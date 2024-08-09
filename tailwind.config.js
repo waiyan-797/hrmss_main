@@ -13,9 +13,10 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                arial: ['Arial', 'sans-serif'],
             },
         },
     },
 
-    plugins: [forms],
+    plugins: [forms, require('flowbite/plugin')],
 };

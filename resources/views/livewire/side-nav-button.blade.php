@@ -1,0 +1,9 @@
+<a href="{{ $route_name }}" class="font-arial flex items-center p-2 font-normal text-blue-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+    {!! $icon !!}
+    <span class="ml-3 flex-1 text-sm">{{ $label }}</span>
+    @if ($count)
+        <span class="flex flex-row items-center justify-center w-5 h-5 text-sm font-semibold rounded-full text-primary-800 bg-blue-200 p-2">
+            {{ $count }}
+        </span>
+    @endif
+</a>
