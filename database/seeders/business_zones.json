@@ -1,0 +1,358 @@
+{
+    "ရှမ်းပြည်နယ်": [
+        {
+            "region": "ရှမ်းပြည်နယ်",
+            "name": " Aye Thar Yar Industrial Zone",
+            "nameMM": "အေးသာယာစက်မှုဇုန်"
+        },
+        {
+            "region": "ရှမ်းပြည်နယ်",
+            "name": "Chin Shwe Haw Trade Zone",
+            "nameMM": "ချင်းရွှေဟော်ကုန်သွယ်ရေးဇုန်"
+        },
+        {
+            "region": "ရှမ်းပြည်နယ်",
+            "name": "Inle Hotel Zone",
+            "nameMM": "အင်းလေးဟိုတယ်ဇုန်"
+        },
+        {
+            "region": "ရှမ်းပြည်နယ်",
+            "name": "Muse 105 Miles Trade Zone",
+            "nameMM": "မူဆယ် ၁၀၅ မိုင်ကုန်သွယ်ရေးဇုန်"
+        }
+    ],
+    "ပဲခူးတိုင်း": [
+        {
+            "region": "ပဲခူးတိုင်း",
+            "name": "Bago (Domestic and International) Industrial Zone",
+            "nameMM": "ပဲခူး(ပြည်တွင်း၊ ပြည်ပ)စက်မှုနယ်မြေ"
+        },
+        {
+            "region": "ပဲခူးတိုင်း",
+            "name": "Overseas Industrial Zone (Extended Industrial Zone and New Gandamar Industrial Zone)\r\n",
+            "nameMM": "ပြည်ပစက်မှု ဇုန်(တိုးချဲ့စက်မှုဇုန်နှင့်ဂန္ဓမာစက်မှုကွက်သစ်)"
+        },
+        {
+            "region": "ပဲခူးတိုင်း",
+            "name": "Overseas Industrial Zone (Extended Industrial Zone and New Gandamar Industrial Zone)",
+            "nameMM": "ပြည်ပစက်မှုဇုန်(တိုးချဲ့စက်မှုဇုန်နှင့်ဂန္ဓမာစက်မှုကွက်သစ်)"
+        }
+    ],
+    "ရန်ကုန်တိုင်း": [
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Dagon Seikkan (1,2) Industrial Zone",
+            "nameMM": "ဒဂုံဆိပ်ကမ်း(၁,၂)စက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "East Dagon Industrial Zone",
+            "nameMM": "ဒဂုံမြို့သစ်အရှေ့ပိုင်းစက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "East Dagon Ywar Thar Gyi Industrial Zone (2) (Big)",
+            "nameMM": "ဒဂုံအရှေ့(၂)ရွာသာကြီးစက်မှုဇုန်(အကြီး)"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "East Dagon Ywar Thar Gyi Industrial Zone (2) (Normal)",
+            "nameMM": "ဒဂုံအရှေ့(၂)ရွာသာကြီးစက်မှုဇုန်(အလတ်စား)"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "East Dagon Ywar Thar Gyi Industrial Zone (2) (Small)",
+            "nameMM": "ဒဂုံမြို့သစ်အ‌ရှေ့ပိုင်းတိုးချဲ့(အသံ+အနံ)ရွာသာကြီးစက်မှုဇုန်(အသေးစား)"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Hlinethaya (1/2/3/4/6/7)",
+            "nameMM": "လှိုင်သာယာစက်မှုဇုန် အမှတ်(၁/၂/၃/၄/၆/၇)"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Hlinethaya (5)",
+            "nameMM": "လှိုင်သာယာစက်မှုဇုန် အမှတ်(၅)"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Mingaladon Industrial Zone",
+            "nameMM": "မင်္ဂလာဒုံစက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Myaung Ta Kar Steel Founding Industrial Zone",
+            "nameMM": "မြောင်းတကာသံမဏိစက်ရုံတည်ထောင်စက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "North Dagon Industrial Zone",
+            "nameMM": "ဒဂုံမြို့သစ်မြောက်ပိုင်းစက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "North Okkalapa Industrial Zone",
+            "nameMM": "မြောက်ဥက္ကပလာပစက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Pyin Ma Bin Industrial Zone",
+            "nameMM": "ပြင်းမပင်စက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Shwe Lin Ban",
+            "nameMM": "‌‌ရွှေလင်ပန်းစက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Ngwe Pin Lal",
+            "nameMM": "ငွေပင်လယ်စက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Shwe Than Lwin",
+            "nameMM": "‌‌ရွှေသံလွင်စက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Shwe Poukkan Industrial Zone",
+            "nameMM": "‌ရွှေပေါက်ကံစက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Shwepyitha (1)",
+            "nameMM": "‌‌ရွှေပြည်သာ အမှတ်(၁) စက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Shwepyitha (2/3/4)",
+            "nameMM": "‌‌ရွှေပြည်သာ အမှတ်(၂/၃/၄) စက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "South Dagon 1 Industrial Zone",
+            "nameMM": "‌တောင်ဒဂုံအမှတ်(၁)စက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "South Dagon 2 Industrial Zone",
+            "nameMM": "‌တောင်ဒဂုံအမှတ်(၂)စက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "South Dagon 3 Industrial Zone",
+            "nameMM": "‌တောင်ဒဂုံအမှတ်(၃)စက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "South Okkalapa Industrial Zone",
+            "nameMM": "တောင်ဥက္ကလာပစက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Thakayta Industrial Zone",
+            "nameMM": "သာကေတစက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Thilawa Industrial Zone",
+            "nameMM": "သီလဝါစက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "A Naw Ya Htar Industrial Zone",
+            "nameMM": "အနော်ရထာစက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Mya Sein Yaung Industrial Zone",
+            "nameMM": "မြစိမ်းရောင်စက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Mway Myuu Yayy Industrial Zone",
+            "nameMM": "မွေးမြူရေးစက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Wartayar Woodbase",
+            "nameMM": "ဝါးတရာသစ်အခြေခံစက်မှုလုပ်ငန်း"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Thardukan Industrial Zone",
+            "nameMM": "သာဓုကန်စက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Woodbase Industrial Zone",
+            "nameMM": "သစ်အခြေခံစက်မှုဇုန်"
+        },
+        {
+            "region": "ရန်ကုန်တိုင်း",
+            "name": "Yangon Industrial Zone",
+            "nameMM": "ရန်ကုန်တိုင်းစက်မှုဇုန်"
+        }
+    ],
+    "နေပြည်တော်": [
+        {
+            "region": "နေပြည်တော်",
+            "name": "Dekkhinathiri small and medium Industrial Zone",
+            "nameMM": "ဒက္ခိဏသီရိအသေးစားအလတ်စားစက်မှုဇုန်"
+        },
+        {
+            "region": "နေပြည်တော်",
+            "name": "Hotel Zone (1/2/3)",
+            "nameMM": "ဟိုတယ်ဇုန်(၁/၂/၃)"
+        },
+        {
+            "region": "နေပြည်တော်",
+            "name": "Kan Gyi Breeding Zone",
+            "nameMM": "ကံကြီးမွေးမြူရေးဇုန်"
+        }
+    ],
+    "ကရင်ပြည်နယ်": [
+        {
+            "region": "ကရင်ပြည်နယ်",
+            "name": "Hpa-An Industrial Zone",
+            "nameMM": "ဘားအံစက်မှုဇုန်"
+        },
+        {
+            "region": "ကရင်ပြည်နယ်",
+            "name": "Myawady Industrial Zone",
+            "nameMM": "မြဝတီစီးပွားရေးဇုန်"
+        }
+    ],
+    "တနင်္သာရီတိုင်း": [
+        {
+            "region": "တနင်္သာရီတိုင်း",
+            "name": "Inlay Myaing Industrial Zone",
+            "nameMM": "အင်းလေးမြိုင်စက်မှုဇုန်"
+        }
+    ],
+    "စစ်ကိုင်းတိုင်း": [
+        {
+            "region": "စစ်ကိုင်းတိုင်း",
+            "name": "Kalay Industrial Zone",
+            "nameMM": "ကလေးစက်မှုဇုန်"
+        },
+        {
+            "region": "စစ်ကိုင်းတိုင်း",
+            "name": "Monywa Industrial Zone ",
+            "nameMM": "မုံရွာစက်မှုဇုန်"
+        },
+        {
+            "region": "စစ်ကိုင်းတိုင်း",
+            "name": "Sagaing Industrial Zone",
+            "nameMM": "စစ်ကိုင်းစက်မှုဇုန်"
+        },
+        {
+            "region": "စစ်ကိုင်းတိုင်း",
+            "name": "Shwebo Industrial Zone",
+            "nameMM": "ရွှေဘိုစက်မှုဇုန်"
+        }
+    ],
+    "ကယားပြည်နယ်": [
+        {
+            "region": "ကယားပြည်နယ်",
+            "name": "Kayah State Industrial Zone",
+            "nameMM": "ကယားပြည်နယ်စက်မှုဇုန်\n"
+        }
+    ],
+    "ရခိုင်ပြည်နယ်": [
+        {
+            "region": "ရခိုင်ပြည်နယ်",
+            "name": "Kin Chaung Trade Zone",
+            "nameMM": "ကညင်ချောင်းကုန်သွယ်ရေးဇုန်"
+        },
+        {
+            "region": "ရခိုင်ပြည်နယ်",
+            "name": "Maungtaw Tade Zone",
+            "nameMM": "မောင်တောကုန်သွယ်ရေးစခန်း"
+        },
+        {
+            "region": "ရခိုင်ပြည်နယ်",
+            "name": "Ngapali Hotel Zone",
+            "nameMM": "ငပလီဟိုတယ်ဇုန်"
+        },
+        {
+            "region": "ရခိုင်ပြည်နယ်",
+            "name": "Sittway Trade Zone",
+            "nameMM": "စစ်တွေကုန်သွယ်ရေးစခန်း"
+        }
+    ],
+    "မန္တလေးတိုင်း": [
+        {
+            "region": "မန္တလေးတိုင်း",
+            "name": "Kyaukse Industrial Zone",
+            "nameMM": "ကျောက်ဆည်စက်မှုဇုန်"
+        },
+        {
+            "region": "မန္တလေးတိုင်း",
+            "name": "Mandalay Industrial Zone",
+            "nameMM": "မန္တလေးစက်မှုဇုန်"
+        },
+        {
+            "region": "မန္တလေးတိုင်း",
+            "name": "Myeiktila Industrial Zone",
+            "nameMM": "မိတ္ထီလာစက်မှုဇုန်"
+        },
+        {
+            "region": "မန္တလေးတိုင်း",
+            "name": "Myingyan Industrial Zone",
+            "nameMM": "မြင်းခြံ စက်မှုဇုန်"
+        },
+        {
+            "region": "မန္တလေးတိုင်း",
+            "name": "Myothar Industrial Zone",
+            "nameMM": "မြို့သာစက်မှုဇုန်"
+        }
+    ],
+    "ဧရာဝတီတိုင်း": [
+        {
+            "region": "ဧရာဝတီတိုင်း",
+            "name": "Maubin Industrial Zone",
+            "nameMM": "မအူပင်စက်မှု"
+        },
+        {
+            "region": "ဧရာဝတီတိုင်း",
+            "name": "Myaungmya Industrial Zone",
+            "nameMM": "မြောင်းမြစက်မှုဇုန်"
+        },
+        {
+            "region": "ဧရာဝတီတိုင်း",
+            "name": "Ngwe Saung Hotel Zone",
+            "nameMM": "ငွေဆောင်ဟိုတယ်ဇုန်"
+        },
+        {
+            "region": "ဧရာဝတီတိုင်း",
+            "name": "Pathein Industrial City",
+            "nameMM": "ပုသိမ်စက်မှုမြို့တော်"
+        },
+        {
+            "region": "ဧရာဝတီတိုင်း",
+            "name": "Pathein Industrial Zone",
+            "nameMM": "ပုသိမ်စက်မှုဇုန်"
+        }
+    ],
+    "မွန်ပြည်နယ်": [
+        {
+            "region": "မွန်ပြည်နယ်",
+            "name": "Mawlamyine Industrial Zone ",
+            "nameMM": "‌မော်လမြိုင်စက်မှုဇုန်"
+        }
+    ],
+    "မကွေးတိုင်း": [
+        {
+            "region": "မကွေးတိုင်း",
+            "name": "Pakokku Industrial Zone",
+            "nameMM": "ပခုက္ကူစက်မှုဇုန်"
+        },
+        {
+            "region": "မကွေးတိုင်း",
+            "name": "Yenangyoung Industrial Zone",
+            "nameMM": "ရေနံချောင်းစက်မှုဇုန်"
+        }
+    ]
+}
