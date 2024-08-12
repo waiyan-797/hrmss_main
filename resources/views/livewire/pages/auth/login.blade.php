@@ -30,7 +30,7 @@ $login = function () {
         HR Management System (HRMS)
     </a>
 
-    <form wire:submit="login" style="background-image: url('{{ asset('img/DICA_logo.png') }}');" class="relative bg-center bg-cover p-2">
+    <form wire:submit="login">
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />

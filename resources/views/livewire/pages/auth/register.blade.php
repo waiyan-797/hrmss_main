@@ -43,7 +43,7 @@ $register = function () {
     <a href="{{ route('welcome') }}" class="text-blue-700 uppercase font-semibold font-arial text-lg flex items-center justify-center hover:text-blue-800 py-3" wire:navigate>
         HR Management System (HRMS)
     </a>
-    <form wire:submit="register" style="background-image: url('{{ asset('img/DICA_logo.png') }}');" class="relative bg-center bg-cover p-2">
+    <form wire:submit="register">
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
