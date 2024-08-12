@@ -17,8 +17,8 @@ return new class extends Migration
         Schema::create('ranks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(StaffType::class)->nullable()->nullOnDelete();
-            $table->foreignIdFor(Payscale::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(StaffType::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Payscale::class)->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

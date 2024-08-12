@@ -18,13 +18,13 @@ return new class extends Migration
     {
         Schema::create('postings', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Staff::class)->nullOnDelete();
-            $table->foreignIdFor(rank::class)->nullOnDelete();
-            $table->foreignIdFor(post::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(Staff::class)->constrained()->nullOnDelete();
+            $table->foreignIdFor(rank::class)->constrained()->nullOnDelete();
+            $table->foreignIdFor(post::class)->nullable()->constrained()->nullOnDelete();
             $table->date('from_date');
             $table->date('to_date');
-            $table->foreignIdFor(Department::class)->nullOnDelete();
-            $table->foreignIdFor(Division::class)->nullOnDelete();
+            $table->foreignIdFor(Department::class)->constrained()->nullOnDelete();
+            $table->foreignIdFor(Division::class)->constrained()->nullOnDelete();
             $table->string('location');
             $table->string('remark')->nullable();
             $table->timestamps();

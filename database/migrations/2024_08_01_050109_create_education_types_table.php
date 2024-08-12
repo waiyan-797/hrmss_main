@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create('education_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(EducationType::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(EducationGroup::class)->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

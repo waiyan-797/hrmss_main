@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(Division::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(Division::class)->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

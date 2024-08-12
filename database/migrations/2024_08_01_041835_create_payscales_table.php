@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('min_salary');
             $table->string('increment');
             $table->string('max_salary');
-            $table->foreignIdFor(StaffType::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(StaffType::class)->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

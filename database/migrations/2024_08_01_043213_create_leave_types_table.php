@@ -15,9 +15,9 @@ return new class extends Migration
         Schema::create('leave_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('allowed')->nullable(); 
-            $table->foreignIdFor(DayOrMonth::class)->nullable()->nullOnDelete();
-            $table->boolean('is_yearly')->default(false); 
+            $table->integer('allowed')->nullable();
+            $table->foreignIdFor(DayOrMonth::class)->nullable()->constrained()->nullOnDelete();
+            $table->boolean('is_yearly')->default(false);
             $table->timestamps();
         });
     }

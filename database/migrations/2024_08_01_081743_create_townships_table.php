@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('townships', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(District::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(District::class)->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

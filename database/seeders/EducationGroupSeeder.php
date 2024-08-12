@@ -19,19 +19,27 @@ class EducationGroupSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         EducationGroup::create([
-            'name' => 'ပါရဂူဘွဲ့',
+            'name' => 'ဘွဲ့ရ',
         ]);
 
         EducationGroup::create([
-            'name' => 'မဟာဘွဲ့',
+            'name' => 'ဘွဲ့လွန်ဂုဏ်ထူးတန်း',
         ]);
 
         EducationGroup::create([
-            'name' => 'ဘွဲ့',
+            'name' => 'ဒီပလိုမာဘွဲ့',
         ]);
 
         EducationGroup::create([
-            'name' => 'အခြား',
+            'name' => 'ဘွဲ့လွန်(မဟာ)',
+        ]);
+        
+        EducationGroup::create([
+            'name' => 'ပါရဂူဘွဲ့ Ph.D.',
+        ]);
+        
+        EducationGroup::create([
+            'name' => 'Doctor of Letters',
         ]);
     }
 }

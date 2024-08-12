@@ -19,13 +19,13 @@ return new class extends Migration
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Staff::class)->nullOnDelete();
-            $table->foreignIdFor(TrainingType::class)->nullOnDelete();
+            $table->foreignIdFor(Staff::class)->constrained()->nullOnDelete();
+            $table->foreignIdFor(TrainingType::class)->constrained()->nullOnDelete();
             $table->date('from_date');
             $table->date('to_date');
             $table->string('location');
-            $table->foreignIdFor(Country::class)->nullOnDelete();
-            $table->foreignIdFor(TrainingLocation::class)->nullOnDelete();
+            $table->foreignIdFor(Country::class)->constrained()->nullOnDelete();
+            $table->foreignIdFor(TrainingLocation::class)->constrained()->nullOnDelete();
         });
     }
 

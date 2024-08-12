@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('punishment_criminals', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Staff::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(Staff::class)->nullable()->constrained()->nullOnDelete();
             $table->string('verdict');
             $table->string('reason');
             $table->date('from_date');

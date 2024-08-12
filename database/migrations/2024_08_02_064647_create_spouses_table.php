@@ -17,14 +17,14 @@ return new class extends Migration
     {
         Schema::create('spouses', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Staff::class)->nullOnDelete();
+            $table->foreignIdFor(Staff::class)->constrained()->nullOnDelete();
             $table->string('name');
-            $table->foreignIdFor(Ethnic::class)->nullOnDelete();
-            $table->foreignIdFor(Religion::class)->nullOnDelete();
+            $table->foreignIdFor(Ethnic::class)->constrained()->nullOnDelete();
+            $table->foreignIdFor(Religion::class)->constrained()->nullOnDelete();
             $table->string('place_of_birth');
             $table->string('occupation');
             $table->string('address');
-            $table->foreignIdFor(Relation::class)->nullOnDelete();
+            $table->foreignIdFor(Relation::class)->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

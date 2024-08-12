@@ -25,15 +25,15 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
-            $table->string('staff_photo');
+            $table->string('staff_photo')->nullable();
             $table->string('staff_no');
             $table->string('name');
-            $table->string('nick_name');
-            $table->string('other_name');
+            $table->string('nick_name')->nullable();
+            $table->string('other_name')->nullable();
             $table->date('dob');
-            $table->foreignIdFor(Gender::class)->nullable()->nullOnDelete();
-            $table->foreignIdFor(Ethnic::class)->nullable()->nullOnDelete();
-            $table->foreignIdFor(Religion::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(Gender::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Ethnic::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Religion::class)->nullable()->constrained()->nullOnDelete();
             $table->integer('height_feet');
             $table->integer('height_inch');
             $table->string('hair_color');
@@ -41,7 +41,7 @@ return new class extends Migration
             $table->string('prominent_mark');
             $table->string('skin_color');
             $table->integer('weight');
-            $table->foreignIdFor(BloodType::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(BloodType::class)->nullable()->constrained()->nullOnDelete();
             $table->string('place_of_birth');
             $table->string('nrc');
             $table->string('phone');
@@ -69,9 +69,9 @@ return new class extends Migration
             $table->string('military_served_army');
             $table->string('military_brief_history_or_penalty');
             $table->integer('military_pension');
-            $table->foreignIdFor(EducationGroup::class)->nullable()->nullOnDelete();
-            $table->foreignIdFor(EducationType::class)->nullable()->nullOnDelete();
-            $table->foreignIdFor(Education::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(EducationGroup::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(EducationType::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Education::class)->nullable()->constrained()->nullOnDelete();
             $table->string('father_name');
             $table->foreignId('father_ethnic_id')->nullable()->constrained('ethnics')->onDelete('set null');
             $table->foreignId('father_religion_id')->nullable()->constrained('religions')->onDelete('set null');
@@ -106,7 +106,7 @@ return new class extends Migration
              $table->date('join_date');
              $table->string('form_of_appointment');
              $table->boolean('is_direct_appointed');
-             $table->foreignIdFor(Payscale::class)->nullable()->nullOnDelete();
+             $table->foreignIdFor(Payscale::class)->nullable()->constrained()->nullOnDelete();
              $table->integer('current_salary');
              $table->integer('current_increment_time');
              $table->string('recommend_by');
