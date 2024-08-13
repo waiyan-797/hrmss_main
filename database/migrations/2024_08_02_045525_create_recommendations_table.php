@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('recommendations', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Staff::class)->constrained()->nullOnDelete();
+            $table->foreignIdFor(Staff::class)->nullable()->constrained()->nullOnDelete();
             $table->string('recommend_by');
             $table->string('ministry');
             $table->string('department');

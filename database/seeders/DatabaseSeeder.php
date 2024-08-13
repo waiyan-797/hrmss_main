@@ -26,17 +26,17 @@ class DatabaseSeeder extends Seeder
             RankSeeder::class,
             CountrySeeder::class,
             DivisionSeeder::class,
+            RegionSeeder::class,
             DistrictSeeder::class,
+            TownshipSeeder::class,
             EducationGroupSeeder::class,
             GenderSeeder::class,
             LeaveTypeSeeder::class,
             PayscaleSeeder::class,
             PenaltyTypeSeeder::class,
             PensionTypeSeeder::class,
-            RegionSeeder::class,
             RelationSeeder::class,
-            TownshipSeeder::class,
-            
+
         ]);
     }
 }

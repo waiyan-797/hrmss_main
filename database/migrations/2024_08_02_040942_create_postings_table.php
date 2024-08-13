@@ -2,8 +2,8 @@
 
 use App\Models\Department;
 use App\Models\Division;
-use App\Models\post;
-use App\Models\rank;
+use App\Models\Post;
+use App\Models\Rank;
 use App\Models\Staff;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,13 +18,13 @@ return new class extends Migration
     {
         Schema::create('postings', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Staff::class)->constrained()->nullOnDelete();
-            $table->foreignIdFor(rank::class)->constrained()->nullOnDelete();
-            $table->foreignIdFor(post::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Staff::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Rank::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Post::class)->nullable()->constrained()->nullOnDelete();
             $table->date('from_date');
             $table->date('to_date');
-            $table->foreignIdFor(Department::class)->constrained()->nullOnDelete();
-            $table->foreignIdFor(Division::class)->constrained()->nullOnDelete();
+            $table->foreignIdFor(Department::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Division::class)->nullable()->constrained()->nullOnDelete();
             $table->string('location');
             $table->string('remark')->nullable();
             $table->timestamps();
