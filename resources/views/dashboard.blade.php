@@ -6,7 +6,7 @@
         <h1 class="text-white font-semibold italic font-arial">Dashboard</h1>
     </x-slot>
 
-    <div class="py-6 h-[83vh] overflow-y-auto w-5/6 px-3">
+    <div class="py-6 h-[83vh] overflow-y-auto w-full px-3">
         <div class="max-w-7xl mx-auto">
             <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="p-6 text-blue-700 dark:text-gray-100 font-arial">

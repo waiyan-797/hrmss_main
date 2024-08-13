@@ -13,23 +13,19 @@
         <!-- Styles -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased font-sans">
-        <div class="bg-white text-black/50 dark:bg-black dark:text-white/50">
-            <div class="relative h-screen flex flex-col items-center justify-center bg-cover bg-center" style="background-image: url('{{ asset('img/HR_welcome.jpg') }}');">
-                <div class="relative w-full px-6 bg-white bg-opacity-80 p-8 shadow-lg">
-                    <header class="grid grid-cols-3 items-center gap-2">
-                        <div class="flex col-start-2 py-2">
-                            <img src="{{ asset('img/DICA_logo.png') }}" alt="Customs Website Banner" class="w-1/3 h-auto rounded-lg mx-auto">
-                        </div>
-                    </header>
+    <body class="antialiased font-arial bg-gradient-to-r from-green-700 to-blue-700">
+        <div class="min-h-screen flex flex-col items-center justify-center text-gray-700 dark:text-gray-200">
+            <div class="w-full max-w-md bg-gradient-to-r from-green-500 to-blue-500 rounded-lg shadow-lg p-8 transform hover:scale-105 transition-transform duration-300 border border-gray-200 dark:border-gray-700">
+                <header class="flex justify-center mb-6">
+                    <img src="{{ asset('img/DICA_logo.png') }}" alt="DICA Logo" class="w-32 h-auto shadow-lg rounded-lg bg-white">
+                </header>
 
-                    <main class="flex flex-col items-center justify-center">
-                        <h1 class="text-blue-700 font-semibold text-xl text-center font-arial">HR Management System (HRMS)</h1>
-                        @if (Route::has('login'))
-                            <livewire:welcome.navigation />
-                        @endif
-                    </main>
-                </div>
+                <main class="text-center">
+                    <h1 class="text-xl font-semibold text-white dark:text-blue-400 mb-4 font-arial">HR Management System (HRMS)</h1>
+                    @if (Route::has('login'))
+                        <livewire:welcome.navigation />
+                    @endif
+                </main>
             </div>
         </div>
     </body>
