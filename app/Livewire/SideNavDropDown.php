@@ -6,12 +6,11 @@ use Livewire\Component;
 
 class SideNavDropDown extends Component
 {
-    public $label, $icon, $dropdown_id, $lists;
+    public $label, $icon, $lists;
 
-    public function mount($label, $icon, $dropdown_id, $lists) {
+    public function mount($label, $icon, $lists) {
         $this->label = $label;
         $this->icon = $icon;
-        $this->dropdown_id = $dropdown_id;
         $this->lists = $lists;
     }
 

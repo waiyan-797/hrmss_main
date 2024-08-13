@@ -1,4 +1,4 @@
-<a href="{{ $route_name }}" class="font-arial flex items-center p-2 font-normal text-blue-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+<a href="{{ $route_name }}" class="font-arial flex items-center p-2 font-normal text-blue-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" wire:navigate>
     {!! $icon !!}
     <span class="ml-3 flex-1 text-sm">{{ $label }}</span>
     @if ($count)
