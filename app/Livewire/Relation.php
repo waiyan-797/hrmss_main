@@ -2,30 +2,32 @@
 
 namespace App\Livewire;
 
-use App\Models\TrainingType as ModelsTrainingType;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\On;
+use App\Models\Relation as ModelsRelation;
 
-class TrainingType extends Component
+class Relation extends Component
 {
+
+
     use WithPagination;
     public $confirm_delete = false;
     public $confirm_edit = false;
     public $confirm_add = false;
     public $message = null;
-    public $training_type_search, $training_type_name, $training_type_id;
+    public $relation_search, $relation_name, $relation_id;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
     //validation
     protected $rules = [
-        'training_type_name' => 'required',
+        'relation_name' => 'required',
     ];
 
      //add new
     public function add_new(){
         $this->resetValidation();
-        $this->reset('training_type_name');
+        $this->reset('relation_name');
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
@@ -34,18 +36,18 @@ class TrainingType extends Component
     public function submitForm()
     {
         if ($this->confirm_add == true) {
-            $this->createTrainingType();
+            $this->createRelation();
         } else {
-            $this->updateTrainingType();
+            $this->updateRelation();
         }
     }
 
     //create
-    public function createTrainingType()
+    public function createRelation()
     {
         $this->validate();
-        ModelsTrainingType::create([
-            'name' => $this->training_type_name,
+        ModelsRelation::create([
+            'name' => $this->relation_name,
         ]);
         $this->message = 'Created successfully.';
         $this->close_modal();
@@ -54,7 +56,7 @@ class TrainingType extends Component
     //close modal
     public function close_modal(){
         $this->resetValidation();
-        $this->reset('training_type_name');
+        $this->reset('relation_name');
         $this->confirm_edit = false;
         $this->confirm_add = false;
     }
@@ -64,17 +66,17 @@ class TrainingType extends Component
         $this->resetValidation();
         $this->confirm_add = false;
         $this->confirm_edit = true;
-        $this->training_type_id = $id;
-        $training_type = ModelsTrainingType::findOrFail($id);
-        $this->training_type_name = $training_type->name;
+        $this->relation_id = $id;
+        $relation = ModelsRelation::findOrFail($id);
+        $this->relation_name = $relation->name;
     }
 
     //update
-    public function updateTrainingType()
+    public function updateRelation()
     {
         $this->validate();
-        ModelsTrainingType::findOrFail($this->training_type_id)->update([
-            'name' => $this->training_type_name,
+        ModelsRelation::findOrFail($this->relation_id)->update([
+            'name' => $this->relation_name,
         ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();
@@ -82,40 +84,45 @@ class TrainingType extends Component
 
     //delete confirm
     public function delete_confirm($id){
-        $this->training_type_id = $id;
+        $this->relation_id = $id;
         $this->confirm_delete = true;
     }
 
     //delete
     public function delete($id){
-        ModelsTrainingType::find($id)->delete();
+        ModelsRelation::find($id)->delete();
         $this->confirm_delete = false;
     }
 
-    #[On('render_training_type')]
-    public function render_training_type(){
+    #[On('render_relation')]
+    public function render_relation(){
         $this->render();
     }
 
     public function render()
     {
-        $this->modal_title = $this->confirm_add ? 'Add Training Type' : 'Edit Training Type';
+        $this->modal_title = $this->confirm_add ? 'Add Relation' : 'Edit Relation';
         $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 
-        $trainingTypeSearch = '%' . $this->training_type_search . '%';
-        $trainingTypeQuery = ModelsTrainingType::query();
-        if ($this->training_type_search) {
+        $relationSearch = '%' . $this->relation_search . '%';
+        $relationQuery = ModelsRelation::query();
+        if ($this->relation_search) {
             $this->resetPage();
-            $trainingTypeQuery->where('name', 'LIKE', $trainingTypeSearch);
-            $training_types = $trainingTypeQuery->paginate($trainingTypeQuery->count() > 10 ? $trainingTypeQuery->count() : 10);
+            $relationQuery->where('name', 'LIKE', $relationSearch);
+            $relations = $relationQuery->paginate($relationQuery->count() > 10 ? $relationQuery->count() : 10);
         } else {
-            $training_types = $trainingTypeQuery->paginate(10);
+            $relations = $relationQuery->paginate(10);
         }
 
-        return view('livewire.training-type', [
-            'training_types' => $training_types,
+        return view('livewire.relation', [
+            'relations' => $relations,
         ]);
     }
+
+    // public function render()
+    // {
+    //     return view('livewire.relation');
+    // }
 }
