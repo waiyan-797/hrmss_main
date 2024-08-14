@@ -203,7 +203,7 @@
                 </li>
 
                 <li class="mb-2 bg-gray-100 rounded-sm hover:bg-gray-200 p-2 flex items-center text-base">
-                    <a href="#"
+                    <a href="staff"
                         class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">ကိုယ်ရေးအချက်အလက်</a>
                 </li>
                 <li class="mb-2 bg-gray-100 rounded-sm hover:bg-gray-200 p-2 flex items-center text-base">

@@ -54,7 +54,7 @@
                         <td class="px-6 py-4 text-gray-500 dark:text-gray-300">{{$index}}</td>
                         @foreach ($column_vals as $val)
                             <td class="px-6 py-4 text-gray-500 dark:text-gray-300">
-                                {{$value->$val}}
+                                {{ gettype($value->$val) == 'object' ? $value->$val->name : $value->$val }}
                             </td>
                         @endforeach
                         <td class="px-6 py-4">
