@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            UserSeeder::class,
             StaffTypeSeeder::class,
             TrainingLocationSeeder::class,
             RankSeeder::class,
@@ -36,7 +37,6 @@ class DatabaseSeeder extends Seeder
             PenaltyTypeSeeder::class,
             PensionTypeSeeder::class,
             RelationSeeder::class,
-
         ]);
     }
 }

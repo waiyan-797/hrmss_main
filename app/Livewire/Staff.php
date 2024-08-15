@@ -3,227 +3,113 @@
 namespace App\Livewire;
 
 use App\Models\Staff as ModelsStaff;
+use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Staff extends Component
 {
-    public $inputs = [];
+    use WithPagination;
+    public $confirm_delete = false;
+    public $confirm_edit = false;
+    public $confirm_add = false;
+    public $message = null;
+    public $staff_search, $staff_name, $staff_id;
+    public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
-    public function rules()
-   {
-    return [
-        'inputs.*.staff_photo' => 'nullable|image|max:1024', // Example: allow images up to 1MB
-        'inputs.*.staff_no' => 'required|string|max:50|unique:staff,staff_no',
-        'inputs.*.name' => 'required|string|max:255',
-        'inputs.*.nick_name' => 'nullable|string|max:255',
-        'inputs.*.other_name' => 'nullable|string|max:255',
-        'inputs.*.dob' => 'required|date',
-        'inputs.*.gender_id' => 'required|integer|exists:genders,id',
-        'inputs.*.ethnic_id' => 'required|integer|exists:ethnics,id',
-        'inputs.*.religion_id' => 'required|integer|exists:religions,id',
-        'inputs.*.height_feet' => 'nullable|integer|min:0|max:7',
-        'inputs.*.height_inch' => 'nullable|integer|min:0|max:11',
-        'inputs.*.hair_color' => 'nullable|string|max:50',
-        'inputs.*.eye_color' => 'nullable|string|max:50',
-        'inputs.*.prominent_mark' => 'nullable|string|max:255',
-        'inputs.*.skin_color' => 'nullable|string|max:50',
-        'inputs.*.weight' => 'nullable|numeric|min:0',
-        'inputs.*.blood_type_id' => 'nullable|integer|exists:blood_types,id',
-        'inputs.*.place_of_birth' => 'nullable|string|max:255',
-        'inputs.*.nrc' => 'nullable|string|max:255',
-        'inputs.*.phone' => 'nullable|string|max:15',
-        'inputs.*.mobile' => 'nullable|string|max:15',
-        'inputs.*.email' => 'nullable|email|max:255|unique:staff,email',
-        'inputs.*.current_address_street' => 'nullable|string|max:255',
-        'inputs.*.current_address_ward' => 'nullable|string|max:255',
-        'inputs.*.current_address_township_or_town_id' => 'nullable|integer|exists:townships,id',
-        'inputs.*.current_address_district_id' => 'nullable|integer|exists:districts,id',
-        'inputs.*.current_address_region_id' => 'nullable|integer|exists:regions,id',
-        'inputs.*.permanent_address_street' => 'nullable|string|max:255',
-        'inputs.*.permanent_address_ward' => 'nullable|string|max:255',
-        'inputs.*.permanent_address_township_or_town_id' => 'nullable|integer|exists:townships,id',
-        'inputs.*.permanent_address_district_id' => 'nullable|integer|exists:districts,id',
-        'inputs.*.permanent_address_region_id' => 'nullable|integer|exists:regions,id',
-        'inputs.*.previous_addresses' => 'nullable|string|max:255',
-        'inputs.*.military_solider_no' => 'nullable|string|max:50',
-        'inputs.*.military_join_date' => 'nullable|date',
-        'inputs.*.military_dsa_no' => 'nullable|string|max:50',
-        'inputs.*.military_gazetted_date' => 'nullable|date',
-        'inputs.*.military_leave_date' => 'nullable|date',
-        'inputs.*.military_leave_reason' => 'nullable|string|max:255',
-        'inputs.*.military_served_army' => 'nullable|string|max:255',
-        'inputs.*.military_brief_history_or_penalty' => 'nullable|string|max:255',
-        'inputs.*.military_pension' => 'nullable|string|max:255',
-        'inputs.*.education_group_id' => 'nullable|integer|exists:education_groups,id',
-        'inputs.*.education_type_id' => 'nullable|integer|exists:education_types,id',
-        'inputs.*.education_id' => 'nullable|integer|exists:education,id',
-        'inputs.*.father_name' => 'nullable|string|max:255',
-        'inputs.*.father_ethnic_id' => 'nullable|integer|exists:ethnics,id',
-        'inputs.*.father_religion_id' => 'nullable|integer|exists:religions,id',
-        'inputs.*.father_place_of_birth' => 'nullable|string|max:255',
-        'inputs.*.father_occupation' => 'nullable|string|max:255',
-        'inputs.*.father_address_street' => 'nullable|string|max:255',
-        'inputs.*.father_address_ward' => 'nullable|string|max:255',
-        'inputs.*.father_address_township_or_town_id' => 'nullable|integer|exists:townships,id',
-        'inputs.*.father_address_district_id' => 'nullable|integer|exists:districts,id',
-        'inputs.*.father_address_region_id' => 'nullable|integer|exists:regions,id',
-        'inputs.*.mother_name' => 'nullable|string|max:255',
-        'inputs.*.mother_ethnic_id' => 'nullable|integer|exists:ethnics,id',
-        'inputs.*.mother_religion_id' => 'nullable|integer|exists:religions,id',
-        'inputs.*.mother_place_of_birth' => 'nullable|string|max:255',
-        'inputs.*.mother_occupation' => 'nullable|string|max:255',
-        'inputs.*.mother_address_street' => 'nullable|string|max:255',
-        'inputs.*.mother_address_ward' => 'nullable|string|max:255',
-        'inputs.*.mother_address_township_or_town_id' => 'nullable|integer|exists:townships,id',
-        'inputs.*.mother_address_district_id' => 'nullable|integer|exists:districts,id',
-        'inputs.*.mother_address_region_id' => 'nullable|integer|exists:regions,id',
-        'inputs.*.is_parents_citizen_when_staff_born' => 'nullable|boolean',
-        'inputs.*.current_rank_id' => 'nullable|integer|exists:ranks,id',
-        'inputs.*.current_rank_date' => 'nullable|date',
-        'inputs.*.current_department_id' => 'nullable|integer|exists:departments,id',
-        'inputs.*.current_division_id' => 'nullable|integer|exists:divisions,id',
-        'inputs.*.side_department_id' => 'nullable|integer|exists:departments,id',
-        'inputs.*.side_division_id' => 'nullable|integer|exists:divisions,id',
-        'inputs.*.salary_paid_by' => 'nullable|string|max:255',
-        'inputs.*.join_date' => 'nullable|date',
-        'inputs.*.form_of_appointment' => 'nullable|string|max:255',
-        'inputs.*.is_direct_appointed' => 'nullable|boolean',
-        'inputs.*.payscale_id' => 'nullable|integer|exists:payscales,id',
-        'inputs.*.current_salary' => 'nullable|numeric|min:0',
-        'inputs.*.current_increment_time' => 'nullable|date',
-        'inputs.*.recommend_by' => 'nullable|string|max:255',
-        'inputs.*.family_in_politics' => 'nullable|string|max:255',
-        'inputs.*.last_school_name' => 'nullable|string|max:255',
-        'inputs.*.last_school_subject' => 'nullable|string|max:255',
-        'inputs.*.last_school_row_no' => 'nullable|integer|min:0',
-        'inputs.*.last_school_major' => 'nullable|string|max:255',
-        'inputs.*.student_life_political_social' => 'nullable|string|max:255',
-        'inputs.*.habit' => 'nullable|string|max:255',
-        'inputs.*.past_occupation' => 'nullable|string|max:255',
-        'inputs.*.revolution' => 'nullable|string|max:255',
-        'inputs.*.transfer_reason_salary' => 'nullable|string|max:255',
-        'inputs.*.during_work_political_social' => 'nullable|string|max:255',
-        'inputs.*.military_friend' => 'nullable|string|max:255',
-        'inputs.*.foreigner_friend_name' => 'nullable|string|max:255',
-        'inputs.*.foreigner_friend_occupation' => 'nullable|string|max:255',
-        'inputs.*.foreigner_friend_nationality_id' => 'nullable|integer|exists:nationalities,id',
-        'inputs.*.foreigner_friend_country_id' => 'nullable|integer|exists:countries,id',
-        'inputs.*.foreigner_friend_how_to_know' => 'nullable|string|max:255',
-        'inputs.*.recommended_by_military_person' => 'nullable|string|max:255',
-    ];
-   }
-    public function save()
+    //add new
+    public function add_new(){
+        $this->confirm_add = true;
+        $this->confirm_edit = false;
+        $this->redirect(StaffDetail::class, navigate: true);
+    }
+
+     //submit form
+    public function submitForm()
+    {
+        if ($this->confirm_add == true) {
+            $this->createStaff();
+        } else {
+            $this->updateStaff();
+        }
+    }
+
+    //create
+    public function createStaff()
     {
         $this->validate();
-
-        foreach ($this->inputs as $input) {
-            ModelsStaff::create([
-                'staff_photo' => $input['staff_photo'],
-                'staff_no' => $input['staff_no'],
-                'name' => $input['name'],
-                'nick_name' => $input['nick_name'],
-                'other_name' => $input['other_name'],
-                'dob' => $input['dob'],
-                'gender_id' => $input['gender_id'],
-                'ethnic_id' => $input['ethnic_id'],
-                'religion_id' => $input['religion_id'],
-                'height_feet' => $input['height_feet'],
-                'height_inch' => $input['height_inch'],
-                'hair_color' => $input['hair_color'],
-                'eye_color' => $input['eye_color'],
-                'prominent_mark' => $input['prominent_mark'],
-                'skin_color' => $input['skin_color'],
-                'weight' => $input['weight'],
-                'blood_type_id' => $input['blood_type_id'],
-                'place_of_birth' => $input['place_of_birth'],
-                'nrc' => $input['nrc'],
-                'phone' => $input['phone'],
-                'mobile' => $input['mobile'],
-                'email' => $input['email'],
-                'current_address_street' => $input['current_address_street'],
-                'current_address_ward' => $input['current_address_ward'],
-                'current_address_township_or_town_id' => $input['current_address_township_or_town_id'],
-                'current_address_district_id' => $input['current_address_district_id'],
-                'current_address_region_id' => $input['current_address_region_id'],
-                'permanent_address_street' => $input['permanent_address_street'],
-                'permanent_address_ward' => $input['permanent_address_ward'],
-                'permanent_address_township_or_town_id' => $input['permanent_address_township_or_town_id'],
-                'permanent_address_district_id' => $input['permanent_address_district_id'],
-                'permanent_address_region_id' => $input['permanent_address_region_id'],
-                'previous_addresses' => $input['previous_addresses'],
-                'military_solider_no' => $input['military_solider_no'],
-                'military_join_date	' => $input['military_join_date	'],
-                'military_dsa_no' => $input['military_dsa_no'],
-                'military_gazetted_date' => $input['military_gazetted_date'],
-                'military_leave_date' => $input['military_leave_date'],
-                'military_leave_reason' => $input['military_leave_reason'],
-                'military_served_army' => $input['military_served_army'],
-                'military_brief_history_or_penalty' => $input['military_brief_history_or_penalty'],
-                'military_pension' => $input['military_pension'],
-                'education_group_id' => $input['education_group_id'],
-                'education_type_id' => $input['education_type_id'],
-                'education_id' => $input['education_id'],
-                'father_name' => $input['father_name'],
-                'father_ethnic_id' => $input['father_ethnic_id'],
-                'father_religion_id' => $input['father_religion_id'],
-                'father_place_of_birth' => $input['father_place_of_birth'],
-                'father_occupation' => $input['father_occupation'],
-                'father_address_street' => $input['father_address_street'],
-                'father_address_ward' => $input['father_address_ward'],
-                'father_address_township_or_town_id' => $input['father_address_township_or_town_id'],
-                'father_address_district_id' => $input['father_address_district_id'],
-                'father_address_region_id' => $input['father_address_region_id'],
-                'mother_name' => $input['mother_name'],
-                'mother_ethnic_id' => $input['mother_ethnic_id'],
-                'mother_religion_id' => $input['mother_religion_id'],
-                'mother_place_of_birth' => $input['mother_place_of_birth'],
-                'mother_occupation' => $input['mother_occupation'],
-                'mother_address_street' => $input['mother_address_street'],
-                'mother_address_ward' => $input['mother_address_ward'],
-                'mother_address_township_or_town_id' => $input['mother_address_township_or_town_id'],
-                'mother_address_district_id' => $input['mother_address_district_id'],
-                'mother_address_region_id' => $input['mother_address_region_id'],
-                'is_parents_citizen_when_staff_born' => $input['is_parents_citizen_when_staff_born'],
-                'current_rank_id' => $input['current_rank_id'],
-                'current_rank_date' => $input['current_rank_date'],
-                'current_department_id' => $input['current_department_id'],
-                'current_division_id' => $input['current_division_id'],
-                'side_department_id' => $input['side_department_id'],
-                'side_division_id' => $input['side_division_id'],
-                'salary_paid_by' => $input['salary_paid_by'],
-                'join_date' => $input['join_date'],
-                'form_of_appointment' => $input['form_of_appointment'],
-                'is_direct_appointed' => $input['is_direct_appointed'],
-                'payscale_id' => $input['payscale_id'],
-                'current_salary' => $input['current_salary'],
-                'current_increment_time' => $input['current_increment_time'],
-                'recommend_by' => $input['recommend_by'],
-                'family_in_politics' => $input['family_in_politics'],
-                'last_school_name' => $input['last_school_name'],
-                'last_school_subject' => $input['last_school_subject'],
-                'last_school_row_no' => $input['last_school_row_no'],
-                'last_school_major' => $input['last_school_major'],
-                'student_life_political_social' => $input['student_life_political_social'],
-                'habit' => $input['habit'],
-                'past_occupation' => $input['past_occupation'],
-                'revolution' => $input['revolution'],
-                'transfer_reason_salary' => $input['transfer_reason_salary'],
-                'during_work_political_social' => $input['during_work_political_social'],
-                'military_friend' => $input['military_friend'],
-                'foreigner_friend_name' => $input['foreigner_friend_name'],
-                'foreigner_friend_occupation' => $input['foreigner_friend_occupation'],
-                'foreigner_friend_nationality_id' => $input['foreigner_friend_nationality_id'],
-                'foreigner_friend_country_id' => $input['foreigner_friend_country_id'],
-                'foreigner_friend_how_to_know' => $input['foreigner_friend_how_to_know'],
-                'recommended_by_military_person' => $input['recommended_by_military_person'],
-            ]);
-        }
-        session()->flash('success', 'Staff Save successfully.');
-        $this->reset(['inputs']);
-        return redirect()->to('/staff');
+        ModelsStaff::create([
+            'name' => $this->staff_name,
+        ]);
+        $this->message = 'Created successfully.';
+        $this->close_modal();
     }
+
+    //close modal
+    public function close_modal(){
+        $this->resetValidation();
+        $this->reset('staff_name');
+        $this->confirm_edit = false;
+        $this->confirm_add = false;
+    }
+
+    //edit
+    public function edit_modal($id){
+        $this->resetValidation();
+        $this->confirm_add = false;
+        $this->confirm_edit = true;
+        $this->staff_id = $id;
+        $staff = ModelsStaff::findOrFail($id);
+        $this->staff_name = $staff->name;
+    }
+
+    //update
+    public function updateStaff()
+    {
+        $this->validate();
+        ModelsStaff::findOrFail($this->staff_id)->update([
+            'name' => $this->staff_name,
+        ]);
+        $this->message = 'Updated successfully.';
+        $this->close_modal();
+    }
+
+    //delete confirm
+    public function delete_confirm($id){
+        $this->staff_id = $id;
+        $this->confirm_delete = true;
+    }
+
+    //delete
+    public function delete($id){
+        ModelsStaff::find($id)->delete();
+        $this->confirm_delete = false;
+    }
+
+    #[On('render_staff')]
+    public function render_staff(){
+        $this->render();
+    }
+
     public function render()
     {
-        return view('livewire.staff');
+        $this->modal_title = $this->confirm_add ? 'Add Staff' : 'Edit Staff';
+        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $this->cancel_action = 'close_modal';
+        $this->submit_form = 'submitForm';
+
+        $staffSearch = '%' . $this->staff_search . '%';
+        $staffQuery = ModelsStaff::query();
+        if ($this->staff_search) {
+            $this->resetPage();
+            $staffQuery->where('name', 'LIKE', $staffSearch);
+            $staffs = $staffQuery->paginate($staffQuery->count() > 10 ? $staffQuery->count() : 10);
+        } else {
+            $staffs = $staffQuery->paginate(10);
+        }
+
+        return view('livewire.staff', [
+            'staffs' => $staffs,
+        ]);
     }
 }

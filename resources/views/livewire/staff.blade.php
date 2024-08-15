@@ -1,4 +1,4 @@
-<div class="w-full bg-gray-200">
+{{-- <div class="w-full bg-gray-200">
     <nav class="navbar bg-blue-700 p-4 w-full h-11 flex items-center justify-between">
         <div class="flex justify-start items-center">
             <img src="img/p1.png" class="w-5 h-5 rounded-full me-2">
@@ -1322,4 +1322,22 @@
             });
         });
     </script>
+</div> --}}
+<div class="w-full">
+    <x-slot name="header">
+        <h1 class="text-white font-semibold italic font-arial">Staff</h1>
+    </x-slot>
+    <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
+        <div class="w-full mx-auto px-3 py-4">
+            @include('table', [
+                'data_values' => $staffs,
+                'modal' => '',
+                'id' => $staff_id,
+                'title' => 'Staff',
+                'search_id' => 'staff_search',
+                'columns' => ['No', 'Name', 'Staff No', 'Action'],
+                'column_vals' => ['name', 'staff_no'],
+            ])
+        </div>
+    </div>
 </div>
