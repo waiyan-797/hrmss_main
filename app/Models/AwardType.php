@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class AwardType extends Model
 {
     use HasFactory;
+    public function awards()
+    {
+        return $this->hasMany(Award::class);
+    }
 }

@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Rank extends Model
 {
     use HasFactory;
+    public function payscale()
+    {
+        return $this->belongsTo(Payscale::class);
+    }
+
+    public function staff_type()
+    {
+        return $this->belongsTo(StaffType::class);
+    }
 }

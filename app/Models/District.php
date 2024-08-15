@@ -14,4 +14,8 @@ class District extends Model
         return $this->belongsTo(Region::class);
     }
 
+    public function townships()
+    {
+        return $this->hasMany(Township::class);
+    }
 }

@@ -6,18 +6,18 @@
         <form wire:submit.prevent="{{$submit_form}}">
             <div class="mb-4">
                 <label for="name" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">Name</label>
-                <input required type="text" wire:model="education_name" id="name" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                @error('education_name') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
+                <input required type="text" wire:model="section_name" id="name" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                @error('section_name') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
             </div>
             <div class="mb-4">
-                <label for="education_type" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">Education Type</label>
+                <label for="division" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">Division</label>
                 <div class="relative">
                     <select
-                        wire:model="education_type_name"
+                        wire:model="division_name"
                         class="text-sm font-arial block w-full mb-4 p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
                         <option value="" selected>Select an option...</option>
-                        @foreach ($education_types as $education)
-                            <option value="{{ $education->id }}"> {{ $education->name }} </option>
+                        @foreach ($divisions as $division)
+                            <option value="{{ $division->id }}"> {{ $division->name }} </option>
                         @endforeach
                     </select>
                 </div>

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Award extends Model
 {
     use HasFactory;
+    public function award_type()
+    {
+        return $this->belongsTo(AwardType::class);
+    }
 }
