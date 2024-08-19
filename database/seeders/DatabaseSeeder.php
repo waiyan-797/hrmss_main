@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             PenaltyTypeSeeder::class,
             PensionTypeSeeder::class,
             RelationSeeder::class,
+            DepartmentSeeder::class,
         ]);
     }
 }

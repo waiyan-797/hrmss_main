@@ -54,7 +54,13 @@
                         <td class="px-6 py-4 text-gray-500 dark:text-gray-300">{{$index}}</td>
                         @foreach ($column_vals as $val)
                             <td class="px-6 py-4 text-gray-500 dark:text-gray-300">
-                                {{ gettype($value->$val) == 'object' ? $value->$val->name : $value->$val }}
+                                @if (gettype($value->$val) == 'object')
+                                    {{ $value->$val->name }}
+                                @elseif (is_string($value->$val) && Str::contains($value->$val, 'staffs/'))
+                                    <img src="{{ route('file', $value->$val) }}" alt="Image" class="w-20 h-20 mx-auto rounded-full">
+                                @else
+                                    {{ $value->$val ? $value->$val : '-' }}
+                                @endif
                             </td>
                         @endforeach
                         <td class="px-6 py-4">

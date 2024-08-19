@@ -5,12 +5,15 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
+use function Livewire\Volt\{state, usesFileUploads};
 
-use function Livewire\Volt\state;
+usesFileUploads();
 
 state([
+    'user' => auth()->user(),
     'name' => fn () => auth()->user()->name,
-    'email' => fn () => auth()->user()->email
+    'email' => fn () => auth()->user()->email,
+    'avatar' => null,
 ]);
 
 $updateProfileInformation = function () {
@@ -19,7 +22,16 @@ $updateProfileInformation = function () {
     $validated = $this->validate([
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
+        'avatar' => '',
     ]);
+
+    if ($this->avatar) {
+        $path = Storage::disk('upload')->put('avatars', $this->avatar);
+        if ($old = $user->avatar) {
+            Storage::disk('upload')->delete($old);
+        }
+        $validated['avatar'] = $path;
+    }
 
     $user->fill($validated);
 
@@ -60,6 +72,17 @@ $sendVerification = function () {
     </header>
 
     <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
+        <div>
+            @if ($user->avatar)
+                <img src="{{ $avatar ? $avatar->temporaryUrl() : route('file', $user->avatar)}}" class="w-20 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
+            @else
+                <img src="{{ $avatar ? $avatar->temporaryUrl() : asset('img/user.png') }}" class="w-20 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
+            @endif
+            <x-input-label for="avatar" :value="__('Avatar')"/>
+            <input wire:model='avatar' id="avatar" accept=".jpg, .jpeg, .png" name="avatar" type="file" class="block w-full text-sm border rounded-lg cursor-pointer text-gray-700 focus:outline-none placeholder-gray-400 mt-1 font-arial dark:bg-gray-900 dark:border-gray-600 dark:text-gray-400 dark:placeholder-gray-500 bg-white border-gray-300" />
+            <x-input-error class="mt-1" :messages="$errors->get('avatar')" />
+        </div>
+
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />

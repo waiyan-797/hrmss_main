@@ -29,6 +29,7 @@ use App\Livewire\Relation;
 use App\Livewire\StaffDetail;
 use App\Livewire\Section\Section;
 use App\Livewire\Township\Township;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('welcome');
@@ -60,6 +61,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/religion', Religion::class)->name('religion');
     Route::get('/gender', Gender::class)->name('gender');
     Route::get('/staff_detail', StaffDetail::class)->name('staff_detail');
+    Route::get('/file/{path}', function($path){
+        if(File::exists(storage_path('app/upload/').$path)){
+            return response()->file(storage_path('app/upload/').$path);
+        } else {
+            abort(404, 'File Not Found');
+        }
+    })->name('file')->where('path', '.*');
 });
 
 
