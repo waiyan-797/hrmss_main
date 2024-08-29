@@ -2,6 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\Abroad;
+use App\Models\Award;
+use App\Models\Awarding;
+use App\Models\AwardType;
 use App\Models\BloodType;
 use App\Models\Children;
 use App\Models\Country;
@@ -16,14 +20,19 @@ use App\Models\FatherSibling;
 use App\Models\Gender;
 use App\Models\MotherSibling;
 use App\Models\Nationality;
+use App\Models\PastOccupation;
 use App\Models\Payscale;
+use App\Models\PenaltyType;
 use App\Models\Post;
 use App\Models\Posting;
+use App\Models\Punishment;
 use App\Models\Rank;
 use App\Models\Recommendation;
 use App\Models\Region;
 use App\Models\Relation;
 use App\Models\Religion;
+use App\Models\School;
+use App\Models\Section;
 use App\Models\Sibling;
 use App\Models\Spouse;
 use App\Models\SpouseFatherSibling;
@@ -32,6 +41,9 @@ use App\Models\SpouseSibling;
 use App\Models\Staff;
 use App\Models\StaffEducation;
 use App\Models\Township;
+use App\Models\Training;
+use App\Models\TrainingLocation;
+use App\Models\TrainingType;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -40,7 +52,7 @@ use Livewire\WithFileUploads;
 class StaffDetail extends Component
 {
     use WithFileUploads;
-    public $message;
+    public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     //personal_info
     public $photo, $name, $nick_name, $other_name, $staff_no, $dob, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id, $current_address_district_id, $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_district_id, $permanent_address_township_or_town_id, $previous_addresses, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension;
     public $educations = [];
@@ -48,6 +60,7 @@ class StaffDetail extends Component
     public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_department_id, $side_division_id, $salary_paid_by, $join_date, $form_of_appointment, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
     public $recommendations = [];
     public $postings = [];
+
     //relative
     public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street, $father_address_ward, $father_address_township_or_town_id, $father_address_district_id, $father_address_region_id, $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_district_id, $mother_address_region_id, $family_in_politics = false;
     public $siblings = [];
@@ -59,8 +72,14 @@ class StaffDetail extends Component
     public $spouse_father_siblings = [];
     public $spouse_mother_siblings = [];
 
-    #[Url]
-    public ?string $tab = 'personal_info';
+    //detail_personal_info
+    public $last_school_name, $last_school_subject, $last_school_row_no, $last_school_major, $student_life_political_social, $habit, $revolution, $transfer_reason_salary, $during_work_political_social, $has_military_friend = false, $foreigner_friend_name, $foreigner_friend_occupation, $foreigner_friend_nationality_id, $foreigner_friend_country_id, $foreigner_friend_how_to_know, $recommended_by_military_person;
+    public $schools = [];
+    public $trainings = [];
+    public $awards = [];
+    public $past_occupations = [];
+    public $abroads = [];
+    public $punishments = [];
 
     protected $personal_info_rules = [
         'photo' => '',
@@ -148,25 +167,24 @@ class StaffDetail extends Component
         'family_in_politics' => 'required',
     ];
 
-    // protected $detail_personal_info_rules = [
-    //     'last_school_name' => 'required',
-    //     'last_school_subject' => 'required',
-    //     'last_school_row_no' => 'required',
-    //     'last_school_major' => 'required',
-    //     'student_life_political_social' => 'required',
-    //     'habit' => 'required',
-    //     'past_occupation' => 'required',
-    //     'revolution' => 'required',
-    //     'transfer_reason_salary' => 'required',
-    //     'during_work_political_social' => 'required',
-    //     'military_friend' => 'required',
-    //     'foreigner_friend_name' => 'required',
-    //     'foreigner_friend_occupation' => 'required',
-    //     'foreigner_friend_nationality_id' => 'required',
-    //     'foreigner_friend_country_id' => 'required',
-    //     'foreigner_friend_how_to_know' => 'required',
-    //     'recommended_by_military_person' => 'required',
-    // ];
+    protected $detail_personal_info_rules = [
+        'last_school_name' => 'required',
+        'last_school_subject' => 'required',
+        'last_school_row_no' => 'required',
+        'last_school_major' => 'required',
+        'student_life_political_social' => 'required',
+        'habit' => 'required',
+        'revolution' => 'required',
+        'transfer_reason_salary' => 'required',
+        'during_work_political_social' => 'required',
+        'has_military_friend' => 'required',
+        'foreigner_friend_name' => 'required',
+        'foreigner_friend_occupation' => 'required',
+        'foreigner_friend_nationality_id' => 'required',
+        'foreigner_friend_country_id' => 'required',
+        'foreigner_friend_how_to_know' => 'required',
+        'recommended_by_military_person' => 'required',
+    ];
 
     public function validate_rules() {
         switch ($this->tab) {
@@ -181,19 +199,285 @@ class StaffDetail extends Component
         }
     }
 
-    public function mount(){
-        $this->educations[] = ['education_group' => '', 'education_type' => '', 'education' => ''];
-        $this->recommendations[] = ['recommend_by' => '', 'ministry' => '', 'department' => '', 'rank' => '', 'remark' => ''];
-        $this->postings[] = ['rank' => '', 'post' => '', 'from_date' => '', 'to_date' => '', 'department' => '', 'division' => '', 'location' => '', 'remark' => ''];
-        $this->siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
-        $this->father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
-        $this->mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
-        $this->spouses[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
-        $this->children[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
-        $this->spouse_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
-        $this->spouse_father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
-        $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+    public function mount($confirm_add = 0, $confirm_edit = 0, $staff_id = 0, $tab = 'personal_info')
+    {
+        $this->confirm_add = $confirm_add;
+        $this->confirm_edit = $confirm_edit;
+        $this->staff_id = $staff_id;
+        $this->tab = $tab;
+
+        if ($this->staff_id) {
+            $this->initializeArrays($this->staff_id);
+            $this->loadStaffData($this->staff_id);
+        }
     }
+
+    private function initializeArrays($staff_id)
+    {
+        $staff_educations = StaffEducation::where('staff_id', $staff_id)->get();
+        $recommendations = Recommendation::where('staff_id', $staff_id)->get();
+        $postings = Posting::where('staff_id', $staff_id)->get();
+        $schools = School::where('staff_id', $staff_id)->get();
+        $trainings = Training::where('staff_id', $staff_id)->get();
+        $awards = Awarding::where('staff_id', $staff_id)->get();
+        $past_occupations = PastOccupation::where('staff_id', $staff_id)->get();
+        $punishments = Punishment::where('staff_id', $staff_id)->get();
+        $siblings = Sibling::where('staff_id', $staff_id)->get();
+        $father_siblings = FatherSibling::where('staff_id', $staff_id)->get();
+        $mother_siblings = MotherSibling::where('staff_id', $staff_id)->get();
+        $spouses = Spouse::where('staff_id', $staff_id)->get();
+        $children = Children::where('staff_id', $staff_id)->get();
+        $spouse_siblings = SpouseSibling::where('staff_id', $staff_id)->get();
+        $spouse_father_siblings = SpouseFatherSibling::where('staff_id', $staff_id)->get();
+        $spouse_mother_siblings = SpouseMotherSibling::where('staff_id', $staff_id)->get();
+
+        foreach ($staff_educations as $edu) {
+            $this->educations[] = [
+                'education_group' => $edu->education_group_id,
+                'education_type' => $edu->education_type_id,
+                'education' => $edu->education_id
+            ];
+        }
+
+        foreach ($recommendations as $rec) {
+            $this->recommendations[] = [
+                'recommend_by' => $rec->recommend_by,
+                'ministry' => $rec->ministry,
+                'department' => $rec->department,
+                'rank' => $rec->rank,
+                'remark' => $rec->remark,
+            ];
+        }
+
+        foreach ($postings as $post) {
+            $this->postings[] = [
+                'rank' => $post->rank_id,
+                'post' => $post->post_id,
+                'from_date' => $post->from_date,
+                'to_date' => $post->to_date,
+                'department' => $post->department_id,
+                'division' => $post->division_id,
+                'location' => $post->location,
+                'remark' => $post->remark,
+            ];
+        }
+
+        foreach ($schools as $sch) {
+            $this->schools[] = [
+                'education_group' => $sch->education_group_id,
+                'education_type' => $sch->education_type_id,
+                'education' => $sch->education_id,
+                'school_name' => $sch->school_name,
+                'town' => $sch->town,
+                'year' => $sch->year,
+            ];
+        }
+
+        foreach ($trainings as $tra) {
+            $this->trainings[] = [
+                'training_type' => $tra->training_type_id,
+                'from_date' => $tra->from_date,
+                'to_date' => $tra->to_date,
+                'location' => $tra->location,
+                'country' => $tra->country_id,
+                'training_location' => $tra->training_location_id,
+            ];
+        }
+
+        foreach ($awards as $awa) {
+            $this->awards[] = [
+                'award_type' => $awa->award_type_id,
+                'award' => $awa->award_id,
+                'order_no' => $awa->order_no,
+                'order_date' => $awa->order_date,
+            ];
+        }
+
+        foreach ($past_occupations as $ocu) {
+            $this->past_occupations[] = [
+                'rank' => $ocu->rank_id,
+                'department' => $ocu->department_id,
+                'section' => $ocu->section_id,
+                'from_date' => $ocu->from_date,
+                'to_date' => $ocu->to_date,
+                'remark' => $ocu->remark,
+            ];
+        }
+
+        foreach ($punishments as $pun) {
+            $this->punishments[] = [
+                'penalty_type' => $pun->penalty_type_id,
+                'reason' => $pun->reason,
+                'from_date' => $pun->from_date,
+                'to_date' => $pun->to_date,
+            ];
+        }
+
+        function relative_array($sib){
+            return [
+                'name' => $sib->name,
+                'ethnic' => $sib->ethnic_id,
+                'religion' => $sib->religion_id,
+                'place_of_birth' => $sib->place_of_birth,
+                'occupation' => $sib->occupation,
+                'address' => $sib->address,
+                'relation' => $sib->relation_id,
+            ];
+        }
+
+        foreach ($siblings as $sib) {
+            $this->siblings[] = relative_array($sib);
+        }
+
+        foreach ($father_siblings as $sib) {
+            $this->father_siblings[] = relative_array($sib);
+        }
+
+        foreach ($mother_siblings as $sib) {
+            $this->mother_siblings[] = relative_array($sib);
+        }
+
+        foreach ($spouses as $sib) {
+            $this->spouses[] = relative_array($sib);
+        }
+
+        foreach ($children as $sib) {
+            $this->children[] = relative_array($sib);
+        }
+
+        foreach ($spouse_siblings as $sib) {
+            $this->spouse_siblings[] = relative_array($sib);
+        }
+
+        foreach ($spouse_father_siblings as $sib) {
+            $this->spouse_father_siblings[] = relative_array($sib);
+        }
+
+        foreach ($spouse_mother_siblings as $sib) {
+            $this->spouse_mother_siblings[] = relative_array($sib);
+        }
+    }
+
+
+    private function loadStaffData($staff_id)
+    {
+        $staff = Staff::find($staff_id);
+
+        $this->fillPersonalInfo($staff);
+        $this->fillJobInfo($staff);
+        $this->fillRelativeInfo($staff);
+        $this->fillDetailPersonalInfo($staff);
+    }
+
+    private function fillPersonalInfo($staff)
+    {
+        $this->photo = $staff->staff_photo;
+        $this->name = $staff->name;
+        $this->nick_name = $staff->nick_name;
+        $this->other_name = $staff->other_name;
+        $this->staff_no = $staff->staff_no;
+        $this->dob = $staff->dob;
+        $this->gender_id = $staff->gender_id;
+        $this->ethnic_id = $staff->ethnic_id;
+        $this->religion_id = $staff->religion_id;
+        $this->height_feet = $staff->height_feet;
+        $this->height_inch = $staff->height_inch;
+        $this->hair_color = $staff->hair_color;
+        $this->eye_color = $staff->eye_color;
+        $this->prominent_mark = $staff->prominent_mark;
+        $this->skin_color = $staff->skin_color;
+        $this->weight = $staff->weight;
+        $this->blood_type_id = $staff->blood_type_id;
+        $this->place_of_birth = $staff->place_of_birth;
+        $this->nrc = $staff->nrc;
+        $this->phone = $staff->phone;
+        $this->mobile = $staff->mobile;
+        $this->email = $staff->email;
+        $this->current_address_street = $staff->current_address_street;
+        $this->current_address_ward = $staff->current_address_ward;
+        $this->current_address_region_id = $staff->current_address_region_id;
+        $this->current_address_district_id = $staff->current_address_district_id;
+        $this->current_address_township_or_town_id = $staff->current_address_township_or_town_id;
+        $this->permanent_address_street = $staff->permanent_address_street;
+        $this->permanent_address_ward = $staff->permanent_address_ward;
+        $this->permanent_address_region_id = $staff->permanent_address_region_id;
+        $this->permanent_address_district_id = $staff->permanent_address_district_id;
+        $this->permanent_address_township_or_town_id = $staff->permanent_address_township_or_town_id;
+        $this->previous_addresses = $staff->previous_addresses;
+        $this->military_solider_no = $staff->military_solider_no;
+        $this->military_join_date = $staff->military_join_date;
+        $this->military_dsa_no = $staff->military_dsa_no;
+        $this->military_gazetted_date = $staff->military_gazetted_date;
+        $this->military_leave_date = $staff->military_leave_date;
+        $this->military_leave_reason = $staff->military_leave_reason;
+        $this->military_served_army = $staff->military_served_army;
+        $this->military_brief_history_or_penalty = $staff->military_brief_history_or_penalty;
+        $this->military_pension = $staff->military_pension;
+    }
+
+    private function fillJobInfo($staff)
+    {
+        $this->current_rank_id = $staff->current_rank_id;
+        $this->current_rank_date = $staff->current_rank_date;
+        $this->current_department_id = $staff->current_department_id;
+        $this->current_division_id = $staff->current_division_id;
+        $this->side_department_id = $staff->side_department_id;
+        $this->side_division_id = $staff->side_division_id;
+        $this->salary_paid_by = $staff->salary_paid_by;
+        $this->join_date = $staff->join_date;
+        $this->form_of_appointment = $staff->form_of_appointment;
+        $this->is_direct_appointed = $staff->is_direct_appointed;
+        $this->payscale_id = $staff->payscale_id;
+        $this->current_salary = $staff->current_salary;
+        $this->current_increment_time = $staff->current_increment_time;
+        $this->is_parents_citizen_when_staff_born = $staff->is_parents_citizen_when_staff_born;
+    }
+
+    private function fillRelativeInfo($staff)
+    {
+        $this->father_name = $staff->father_name;
+        $this->father_ethnic_id = $staff->father_ethnic_id;
+        $this->father_religion_id = $staff->father_religion_id;
+        $this->father_place_of_birth = $staff->father_place_of_birth;
+        $this->father_occupation = $staff->father_occupation;
+        $this->father_address_street = $staff->father_address_street;
+        $this->father_address_ward = $staff->father_address_ward;
+        $this->father_address_township_or_town_id = $staff->father_address_township_or_town_id;
+        $this->father_address_district_id = $staff->father_address_district_id;
+        $this->father_address_region_id = $staff->father_address_region_id;
+        $this->mother_name = $staff->mother_name;
+        $this->mother_ethnic_id = $staff->mother_ethnic_id;
+        $this->mother_religion_id = $staff->mother_religion_id;
+        $this->mother_place_of_birth = $staff->mother_place_of_birth;
+        $this->mother_occupation = $staff->mother_occupation;
+        $this->mother_address_street = $staff->mother_address_street;
+        $this->mother_address_ward = $staff->mother_address_ward;
+        $this->mother_address_township_or_town_id = $staff->mother_address_township_or_town_id;
+        $this->mother_address_district_id = $staff->mother_address_district_id;
+        $this->mother_address_region_id = $staff->mother_address_region_id;
+        $this->family_in_politics = $staff->family_in_politics;
+    }
+
+    private function fillDetailPersonalInfo($staff)
+    {
+        $this->last_school_name = $staff->last_school_name;
+        $this->last_school_subject = $staff->last_school_subject;
+        $this->last_school_row_no = $staff->last_school_row_no;
+        $this->last_school_major = $staff->last_school_major;
+        $this->student_life_political_social = $staff->student_life_political_social;
+        $this->habit = $staff->habit;
+        $this->revolution = $staff->revolution;
+        $this->transfer_reason_salary = $staff->transfer_reason_salary;
+        $this->during_work_political_social = $staff->during_work_political_social;
+        $this->has_military_friend = $staff->has_military_friend;
+        $this->foreigner_friend_name = $staff->foreigner_friend_name;
+        $this->foreigner_friend_occupation = $staff->foreigner_friend_occupation;
+        $this->foreigner_friend_nationality_id = $staff->foreigner_friend_nationality_id;
+        $this->foreigner_friend_country_id = $staff->foreigner_friend_country_id;
+        $this->foreigner_friend_how_to_know = $staff->foreigner_friend_how_to_know;
+        $this->recommended_by_military_person = $staff->recommended_by_military_person;
+    }
+
 
     public function add_edu(){
         $this->educations[] = ['education_group' => '', 'education_type' => '', 'education' => ''];
@@ -237,6 +521,26 @@ class StaffDetail extends Component
 
     public function add_spouse_mother_siblings(){
         $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+    }
+
+    public function add_schools(){
+        $this->schools[] = ['education_group' => '', 'education_type' => '', 'education' => '', 'school_name' => '', 'town' => '', 'year' => ''];
+    }
+
+    public function add_trainings(){
+        $this->trainings[] = ['training_type' => '', 'from_date' => '', 'to_date' => '', 'location' => '', 'country' => '', 'training_location' => ''];
+    }
+
+    public function add_awardings(){
+        $this->awards[] = ['award_type' => '', 'award' => '', 'order_no' => '', 'order_date' => ''];
+    }
+
+    public function add_past_occupations(){
+        $this->past_occupations[] = ['rank' => '', 'department' => '', 'section' => '', 'from_date' => '', 'to_date' => '', 'remark' => ''];
+    }
+
+    public function add_punishments(){
+        $this->punishments[] = ['penalty_type' => '', 'reason' => '', 'from_date' => '', 'to_date' => ''];
     }
 
     public function removeEdu($index){
@@ -289,16 +593,35 @@ class StaffDetail extends Component
         $this->spouse_mother_siblings = array_values($this->spouse_mother_siblings);
     }
 
+    public function remove_schools($index){
+        unset($this->schools[$index]);
+        $this->schools = array_values($this->schools);
+    }
+
+    public function remove_trainings($index){
+        unset($this->trainings[$index]);
+        $this->trainings = array_values($this->trainings);
+    }
+
+    public function remove_awardings($index){
+        unset($this->awards[$index]);
+        $this->awards = array_values($this->awards);
+    }
+
+    public function remove_past_occupations($index){
+        unset($this->past_occupations[$index]);
+        $this->past_occupations = array_values($this->past_occupations);
+    }
+
     public function submit_staff(){
         $rules = $this->validate_rules();
         $this->validate($rules);
-        $staff_create = null;
-
+        $staff = Staff::find($this->staff_id);
         if ($this->photo) {
             $this->photo = Storage::disk('upload')->put('staffs', $this->photo);
-        // if ($old = $user->avatar) {
-        //     Storage::disk('upload')->delete($old);
-        // }
+            if ($staff->exists && $old = $staff->staff_photo) {
+                Storage::disk('upload')->delete($old);
+            }
         }
 
         $personal_info = [
@@ -387,50 +710,149 @@ class StaffDetail extends Component
             'family_in_politics' => $this->family_in_politics,
         ];
 
-        // $detail_personal_info = [
-        //     'last_school_name' => $this->last_school_name,
-        //     'last_school_subject' => $this->last_school_subject,
-        //     'last_school_row_no' => $this->last_school_row_no,
-        //     'last_school_major' => $this->last_school_major,
-        //     'student_life_political_social' => $this->student_life_political_social,
-        //     'habit' => $this->habit,
-        //     'past_occupation' => $this->past_occupation,
-        //     'revolution' => $this->revolution,
-        //     'transfer_reason_salary' => $this->transfer_reason_salary,
-        //     'during_work_political_social' => $this->during_work_political_social,
-        //     'military_friend' => $this->military_friend,
-        //     'foreigner_friend_name' => $this->foreigner_friend_name,
-        //     'foreigner_friend_occupation' => $this->foreigner_friend_occupation,
-        //     'foreigner_friend_nationality_id' => $this->foreigner_friend_nationality_id,
-        //     'foreigner_friend_country_id' => $this->foreigner_friend_country_id,
-        //     'foreigner_friend_how_to_know' => $this->foreigner_friend_how_to_know,
-        //     'recommended_by_military_person' => $this->recommended_by_military_person,
-        // ];
+        $detail_personal_info = [
+            'last_school_name' => $this->last_school_name,
+            'last_school_subject' => $this->last_school_subject,
+            'last_school_row_no' => $this->last_school_row_no,
+            'last_school_major' => $this->last_school_major,
+            'student_life_political_social' => $this->student_life_political_social,
+            'habit' => $this->habit,
+            'revolution' => $this->revolution,
+            'transfer_reason_salary' => $this->transfer_reason_salary,
+            'during_work_political_social' => $this->during_work_political_social,
+            'has_military_friend' => $this->has_military_friend,
+            'foreigner_friend_name' => $this->foreigner_friend_name,
+            'foreigner_friend_occupation' => $this->foreigner_friend_occupation,
+            'foreigner_friend_nationality_id' => $this->foreigner_friend_nationality_id,
+            'foreigner_friend_country_id' => $this->foreigner_friend_country_id,
+            'foreigner_friend_how_to_know' => $this->foreigner_friend_how_to_know,
+            'recommended_by_military_person' => $this->recommended_by_military_person,
+        ];
 
         $dataMapping = [
             'job_info' => $job_info,
             'relative' => $relative,
-            // 'detail_personal_info' => $detail_personal_info,
+            'detail_personal_info' => $detail_personal_info,
             'default' => $personal_info,
         ];
 
         $staff_create = $dataMapping[$this->tab] ?? $dataMapping['default'];
+        $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
+        $this->staff_id = $staff->id;
 
-        $staff = Staff::create($staff_create);
+        switch ($this->tab) {
+            case 'personal_info':
+                $this->saveEducations($staff->id);
+                break;
 
-        if ($this->tab == 'personal_info') {
-            $this->saveEducations($staff->id);
-        } elseif ($this->tab == 'job_info') {
-            $this->saveRecommendations($staff->id);
-            $this->savePostings($staff->id);
-        } elseif ($this->tab == 'relative') {
-            $this->saveRelatives($staff->id);
+            case 'job_info':
+                $this->saveRecommendations($staff->id);
+                $this->savePostings($staff->id);
+                break;
+
+            case 'relative':
+                $this->saveRelatives($staff->id);
+                break;
+
+            case 'detail_personal_info':
+                $this->saveAbroads($staff->id);
+                $this->saveSchools($staff->id);
+                $this->savePastOccupations($staff->id);
+                $this->saveAwards($staff->id);
+                $this->saveTrainings($staff->id);
+                $this->savePunishments($staff->id);
+                break;
         }
 
-        $this->resetExcept('tab');
         $this->message = 'Saved Successfully';
     }
+
+    private function saveAbroads($staffId){
+        Abroad::where('staff_id', $staffId)->delete();
+        foreach ($this->abroads as $abroad) {
+            Abroad::create([
+                'staff_id' => $staffId,
+                'country_id' => $abroad['country'],
+                'particular' => $abroad['particular'],
+                'meet_with' => $abroad['meet_with'],
+                'to_date' => $abroad['to_date'],
+            ]);
+        }
+    }
+
+    private function saveSchools($staffId){
+        School::where('staff_id', $staffId)->delete();
+        foreach ($this->schools as $school) {
+            School::create([
+                'staff_id' => $staffId,
+                'education_group_id' => $school['education_group'],
+                'education_type_id' => $school['education_type'],
+                'education_id' => $school['education'],
+                'school_name' => $school['school_name'],
+                'town' => $school['town'],
+                'year' => $school['year'],
+            ]);
+        }
+    }
+
+    private function savePastOccupations($staffId){
+        PastOccupation::where('staff_id', $staffId)->delete();
+        foreach ($this->past_occupations as $occupation) {
+            PastOccupation::create([
+                'staff_id' => $staffId,
+                'rank_id' => $occupation['rank'],
+                'department_id' => $occupation['department'],
+                'section_id' => $occupation['section'],
+                'from_date' => $occupation['from_date'],
+                'to_date' => $occupation['to_date'],
+                'remark' => $occupation['remark'],
+            ]);
+        }
+    }
+
+    private function saveAwards($staffId){
+        Awarding::where('staff_id', $staffId)->delete();
+        foreach ($this->awards as $award) {
+            Awarding::create([
+                'staff_id' => $staffId,
+                'award_type_id' => $award['award_type'],
+                'award_id' => $award['award'],
+                'order_no' => $award['order_no'],
+                'order_date' => $award['order_date'],
+            ]);
+        }
+    }
+
+    private function saveTrainings($staffId){
+        Training::where('staff_id', $staffId)->delete();
+        foreach ($this->trainings as $training) {
+            Training::create([
+                'staff_id' => $staffId,
+                'training_type_id' => $training['training_type'],
+                'from_date' => $training['from_date'],
+                'to_date' => $training['to_date'],
+                'location' => $training['location'],
+                'country_id' => $training['country'],
+                'training_location_id' => $training['training_location'],
+            ]);
+        }
+    }
+
+    private function savePunishments($staffId){
+        Punishment::where('staff_id', $staffId)->delete();
+        foreach ($this->punishments as $punishment) {
+            Punishment::create([
+                'staff_id' => $staffId,
+                'penalty_id' => $punishment['penalty'],
+                'reason' => $punishment['reason'],
+                'from_date' => $punishment['from_date'],
+                'to_date' => $punishment['to_date'],
+            ]);
+        }
+    }
+
     private function saveEducations($staffId){
+        StaffEducation::where('staff_id', $staffId)->delete();
         foreach ($this->educations as $education) {
             StaffEducation::create([
                 'education_group_id' => $education['education_group'],
@@ -442,6 +864,7 @@ class StaffDetail extends Component
     }
 
     private function saveRecommendations($staffId){
+        Recommendation::where('staff_id', $staffId)->delete();
         foreach ($this->recommendations as $recommendation) {
             Recommendation::create([
                 'recommend_by' => $recommendation['recommend_by'],
@@ -455,6 +878,7 @@ class StaffDetail extends Component
     }
 
     private function savePostings($staffId){
+        Posting::where('staff_id', $staffId)->delete();
         foreach ($this->postings as $posting) {
             Posting::create([
                 'staff_id' => $staffId,
@@ -485,6 +909,15 @@ class StaffDetail extends Component
     }
 
     private function saveRelatives($staffId){
+        Sibling::where('staff_id', $staffId)->delete();
+        FatherSibling::where('staff_id', $staffId)->delete();
+        MotherSibling::where('staff_id', $staffId)->delete();
+        Spouse::where('staff_id', $staffId)->delete();
+        Children::where('staff_id', $staffId)->delete();
+        SpouseSibling::where('staff_id', $staffId)->delete();
+        SpouseFatherSibling::where('staff_id', $staffId)->delete();
+        SpouseMotherSibling::where('staff_id', $staffId)->delete();
+
         foreach($this->siblings as $relative){
             Sibling::create($this->relativeFields($staffId, $relative));
         }
@@ -527,9 +960,13 @@ class StaffDetail extends Component
         $townships = Township::get();
 
         // Initialize variables for all potential data sets
+        //personal_info
         $genders = $blood_types = $education_groups = $education_types = $_educations = null;
+        //job_info
         $ranks = $divisions = $departments = $payscales = $posts = null;
-        $nationalities = $countries = null;
+        //detail_personal_info
+        $nationalities = $countries = $training_types = $training_locations = $award_types = $_awards = $sections = $penalty_types = null;
+        //relative
         $relatives = $relations = null;
 
         switch ($this->tab) {
@@ -550,8 +987,19 @@ class StaffDetail extends Component
                 break;
 
             case 'detail_personal_info':
+                $education_groups = EducationGroup::get();
+                $education_types = EducationType::get();
+                $_educations = Education::get();
                 $nationalities = Nationality::get();
                 $countries = Country::get();
+                $training_types = TrainingType::get();
+                $training_locations = TrainingLocation::get();
+                $award_types = AwardType::get();
+                $_awards = Award::get();
+                $sections = Section::get();
+                $penalty_types = PenaltyType::get();
+                $ranks = Rank::get();
+                $departments = Department::get();
                 break;
 
             case 'relative':
@@ -600,7 +1048,7 @@ class StaffDetail extends Component
                 break;
         }
 
-        return view('livewire.staff-detail', compact('genders', 'relations', 'relatives', 'ethnics', 'religions', 'blood_types', 'regions', 'districts', 'townships', 'education_groups', 'education_types', '_educations', 'ranks', 'divisions', 'departments', 'payscales', 'nationalities', 'countries', 'posts'));
+        return view('livewire.staff-detail', compact('penalty_types', 'sections', 'award_types', '_awards', 'training_locations', 'training_types', 'genders', 'relations', 'relatives', 'ethnics', 'religions', 'blood_types', 'regions', 'districts', 'townships', 'education_groups', 'education_types', '_educations', 'ranks', 'divisions', 'departments', 'payscales', 'nationalities', 'countries', 'posts'));
     }
 
 }

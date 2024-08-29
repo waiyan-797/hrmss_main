@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignIdFor(Education::class)->nullable()->constrained()->nullOnDelete();
             $table->string('school_name');
             $table->string('town');
-            $table->date('year');
+            $table->string('year');
             $table->timestamps();
         });
     }

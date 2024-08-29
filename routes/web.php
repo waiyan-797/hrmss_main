@@ -60,7 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/ethnic', Ethnic::class)->name('ethnic');
     Route::get('/religion', Religion::class)->name('religion');
     Route::get('/gender', Gender::class)->name('gender');
-    Route::get('/staff_detail', StaffDetail::class)->name('staff_detail');
+    Route::get('/staff_detail/{confirm_add?}/{confirm_edit?}/{staff_id?}/{tab?}', StaffDetail::class)->name('staff_detail');
     Route::get('/file/{path}', function($path){
         if(File::exists(storage_path('app/upload/').$path)){
             return response()->file(storage_path('app/upload/').$path);

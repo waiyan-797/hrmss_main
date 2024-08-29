@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Rank;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,34 +15,18 @@ class RankSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('ranks')->insert([
-            'name' => 'ညွှန်ကြားရေးမှူးချုပ်',
-           
-        ]);
+        $columns = ['name'];
+        $values = [
+            ['ညွှန်ကြားရေးမှူးချုပ်'],
+            ['ဒုတိယညွှန်ကြားရေးမှူးချုပ်'],
+            ['ညွှန်ကြားရေးမှူး'],
+            ['ဒုတိယညွှန်ကြားရေးမှူး'],
+            ['လက်ထောက်ညွှန်ကြားရေးမှူး'],
+            ['ဦးစီးအရာရှိ'],
+        ];
 
-        DB::table('ranks')->insert([
-            'name' => 'ဒုတိယညွှန်ကြားရေးမှူးချုပ်',
-           
-        ]);
-
-        DB::table('ranks')->insert([
-            'name' => 'ညွှန်ကြားရေးမှူး',
-           
-        ]);
-
-        DB::table('ranks')->insert([
-            'name' => 'ဒုတိယညွှန်ကြားရေးမှူး',
-           
-        ]);
-
-        DB::table('ranks')->insert([
-            'name' => 'လက်ထောက်ညွှန်ကြားရေးမှူး',
-           
-        ]);
-
-        DB::table('ranks')->insert([
-            'name' => 'ဦးစီးအရာရှိ',
-           
-        ]);
+        foreach ($values as $val) {
+            Rank::create(array_combine($columns, $val));
+        }
     }
 }

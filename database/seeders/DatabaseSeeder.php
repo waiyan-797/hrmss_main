@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Nationality;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -38,6 +39,10 @@ class DatabaseSeeder extends Seeder
             PensionTypeSeeder::class,
             RelationSeeder::class,
             DepartmentSeeder::class,
+            NationalitySeeder::class,
+            RankSeeder::class,
+            AwardSeeder::class,
+            SectionSeeder::class,
         ]);
     }
 }

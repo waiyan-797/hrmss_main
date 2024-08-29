@@ -112,11 +112,10 @@ return new class extends Migration
             $table->string('last_school_major')->nullable();
             $table->string('student_life_political_social')->nullable();
             $table->string('habit')->nullable();
-            $table->string('past_occupation')->nullable();
             $table->string('revolution')->nullable();
             $table->string('transfer_reason_salary')->nullable();
             $table->string('during_work_political_social')->nullable();
-            $table->string('military_friend')->nullable();
+            $table->boolean('has_military_friend')->nullable()->default(false);
             $table->string('foreigner_friend_name')->nullable();
             $table->string('foreigner_friend_occupation')->nullable();
             $table->foreignId('foreigner_friend_nationality_id')->nullable()->constrained('nationalities')->onDelete('set null');
