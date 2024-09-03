@@ -1,0 +1,185 @@
+<div class="w-full">
+    <x-slot name="header">
+        <h1 class="text-white font-semibold italic font-arial">Staff Salary List</h1>
+    </x-slot>
+    <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
+        <div class="w-full mx-auto px-3 py-4">
+            {{-- @include('table', [
+                'data_values' => $ethnic_types,
+                'modal' => 'modals/ethnic_modal',
+                'id' => $ethnic_type_id,
+                'title' => 'Ethnic',
+                'search_id' => 'ethnic_type_search',
+                'columns' => ['No', 'Name', 'Action'],
+                'column_vals' => ['name'],
+            ]) --}}
+
+            <h1 class="text-center text-sm mb-2">နိုင်ငံတော်စီမံအုပ်ချုပ်ရေးကောင်စီလက်ထက်<br>ရင်းနှီးမြှပ်နှံမှုနှင့်
+                နိုင်ငံခြားစီးပွားဆက်သွယ်‌ရေးဝန်ကြီးဌာန၊ ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၏</h1>
+            <h2 class="font-bold text-center text-sm mb-4">လစာ၊ ဘွဲ့အလိုက် ချီးမြှင့်ငွေနှင့်
+                အခြားချီးမြှင့်ငွေ/စရိတ်များ ရရှိသည့်<br>ဝန်ထမ်းဦးရေနှင့် စုစုပေါင်း လစာစရိတ်စာရင်းချုပ်(၃၁-၅-၂၀၂၄)
+            </h2>
+
+            <table class="md:w-full font-bold text-sm">
+                <thead>
+                    <tr>
+                        <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
+                        <th rowspan="2" class="border border-black text-center p-2">လစာနှုန်း</th>
+                        <th rowspan="2" class="border border-black text-center p-2">ရာထူးအဆင့်</th>
+                        <th colspan="2" class="border border-black text-center p-2">ဦးရေ</th>
+                        <th rowspan="2" class="border border-black text-center p-2">လစာ</th>
+                        <th rowspan="2" class="border border-black text-center p-2">ဘွဲ့အလိုက်<br>ချီးမြှင့်ငွေ</th>
+                        <th rowspan="2" class="border border-black text-center p-2">အခြားချီးမြှင့်ငွေ/စရိတ်များ</th>
+                        <th rowspan="2" class="border border-black text-center p-2">ဒေသစရိတ်</th>
+                        <th rowspan="2" class="border border-black text-center p-2">လစာနှင့်စရိတ်ပေါင်း</th>
+                    </tr>
+                    <tr>
+                        <th class="border border-black text-center p-2">ခွင့်ပြု</th>
+                        <th class="border border-black text-center p-2">ခန့်ပြီး</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-black text-center p-2">၁</td>
+                        <td class="border border-black text-center p-2">၂</td>
+                        <td class="border border-black text-center p-2">၃</td>
+                        <td class="border border-black text-center p-2">၄</td>
+                        <td class="border border-black text-center p-2">၅</td>
+                        <td class="border border-black text-center p-2">၆</td>
+                        <td class="border border-black text-center p-2">၇</td>
+                        <td class="border border-black text-center p-2">၈</td>
+                        <td class="border border-black text-center p-2">၁၁</td>
+                        <td class="border border-black text-center p-2">၁၂=၆+၇+၈+၉+၁၀+၁၁</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
+                        <td class="border border-black text-center p-2">ညွှန်ကြားရေးမှူးချုပ်</td>
+                        <td class="border border-black text-right p-2">၁</td>
+                        <td class="border border-black text-right p-2">၂</td>
+                        <td class="border border-black text-right p-2">၄</td>
+                        <td class="border border-black text-right p-2">၆</td>
+                        <td class="border border-black text-right p-2">၇</td>
+                        <td class="border border-black text-right p-2">၆</td>
+                        <td class="border border-black text-right p-2">၃၄</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">အရာထမ်းပေါင်း</td>
+                        <td class="border border-black text-center p-2">-</td>
+                        <td class="border border-black text-right p-2">၁၂</td>
+                        <td class="border border-black text-right p-2">၁၂</td>
+                        <td class="border border-black text-right p-2">၃၄</td>
+                        <td class="border border-black text-right p-2">၂၃</td>
+                        <td class="border border-black text-right p-2">၂၃</td>
+                        <td class="border border-black text-right p-2">၃၄</td>
+                        <td class="border border-black text-right p-2">၃၄</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
+                        <td class="border border-black text-center p-2">ရုံးအုပ်နှင့်အဆင့်တူ</td>
+                        <td class="border border-black text-right p-2">၆</td>
+                        <td class="border border-black text-right p-2">၅</td>
+                        <td class="border border-black text-right p-2">၁၂</td>
+                        <td class="border border-black text-right p-2">၃၄</td>
+                        <td class="border border-black text-right p-2">၇</td>
+                        <td class="border border-black text-right p-2">၄</td>
+                        <td class="border border-black text-right p-2">၄၅၆</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">အမှုထမ်းပေါင်း</td>
+                        <td class="border border-black text-center p-2">-</td>
+                        <td class="border border-black text-right p-2">၁၂၃</td>
+                        <td class="border border-black text-right p-2">၁၂၃</td>
+                        <td class="border border-black text-right p-2">၁၂၃</td>
+                        <td class="border border-black text-right p-2">၁၂၃</td>
+                        <td class="border border-black text-right p-2">၁၂၃</td>
+                        <td class="border border-black text-right p-2">၁၂၃</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">စုစုပေါင်း</td>
+                        <td class="border border-black text-center p-2">-</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">ထောက်ပံ့ကြေး</td>
+                        <td class="border border-black text-center p-2">-</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                        <td class="border border-black text-right p-2">၃၄၅</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            {{-- <div class="">
+                <div class="flex justify-start mb-2">
+                    <p class="md:w-1/5">လက်မှတ်</p>
+                    <p class="md:w-5">၊</p>
+                    <p></p>
+                </div>
+
+                <div class="flex justify-start mb-2">
+                    <p class="md:w-1/5">အမည်</p>
+                    <p class="md:w-5">၊</p>
+                    <p>ဒေါ်နှင်းစုမွန်
+                    </p>
+                </div>
+
+                <div class="flex justify-start mb-2">
+                    <p class="md:w-1/5">ရာထူး</p>
+                    <p class="md:w-5">၊</p>
+                    <p>လက်ထောက်ညွှန်ကြားရေးမှူး</p>
+                </div>
+
+                <div class="flex justify-start mb-2">
+                    <p class="md:w-1/5">ဆက်သွယ်ရန်ဖုန်း</p>
+                    <p class="md:w-5">၊</p>
+                    <p></p>
+                </div>
+            </div> --}}
+
+            <div class="mx-60 my-8">
+                <div class="flex justify-end mb-2">
+                    <p class="md:w-1/5 text-right">လက်မှတ်</p>
+                    <p class="md:w-5 text-right">၊</p>
+                    <p></p>
+                </div>
+
+                <div class="flex justify-end mb-2">
+                    <p class="md:w-1/5 text-right">အမည်</p>
+                    <p class="md:w-5 text-right">၊</p>
+                    <p></p>
+                </div>
+
+                <div class="flex justify-end mb-2">
+                    <p class="md:w-1/5 text-right">ရာထူး</p>
+                    <p class="md:w-5 text-right">၊</p>
+                    <p></p>
+                </div>
+
+                <div class="flex justify-end mb-2">
+                    <p class="md:w-1/5 text-right">ဆက်သွယ်ရန်ဖုန်း</p>
+                    <p class="md:w-5 text-right">၊</p>
+                    <p></p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

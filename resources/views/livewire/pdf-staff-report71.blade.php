@@ -1,0 +1,1174 @@
+<div class="w-full">
+    <x-slot name="header">
+        <h1 class="text-white font-semibold italic font-arial">Staff Report71</h1>
+    </x-slot>
+    <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
+        <div class="w-full mx-auto px-3 py-4">
+            {{-- @include('table', [
+                'data_values' => $religion_types,
+                'modal' => 'modals/religion_modal',
+                'id' => $religion_type_id,
+                'title' => 'PDF Staff Report',
+                'search_id' => 'religion_type_search',
+                'columns' => ['No', 'Name', 'Action'],
+                'column_vals' => ['name'],
+            ]) --}}
+
+
+            <div class="md:w-full p-4">
+                <h1 class="text-center font-semibold text-base">HR Software
+                    အတွက်ဝန်ထမ်းများ၏ကိုယ်ရေးမှတ်တမ်းရေးသွင်းခြင်းပုံစံ </h1>
+                <img src="./img/{{ $staff->staff_photo }}" alt="" class="w-20 h-20 float-right mr-28">
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၁။ </label>
+                    <label for="name" class="md:w-1/3">အမည် (အပြည့်အစုံ)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->name }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၂။ </label>
+                    <label for="name" class="md:w-1/3">ငယ်အမည်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->nick_name }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၃။ </label>
+                    <label for="name" class="md:w-1/3">ကျား/ မ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->gender_id }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၄။ </label>
+                    <label for="name" class="md:w-1/3">Attandance ID(Figer Print ID)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၅။ </label>
+                    <label for="name" class="md:w-1/3">GPMS ဝန်ထမ်းအမှတ်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->other_name }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၆။ </label>
+                    <label for="name" class="md:w-1/3">လူမျိုး/ကိုးကွယ်သည့်ဘာသာ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->ethnics ? $staff->ethnic->name : '-' }}/
+                        {{ $staff->religions ? $staff->religion->name : '-' }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၇။ </label>
+                    <label for="name" class="md:w-1/3">အမျိုးသားမှတ်ပုံတင်အမှတ်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->nrc }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၈။ </label>
+                    <label for="name" class="md:w-1/3">မွေးသက္ကရာဇ် (ရက်-လ-နှစ်)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->dob }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၉။ </label>
+                    <label for="name" class="md:w-1/3">မွေးဖွားရာဇာတိနှင့်လိပ်စာအပြည့်အစုံ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->place_of_birth }}/
+                        {{ $staff->current_address_ward }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၁၀။ </label>
+                    <label for="name" class="md:w-1/3">ကိုယ်တွင်ထင်ရှားသောအမှတ်အသား</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->prominent_mark }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၁၁။ </label>
+                    <label for="name" class="md:w-1/3">အရပ်အမြင့် (ပေ-လက်မ)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name"
+                        class="md:w-3/5">{{ $staff->height_feet }}-{{ $staff->height_inch }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၁၂။ </label>
+                    <label for="name" class="md:w-1/3">မျက်စေ့အရောင်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->eye_color }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၁၃။ </label>
+                    <label for="name" class="md:w-1/3">ဆံပင်အရောင်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->hair_color }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="name" class="md:w-5">၁၄။ </label>
+                    <label for="name" class="md:w-1/3">သွေးအုပ်စု</label>
+                    <label for="name" class="md:w-5">-</label>
+                    <label for="name"
+                        class="md:w-3/5">{{ $staff->blood_type ? $staff->blood_type->name : '-' }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၁၅။ </label>
+                    <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၁၆။ </label>
+                    <label for="name" class="md:w-1/3">ဘွဲ့ရရှိခဲ့သည့်တက္ကသိုလ်/ကျောင်း</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၁၇။ </label>
+                    <label for="name" class="md:w-1/3">ဘွဲ့ရရှိခဲ့သည့် နိုင်ငံ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၁၈။ </label>
+                    <label for="name" class="md:w-1/3">ဘွဲ့ရရှိခဲ့သည့် ခုနှစ်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၁၉။ </label>
+                    <label for="name" class="md:w-1/3">ကျန်းမာရေး အခြေအနေ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၂၀။ </label>
+                    <label for="name" class="md:w-1/3">ဝါသနာပါသောအားကစား</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->habit }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၂၁။ </label>
+                    <label for="name" class="md:w-1/3">လက်ရှိရာထူးအမျိုးအစား</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၂၂။ </label>
+                    <label for="name" class="md:w-1/3">လက်ရှိလစာနှုန်း</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၂၃။ </label>
+                    <label for="name" class="md:w-1/3">လက်ရှိလစာ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၂၄။ </label>
+                    <label for="name" class="md:w-1/3">အစိုးရဝန်ထမ်းစဖြစ်သော (ရက်-လ-နှစ်)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၂၅။ </label>
+                    <label for="name" class="md:w-1/3">လက်ရှိဌာန၏အလုပ်ဝင်ရက်စွဲ (ရက်-လ-နှစ်)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၂၆။ </label>
+                    <label for="name" class="md:w-1/3">လက်ရှိရာထူးရသည့်နေ့ (ရက်-လ-နှစ်)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၂၇။ </label>
+                    <label for="name" class="md:w-1/3">ယခုနေထိုင်သည့်နေရပ်လိပ်စာ (အပြည့်အစုံဖော်ပြရန်)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၂၈။ </label>
+                    <label for="name" class="md:w-1/3">အမြဲတမ်းဆက်သွယ်နိုင်သောနေရပ်လိပ်စာ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၂၉။ </label>
+                    <label for="name" class="md:w-1/3">ဆက်သွယ်နိုင်သောဖုန်းနံပါတ်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၃၀။ </label>
+                    <label for="name" class="md:w-1/3">အိမ်ထောင်ရှိ/ မရှိ (ဥပမာ- လူပျို/အပျို၊ မုဆိုးဖို/မုဆိုးမ၊
+                        တစ်ခုလပ်)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၃၁။ </label>
+                    <label for="name" class="md:w-1/3">ဝင်ငွေခွန်သက်သာခွင့် ရှိ/ မရှိ (ရှိကဖော်ပြရန်)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၃၂။ </label>
+                    <label for="name" class="md:w-1/3">အခြားအမည်များ (ရှိလျှင်)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->other_name }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၃၃။ </label>
+                    <label for="name" class="md:w-1/3">အသားအရောင်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->skin_color }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၃၄။ </label>
+                    <label for="name" class="md:w-1/3">ကိုယ်အလေးချိန်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->weight }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၃၅။ </label>
+                    <label for="name" class="md:w-1/3">ယခင်နေခဲ့ဖူးသောဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ
+                        (တပ်မတော်သားဖြစ်ကတပ်လိပ်စာဖော်ပြရန်မလို)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->previous_addresses }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၃၆။</label>
+                    <label for="name"
+                        class="md:w-1/3">ကာယကံရှင်မွေးဖွားချိန်၌မိဘနှစ်ပါးသည်နိုင်ငံသားဟုတ်/မဟုတ်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->is_parents_citizen_when_staff_born }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၃၇။ </label>
+                    <label for="name" class="md:w-1/3">လက်ရှိအလုပ်အကိုင်ရလာပုံ
+                        (ပြိုင်အရွေးခံ(သို့)တိုက်ရိုက်ခန့်)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->form_of_appointment }}/
+                        {{ $staff->is_direct_appointed }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၃၈။ </label>
+                    <label for="name" class="md:w-1/3">အလုပ်အကိုင်အတွက် ထောက်ခံသူများ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->recommend_by }}</label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၃၉။ </label>
+                    <label for="name" class="md:w-1/3">မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်းတို့၏မိဘ၊
+                        ညီအစ်ကိုမောင်နှမများ၊ သားသမီးများသည် နိုင်ငံရေးပါတီများတွင် ဝင်ရောက်ဆောင်ရွက်မှု ရှိ/မရှိ (ရှိက
+                        အသေးစိတ်ဖော်ပြရန်)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+
+                <h1 class="font-semibold text-base mb-4">
+                    (တပ်မတော်တွင်တာဝန်မထမ်းဆောင်ခဲ့ဖူးပါကဖြည့်စွက်ရန်မလို)<br>တပ်မတော်တွင်တာဝန်ထမ်းဆောင်ခဲ့ဖူးပါက
+                </h1>
+                <div class="w-full mb-4">
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၁။ </label>
+                        <label for="name" class="md:w-1/3">ပြန်တမ်းဝင်အမှတ်</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၂။ </label>
+                        <label for="name" class="md:w-1/3">ဗိုလ်သင်တန်းအမှတ်စဥ်</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၃။ </label>
+                        <label for="name" class="md:w-1/3">စစ်မှုထမ်း‌ဟောင်းအဖွဲ့ဝင်အမှတ်နှင့်ရက်စွဲ</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၄။ </label>
+                        <label for="name" class="md:w-1/3">ကိုယ်ပိုင်အမှတ်</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၅။ </label>
+                        <label for="name" class="md:w-1/3">အဆင့်</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၆။ </label>
+                        <label for="name" class="md:w-1/3">နောက်ဆုံးတာဝန်ထမ်းဆောင်ခဲ့သည့် တိုင်း၊ တပ်မ၊ တပ်ရင်း၊
+                            တပ်ဖွဲ့</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၇။ </label>
+                        <label for="name" class="md:w-1/3">တပ်သို့ဝင်သည့်နေ့ (ရက်-လ-နှစ်)</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၈။ </label>
+                        <label for="name" class="md:w-1/3">ပြန်တမ်းဝင်ဖြစ်သည့်နေ့ (ရက်-လ-နှစ်)</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၉။ </label>
+                        <label for="name" class="md:w-1/3">အမှုထမ်းဆောင်ခဲ့သောတပ်များ</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၁၀။ </label>
+                        <label for="name" class="md:w-1/3">တပ်တွင်းရာဇဝင်အကျဥ်း/ပြစ်မှု</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၁၁။ </label>
+                        <label for="name" class="md:w-1/3">အငြိမ်းစားလစာ</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <h2 class="font-semibold text-base mb-4"></h2>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၁၂။ </label>
+                        <label for="name" class="md:w-1/3">ရက်စွဲ (ရက်-လ-နှစ်)</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၁၃။ </label>
+                        <label for="name" class="md:w-1/3">အကြောင်းအရာ</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <h2 class="font-semibold text-base mb-4">အသက်အာမခံ</h2>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၁။ </label>
+                        <label for="name" class="md:w-1/3">အဆိုပြုလွှာ</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၂။ </label>
+                        <label for="name" class="md:w-1/3">ပေါ်လစီအမှတ်</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                    <div class="flex justify-between w-full mb-2">
+                        <label for="" class="md:w-5">၃။ </label>
+                        <label for="name" class="md:w-1/3">ပရီမီယံ</label>
+                        <label for="" class="md:w-5">-</label>
+                        <label for="name" class="md:w-3/5"></label>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၄၀။ </label>
+                        <h2 class="font-semibold text-base">တက်ရောက်ခဲ့သောကျောင်းများ(မူလတန်း/အလယ်တန်း/အထက်တန်း)</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">ကျောင်းအမည်</th>
+                                    <th class="p-2 border border-black">မှ (ရက်-လ-နှစ်)</th>
+                                    <th class="p-2 border border-black">ထိ (ရက်-လ-နှစ်)</th>
+                                    <th class="p-2 border border-black">အောင်မြင်ခဲ့သည့်အတန်း</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">အ.ထ.က (၁) ဒဂုံ</td>
+                                    <td class="p-2 border border-black">၁-၆-၂၀၁၀</td>
+                                    <td class="p-2 border border-black">၁-၃-၂၀၁၅</td>
+                                    <td class="p-2 border border-black">အထက်တန်း</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၄၁။ </label>
+                        <h2 class="font-semibold text-base">ဘွဲ့ရရှိခဲ့သောတက္ကသိုလ်များ</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">တက္ကသိုလ်အမည်</th>
+                                    <th class="p-2 border border-black">တက္ကသိုလ်တည်နေရာ</th>
+                                    <th class="p-2 border border-black">အတန်း</th>
+                                    <th class="p-2 border border-black">ခုံအမှတ်</th>
+                                    <th class="p-2 border border-black">အထူးပြုဘာသာရပ်</th>
+                                    <th class="p-2 border border-black">စတင်တက်ရောက်သော ရက်၊လ၊နှစ်</th>
+                                    <th class="p-2 border border-black">ပြီးစီးသော ရက်၊လ၊နှစ်</th>
+                                    <th class="p-2 border border-black">ဘွဲ့အမည်</th>
+                                    <th class="p-2 border border-black">ဘွဲ့ရရှိခုနှစ်</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">အ.ထ.က (၁) ဒဂုံ</td>
+                                    <td class="p-2 border border-black">၁-၆-၂၀၁၀</td>
+                                    <td class="p-2 border border-black">၁-၃-၂၀၁၅</td>
+                                    <td class="p-2 border border-black">အထက်တန်း</td>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">အ.ထ.က (၁) ဒဂုံ</td>
+                                    <td class="p-2 border border-black">၁-၆-၂၀၁၀</td>
+                                    <td class="p-2 border border-black">၁-၃-၂၀၁၅</td>
+                                    <td class="p-2 border border-black">အထက်တန်း</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၄၂။ </label>
+                    <label for="name" class="md:w-1/3">ကျောင်းသားဘဝတွင် နိုင်ငံရေး/မြို့ရေး/ရွာရေး
+                        ဆောင်ရွက်မှုများနှင့် အဆင့်အတန်း/တာဝန်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၄၃။ </label>
+                    <label for="name" class="md:w-1/3">ဝါသနာပါပြီး၊ လေ့လာလိုက်စားခဲ့သော ကျန်းမာရေး/ အနုပညာ/
+                        ပညာရေး/ စက်မှုလက်မှု</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၄၄။ </label>
+                    <label for="name" class="md:w-1/3">လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၄၅။ </label>
+                    <label for="name" class="md:w-1/3">တောခိုခဲ့ဖူးလျှင်(သို့)သောင်းကျန်းသူများကြီးစိုးသော
+                        နယ်မြေတွင် နေခဲ့ဖူးလျှင် လုပ်ကိုင်ဆောင်ရွက်ချက်များကို ဖော်ပြပါ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၄၆။ </label>
+                    <label for="name" class="md:w-1/3">အလုပ်အကိုင်ပြောင်းရွှေ့ခဲ့သော အကြောင်းအကျိုးနှင့်
+                        လစာ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၄၇။ </label>
+                    <label for="name" class="md:w-1/3">အမှုထမ်းနေစဉ်(သို့)ကိုယ်ပိုင်အလုပ်အကိုင်ဆောင်ရွက်နေစဉ်
+                        အဆင့်အတန်းနှင့် တာဝန်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၄၈။ </label>
+                    <label for="name" class="md:w-1/3">စစ်ဘက်/နယ်ဘက်/ရဲဘက်နှင့် နိုင်ငံရေးဘက်တွင်
+                        ခင်မင်ရင်းနှီးသော မိတ်ဆွေများ ရှိ/ မရှိ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၄၉။ </label>
+                    <label for="name" class="md:w-1/3">မိမိနှင့် ခင်မင်ရင်းနှီးသော နိုင်ငံခြားသား ရှိ/ မရှိ၊
+                        ရှိကမည်သည့်အလုပ်အကိုင်၊ လူမျိုး၊ တိုင်းပြည်၊ မည်ကဲ့သို့ရင်းနှီးသည်</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၅၀။ </label>
+                    <label for="name" class="md:w-1/3">မိမိအားထောက်ခံသည့် (ကျောင်းဆရာ၊ ရပ်ကွက်လူကြီး၊
+                        တပ်မတော်အရာရှိ)</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၅၁။ </label>
+                    <label for="name" class="md:w-1/3">ရာဇဝတ်ပြစ်မှုခံရခြင်း ရှိ/ မရှိ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+
+                <h1 class="font-semibold text-base mb-1">မိသားစုအချက်အလက်များ</h1>
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၅၂။ </label>
+                        <h2 class="font-semibold text-base">ဖခင်</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">အမည်</th>
+                                    <th class="p-2 border border-black">လူမျိုး</th>
+                                    <th class="p-2 border border-black">ဘာသာ</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
+                                    <th class="p-2 border border-black">နေရပ်လိပ်စာ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">ဗုဒ္ဓ</td>
+                                    <td class="p-2 border border-black">ရန်ကုန်</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၅၃။ </label>
+                        <h2 class="font-semibold text-base">မိခင်</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">အမည်</th>
+                                    <th class="p-2 border border-black">လူမျိုး</th>
+                                    <th class="p-2 border border-black">ဘာသာ</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
+                                    <th class="p-2 border border-black">နေရပ်လိပ်စာ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">ဗုဒ္ဓ</td>
+                                    <td class="p-2 border border-black">ရန်ကုန်</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၅၄။ </label>
+                        <h2 class="font-semibold text-base">မိဘ၏ညီအစ်ကိုမောင်နှမများ</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">အမည်</th>
+                                    <th class="p-2 border border-black">တော်စပ်ပုံ</th>
+                                    <th class="p-2 border border-black">ကျား/မ</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
+                                    <th class="p-2 border border-black">လူမျိုး</th>
+                                    <th class="p-2 border border-black">ဘာသာ</th>
+                                    <th class="p-2 border border-black">နေရပ်လိပ်စာ</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">ဗုဒ္ဓ</td>
+                                    <td class="p-2 border border-black">ရန်ကုန်</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၅၅။ </label>
+                        <h2 class="font-semibold text-base">ဖခင်၏ညီအစ်ကိုမောင်နှမများ (တော်စပ်ပုံတွင်ဖခင်၏အစ်ကို၊
+                            ဖခင်၏အစ်မစသည်ဖြင့်ဖြည့်စွက်ရန်)</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">အမည်</th>
+                                    <th class="p-2 border border-black">တော်စပ်ပုံ</th>
+                                    <th class="p-2 border border-black">ကျား/မ</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
+                                    <th class="p-2 border border-black">လူမျိုး</th>
+                                    <th class="p-2 border border-black">ဘာသာ</th>
+                                    <th class="p-2 border border-black">နေရပ်လိပ်စာ</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">ဗုဒ္ဓ</td>
+                                    <td class="p-2 border border-black">ရန်ကုန်</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၅၆။ </label>
+                        <h2 class="font-semibold text-base">မိခင်၏ညီအစ်ကိုမောင်နှမများ (တော်စပ်ပုံတွင်မိခင်၏အစ်ကို၊
+                            မိခင်၏အစ်မစသည်ဖြင့်ဖြည့်စွက်ရန်)</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">အမည်</th>
+                                    <th class="p-2 border border-black">တော်စပ်ပုံ</th>
+                                    <th class="p-2 border border-black">ကျား/မ</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
+                                    <th class="p-2 border border-black">လူမျိုး</th>
+                                    <th class="p-2 border border-black">ဘာသာ</th>
+                                    <th class="p-2 border border-black">နေရပ်လိပ်စာ</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">ဗုဒ္ဓ</td>
+                                    <td class="p-2 border border-black">ရန်ကုန်</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၅၇။ </label>
+                        <h2 class="font-semibold text-base">ခင်ပွန်း/ ဇနီးအမည်</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">အမည်</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
+                                    <th class="p-2 border border-black">လူမျိုး</th>
+                                    <th class="p-2 border border-black">ဘာသာ</th>
+                                    <th class="p-2 border border-black">နေရပ်လိပ်စာ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">ဗုဒ္ဓ</td>
+                                    <td class="p-2 border border-black">ရန်ကုန်</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၅၈။ </label>
+                        <h2 class="font-semibold text-base">သား/ သမီး</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">အမည်</th>
+                                    <th class="p-2 border border-black">ကျား/ မ</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
+                                    <th class="p-2 border border-black">လူမျိုး</th>
+                                    <th class="p-2 border border-black">ဘာသာ</th>
+                                    <th class="p-2 border border-black">နေရပ်လိပ်စာ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">ဗုဒ္ဓ</td>
+                                    <td class="p-2 border border-black">ရန်ကုန်</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၅၉။ </label>
+                        <h2 class="font-semibold text-base">ခင်ပွန်း/ ဇနီး၏ညီအစ်ကိုမောင်နှမများ</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">အမည်</th>
+                                    <th class="p-2 border border-black">ကျား/ မ</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
+                                    <th class="p-2 border border-black">တော်စပ်ပုံ</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
+                                    <th class="p-2 border border-black">လူမျိုး</th>
+                                    <th class="p-2 border border-black">ဘာသာ</th>
+                                    <th class="p-2 border border-black">နေရပ်လိပ်စာ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">ဗုဒ္ဓ</td>
+                                    <td class="p-2 border border-black">ရန်ကုန်</td>
+                                    <td class="p-2 border border-black">ရန်ကုန်</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၆၀။ </label>
+                        <h2 class="font-semibold text-base">ခင်ပွန်း/ ဇနီး၏ဖခင်</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">အမည်</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
+                                    <th class="p-2 border border-black">လူမျိုး</th>
+                                    <th class="p-2 border border-black">ဘာသာ</th>
+                                    <th class="p-2 border border-black">နေရပ်လိပ်စာ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၆၁။ </label>
+                        <h2 class="font-semibold text-base">ခင်ပွန်း/ ဇနီးဖခင်၏ညီအစ်ကိုမောင်နှမများ</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">အမည်</th>
+                                    <th class="p-2 border border-black">တော်စပ်ပုံ</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
+                                    <th class="p-2 border border-black">ကျား/ မ</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
+                                    <th class="p-2 border border-black">လူမျိုး</th>
+                                    <th class="p-2 border border-black">ဘာသာ</th>
+                                    <th class="p-2 border border-black">နေရပ်လိပ်စာ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၆၂။ </label>
+                        <h2 class="font-semibold text-base">ခင်ပွန်း/ ဇနီး၏မိခင်</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">အမည်</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
+                                    <th class="p-2 border border-black">လူမျိုး</th>
+                                    <th class="p-2 border border-black">ဘာသာ</th>
+                                    <th class="p-2 border border-black">နေရပ်လိပ်စာ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၆၃။ </label>
+                        <h2 class="font-semibold text-base">ခင်ပွန်း/ ဇနီး၏မိခင်၏ညီအစ်ကိုမောင်နှမများ</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">အမည်</th>
+                                    <th class="p-2 border border-black">တော်စပ်ပုံ</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
+                                    <th class="p-2 border border-black">ကျား/ မ</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
+                                    <th class="p-2 border border-black">လူမျိုး</th>
+                                    <th class="p-2 border border-black">ဘာသာ</th>
+                                    <th class="p-2 border border-black">နေရပ်လိပ်စာ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၆၄။ </label>
+                        <h2 class="font-semibold text-base">ရရှိခဲ့သော Diploma/Certificateနှင့်
+                            တက်ရောက်ထားသောသင်တန်းများ</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">Diploma/Certificate အမည်</th>
+                                    <th class="p-2 border border-black">ကျောင်း/တက္ကသိုလ်/သင်တန်းအမည်</th>
+                                    <th class="p-2 border border-black">မှ<br>ရက်-လ-နှစ်</th>
+                                    <th class="p-2 border border-black">ထိ<br>ရက်-လ-နှစ်</th>
+                                    <th class="p-2 border border-black">သင်တန်းကြေး</th>
+                                    <th class="p-2 border border-black">Training<br>Type(local/foreign)</th>
+                                    <th class="p-2 border border-black">မှတ်ချက်</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၆၅။ </label>
+                        <h2 class="font-semibold text-base">ရရှိခဲ့သောဆုတံဆိပ်များ</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">ဆုတံဆိပ်အမျိူးအစား</th>
+                                    <th class="p-2 border border-black">ရက်-လ-နှစ်</th>
+                                    <th class="p-2 border border-black">အမိန့်စာအမှတ်နှင့်အမှတ်စဥ်</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၆၆။ </label>
+                        <h2 class="font-semibold text-base">နိုင်ငံခြားခရီးစဥ်များ</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">သွား‌ရောက်သည့်နိုင်ငံ</th>
+                                    <th class="p-2 border border-black">မှ<br>ရက်-လ-နှစ်</th>
+                                    <th class="p-2 border border-black">ထိ<br>ရက်-လ-နှစ်</th>
+                                    <th class="p-2 border border-black">သွား‌ရောက်သည့်အကြောင်းအရာ</th>
+                                    <th class="p-2 border border-black">ထောက်ပံ့သည့်နိုင်ငံ/ အဖွဲ့အစည်း</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၆၇။ </label>
+                        <h2 class="font-semibold text-base">ယခင်လုပ်ကိုင်ခဲ့ဖူးသည့်အလုပ်အကိုင်</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">ဌာနအမည် (ဝန်ကြီးဌာန၊ ဦးစီးဌာန)
+                                        အပြည့်အစုံဖော်ပြရန်</th>
+                                    <th class="p-2 border border-black">ရာထူး</th>
+                                    <th class="p-2 border border-black">မှ<br>ရက်-လ-နှစ်</th>
+                                    <th class="p-2 border border-black">ထိ<br>ရက်-လ-နှစ်</th>
+                                    <th class="p-2 border border-black">လစာစကေး</th>
+                                    <th class="p-2 border border-black">မှတ်ချက်</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၆၈။ </label>
+                        <h2 class="font-semibold text-base">လူမှုရေးလုပ်ဆောင်ချက်</h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">အသင်းအဖွဲ့အမည်နှင့်လုပ်ဆောင်မှုများ</th>
+                                    <th class="p-2 border border-black">မှ<br>ရက်-လ-နှစ်</th>
+                                    <th class="p-2 border border-black">ထိ<br>ရက်-လ-နှစ်</th>
+                                    <th class="p-2 border border-black">မှတ်ချက်</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၆၉။ </label>
+                        <h2 class="font-semibold text-base"></h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">ဘာသာစကား</th>
+                                    <th class="p-2 border border-black">အရေး</th>
+                                    <th class="p-2 border border-black">အဖတ်</th>
+                                    <th class="p-2 border border-black">အပြော</th>
+                                    <th class="p-2 border border-black">မှတ်ချက်</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ျိါ်,ပကင,၆မာတျမိ.၆.ျ,ာိ၅၄,န..မ၆,တ၄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-2">
+                        <label>၇၀။ </label>
+                        <h2 class="font-semibold text-base"></h2>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center border-collapse border border-black">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဥ်</th>
+                                    <th class="p-2 border border-black">ပြစ်ဒဏ်</th>
+                                    <th class="p-2 border border-black">မှ<br>ရက်-လ-နှစ်</th>
+                                    <th class="p-2 border border-black">ထိ<br>ရက်-လ-နှစ်</th>
+                                    <th class="p-2 border border-black">မှတ်ချက်</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center h-8 p-2">
+                                <tr>
+                                    <td class="p-2 border border-black">၁။ </td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">ဗမာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                    <td class="p-2 border border-black">သတင်းအချက်အလက်နှင့်နည်းပညာ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="flex justify-start space-x-2">
+                <p>၇၁။ </p>
+                <p class="mb-8">အထက်ပါအချက်အလက်များမှန်ကန်ကြောင်းလက်မှတ်ရေးထိုးပါသည်။</p>
+            </div>
+
+            <div class="p-4 float-right mr-32">
+                <div class="flex justify-start mb-2">
+                    <p class="w-32">လက်မှတ်</p>
+                    <p class="w-40">-------------------------</p>
+                </div>
+
+                <div class="flex justify-start mb-2">
+                    <p class="w-32">အမည်</p>
+                    <p class="w-40">-------------------------</p>
+                </div>
+
+                <div class="flex justify-start mb-2">
+                    <p class="w-32">ရာထူး</p>
+                    <p class="w-40">-------------------------</p>
+                </div>
+
+
+                <div class="flex justify-start">
+                    <p class="w-32">ဌာန</p>
+                    <p class="w-40">-------------------------</p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

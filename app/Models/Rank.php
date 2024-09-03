@@ -17,4 +17,9 @@ class Rank extends Model
     {
         return $this->belongsTo(StaffType::class);
     }
+
+    public function staff()
+    {
+        return $this->hasMany(Staff::class);
+    }
 }

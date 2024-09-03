@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ethnic extends Model
 {
     use HasFactory;
+    public function staff(){
+        return $this -> hasMany(Staff::class);
+    }
 }
