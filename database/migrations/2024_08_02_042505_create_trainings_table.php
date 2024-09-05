@@ -19,7 +19,7 @@ return new class extends Migration
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Staff::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Staff::class)->nullable()->constrained()->cascadeOnDelete();
             $table->foreignIdFor(TrainingType::class)->nullable()->constrained()->nullOnDelete();
             $table->date('from_date');
             $table->date('to_date');

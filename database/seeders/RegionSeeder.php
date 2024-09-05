@@ -2,14 +2,10 @@
 
 namespace Database\Seeders;
 use App\Models\Region;
-
-// use Illuminate\Support\Facades\Schema;
-// use Illuminate\Support\Str;
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Schema;
 
 class RegionSeeder extends Seeder
 {
@@ -18,26 +14,45 @@ class RegionSeeder extends Seeder
      */
     public function run(): void
     {
-        $regions = [
-            ['id' => 1, 'name' => 'နေပြည်တော်'],
-            ['id' => 2, 'name' => 'ကချင်ပြည်နယ်'],
-            ['id' => 3, 'name' => 'ကယားပြည်နယ်'],
-            ['id' => 4, 'name' => 'ကရင်ပြည်နယ်'],
-            ['id' => 5, 'name' => 'ချင်းပြည်နယ်'],
-            ['id' => 6, 'name' => 'စစ်ကိုင်းတိုင်း'],
-            ['id' => 7, 'name' => 'တနင်္သာရီတိုင်း'],
-            ['id' => 8, 'name' => 'ပဲခူးတိုင်း'],
-            ['id' => 9, 'name' => 'မကွေးတိုင်း'],
-            ['id' => 10, 'name' => 'မန္တလေးတိုင်း'],
-            ['id' => 11, 'name' => 'မွန်ပြည်နယ်'],
-            ['id' => 12, 'name' => 'ရခိုင်ပြည်နယ်'],
-            ['id' => 13, 'name' => 'ရန်ကုန်တိုင်း'],
-            ['id' => 14, 'name' => 'ရှမ်းပြည်နယ်'],
-            ['id' => 15, 'name' => 'ဧရာဝတီတိုင်း'],
-        ];
+        Schema::disableForeignKeyConstraints();
 
-        DB::table('regions')->insert($regions);
+        DB::table('townships')->truncate();
+        DB::table('districts')->truncate();
+        DB::table('regions')->truncate();
 
+        Schema::enableForeignKeyConstraints();
 
+        $all = getcsv(__DIR__.'/regions.csv');
+        array_shift($all);
+        $get = fn ($n) => collect(getcsv(__DIR__.'/'.$n.'_translation.csv'))->mapWithKeys(fn ($v) => [$v[0] => $v[1]]);
+        $translations = collect(['regions', 'districts', 'townships'])->mapWithKeys(fn ($n) => [$n => $get($n)]);
+        $t = fn ($k, $r) => Str::of($translations->get($r)->get($k))->trim() ?? $k;
+
+        DB::transaction(function () use ($all, $t) {
+            foreach ($all as $key => [, $region_name, $district_name, $township_name]) {
+                printf("seed: %s\n", implode(' | ', [$key, $region_name, $district_name, $township_name]));
+
+                if (! $region_name) {
+                    continue;
+                }
+                $region = Region::updateOrCreate(
+                    ['name' => $region_name],
+                );
+
+                if (! $district_name) {
+                    continue;
+                }
+                $district = $region->districts()->updateOrCreate(
+                    ['name' => $district_name],
+                );
+
+                if (! $township_name) {
+                    continue;
+                }
+                $district->townships()->updateOrCreate(
+                    ['name' => $township_name],
+                );
+            }
+        });
     }
 }

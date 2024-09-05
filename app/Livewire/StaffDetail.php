@@ -20,6 +20,9 @@ use App\Models\FatherSibling;
 use App\Models\Gender;
 use App\Models\MotherSibling;
 use App\Models\Nationality;
+use App\Models\NrcRegionId;
+use App\Models\NrcSign;
+use App\Models\NrcTownshipCode;
 use App\Models\PastOccupation;
 use App\Models\Payscale;
 use App\Models\PenaltyType;
@@ -54,32 +57,32 @@ class StaffDetail extends Component
     use WithFileUploads;
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     //personal_info
-    public $photo, $name, $nick_name, $other_name, $staff_no, $dob, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id, $current_address_district_id, $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_district_id, $permanent_address_township_or_town_id, $previous_addresses, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension;
-    public $educations = [];
+    public $photo, $name, $nick_name, $other_name, $staff_no, $dob, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id, $current_address_district_id, $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_district_id, $permanent_address_township_or_town_id, $previous_addresses, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension;
+    public $educations = [['education_group' => '', 'education_type' => '', 'education' => '']];
     //job_info
     public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_department_id, $side_division_id, $salary_paid_by, $join_date, $form_of_appointment, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
-    public $recommendations = [];
-    public $postings = [];
+    public $recommendations = [['recommend_by' => '', 'ministry' => '', 'department' => '', 'rank' => '', 'remark' => '']];
+    public $postings = [['rank' => '', 'post' => '', 'from_date' => '', 'to_date' => '', 'department' => '', 'division' => '', 'location' => '', 'remark' => '']];
 
     //relative
     public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street, $father_address_ward, $father_address_township_or_town_id, $father_address_district_id, $father_address_region_id, $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_district_id, $mother_address_region_id, $family_in_politics = false;
-    public $siblings = [];
-    public $father_siblings = [];
-    public $mother_siblings = [];
-    public $spouses = [];
-    public $children = [];
-    public $spouse_siblings = [];
-    public $spouse_father_siblings = [];
-    public $spouse_mother_siblings = [];
+    public $siblings = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
+    public $father_siblings = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
+    public $mother_siblings = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
+    public $spouses = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
+    public $children = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
+    public $spouse_siblings = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
+    public $spouse_father_siblings = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
+    public $spouse_mother_siblings = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
 
     //detail_personal_info
     public $last_school_name, $last_school_subject, $last_school_row_no, $last_school_major, $student_life_political_social, $habit, $revolution, $transfer_reason_salary, $during_work_political_social, $has_military_friend = false, $foreigner_friend_name, $foreigner_friend_occupation, $foreigner_friend_nationality_id, $foreigner_friend_country_id, $foreigner_friend_how_to_know, $recommended_by_military_person;
-    public $schools = [];
-    public $trainings = [];
-    public $awards = [];
-    public $past_occupations = [];
-    public $abroads = [];
-    public $punishments = [];
+    public $schools = [['education_group' => '', 'education_type' => '', 'education' => '', 'school_name' => '', 'town' => '', 'year' => '']];
+    public $trainings = [['training_type' => '', 'from_date' => '', 'to_date' => '', 'location' => '', 'country' => '', 'training_location' => '']];
+    public $awards = [['award_type' => '', 'award' => '', 'order_no' => '', 'order_date' => '']];
+    public $past_occupations = [['rank' => '', 'department' => '', 'section' => '', 'from_date' => '', 'to_date' => '', 'remark' => '']];
+    public $abroads = [['country' => '', 'particular' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '']];
+    public $punishments = [['penalty_type' => '', 'reason' => '', 'from_date' => '', 'to_date' => '']];
 
     protected $personal_info_rules = [
         'photo' => '',
@@ -100,7 +103,10 @@ class StaffDetail extends Component
         'weight' => 'required',
         'blood_type_id' => '',
         'place_of_birth' => 'required',
-        'nrc' => 'required',
+        'nrc_region_id_id' => 'required',
+        'nrc_township_code_id' => 'required',
+        'nrc_sign_id' => 'required',
+        'nrc_code' => 'required',
         'phone' => 'required',
         'mobile' => 'required',
         'email' => 'required',
@@ -389,7 +395,10 @@ class StaffDetail extends Component
         $this->weight = $staff->weight;
         $this->blood_type_id = $staff->blood_type_id;
         $this->place_of_birth = $staff->place_of_birth;
-        $this->nrc = $staff->nrc;
+        $this->nrc_region_id = $staff->nrc_region_id_id;
+        $this->nrc_township_code_id = $staff->nrc_township_code_id;
+        $this->nrc_sign_id = $staff->nrc_sign_id;
+        $this->nrc_code = $staff->nrc_code;
         $this->phone = $staff->phone;
         $this->mobile = $staff->mobile;
         $this->email = $staff->email;
@@ -543,6 +552,10 @@ class StaffDetail extends Component
         $this->punishments[] = ['penalty_type' => '', 'reason' => '', 'from_date' => '', 'to_date' => ''];
     }
 
+    public function add_abroads(){
+        $this->abroads[] = [['country' => '', 'particular' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '']];
+    }
+
     public function removeEdu($index){
         unset($this->educations[$index]);
         $this->educations = array_values($this->educations); //to re_indexing the array (eg: before remove (1,2,3) - after (1,3) 2 missing) reindex will do like (1,2) back
@@ -551,6 +564,11 @@ class StaffDetail extends Component
     public function removeRecommendation($index){
         unset($this->recommendations[$index]);
         $this->recommendations = array_values($this->recommendations);
+    }
+
+    public function removePosting($index){
+        unset($this->postings[$index]);
+        $this->postings = array_values($this->postings);
     }
 
     public function remove_siblings($index){
@@ -613,19 +631,29 @@ class StaffDetail extends Component
         $this->past_occupations = array_values($this->past_occupations);
     }
 
+    public function remove_abroads($index){
+        unset($this->abroads[$index]);
+        $this->abroads = array_values($this->abroads);
+    }
+
+    public function remove_punishments($index){
+        unset($this->punishments[$index]);
+        $this->punishments = array_values($this->punishments);
+    }
+
     public function submit_staff(){
         $rules = $this->validate_rules();
         $this->validate($rules);
         $staff = Staff::find($this->staff_id);
         if ($this->photo) {
-            $this->photo = Storage::disk('upload')->put('staffs', $this->photo);
-            if ($staff->exists && $old = $staff->staff_photo) {
+            $_photo = Storage::disk('upload')->put('staffs', $this->photo);
+            if (($staff != null) && ($old = $staff->staff_photo)) {
                 Storage::disk('upload')->delete($old);
             }
         }
 
         $personal_info = [
-            'staff_photo' => $this->photo,
+            'staff_photo' => $this->photo ? $_photo : null,
             'name' => $this->name,
             'nick_name' => $this->nick_name,
             'other_name' => $this->other_name,
@@ -643,7 +671,10 @@ class StaffDetail extends Component
             'weight' => $this->weight,
             'blood_type_id' => $this->blood_type_id,
             'place_of_birth' => $this->place_of_birth,
-            'nrc' => $this->nrc,
+            'nrc_region_id_id' => $this->nrc_region_id,
+            'nrc_township_code_id' => $this->nrc_township_code_id,
+            'nrc_sign_id' => $this->nrc_sign_id,
+            'nrc_code' => $this->nrc_code,
             'phone' => $this->phone,
             'mobile' => $this->mobile,
             'email' => $this->email,
@@ -775,6 +806,7 @@ class StaffDetail extends Component
                 'country_id' => $abroad['country'],
                 'particular' => $abroad['particular'],
                 'meet_with' => $abroad['meet_with'],
+                'from_date' => $abroad['from_date'],
                 'to_date' => $abroad['to_date'],
             ]);
         }
@@ -951,104 +983,145 @@ class StaffDetail extends Component
         }
     }
 
+    public function updatedCurrentAddressRegionId(){
+        $this->current_address_district_id = null;
+        $this->current_address_township_or_town_id = null;
+    }
+
+    public function updatedCurrentAddressDistrictId(){
+        $this->current_address_township_or_town_id = null;
+    }
+
+    public function updatedPermanentAddressRegionId(){
+        $this->permanent_address_district_id = null;
+        $this->permanent_address_township_or_town_id = null;
+    }
+
+    public function updatedPermanentAddressDistrictId(){
+        $this->permanent_address_township_or_town_id = null;
+    }
+
+    public function updatedFatherAddressRegionId(){
+        $this->father_address_district_id = null;
+        $this->father_address_township_or_town_id = null;
+    }
+
+    public function updatedFatherAddressDistrictId(){
+        $this->father_address_township_or_town_id = null;
+    }
+
+    public function updatedMotherAddressRegionId(){
+        $this->mother_address_district_id = null;
+        $this->mother_address_township_or_town_id = null;
+    }
+
+    public function updatedMotherAddressDistrictId(){
+        $this->mother_address_township_or_town_id = null;
+    }
+
+    public function updatedNrcRegionId(){
+        $this->nrc_township_code_id = null;
+    }
+
     public function render()
     {
-        $ethnics = Ethnic::get();
-        $religions = Religion::get();
-        $regions = Region::get();
-        $districts = District::get();
-        $townships = Township::get();
-
-        // Initialize variables for all potential data sets
-        //personal_info
-        $genders = $blood_types = $education_groups = $education_types = $_educations = null;
-        //job_info
-        $ranks = $divisions = $departments = $payscales = $posts = null;
-        //detail_personal_info
-        $nationalities = $countries = $training_types = $training_locations = $award_types = $_awards = $sections = $penalty_types = null;
-        //relative
-        $relatives = $relations = null;
+        $data = [
+            'ethnics' => Ethnic::all(),
+            'religions' => Religion::all(),
+            'regions' => Region::all(),
+            'genders' => null,
+            'blood_types' => null,
+            'education_groups' => null,
+            'education_types' => null,
+            '_educations' => null,
+            'current_address_districts' => null,
+            'permanent_address_districts' => null,
+            'current_address_townships' => null,
+            'permanent_address_townships' => null,
+            'ranks' => null,
+            'divisions' => null,
+            'departments' => null,
+            'payscales' => null,
+            'posts' => null,
+            'nationalities' => null,
+            'countries' => null,
+            'training_types' => null,
+            'training_locations' => null,
+            'award_types' => null,
+            '_awards' => null,
+            'sections' => null,
+            'penalty_types' => null,
+            'relatives' => null,
+            'relations' => null,
+            'father_districts' => null,
+            'father_townships' => null,
+            'mother_districts' => null,
+            'mother_townships' => null,
+            'nrc_region_ids' => null,
+            'nrc_township_codes' => null,
+            'nrc_signs' => null,
+        ];
 
         switch ($this->tab) {
             case 'personal_info':
-                $genders = Gender::get();
-                $blood_types = BloodType::get();
-                $education_groups = EducationGroup::get();
-                $education_types = EducationType::get();
-                $_educations = Education::get();
+                $data['genders'] = Gender::all();
+                $data['blood_types'] = BloodType::all();
+                $data['education_groups'] = EducationGroup::all();
+                $data['education_types'] = EducationType::all();
+                $data['_educations'] = Education::all();
+                $data['current_address_districts'] = District::where('region_id', $this->current_address_region_id)->get();
+                $data['permanent_address_districts'] = District::where('region_id', $this->permanent_address_region_id)->get();
+                $data['current_address_townships'] = Township::where('district_id', $this->current_address_district_id)->get();
+                $data['permanent_address_townships'] = Township::where('district_id', $this->permanent_address_district_id)->get();
+                $data['nrc_region_ids'] = NrcRegionId::all();
+                $data['nrc_township_codes'] = NrcTownshipCode::where('nrc_region_id_id', $this->nrc_region_id)->get();
+                $data['nrc_signs'] = NrcSign::all();
                 break;
 
             case 'job_info':
-                $posts = Post::get();
-                $ranks = Rank::get();
-                $divisions = Division::get();
-                $departments = Department::get();
-                $payscales = Payscale::get();
+                $data['posts'] = Post::all();
+                $data['ranks'] = Rank::all();
+                $data['divisions'] = Division::all();
+                $data['departments'] = Department::all();
+                $data['payscales'] = Payscale::all();
                 break;
 
             case 'detail_personal_info':
-                $education_groups = EducationGroup::get();
-                $education_types = EducationType::get();
-                $_educations = Education::get();
-                $nationalities = Nationality::get();
-                $countries = Country::get();
-                $training_types = TrainingType::get();
-                $training_locations = TrainingLocation::get();
-                $award_types = AwardType::get();
-                $_awards = Award::get();
-                $sections = Section::get();
-                $penalty_types = PenaltyType::get();
-                $ranks = Rank::get();
-                $departments = Department::get();
+                $data['education_groups'] = EducationGroup::all();
+                $data['education_types'] = EducationType::all();
+                $data['_educations'] = Education::all();
+                $data['nationalities'] = Nationality::all();
+                $data['countries'] = Country::all();
+                $data['training_types'] = TrainingType::all();
+                $data['training_locations'] = TrainingLocation::all();
+                $data['award_types'] = AwardType::all();
+                $data['_awards'] = Award::all();
+                $data['sections'] = Section::all();
+                $data['penalty_types'] = PenaltyType::all();
+                $data['ranks'] = Rank::all();
+                $data['departments'] = Department::all();
                 break;
 
             case 'relative':
-                $relatives = [
-                    'siblings' => [
-                        'label' => 'Siblings',
-                        'data' => $this->siblings,
-                    ],
-
-                    'father_siblings' => [
-                        'label' => 'Father Siblings',
-                        'data' => $this->father_siblings,
-                    ],
-
-                    'mother_siblings' => [
-                        'label' => 'Mother Siblings',
-                        'data' => $this->mother_siblings,
-                    ],
-
-                    'spouses' => [
-                        'label' => 'Spouses',
-                        'data' => $this->spouses,
-                    ],
-
-                    'children' => [
-                        'label' => 'Children',
-                        'data' => $this->children,
-                    ],
-
-                    'spouse_siblings' => [
-                        'label' => 'Spouse Siblings',
-                        'data' => $this->spouse_siblings,
-                    ],
-
-                    'spouse_father_siblings' => [
-                        'label' => 'Spouse Father Siblings',
-                        'data' => $this->spouse_father_siblings,
-                    ],
-
-                    'spouse_mother_siblings' => [
-                        'label' => 'Spouse Mother Siblings',
-                        'data' => $this->spouse_mother_siblings,
-                    ],
+                $data['relatives'] = [
+                    'siblings' => ['label' => 'Siblings', 'data' => $this->siblings],
+                    'father_siblings' => ['label' => 'Father Siblings', 'data' => $this->father_siblings],
+                    'mother_siblings' => ['label' => 'Mother Siblings', 'data' => $this->mother_siblings],
+                    'spouses' => ['label' => 'Spouses', 'data' => $this->spouses],
+                    'children' => ['label' => 'Children', 'data' => $this->children],
+                    'spouse_siblings' => ['label' => 'Spouse Siblings', 'data' => $this->spouse_siblings],
+                    'spouse_father_siblings' => ['label' => 'Spouse Father Siblings', 'data' => $this->spouse_father_siblings],
+                    'spouse_mother_siblings' => ['label' => 'Spouse Mother Siblings', 'data' => $this->spouse_mother_siblings],
                 ];
-                $relations = Relation::get();
+                $data['relations'] = Relation::all();
+                $data['father_districts'] = District::where('region_id', $this->father_address_region_id)->get();
+                $data['father_townships'] = Township::where('district_id', $this->father_address_district_id)->get();
+                $data['mother_districts'] = District::where('region_id', $this->mother_address_region_id)->get();
+                $data['mother_townships'] = Township::where('district_id', $this->mother_address_district_id)->get();
                 break;
         }
 
-        return view('livewire.staff-detail', compact('penalty_types', 'sections', 'award_types', '_awards', 'training_locations', 'training_types', 'genders', 'relations', 'relatives', 'ethnics', 'religions', 'blood_types', 'regions', 'districts', 'townships', 'education_groups', 'education_types', '_educations', 'ranks', 'divisions', 'departments', 'payscales', 'nationalities', 'countries', 'posts'));
+        return view('livewire.staff-detail', $data);
     }
 
 }

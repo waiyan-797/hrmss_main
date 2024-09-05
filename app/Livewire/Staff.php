@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Staff as ModelsStaff;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -50,7 +51,9 @@ class Staff extends Component
 
     //delete
     public function delete($id){
-        ModelsStaff::find($id)->delete();
+        $staff = ModelsStaff::find($id);
+        Storage::disk('upload')->delete($staff->staff_photo);
+        $staff->delete();
         $this->confirm_delete = false;
     }
 

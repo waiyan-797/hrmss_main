@@ -99,10 +99,26 @@
         <x-textarea-input wire:model="place_of_birth" id="place_of_birth" name="place_of_birth" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('place_of_birth')" />
     </div>
-    <div>
-        <x-input-label for="nrc" :value="__('NRC')" />
-        <x-text-input wire:model="nrc" id="nrc" name="nrc" type="text" class="mt-1 block w-full" required/>
-        <x-input-error class="mt-2" :messages="$errors->get('nrc')" />
+    <div class="col-span-4">
+        <x-input-label :value="__('NRC (Region ID, Township Code, Sign, Code)')" />
+        <div class="flex flex-row justify-center gap-4">
+            <div class="w-full">
+                <x-select wire:model.change="nrc_region_id" :values="$nrc_region_ids" placeholder="Select Region ID" id="nrc_region_id" name="nrc_region_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('nrc_region_id')" />
+            </div>
+            <div class="w-full">
+                <x-select wire:model.change="nrc_township_code_id" :values="$nrc_township_codes" placeholder="Select Township Code" id="nrc_township_code_id" name="nrc_township_code_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('nrc_township_code_id')" />
+            </div>
+            <div class="w-full">
+                <x-select wire:model.change="nrc_sign_id" :values="$nrc_signs" placeholder="Select Sign" id="nrc_sign_id" name="nrc_sign_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('nrc_sign_id')" />
+            </div>
+            <div class="w-full">
+                <x-text-input wire:model="nrc_code" id="nrc_code" placeholder="Code" name="nrc_code" type="number" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('nrc_code')" />
+            </div>
+        </div>
     </div>
     <div>
         <x-input-label for="phone" :value="__('Phone Number')" />
@@ -131,15 +147,15 @@
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_ward')" />
             </div>
             <div>
-                <x-select wire:model="current_address_region_id" :values="$regions" placeholder="Region" id="current_address_region_id" name="current_address_region_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.change="current_address_region_id" :values="$regions" placeholder="Region" id="current_address_region_id" name="current_address_region_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_region_id')" />
             </div>
             <div>
-                <x-select wire:model="current_address_district_id" :values="$districts" placeholder="District" id="current_address_district_id" name="current_address_district_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.change="current_address_district_id" :values="$current_address_districts" placeholder="District" id="current_address_district_id" name="current_address_district_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_district_id')" />
             </div>
             <div>
-                <x-select wire:model="current_address_township_or_town_id" :values="$townships" placeholder="Township" id="current_address_township_or_town_id" name="current_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-select wire:model="current_address_township_or_town_id" :values="$current_address_townships" placeholder="Township" id="current_address_township_or_town_id" name="current_address_township_or_town_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_township_or_town_id')" />
             </div>
         </div>
@@ -156,15 +172,15 @@
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_ward')" />
             </div>
             <div>
-                <x-select wire:model="permanent_address_region_id" :values="$regions" placeholder="Region" id="permanent_address_region_id" name="permanent_address_region_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.change="permanent_address_region_id" :values="$regions" placeholder="Region" id="permanent_address_region_id" name="permanent_address_region_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_region_id')" />
             </div>
             <div>
-                <x-select wire:model="permanent_address_district_id" :values="$districts" placeholder="District" id="permanent_address_district_id" name="permanent_address_district_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.change="permanent_address_district_id" :values="$permanent_address_districts" placeholder="District" id="permanent_address_district_id" name="permanent_address_district_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_district_id')" />
             </div>
             <div>
-                <x-select wire:model="permanent_address_township_or_town_id" :values="$townships" placeholder="Township" id="permanent_address_township_or_town_id" name="permanent_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-select wire:model="permanent_address_township_or_town_id" :values="$permanent_address_townships" placeholder="Township" id="permanent_address_township_or_town_id" name="permanent_address_township_or_town_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_township_or_town_id')" />
             </div>
         </div>

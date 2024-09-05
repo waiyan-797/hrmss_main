@@ -18,7 +18,7 @@ return new class extends Migration
     {
         Schema::create('postings', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Staff::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Staff::class)->nullable()->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Rank::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Post::class)->nullable()->constrained()->nullOnDelete();
             $table->date('from_date');

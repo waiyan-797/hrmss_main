@@ -29,8 +29,6 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             DivisionSeeder::class,
             RegionSeeder::class,
-            DistrictSeeder::class,
-            TownshipSeeder::class,
             EducationGroupSeeder::class,
             GenderSeeder::class,
             LeaveTypeSeeder::class,
@@ -43,6 +41,8 @@ class DatabaseSeeder extends Seeder
             RankSeeder::class,
             AwardSeeder::class,
             SectionSeeder::class,
+            NrcSignSeeder::class,
+            NrcRegionIdSeeder::class,
         ]);
     }
 }

@@ -28,15 +28,15 @@
                 <x-input-error class="mt-2" :messages="$errors->get('father_place_of_birth')" />
             </div>
             <div class="w-full">
-                <x-select wire:model="father_address_region_id" :values="$regions" placeholder="Select Regions" id="father_address_region_id" name="father_address_region_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.change="father_address_region_id" :values="$regions" placeholder="Select Regions" id="father_address_region_id" name="father_address_region_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('father_address_region_id')" />
             </div>
             <div class="w-full">
-                <x-select wire:model="father_address_district_id" :values="$districts" placeholder="Select Districts" id="father_address_district_id" name="father_address_district_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.change="father_address_district_id" :values="$father_districts" placeholder="Select Districts" id="father_address_district_id" name="father_address_district_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('father_address_district_id')" />
             </div>
             <div class="w-full">
-                <x-select wire:model="father_address_township_or_town_id" :values="$townships" placeholder="Select Townships" id="father_address_township_or_town_id" name="father_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-select wire:model="father_address_township_or_town_id" :values="$father_townships" placeholder="Select Townships" id="father_address_township_or_town_id" name="father_address_township_or_town_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('father_address_township_or_town_id')" />
             </div>
         </div>
@@ -80,15 +80,15 @@
                 <x-input-error class="mt-2" :messages="$errors->get('mother_place_of_birth')" />
             </div>
             <div class="w-full">
-                <x-select wire:model="mother_address_region_id" :values="$regions" placeholder="Select Regions" id="mother_address_region_id" name="mother_address_region_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.change="mother_address_region_id" :values="$regions" placeholder="Select Regions" id="mother_address_region_id" name="mother_address_region_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('mother_address_region_id')" />
             </div>
             <div class="w-full">
-                <x-select wire:model="mother_address_district_id" :values="$districts" placeholder="Select Districts" id="mother_address_district_id" name="mother_address_district_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.change="mother_address_district_id" :values="$mother_districts" placeholder="Select Districts" id="mother_address_district_id" name="mother_address_district_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('mother_address_district_id')" />
             </div>
             <div class="w-full">
-                <x-select wire:model="mother_address_township_or_town_id" :values="$townships" placeholder="Select Townships" id="mother_address_township_or_town_id" name="mother_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-select wire:model="mother_address_township_or_town_id" :values="$mother_townships" placeholder="Select Townships" id="mother_address_township_or_town_id" name="mother_address_township_or_town_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('mother_address_township_or_town_id')" />
             </div>
         </div>

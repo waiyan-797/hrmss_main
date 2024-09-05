@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('awardings', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Staff::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Staff::class)->nullable()->constrained()->cascadeOnDelete();
             $table->foreignIdFor(AwardType::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Award::class)->nullable()->constrained()->nullOnDelete();
             $table->string('order_no');

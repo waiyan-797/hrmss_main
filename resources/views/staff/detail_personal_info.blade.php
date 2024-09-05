@@ -218,6 +218,45 @@
         <x-radio-input id1="has_military_friend_1" id2="has_military_friend_2" wire="has_military_friend" />
         <x-input-error class="mt-2" :messages="$errors->get('has_military_friend')" />
     </div>
+</div>
+<div class="w-full h-auto py-5">
+    <h1 class="text-blue-700 font-arial text-md mb-2 uppercase font-semibold">Abroads</h1>
+    @include('staff_multiple_table', [
+        'column_names' => ['Country', 'Particular', 'Meet With', 'From Date', 'To Date'],
+        'add_event' => 'add_abroads',
+        'column_vals' => $abroads,
+        'column_types' => [
+            [
+                'type' => 'select',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'country',
+                'select_values' => $countries,
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'particular',
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'meet_with',
+            ],
+            [
+                'type' => 'date',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'from_date',
+            ],
+            [
+                'type' => 'date',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'to_date',
+            ],
+        ],
+        'del_method' => 'remove_abroads',
+    ])
+</div>
+<div class="grid grid-cols-4 gap-4 py-5">
     <div class="col-span-4">
         <x-input-label :value="__('Foreigner Friend (Name, Occupation, Nationality, Country)')" />
         <div class="flex flex-row justify-center gap-4">
