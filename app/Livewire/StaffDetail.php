@@ -103,7 +103,7 @@ class StaffDetail extends Component
         'weight' => 'required',
         'blood_type_id' => '',
         'place_of_birth' => 'required',
-        'nrc_region_id_id' => 'required',
+        'nrc_region_id' => 'required',
         'nrc_township_code_id' => 'required',
         'nrc_sign_id' => 'required',
         'nrc_code' => 'required',

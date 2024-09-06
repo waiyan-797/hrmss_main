@@ -79,7 +79,7 @@ $sendVerification = function () {
                 <img src="{{ $avatar ? $avatar->temporaryUrl() : asset('img/user.png') }}" class="w-20 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
             @endif
             <x-input-label for="avatar" :value="__('Avatar')"/>
-            <input wire:model='avatar' id="avatar" accept=".jpg, .jpeg, .png" name="avatar" type="file" class="block w-full text-sm border rounded-lg cursor-pointer text-gray-700 focus:outline-none placeholder-gray-400 mt-1 font-arial dark:bg-gray-900 dark:border-gray-600 dark:text-gray-400 dark:placeholder-gray-500 bg-white border-gray-300" />
+            <x-input-file wire:model='avatar' id="avatar" accept=".jpg, .jpeg, .png" name="avatar"/>
             <x-input-error class="mt-1" :messages="$errors->get('avatar')" />
         </div>
 

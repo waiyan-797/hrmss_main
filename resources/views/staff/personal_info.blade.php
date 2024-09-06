@@ -8,7 +8,7 @@
     </div>
     <div>
         <x-input-label for="photo" :value="__('Photo')"/>
-        <input wire:model='photo' id="photo" accept=".jpg, .jpeg, .png" name="photo" type="file" class="block w-full text-sm border rounded-lg cursor-pointer text-gray-700 focus:outline-none placeholder-gray-400 mt-1 font-arial bg-white border-gray-300" />
+        <x-input-file wire:model='photo' id="photo" accept=".jpg, .jpeg, .png" name="photo"/>
         <x-input-error class="mt-1" :messages="$errors->get('photo')" />
     </div>
     <div>
