@@ -1,7 +1,7 @@
 <div class="grid grid-cols-4 gap-4 py-5">
     <div class="col-span-4">
-        @if ($photo)
-            <img src="{{ $photo ? $photo->temporaryUrl() : route('file', $staff->staff_photo)}}" class="w-20 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
+        @if ($staff_photo && $photo == null)
+            <img src="{{ route('file', $staff_photo) }}" class="w-20 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
         @else
             <img src="{{ $photo ? $photo->temporaryUrl() : asset('img/user.png') }}" class="w-20 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
         @endif

@@ -7,11 +7,13 @@ use Livewire\Component;
 
 class PdfStaffReport15 extends Component
 {
-
+    public $staff_id;
+    public function mount($staff_id = 0){
+        $this->staff_id = $staff_id;
+    }
     public function render()
     {
-
-        $staff = Staff::with('ethnic', 'religion')->where('id', 4)->first();
+        $staff = Staff::where('id', $this->staff_id)->first();
         return view('livewire.pdf-staff-report15',[
             'staff' => $staff,
         ]);

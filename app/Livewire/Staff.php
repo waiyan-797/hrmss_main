@@ -14,8 +14,10 @@ class Staff extends Component
     public $confirm_delete = false;
     public $confirm_edit = false;
     public $confirm_add = false;
+    public $open_staff_report = false;
     public $message = null;
     public $staff_search, $staff_name, $staff_id = 0;
+    public $modal_title;
 
     //add new
     public function add_new(){
@@ -62,9 +64,22 @@ class Staff extends Component
         $this->render();
     }
 
+    public function open_report($staff_id){
+        $this->open_staff_report = true;
+        $this->staff_id = $staff_id;
+    }
+
+    public function go_report($staff_id, $report_id){
+        $routeName = "pdf_staff_report{$report_id}";
+        $this->redirect(route($routeName, [
+            'staff_id' => $staff_id,
+        ]), navigate:true);
+    }
+
     public function render()
     {
         $staffSearch = '%' . $this->staff_search . '%';
+        $this->modal_title = 'Choose Report Type';
         $staffQuery = ModelsStaff::query();
         if ($this->staff_search) {
             $this->resetPage();

@@ -13,6 +13,10 @@
                 'columns' => ['No', 'Photo', 'Name', 'Staff No', 'Action'],
                 'column_vals' => ['staff_photo', 'name', 'staff_no'],
             ])
+
+            @if ($open_staff_report)
+                @include('modals/staff_report_choice_modal')
+            @endif
         </div>
     </div>
 </div>

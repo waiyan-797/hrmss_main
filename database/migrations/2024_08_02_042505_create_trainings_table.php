@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('location');
             $table->foreignIdFor(Country::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(TrainingLocation::class)->nullable()->constrained()->nullOnDelete();
+            $table->timestamps();
         });
     }
 

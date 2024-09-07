@@ -56,32 +56,32 @@ class StaffDetail extends Component
     use WithFileUploads;
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     //personal_info
-    public $photo, $name, $nick_name, $other_name, $staff_no, $dob, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code,$nrc_front,$nrc_back,$phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id, $current_address_district_id, $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_district_id, $permanent_address_township_or_town_id, $previous_addresses, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension;
-    public $educations = [['education_group' => '', 'education_type' => '', 'education' => '']];
+    public $staff_photo, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code,$nrc_front,$nrc_back,$phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id, $current_address_district_id, $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_district_id, $permanent_address_township_or_town_id, $previous_addresses, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension;
+    public $educations = [];
     //job_info
     public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_department_id, $side_division_id, $salary_paid_by, $join_date, $form_of_appointment, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
-    public $recommendations = [['recommend_by' => '', 'ministry' => '', 'department' => '', 'rank' => '', 'remark' => '','recommendation_letter'=>'']];
-    public $postings = [['rank' => '', 'post' => '', 'from_date' => '', 'to_date' => '', 'department' => '', 'division' => '', 'location' => '', 'remark' => '']];
+    public $recommendations = [];
+    public $postings = [];
 
     //relative
     public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street, $father_address_ward, $father_address_township_or_town_id, $father_address_district_id, $father_address_region_id, $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_district_id, $mother_address_region_id, $family_in_politics = false;
-    public $siblings = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
-    public $father_siblings = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
-    public $mother_siblings = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
-    public $spouses = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
-    public $children = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
-    public $spouse_siblings = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
-    public $spouse_father_siblings = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
-    public $spouse_mother_siblings = [['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '']];
+    public $siblings = [];
+    public $father_siblings = [];
+    public $mother_siblings = [];
+    public $spouses = [];
+    public $children = [];
+    public $spouse_siblings = [];
+    public $spouse_father_siblings = [];
+    public $spouse_mother_siblings = [];
 
     //detail_personal_info
     public $last_school_name, $last_school_subject, $last_school_row_no, $last_school_major, $student_life_political_social, $habit, $revolution, $transfer_reason_salary, $during_work_political_social, $has_military_friend = false, $foreigner_friend_name, $foreigner_friend_occupation, $foreigner_friend_nationality_id, $foreigner_friend_country_id, $foreigner_friend_how_to_know, $recommended_by_military_person;
-    public $schools = [['education_group' => '', 'education_type' => '', 'education' => '', 'school_name' => '', 'town' => '', 'year' => '','certificate'=>'','exam_mark'=>'']];
-    public $trainings = [['training_type' => '', 'from_date' => '', 'to_date' => '', 'location' => '', 'country' => '', 'training_location' => '']];
-    public $awards = [['award_type' => '', 'award' => '', 'order_no' => '', 'order_date' => '']];
-    public $past_occupations = [['rank' => '', 'department' => '', 'section' => '', 'from_date' => '', 'to_date' => '', 'remark' => '']];
-    public $abroads = [['country' => '', 'particular' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '']];
-    public $punishments = [['penalty_type' => '', 'reason' => '', 'from_date' => '', 'to_date' => '']];
+    public $schools = [];
+    public $trainings = [];
+    public $awards = [];
+    public $past_occupations = [];
+    public $abroads = [];
+    public $punishments = [];
 
     protected $personal_info_rules = [
         'photo' => '',
@@ -381,7 +381,7 @@ class StaffDetail extends Component
 
     private function fillPersonalInfo($staff)
     {
-        $this->photo = $staff->staff_photo;
+        $this->staff_photo = $staff->staff_photo;
         $this->name = $staff->name;
         $this->nick_name = $staff->nick_name;
         $this->other_name = $staff->other_name;
@@ -802,7 +802,7 @@ class StaffDetail extends Component
                 $this->savePunishments($staff->id);
                 break;
         }
-
+        $this->reset('photo');
         $this->message = 'Saved Successfully';
     }
 
@@ -885,7 +885,7 @@ class StaffDetail extends Component
         foreach ($this->punishments as $punishment) {
             Punishment::create([
                 'staff_id' => $staffId,
-                'penalty_id' => $punishment['penalty'],
+                'penalty_type_id' => $punishment['penalty_type'],
                 'reason' => $punishment['reason'],
                 'from_date' => $punishment['from_date'],
                 'to_date' => $punishment['to_date'],
