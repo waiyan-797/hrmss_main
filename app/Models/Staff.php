@@ -36,4 +36,14 @@ class Staff extends Model
     public function gender() {
         return $this->belongsTo(Gender::class);
     }
+    public function leaves()
+    {
+        return $this->hasMany(Leave::class);
+    }
+    public function increments()
+    {
+        return $this->hasMany(Increment::class);
+    }
+
+
 }

@@ -92,8 +92,8 @@ class PensionType extends Component
     }
     public function render()
     {
-        $this->modal_title = $this->confirm_add ? 'Add pension Type' : 'Edit pension Type';
-        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $this->modal_title = $this->confirm_add ? 'ပင်စင်အမျိူးအစားသိမ်းရန်':'ပင်စင်အမျိူးအစားပြင်ရန်';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 

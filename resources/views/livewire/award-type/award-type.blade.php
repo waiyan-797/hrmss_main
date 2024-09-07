@@ -1,6 +1,6 @@
 <div class="w-full">
     <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Award Type</h1>
+        <h1 class="text-white font-semibold italic font-arial">ဘွဲ့တံဆိပ်အမျိုးအစား</h1>
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
@@ -8,9 +8,9 @@
                 'data_values' => $award_types,
                 'modal' => 'modals/award_type_modal',
                 'id' => $award_type_id,
-                'title' => 'Award Type',
+                'title' => 'ဘွဲ့တံဆိပ်အမျိုးအစား',
                 'search_id' => 'award_type_search',
-                'columns' => ['No', 'Name', 'Action'],
+                'columns' => ['စဉ်','ဘွဲ့တံဆိပ်အမျိုးအစား','လုပ်ဆောင်ချက်'],
                 'column_vals' => ['name'],
             ])
         </div>

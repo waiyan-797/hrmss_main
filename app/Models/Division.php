@@ -13,6 +13,13 @@ class Division extends Model
     {
         return $this->hasMany(Section::class);
     }
+    
+    
+    public function divisionType()
+    {
+        return $this->belongsTo(DivisionType::class);
+    }
+
 
 
 }

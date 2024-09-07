@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('department');
             $table->string('rank');
             $table->string('remark');
+            $table->string('recommendation_letter')->nullable();
             $table->timestamps();
         });
     }

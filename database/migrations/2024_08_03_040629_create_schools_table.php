@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('school_name');
             $table->string('town');
             $table->string('year');
+            $table->string('certificate')->nullable();
+            $table->string('exam_mark')->nullable();
             $table->timestamps();
         });
     }

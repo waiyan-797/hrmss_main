@@ -10,7 +10,6 @@ use App\Models\Relation as ModelsRelation;
 class Relation extends Component
 {
 
-
     use WithPagination;
     public $confirm_delete = false;
     public $confirm_edit = false;
@@ -101,8 +100,9 @@ class Relation extends Component
 
     public function render()
     {
-        $this->modal_title = $this->confirm_add ? 'Add Relation' : 'Edit Relation';
-        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $this->modal_title = $this->confirm_add ? 'တော်စပ်ပုံအသစ်ထည့်ပါ
+' : 'တော်စပ်ပုံပြင်ရန်';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 

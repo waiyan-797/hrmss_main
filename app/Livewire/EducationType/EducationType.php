@@ -99,8 +99,9 @@ class EducationType extends Component
     public function render()
     {
         $education_groups = EducationGroup::get();
-        $this->modal_title = $this->confirm_add ? 'Add education Type' : 'Edit education Type';
-        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $this->modal_title = $this->confirm_add ? 'ပညာအရည်အချင်း အမျိုးအစား
+အသစ်ထည့်ရန်' : 'ပညာအရည်အချင်း အမျိုးအစားပြင်ရန်';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 

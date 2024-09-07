@@ -22,4 +22,9 @@ class Rank extends Model
     {
         return $this->hasMany(Staff::class);
     }
+    public function increments()
+    {
+        return $this->hasMany(Increment::class, 'increment_rank_id');
+    }
+
 }

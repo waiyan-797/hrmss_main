@@ -63,11 +63,11 @@ $sendVerification = function () {
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 font-arial">
-            {{ __('Profile Information') }}
+            {{ __('ကိုယ်ရေးအချက်လက်') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 font-arial">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("ကိုယ်ရေးအချက်လက်နှင့်အီးမေးလ်လိပ်စာပြင်ရန်") }}
         </p>
     </header>
 
@@ -78,19 +78,19 @@ $sendVerification = function () {
             @else
                 <img src="{{ $avatar ? $avatar->temporaryUrl() : asset('img/user.png') }}" class="w-20 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
             @endif
-            <x-input-label for="avatar" :value="__('Avatar')"/>
+            <x-input-label for="ဓါတ်ပုံ" :value="__('ဓါတ်ပုံ')"/>
             <x-input-file wire:model='avatar' id="avatar" accept=".jpg, .jpeg, .png" name="avatar"/>
             <x-input-error class="mt-1" :messages="$errors->get('avatar')" />
         </div>
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="အမည်" :value="__('အမည်')" />
             <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="အီးမေးလ်" :value="__('အီးမေးလ်')" />
             <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 

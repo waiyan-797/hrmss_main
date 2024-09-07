@@ -106,8 +106,8 @@ class Section extends Component
     public function render()
     {
         $divisions = Division::get();
-        $this->modal_title = $this->confirm_add ? 'Add section' : 'Edit section';
-        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $this->modal_title = $this->confirm_add ? 'ဌာနစိတ်သိမ်းရန်' : 'ဌာနစိတ်ပြင်ရန်';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 

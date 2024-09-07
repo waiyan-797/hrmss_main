@@ -15,13 +15,13 @@
             <livewire:layout.navigation />
 
             <!-- Page Heading -->
-            @if (isset($header))
+             @if (isset($header))
                 <header class="bg-blue-700 shadow h-[8vh] flex items-center">
                     <div class="w-4/5 mx-auto py-4 px-6 flex justify-end items-center gap-3">
                         {{ $header }}
                     </div>
                 </header>
-            @endif
+            @endif 
 
             <!-- Page Content -->
             <main>

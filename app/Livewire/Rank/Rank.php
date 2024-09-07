@@ -16,7 +16,7 @@ class Rank extends Component
     public $confirm_edit = false;
     public $confirm_add = false;
     public $message = null;
-    public $rank_search, $rank_name, $payscale_name, $staff_type_name, $rank_id;
+    public $rank_search, $rank_name, $payscale_name, $staff_type_name, $rank_id,$allowed_qty;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
     //Validation
@@ -24,12 +24,13 @@ class Rank extends Component
         'rank_name' => 'required|string|max:255',
         'payscale_name' => 'required',
         'staff_type_name' => 'required',
+        'allowed_qty'=>'required',
     ];
     //Add New
     public function add_new()
     {
         $this->resetValidation();
-        $this->reset(['rank_name', 'payscale_name', 'staff_type_name']);
+        $this->reset(['rank_name', 'payscale_name', 'staff_type_name','allowed_qty']);
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
@@ -49,6 +50,7 @@ class Rank extends Component
             'name' => $this->rank_name,
             'payscale_id' => $this->payscale_name,
             'staff_type_id' => $this->staff_type_name,
+            'allowed_qty'=>$this->allowed_qty,
         ]);
         $this->message = 'Created successfully.';
         $this->close_modal();
@@ -57,7 +59,7 @@ class Rank extends Component
     public function close_modal()
     {
         $this->resetValidation();
-        $this->reset(['rank_name', 'payscale_name', 'staff_type_name']);
+        $this->reset(['rank_name', 'payscale_name', 'staff_type_name','allowed_qty']);
         $this->confirm_edit = false;
         $this->confirm_add = false;
     }
@@ -72,6 +74,7 @@ class Rank extends Component
         $this->rank_name = $rank->name;
         $this->payscale_name = $rank->payscale_id;
         $this->staff_type_name = $rank->staff_type_id;
+        $this->allowed_qty=$rank->allowed_qty;
     }
 
     //update
@@ -83,6 +86,7 @@ class Rank extends Component
             'name' => $this->rank_name,
             'payscale_id' => $this->payscale_name,
             'staff_type_id' => $this->staff_type_name,
+            'allowed_qty'=>$this->allowed_qty,
         ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();
@@ -111,8 +115,8 @@ class Rank extends Component
     {
         $payscales = Payscale::get();
         $staff_types = StaffType::get();
-        $this->modal_title = $this->confirm_add ? 'Add rank' : 'Edit rank';
-        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $this->modal_title = $this->confirm_add ? 'ရာထူးသိမ်းရန်' : 'ရာထူးပြင်ရန်';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 

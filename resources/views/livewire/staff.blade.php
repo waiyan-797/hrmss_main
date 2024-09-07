@@ -1,6 +1,6 @@
 <div class="w-full">
     <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Staff</h1>
+        <h1 class="text-white font-semibold italic font-arial">ဝန်ထမ်း</h1>
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
@@ -8,7 +8,7 @@
                 'data_values' => $staffs,
                 'modal' => '',
                 'id' => $staff_id,
-                'title' => 'Staff',
+                'title' => 'ဝန်ထမ်း',
                 'search_id' => 'staff_search',
                 'columns' => ['No', 'Photo', 'Name', 'Staff No', 'Action'],
                 'column_vals' => ['staff_photo', 'name', 'staff_no'],

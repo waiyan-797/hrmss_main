@@ -1,6 +1,6 @@
 <div class="w-full">
     <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Education Group</h1>
+        <h1 class="text-white font-semibold italic font-arial">ပညာအရည်အချင်း အုပ်စု</h1>
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
@@ -8,9 +8,9 @@
                 'data_values' => $education_groups,
                 'modal' => 'modals/education_group_modal',
                 'id' => $education_group_id,
-                'title' => 'Education Group',
+                'title' => 'ပညာအရည်အချင်း အုပ်စု',
                 'search_id' => 'education_group_search',
-                'columns' => ['No', 'Name', 'Action'],
+                'columns' => ['စဉ်', 'ပညာအရည်အချင်း အုပ်စု', 'လုပ်ဆောင်ချက်'],
                 'column_vals' => ['name'],
             ])
         </div>

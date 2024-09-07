@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-white font-semibold italic font-arial">
-            {{ __('Profile') }}
+            {{ __('ကိုယ်ရေးအချက်အလက်') }}
         </h2>
     </x-slot>
 

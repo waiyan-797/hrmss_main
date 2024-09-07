@@ -1,6 +1,6 @@
 <div class="w-full">
     <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Payscale</h1>
+        <h1 class="text-white font-semibold italic font-arial">လစာနှုန်း</h1>
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
@@ -8,10 +8,11 @@
                 'data_values' => $payscales,
                 'modal' => 'modals/payscale_modal',
                 'id' => $payscale_id,
-                'title' => 'Payscale',
+                'title' => 'လစာနှုန်း',
                 'search_id' => 'payscale_search',
-                'columns' => ['No', 'Name', 'Min Salary', 'Increment', 'Max Salary', 'Staff Type', 'Action'],
-                'column_vals' => ['name', 'min_salary', 'increment', 'max_salary', 'staff_type'],
+                // 'columns' => ['No', 'Name', 'Min Salary', 'Increment', 'Max Salary', 'Staff Type','Allowed Qty','Action'],
+                'columns' => ['စဉ်', 'လစာနှုန်း','အနိမ့်ဆုံးလစာ','အတိုးနှုန်း','အမြင့်ဆုံးလစာ','ဝန်ထမ်းအမျိုးအစား','ခွင့်ပြုသည့်အရေအတွက်','လုပ်ဆောင်ချက်'],
+                'column_vals' => ['name', 'min_salary', 'increment', 'max_salary', 'staff_type','allowed_qty'],
             ])
         </div>
     </div>

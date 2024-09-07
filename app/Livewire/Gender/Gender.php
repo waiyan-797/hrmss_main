@@ -98,8 +98,9 @@ class Gender extends Component
     }
     public function render()
     {
-        $this->modal_title = $this->confirm_add ? 'Add gender Type' : 'Edit gender Type';
-        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $this->modal_title = $this->confirm_add ? 'ကျား/မအသစ်ထည့်ရန်
+' : 'ကျား/မပြင်ရန်';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 

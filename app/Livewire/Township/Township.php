@@ -105,8 +105,10 @@ class Township extends Component
     public function render()
     {
         $districts = District::get();
-        $this->modal_title = $this->confirm_add ? 'Add township' : 'Edit township';
-        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $this->modal_title = $this->confirm_add ? 'မြို့/မြို့နယ်သိမ်းရန်
+' : 'မြို့/မြို့နယ်ပြင်ရန်
+';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 

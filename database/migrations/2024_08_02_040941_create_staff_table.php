@@ -128,6 +128,9 @@ return new class extends Migration
             $table->foreignId('foreigner_friend_country_id')->nullable()->constrained('countries')->onDelete('set null');
             $table->string('foreigner_friend_how_to_know')->nullable();
             $table->string('recommended_by_military_person')->nullable();
+            $table->boolean('punishment_for_crime')->default(false);
+            $table->string('nrc_front')->nullable();
+            $table->string('nrc_back')->nullable();
             $table->timestamps();
         });
     }

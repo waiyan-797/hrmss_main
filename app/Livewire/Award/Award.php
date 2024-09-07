@@ -99,8 +99,10 @@ class Award extends Component
     public function render()
     {
         $award_types = AwardType::get();
-        $this->modal_title = $this->confirm_add ? 'Add Award' : 'Edit Award';
-        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $this->modal_title = $this->confirm_add ? 'ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အသစ်ထည့်ရန်
+' : 'ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်ပြင်ရန်
+';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Models\Division as ModelsDivision;
+use App\Models\DivisionType;
 use Livewire\WithPagination;
 
 class Division extends Component
@@ -14,51 +15,47 @@ class Division extends Component
     public $confirm_edit = false;
     public $confirm_add = false;
     public $message = null;
-    public $division_search, $division_name, $division_id;
+    public $division_search, $division_name, $division_type_name, $division_id;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
-    //validation
+    //Validation
     protected $rules = [
-        'division_name' => 'required',
+        'division_name' => 'required|string|max:255',
+        'division_type_name' => 'required',
     ];
-
-     //add new
+    //Add New
     public function add_new(){
         $this->resetValidation();
-        $this->reset('division_name');
+        $this->reset(['division_name', 'division_type_name']);
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
-
-     //submit form
     public function submitForm()
     {
         if ($this->confirm_add == true) {
-            $this->createDivision();
+            $this->createPosition();
         } else {
-            $this->updateDivision();
+            $this->updatePosition();
         }
     }
-
     //create
-    public function CreateDivision()
+    public function createPosition()
     {
         $this->validate();
         ModelsDivision::create([
             'name' => $this->division_name,
+            'division_type_id' => $this->division_type_name,
         ]);
         $this->message = 'Created successfully.';
         $this->close_modal();
     }
-
     //close modal
     public function close_modal(){
         $this->resetValidation();
-        $this->reset('division_name');
+        $this->reset(['division_name', 'division_type_name']);
         $this->confirm_edit = false;
         $this->confirm_add = false;
     }
-
     //edit
     public function edit_modal($id){
         $this->resetValidation();
@@ -67,14 +64,17 @@ class Division extends Component
         $this->division_id = $id;
         $division = ModelsDivision::findOrFail($id);
         $this->division_name = $division->name;
+        $this->division_type_name = $division->division_type_id;
     }
 
     //update
-    public function updateDivision()
+    public function updatePosition()
     {
         $this->validate();
-        ModelsDivision::findOrFail($this->division_id)->update([
+        $division = ModelsDivision::findOrFail($this->division_id);
+        $division->update([
             'name' => $this->division_name,
+            'division_type_id' => $this->division_type_name
         ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();
@@ -96,11 +96,13 @@ class Division extends Component
     public function render_division(){
         $this->render();
     }
-
     public function render()
     {
-        $this->modal_title = $this->confirm_add ? 'Add Division' : 'Edit Division';
-        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $division_types = divisionType::get();
+        $this->modal_title = $this->confirm_add ? 'ဌာနခွဲအသစ်ထည့်ရန်
+' : 'ဌာနခွဲပြင်ရန်
+';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 
@@ -108,14 +110,15 @@ class Division extends Component
         $divisionQuery = ModelsDivision::query();
         if ($this->division_search) {
             $this->resetPage();
-            $divisionQuery->where('name', 'LIKE', $divisionSearch);
-            $divisions = $divisionQuery->paginate($divisionQuery->count() > 10 ? $divisionQuery->count() : 10);
+            $divisionQuery->where(fn($q) => $q->where('name', 'LIKE', $divisionSearch)->orWhereHas('divisionType', fn($query) => $query->where('name', 'LIKE', $divisionSearch)));
+            $divisions = $divisionQuery->with('divisionType')->paginate($divisionQuery->count() > 10 ? $divisionQuery->count() : 10);
         } else {
-            $divisions = $divisionQuery->paginate(10);
+            $divisions = $divisionQuery->with('divisionType')->paginate(10);
         }
 
         return view('livewire.division', [
             'divisions' => $divisions,
+            'division_types' => $division_types,
         ]);
     }
 }

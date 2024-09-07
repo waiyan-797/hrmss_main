@@ -11,19 +11,23 @@
             </svg>
         </a>
         <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'personal_info'])" :active="$tab == 'personal_info'" wire:navigate>
-            {{ __('Personal Information') }}
+            {{ __('ကိုယ်ရေးအချက်အလက်ဖြည့်ရန်') }}
         </x-nav-link>
         <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'job_info'])" :active="$tab == 'job_info'" wire:navigate>
-            {{ __('Job Information') }}
+            {{ __('အလုပ်အကိုင်') }}
         </x-nav-link>
         <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'relative'])" :active="$tab == 'relative'" wire:navigate>
-            {{ __('Relatives') }}
+            {{ __('ဆွေမျိုးများ') }}
         </x-nav-link>
         <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'detail_personal_info'])" :active="$tab == 'detail_personal_info'" wire:navigate>
-            {{ __('Detail Personal Info') }}
+            {{ __('ငယ်စဉ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်') }}
         </x-nav-link>
         <h1 class="text-white font-semibold italic font-arial">{{$confirm_add == 1 ? 'Create ' : 'Update '}}Staff</h1>
-    </x-slot>
+    </x-slot> 
+
+
+    
+    
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <form wire:submit="submit_staff">
@@ -40,6 +44,7 @@
                         </button>
                     </div>
                 @endif
+                <div class="bg-white shadow-md rounded-lg p-5">
                 @if ($tab == 'personal_info')
                     @include('staff.personal_info')
                 @elseif ($tab == 'job_info')
@@ -49,11 +54,15 @@
                 @elseif ($tab == 'detail_personal_info')
                     @include('staff.detail_personal_info')
                 @endif
+           
                 <div class="pb-5">
                     <x-primary-button>{{ $confirm_add == 1 ? __('Save') : __('Update') }}</x-primary-button>
                 </div>
+            </div>
             </form>
+        
         </div>
     </div>
 </div>
+
 

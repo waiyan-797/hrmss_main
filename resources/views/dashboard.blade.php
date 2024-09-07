@@ -3,7 +3,7 @@
         {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
             {{ __('Dashboard') }}
         </x-nav-link> --}}
-        <h1 class="text-white font-semibold italic font-arial">Dashboard</h1>
+        <h1 class="text-white font-semibold italic font-arial">ဒက်ရှ်ဘုတ်</h1>
     </x-slot>
 
     <div class="py-6 h-[83vh] overflow-y-auto w-full px-3">

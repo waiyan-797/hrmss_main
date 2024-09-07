@@ -1,6 +1,6 @@
 <div class="w-full">
     <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Township</h1>
+        <h1 class="text-white font-semibold italic font-arial">မြို့/မြို့နယ်</h1>
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
@@ -8,9 +8,9 @@
                 'data_values' => $townships,
                 'modal' => 'modals/township_modal',
                 'id' => $township_id,
-                'title' => 'Township',
+                'title' => 'မြို့/မြို့နယ်',
                 'search_id' => 'township_search',
-                'columns' => ['No', 'Name', 'District', 'Action'],
+                'columns' => ['စဉ်', 'မြို့/မြို့နယ်','ခရိုင်','လုပ်ဆောင်ချက်'],
                 'column_vals' => ['name', 'district'],
             ])
         </div>

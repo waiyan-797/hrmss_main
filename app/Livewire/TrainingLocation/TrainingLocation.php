@@ -98,8 +98,8 @@ class TrainingLocation extends Component
     }
     public function render()
     {
-        $this->modal_title = $this->confirm_add ? 'Add education Group' : 'Edit education Group';
-        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $this->modal_title = $this->confirm_add ? 'သင်တန်းတည်နေရာသိမ်းရန်' : 'သင်တန်းတည်နေရာပြင်ရန်';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 

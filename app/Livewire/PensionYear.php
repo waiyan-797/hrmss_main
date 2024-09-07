@@ -101,8 +101,8 @@ class PensionYear extends Component
 
     public function render()
     {
-        $this->modal_title = $this->confirm_add ? 'Add Pension Year' : 'Edit Pension Year';
-        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $this->modal_title = $this->confirm_add ? 'ပင်စင်နှစ်သိမ်းရန်' : 'ပင်စင်နှစ်ပြင်ရန်';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 

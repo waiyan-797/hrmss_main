@@ -98,8 +98,10 @@ class Religion extends Component
     }
     public function render()
     {
-        $this->modal_title = $this->confirm_add ? 'Add religion Type' : 'Edit religion Type';
-        $this->submit_button_text = $this->confirm_add ? 'Add' : 'Update';
+        $this->modal_title = $this->confirm_add ? 'ကိုးကွယ်သည့်ဘာသာအသစ်ထည့်ရန်
+' : 'ကိုးကွယ်သည့်ဘာသာပြင်ရန်
+';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 
