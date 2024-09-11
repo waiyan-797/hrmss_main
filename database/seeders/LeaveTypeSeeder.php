@@ -30,11 +30,17 @@ class LeaveTypeSeeder extends Seeder
         ]);
 
         DB::table('leave_types')->insert([
-            'name'=>'မီးဖွားခွင့်',
+            'name'=>'မီးဖွားခွင့်/သားပျက်ခွင့်',
         ]);
 
         DB::table('leave_types')->insert([
             'name'=>'ရှောင်တခင်ခွင့်',
+        ]);
+        DB::table('leave_types')->insert([
+            'name'=>'ကြိုတင်ပြင်ဆင်ခွင့်',
+        ]);
+        DB::table('leave_types')->insert([
+            'name'=>'ကလေးပြုစုစောင့်ရှောက်ခွင့်',
         ]);
 
     }

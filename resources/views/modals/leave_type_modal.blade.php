@@ -27,9 +27,6 @@
                 </select>
             </div>
             
-            {{-- <input required type="text" wire:model="leave_type" id="is_yearly" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-            @error('leave_type') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
-            <br> --}}
             <div>
                 <label for="is_yearly" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">နှစ်စဉ်
                 </label>

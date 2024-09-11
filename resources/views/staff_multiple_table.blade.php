@@ -1,6 +1,5 @@
 <table class="w-full text-sm rounded-lg">
     <thead class="font-arial text-xs text-center text-gray-900 uppercase bg-gray-50 font-semibold">
-    
         <tr>
             @foreach ($column_names as $name)
                 <th scope="col" class="px-6 py-3">{{$name}}</th>
@@ -42,8 +41,6 @@
                     </td>
                     
                 @endforeach
-               
-                
                 <td class="px-6 py-4">
                     <button type="button" wire:click="{{$del_method}}({{ $index }})" class="font-medium text-red-600 hover:underline">Remove</button>
                 </td>
@@ -69,10 +66,5 @@
                 </div>
             </td>
             </tr> --}}
-           
-            
-           
-    
-
     </tbody>
 </table>

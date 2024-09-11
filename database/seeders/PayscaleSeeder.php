@@ -18,7 +18,7 @@ class PayscaleSeeder extends Seeder
         Payscale::truncate();
         Schema::enableForeignKeyConstraints();
 
-        $columns = ['id', 'name', 'min_salary', 'increment', 'max_salary'];
+        $columns = ['id', 'name', 'min_salary', 'increment','max_salary'];
 
         $items = [
             [1, '၅၅၀၀၀၀', '၅၅၀၀၀၀', '-', '၅၅၀၀၀၀'],
@@ -32,7 +32,7 @@ class PayscaleSeeder extends Seeder
             [9, '၁၉၈၀၀၀-၂၀၀၀-၂၀၈၀၀၀', '၁၉၈၀၀၀', '၂၀၀၀', '၂၀၈၀၀၀'],
             [10, '၁၈၀၀၀၀-၂၀၀၀-၁၉၀၀၀၀', '၁၈၀၀၀၀', '၂၀၀၀', '၁၉၀၀၀၀'],
             [11, '၁၆၂၀၀၀-၂၀၀၀-၁၇၂၀၀၀', '၁၆၂၀၀၀', '၂၀၀၀', '၁၇၂၀၀၀'],
-            [12, '၁၄၄၀၀၀-၂၀၀၀-၁၅၄၀၀၀', '၁၄၄၀၀၀', '၂၀၀၀', '၁၅၄၀၀၀']
+            [12, '၁၄၄၀၀၀-၂၀၀၀-၁၅၄၀၀၀', '၁၄၄၀၀၀', '၂၀၀၀','၁၅၄၀၀၀']
         ];
 
         foreach ($items as $item) {

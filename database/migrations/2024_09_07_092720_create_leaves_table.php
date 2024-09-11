@@ -21,7 +21,6 @@ return new class extends Migration
             $table->date('from_date')->nullable();
             $table->date('to_date')->nullable();
             $table->integer('qty')->nullable();
-            $table->foreignIdFor(DayOrMonth::class)->nullable()->nullOnDelete();
             $table->string('order_no')->nullable();
             $table->string('remark')->nullable();
             $table->timestamps();

@@ -1,0 +1,18 @@
+<div class="w-full">
+    <x-slot name="header">
+        <h1 class="text-white font-semibold italic font-arial">ခွင့်</h1>
+    </x-slot>
+    <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
+        <div class="w-full mx-auto px-3 py-4">
+            @include('table', [
+                'data_values' => $leaves,
+                'modal' => 'modals/leave_modal',
+                'id' => $leave_id,
+                'title' => 'ခွင့်',
+                'search_id' => 'leave_search',
+                'columns' => ['စဉ်','ဝန်ထမ်းအမည်','ခွင့်အမျိုးအစား','မှ','ထိ','အရေအတွက်','ရုံးမိန့်','မှတ်ချက်','လုပ်ဆောင်ချက်'],
+                'column_vals' => ['staff_name', 'leave_type','from_date','to_date','qty','order_no','remark'],
+            ])
+        </div>
+    </div>
+</div>

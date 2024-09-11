@@ -69,6 +69,7 @@ use App\Livewire\InvestmentCompanies\StaffSalaryList3;
 use App\Livewire\InvestmentCompanies\StaffSalaryList4;
 use App\Livewire\InvestmentCompanies\YangonOfficeStaff;
 use App\Livewire\InvestmentCompanies\YangonOfficeStaff2;
+use App\Livewire\Leave;
 use App\Livewire\Leave\LeaveNuberPercent;
 use App\Livewire\LeaveType;
 use App\Livewire\LocalTrainingReport\LocalTrainingReport;
@@ -125,6 +126,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/blood_type', BloodType::class)->name('blood_type');
     Route::get('/post', Post::class)->name('post');
     Route::get('/section',Section::class)->name('section');
+    Route::get('/leave',Leave::class)->name('leave');
     Route::get('/leave_type', LeaveType::class)->name('leave_type');
     Route::get('/nationality', Nationality::class)->name('nationality');
     Route::get('/country', Country::class)->name('country');
