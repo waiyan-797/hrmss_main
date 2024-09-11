@@ -15,11 +15,13 @@ class PdfStaffReport15 extends Component
 
     public function go_pdf($staff_id){
         $staff = Staff::find($staff_id);
-
-        $htmlContent = view('livewire.pdf-staff-report15', compact('staff'))->render();
-        $pdf = PDF::loadHTML($htmlContent);
-
-        return $pdf->stream('staff-report.pdf');
+        $data = [
+            'staff' => $staff,
+        ];
+        $pdf = PDF::loadView('pdf_reports.staff_report_15', $data);
+        return response()->streamDownload(function() use ($pdf) {
+            echo $pdf->output();
+        }, 'staff_pdf_15.pdf');
     }
 
     public function render()

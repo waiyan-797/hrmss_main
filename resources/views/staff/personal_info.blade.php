@@ -120,36 +120,36 @@
             </div>
         </div>
         <br>
-         
+
         <div class="grid grid-cols-2 gap-4">
             <div>
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     @if ($nrc_front)
                         <img src="{{ $nrc_front ? $nrc_front->temporaryUrl() : route('file', $staff->nrc_front)}}" class="w-20 h-20 border-2 rounded-full dark:border-blue-600 border-blue-400 mb-4">
                     @else
                         <img src="{{ $nrc_front ? $nrc_front->temporaryUrl() : asset('img/a1.png') }}" class="w-40 h-20 border-2 dark:border-blue-600 border-blue-400 mb-4">
                     @endif
-                </div>
-        
+                </div> --}}
+
                 <x-input-label for="nrc_front" :value="__('နိုင်ငံသားစိစစ်ရေးကတ်ပြား (အရှေ့ဘက်)')"/>
                 <x-input-file wire:model='nrc_front' id="nrc_front" accept=".jpg, .jpeg, .png" name="nrc_front" class="block w-full text-sm border rounded-lg cursor-pointer text-gray-700 focus:outline-none placeholder-gray-400 mt-1 font-arial bg-white border-gray-300" />
                 <x-input-error class="mt-1" :messages="$errors->get('nrc_front')" />
             </div>
-        
+
             <div>
-                <div class="col-span-2">
+                {{-- <div class="col-span-2">
                     @if ($nrc_back)
                         <img src="{{ $nrc_back ? $nrc_back->temporaryUrl() : route('file', $staff->nrc_back)}}" class="w-40 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
                     @else
                         <img src="{{ $nrc_back ? $nrc_back->temporaryUrl() : asset('img/a2.png') }}" class="w-40 h-20 border-2 dark:border-blue-600 border-blue-400 mb-4">
                     @endif
-                </div>
+                </div> --}}
                 <x-input-label for="nrc_back" :value="__('နိုင်ငံသားစိစစ်ရေးကတ်ပြား (အနောက်ဘက်)')"/>
                 <input wire:model='nrc_back' id="nrc_back" accept=".jpg, .jpeg, .png" name="nrc_back" type="file" class="block w-full text-sm border rounded-lg cursor-pointer text-gray-700 focus:outline-none placeholder-gray-400 mt-1 font-arial bg-white border-gray-300" />
                 <x-input-error class="mt-1" :messages="$errors->get('nrc_back')" />
             </div>
         </div>
-        
+
     </div>
     <div>
         <x-input-label for="ဖုန်းနံပါတ်" :value="__('ဖုန်းနံပါတ်')" />
@@ -178,19 +178,17 @@
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_ward')" />
             </div>
             <div>
-                <x-select wire:model="current_address_township_or_town_id" :values="$current_address_townships" placeholder="မြို့/မြို့နယ်" id="current_address_township_or_town_id" name="current_address_township_or_town_id" class="mt-1 block w-full" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('current_address_township_or_town_id')" />
+                <x-select wire:model.change="current_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="current_address_region_id" name="current_address_region_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('current_address_region_id')" />
             </div>
             <div>
                 <x-select wire:model.change="current_address_district_id" :values="$current_address_districts" placeholder="ခရိုင်" id="current_address_district_id" name="current_address_district_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_district_id')" />
             </div>
             <div>
-                <x-select wire:model.change="current_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="current_address_region_id" name="current_address_region_id" class="mt-1 block w-full" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('current_address_region_id')" />
+                <x-select wire:model="current_address_township_or_town_id" :values="$current_address_townships" placeholder="မြို့/မြို့နယ်" id="current_address_township_or_town_id" name="current_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('current_address_township_or_town_id')" />
             </div>
-           
-            
         </div>
     </div>
     <div class="col-span-3">
@@ -205,16 +203,16 @@
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_ward')" />
             </div>
             <div>
-                <x-select wire:model="permanent_address_township_or_town_id" :values="$permanent_address_townships" placeholder="မြို့/မြို့နယ်" id="permanent_address_township_or_town_id" name="permanent_address_township_or_town_id" class="mt-1 block w-full" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_township_or_town_id')" />
+                <x-select wire:model.change="permanent_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="permanent_address_region_id" name="permanent_address_region_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_region_id')" />
             </div>
             <div>
                 <x-select wire:model.change="permanent_address_district_id" :values="$permanent_address_districts" placeholder="ခရိုင်" id="permanent_address_district_id" name="permanent_address_district_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_district_id')" />
             </div>
             <div>
-                <x-select wire:model.change="permanent_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="permanent_address_region_id" name="permanent_address_region_id" class="mt-1 block w-full" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_region_id')" />
+                <x-select wire:model="permanent_address_township_or_town_id" :values="$permanent_address_townships" placeholder="မြို့/မြို့နယ်" id="permanent_address_township_or_town_id" name="permanent_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_township_or_town_id')" />
             </div>
         </div>
     </div>
@@ -223,7 +221,7 @@
         <x-textarea-input wire:model="previous_addresses" id="previous_addresses" name="previous_addresses" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('previous_addresses')" />
     </div>
-   
+
     <div>
         <x-input-label for="တပ်မတော်သို့ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်(က)ကိုယ်ပိုင်အမှတ်" :value="__('(က)တပ်မတော်သို့ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင် ကိုယ်ပိုင်အမှတ်')" />
         <x-text-input wire:model="military_solider_no" id="military_solider_no" name="military_solider_no" type="text" class="mt-1 block w-full" required/>

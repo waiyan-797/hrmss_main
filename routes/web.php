@@ -100,6 +100,7 @@ use App\Livewire\Reports\SocialReport;
 use App\Livewire\Section\Section;
 use App\Livewire\Table\Table;
 use App\Livewire\Township\Township;
+use App\Models\Staff as ModelsStaff;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
@@ -213,6 +214,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/other_qualification_report', OtherQualificationReport::class)->name('other_qualification_report');
     Route::get('/punishment_report', PunishmentReport::class)->name('punishment_report');
     Route::get('/rank_salary_list', RankSalaryList::class)->name('rank_salary_list');
+    Route::get('/pdf_15/{staff_id?}', function($staff_id){
+        $staff = ModelsStaff::find($staff_id);
+        return view('pdf_reports.staff_report_15', ['staff' => $staff]);
+    })->name('pdf');
 });
 
 require __DIR__.'/auth.php';
