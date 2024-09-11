@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             DivisionSeeder::class,
             RegionSeeder::class,
             EducationGroupSeeder::class,
+            EducationTypeSeeder::class,
             GenderSeeder::class,
             LeaveTypeSeeder::class,
             PayscaleSeeder::class,
@@ -43,6 +44,14 @@ class DatabaseSeeder extends Seeder
             SectionSeeder::class,
             NrcSignSeeder::class,
             NrcRegionIdSeeder::class,
+            AwardTypeSeeder::class,
+            BloodTypeSeeder::class,
+            ReligionSeeder::class,
+            PensionYearSeeder::class,
+            TrainingTypeSeeder::class,
+            EthnicSeeder::class,
+            EducationSeeder::class,
+            PostSeeder::class,
         ]);
     }
 }

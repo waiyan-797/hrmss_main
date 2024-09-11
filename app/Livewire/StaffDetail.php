@@ -803,6 +803,7 @@ class StaffDetail extends Component
                 break;
         }
         $this->reset('photo');
+        $this->loadStaffData($staff->id);
         $this->message = 'Saved Successfully';
     }
 
