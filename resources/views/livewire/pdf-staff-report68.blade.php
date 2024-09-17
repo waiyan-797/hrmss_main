@@ -1,20 +1,11 @@
 <div class="w-full">
     <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">PDF Staff Report</h1>
+        <h1 class="text-white font-semibold italic font-arial">PDF Staff Report68</h1>
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $religion_types,
-                'modal' => 'modals/religion_modal',
-                'id' => $religion_type_id,
-                'title' => 'PDF Staff Report',
-                'search_id' => 'religion_type_search',
-                'columns' => ['No', 'Name', 'Action'],
-                'column_vals' => ['name'],
-            ]) --}}
-
-
+            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
             <div class="md:w-full p-4">
                 <h1 class="text-center font-semibold text-base">ကိုယ်ရေးမှတ်တမ်း</h1>
                 <img src="{{ $staff->staff_photo }}" alt="" class="w-20 h-20 float-right mr-28">
@@ -192,7 +183,7 @@
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း(ရရှိထားသောတက္ကသိုလ်/ဘွဲ့/ဒီပလိုမာ)</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->staff_educations }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->education_id }}</label>
 
                 </div>
             </div>
@@ -435,14 +426,7 @@
                     <h1 class="font-semibold text-base mb-2 text-center">မိဘဆွေမျိုးများ</h1>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center ml-9">
-                            <!-- <thead>
-                      <tr class="bg-gray-100">
-                        <th class="p-2 w-14 border border-black">၁။</th>
-                        <th class="p-2 w-100 border border-black">တပ်/ဌာန</th>
-                        <th class="w-6 border border-black">-</th>
-                        <th class="p-2 w-28 border border-black">မှ</th>
-                      </tr>
-                    </thead> -->
+                          
                             <tbody class="text-center h-8 p-2">
                                 <tr>
                                     <td class="p-2 w-14 border border-black">၁။</td>
@@ -1029,7 +1013,7 @@
                 <div class="flex justify-start mb-2">
                     <p class="md:w-1/3 ml-36">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</p>
                     <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5">၇/နတလ(နိုင်)၁၅၂၂၀၁</p>
+                    <p class="md:w-3/5">{{ $staff->nrc }}</p>
                 </div>
 
                 <div class="flex justify-start mb-2">

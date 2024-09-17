@@ -4,6 +4,8 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
+            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
             <div class="md:w-full p-4">
                 <h1 class="text-center text-black font-semibold text-base mb-4">ကိုယ်ရေးမှတ်တမ်း</h1>
                 <h2 class="text-center text-black font-semibold text-base">[နည်းဥပဒေ ၃၅ (ဇ) (၄)၊ ၄၇ (စ) (၄)]</h2>
@@ -24,7 +26,7 @@
                     <label for="" class="md:w-5">၃။ </label>
                     <label for="name" class="md:w-1/3">လူမျိုး/ ဘာသာ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->ethnic->name }}/{{ $staff->religion->name }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff?->ethnic?->name }}/{{ $staff->religion?->name }}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၄။ </label>
@@ -118,12 +120,12 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                @foreach ($staff->schools as $school)
+                                
                                     <tr>
-                                        <td class="border border-black p-2">{{$school->school_name}}</td>
-                                        <td class="border border-black p-2">{{$school->year}}</td>
+                                        <td class="border border-black p-2"></td>
+                                        <td class="border border-black p-2"></td>
                                     </tr>
-                                @endforeach
+                                    
                             </tbody>
                         </table>
                     </div>

@@ -21,11 +21,11 @@ return new class extends Migration
             $table->foreignIdFor(Staff::class)->nullable()->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Rank::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Post::class)->nullable()->constrained()->nullOnDelete();
-            $table->date('from_date');
-            $table->date('to_date');
+            $table->date('from_date')->nullable();
+            $table->date('to_date')->nullable();
             $table->foreignIdFor(Department::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Division::class)->nullable()->constrained()->nullOnDelete();
-            $table->string('location');
+            $table->string('location')->nullable();
             $table->string('remark')->nullable();
             $table->timestamps();
         });

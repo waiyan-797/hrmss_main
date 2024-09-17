@@ -4,15 +4,8 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $townships,
-                'modal' => 'modals/township_modal',
-                'id' => $township_id,
-                'title' => 'Report',
-                'search_id' => 'township_search',
-                'columns' => ['No', 'Name', 'District', 'Action'],
-                'column_vals' => ['name', 'district'],
-            ]) --}}
+            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
 
             <h1 class="font-bold text-center text-base mb-2">ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br> (၁-၄-၂၀၂၄) ရက်နေ့၏ ဝန်ထမ်းများစာရင်း</h1>
 

@@ -4,16 +4,9 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $religion_types,
-                'modal' => 'modals/religion_modal',
-                'id' => $religion_type_id,
-                'title' => 'PDF Staff Report',
-                'search_id' => 'religion_type_search',
-                'columns' => ['No', 'Name', 'Action'],
-                'column_vals' => ['name'],
-            ]) --}}
-
+            
+            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
 
             <div class="md:w-full p-4">
                 <h1 class="text-center font-semibold text-base">HR Software

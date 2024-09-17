@@ -4,6 +4,8 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4 font-arial">
+            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
             <div class="p-4 md:w-full">
                 <h1 class="text-center text-black font-semibold text-base">ကိုယ်ရေးမှတ်တမ်း</h1>
                 <img src="{{ $staff->staff_photo ? route('file', $staff->staff_photo) : asset('img/user.png') }}" alt="" class="w-20 h-20 float-right mr-28">
@@ -55,9 +57,9 @@
                     <label for="name" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">
                         @if($staff->spouses->count() > 1)
-                            {{ implode(', ', $staff->spouses->pluck('name')->toArray()) }}
+                            {{ implode(', ', $staff?->spouses->pluck('name')->toArray()) }}
                         @else
-                            {{ $staff->spouses->first()->name }}
+                            {{ $staff?->spouses->first()?->name }}
                         @endif
                     </label>
                 </div>
@@ -66,11 +68,11 @@
                     <label for="name" class="md:w-1/3">သား/သမီးအမည်</label>
                     <label for="name" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">
-                        @if($staff->children->count() > 1)
+                        {{-- @if($staff->children->count() > 1)
                             {{ implode(', ', $staff->children->pluck('name')->toArray()) }}
                         @else
-                            {{ $staff->children->first()->name }}
-                        @endif
+                            {{ $staff->children>first()?->name }}
+                        @endif --}}
                     </label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -175,7 +177,7 @@
                             @foreach ($staff->trainings->where('training_location_id', 1) as $training)
                                 <tr>
                                     <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
-                                    <td class="border border-black text-center p-2">{{$training->training_type->name}}</td>
+                                    <td class="border border-black text-center p-2"></td>
                                     <td class="border border-black text-center p-2">{{$training->from_date}}</td>
                                     <td class="border border-black text-center p-2">{{$training->to_date}}</td>
                                     <td class="border border-black text-center p-2">{{$training->location}}</td>
@@ -207,7 +209,7 @@
                             @foreach ($staff->trainings->where('training_location_id', 2) as $training)
                                 <tr>
                                     <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
-                                    <td class="border border-black text-center p-2">{{$training->training_type->name}}</td>
+                                    <td class="border border-black text-center p-2"></td>
                                     <td class="border border-black text-center p-2">{{$training->from_date}}</td>
                                     <td class="border border-black text-center p-2">{{$training->to_date}}</td>
                                     <td class="border border-black text-center p-2">{{$training->location}}</td>

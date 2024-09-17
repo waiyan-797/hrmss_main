@@ -20,6 +20,10 @@ class Division extends Model
         return $this->belongsTo(DivisionType::class);
     }
 
+    public function staff(){
+        return $this -> hasMany(Staff::class);
+    }
+
 
 
 }

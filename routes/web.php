@@ -56,9 +56,9 @@ use App\Livewire\StaffType\StaffType;
 use App\Livewire\TrainingLocation\TrainingLocation;
 use App\Livewire\Division;
 use App\Livewire\TrainingType;
-use App\Livewire\DivisionCrud;
 use App\Livewire\EmployeeRecordReport\EmpoyeeRecordReport;
 use App\Livewire\FTR\ForeignGoneTotal;
+use App\Livewire\InvestmentCompanies\InvestmentCompanies15;
 use App\Livewire\InvestmentCompanies\MarchSalaryList;
 use App\Livewire\InvestmentCompanies\OctoberSalaryList;
 use App\Livewire\InvestmentCompanies\PermanentStaff;
@@ -80,6 +80,7 @@ use App\Livewire\PdfStaffReport17;
 use App\Livewire\PdfStaffReport18;
 use App\Livewire\PdfStaffReport19;
 use App\Livewire\PdfStaffReport53;
+use App\Livewire\PdfStaffReport68;
 use App\Livewire\PdfStaffReport71;
 use App\Livewire\PensionFamily\PensionFamily;
 use App\Livewire\PensionList\PensionList;
@@ -99,6 +100,7 @@ use App\Livewire\Reports\OtherQualificationReport;
 use App\Livewire\Reports\PunishmentReport;
 use App\Livewire\Reports\SocialReport;
 use App\Livewire\Section\Section;
+use App\Livewire\StaffReport\StaffReport1;
 use App\Livewire\Table\Table;
 use App\Livewire\Township\Township;
 use App\Models\Staff as ModelsStaff;
@@ -149,11 +151,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('file')->where('path', '.*');
     Route::get('/local_training_report', LocalTrainingReport::class)->name('local_training_report');
     Route::get('/staff_report', ReportName::class)->name('staff_report');
+    Route::get('/staff_report1',StaffReport1::class)->name('staff_report1');
     Route::get('/staff_report2', StaffReport::class)->name('staff_report2');
     Route::get('/staff_report3', StaffReport3::class)->name('staff_report3');
     Route::get('/pension_list', PensionList::class)->name('pension_list');
     Route::get('/pension_family', PensionFamily::class)->name('pension_family');
-    Route::get('/pdf_staff_report/{staff_id?}', PdfStaffReport::class)->name('pdf_staff_report');
+    Route::get('/pdf_staff_report68/{staff_id?}', PdfStaffReport68::class)->name('pdf_staff_report68');
     Route::get('/pdf_staff_report18/{staff_id?}', PdfStaffReport18::class)->name('pdf_staff_report18');
     Route::get('/pdf_staff_report53/{staff_id?}', PdfStaffReport53::class)->name('pdf_staff_report53');
     Route::get('/pdf_staff_report15/{staff_id?}', PdfStaffReport15::class)->name('pdf_staff_report15');
@@ -175,6 +178,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/investment_companies12', InvestmentCompanies12::class)->name('investment_companies12');
     Route::get('/investment_companies13', InvestmentCompanies13::class)->name('investment_companies13');
     Route::get('/investment_companies14', InvestmentCompanies14::class)->name('investment_companies14');
+    Route::get('/investment_companies15', InvestmentCompanies15::class)->name('investment_companies15');
     Route::get('/march_salary_list', MarchSalaryList::class)->name('march_salary_list');
     Route::get('/october_salary_list', OctoberSalaryList::class)->name('october_salary_list');
     Route::get('/permanent_staff', PermanentStaff::class)->name('permanent_staff');
@@ -206,7 +210,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/report4', Report4::class)->name('report4');
     Route::get('/pension_report', PensionReport::class)->name('pension_report');
     Route::get('/employee_record_report', EmpoyeeRecordReport::class)->name('employee_record_report');
-    Route::get('finance_pension_age62', FinancePensionAge62::class)->name('finance_pension_age62');
+    Route::get('/finance_pension_age62', FinancePensionAge62::class)->name('finance_pension_age62');
     Route::get('/religion_report', ReligionReport::class)->name('religion_report');
     Route::get('/language_report', LanguageReport::class)->name('language_report');
     Route::get('/social_report', SocialReport::class)->name('social_report');
@@ -216,9 +220,29 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/other_qualification_report', OtherQualificationReport::class)->name('other_qualification_report');
     Route::get('/punishment_report', PunishmentReport::class)->name('punishment_report');
     Route::get('/rank_salary_list', RankSalaryList::class)->name('rank_salary_list');
+    Route::get('/pdf_17/{staff_id?}', function($staff_id){
+        $staff = ModelsStaff::find($staff_id);
+        return view('pdf_reports.staff_report_17', ['staff' => $staff]);
+    })->name('pdf');
     Route::get('/pdf_15/{staff_id?}', function($staff_id){
         $staff = ModelsStaff::find($staff_id);
         return view('pdf_reports.staff_report_15', ['staff' => $staff]);
+    })->name('pdf');
+    Route::get('/pdf_18/{staff_id?}', function($staff_id){
+        $staff = ModelsStaff::find($staff_id);
+        return view('pdf_reports.staff_report_18', ['staff' => $staff]);
+    })->name('pdf');
+    Route::get('/pdf_19/{staff_id?}', function($staff_id){
+        $staff = ModelsStaff::find($staff_id);
+        return view('pdf_reports.staff_report_19', ['staff' => $staff]);
+    })->name('pdf');
+    Route::get('/pdf_53/{staff_id?}', function($staff_id){
+        $staff = ModelsStaff::find($staff_id);
+        return view('pdf_reports.staff_report_53', ['staff' => $staff]);
+    })->name('pdf');
+    Route::get('/pdf_71/{staff_id?}', function($staff_id){
+        $staff = ModelsStaff::find($staff_id);
+        return view('pdf_reports.staff_report_71', ['staff' => $staff]);
     })->name('pdf');
 });
 

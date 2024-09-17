@@ -4,15 +4,9 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $townships,
-                'modal' => 'modals/township_modal',
-                'id' => $township_id,
-                'title' => 'Report',
-                'search_id' => 'township_search',
-                'columns' => ['No', 'Name', 'District', 'Action'],
-                'column_vals' => ['name', 'district'],
-            ]) --}}
+            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <br><br>
 
             <h1 class="text-center text-base font-bold">ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>(၂၄-၇-၂၀၂၄)ရက်နေ့ ညွှန်ကြားရေးမှူးများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း</h1>
 
@@ -37,16 +31,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($staffs as $key => $staff)
+                      
                             <tr>
-                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $key + 1 }}
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
                                 </td>
-                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->name }}
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
                                 </td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
-                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->nrc }}
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
                                 </td>
-                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->dob }}
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
                                 </td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
@@ -55,7 +49,7 @@
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
                             </tr>
-                        @endforeach
+                       
                     </tbody>
                 </table>
             </div>

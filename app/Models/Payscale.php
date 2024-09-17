@@ -17,4 +17,7 @@ class Payscale extends Model
     {
         return $this->hasMany(Rank::class);
     }
+    public function staff(){
+        return $this -> hasMany(Staff::class);
+    }
 }

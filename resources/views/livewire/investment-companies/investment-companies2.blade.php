@@ -4,16 +4,9 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $ethnic_types,
-                'modal' => 'modals/ethnic_modal',
-                'id' => $ethnic_type_id,
-                'title' => 'Ethnic',
-                'search_id' => 'ethnic_type_search',
-                'columns' => ['No', 'Name', 'Action'],
-                'column_vals' => ['name'],
-            ]) --}}
-
+            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <br><br>
 
             <div class="md:w-full mb-4">
                 <h1 class="font-semibold text-base mb-2">ဦးစီးဌာန ၊ ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
@@ -46,6 +39,10 @@
                                 <th rowspan="2" class="border border-black text-center p-2">စုစုပေါင်း</th>
                             </tr>
                             <tr>
+                                <th class="border border-black text-center p-2">ကျား</th>
+                                <th class="border border-black text-center p-2">မ</th>
+                                <th class="border border-black text-center p-2">ကျား</th>
+                                <th class="border border-black text-center p-2">မ</th>
                                 <th class="border border-black text-center p-2">ကျား</th>
                                 <th class="border border-black text-center p-2">မ</th>
                                 <th class="border border-black text-center p-2">ကျား</th>

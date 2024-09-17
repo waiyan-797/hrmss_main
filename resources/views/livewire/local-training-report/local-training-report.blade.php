@@ -4,15 +4,10 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $townships,
-                'modal' => 'modals/township_modal',
-                'id' => $township_id,
-                'title' => 'Report',
-                'search_id' => 'township_search',
-                'columns' => ['No', 'Name', 'District', 'Action'],
-                'column_vals' => ['name', 'district'],
-            ]) --}}
+            <x-primary-button type="button" wire:click="go_pdf({{$trainings->id}})">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word({{$trainings->id}})">WORD</x-primary-button>
+            <br><br>
+
             <div class="overflow-x-auto">
                 <table class="min-w-full border border-gray-300 border-collapse table-auto">
                     <thead>
@@ -28,19 +23,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($trainings as $key=>$training )
+                       
                         <tr>
-                            <td>{{ $key + 1 }}</td>
                             <td></td>
-                            <td>{{ $training->name }}</td>
                             <td></td>
-                            <td>{{ $training->name }}</td>
-                            <td>{{ $training->from_date }}</td>
-                            <td>{{ $training->to_date }}</td>
-                            <td>{{ $training->location }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                         </tr>
-                        @endforeach
+                        
                     </tbody>
                 </table>
             </div>
