@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignIdFor(Rank::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Department::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Section::class)->nullable()->constrained()->nullOnDelete();
+            $table->text('address')->nullable();
             $table->date('from_date')->nullable();
             $table->date('to_date')->nullable();
             $table->text('remark')->nullable();

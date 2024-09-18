@@ -43,7 +43,7 @@
                     <label for="" class="md:w-5">၆။ </label>
                     <label for="name" class="md:w-1/3">အမှုထမ်းသက်(ဝင်ရောက်သည့်နေ့စွဲ)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{formatPeriodMM(\Carbon\Carbon::parse($staff->join_date)->year, \Carbon\Carbon::parse($staff->join_date)->month, \Carbon\Carbon::parse($staff->join_date)->day)}}</label>
+                    <label for="name" class="md:w-3/5">{{en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၇။ </label>
@@ -118,8 +118,8 @@
                                 <th rowspan="2" class="border border-black text-center p-2">
                                     နောက်ဆုံးသွားရောက်ခဲ့သည့်(၅)နှိင်ငံ</th>
                                 <th rowspan="2" class="border border-black text-center p-2">သွားရောက်သည့်ကိစ္စ</th>
-                                <th rowspan="2" class="border border-black text-center p-2">
-                                    Meet With</th>
+                                <th rowspan="2" class="border border-black text-center p-2">သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်</th>
+                                <th rowspan="2" class="border border-black text-center p-2">မည်သည့်အစိုးရအဖွဲ့အစည်းအထောက်အပံ့ဖြင့်သွားရောက်သည်</th>
                             </tr>
                             <tr>
                                 <th class="border border-black text-center p-2">မှ</th>
@@ -134,7 +134,8 @@
                                     <td class="border border-black text-center p-2">{{$abroad->to_date}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->particular}}</td>
-                                    <td class="border border-black text-center p-2">{{$abroad->meet_with}}</td>
+                                    <td class="border border-black text-center p-2">{{$abroad->training_success_count}}</td>
+                                    <td class="border border-black text-center p-2">{{$abroad->sponser}}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -154,6 +155,7 @@
                                     <th class="p-2 border border-black">လူမျိုး/နိုင်ငံသား</th>
                                     <th class="p-2 border border-black">အလုပ်အကိုင်နှင့်ဌာန</th>
                                     <th class="p-2 border border-black">နေရပ်</th>
+                                    <th class="p-2 border border-black">မှတ်ချက်</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">
@@ -163,6 +165,7 @@
                                         <td class="border border-black p-2">{{$spouse->ethnic->name .'/'. $spouse->religion->name}}</td>
                                         <td class="border border-black p-2">{{$spouse->occupation}}</td>
                                         <td class="border border-black p-2">{{$spouse->address}}</td>
+                                        <td class="border border-black p-2">{{$spouse->remark ?? '-'}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -187,13 +190,13 @@
                     <div class="flex justify-center mb-2 items-center">
                         <p class="md:w-20 mr-6">အမည်</p>
                         <p>-</p>
-                        <p>{{auth()->user()->name}}</p>
+                        <p></p>
                     </div>
 
                     <div class="flex justify-center mb-2 items-center">
                         <p class="md:w-20 mr-6">အဆင့်</p>
                         <p>-</p>
-                        <p>{{auth()->user()->role->name ?? ''}}</p>
+                        <p></p>
                     </div>
 
                     <div class="flex justify-center mb-2 items-center">

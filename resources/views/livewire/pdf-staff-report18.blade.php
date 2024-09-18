@@ -25,7 +25,7 @@
                     <label for="name" class="md:w-5">၃။ </label>
                     <label for="name" class="md:w-1/3">မွေးနေ့ (ရက်၊ လ၊ နှစ်)</label>
                     <label for="name" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->dob }}</label>
+                    <label for="name" class="md:w-3/5">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="name" class="md:w-5">၄။ </label>
@@ -68,11 +68,11 @@
                     <label for="name" class="md:w-1/3">သား/သမီးအမည်</label>
                     <label for="name" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">
-                        {{-- @if($staff->children->count() > 1)
+                        @if($staff->children->count() > 1)
                             {{ implode(', ', $staff->children->pluck('name')->toArray()) }}
                         @else
-                            {{ $staff->children>first()?->name }}
-                        @endif --}}
+                            {{ $staff->children->first()?->name }}
+                        @endif
                     </label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -133,7 +133,7 @@
                             <tr>
                                 <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
                                 <th rowspan="2" class="border border-black text-center p-2">ရာထူး/ဌာန</th>
-                                <th colspan="2" class="border border-black text-center p-2">တက်ရောက်သည့်ကာလ</th>
+                                <th colspan="2" class="border border-black text-center p-2">တာ၀န်ထမ်းဆောင်သည့်ကာလ</th>
                                 <th rowspan="2" class="border border-black text-center p-2">နေရာ/ဒေသ</th>
                             </tr>
                             <tr>
@@ -148,7 +148,7 @@
                                     <td class="border border-black text-center p-2">{{$occupation->rank->name}}</td>
                                     <td class="border border-black text-center p-2">{{$occupation->from_date}}</td>
                                     <td class="border border-black text-center p-2">{{$occupation->to_date}}</td>
-                                    <td class="border border-black text-center p-2">{{$occupation->department->name.'/'.$occupation->section->name}}</td>
+                                    <td class="border border-black text-center p-2">{{$occupation->address}}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -177,7 +177,7 @@
                             @foreach ($staff->trainings->where('training_location_id', 1) as $training)
                                 <tr>
                                     <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
-                                    <td class="border border-black text-center p-2"></td>
+                                    <td class="border border-black text-center p-2">{{$training->training_type->name}}</td>
                                     <td class="border border-black text-center p-2">{{$training->from_date}}</td>
                                     <td class="border border-black text-center p-2">{{$training->to_date}}</td>
                                     <td class="border border-black text-center p-2">{{$training->location}}</td>
@@ -209,7 +209,7 @@
                             @foreach ($staff->trainings->where('training_location_id', 2) as $training)
                                 <tr>
                                     <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
-                                    <td class="border border-black text-center p-2"></td>
+                                    <td class="border border-black text-center p-2">{{$training->training_type->name}}</td>
                                     <td class="border border-black text-center p-2">{{$training->from_date}}</td>
                                     <td class="border border-black text-center p-2">{{$training->to_date}}</td>
                                     <td class="border border-black text-center p-2">{{$training->location}}</td>
@@ -295,14 +295,14 @@
                     <p class="md:w-1/3 ml-36">အမည်</p>
                     <p class="md:w-5">၊</p>
                     <p class="md:w-3/5">
-                        {{auth()->user()->name}}
+
                     </p>
                 </div>
 
                 <div class="flex justify-start mb-2">
                     <p class="md:w-1/3 ml-36">ရာထူး</p>
                     <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5">{{auth()->user()->role->name ?? ''}}</p>
+                    <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start mb-2">
@@ -314,7 +314,7 @@
                 <div class="flex justify-start mb-4">
                     <p class="md:w-1/3 ml-36">အီး‌မေးလ်</p>
                     <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5">{{auth()->user()->email}}</p>
+                    <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start space-x-1">

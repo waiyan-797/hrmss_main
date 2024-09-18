@@ -46,11 +46,6 @@
             background-color: #f2f2f2;
         }
 
-
-
-
-
-
         .container {
             width: 100%;
         }
@@ -126,7 +121,7 @@
                                     <td style="border: none;">မွေးနေ့ (ရက်၊ လ၊ နှစ်)
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->dob }}</td>
+                                    <td style="border: none;">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၄။</td>
@@ -174,11 +169,13 @@
                                     <td style="border: none;">သား/သမီးအမည်
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">@if($staff->children->count() > 1)
-                                        {{ implode(', ', $staff->children->pluck('name')->toArray()) }}
-                                    @else
-                                        {{ $staff->children->first()?->name }}
-                                    @endif</td>
+                                    <td style="border: none;">
+                                        @if($staff->children->count() > 1)
+                                            {{ implode(', ', $staff->children->pluck('name')->toArray()) }}
+                                        @else
+                                            {{ $staff->children->first()?->name }}
+                                        @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၁၀။</td>
@@ -229,13 +226,13 @@
                                         <td style="border: none;">-</td>
                                         <td style="border: none;">{{ $staff->blood_type->name ?? '' }}</td>
                                     </tr>
-                                   
-                
+
+
                                 </tbody>
                             </table>
                         </div>
-                        
-                            <div class="section"> 
+
+                            <div class="section">
                                 <div class="section-header">
                                     <label for="">၁၄။ </label>
                                     <h1>နိုင်ငံ့ဝန်ထမ်းတာဝန်ထမ်းဆောင်မှုမှတ်တမ်း (စစ်ဘက်/နယ်ဘက်)</h1>
@@ -245,7 +242,7 @@
                                         <tr>
                                             <th rowspan="2">စဉ်</th>
                                             <th rowspan="2">ရာထူး/ဌာန</th>
-                                            <th colspan="2">တက်ရောက်သည့်ကာလ</th>
+                                            <th colspan="2">တာ၀န်ထမ်းဆောင်သည့်ကာလ</th>
                                             <th rowspan="2">နေရာ/ဒေသ</th>
                                         </tr>
                                         <tr>
@@ -260,14 +257,14 @@
                                                 <td>{{$occupation->rank->name}}</td>
                                                 <td>{{$occupation->from_date}}</td>
                                                 <td>{{$occupation->to_date}}</td>
-                                                <td>{{$occupation->department->name.'/'.$occupation->section->name}}</td>
+                                                <td>{{$occupation->address}}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                             </div> 
-                    
-                             <div class="section"> 
+                             </div>
+
+                             <div class="section">
                                 <div class="section-header">
                                     <label for="">၁၅။ </label>
                                     <h1>ပြည်တွင်းသင်တန်းများ တက်ရောက်မှု</h1>
@@ -289,7 +286,7 @@
                                         @foreach ($staff->trainings->where('training_location_id', 1) as $training)
                                             <tr>
                                                 <td>{{$loop->index + 1}}</td>
-                                                <td></td>
+                                                <td>{{$training->training_type->name}}</td>
                                                 <td>{{$training->from_date}}</td>
                                                 <td>{{$training->to_date}}</td>
                                                 <td>{{$training->location}}</td>
@@ -298,7 +295,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                    
+
                             <div class="section">
                                 <div class="section-header">
                                     <label for="">၁၆။ </label>
@@ -321,7 +318,7 @@
                                         @foreach ($staff->trainings->where('training_location_id', 2) as $training)
                                             <tr>
                                                 <td>{{$loop->index + 1}}</td>
-                                                <td></td>
+                                                <td>{{$training->training_type->name}}</td>
                                                 <td>{{$training->from_date}}</td>
                                                 <td>{{$training->to_date}}</td>
                                                 <td>{{$training->location}}</td>
@@ -330,7 +327,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                    
+
                             <div class="section">
                                 <div class="section-header">
                                     <label for="">၁၇။ </label>
@@ -362,7 +359,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                    
+
                             <div class="section">
                                 <div class="section-header">
                                     <label for="">၁၈။ </label>
@@ -389,8 +386,8 @@
                                     </table>
                                 </div>
                             </div>
-                         </div> 
-                    
+                         </div>
+
 
 
                         <div style="margin-bottom: 16px; font-size: 13px;">
@@ -413,25 +410,16 @@
                                                 <td style="font-size: 13px; border: none;">လက်မှတ် -</td>
                                             </tr>
                                             <tr>
-                                                <td style="font-size: 13px; border: none;">အမည် - {{ auth()->user()->name }}</td>
+                                                <td style="font-size: 13px; border: none;">အမည် - </td>
                                             </tr>
                                             <tr>
-                                                <td style="font-size: 13px; border: none;">ရာထူး
-
-                                                    - {{ auth()->user()->role->name ?? '' }}</td>
+                                                <td style="font-size: 13px; border: none;">ရာထူး - </td>
                                             </tr>
                                             <tr>
-                                                <td style="font-size: 13px; border: none;">ဖုန်းနံပါတ်(ရုံး/လက်ကိုင်ဖုန်း)
-
-                                                    -</td>
+                                                <td style="font-size: 13px; border: none;">ဖုန်းနံပါတ်(ရုံး/လက်ကိုင်ဖုန်း) - </td>
                                             </tr>
-
                                             <tr>
-                                                <td style="font-size: 13px; border: none;">အီး‌မေးလ်
-
-
-
-                                                    -</td>
+                                                <td style="font-size: 13px; border: none;">အီး‌မေးလ် -</td>
                                             </tr>
                                         </table>
                                     </td>

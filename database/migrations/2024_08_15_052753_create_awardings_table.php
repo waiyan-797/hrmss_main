@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignIdFor(Award::class)->nullable()->constrained()->nullOnDelete();
             $table->string('order_no');
             $table->date('order_date');
+            $table->text('remark')->nullable();
             $table->timestamps();
         });
     }

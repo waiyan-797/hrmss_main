@@ -18,9 +18,15 @@ return new class extends Migration
             $table->foreignIdFor(Staff::class)->nullable()->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Country::class)->nullable()->constrained()->nullOnDelete();
             $table->string('particular');
-            $table->string('meet_with');
-            $table->date('from_date');
-            $table->date('to_date');
+            $table->boolean('training_success_fail')->nullable()->default(null);
+            $table->boolean('training_success_count')->nullable();
+            $table->string('sponser')->nullable();
+            $table->string('meet_with')->nullable();
+            $table->date('from_date')->nullable();
+            $table->date('to_date')->nullable();
+            $table->integer('status');
+            $table->date('actual_abroad_date')->nullable();
+            $table->string('position')->nullable();
             $table->timestamps();
         });
     }

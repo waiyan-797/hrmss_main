@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('occupation');
             $table->string('address');
             $table->foreignIdFor(Relation::class)->nullable()->constrained()->nullOnDelete();
+            $table->text('remark')->nullable();
             $table->timestamps();
         });
     }

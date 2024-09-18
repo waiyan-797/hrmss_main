@@ -118,4 +118,8 @@ class Staff extends Model
     public function schools(){
         return $this->hasMany(School::class);
     }
+
+    public function staff_languages(){
+        return $this->hasMany(StaffLanguage::class);
+    }
 }

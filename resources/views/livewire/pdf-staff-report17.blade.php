@@ -19,7 +19,7 @@
                     <label for="" class="md:w-5">၂။ </label>
                     <label for="name" class="md:w-1/3">အသက်(မွေးသက္ကရာဇ်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->dob }}</label>
+                    <label for="name" class="md:w-3/5">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၃။ </label>
@@ -43,7 +43,11 @@
                     <label for="" class="md:w-5">၆။ </label>
                     <label for="name" class="md:w-1/3">အမှုထမ်းလုပ်သက်၊ ဝင်ရောက်သည့်ရက်စွဲ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{$staff->current_rank_date .', '. $staff->join_date}}</label>
+                    @php
+                        $join_date = Carbon\Carbon::parse($staff->join_date);
+                        $join_date_duration = $join_date->diff(Carbon\Carbon::now());
+                    @endphp
+                    <label for="name" class="md:w-3/5">{{formatPeriodMM($join_date_duration->y, $join_date_duration->m, $join_date_duration->d).', '. en2mm(Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၇။ </label>
@@ -154,6 +158,7 @@
                                 <tr class="bg-gray-100">
                                     <th class="p-2 border border-black">အမည်(အခြားအမည်များရှိလျှင်လည်း ဖော်ပြရန်)</th>
                                     <th class="p-2 border border-black">လူမျိုး/နိုင်ငံသား</th>
+                                    <th class="p-2 border border-black">ဇာတိ</th>
                                     <th class="p-2 border border-black">အလုပ်အကိုင်နှင့်ဌာန</th>
                                     <th class="p-2 border border-black">နေရပ်</th>
                                 </tr>
@@ -163,6 +168,7 @@
                                     <tr>
                                         <td class="border border-black p-2">{{$spouse->name}}</td>
                                         <td class="border border-black p-2">{{$spouse->ethnic->name .'/'. $spouse->religion->name}}</td>
+                                        <td class="border border-black p-2">{{$spouse->place_of_birth}}</td>
                                         <td class="border border-black p-2">{{$spouse->occupation}}</td>
                                         <td class="border border-black p-2">{{$spouse->address}}</td>
                                     </tr>
@@ -170,6 +176,44 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+
+                <div class="md:w-full mb-4">
+                    <div class="mb-2 flex justify-start space-x-3">
+                        <label>၁၅။ </label>
+                        <h2 class="font-semibold text-base">နိုင်ငံခြားသွားရောက်မည့်ကိစ္စ</h2>
+                    </div>
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
+                                <th rowspan="2" class="border border-black text-center p-2">သွားရောက်သည့်ကိစ္စ</th>
+                                <th rowspan="2" class="border border-black text-center p-2">စေလွှတ်သည့်နှိင်ငံ</th>
+                                <th colspan="2" class="border border-black text-center p-2">အချိန်ကာလ</th>
+                                <th rowspan="2" class="border border-black text-center p-2">နိုင်ငံခြားသို့သွားရောက်မည့်နေ့</th>
+                                <th rowspan="2" class="border border-black text-center p-2">ထောက်ပံ့သည့်အဖွဲ့အစည်း</th>
+                                <th rowspan="2" class="border border-black text-center p-2">ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး</th>
+                            </tr>
+                            <tr>
+                                <th class="border border-black text-center p-2">မှ</th>
+                                <th class="border border-black text-center p-2">ထိ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($staff->abroads as $abroad)
+                                <tr>
+                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
+                                    <td class="border border-black text-center p-2">{{$abroad->particular}}</td>
+                                    <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
+                                    <td class="border border-black text-center p-2">{{$abroad->from_date}}</td>
+                                    <td class="border border-black text-center p-2">{{$abroad->to_date}}</td>
+                                    <td class="border border-black text-center p-2">{{$abroad->actual_abroad_date}}</td>
+                                    <td class="border border-black text-center p-2">{{$abroad->sponser}}</td>
+                                    <td class="border border-black text-center p-2">{{$abroad->position}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="mb-4">

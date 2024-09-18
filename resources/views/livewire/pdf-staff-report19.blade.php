@@ -44,7 +44,7 @@
                     <label for="" class="md:w-5">၆။ </label>
                     <label for="name" class="md:w-1/3">မွေးဖွားသည့် ရက်၊ လ၊ ခုနှစ်</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->dob }}</label>
+                    <label for="name" class="md:w-3/5">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</label>
                 </div>
 
 
@@ -99,33 +99,53 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="flex justify-between w-full mb-4">
-                    <label for="" class="md:w-5">၁၂။ </label>
-                    <label for="name" class="md:w-1/3">တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်</label>
-                    <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                <div class="w-full mb-4">
+                    <div class="flex justify-start mb-2 space-x-3">
+                        <label for="">၁၂။ </label>
+                        <h1 class="font-semibold text-base">တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်</h1>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">ဘာသာစကား</th>
+                                    <th class="p-2 border border-black">တတ်ကျွမ်းသည့်အဆင့်</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                @foreach ($staff->staff_languages as $lang)
+                                    <tr>
+                                        <td class="border border-black p-2">{{$lang->language}}</td>
+                                        <td class="border border-black p-2">{{$lang->rank}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">
                         <label for="">၁၃။ </label>
-                        <h1 class="font-semibold text-base">တတ်ရောက်ခဲ့သည့်သင်တန်းများ</h1>
+                        <h1 class="font-semibold text-base">တက်ရောက်ခဲ့သည့်သင်တန်းများ</h1>
                     </div>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center">
                             <thead>
                                 <tr class="bg-gray-100">
                                     <th class="p-2 border border-black">ကျောင်း/တက္ကသိုလ်/သင်တန်း</th>
-                                    <th class="p-2 border border-black">မှ-ထိ</th>
+                                    <th class="p-2 border border-black">မှ</th>
+                                    <th class="p-2 border border-black">ထိ</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                
+                                @foreach ($staff->trainings as $training)
                                     <tr>
-                                        <td class="border border-black p-2"></td>
-                                        <td class="border border-black p-2"></td>
+                                        <td class="border border-black p-2">{{$training->training_type->name}}</td>
+                                        <td class="border border-black p-2">{{$training->from_date}}</td>
+                                        <td class="border border-black p-2">{{$training->to_date}}</td>
                                     </tr>
-                                    
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -150,8 +170,8 @@
                             <tbody class="text-center">
                                 @foreach ($staff->past_occupations as $occupation)
                                     <tr>
-                                        <td class="border border-black p-2">{{$loop->index + 1}}</td>
                                         <td class="border border-black p-2">{{$occupation->rank->name}}</td>
+                                        <td class="border border-black p-2">{{$occupation->department->name}}</td>
                                         <td class="border border-black p-2">{{$occupation->from_date}}</td>
                                         <td class="border border-black p-2">{{$occupation->to_date}}</td>
                                         <td class="border border-black p-2">{{$occupation->remark}}</td>
@@ -204,6 +224,7 @@
                                     <th class="p-2 border border-black">စဥ်</th>
                                     <th class="p-2 border border-black">ဆုတံဆိပ်အမျိုးအစား</th>
                                     <th class="p-2 border border-black">ရက်၊ လ၊ နှစ်</th>
+                                    <th class="p-2 border border-black">မှတ်ချက်</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
@@ -212,6 +233,7 @@
                                         <td class="border border-black p-2">{{$loop->index + 1}}</td>
                                         <td class="border border-black p-2">{{$awarding->award_type->name .'/'. $awarding->award->name}}</td>
                                         <td class="border border-black p-2">{{$awarding->order_date}}</td>
+                                        <td class="border border-black p-2">{{$awarding->remark}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

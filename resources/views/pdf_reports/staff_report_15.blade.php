@@ -101,7 +101,7 @@
                                     <td style="border: none;">၆။</td>
                                     <td style="border: none;">အမှုထမ်းသက်(ဝင်ရောက်သည့်နေ့စွဲ)</td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{formatPeriodMM(\Carbon\Carbon::parse($staff->join_date)->year, \Carbon\Carbon::parse($staff->join_date)->month, \Carbon\Carbon::parse($staff->join_date)->day)}}</td>
+                                    <td style="border: none;">{{en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၇။</td>
@@ -112,7 +112,18 @@
                             </tbody>
                         </table>
                         <div style="margin-top: 16px;">
-                            <label for="">၈။ ပညာအရည်အချင်း</label>
+                            <table style="border: none;">
+                                <tbody style="border: none;">
+                                    <tr style="border: none;">
+                                        <td style="border: none; width: 5%;">၈။</td>
+                                        <td style="border: none; width: 35%;">ပညာအရည်အချင်း</td>
+                                        <td style="border: none; width: 5%;"></td>
+                                        <td style="border: none; width: 55%;"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="margin-top: 16px;">
                             <table>
                                 <thead>
                                     <tr>
@@ -178,7 +189,8 @@
                                         <th colspan="2">ကာလ</th>
                                         <th rowspan="2">နောက်ဆုံးသွားရောက်ခဲ့သည့်(၅)နှိင်ငံ</th>
                                         <th rowspan="2">သွားရောက်သည့်ကိစ္စ</th>
-                                        <th rowspan="2">Meet With</th>
+                                        <th rowspan="2">သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်</th>
+                                        <th rowspan="2">မည်သည့်အစိုးရအဖွဲ့အစည်းအထောက်အပံ့ဖြင့်သွားရောက်သည်</th>
                                     </tr>
                                     <tr>
                                         <th>မှ</th>
@@ -187,17 +199,56 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($staff->abroads as $abroad)
-                                    <tr>
-                                        <td style="text-align: center;">{{$loop->index + 1}}</td>
-                                        <td style="text-align: center;">{{$abroad->from_date}}</td>
-                                        <td style="text-align: center;">{{$abroad->to_date}}</td>
-                                        <td>{{$abroad->last_five_countries}}</td>
-                                        <td>{{$abroad->purpose}}</td>
-                                        <td>{{$abroad->meet_with}}</td>
-                                    </tr>
+                                        <tr>
+                                            <td style="text-align: center;">{{$loop->index + 1}}</td>
+                                            <td style="text-align: center;">{{$abroad->from_date}}</td>
+                                            <td style="text-align: center;">{{$abroad->to_date}}</td>
+                                            <td>{{$abroad->country->name}}</td>
+                                            <td>{{$abroad->particular}}</td>
+                                            <td>{{$abroad->training_success_count}}</td>
+                                            <td>{{$abroad->sponser}}</td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                        <div style="margin-top: 16px;">
+                            <table style="border: none;">
+                                <tbody style="border: none;">
+                                    <tr style="border: none;">
+                                        <td style="border: none; width: 5%;">၁၄။</td>
+                                        <td style="border: none; width: 35%;">ဇနီး/ခင်ပွန်း</td>
+                                        <td style="border: none; width: 5%;"></td>
+                                        <td style="border: none; width: 55%;"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="margin-top: 16px;">
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>အမည်(အခြားအမည်များရှိလျှင်လည်း ဖော်ပြရန်)</th>
+                                            <th>လူမျိုး/နိုင်ငံသား</th>
+                                            <th>အလုပ်အကိုင်နှင့်ဌာန</th>
+                                            <th>နေရပ်</th>
+                                            <th>မှတ်ချက်</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($staff->spouses as $spouse)
+                                            <tr>
+                                                <td>{{$spouse->name}}</td>
+                                                <td>{{$spouse->ethnic->name .'/'. $spouse->religion->name}}</td>
+                                                <td>{{$spouse->occupation}}</td>
+                                                <td>{{$spouse->address}}</td>
+                                                <td>{{$spouse->remark}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div style="margin-bottom: 16px; font-size: 13px;">
                             <table width="100%" style="margin-bottom: 16px; border: none;">
@@ -218,10 +269,10 @@
                                                 <td style="font-size: 13px; border: none;">လက်မှတ် -</td>
                                             </tr>
                                             <tr>
-                                                <td style="font-size: 13px; border: none;">အမည် - {{ auth()->user()->name }}</td>
+                                                <td style="font-size: 13px; border: none;">အမည် -</td>
                                             </tr>
                                             <tr>
-                                                <td style="font-size: 13px; border: none;">အဆင့် - {{ auth()->user()->role->name ?? '' }}</td>
+                                                <td style="font-size: 13px; border: none;">အဆင့် -</td>
                                             </tr>
                                             <tr>
                                                 <td style="font-size: 13px; border: none;">တပ်/ ဌာန -</td>

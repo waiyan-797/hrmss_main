@@ -167,82 +167,77 @@
                         <table style="border: none;">
                             <tbody>
                                 <tr>
-                                    <td style="border: none; width: 5%;">၁</td>
+                                    <td style="border: none; width: 5%;">၁။</td>
                                     <td style="border: none; width: 35%;">အမည်</td>
                                     <td style="border: none; width: 5%;">-</td>
                                     <td style="border: none; width: 55%;">{{ $staff->name }}</td>
                                 </tr>
                                 <tr>
-                                    <td style="border: none;">၂</td>
-                                    <td style="border: none;">နိုင်ငံသားစိစစ်ရေးအမှတ်</td>
-                                    <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</td>
+                                    <td style="border: none; width: 5%;">၂။</td>
+                                    <td style="border: none; width: 35%;">နိုင်ငံသားစိစစ်ရေးအမှတ်</td>
+                                    <td style="border: none; width: 5%;">-</td>
+                                    <td style="border: none; width: 55%;">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</td>
                                 </tr>
                                 <tr>
-                                    <td style="border: none; width: 5%;">၃</td>
-                                    <td style="border: none; width: 35%;">လူမျိုး/ ဘာသာ
-
-                                    </td>
+                                    <td style="border: none; width: 5%;">၃။</td>
+                                    <td style="border: none; width: 35%;">လူမျိုး/ ဘာသာ</td>
                                     <td style="border: none; width: 5%;">-</td>
                                     <td style="border: none; width: 55%;">{{ $staff?->ethnic?->name }}/{{ $staff->religion?->name }}</td>
                                 </tr>
                                 <tr>
-                                    <td style="border: none;">၄</td>
-                                    <td style="border: none;">မွေးဖွားရာအရပ်
+                                    <td style="border: none; width: 5%;">၄။</td>
+                                    <td style="border: none; width: 35%;">မွေးဖွားရာအရပ်
 
                                     </td>
-                                    <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->place_of_birth }}</td>
-                                </tr>
-                               
-                                <tr>
-                                    <td style="border: none;">၅</td>
-                                    <td style="border: none;">အဘအမည်
-
-                                    </td>
-                                    <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->father_name }}</td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none;">၆</td>
-                                    <td style="border: none;">မွေးဖွားသည့် ရက်၊ လ၊ ခုနှစ်
-
-
-                                    </td>
-                                    <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->dob }}</td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none;">၇</td>
-                                    <td style="border: none;">ကိုယ်တွင်ထင်ရှားသည့် အမှတ်အသား
-                                    </td>
-                                    <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->prominent_mark }}</td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none;">၈</td>
-                                    <td style="border: none;">လက်ရှိရာထူး
-
-                                    </td>
-                                    <td style="border: none;">-</td>
-                                    <td style="border: none;">{{$staff->current_rank->name}}</td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none;">၉</td>
-                                    <td style="border: none;">လက်ရှိနေရပ်လိပ်စာ
-
-                                    </td>
-                                    <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}</td>
+                                    <td style="border: none; width: 5%;">-</td>
+                                    <td style="border: none; width: 55%;">{{ $staff->place_of_birth }}</td>
                                 </tr>
 
                                 <tr>
-                                    <td style="border: none;">၁၀</td>
-                                    <td style="border: none;">အမြဲတမ်းနေရပ်လိပ်စာ
+                                    <td style="border: none; width: 5%;">၅။</td>
+                                    <td style="border: none; width: 35%;">အဘအမည်
 
                                     </td>
-                                    <td style="border: none;">-</td>
-                                    <td style="border: none;">
+                                    <td style="border: none; width: 5%;">-</td>
+                                    <td style="border: none; width: 55%;">{{ $staff->father_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none; width: 5%;">၆။</td>
+                                    <td style="border: none; width: 35%;">မွေးဖွားသည့် ရက်၊ လ၊ ခုနှစ်</td>
+                                    <td style="border: none; width: 5%;">-</td>
+                                    <td style="border: none; width: 55%;">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none; width: 5%;">၇။</td>
+                                    <td style="border: none; width: 35%;">ကိုယ်တွင်ထင်ရှားသည့် အမှတ်အသား
+                                    </td>
+                                    <td style="border: none; width: 5%;">-</td>
+                                    <td style="border: none; width: 55%;">{{ $staff->prominent_mark }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none; width: 5%;">၈။</td>
+                                    <td style="border: none; width: 35%;">လက်ရှိရာထူး
+
+                                    </td>
+                                    <td style="border: none; width: 5%;">-</td>
+                                    <td style="border: none; width: 55%;">{{$staff->current_rank->name}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none; width: 5%;">၉။</td>
+                                    <td style="border: none; width: 35%;">လက်ရှိနေရပ်လိပ်စာ
+
+                                    </td>
+                                    <td style="border: none; width: 5%;">-</td>
+                                    <td style="border: none; width: 55%;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border: none; width: 5%;">၁၀။</td>
+                                    <td style="border: none; width: 35%;">အမြဲတမ်းနေရပ်လိပ်စာ
+
+                                    </td>
+                                    <td style="border: none; width: 5%;">-</td>
+                                    <td style="border: none; width: 55%;">
                                         {{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_district->name.'/'.$staff->permanent_address_township_or_town->name }}
                                     </td>
                                 </tr>
@@ -250,7 +245,7 @@
                             </tbody>
                         </table>
                         <div style="margin-top: 16px;">
-                            <label for="">၁၁ ပညာအရည်အချင်း</label>
+                            <label for="">၁၁။ ပညာအရည်အချင်း</label>
                             <table>
                                 <thead>
                                     <tr>
@@ -272,57 +267,59 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div style="margin-top: 16px;">
-                            <table style="border: none;">
-                                <tbody style="border: none;">
-                                    <tr style="border: none;">
-                                        <td style="border: none; width: 5%;">၁၂</td>
-                                        <td style="border: none; width: 35%;">တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်
-
-                                        </td>
-                                        <td style="border: none; width: 5%;">-</td>
-                                        <td style="border: none; width: 55%;"></td>
+                    <div class="container">
+                        <div class="section-header">
+                            <label for="">၁၂။ တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်</label>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ဘာသာစကား</th>
+                                        <th>တတ်ကျွမ်းသည့်အဆင့်</th>
                                     </tr>
-                                  
-                                   
-                
+                                </thead>
+                                <tbody>
+                                    @foreach ($staff->staff_languages as $lang)
+                                        <tr>
+                                            <td>{{$lang->language}}</td>
+                                            <td>{{$lang->rank}}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
-                        
-                          
+                    </div>
 
-
-
-                     <div class="container">
+                    <div class="container">
                         <div class="section-header">
-                            <label for="">၁၃</label>
-                            <h1>တတ်ရောက်ခဲ့သည့်သင်တန်းများ</h1>
+                            <label for="">၁၃။ တက်ရောက်ခဲ့သည့်သင်တန်းများ</label>
                         </div>
                         <div class="table-container">
                             <table>
                                 <thead>
                                     <tr>
                                         <th>ကျောင်း/တက္ကသိုလ်/သင်တန်း</th>
-                                        <th>မှ-ထိ</th>
+                                        <th>မှ</th>
+                                        <th>ထိ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    
+                                    @foreach ($staff->trainings as $training)
+                                        <tr>
+                                            <td>{{$training->training_type->name}}</td>
+                                            <td>{{$training->from_date}}</td>
+                                            <td>{{$training->to_date}}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    
+
                     <div class="container">
                         <div class="section-header">
-                            <label for="">၁၄</label>
-                            <h1>ထမ်းဆောင်ခဲ့သောတာဝန်များ</h1>
+                            <label for="">၁၄။ ထမ်းဆောင်ခဲ့သောတာဝန်များ</label>
                         </div>
                         <div class="table-container">
                             <table>
@@ -338,8 +335,8 @@
                                 <tbody>
                                     @foreach ($staff->past_occupations as $occupation)
                                     <tr>
-                                        <td>{{$loop->index + 1}}</td>
                                         <td>{{$occupation->rank->name}}</td>
+                                        <td>{{$occupation->department->name}}</td>
                                         <td>{{$occupation->from_date}}</td>
                                         <td>{{$occupation->to_date}}</td>
                                         <td>{{$occupation->remark}}</td>
@@ -349,11 +346,10 @@
                             </table>
                         </div>
                     </div>
-                    
+
                     <div class="container">
                         <div class="section-header">
-                            <label for="">၁၅</label>
-                            <h1>ပါဝင်ဆောင်ရွက်ဆဲနှင့် ဆောင်ရွက်ခဲ့သည် လူမှုရေးနှင့် အစိုးရမဟုတ်သော အဖွဲ့အစည်းများ၏ အမည်နှင့်တာဝန်များ</h1>
+                            <label for="">၁၅။ ပါဝင်ဆောင်ရွက်ဆဲနှင့် ဆောင်ရွက်ခဲ့သည် လူမှုရေးနှင့် အစိုးရမဟုတ်သော အဖွဲ့အစည်းများ၏ အမည်နှင့်တာဝန်များ</label>
                         </div>
                         <div class="table-container">
                             <table>
@@ -378,11 +374,10 @@
                             </table>
                         </div>
                     </div>
-                    
+
                     <div class="container">
                         <div class="section-header">
-                            <label for="">၁၆</label>
-                            <h1>ချီးမြှင့်ခံရသည့်ဘွဲ့ထူး/ဂုဏ်ထူးတံဆိပ်လက်မှတ်များ</h1>
+                            <label for="">၁၆။ ချီးမြှင့်ခံရသည့်ဘွဲ့ထူး/ဂုဏ်ထူးတံဆိပ်လက်မှတ်များ</label>
                         </div>
                         <div class="table-container">
                             <table>
@@ -391,6 +386,7 @@
                                         <th>စဥ်</th>
                                         <th>ဆုတံဆိပ်အမျိုးအစား</th>
                                         <th>ရက်၊ လ၊ နှစ်</th>
+                                        <th>မှတ်ချက်</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -399,17 +395,17 @@
                                         <td>{{$loop->index + 1}}</td>
                                         <td>{{$awarding->award_type->name .'/'. $awarding->award->name}}</td>
                                         <td>{{$awarding->order_date}}</td>
+                                        <td>{{$awarding->remark}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    
+
                     <div class="container">
                         <div class="section-header">
-                            <label for="">၁၇</label>
-                            <h1>အပြစ်ပေးခံရခြင်းများ</h1>
+                            <label for="">၁၇။ အပြစ်ပေးခံရခြင်းများ</label>
                         </div>
                         <div class="table-container">
                             <table>
@@ -444,32 +440,20 @@
                         <table style="border: none;">
                             <tbody style="border: none;">
                                 <tr style="border: none;">
-                                    <td style="border: none; width: 5%;">၁၂</td>
-                                    <td style="border: none; width: 35%;">အခြားတင်ပြလိုသည့်အချက်များ
-
-
-                                    </td>
+                                    <td style="border: none; width: 5%;">၁၈။</td>
+                                    <td style="border: none; width: 35%;">အခြားတင်ပြလိုသည့်အချက်များ</td>
                                     <td style="border: none; width: 5%;">-</td>
                                     <td style="border: none; width: 55%;"></td>
                                 </tr>
-                              
-                               
-            
                             </tbody>
                         </table>
                     </div>
-                    
-
                     <div style="margin-bottom: 16px; font-size: 13px;">
                         <table width="100%" style="margin-bottom: 16px; border: none;">
                             <tr style="border: none;">
                                 <td style="border: none;">
                                     <p style="margin: 0; font-size: 13px;">
-                                        ၁၉
-
-                                        အထက်ဖော်ပြပါ ဝန်ထမ်း၏ ကိုယ်ရေးမှတ်တမ်းနှင့်ပတ်သတ်၍ မှန်ကန်စွာဖြည့်သွင်းရေးသားထားပါကြောင်းစိစစ်အတည်ပြုပါသည်
-                                        
-                                        
+                                        ၁၉။ အထက်ဖော်ပြပါ ဝန်ထမ်း၏ ကိုယ်ရေးမှတ်တမ်းနှင့်ပတ်သတ်၍ မှန်ကန်စွာဖြည့်သွင်းရေးသားထားပါကြောင်းစိစစ်အတည်ပြုပါသည်
                                     </p>
                                 </td>
                             </tr>
@@ -482,10 +466,10 @@
                                             <td style="font-size: 13px; border: none;">လက်မှတ် -</td>
                                         </tr>
                                         <tr>
-                                            <td style="font-size: 13px; border: none;">အမည် - {{ auth()->user()->name }}</td>
+                                            <td style="font-size: 13px; border: none;">အမည် - </td>
                                         </tr>
                                         <tr>
-                                            <td style="font-size: 13px; border: none;">အဆင့် - {{ auth()->user()->role->name ?? '' }}</td>
+                                            <td style="font-size: 13px; border: none;">အဆင့် - </td>
                                         </tr>
                                         <tr>
                                             <td style="font-size: 13px; border: none;">တပ်/ ဌာန -</td>
@@ -498,12 +482,6 @@
                             </tr>
                         </table>
                     </div>
-                    
-
-
-                     
-
-
                     </div>
                 </div>
             </div>
