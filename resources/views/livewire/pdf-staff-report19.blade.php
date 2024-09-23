@@ -131,8 +131,7 @@
                             <thead>
                                 <tr class="bg-gray-100">
                                     <th class="p-2 border border-black">ကျောင်း/တက္ကသိုလ်/သင်တန်း</th>
-                                    <th class="p-2 border border-black">မှ</th>
-                                    <th class="p-2 border border-black">ထိ</th>
+                                    <th class="p-2 border border-black">မှ-ထိ</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
@@ -221,7 +220,6 @@
                                     <th class="p-2 border border-black">စဥ်</th>
                                     <th class="p-2 border border-black">ဆုတံဆိပ်အမျိုးအစား</th>
                                     <th class="p-2 border border-black">ရက်၊ လ၊ နှစ်</th>
-                                    <th class="p-2 border border-black">မှတ်ချက်</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">

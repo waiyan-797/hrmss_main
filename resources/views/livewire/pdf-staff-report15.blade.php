@@ -154,7 +154,6 @@
                                     <th class="p-2 border border-black">လူမျိုး/နိုင်ငံသား</th>
                                     <th class="p-2 border border-black">အလုပ်အကိုင်နှင့်ဌာန</th>
                                     <th class="p-2 border border-black">နေရပ်</th>
-                                    <th class="p-2 border border-black">မှတ်ချက်</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">
@@ -189,13 +188,13 @@
                     <div class="flex justify-center mb-2 items-center">
                         <p class="md:w-20 mr-6">အမည်</p>
                         <p>-</p>
-                        <p></p>
+                        <p>{{auth()->user()->name}}</p>
                     </div>
 
                     <div class="flex justify-center mb-2 items-center">
                         <p class="md:w-20 mr-6">အဆင့်</p>
                         <p>-</p>
-                        <p></p>
+                        <p>{{auth()->user()->role->name ?? ''}}</p>
                     </div>
 
                     <div class="flex justify-center mb-2 items-center">

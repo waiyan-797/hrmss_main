@@ -30,7 +30,6 @@ class PdfStaffReport17 extends Component
     public function render()
     {
         $staff = Staff::where('id', $this->staff_id)->first();
-        // dd($staff);
         return view('livewire.pdf-staff-report17',[
             'staff' => $staff,
         ]);

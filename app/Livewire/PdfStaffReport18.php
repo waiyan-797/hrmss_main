@@ -7,6 +7,7 @@ use App\Models\Education;
 use App\Models\Ethnic;
 use App\Models\Religion;
 use App\Models\Spouse;
+use App\Models\Spouse;
 use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;

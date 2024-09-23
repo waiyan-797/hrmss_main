@@ -111,6 +111,7 @@
                     <label for="name" class="md:w-5">-</label>
                     <label for="name"
                         class="md:w-3/5">{{$staff->current_rank->name .'/'. $staff->current_salary .'/'. $staff->current_department->name}}</label>
+                        class="md:w-3/5">{{$staff->current_rank->name .'/'. $staff->current_salary .'/'. $staff->current_department->name}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="name" class="md:w-5">၁၃။ </label>

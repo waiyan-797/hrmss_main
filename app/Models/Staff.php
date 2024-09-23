@@ -46,6 +46,7 @@ public function country(){
     }
 
     public function rank(){
+    public function rank(){
         return $this->belongsTo(Rank::class);
     }
 
@@ -66,8 +67,6 @@ public function country(){
     public function ministry(){
         return $this->belongsTo(Ministry::class);
     }
-
-
 
 
 
