@@ -2,7 +2,7 @@
 
 namespace App\Livewire\StaffList;
 
-use App\Models\Staff;
+use App\Models\Rank;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 

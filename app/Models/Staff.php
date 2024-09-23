@@ -46,7 +46,6 @@ public function country(){
     }
 
     public function rank(){
-    public function rank(){
         return $this->belongsTo(Rank::class);
     }
 
@@ -152,10 +151,12 @@ public function country(){
     public function staff_languages(){
         return $this->hasMany(StaffLanguage::class);
     }
-    public function marital_statuses(){
-        return $this->hasMany(MaritalStatus::class);
+
+    public function side_department(){
+        return $this->belongsTo(Department::class);
     }
-    public function social_activities(){
-        return $this->hasMany(SocialActivity::class);
+
+    public function current_division(){
+        return $this->belongsTo(Division::class);
     }
 }
