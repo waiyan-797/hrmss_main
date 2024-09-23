@@ -72,6 +72,8 @@ public function country(){
 
 
 
+
+
     public function nrc_region_id(){
         return $this->belongsTo(NrcRegionId::class);
     }

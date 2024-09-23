@@ -28,20 +28,27 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        @foreach ($staffs as $staff)
                             <tr class="border-b">
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $loop->index + 1 }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->name }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->current_rank->name }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->side_department->name }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y')) }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y')) }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ en2mm(\Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y')) }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">
+                                    @foreach ($staff->staff_educations as $edu)
+                                        <div class="mb-2">
+                                            <span class="font-semibold">{{ $edu->education_group->name }}</span> -
+                                            <span>{{ $edu->education_type->name }}</span>,
+                                            <span>{{ $edu->education->name }}</span>
+                                        </div>
+                                    @endforeach
+                                </td>
                             </tr>
-
                     </tbody>
                 </table>
             </div>
