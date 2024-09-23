@@ -12,4 +12,8 @@ class StaffLanguage extends Model
     public function staff(){
         return $this->belongsTo(Staff::class);
     }
+
+    public function language(){
+        return $this->belongsTo(Language::class);
+    }
 }

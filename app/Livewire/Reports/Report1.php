@@ -22,11 +22,11 @@ class Report1 extends Component
             echo $pdf->output();
         }, 'report_pdf_1.pdf');
     }
-   
+
     public function render()
      {
         $staff = Staff::get()->first();
-        return view('livewire.reports.report1',[ 
+        return view('livewire.reports.report1',[
             'staff' => $staff,
         ]);
      }

@@ -1,7 +1,4 @@
 <div class="w-full">
-    <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Pension Family List</h1>
-    </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>

@@ -14,7 +14,8 @@ return new class extends Migration
     {
         Schema::create('divisions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->text('name');
+            $table->text('nick_name');
             $table->foreignIdFor(DivisionType::class)->nullable()->nullOnDelete();
             $table->timestamps();
         });

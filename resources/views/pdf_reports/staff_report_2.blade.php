@@ -69,7 +69,7 @@
     text-align: center;
     color: #666;
 }
-     
+
     </style>
 </head>
 <body>
@@ -77,7 +77,7 @@
         <h1 class="heading">
             ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
         </h1>
-    
+
         <div class="table-container">
             <table class="custom-table">
                 <thead>
@@ -95,21 +95,49 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    @foreach ($staffs as $staff)
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                                {{$loop->index + 1}}
+                            </td>
+                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                                {{$staff->name}}
+                            </td>
+                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                                {{$staff->current_rank->name}}
+                            </td>
+                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                                {{$staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code}}
+                            </td>
+                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                                {{$staff->current_department->name}}
+                            </td>
+                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                                {{$staff->dob}}
+                            </td>
+                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                                {{en2mm(Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}
+                            </td>
+                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                                {{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y'))}}
+                            </td>
+                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                                {{en2mm(Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y'))}}
+                            </td>
+                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                                @foreach ($staff->staff_educations as $edu)
+                                    <div style="margin-bottom: 8px;">
+                                        <span style="font-weight: 600;">{{ $edu->education_group->name }}</span> -
+                                        <span>{{ $edu->education_type->name }}</span>,
+                                        <span>{{ $edu->education->name }}</span>
+                                    </div>
+                                @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
-        </div>  
+        </div>
     </page>
 </body>
 </html>

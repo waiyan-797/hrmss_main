@@ -17,17 +17,14 @@ class StaffTypeSeeder extends Seeder
     {
         DB::table('staff_types')->insert([
             'name' => 'အရာထမ်း',
-            
         ]);
 
         DB::table('staff_types')->insert([
             'name' => 'အမှုထမ်း',
-           
         ]);
 
         DB::table('staff_types')->insert([
             'name' => 'နေ့စား',
-            
         ]);
 
 

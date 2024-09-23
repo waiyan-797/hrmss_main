@@ -77,25 +77,35 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($staffs as $staff)
+                    <tr>
+                        <td>{{ $loop->index + 1 }}</td>
+                        <td>{{ $staff->name }}</td>
+                        <td>{{ $staff->current_rank->name }}</td>
+                        <td>
+                            @foreach ($staff->staff_educations as $edu)
+                                <div class="mb-2">
+                                    <span class="font-semibold">{{ $edu->education_group->name }}</span> -
+                                    <span>{{ $edu->education_type->name }}</span>,
+                                    <span>{{ $edu->education->name }}</span>
+                                </div>
+                            @endforeach
+                        </td>
+                        <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->age).'နှစ်' }}</td>
+                        <td>{{ $staff->ethnic->name }}</td>
+                        <td>{{ $staff->religion->name }}</td>
+                        <td>{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}</td>
+                        <td>{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_district->name.'/'.$staff->permanent_address_township_or_town->name }}</td>
+                        <td>{{ $staff->gender->name }}</td>
+                        <td>{{ en2mm($staff->children->where('gender_id', 1)->count()) }}</td>
+                        <td>{{ en2mm($staff->children->where('gender_id', 2)->count()) }}</td>
+                        <td>{{ $staff->spouse_name ? 'ရှိ' : '-' }}</td>
+                        <td>{{ $staff->spouse_name ? '-' : 'မရှိ' }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
-    
+
     </page>
 </body>
 </html>

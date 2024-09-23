@@ -18,9 +18,9 @@ class Rank extends Model
         return $this->belongsTo(StaffType::class);
     }
 
-    public function staff()
+    public function staffs()
     {
-        return $this->hasMany(Staff::class);
+        return $this->hasMany(Staff::class, 'current_rank_id', 'id');
     }
     public function increments()
     {

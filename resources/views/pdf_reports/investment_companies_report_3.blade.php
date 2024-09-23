@@ -1,100 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
 
-    <style type="text/css">
-        page{
-            background: white;
-        }
-
-        page[size="A4"] {
-            width: 210mm;
-            height: 297mm;
-        }
-
-        @media print {
-            body, page {
-                margin: 0;
-                box-shadow: 0;
+        <style type="text/css">
+            page{
+                background: white;
             }
-        }
 
-        body {
-            font-family: 'tharlon';
-            font-size: 13px;
-        }
+            page[size="A4"] {
+                width: 210mm;
+                height: 297mm;
+            }
 
-        .container {
-            width: 100%;
-            margin-bottom: 16px;
-        }
+            @media print {
+                body, page {
+                    margin: 0;
+                    box-shadow: 0;
+                }
+            }
 
-        .header-title {
-            font-weight: 600;
-            font-size: 16px;
-            margin-bottom: 8px;
-            text-align: center;
-        }
+            body {
+                font-family: 'tharlon';
+                font-size: 13px;
+            }
 
-        .table-container {
-            width: 100%;
-            border-radius: 8px;
-            overflow: hidden;
-        }
+            .container {
+                width: 100%;
+                margin-bottom: 16px;
+            }
 
-        table {
-            width: 100%;
-            text-align: center;
-            border-collapse: collapse;
-        }
+            .header-title {
+                font-weight: 600;
+                font-size: 16px;
+                margin-bottom: 8px;
+                text-align: center;
+            }
 
-        thead tr {
-            background-color: #f3f4f6;
-        }
+            .table-container {
+                width: 100%;
+                border-radius: 8px;
+                overflow: hidden;
+            }
 
-        th, td {
-            padding: 8px;
-            border: 1px solid black;
-        }
+            table {
+                width: 100%;
+                text-align: center;
+                border-collapse: collapse;
+            }
 
-        tbody tr td {
-            height: 32px;
-        }
+            thead tr {
+                background-color: #f3f4f6;
+            }
 
-    </style>
-</head>
-<body>
-    <page size="A4">
-        <div class="container">
-            <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>စဥ်</th>
-                            <th>ရာထူးအမည်</th>
-                            <th>လစာနှုန်း (ကျပ်)</th>
-                            <th>ခွင့်ပြုအင်အား</th>
-                            <th>ခန့်ပြီးအင်အား</th>
-                            <th>လစ်လပ်အင်အား</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td>{{ $staff->ranks ? $staff->rank->name  : 'error'}}</td>
-                            <td>{{ $staff->military_pension }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+            th, td {
+                padding: 8px;
+                border: 1px solid black;
+            }
+
+            tbody tr td {
+                height: 32px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <page size="A4">
+            <div class="container">
+                <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>စဥ်</th>
+                                <th>ရာထူးအမည်</th>
+                                <th>လစာနှုန်း (ကျပ်)</th>
+                                <th>ခွင့်ပြုအင်အား</th>
+                                <th>ခန့်ပြီးအင်အား</th>
+                                <th>လစ်လပ်အင်အား</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($first_ranks as $rank)
+                                <tr>
+                                    <td style="border: 1px solid black; padding: 0.5rem; text-align: center;">{{$loop->index + 1}}</td>
+                                    <td style="border: 1px solid black; padding: 0.5rem;">{{$rank->name}}</td>
+                                    <td style="border: 1px solid black; padding: 0.5rem;">{{$rank->payscale->name}}</td>
+                                    <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($rank->allowed_qty)}}</td>
+                                    <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($rank->staff->count())}}</td>
+                                    <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($rank->allowed_qty - $rank->staff->count())}}</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;" colspan="3">{{$first_ranks[0]->staff_type->name}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($first_ranks->sum(fn($rank) => $rank->staff->count())) }}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->staff->count())) }}</td>
+                            </tr>
+
+                            @foreach ($second_ranks as $rank)
+                                <tr>
+                                    <td style="border: 1px solid black; padding: 0.5rem; text-align: center;">{{$loop->index + 1}}</td>
+                                    <td style="border: 1px solid black; padding: 0.5rem;">{{$rank->name}}</td>
+                                    <td style="border: 1px solid black; padding: 0.5rem;">{{$rank->payscale->name}}</td>
+                                    <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($rank->allowed_qty)}}</td>
+                                    <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($rank->staff->count())}}</td>
+                                    <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($rank->allowed_qty - $rank->staff->count())}}</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;" colspan="3">{{$second_ranks[0]->staff_type->name}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($second_ranks->sum(fn($rank) => $rank->staff->count())) }}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->staff->count())) }}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
             </div>
-        </div>
-</body>
+        </page>
+    </body>
 </html>

@@ -56,7 +56,7 @@ class StaffDetail extends Component
     use WithFileUploads;
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     //personal_info
-    public $staff_photo, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code,$nrc_front,$nrc_back,$phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id, $current_address_district_id, $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_district_id, $permanent_address_township_or_town_id, $previous_addresses, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension;
+    public $staff_photo, $nrc_f, $nrc_b, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id, $current_address_district_id, $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_district_id, $permanent_address_township_or_town_id, $previous_addresses, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension;
     public $educations = [];
     //job_info
     public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_department_id, $side_division_id, $salary_paid_by, $join_date, $form_of_appointment, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
@@ -206,13 +206,8 @@ class StaffDetail extends Component
         }
     }
 
-    public function mount($confirm_add = 0, $confirm_edit = 0, $staff_id = 0, $tab = 'personal_info')
+    public function mount()
     {
-        $this->confirm_add = $confirm_add;
-        $this->confirm_edit = $confirm_edit;
-        $this->staff_id = $staff_id;
-        $this->tab = $tab;
-
         if ($this->staff_id) {
             $this->initializeArrays($this->staff_id);
             $this->loadStaffData($this->staff_id);
@@ -403,7 +398,7 @@ class StaffDetail extends Component
         $this->nrc_township_code_id = $staff->nrc_township_code_id;
         $this->nrc_sign_id = $staff->nrc_sign_id;
         $this->nrc_code = $staff->nrc_code;
-        $this->nrc_front=$staff->nrc_front;
+        $this->nrc_front= $staff->nrc_front;
         $this->nrc_back=$staff->nrc_back;
         $this->phone = $staff->phone;
         $this->mobile = $staff->mobile;
@@ -658,6 +653,20 @@ class StaffDetail extends Component
             }
         }
 
+        if ($this->nrc_front) {
+            $_nrc_front = Storage::disk('upload')->put('staffs', $this->nrc_front);
+            if (($staff != null) && ($old = $staff->nrc_front)) {
+                Storage::disk('upload')->delete($old);
+            }
+        }
+
+        if ($this->nrc_back) {
+            $_nrc_back = Storage::disk('upload')->put('staffs', $this->nrc_back);
+            if (($staff != null) && ($old = $staff->nrc_back)) {
+                Storage::disk('upload')->delete($old);
+            }
+        }
+
         $personal_info = [
             'staff_photo' => $this->photo ? $_photo : null,
             'name' => $this->name,
@@ -681,8 +690,8 @@ class StaffDetail extends Component
             'nrc_township_code_id' => $this->nrc_township_code_id,
             'nrc_sign_id' => $this->nrc_sign_id,
             'nrc_code' => $this->nrc_code,
-            'nrc_front' => $this->nrc_front ? $this->nrc_front : null,
-            'nrc_back' => $this->nrc_back ? $this->nrc_back : null,
+            'nrc_front' => $this->nrc_front ? $_nrc_front : null,
+            'nrc_back' => $this->nrc_back ? $_nrc_back : null,
             'phone' => $this->phone,
             'mobile' => $this->mobile,
             'email' => $this->email,
@@ -778,6 +787,9 @@ class StaffDetail extends Component
         $staff_create = $dataMapping[$this->tab] ?? $dataMapping['default'];
         $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
         $this->staff_id = $staff->id;
+        $this->staff_photo = $staff->staff_photo;
+        $this->nrc_f = $staff->nrc_front;
+        $this->nrc_b = $staff->nrc_back;
 
         switch ($this->tab) {
             case 'personal_info':
@@ -802,7 +814,8 @@ class StaffDetail extends Component
                 $this->savePunishments($staff->id);
                 break;
         }
-        $this->reset('photo');
+        $this->reset(['photo', 'nrc_front', 'nrc_back']);
+        $this->initializeArrays($this->staff_id);
         $this->loadStaffData($staff->id);
         $this->message = 'Saved Successfully';
     }

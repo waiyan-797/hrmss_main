@@ -1,11 +1,8 @@
 <div class="w-full">
-    <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Staff Report3</h1>
-    </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
 
             <h1 class="font-bold text-center text-base mb-2">ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br> (၁-၄-၂၀၂၄) ရက်နေ့၏ ဝန်ထမ်းများစာရင်း</h1>
 
@@ -27,19 +24,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
-                            <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
-                            <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
-                            <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
-                            <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
-                            <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
-                            <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
-                            <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
-                            <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
-                            <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
-                            <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
-                        </tr>
+                        @foreach ($staffs as $staff)
+                            <tr>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $loop->index + 1 }}</td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->name }}</td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->current_rank->name }}</td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(Carbon\Carbon::parse($staff->join_date)->format('d-m-y')) }}</td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y')) }}</td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->side_department->name }}</td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
+                                    @foreach ($staff->staff_educations as $edu)
+                                        <div class="mb-2">
+                                            <span class="font-semibold">{{ $edu->education_group->name }}</span> -
+                                            <span>{{ $edu->education_type->name }}</span>,
+                                            <span>{{ $edu->education->name }}</span>
+                                        </div>
+                                    @endforeach
+                                </td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(Carbon\Carbon::parse($staff->dob)->year + $pension_year->year) }}</td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

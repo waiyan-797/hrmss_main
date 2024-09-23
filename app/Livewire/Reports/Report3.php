@@ -8,32 +8,22 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class Report3 extends Component
 {
-    public $staff_id;
-    public function mount($staff_id = 0){
-        $this->staff_id = $staff_id;
-    }
-
-    public function go_pdf($staff_id){
-        $staff = Staff::find($staff_id);
+    public function go_pdf(){
+        $staffs = Staff::get();
         $data = [
-            'staff' => $staff,
+            'staffs' => $staffs,
         ];
         $pdf = PDF::loadView('pdf_reports.report_3', $data);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
-        }, 'report_pdf_3.pdf');
+        }, 'report_2.pdf');
     }
-   
-    
-     public function render()
-     {
-        $staff = Staff::get()->first();
-        return view('livewire.reports.report3',[ 
-            'staff' => $staff,
+
+    public function render()
+    {
+        $staffs = Staff::get();
+        return view('livewire.reports.report3', [
+            'staffs' => $staffs,
         ]);
-     }
-    // public function render()
-    // {
-    //     return view('livewire.reports.report3');
-    // }
+    }
 }

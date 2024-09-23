@@ -76,7 +76,6 @@
                     <thead>
                         <tr>
                             <th>စဥ်</th>
-                            <th>ရာထူးအမည်</th>
                             <th>လစာနှုန်း (ကျပ်)</th>
                             <th>ခွင့်ပြုအင်အား</th>
                             <th>ခန့်ပြီးအင်အား</th>
@@ -84,13 +83,35 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($first_payscales as $payscale)
+                            <tr>
+                                <td style="border: 1px solid black; padding: 0.5rem; text-align: center;">{{$loop->index + 1}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem;">{{$payscale->name}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->allowed_qty)}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->staff->count())}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->allowed_qty - $payscale->staff->count())}}</td>
+                            </tr>
+                        @endforeach
                         <tr>
-                            <td></td>
-                            <td>{{ $staff->ranks ? $staff->rank->name  : 'error'}}</td>
-                            <td>{{ $staff->military_pension }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;" colspan="2">{{$first_payscales[0]->staff_type->name}}</td>
+                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
+                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($first_payscales->sum('allowed_qty') - $first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                        </tr>
+                        @foreach ($second_payscales as $payscale)
+                            <tr>
+                                <td style="border: 1px solid black; padding: 0.5rem; text-align: center;">{{$loop->index + 1}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem;">{{$payscale->name}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->allowed_qty)}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->staff->count())}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->allowed_qty - $payscale->staff->count())}}</td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;" colspan="2">{{$second_payscales[0]->staff_type->name}}</td>
+                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
+                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($second_payscales->sum('allowed_qty') - $second_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
                         </tr>
                     </tbody>
                 </table>

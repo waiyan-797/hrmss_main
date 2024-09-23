@@ -27,7 +27,7 @@
             font-family: 'tharlon';
             font-size: 13px;
         }
-       
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -106,70 +106,68 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="text-right">၁</td>
-                    <td class="text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်<br>ကုမ္ပဏီများ<br>ညွှန်ကြားမှုဦးစီးဌာန</td>
-                    <td class="text-right">၁</td>
-                    <td class="text-right">၁</td>
-                    <td class="text-right">-</td>
-                    <td class="text-right">၄</td>
-                    <td class="text-right">၄</td>
-                    <td class="text-right">-</td>
-                    <td class="text-right">၂၆</td>
-                    <td class="text-right">၂၄</td>
-                    <td class="text-right">-၂</td>
-                    <td class="text-right">၆၈</td>
-                    <td class="text-right">၄၉</td>
-                    <td class="text-right">-၁၉</td>
-                    <td class="text-right">၁၀၁</td>
-                    <td class="text-right">၇၅</td>
-                    <td class="text-right">-၂၆</td>
-                    <td class="text-right">၁၇၅</td>
-                    <td class="text-right">၈၅</td>
-                    <td class="text-right">-၉၀</td>
-                    <td class="text-right">၃၇၅</td>
-                    <td class="text-right">၂၃၈</td>
-                    <td class="text-right">-၁၃၇</td>
-                    <td class="text-right">၄၈၄</td>
-                    <td class="text-right">၂၀၈</td>
-                    <td class="text-right">-၂၇၆</td>
-                    <td class="text-right">၈၅၉</td>
-                    <td class="text-right">၄၄၆</td>
-                    <td class="text-right">-၄၁၃</td>
+                    <td>၁</td>
+                    <td>ရင်းနှီးမြှပ်နှံမှုနှင့်<br>ကုမ္ပဏီများ<br>ညွှန်ကြားမှုဦးစီးဌာန</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 1)->first())->allowed_qty) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 1)->first())->allowed_qty - ($first_ranks->where('id', 1)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 2)->first())->allowed_qty) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 2)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 2)->first())->allowed_qty - ($first_ranks->where('id', 2)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 3)->first())->allowed_qty) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 3)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 3)->first())->allowed_qty - ($first_ranks->where('id', 3)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 4)->first())->allowed_qty) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 4)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 4)->first())->allowed_qty - ($first_ranks->where('id', 4)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 5)->first())->allowed_qty) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 5)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 5)->first())->allowed_qty - ($first_ranks->where('id', 5)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 6)->first())->allowed_qty) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 6)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 6)->first())->allowed_qty - ($first_ranks->where('id', 6)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
+                    <td>{{ en2mm($first_ranks->sum('staffs_count')) }}</td>
+                    <td>{{ en2mm(($first_ranks->sum('allowed_qty')) - $first_ranks->sum('staffs_count')) }}</td>
+                    <td>{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
+                    <td>{{ en2mm($second_ranks->sum('staffs_count')) }}</td>
+                    <td>{{ en2mm(($second_ranks->sum('allowed_qty')) - $second_ranks->sum('staffs_count')) }}</td>
+                    <td>{{ en2mm($all_ranks->sum('allowed_qty')) }}</td>
+                    <td>{{ en2mm($all_ranks->sum('staffs_count')) }}</td>
+                    <td>{{ en2mm(($all_ranks->sum('allowed_qty')) - $all_ranks->sum('staffs_count')) }}</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td class="text-center">စုစုပေါင်း</td>
-                    <td class="text-right">၁</td>
-                    <td class="text-right">၁</td>
-                    <td class="text-right">-</td>
-                    <td class="text-right">၄</td>
-                    <td class="text-right">၄</td>
-                    <td class="text-right">-</td>
-                    <td class="text-right">၂၆</td>
-                    <td class="text-right">၂၄</td>
-                    <td class="text-right">-၂</td>
-                    <td class="text-right">၆၈</td>
-                    <td class="text-right">၄၉</td>
-                    <td class="text-right">-၁၉</td>
-                    <td class="text-right">၁၀၁</td>
-                    <td class="text-right">၇၅</td>
-                    <td class="text-right">-၂၆</td>
-                    <td class="text-right">၁၇၅</td>
-                    <td class="text-right">၈၅</td>
-                    <td class="text-right">-၉၀</td>
-                    <td class="text-right">၃၇၅</td>
-                    <td class="text-right">၂၃၈</td>
-                    <td class="text-right">-၁၃၇</td>
-                    <td class="text-right">၄၈၄</td>
-                    <td class="text-right">၂၀၈</td>
-                    <td class="text-right">-၂၇၆</td>
-                    <td class="text-right">၈၅၉</td>
-                    <td class="text-right">၄၄၆</td>
-                    <td class="text-right">-၄၁၃</td>
+                    <td>စုစုပေါင်း</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 1)->first())->allowed_qty) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 1)->first())->allowed_qty - ($first_ranks->where('id', 1)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 2)->first())->allowed_qty) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 2)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 2)->first())->allowed_qty - ($first_ranks->where('id', 2)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 3)->first())->allowed_qty) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 3)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 3)->first())->allowed_qty - ($first_ranks->where('id', 3)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 4)->first())->allowed_qty) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 4)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 4)->first())->allowed_qty - ($first_ranks->where('id', 4)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 5)->first())->allowed_qty) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 5)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 5)->first())->allowed_qty - ($first_ranks->where('id', 5)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 6)->first())->allowed_qty) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 6)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm(($first_ranks->where('id', 6)->first())->allowed_qty - ($first_ranks->where('id', 6)->first())->staffs->count()) }}</td>
+                    <td>{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
+                    <td>{{ en2mm($first_ranks->sum('staffs_count')) }}</td>
+                    <td>{{ en2mm(($first_ranks->sum('allowed_qty')) - $first_ranks->sum('staffs_count')) }}</td>
+                    <td>{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
+                    <td>{{ en2mm($second_ranks->sum('staffs_count')) }}</td>
+                    <td>{{ en2mm(($second_ranks->sum('allowed_qty')) - $second_ranks->sum('staffs_count')) }}</td>
+                    <td>{{ en2mm($all_ranks->sum('allowed_qty')) }}</td>
+                    <td>{{ en2mm($all_ranks->sum('staffs_count')) }}</td>
+                    <td>{{ en2mm(($all_ranks->sum('allowed_qty')) - $all_ranks->sum('staffs_count')) }}</td>
                 </tr>
             </tbody>
         </table>
-        
-
 </body>
 </html>

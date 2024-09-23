@@ -1,7 +1,4 @@
 <div class="w-full">
-    <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Pdf Staff Report-15</h1>
-    </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
@@ -49,7 +46,9 @@
                     <label for="" class="md:w-5">၇။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိနေရပ်</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}</label>
+                    <label for="name" class="md:w-3/5">
+                        {{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}
+                    </label>
                 </div>
                 <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">

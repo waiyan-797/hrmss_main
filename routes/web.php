@@ -106,6 +106,7 @@ use App\Livewire\Reports\PunishmentReport;
 use App\Livewire\Reports\SocialReport;
 use App\Livewire\Section\Section;
 use App\Livewire\StaffReport\StaffReport1;
+use App\Livewire\StaffReport\StaffReport2;
 use App\Livewire\Table\Table;
 use App\Livewire\Township\Township;
 use App\Models\Ministry;
@@ -160,7 +161,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/local_training_report2',LocalTrainingReport2::class)->name('local_training_report2');
     // Route::get('/staff_report', ReportName::class)->name('staff_report');
     Route::get('/staff_report1',StaffReport1::class)->name('staff_report1');
-    Route::get('/staff_report2', StaffReport::class)->name('staff_report2');
+    Route::get('/staff_report2', StaffReport2::class)->name('staff_report2');
     Route::get('/staff_report3', StaffReport3::class)->name('staff_report3');
     Route::get('/pension_list', PensionList::class)->name('pension_list');
     Route::get('/pension_family', PensionFamily::class)->name('pension_family');
@@ -231,6 +232,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/other_qualification_report', OtherQualificationReport::class)->name('other_qualification_report');
     Route::get('/punishment_report', PunishmentReport::class)->name('punishment_report');
     Route::get('/rank_salary_list', RankSalaryList::class)->name('rank_salary_list');
+    Route::get('/staff_report', StaffReport::class)->name('staff_report');
     Route::get('/pdf_17/{staff_id?}', function($staff_id){
         $staff = ModelsStaff::find($staff_id);
         return view('pdf_reports.staff_report_17', ['staff' => $staff]);

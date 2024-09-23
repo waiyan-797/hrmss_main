@@ -50,14 +50,14 @@ return new class extends Migration
             $table->foreignIdFor(NrcRegionId::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(NrcTownshipCode::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(NrcSign::class)->nullable()->constrained()->nullOnDelete();
-            $table->string('nrc')->nullable();
             $table->string('nrc_code')->nullable();
             $table->string('nrc_front')->nullable();
             $table->string('nrc_back')->nullable();
-            $table->string('nrc_no')->nullable();
             $table->string('phone')->nullable();
             $table->string('mobile')->nullable();
             $table->string('email')->nullable();
+            $table->text('spouse_name')->nullable();
+            $table->text('health_condition')->nullable();
             $table->string('recommend_by')->nullable();
             $table->string('current_address_street')->nullable();
             $table->string('current_address_ward')->nullable();
@@ -116,7 +116,7 @@ return new class extends Migration
             $table->date('join_date')->nullable();
             $table->string('form_of_appointment')->nullable();
             $table->boolean('is_direct_appointed')->nullable();
-            $table->foreignIdFor(payscale::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Payscale::class)->nullable()->constrained()->nullOnDelete();
             $table->integer('current_salary')->nullable();
             $table->integer('current_increment_time')->nullable();
             //detail personal info (From childhood until now)

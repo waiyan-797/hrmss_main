@@ -1,31 +1,31 @@
 <div class="w-full">
-    <x-slot name="header">
-        <a
-            href="{{ route('staff') }}"
-            wire:navigate
-            class="inline-flex items-center justify-center p-2 text-white bg-blue-500 hover:bg-blue-400 rounded-full font-semibold"
-        >
-            <!-- Close icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-                <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-            </svg>
-        </a>
-         <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'personal_info'])" :active="$tab == 'personal_info'" wire:navigate>
-            {{ __('ကိုယ်ရေးအချက်အလက်ဖြည့်ရန်') }}
-        </x-nav-link>
-        <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'job_info'])" :active="$tab == 'job_info'" wire:navigate>
-            {{ __('အလုပ်အကိုင်') }}
-        </x-nav-link>
-        <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'relative'])" :active="$tab == 'relative'" wire:navigate>
-            {{ __('ဆွေမျိုးများ') }}
-        </x-nav-link>
-        <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'detail_personal_info'])" :active="$tab == 'detail_personal_info'" wire:navigate>
-            {{ __('ငယ်စဉ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်') }}
-        </x-nav-link>
-        <h1 class="text-white font-semibold italic font-arial">{{$confirm_add == 1 ? 'Create ' : 'Update '}}Staff</h1>
-    </x-slot> 
-
-
+    <div class="bg-blue-700 shadow flex items-center h-[8vh]">
+        <div class="w-4/5 mx-auto py-4 px-6 flex justify-end items-center gap-3">
+            <a
+                href="{{ route('staff') }}"
+                wire:navigate
+                class="inline-flex items-center justify-center p-2 text-white bg-blue-500 hover:bg-blue-400 rounded-full font-semibold"
+            >
+                <!-- Close icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                    <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                </svg>
+            </a>
+            <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'personal_info'])" :active="$tab == 'personal_info'" wire:navigate>
+                {{ __('ကိုယ်ရေးအချက်အလက်ဖြည့်ရန်') }}
+            </x-nav-link>
+            <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'job_info'])" :active="$tab == 'job_info'" wire:navigate>
+                {{ __('အလုပ်အကိုင်') }}
+            </x-nav-link>
+            <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'relative'])" :active="$tab == 'relative'" wire:navigate>
+                {{ __('ဆွေမျိုးများ') }}
+            </x-nav-link>
+            <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'detail_personal_info'])" :active="$tab == 'detail_personal_info'" wire:navigate>
+                {{ __('ငယ်စဉ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်') }}
+            </x-nav-link>
+            <h1 class="text-white font-semibold italic font-arial">{{$confirm_add == 1 ? 'Create ' : 'Update '}}Staff</h1>
+        </div>
+    </div>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <form wire:submit="submit_staff">
@@ -43,22 +43,21 @@
                     </div>
                 @endif
                 <div class="bg-white shadow-md rounded-lg p-5">
-                @if ($tab == 'personal_info')
-                    @include('staff.personal_info')
-                @elseif ($tab == 'job_info')
-                    @include('staff.job_info')
-                @elseif ($tab == 'relative')
-                    @include('staff.relative')
-                @elseif ($tab == 'detail_personal_info')
-                    @include('staff.detail_personal_info')
-                @endif
-           
-                <div class="pb-5">
-                    <x-primary-button>{{ $confirm_add == 1 ? __('Save') : __('Update') }}</x-primary-button>
+                    @if ($tab == 'personal_info')
+                        @include('staff.personal_info')
+                    @elseif ($tab == 'job_info')
+                        @include('staff.job_info')
+                    @elseif ($tab == 'relative')
+                        @include('staff.relative')
+                    @elseif ($tab == 'detail_personal_info')
+                        @include('staff.detail_personal_info')
+                    @endif
+
+                    <div class="pb-5">
+                        <x-primary-button>{{ $confirm_add == 1 ? __('Save') : __('Update') }}</x-primary-button>
+                    </div>
                 </div>
-            </div>
             </form>
-        
         </div>
     </div>
 </div>

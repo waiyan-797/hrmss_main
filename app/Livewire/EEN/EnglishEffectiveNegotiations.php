@@ -18,7 +18,7 @@ class EnglishEffectiveNegotiations extends Component
             'staff' => $staff,
         ];
         $pdf = PDF::loadView('pdf_reports.english_effective_negotiations_report', $data);
-        
+
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'english_effective_negotiations_report.pdf');
@@ -26,7 +26,7 @@ class EnglishEffectiveNegotiations extends Component
      public function render()
     {
         $staff = Staff::get()->first();
-         return view('livewire.e-e-n.english-effective-negotiations',[ 
+         return view('livewire.e-e-n.english-effective-negotiations',[
             'staff' => $staff,
         ]);
      }

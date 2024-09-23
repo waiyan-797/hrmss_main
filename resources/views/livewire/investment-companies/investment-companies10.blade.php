@@ -1,11 +1,8 @@
 <div class="w-full">
-    <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Investment Companies10</h1>
-    </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
             <table>
                 <thead>
@@ -57,69 +54,67 @@
                     <tr>
                         <td class="border border-black p-2 text-right">၁</td>
                         <td class="border border-black p-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်<br>ကုမ္ပဏီများ<br>ညွှန်ကြားမှုဦးစီးဌာန</td>
-                        <td class="border border-black p-2 text-right">၁</td>
-                        <td class="border border-black p-2 text-right">၁</td>
-                        <td class="border border-black p-2 text-right">-</td>
-                        <td class="border border-black p-2 text-right">၄</td>
-                        <td class="border border-black p-2 text-right">၄</td>
-                        <td class="border border-black p-2 text-right">-</td>
-                        <td class="border border-black p-2 text-right">၂၆</td>
-                        <td class="border border-black p-2 text-right">၂၄</td>
-                        <td class="border border-black p-2 text-right">-၂</td>
-                        <td class="border border-black p-2 text-right">၆၈</td>
-                        <td class="border border-black p-2 text-right">၄၉</td>
-                        <td class="border border-black p-2 text-right">-၁၉</td>
-                        <td class="border border-black p-2 text-right">၁၀၁</td>
-                        <td class="border border-black p-2 text-right">၇၅</td>
-                        <td class="border border-black p-2 text-right">-၂၆</td>
-                        <td class="border border-black p-2 text-right">၁၇၅</td>
-                        <td class="border border-black p-2 text-right">၈၅</td>
-                        <td class="border border-black p-2 text-right">-၉၀</td>
-                        <td class="border border-black p-2 text-right">၃၇၅</td>
-                        <td class="border border-black p-2 text-right">၂၃၈</td>
-                        <td class="border border-black p-2 text-right">-၁၃၇</td>
-                        <td class="border border-black p-2 text-right">၄၈၄</td>
-                        <td class="border border-black p-2 text-right">၂၀၈</td>
-                        <td class="border border-black p-2 text-right">-၂၇၆</td>
-                        <td class="border border-black p-2 text-right">၈၅၉</td>
-                        <td class="border border-black p-2 text-right">၄၄၆၁</td>
-                        <td class="border border-black p-2 text-right">-၄၁၃</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 1)->first())->allowed_qty) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 1)->first())->allowed_qty - ($first_ranks->where('id', 1)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 2)->first())->allowed_qty) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 2)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 2)->first())->allowed_qty - ($first_ranks->where('id', 2)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 3)->first())->allowed_qty) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 3)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 3)->first())->allowed_qty - ($first_ranks->where('id', 3)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 4)->first())->allowed_qty) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 4)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 4)->first())->allowed_qty - ($first_ranks->where('id', 4)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 5)->first())->allowed_qty) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 5)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 5)->first())->allowed_qty - ($first_ranks->where('id', 5)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 6)->first())->allowed_qty) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 6)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 6)->first())->allowed_qty - ($first_ranks->where('id', 6)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm($first_ranks->sum('staffs_count')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->sum('allowed_qty')) - $first_ranks->sum('staffs_count')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm($second_ranks->sum('staffs_count')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($second_ranks->sum('allowed_qty')) - $second_ranks->sum('staffs_count')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm($all_ranks->sum('allowed_qty')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm($all_ranks->sum('staffs_count')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($all_ranks->sum('allowed_qty')) - $all_ranks->sum('staffs_count')) }}</td>
                     </tr>
                     <tr>
                         <td class="border border-black p-2 text-right"></td>
                         <td class="border border-black p-2 text-center">စုစုပေါင်း</td>
-                        <td class="border border-black p-2 text-right">၁</td>
-                        <td class="border border-black p-2 text-right">၁</td>
-                        <td class="border border-black p-2 text-right">-</td>
-                        <td class="border border-black p-2 text-right">၄</td>
-                        <td class="border border-black p-2 text-right">၄</td>
-                        <td class="border border-black p-2 text-right">-</td>
-                        <td class="border border-black p-2 text-right">၂၆</td>
-                        <td class="border border-black p-2 text-right">၂၄</td>
-                        <td class="border border-black p-2 text-right">-၂</td>
-                        <td class="border border-black p-2 text-right">၆၈</td>
-                        <td class="border border-black p-2 text-right">၄၉</td>
-                        <td class="border border-black p-2 text-right">-၁၉</td>
-                        <td class="border border-black p-2 text-right">၁၀၁</td>
-                        <td class="border border-black p-2 text-right">၇၅</td>
-                        <td class="border border-black p-2 text-right">-၂၆</td>
-                        <td class="border border-black p-2 text-right">၁၇၅</td>
-                        <td class="border border-black p-2 text-right">၈၅</td>
-                        <td class="border border-black p-2 text-right">-၉၀</td>
-                        <td class="border border-black p-2 text-right">၃၇၅</td>
-                        <td class="border border-black p-2 text-right">၂၃၈</td>
-                        <td class="border border-black p-2 text-right">-၁၃၇</td>
-                        <td class="border border-black p-2 text-right">၄၈၄</td>
-                        <td class="border border-black p-2 text-right">၂၀၈</td>
-                        <td class="border border-black p-2 text-right">-၂၇၆</td>
-                        <td class="border border-black p-2 text-right">၈၅၉</td>
-                        <td class="border border-black p-2 text-right">၄၄၆</td>
-                        <td class="border border-black p-2 text-right">-၄၁၃</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 1)->first())->allowed_qty) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 1)->first())->allowed_qty - ($first_ranks->where('id', 1)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 2)->first())->allowed_qty) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 2)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 2)->first())->allowed_qty - ($first_ranks->where('id', 2)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 3)->first())->allowed_qty) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 3)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 3)->first())->allowed_qty - ($first_ranks->where('id', 3)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 4)->first())->allowed_qty) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 4)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 4)->first())->allowed_qty - ($first_ranks->where('id', 4)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 5)->first())->allowed_qty) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 5)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 5)->first())->allowed_qty - ($first_ranks->where('id', 5)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 6)->first())->allowed_qty) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 6)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->where('id', 6)->first())->allowed_qty - ($first_ranks->where('id', 6)->first())->staffs->count()) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm($first_ranks->sum('staffs_count')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($first_ranks->sum('allowed_qty')) - $first_ranks->sum('staffs_count')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm($second_ranks->sum('staffs_count')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($second_ranks->sum('allowed_qty')) - $second_ranks->sum('staffs_count')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm($all_ranks->sum('allowed_qty')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm($all_ranks->sum('staffs_count')) }}</td>
+                        <td class="border border-black p-2 text-right">{{ en2mm(($all_ranks->sum('allowed_qty')) - $all_ranks->sum('staffs_count')) }}</td>
                     </tr>
                 </tbody>
             </table>
-
-
         </div>
     </div>
 </div>

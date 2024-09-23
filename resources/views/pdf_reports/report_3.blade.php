@@ -70,7 +70,7 @@
                 <th rowspan="2">ယခုနေထိုင်သည့်နေရပ်လိပ်စာ</th>
                 <th rowspan="2">အမြဲတမ်းဆက်သွယ်နိုင်သောနေရပ်လိပ်စာ</th>
                 <th colspan="2">သားသမီးအရေအတွက်</th>
-                <th colspan="2">အိမ်ထောင်</th>
+                <th rowspan="2">အိမ်ထောင်</th>
                 <th rowspan="2">ကျန်းမာရေးအခြေအနေ</th>
                 <th rowspan="2">သွေးအုပ်စု</th>
                 <th rowspan="2">အရပ်အမြင့်</th>
@@ -80,38 +80,50 @@
             <tr>
                 <th>ကျား</th>
                 <th>မ</th>
-                <th>ရှိ</th>
-                <th>မရှိ</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            @foreach ($staffs as $staff)
+                <tr>
+                    <td>{{ $loop->index + 1 }}</td>
+                    <td>{{ $staff->name }}</td>
+                    <td>{{ $staff->staff_no }}</td>
+                    <td>{{ $staff->current_rank->name }}</td>
+                    <td>{{ Carbon\Carbon::parse($staff->dob)->age }} years</td>
+                    <td>{{ en2mm(Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y')) }}</td>
+                    <td>{{ Carbon\Carbon::parse($staff->current_rank_date)->age }} years</td>
+                    <td>
+                        @foreach ($staff->staff_educations as $edu)
+                            <div class="mb-2">
+                                <span class="font-semibold">{{ $edu->education_group->name }}</span> -
+                                <span>{{ $edu->education_type->name }}</span>,
+                                <span>{{ $edu->education->name }}</span>
+                            </div>
+                        @endforeach
+                    </td>
+                    <td>{{ $staff->gender->name }}</td>
+                    <td>{{ $staff->ethnic->name }}</td>
+                    <td>{{ $staff->religion->name }}</td>
+                    <td>{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}</td>
+                    <td>{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_district->name.'/'.$staff->permanent_address_township_or_town->name }}</td>
+                    <td>{{ $staff->children->where('gender_id', 1)->count() }}</td>
+                    <td>{{ $staff->children->where('gender_id', 2)->count() }}</td>
+                    <td>{{ $staff->spouse_name != null ? 'ရှိ' : 'မရှိ'}}</td>
+                    <td>{{ $staff->health_condition }}</td>
+                    <td>{{ $staff->blood_type->name }}</td>
+                    <td>{{ $staff->height_feet.'/'.$staff->height_inch  }}</td>
+                    <td>{{ $staff->habit }}</td>
+                    <td>
+                        @foreach ($staff->staff_languages as $lang)
+                            <div class="mb-2">
+                                <span class="font-semibold">{{ $lang->language->name }}</span>
+                            </div>
+                        @endforeach
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
-
     </page>
 </body>
 </html>

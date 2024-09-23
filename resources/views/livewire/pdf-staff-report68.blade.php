@@ -1,7 +1,4 @@
 <div class="w-full">
-    <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">PDF Staff Report68</h1>
-    </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
@@ -426,7 +423,7 @@
                     <h1 class="font-semibold text-base mb-2 text-center">မိဘဆွေမျိုးများ</h1>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center ml-9">
-                          
+
                             <tbody class="text-center h-8 p-2">
                                 <tr>
                                     <td class="p-2 w-14 border border-black">၁။</td>

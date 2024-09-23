@@ -1,15 +1,9 @@
 <div class="w-full">
-    <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Report2</h1>
-    </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
-            <br><br>
-
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <h1 class="text-center font-bold text-sm">Report - 2</h1>
-
             <table class="md:w-full">
                 <thead>
                     <tr>
@@ -24,32 +18,31 @@
                         <th rowspan="2" class="border border-black text-center p-2">အမြဲတမ်းဆက်သွယ်နိုင်သောနေရပ်လိပ်စာ</th>
                         <th rowspan="2" class="border border-black text-center p-2">ကျား/မ</th>
                         <th colspan="2" class="border border-black text-center p-2">သားသမီးအရေအတွက်</th>
-                        <th colspan="2" class="border border-black text-center p-2">အိမ်ထောင်</th>
+                        <th rowspan="2" class="border border-black text-center p-2">အိမ်ထောင် (ရှိ/မရှိ)</th>
                     </tr>
                     <tr>
                         <th class="border border-black text-center p-2">ကျား</th>
                         <th class="border border-black text-center p-2">မ</th>
-                        <th class="border border-black text-center p-2">ရှိ</th>
-                        <th class="border border-black text-center p-2">မရှိ</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                    </tr>
+                    @foreach ($staffs as $staff)
+                        <tr>
+                            <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->current_rank->name }}</td>
+                            <td class="border border-black text-center p-2">{{ Carbon\Carbon::parse($staff->dob)->age }} years</td>
+                            <td class="border border-black text-center p-2">{{ Carbon\Carbon::parse($staff->current_rank_date)->age }} years</td>
+                            <td class="border border-black text-center p-2">{{ $staff->ethnic->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->religion->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_district->name.'/'.$staff->permanent_address_township_or_town->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->gender->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->children->where('gender_id', 1)->count() }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->children->where('gender_id', 2)->count() }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->spouse_name != null ? 'ရှိ' : 'မရှိ'}}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
 

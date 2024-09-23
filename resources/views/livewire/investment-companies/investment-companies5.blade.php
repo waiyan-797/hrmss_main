@@ -1,13 +1,8 @@
 <div class="w-full">
-    <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Investment Companies5</h1>
-    </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
-            <br><br>
-
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
 
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
@@ -23,18 +18,25 @@
                             </tr>
                         </thead>
                         <tbody class="text-center h-8 p-2">
+                            @foreach ($payscales as $payscale)
+                                <tr>
+                                    <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                    <td class="border border-black p-2">{{$payscale->ranks[0]->name}}နှင့်အဆင့်တူ</td>
+                                    <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
+                                    <td class="border border-black p-2">{{en2mm($payscale->staff->count())}}</td>
+                                    <td class="border border-black p-2">{{en2mm($payscale->allowed_qty - $payscale->staff->count())}}</td>
+                                </tr>
+                            @endforeach
                             <tr>
-                                <td class="border border-black p-2"></td>
-                                <td class="border border-black p-2">{{ $staff->ranks ? $staff->rank->name : 'error' }}</td>
-                                <td class="border border-black p-2"></td>
-                                <td class="border border-black p-2"></td>
-                                <td class="border border-black p-2"></td>
+                                <td class="border border-black p-2 font-semibold" colspan="2">စုစုပေါင်း</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($payscales->sum('allowed_qty')) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($payscales->sum(fn($payscale) => $payscale->staff->count())) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($payscales->sum('allowed_qty') - $payscales->sum(fn($payscale) => $payscale->staff->count())) }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -1,12 +1,8 @@
 <div class="w-full">
-    <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Staff List5</h1>
-    </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
           <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
           <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
-          <br><br>
 
             <h1 class="font-bold text-center text-base mb-4">
                 ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဌာန အလိုက်ဝန်ထမ်းအင်အားစာရင်း<br>၁။

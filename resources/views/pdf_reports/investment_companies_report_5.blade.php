@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-rank=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
@@ -77,20 +77,26 @@
                         <tr>
                             <th>စဥ်</th>
                             <th>ရာထူးအမည်</th>
-                            <th>လစာနှုန်း (ကျပ်)</th>
                             <th>ခွင့်ပြုအင်အား</th>
                             <th>ခန့်ပြီးအင်အား</th>
                             <th>လစ်လပ်အင်အား</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($payscales as $payscale)
+                            <tr>
+                                <td style="border: 1px solid black; padding: 0.5rem; text-align: center;">{{$loop->index + 1}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem;">{{$payscale->name}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->allowed_qty)}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->staff->count())}}</td>
+                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->allowed_qty - $payscale->staff->count())}}</td>
+                            </tr>
+                        @endforeach
                         <tr>
-                            <td></td>
-                            <td>{{ $staff->ranks ? $staff->rank->name  : 'error'}}</td>
-                            <td>{{ $staff->military_pension }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;" colspan="2">{{$payscale[0]->staff_type->name}}</td>
+                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($payscale->sum('allowed_qty')) }}</td>
+                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($payscale->sum(fn($payscale) => $payscale->staff->count())) }}</td>
+                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($payscale->sum('allowed_qty') - $payscale->sum(fn($payscale) => $payscale->staff->count())) }}</td>
                         </tr>
                     </tbody>
                 </table>

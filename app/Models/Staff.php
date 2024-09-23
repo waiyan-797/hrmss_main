@@ -22,14 +22,14 @@ class Staff extends Model
     }
     public function educationGroup()
     {
-        return $this->belongsTo(EducationGroup::class, 'education_group_id'); // 
+        return $this->belongsTo(EducationGroup::class, 'education_group_id'); //
     }
     public function educationType(){
         return $this->belongsTo(EducationType::class,'education_type_id');
     }
     public function education()
     {
-        return $this->belongsTo(Education::class, 'education_id'); 
+        return $this->belongsTo(Education::class, 'education_id');
     }
 
 public function country(){
@@ -66,7 +66,9 @@ public function country(){
     public function ministry(){
         return $this->belongsTo(Ministry::class);
     }
-    
+
+
+
 
 
 

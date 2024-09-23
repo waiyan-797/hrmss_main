@@ -1,14 +1,9 @@
 <div class="w-full">
-    <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Other Qualification Report</h1>
-    </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
-            <br><br>
             <h1 class="font-bold text-center text-base mb-1">Other Qualification Report</h1>
-
             <table class="md:w-full">
                 <thead>
                     <tr>
@@ -27,7 +22,7 @@
                         @foreach ($staff->staff_educations as $education)
                         <td class="border border-black text-left p-1">{{$education->education->name}}</td>
                             @endforeach
-                       
+
                     @endforeach
                 </tbody>
             </table>

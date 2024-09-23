@@ -2,22 +2,17 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Models\Payscale;
+use App\Models\Rank;
 use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class InvestmentCompanies5 extends Component
 {
-
-    public $staff_id;
-    public function mount($staff_id = 0){
-        $this->staff_id = $staff_id;
-    }
-
-    public function go_pdf($staff_id){
-        $staff = Staff::find($staff_id);
+    public function go_pdf(){
         $data = [
-            'staff' => $staff,
+            'payscales' => Payscale::get(),
         ];
         $pdf = PDF::loadView('pdf_reports.investment_companies_report_5', $data);
         return response()->streamDownload(function() use ($pdf) {
@@ -27,9 +22,9 @@ class InvestmentCompanies5 extends Component
 
     public function render()
     {
-        $staff = Staff::get()->first();
+        $payscales = Payscale::get();
         return view('livewire.investment-companies.investment-companies5', [
-            'staff' => $staff,
+            'payscales' => $payscales,
         ]);
     }
 }

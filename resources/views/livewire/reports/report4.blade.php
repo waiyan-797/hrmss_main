@@ -1,12 +1,8 @@
 <div class="w-full">
-    <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Report4</h1>
-    </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
-            <br><br>
 
             <h1 class="text-center text-sm font-bold">Report - 4</h1>
 

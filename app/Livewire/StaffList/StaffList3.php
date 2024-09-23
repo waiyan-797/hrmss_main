@@ -23,11 +23,11 @@ class StaffList3 extends Component
             echo $pdf->output();
         }, 'staff_list_pdf_3.pdf');
     }
-    
+
      public function render()
      {
         $staff = Staff::get()->first();
-        return view('livewire.staff-list.staff-list3',[ 
+        return view('livewire.staff-list.staff-list3',[
             'staff' => $staff,
         ]);
      }

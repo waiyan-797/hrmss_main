@@ -1,14 +1,9 @@
 <div class="w-full">
-    <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Staff Report2</h1>
-    </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
-            <br><br>
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <h1 class="text-center text-base font-bold mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-
             <div class="overflow-x-auto">
                 <table class="min-w-full border border-gray-300 border-collapse table-auto">
                     <thead>
@@ -30,20 +25,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        @foreach ($staffs as $staff)
                             <tr class="border-b">
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{$loop->index + 1}}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{$staff->name}}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{$staff->current_rank->name}}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{$staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code  }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{$staff->current_department->name}}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y'))}}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{en2mm(Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y'))}}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{en2mm(Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y'))}}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">
+                                    @foreach ($staff->staff_educations as $edu)
+                                        <div class="mb-2">
+                                            <span class="font-semibold">{{ $edu->education_group->name }}</span> -
+                                            <span>{{ $edu->education_type->name }}</span>,
+                                            <span>{{ $edu->education->name }}</span>
+                                        </div>
+                                    @endforeach
+                                </td>
                             </tr>
-                       
+
                     </tbody>
                 </table>
             </div>

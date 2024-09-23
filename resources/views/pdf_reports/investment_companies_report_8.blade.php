@@ -81,7 +81,7 @@
         <div class="container">
             <h1 class="heading">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဌာနအလိုက်နေပြည်တော်သို့ပြောင်းရွေ့ရောက်ရှိအင်အားစာရင်း</h1>
             <h2 class="sub-heading">၂၀၂၄ ခုနှစ်၊ ဇွန်လ</h2>
-    
+
             <div class="table-container">
                 <table>
                     <thead>
@@ -119,47 +119,63 @@
                             <td>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td>-</td>
-                            <td>၁</td>
-                            <td>၂</td>
-                            <td>၁</td>
-                            <td>၃</td>
-                            <td>-</td>
-                            <td>၁</td>
-                            <td>၇</td>
-                            <td>၂</td>
-                            <td>၂</td>
-                            <td>၁၉</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 2)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 3)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 4)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 5)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 6)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>
+                                {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->whereNull('spouse_name')->where('gender_id', 1)->count())) }}
+                            </td>
+                            <td>
+                                {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->whereNull('spouse_name')->where('gender_id', 2)->count())) }}
+                            </td>
+                            <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->whereNotNull('spouse_name')->count())) }}</td>
+                            <td>
+                                {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->whereNull('spouse_name')->where('gender_id', 1)->count())) }}
+                            </td>
+                            <td>
+                                {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->whereNull('spouse_name')->where('gender_id', 2)->count())) }}
+                            </td>
+                            <td>{{ en2mm($all_ranks->sum('staffs_count')) }}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>-</td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td>-</td>
-                            <td>၁</td>
-                            <td>၂</td>
-                            <td>၁</td>
-                            <td>၃</td>
-                            <td>-</td>
-                            <td>၁</td>
-                            <td>၇</td>
-                            <td>၂</td>
-                            <td>၂</td>
-                            <td>၁၉</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 2)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 3)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 4)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 5)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 6)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>
+                                {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->whereNull('spouse_name')->where('gender_id', 1)->count())) }}
+                            </td>
+                            <td>
+                                {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->whereNull('spouse_name')->where('gender_id', 2)->count())) }}
+                            </td>
+                            <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->whereNotNull('spouse_name')->count())) }}</td>
+                            <td>
+                                {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->whereNull('spouse_name')->where('gender_id', 1)->count())) }}
+                            </td>
+                            <td>
+                                {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->whereNull('spouse_name')->where('gender_id', 2)->count())) }}
+                            </td>
+                            <td>{{ en2mm($all_ranks->sum('staffs_count')) }}</td>
                         </tr>
                     </tbody>
                 </table>
-    
+
                 <div class="note-container">
                     <p class="note-label">မှတ်ချက်။</p>
                     <p class="note-content">လစဥ်လဆန်း(၂)ရက်နေ့အရောက်ဝန်ကြီးရုံးသို့ပေးပို့ရန်။</p>
                 </div>
             </div>
         </div>
-    
-    
+
+
 </body>
 </html>

@@ -4,7 +4,7 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            
+
             <h1 class="text-center text-base font-bold mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
 
             <div class="overflow-x-auto">
@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                             <tr class="border-b">
                                 <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
@@ -41,7 +41,7 @@
                                 <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
                             </tr>
-                       
+
                     </tbody>
                 </table>
             </div>

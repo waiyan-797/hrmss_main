@@ -23,12 +23,12 @@ class WE10overStaffList extends Component
             echo $pdf->output();
         }, 'w-e10over_staff_list_pdf.pdf');
     }
-     
-     
+
+
      public function render()
      {
         $staff = Staff::get()->first();
-        return view('livewire.staff-list.w-e10over-staff-list',[ 
+        return view('livewire.staff-list.w-e10over-staff-list',[
             'staff' => $staff,
         ]);
      }

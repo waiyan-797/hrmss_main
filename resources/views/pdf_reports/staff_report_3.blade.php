@@ -89,19 +89,29 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($staffs as $staff)
+                    <tr>
+                        <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $loop->index + 1 }}</td>
+                        <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->name }}</td>
+                        <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->current_rank->name }}</td>
+                        <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</td>
+                        <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
+                        <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(Carbon\Carbon::parse($staff->join_date)->format('d-m-y')) }}</td>
+                        <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y')) }}</td>
+                        <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->side_department->name }}</td>
+                        <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
+                            @foreach ($staff->staff_educations as $edu)
+                                <div class="mb-2">
+                                    <span class="font-semibold">{{ $edu->education_group->name }}</span> -
+                                    <span>{{ $edu->education_type->name }}</span>,
+                                    <span>{{ $edu->education->name }}</span>
+                                </div>
+                            @endforeach
+                        </td>
+                        <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(Carbon\Carbon::parse($staff->dob)->year + $pension_year->year) }}</td>
+                        <td class="text-sm text-left font-medium text-gray-600 px-2 py-3"></td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

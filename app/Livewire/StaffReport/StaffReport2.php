@@ -8,16 +8,10 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class StaffReport2 extends Component
 {
-
-    public $staff_id;
-    public function mount($staff_id = 0){
-        $this->staff_id = $staff_id;
-    }
-
-    public function go_pdf($staff_id){
-        $staff = Staff::find($staff_id);
+    public function go_pdf(){
+        $staffs = Staff::get();
         $data = [
-            'staff' => $staff,
+            'staffs' => $staffs,
         ];
         $pdf = PDF::loadView('pdf_reports.staff_report_2', $data);
         return response()->streamDownload(function() use ($pdf) {
@@ -26,13 +20,9 @@ class StaffReport2 extends Component
     }
     public function render()
     {
-        $staff = Staff::get()->first();
-        return view('livewire.staff-report.staff-report2',[ 
-            'staff' => $staff,
-    ]);
+        $staffs = Staff::get();
+        return view('livewire.staff-report.staff-report2',[
+            'staffs' => $staffs,
+        ]);
     }
-    // public function render()
-    // {
-    //     return view('livewire.staff-report.staff-report2');
-    // }
 }

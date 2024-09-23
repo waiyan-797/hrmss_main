@@ -158,11 +158,13 @@
 
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;"> @if($staff->spouses->count() > 1)
-                                        {{ implode(', ', $staff?->spouses->pluck('name')->toArray()) }}
-                                    @else
-                                        {{ $staff?->spouses->first()?->name }}
-                                    @endif</td>
+                                    <td style="border: none;">
+                                        @if($staff->spouses->count() > 1)
+                                            {{ implode(', ', $staff?->spouses->pluck('name')->toArray()) }}
+                                        @else
+                                            {{ $staff?->spouses->first()?->name }}
+                                        @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၉။</td>
