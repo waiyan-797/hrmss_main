@@ -28,13 +28,13 @@
                     <label for="" class="md:w-5">၃။ </label>
                     <label for="name" class="md:w-1/3">ကျား/ မ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->gender_id }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->gender->name }}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၄။ </label>
                     <label for="name" class="md:w-1/3">Attandance ID(Figer Print ID)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->attendid}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၅။ </label>
@@ -53,7 +53,7 @@
                     <label for="" class="md:w-5">၇။ </label>
                     <label for="name" class="md:w-1/3">အမျိုးသားမှတ်ပုံတင်အမှတ်</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->nrc }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၈။ </label>
@@ -65,8 +65,8 @@
                     <label for="" class="md:w-5">၉။ </label>
                     <label for="name" class="md:w-1/3">မွေးဖွားရာဇာတိနှင့်လိပ်စာအပြည့်အစုံ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->place_of_birth }}/
-                        {{ $staff->current_address_ward }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->place_of_birth.','.$staff->current_address_ward .','.$staff->current_address_street.','.$staff->current_address_township_or_town->name .','.$staff->current_address_district->name .','.$staff->current_address_region->name }}
+                       </label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၁၀။ </label>
@@ -100,13 +100,35 @@
                     <label for="name"
                         class="md:w-3/5">{{ $staff->blood_type ? $staff->blood_type->name : '-' }}</label>
                 </div>
-                <div class="flex justify-between w-full mb-2">
-                    <label for="" class="md:w-5">၁၅။ </label>
-                    <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
-                    <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+              
+                <div class="w-full mb-4">
+                    <div class="flex justify-start mb-2 space-x-3">
+                        <label for="">၁၅။ </label>
+                        <h1 class="font-semibold text-base">ပညာအရည်အချင်း
+                        </h1>
+                    </div>
+                    <table class="md:w-full">
+                        <thead>
+                            <tr>
+                                <th class="border border-black text-center p-2">စဉ်</th>
+                                <th class="border border-black text-center p-2">Education Group</th>
+                                <th class="border border-black text-center p-2">Education Type</th>
+                                <th class="border border-black text-center p-2">Education</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($staff->staff_educations as $education)
+                                <tr>
+                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
+                                    <td class="border border-black text-center p-2">{{$education->education_group->name}}</td>
+                                    <td class="border border-black text-center p-2">{{$education->education_type->name}}</td>
+                                    <td class="border border-black text-center p-2">{{$education->education->name}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                <div class="flex justify-between w-full mb-2">
+                {{-- <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၁၆။ </label>
                     <label for="name" class="md:w-1/3">ဘွဲ့ရရှိခဲ့သည့်တက္ကသိုလ်/ကျောင်း</label>
                     <label for="" class="md:w-5">-</label>
@@ -123,12 +145,67 @@
                     <label for="name" class="md:w-1/3">ဘွဲ့ရရှိခဲ့သည့် ခုနှစ်</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5"></label>
+                </div> --}}
+                {{-- <div class="w-full mb-4">
+                    <div class="flex justify-start mb-2 space-x-3">
+                        <label for="">၁၆။ </label>
+                        <h1 class="font-semibold text-base">ဘွဲ့ရရှိခဲ့သည့်တက္ကသိုလ်/ကျောင်း
+                        </h1>
+                    </div>
+                    <table class="md:w-full">
+                        <thead>
+                            <tr>
+                                <th class="border border-black text-center p-2">စဉ်</th>
+                                <th class="border border-black text-center p-2">ဘွဲ့ရရှိခဲ့သည့်တက္ကသိုလ်/ကျောင်း</th>
+                                <th class="border border-black text-center p-2">ဘွဲ့ရရှိခဲ့သည့် နိုင်ငံ</th>
+                                <th class="border border-black text-center p-2">ဘွဲ့ရရှိခဲ့သည့် ခုနှစ်</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                                <tr>
+                                    <td class="border border-black text-center p-2"></td>
+                                    <td class="border border-black text-center p-2"></td>
+                                    <td class="border border-black text-center p-2"></td>
+                                    <td class="border border-black text-center p-2"></td>
+                                </tr>
+                           
+                        </tbody>
+                    </table>
+                </div> --}}
+                <div class="w-full mb-4">
+                    <div class="flex justify-start mb-2 space-x-3">
+                        <label for="">၁၆။ </label>
+                        <h1 class="font-semibold text-base">ဘွဲ့ရရှိခဲ့သည့်တက္ကသိုလ်/ကျောင်း</h1>
+                    </div>
+                    <table class="md:w-full">
+                        <thead>
+                            <tr>
+                                <th class="border border-black text-center p-2">စဉ်</th>
+                                <th class="border border-black text-center p-2">ဘွဲ့ရရှိခဲ့သည့်တက္ကသိုလ်/ကျောင်း</th>
+                                <th class="border border-black text-center p-2">ဘွဲ့ရရှိခဲ့သည့် နိုင်ငံ</th>
+                                <th class="border border-black text-center p-2">ဘွဲ့ရရှိခဲ့သည့် ခုနှစ်</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($staff->schools as $index => $school)
+                                <tr>
+                                    <td class="border border-black text-center p-2">{{ $index + 1 }}</td>
+                                    <td class="border border-black text-center p-2">{{ $school->school_name }}</td>
+                                    <td class="border border-black text-center p-2">{{ $school->country->name ?? '-' }}</td> 
+                                    <td class="border border-black text-center p-2">{{ $school->year }}</td>
+                                </tr>
+                           
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
+                
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၁၉။ </label>
                     <label for="name" class="md:w-1/3">ကျန်းမာရေး အခြေအနေ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->health_condition}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၀။ </label>
@@ -140,55 +217,55 @@
                     <label for="" class="md:w-5">၂၁။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိရာထူးအမျိုးအစား</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->current_rank->name}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၂။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိလစာနှုန်း</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->payscale?->name}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၃။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိလစာ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->current_salary}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၄။ </label>
                     <label for="name" class="md:w-1/3">အစိုးရဝန်ထမ်းစဖြစ်သော (ရက်-လ-နှစ်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->government_staff_started_date}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၅။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိဌာန၏အလုပ်ဝင်ရက်စွဲ (ရက်-လ-နှစ်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->join_date}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၆။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိရာထူးရသည့်နေ့ (ရက်-လ-နှစ်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->current_rank_date}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၇။ </label>
                     <label for="name" class="md:w-1/3">ယခုနေထိုင်သည့်နေရပ်လိပ်စာ (အပြည့်အစုံဖော်ပြရန်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->current_address_street.','.$staff->current_address_ward.','.$staff->current_address_township_or_town->name.','.$staff->current_address_district->name.','.$staff->current_address_region->name }}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၈။ </label>
                     <label for="name" class="md:w-1/3">အမြဲတမ်းဆက်သွယ်နိုင်သောနေရပ်လိပ်စာ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->permanent_address_street.','.$staff->permanent_address_ward.','.$staff->permanent_address_township_or_town->name.','.$staff->permanent_address_district->name.','.$staff->permanent_address_region->name}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၉။ </label>
                     <label for="name" class="md:w-1/3">ဆက်သွယ်နိုင်သောဖုန်းနံပါတ်</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->phone}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၃၀။ </label>
@@ -201,7 +278,7 @@
                     <label for="" class="md:w-5">၃၁။ </label>
                     <label for="name" class="md:w-1/3">ဝင်ငွေခွန်သက်သာခွင့် ရှိ/ မရှိ (ရှိကဖော်ပြရန်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->tax_exception}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၃၂။ </label>
@@ -243,19 +320,85 @@
                     <label for="name" class="md:w-3/5">{{ $staff->form_of_appointment }}/
                         {{ $staff->is_direct_appointed }}</label>
                 </div>
-                <div class="flex justify-between w-full mb-2">
+                {{-- <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၃၈။ </label>
                     <label for="name" class="md:w-1/3">အလုပ်အကိုင်အတွက် ထောက်ခံသူများ</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">{{ $staff->recommend_by }}</label>
+                </div> --}}
+                {{-- <div class="w-full mb-4">
+                    <div class="flex justify-start mb-2 space-x-3">
+                        <label for="">၃၈။ </label>
+                        <h1 class="font-semibold text-base">
+                            အလုပ်အကိုင်အတွက် ထောက်ခံသူများ
+                        </h1>
+                    </div>
+                    <table class="md:w-full">
+                        <thead>
+                            <tr>
+                                <th class="border border-black text-center p-2">စဉ်</th>
+                                <th class="border border-black text-center p-2">ထောက်ခံသူ</th>
+                                <th class="border border-black text-center p-2">ဝန်ကြီးဌာန</th>
+                                <th class="border border-black text-center p-2">ဦးစီးဌာန</th>
+                                <th class="border border-black text-center p-2">ရာထူး</th>
+                                <th class="border border-black text-center p-2">အကြောင်းအရာ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                                <tr>
+                                    <td class="border border-black text-center p-2"></td>
+                                    <td class="border border-black text-center p-2"></td>
+                                    <td class="border border-black text-center p-2"></td>
+                                    <td class="border border-black text-center p-2"></td>
+                                    <td class="border border-black text-center p-2"></td>
+                                    <td class="border border-black text-center p-2"></td>
+                                </tr>
+                           
+                        </tbody>
+                    </table>
+                </div> --}}
+                <div class="w-full mb-4">
+                    <div class="flex justify-start mb-2 space-x-3">
+                        <label for="">၃၈။ </label>
+                        <h1 class="font-semibold text-base">
+                            အလုပ်အကိုင်အတွက် ထောက်ခံသူများ
+                        </h1>
+                    </div>
+                    <table class="md:w-full">
+                        <thead>
+                            <tr>
+                                <th class="border border-black text-center p-2">စဉ်</th>
+                                <th class="border border-black text-center p-2">ထောက်ခံသူ</th>
+                                <th class="border border-black text-center p-2">ဝန်ကြီးဌာန</th>
+                                <th class="border border-black text-center p-2">ဦးစီးဌာန</th>
+                                <th class="border border-black text-center p-2">ရာထူး</th>
+                                <th class="border border-black text-center p-2">အကြောင်းအရာ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($staff->recommendations as $index => $recommendation)
+                                <tr>
+                                    <td class="border border-black text-center p-2">{{ $index + 1 }}</td>
+                                    <td class="border border-black text-center p-2">{{ $recommendation->recommend_by }}</td>
+                                    <td class="border border-black text-center p-2">{{ $recommendation->ministry}}</td>
+                                    <td class="border border-black text-center p-2">{{ $recommendation->department}}</td>
+                                    <td class="border border-black text-center p-2">{{ $recommendation->rank}}</td>
+                                    <td class="border border-black text-center p-2">{{ $recommendation->remark }}</td>
+                                </tr>
+                            
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
+                
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၃၉။ </label>
                     <label for="name" class="md:w-1/3">မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်းတို့၏မိဘ၊
                         ညီအစ်ကိုမောင်နှမများ၊ သားသမီးများသည် နိုင်ငံရေးပါတီများတွင် ဝင်ရောက်ဆောင်ရွက်မှု ရှိ/မရှိ (ရှိက
                         အသေးစိတ်ဖော်ပြရန်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{ $staff->family_in_politics}}</label>
                 </div>
 
                 <h1 class="font-semibold text-base mb-4">
@@ -266,100 +409,100 @@
                         <label for="" class="md:w-5">၁။ </label>
                         <label for="name" class="md:w-1/3">ပြန်တမ်းဝင်အမှတ်</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->military_gazetted_no}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၂။ </label>
                         <label for="name" class="md:w-1/3">ဗိုလ်သင်တန်းအမှတ်စဥ်</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->military_dsa_no}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၃။ </label>
                         <label for="name" class="md:w-1/3">စစ်မှုထမ်း‌ဟောင်းအဖွဲ့ဝင်အမှတ်နှင့်ရက်စွဲ</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->veteran_no}}/{{ $staff->veteran_date}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၄။ </label>
                         <label for="name" class="md:w-1/3">ကိုယ်ပိုင်အမှတ်</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->military_solider_no}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၅။ </label>
                         <label for="name" class="md:w-1/3">အဆင့်</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->current_rank?->name}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၆။ </label>
                         <label for="name" class="md:w-1/3">နောက်ဆုံးတာဝန်ထမ်းဆောင်ခဲ့သည့် တိုင်း၊ တပ်မ၊ တပ်ရင်း၊
                             တပ်ဖွဲ့</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->last_serve_army}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၇။ </label>
                         <label for="name" class="md:w-1/3">တပ်သို့ဝင်သည့်နေ့ (ရက်-လ-နှစ်)</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->military_join_date}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၈။ </label>
                         <label for="name" class="md:w-1/3">ပြန်တမ်းဝင်ဖြစ်သည့်နေ့ (ရက်-လ-နှစ်)</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->military_gazetted_date}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၉။ </label>
                         <label for="name" class="md:w-1/3">အမှုထမ်းဆောင်ခဲ့သောတပ်များ</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->military_served_army}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၁၀။ </label>
                         <label for="name" class="md:w-1/3">တပ်တွင်းရာဇဝင်အကျဥ်း/ပြစ်မှု</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->military_brief_history_or_penalty}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၁၁။ </label>
                         <label for="name" class="md:w-1/3">အငြိမ်းစားလစာ</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->military_pension}}</label>
                     </div>
                     <h2 class="font-semibold text-base mb-4"></h2>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၁၂။ </label>
                         <label for="name" class="md:w-1/3">ရက်စွဲ (ရက်-လ-နှစ်)</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->military_gazetted_date}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၁၃။ </label>
                         <label for="name" class="md:w-1/3">အကြောင်းအရာ</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->transfer_remark}}</label>
                     </div>
                     <h2 class="font-semibold text-base mb-4">အသက်အာမခံ</h2>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၁။ </label>
                         <label for="name" class="md:w-1/3">အဆိုပြုလွှာ</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->life_insurance_proposal}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၂။ </label>
                         <label for="name" class="md:w-1/3">ပေါ်လစီအမှတ်</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->life_insurance_policy_no}}</label>
                     </div>
                     <div class="flex justify-between w-full mb-2">
                         <label for="" class="md:w-5">၃။ </label>
                         <label for="name" class="md:w-1/3">ပရီမီယံ</label>
                         <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->life_insurance_premium}}</label>
                     </div>
                 </div>
 

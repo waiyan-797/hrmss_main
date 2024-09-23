@@ -14,6 +14,7 @@ use App\Models\NrcTownshipCode;
 use App\Models\payscale;
 use App\Models\Region;
 use App\Models\Religion;
+use App\Models\RetireType;
 use App\Models\Township;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -168,6 +169,9 @@ return new class extends Migration
             $table->text('life_insurance_proposal')->nullable();
             $table->text('life_insurance_policy_no')->nullable();
             $table->text('life_insurance_premium')->nullable();
+            $table->boolean('is_active')->default(0);
+            $table->date('retire_date')->nullable();
+            $table->foreignIdFor(RetireType::class)->nullable()->nullOnDelete();
             $table->timestamps();
         });
     }

@@ -4,16 +4,9 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $ethnic_types,
-                'modal' => 'modals/ethnic_modal',
-                'id' => $ethnic_type_id,
-                'title' => 'Ethnic',
-                'search_id' => 'ethnic_type_search',
-                'columns' => ['No', 'Name', 'Action'],
-                'column_vals' => ['name'],
-            ]) --}}
-
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            <br><br>
             <h1 class="text-center text-sm font-bold mb-2">Foreign Training Report</h1>
 
             <table class="md:w-full">
@@ -34,17 +27,21 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($staffs as $staff)
                     <tr>
+                        <td class="border border-black text-center p-2">{{ $loop->index+1}}</td>
+                        <td class="border border-black text-center p-2">{{ $staff->name}}</td>
+                        <td class="border border-black text-center p-2">{{ $staff->current_rank->name}}</td>
+                        @foreach ($staff->abroads as $abroad)
+                        <td class="border border-black text-center p-2">{{$abroad->from_date}}</td>
+                        <td class="border border-black text-center p-2">{{$abroad->to_date}}</td>
+                        <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
+                        <td class="border border-black text-center p-2">{{$abroad->particular}}</td>
+                        <td class="border border-black text-center p-2">{{$abroad->sponser}}</td>
                         <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
+                @endforeach
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
 

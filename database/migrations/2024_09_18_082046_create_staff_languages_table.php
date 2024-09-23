@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Language;
 use App\Models\Staff;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,8 +16,12 @@ return new class extends Migration
         Schema::create('staff_languages', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Staff::class)->constrained()->cascadeOnDelete();
-            $table->string('language');
+            $table->foreignIdFor(Language::class)->constrained()->cascadeOnDelete();
             $table->string('rank');
+            $table->string('writing')->nullable();
+            $table->string('reading')->nullable();
+            $table->string('speaking')->nullable();
+            $table->string('remark')->nullable();
             $table->timestamps();
         });
     }

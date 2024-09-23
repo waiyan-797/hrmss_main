@@ -24,7 +24,7 @@ class PdfStaffReport71 extends Component
     }
     public function render()
     {
-        $staff = Staff::with(['ethnic', 'religion', 'blood_type'])->where('id', 3)->first();
+        $staff = Staff::get()->first();
         return view('livewire.pdf-staff-report71', [
             'staff' => $staff,
         ]);

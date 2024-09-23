@@ -4,6 +4,9 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
+            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <br><br>
             <div class="relative overflow-x-auto shadow-md mb-5">
                 <table class="w-full text-sm text-gray-500 dark:text-gray-400">
                     <thead class="font-arial text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-300">
@@ -24,23 +27,23 @@
                             <th scope="col" class="px-3 py-3 border border-gray-300">ဆက်သွယ်ရန်လိပ်စာ/တယ်လီဖုန်းနံပါတ်</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
-                        @foreach($data as $item)
+                     <tbody>
+                        
                             <tr>
-                                <td>{{ $item->index }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->position }}</td>
-                                <td>{{ $item->id_number }}</td>
-                                <td>{{ $item->dob }}</td>
-                                <td>{{ $item->join_date }}</td>
-                                <td>{{ $item->current_grade_date }}</td>
-                                <td>{{ $item->current_department_date }}</td>
-                                <td>{{ $item->department_branch }}</td>
-                                <td>{{ $item->qualification }}</td>
-                                <td>{{ $item->retirement_date }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                        @endforeach
-                    </tbody> --}}
+                       
+                    </tbody> 
                 </table>
             </div>
         </div>

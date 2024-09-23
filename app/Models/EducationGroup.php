@@ -13,4 +13,9 @@ class EducationGroup extends Model
     {
         return $this->hasMany(EducationType::class);
     }
+    public function staffEducations()
+    {
+        return $this->hasMany(StaffEducation::class);
+    }
+
 }

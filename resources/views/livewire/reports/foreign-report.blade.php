@@ -4,15 +4,9 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $ethnic_types,
-                'modal' => 'modals/ethnic_modal',
-                'id' => $ethnic_type_id,
-                'title' => 'Ethnic',
-                'search_id' => 'ethnic_type_search',
-                'columns' => ['No', 'Name', 'Action'],
-                'column_vals' => ['name'],
-            ]) --}}
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            <br><br>
 
             <h1 class="font-bold text-center text-base mb-1">Foreign Report</h1>
 
@@ -22,16 +16,20 @@
                         <th class="border border-black text-left p-1">စဥ်</th>
                         <th class="border border-black text-left p-1">အမည်</th>
                         <th class="border border-black text-left p-1">သွားရောက်သည့်နိုင်ငံ</th>
-                        <th class="border border-black text-left p-1">က်</th>
+                        <th class="border border-black text-left p-1">သွားရောက်သည့်ရက်</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($staffs as $staff)
                     <tr>
-                        <td class="border border-black text-right p-1">1</td>
-                        <td class="border border-black text-left p-1"></td>
-                        <td class="border border-black text-left p-1"></td>
-                        <td class="border border-black text-left p-1"></td>
-                    </tr>
+                        <td class="border border-black text-right p-1">{{ $loop->index + 1 }}</td>
+                        <td class="border border-black text-left p-1">{{ $staff->name}}</td>
+                        @foreach ($staff->abroads as $abroad)
+                            <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
+                            <td class="border border-black text-center p-2">{{$abroad->from_date}}</td>
+                    @endforeach
+                    
+                    @endforeach
                 </tbody>
             </table>
 

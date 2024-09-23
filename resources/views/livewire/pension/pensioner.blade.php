@@ -1,10 +1,12 @@
 <div class="w-full">
     <x-slot name="header">
-        <h1 class="text-white font-semibold italic font-arial">Pension Family List</h1>
+        <h1 class="text-white font-semibold italic font-arial">Pensioner</h1>
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-           
+            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <br><br>
             <div class="relative overflow-x-auto shadow-md mb-5">
                 <table class="w-full text-sm text-gray-500 dark:text-gray-400">
                     <thead class="font-arial text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-300">

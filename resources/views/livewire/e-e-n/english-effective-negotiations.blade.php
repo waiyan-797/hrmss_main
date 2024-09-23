@@ -4,15 +4,9 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $ethnic_types,
-                'modal' => 'modals/ethnic_modal',
-                'id' => $ethnic_type_id,
-                'title' => 'Ethnic',
-                'search_id' => 'ethnic_type_search',
-                'columns' => ['No', 'Name', 'Action'],
-                'column_vals' => ['name'],
-            ]) --}}
+            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <br><br>
 
             <h1 class="font-bold text-base text-center mb-4">၂၀၂၃ ခုနှစ်၊ သြဂုတ်လ ၂၁ရက်နေ့မှ စက်တင်ဘာလ ၁ရက်နေ့အထိ E-Learning
                 စနစ်ဖြင့် ဖွင့်လှစ်မည့်<br>"English for Effective Negotiations" သင်တန်းတက်ရောက်ရန်အတွက်

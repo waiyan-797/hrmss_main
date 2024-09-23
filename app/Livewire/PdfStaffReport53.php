@@ -34,11 +34,12 @@ class PdfStaffReport53 extends Component
         ->join('education', 'staff_education.education_id', '=', 'education.id')
         ->select('staff.*', 'ethnics.name as ethnic_name', 'religions.name as religion_name', 'education.name as education_name')
         ->first();
-        // dd($staffs);
+        
 
         return view('livewire.pdf-staff-report53', [
             'staff' => $staff,
             
         ]);
     }
+   
 }

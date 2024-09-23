@@ -28,20 +28,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($staffs as $key => $staff)
+                        
                             <tr class="border-b">
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $key + 1 }}</td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->name }}</td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->nrc }}</td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->dob }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600"></td>
                             </tr>
-                        @endforeach
+                       
                     </tbody>
                 </table>
             </div>

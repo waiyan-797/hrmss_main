@@ -47,10 +47,6 @@
         }
 
 
-
-
-
-
         .container {
             margin-left: 16px;
         }

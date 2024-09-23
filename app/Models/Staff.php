@@ -16,6 +16,26 @@ class Staff extends Model
     public function ethnic(){
         return $this->belongsTo(Ethnic::class);
     }
+    public function currentRank()
+    {
+        return $this->belongsTo(Rank::class, 'current_rank_id');
+    }
+    public function educationGroup()
+    {
+        return $this->belongsTo(EducationGroup::class, 'education_group_id'); // 
+    }
+    public function educationType(){
+        return $this->belongsTo(EducationType::class,'education_type_id');
+    }
+    public function education()
+    {
+        return $this->belongsTo(Education::class, 'education_id'); 
+    }
+
+public function country(){
+    return $this->belongsTo(Country::class);
+}
+
 
     public function religion(){
         return $this->belongsTo(Religion::class);
@@ -40,6 +60,13 @@ class Staff extends Model
     {
         return $this->hasMany(Increment::class);
     }
+    public function recommendations(){
+        return $this->hasMany(Recommendation::class);
+    }
+    public function ministry(){
+        return $this->belongsTo(Ministry::class);
+    }
+    
 
 
 
@@ -121,5 +148,11 @@ class Staff extends Model
 
     public function staff_languages(){
         return $this->hasMany(StaffLanguage::class);
+    }
+    public function marital_statuses(){
+        return $this->hasMany(MaritalStatus::class);
+    }
+    public function social_activities(){
+        return $this->hasMany(SocialActivity::class);
     }
 }

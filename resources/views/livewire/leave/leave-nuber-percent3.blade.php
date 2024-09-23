@@ -4,16 +4,9 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $ethnic_types,
-                'modal' => 'modals/ethnic_modal',
-                'id' => $ethnic_type_id,
-                'title' => 'Ethnic',
-                'search_id' => 'ethnic_type_search',
-                'columns' => ['No', 'Name', 'Action'],
-                'column_vals' => ['name'],
-            ]) --}}
-
+            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <br><br>
             <h1 class="font-bold text-center text-base mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>၂၀၂၄ခုနှစ်၊ ဧပြီလ ဝန်ထမ်းများ၏<br>ခွင့်ခံစားမှုအရေအတွက်နှင့်ရာခိုင်နှုန်း</h1>
 
             <table class="md:w-full">

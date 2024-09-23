@@ -24,4 +24,16 @@ class StaffEducation extends Model
     public function staff(){
         return $this->belongsTo(Staff::class);
     }
+    public function educationGroup()
+    {
+        return $this->belongsTo(EducationGroup::class);
+    }
+
+    public function educationType()
+    {
+        return $this->belongsTo(EducationType::class);
+    }
+
+   
+
 }

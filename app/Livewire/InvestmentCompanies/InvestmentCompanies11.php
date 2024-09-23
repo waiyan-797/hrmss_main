@@ -27,7 +27,7 @@ class InvestmentCompanies11 extends Component
 
     public function render()
     {
-        $staff = Staff::where('id', 3)->get()->first();
+        $staff = Staff::get()->first();
         return view('livewire.investment-companies.investment-companies11',[
             'staff' => $staff,
         ]);

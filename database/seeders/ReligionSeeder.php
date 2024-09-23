@@ -22,8 +22,10 @@ class ReligionSeeder extends Seeder
         $items = [
             [1, 'ဗုဒ္ဓ'],
             [2, 'ခရစ်ယာန်'],
-            [3, 'အစ္စလာမ်'],
-            [4, 'ဟိန္ဒူ']
+            [3, 'ဟိန္ဒူ'],
+            [4, 'အစ္စလာမ်'],
+            [5, 'အခြား'],
+
         ];
 
         foreach ($items as $item) {

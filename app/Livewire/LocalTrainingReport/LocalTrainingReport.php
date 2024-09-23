@@ -10,28 +10,21 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class LocalTrainingReport extends Component
 {
-
-    public $training_id;
-    public function mount($training_id = 0){
-        $this->training_id = $training_id;
-    }
-
-    public function go_pdf($training_id){
-        $trainings = Training::find($training_id);
+    public function go_pdf(){
+        $staffs = Staff::get();
         $data = [
-            'trainings' => $trainings,
+            'staffs' => $staffs,
         ];
         $pdf = PDF::loadView('pdf_reports.local_training_report', $data);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
-        }, 'local_training_pdf.pdf');
+        }, 'local_training_report_pdf.pdf');
     }
-
     public function render()
     {
-        $trainings = Training::get()->first();
+        $staffs = Staff::get();
         return view('livewire.local-training-report.local-training-report',[
-            'trainings' => $trainings,
+            'staffs' => $staffs,
         ]);
     }
 }

@@ -12,4 +12,9 @@ class Punishment extends Model
     public function penalty_type(){
         return $this->belongsTo(PenaltyType::class);
     }
+    public function staff()
+{
+    return $this->belongsTo(Staff::class);
+}
+
 }

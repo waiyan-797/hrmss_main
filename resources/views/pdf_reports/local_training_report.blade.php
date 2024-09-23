@@ -77,16 +77,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    @foreach($staffs as $staff)
+                        <tr>
+                            <td>{{ $loop->index+1}}</td>
+                            <td>{{ $staff->name}}</td>
+                            <td>{{ $staff->current_rank->name}}</td>
+                            @foreach ($staff->trainings->where('training_location_id', 1) as $training)
+                                <td>{{$training->training_type->name}}</td>
+                                <td>{{$training->from_date}}</td>
+                                <td>{{$training->to_date}}</td>
+                                <td>{{$training->location}}</td>
+                                <td>{{$training->training_location?->name}}</td>
+                        @endforeach
+                        @endforeach
                 </tbody>
             </table>
         </div>

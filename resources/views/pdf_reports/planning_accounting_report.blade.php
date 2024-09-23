@@ -68,12 +68,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    
+                    @foreach($staffs as $staff)
+                        <tr>
+                            <td>{{ $loop->index+1}}</td>
+                            <td>{{ $staff->name}}</td>
+                            <td>{{ $staff->current_rank->name}}</td>
+                            <td></td>
+                        </tr>
+                        @endforeach
                 </tbody>
             </table>
         </div>

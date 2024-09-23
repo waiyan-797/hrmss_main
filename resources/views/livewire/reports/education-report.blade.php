@@ -4,18 +4,10 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $ethnic_types,
-                'modal' => 'modals/ethnic_modal',
-                'id' => $ethnic_type_id,
-                'title' => 'Ethnic',
-                'search_id' => 'ethnic_type_search',
-                'columns' => ['No', 'Name', 'Action'],
-                'column_vals' => ['name'],
-            ]) --}}
-
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            <br><br>
             <h1 class="font-bold text-center text-base mb-1">Education Report</h1>
-
             <table class="md:w-full">
                 <thead>
                     <tr>
@@ -26,14 +18,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="border border-black text-right p-1">1</td>
-                        <td class="border border-black text-left p-1"></td>
-                        <td class="border border-black text-left p-1"></td>
-                        <td class="border border-black text-left p-1"></td>
-                    </tr>
+                    @foreach ($staffs as $staff)
+                        <tr>
+                            <td class="border border-black text-right p-1">{{ $loop->index + 1 }}</td>
+                            <td class="border border-black text-left p-1">{{ $staff->name }}</td>
+                            <td class="border border-black text-left p-1">{{ $staff->current_rank->name }}</td>
+                            <td class="border border-black text-left p-1">
+                                @foreach ($staff->staff_educations as $edu)
+                                    <div>
+                                        <span>{{ $edu->education_group->name }}</span>
+                                        <span>{{ $edu->education_type->name }}</span>
+                                        <span>{{ $edu->education->name }}</span>
+                                    </div>
+                                @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
+            
 
         </div>
     </div>

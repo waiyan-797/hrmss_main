@@ -75,17 +75,22 @@
             </tr>
         </thead>
         <tbody>
+           
+            @foreach($staffs as $staff)
             <tr>
+                <td>{{ $loop->index+1}}</td>
+                <td>{{ $staff->name}}</td>
+                <td>{{ $staff->current_rank->name}}</td>
+                @foreach ($staff->abroads as $abroad)
+                <td>{{$abroad->from_date}}</td>
+                <td>{{$abroad->to_date}}</td>
+                <td>{{$abroad->country->name}}</td>
+                <td>{{$abroad->particular}}</td>
+                <td>{{$abroad->sponser}}</td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+        @endforeach
             </tr>
+            @endforeach
         </tbody>
     </table>
 

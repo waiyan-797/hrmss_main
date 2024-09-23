@@ -4,15 +4,9 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $pension_types,
-                'modal' => 'modals/pension_type_modal',
-                'id' => $pension_type_id,
-                'title' => 'Pension Type',
-                'search_id' => 'pension_type_search',
-                'columns' => ['No', 'Name', 'Action'],
-                'column_vals' => ['name'],
-            ]) --}}
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            <br><br>
 
             <div class="w-full mb-4">
                 <h2 class="font-semibold text-base">စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲဝန်ထမ်းအင်အားစာရင်း</h2>
@@ -26,14 +20,15 @@
                         </tr>
                     </thead>
                     <tbody class="text-center h-8 p-2">
-                        {{-- @foreach ($staffs as $Key=> $staff) --}}
+                       @foreach($staffs as $staff)
                         <tr>
-                            <td class="border border-black p-2">1</td>
-                            <td class="border border-black p-2">{{ $staff->name }}</td>
-                            <td class="border border-black p-2">{{ $staff->ranks ? $staff->rank->name : 'error' }}</td>
+                            <td class="border border-black p-2">{{ $loop->index+1}}</td>
+                            <td class="border border-black p-2">{{ $staff->name}}</td>
+                            <td class="border border-black p-2">{{ $staff->current_rank->name}}</td>
                             <td class="border border-black p-2"></td>
                         </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
+                       
                     </tbody>
                 </table>
             </div>
