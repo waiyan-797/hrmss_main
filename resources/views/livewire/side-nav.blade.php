@@ -97,12 +97,14 @@
                     '
                     :lists="[
                         ['route_name' => 'local_training_report', 'name' => 'local_training_report'],
+                        ['route_name' => 'local_training_report2', 'name' => 'local_training_report2'],
                         ['route_name' => 'staff_report', 'name' => 'staff_report'],
                         ['route_name' => 'staff_report1', 'name' => 'staff_report1'],
                         ['route_name' => 'staff_report2', 'name' => 'staff_report2'],
                         ['route_name' => 'staff_report3', 'name' => 'staff_report3'],
                         ['route_name' => 'pension_list', 'name' => 'pension_list'],
                         ['route_name' => 'pension_family', 'name' => 'pension_family'],
+                        ['route_name' => 'pension_report', 'name' => 'pension_report'],
 
                     ]" />
             </li>

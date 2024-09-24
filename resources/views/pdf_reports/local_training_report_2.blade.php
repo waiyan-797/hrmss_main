@@ -72,16 +72,31 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                
+                @foreach($staffs as $staff)
+                    <tr>
+                        <td>{{ $loop->index+1}}</td>
+                        <td>{{ $staff->name}}</td>
+                        <td>{{ $staff->current_rank->name}}</td>
+                        @foreach($staff->abroads as $abroad)
+                        <td>{{ $abroad->from_date}}</td>
+                        <td>{{ $abroad->to_date}}</td>
+                        @endforeach
+                        @foreach($staff->trainings as $training)
+                        <td>{{ $training->location}}</td>
+                        <td>{{ $training->remark}}</td>
+                        @endforeach
+                        <td class="border border-black text-left p-1">
+                            @foreach ($staff->staff_educations as $edu)
+                                <div>
+                                    <span>{{ $edu->education_group->name }}</span>
+                                    <span>{{ $edu->education_type->name }}</span>
+                                    <span>{{ $edu->education->name }}</span>
+                                </div>
+                            @endforeach
+                        </td>
+                    </tr>
+                    @endforeach
             </tbody>
         </table>
         

@@ -21,7 +21,7 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        @foreach($staffs as $staff)
                         <tr>
                             <td class="border border-black text-right p-1">{{ $loop->index+1}}</td>
                             <td class="border border-black text-right p-1">{{ $staff->name}}</td>
@@ -32,7 +32,8 @@
                                 <td class="border border-black text-center p-2">{{$training->to_date}}</td>
                                 <td class="border border-black text-center p-2">{{$training->location}}</td>
                                 <td class="border border-black text-center p-2">{{$training->training_location?->name}}</td>
-                        @endforeach
+                                @endforeach
+                        </tr>
                         @endforeach
 
                     </tbody>

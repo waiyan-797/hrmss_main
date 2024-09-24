@@ -4,8 +4,8 @@
     </x-slot>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$trainings->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$trainings->id}})">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
 
             <h1 class="text-center text-sm font-bold">Local Training Report2</h1>
@@ -29,18 +29,30 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($staffs as $staff)
                     <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        
-                        
+                        <td class="border border-black text-center p-2">{{ $loop->index+1}}</td>
+                        <td class="border border-black text-center p-2">{{ $staff->name}}</td>
+                        <td class="border border-black text-center p-2">{{ $staff->current_rank->name}}</td>
+                        @foreach($staff->abroads as $abroad)
+                        <td class="border border-black text-center p-2">{{ $abroad->from_date}}</td>
+                        <td class="border border-black text-center p-2">{{ $abroad->to_date}}</td>
+                        @endforeach
+                        @foreach($staff->trainings as $training)
+                        <td class="border border-black text-center p-2">{{ $training->location}}</td>
+                        <td class="border border-black text-center p-2">{{ $training->remark}}</td>
+                        @endforeach
+                        <td class="border border-black text-left p-1">
+                            @foreach ($staff->staff_educations as $edu)
+                                <div>
+                                    <span>{{ $edu->education_group->name }}</span>
+                                    <span>{{ $edu->education_type->name }}</span>
+                                    <span>{{ $edu->education->name }}</span>
+                                </div>
+                            @endforeach
+                        </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
 

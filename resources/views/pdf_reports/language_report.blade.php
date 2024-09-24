@@ -69,23 +69,19 @@
             </tr>
         </thead>
         <tbody>
-            {{-- <tr>
-                <td class="text-right">1</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr> --}}
             @foreach($staffs as $staff)
-            <tr>
-                <td>{{ $loop->index+1}}</td>
-                <td>{{ $staff->name}}</td>
-                <td>{{ $staff->current_rank->name}}</td>
-                @foreach($staff->staff_languages as $language)
-                <td>{{ $language->language?->name}}</td>
-                @endforeach
-                <td></td>
-            </tr>
-            @endforeach
+                    <tr>
+                        <td>{{ $loop->index+1}}</td>
+                        <td>{{ $staff->name}}</td>
+                        <td>{{ $staff->current_rank->name}}</td>
+                       
+                        <td>
+                            @foreach($staff->staff_languages as $language)
+                            {{ $language->language?->name}}
+                            @endforeach
+                        </td>
+                    </tr>
+                    @endforeach
         </tbody>
     </table>
 

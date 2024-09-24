@@ -20,10 +20,12 @@
                         <td class="border border-black text-right p-1">{{ $loop->index+1}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->name}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->current_rank->name}}</td>
-                        @foreach($staff->staff_languages as $language)
-                        <td class="border border-black text-left p-1">{{ $language->language?->name}}</td>
-                        @endforeach
-                        <td class="border border-black text-left p-1"></td>
+                       
+                        <td class="border border-black text-left p-1">
+                            @foreach($staff->staff_languages as $language)
+                            {{ $language->language?->name}}
+                            @endforeach
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

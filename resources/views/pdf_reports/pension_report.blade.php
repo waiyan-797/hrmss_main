@@ -84,7 +84,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            {{-- <tr>
                 <td class="text-right"></td>
                 <td class="text-left"></td>
                 <td class="text-left"></td>
@@ -93,7 +93,21 @@
                 <td class="text-left"></td>
                 <td class="text-left"></td>
                 <td class="text-left"></td>
+            </tr> --}}
+            @foreach($staffs as $staff)
+            <tr>
+                <td>{{ $loop->index+1}}</td>
+                <td>{{ $staff->name}}</td>
+                <td>{{ $staff->current_rank->name}}</td>
+                <td>{{ $staff->current_department->name}}</td>
+                <td>-</td>
+                <td>{{ $staff->dob}}</td>
+                <td>{{ $staff->retire_date}}</td>
+           
+                <td>
+                </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 

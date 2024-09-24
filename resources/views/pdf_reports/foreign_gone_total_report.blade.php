@@ -78,15 +78,27 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td class="text-left"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                
+                @foreach($staffs as $staff)
+                    <tr>
+                        <td>{{ $loop->index+1}}</td>
+                        <td>{{ $staff->name}}</td>
+                        <td>{{ $staff->current_rank->name}}</td>
+                        <td>
+                            @foreach($staff->abroads as $abroad)
+                                <span>{{ $abroad->country->name}}</span>
+                            @endforeach
+                        </td>
+                        <td>{{ en2mm($staff->trainings->count()) }}   
+                        </td>
+
+                        <td>{{ en2mm($staff->abroads->count()) }}</td>
+
+                        <td>
+                            {{ en2mm($staff->trainings->count() + $staff->abroads->count()) }}
+                        </td>
+                    </tr>
+                    @endforeach
             </tbody>
         </table>
     

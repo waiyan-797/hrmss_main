@@ -22,15 +22,26 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($staffs as $staff)
                     <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-left p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">{{ $loop->index+1}}</td>
+                        <td class="border border-black text-left p-2">{{ $staff->name}}</td>
+                        <td class="border border-black text-center p-2">{{ $staff->current_rank->name}}</td>
+                        <td class="border border-black text-center p-2">
+                            @foreach($staff->abroads as $abroad)
+                                <span>{{ $abroad->country->name}}</span>
+                            @endforeach
+                        </td>
+                        <td class="border border-black text-center p-2">{{ en2mm($staff->trainings->count()) }}   
+                        </td>
+
+                        <td class="border border-black text-center p-2">{{ en2mm($staff->abroads->count()) }}</td>
+
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($staff->trainings->count() + $staff->abroads->count()) }}
+                        </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
 

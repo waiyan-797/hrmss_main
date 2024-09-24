@@ -1,8 +1,8 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
             <h1 class="font-bold text-center text-base">Pension Report</h1>
             <table class="md:w-full">
@@ -19,16 +19,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($staffs as $staff)
                     <tr>
-                        <td class="border border-black text-right p-1"></td>
-                        <td class="border border-black text-left p-1"></td>
-                        <td class="border border-black text-left p-1"></td>
-                        <td class="border border-black text-left p-1"></td>
-                        <td class="border border-black text-left p-1"></td>
-                        <td class="border border-black text-left p-1"></td>
-                        <td class="border border-black text-left p-1"></td>
-                        <td class="border border-black text-left p-1"></td>
+                        <td class="border border-black text-right p-1">{{ $loop->index+1}}</td>
+                        <td class="border border-black text-left p-1">{{ $staff->name}}</td>
+                        <td class="border border-black text-left p-1">{{ $staff->current_rank->name}}</td>
+                        <td class="border border-black text-left p-1">{{ $staff->current_department->name}}</td>
+                        <td class="border border-black text-left p-1">-</td>
+                        <td class="border border-black text-left p-1">{{ $staff->dob}}</td>
+                        <td class="border border-black text-left p-1">{{ $staff->retire_date}}</td>
+                   
+                        <td class="border border-black text-left p-1">
+                        </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
 

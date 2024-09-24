@@ -12,6 +12,7 @@ use App\Models\NrcRegionId;
 use App\Models\NrcSign;
 use App\Models\NrcTownshipCode;
 use App\Models\payscale;
+use App\Models\PensionType;
 use App\Models\Region;
 use App\Models\Religion;
 use App\Models\RetireType;
@@ -162,6 +163,7 @@ return new class extends Migration
             $table->boolean('has_military_friend')->nullable()->default(false);
             $table->text('foreigner_friend_name')->nullable();
             $table->text('foreigner_friend_occupation')->nullable();
+            $table->foreignIdFor(PensionType::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignId('foreigner_friend_nationality_id')->nullable()->constrained('nationalities')->onDelete('set null');
             $table->foreignId('foreigner_friend_country_id')->nullable()->constrained('countries')->onDelete('set null');
             $table->text('foreigner_friend_how_to_know')->nullable();

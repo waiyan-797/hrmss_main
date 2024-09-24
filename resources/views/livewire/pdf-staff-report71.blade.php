@@ -317,44 +317,7 @@
                     <label for="name" class="md:w-3/5">{{ $staff->form_of_appointment }}/
                         {{ $staff->is_direct_appointed }}</label>
                 </div>
-                {{-- <div class="flex justify-between w-full mb-2">
-                    <label for="" class="md:w-5">၃၈။ </label>
-                    <label for="name" class="md:w-1/3">အလုပ်အကိုင်အတွက် ထောက်ခံသူများ</label>
-                    <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->recommend_by }}</label>
-                </div> --}}
-                {{-- <div class="w-full mb-4">
-                    <div class="flex justify-start mb-2 space-x-3">
-                        <label for="">၃၈။ </label>
-                        <h1 class="font-semibold text-base">
-                            အလုပ်အကိုင်အတွက် ထောက်ခံသူများ
-                        </h1>
-                    </div>
-                    <table class="md:w-full">
-                        <thead>
-                            <tr>
-                                <th class="border border-black text-center p-2">စဉ်</th>
-                                <th class="border border-black text-center p-2">ထောက်ခံသူ</th>
-                                <th class="border border-black text-center p-2">ဝန်ကြီးဌာန</th>
-                                <th class="border border-black text-center p-2">ဦးစီးဌာန</th>
-                                <th class="border border-black text-center p-2">ရာထူး</th>
-                                <th class="border border-black text-center p-2">အကြောင်းအရာ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
-                                <tr>
-                                    <td class="border border-black text-center p-2"></td>
-                                    <td class="border border-black text-center p-2"></td>
-                                    <td class="border border-black text-center p-2"></td>
-                                    <td class="border border-black text-center p-2"></td>
-                                    <td class="border border-black text-center p-2"></td>
-                                    <td class="border border-black text-center p-2"></td>
-                                </tr>
-                           
-                        </tbody>
-                    </table>
-                </div> --}}
+                
                 <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">
                         <label for="">၃၈။ </label>

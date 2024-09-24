@@ -31,6 +31,9 @@ class Staff extends Model
     {
         return $this->belongsTo(Education::class, 'education_id');
     }
+    public function pension_types(){
+        return $this->belongsTo(pensionType::class);
+    }
 
 public function country(){
     return $this->belongsTo(Country::class);
@@ -66,9 +69,9 @@ public function country(){
     public function ministry(){
         return $this->belongsTo(Ministry::class);
     }
-
-
-
+    public function payscale(){
+        return $this->belongsTo(Payscale::class);
+    }
 
 
 
@@ -94,6 +97,9 @@ public function country(){
 
     public function current_address_region(){
         return $this->belongsTo(Region::class);
+    }
+    public function postings(){
+        return $this->hasMany(Posting::class);
     }
 
     public function current_address_district(){
