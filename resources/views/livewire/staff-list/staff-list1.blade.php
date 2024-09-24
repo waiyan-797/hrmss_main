@@ -1,8 +1,8 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
 
 
@@ -20,13 +20,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="border border-black text-center p-2">၁</td>
-                        <td class="border border-black text-left p-2">ရန်ကုန်တိုင်းဒေသကြီးညွှန်ကြားရေးမှူး</td>
-                        <td class="border border-black text-center p-2">၁၄</td>
-                        <td class="border border-black text-center p-2">၁၁</td>
-                        <td class="border border-black text-center p-2">၂၅</td>
-                    </tr>
+                    @foreach ($divisions as $division)
+                        <tr>
+                            <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td>
+                            <td class="border border-black text-left p-2">{{ $division->name }}</td>
+                            <td class="border border-black text-center p-2">
+                                {{ en2mm($division->staffs->filter(fn($staff) => $staff->currentRank && $staff->currentRank->staff_type_id == 1)->count()) }}
+                            </td>
+                            <td class="border border-black text-center p-2">
+                                {{ en2mm($division->staffs->filter(fn($staff) => $staff->currentRank && $staff->currentRank->staff_type_id == 2)->count()) }}
+                            </td>
+                            <td class="border border-black text-center p-2">{{ en2mm($division->staffs->count() )}}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
 

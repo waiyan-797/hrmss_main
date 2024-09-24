@@ -2,33 +2,29 @@
 
 namespace App\Livewire\StaffList;
 
+use App\Models\Division;
 use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class StaffList1 extends Component
 {
-    public $staff_id;
-    public function mount($staff_id = 0){
-        $this->staff_id = $staff_id;
-    }
-
-    public function go_pdf($staff_id){
-        $staff = Staff::find($staff_id);
+    public function go_pdf(){
+        $divisions = Division::where('division_type_id', 2)->get();
         $data = [
-            'staff' => $staff,
+            'divisions' => $divisions,
         ];
         $pdf = PDF::loadView('pdf_reports.staff_list_report_1', $data);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'staff_list_pdf_1.pdf');
     }
-    
+
      public function render()
      {
-        $staff = Staff::get()->first();
-        return view('livewire.staff-list.staff-list1',[ 
-            'staff' => $staff,
+        $divisions = Division::where('division_type_id', 2)->get();
+        return view('livewire.staff-list.staff-list1',[
+            'divisions' => $divisions,
         ]);
      }
 }

@@ -1,4 +1,4 @@
-<aside id="side_bar" class="left-0 z-40 w-1/6 h-[83vh]">
+<aside id="side_bar" class="left-0 z-40 w-1/7 {{isset($header) ? 'h-[83vh]' : 'h-[91vh]'}}">
     <div class="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200">
         <ul class="space-y-2">
             <li>

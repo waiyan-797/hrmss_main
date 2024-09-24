@@ -13,15 +13,15 @@ class Division extends Model
     {
         return $this->hasMany(Section::class);
     }
-    
-    
+
+
     public function divisionType()
     {
         return $this->belongsTo(DivisionType::class);
     }
 
-    public function staff(){
-        return $this -> hasMany(Staff::class);
+    public function staffs(){
+        return $this->hasMany(Staff::class, 'current_division_id', 'id');
     }
 
 

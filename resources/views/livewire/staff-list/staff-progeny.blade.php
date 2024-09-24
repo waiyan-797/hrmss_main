@@ -1,8 +1,8 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <h1 class="font-bold text-center text-base mb-4">
                 ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဝန်ထမ်းများ၏ သားသမီးအရေအတွက် စာရင်း<br>၁။
                 စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲ
@@ -20,14 +20,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-left p-2"></td>
-                        <td class="border border-black text-left p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-left p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                    </tr>
+                    @foreach ($staffs as $staff)
+                        <tr>
+                            <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td>
+                            <td class="border border-black text-left p-2">{{ $staff->name }}</td>
+                            <td class="border border-black text-left p-2">{{ $staff->current_rank->name }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($staff->children->where('gender_id', 1)->count()) }}</td>
+                            <td class="border border-black text-left p-2">{{ en2mm($staff->children->where('gender_id', 2)->count()) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($staff->children->count()) }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
 

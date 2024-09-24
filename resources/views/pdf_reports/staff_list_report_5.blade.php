@@ -48,9 +48,9 @@
             font-weight: bold;
         }
 
-       
-        
-        
+
+
+
     </style>
 </head>
 <body>
@@ -60,7 +60,7 @@
             ဌာန အလိုက်ဝန်ထမ်းအင်အားစာရင်း<br>
             ၁။ စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲ
         </h1>
-        
+
         <table>
             <thead>
                 <tr>
@@ -72,49 +72,90 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>၁</td>
-                    <td>ညွှန်ကြားရေးမှူးချုပ်</td>
-                    <td>၁</td>
-                    <td>-</td>
-                    <td>၁</td>
-                </tr>
-                <tr class="font-bold">
-                    <td></td>
-                    <td>စုစုပေါင်း အရာထမ်း</td>
-                    <td>၇၅</td>
-                    <td>၁၆၂</td>
-                    <td>၂၃၇</td>
-                </tr>
-                <tr>
-                    <td>၁</td>
-                    <td>ရုံးအုပ်</td>
-                    <td>၁</td>
-                    <td>၂</td>
-                    <td>၃</td>
-                </tr>
-                <tr class="font-bold">
-                    <td></td>
-                    <td>စုစုပေါင်း အမှုထမ်း</td>
-                    <td>၅၆</td>
-                    <td>၁၃၃</td>
-                    <td>၁၈၉</td>
-                </tr>
-                <tr>
-                    <td>၁</td>
-                    <td>နေ့စား</td>
-                    <td>၂၃</td>
-                    <td>၁၅</td>
-                    <td>၃၈</td>
-                </tr>
-                <tr class="font-bold">
-                    <td></td>
-                    <td>စုစုပေါင်း ဝန်ထမ်းဦးရေ</td>
-                    <td>၁၅၄</td>
-                    <td>၃၁၀</td>
-                    <td>၄၆၄</td>
-                </tr>
-            </tbody>
+                    @foreach ($first_ranks as $rank)
+                        <tr>
+                            <td>{{ en2mm($loop->index + 1) }}</td>
+                            <td>{{ $rank->name }}</td>
+                            <td>{{ en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count()) }}</td>
+                            <td>{{ en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count()) }}</td>
+                            <td>{{ en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count()) }}</td>
+                        </tr>
+                    @endforeach
+                    <tr class="font-bold">
+                        <td></td>
+                        <td>စုစုပေါင်း အရာထမ်း</td>
+                        <td>
+                            {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count())) }}
+                        </td>
+                        <td>
+                            {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                        <td>
+                            {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                    </tr>
+                    @foreach ($second_ranks as $rank)
+                        <tr>
+                            <td>{{ en2mm($loop->index + 1) }}</td>
+                            <td>{{ $rank->name }}</td>
+                            <td>{{ en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count()) }}</td>
+                            <td>{{ en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count()) }}</td>
+                            <td>{{ en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count()) }}</td>
+                        </tr>
+                    @endforeach
+                    <tr class="font-bold">
+                        <td></td>
+                        <td>စုစုပေါင်း အမှုထမ်း</td>
+                        <td>
+                            {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count())) }}
+                        </td>
+                        <td>
+                            {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                        <td>
+                            {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                    </tr>
+                    <tr class="font-bold">
+                        <td></td>
+                        <td>စုစုပေါင်း အရာထမ်း အမှုထမ်း</td>
+                        <td>
+                            {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count())) }}
+                        </td>
+                        <td>
+                            {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                        <td>
+                            {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>၁</td>
+                        <td>နေ့စား</td>
+                        <td>
+                            {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count())) }}
+                        </td>
+                        <td>
+                            {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                        <td>
+                            {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                    </tr>
+                    <tr class="font-bold">
+                        <td></td>
+                        <td>စုစုပေါင်း ဝန်ထမ်းဦးရေ</td>
+                        <td>
+                            {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count())) }}
+                        </td>
+                        <td>
+                            {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                        <td>
+                            {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                    </tr>
+                </tbody>
         </table>
     </page>
 </body>

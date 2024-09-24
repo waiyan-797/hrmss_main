@@ -52,14 +52,14 @@
             font-weight: bold;
         }
 
-        
+
     </style>
 </head>
 <body>
     <page size="A4">
         <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
         <h2>အသက် ၁၈ နှစ်နှင့်အထက် ရှိသောဝန်ထမ်းဦးရေစာရင်း</h2>
-    
+
         <table>
             <thead>
                 <tr>
@@ -71,52 +71,66 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>၁</td>
-                    <td>ညွှန်ကြားရေးမှူးချုပ်</td>
-                    <td>၁</td>
-                    <td>-</td>
-                    <td>၁</td>
-                </tr>
+                @foreach ($first_ranks as $rank)
+                    <tr>
+                        <td>{{ en2mm($loop->index + 1) }}</td>
+                        <td>{{ $rank->name }}</td>
+                        <td>
+                            {{ en2mm($rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count()) }}
+                        </td>
+                        <td>
+                            {{ en2mm($rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count()) }}
+                        </td>
+                        <td>
+                            {{ en2mm($rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count()) }}
+                        </td>
+                    </tr>
+                @endforeach
                 <tr class="font-bold">
                     <td></td>
                     <td>စုစုပေါင်း အရာထမ်း</td>
-                    <td>၇၅</td>
-                    <td>၁၆၂</td>
-                    <td>၂၃၇</td>
+                    <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
+                    <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
+                    <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
                 </tr>
-                <tr>
-                    <td>၂</td>
-                    <td>ရုံးအုပ်</td>
-                    <td>၁</td>
-                    <td>၂</td>
-                    <td>၃</td>
-                </tr>
+                @foreach ($second_ranks as $rank)
+                    <tr>
+                        <td>{{ en2mm($loop->index + 1) }}</td>
+                        <td>{{ $rank->name }}</td>
+                        <td>
+                            {{ en2mm($rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count()) }}
+                        </td>
+                        <td>
+                            {{ en2mm($rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count()) }}
+                        </td>
+                        <td>
+                            {{ en2mm($rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count()) }}
+                        </td>
+                    </tr>
+                @endforeach
                 <tr class="font-bold">
                     <td></td>
                     <td>စုစုပေါင်း အမှုထမ်း</td>
-                    <td>၅၆</td>
-                    <td>၁၃၃</td>
-                    <td>၁၈၉</td>
+                    <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
+                    <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
+                    <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
                 </tr>
                 <tr>
-                    <td>၃</td>
+                    <td>၁</td>
                     <td>နေ့စား</td>
-                    <td>၂၃</td>
-                    <td>၁၅</td>
-                    <td>၃၈</td>
+                    <td>{{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
+                    <td>{{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
+                    <td>{{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
                 </tr>
                 <tr class="font-bold">
                     <td></td>
                     <td>စုစုပေါင်း ဝန်ထမ်းဦးရေ</td>
-                    <td>၁၅၄</td>
-                    <td>၃၁၀</td>
-                    <td>၄၆၄</td>
+                    <td>{{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
+                    <td>{{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
+                    <td>{{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
                 </tr>
             </tbody>
         </table>
-    
-
     </page>
 </body>
 </html>

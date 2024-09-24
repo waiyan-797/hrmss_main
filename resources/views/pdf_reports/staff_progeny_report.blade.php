@@ -26,7 +26,7 @@
             font-family: 'tharlon';
             font-size: 13px;
         }
-       
+
         h1 {
             font-weight: bold;
             text-align: center;
@@ -49,8 +49,8 @@
             text-align: left;
         }
 
-       
-        
+
+
     </style>
 </head>
 <body>
@@ -60,7 +60,6 @@
             ဝန်ထမ်းများ၏ သားသမီးအရေအတွက် စာရင်း<br>
             ၁။ စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲ
         </h1>
-    
         <table>
             <thead>
                 <tr>
@@ -73,18 +72,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td class="text-left"></td>
-                    <td class="text-left"></td>
-                    <td></td>
-                    <td class="text-left"></td>
-                    <td></td>
-                </tr>
+                @foreach ($staffs as $staff)
+                    <tr>
+                        <td>{{ $loop->index + 1 }}</td>
+                        <td>{{ $staff->name }}</td>
+                        <td>{{ $staff->current_rank->name }}</td>
+                        <td>{{ en2mm($staff->children->where('gender_id', 1)->count()) }}</td>
+                        <td>{{ en2mm($staff->children->where('gender_id', 2)->count()) }}</td>
+                        <td>{{ en2mm($staff->children->count()) }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
-    
-    
     </page>
 </body>
 </html>

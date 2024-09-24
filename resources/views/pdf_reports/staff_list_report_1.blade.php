@@ -65,7 +65,7 @@
             ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
             ဝန်ထမ်းအင်အားစာရင်း(တိုင်း‌ဒေသကြီး/ပြည်နယ်)
         </h1>
-    
+
         <table>
             <thead>
                 <tr>
@@ -80,16 +80,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>၁</td>
-                    <td>ရန်ကုန်တိုင်းဒေသကြီးညွှန်ကြားရေးမှူး</td>
-                    <td>၁၄</td>
-                    <td>၁၁</td>
-                    <td>၂၅</td>
-                </tr>
+                @foreach ($divisions as $division)
+                    <tr>
+                        <td>{{ $loop->index + 1 }}</td>
+                        <td>{{ $division->name }}</td>
+                        <td>
+                            {{ en2mm($division->staffs->filter(fn($staff) => $staff->currentRank && $staff->currentRank->staff_type_id == 1)->count()) }}
+                        </td>
+                        <td>
+                            {{ en2mm($division->staffs->filter(fn($staff) => $staff->currentRank && $staff->currentRank->staff_type_id == 2)->count()) }}
+                        </td>
+                        <td>{{ en2mm($division->staffs->count() )}}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
-    
+
     </page>
 </body>
 </html>

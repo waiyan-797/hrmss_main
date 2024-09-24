@@ -1,69 +1,110 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-          <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-          <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+          <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+          <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
 
             <h1 class="font-bold text-center text-base mb-4">
                 ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဌာန အလိုက်ဝန်ထမ်းအင်အားစာရင်း<br>၁။
                 စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲ
             </h1>
 
-            <table class="md:w-full"><thead>
-                <tr>
-                  <th class="border border-black text-center p-2">စဥ်</th>
-                  <th class="border border-black text-center p-2">ရာထူးအမည်</th>
-                  <th class="border border-black text-center p-2">ကျား</th>
-                  <th class="border border-black text-center p-2">မ</th>
-                  <th class="border border-black text-center p-2">စုစုပေါင်း</th>
-                </tr></thead>
-              <tbody>
-                <tr>
-                  <td class="border border-black text-center p-2">၁</td>
-                  <td class="border border-black text-center p-2">ညွှန်ကြားရေးမှူးချုပ်</td>
-                  <td class="border border-black text-center p-2">၁</td>
-                  <td class="border border-black text-center p-2">-</td>
-                  <td class="border border-black text-center p-2">၁</td>
-                </tr>
-                <tr class="font-bold">
-                  <td class="border border-black text-center p-2"></td>
-                  <td class="border border-black text-center p-2">စုစုပေါင်း အရာထမ်း</td>
-                  <td class="border border-black text-center p-2">၇၅</td>
-                  <td class="border border-black text-center p-2">၁၆၂</td>
-                  <td class="border border-black text-center p-2">၂၃၇</td>
-                </tr>
-                <tr>
-                  <td class="border border-black text-center p-2">၁</td>
-                  <td class="border border-black text-center p-2">ရုံးအုပ်</td>
-                  <td class="border border-black text-center p-2">၁</td>
-                  <td class="border border-black text-center p-2">၂</td>
-                  <td class="border border-black text-center p-2">၃</td>
-                </tr>
-                <tr class="font-bold">
-                  <td class="border border-black text-center p-2"></td>
-                  <td class="border border-black text-center p-2">စုစုပေါင်း အမှုထမ်း</td>
-                  <td class="border border-black text-center p-2">၅၆</td>
-                  <td class="border border-black text-center p-2">၁၃၃</td>
-                  <td class="border border-black text-center p-2">၁၈၉</td>
-                </tr>
-                <tr>
-                  <td class="border border-black text-center p-2">၁</td>
-                  <td class="border border-black text-center p-2">နေ့စား</td>
-                  <td class="border border-black text-center p-2">၂၃</td>
-                  <td class="border border-black text-center p-2">၁၅</td>
-                  <td class="border border-black text-center p-2">၃၈</td>
-                </tr>
-                <tr class="font-bold">
-                  <td class="border border-black text-center p-2"></td>
-                  <td class="border border-black text-center p-2">စုစုပေါင်း ဝန်ထမ်းဦးရေ</td>
-                  <td class="border border-black text-center p-2">၁၅၄</td>
-                  <td class="border border-black text-center p-2">၃၁၀</td>
-                  <td class="border border-black text-center p-2">၄၆၄</td>
-                </tr>
-              </tbody>
+            <table class="md:w-full">
+                <thead>
+                    <tr>
+                        <th class="border border-black text-center p-2">စဥ်</th>
+                        <th class="border border-black text-center p-2">ရာထူးအမည်</th>
+                        <th class="border border-black text-center p-2">ကျား</th>
+                        <th class="border border-black text-center p-2">မ</th>
+                        <th class="border border-black text-center p-2">စုစုပေါင်း</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($first_ranks as $rank)
+                        <tr>
+                            <td class="border border-black text-center p-2">{{ en2mm($loop->index + 1) }}</td>
+                            <td class="border border-black text-center p-2">{{ $rank->name }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count()) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count()) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count()) }}</td>
+                        </tr>
+                    @endforeach
+                    <tr class="font-bold">
+                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">စုစုပေါင်း အရာထမ်း</td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count())) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                    </tr>
+                    @foreach ($second_ranks as $rank)
+                        <tr>
+                            <td class="border border-black text-center p-2">{{ en2mm($loop->index + 1) }}</td>
+                            <td class="border border-black text-center p-2">{{ $rank->name }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count()) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count()) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count()) }}</td>
+                        </tr>
+                    @endforeach
+                    <tr class="font-bold">
+                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">စုစုပေါင်း အမှုထမ်း</td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count())) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                    </tr>
+                    <tr class="font-bold">
+                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">စုစုပေါင်း အရာထမ်း အမှုထမ်း</td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count())) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-black text-center p-2">၁</td>
+                        <td class="border border-black text-center p-2">နေ့စား</td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count())) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                    </tr>
+                    <tr class="font-bold">
+                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">စုစုပေါင်း ဝန်ထမ်းဦးရေ</td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count())) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count())) }}
+                        </td>
+                    </tr>
+                </tbody>
               </table>
-
-
         </div>
     </div>
 </div>
