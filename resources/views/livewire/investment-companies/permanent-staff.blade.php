@@ -1,16 +1,8 @@
 <div class="w-full">
     <div class="md:w-full h-[83vh] overflow-y-auto">
-        {{-- <div class="w-full mx-auto px-3 py-4">
-            @include('table', [
-                'data_values' => $ethnic_types,
-                'modal' => 'modals/ethnic_modal',
-                'id' => $ethnic_type_id,
-                'title' => 'Ethnic',
-                'search_id' => 'ethnic_type_search',
-                'columns' => ['No', 'Name', 'Action'],
-                'column_vals' => ['name'],
-            ])
-        </div> --}}
+        <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            <br><br>
 
         <h1 class="font-bold text-center text-base my-2">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
         <h2 class="text-center text-base mb-2">အမြဲတမ်းဝန်ထမ်းအင်အားစာရင်း</h2>

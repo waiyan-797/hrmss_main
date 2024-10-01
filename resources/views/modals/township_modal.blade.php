@@ -9,7 +9,7 @@
                 <input required type="text" wire:model="township_name" id="name" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 @error('township_name') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
             </div>
-            <div class="mb-4">
+            {{-- <div class="mb-4">
                 <label for="district" class="block mb-1 text-gray600 dark:text-blue-500 font-arial">ခရိုင်
                 </label>
                 <div class="relative">
@@ -19,6 +19,21 @@
                         <option value="" selected>ခရိုင်ရွေးပါ</option>
                         @foreach ($districts as $district)
                             <option value="{{ $district->id }}"> {{ $district->name }} </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div> --}}
+            <div class="mb-4">
+                <label for="region" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">ပြည်နယ်/တိုင်းဒေသကြီး
+
+                </label>
+                <div class="relative">
+                    <select
+                        wire:model="region_name"
+                        class="text-sm font-arial block w-full mb-4 p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                        <option value="" selected>ပြည်နယ်/တိုင်းဒေသကြီးရွေးပါ</option>
+                        @foreach ($regions as $region)
+                            <option value="{{ $region->id }}"> {{ $region->name }} </option>
                         @endforeach
                     </select>
                 </div>

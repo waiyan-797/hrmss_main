@@ -169,50 +169,58 @@
         <x-input-label :value="__('လက်ရှိနေရပ်လိပ်စာ အပြည့်အစုံ (လမ်း,ရပ်ကွက်,မြို့/မြို့နယ်,ခရိုင်,ပြည်နယ်/တိုင်းဒေသကြီး)')" />
         <div class="flex flex-row gap-2">
             <div>
-                <x-text-input wire:model="current_address_street" placeholder="လမ်း" id="current_address_street" name="current_address_street" type="text" class="mt-1 block w-full" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('current_address_street')" />
+                <x-select wire:model.change="current_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="current_address_region_id" name="current_address_region_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('current_address_region_id')" />
+            </div>
+            {{-- <div>
+                <x-select wire:model.change="current_address_district_id" :values="$current_address_districts" placeholder="ခရိုင်" id="current_address_district_id" name="current_address_district_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('current_address_district_id')" />
+            </div> --}}
+            <div>
+                <x-select wire:model="current_address_township_or_town_id" :values="$current_address_townships" placeholder="မြို့/မြို့နယ်" id="current_address_township_or_town_id" name="current_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('current_address_township_or_town_id')" />
             </div>
             <div>
                 <x-text-input wire:model="current_address_ward" placeholder="ရပ်ကွက်" id="current_address_ward" name="current_address_ward" type="text" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_ward')" />
             </div>
             <div>
-                <x-select wire:model.change="current_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="current_address_region_id" name="current_address_region_id" class="mt-1 block w-full" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('current_address_region_id')" />
+                <x-text-input wire:model="current_address_street" placeholder="လမ်း" id="current_address_street" name="current_address_street" type="text" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('current_address_street')" />
             </div>
-            <div>
-                <x-select wire:model.change="current_address_district_id" :values="$current_address_districts" placeholder="ခရိုင်" id="current_address_district_id" name="current_address_district_id" class="mt-1 block w-full" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('current_address_district_id')" />
-            </div>
-            <div>
-                <x-select wire:model="current_address_township_or_town_id" :values="$current_address_townships" placeholder="မြို့/မြို့နယ်" id="current_address_township_or_town_id" name="current_address_township_or_town_id" class="mt-1 block w-full" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('current_address_township_or_town_id')" />
-            </div>
+            
+           
+            
+            
         </div>
     </div>
     <div class="col-span-3">
         <x-input-label :value="__('အမြဲတမ်းနေရပ်လိပ်စာ အပြည့်အစုံ (လမ်း,ရပ်ကွက်,မြို့/မြို့နယ်,ခရိုင်,ပြည်နယ်/တိုင်းဒေသကြီး)')" />
         <div class="flex flex-row gap-2">
             <div>
-                <x-text-input wire:model="permanent_address_street" placeholder="လမ်း" id="permanent_address_street" name="permanent_address_street" type="text" class="mt-1 block w-full" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_street')" />
+                <x-select wire:model.change="permanent_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="permanent_address_region_id" name="permanent_address_region_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_region_id')" />
             </div>
+             {{-- <div>
+                <x-select wire:model.change="permanent_address_district_id" :values="$permanent_address_districts" placeholder="ခရိုင်" id="permanent_address_district_id" name="permanent_address_district_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_district_id')" />
+            </div> --}}
+            <div>
+                <x-select wire:model="permanent_address_township_or_town_id" :values="$permanent_address_townships" placeholder="မြို့/မြို့နယ်" id="permanent_address_township_or_town_id" name="permanent_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_township_or_town_id')" />
+            </div>
+            
             <div>
                 <x-text-input wire:model="permanent_address_ward" placeholder="ရပ်ကွက်" id="permanent_address_ward" name="permanent_address_ward" type="text" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_ward')" />
             </div>
             <div>
-                <x-select wire:model.change="permanent_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="permanent_address_region_id" name="permanent_address_region_id" class="mt-1 block w-full" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_region_id')" />
+                <x-text-input wire:model="permanent_address_street" placeholder="လမ်း" id="permanent_address_street" name="permanent_address_street" type="text" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_street')" />
             </div>
-            <div>
-                <x-select wire:model.change="permanent_address_district_id" :values="$permanent_address_districts" placeholder="ခရိုင်" id="permanent_address_district_id" name="permanent_address_district_id" class="mt-1 block w-full" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_district_id')" />
-            </div>
-            <div>
-                <x-select wire:model="permanent_address_township_or_town_id" :values="$permanent_address_townships" placeholder="မြို့/မြို့နယ်" id="permanent_address_township_or_town_id" name="permanent_address_township_or_town_id" class="mt-1 block w-full" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_township_or_town_id')" />
-            </div>
+            
+           
+            
         </div>
     </div>
     <div>

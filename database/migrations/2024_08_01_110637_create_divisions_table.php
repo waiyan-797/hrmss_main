@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Department;
 use App\Models\DivisionType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->text('name');
             $table->text('nick_name');
             $table->foreignIdFor(DivisionType::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(Department::class)->nullable()->nullOnDelete();
             $table->timestamps();
         });
     }

@@ -139,13 +139,13 @@
                                     <td style="border: none;">၄။</td>
                                     <td style="border: none;">အသက်(မွေးနေ့သက္ကရာဇ်)</td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->dob }}</td>
+                                    <td style="border: none;">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၅။</td>
                                     <td style="border: none;">လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ</td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->ethnic_id ? $staff->ethnic->name : '-' }}/{{ $staff->religion_id ? $staff->religion->name : '-' }}</td>
+                                    <td style="border: none;">{{ $staff->ethnic->name }}/{{ $staff->religion?->name }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၆။</td>
@@ -204,7 +204,7 @@
 
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->nrc }}</td>
+                                    <td style="border: none;">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</td>
                                 </tr>
 
                                 <tr>
@@ -296,6 +296,15 @@
                                     <td style="border: none;">{{ $staff->military_served_army }}</td>
                                 </tr>
                                 <tr>
+                                    <td style="border: none;">(ဇ)
+                                    </td>
+                                    <td style="border: none;">တပ်တွင်းရာဇဝင်အကျဥ်း/ပြစ်မှု
+
+                                    </td>
+                                    <td style="border: none;">-</td>
+                                    <td style="border: none;">{{ $staff->military_brief_history_or_penalty }}</td>
+                                </tr>
+                                <tr>
                                     <td style="border: none;">(ဈ)
                                     </td>
                                     <td style="border: none;">အငြိမ်းစားလစာ
@@ -304,23 +313,46 @@
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">{{ $staff->military_pension }}</td>
                                 </tr>
-                                <tr>
-                                    <td style="border: none;">၁၈။
-                                    </td>
-                                    <td style="border: none;">ပညာအရည်အချင်း
-                                    </td>
-                                    <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->education_name }}</td>
-                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="section">
+                            <div class="section-title">
+                                <label>၁၈။ </label>
+                                <h2 class="text-base">ပညာအရည်အချင်း</h2>
+                            </div>
+                            <div class="table-container">
+                                <table class="table">
+                                    <thead class="thead-bg">
+                                        <tr>
+                                            <th>Education Group</th>
+                                            <th>Education Type</th>
+                                            <th>Education</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($staff->staff_educations as $education)
+                                        <tr>
+                                            <td>{{$loop->index + 1}}</td>
+                                            <td>{{$education->education_group->name}}</td>
+                                            <td>{{$education->education_type->name}}</td>
+                                            <td>{{$education->education->name}}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    
+                               
+                                <table style="border: none;">
+                                    <tbody>
                                 <tr>
                                     <td style="border: none;">၁၉။
                                     </td>
                                     <td style="border: none;">အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာနှင့် ဇာတိနှင့် အလုပ်အကိုင်
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->father_name }}၊
-                                        {{ $staff->father_ethnic_id }}၊ {{ $staff->father_religion_id }}၊
-                                        {{ $staff->father_place_of_birth }}၊ {{ $staff->father_occupation }}</td>
+                                    <td style="border: none;">{{ $staff->father_name.'၊'.$staff->father_ethnic?->name.'၊'.$staff->father_religion?->name.'၊'.$staff->father_place_of_birth.'၊'.$staff->father_occupation }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၀။
@@ -328,7 +360,7 @@
                                     <td style="border: none;">၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->father_address_township_or_town_id }}</td>
+                                    <td style="border: none;">{{ $staff->father_address_street.'၊'.$staff->father_address_ward.'၊'.$staff->father_address_township_or_town?->name.'၊'.$staff->father_address_district?->name.'၊'.$staff->father_address_region?->name }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၁။
@@ -336,9 +368,7 @@
                                     <td style="border: none;">အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာနှင့် ဇာတိနှင့် အလုပ်အကိုင်
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->mother_name }}၊
-                                        {{ $staff->mother_ethnic_id }}၊ {{ $staff->mother_religion_id }}၊
-                                        {{ $staff->mother_place_of_birth }}၊ {{ $staff->mother_occupation }}</td>
+                                    <td style="border: none;">{{ $staff->mother_name.'၊'.$staff->mother_ethnic?->name.'၊'.$staff->mother_religion?->name.'၊'.$staff->mother_place_of_birth.'၊'.$staff->mother_occupation }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၂။
@@ -346,7 +376,7 @@
                                     <td style="border: none;">၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->mother_address_township_or_town_id }}</td>
+                                    <td style="border: none;">{{ $staff->mother_address_street.'၊'.$staff->mother_address_ward.'၊'.$staff->mother_address_township_or_town?->name.'၊'.$staff->mother_address_district?->name.'၊'.$staff->mother_address_region?->name }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၃။
@@ -363,7 +393,7 @@
                                     <td style="border: none;">လက်ရှိအလုပ်အကိုင်နှင့်အဆင့်
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->current_rank_id }}</td>
+                                    <td style="border: none;">{{ $staff->current_rank->name }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၅။
@@ -395,7 +425,7 @@
                                     <td style="border: none;">လစာဝင်ငွေ
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->payscale_id }}</td>
+                                    <td style="border: none;">{{ $staff->payscale?->name }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၉။
@@ -404,18 +434,46 @@
 
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;"></td>
+                                    <td style="border: none;">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၊
+                                        ရန်ကုန်မြို့။</td>
                                 </tr>
-                                <tr>
-                                    <td style="border: none;">၃၀။
-                                    </td>
-                                    <td style="border: none;">အလုပ်အကိုင်အတွက် ထောက်ခံသူများ
-                                    </td>
-                                    <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->recommend_by }}</td>
-                                </tr>
+                                
                             </tbody>
                         </table>
+                        
+                     <div class="section">
+                        <div class="section-title">
+                            <label>၃၀။ </label>
+                            <h2 class="text-base">အလုပ်အကိုင်အတွက် ထောက်ခံသူများ</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="table">
+                                <thead class="thead-bg">
+                                    <tr>
+                                        <th>စဥ်</th>
+                                        <th>ထောက်ခံသူ</th>
+                                        <th>ဝန်ကြီးဌာန</th>
+                                        <th>ဦးစီးဌာန</th>
+                                        <th>ရာထူး</th>
+                                        <th>အကြောင်းအရာ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($staff->recommendations as $index => $recommendation)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $recommendation->recommend_by }}</td>
+                                        <td>{{ $recommendation->ministry}}</td>
+                                        <td>{{ $recommendation->department}}</td>
+                                        <td>{{ $recommendation->rank}}</td>
+                                        <td>{{ $recommendation->remark }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                
 
 
                         <div class="container">
@@ -440,14 +498,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($staff->postings as $index => $posting)
                                             <tr>
-                                                <td>(က)</td>
-                                                <td>အကြီးတန်းစာရေး</td>
-                                                <td>၂၂-၆-၂၀၀၉</td>
-                                                <td>၂၀-၃-၂၀၁၁</td>
-                                                <td>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန။နေပြည်တော်</td>
-                                                <td>သထုံ</td>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>{{ $posting->rank->name ?? '' }}</td>
+                                                <td>{{ $posting->from_date }}</td>
+                                                <td>{{ $posting->to_date }}</td>
+                                                <td>
+                                                    {{ $posting->division->name ?? '' }} / {{ $posting->department->name ?? '' }}
+                                                </td>
+                                                <td>{{ $posting->location }}</td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -471,14 +533,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($staff->siblings as $sibling)
                                             <tr>
-                                                <td>ဒေါ်ယုယုနိုင်</td>
-                                                <td>ဗမာ၊ဗုဒ္ဓဘာသာ</td>
-                                                <td>နတ္တလင်းမြို့</td>
-                                                <td>ဈေးသည်</td>
-                                                <td>မြောင်းတကာရွာ၊မှော်ဘီမြို့၊ရန်ကုန်၊တိုင်းဒေသကြီး။</td>
-                                                <td>အစ်မ</td>
+                                                <td>{{ $sibling->name }}</td>
+                                                <td>{{ $sibling->ethnic?->name}}၊{{ $sibling->religion?->name  }}</td>
+                                                <td>{{ $sibling->place_of_birth }}</td>
+                                                <td>{{ $sibling->occupation }}</td>
+                                                <td>{{ $sibling->address }}</td>
+                                                <td>{{ $sibling->relation->name ?? '' }}</td>
                                             </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -503,15 +567,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>၁</td>
-                                                <td>ဦးဇော်မျိုးခိုင်</td>
-                                                <td>ဗမာ၊ဗုဒ္ဓဘာသာ</td>
-                                                <td>နတ္တလင်းမြို့</td>
-                                                <td>တောင်သူ</td>
-                                                <td>လယ်တာငယ်ရွာ၊နတ္တလင်းမြို့၊ပဲခူးတိုင်းဒေသကြီး။</td>
-                                                <td>ညီ</td>
-                                            </tr>
+                                           
+                                            @foreach ($staff->fatherSiblings as $index => $sibling)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $sibling->name }}</td>
+                                        <td>
+                                            {{ $sibling->ethnic?->name }}၊{{ $sibling->religion?->name }}
+                                        </td>
+                                        <td>{{ $sibling->place_of_birth }}</td>
+                                        <td>{{ $sibling->occupation }}</td>
+                                        <td>{{ $sibling->address }}</td>
+                                        <td>{{ $sibling->relation?->name }}</td>
+                                    </tr>
+                                @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -536,15 +605,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>၁</td>
-                                                <td>ဦးကျော်စိုး</td>
-                                                <td>ဗမာ၊ဗုဒ္ဓဘာသာ</td>
-                                                <td>နတ္တလင်းမြို့</td>
-                                                <td>တောင်သူ</td>
-                                                <td>မြို့ပါတ်လမ်း၊ဇီးကုန်းမြို့၊ပဲခူးတိုင်းဒေသကြီး။</td>
-                                                <td>မောင်</td>
-                                            </tr>
+                                           
+                                            @foreach($staff->motherSiblings as $index => $sibling)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $sibling->name }}</td>
+                                        <td>
+                                            {{ $sibling->ethnic->name ?? '' }}၊{{ $sibling->religion->name ?? '' }}
+                                        </td>
+                                        <td>{{ $sibling->place_of_birth }}</td>
+                                        <td>{{ $sibling->occupation }}</td>
+                                        <td>{{ $sibling->address }}</td>
+                                        <td>{{ $sibling->relation->name ?? '' }}</td>
+                                    </tr>
+                                @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -569,15 +643,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($staff->spouses as $index => $spouse)
                                             <tr>
-                                                <td></td>
-                                                <td>မရှိပါ</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>{{ $spouse->name }}</td>
+                                                <td>
+                                                    {{ $spouse->ethnic->name }} / {{ $spouse->religion->name }}
+                                                </td>
+                                                <td>{{ $spouse->place_of_birth }}</td>
+                                                <td>{{ $spouse->occupation }}</td>
+                                                <td>{{ $spouse->address }}</td>
+                                                <td>{{ $spouse->relation?->name }}</td>
                                             </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -602,15 +680,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td>မရှိပါ</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                            @foreach ($staff->children as $index => $child)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $child->name }}</td>
+                                        <td>
+                                            {{ $child->ethnic?->name }}/{{ $child->religion?->name }}
+                                        </td>
+                                        <td>{{ $child->place_of_birth }}</td>
+                                        <td>{{ $child->occupation }}</td>
+                                        <td>{{ $child->address }}</td>
+                                        <td>{{ $child->relation?->name }}</td>
+                                    </tr>
+                                @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -636,15 +718,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($staff->spouseSiblings as $index => $sibling)
                                             <tr>
-                                                <td></td>
-                                                <td>မရှိပါ</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>{{ $sibling->name }}</td>
+                                                <td>
+                                                    {{ $sibling->ethnic->name ?? '' }} / {{ $sibling->religion->name ?? '' }}
+                                                </td>
+                                                <td>{{ $sibling->place_of_birth }}</td>
+                                                <td>{{ $sibling->occupation }}</td>
+                                                <td>{{ $sibling->address }}</td>
+                                                <td>{{ $sibling->relation->name ?? '' }}</td>
                                             </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -669,15 +755,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($staff->spouseFatherSiblings as $index => $sibling)
                                             <tr>
-                                                <td></td>
-                                                <td>မရှိပါ</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>{{ $sibling->name }}</td>
+                                                <td>
+                                                    {{ optional($sibling->ethnic)->name ?? ' - ' }}/{{ optional($sibling->religion)->name ?? ' - ' }}
+                                                </td>
+                                                <td>{{ $sibling->place_of_birth }}</td>
+                                                <td>{{ $sibling->occupation }}</td>
+                                                <td>{{ $sibling->address }}</td>
+                                                <td>{{ optional($sibling->relation)->name ?? ' - ' }}</td>
                                             </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -703,15 +793,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td>မရှိပါ</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                            @foreach($staff->spouseMotherSiblings as $index => $sibling)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $sibling->name }}</td>
+                                        <td>{{ $sibling->ethnic?->name }} / {{ $sibling->religion?->name }}</td>
+                                        <td>{{ $sibling->place_of_birth }}</td>
+                                        <td>{{ $sibling->occupation }}</td>
+                                        <td>{{ $sibling->address }}</td>
+                                        <td>{{ $sibling->relation?->name }}</td>
+                                    </tr>
+                                @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -727,7 +819,7 @@
                                     <td style="border: none; width: 35%;">မိမိနှင့်ခင်မင်ရင်းနှီးသော နိုင်ငံခြားသားရှိ/မရှိ၊ ရှိက မည်သည့် အလုပ်အကိုင်၊ လူမျိူး၊ တိုင်းပြည်၊ မည်ကဲ့သို့ ရင်းနှီးသည်
                                     </td>
                                     <td style="border: none; width: 5%;">-</td>
-                                    <td style="border: none; width: 55%;">{{ $staff->foreigner_friend_name }}</td>
+                                    <td style="border: none; width: 55%;">{{ $staff->family_in_politics }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none; width: 5%;">၁။
@@ -735,7 +827,9 @@
                                     <td style="border: none; width: 35%;">နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ်ဖော်ပြရန်)
                                     </td>
                                     <td style="border: none; width: 5%;">-</td>
-                                    <td style="border: none; width: 55%;"></td>
+                                    <td style="border: none; width: 55%;">@foreach($staff->schools as $school)
+                                        {{ $school->school_name}}/{{ $school->year}}
+                                        @endforeach</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none; width: 5%;">၂။
@@ -770,7 +864,7 @@
                                     <td style="border: none; width: 35%;">လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်
                                     </td>
                                     <td style="border: none; width: 5%;">-</td>
-                                    <td style="border: none; width: 55%;"></td>
+                                    <td style="border: none; width: 55%;">{{ $staff->past_occupation}}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none; width: 5%;">၆။
@@ -778,7 +872,7 @@
                                     <td style="border: none; width: 35%;">တောခိုခဲ့ဖူးလျှင်(သို့)သောင်းကျန်းသူများကြီးစိုးသော နယ်မြေတွင် နေခဲ့ဖူးလျှင်လုပ်ကိုင်ဆောင်ရွက်ချက်များကိုဖော်ပြပါ
                                     </td>
                                     <td style="border: none; width: 5%;">-</td>
-                                    <td style="border: none; width: 55%;"></td>
+                                    <td style="border: none; width: 55%;">{{ $staff->revolution }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none; width: 5%;">၇။
@@ -804,7 +898,7 @@
                                     <td style="border: none; width: 35%;">စစ်ဘက်/ နယ်ဘက်/ ရဲဘက်နှင့်နိုင်ငံရေးဘက်တွင် ခင်မင်ရင်းနှီးသော မိတ်ဆွေများရှိ/ မရှိ
                                     </td>
                                     <td style="border: none; width: 5%;">-</td>
-                                    <td style="border: none; width: 55%;"></td>
+                                    <td style="border: none; width: 55%;">{{ $staff->has_military_friend}}</td>
                                 </tr>
                             </table>
                      
@@ -832,14 +926,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                           
-                                        </tr>
+                                        @foreach($staff->abroads as $index => $abroad)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $abroad->country->name ?? 'မရှိပါ' }}</td>
+                                        <td>{{ $abroad->particular }}</td>
+                                        <td>{{ $abroad->meet_with }}</td>
+                                        <td>{{ $abroad->from_date }} - {{ $abroad->to_date }}</td>
+                                    </tr>
+                                @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -853,7 +948,7 @@
                                 <td style="border: none; width: 35%;">မိမိနှင့်ခင်မင်ရင်းနှီးသော နိုင်ငံခြားသားရှိ/မရှိ၊ ရှိက မည်သည့် အလုပ်အကိုင်၊ လူမျိူး၊ တိုင်းပြည်၊ မည်ကဲ့သို့ ရင်းနှီးသည်
                                 </td>
                                 <td style="border: none; width: 5%;">-</td>
-                                <td style="border: none; width: 55%;">{{ $staff->foreigner_friend_name }}</td>
+                                <td style="border: none; width: 55%;">{{ $staff->foreigner_friend_name.'၊'.$staff->foreigner_friend_occupation.'၊'.$staff->foreigner_friend_nationality?->name.'၊'.$staff->foreigner_friend_country?->name.'၊'.$staff->foreigner_friend_how_to_know }}</td>
                             </tr>
                             <tr>
                                 <td style="border: none; width: 5%;">၁၂။</td>
@@ -867,7 +962,7 @@
                                 <td style="border: none; width: 35%;">ရာဇဝတ်ပြစ်မှုခံရခြင်း ရှိ/မရှိ
                                 </td>
                                 <td style="border: none; width: 5%;">-</td>
-                                <td style="border: none; width: 55%;"></td>
+                                <td style="border: none; width: 55%;">{{en2mm($staff->punishments->count())}}</td>
                             </tr>
                         </table>
                         <div style="margin-bottom: 16px; font-size: 13px;">
@@ -897,10 +992,10 @@
                                                     -</td>
                                             </tr>
                                             <tr>
-                                                <td style="font-size: 13px; border: none;">အမည် - {{ auth()->user()->name }}</td>
+                                                <td style="font-size: 13px; border: none;">အမည် - </td>
                                             </tr>
                                             <tr>
-                                                <td style="font-size: 13px; border: none;">အဆင့် - {{ auth()->user()->role->name ?? '' }}</td>
+                                                <td style="font-size: 13px; border: none;">အဆင့် - </td>
                                             </tr>
                                             <tr>
                                                 <td style="font-size: 13px; border: none;">တပ်/ ဌာန -</td>

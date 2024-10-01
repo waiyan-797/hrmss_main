@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Ministry extends Model
 {
     use HasFactory;
+    public function departments()
+    {
+        return $this->hasMany(Department::class);
+    }
+
 }

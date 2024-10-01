@@ -48,6 +48,8 @@
                         ['route_name' => 'relation', 'name' => 'တော်စပ်ပုံ'],
                         ['route_name' => 'leave', 'name' => 'ခွင့်'],
                         ['route_name' => 'ministry', 'name' => 'ဝန်ကြီးဌာန'],
+                        ['route_name' => 'language', 'name' => 'ဘာသာစကား'],
+                        ['route_name' => 'department', 'name' => 'ဌာန'],
                     ]" />
             </li>
 
@@ -146,9 +148,6 @@
                         ['route_name' => 'blood_staff_list6', 'name' => 'blood_staff_list6'],
                         ['route_name' => 'we10over_staff_list', 'name' => 'we10over_staff_list'],
                         ['route_name' => 'age18over_staff_list', 'name' => 'age18over_staff_list'],
-                        ['route_name' => 'permanent_staff', 'name' => 'permanent_staff'],
-                        ['route_name' => 'yangon_office_staff', 'name' => 'yangon_office_staff'],
-                        ['route_name' => 'yangon_office_staff2', 'name' => 'yangon_office_staff2'],
                         ['route_name' => 'planning_accounting', 'name' => 'planning_accounting'],
 
 
@@ -163,6 +162,7 @@
 
                     '
                     :lists="[
+                        ['route_name' => 'staff_salary', 'name' => 'staff_salary'],
                         ['route_name' => 'staff_salary_list', 'name' => 'staff_salary_list'],
                         ['route_name' => 'staff_salary_list2', 'name' => 'staff_salary_list2'],
                         ['route_name' => 'staff_salary_list3', 'name' => 'staff_salary_list3'],
@@ -170,6 +170,20 @@
                         ['route_name' => 'march_salary_list', 'name' => 'march_salary_list'],
                         ['route_name' => 'october_salary_list', 'name' => 'october_salary_list'],
                         ['route_name' => 'rank_salary_list', 'name' => 'rank_salary_list'],
+                        ['route_name' => 'permanent_staff', 'name' => 'permanent_staff'],
+                        ['route_name' => 'yangon_office_staff', 'name' => 'yangon_office_staff'],
+                        ['route_name' => 'yangon_office_staff2', 'name' => 'yangon_office_staff2'],
+                        ['route_name' => 'january_salary_list', 'name' => 'january_salary_list'],
+                        ['route_name' => 'april_salary_list', 'name' => 'april_salary_list'],
+                        ['route_name' => 'payscale_list', 'name' => 'payscale_list'],
+                        ['route_name' => 'salary_list', 'name' => 'salary_list'],
+                        ['route_name' => 'no_salary_leave', 'name' => 'no_salary_leave'],
+                        ['route_name' => 'started_salary_list', 'name' => 'started_salary_list'],
+                        ['route_name' => 'finance_salary_list', 'name' => 'finance_salary_list'],
+                        ['route_name' => 'yangon_staff_april_salary_list', 'name' => 'YangonStaffAprilSalaryList'],
+                        ['route_name' => 'finance_year_salary_list', 'name' => 'FinanceYearSalaryList'],
+                        ['route_name' => 'information_list', 'name' => 'InformationList'],
+                        ['route_name' => 'last_pay_certificate', 'name' => 'LastPayCertificate'],
 
 
                     ]" />

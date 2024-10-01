@@ -52,6 +52,8 @@ class DatabaseSeeder extends Seeder
             EthnicSeeder::class,
             EducationSeeder::class,
             PostSeeder::class,
+            MaritalStatusSeeder::class,
+
         ]);
     }
 }

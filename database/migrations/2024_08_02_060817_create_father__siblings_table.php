@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Ethnic;
+use App\Models\Gender;
 use App\Models\Relation;
 use App\Models\Religion;
 use App\Models\Staff;
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignIdFor(Ethnic::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Religion::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Gender::class)->nullable()->constrained()->nullOnDelete();
             $table->string('place_of_birth');
             $table->string('occupation');
             $table->string('address');

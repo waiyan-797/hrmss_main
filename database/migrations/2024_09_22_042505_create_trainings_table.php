@@ -21,14 +21,14 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Staff::class)->nullable()->constrained()->cascadeOnDelete();
             $table->foreignIdFor(TrainingType::class)->nullable()->constrained()->nullOnDelete();
-            $table->string('diploma_name');
-            $table->integer('fees');
+            $table->string('diploma_name')->nullable();
+            $table->integer('fees')->nullable();
             $table->date('from_date');
             $table->date('to_date');
-            $table->string('location');
+            $table->string('location')->nullable();
             $table->foreignIdFor(Country::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(TrainingLocation::class)->nullable()->constrained()->nullOnDelete();
-            $table->string('remark');
+            $table->string('remark')->nullable();
             $table->timestamps();
         });
     }

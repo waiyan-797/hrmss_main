@@ -1,15 +1,9 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $ethnic_types,
-                'modal' => 'modals/ethnic_modal',
-                'id' => $ethnic_type_id,
-                'title' => 'Ethnic',
-                'search_id' => 'ethnic_type_search',
-                'columns' => ['No', 'Name', 'Action'],
-                'column_vals' => ['name'],
-            ]) --}}
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            <br><br>
 
             <h1 class="text-center text-sm mb-2">နိုင်ငံတော်စီမံအုပ်ချုပ်ရေးကောင်စီလက်ထက်<br>ရင်းနှီးမြှပ်နှံမှုနှင့်
                 နိုင်ငံခြားစီးပွားဆက်သွယ်‌ရေးဝန်ကြီးဌာန၊ ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၏</h1>
@@ -122,34 +116,6 @@
                     </tr>
                 </tbody>
             </table>
-
-            {{-- <div class="">
-                <div class="flex justify-start mb-2">
-                    <p class="md:w-1/5">လက်မှတ်</p>
-                    <p class="md:w-5">၊</p>
-                    <p></p>
-                </div>
-
-                <div class="flex justify-start mb-2">
-                    <p class="md:w-1/5">အမည်</p>
-                    <p class="md:w-5">၊</p>
-                    <p>ဒေါ်နှင်းစုမွန်
-                    </p>
-                </div>
-
-                <div class="flex justify-start mb-2">
-                    <p class="md:w-1/5">ရာထူး</p>
-                    <p class="md:w-5">၊</p>
-                    <p>လက်ထောက်ညွှန်ကြားရေးမှူး</p>
-                </div>
-
-                <div class="flex justify-start mb-2">
-                    <p class="md:w-1/5">ဆက်သွယ်ရန်ဖုန်း</p>
-                    <p class="md:w-5">၊</p>
-                    <p></p>
-                </div>
-            </div> --}}
-
             <div class="mx-60 my-8">
                 <div class="flex justify-end mb-2">
                     <p class="md:w-1/5 text-right">လက်မှတ်</p>

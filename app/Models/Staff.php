@@ -32,11 +32,20 @@ class Staff extends Model
         return $this->belongsTo(Education::class, 'education_id');
     }
     public function pension_types(){
-        return $this->belongsTo(pensionType::class);
+        return $this->hasMany(pensionType::class);
     }
 
 public function country(){
     return $this->belongsTo(Country::class);
+}
+public function siblings(){
+    return $this->hasMany(Sibling::class);
+}
+public function fatherSiblings(){
+    return $this->hasMany(FatherSibling::class);
+}
+public function motherSiblings(){
+    return $this->hasMany(MotherSibling::class);
 }
 
 
@@ -89,6 +98,15 @@ public function country(){
 
     public function spouses(){
         return $this->hasMany(Spouse::class);
+    }
+    public function spouseSiblings(){
+        return $this->hasMany(SpouseSibling::class);
+    }
+    public function spouseFatherSiblings(){
+        return $this->hasMany(SpouseFatherSibling::class);
+    }
+    public function spouseMotherSiblings(){
+        return $this->hasMany(SpouseMotherSibling::class);
     }
 
     public function children(){
@@ -145,6 +163,9 @@ public function country(){
     public function awardings(){
         return $this->hasMany(Awarding::class);
     }
+    public function awards(){
+        return $this->hasMany(Award::class);
+    }
 
     public function abroads(){
         return $this->hasMany(Abroad::class);
@@ -164,5 +185,12 @@ public function country(){
 
     public function current_division(){
         return $this->belongsTo(Division::class);
+    }
+    public function marital_statuses(){
+        return $this->belongsTo(MaritalStatus::class);
+
+    }
+    public function socialActivities(){
+        return $this->hasMany(SocialActivity::class);
     }
 }

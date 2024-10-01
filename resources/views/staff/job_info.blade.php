@@ -66,7 +66,7 @@
         <x-input-error class="mt-2" :messages="$errors->get('current_salary')" />
     </div>
     <div>
-        <x-input-label for="လက်ရှိနှစ်တိုးအကြိမ်ရေ" :value="__('လက်ရှိနှစ်တိုးအကြိမ်ရေ')" />
+        <x-input-label for="လက်ရှိရာထူးတွင်နှစ်တိုးအကြိမ်" :value="__('လက်ရှိရာထူးတွင်နှစ်တိုးအကြိမ်')" />
         <x-text-input wire:model="current_increment_time" id="current_increment_time" name="current_increment_time" type="number" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('current_increment_time')" />
     </div>
@@ -117,10 +117,10 @@
 
 <div class="w-full h-auto py-5">
     <div class="pb-2">
-        <x-input-label :value="__('အဆင့်')" class="font-semibold"/>
+        <x-input-label :value="__('လုပ်ကိုင်ခဲ့ဖူးသည့်အလုပ်အကိုင်')" class="font-semibold"/>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['ရာထူး', 'အဆင့်', 'မှ', 'ထိ', 'ဌာန', 'ဌာနခွဲ', 'နေရာ', 'မှတ်ချက်'],
+        'column_names' => ['ရာထူး', 'အဆင့်', 'မှ', 'ထိ', 'ဌာန', 'ဌာနခွဲ', 'နေရာ', 'တည်နေရာ'],
         'add_event' => 'add_posting',
         'column_vals' => $postings,
         'column_types' => [

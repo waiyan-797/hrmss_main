@@ -1,16 +1,9 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            {{-- @include('table', [
-                'data_values' => $ethnic_types,
-                'modal' => 'modals/ethnic_modal',
-                'id' => $ethnic_type_id,
-                'title' => 'Ethnic',
-                'search_id' => 'ethnic_type_search',
-                'columns' => ['No', 'Name', 'Action'],
-                'column_vals' => ['name'],
-            ]) --}}
-
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            <br><br>
             <h1 class="font-bold text-center text-sm mb-3">ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <h2 class="font-bold text-center text-sm mb-3">၂၀၂၄-၂၀၂၅ ဘဏ္ဍာရေးနှစ်</h2>
             <h2 class="font-bold text-center text-sm mb-6">ရန်ကုန်(ရုံးချုပ်)ရှိ နေ့စားဝန်ထမ်း(၈)ဦး၏ မေလ လစာစာရင်း</h2>

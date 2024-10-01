@@ -51,6 +51,7 @@ class RegionSeeder extends Seeder
                 }
                 $district->townships()->updateOrCreate(
                     ['name' => $township_name],
+                    ['region_id' => $region->id],
                 );
             }
         });

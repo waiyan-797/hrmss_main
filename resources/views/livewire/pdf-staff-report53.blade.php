@@ -36,7 +36,7 @@
                     <label for="" class="md:w-5">၄။ </label>
                     <label for="name" class="md:w-1/3">အသက်(မွေးသက္ကရာဇ်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->dob }}</label>
+                    <label for="name" class="md:w-3/5">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</label>
                 </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -367,7 +367,6 @@
                                                         <td class="border border-black text-center p-2">{{ $recommendation->rank}}</td>
                                                         <td class="border border-black text-center p-2">{{ $recommendation->remark }}</td>
                                                     </tr>
-                                                
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -386,10 +385,10 @@
                             <thead>
                                 <tr>
                                     <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
-                                    <th rowspan="2" class="border border-black text-center p-2">အဆင့်</th>
+                                    <th rowspan="2" class="border border-black text-center p-2">အဆင့်/ရာထူး</th>
                                     <th colspan="2" class="border border-black text-center p-2">ကာလ</th>
-                                    <th rowspan="2" class="border border-black text-center p-2">တပ်/ဌာန</th>
-                                    <th rowspan="2" class="border border-black text-center p-2">နေရာ</th>
+                                    <th rowspan="2" class="border border-black text-center p-2">ဌာန/နေရာ</th>
+                                    <th rowspan="2" class="border border-black text-center p-2">မှတ်ချက်</th>
                                 </tr>
                                 <tr>
                                     <th class="border border-black text-center p-2">မှ</th>
@@ -400,13 +399,13 @@
                                 @foreach ($staff->postings as $index => $posting)
                                 <tr>
                                     <td class="border border-black text-center p-2">{{ $index + 1 }}</td>
-                                    <td class="border border-black text-center p-2">{{ $posting->current_rank->name ?? '' }}</td>
+                                    <td class="border border-black text-center p-2">{{ $posting->rank->name ?? '' }}</td>
                                     <td class="border border-black text-center p-2">{{ $posting->from_date }}</td>
                                     <td class="border border-black text-center p-2">{{ $posting->to_date }}</td>
                                     <td class="border border-black text-center p-2">
-                                        {{ $posting->division->name ?? '' }} / {{ $posting->department->name ?? '' }}
+                                        {{ $posting->division->name ?? '' }} / {{ $posting->department->name ?? '' }}/{{ $posting->location }}
                                     </td>
-                                    <td class="border border-black text-center p-2">{{ $posting->location }}</td>
+                                    <td class="border border-black text-center p-2">{{ $staff->remark}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -415,6 +414,7 @@
                 </div>
                 
 
+                
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၂။ </label>
@@ -433,24 +433,27 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">
-                                <tr>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black">ဗမာ၊ဗုဒ္ဓဘာသာ</td>
-                                    <td class="p-2 border border-black">နတ္တလင်းမြို့</td>
-                                    <td class="p-2 border border-black">ဈေးသည်</td>
-                                    <td class="p-2 border border-black">
-                                        မြောင်းတကာရွာ၊မှော်ဘီမြို့၊ရန်ကုန်၊တိုင်းဒေသကြီး။</td>
-                                    <td class="p-2 border border-black">အစ်မ</td>
-                                </tr>
+                                @foreach($staff->siblings as $sibling)
+                                    <tr>
+                                        <td class="p-2 border border-black">{{ $sibling->name }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->ethnic?->name}}၊{{ $sibling->religion?->name  }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->place_of_birth }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->occupation }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->address }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->relation->name ?? '' }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+                
 
+                
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၃။ </label>
-                        <h2 class= "text-base">အဘ၏ညီအကိုမောင်နှမများ</h2>
+                        <h2 class="text-base">အဘ၏ညီအကိုမောင်နှမများ</h2>
                     </div>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center ml-8">
@@ -466,25 +469,30 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">
-                                <tr>
-                                    <td class="p-2 border border-black">၁</td>
-                                    <td class="p-2 border border-black">ဦးဇော်မျိုးခိုင်</td>
-                                    <td class="p-2 border border-black">ဗမာ၊ဗုဒ္ဓဘာသာ</td>
-                                    <td class="p-2 border border-black">နတ္တလင်းမြို့</td>
-                                    <td class="p-2 border border-black">တောင်သူ</td>
-                                    <td class="p-2 border border-black">လယ်တာငယ်ရွာ၊နတ္တလင်းမြို့၊ပဲခူးတိုင်းဒေသကြီး။
-                                    </td>
-                                    <td class="p-2 border border-black">ညီ</td>
-                                </tr>
+                                @foreach ($staff->fatherSiblings as $index => $sibling)
+                                    <tr>
+                                        <td class="p-2 border border-black">{{ $index + 1 }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->name }}</td>
+                                        <td class="p-2 border border-black">
+                                            {{ $sibling->ethnic?->name }}၊{{ $sibling->religion?->name }}
+                                        </td>
+                                        <td class="p-2 border border-black">{{ $sibling->place_of_birth }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->occupation }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->address }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->relation?->name }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+                
 
+                
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၄။ </label>
-                        <h2 class= "text-base">အမိ၏ညီအကိုမောင်နှမများ</h2>
+                        <h2 class="text-base">အမိ၏ညီအကိုမောင်နှမများ</h2>
                     </div>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center ml-8">
@@ -500,25 +508,30 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">
-                                <tr>
-                                    <td class="p-2 border border-black">၁</td>
-                                    <td class="p-2 border border-black">ဦးကျော်စိုး</td>
-                                    <td class="p-2 border border-black">ဗမာ၊ဗုဒ္ဓဘာသာ</td>
-                                    <td class="p-2 border border-black">နတ္တလင်းမြို့</td>
-                                    <td class="p-2 border border-black">တောင်သူ</td>
-                                    <td class="p-2 border border-black">မြို့ပါတ်လမ်း၊ဇီးကုန်းမြို့၊ပဲခူးတိုင်းဒေသကြီး။
-                                    </td>
-                                    <td class="p-2 border border-black">မောင်</td>
-                                </tr>
+                                @foreach($staff->motherSiblings as $index => $sibling)
+                                    <tr>
+                                        <td class="p-2 border border-black">{{ $index + 1 }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->name }}</td>
+                                        <td class="p-2 border border-black">
+                                            {{ $sibling->ethnic->name ?? '' }}၊{{ $sibling->religion->name ?? '' }}
+                                        </td>
+                                        <td class="p-2 border border-black">{{ $sibling->place_of_birth }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->occupation }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->address }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->relation->name ?? '' }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+                
 
+                
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၅။ </label>
-                        <h2 class= text-base">ခင်ပွန်း၊ ဇနီးသည်</h2>
+                        <h2 class="text-base">ခင်ပွန်း၊ ဇနီးသည်</h2>
                     </div>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center ml-8">
@@ -534,24 +547,30 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                <tr>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black">မရှိပါ</td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                </tr>
+                                @foreach($staff->spouses as $index => $spouse)
+                                    <tr>
+                                        <td class="p-2 border border-black">{{ $index + 1 }}</td>
+                                        <td class="p-2 border border-black">{{ $spouse->name }}</td>
+                                        <td class="p-2 border border-black">
+                                            {{ $spouse->ethnic->name }} / {{ $spouse->religion->name }}
+                                        </td>
+                                        <td class="p-2 border border-black">{{ $spouse->place_of_birth }}</td>
+                                        <td class="p-2 border border-black">{{ $spouse->occupation }}</td>
+                                        <td class="p-2 border border-black">{{ $spouse->address }}</td>
+                                        <td class="p-2 border border-black">{{ $spouse->relation?->name }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+                
 
+                
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၆။ </label>
-                        <h2 class= "text-base">သားသမီးများ</h2>
+                        <h2 class="text-base">သားသမီးများ</h2>
                     </div>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center ml-8">
@@ -567,24 +586,30 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">
-                                <tr>
-                                    <td class="p-2 border border-black">၁</td>
-                                    <td class="p-2 border border-black">မရှိပါ</td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                </tr>
+                                @foreach ($staff->children as $index => $child)
+                                    <tr>
+                                        <td class="p-2 border border-black">{{ $index + 1 }}</td>
+                                        <td class="p-2 border border-black">{{ $child->name }}</td>
+                                        <td class="p-2 border border-black">
+                                            {{ $child->ethnic?->name }}/{{ $child->religion?->name }}
+                                        </td>
+                                        <td class="p-2 border border-black">{{ $child->place_of_birth }}</td>
+                                        <td class="p-2 border border-black">{{ $child->occupation }}</td>
+                                        <td class="p-2 border border-black">{{ $child->address }}</td>
+                                        <td class="p-2 border border-black">{{ $child->relation?->name }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+                
 
+                
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၇။ </label>
-                        <h2 class= "text-base">ခင်ပွန်း/ဇနီးသည်၏ ညီအကိုမောင်နှမများ</h2>
+                        <h2 class="text-base">ခင်ပွန်း/ဇနီးသည်၏ ညီအကိုမောင်နှမများ</h2>
                     </div>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center ml-8">
@@ -600,26 +625,32 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">
-                                <tr>
-                                    <td class="p-2 border border-black">၁</td>
-                                    <td class="p-2 border border-black">မရှိပါ</td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                </tr>
+                                @foreach($staff->spouseSiblings as $index => $sibling)
+                                    <tr>
+                                        <td class="p-2 border border-black">{{ $index + 1 }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->name }}</td>
+                                        <td class="p-2 border border-black">
+                                            {{ $sibling->ethnic->name ?? '' }} / {{ $sibling->religion->name ?? '' }}
+                                        </td>
+                                        <td class="p-2 border border-black">{{ $sibling->place_of_birth }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->occupation }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->address }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->relation->name ?? '' }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+                
 
+                
+                
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၈။ </label>
-                        <h2 class= "text-base">ခင်ပွန်း/ဇနီးသည် အဘနှင့်ညီအကိုမောင်နှမများ</h2>
+                        <h2 class="text-base">ခင်ပွန်း/ဇနီးသည် အဘနှင့်ညီအကိုမောင်နှမများ</h2>
                     </div>
-                    <h1 class= "text-base"> </h1>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center ml-8">
                             <thead>
@@ -634,24 +665,30 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">
-                                <tr>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black">မရှိပါ</td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                </tr>
+                                @foreach($staff->spouseFatherSiblings as $index => $sibling)
+                                    <tr>
+                                        <td class="p-2 border border-black">{{ $index + 1 }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->name }}</td>
+                                        <td class="p-2 border border-black">
+                                            {{ optional($sibling->ethnic)->name ?? ' - ' }}/{{ optional($sibling->religion)->name ?? ' - ' }}
+                                        </td>
+                                        <td class="p-2 border border-black">{{ $sibling->place_of_birth }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->occupation }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->address }}</td>
+                                        <td class="p-2 border border-black">{{ optional($sibling->relation)->name ?? ' - ' }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+                
 
+               
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၉။ </label>
-                        <h2 class= "text-base">ခင်ပွန်း/ဇနီးသည် အမိနှင့်ညီအကိုမောင်နှမများ</h2>
+                        <h2 class="text-base">ခင်ပွန်း/ဇနီးသည် အမိနှင့်ညီအကိုမောင်နှမများ</h2>
                     </div>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center ml-8">
@@ -667,19 +704,22 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                <tr>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black">မရှိပါ</td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                </tr>
+                                @foreach($staff->spouseMotherSiblings as $index => $sibling)
+                                    <tr>
+                                        <td class="p-2 border border-black">{{ $index + 1 }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->name }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->ethnic?->name }} / {{ $sibling->religion?->name }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->place_of_birth }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->occupation }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->address }}</td>
+                                        <td class="p-2 border border-black">{{ $sibling->relation?->name }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+                
 
                 <div class="flex justify-around w-full">
                     <label for="" class="md:w-5">၄၀။ </label>
@@ -699,11 +739,15 @@
                     <label for="" class="md:w-5">၁။ </label>
                     <label for="name" class="md:w-1/3">နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ်ဖော်ပြရန်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">အ.မ.က လယ်တာငယ် (၂၀၀၂မှ၂၀၀၉ထိ)<br>အ.ထ.က(ခွဲ) ကြိုးကြာကန်
-                        (၂၀၀၉ မှ
-                        ၂၀၁၀ထိ)<br>အ.ထ.က လေးမျက်နှာ (၂၀၁၀ မှ ၂၀၁၂ထိ)<br>စစ်တက္ကသိုလ်၊ ပြင်ဦးလွင် (၂၀၁၃ မှ
-                        ၂၀၁၇ထိ)</label>
-                </div>
+                    
+                    <label for="name" class="md:w-3/5"> 
+                        @foreach($staff->schools as $school)
+                        {{ $school->school_name}}/{{ $school->year}}
+                        @endforeach
+                    </label>
+                </div> 
+                
+                
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၂။ </label>
@@ -741,7 +785,7 @@
                     <label for="name" class="md:w-1/3">လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->past_occupation}}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -780,13 +824,14 @@
                         မိတ်ဆွေများရှိ/ မရှိ</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->has_military_friend}}</label>
                                     </div>
 
+               
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၁၀။ </label>
-                        <h2 class= "text-base">နိုင်ငံခြားသို့သွားရောက်ခဲ့ဖူးလျှင်</h2>
+                        <h2 class="text-base">နိုင်ငံခြားသို့သွားရောက်ခဲ့ဖူးလျှင်</h2>
                     </div>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center ml-8">
@@ -800,17 +845,20 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                <tr>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black">မရှိပါ</td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                    <td class="p-2 border border-black"></td>
-                                </tr>
+                                @foreach($staff->abroads as $index => $abroad)
+                                    <tr>
+                                        <td class="p-2 border border-black">{{ $index + 1 }}</td>
+                                        <td class="p-2 border border-black">{{ $abroad->country->name ?? 'မရှိပါ' }}</td>
+                                        <td class="p-2 border border-black">{{ $abroad->particular }}</td>
+                                        <td class="p-2 border border-black">{{ $abroad->meet_with }}</td>
+                                        <td class="p-2 border border-black">{{ $abroad->from_date }} - {{ $abroad->to_date }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+                
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၁။ </label>
@@ -819,7 +867,7 @@
                         အလုပ်အကိုင်၊ လူမျိူး၊ တိုင်းပြည်၊ မည်ကဲ့သို့ ရင်းနှီးသည်</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ $staff->foreigner_friend_name }}</label>
+                        <label for="name" class="md:w-3/5">{{ $staff->foreigner_friend_name.'၊'.$staff->foreigner_friend_occupation.'၊'.$staff->foreigner_friend_nationality?->name.'၊'.$staff->foreigner_friend_country?->name.'၊'.$staff->foreigner_friend_how_to_know }}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -836,7 +884,7 @@
                     <label for="" class="md:w-5">၁၃။ </label>
                     <label for="name" class="md:w-1/3">ရာဇဝတ်ပြစ်မှုခံရခြင်း ရှိ/မရှိ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5"></label>
+                    <label for="name" class="md:w-3/5">{{en2mm($staff->punishments->count())}}</label>
                 </div>
             </div>
 
@@ -859,25 +907,25 @@
                 <div class="flex justify-start mb-2">
                     <p class="md:w-1/3 ml-36">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</p>
                     <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5">၇/နတလ(နိုင်)၁၅၂၂၀၁</p>
+                    <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start mb-2">
                     <p class="md:w-1/3 ml-36">အဆင့်၊ ရာထူး</p>
                     <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5">ဦးစီးအရာရှိ</p>
+                    <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start mb-2">
                     <p class="md:w-1/3 ml-36">အမည်</p>
                     <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5">ဦးပြည့်စုံသူ</p>
+                    <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start mb-4">
                     <p class="md:w-1/3 ml-36">တပ်/ဌာန</p>
                     <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန။</p>
+                    <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start space-x-14">

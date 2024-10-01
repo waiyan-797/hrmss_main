@@ -23,6 +23,11 @@ return new class extends Migration
             $table->foreignIdFor(Education::class)->nullable()->constrained()->nullOnDelete();
             $table->string('school_name');
             $table->string('town');
+            $table->string('semester')->nullable();
+            $table->string('roll_no')->nullable();
+            $table->string('major')->nullable();
+            $table->date('from_date');
+            $table->date('to_date');
             $table->string('year');
             $table->string('certificate')->nullable();
             $table->string('exam_mark')->nullable();

@@ -84,16 +84,7 @@
             </tr>
         </thead>
         <tbody>
-            {{-- <tr>
-                <td class="text-right"></td>
-                <td class="text-left"></td>
-                <td class="text-left"></td>
-                <td class="text-left"></td>
-                <td class="text-left"></td>
-                <td class="text-left"></td>
-                <td class="text-left"></td>
-                <td class="text-left"></td>
-            </tr> --}}
+            
             @foreach($staffs as $staff)
             <tr>
                 <td>{{ $loop->index+1}}</td>
