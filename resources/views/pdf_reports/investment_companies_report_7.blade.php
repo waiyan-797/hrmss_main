@@ -65,7 +65,7 @@
             font-weight: bold;
         }
 
-        
+
 
     </style>
 </head>
@@ -74,7 +74,7 @@
         <div class="container">
             <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <h3>၂၀၂၄ ခုနှစ်၊ ဇွန်လ</h3>
-    
+
             <div class="table-container">
                 <table>
                     <thead>
@@ -122,68 +122,68 @@
                             <th>ပေါင်း</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="md:w-auto">
                         <tr>
                             <td>၁</td>
                             <td>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
-                            <td>၂၄၁</td>
-                            <td>၂၁၁</td>
-                            <td>၄၅၂</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
+                            <td>{{ en2mm($high_staffs) }}</td>
+                            <td>{{ en2mm($low_staffs) }}</td>
+                            <td>{{ en2mm($high_staffs + $low_staffs) }}</td>
+                            <td>{{ en2mm($high_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
+                            <td>{{ en2mm($low_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
+                            <td>{{ en2mm($high_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
+                            <td>{{ en2mm($low_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
+                            <td>{{ en2mm($high_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
+                            <td>{{ en2mm($low_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
+                            <td>{{ en2mm($high_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
+                            <td>{{ en2mm($low_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
+                            <td>{{ en2mm($total_reduced_staffs->count()) }}</td>
+                            <td>{{ en2mm($high_new_staffs) }}</td>
+                            <td>{{ en2mm($low_new_staffs) }}</td>
+                            <td>{{ en2mm($total_new_staffs) }}</td>
+                            <td>{{ en2mm($high_leave_staffs) }}</td>
+                            <td>{{ en2mm($low_leave_staffs) }}</td>
+                            <td>{{ en2mm($total_leave_staffs) }}</td>
+                            <td>{{ en2mm($high_transfer_staffs) }}</td>
+                            <td>{{ en2mm($low_transfer_staffs) }}</td>
+                            <td>{{ en2mm($total_transfer_staffs) }}</td>
+                            <td>{{ en2mm($high_left_staffs) }}</td>
+                            <td>{{ en2mm($low_left_staffs) }}</td>
+                            <td>{{ en2mm($total_left_staffs) }}</td>
                         </tr>
                         <tr class="font-bold">
                             <td></td>
                             <td></td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
-                            <td>၁၂၃</td>
+                            <td>{{ en2mm($high_staffs) }}</td>
+                            <td>{{ en2mm($low_staffs) }}</td>
+                            <td>{{ en2mm($high_staffs + $low_staffs) }}</td>
+                            <td>{{ en2mm($high_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
+                            <td>{{ en2mm($low_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
+                            <td>{{ en2mm($high_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
+                            <td>{{ en2mm($low_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
+                            <td>{{ en2mm($high_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
+                            <td>{{ en2mm($low_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
+                            <td>{{ en2mm($high_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
+                            <td>{{ en2mm($low_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
+                            <td>{{ en2mm($total_reduced_staffs->count()) }}</td>
+                            <td>{{ en2mm($high_new_staffs) }}</td>
+                            <td>{{ en2mm($low_new_staffs) }}</td>
+                            <td>{{ en2mm($total_new_staffs) }}</td>
+                            <td>{{ en2mm($high_leave_staffs) }}</td>
+                            <td>{{ en2mm($low_leave_staffs) }}</td>
+                            <td>{{ en2mm($total_leave_staffs) }}</td>
+                            <td>{{ en2mm($high_transfer_staffs) }}</td>
+                            <td>{{ en2mm($low_transfer_staffs) }}</td>
+                            <td>{{ en2mm($total_transfer_staffs) }}</td>
+                            <td>{{ en2mm($high_left_staffs) }}</td>
+                            <td>{{ en2mm($low_left_staffs) }}</td>
+                            <td>{{ en2mm($total_left_staffs) }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    
-    
+
+
 </body>
 </html>

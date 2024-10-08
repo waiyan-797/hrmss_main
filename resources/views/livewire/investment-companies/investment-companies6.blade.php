@@ -57,9 +57,9 @@
                                 <td class="border border-black text-center p-2">{{ en2mm($punishments->where('penalty_type_id', 5)->count()) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($punishments->where('penalty_type_id', 8)->count()) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($punishments->where('penalty_type_id', 9)->count()) }}</td>
-                                <td class="border border-black text-center p-2">-</td>
-                                <td class="border border-black text-center p-2">-</td>
-                                <td class="border border-black text-center p-2">-</td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
                             </tr>
                         </tbody>
                     </table>

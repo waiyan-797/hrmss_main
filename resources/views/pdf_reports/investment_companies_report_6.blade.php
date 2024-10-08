@@ -126,9 +126,9 @@
                             <td>{{ en2mm($punishments->where('penalty_type_id', 5)->count()) }}</td>
                             <td>{{ en2mm($punishments->where('penalty_type_id', 8)->count()) }}</td>
                             <td>{{ en2mm($punishments->where('penalty_type_id', 9)->count()) }}</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>

@@ -26,7 +26,8 @@ class RetireTypeSeeder extends Seeder
             [3,'ထုတ်ပယ်'],
             [4,'ထုတ်ပစ်'],
             [5,'ပင်စင်'],
-            
+            [6,'ပြောင်းရွေ့ထွက်ခွာ']
+
         ];
 
         foreach ($items as $item) {
