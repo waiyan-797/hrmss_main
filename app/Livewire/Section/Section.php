@@ -19,12 +19,12 @@ class Section extends Component
     public $section_search, $section_name, $division_name, $section_id;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
-    //Validation
+    
     protected $rules = [
         'section_name' => 'required|string|max:255',
         'division_name' => 'required',
     ];
-    //Add New
+  
     public function add_new()
     {
         $this->resetValidation();
@@ -40,7 +40,7 @@ class Section extends Component
             $this->updatePosition();
         }
     }
-    //create
+   
     public function createPosition()
     {
         $this->validate();
@@ -51,7 +51,7 @@ class Section extends Component
         $this->message = 'Created successfully.';
         $this->close_modal();
     }
-    //close modal
+   
     public function close_modal()
     {
         $this->resetValidation();
@@ -59,7 +59,7 @@ class Section extends Component
         $this->confirm_edit = false;
         $this->confirm_add = false;
     }
-    //edit
+  
     public function edit_modal($id)
     {
         $this->resetValidation();
@@ -71,7 +71,7 @@ class Section extends Component
         $this->division_name = $section->division_id;
     }
 
-    //update
+  
     public function updatePosition()
     {
         $this->validate();
@@ -84,14 +84,14 @@ class Section extends Component
         $this->close_modal();
     }
 
-    //delete confirm
+  
     public function delete_confirm($id)
     {
         $this->section_id = $id;
         $this->confirm_delete = true;
     }
 
-    //delete
+   
     public function delete($id)
     {
         ModelsSection::find($id)->delete();

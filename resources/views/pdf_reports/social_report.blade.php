@@ -80,11 +80,10 @@
                         <td>{{ $loop->index+1}}</td>
                         <td>{{ $staff->name}}</td>
                         <td>{{ $staff->current_rank->name}}</td>
-                        @foreach($staff->social_activities as $social_activity)
-                        <td>{{ $social_activity->particular}}</td>
-                        @endforeach
-                        <td></td>
-                      
+                        <td>
+                            {{-- @foreach($staff->social_activities as $social_activity){{ $social_activity->particular}} 
+                            @endforeach --}}
+                        </td>
                     </tr>
                     @endforeach
         </tbody>

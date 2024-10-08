@@ -45,11 +45,11 @@
         <x-text-input wire:model="join_date" id="join_date" name="join_date" type="date" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('join_date')" />
     </div>
-    <div>
+    {{-- <div>
         <x-input-label for="လက်ရှိအလုပ်အကိုင်ရလာပုံ" :value="__('လက်ရှိအလုပ်အကိုင်ရလာပုံ')" />
         <x-text-input wire:model="form_of_appointment" id="form_of_appointment" name="form_of_appointment" type="text" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('form_of_appointment')" />
-    </div>
+    </div> --}}
     <div>
         <x-input-label for="ပြိုင်ရွေးခံ (သို့) တိုက်ရိုက်ခန့်" :value="__('ပြိုင်ရွေးခံ (သို့) တိုက်ရိုက်ခန့်')" />
         <x-radio-input id1="direct_appointed_1" id2="direct_appointed_2" wire="is_direct_appointed" />

@@ -85,40 +85,38 @@
                         </thead>
                         <tbody>
                             @foreach ($first_ranks as $rank)
-                                <tr>
-                                    <td style="border: 1px solid black; padding: 0.5rem; text-align: center;">{{$loop->index + 1}}</td>
-                                    <td style="border: 1px solid black; padding: 0.5rem;">{{$rank->name}}</td>
-                                    <td style="border: 1px solid black; padding: 0.5rem;">{{$rank->payscale->name}}</td>
-                                    <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($rank->allowed_qty)}}</td>
-                                    <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($rank->staff->count())}}</td>
-                                    <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($rank->allowed_qty - $rank->staff->count())}}</td>
-                                </tr>
+                            <tr>
+                                <td>{{$loop->index + 1}}</td>
+                                <td>{{$rank->name}}</td>
+                                <td>{{$rank->payscale->name}}</td>
+                                <td>{{en2mm($rank->allowed_qty)}}</td>
+                                <td>{{en2mm($rank->staffs->count())}}</td>
+                                <td>{{en2mm($rank->allowed_qty - $rank->staffs->count())}}</td>
+                            </tr>
                             @endforeach
                             <tr>
-                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;" colspan="3">{{$first_ranks[0]->staff_type->name}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($first_ranks->sum(fn($rank) => $rank->staff->count())) }}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->staff->count())) }}</td>
+                                <td colspan="3">{{$first_ranks[0]->staff_type->name}}</td>
+                                <td>{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
+                                <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                                <td>{{ en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
                             </tr>
-
                             @foreach ($second_ranks as $rank)
                                 <tr>
-                                    <td style="border: 1px solid black; padding: 0.5rem; text-align: center;">{{$loop->index + 1}}</td>
-                                    <td style="border: 1px solid black; padding: 0.5rem;">{{$rank->name}}</td>
-                                    <td style="border: 1px solid black; padding: 0.5rem;">{{$rank->payscale->name}}</td>
-                                    <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($rank->allowed_qty)}}</td>
-                                    <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($rank->staff->count())}}</td>
-                                    <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($rank->allowed_qty - $rank->staff->count())}}</td>
+                                    <td>{{$loop->index + 1}}</td>
+                                    <td>{{$rank->name}}</td>
+                                    <td>{{$rank->payscale->name}}</td>
+                                    <td>{{en2mm($rank->allowed_qty)}}</td>
+                                    <td>{{en2mm($rank->staffs->count())}}</td>
+                                    <td>{{en2mm($rank->allowed_qty - $rank->staffs->count())}}</td>
                                 </tr>
                             @endforeach
                             <tr>
-                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;" colspan="3">{{$second_ranks[0]->staff_type->name}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($second_ranks->sum(fn($rank) => $rank->staff->count())) }}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->staff->count())) }}</td>
+                                <td colspan="3">{{$second_ranks[0]->staff_type->name}}</td>
+                                <td>{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
+                                <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                                <td>{{ en2mm($second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
                             </tr>
                         </tbody>
-
                     </table>
                 </div>
             </div>

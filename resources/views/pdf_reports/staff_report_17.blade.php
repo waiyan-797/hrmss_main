@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>PDF Report 15</title>
+    <title>PDF Report 17</title>
     <style type="text/css">
         page{
             background: white;
@@ -150,7 +150,7 @@
                                     <td style="border: none;">၇။</td>
                                     <td style="border: none;">လက်ရှိနေရပ်</td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}</td>
+                                    <td style="border: none;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}</td>
                                 </tr>
                                 <tr style="font-weight: bold">
                                     <td style="border: none;">၈။</td>

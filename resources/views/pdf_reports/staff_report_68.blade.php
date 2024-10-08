@@ -370,14 +370,14 @@
                                     <td style="border: none;">လက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}</td>
+                                    <td style="border: none;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၃။</td>
                                     <td style="border: none;">အမြဲတမ်းလက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_district->name.'/'.$staff->permanent_address_township_or_town->name }}</td>
+                                    <td style="border: none;">{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၄။</td>
@@ -700,7 +700,7 @@
                                             <td class="col-number">၂။</td>
                                             <td class="col-label">၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ</td>
                                             <td class="col-dash">-</td>
-                                            <td class="col-data"> {{ $staff->father_address_street.'၊'.$staff->father_address_ward.'၊'.$staff->father_address_township_or_town?->name.'၊'.$staff->father_address_district?->name.'၊'.$staff->father_address_region?->name }}</td>
+                                            <td class="col-data"> {{ $staff->father_address_street.'၊'.$staff->father_address_ward.'၊'.$staff->father_address_township_or_town?->name.'၊'.$staff->father_address_region?->name }}</td>
                                         </tr>
                                     </tbody>
                                     <tbody>
@@ -716,7 +716,7 @@
                                             <td class="col-number">၄။</td>
                                             <td class="col-label">၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ</td>
                                             <td class="col-dash">-</td>
-                                            <td class="col-data">{{ $staff->mother_address_street.'၊'.$staff->mother_address_ward.'၊'.$staff->mother_address_township_or_town?->name.'၊'.$staff->mother_address_district?->name.'၊'.$staff->mother_address_region?->name }}</td>
+                                            <td class="col-data">{{ $staff->mother_address_street.'၊'.$staff->mother_address_ward.'၊'.$staff->mother_address_township_or_town?->name.'၊'.$staff->mother_address_region?->name }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

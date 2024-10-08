@@ -64,7 +64,6 @@
         tbody tr td {
             height: 32px;
         }
-
     </style>
 </head>
 <body>
@@ -84,20 +83,20 @@
                     </thead>
                     <tbody>
                         @foreach ($payscales as $payscale)
-                            <tr>
-                                <td style="border: 1px solid black; padding: 0.5rem; text-align: center;">{{$loop->index + 1}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem;">{{$payscale->name}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->allowed_qty)}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->staff->count())}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->allowed_qty - $payscale->staff->count())}}</td>
-                            </tr>
-                        @endforeach
                         <tr>
-                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;" colspan="2">{{$payscale[0]->staff_type->name}}</td>
-                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($payscale->sum('allowed_qty')) }}</td>
-                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($payscale->sum(fn($payscale) => $payscale->staff->count())) }}</td>
-                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($payscale->sum('allowed_qty') - $payscale->sum(fn($payscale) => $payscale->staff->count())) }}</td>
+                            <td>{{$loop->index + 1}}</td>
+                            <td>{{$payscale->ranks[0]->name}}နှင့်အဆင့်တူ</td>
+                            <td>{{en2mm($payscale->allowed_qty)}}</td>
+                            <td>{{en2mm($payscale->staff->count())}}</td>
+                            <td>{{en2mm($payscale->allowed_qty - $payscale->staff->count())}}</td>
                         </tr>
+                    @endforeach
+                    <tr>
+                        <td colspan="2">စုစုပေါင်း</td>
+                        <td>{{ en2mm($payscales->sum('allowed_qty')) }}</td>
+                        <td>{{ en2mm($payscales->sum(fn($payscale) => $payscale->staff->count())) }}</td>
+                        <td>{{ en2mm($payscales->sum('allowed_qty') - $payscales->sum(fn($payscale) => $payscale->staff->count())) }}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

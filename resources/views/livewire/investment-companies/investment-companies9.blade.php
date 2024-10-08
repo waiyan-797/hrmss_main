@@ -1,8 +1,8 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
 
 
@@ -41,18 +41,25 @@
                                 <td class="border border-black p-2">(ဈ)</td>
                                 <td class="border border-black p-2">(ည)</td>
                             </tr>
+                            @foreach($staffs as $staff)
                             <tr>
-                                <td class="border border-black p-2"></td>
-                                <td class="border border-black p-2"></td>
-                                <td class="border border-black p-2"></td>
-                                <td class="border border-black p-2"></td>
-                                <td class="border border-black p-2"></td>
-                                <td class="border border-black p-2"></td>
-                                <td class="border border-black p-2"></td>
-                                <td class="border border-black p-2"></td>
-                                <td class="border border-black p-2"></td>
+                                <td class="border border-black p-2">{{ $loop->index+1}}</td>
+                                <td class="border border-black p-2">{{ $staff->name}}၊{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</td>
+                                <td class="border border-black p-2">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
+                                <td class="border border-black p-2">{{ $staff->current_rank->name}}၊{{ $staff->payscale->name}}၊{{ $staff->current_salary}}</td>
+                                <td class="border border-black p-2">{{en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</td>
+                                <td class="border border-black p-2">{{ $staff->lost_contact_from_date}}</td>
+                                <td class="border border-black p-2">{{ $staff->retire_date}}</td>
+                                <td class="border border-black p-2">
+                                      @php
+                                    $join_date = Carbon\Carbon::parse($staff->join_date);
+                                    $join_date_duration = $join_date->diff(Carbon\Carbon::now());
+                                @endphp
+                                {{formatPeriodMM($join_date_duration->y, $join_date_duration->m, $join_date_duration->d)}}</td>
+                                <td class="border border-black p-2">{{ $staff->retire_remark}}</td>
                                 <td class="border border-black p-2"></td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -107,7 +107,7 @@
                                     <td style="border: none;">၇။</td>
                                     <td style="border: none;">လက်ရှိနေရပ်</td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}</td>
+                                    <td style="border: none;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}</td>
                                 </tr>
                             </tbody>
                         </table>

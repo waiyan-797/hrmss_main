@@ -6,7 +6,7 @@ use App\Models\Payscale;
 use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
-
+use PhpOffice\PhpWord\PhpWord;
 
 class InvestmentCompanies2 extends Component
 {
@@ -54,7 +54,7 @@ class InvestmentCompanies2 extends Component
             echo $pdf->output();
         }, 'investment_companies_pdf_2.pdf');
     }
-
+   
     public function render()
     {
         $first_payscales = Payscale::where('staff_type_id', 1)->get();
@@ -98,4 +98,6 @@ class InvestmentCompanies2 extends Component
             'total_staffs' => $total_staffs,
         ]);
     }
+
+    
 }

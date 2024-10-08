@@ -21,9 +21,9 @@
                         <td class="border border-black text-left p-1">{{ $staff->name}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->current_rank->name}}</td>
                         <td class="border border-black text-left p-1">
-                            @foreach($staff->social_activities as $social_activity)
+                            {{-- @foreach($staff->social_activities as $social_activity)
                             {{ $social_activity->particular}}
-                            @endforeach
+                            @endforeach --}}
                         </td>  
                     </tr>
                     @endforeach

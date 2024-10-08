@@ -83,18 +83,28 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($staffs as $staff)
             <tr>
+                <td>{{ $loop->index+1}}</td>
+                <td>{{ $staff->name}}</td>
+                <td>{{ $staff->current_rank->name}}</td>
+                @foreach($staff->trainings as $training)
+                <td>{{ $training->diploma_name}}
+                   </td>
+                <td>{{ $training->training_type->name}}
+                </td>
+                <td>{{ $training->from_date}}</td>
+                <td>{{ $training->to_date}}</td>
+                @endforeach
+                @foreach($staff->abroads as $abroad)
+                <td>{{ $abroad->particular}}</td>
+                <td>{{ $abroad->from_date}}</td>
+                <td>{{ $abroad->to_date}}</td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                @endforeach
             </tr>
+            @endforeach
         </tbody>
     </table>
 

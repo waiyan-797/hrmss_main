@@ -147,7 +147,7 @@
 
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->place_of_birth.','.$staff->current_address_ward .','.$staff->current_address_street.','.$staff->current_address_township_or_town->name .','.$staff->current_address_district->name .','.$staff->current_address_region->name }}</td>
+                                    <td style="border: none;">{{ $staff->place_of_birth.','.$staff->current_address_ward .','.$staff->current_address_street.','.$staff->current_address_township_or_town->name .','.$staff->current_address_region->name }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၁၀။</td>
@@ -313,14 +313,14 @@
 
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->current_address_street.','.$staff->current_address_ward.','.$staff->current_address_township_or_town->name.','.$staff->current_address_district->name.','.$staff->current_address_region->name }}</td>
+                                    <td style="border: none;">{{ $staff->current_address_street.','.$staff->current_address_ward.','.$staff->current_address_township_or_town->name.','.$staff->current_address_region->name }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၈။</td>
                                     <td style="border: none;">အမြဲတမ်းဆက်သွယ်နိုင်သောနေရပ်လိပ်စာ
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->permanent_address_street.','.$staff->permanent_address_ward.','.$staff->permanent_address_township_or_town->name.','.$staff->permanent_address_district->name.','.$staff->permanent_address_region->name}}</td>
+                                    <td style="border: none;">{{ $staff->permanent_address_street.','.$staff->permanent_address_ward.','.$staff->permanent_address_township_or_town->name.','.$staff->permanent_address_region->name}}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၉။</td>
@@ -1048,7 +1048,7 @@
                     <td>{{ $staff->spouse_father_occupation}}</td>
                     <td>{{ $staff->spouse_father_ethnic?->name}}</td>
                     <td>{{ $staff->spouse_father_religion?->name}}</td>
-                    <td class="address">{{ $staff->spouse_father_address_street.','.$staff->spouse_father_address_ward.','.$staff->spouse_father_address_township_or_town?->name.','.$staff->spouse_father_address_district?->name.','.$staff->spouse_father_address_region?->name}}</td>
+                    <td class="address">{{ $staff->spouse_father_address_street.','.$staff->spouse_father_address_ward.','.$staff->spouse_father_address_township_or_town?->name.','.$staff->spouse_father_address_region?->name}}</td>
                 </tr>
             </tbody>
         </table>

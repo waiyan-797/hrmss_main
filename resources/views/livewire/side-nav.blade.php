@@ -50,6 +50,9 @@
                         ['route_name' => 'ministry', 'name' => 'ဝန်ကြီးဌာန'],
                         ['route_name' => 'language', 'name' => 'ဘာသာစကား'],
                         ['route_name' => 'department', 'name' => 'ဌာန'],
+                        ['route_name' => 'salary', 'name' => 'လစာ'],
+                        ['route_name' => 'promotion', 'name' => 'ရာထူးတိုး'],
+                        ['route_name' => 'increment', 'name' => 'အတိုးနှုန်း'],
                     ]" />
             </li>
 
@@ -184,8 +187,7 @@
                         ['route_name' => 'finance_year_salary_list', 'name' => 'FinanceYearSalaryList'],
                         ['route_name' => 'information_list', 'name' => 'InformationList'],
                         ['route_name' => 'last_pay_certificate', 'name' => 'LastPayCertificate'],
-
-
+                       
                     ]" />
             </li>
             <li>

@@ -20,9 +20,11 @@
                         <td class="border border-black text-right p-1">{{ $loop->index+1}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->name}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->current_rank->name}}</td>
-                        @foreach($staff->awardings as $awarding)
-                        <td class="border border-black text-left p-1">{{ $awarding->award_type->name}}</td>
-                        @endforeach
+                     
+                        <td class="border border-black text-left p-1">
+                            @foreach($staff->awardings as $awarding)
+                            {{ $awarding->award_type->name}} @endforeach</td>
+                       
                     </tr>
                     @endforeach
                 </tbody>

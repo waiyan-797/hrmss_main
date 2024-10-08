@@ -62,7 +62,7 @@
                     <label for="" class="md:w-5">၉။ </label>
                     <label for="name" class="md:w-1/3">မွေးဖွားရာဇာတိနှင့်လိပ်စာအပြည့်အစုံ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->place_of_birth.','.$staff->current_address_ward .','.$staff->current_address_street.','.$staff->current_address_township_or_town->name .','.$staff->current_address_district->name .','.$staff->current_address_region->name }}
+                    <label for="name" class="md:w-3/5">{{ $staff->place_of_birth.','.$staff->current_address_ward .','.$staff->current_address_street.','.$staff->current_address_township_or_town->name .','.$staff->current_address_region->name }}
                        </label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -206,13 +206,13 @@
                     <label for="" class="md:w-5">၂၇။ </label>
                     <label for="name" class="md:w-1/3">ယခုနေထိုင်သည့်နေရပ်လိပ်စာ (အပြည့်အစုံဖော်ပြရန်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->current_address_street.','.$staff->current_address_ward.','.$staff->current_address_township_or_town->name.','.$staff->current_address_district->name.','.$staff->current_address_region->name }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->current_address_street.','.$staff->current_address_ward.','.$staff->current_address_township_or_town->name.','.$staff->current_address_region->name }}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၈။ </label>
                     <label for="name" class="md:w-1/3">အမြဲတမ်းဆက်သွယ်နိုင်သောနေရပ်လိပ်စာ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->permanent_address_street.','.$staff->permanent_address_ward.','.$staff->permanent_address_township_or_town->name.','.$staff->permanent_address_district->name.','.$staff->permanent_address_region->name}}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->permanent_address_street.','.$staff->permanent_address_ward.','.$staff->permanent_address_township_or_town->name.','.$staff->permanent_address_region->name}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၉။ </label>

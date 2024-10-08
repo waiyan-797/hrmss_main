@@ -12,4 +12,7 @@ class Posting extends Model
     public function staff(){
         return $this->belongsTo(Staff::class);
     }
+    public function department(){
+        return $this->belongsTo(Department::class);
+    }
 }

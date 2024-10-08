@@ -118,7 +118,7 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name"
-                            class="md:w-3/5">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}</label>
+                            class="md:w-3/5">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -127,7 +127,7 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name"
-                            class="md:w-3/5">{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_district->name.'/'.$staff->permanent_address_township_or_town->name }}</label>
+                            class="md:w-3/5">{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name }}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -341,7 +341,7 @@
                 
                                     <div class="w-full mb-4">
                                         <div class="flex justify-start mb-2 space-x-3">
-                                            <label for="">၃၈။ </label>
+                                            <label for="">၃၀။ </label>
                                             <h1 class="font-semibold text-base">
                                                 အလုပ်အကိုင်အတွက် ထောက်ခံသူများ
                                             </h1>

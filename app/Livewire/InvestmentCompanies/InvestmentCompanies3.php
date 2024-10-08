@@ -6,6 +6,7 @@ use App\Models\Rank;
 use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
+use PhpOffice\PhpWord\PhpWord;
 
 class InvestmentCompanies3 extends Component
 {
@@ -20,7 +21,59 @@ class InvestmentCompanies3 extends Component
             echo $pdf->output();
         }, 'investment_companies_pdf_3.pdf');
     }
+    public function go_word()
+{
+    $first_ranks = Rank::where('staff_type_id', 1)->get();
+    $second_ranks = Rank::where('staff_type_id', 2)->get();
+    $phpWord = new PhpWord();
+    $section = $phpWord->addSection();
+    $section->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true], ['align' => 'center']);
+    $tableStyle = ['borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80];
+    $phpWord->addTableStyle('RanksTable', $tableStyle);
+    $table = $section->addTable('RanksTable');
+    $table->addRow();
+    $table->addCell(2000)->addText('စဥ်');
+    $table->addCell(4000)->addText('ရာထူးအမည်');
+    $table->addCell(3000)->addText('လစာနှုန်း (ကျပ်)');
+    $table->addCell(3000)->addText('ခွင့်ပြုအင်အား');
+    $table->addCell(3000)->addText('ခန့်ပြီးအင်အား');
+    $table->addCell(3000)->addText('လစ်လပ်အင်အား');
 
+    
+    foreach ($first_ranks as $index => $rank) {
+        $table->addRow();
+        $table->addCell(2000)->addText($index + 1);
+        $table->addCell(4000)->addText($rank->name);
+        $table->addCell(3000)->addText($rank->payscale->name);
+        $table->addCell(3000)->addText(en2mm($rank->allowed_qty));
+        $table->addCell(3000)->addText(en2mm($rank->staffs->count()));
+        $table->addCell(3000)->addText(en2mm($rank->allowed_qty - $rank->staffs->count()));
+    }
+
+   
+    $table->addRow();
+    $table->addCell(2000, ['gridSpan' => 3])->addText($first_ranks[0]->staff_type->name . 'စုစုပေါင်း', ['bold' => true],['align'=>'center']);
+    $table->addCell(3000)->addText(en2mm($first_ranks->sum('allowed_qty')), ['bold' => true]);
+    $table->addCell(3000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count())), ['bold' => true]);
+    $table->addCell(3000)->addText(en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->staffs->count())), ['bold' => true]);
+    foreach ($second_ranks as $index => $rank) {
+        $table->addRow();
+        $table->addCell(2000)->addText($index + 1);
+        $table->addCell(4000)->addText($rank->name);
+        $table->addCell(3000)->addText($rank->payscale->name);
+        $table->addCell(3000)->addText(en2mm($rank->allowed_qty));
+        $table->addCell(3000)->addText(en2mm($rank->staffs->count()));
+        $table->addCell(3000)->addText(en2mm($rank->allowed_qty - $rank->staffs->count()));
+    }
+    $table->addRow();
+    $table->addCell(2000, ['gridSpan' => 3])->addText($second_ranks[0]->staff_type->name . 'စုစုပေါင်း', ['bold' => true],['align'=>'center']);
+    $table->addCell(3000)->addText(en2mm($second_ranks->sum('allowed_qty')), ['bold' => true]);
+    $table->addCell(3000)->addText(en2mm($second_ranks->sum(fn($rank) => $rank->staffs->count())), ['bold' => true]);
+    $table->addCell(3000)->addText(en2mm($second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->staffs->count())), ['bold' => true]);
+    $tempFile = tempnam(sys_get_temp_dir(), 'investment_companies_') . '.docx';
+    $phpWord->save($tempFile, 'Word2007');
+    return response()->download($tempFile, 'investment_companies_report.docx')->deleteFileAfterSend(true);
+}
     public function render()
     {
         $first_ranks = Rank::where('staff_type_id', 1)->get();

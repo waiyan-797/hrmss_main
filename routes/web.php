@@ -59,6 +59,7 @@ use App\Livewire\Division;
 use App\Livewire\TrainingType;
 use App\Livewire\EmployeeRecordReport\EmpoyeeRecordReport;
 use App\Livewire\FTR\ForeignGoneTotal;
+use App\Livewire\Increment;
 use App\Livewire\InvestmentCompanies\AprilSalaryList;
 use App\Livewire\InvestmentCompanies\DetailStaffSalary;
 use App\Livewire\InvestmentCompanies\FinanceSalaryList;
@@ -124,7 +125,10 @@ use App\Livewire\StaffReport\StaffReport2;
 use App\Livewire\Table\Table;
 use App\Livewire\Township\Township;
 use App\Livewire\Language;
+use App\Livewire\Promotion as LivewirePromotion;
+use App\Livewire\Salary;
 use App\Models\Ministry;
+use App\Models\Promotion;
 use App\Models\Staff as ModelsStaff;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
@@ -166,6 +170,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/ethnic', Ethnic::class)->name('ethnic');
     Route::get('/religion', Religion::class)->name('religion');
     Route::get('/gender', Gender::class)->name('gender');
+    Route::get('/salary',Salary::class)->name('salary');
+    Route::get('/promotion',LivewirePromotion::class)->name('promotion');
+    Route::get('/increment',Increment::class)->name('increment');
     Route::get('/staff_detail/{confirm_add?}/{confirm_edit?}/{staff_id?}/{tab?}', StaffDetail::class)->name('staff_detail');
     Route::get('/file/{path}', function($path){
         if(File::exists(storage_path('app/upload/').$path)){
@@ -286,6 +293,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         $staff = ModelsStaff::find($staff_id);
         return view('pdf_reports.staff_report_71', ['staff' => $staff]);
     })->name('pdf');
+    Route::get('/word_15/{staff_id?}', function($staff_id) {
+        $staff = ModelsStaff::find($staff_id);
+        return view('word_reports.staff_report_15', ['staff' => $staff]);
+    })->name('word_report_15');
+    
+    
+
 });
 
 require __DIR__.'/auth.php';

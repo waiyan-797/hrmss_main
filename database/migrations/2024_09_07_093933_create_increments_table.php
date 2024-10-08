@@ -14,8 +14,11 @@ return new class extends Migration
     {
         Schema::create('increments', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Staff::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(Staff::class)->constrained()->cascadeOnDelete();
             $table->foreignId('increment_rank_id')->nullable()->constrained('ranks')->onDelete('set null');
+            $table->integer('min_salary')->nullable();
+            $table->integer('increment')->nullable();
+            $table->integer('max_salary')->nullable();
             $table->date('increment_date')->nullable();
             $table->integer('increment_time')->nullable();
             $table->string('order_no')->nullable();

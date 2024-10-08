@@ -15,7 +15,7 @@ public function staff()
     return $this->belongsTo(Staff::class);
 }
 
-public function leaveType()
+public function leave_type()
 {
     return $this->belongsTo(LeaveType::class);
 }

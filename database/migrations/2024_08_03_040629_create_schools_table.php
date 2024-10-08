@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('year');
             $table->string('certificate')->nullable();
             $table->string('exam_mark')->nullable();
+            $table->string('remark')->nullable();
             $table->timestamps();
         });
     }

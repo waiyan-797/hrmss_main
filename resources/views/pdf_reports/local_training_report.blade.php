@@ -77,19 +77,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($staffs as $staff)
-                        <tr>
-                            <td>{{ $loop->index+1}}</td>
-                            <td>{{ $staff->name}}</td>
-                            <td>{{ $staff->current_rank->name}}</td>
-                            @foreach ($staff->trainings->where('training_location_id', 1) as $training)
-                                <td>{{$training->training_type->name}}</td>
-                                <td>{{$training->from_date}}</td>
-                                <td>{{$training->to_date}}</td>
-                                <td>{{$training->location}}</td>
-                                <td>{{$training->training_location?->name}}</td>
-                        @endforeach
-                        @endforeach
+                        @foreach($staffs as $staff)
+                    <tr>
+                        <td>{{ $loop->index+1}}</td>
+                        <td>{{ $staff->name}}</td>
+                        <td>{{ $staff->current_rank->name}}</td>
+                        
+                        <td>@foreach($staff->abroads as $abroad){{ $abroad->from_date}}@endforeach</td>
+                        <td>@foreach($staff->abroads as $abroad)
+                            {{ $abroad->to_date}}@endforeach</td>
+                        <td>@foreach($staff->trainings as $training){{ $training->location}}@endforeach</td>
+                        <td>@foreach($staff->trainings as $training){{ $training->remark}}@endforeach</td>
+                      
+                        <td>
+                            @foreach ($staff->staff_educations as $edu)
+                                <div>
+                                    <span>{{ $edu->education_group->name }}</span>
+                                    <span>{{ $edu->education_type->name }}</span>
+                                    <span>{{ $edu->education->name }}</span>
+                                </div>
+                            @endforeach
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

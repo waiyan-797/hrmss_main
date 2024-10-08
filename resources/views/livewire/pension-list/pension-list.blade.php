@@ -1,45 +1,58 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
             <div class="overflow-x-auto">
-                <table class="min-w-full border border-gray-300 border-collapse table-auto">
+                <table class="min-w-full border border-black border-collapse table-auto">
                     <thead>
                         <tr class="bg-gray-100">
-                            <th class="px-4 py-2 border border-gray-300">စဥ်</th>
-                            <th class="px-4 py-2 border border-gray-300">အမည်</th>
-                            <th class="px-4 py-2 border border-gray-300">တာဝန်ထမ်းဆောင်ခဲ့သည့်ရာထူး</th>
-                            <th class="px-4 py-2 border border-gray-300">တာဝန်ထမ်းဆောင်ခဲ့သည့်ဌာနခွဲ</th>
-                            <th class="px-4 py-2 border border-gray-300">မွေးနေ့သက္ကရာဇ်</th>
-                            <th class="px-4 py-2 border border-gray-300">စုစုပေါင်းလုပ်သက်</th>
-                            <th class="px-4 py-2 border border-gray-300">ပင်စင်အမျိုးအစား</th>
-                            <th class="px-4 py-2 border border-gray-300">ပင်စင်ခံစားသည့် ရက်စွဲ</th>
-                            <th class="px-4 py-2 border border-gray-300">ပင်စင်လစာ</th>
-                            <th class="px-4 py-2 border border-gray-300">ဆုငွေ</th>
-                            <th class="px-4 py-2 border border-gray-300">ထုတ်ွံယူသည့်ဘဏ်</th>
-                            <th class="px-4 py-2 border border-gray-300">ပင်စင်ရုံး၏ ခွင့်ပြုမိန့်</th>
-                            <th class="px-4 py-2 border border-gray-300">ဆက်သွယ်ရန်လိပ်စာ/တယ်လီဖုန်းနံပါတ်</th>
+                            <th class="px-4 py-2 border border-black">စဥ်</th>
+                            <th class="px-4 py-2 border border-black">အမည်</th>
+                            <th class="px-4 py-2 border border-black">တာဝန်ထမ်းဆောင်ခဲ့သည့်ရာထူး</th>
+                            <th class="px-4 py-2 border border-black">တာဝန်ထမ်းဆောင်ခဲ့သည့်ဌာနခွဲ</th>
+                            <th class="px-4 py-2 border border-black">မွေးနေ့သက္ကရာဇ်</th>
+                            <th class="px-4 py-2 border border-black">စုစုပေါင်းလုပ်သက်</th>
+                            <th class="px-4 py-2 border border-black">ပင်စင်အမျိုးအစား</th>
+                            <th class="px-4 py-2 border border-black">ပင်စင်ခံစားသည့် ရက်စွဲ</th>
+                            <th class="px-4 py-2 border border-black">ပင်စင်လစာ</th>
+                            <th class="px-4 py-2 border border-black">ဆုငွေ</th>
+                            <th class="px-4 py-2 border border-black">ထုတ်ွံယူသည့်ဘဏ်</th>
+                            <th class="px-4 py-2 border border-black">ပင်စင်ရုံး၏ ခွင့်ပြုမိန့်</th>
+                            <th class="px-4 py-2 border border-black">ဆက်သွယ်ရန်လိပ်စာ/တယ်လီဖုန်းနံပါတ်</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
-                        @foreach($data as $item)
+                    <tbody>
+                       @foreach($staffs as $staff)
                             <tr>
-                                <td>{{ $item->index }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->position }}</td>
-                                <td>{{ $item->id_number }}</td>
-                                <td>{{ $item->dob }}</td>
-                                <td>{{ $item->join_date }}</td>
-                                <td>{{ $item->current_grade_date }}</td>
-                                <td>{{ $item->current_department_date }}</td>
-                                <td>{{ $item->department_branch }}</td>
-                                <td>{{ $item->qualification }}</td>
-                                <td>{{ $item->retirement_date }}</td>
+                                <td class="border border-black text-right p-1">{{ $loop->index+1}}</td>
+                                <td class="border border-black text-right p-1">{{ $staff->name}}</td>
+                                
+                                <td class="border border-black text-right p-1">@foreach($staff->postings as $posting)
+                                    {{ $posting->rank?->name}}
+                                    @endforeach
+                                </td>
+                                <td class="border border-black text-right p-1">@foreach($staff->postings as $posting)
+                                    {{ $posting->division?->name}}
+                                    @endforeach</td>
+                                <td class="border border-black text-right p-1">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
+                                <td class="border border-black text-right p-1"> @php
+                                    $currentDate = Carbon\Carbon::now();
+                                    $rankDate = Carbon\Carbon::parse($staff->current_rank_date);
+                                    $diff = $rankDate->diff($currentDate);
+                                @endphp
+                                {{ $diff->y == 0 ? '' : en2mm($diff->y) .' နှစ်'}} {{ $diff->m == 0 ? '' : en2mm($diff->m) .' လ' }} {{ $diff->d == 0 ? '' : en2mm($diff->d) .' ရက်' }}</td>
+                                <td class="border border-black text-right p-1">  {{ $staff->pension_type?->name}}</td>
+                                <td class="border border-black text-right p-1">{{ $staff->retire_date}}</td>
+                                <td class="border border-black text-right p-1">{{ $staff->pension_salary}}</td>
+                                <td class="border border-black text-right p-1">{{ $staff->gratuity}}</td>
+                                <td class="border border-black text-right p-1">{{ $staff->pension_bank}}</td>
+                                <td class="border border-black text-right p-1">{{ $staff->pension_office_order }}</td>
+                                <td class="border border-black text-right p-1">{{ $staff->permanent_address_ward.'၊'.$staff->permanent_address_street.'၊'.$staff->permanent_address_township_or_town->name.'၊'.$staff->permanent_address_region->name }}၊{{ $staff->phone}}</td>
                             </tr>
-                        @endforeach
-                    </tbody> --}}
+                       @endforeach
+                    </tbody> 
                 </table>
             </div>
 

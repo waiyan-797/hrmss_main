@@ -72,15 +72,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+             
+                    @foreach($staffs as $staff)
+                    @foreach($staff->schools as $school)
+                        <tr>
+                            <td>{{ $loop->index + 1 }}</td>
+                            <td>{{ $staff->name }} / {{ $staff->current_rank->name }} / {{ $staff->side_department->name }}</td>
+                            <td>{{ $school->education?->name }}၊ {{ $school->major }}</td>
+                            <td>{{ $school->name }}</td>
+                            <td>{{ $school->country?->name }}</td>
+                            <td>{{ $school->year }}</td>
+                            <td>{{ $school->remark }}</td>
+                        </tr>
+                    @endforeach
+                @endforeach
             </tbody>
         </table>
         

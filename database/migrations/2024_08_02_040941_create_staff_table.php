@@ -136,6 +136,7 @@ return new class extends Migration
             $table->foreignId('current_rank_id')->nullable()->constrained('ranks')->onDelete('set null');
             $table->date('current_rank_date')->nullable();
             $table->foreignId('current_department_id')->nullable()->constrained('departments')->onDelete('set null');
+            $table->foreignId('transfer_department_id')->nullable()->constrained('departments')->onDelete('set null');
             $table->foreignId('current_division_id')->nullable()->constrained('divisions')->onDelete('set null');
             $table->text('transfer_remark')->nullable();
             $table->foreignId('side_department_id')->nullable()->constrained('departments')->onDelete('set null');
@@ -143,9 +144,10 @@ return new class extends Migration
             $table->foreignId('salary_paid_by')->nullable()->constrained('departments')->onDelete('set null');
             $table->date('join_date')->nullable();
             $table->date('government_staff_started_date')->nullable();
-            $table->text('form_of_appointment')->nullable();
+            $table->boolean('is_newly_appointment')->nullable();
             $table->boolean('is_direct_appointed')->nullable();
             $table->foreignIdFor(payscale::class)->nullable()->constrained()->nullOnDelete();
+            
             $table->integer('current_salary')->nullable();
             $table->integer('current_increment_time')->nullable();
             //detail personal info (From childhood until now)
@@ -163,7 +165,6 @@ return new class extends Migration
             $table->boolean('has_military_friend')->nullable()->default(false);
             $table->text('foreigner_friend_name')->nullable();
             $table->text('foreigner_friend_occupation')->nullable();
-            $table->foreignIdFor(PensionType::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignId('foreigner_friend_nationality_id')->nullable()->constrained('nationalities')->onDelete('set null');
             $table->foreignId('foreigner_friend_country_id')->nullable()->constrained('countries')->onDelete('set null');
             $table->text('foreigner_friend_how_to_know')->nullable();
@@ -175,6 +176,17 @@ return new class extends Migration
             $table->boolean('is_active')->default(0);
             $table->date('retire_date')->nullable();
             $table->foreignIdFor(RetireType::class)->nullable()->nullOnDelete();
+            $table->date('lost_contact_from_date')->nullable();
+            $table->text('retire_remark')->nullable();
+            $table->foreignIdFor(PensionType::class)->nullable()->constrained()->nullOnDelete();
+            $table->integer('pension_salary')->nullable();
+            $table->integer('gratuity')->nullable();
+            $table->text('pension_bank')->nullable();
+            $table->text('pension_office_order')->nullable();
+            $table->date('date_of_death')->nullable();
+            $table->text('family_pension_inheritor')->nullable();
+            $table->foreignId('family_pension_inheritor_relation_id')->nullable()->constrained('relations')->onDelete('set null');
+            $table->date('family_pension_date')->nullable();
             $table->timestamps();
         });
     }

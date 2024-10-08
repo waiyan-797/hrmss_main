@@ -4,8 +4,6 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
-
-
             <table class="md:w-full">
                 <thead>
                     <tr>
@@ -119,8 +117,6 @@
                     </tr> --}}
                 </tbody>
             </table>
-
-
         </div>
     </div>
 </div>

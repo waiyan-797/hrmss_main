@@ -56,15 +56,15 @@ class StaffDetail extends Component
     use WithFileUploads;
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     //personal_info
-    public $staff_photo, $nrc_f, $nrc_b, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id, $current_address_district_id, $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_district_id, $permanent_address_township_or_town_id, $previous_addresses, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension;
+    public $staff_photo, $nrc_f, $nrc_b, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension;
     public $educations = [];
     //job_info
-    public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_department_id, $side_division_id, $salary_paid_by, $join_date, $form_of_appointment, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
+    public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_department_id, $side_division_id, $salary_paid_by, $join_date,$is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
     public $recommendations = [];
     public $postings = [];
 
     //relative
-    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street, $father_address_ward, $father_address_township_or_town_id, $father_address_district_id, $father_address_region_id, $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_district_id, $mother_address_region_id, $family_in_politics = false;
+    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id, $family_in_politics = false;
     public $siblings = [];
     public $father_siblings = [];
     public $mother_siblings = [];
@@ -114,12 +114,12 @@ class StaffDetail extends Component
         'current_address_street' => 'required',
         'current_address_ward' => 'required',
         'current_address_region_id' => 'required',
-        'current_address_district_id' => 'required',
+        // 'current_address_district_id' => 'required',
         'current_address_township_or_town_id' => 'required',
         'permanent_address_street' => 'required',
         'permanent_address_ward' => 'required',
         'permanent_address_region_id' => 'required',
-        'permanent_address_district_id' => 'required',
+        // 'permanent_address_district_id' => 'required',
         'permanent_address_township_or_town_id' => 'required',
         'previous_addresses' => 'required',
         'military_solider_no' => 'required',
@@ -143,7 +143,7 @@ class StaffDetail extends Component
         'side_division_id' => '',
         'salary_paid_by' => 'required',
         'join_date' => 'required',
-        'form_of_appointment' => 'required',
+        // 'form_of_appointment' => 'nullable',
         'is_direct_appointed' => 'required',
         'payscale_id' => 'required',
         'current_salary' => 'required|integer',
@@ -159,7 +159,7 @@ class StaffDetail extends Component
         'father_address_street' => 'required',
         'father_address_ward' => 'required',
         'father_address_township_or_town_id' => 'required',
-        'father_address_district_id' => 'required',
+        // 'father_address_district_id' => 'required',
         'father_address_region_id' => 'required',
         'mother_name' => 'required',
         'mother_ethnic_id' => 'required',
@@ -169,7 +169,7 @@ class StaffDetail extends Component
         'mother_address_street' => 'required',
         'mother_address_ward' => 'required',
         'mother_address_township_or_town_id' => 'required',
-        'mother_address_district_id' => 'required',
+        // 'mother_address_district_id' => 'required',
         'mother_address_region_id' => 'required',
         'family_in_politics' => 'required',
     ];
@@ -406,12 +406,12 @@ class StaffDetail extends Component
         $this->current_address_street = $staff->current_address_street;
         $this->current_address_ward = $staff->current_address_ward;
         $this->current_address_region_id = $staff->current_address_region_id;
-        $this->current_address_district_id = $staff->current_address_district_id;
+        // $this->current_address_district_id = $staff->current_address_district_id;
         $this->current_address_township_or_town_id = $staff->current_address_township_or_town_id;
         $this->permanent_address_street = $staff->permanent_address_street;
         $this->permanent_address_ward = $staff->permanent_address_ward;
         $this->permanent_address_region_id = $staff->permanent_address_region_id;
-        $this->permanent_address_district_id = $staff->permanent_address_district_id;
+        // $this->permanent_address_district_id = $staff->permanent_address_district_id;
         $this->permanent_address_township_or_town_id = $staff->permanent_address_township_or_town_id;
         $this->previous_addresses = $staff->previous_addresses;
         $this->military_solider_no = $staff->military_solider_no;
@@ -435,7 +435,7 @@ class StaffDetail extends Component
         $this->side_division_id = $staff->side_division_id;
         $this->salary_paid_by = $staff->salary_paid_by;
         $this->join_date = $staff->join_date;
-        $this->form_of_appointment = $staff->form_of_appointment;
+        // $this->form_of_appointment = $staff->form_of_appointment;
         $this->is_direct_appointed = $staff->is_direct_appointed;
         $this->payscale_id = $staff->payscale_id;
         $this->current_salary = $staff->current_salary;
@@ -453,7 +453,7 @@ class StaffDetail extends Component
         $this->father_address_street = $staff->father_address_street;
         $this->father_address_ward = $staff->father_address_ward;
         $this->father_address_township_or_town_id = $staff->father_address_township_or_town_id;
-        $this->father_address_district_id = $staff->father_address_district_id;
+        // $this->father_address_district_id = $staff->father_address_district_id;
         $this->father_address_region_id = $staff->father_address_region_id;
         $this->mother_name = $staff->mother_name;
         $this->mother_ethnic_id = $staff->mother_ethnic_id;
@@ -463,7 +463,7 @@ class StaffDetail extends Component
         $this->mother_address_street = $staff->mother_address_street;
         $this->mother_address_ward = $staff->mother_address_ward;
         $this->mother_address_township_or_town_id = $staff->mother_address_township_or_town_id;
-        $this->mother_address_district_id = $staff->mother_address_district_id;
+        // $this->mother_address_district_id = $staff->mother_address_district_id;
         $this->mother_address_region_id = $staff->mother_address_region_id;
         $this->family_in_politics = $staff->family_in_politics;
     }
@@ -698,12 +698,12 @@ class StaffDetail extends Component
             'current_address_street' => $this->current_address_street,
             'current_address_ward' => $this->current_address_ward,
             'current_address_region_id' => $this->current_address_region_id,
-            'current_address_district_id' => $this->current_address_district_id,
+            // 'current_address_district_id' => $this->current_address_district_id,
             'current_address_township_or_town_id' => $this->current_address_township_or_town_id,
             'permanent_address_street' => $this->permanent_address_street,
             'permanent_address_ward' => $this->permanent_address_ward,
             'permanent_address_region_id' => $this->permanent_address_region_id,
-            'permanent_address_district_id' => $this->permanent_address_district_id,
+            // 'permanent_address_district_id' => $this->permanent_address_district_id,
             'permanent_address_township_or_town_id' => $this->permanent_address_township_or_town_id,
             'previous_addresses' => $this->previous_addresses,
             'military_solider_no' => $this->military_solider_no,
@@ -727,7 +727,7 @@ class StaffDetail extends Component
             'side_division_id' => $this->side_division_id,
             'salary_paid_by' => $this->salary_paid_by,
             'join_date' => $this->join_date,
-            'form_of_appointment' => $this->form_of_appointment,
+            // 'form_of_appointment' => $this->form_of_appointment,
             'is_direct_appointed' => $this->is_direct_appointed,
             'payscale_id' => $this->payscale_id,
             'current_salary' => $this->current_salary,
@@ -743,7 +743,7 @@ class StaffDetail extends Component
             'father_address_street' => $this->father_address_street,
             'father_address_ward' => $this->father_address_ward,
             'father_address_township_or_town_id' => $this->father_address_township_or_town_id,
-            'father_address_district_id' => $this->father_address_district_id,
+            // 'father_address_district_id' => $this->father_address_district_id,
             'father_address_region_id' => $this->father_address_region_id,
             'mother_name' => $this->mother_name,
             'mother_ethnic_id' => $this->mother_ethnic_id,
@@ -753,7 +753,7 @@ class StaffDetail extends Component
             'mother_address_street' => $this->mother_address_street,
             'mother_address_ward' => $this->mother_address_ward,
             'mother_address_township_or_town_id' => $this->mother_address_township_or_town_id,
-            'mother_address_district_id' => $this->mother_address_district_id,
+            // 'mother_address_district_id' => $this->mother_address_district_id,
             'mother_address_region_id' => $this->mother_address_region_id,
             'family_in_politics' => $this->family_in_politics,
         ];
@@ -1008,45 +1008,71 @@ class StaffDetail extends Component
         }
     }
 
-    public function updatedCurrentAddressRegionId(){
-        $this->current_address_district_id = null;
+    // public function updatedCurrentAddressRegionId(){
+    //     $this->current_address_region_id = null;
+    //     $this->current_address_township_or_town_id = null;
+    // }
+
+    //  public function updatedCurrentAddressRegionId(){
+    //     $this->current_address_township_or_town_id = null;
+    // }
+
+    // public function updatedPermanentAddressRegionId(){
+    //     $this->permanent_address_region_id = null;
+    //     $this->permanent_address_township_or_town_id = null;
+    // }
+
+    // public function updatedPermanentAddressDistrictId(){
+    //     $this->permanent_address_township_or_town_id = null;
+    // }
+
+    // public function updatedFatherAddressRegionId(){
+    //     $this->father_address_region_id = null;
+    //     $this->father_address_township_or_town_id = null;
+    // }
+
+    // public function updatedFatherAddressDistrictId(){
+    //     $this->father_address_township_or_town_id = null;
+    // }
+
+    // public function updatedMotherAddressRegionId(){
+    //     $this->mother_address_region_id = null;
+    //     $this->mother_address_township_or_town_id = null;
+    // }
+
+    // public function updatedMotherAddressDistrictId(){
+    //     $this->mother_address_township_or_town_id = null;
+    // }
+
+    // public function updatedNrcRegionId(){
+    //     $this->nrc_township_code_id = null;
+    // }
+
+    public function updatedCurrentAddressRegionId()
+    {
         $this->current_address_township_or_town_id = null;
     }
 
-    public function updatedCurrentAddressDistrictId(){
-        $this->current_address_township_or_town_id = null;
-    }
-
-    public function updatedPermanentAddressRegionId(){
-        $this->permanent_address_district_id = null;
+    public function updatedPermanentAddressRegionId()
+    {
         $this->permanent_address_township_or_town_id = null;
     }
 
-    public function updatedPermanentAddressDistrictId(){
-        $this->permanent_address_township_or_town_id = null;
-    }
-
-    public function updatedFatherAddressRegionId(){
-        $this->father_address_district_id = null;
+    public function updatedFatherAddressRegionId()
+    {
         $this->father_address_township_or_town_id = null;
     }
 
-    public function updatedFatherAddressDistrictId(){
-        $this->father_address_township_or_town_id = null;
-    }
-
-    public function updatedMotherAddressRegionId(){
-        $this->mother_address_district_id = null;
+    public function updatedMotherAddressRegionId()
+    {
         $this->mother_address_township_or_town_id = null;
     }
 
-    public function updatedMotherAddressDistrictId(){
-        $this->mother_address_township_or_town_id = null;
-    }
-
-    public function updatedNrcRegionId(){
+    public function updatedNrcRegionId()
+    {
         $this->nrc_township_code_id = null;
     }
+
 
     public function render()
     {
@@ -1059,8 +1085,8 @@ class StaffDetail extends Component
             'education_groups' => null,
             'education_types' => null,
             '_educations' => null,
-            'current_address_districts' => null,
-            'permanent_address_districts' => null,
+            // 'current_address_districts' => null,
+            // 'permanent_address_districts' => null,
             'current_address_townships' => null,
             'permanent_address_townships' => null,
             'ranks' => null,
@@ -1078,9 +1104,9 @@ class StaffDetail extends Component
             'penalty_types' => null,
             'relatives' => null,
             'relations' => null,
-            'father_districts' => null,
+            // 'father_districts' => null,
             'father_townships' => null,
-            'mother_districts' => null,
+            // 'mother_districts' => null,
             'mother_townships' => null,
             'nrc_region_ids' => null,
             'nrc_township_codes' => null,
@@ -1094,10 +1120,10 @@ class StaffDetail extends Component
                 $data['education_groups'] = EducationGroup::all();
                 $data['education_types'] = EducationType::all();
                 $data['_educations'] = Education::all();
-                $data['current_address_districts'] = District::where('region_id', $this->current_address_region_id)->get();
-                $data['permanent_address_districts'] = District::where('region_id', $this->permanent_address_region_id)->get();
-                $data['current_address_townships'] = Township::where('district_id', $this->current_address_district_id)->get();
-                $data['permanent_address_townships'] = Township::where('district_id', $this->permanent_address_district_id)->get();
+                $data['current_address_township_or_towns'] = Township::where('region_id', $this->current_address_region_id)->get();
+                $data['permanent_address_township_or_towns'] = Township::where('region_id', $this->permanent_address_region_id)->get();
+                $data['current_address_townships'] = Township::where('region_id', $this->current_address_region_id)->get();
+                $data['permanent_address_townships'] = Township::where('region_id', $this->permanent_address_region_id)->get();
                 $data['nrc_region_ids'] = NrcRegionId::all();
                 $data['nrc_township_codes'] = NrcTownshipCode::where('nrc_region_id_id', $this->nrc_region_id)->get();
                 $data['nrc_signs'] = NrcSign::all();
@@ -1139,10 +1165,10 @@ class StaffDetail extends Component
                     'spouse_mother_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အမိ၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_mother_siblings],
                 ];
                 $data['relations'] = Relation::all();
-                $data['father_districts'] = District::where('region_id', $this->father_address_region_id)->get();
-                $data['father_townships'] = Township::where('district_id', $this->father_address_district_id)->get();
-                $data['mother_districts'] = District::where('region_id', $this->mother_address_region_id)->get();
-                $data['mother_townships'] = Township::where('district_id', $this->mother_address_district_id)->get();
+                $data['father_township_or_towns'] = Township::where('region_id', $this->father_address_region_id)->get();
+                $data['father_townships'] = Township::where('region_id', $this->father_address_region_id)->get();
+                $data['mother_township_or_towns'] = Township::where('region_id', $this->mother_address_region_id)->get();
+                $data['mother_townships'] = Township::where('region_id', $this->mother_address_region_id)->get();
                 break;
         }
 

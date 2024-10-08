@@ -30,6 +30,7 @@
                         <td class="border border-black text-left p-1">{{ $staff->retire_date}}</td>
                    
                         <td class="border border-black text-left p-1">
+                            {{ $staff->pension_type?->name}}
                         </td>
                     </tr>
                     @endforeach
