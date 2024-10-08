@@ -117,8 +117,8 @@
                     <td>{{ en2mm($low_new_appointed_staffs) }}</td>
                     <td>{{ en2mm($high_transferred_staffs) }}</td>
                     <td>{{ en2mm($low_transferred_staffs) }}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ en2mm($high_leave_staffs) }}</td>
+                    <td>{{ en2mm($low_leave_staffs) }}</td>
                     <td>{{ en2mm($high_staff_query->where('retire_type_id', 5)->count()) }}</td>
                     <td>{{ en2mm($low_staff_query->where('retire_type_id', 5)->count()) }}</td>
                     <td>{{ en2mm($high_staff_query->where('retire_type_id', 2)->count()) }}</td>
@@ -132,56 +132,7 @@
                     <td>{{ en2mm($d_limit_high_staffs + $d_limit_low_staffs) }}</td>
                     <td></td>
                 </tr>
-                {{-- <tr>
-                    <td>၁</td>
-                    <td class="border border-black text-right p-2">၂၄၄</td>
-                    <td class="border border-black text-right p-2">၂၀၄</td>
-                    <td class="border border-black text-right p-2">၄၄၈</td>
-                    <td class="border border-black text-right p-2"></td>
-                    <td class="border border-black text-right p-2">၁၄</td>
-                    <td class="border border-black text-right p-2"></td>
-                    <td class="border border-black text-right p-2">၁</td>
-                    <td class="border border-black text-right p-2"></td>
-                    <td class="border border-black text-right p-2">၁</td>
-                    <td class="border border-black text-right p-2"></td>
-                    <td class="border border-black text-right p-2">၁</td>
-                    <td class="border border-black text-right p-2">၁</td>
-                    <td class="border border-black text-right p-2">၇</td>
-                    <td class="border border-black text-right p-2"></td>
-                    <td class="border border-black text-right p-2"></td>
-                    <td class="border border-black text-right p-2"></td>
-                    <td class="border border-black text-right p-2"></td>
-                    <td class="border border-black text-right p-2">၂၄၃</td>
-                    <td class="border border-black text-right p-2">၂၁၀</td>
-                    <td class="border border-black text-right p-2">၄၅၃</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>၂၄၄</td>
-                    <td>၂၀၄</td>
-                    <td>၄၄၈</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>၁</td>
-                    <td>၁</td>
-                    <td>၇</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>၂၄၃</td>
-                    <td>၂၁၀</td>
-                    <td>၄၅၃</td>
-                    <td></td>
-                </tr> --}}
             </tbody>
         </table>
-
 </body>
 </html>

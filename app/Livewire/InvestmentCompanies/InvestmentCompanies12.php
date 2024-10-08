@@ -28,6 +28,9 @@ class InvestmentCompanies12 extends Component
         ->where('is_newly_appointed', false)
         ->count();
 
+        $high_leave_staffs = $high_staff_query->where('retire_type_id', 6)->count();
+        $low_leave_staffs = $low_staff_query->where('retire_type_id', 6)->count();
+
         $d_limit_high_staffs = $date_limit_query->whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->count();
         $d_limit_low_staffs = $date_limit_query->whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->count();
 
@@ -40,6 +43,8 @@ class InvestmentCompanies12 extends Component
             'd_limit_low_staffs' => $d_limit_low_staffs,
             'high_staff_query' => $high_staff_query,
             'low_staff_query' => $low_staff_query,
+            'high_leave_staffs' => $high_leave_staffs,
+            'low_leave_staffs' => $low_leave_staffs,
         ];
         $pdf = PDF::loadView('pdf_reports.investment_companies_report_12', $data);
         return response()->streamDownload(function() use ($pdf) {
@@ -68,6 +73,9 @@ class InvestmentCompanies12 extends Component
         ->where('is_newly_appointed', false)
         ->count();
 
+        $high_leave_staffs = $high_staff_query->where('retire_type_id', 6)->count();
+        $low_leave_staffs = $low_staff_query->where('retire_type_id', 6)->count();
+
         $d_limit_high_staffs = $date_limit_query->whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->count();
         $d_limit_low_staffs = $date_limit_query->whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->count();
 
@@ -80,6 +88,8 @@ class InvestmentCompanies12 extends Component
             'd_limit_low_staffs' => $d_limit_low_staffs,
             'high_staff_query' => $high_staff_query,
             'low_staff_query' => $low_staff_query,
+            'high_leave_staffs' => $high_leave_staffs,
+            'low_leave_staffs' => $low_leave_staffs,
         ]);
     }
 }

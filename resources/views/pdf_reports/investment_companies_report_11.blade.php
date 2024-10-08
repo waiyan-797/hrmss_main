@@ -137,8 +137,8 @@
                     <td>{{ en2mm($low_new_staffs) }}</td>
                     <td>{{ en2mm($high_transfer_new_staffs) }}</td>
                     <td>{{ en2mm($low_transfer_new_staffs) }}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ en2mm($high_leave_staffs) }}</td>
+                    <td>{{ en2mm($low_leave_staffs) }}</td>
                     <td>{{ en2mm($high_q->where('retire_type_id', 5)->count()) }}</td>
                     <td>{{ en2mm($low_q->where('retire_type_id', 5)->count()) }}</td>
                     <td>{{ en2mm($high_q->where('retire_type_id', 2)->count()) }}</td>
@@ -161,8 +161,8 @@
                     <td>{{ en2mm($low_new_staffs2) }}</td>
                     <td>{{ en2mm($high_transfer_new_staffs2) }}</td>
                     <td>{{ en2mm($low_transfer_new_staffs2) }}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ en2mm($high_leave_staffs2) }}</td>
+                    <td>{{ en2mm($low_leave_staffs2) }}</td>
                     <td>{{ en2mm($high_q2->where('retire_type_id', 5)->count()) }}</td>
                     <td>{{ en2mm($low_q2->where('retire_type_id', 5)->count()) }}</td>
                     <td>{{ en2mm($high_q2->where('retire_type_id', 2)->count()) }}</td>
@@ -186,8 +186,8 @@
                     <td>{{ en2mm($low_new_staffs + $low_new_staffs2) }}</td>
                     <td>{{ en2mm($high_transfer_new_staffs + $high_transfer_new_staffs2) }}</td>
                     <td>{{ en2mm($low_transfer_new_staffs + $low_transfer_new_staffs2) }}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ en2mm($high_leave_staffs + $high_leave_staffs2) }}</td>
+                    <td>{{ en2mm($low_leave_staffs + $low_leave_staffs2) }}</td>
                     <td>{{ en2mm(($high_q->where('retire_type_id', 5)->count()) + ($high_q2->where('retire_type_id', 5)->count())) }}</td>
                     <td>{{ en2mm(($low_q->where('retire_type_id', 5)->count()) + ($low_q2->where('retire_type_id', 5)->count())) }}</td>
                     <td>{{ en2mm($high_q->where('retire_type_id', 2)->count() + $high_q2->where('retire_type_id', 2)->count()) }}</td>
