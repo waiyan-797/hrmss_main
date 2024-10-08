@@ -80,8 +80,8 @@
             border-collapse: collapse;
         }
 
-       
-        
+
+
     </style>
 </head>
 <body>
@@ -128,116 +128,91 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>၁</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                </tr>
-                <tr>
                     <td rowspan="2">၁</td>
                     <td>လုပ်သက်၁၀နှစ်အထက်</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
+                    <td>{{ en2mm($high_dlimit_staffs) }}</td>
+                    <td>{{ en2mm($low_dlimit_staffs) }}</td>
+                    <td>{{ en2mm($high_dlimit_staffs + $low_dlimit_staffs) }}</td>
+                    <td>{{ en2mm($high_new_staffs) }}</td>
+                    <td>{{ en2mm($low_new_staffs) }}</td>
+                    <td>{{ en2mm($high_transfer_new_staffs) }}</td>
+                    <td>{{ en2mm($low_transfer_new_staffs) }}</td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ en2mm($high_q->where('retire_type_id', 5)->count()) }}</td>
+                    <td>{{ en2mm($low_q->where('retire_type_id', 5)->count()) }}</td>
+                    <td>{{ en2mm($high_q->where('retire_type_id', 2)->count()) }}</td>
+                    <td>{{ en2mm($low_q->where('retire_type_id', 2)->count()) }}</td>
+                    <td>{{ en2mm($high_q->whereIn('retire_type_id', [3, 4])->count()) }}</td>
+                    <td>{{ en2mm($low_q->where('retire_type_id', [3, 4])->count()) }}</td>
+                    <td>{{ en2mm($high_q->where('retire_type_id', 1)->count()) }}</td>
+                    <td>{{ en2mm($low_q->where('retire_type_id', 1)->count()) }}</td>
+                    <td>{{ en2mm($high_dlimit2_staffs) }}</td>
+                    <td>{{ en2mm($low_dlimit2_staffs) }}</td>
+                    <td>{{ en2mm($high_dlimit2_staffs + $low_dlimit2_staffs) }}</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>လုပ်သက်၁၀နှစ်အောက်</td>
-                    <td>115</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
+                    <td>{{ en2mm($high_dlimit_staffs2) }}</td>
+                    <td>{{ en2mm($low_dlimit_staffs2) }}</td>
+                    <td>{{ en2mm($high_dlimit_staffs2 + $low_dlimit_staffs2) }}</td>
+                    <td>{{ en2mm($high_new_staffs2) }}</td>
+                    <td>{{ en2mm($low_new_staffs2) }}</td>
+                    <td>{{ en2mm($high_transfer_new_staffs2) }}</td>
+                    <td>{{ en2mm($low_transfer_new_staffs2) }}</td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ en2mm($high_q2->where('retire_type_id', 5)->count()) }}</td>
+                    <td>{{ en2mm($low_q2->where('retire_type_id', 5)->count()) }}</td>
+                    <td>{{ en2mm($high_q2->where('retire_type_id', 2)->count()) }}</td>
+                    <td>{{ en2mm($low_q2->where('retire_type_id', 2)->count()) }}</td>
+                    <td>{{ en2mm($high_q2->whereIn('retire_type_id', [3, 4])->count()) }}</td>
+                    <td>{{ en2mm($low_q2->where('retire_type_id', [3, 4])->count()) }}</td>
+                    <td>{{ en2mm($high_q2->where('retire_type_id', 1)->count()) }}</td>
+                    <td>{{ en2mm($low_q2->where('retire_type_id', 1)->count()) }}</td>
+                    <td>{{ en2mm($high_dlimit2_staffs) }}</td>
+                    <td>{{ en2mm($low_dlimit2_staffs) }}</td>
+                    <td>{{ en2mm($high_dlimit2_staffs + $low_dlimit2_staffs) }}</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>စုစုပေါင်း</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>15</td>
+                    <td>{{ en2mm($high_dlimit_staffs + $high_dlimit_staffs2) }}</td>
+                    <td>{{ en2mm($low_dlimit_staffs + $low_dlimit_staffs2) }}</td>
+                    <td>{{ en2mm(($high_dlimit_staffs + $low_dlimit_staffs) + ($high_dlimit_staffs2 + $low_dlimit_staffs2)) }}</td>
+                    <td>{{ en2mm($high_new_staffs + $high_new_staffs2) }}</td>
+                    <td>{{ en2mm($low_new_staffs + $low_new_staffs2) }}</td>
+                    <td>{{ en2mm($high_transfer_new_staffs + $high_transfer_new_staffs2) }}</td>
+                    <td>{{ en2mm($low_transfer_new_staffs + $low_transfer_new_staffs2) }}</td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ en2mm(($high_q->where('retire_type_id', 5)->count()) + ($high_q2->where('retire_type_id', 5)->count())) }}</td>
+                    <td>{{ en2mm(($low_q->where('retire_type_id', 5)->count()) + ($low_q2->where('retire_type_id', 5)->count())) }}</td>
+                    <td>{{ en2mm($high_q->where('retire_type_id', 2)->count() + $high_q2->where('retire_type_id', 2)->count()) }}</td>
+                    <td>{{ en2mm($low_q->where('retire_type_id', 2)->count() + $low_q2->where('retire_type_id', 2)->count()) }}</td>
+                    <td>{{ en2mm($high_q->whereIn('retire_type_id', [3, 4])->count() + $high_q2->whereIn('retire_type_id', [3, 4])->count()) }}</td>
+                    <td>{{ en2mm($low_q->where('retire_type_id', [3, 4])->count() + $low_q2->where('retire_type_id', [3, 4])->count()) }}</td>
+                    <td>{{ en2mm($high_q->where('retire_type_id', 1)->count() + $high_q2->where('retire_type_id', 1)->count()) }}</td>
+                    <td>{{ en2mm($low_q->where('retire_type_id', 1)->count() + $low_q2->where('retire_type_id', 1)->count()) }}</td>
+                    <td>{{ en2mm($high_dlimit2_staffs + $high_dlimit2_staffs2) }}</td>
+                    <td>{{ en2mm($low_dlimit2_staffs + $low_dlimit2_staffs2) }}</td>
+                    <td>{{ en2mm(($high_dlimit2_staffs + $low_dlimit2_staffs) + ($high_dlimit2_staffs2 + $low_dlimit2_staffs2)) }}</td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
-    
+
         <div class="my-2">
             <p class="ml-10 w-1-5">ရှင်းလင်းချက်။</p>
             <p class="w-3-4">လက်ထောက်ညွှန်ကြားရေးမှူး ဒေါ်ဧဧသန့်သည် လုပ်သက် ၁၀နှစ်အထက်သို့ရောက်ရှိ<br>လက်ထောက်ညွှန်ကြားရေးမှူး ‌ဒေါ်မေသူဇာဝင့်သည် လုပ်သက် ၁၀နှစ်အထက်သို့ရောက်ရှိ</p>
         </div>
-    
+
         <p class="float-right mr-32">(လက်မှတ်)<br>တာဝန်ခံအရာရှိ</p>
-    
-       
-        
+
+
+
 
 </body>
 </html>

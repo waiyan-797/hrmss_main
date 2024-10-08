@@ -1,18 +1,14 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
-
-
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">
                     ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
                 <h3 class="font-semibold text-base mb-2 text-center">၂၀၂၄ ခုနှစ်၊ ဇွန်လ</h3>
                 <div class="w-full rounded-lg">
-
-
                     <table class="md:w-auto">
                         <thead>
                             <tr>
@@ -63,30 +59,30 @@
                             <tr>
                                 <td class="border border-black text-center p-2">၁</td>
                                 <td class="border border-black text-center p-2">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
-                                <td class="border border-black text-center p-2">၂၄၁</td>
-                                <td class="border border-black text-center p-2">၂၁၁</td>
-                                <td class="border border-black text-center p-2">၄၅၂</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
-                                <td class="border border-black text-center p-2">၁၂၃</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($high_staffs) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($low_staffs) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($high_staffs + $low_staffs) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($high_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($low_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($high_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($low_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($high_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($low_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($high_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($low_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($total_reduced_staffs->count()) }}</td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
                             </tr>
                             <tr class="font-bold">
                                 <td class="border border-black text-center p-2"></td>

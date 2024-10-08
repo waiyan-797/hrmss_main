@@ -1,8 +1,8 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
 
 
@@ -47,29 +47,29 @@
                 <tbody>
                     <tr>
                         <td class="border border-black text-center p-2">၁</td>
-                        <td class="border border-black text-center p-2">၃</td>
-                        <td class="border border-black text-center p-2">၄</td>
-                        <td class="border border-black text-center p-2">၅(၃+၄)</td>
-                        <td class="border border-black text-center p-2">၆</td>
-                        <td class="border border-black text-center p-2">၇</td>
-                        <td class="border border-black text-center p-2">၈</td>
-                        <td class="border border-black text-center p-2">၉</td>
-                        <td class="border border-black text-center p-2">၁၀</td>
-                        <td class="border border-black text-center p-2">၁၁</td>
-                        <td class="border border-black text-center p-2">၁၂</td>
-                        <td class="border border-black text-center p-2">၁၃</td>
-                        <td class="border border-black text-center p-2">၁၄</td>
-                        <td class="border border-black text-center p-2">၁၅</td>
-                        <td class="border border-black text-center p-2">၁၆</td>
-                        <td class="border border-black text-center p-2">၁၇</td>
-                        <td class="border border-black text-center p-2">၁၈</td>
-                        <td class="border border-black text-center p-2">၁၉</td>
-                        <td class="border border-black text-center p-2">၂၀<br>(၃+၆+၈)-(၁၀+၁၂+၁၄+၁၆+၁၈)</td>
-                        <td class="border border-black text-center p-2">၂၁<br>(၄+၇+၉)-(၁၁+၁၃+၁၅+၁၇+၁၉)</td>
-                        <td class="border border-black text-center p-2">၂၂<br>(၂၁+၂၂)</td>
-                        <td class="border border-black text-center p-2">၂၃</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($high_staff_query->count()) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($low_staff_query->count()) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($high_staff_query->count() + $low_staff_query->count()) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($high_new_appointed_staffs) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($low_new_appointed_staffs) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($high_transferred_staffs) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($low_transferred_staffs) }}</td>
+                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">{{ en2mm($high_staff_query->where('retire_type_id', 5)->count()) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($low_staff_query->where('retire_type_id', 5)->count()) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($high_staff_query->where('retire_type_id', 2)->count()) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($low_staff_query->where('retire_type_id', 2)->count()) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($high_staff_query->whereIn('retire_type_id', [3, 4])->count()) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($low_staff_query->whereIn('retire_type_id', [3, 4])->count()) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($high_staff_query->where('retire_type_id', 1)->count()) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($low_staff_query->where('retire_type_id', 1)->count()) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($d_limit_high_staffs) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($d_limit_low_staffs) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($d_limit_high_staffs + $d_limit_low_staffs) }}</td>
+                        <td class="border border-black text-center p-2"></td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <td class="border border-black text-center p-2">၁</td>
                         <td class="border border-black text-right p-2">၂၄၄</td>
                         <td class="border border-black text-right p-2">၂၀၄</td>
@@ -116,7 +116,7 @@
                         <td class="border border-black text-center p-2">၂၁၀</td>
                         <td class="border border-black text-center p-2">၄၅၃</td>
                         <td class="border border-black text-center p-2"></td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
 

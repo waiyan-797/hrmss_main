@@ -8,16 +8,38 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class InvestmentCompanies12 extends Component
 {
+    public function go_pdf(){
+        $date_limit = '2024-03-31';
+        $date_limit_query = Staff::where('join_date', '<=', $date_limit);
+        $high_staff_query = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1));
+        $low_staff_query = Staff::whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]));
 
-    public $staff_id;
-    public function mount($staff_id = 0){
-        $this->staff_id = $staff_id;
-    }
+        $high_new_appointed_staffs = $high_staff_query
+        ->where('is_newly_appointed', true)
+        ->count();
+        $low_new_appointed_staffs = $low_staff_query
+        ->where('is_newly_appointed', true)
+        ->count();
 
-    public function go_pdf($staff_id){
-        $staff = Staff::find($staff_id);
+        $high_transferred_staffs = $high_staff_query
+        ->where('is_newly_appointed', false)
+        ->count();
+        $low_transferred_staffs = $low_staff_query
+        ->where('is_newly_appointed', false)
+        ->count();
+
+        $d_limit_high_staffs = $date_limit_query->whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->count();
+        $d_limit_low_staffs = $date_limit_query->whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->count();
+
         $data = [
-            'staff' => $staff,
+            'high_new_appointed_staffs' => $high_new_appointed_staffs,
+            'low_new_appointed_staffs' => $low_new_appointed_staffs,
+            'high_transferred_staffs' => $high_transferred_staffs,
+            'low_transferred_staffs' => $low_transferred_staffs,
+            'd_limit_high_staffs' => $d_limit_high_staffs,
+            'd_limit_low_staffs' => $d_limit_low_staffs,
+            'high_staff_query' => $high_staff_query,
+            'low_staff_query' => $low_staff_query,
         ];
         $pdf = PDF::loadView('pdf_reports.investment_companies_report_12', $data);
         return response()->streamDownload(function() use ($pdf) {
@@ -27,14 +49,37 @@ class InvestmentCompanies12 extends Component
 
     public function render()
     {
-        $staff = Staff::get()->first();
+        $date_limit = '2024-03-31';
+        $date_limit_query = Staff::where('join_date', '<=', $date_limit);
+        $high_staff_query = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1));
+        $low_staff_query = Staff::whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]));
+
+        $high_new_appointed_staffs = $high_staff_query
+        ->where('is_newly_appointed', true)
+        ->count();
+        $low_new_appointed_staffs = $low_staff_query
+        ->where('is_newly_appointed', true)
+        ->count();
+
+        $high_transferred_staffs = $high_staff_query
+        ->where('is_newly_appointed', false)
+        ->count();
+        $low_transferred_staffs = $low_staff_query
+        ->where('is_newly_appointed', false)
+        ->count();
+
+        $d_limit_high_staffs = $date_limit_query->whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->count();
+        $d_limit_low_staffs = $date_limit_query->whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->count();
+
         return view('livewire.investment-companies.investment-companies12',[
-            'staff' => $staff,
+            'high_new_appointed_staffs' => $high_new_appointed_staffs,
+            'low_new_appointed_staffs' => $low_new_appointed_staffs,
+            'high_transferred_staffs' => $high_transferred_staffs,
+            'low_transferred_staffs' => $low_transferred_staffs,
+            'd_limit_high_staffs' => $d_limit_high_staffs,
+            'd_limit_low_staffs' => $d_limit_low_staffs,
+            'high_staff_query' => $high_staff_query,
+            'low_staff_query' => $low_staff_query,
         ]);
     }
-    
-    // public function render()
-    // {
-    //     return view('livewire.investment-companies.investment-companies12');
-    // }
 }

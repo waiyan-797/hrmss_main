@@ -63,8 +63,8 @@
         }
 
 
-       
-        
+
+
     </style>
 </head>
 <body>
@@ -109,40 +109,64 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="center">၁</td>
-                    <td>၃</td>
-                    <td>၄</td>
-                    <td>၅(၃+၄)</td>
-                    <td>၆</td>
-                    <td>၇</td>
-                    <td>၈</td>
-                    <td>၉</td>
-                    <td>၁၀</td>
-                    <td>၁၁</td>
-                    <td>၁၂</td>
-                    <td>၁၃</td>
-                    <td>၁၄</td>
-                    <td>၁၅</td>
-                    <td>၁၆</td>
-                    <td>၁၇</td>
-                    <td>၁၈</td>
-                    <td>၁၉</td>
-                    <td>၂၀<br>(၃+၆+၈)-(၁၀+၁၂+၁၄+၁၆+၁၈)</td>
-                    <td>၂၁<br>(၄+၇+၉)-(၁၁+၁၃+၁၅+၁၇+၁၉)</td>
-                    <td>၂၂<br>(၂၁+၂၂)</td>
-                    <td class="note">၂၃</td>
+                    <td>၁</td>
+                    <td>{{ en2mm($high_staff_query->count()) }}</td>
+                    <td>{{ en2mm($low_staff_query->count()) }}</td>
+                    <td>{{ en2mm($high_staff_query->count() + $low_staff_query->count()) }}</td>
+                    <td>{{ en2mm($high_new_appointed_staffs) }}</td>
+                    <td>{{ en2mm($low_new_appointed_staffs) }}</td>
+                    <td>{{ en2mm($high_transferred_staffs) }}</td>
+                    <td>{{ en2mm($low_transferred_staffs) }}</td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ en2mm($high_staff_query->where('retire_type_id', 5)->count()) }}</td>
+                    <td>{{ en2mm($low_staff_query->where('retire_type_id', 5)->count()) }}</td>
+                    <td>{{ en2mm($high_staff_query->where('retire_type_id', 2)->count()) }}</td>
+                    <td>{{ en2mm($low_staff_query->where('retire_type_id', 2)->count()) }}</td>
+                    <td>{{ en2mm($high_staff_query->whereIn('retire_type_id', [3, 4])->count()) }}</td>
+                    <td>{{ en2mm($low_staff_query->whereIn('retire_type_id', [3, 4])->count()) }}</td>
+                    <td>{{ en2mm($high_staff_query->where('retire_type_id', 1)->count()) }}</td>
+                    <td>{{ en2mm($low_staff_query->where('retire_type_id', 1)->count()) }}</td>
+                    <td>{{ en2mm($d_limit_high_staffs) }}</td>
+                    <td>{{ en2mm($d_limit_low_staffs) }}</td>
+                    <td>{{ en2mm($d_limit_high_staffs + $d_limit_low_staffs) }}</td>
+                    <td></td>
+                </tr>
+                {{-- <tr>
+                    <td>၁</td>
+                    <td class="border border-black text-right p-2">၂၄၄</td>
+                    <td class="border border-black text-right p-2">၂၀၄</td>
+                    <td class="border border-black text-right p-2">၄၄၈</td>
+                    <td class="border border-black text-right p-2"></td>
+                    <td class="border border-black text-right p-2">၁၄</td>
+                    <td class="border border-black text-right p-2"></td>
+                    <td class="border border-black text-right p-2">၁</td>
+                    <td class="border border-black text-right p-2"></td>
+                    <td class="border border-black text-right p-2">၁</td>
+                    <td class="border border-black text-right p-2"></td>
+                    <td class="border border-black text-right p-2">၁</td>
+                    <td class="border border-black text-right p-2">၁</td>
+                    <td class="border border-black text-right p-2">၇</td>
+                    <td class="border border-black text-right p-2"></td>
+                    <td class="border border-black text-right p-2"></td>
+                    <td class="border border-black text-right p-2"></td>
+                    <td class="border border-black text-right p-2"></td>
+                    <td class="border border-black text-right p-2">၂၄၃</td>
+                    <td class="border border-black text-right p-2">၂၁၀</td>
+                    <td class="border border-black text-right p-2">၄၅၃</td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td class="center">၁</td>
+                    <td></td>
                     <td>၂၄၄</td>
                     <td>၂၀၄</td>
                     <td>၄၄၈</td>
                     <td></td>
-                    <td>၁၄</td>
                     <td></td>
-                    <td>၁</td>
                     <td></td>
-                    <td>၁</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td>၁</td>
                     <td>၁</td>
@@ -155,33 +179,9 @@
                     <td>၂၁၀</td>
                     <td>၄၅၃</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td class="center"></td>
-                    <td>၂၄၄</td>
-                    <td>၂၀၄</td>
-                    <td>၄၄၈</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>၁</td>
-                    <td>၁</td>
-                    <td>၇</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>၂၄၃</td>
-                    <td>၂၁၀</td>
-                    <td>၄၅၃</td>
-                    <td></td>
-                </tr>
+                </tr> --}}
             </tbody>
         </table>
-        
+
 </body>
 </html>

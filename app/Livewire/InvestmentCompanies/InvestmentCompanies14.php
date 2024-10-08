@@ -2,21 +2,17 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Models\Division;
+use App\Models\Rank;
 use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class InvestmentCompanies14 extends Component
 {
-    public $staff_id;
-    public function mount($staff_id = 0){
-        $this->staff_id = $staff_id;
-    }
-
-    public function go_pdf($staff_id){
-        $staff = Staff::find($staff_id);
+    public function go_pdf(){
         $data = [
-            'staff' => $staff,
+
         ];
         $pdf = PDF::loadView('pdf_reports.investment_companies_report_14', $data);
         return response()->streamDownload(function() use ($pdf) {
@@ -26,13 +22,30 @@ class InvestmentCompanies14 extends Component
 
     public function render()
     {
-        $staff = Staff::get()->first();
+        $yinn_1 = Rank::whereHas('staffs', function($query){
+            return $query->where('current_division_id', 1);
+        })->count();
+
+        $yinn_2 = Rank::whereHas('staffs', function($query){
+            return $query->where('current_division_id', 2);
+        })->count();
+
+        $yinn_3 = Rank::whereHas('staffs', function($query){
+            return $query->where('current_division_id', 3);
+        })->count();
+
+        $yinn_4 = Rank::whereHas('staffs', function($query){
+            return $query->where('current_division_id', 4);
+        })->count();
+
+        $ranks = Rank::get();
+
         return view('livewire.investment-companies.investment-companies14',[
-            'staff' => $staff,
+            'ranks' => $ranks,
+            'yinn_1' => $yinn_1,
+            'yinn_2' => $yinn_2,
+            'yinn_3' => $yinn_3,
+            'yinn_4' => $yinn_4,
         ]);
     }
-    // public function render()
-    // {
-    //     return view('livewire.investment-companies.investment-companies14');
-    // }
 }

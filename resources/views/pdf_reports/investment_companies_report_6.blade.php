@@ -79,7 +79,7 @@
         <div class="container">
             <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
             <h2>----ခုနှစ်၊ ---လအတွင်း တာဝန်ပျက်ကွက်သူဝန်ထမ်းများအား အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း</h2>
-            
+
             <div class="table-container">
                 <table>
                     <thead>
@@ -90,7 +90,6 @@
                             <th rowspan="2">ပုဒ်မ၅၀၅ဖြင့်အရေးယူပြီးစီးမှု</th>
                             <th rowspan="2">အရေးယူဆောင်ရွက်ဆဲအင်အား</th>
                             <th rowspan="2">စုစုပေါင်း</th>
-                            <th rowspan="2">CDM မှပြန်လည်တာဝန်ထမ်းဆောင်သူဦးရေ</th>
                         </tr>
                         <tr>
                             <th>စာဖြင့် သတိပေးခြင်း</th>
@@ -106,29 +105,27 @@
                         <tr>
                             <td>(က)</td>
                             <td>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 1)->count()) }}</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 2)->count()) }}</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 3)->count()) }}</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 4)->count()) }}</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 5)->count()) }}</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 8)->count()) }}</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 9)->count()) }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>စုစုပေါင်း</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 1)->count()) }}</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 2)->count()) }}</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 3)->count()) }}</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 4)->count()) }}</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 5)->count()) }}</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 8)->count()) }}</td>
+                            <td>{{ en2mm($punishments->where('penalty_type_id', 9)->count()) }}</td>
                             <td>-</td>
                             <td>-</td>
                             <td>-</td>
@@ -137,6 +134,6 @@
                 </table>
             </div>
         </div>
-    
+
 </body>
 </html>
