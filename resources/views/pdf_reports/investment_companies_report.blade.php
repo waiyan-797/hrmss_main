@@ -131,165 +131,28 @@
                                 <th>စုစုပေါင်း</th>
                             </tr>
                         </thead>
-                        <tbody class="text-center h-8 p-2">
-                            @foreach ($first_payscales as $payscale)
-                                <tr>
-                                    <td>{{$loop->index + 1}}</td>
-                                    <td>{{$payscale->name}}</td>
-                                    <td>{{en2mm($payscale->allowed_qty)}}</td>
-                                    <td>{{en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($kayah_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($kayin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($chin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($mon_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($rakhine_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($shan_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($sagaing_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($mdy_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($npt_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($ygn_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($head_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($mag_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($pagu_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($tnty_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($aya_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($total_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                </tr>
-                            @endforeach
+                        <tbody>
                             <tr>
-                                <td colspan="2">{{$first_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
-                                <td>{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
-                                <td>
-                                    {{ en2mm($kachin_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($kayah_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($kayin_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($chin_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($mon_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($rakhine_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($shan_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($sagaing_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($mdy_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($npt_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($ygn_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($head_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($mag_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($pagu_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($tnty_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($aya_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($total_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                                </td>
-                            </tr>
-
-                            @foreach ($second_payscales as $payscale)
-                                <tr>
-                                    <td>{{$loop->index + 1}}</td>
-                                    <td>{{$payscale->name}}</td>
-                                    <td>{{en2mm($payscale->allowed_qty)}}</td>
-                                    <td>{{en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($kayah_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($kayin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($chin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($mon_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($rakhine_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($shan_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($sagaing_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($mdy_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($npt_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($ygn_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($head_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($mag_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($pagu_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($tnty_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($aya_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                    <td>{{en2mm($total_staffs->where('payscale_id', $payscale->id)->count())}}</td>
-                                </tr>
-                            @endforeach
-                            <tr>
-                                <td colspan="2">{{$second_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
-                                <td>{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
-                                <td>
-                                    {{ en2mm($kachin_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($kayah_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($kayin_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($chin_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($mon_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($rakhine_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($shan_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($sagaing_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($mdy_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($npt_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($ygn_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($head_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($mag_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($pagu_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($tnty_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($aya_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
-                                <td>
-                                    {{ en2mm($total_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
-                                </td>
+                                <td>၁</td>
+                                <td>၅၀၀၀၀၀</td>
+                                <td>၄၁၈၀၀၀-၄၀၀၀-၄၃၈၀၀၀</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
+                                <td>၁၂</td>
                             </tr>
                         </tbody>
                     </table>
