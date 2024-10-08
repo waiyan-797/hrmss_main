@@ -54,6 +54,7 @@ class InvestmentCompanies2 extends Component
             echo $pdf->output();
         }, 'investment_companies_pdf_2.pdf');
     }
+    
    
     public function render()
     {

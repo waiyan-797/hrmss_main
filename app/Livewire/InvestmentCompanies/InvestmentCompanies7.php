@@ -16,17 +16,17 @@ class InvestmentCompanies7 extends Component
         $low_reduced_staffs = Staff::whereNotNull('retire_type_id')->whereHas('currentRank', fn($q) => $q->where('staff_type_id', [2, 3]))->get();
         $total_reduced_staffs = Staff::whereIn('retire_type_id', [1, 2, 4, 5])->get();
 
-        $high_new_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->where('is_newly_appointment', true)->count();
-        $low_new_staffs = Staff::whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->where('is_newly_appointment', true)->count();
-        $total_new_staffs = Staff::where('is_newly_appointment', true)->count();
+        $high_new_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->where('is_newly_appointed', true)->count();
+        $low_new_staffs = Staff::whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->where('is_newly_appointed', true)->count();
+        $total_new_staffs = Staff::where('is_newly_appointed', true)->count();
 
         $high_leave_staffs = Staff::where('retire_type_id', 6)->whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->count();
         $low_leave_staffs = Staff::where('retire_type_id', 6)->whereHas('currentRank', fn($q) => $q->where('staff_type_id', [2, 3]))->count();
         $total_leave_staffs = Staff::where('retire_type_id', 6)->count();
 
-        $high_transfer_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->where('is_newly_appointment', false)->count();
-        $low_transfer_staffs = Staff::whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->where('is_newly_appointment', false)->count();
-        $total_transfer_staffs = Staff::where('is_newly_appointment', false)->count();
+        $high_transfer_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->where('is_newly_appointed', false)->count();
+        $low_transfer_staffs = Staff::whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->where('is_newly_appointed', false)->count();
+        $total_transfer_staffs = Staff::where('is_newly_appointed', false)->count();
 
         $high_reduced_total = Staff::whereIn('retire_type_id', [1, 2, 4, 5])->whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->count();
         $low_reduced_total = Staff::whereIn('retire_type_id', [1, 2, 4, 5])->whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->count();
@@ -68,17 +68,17 @@ class InvestmentCompanies7 extends Component
         $low_reduced_staffs = Staff::whereNotNull('retire_type_id')->whereHas('currentRank', fn($q) => $q->where('staff_type_id', [2, 3]))->get();
         $total_reduced_staffs = Staff::whereIn('retire_type_id', [1, 2, 4, 5])->get();
 
-        $high_new_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->where('is_newly_appointment', true)->count();
-        $low_new_staffs = Staff::whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->where('is_newly_appointment', true)->count();
-        $total_new_staffs = Staff::where('is_newly_appointment', true)->count();
+        $high_new_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->where('is_newly_appointed', true)->count();
+        $low_new_staffs = Staff::whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->where('is_newly_appointed', true)->count();
+        $total_new_staffs = Staff::where('is_newly_appointed', true)->count();
 
         $high_leave_staffs = Staff::where('retire_type_id', 6)->whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->count();
         $low_leave_staffs = Staff::where('retire_type_id', 6)->whereHas('currentRank', fn($q) => $q->where('staff_type_id', [2, 3]))->count();
         $total_leave_staffs = Staff::where('retire_type_id', 6)->count();
 
-        $high_transfer_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->where('is_newly_appointment', false)->count();
-        $low_transfer_staffs = Staff::whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->where('is_newly_appointment', false)->count();
-        $total_transfer_staffs = Staff::where('is_newly_appointment', false)->count();
+        $high_transfer_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->where('is_newly_appointed', false)->count();
+        $low_transfer_staffs = Staff::whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->where('is_newly_appointed', false)->count();
+        $total_transfer_staffs = Staff::where('is_newly_appointed', false)->count();
 
         $high_reduced_total = Staff::whereIn('retire_type_id', [1, 2, 4, 5])->whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->count();
         $low_reduced_total = Staff::whereIn('retire_type_id', [1, 2, 4, 5])->whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->count();

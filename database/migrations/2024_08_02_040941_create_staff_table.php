@@ -144,7 +144,7 @@ return new class extends Migration
             $table->foreignId('salary_paid_by')->nullable()->constrained('departments')->onDelete('set null');
             $table->date('join_date')->nullable();
             $table->date('government_staff_started_date')->nullable();
-            $table->boolean('is_newly_appointment')->nullable();
+            $table->boolean('is_newly_appointed')->nullable();
             $table->boolean('is_direct_appointed')->nullable();
             $table->foreignIdFor(payscale::class)->nullable()->constrained()->nullOnDelete();
             
