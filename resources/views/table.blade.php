@@ -56,13 +56,47 @@
                             <td class="px-6 py-4 text-gray-500 dark:text-gray-300">
                                 @if (gettype($value->$val) == 'object')
                                     {{ $value->$val->name }}
-                                @elseif (is_string($value->$val) && Str::contains($value->$val, 'staffs/'))
+                                @elseif (is_string($value->$val) && Str::contains($value->$val, 'staffs/') || Str::contains($value->$val, 'avatars/'))
                                     <img src="{{ route('file', $value->$val) }}" alt="Image" class="w-20 h-20 mx-auto rounded-full">
                                 @else
-                                    {{ $value->$val ? $value->$val : '-' }}
+                                    {{ $value->$val    ? $value->$val : '-' }}
                                 @endif
+                               
+
                             </td>
+
+                          
+                         
+                          
+
                         @endforeach
+                        <td>
+
+                        @if(($disabledMode ?? false) == 'toggle')
+
+                    
+                            
+                        <label class="inline-flex items-center cursor-pointer">
+                            <input type="checkbox" 
+                                   wire:click="updateStatus({{ $value->id }})" 
+                             
+                                   class="sr-only peer" 
+                                   @if($value->status) checked @endif> 
+                            <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 
+                                        peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full 
+                                        peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] 
+                                        after:start-[2px] after:bg-white after:border-gray-300 after:border 
+                                        after:rounded-full after:h-5 after:w-5 after:transition-all 
+                                        dark:border-gray-600 peer-checked:bg-blue-600">
+                            </div>
+                        </label>
+                        
+                      
+
+
+                        @endif 
+                    </td>
+
                         <td class="px-6 py-4">
                             @if($confirm_delete == true && $id === $value->id)
                                 <div>
@@ -74,8 +108,19 @@
                                 @if (isset($value->staff_no))
                                     <button type="button" wire:click='open_report({{$value->id}})' class="font-medium text-yellow-600 dark:text-yellow-500 hover:underline">Reports</button> |
                                 @endif
-                                <button type="button" wire:click='edit_modal({{$value->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button> |
+                                <button type="button" wire:click='edit_modal({{$value->id}})' class=" font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button> 
+                          
+                          
+                          
+                                @if(!($disabledMode ?? false) == 'toggle')
+                                |
+                          
+
+  
+
+                          
                                 <button type="button" wire:click="delete_confirm({{ $value->id }})" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</button>
+                            @endif
                             @endif
                         </td>
                     </tr>
@@ -87,6 +132,7 @@
         {{ $data_values->links('pagination') }}
     </div>
     @if ($confirm_edit || $confirm_add)
+    
         @include($modal)
     @endif
 </div>

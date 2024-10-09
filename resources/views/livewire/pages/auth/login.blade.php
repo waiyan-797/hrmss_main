@@ -26,9 +26,7 @@ $login = function () {
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <a href="{{ route('welcome') }}" class="text-blue-700 uppercase font-semibold font-arial text-lg flex items-center justify-center hover:text-blue-800 py-3" wire:navigate>
-        HR Management System (HRMS)
-    </a>
+ 
 
     <form wire:submit="login">
         <!-- Email Address -->
@@ -59,14 +57,8 @@ $login = function () {
         </div>
 
         <div class="flex flex-row items-center justify-end gap-3 mt-4">
-            @if (Route::has('password.request'))
-                <a class="font-arial font-medium underline text-sm text-blue-700 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif |
-            <a class="font-arial font-medium underline text-sm text-blue-700 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}" wire:navigate>
-                {{ __('Sign Up') }}
-            </a>
+           
+     
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>

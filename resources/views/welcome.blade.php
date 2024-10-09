@@ -19,6 +19,7 @@
                 <header class="flex justify-center mb-6">
                     <img src="{{ asset('img/DICA_logo.png') }}" alt="DICA Logo" class="w-32 h-auto shadow-lg rounded-lg bg-white">
                 </header>
+                
 
                 <main class="text-center">
                     <h1 class="text-xl font-semibold text-white dark:text-blue-400 mb-4 font-arial">HR Management System (HRMS)</h1>

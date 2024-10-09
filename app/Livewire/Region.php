@@ -22,15 +22,16 @@ class Region extends Component
         'region_name' => 'required',
     ];
 
-     //add new
-    public function add_new(){
+    //add new
+    public function add_new()
+    {
         $this->resetValidation();
         $this->reset('region_name');
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
 
-     //submit form
+    //submit form
     public function submitForm()
     {
         if ($this->confirm_add == true) {
@@ -52,7 +53,8 @@ class Region extends Component
     }
 
     //close modal
-    public function close_modal(){
+    public function close_modal()
+    {
         $this->resetValidation();
         $this->reset('region_name');
         $this->confirm_edit = false;
@@ -60,7 +62,8 @@ class Region extends Component
     }
 
     //edit
-    public function edit_modal($id){
+    public function edit_modal($id)
+    {
         $this->resetValidation();
         $this->confirm_add = false;
         $this->confirm_edit = true;
@@ -81,19 +84,22 @@ class Region extends Component
     }
 
     //delete confirm
-    public function delete_confirm($id){
+    public function delete_confirm($id)
+    {
         $this->region_id = $id;
         $this->confirm_delete = true;
     }
 
     //delete
-    public function delete($id){
+    public function delete($id)
+    {
         ModelsRegion::find($id)->delete();
         $this->confirm_delete = false;
     }
 
     #[On('render_region')]
-    public function render_region(){
+    public function render_region()
+    {
         $this->render();
     }
 
@@ -119,6 +125,4 @@ class Region extends Component
             'regions' => $regions,
         ]);
     }
-    
 }
-

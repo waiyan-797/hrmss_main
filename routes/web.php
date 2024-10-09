@@ -127,13 +127,14 @@ use App\Livewire\Township\Township;
 use App\Livewire\Language;
 use App\Livewire\Promotion as LivewirePromotion;
 use App\Livewire\Salary;
+use App\Livewire\User;
 use App\Models\Ministry;
 use App\Models\Promotion;
 use App\Models\Staff as ModelsStaff;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome')->name('welcome');
+// Route::view('/', 'welcome')->name('welcome');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
@@ -141,26 +142,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/training_type', TrainingType::class)->name('training_type');
     Route::get('/relation', Relation::class)->name('relation');
     Route::get('/division', Division::class)->name('division');
-    Route::get('/department',Department::class)->name('department');
+    Route::get('/department', Department::class)->name('department');
     Route::get('/region', Region::class)->name('region');
     Route::get('/district', District::class)->name('district');
     Route::get('/township', Township::class)->name('township');
-    Route::get('/pension_year',PensionYear ::class)->name('pension_year');
+    Route::get('/pension_year', PensionYear::class)->name('pension_year');
     Route::get('/staff', Staff::class)->name('staff');
-    Route::get('/payscale',Payscale::class)->name('payscale');
-    Route::get('/rank',Rank::class)->name('rank');
+    Route::get('/payscale', Payscale::class)->name('payscale');
+    Route::get('/rank', Rank::class)->name('rank');
     Route::get('/staff_type', StaffType::class)->name('staff_type');
     Route::get('/award', Award::class)->name('award');
     Route::get('/award_type', AwardType::class)->name('award_type');
     Route::get('/blood_type', BloodType::class)->name('blood_type');
     Route::get('/post', Post::class)->name('post');
-    Route::get('/section',Section::class)->name('section');
-    Route::get('/leave',Leave::class)->name('leave');
+    Route::get('/section', Section::class)->name('section');
+    Route::get('/leave', Leave::class)->name('leave');
     Route::get('/leave_type', LeaveType::class)->name('leave_type');
     Route::get('/nationality', Nationality::class)->name('nationality');
     Route::get('/country', Country::class)->name('country');
     Route::get('/ministry', LivewireMinistry::class)->name('ministry');
-    Route::get('/language',Language::class)->name('language');
+    Route::get('/language', Language::class)->name('language');
     Route::get('/education_group', EducationGroup::class)->name('education_group');
     Route::get('/education_type', EducationType::class)->name('education_type');
     Route::get('/education', Education::class)->name('education');
@@ -170,21 +171,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/ethnic', Ethnic::class)->name('ethnic');
     Route::get('/religion', Religion::class)->name('religion');
     Route::get('/gender', Gender::class)->name('gender');
-    Route::get('/salary',Salary::class)->name('salary');
-    Route::get('/promotion',LivewirePromotion::class)->name('promotion');
-    Route::get('/increment',Increment::class)->name('increment');
+    Route::get('/salary', Salary::class)->name('salary');
+    Route::get('/promotion', LivewirePromotion::class)->name('promotion');
+    Route::get('/increment', Increment::class)->name('increment');
     Route::get('/staff_detail/{confirm_add?}/{confirm_edit?}/{staff_id?}/{tab?}', StaffDetail::class)->name('staff_detail');
-    Route::get('/file/{path}', function($path){
-        if(File::exists(storage_path('app/upload/').$path)){
-            return response()->file(storage_path('app/upload/').$path);
+    Route::get('/file/{path}', function ($path) {
+        if (File::exists(storage_path('app/upload/') . $path)) {
+            return response()->file(storage_path('app/upload/') . $path);
         } else {
             abort(404, 'File Not Found');
         }
     })->name('file')->where('path', '.*');
     Route::get('/local_training_report', LocalTrainingReport::class)->name('local_training_report');
-    Route::get('/local_training_report2',LocalTrainingReport2::class)->name('local_training_report2');
+    Route::get('/local_training_report2', LocalTrainingReport2::class)->name('local_training_report2');
     // Route::get('/staff_report', ReportName::class)->name('staff_report');
-    Route::get('/staff_report1',StaffReport1::class)->name('staff_report1');
+    Route::get('/staff_report1', StaffReport1::class)->name('staff_report1');
     Route::get('/staff_report2', StaffReport2::class)->name('staff_report2');
     Route::get('/staff_report3', StaffReport3::class)->name('staff_report3');
     Route::get('/pension_list', PensionList::class)->name('pension_list');
@@ -221,19 +222,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/staff_salary_list4', StaffSalaryList4::class)->name('staff_salary_list4');
     Route::get('/yangon_office_staff', YangonOfficeStaff::class)->name('yangon_office_staff');
     Route::get('/yangon_office_staff2', YangonOfficeStaff2::class)->name('yangon_office_staff2');
-    Route::get('/january_salary_list',JanuarySalaryList::class)->name('january_salary_list');
-    Route::get('/april_salary_list',AprilSalaryList::class)->name('april_salary_list');
-    Route::get('/payscale_list',PayscaleList::class)->name('payscale_list');
+    Route::get('/january_salary_list', JanuarySalaryList::class)->name('january_salary_list');
+    Route::get('/april_salary_list', AprilSalaryList::class)->name('april_salary_list');
+    Route::get('/payscale_list', PayscaleList::class)->name('payscale_list');
     Route::get('/staff_salary', StaffSalary::class)->name('staff_salary');
     Route::get('/salary_list', SalaryList::class)->name('salary_list');
-    Route::get('/no_salary_leave',NoSalaryLeave::class)->name('no_salary_leave');
-    Route::get('/started_salary_list',StartedSalaryList::class)->name('started_salary_list');
-    Route::get('/finance_salary_list',FinanceSalaryList::class)->name('finance_salary_list');
-    Route::get('/yangon_staff_april_salary_list',YangonStaffAprilSalaryList::class)->name('yangon_staff_april_salary_list');
-    Route::get('/finance_year_salary_list',FinanceYearSalaryList::class)->name('finance_year_salary_list');
-    Route::get('/information_list',InformationList::class)->name('information_list');
-    Route::get('/last_pay_certificate',LastPayCertificate::class)->name('last_pay_certificate');
-    Route::get('/detail_staff_salary',DetailStaffSalary::class)->name('detail_staff_salary');
+    Route::get('/no_salary_leave', NoSalaryLeave::class)->name('no_salary_leave');
+    Route::get('/started_salary_list', StartedSalaryList::class)->name('started_salary_list');
+    Route::get('/finance_salary_list', FinanceSalaryList::class)->name('finance_salary_list');
+    Route::get('/yangon_staff_april_salary_list', YangonStaffAprilSalaryList::class)->name('yangon_staff_april_salary_list');
+    Route::get('/finance_year_salary_list', FinanceYearSalaryList::class)->name('finance_year_salary_list');
+    Route::get('/information_list', InformationList::class)->name('information_list');
+    Route::get('/last_pay_certificate', LastPayCertificate::class)->name('last_pay_certificate');
+    Route::get('/detail_staff_salary', DetailStaffSalary::class)->name('detail_staff_salary');
     Route::get('/staff_list1', StaffList1::class)->name('staff_list1');
     Route::get('/staff_list2', StaffList2::class)->name('staff_list2');
     Route::get('/staff_list3', StaffList3::class)->name('staff_list3');
@@ -246,8 +247,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/leaves', LeaveNuberPercent::class)->name('leaves');
     Route::get('/leaves2', LeaveNuberPercent2::class)->name('leaves2');
     Route::get('/leaves3', LeaveNuberPercent3::class)->name('leaves3');
-    Route::get('/leaves4',LeaveNuberPercent4::class)->name('leaves4');
-    Route::get('/leaves5',LeaveNuberPercent5::class)->name('leaves5');
+    Route::get('/leaves4', LeaveNuberPercent4::class)->name('leaves4');
+    Route::get('/leaves5', LeaveNuberPercent5::class)->name('leaves5');
     Route::get('/een', EnglishEffectiveNegotiations::class)->name('een');
     Route::get('/foreign_training_report', ForeignTrainingReport::class)->name('foreign_training_report');
     Route::get('/foreign_gone_total', ForeignGoneTotal::class)->name('foreign_gone_total');
@@ -256,7 +257,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/report3', Report3::class)->name('report3');
     Route::get('/report4', Report4::class)->name('report4');
     Route::get('/pension_report', PensionReport::class)->name('pension_report');
-    Route::get('/pensioner',Pensioner::class)->name('pensioner');
+    Route::get('/pensioner', Pensioner::class)->name('pensioner');
     Route::get('/employee_record_report', EmpoyeeRecordReport::class)->name('employee_record_report');
     Route::get('/finance_pension_age62', FinancePensionAge62::class)->name('finance_pension_age62');
     Route::get('/religion_report', ReligionReport::class)->name('religion_report');
@@ -269,37 +270,46 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/punishment_report', PunishmentReport::class)->name('punishment_report');
     Route::get('/rank_salary_list', RankSalaryList::class)->name('rank_salary_list');
     Route::get('/staff_report', StaffReport::class)->name('staff_report');
-    Route::get('/pdf_17/{staff_id?}', function($staff_id){
+    Route::get('/pdf_17/{staff_id?}', function ($staff_id) {
         $staff = ModelsStaff::find($staff_id);
         return view('pdf_reports.staff_report_17', ['staff' => $staff]);
     })->name('pdf');
-    Route::get('/pdf_15/{staff_id?}', function($staff_id){
+    Route::get('/pdf_15/{staff_id?}', function ($staff_id) {
         $staff = ModelsStaff::find($staff_id);
         return view('pdf_reports.staff_report_15', ['staff' => $staff]);
     })->name('pdf');
-    Route::get('/pdf_18/{staff_id?}', function($staff_id){
+    Route::get('/pdf_18/{staff_id?}', function ($staff_id) {
         $staff = ModelsStaff::find($staff_id);
         return view('pdf_reports.staff_report_18', ['staff' => $staff]);
     })->name('pdf');
-    Route::get('/pdf_19/{staff_id?}', function($staff_id){
+    Route::get('/pdf_19/{staff_id?}', function ($staff_id) {
         $staff = ModelsStaff::find($staff_id);
         return view('pdf_reports.staff_report_19', ['staff' => $staff]);
     })->name('pdf');
-    Route::get('/pdf_53/{staff_id?}', function($staff_id){
+    Route::get('/pdf_53/{staff_id?}', function ($staff_id) {
         $staff = ModelsStaff::find($staff_id);
         return view('pdf_reports.staff_report_53', ['staff' => $staff]);
     })->name('pdf');
-    Route::get('/pdf_71/{staff_id?}', function($staff_id){
+    Route::get('/pdf_71/{staff_id?}', function ($staff_id) {
         $staff = ModelsStaff::find($staff_id);
         return view('pdf_reports.staff_report_71', ['staff' => $staff]);
     })->name('pdf');
-    Route::get('/word_15/{staff_id?}', function($staff_id) {
+    Route::get('/word_15/{staff_id?}', function ($staff_id) {
         $staff = ModelsStaff::find($staff_id);
         return view('word_reports.staff_report_15', ['staff' => $staff]);
     })->name('word_report_15');
-    
-    
 
+
+
+
+
+    Route::get(
+        'user_create',
+        User::class
+    )->name('user_create');
 });
 
-require __DIR__.'/auth.php';
+
+
+
+require __DIR__ . '/auth.php';
