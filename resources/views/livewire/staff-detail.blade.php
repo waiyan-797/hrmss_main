@@ -1,7 +1,7 @@
 <div class="w-full  max-h-screen">
     <div class="shadow flex items-center h-[8vh] my-6">
         {{-- <div class="w-4/5 mx-auto py-4 px-6 flex justify-end items-center gap-3"> --}}
-            <div class=" flex flex-wrap text-sm  justify-around font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700  w-full dark:text-gray-400">
+            <div class=" flex flex-wrap text-sm   gap-x-5 font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700  w-full dark:text-gray-400">
             {{-- close icon  --}}
             {{-- <a
                 href="{{ route('staff') }}"
