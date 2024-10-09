@@ -13,10 +13,13 @@ $logout = function (Logout $logout) {
 <nav x-data="{ open: false }" class="bg-blue-700 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 h-[9vh]">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-8 flex flex-row items-center justify-between h-full">
-        <div class="flex flex-row items-center justify-between w-full">
-            <!-- Logo -->
-            <a href="{{ route('dashboard') }}" class="font-arial font-semibold text-md text-white hover:text-white/90" wire:navigate>
-                HR Management System (HRMS)
+        <div class=" w-full ">
+          
+            <a href="{{ route('home') }}" class="font-arial flex flex-row items-center  gap-x-3 font-semibold text-md text-white hover:text-white/90" wire:navigate>
+                <img 
+                class=" w-10 h-10"
+                src="{{asset('img/DICA_logo.png')}}" alt="">
+                 HR Management System (HRMS)
             </a>
         </div>
 

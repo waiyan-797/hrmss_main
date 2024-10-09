@@ -1,29 +1,43 @@
-<div class="w-full">
-    <div class="bg-blue-700 shadow flex items-center h-[8vh]">
-        <div class="w-4/5 mx-auto py-4 px-6 flex justify-end items-center gap-3">
-            <a
+<div class="w-full  max-h-screen">
+    <div class="shadow flex items-center h-[8vh] my-6">
+        {{-- <div class="w-4/5 mx-auto py-4 px-6 flex justify-end items-center gap-3"> --}}
+            <div class=" flex flex-wrap text-sm  justify-around font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700  w-full dark:text-gray-400">
+            {{-- close icon  --}}
+            {{-- <a
                 href="{{ route('staff') }}"
                 wire:navigate
                 class="inline-flex items-center justify-center p-2 text-white bg-blue-500 hover:bg-blue-400 rounded-full font-semibold"
             >
-                <!-- Close icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-                    <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-                </svg>
-            </a>
-            <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'personal_info'])" :active="$tab == 'personal_info'" wire:navigate>
+
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+              </svg>
+              
+            </a> --}}
+            <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'personal_info'])" :active="$tab == 'personal_info'" wire:navigate
+                class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500 "
+                >
                 {{ __('ကိုယ်ရေးအချက်အလက်ဖြည့်ရန်') }}
             </x-nav-link>
-            <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'job_info'])" :active="$tab == 'job_info'" wire:navigate>
+            <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'job_info'])" :active="$tab == 'job_info'" wire:navigate
+                class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+                
+                >
                 {{ __('အလုပ်အကိုင်') }}
             </x-nav-link>
-            <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'relative'])" :active="$tab == 'relative'" wire:navigate>
+            <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'relative'])" :active="$tab == 'relative'" wire:navigate
+                class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+                
+                >
                 {{ __('ဆွေမျိုးများ') }}
             </x-nav-link>
-            <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'detail_personal_info'])" :active="$tab == 'detail_personal_info'" wire:navigate>
+            <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'detail_personal_info'])" :active="$tab == 'detail_personal_info'" wire:navigate
+                class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+                
+                >
                 {{ __('ငယ်စဉ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်') }}
             </x-nav-link>
-            <h1 class="text-white font-semibold italic font-arial">{{$confirm_add == 1 ? 'Create ' : 'Update '}}Staff</h1>
+            {{-- <h1 class="text-white font-semibold italic font-arial">{{$confirm_add == 1 ? 'Create ' : 'Update '}}Staff</h1> --}}
         </div>
     </div>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
@@ -42,7 +56,7 @@
                         </button>
                     </div>
                 @endif
-                <div class="bg-white shadow-md rounded-lg p-5">
+                <div class="bg-white shadow-md   rounded-lg p-5">
                     @if ($tab == 'personal_info')
                         @include('staff.personal_info')
                     @elseif ($tab == 'job_info')
@@ -61,5 +75,5 @@
         </div>
     </div>
 </div>
-
+</div>
 

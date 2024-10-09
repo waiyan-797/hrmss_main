@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire;
+
 use App\Models\Abroad;
 use App\Models\Award;
 use App\Models\Awarding;
@@ -59,7 +60,7 @@ class StaffDetail extends Component
     public $staff_photo, $nrc_f, $nrc_b, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension;
     public $educations = [];
     //job_info
-    public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_department_id, $side_division_id, $salary_paid_by, $join_date,$is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
+    public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_department_id, $side_division_id, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
     public $recommendations = [];
     public $postings = [];
 
@@ -106,8 +107,8 @@ class StaffDetail extends Component
         'nrc_township_code_id' => 'required',
         'nrc_sign_id' => 'required',
         'nrc_code' => 'required',
-        'nrc_front'=>'',
-        'nrc_back'=>'',
+        'nrc_front' => '',
+        'nrc_back' => '',
         'phone' => 'required',
         'mobile' => 'required',
         'email' => 'required',
@@ -193,7 +194,8 @@ class StaffDetail extends Component
         'recommended_by_military_person' => 'required',
     ];
 
-    public function validate_rules() {
+    public function validate_rules()
+    {
         switch ($this->tab) {
             case 'job_info':
                 return $this->job_info_rules;
@@ -248,7 +250,7 @@ class StaffDetail extends Component
                 'department' => $rec->department,
                 'rank' => $rec->rank,
                 'remark' => $rec->remark,
-                'recommendation_letter'=>$rec->recommendation_letter,
+                'recommendation_letter' => $rec->recommendation_letter,
             ];
         }
 
@@ -273,8 +275,8 @@ class StaffDetail extends Component
                 'school_name' => $sch->school_name,
                 'town' => $sch->town,
                 'year' => $sch->year,
-                'certificate'=>$sch->certificate,
-                'exam_mark'=>$sch->exam_mark,
+                'certificate' => $sch->certificate,
+                'exam_mark' => $sch->exam_mark,
             ];
         }
 
@@ -318,7 +320,8 @@ class StaffDetail extends Component
             ];
         }
 
-        function relative_array($sib){
+        function relative_array($sib)
+        {
             return [
                 'name' => $sib->name,
                 'ethnic' => $sib->ethnic_id,
@@ -398,8 +401,8 @@ class StaffDetail extends Component
         $this->nrc_township_code_id = $staff->nrc_township_code_id;
         $this->nrc_sign_id = $staff->nrc_sign_id;
         $this->nrc_code = $staff->nrc_code;
-        $this->nrc_front= $staff->nrc_front;
-        $this->nrc_back=$staff->nrc_back;
+        $this->nrc_front = $staff->nrc_front;
+        $this->nrc_back = $staff->nrc_back;
         $this->phone = $staff->phone;
         $this->mobile = $staff->mobile;
         $this->email = $staff->email;
@@ -489,160 +492,195 @@ class StaffDetail extends Component
     }
 
 
-    public function add_edu(){
+    public function add_edu()
+    {
         $this->educations[] = ['education_group' => '', 'education_type' => '', 'education' => ''];
     }
 
-    public function add_recommendation(){
-        $this->recommendations[] = ['recommend_by' => '', 'ministry' => '', 'department' => '', 'rank' => '', 'remark' => '','recommendation_letter'=>''];
+    public function add_recommendation()
+    {
+        $this->recommendations[] = ['recommend_by' => '', 'ministry' => '', 'department' => '', 'rank' => '', 'remark' => '', 'recommendation_letter' => ''];
     }
 
-    public function add_posting(){
+    public function add_posting()
+    {
         $this->postings[] = ['rank' => '', 'post' => '', 'from_date' => '', 'to_date' => '', 'department' => '', 'division' => '', 'location' => '', 'remark' => ''];
     }
 
-    public function add_siblings(){
+    public function add_siblings()
+    {
         $this->siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
     }
 
-    public function add_father_siblings(){
+    public function add_father_siblings()
+    {
         $this->father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
     }
 
-    public function add_mother_siblings(){
+    public function add_mother_siblings()
+    {
         $this->mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
     }
 
-    public function add_spouses(){
+    public function add_spouses()
+    {
         $this->spouses[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
     }
 
-    public function add_children(){
+    public function add_children()
+    {
         $this->children[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
     }
 
-    public function add_spouse_siblings(){
+    public function add_spouse_siblings()
+    {
         $this->spouse_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
     }
 
-    public function add_spouse_father_siblings(){
+    public function add_spouse_father_siblings()
+    {
         $this->spouse_father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
     }
 
-    public function add_spouse_mother_siblings(){
+    public function add_spouse_mother_siblings()
+    {
         $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
     }
 
-    public function add_schools(){
-        $this->schools[] = ['education_group' => '', 'education_type' => '', 'education' => '', 'school_name' => '', 'town' => '', 'year' => '','certificate'=>'','exam_mark'=>''];
+    public function add_schools()
+    {
+        $this->schools[] = ['education_group' => '', 'education_type' => '', 'education' => '', 'school_name' => '', 'town' => '', 'year' => '', 'certificate' => '', 'exam_mark' => ''];
     }
 
-    public function add_trainings(){
+    public function add_trainings()
+    {
         $this->trainings[] = ['training_type' => '', 'from_date' => '', 'to_date' => '', 'location' => '', 'country' => '', 'training_location' => ''];
     }
 
-    public function add_awardings(){
+    public function add_awardings()
+    {
         $this->awards[] = ['award_type' => '', 'award' => '', 'order_no' => '', 'order_date' => ''];
     }
 
-    public function add_past_occupations(){
+    public function add_past_occupations()
+    {
         $this->past_occupations[] = ['rank' => '', 'department' => '', 'section' => '', 'from_date' => '', 'to_date' => '', 'remark' => ''];
     }
 
-    public function add_punishments(){
+    public function add_punishments()
+    {
         $this->punishments[] = ['penalty_type' => '', 'reason' => '', 'from_date' => '', 'to_date' => ''];
     }
 
-    public function add_abroads(){
+    public function add_abroads()
+    {
         $this->abroads[] = [['country' => '', 'particular' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '']];
     }
 
-    public function removeEdu($index){
+    public function removeEdu($index)
+    {
         unset($this->educations[$index]);
         $this->educations = array_values($this->educations); //to re_indexing the array (eg: before remove (1,2,3) - after (1,3) 2 missing) reindex will do like (1,2) back
     }
 
-    public function removeRecommendation($index){
+    public function removeRecommendation($index)
+    {
         unset($this->recommendations[$index]);
         $this->recommendations = array_values($this->recommendations);
     }
 
-    public function removePosting($index){
+    public function removePosting($index)
+    {
         unset($this->postings[$index]);
         $this->postings = array_values($this->postings);
     }
 
-    public function remove_siblings($index){
+    public function remove_siblings($index)
+    {
         unset($this->siblings[$index]);
         $this->siblings = array_values($this->siblings);
     }
 
-    public function remove_father_siblings($index){
+    public function remove_father_siblings($index)
+    {
         unset($this->father_siblings[$index]);
         $this->father_siblings = array_values($this->father_siblings);
     }
 
-    public function remove_mother_siblings($index){
+    public function remove_mother_siblings($index)
+    {
         unset($this->mother_siblings[$index]);
         $this->mother_siblings = array_values($this->mother_siblings);
     }
 
-    public function remove_spouses($index){
+    public function remove_spouses($index)
+    {
         unset($this->spouses[$index]);
         $this->spouses = array_values($this->spouses);
     }
 
-    public function remove_children($index){
+    public function remove_children($index)
+    {
         unset($this->children[$index]);
         $this->children = array_values($this->children);
     }
 
-    public function remove_spouse_siblings($index){
+    public function remove_spouse_siblings($index)
+    {
         unset($this->spouse_siblings[$index]);
         $this->spouse_siblings = array_values($this->spouse_siblings);
     }
 
-    public function remove_spouse_father_siblings($index){
+    public function remove_spouse_father_siblings($index)
+    {
         unset($this->spouse_father_siblings[$index]);
         $this->spouse_father_siblings = array_values($this->spouse_father_siblings);
     }
 
-    public function remove_spouse_mother_siblings($index){
+    public function remove_spouse_mother_siblings($index)
+    {
         unset($this->spouse_mother_siblings[$index]);
         $this->spouse_mother_siblings = array_values($this->spouse_mother_siblings);
     }
 
-    public function remove_schools($index){
+    public function remove_schools($index)
+    {
         unset($this->schools[$index]);
         $this->schools = array_values($this->schools);
     }
 
-    public function remove_trainings($index){
+    public function remove_trainings($index)
+    {
         unset($this->trainings[$index]);
         $this->trainings = array_values($this->trainings);
     }
 
-    public function remove_awardings($index){
+    public function remove_awardings($index)
+    {
         unset($this->awards[$index]);
         $this->awards = array_values($this->awards);
     }
 
-    public function remove_past_occupations($index){
+    public function remove_past_occupations($index)
+    {
         unset($this->past_occupations[$index]);
         $this->past_occupations = array_values($this->past_occupations);
     }
 
-    public function remove_abroads($index){
+    public function remove_abroads($index)
+    {
         unset($this->abroads[$index]);
         $this->abroads = array_values($this->abroads);
     }
 
-    public function remove_punishments($index){
+    public function remove_punishments($index)
+    {
         unset($this->punishments[$index]);
         $this->punishments = array_values($this->punishments);
     }
 
-    public function submit_staff(){
+    public function submit_staff()
+    {
         $rules = $this->validate_rules();
         $this->validate($rules);
         $staff = Staff::find($this->staff_id);
@@ -820,7 +858,8 @@ class StaffDetail extends Component
         $this->message = 'Saved Successfully';
     }
 
-    private function saveAbroads($staffId){
+    private function saveAbroads($staffId)
+    {
         Abroad::where('staff_id', $staffId)->delete();
         foreach ($this->abroads as $abroad) {
             Abroad::create([
@@ -834,7 +873,8 @@ class StaffDetail extends Component
         }
     }
 
-    private function saveSchools($staffId){
+    private function saveSchools($staffId)
+    {
         School::where('staff_id', $staffId)->delete();
         foreach ($this->schools as $school) {
             School::create([
@@ -845,13 +885,14 @@ class StaffDetail extends Component
                 'school_name' => $school['school_name'],
                 'town' => $school['town'],
                 'year' => $school['year'],
-                'certificate'=>$school['certificate'],
-                'exam_mark'=>$school['exam_mark'],
+                'certificate' => $school['certificate'],
+                'exam_mark' => $school['exam_mark'],
             ]);
         }
     }
 
-    private function savePastOccupations($staffId){
+    private function savePastOccupations($staffId)
+    {
         PastOccupation::where('staff_id', $staffId)->delete();
         foreach ($this->past_occupations as $occupation) {
             PastOccupation::create([
@@ -866,7 +907,8 @@ class StaffDetail extends Component
         }
     }
 
-    private function saveAwards($staffId){
+    private function saveAwards($staffId)
+    {
         Awarding::where('staff_id', $staffId)->delete();
         foreach ($this->awards as $award) {
             Awarding::create([
@@ -879,7 +921,8 @@ class StaffDetail extends Component
         }
     }
 
-    private function saveTrainings($staffId){
+    private function saveTrainings($staffId)
+    {
         Training::where('staff_id', $staffId)->delete();
         foreach ($this->trainings as $training) {
             Training::create([
@@ -894,7 +937,8 @@ class StaffDetail extends Component
         }
     }
 
-    private function savePunishments($staffId){
+    private function savePunishments($staffId)
+    {
         Punishment::where('staff_id', $staffId)->delete();
         foreach ($this->punishments as $punishment) {
             Punishment::create([
@@ -907,7 +951,8 @@ class StaffDetail extends Component
         }
     }
 
-    private function saveEducations($staffId){
+    private function saveEducations($staffId)
+    {
         StaffEducation::where('staff_id', $staffId)->delete();
         foreach ($this->educations as $education) {
             StaffEducation::create([
@@ -919,7 +964,8 @@ class StaffDetail extends Component
         }
     }
 
-    private function saveRecommendations($staffId){
+    private function saveRecommendations($staffId)
+    {
         Recommendation::where('staff_id', $staffId)->delete();
         foreach ($this->recommendations as $recommendation) {
             Recommendation::create([
@@ -928,13 +974,14 @@ class StaffDetail extends Component
                 'department' => $recommendation['department'],
                 'rank' => $recommendation['rank'],
                 'remark' => $recommendation['remark'],
-                'recommendation_letter'=>$recommendation['recommendation_letter'],
+                'recommendation_letter' => $recommendation['recommendation_letter'],
                 'staff_id' => $staffId,
             ]);
         }
     }
 
-    private function savePostings($staffId){
+    private function savePostings($staffId)
+    {
         Posting::where('staff_id', $staffId)->delete();
         foreach ($this->postings as $posting) {
             Posting::create([
@@ -950,7 +997,8 @@ class StaffDetail extends Component
             ]);
         }
     }
-    private function relativeFields($staffId, $relative){
+    private function relativeFields($staffId, $relative)
+    {
         $fields = [
             'staff_id' => $staffId,
             'name' => $relative['name'],
@@ -965,7 +1013,8 @@ class StaffDetail extends Component
         return $fields;
     }
 
-    private function saveRelatives($staffId){
+    private function saveRelatives($staffId)
+    {
         Sibling::where('staff_id', $staffId)->delete();
         FatherSibling::where('staff_id', $staffId)->delete();
         MotherSibling::where('staff_id', $staffId)->delete();
@@ -975,35 +1024,35 @@ class StaffDetail extends Component
         SpouseFatherSibling::where('staff_id', $staffId)->delete();
         SpouseMotherSibling::where('staff_id', $staffId)->delete();
 
-        foreach($this->siblings as $relative){
+        foreach ($this->siblings as $relative) {
             Sibling::create($this->relativeFields($staffId, $relative));
         }
 
-        foreach($this->father_siblings as $relative){
+        foreach ($this->father_siblings as $relative) {
             FatherSibling::create($this->relativeFields($staffId, $relative));
         }
 
-        foreach($this->mother_siblings as $relative){
+        foreach ($this->mother_siblings as $relative) {
             MotherSibling::create($this->relativeFields($staffId, $relative));
         }
 
-        foreach($this->spouses as $relative){
+        foreach ($this->spouses as $relative) {
             Spouse::create($this->relativeFields($staffId, $relative));
         }
 
-        foreach($this->children as $relative){
+        foreach ($this->children as $relative) {
             Children::create($this->relativeFields($staffId, $relative));
         }
 
-        foreach($this->spouse_siblings as $relative){
+        foreach ($this->spouse_siblings as $relative) {
             SpouseSibling::create($this->relativeFields($staffId, $relative));
         }
 
-        foreach($this->spouse_father_siblings as $relative){
+        foreach ($this->spouse_father_siblings as $relative) {
             SpouseFatherSibling::create($this->relativeFields($staffId, $relative));
         }
 
-        foreach($this->spouse_mother_siblings as $relative){
+        foreach ($this->spouse_mother_siblings as $relative) {
             SpouseMotherSibling::create($this->relativeFields($staffId, $relative));
         }
     }
@@ -1174,5 +1223,4 @@ class StaffDetail extends Component
 
         return view('livewire.staff-detail', $data);
     }
-
 }

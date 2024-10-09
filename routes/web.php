@@ -138,6 +138,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::view('home', 'home')->name('home');
     Route::view('profile', 'profile')->name('profile');
     Route::get('/training_type', TrainingType::class)->name('training_type');
     Route::get('/relation', Relation::class)->name('relation');

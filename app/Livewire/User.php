@@ -22,15 +22,28 @@ class User extends Component
     public $password;
     public $email;
     public $roles;
+    public $status;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
 
 
 
     //validation
-    protected $rules = [
-        'user_name' => 'required',
-    ];
+    // protected $rules = [
+    //     'user_name' => 'required|max:255',
+    //     'email' => 'required|email|max:255|unique:users,email,' . $this->user_id,
+
+    //     'role_id' => 'required|exists:roles,id',
+
+    // ];
+    public function rules()
+    {
+        return [
+            'user_name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $this->user_id,
+            'role_id' => 'required|exists:roles,id',
+        ];
+    }
 
     public function render()
     {
@@ -96,7 +109,8 @@ class User extends Component
     public function createUser()
     {
 
-        $this->validate();
+        $this->validate($this->rules());
+
         ModelsUser::create([
             'name' => $this->user_name,
             'role_id' => $this->role_id,
@@ -112,7 +126,7 @@ class User extends Component
 
     public function edit_modal($id)
     {
-        $this->resetValidation();
+        $this->resetValidation($this->rules());
         $this->confirm_add = false;
         $this->confirm_edit = true;
         $this->user_id = $id;
@@ -120,6 +134,7 @@ class User extends Component
         $this->roles = Role::all();
         $this->user_name = $relation->name;
         $this->role_id = $relation->role_id;
+        $this->status = $relation->status;
 
         $this->email = $relation->email;
     }
@@ -127,12 +142,14 @@ class User extends Component
 
     public function  updateUser()
     {
-        $this->validate();
+        $this->validate($this->rules());
+
         ModelsUser::findOrFail($this->user_id)->update([
             'name' => $this->user_name,
             'role_id' => $this->role_id,
             'email' => $this->email,
-            'password' => $this->password
+            'password' => $this->password,
+            'status' => $this->status
 
         ]);
         $this->message = 'Updated successfully.';
@@ -145,7 +162,7 @@ class User extends Component
     //close modal
     public function close_modal()
     {
-        $this->resetValidation();
+        $this->resetValidation($this->rules());
         $this->reset('user_name');
         $this->reset('role_id');
         $this->confirm_edit = false;

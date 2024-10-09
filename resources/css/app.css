@@ -3,3 +3,8 @@
 @tailwind utilities;
 
 [x-cloak] { display: none !important; }
+.login_bg{
+    background: url('../../public/img/demo.jpg');
+    background-position: center;
+    background-size: 100%;
+}

@@ -1,7 +1,7 @@
 <aside id="side_bar" class="left-0 z-40 w-1/7 {{isset($header) ? 'h-[83vh]' : 'h-[91vh]'}}">
     <div class="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200">
         <ul class="space-y-2">
-            <li>
+            {{-- <li>
                 <livewire:side-nav-button label="ဒက်ရှ်ဘုတ်"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-gray-600 group-hover:text-gray-900">
@@ -9,7 +9,7 @@
                         </svg>
                     '
                     route_name="dashboard" count="" />
-            </li>
+            </li> --}}
             <li>
                 <livewire:side-nav-drop-down label="အပြင်အဆင်များ"
                     icon='
