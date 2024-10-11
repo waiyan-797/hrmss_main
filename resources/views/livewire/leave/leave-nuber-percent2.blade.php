@@ -5,41 +5,65 @@
           <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
           <br><br>
             <h1 class="font-bold text-base text-center mb-4">
-                ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>၂၀၂၂ခုနှစ်၊ အောက်တိုဘာလမှ ၂၀၂၃ခုနှစ်၊
-                ဇွန်လအထိ ခွင့်ခံစားမှု အနည်းအများအလိုက် ရာခိုင်နှုန်းဇယား</h1>
+                ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+                    
+                {{mmDateFormat($startYr,$startMonth)}}
+                မှ
+               {{mmDateFormat($endYr,$endMonth)}}
+                 ခွင့်ခံစားမှု အနည်းအများအလိုက် ရာခိုင်နှုန်းဇယား</h1>
 
+                <div>
+                    <input type="month" wire:model.live='fromDateRange'>
+                    <input type="month" wire:model.live='toDateRange'>
+                </div>
+
+                <div>
+                    <select wire:model.live='dep_category' id="">
+                      <option value="1">ရုံးချုပ်</option>
+                      <option value="2">တိုင်းဒေသကြီး/ပြည်နယ်</option>
+                    </select>
+                  </div>
             <table class="md:w-full">
                 <thead>
                     <tr class="font-bold">
                         <th class="border border-black text-center p-2">စဥ်</th>
                         <th class="border border-black text-center p-2">ဌာနခွဲ</th>
-                        <th class="border border-black text-center p-2">၂၀၂၂ခုနှစ်<br>အောက်တိုဘာလ</th>
-                        <th class="border border-black text-center p-2">၂၀၂၂ခုနှစ်<br>နိုဝင်ဘာလ</th>
-                        <th class="border border-black text-center p-2">၂၀၂၂ခုနှစ်<br>ဒီဇင်ဘာလ</th>
-                        <th class="border border-black text-center p-2">၂၀၂၃ခုနှစ်<br>ဇန်နဝါရီလ</th>
-                        <th class="border border-black text-center p-2">၂၀၂၃ခုနှစ်<br>ဖေဖော်ဝါရီလ</th>
-                        <th class="border border-black text-center p-2">၂၀၂၃ခုနှစ်<br>မတ်လ</th>
-                        <th class="border border-black text-center p-2">၂၀၂၃ခုနှစ်<br>ဧပြီလ</th>
-                        <th class="border border-black text-center p-2">၂၀၂၃ခုနှစ်<br>မေလ</th>
-                        <th class="border border-black text-center p-2">၂၀၂၃ခုနှစ်<br>ဇွန်လ</th>
+
+                        @foreach ($months as $month)
+                            
+                    {{-- @dd(explode('-', $month)); --}}
+                        <th class="border border-black text-center p-2"> {{en2mm(explode('-' ,$month)[0])}}<br>{{en2mm(explode('-' ,$month)[1])}}</th>
+
+                        @endforeach
                         <th class="border border-black text-center p-2">စုစုပေါင်း</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                    </tr>
+                    
+                   @foreach ($divisions as  $division)
+                   
+                   <tr>
+                    <td class="border border-black text-center p-2">     
+                        {{$division->id}}
+                    </td>   
+                    <td class="border border-black text-center p-2">
+                       {{$division->name}}
+                    </td>
+                    @foreach ($months as $YearMonth)
+                            
+                    <td class="border border-black text-center p-2">
+                        {{$this->leaveCount($division->id, $YearMonth )}}
+                    </td>
+
+
+                        @endforeach
+                    
+            
+                    <td class="border border-black text-center p-2"></td>
+                </tr>
+                       
+                   @endforeach
                 </tbody>
             </table>
 

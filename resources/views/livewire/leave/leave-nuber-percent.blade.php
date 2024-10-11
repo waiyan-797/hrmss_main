@@ -5,7 +5,17 @@
         <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
         <br><br>
 
-          <h1 class="font-bold text-center text-base mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>၂၀၂၄ခုနှစ်၊ ဧပြီလ ဝန်ထမ်းများ၏<br>ခွင့်ခံစားမှုအရေအတွက်နှင့်ရာခိုင်နှုန်း</h1>
+          <h1 class="font-bold text-center text-base mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+            {{formatPeriodMM($year)}} ၊{{formatPeriodMM($month)}}    ဝန်ထမ်းများ၏<br>ခွင့်ခံစားမှုအရေအတွက်နှင့်ရာခိုင်နှုန်း</h1>
+          <div>
+            <select wire:model.live='dep_category' id="">
+              <option value="1">ရုံးချုပ်</option>
+              <option value="2">တိုင်းဒေသကြီး/ပြည်နယ်</option>
+            </select>
+          </div>
+          <div>
+            <input type="month" wire:model.live='dateRange'>
+          </div>
           <table class="md:w-full">
             <thead>
               <tr class="font-bold">

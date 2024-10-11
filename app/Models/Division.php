@@ -20,10 +20,22 @@ class Division extends Model
         return $this->belongsTo(DivisionType::class);
     }
 
-    public function staffs(){
+    public function staffs()
+    {
         return $this->hasMany(Staff::class, 'current_division_id', 'id');
     }
 
 
+    public function leaveCount($division, $YearMonth)
+    {
 
+        [$year, $month] = explode('-', $YearMonth);
+        $totalLeaveCount = 0;
+        $staffs = Staff::where("current_division_id", $division)->get();
+        foreach ($staffs as $staff) {
+            $leave = Leave::where('staff_id', $staff->id)->whereYear('created_at', $year)->whereMonth('created_at', $month)->count();
+            $totalLeaveCount += $leave;
+        }
+        return $totalLeaveCount;
+    }
 }

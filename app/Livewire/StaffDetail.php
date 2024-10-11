@@ -19,6 +19,7 @@ use App\Models\Ethnic;
 use App\Models\FatherSibling;
 use App\Models\Gender;
 use App\Models\Leave;
+use App\Models\LeaveType;
 use App\Models\MotherSibling;
 use App\Models\Nationality;
 use App\Models\NrcRegionId;
@@ -52,6 +53,7 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Models\LeaveType as ModelsLeave;
 
 class StaffDetail extends Component
 {

@@ -128,7 +128,7 @@ class InvestmentCompanies11 extends Component
 
 
 
-        $this->filterRangeTo = Carbon::now()->format('Y-m-d'); // Format: 'YYYY-MM'
+        $this->filterRangeTo = Carbon::now()->format('Y-m-d');
 
         [$Toyear, $Tomonth, $day] = explode('-', $this->filterRangeTo);
 
@@ -142,6 +142,25 @@ class InvestmentCompanies11 extends Component
     public function render()
     {
 
+
+
+
+
+        [$year, $month, $day] = explode('-', $this->filterRange);
+        $this->year = $year;
+        $this->month = $month;
+        $this->day = $day;
+
+
+
+
+
+        [$Toyear, $Tomonth, $day] = explode('-', $this->filterRangeTo);
+
+
+        $this->Toyear = $Toyear;
+        $this->Tomonth = $Tomonth;
+        $this->toDay = $day;
 
 
 
@@ -239,6 +258,7 @@ class InvestmentCompanies11 extends Component
             'low_q2' => $low_q2,
             'high_dlimit2_staffs2' => $high_dlimit2_staffs2,
             'low_dlimit2_staffs2' => $low_dlimit2_staffs2,
+
         ]);
     }
 }
