@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('retire_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('staff', function (Blueprint $table) {
+            $table->string('previous_active_status')->default('1')->before('status_changed_at');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('retire_types');
+        Schema::table('staff', function (Blueprint $table) {
+            $table->dropColumn('previous_active_status');
+        });
     }
 };

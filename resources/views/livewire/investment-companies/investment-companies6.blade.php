@@ -4,12 +4,12 @@
           <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
           <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
           <br><br>
-
+<input type="month" wire:model.live='filterRange'>
 
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">
                     ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
-                <h2 class="font-semibold text-base mb-2 text-center">----ခုနှစ်၊ ---လအတွင်း တာဝန်ပျက်ကွက်သူဝန်ထမ်းများအား
+                <h2 class="font-semibold text-base mb-2 text-center"> {{en2mm($year)}}ခုနှစ်၊ {{en2mm($month)}}လအတွင်း တာဝန်ပျက်ကွက်သူဝန်ထမ်းများအား
                     အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း</h2>
                 <div class="w-full rounded-lg">
                     <table>

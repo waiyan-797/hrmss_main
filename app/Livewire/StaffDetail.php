@@ -18,6 +18,7 @@ use App\Models\EducationType;
 use App\Models\Ethnic;
 use App\Models\FatherSibling;
 use App\Models\Gender;
+use App\Models\Leave;
 use App\Models\MotherSibling;
 use App\Models\Nationality;
 use App\Models\NrcRegionId;
@@ -83,6 +84,18 @@ class StaffDetail extends Component
     public $past_occupations = [];
     public $abroads = [];
     public $punishments = [];
+
+    public $leave_modal_open  = false;
+
+    public $modal_title;
+
+    public $confirm_delete = false;
+
+
+    public $leave_search, $leave_name, $leave_type_name, $leave_id, $staff_name, $from_date, $to_date, $qty, $order_no, $remark;
+    public  $submit_button_text, $cancel_action, $submit_form, $leave_types;
+
+
 
     protected $personal_info_rules = [
         'photo' => '',
@@ -214,6 +227,7 @@ class StaffDetail extends Component
             $this->initializeArrays($this->staff_id);
             $this->loadStaffData($this->staff_id);
         }
+        $this->leave_types = Leave::all();
     }
 
     private function initializeArrays($staff_id)
@@ -1220,7 +1234,83 @@ class StaffDetail extends Component
                 $data['mother_townships'] = Township::where('region_id', $this->mother_address_region_id)->get();
                 break;
         }
+        $leave_modal_open = $this->leave_modal_open;
 
         return view('livewire.staff-detail', $data);
+    }
+
+    public function leave_modal()
+    {
+        $this->modal_title = 'ခွင့်';
+        $this->leave_modal_open = !$this->leave_modal_open;
+    }
+
+    public function add_new()
+    {
+        $this->resetValidation();
+        $this->reset(['staff_name', 'leave_type_name', 'from_date', 'to_date', 'qty', 'order_no', 'remark']);
+        $this->confirm_add = true;
+        $this->confirm_edit = false;
+    }
+    public function submitForm()
+    {
+        if ($this->confirm_add == true) {
+            $this->createPosition();
+        } else {
+            $this->updatePosition();
+        }
+    }
+    public function createPosition()
+    {
+        $this->validate();
+        ModelsLeave::create([
+            'staff_id' => $this->staff_name,
+            'leave_type_id' => $this->leave_type_name,
+            'from_date' => $this->from_date,
+            'to_date' => $this->to_date,
+            'qty' => $this->qty,
+            'order_no' => $this->order_no,
+            'remark' => $this->remark,
+        ]);
+        $this->message = 'Created successfully.';
+        $this->close_modal();
+    }
+
+
+    public function edit_modal($id)
+    {
+        $this->resetValidation();
+        $this->confirm_add = false;
+        $this->confirm_edit = true;
+        $this->leave_id = $id;
+        $leave = ModelsLeave::findOrFail($id);
+        $this->staff_name = $leave->staff_id;
+        $this->leave_type_name = $leave->leave_type_id;
+    }
+
+    //update
+    public function updatePosition()
+    {
+        $this->validate();
+        $leave = ModelsLeave::findOrFail($this->leave_id);
+        $leave->update([
+            'staff_id' => $this->staff_name,
+            'leave_type_id' => $this->leave_type_name
+        ]);
+        $this->message = 'Updated successfully.';
+        $this->close_modal();
+    }
+
+    //delete confirm
+    public function delete_confirm($id)
+    {
+        $this->leave_id = $id;
+        $this->confirm_delete = true;
+    }
+
+    public function delete($id)
+    {
+        ModelsLeave::find($id)->delete();
+        $this->confirm_delete = false;
     }
 }

@@ -42,11 +42,22 @@ class Salary extends Component
     {
         $this->resetValidation();
         $this->reset([
-            'staff_name', 'rank_name', 'salary_month', 'current_salary', 'current_salary_day',
-            'previous_salary_before_increment', 'previous_salary_before_increment_day',
-            'previous_salary_before_salary', 'previous_salary_before_salary_day',
-            'addition', 'addition_education', 'addition_ration', 'deduction',
-            'deduction_insurance', 'deduction_tax', 'actual_salary'
+            'staff_name',
+            'rank_name',
+            'salary_month',
+            'current_salary',
+            'current_salary_day',
+            'previous_salary_before_increment',
+            'previous_salary_before_increment_day',
+            'previous_salary_before_salary',
+            'previous_salary_before_salary_day',
+            'addition',
+            'addition_education',
+            'addition_ration',
+            'deduction',
+            'deduction_insurance',
+            'deduction_tax',
+            'actual_salary'
         ]);
         $this->confirm_add = true;
         $this->confirm_edit = false;
@@ -88,11 +99,23 @@ class Salary extends Component
     public function close_modal()
     {
         $this->resetValidation();
-        $this->reset(['staff_name', 'rank_name', 'salary_month', 'current_salary', 'current_salary_day',
-            'previous_salary_before_increment', 'previous_salary_before_increment_day',
-            'previous_salary_before_salary', 'previous_salary_before_salary_day',
-            'addition', 'addition_education', 'addition_ration', 'deduction',
-            'deduction_insurance', 'deduction_tax', 'actual_salary'
+        $this->reset([
+            'staff_name',
+            'rank_name',
+            'salary_month',
+            'current_salary',
+            'current_salary_day',
+            'previous_salary_before_increment',
+            'previous_salary_before_increment_day',
+            'previous_salary_before_salary',
+            'previous_salary_before_salary_day',
+            'addition',
+            'addition_education',
+            'addition_ration',
+            'deduction',
+            'deduction_insurance',
+            'deduction_tax',
+            'actual_salary'
         ]);
         $this->confirm_edit = false;
         $this->confirm_add = false;
@@ -161,68 +184,64 @@ class Salary extends Component
         $this->confirm_delete = false;
     }
 
-   
-   #[On('render_salary')]
-  public function render_salary()
-  {
-    $this->render();
-}
-//   public function render()
-// {
-    
-//     $staffs = Staff::all();
-//     $ranks = Rank::all();
-//     $this->modal_title = $this->confirm_add ? 'လစာသိမ်းရန်' : 'လစာပြင်ရန်';
-//     $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
-//     $this->cancel_action = 'close_modal';
-//     $this->submit_form = 'submitForm';
 
-//     $salarySearch = '%' . $this->salary_search . '%';
-//     $salaryQuery = ModelsSalary::query();
-//     if ($this->salary_search) {
-//         $this->resetPage();
-//         $salaryQuery->where(fn($q) => $q->where('name', 'LIKE', $salarySearch)->orWhereHas('staff', fn($query) => $query->where('name', 'LIKE', $salarySearch)));
-//         $salarys = $salaryQuery->with('staff')->paginate($salaryQuery->count() > 10 ? $salaryQuery->count() : 10);
-//     } else {
-//         $salarys = $salaryQuery->with('staff')->paginate(10);
-//     }
-   
-//     return view('livewire.salary', [
-//         'salarys' => $salarys,
-//         'staffs' => $staffs,
-//         'ranks' => $ranks,
-//     ]);
-// }
-public function render()
-{
-   
-    $staffs = Staff::all();
-    $ranks = Rank::all();
-    $this->modal_title = $this->confirm_add ? 'အတိုးနှူန်းသိမ်းရန်' : 'အတိုးနှုန်းပြင်ရန်';
-    $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
-    $this->cancel_action = 'close_modal';
-    $this->submit_form = 'submitForm';
-    $salarySearch = '%' . $this->salary_search . '%';
-    $salaryQuery =ModelsSalary::query();
-    if ($this->salary_search) {
-        $this->resetPage();
-        $salaryQuery->where(function ($q) use ($salarySearch) {
-            $q->where('rank_name' ,'LIKE', $salarySearch)->orWhereHas('staff', function ($query) use ($salarySearch) {
-                  $query->where('name', 'LIKE', $salarySearch);
-              });
-        });
-       
-        
+    #[On('render_salary')]
+    public function render_salary()
+    {
+        $this->render();
     }
+    //   public function render()
+    // {
 
-    $salarys = $salaryQuery->with(['staff', 'rank'])
-        ->paginate($salaryQuery->count() > 10 ? $salaryQuery->count() : 10);
-    return view('livewire.salary', [
-        'salarys' => $salarys,
-        'staffs' => $staffs,
-        'ranks' => $ranks,
-    ]);
-}   
+    //     $staffs = Staff::all();
+    //     $ranks = Rank::all();
+    //     $this->modal_title = $this->confirm_add ? 'လစာသိမ်းရန်' : 'လစာပြင်ရန်';
+    //     $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
+    //     $this->cancel_action = 'close_modal';
+    //     $this->submit_form = 'submitForm';
 
+    //     $salarySearch = '%' . $this->salary_search . '%';
+    //     $salaryQuery = ModelsSalary::query();
+    //     if ($this->salary_search) {
+    //         $this->resetPage();
+    //         $salaryQuery->where(fn($q) => $q->where('name', 'LIKE', $salarySearch)->orWhereHas('staff', fn($query) => $query->where('name', 'LIKE', $salarySearch)));
+    //         $salarys = $salaryQuery->with('staff')->paginate($salaryQuery->count() > 10 ? $salaryQuery->count() : 10);
+    //     } else {
+    //         $salarys = $salaryQuery->with('staff')->paginate(10);
+    //     }
+
+    //     return view('livewire.salary', [
+    //         'salarys' => $salarys,
+    //         'staffs' => $staffs,
+    //         'ranks' => $ranks,
+    //     ]);
+    // }
+    public function render()
+    {
+
+        $staffs = Staff::all();
+        $ranks = Rank::all();
+        $this->modal_title = $this->confirm_add ? 'နှစ်တိုးသိမ်းရန်' : 'အတိုးနှုန်းပြင်ရန်';
+        $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
+        $this->cancel_action = 'close_modal';
+        $this->submit_form = 'submitForm';
+        $salarySearch = '%' . $this->salary_search . '%';
+        $salaryQuery = ModelsSalary::query();
+        if ($this->salary_search) {
+            $this->resetPage();
+            $salaryQuery->where(function ($q) use ($salarySearch) {
+                $q->where('rank_name', 'LIKE', $salarySearch)->orWhereHas('staff', function ($query) use ($salarySearch) {
+                    $query->where('name', 'LIKE', $salarySearch);
+                });
+            });
+        }
+
+        $salarys = $salaryQuery->with(['staff', 'rank'])
+            ->paginate($salaryQuery->count() > 10 ? $salaryQuery->count() : 10);
+        return view('livewire.salary', [
+            'salarys' => $salarys,
+            'staffs' => $staffs,
+            'ranks' => $ranks,
+        ]);
+    }
 }
-

@@ -4,33 +4,19 @@
         <!-- Modal Content -->
         <h2 class="text-lg font-semibold mb-4 text-gray-500 dark:text-white font-arial uppercase">{{ $modal_title }}</h2>
         <form wire:submit.prevent="{{$submit_form}}">
-            <div class="mb-4">
-                <label for="staff_name" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">ဝန်ထမ်း</label>
-                <div class="relative">
-                    <select
-                        wire:model="staff_name"
-                        class="text-sm font-arial block w-full mb-4 p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
-                        <option value="" selected>ဝန်ထမ်းအမည်ရွေးပါ</option>
-                        @foreach ($staffs as $staff)
-                            <option value="{{ $staff->id }}"> {{ $staff->name }} </option>
-                        @endforeach
-                    </select>
-                </div>
-
-
-
-            </div>
+            
             <div class="mb-4">
                 <label for="leave_type" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">ခွင့်အမျိုးအစား</label>
                 <div class="relative">
                     <select
                         wire:model="leave_type_name"
                         class="text-sm font-arial block w-full mb-4 p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
-                        <option value="" selected>ခွင့်အမျိုးအစားရွေးပါ</option>
+                        <option  value="" selected>ခွင့်အမျိုးအစားရွေးပါ</option>
                         @foreach ($leave_types as $leave_type)
                             <option value="{{ $leave_type->id }}"> {{ $leave_type->name }} </option>
                         @endforeach
                     </select>
+                    @error('leave_type_name') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="mb-4">

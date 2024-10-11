@@ -11,7 +11,7 @@ use App\Models\Gender;
 use App\Models\NrcRegionId;
 use App\Models\NrcSign;
 use App\Models\NrcTownshipCode;
-use App\Models\payscale;
+use App\Models\Payscale;
 use App\Models\PensionType;
 use App\Models\Region;
 use App\Models\Religion;
@@ -146,8 +146,8 @@ return new class extends Migration
             $table->date('government_staff_started_date')->nullable();
             $table->boolean('is_newly_appointed')->nullable();
             $table->boolean('is_direct_appointed')->nullable();
-            $table->foreignIdFor(payscale::class)->nullable()->constrained()->nullOnDelete();
-            
+            $table->foreignIdFor(Payscale::class)->nullable()->constrained()->nullOnDelete();
+
             $table->integer('current_salary')->nullable();
             $table->integer('current_increment_time')->nullable();
             //detail personal info (From childhood until now)
@@ -173,6 +173,7 @@ return new class extends Migration
             $table->text('life_insurance_proposal')->nullable();
             $table->text('life_insurance_policy_no')->nullable();
             $table->text('life_insurance_premium')->nullable();
+
             $table->boolean('is_active')->default(0);
             $table->date('retire_date')->nullable();
             $table->foreignIdFor(RetireType::class)->nullable()->nullOnDelete();

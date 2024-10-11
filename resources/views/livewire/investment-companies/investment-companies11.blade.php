@@ -4,12 +4,17 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
+            
+            <input type="date"  wire:model.live='filterRange'>   
+            
+            <input type="date" wire:model.live='filterRangeTo'>
             <table class="w-full">
                 <thead>
                     <tr>
+                        
                         <th rowspan="2" class="border border-black p-2 text-center">စဥ်</th>
                         <th rowspan="2" class="border border-black p-2 text-center">အကြောင်းအရာ</th>
-                        <th colspan="3" class="border border-black p-2 text-center">၃၁-၁၂-၂၀၂၃ထိ<br>အင်အား</th>
+                        <th colspan="3" class="border border-black p-2 text-center">{{$day}}-{{$month}}-{{$year}}ထိ<br>အင်အား</th>
                         <th colspan="2" class="border border-black p-2 text-center">အသစ်ခန့်အပ်</th>
                         <th colspan="2" class="border border-black p-2 text-center">အခြားဌာနမှ<br>ရောက်ရှိ</th>
                         <th colspan="2" class="border border-black p-2 text-center">အခြားဌာနသို့<br>ပြောင်းရွေ့ခြင်း
@@ -19,7 +24,7 @@
                         <th colspan="2" class="border border-black p-2 text-center">ထုတ်ပယ်ခြင်း/<br>ထုတ်ပစ်ခြင်း
                         </th>
                         <th colspan="2" class="border border-black p-2 text-center">ကွယ်လွန်ခြင်း</th>
-                        <th colspan="3" class="border border-black p-2 text-center">၃၁-၃-၂၀၂၄ထိအင်အားစုစုပေါင်း</th>
+                        <th colspan="3" class="border border-black p-2 text-center">{{$toDay}}-{{$Tomonth}}-{{$Toyear}}ထိအင်အားစုစုပေါင်း</th>
                         <th rowspan="2" class="border border-black p-2 text-center">မှတ်ချက်</th>
                     </tr>
                     <tr>

@@ -51,8 +51,7 @@
                         ['route_name' => 'language', 'name' => 'ဘာသာစကား'],
                         ['route_name' => 'department', 'name' => 'ဌာန'],
                         ['route_name' => 'salary', 'name' => 'လစာ'],
-                        ['route_name' => 'promotion', 'name' => 'ရာထူးတိုး'],
-                        ['route_name' => 'increment', 'name' => 'အတိုးနှုန်း'],
+                    
                     ]" />
             </li>
 

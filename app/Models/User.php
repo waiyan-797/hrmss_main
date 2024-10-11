@@ -44,4 +44,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function leave()
+    {
+        return $this->belongsTo(Leave::class);
+    }
 }

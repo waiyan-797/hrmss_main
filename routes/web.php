@@ -126,6 +126,7 @@ use App\Livewire\Table\Table;
 use App\Livewire\Township\Township;
 use App\Livewire\Language;
 use App\Livewire\Promotion as LivewirePromotion;
+use App\Livewire\Retirement;
 use App\Livewire\Salary;
 use App\Livewire\User;
 use App\Models\Ministry;
@@ -157,7 +158,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/blood_type', BloodType::class)->name('blood_type');
     Route::get('/post', Post::class)->name('post');
     Route::get('/section', Section::class)->name('section');
-    Route::get('/leave', Leave::class)->name('leave');
+    Route::get('/leave', Leave::class)->name('leave'); //no longer use 
+    Route::get('/leave/{staff_id}', Leave::class)->name('staff_leave');
     Route::get('/leave_type', LeaveType::class)->name('leave_type');
     Route::get('/nationality', Nationality::class)->name('nationality');
     Route::get('/country', Country::class)->name('country');
@@ -173,8 +175,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/religion', Religion::class)->name('religion');
     Route::get('/gender', Gender::class)->name('gender');
     Route::get('/salary', Salary::class)->name('salary');
-    Route::get('/promotion', LivewirePromotion::class)->name('promotion');
-    Route::get('/increment', Increment::class)->name('increment');
+    Route::get('/promotion', LivewirePromotion::class)->name('promotion'); //no longer use 
+    Route::get('/promotion/{staff_id}', LivewirePromotion::class)->name('staff_promotion'); //no longer use 
+    Route::get('/increment', Increment::class)->name('increment'); //no longer use 
+    Route::get('/retirement/{staff_id}', Retirement::class)->name('staff_retirement'); //no longer use 
+
+
+    Route::get('/increment/{staff_id}', Increment::class)->name('staff_increment'); //currently use
     Route::get('/staff_detail/{confirm_add?}/{confirm_edit?}/{staff_id?}/{tab?}', StaffDetail::class)->name('staff_detail');
     Route::get('/file/{path}', function ($path) {
         if (File::exists(storage_path('app/upload/') . $path)) {

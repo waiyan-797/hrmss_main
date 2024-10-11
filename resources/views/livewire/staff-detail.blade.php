@@ -56,6 +56,12 @@
                         </button>
                     </div>
                 @endif
+                <div class=" flex gap-x-8">
+                    <x-nav-link   class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"  :href="route('staff_leave',[$staff_id])">ခွင့်</x-nav-link>
+                    <x-nav-link    class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500" :href="route('staff_increment',[$staff_id])">နှစ်တိုး</x-nav-link>
+                    <x-nav-link   class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"  :href="route('staff_promotion',[$staff_id])">ရာထူးတိုး</x-nav-link>
+                    <x-nav-link    class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500" :href="route('staff_retirement',[$staff_id])" >ပြုန်းတီး</x-nav-link>
+                </div>
                 <div class="bg-white shadow-md   rounded-lg p-5">
                     @if ($tab == 'personal_info')
                         @include('staff.personal_info')
@@ -75,5 +81,7 @@
         </div>
     </div>
 </div>
+
+
 </div>
 

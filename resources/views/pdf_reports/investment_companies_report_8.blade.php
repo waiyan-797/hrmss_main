@@ -81,7 +81,7 @@
         <div class="container">
             <h1 class="heading">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဌာနအလိုက်နေပြည်တော်သို့ပြောင်းရွေ့ရောက်ရှိအင်အားစာရင်း</h1>
             <h2 class="sub-heading">၂၀၂၄ ခုနှစ်၊ ဇွန်လ</h2>
-
+            
             <div class="table-container">
                 <table>
                     <thead>

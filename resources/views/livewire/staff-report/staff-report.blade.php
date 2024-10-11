@@ -32,9 +32,9 @@
                             <tr class="border-b">
                                 <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $loop->index + 1 }}</td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->name }}</td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->current_rank->name }}</td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->side_department->name }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->current_rank?->name }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff->nrc_region_id?->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $staff?->side_department?->name }}</td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600">{{ en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y')) }}</td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600">{{ en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y')) }}</td>

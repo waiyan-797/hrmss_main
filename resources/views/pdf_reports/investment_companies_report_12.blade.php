@@ -81,7 +81,7 @@
                     <th colspan="2" class="center">နုတ်ထွက်ခြင်း</th>
                     <th colspan="2" class="center">ထုတ်ပယ်ခြင်း/<br>ထုတ်ပစ်ခြင်း</th>
                     <th colspan="2" class="center">ကွယ်လွန်ခြင်း</th>
-                    <th colspan="3" class="center">၃၁-၃-၂၀၂၄ထိအင်အားစုစုပေါင်း</th>
+                    <th colspan="3" class="center">{{$year.'-'.$month.'-'.$date}} အင်အားစုစုပေါင်း</th>
                     <th rowspan="2" class="center">မှတ်ချက်</th>
                 </tr>
                 <tr>

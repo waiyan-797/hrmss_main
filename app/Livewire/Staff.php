@@ -20,7 +20,8 @@ class Staff extends Component
     public $modal_title;
 
     //add new
-    public function add_new(){
+    public function add_new()
+    {
         $this->confirm_add = 1;
         $this->confirm_edit = 0;
         $this->reset('staff_id');
@@ -33,7 +34,8 @@ class Staff extends Component
     }
 
     //edit
-    public function edit_modal($id){
+    public function edit_modal($id)
+    {
         $this->confirm_add = 0;
         $this->confirm_edit = 1;
         $this->staff_id = $id;
@@ -46,13 +48,15 @@ class Staff extends Component
     }
 
     //delete confirm
-    public function delete_confirm($id){
+    public function delete_confirm($id)
+    {
         $this->staff_id = $id;
         $this->confirm_delete = true;
     }
 
     //delete
-    public function delete($id){
+    public function delete($id)
+    {
         $staff = ModelsStaff::find($id);
         Storage::disk('upload')->delete($staff->staff_photo);
         $staff->delete();
@@ -60,20 +64,23 @@ class Staff extends Component
     }
 
     #[On('render_staff')] //emitting event
-    public function render_staff(){
+    public function render_staff()
+    {
         $this->render();
     }
 
-    public function open_report($staff_id){
+    public function open_report($staff_id)
+    {
         $this->open_staff_report = true;
         $this->staff_id = $staff_id;
     }
 
-    public function go_report($staff_id, $report_id){
+    public function go_report($staff_id, $report_id)
+    {
         $routeName = "pdf_staff_report{$report_id}";
         $this->redirect(route($routeName, [
             'staff_id' => $staff_id,
-        ]), navigate:true);
+        ]), navigate: true);
     }
 
     public function render()
@@ -83,7 +90,7 @@ class Staff extends Component
         $staffQuery = ModelsStaff::query();
         if ($this->staff_search) {
             $this->resetPage();
-            $staffQuery->where(function($q) use ($staffSearch){
+            $staffQuery->where(function ($q) use ($staffSearch) {
                 $q->where('name', 'LIKE', $staffSearch)->orWhere('staff_no', 'LIKE', $staffSearch);
             });
             $staffs = $staffQuery->paginate($staffQuery->count() > 10 ? $staffQuery->count() : 10);

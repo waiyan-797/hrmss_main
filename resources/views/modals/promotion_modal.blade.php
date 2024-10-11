@@ -5,15 +5,17 @@
         <h2 class="text-lg font-semibold mb-4 text-gray-500 dark:text-white font-arial uppercase">{{ $modal_title }}</h2>
         <form wire:submit.prevent="{{$submit_form}}">
            
+          
+            
             <div class="mb-4">
-                <label for="staff" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">ဝန်ထမ်းအမည်</label>
+                <label for="previous_rank_name" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">ယခင်လုပ်ကိုင်ခဲ့ဖူးသည့်ရာထူး</label>
                 <div class="relative">
                     <select
-                        wire:model="staff_name"
+                        wire:model="previous_rank_name"
                         class="text-sm font-arial block w-full mb-4 p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
-                        <option value="" selected>ဝန်ထမ်းအမည်</option>
-                        @foreach ($staffs as $staff)
-                            <option value="{{ $staff->id }}"> {{ $staff->name }} </option>
+                        <option value="" selected>ယခင်လုပ်ကိုင်ခဲ့ဖူးသည့်ရာထူး</option>
+                        @foreach ($ranks as $rank)
+                            <option value="{{ $rank->id }}"> {{ $rank->name }} </option>
                         @endforeach
                     </select>
                 </div>
@@ -31,19 +33,7 @@
                     </select>
                 </div>
             </div>
-            <div class="mb-4">
-                <label for="previous_rank_name" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">ယခင်လုပ်ကိုင်ခဲ့ဖူးသည့်ရာထူး</label>
-                <div class="relative">
-                    <select
-                        wire:model="previous_rank_name"
-                        class="text-sm font-arial block w-full mb-4 p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
-                        <option value="" selected>ယခင်လုပ်ကိုင်ခဲ့ဖူးသည့်ရာထူး</option>
-                        @foreach ($ranks as $rank)
-                            <option value="{{ $rank->id }}"> {{ $rank->name }} </option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
+            
             <div class="mb-4">
                 <label for="promotion_date" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">ရာထူးတိုးသည့်နေ့</label>
                 <input required type="date" wire:model="promotion_date" id="promotion_date" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">

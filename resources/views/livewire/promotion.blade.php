@@ -7,8 +7,8 @@
                 'id' => $promotion_id,
                 'title' => 'ရာထူးတိုး',
                 'search_id' => 'promotion_search',
-                'columns' => ['စဉ်', 'ဝန်ထမ်းအမည်','ရာထူး','ယခင်လုပ်ကိုင်ခဲ့ဖူးသည့်ရာထူး','ရာထူးတိုးသည့်ရက်','အမိန့်အမှတ်','လုပ်ဆောင်ချက်'],
-                'column_vals' => ['staff', 'rank','previous_rank','promotion_date','order_no'],
+                'columns' => ['စဉ်', 'ဝန်ထမ်းအမည်','ယခင်လုပ်ကိုင်ခဲ့ဖူးသည့်ရာထူး','တိုးမည်ရာထူး','ရာထူးတိုးသည့်ရက်','အမိန့်အမှတ်','လုပ်ဆောင်ချက်'],
+                'column_vals' => ['staff', 'previousRank','rank','promotion_date','order_no'],
             ])
         </div>
     </div>

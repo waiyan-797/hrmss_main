@@ -8,9 +8,7 @@
                     ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဌာနအလိုက်
                     နေပြည်တော်သို့ပြောင်းရွေ့ရောက်ရှိအင်အားစာရင်း</h1>
                 <h2 class="font-semibold text-base mb-2 text-center">၂၀၂၄ ခုနှစ်၊ ဇွန်လ</h2>
-                <div class="w-full rounded-lg">
-
-
+                <div class="w-full rounded-lg">                  
                     <table class="md:w-full">
                         <thead>
                             <tr>
@@ -43,17 +41,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            
                             <tr>
                                 <td class="border border-black text-center p-2">၁</td>
                                 <td class="border border-black text-center p-2">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
                                 <td class="border border-black text-center p-2"></td>
                                 <td class="border border-black text-center p-2"></td>
-                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 2)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 3)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 4)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 5)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 6)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 1)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 2)?->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 3)?->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 4)?->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 5)?->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 6)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
                                 <td class="border border-black text-center p-2">
                                     {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->whereNull('spouse_name')->where('gender_id', 1)->count())) }}
                                 </td>
@@ -74,12 +73,12 @@
                                 <td class="border border-black text-center p-2">-</td>
                                 <td class="border border-black text-center p-2"></td>
                                 <td class="border border-black text-center p-2"></td>
-                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 2)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 3)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 4)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 5)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 6)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 1)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 2)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 3)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 4)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 5)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm(($first_ranks->where('id', 6)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
                                 <td class="border border-black text-center p-2">
                                     {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->whereNull('spouse_name')->where('gender_id', 1)->count())) }}
                                 </td>
@@ -97,14 +96,8 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="flex justify-start font-bold">
-                        <p class="md:w-1/5 ml-10">မှတ်ချက်။</p>
-                        <p class="md:w-3/5">လစဥ်လဆန်း(၂)ရက်နေ့အရောက်ဝန်ကြီးရုံးသို့ပေးပို့ရန်။</p>
-                    </div>
-
                 </div>
             </div>
-
         </div>
     </div>
 </div>

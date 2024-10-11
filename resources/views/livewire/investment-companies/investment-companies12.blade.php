@@ -4,6 +4,8 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
+            <input type="date" wire:model.live='filterRange'>
+            
             <table class="md:w-full">
                 <thead>
                     <tr>
@@ -16,7 +18,9 @@
                         <th colspan="2" class="border border-black text-center p-2">နုတ်ထွက်ခြင်း</th>
                         <th colspan="2" class="border border-black text-center p-2">ထုတ်ပယ်ခြင်း/<br>ထုတ်ပစ်ခြင်း</th>
                         <th colspan="2" class="border border-black text-center p-2">ကွယ်လွန်ခြင်း</th>
-                        <th colspan="3" class="border border-black text-center p-2">၃၁-၃-၂၀၂၄ထိအင်အားစုစုပေါင်း</th>
+             
+                        <th colspan="3" class="border border-black text-center p-2">{{$year.'-'.$month.'-'.$date}} ထိအင်အားစုစုပေါင်း </th>
+
                         <th rowspan="2" class="border border-black text-center p-2">မှတ်ချက်</th>
                     </tr>
                     <tr>
