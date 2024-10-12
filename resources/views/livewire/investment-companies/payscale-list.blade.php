@@ -1,8 +1,9 @@
-<body class="flex items-center justify-center min-h-screen">
-<div class="w-full  bg-white p-6 shadow-lg">
+<body class="flex items-center justify-center min-h-screen ">
+<div class="w-full  bg-white p-6 shadow-lg  h-[83vh] overflow-y-auto">
     <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
     <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
     <br><br>
+    <h1 class="font-bold text-center text-base mb-3">လစာအပေါ်ဝင်ငွေခွန်တွက်ချက်မှုပုံစံ</h1>
     <div class="flex justify-between w-full mb-4">
         <label for="name" class="md:w-1/3 text-left">အမည်</label>
       

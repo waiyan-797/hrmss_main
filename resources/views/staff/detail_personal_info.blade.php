@@ -1,8 +1,8 @@
 
-<div class="w-full h-auto py-5">
+<div class="w-full h-auto py-5 h-[83vh] overflow-y-auto">
     <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ် ဖော်ပြရန်)</h1>
     @include('staff_multiple_table', [
-        'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သော ဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့', 'ခုနှစ်','ဘွဲ့လက်မှတ်','အမှတ်စာရင်း'],
+        'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သော ဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့','အတန်း','ခုံအမှတ်','မေဂျာ','မှ','ထိ', 'ခုနှစ်','ဘွဲ့လက်မှတ်','အမှတ်စာရင်း','မှတ်ချက်'],
         'add_event' => 'add_schools',
         'column_vals' => $schools,
         'column_types' => [
@@ -37,27 +37,60 @@
             [
                 'type' => 'text',
                 'wire_array_name' => 'schools',
+                'wire_array_key' => 'semester',
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'schools',
+                'wire_array_key' => 'roll_no',
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'schools',
+                'wire_array_key' => 'major',
+            ],
+            [
+                'type' => 'date',
+                'wire_array_name' => 'schools',
+                'wire_array_key' => 'from_date',
+            ],
+            [
+                'type' => 'date',
+                'wire_array_name' => 'schools',
+                'wire_array_key' => 'to_date',
+            ],
+
+
+            [
+                'type' => 'text',
+                'wire_array_name' => 'schools',
                 'wire_array_key' => 'year',
             ],
             [
-                'type' => 'file',
+                'type' => 'text',
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'certificate',
             ],
             [
-                'type' => 'file',
+                'type' => 'text',
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'exam_mark',
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'schools',
+                'wire_array_key' => 'remark',
             ],
 
         ],
         'del_method' => 'remove_schools',
     ])
 </div>
+
 <div class="w-full h-auto py-5">
     <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">သင်တန်း</h1>
     @include('staff_multiple_table', [
-        'column_names' => ['သင်တန်းအမည်', 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းတည်နေရာ'],
+        'column_names' => ['သင်တန်းအမည်','ဒီပလိုမာလက်မှတ်','သင်တန်းကြေး', 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းတည်နေရာ','မှတ်ချက်'],
         'add_event' => 'add_trainings',
         'column_vals' => $trainings,
         'column_types' => [
@@ -66,6 +99,16 @@
                 'wire_array_name' => 'trainings',
                 'wire_array_key' => 'training_type',
                 'select_values' => $training_types,
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'trainings',
+                'wire_array_key' => 'diploma_name',
+            ],
+            [
+                'type' => 'number',
+                'wire_array_name' => 'trainings',
+                'wire_array_key' => 'fees',
             ],
             [
                 'type' => 'date',
@@ -94,14 +137,21 @@
                 'wire_array_key' => 'training_location',
                 'select_values' => $training_locations,
             ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'trainings',
+                'wire_array_key' => 'remark',
+            ],
         ],
         'del_method' => 'remove_trainings',
     ])
+    
+
 </div>
 <div class="w-full h-auto py-5">
     <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်</h1>
     @include('staff_multiple_table', [
-        'column_names' => ['ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အမည်', 'ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်', 'အမိန့်အမှတ်', 'ရက်စွဲ'],
+        'column_names' => ['ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အမည်', 'ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်', 'အမိန့်အမှတ်', 'ရက်စွဲ','မှတ်ချက်'],
         'add_event' => 'add_awardings',
         'column_vals' => $awards,
         'column_types' => [
@@ -127,10 +177,18 @@
                 'wire_array_name' => 'awards',
                 'wire_array_key' => 'order_date',
             ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'awards',
+                'wire_array_key' => 'remark',
+            ],
         ],
         'del_method' => 'remove_awardings',
     ])
+     
 </div>
+
+
 <div class="grid grid-cols-4 gap-4 py-5">
     <div class="col-span-4">
         <x-input-label :value="__('နောက်ဆုံးအောင်မြင်ခဲ့သည့် ကျောင်း (အမည်, အတန်း, ခုံအမှတ်, ဘာသာရပ်)')" />
@@ -167,7 +225,7 @@
 <div class="w-full h-auto py-5">
     <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်</h1>
     @include('staff_multiple_table', [
-        'column_names' => ['ရာထူး', 'ဌာန', 'ဌာနခွဲ', 'မှ', 'ထိ', 'မှတ်ချက်'],
+        'column_names' => ['ရာထူး', 'ဌာန', 'ဌာနခွဲ','လိပ်စာ' ,'မှ', 'ထိ', 'မှတ်ချက်'],
         'add_event' => 'add_past_occupations',
         'column_vals' => $past_occupations,
         'column_types' => [
@@ -190,6 +248,11 @@
                 'select_values' => $sections,
             ],
             [
+                'type' => 'text',
+                'wire_array_name' => 'past_occupations',
+                'wire_array_key' => 'address',
+            ],
+            [
                 'type' => 'date',
                 'wire_array_name' => 'past_occupations',
                 'wire_array_key' => 'from_date',
@@ -207,6 +270,7 @@
         ],
         'del_method' => 'remove_past_occupations',
     ])
+ 
 </div>
 <div class="grid grid-cols-4 gap-4 py-5">
     <div>
@@ -230,10 +294,11 @@
         <x-input-error class="mt-2" :messages="$errors->get('has_military_friend')" />
     </div>
 </div>
+
 <div class="w-full h-auto py-5">
     <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">နိုင်ငံခြားသွားရောက်ခြင်း</h1>
     @include('staff_multiple_table', [
-        'column_names' => ['သွားရောက်ခဲ့သည့်နိုင်ငံ', 'သွားရောက်ခဲ့သည့်အကြောင်း', 'တွေ့ဆုံခဲ့သည့် ကုမ္ပဏီ၊ လူပုဂ္ဂိုလ်၊ ဌာန', 'သွားသည့်နေ့', 'ပြန်သည့်နေ့'],
+        'column_names' => ['သွားရောက်ခဲ့သည့်နိုင်ငံ', 'သွားရောက်ခဲ့သည့်အကြောင်း','သင်တန်းတက်ခြင်းဖြစ်လျှင် အောင်','သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်','ထောက်ပံ့သည့်အဖွဲ့အစည်း', 'တွေ့ဆုံခဲ့သည့် ကုမ္ပဏီ၊ လူပုဂ္ဂိုလ်၊ ဌာန', 'သွားသည့်နေ့', 'ပြန်သည့်နေ့','နိုင်ငံခြားခရီးစဉ်','နိုင်ငံခြားသို့သွားရောက်မည်ံနေ့','ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး'],
         'add_event' => 'add_abroads',
         'column_vals' => $abroads,
         'column_types' => [
@@ -247,6 +312,21 @@
                 'type' => 'text',
                 'wire_array_name' => 'abroads',
                 'wire_array_key' => 'particular',
+            ],
+            [
+                'type' => 'checkbox',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'training_success_fail',
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'training_success_count',
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'sponser',
             ],
             [
                 'type' => 'text',
@@ -263,9 +343,25 @@
                 'wire_array_name' => 'abroads',
                 'wire_array_key' => 'to_date',
             ],
+            [
+                'type' => 'number',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'status',
+            ],
+            [
+                'type' => 'date',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'actual_abroad_date',
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'position',
+            ],
         ],
         'del_method' => 'remove_abroads',
     ])
+    
 </div>
 <div class="grid grid-cols-4 gap-4 py-5">
     <div class="col-span-4">

@@ -19,11 +19,13 @@
                         <td class="border border-black p-2 text-left">၂</td>
                         <td class="border border-black p-2 text-center">၃</td>
                     </tr>
+                    @foreach($staffs as $staff)
                     <tr>
-                        <td class="border border-black p-2 text-center"></td>
-                        <td class="border border-black p-2 text-center"></td>
-                        <td class="border border-black p-2 text-center"></td>
+                        <td class="border border-black p-2 text-center">{{ $staff->name}}</td>
+                        <td class="border border-black p-2 text-center">{{ $staff->current_rank?->name}}</td>
+                        <td class="border border-black p-2 text-center">{{ $staff->payscale?->name}}</td>
                     </tr>
+                    @endforeach
                     <tr>
                         <td class="border border-black p-2 text-center"></td>
                         <td class="border border-black p-2 text-center"></td>

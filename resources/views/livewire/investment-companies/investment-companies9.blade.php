@@ -46,7 +46,7 @@
                                 <td class="border border-black p-2">{{ $loop->index+1}}</td>
                                 <td class="border border-black p-2">{{ $staff->name}}၊{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</td>
                                 <td class="border border-black p-2">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
-                                <td class="border border-black p-2">{{ $staff->current_rank->name}}၊{{ $staff->payscale->name}}၊{{ $staff->current_salary}}</td>
+                                <td class="border border-black p-2">{{ $staff->current_rank?->name}}၊{{ $staff->payscale?->name}}၊{{ $staff->current_salary}}</td>
                                 <td class="border border-black p-2">{{en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</td>
                                 <td class="border border-black p-2">{{ $staff->lost_contact_from_date}}</td>
                                 <td class="border border-black p-2">{{ $staff->retire_date}}</td>

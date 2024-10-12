@@ -27,8 +27,5 @@ class PayscaleList extends Component
         'staffs' => $staffs,
     ]);
      }
-    // public function render()
-    // {
-    //     return view('livewire.investment-companies.payscale-list');
-    // }
+   
 }

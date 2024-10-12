@@ -36,6 +36,15 @@
                                 class="mt-1 block w-full"
                                 required
                             />
+                            @elseif ($type['type'] == 'checkbox')
+                             <x-text-input
+                             wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
+                             id="{{$type['wire_array_key']}}"
+                             name="{{$type['wire_array_key']}}"
+                             type="checkbox"
+                            class="form-checkbox h-4 w-4 text-indigo-600"
+                            required
+                             />
                         @endif
                         
                     </td>

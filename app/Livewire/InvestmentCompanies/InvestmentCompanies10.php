@@ -25,90 +25,126 @@ class InvestmentCompanies10 extends Component
         }, 'investment_companies_pdf_10.pdf');
     }
     public function go_word()
-    {
-        // Fetch data
-        $first_ranks = Rank::where('staff_type_id', 1)->withCount('staffs')->get();
-        $second_ranks = Rank::where('staff_type_id', 2)->withCount('staffs')->get();
-        $all_ranks = Rank::whereIn('staff_type_id', [1, 2])->withCount('staffs')->get();
+{
+    $first_ranks = Rank::where('staff_type_id', 1)->withCount('staffs')->get();
+    $second_ranks = Rank::where('staff_type_id', 2)->withCount('staffs')->get();
+    $all_ranks = Rank::whereIn('staff_type_id', [1, 2])->withCount('staffs')->get();
 
-        // Create a new PHPWord object
-        $phpWord = new PhpWord();
-        
-        // Add a section
-        $section = $phpWord->addSection();
-
-        // Add title
-        $section->addTitle('Investment Companies Report', 1);
-        
-        // Create table
-        $table = $section->addTable(['borderSize' => 6, 'borderColor' => '000000']);
-        
-       
-        $table->addRow();
-        $table->addCell(1000)->addText('စဥ်', ['bold' => true]);
-        $table->addCell(2000)->addText('ဦစီးဌာန', ['bold' => true]);
-        
-        // Add your columns here, similar to your PDF layout
-        // $headers = [
-        //     'အမြဲတမ်းအတွင်းဝန်/ညွှန်ကြားရေးမှူးချုပ်',
-        //     'ဒုတိယအမြဲတမ်းအတွင်းဝန်/ဒုတိယညွှန်ကြားရေးမှူး',
-        //     'လက်ထောက်အတွင်းဝန်/ညွှန်ကြားရေးမှူး',
-        //     'ဒုတိယညွှန်ကြားရေးမှူး',
-        //     'လက်ထောက်ညွှန်ကြားရေးမှူး',
-        //     'ဦးစီးအရာရှိ',
-        //     'အရာရှိပေါင်း',
-        //     'အမှုထမ်းပေါင်း',
-        //     'စုစုပေါင်း',
-        // ];
-
-        // foreach ($headers as $header) {
-        //     $table->addCell(1000)->addText($header, ['bold' => true]);
-        // }
+    $phpWord = new PhpWord();
+    $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
+    $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
     $table->addRow();
-    $table->addCell(2000,['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true]);
-    $table->addCell(4000,['vMerge' => 'restart'])->addText('ဌာနအမည်', ['bold' => true]);
-    $table->addCell(7000, ['gridSpan' => 7, 'valign' => 'center'])->addText('နိုင်ငံ့ဝန်ထမ်းဥပ‌‌ဒေနည်းပညာအရ အရေးယူမှုပြီးစီးမှု');
-    $table->addCell(3000,['vMerge' => 'restart'])->addText('ပုဒ်မ၅၀၅ဖြင့်အရေးယူပြီးစီးမှု', ['bold' => true]);
-    $table->addCell(3000,['vMerge' => 'restart'])->addText('အရေးယူဆောင်ရွက်ဆဲအင်အား', ['bold' => true]);
-    $table->addCell(3000,['vMerge' => 'restart'])->addText('စုစုပေါင်း', ['bold' => true]);
+    $table->addCell(2000)->addText('စဥ်');
+    $table->addCell(4000)->addText('ဦစီးဌာန');
+   $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('အမြဲတမ်းအတွင်းဝန်/ညွှန်ကြားရေးမှူးချုပ်');
+   $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('ဒုတိယအမြဲတမ်းအတွင်းဝန်/
+   ဒုတိယညွှန်ကြားရေးမှူးချုပ်');
+   $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('လက်ထောက်အတွင်းဝန်/
+   ညွှန်ကြားရေးမှူး');
+   $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('ဒုတိယညွှန်ကြားရေးမှူး');
+   $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('လက်ထောက်ညွှန်ကြားရေးမှူး');
+   $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('ဦးစီးအရာရှိ');
+   $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('အရာရှိပေါင်း');
+   $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('အမှုထမ်းပေါင်း');
+   $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('စုစုပေါင်း');
 
 $table->addRow();
 $table->addCell(2000, ['vMerge' => 'continue']);
 $table->addCell(4000, ['vMerge' => 'continue']);
-$table->addCell(1000)->addText('စာဖြင့် သတိပေးခြင်း', ['alignment' => 'center']);
-$table->addCell(1000)->addText('နှစ်တိုးလစာရပ်ဆိုင်းခြင်း', ['alignment' => 'center']);
-$table->addCell(1000)->addText('ရာထူးတိုးမြှင့်ခြင်းကိုရပ်ဆိုင်းခြင်း', ['alignment' => 'center']);
-$table->addCell(1000)->addText('လစာနှုန်းအတွင်းလစာလျှော့ချခြင်း', ['alignment' => 'center']);
-$table->addCell(1000)->addText('ရာထူးအဆင့်လျှော့ချခြင်း', ['alignment' => 'center']);
-$table->addCell(1000)->addText('ရာထူးမှထုတ်ပယ်ခြင်း', ['alignment' => 'center']);
-$table->addCell(1000)->addText('ရာထူးအဖြစ်မှထုတ်ပစ်ခြင်း', ['alignment' => 'center']);
-$table->addCell(4000, ['vMerge' => 'continue']);
-$table->addCell(4000, ['vMerge' => 'continue']);
-$table->addCell(4000, ['vMerge' => 'continue']);
-  
-
-        
+$table->addCell(1000)->addText('ခွင့်ပြု', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခန့်အပ်', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ပို/လို', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခွင့်ပြု', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခန့်အပ်', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ပို/လို	', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခွင့်ပြု', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခန့်အပ်', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ပို/လို	', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခွင့်ပြု', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခန့်အပ်', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ပို/လို	', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခွင့်ပြု', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခန့်အပ်', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ပို/လို	', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခွင့်ပြု', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခန့်အပ်', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ပို/လို	', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခွင့်ပြု', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခန့်အပ်', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ပို/လို	', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခွင့်ပြု', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခန့်အပ်', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ပို/လို	', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခွင့်ပြု', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ခန့်အပ်', ['alignment' => 'center']);
+$table->addCell(1000)->addText('ပို/လို	', ['alignment' => 'center']);
+    
         $table->addRow();
-        $table->addCell(1000)->addText('1');
-        $table->addCell(2000)->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန');
-        
-       
-        foreach ($first_ranks as $rank) {
-            $table->addCell(1000)->addText(en2mm($rank->allowed_qty));
-            $table->addCell(1000)->addText(en2mm($rank->staffs->count()));
-            $table->addCell(1000)->addText(en2mm($rank->allowed_qty - $rank->staffs->count()));
-        }
+        $table->addCell(2000)->addText('၁');  
+        $table->addCell(4000)->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန');
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 1)->first())->allowed_qty));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 1)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 1)->first())->allowed_qty - ($first_ranks->where('id', 1)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 2)->first())->allowed_qty));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 2)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 2)->first())->allowed_qty - ($first_ranks->where('id', 2)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 3)->first())->allowed_qty));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 3)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 3)->first())->allowed_qty - ($first_ranks->where('id', 3)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 4)->first())->allowed_qty));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 4)->first())->staffs->count()) );
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 4)->first())->allowed_qty - ($first_ranks->where('id', 4)->first())->staffs->count()) );
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 5)->first())->allowed_qty));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 5)->first())->staffs->count()) );
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 5)->first())->allowed_qty - ($first_ranks->where('id', 5)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 6)->first())->allowed_qty));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 6)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 6)->first())->allowed_qty - ($first_ranks->where('id', 6)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm($first_ranks->sum('allowed_qty')));
+        $table->addCell(1000)->addText(en2mm($first_ranks->sum('staffs_count')));
+        $table->addCell(1000)->addText( en2mm(($first_ranks->sum('allowed_qty')) - $first_ranks->sum('staffs_count')));
+        $table->addCell(1000)->addText( en2mm($second_ranks->sum('allowed_qty')) );
+        $table->addCell(1000)->addText(en2mm($second_ranks->sum('staffs_count')));
+        $table->addCell(1000)->addText(en2mm(($second_ranks->sum('allowed_qty')) - $second_ranks->sum('staffs_count')));
+        $table->addCell(1000)->addText( en2mm($all_ranks->sum('allowed_qty')));
+        $table->addCell(1000)->addText(en2mm($all_ranks->sum('staffs_count')));
+        $table->addCell(1000)->addText(en2mm(($all_ranks->sum('allowed_qty')) - $all_ranks->sum('staffs_count')));
+        $table->addRow();
+        $table->addCell(2000)->addText();  
+        $table->addCell(4000)->addText('စုစုပေါင်း');
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 1)->first())->allowed_qty));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 1)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 1)->first())->allowed_qty - ($first_ranks->where('id', 1)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 2)->first())->allowed_qty) );
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 2)->first())->staffs->count()) );
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 2)->first())->allowed_qty - ($first_ranks->where('id', 2)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 3)->first())->allowed_qty));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 3)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 3)->first())->allowed_qty - ($first_ranks->where('id', 3)->first())->staffs->count()) );
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 4)->first())->allowed_qty));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 4)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 4)->first())->allowed_qty - ($first_ranks->where('id', 4)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 5)->first())->allowed_qty));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 5)->first())->staffs->count()) );
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 5)->first())->allowed_qty - ($first_ranks->where('id', 5)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 6)->first())->allowed_qty));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 6)->first())->staffs->count()));
+        $table->addCell(1000)->addText(en2mm(($first_ranks->where('id', 6)->first())->allowed_qty - ($first_ranks->where('id', 6)->first())->staffs->count()) );
+        $table->addCell(1000)->addText( en2mm($first_ranks->sum('allowed_qty')) );
+        $table->addCell(1000)->addText(en2mm($first_ranks->sum('staffs_count')));
+        $table->addCell(1000)->addText( en2mm(($first_ranks->sum('allowed_qty')) - $first_ranks->sum('staffs_count')) );
+        $table->addCell(1000)->addText(en2mm($second_ranks->sum('allowed_qty')));
+        $table->addCell(1000)->addText(en2mm($second_ranks->sum('staffs_count')));
+        $table->addCell(1000)->addText(en2mm(($second_ranks->sum('allowed_qty')) - $second_ranks->sum('staffs_count')));
+        $table->addCell(1000)->addText(en2mm($all_ranks->sum('allowed_qty')));
+        $table->addCell(1000)->addText(en2mm($all_ranks->sum('staffs_count')));
+        $table->addCell(1000)->addText(en2mm(($all_ranks->sum('allowed_qty')) - $all_ranks->sum('staffs_count')));
+    $fileName = 'investment_companies_report.docx';
+    $tempFile = storage_path($fileName);
+    $phpWord->save($tempFile);
 
-      
-        $fileName = 'investment_companies_report.docx';
-        $temp_file = tempnam(sys_get_temp_dir(), $fileName);
-        $phpWord->save($temp_file);
-        return response()->download($temp_file)->deleteFileAfterSend(true);
-    }
-
-
-  
-
+    return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
+}
     public function render()
     {
         $first_ranks = Rank::where('staff_type_id', 1)->withCount('staffs')->get();
@@ -122,76 +158,3 @@ $table->addCell(4000, ['vMerge' => 'continue']);
     }
 }
 
-
-// public function go_word() {
-//     $punishments = Punishment::get();
-//     $phpWord = new PhpWord();
-//     $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
-//     $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 14], ['alignment' => 'center']);
-//     $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
-//     $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
-//     $section->addTitle('----ခုနှစ်၊ ---လအတွင်း တာဝန်ပျက်ကွက်သူဝန်ထမ်းများအား အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း', 2);
-//     $table = $section->addTable([
-//         'borderSize' => 6,
-//         'borderColor' => '000000',
-//         'cellMargin' => 80,
-//     ]);
-
-   
-//     $table->addRow();
-//     $table->addCell(2000,['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true]);
-//     $table->addCell(4000,['vMerge' => 'restart'])->addText('ဌာနအမည်', ['bold' => true]);
-//     $table->addCell(7000, ['gridSpan' => 7, 'valign' => 'center'])->addText('နိုင်ငံ့ဝန်ထမ်းဥပ‌‌ဒေနည်းပညာအရ အရေးယူမှုပြီးစီးမှု');
-//     $table->addCell(3000,['vMerge' => 'restart'])->addText('ပုဒ်မ၅၀၅ဖြင့်အရေးယူပြီးစီးမှု', ['bold' => true]);
-//     $table->addCell(3000,['vMerge' => 'restart'])->addText('အရေးယူဆောင်ရွက်ဆဲအင်အား', ['bold' => true]);
-//     $table->addCell(3000,['vMerge' => 'restart'])->addText('စုစုပေါင်း', ['bold' => true]);
-
-// $table->addRow();
-// $table->addCell(2000, ['vMerge' => 'continue']);
-// $table->addCell(4000, ['vMerge' => 'continue']);
-// $table->addCell(1000)->addText('စာဖြင့် သတိပေးခြင်း', ['alignment' => 'center']);
-// $table->addCell(1000)->addText('နှစ်တိုးလစာရပ်ဆိုင်းခြင်း', ['alignment' => 'center']);
-// $table->addCell(1000)->addText('ရာထူးတိုးမြှင့်ခြင်းကိုရပ်ဆိုင်းခြင်း', ['alignment' => 'center']);
-// $table->addCell(1000)->addText('လစာနှုန်းအတွင်းလစာလျှော့ချခြင်း', ['alignment' => 'center']);
-// $table->addCell(1000)->addText('ရာထူးအဆင့်လျှော့ချခြင်း', ['alignment' => 'center']);
-// $table->addCell(1000)->addText('ရာထူးမှထုတ်ပယ်ခြင်း', ['alignment' => 'center']);
-// $table->addCell(1000)->addText('ရာထူးအဖြစ်မှထုတ်ပစ်ခြင်း', ['alignment' => 'center']);
-// $table->addCell(4000, ['vMerge' => 'continue']);
-// $table->addCell(4000, ['vMerge' => 'continue']);
-// $table->addCell(4000, ['vMerge' => 'continue']);
-  
-   
-//     $rowCount = 1;
-//     $table->addRow();
-//     $table->addCell(2000)->addText($rowCount);
-//     $table->addCell(4000)->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန');
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 1)->count()));
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 2)->count()) );
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 3)->count()));
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 4)->count()) );
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 5)->count()));
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 8)->count()));
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 9)->count()));
-//     $table->addCell(4000)->addText();
-//     $table->addCell(4000)->addText();
-//     $table->addCell(4000)->addText();
-
-//     $table->addRow();
-//     $table->addCell(2000)->addText();
-//     $table->addCell(4000)->addText('စုစုပေါင်း');
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 1)->count()) );
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 2)->count()) );
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 3)->count()));
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 4)->count()));
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 5)->count()) );
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 8)->count()));
-//     $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 9)->count()));
-//     $table->addCell(4000)->addText();
-//     $table->addCell(4000)->addText();
-//     $table->addCell(4000)->addText();
-//     $fileName = 'investment_companies_report.docx';
-//     $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
-//     $filePath = storage_path($fileName);
-//     $objWriter->save($filePath);
-//     return response()->download($filePath)->deleteFileAfterSend(true);
-// }

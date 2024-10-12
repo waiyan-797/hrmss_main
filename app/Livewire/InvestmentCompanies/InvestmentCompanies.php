@@ -132,8 +132,8 @@ class InvestmentCompanies extends Component
             $table->addCell(2000)->addText($total_staffs->where('payscale_id', $payscale->id)->count());
         }
         $table->addRow();
-            $table->addCell(2000)->addText();
-            $table->addCell(2000)->addText($first_payscales[0]->staff_type->name);
+   
+            $table->addCell(2000, ['gridSpan' => 2])->addText($first_payscales[0]->staff_type->name.'စုစုပေါင်း');
             $table->addCell(2000)->addText(en2mm($first_payscales->sum('allowed_qty')) );
             $table->addCell(2000)->addText(en2mm($kachin_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
             $table->addCell(2000)->addText(en2mm($kayah_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
@@ -178,8 +178,7 @@ class InvestmentCompanies extends Component
                 $table->addCell(2000)->addText($total_staffs->where('payscale_id', $payscale->id)->count());
             }
             $table->addRow();
-            $table->addCell(2000)->addText();
-            $table->addCell(2000)->addText($second_payscales[0]->staff_type->name);
+            $table->addCell(2000,['gridSpan' => 2])->addText($second_payscales[0]->staff_type->name.'စုစုပေါင်း');
             $table->addCell(2000)->addText(en2mm($second_payscales->sum('allowed_qty')) );
             $table->addCell(2000)->addText(en2mm($kachin_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
             $table->addCell(2000)->addText(en2mm($kayah_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));

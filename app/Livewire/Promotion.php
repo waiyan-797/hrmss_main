@@ -135,8 +135,11 @@ class Promotion extends Component
 
     public function mount($staff_id)
     {
+
         $this->staff_id = $staff_id;
+       
         $this->staff = Staff::find($staff_id);
+        dd($this->staff);
         $this->rank_name = $this->staff->current_rank_id;
     }
 

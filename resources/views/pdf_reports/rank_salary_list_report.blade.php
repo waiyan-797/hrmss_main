@@ -75,11 +75,13 @@
                 <td class="text-left">၂</td>
                 <td>၃</td>
             </tr>
+            @foreach($staffs as $staff)
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ $staff->name}}</td>
+                <td>{{ $staff->current_rank?->name}}</td>
+                <td>{{ $staff->payscale?->name}}</td>
             </tr>
+            @endforeach
             <tr class="total-row">
                 <td></td>
                 <td></td>

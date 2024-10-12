@@ -55,14 +55,15 @@ return new class extends Migration
             $table->foreignIdFor(NrcRegionId::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(NrcTownshipCode::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(NrcSign::class)->nullable()->constrained()->nullOnDelete();
-            $table->text('nrc')->nullable();
             $table->text('nrc_code')->nullable();
             $table->text('nrc_front')->nullable();
             $table->text('nrc_back')->nullable();
-            $table->text('nrc_no')->nullable();
             $table->text('phone')->nullable();
             $table->text('mobile')->nullable();
             $table->text('email')->nullable();
+            $table->text('life_insurance_proposal')->nullable();
+            $table->text('life_insurance_policy_no')->nullable();
+            $table->text('life_insurance_premium')->nullable();
             $table->text('current_address_street')->nullable();
             $table->text('current_address_ward')->nullable();
             $table->foreignId('current_address_township_or_town_id')->nullable()->constrained('townships')->onDelete('set null');
@@ -86,6 +87,9 @@ return new class extends Migration
             $table->text('military_served_army')->nullable();
             $table->text('military_brief_history_or_penalty')->nullable();
             $table->integer('military_pension')->nullable();
+            $table->text('last_serve_army')->nullable();
+            $table->text('health_condition')->nullable();
+            $table->text('tax_exception')->nullable();
             $table->foreignIdFor(EducationGroup::class)->nullable()->nullOnDelete();
             $table->foreignIdFor(EducationType::class)->nullable()->nullOnDelete();
             $table->foreignIdFor(Education::class)->nullable()->nullOnDelete();
@@ -147,7 +151,6 @@ return new class extends Migration
             $table->boolean('is_newly_appointed')->nullable();
             $table->boolean('is_direct_appointed')->nullable();
             $table->foreignIdFor(Payscale::class)->nullable()->constrained()->nullOnDelete();
-
             $table->integer('current_salary')->nullable();
             $table->integer('current_increment_time')->nullable();
             //detail personal info (From childhood until now)
@@ -157,8 +160,6 @@ return new class extends Migration
             $table->text('last_school_major')->nullable();
             $table->text('student_life_political_social')->nullable();
             $table->text('habit')->nullable();
-            $table->text('health_condition')->nullable();
-            $table->text('tax_exception')->nullable();
             $table->text('revolution')->nullable();
             $table->text('transfer_reason_salary')->nullable();
             $table->text('during_work_political_social')->nullable();
@@ -173,7 +174,6 @@ return new class extends Migration
             $table->text('life_insurance_proposal')->nullable();
             $table->text('life_insurance_policy_no')->nullable();
             $table->text('life_insurance_premium')->nullable();
-
             $table->boolean('is_active')->default(0);
             $table->date('retire_date')->nullable();
             $table->foreignIdFor(RetireType::class)->nullable()->nullOnDelete();

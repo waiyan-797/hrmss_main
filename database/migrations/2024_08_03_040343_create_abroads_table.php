@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Country::class)->nullable()->constrained()->nullOnDelete();
             $table->string('particular');
             $table->boolean('training_success_fail')->nullable()->default(null);
-            $table->boolean('training_success_count')->nullable();
+            $table->text('training_success_count')->nullable();
             $table->string('sponser')->nullable();
             $table->string('meet_with')->nullable();
             $table->date('from_date')->nullable();
