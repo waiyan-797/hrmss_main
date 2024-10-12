@@ -13,6 +13,7 @@ class InvestmentCompanies7 extends Component
 {
     public $year, $month, $filterRange;
     public $previousYear, $previousMonthDate, $previousMonth;
+
     public function go_pdf()
     {
 

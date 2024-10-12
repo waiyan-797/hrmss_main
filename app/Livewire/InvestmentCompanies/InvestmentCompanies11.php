@@ -329,7 +329,7 @@ $table->addCell(2000, ['vMerge' => 'continue']);
 
 
 
-        $this->filterRangeTo = Carbon::now()->format('Y-m-d'); // Format: 'YYYY-MM'
+        $this->filterRangeTo = Carbon::now()->format('Y-m-d');
 
         [$Toyear, $Tomonth, $day] = explode('-', $this->filterRangeTo);
 
@@ -343,6 +343,25 @@ $table->addCell(2000, ['vMerge' => 'continue']);
     public function render()
     {
 
+
+
+
+
+        [$year, $month, $day] = explode('-', $this->filterRange);
+        $this->year = $year;
+        $this->month = $month;
+        $this->day = $day;
+
+
+
+
+
+        [$Toyear, $Tomonth, $day] = explode('-', $this->filterRangeTo);
+
+
+        $this->Toyear = $Toyear;
+        $this->Tomonth = $Tomonth;
+        $this->toDay = $day;
 
 
 
@@ -440,6 +459,7 @@ $table->addCell(2000, ['vMerge' => 'continue']);
             'low_q2' => $low_q2,
             'high_dlimit2_staffs2' => $high_dlimit2_staffs2,
             'low_dlimit2_staffs2' => $low_dlimit2_staffs2,
+
         ]);
     }
 }

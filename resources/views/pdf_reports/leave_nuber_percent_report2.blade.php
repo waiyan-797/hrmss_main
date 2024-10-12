@@ -54,41 +54,53 @@
     </style>
 </head>
 <body>
+    
     <page size="A4">
-        <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>၂၀၂၂ခုနှစ်၊ အောက်တိုဘာလမှ ၂၀၂၃ခုနှစ်၊ ဇွန်လအထိ ခွင့်ခံစားမှု အနည်းအများအလိုက် ရာခိုင်နှုန်းဇယား</h1>
+        <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>        
+            {{mmDateFormat($startYr,$startMonth)}}
+            မှ
+           {{mmDateFormat($endYr,$endMonth)}}
+           အထိ ခွင့်ခံစားမှု အနည်းအများအလိုက် ရာခိုင်နှုန်းဇယား</h1>
 
     <table>
         <thead>
             <tr>
                 <th>စဥ်</th>
                 <th>ဌာနခွဲ</th>
-                <th>၂၀၂၂ခုနှစ်<br>အောက်တိုဘာလ</th>
-                <th>၂၀၂၂ခုနှစ်<br>နိုဝင်ဘာလ</th>
-                <th>၂၀၂၂ခုနှစ်<br>ဒီဇင်ဘာလ</th>
-                <th>၂၀၂၃ခုနှစ်<br>ဇန်နဝါရီလ</th>
-                <th>၂၀၂၃ခုနှစ်<br>ဖေဖော်ဝါရီလ</th>
-                <th>၂၀၂၃ခုနှစ်<br>မတ်လ</th>
-                <th>၂၀၂၃ခုနှစ်<br>ဧပြီလ</th>
-                <th>၂၀၂၃ခုနှစ်<br>မေလ</th>
-                <th>၂၀၂၃ခုနှစ်<br>ဇွန်လ</th>
+                @foreach ($months as $month)
+                            
+                
+                    <th class="border border-black text-center p-2"> {{en2mm(explode('-' ,$month)[0])}}<br>{{en2mm(explode('-' ,$month)[1])}}</th>
+
+                    @endforeach
                 <th>စုစုပေါင်း</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($divisions as  $division)
+                   
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+             <td class="border border-black text-center p-2">     
+                 {{$division->id}}
+             </td>   
+             <td class="border border-black text-center p-2">
+                {{$division->name}}
+             </td>
+             @foreach ($months as $YearMonth)
+                     
+             <td class="border border-black text-center p-2">
+                 {{$division->leaveCount($division->id, $YearMonth )}}
+                 
+             </td>
+
+
+                 @endforeach
+             
+     
+             <td class="border border-black text-center p-2"></td>
+         </tr>
+                
+            @endforeach
         </tbody>
     </table>
 
