@@ -29,6 +29,7 @@ class Division extends Model
     public function leaveCount($division, $YearMonth)
     {
 
+
         [$year, $month] = explode('-', $YearMonth);
         $totalLeaveCount = 0;
         $staffs = Staff::where("current_division_id", $division)->get();
