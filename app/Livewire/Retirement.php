@@ -110,7 +110,8 @@ class Retirement extends Component
         $this->staff->date_of_death = $this->date_of_death;
         $this->staff->family_pension_inheritor = $this->family_pension_inheritor;
         $this->staff->family_pension_date = $this->family_pension_date;
-
+        $this->staff->is_active = false;
+        $this->staff->status_changed_at = now();
 
         $this->staff->update();
         $this->message = 'Created successfully.';
@@ -140,6 +141,7 @@ class Retirement extends Component
         $this->family_pension_date = $this->staff->family_pension_date;
 
 
+
         $this->confirm_add = false;
         $this->confirm_edit = true;
     }
@@ -159,6 +161,9 @@ class Retirement extends Component
         $this->staff->date_of_death = $this->date_of_death;
         $this->staff->family_pension_inheritor = $this->family_pension_inheritor;
         $this->staff->family_pension_date = $this->family_pension_date;
+        $this->staff->is_active = false;
+        $this->staff->status_changed_at = now();
+
         $this->staff->update();
         $this->message = 'Updated successfully.';
         $this->close_modal();
@@ -184,8 +189,9 @@ class Retirement extends Component
         $this->staff->date_of_death = null;
         $this->staff->family_pension_inheritor = null;
         $this->staff->family_pension_date = null;
-        $this->staff->update();
-
+        $this->staff->status_changed_at = now();
+        $this->staff->previous_active_status = 0;
         $this->confirm_delete = false;
+        $this->staff->update();
     }
 }

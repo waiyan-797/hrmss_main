@@ -200,9 +200,7 @@
                     :lists="[
                         ['route_name' => 'leaves', 'name' => 'leaves'],
                         ['route_name' => 'leaves2', 'name' => 'leaves2'],
-                        ['route_name' => 'leaves3', 'name' => 'leaves3'],
-                        ['route_name' => 'leaves4', 'name' => 'leaves4'],
-                        ['route_name' => 'leaves5', 'name' => 'leaves5'],
+                       
                     ]" />
             </li>
 

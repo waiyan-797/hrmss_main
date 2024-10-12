@@ -29,11 +29,27 @@ class Division extends Model
     public function leaveCount($division, $YearMonth)
     {
 
+
         [$year, $month] = explode('-', $YearMonth);
         $totalLeaveCount = 0;
         $staffs = Staff::where("current_division_id", $division)->get();
         foreach ($staffs as $staff) {
-            $leave = Leave::where('staff_id', $staff->id)->whereYear('created_at', $year)->whereMonth('created_at', $month)->count();
+            $leave = Leave::withWhere('staff_id', $staff->id)->whereYear('created_at', $year)->whereMonth('created_at', $month)->distinct('staff_id')->count('staff_id');
+            $totalLeaveCount += $leave;
+        }
+        return $totalLeaveCount;
+    }
+
+
+    public function leaveCountWithLeaveType($division, $YearMonth, $leaveTypeId)
+    {
+
+
+        [$year, $month] = explode('-', $YearMonth);
+        $totalLeaveCount = 0;
+        $staffs = Staff::where("current_division_id", $division)->get();
+        foreach ($staffs as $staff) {
+            $leave = Leave::where('staff_id', $staff->id)->where('leave_type_id', $leaveTypeId)->whereYear('created_at', $year)->whereMonth('created_at', $month)->count();
             $totalLeaveCount += $leave;
         }
         return $totalLeaveCount;

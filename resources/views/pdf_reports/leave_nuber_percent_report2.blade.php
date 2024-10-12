@@ -56,6 +56,7 @@
 <body>
     
     <page size="A4">
+        
         <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>        
             {{mmDateFormat($startYr,$startMonth)}}
             မှ
@@ -70,7 +71,10 @@
                 @foreach ($months as $month)
                             
                 
-                    <th class="border border-black text-center p-2"> {{en2mm(explode('-' ,$month)[0])}}<br>{{en2mm(explode('-' ,$month)[1])}}</th>
+                    <th class="border border-black text-center p-2"> 
+                        {{mmDateFormat(explode('-' ,$month)[0],explode('-' ,$month)[1])}}
+
+                    </th>
 
                     @endforeach
                 <th>စုစုပေါင်း</th>
@@ -89,6 +93,7 @@
              @foreach ($months as $YearMonth)
                      
              <td class="border border-black text-center p-2">
+                
                  {{$division->leaveCount($division->id, $YearMonth )}}
                  
              </td>
@@ -97,7 +102,22 @@
                  @endforeach
              
      
-             <td class="border border-black text-center p-2"></td>
+                 <td class="border border-black text-center p-2">
+                    @php
+                            $totalLeaveCount =  0 ;
+                    foreach ($months as $YearMonth) {
+                        $totalLeaveCount = $division->leaveCount($division->id, $YearMonth );
+
+                    }
+                 
+                        
+                        
+    
+    
+                           
+                            @endphp
+                    {{$totalLeaveCount}}
+                </td>
          </tr>
                 
             @endforeach
