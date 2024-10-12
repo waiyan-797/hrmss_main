@@ -94,7 +94,7 @@ class LeaveNuberPercent2 extends Component
         $totalLeaveCount = 0;
         $staffs = Staff::where("current_division_id", $division)->get();
         foreach ($staffs as $staff) {
-            $leave = Leave::where('staff_id', $staff->id)->whereYear('created_at', $year)->whereMonth('created_at', $month)->count();
+            $leave = Leave::where('staff_id', $staff->id)->whereYear('created_at', $year)->whereMonth('created_at', $month)->distinct('staff_id')->count('staff_id');
             $totalLeaveCount += $leave;
         }
         return $totalLeaveCount;

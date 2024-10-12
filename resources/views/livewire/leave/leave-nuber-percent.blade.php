@@ -6,11 +6,12 @@
         <br><br>
 
           <h1 class="font-bold text-center text-base mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
-            {{formatPeriodMM($year)}} ၊{{formatPeriodMM($month)}}    ဝန်ထမ်းများ၏<br>ခွင့်ခံစားမှုအရေအတွက်နှင့်ရာခိုင်နှုန်း</h1>
+            {{mmDateFormat($year,$month)}}    ဝန်ထမ်းများ၏<br>ခွင့်ခံစားမှုအရေအတွက်နှင့်ရာခိုင်နှုန်း</h1>
           <div>
             <select wire:model.live='dep_category' id="">
               <option value="1">ရုံးချုပ်</option>
               <option value="2">တိုင်းဒေသကြီး/ပြည်နယ်</option>
+              <option value="3">အချုပ်</option>
             </select>
           </div>
           <div>
@@ -29,15 +30,20 @@
                 <th class="border border-black text-center p-2">ခွင့်ယူသည့်အင်အားရာခိုင်နှုန်း</th>
               </tr>
             </thead>
+            
             <tbody>
               @foreach($divisions as $division)
               <tr>
+                
                 <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td>
                 <td class="border border-black text-center p-2">{{ $division->name }}</td>
                 <td class="border border-black text-center p-2">{{ $division->staffCount }}</td>
                 <td class="border border-black text-center p-2">{{ $division->leaveCount }}</td>
                 @foreach($leave_types as $leave_type)
-                <td class="border border-black text-center p-2">{{ $totalLeaveTypeCounts[$leave_type->id] ?? 0 }}</td>
+                <td class="border border-black text-center p-2">
+                  {{-- {{ $totalLeaveTypeCounts[$leave_type->id] ?? 0 }} --}}
+                  {{$division->leaveCountWithLeaveType($division->id, $dateRange,$leave_type->id)}}
+                </td>
                 @endforeach
                 <td class="border border-black text-center p-2">
                     {{ number_format($division->staffCount > 0 ? ($division->leaveCount / $division->staffCount) * 100 : 0, 2) }}%

@@ -32,7 +32,10 @@
                         @foreach ($months as $month)
                             
                     {{-- @dd(explode('-', $month)); --}}
-                        <th class="border border-black text-center p-2"> {{en2mm(explode('-' ,$month)[0])}}<br>{{en2mm(explode('-' ,$month)[1])}}</th>
+                        <th class="border border-black text-center p-2">
+                             
+                             {{mmDateFormat(explode('-' ,$month)[0],explode('-' ,$month)[1])}}
+                            </th>
 
                         @endforeach
                         <th class="border border-black text-center p-2">စုစုပေါင်း</th>
@@ -60,7 +63,22 @@
                         @endforeach
                     
             
-                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">
+                        @php
+                                $totalLeaveCount =  0 ;
+                        foreach ($months as $YearMonth) {
+                            $totalLeaveCount = $this->leaveCount($division->id, $YearMonth );
+
+                        }
+                     
+                            
+                            
+        
+        
+                               
+                                @endphp
+                        {{$totalLeaveCount}}
+                    </td>
                 </tr>
                        
                    @endforeach

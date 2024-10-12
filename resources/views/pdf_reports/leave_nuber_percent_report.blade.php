@@ -54,7 +54,11 @@
 </head>
 <body>
     <page size="A4">
+<<<<<<< HEAD
         <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>         {{formatPeriodMM($year)}} ၊{{formatPeriodMM($month)}}  ၏<br>ခွင့်ခံစားမှုအရေအတွက်နှင့်ရာခိုင်နှုန်း</h1>
+=======
+        <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>           {{mmDateFormat($year,$month)}}  ၏<br>ခွင့်ခံစားမှုအရေအတွက်နှင့်ရာခိုင်နှုန်း</h1>
+>>>>>>> temporary
 
 <table>
     <thead>
@@ -63,46 +67,42 @@
             <th>ဌာနခွဲ</th>
             <th>ဝန်ထမ်းအင်အား</th>
             <th>ခွင့်ယူသည့်ဝန်ထမ်းဦးရေ</th>
-            <th>ရှောင်တခင်ခွင့်ရက်ပေါင်း</th>
-            <th>လုပ်သက်ခွင့်ရက်ပေါင်း</th>
-            <th>မီးဖွားခွင့်/သားပျက်ခွင့်</th>
-            <th>ဆေးခွင့်ရက်ပေါင်း</th>
-            <th>လစာမဲ့ခွင့်</th>
-            <th>ကြိုတင်ပြင်ဆင်ခွင့်ရက်ပေါင်း</th>
-            <th>ကလေးပြုစုစောင့်ရှောက်ခွင့်ရက်ပေါင်း</th>
+            @foreach($leave_types as $leave_type)
+                <th class="border border-black text-center p-2">{{ $leave_type->name}}</th>
+                @endforeach
             <th>ခွင့်ယူသည့်အင်အားရာခိုင်နှုန်း</th>
         </tr>
     </thead>
     <tbody>
+        @foreach($divisions as $division)
+
+
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td>
+          <td class="border border-black text-center p-2">{{ $division->name }}</td>
+          <td class="border border-black text-center p-2">{{ $division->staffs->count() }}</td>
+          <td class="border border-black text-center p-2">{{ $division->leaveCount($division ,  $YearMonth) }}</td>
+          @foreach($leave_types as $leave_type)
+          <td class="border border-black text-center p-2"> {{$division->leaveCountWithLeaveType($division->id, $YearMonth,$leave_type->id)}}</td>
+          @endforeach
+          <td class="border border-black text-center p-2">
+              {{ number_format($division->staffCount > 0 ? ($division->leaveCount / $division->staffCount) * 100 : 0, 2) }}%
+          </td>
         </tr>
-        <tr class="bold">
-            <td></td>
-            <td>စုစုပေါင်း</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        @endforeach
+        <tr class="font-bold">
+          <td class="border border-black text-center p-2"></td>
+          <td class="border border-black text-center p-2">စုစုပေါင်း</td>
+          <td class="border border-black text-center p-2">{{ $totalStaffCount }}</td>
+          <td class="border border-black text-center p-2">{{ $totalLeaveCount }}</td>
+          @foreach($leave_types as $leave_type)
+          <td class="border border-black text-center p-2">{{ $totalLeaveTypeCounts[$leave_type->id] ?? 0 }}</td>
+          @endforeach
+          <td class="border border-black text-center p-2">
+              {{ number_format($totalStaffCount > 0 ? ($totalLeaveCount / $totalStaffCount) * 100 : 0, 2) }}%
+          </td>
         </tr>
-    </tbody>
+      </tbody>
 </table>
     </page>
 </body>

@@ -68,6 +68,8 @@ if (!function_exists('mmDateFormat')) {
         $myanmarMonth = $monthsInMyanmar[$month];
 
         // Return formatted date
-        return "$myanmarMonth $year";
+
+        $year = en2mm($year);
+        return "$year $myanmarMonth  ";
     }
 }

@@ -174,7 +174,14 @@ return new class extends Migration
             $table->text('life_insurance_proposal')->nullable();
             $table->text('life_insurance_policy_no')->nullable();
             $table->text('life_insurance_premium')->nullable();
-            $table->boolean('is_active')->default(0);
+
+            $table->boolean('is_active')->default(1);
+            $table->string('status')->nullable();
+            $table->string('previous_active_status')->default('1');
+
+            $table->timestamp('status_changed_at')->nullable();
+
+
             $table->date('retire_date')->nullable();
             $table->foreignIdFor(RetireType::class)->nullable()->nullOnDelete();
             $table->date('lost_contact_from_date')->nullable();
