@@ -90,16 +90,6 @@ class LocalTrainingReport extends Component
 
         return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
     }
-<<<<<<< HEAD
-    $fileName = 'local_training_report.docx';
-    $tempFile = tempnam(sys_get_temp_dir(), $fileName);
-    $writer = IOFactory::createWriter($phpWord, 'Word2007');
-    $writer->save($tempFile);
-    return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
-}
-=======
-
->>>>>>> 6e782ba (local training and date filter)
 
     public function render()
     {
