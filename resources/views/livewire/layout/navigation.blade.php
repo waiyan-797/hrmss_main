@@ -10,14 +10,14 @@ $logout = function (Logout $logout) {
 
 ?>
 
-<nav x-data="{ open: false }" class="bg-blue-700 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 h-[9vh]">
+<nav x-data="{ open: false }" class="  bg-[#F0F0F0] dark:bg-gray-800 border-b py-4 border-gray-100 dark:border-gray-700 h-[12vh]">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-8 flex flex-row items-center justify-between h-full">
         <div class=" w-full ">
           
-            <a href="{{ route('home') }}" class="font-arial flex flex-row items-center  gap-x-3 font-semibold text-md text-white hover:text-white/90" wire:navigate>
+            <a href="{{ route('home') }}" class="font-arial flex flex-row items-center  gap-x-3 font-semibold text-md text-black " wire:navigate>
                 <img 
-                class=" w-10 h-10"
+                class=" w-20 h-20"
                 src="{{asset('img/DICA_logo.png')}}" alt="">
                  HR Management System (HRMS)
             </a>
@@ -27,10 +27,10 @@ $logout = function (Logout $logout) {
         <div class="flex flex-col items-center ms-6 justify-center">
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
-                    <button class="w-auto h-[7vh] flex flex-row items-center justify-center text-sm leading-4 font-medium rounded-md text-white dark:text-gray-400 bg-blue-700 dark:bg-gray-800 hover:text-white/90 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                        <img id="avatar" src="{{auth()->user()->avatar ? route('file', auth()->user()->avatar) : asset('img/user.png')}}" class="w-[6vh] h-[6vh] border-2 border-gray-200 rounded-full" alt="avatar">
+                    <button class="w-auto h-[7vh] flex flex-row items-center justify-center text-sm leading-4 font-medium rounded-md text-white dark:text-gray-400  dark:bg-gray-800 hover:text-white/90 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <img id="avatar" src="{{auth()->user()->avatar ? route('file', auth()->user()->avatar) : asset('img/user.png')}}" class="w-[8vh] h-[8vh] border-2 border-gray-500 rounded-full" alt="avatar">
                         <div class="ms-1">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <svg class="fill-current text-black h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
                         </div>

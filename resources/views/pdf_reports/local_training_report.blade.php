@@ -77,28 +77,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                        @foreach($staffs as $staff)
-                    <tr>
-                        <td>{{ $loop->index+1}}</td>
-                        <td>{{ $staff->name}}</td>
-                        <td>{{ $staff->current_rank->name}}</td>
-                        
-                        <td>@foreach($staff->abroads as $abroad){{ $abroad->from_date}}@endforeach</td>
-                        <td>@foreach($staff->abroads as $abroad)
-                            {{ $abroad->to_date}}@endforeach</td>
-                        <td>@foreach($staff->trainings as $training){{ $training->location}}@endforeach</td>
-                        <td>@foreach($staff->trainings as $training){{ $training->remark}}@endforeach</td>
-                      
-                        <td>
-                            @foreach ($staff->staff_educations as $edu)
-                                <div>
-                                    <span>{{ $edu->education_group->name }}</span>
-                                    <span>{{ $edu->education_type->name }}</span>
-                                    <span>{{ $edu->education->name }}</span>
-                                </div>
+                    @foreach($staffs as $staff)
+                        @php $firstTraining = $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->first(); @endphp
+                        @if($firstTraining)
+                            <tr>
+                                <!-- First staff details row with first training -->
+                                <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $loop->index + 1 }}</td>
+                                <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->name }}</td>
+                                <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->current_rank->name }}</td>
+                                
+                                <!-- First training record -->
+                                <td class="border border-black text-center p-2">{{ $firstTraining->training_type->name }}</td>
+                                <td class="border border-black text-center p-2">{{ $firstTraining->from_date }}</td>
+                                <td class="border border-black text-center p-2">{{ $firstTraining->to_date }}</td>
+                                <td class="border border-black text-center p-2">{{ $firstTraining->location }}</td>
+                                <td class="border border-black text-center p-2">{{ $firstTraining->training_location?->name }}</td>
+                            </tr>
+                
+                            <!-- For remaining trainings, create new rows -->
+                            @foreach($staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->skip(1) as $training)
+                                <tr>
+                                    <td class="border border-black text-center p-2">{{ $training->training_type->name }}</td>
+                                    <td class="border border-black text-center p-2">{{ $training->from_date }}</td>
+                                    <td class="border border-black text-center p-2">{{ $training->to_date }}</td>
+                                    <td class="border border-black text-center p-2">{{ $training->location }}</td>
+                                    <td class="border border-black text-center p-2">{{ $training->training_location?->name }}</td>
+                                </tr>
                             @endforeach
-                        </td>
-                    </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

@@ -137,9 +137,9 @@ class Promotion extends Component
     {
 
         $this->staff_id = $staff_id;
-       
+
         $this->staff = Staff::find($staff_id);
-        dd($this->staff);
+        // dd($this->staff);
         $this->rank_name = $this->staff->current_rank_id;
     }
 

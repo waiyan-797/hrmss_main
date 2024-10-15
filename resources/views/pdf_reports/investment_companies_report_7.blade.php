@@ -73,7 +73,7 @@
     <page size="A4">
         <div class="container">
             <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-            <h3>{{၂၀၂၄ ခုနှစ်၊ ဇွန်လ}}</h3>
+            <h3>{{mmDateFormat($year,$month      )}} </h3>
 
             <div class="table-container">
                 <table>

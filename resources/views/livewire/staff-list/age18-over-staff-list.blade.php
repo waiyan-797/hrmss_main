@@ -41,7 +41,7 @@
                         <td class="border border-black text-center p-2">စုစုပေါင်း အရာထမ်း</td>
                         <td class="border border-black text-center p-2">{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->dob)->diffInYears(Carbon\Carbon::now()) > 18)->count())) }}</td>
                     </tr>
                     @foreach ($second_ranks as $rank)
                         <tr>

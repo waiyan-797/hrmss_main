@@ -5,8 +5,11 @@
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
             <h1 class="text-center text-sm font-bold mb-2">Foreign Training Report</h1>
+            <div class=" w-52">
+                <x-text-input wire:model.live='nameSearch' />
+            </div>
 
-            <table class="md:w-full">
+            <table class="md:w-full mt-6">
                 <thead>
                     <tr>
                         <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
@@ -24,25 +27,39 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php 
+                        $serialNumber = 1;  // Initialize serial number counter
+                    @endphp
+
                     @foreach($staffs as $staff)
-                    <tr>
-                        <td class="border border-black text-center p-2">{{ $loop->index+1}}</td>
-                        <td class="border border-black text-center p-2">{{ $staff->name}}</td>
-                        <td class="border border-black text-center p-2">{{ $staff->current_rank->name}}</td>
-                        @foreach ($staff->abroads as $abroad)
-                        <td class="border border-black text-center p-2">{{$abroad->from_date}}</td>
-                        <td class="border border-black text-center p-2">{{$abroad->to_date}}</td>
-                        <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
-                        <td class="border border-black text-center p-2">{{$abroad->particular}}</td>
-                        <td class="border border-black text-center p-2">{{$abroad->sponser}}</td>
-                        <td class="border border-black text-center p-2"></td>
-                @endforeach
-                    </tr>
+                        @if($staff->abroads->isNotEmpty()) 
+                            @php 
+                                $abroadCount = $staff->abroads->count();
+                            @endphp
+                    
+                            @foreach ($staff->abroads as $index => $abroad)
+                                <tr>
+                                    @if($index == 0)
+                                        <td class="border border-black text-center p-2" rowspan="{{ $abroadCount }}">{{ $serialNumber++ }}</td> <!-- Use and increment serialNumber -->
+                                        <td class="border border-black text-center p-2" rowspan="{{ $abroadCount }}">{{ $staff->name }}</td>
+                                        <td class="border border-black text-center p-2" rowspan="{{ $abroadCount }}">{{ $staff->current_rank->name }}</td>
+                                    @endif
+                                    
+                                    <td class="border border-black text-center p-2">{{ $abroad->from_date }}</td>
+                                    <td class="border border-black text-center p-2">{{ $abroad->to_date }}</td>
+                                    <td class="border border-black text-center p-2">{{ $abroad->country->name }}</td>
+                                    <td class="border border-black text-center p-2">{{ $abroad->particular }}</td>
+                                    <td class="border border-black text-center p-2">{{ $abroad->sponser }}</td>
+                
+                                    @if($index == 0)
+                                        <td class="border border-black text-center p-2" rowspan="{{ $abroadCount }}"></td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        @endif
                     @endforeach
                 </tbody>
             </table>
-
-
         </div>
     </div>
 </div>

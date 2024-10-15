@@ -74,58 +74,59 @@
                     <td>{{ en2mm($loop->index + 1) }}</td>
                     <td>{{ $rank->name }}</td>
                     <td>
-                        {{ en2mm($rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count()) }}
+                        {{ en2mm($rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count()) }}
                     </td>
                     <td>
-                        {{ en2mm($rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count()) }}
+                        {{ en2mm($rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count()) }}
                     </td>
                     <td>
-                        {{ en2mm($rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count()) }}
+                        {{ en2mm($rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count()) }}
                     </td>
                 </tr>
             @endforeach
             <tr class="font-bold">
                 <td></td>
                 <td>စုစုပေါင်း အရာထမ်း</td>
-                <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count())) }}</td>
-                <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count())) }}</td>
-                <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count())) }}</td>
+                <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count())) }}</td>
+                <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count())) }}</td>
+
             </tr>
             @foreach ($second_ranks as $rank)
                 <tr>
                     <td>{{ en2mm($loop->index + 1) }}</td>
                     <td>{{ $rank->name }}</td>
                     <td>
-                        {{ en2mm($rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count()) }}
+                        {{ en2mm($rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count()) }}
                     </td>
                     <td>
-                        {{ en2mm($rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count()) }}
+                        {{ en2mm($rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count()) }}
                     </td>
                     <td>
-                        {{ en2mm($rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count()) }}
+                        {{ en2mm($rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count()) }}
                     </td>
                 </tr>
             @endforeach
             <tr class="font-bold">
                 <td></td>
                 <td>စုစုပေါင်း အမှုထမ်း</td>
-                <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count())) }}</td>
-                <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count())) }}</td>
-                <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count())) }}</td>
+                <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count())) }}</td>
+                <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count())) }}</td>
+                <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count())) }}</td>
             </tr>
             <tr>
                 <td>၁</td>
                 <td>နေ့စား</td>
-                <td>{{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count())) }}</td>
-                <td>{{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count())) }}</td>
-                <td>{{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count())) }}</td>
+                <td>{{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count())) }}</td>
+                <td>{{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count())) }}</td>
+                <td>{{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count())) }}</td>
             </tr>
             <tr class="font-bold">
                 <td></td>
                 <td>စုစုပေါင်း ဝန်ထမ်းဦးရေ</td>
-                <td>{{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count())) }}</td>
-                <td>{{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count())) }}</td>
-                <td>{{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > 10)->count())) }}</td>
+                <td>{{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count())) }}</td>
+                <td>{{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count())) }}</td>
+                <td>{{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->filter(fn($staff) => Carbon\Carbon::parse($staff->join_date)->diffInYears(Carbon\Carbon::now()) > $exp_years)->count())) }}</td>
             </tr>
         </tbody>
     </table>

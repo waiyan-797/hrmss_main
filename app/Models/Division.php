@@ -34,7 +34,7 @@ class Division extends Model
         $totalLeaveCount = 0;
         $staffs = Staff::where("current_division_id", $division)->get();
         foreach ($staffs as $staff) {
-            $leave = Leave::withWhere('staff_id', $staff->id)->whereYear('created_at', $year)->whereMonth('created_at', $month)->distinct('staff_id')->count('staff_id');
+            $leave = Leave::Where('staff_id', $staff->id)->whereYear('created_at', $year)->whereMonth('created_at', $month)->distinct('staff_id')->count('staff_id');
             $totalLeaveCount += $leave;
         }
         return $totalLeaveCount;

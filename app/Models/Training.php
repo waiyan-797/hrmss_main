@@ -9,7 +9,12 @@ class Training extends Model
 {
     use HasFactory;
 
-    public function training_type(){
+    public function training_type()
+    {
         return $this->belongsTo(TrainingType::class);
+    }
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
     }
 }

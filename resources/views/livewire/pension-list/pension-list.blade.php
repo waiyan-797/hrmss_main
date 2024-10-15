@@ -4,7 +4,14 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
-            <div class="overflow-x-auto">
+
+            <div>
+                
+                <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+    <x-text-input wire:model.live='nameSearch' class=" w-52"/>
+</div>
+
+            <div class="overflow-x-auto mt-5">
                 <table class="min-w-full border border-black border-collapse table-auto">
                     <thead>
                         <tr class="bg-gray-100">

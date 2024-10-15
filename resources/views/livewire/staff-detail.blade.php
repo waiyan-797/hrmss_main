@@ -1,4 +1,4 @@
-<div class="w-full  max-h-screen">
+<div class="w-full">
     <div class="shadow flex items-center h-[8vh] my-6">
         {{-- <div class="w-4/5 mx-auto py-4 px-6 flex justify-end items-center gap-3"> --}}
             <div class=" flex flex-wrap text-sm  justify-around font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700  w-full dark:text-gray-400">
@@ -44,8 +44,8 @@
             {{-- <h1 class="text-white font-semibold italic font-arial">{{$confirm_add == 1 ? 'Create ' : 'Update '}}Staff</h1> --}}
         </div>
     </div>
-    <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
-        <div class="w-full mx-auto px-3 py-4">
+    <div class="flex justify-center w-full  h-auto  overflow-y-auto">
+        <div class="w-full mx-auto px-3">
             <form wire:submit="submit_staff">
                 @if ($message)
                     <div id="alert-border-1" class="flex items-center p-4 text-blue-800 border-t-4 border-blue-300 bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800" role="alert">
@@ -61,7 +61,9 @@
                     </div>
                 @endif
                 
-                <div class="bg-white shadow-md   rounded-lg p-5">
+                {{-- <div class="bg-white shadow-md   rounded-lg p-5"> --}}
+                    <div class="w-full py-5  h-96 overflow-y-auto">
+
                     @if ($tab == 'personal_info')
                         @include('staff.personal_info')
                     @elseif ($tab == 'job_info')
@@ -76,6 +78,9 @@
                         <x-primary-button>{{ $confirm_add == 1 ? __('Save') : __('Update') }}</x-primary-button>
                     </div>
                 </div>
+             
+                
+               
             </form>
         </div>
     </div>

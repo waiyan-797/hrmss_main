@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Models\Country;
 
 if (! function_exists('getcsv')) {
     function getcsv($f)
@@ -71,5 +70,12 @@ if (!function_exists('mmDateFormat')) {
 
         $year = en2mm($year);
         return "$year $myanmarMonth  ";
+    }
+
+    if(!function_exists('getCountryNameById')){
+        function getCountryNameById($id){
+            return Country::where('id', $id)->first()->name;
+
+        }
     }
 }

@@ -5,7 +5,14 @@
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
             <h1 class="font-bold text-center text-base">Pension Report</h1>
-            <table class="md:w-full">
+            
+            <div   class=" w-44">
+                <x-text-input 
+                    wire:model.live='searchName'
+                 
+                />
+            </div>
+        <table class="md:w-full  mt-6">
                 <thead>
                     <tr>
                         <th class="border border-black text-center p-2">စဥ်</th>
@@ -28,7 +35,7 @@
                         <td class="border border-black text-left p-1">-</td>
                         <td class="border border-black text-left p-1">{{ $staff->dob}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->retire_date}}</td>
-                   
+                        
                         <td class="border border-black text-left p-1">
                             {{ $staff->pension_type?->name}}
                         </td>

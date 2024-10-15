@@ -58,7 +58,7 @@
 <body>
     <page size="A4">
         <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-    <h2>သွေးအုပ်စု A ရှိသောဝန်ထမ်းစာရင်း</h2>
+    <h2>သွေးအုပ်စု {{$bloodName}} ရှိသောဝန်ထမ်းစာရင်း</h2>
 
     <table>
         <thead>
@@ -75,83 +75,83 @@
                 <tr>
                     <td>{{ en2mm($loop->index + 1) }}</td>
                     <td>{{ $rank->name }}</td>
-                    <td>{{ en2mm($rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count()) }}</td>
-                    <td>{{ en2mm($rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count()) }}</td>
-                    <td>{{ en2mm($rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count()) }}</td>
+                    <td>{{ en2mm($rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count()) }}</td>
+                    <td>{{ en2mm($rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count()) }}</td>
+                    <td>{{ en2mm($rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count()) }}</td>
                 </tr>
             @endforeach
             <tr class="font-bold">
                 <td></td>
                 <td>စုစုပေါင်း အရာထမ်း</td>
                 <td>
-                    {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count())) }}
+                    {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count())) }}
                 </td>
                 <td>
-                    {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())) }}
+                    {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count())) }}
                 </td>
                 <td>
-                    {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())) }}
+                    {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count())) }}
                 </td>
             </tr>
             @foreach ($second_ranks as $rank)
                 <tr>
                     <td>{{ en2mm($loop->index + 1) }}</td>
                     <td>{{ $rank->name }}</td>
-                    <td>{{ en2mm($rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count()) }}</td>
-                    <td>{{ en2mm($rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count()) }}</td>
-                    <td>{{ en2mm($rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count()) }}</td>
+                    <td>{{ en2mm($rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count()) }}</td>
+                    <td>{{ en2mm($rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count()) }}</td>
+                    <td>{{ en2mm($rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count()) }}</td>
                 </tr>
             @endforeach
             <tr class="font-bold">
                 <td></td>
                 <td>စုစုပေါင်း အမှုထမ်း</td>
                 <td>
-                    {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count())) }}
+                    {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count())) }}
                 </td>
                 <td>
-                    {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())) }}
+                    {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count())) }}
                 </td>
                 <td>
-                    {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())) }}
+                    {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count())) }}
                 </td>
             </tr>
             <tr class="font-bold">
                 <td></td>
                 <td>စုစုပေါင်း အရာထမ်း အမှုထမ်း</td>
                 <td>
-                    {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count())) }}
+                    {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count())) }}
                 </td>
                 <td>
-                    {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())) }}
+                    {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count())) }}
                 </td>
                 <td>
-                    {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())) }}
+                    {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count())) }}
                 </td>
             </tr>
             <tr>
                 <td>၁</td>
                 <td>နေ့စား</td>
                 <td>
-                    {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count())) }}
+                    {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count())) }}
                 </td>
                 <td>
-                    {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())) }}
+                    {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count())) }}
                 </td>
                 <td>
-                    {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())) }}
+                    {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count())) }}
                 </td>
             </tr>
             <tr class="font-bold">
                 <td></td>
                 <td>စုစုပေါင်း ဝန်ထမ်းဦးရေ</td>
                 <td>
-                    {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count())) }}
+                    {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count())) }}
                 </td>
                 <td>
-                    {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())) }}
+                    {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count())) }}
                 </td>
                 <td>
-                    {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())) }}
+                    {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count())) }}
                 </td>
             </tr>
         </tbody>

@@ -26,32 +26,51 @@
                     </tr>
                 </thead>
                 <tbody>
-                  @foreach($staffs as $staff)
-                    <tr>
-                        <td class="border border-black text-center p-2">{{ $loop->index+1}}</td>
-                        <td class="border border-black text-center p-2">{{ $staff->name}}</td>
-                        <td class="border border-black text-center p-2">{{ $staff->current_rank->name}}</td>
-                        @foreach($staff->trainings as $training)
-                        <td class="border border-black text-center p-2">{{ $training->diploma_name}}
-                           </td>
-                        <td class="border border-black text-center p-2">{{ $training->training_type->name}}
-                        </td>
-                        <td class="border border-black text-center p-2">{{ $training->from_date}}</td>
-                        <td class="border border-black text-center p-2">{{ $training->to_date}}</td>
-                        @endforeach
-                        @foreach($staff->abroads as $abroad)
-                        <td class="border border-black text-center p-2">{{ $abroad->particular}}</td>
-                        <td class="border border-black text-center p-2">{{ $abroad->from_date}}</td>
-                        <td class="border border-black text-center p-2">{{ $abroad->to_date}}</td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        @endforeach
-                    </tr>
+                    @foreach($staffs as $staff)
+                        @php
+                            // Get the max number of rows needed (either from trainings or abroads)
+                            $maxRows = max($staff->trainings->count(), $staff->abroads->count());
+                        @endphp
+                
+                        @for($i = 0; $i < $maxRows; $i++)
+                        <tr>
+                            @if($i == 0)
+                                <!-- Merge the first three columns for each staff -->
+                                <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $loop->index + 1 }}</td>
+                                <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->name }}</td>
+                                <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->current_rank->name }}</td>
+                            @endif
+                
+                            <!-- Training information -->
+                            @if(isset($staff->trainings[$i]))
+                                <td class="border border-black text-center p-2">{{ $staff->trainings[$i]->diploma_name }}</td>
+                                <td class="border border-black text-center p-2">{{ $staff->trainings[$i]->training_type->name }}</td>
+                                <td class="border border-black text-center p-2">{{ $staff->trainings[$i]->from_date }}</td>
+                                <td class="border border-black text-center p-2">{{ $staff->trainings[$i]->to_date }}</td>
+                            @else
+                                <!-- Empty cells if no training data -->
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                            @endif
+                
+                            <!-- Abroad information -->
+                            @if(isset($staff->abroads[$i]))
+                                <td class="border border-black text-center p-2">{{ $staff->abroads[$i]->particular }}</td>
+                                <td class="border border-black text-center p-2">{{ $staff->abroads[$i]->from_date }}</td>
+                                <td class="border border-black text-center p-2">{{ $staff->abroads[$i]->to_date }}</td>
+                            @else
+                                <!-- Empty cells if no abroad data -->
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                                <td class="border border-black text-center p-2"></td>
+                            @endif
+                        </tr>
+                        @endfor
                     @endforeach
-                    
                 </tbody>
+                
             </table>
 
         </div>

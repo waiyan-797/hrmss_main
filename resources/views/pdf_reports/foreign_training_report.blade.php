@@ -76,21 +76,37 @@
         </thead>
         <tbody>
            
-            @foreach($staffs as $staff)
-            <tr>
-                <td>{{ $loop->index+1}}</td>
-                <td>{{ $staff->name}}</td>
-                <td>{{ $staff->current_rank->name}}</td>
-                @foreach ($staff->abroads as $abroad)
-                <td>{{$abroad->from_date}}</td>
-                <td>{{$abroad->to_date}}</td>
-                <td>{{$abroad->country->name}}</td>
-                <td>{{$abroad->particular}}</td>
-                <td>{{$abroad->sponser}}</td>
-                <td></td>
-        @endforeach
-            </tr>
-            @endforeach
+            @php 
+                        $serialNumber = 1;  // Initialize serial number counter
+                    @endphp
+
+                    @foreach($staffs as $staff)
+                        @if($staff->abroads->isNotEmpty()) 
+                            @php 
+                                $abroadCount = $staff->abroads->count();
+                            @endphp
+                    
+                            @foreach ($staff->abroads as $index => $abroad)
+                                <tr>
+                                    @if($index == 0)
+                                        <td class="border border-black text-center p-2" rowspan="{{ $abroadCount }}">{{ $serialNumber++ }}</td> <!-- Use and increment serialNumber -->
+                                        <td class="border border-black text-center p-2" rowspan="{{ $abroadCount }}">{{ $staff->name }}</td>
+                                        <td class="border border-black text-center p-2" rowspan="{{ $abroadCount }}">{{ $staff->current_rank->name }}</td>
+                                    @endif
+                                    
+                                    <td class="border border-black text-center p-2">{{ $abroad->from_date }}</td>
+                                    <td class="border border-black text-center p-2">{{ $abroad->to_date }}</td>
+                                    <td class="border border-black text-center p-2">{{ $abroad->country->name }}</td>
+                                    <td class="border border-black text-center p-2">{{ $abroad->particular }}</td>
+                                    <td class="border border-black text-center p-2">{{ $abroad->sponser }}</td>
+                
+                                    @if($index == 0)
+                                        <td class="border border-black text-center p-2" rowspan="{{ $abroadCount }}"></td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        @endif
+                    @endforeach
         </tbody>
     </table>
 

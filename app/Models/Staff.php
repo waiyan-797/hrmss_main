@@ -217,6 +217,7 @@ class Staff extends Model
         return $this->hasMany(Abroad::class);
     }
 
+
     public function schools()
     {
         return $this->hasMany(School::class);
@@ -255,5 +256,15 @@ class Staff extends Model
     public function familyPensionInheritor()
     {
         return $this->belongsTo(Relation::class, 'family_pension_inheritor_relation_id');
+    }
+
+    public function currentDeptJoinDAate()
+    {
+        return $this->postings->sortByDesc('from_date')->first()?->from_date;
+    }
+
+    public function pension_type()
+    {
+        return $this->hasOne(PensionType::class, 'id', 'pension_type_id');
     }
 }
