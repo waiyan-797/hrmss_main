@@ -7,7 +7,11 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <h1 class="text-center font-bold text-sm mb-2">Report - 1</h1>
-            <table class="md:w-full">
+            <div class=" w-52 ">
+
+                <x-text-input wire:model.live='nameSearch' />
+            </div>
+            <table class="md:w-full mt-6">
                 <thead>
                     <tr>
                         <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
@@ -45,6 +49,7 @@
                                     </div>
                                 @endforeach
                             </td>
+                            
                             <td class="border border-black text-center p-2">{{ en2mm(Carbon\Carbon::parse($staff->dob)->age).'နှစ်' }}</td>
                             <td class="border border-black text-center p-2">{{ $staff->ethnic->name }}</td>
                             <td class="border border-black text-center p-2">{{ $staff->religion->name }}</td>

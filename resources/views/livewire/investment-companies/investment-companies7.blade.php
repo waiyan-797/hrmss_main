@@ -9,7 +9,7 @@
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">
                     ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-                <h3 class="font-semibold text-base mb-2 text-center">{{formatPeriodMM($year,$month      )}} </h3>
+                <h3 class="font-semibold text-base mb-2 text-center">{{mmDateFormat($year,$month      )}} </h3>
                 <div class="w-full rounded-lg">
                     <table class="md:w-auto">
                         <thead>

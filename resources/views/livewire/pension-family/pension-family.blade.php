@@ -4,7 +4,13 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
-            <div class="relative overflow-x-auto shadow-md mb-5">
+            <div   class=" w-44">
+                <x-text-input 
+                    wire:model.live='searchName'
+                 
+                />
+            </div>
+            <div class="relative overflow-x-auto shadow-md mb-5 mt-6">
                 <table class="w-full text-sm text-gray-500 dark:text-gray-400">
                     <thead class="font-arial text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-black">
                         <tr>

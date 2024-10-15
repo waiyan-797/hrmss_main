@@ -4,7 +4,14 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <h1 class="text-center text-base font-bold mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-            <div class="overflow-x-auto">
+            <div   class=" w-44">
+                <x-text-input 
+                    wire:model.live='searchName'
+                 
+                />
+            </div>
+            <div class="overflow-x-auto mt-7">
+
                 <table class="min-w-full border border-gray-300 border-collapse table-auto">
                     <thead>
                         <tr class="bg-gray-200">

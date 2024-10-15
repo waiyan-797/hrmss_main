@@ -4,7 +4,18 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
+<div>
+    <input type="text" wire:model.live='nameSearch'>
 
+    <input type="date" wire:model.live='filterDate'>
+    <x-select
+    :values="$depts"
+    
+    wire:model.live='deptId'
+    />
+    
+    
+</div>
             <h1 class="text-center text-base font-bold">ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>(၂၄-၇-၂၀၂၄)ရက်နေ့ ညွှန်ကြားရေးမှူးများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း</h1>
 
             <div class="overflow-x-auto">
