@@ -17,9 +17,7 @@ class PenaltyTypeSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
         PenaltyType::truncate();
         Schema::enableForeignKeyConstraints();
-
         $columns = ['id', 'name'];
-
         $items = [
             [1, 'စာဖြင့်သတိပေးခြင်း'],
             [2, 'နှစ်တိုးလစာရပ်ဆိုင်းခြင်း'],

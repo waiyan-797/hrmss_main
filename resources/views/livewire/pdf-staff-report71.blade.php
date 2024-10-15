@@ -1,10 +1,8 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-
             <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
-
             <div class="md:w-full p-4">
                 <h1 class="text-center font-semibold text-base">HR Software
                     အတွက်ဝန်ထမ်းများ၏ကိုယ်ရေးမှတ်တမ်းရေးသွင်းခြင်းပုံစံ </h1>
@@ -829,11 +827,6 @@
                         </table>
                     </div>
                 </div>
-                
-
-
-                
-               
 <div class="w-full mb-4">
     <div class="mb-2 flex justify-start space-x-2">
         <label>၅၉။ </label>
@@ -1056,9 +1049,6 @@
                         </table>
                     </div>
                 </div>
-                
-
-               
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၆၅။ </label>

@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-   
+    
     <div class="col-span-4">
         <x-input-label :value="__('အဘ (ဇာတိ, ပြည်နယ်/တိုင်းဒေသကြီး, ခရိုင်, မြို့/မြို့နယ်, လမ်း, ရပ်ကွက်)')" />
         <div class="flex flex-row justify-center gap-4">
@@ -87,7 +87,7 @@
             </div>
            
             <div class="w-full">
-                <x-select wire:model="spouse_father_address_township_or_town_id"  placeholder=" မြို့/မြို့နယ်ရွေးပါ" :values="$father_townships" id="spouse_father_address_township_or_town_id" name="spouse_father_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-select wire:model="spouse_father_address_township_or_town_id"  placeholder=" မြို့/မြို့နယ်ရွေးပါ" :values="$spouse_father_townships" id="spouse_father_address_township_or_town_id" name="spouse_father_address_township_or_town_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('spouse_father_address_township_or_town_id')" />
             </div> 
         </div>
@@ -110,7 +110,7 @@
                 <x-input-error class="mt-2" :messages="$errors->get('mother_name')" />
             </div>
             <div class="w-full">
-                <x-select wire:model="mother_ethnic_id" :values="$ethnics" placeholder="လူမျိုးရွေးပါ" id="mother_ethnic_id" :values="$father_townships" name="mother_ethnic_id" class="mt-1 block w-full" required/>
+                <x-select wire:model="mother_ethnic_id" :values="$ethnics" placeholder="လူမျိုးရွေးပါ" id="mother_ethnic_id" :values="$ethnics"  name="mother_ethnic_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('mother_ethnic_id')" />
             </div>
             <div class="w-full">
@@ -188,7 +188,7 @@
             </div>
           
             <div class="w-full">
-                <x-select wire:model="spouse_mother_address_township_or_town_id" :values="$mother_townships" placeholder="မြို့/မြို့နယ်ရွေးပါ" id="spouse_mother_address_township_or_town_id" name="spouse_mother_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-select wire:model="spouse_mother_address_township_or_town_id" :values="$spouse_mother_townships" placeholder="မြို့/မြို့နယ်ရွေးပါ" id="spouse_mother_address_township_or_town_id" name="spouse_mother_address_township_or_town_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('spouse_mother_address_township_or_town_id')" />
             </div>
         </div>

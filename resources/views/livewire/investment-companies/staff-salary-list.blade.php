@@ -42,78 +42,63 @@
                         <td class="border border-black text-center p-2">၁၁</td>
                         <td class="border border-black text-center p-2">၁၂=၆+၇+၈+၉+၁၀+၁၁</td>
                     </tr>
-                    <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                        <td class="border border-black text-center p-2">ညွှန်ကြားရေးမှူးချုပ်</td>
-                        <td class="border border-black text-right p-2">၁</td>
-                        <td class="border border-black text-right p-2">၂</td>
-                        <td class="border border-black text-right p-2">၄</td>
-                        <td class="border border-black text-right p-2">၆</td>
-                        <td class="border border-black text-right p-2">၇</td>
-                        <td class="border border-black text-right p-2">၆</td>
-                        <td class="border border-black text-right p-2">၃၄</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">အရာထမ်းပေါင်း</td>
-                        <td class="border border-black text-center p-2">-</td>
-                        <td class="border border-black text-right p-2">၁၂</td>
-                        <td class="border border-black text-right p-2">၁၂</td>
-                        <td class="border border-black text-right p-2">၃၄</td>
-                        <td class="border border-black text-right p-2">၂၃</td>
-                        <td class="border border-black text-right p-2">၂၃</td>
-                        <td class="border border-black text-right p-2">၃၄</td>
-                        <td class="border border-black text-right p-2">၃၄</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                        <td class="border border-black text-center p-2">ရုံးအုပ်နှင့်အဆင့်တူ</td>
-                        <td class="border border-black text-right p-2">၆</td>
-                        <td class="border border-black text-right p-2">၅</td>
-                        <td class="border border-black text-right p-2">၁၂</td>
-                        <td class="border border-black text-right p-2">၃၄</td>
-                        <td class="border border-black text-right p-2">၇</td>
-                        <td class="border border-black text-right p-2">၄</td>
-                        <td class="border border-black text-right p-2">၄၅၆</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">အမှုထမ်းပေါင်း</td>
-                        <td class="border border-black text-center p-2">-</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">စုစုပေါင်း</td>
-                        <td class="border border-black text-center p-2">-</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">ထောက်ပံ့ကြေး</td>
-                        <td class="border border-black text-center p-2">-</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                        <td class="border border-black text-right p-2">၃၄၅</td>
-                    </tr>
+                    @foreach ($first_ranks as $rank)
+                            <tr>
+                                <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                <td class="border border-black p-2">{{$rank->payscale->name}}</td>
+                                <td class="border border-black p-2">{{$rank->name}}</td>
+                                <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
+                                <td class="border border-black p-2">{{en2mm($rank->staffs->count())}}</td>
+                @foreach($salaries as  $salary)
+        <td class="border border-black text-right p-2">{{ $salary->actual_salary ?? 0 }}</td>
+        <td class="border border-black text-right p-2">{{ $salary->addition_education}}</td>
+        <td class="border border-black text-right p-2">{{ $salary->addition}}</td>
+        <td class="border border-black text-right p-2">{{ $salary->addition_ration ?? 0 }}</td>
+        <td class="border border-black text-right p-2">{{ $salary->actual_salary + $salary->addition_education+$salary->addition + $salary->addition_ration }}</td>
+    @endforeach 
+                               
+                            </tr>
+                            @endforeach
+                            <tr>
+                                <td class="border border-black p-2 font-semibold" colspan="3">{{$first_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                                @foreach($salaries as  $salary)
+                                <td class="border border-black text-right p-2">{{ $salary->actual_salary ?? 0 }}</td>
+                                <td class="border border-black text-right p-2">{{ $salary->addition_education}}</td>
+                                <td class="border border-black text-right p-2">{{ $salary->addition}}</td>
+                                <td class="border border-black text-right p-2">{{ $salary->addition_ration ?? 0 }}</td>
+                                <td class="border border-black text-right p-2">{{ $salary->actual_salary + $salary->addition_education + $salary->addition_ration }}</td>
+                            @endforeach 
+                            </tr>
+                            @foreach ($second_ranks as $rank)
+                                <tr>
+                                    <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                    <td class="border border-black p-2">{{$rank->payscale->name}}</td>
+                                    <td class="border border-black p-2">{{$rank->name}}</td>
+                                    <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
+                                    <td class="border border-black p-2">{{en2mm($rank->staffs->count())}}</td>
+                                    @foreach($salaries as  $salary)
+                                    <td class="border border-black text-right p-2">{{ $salary->actual_salary ?? 0 }}</td>
+                                    <td class="border border-black text-right p-2">{{ $salary->addition_education}}</td>
+                                    <td class="border border-black text-right p-2">{{ $salary->addition}}</td>
+                                    <td class="border border-black text-right p-2">{{ $salary->addition_ration ?? 0 }}</td>
+                                    <td class="border border-black text-right p-2">{{ $salary->actual_salary + $salary->addition_education +$salary->addition+ $salary->addition_ration }}</td>
+                                @endforeach 
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td class="border border-black p-2 font-semibold" colspan="3">{{$second_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                                @foreach($salaries as  $salary)
+                            <td class="border border-black text-right p-2">{{ $salary->actual_salary ?? 0 }}</td>
+                            <td class="border border-black text-right p-2">{{ $salary->addition_education}}</td>
+                            <td class="border border-black text-right p-2">{{ $salary->addition}}</td>
+                            <td class="border border-black text-right p-2">{{ $salary->addition_ration ?? 0 }}</td>
+                            <td class="border border-black text-right p-2">{{ $salary->actual_salary + $salary->addition_education +$salary->addition+ $salary->addition_ration }}</td>
+                        @endforeach 
+                            </tr>     
                 </tbody>
             </table>
             <div class="mx-60 my-8">

@@ -25,13 +25,26 @@
                             <td class="border border-black text-right p-1">{{ $loop->index + 1 }}</td>
                             <td class="border border-black text-right p-1">{{ $staff->name }}</td>
                             <td class="border border-black text-right p-1">{{ $staff->current_rank->name }}</td>
-                            @foreach ($staff->trainings->where('training_location_id', 1) as $training)
-                                <td class="border border-black text-center p-2">{{ $training->training_type->name }}</td>
-                                <td class="border border-black text-center p-2">{{ $training->from_date }}</td>
-                                <td class="border border-black text-center p-2">{{ $training->to_date }}</td>
-                                <td class="border border-black text-center p-2">{{ $training->location }}</td>
-                                <td class="border border-black text-center p-2">{{ $training->training_location?->name }}</td>
-                            @endforeach
+                           
+                                <td class="border border-black text-center p-2"> @foreach ($staff->trainings->where('training_location_id', 1) as $training){{ $training->training_type->name }}
+                                    @endforeach
+                                </td>
+                                <td class="border border-black text-center p-2">
+                                    @foreach ($staff->trainings->where('training_location_id', 1) as $training)
+                                    {{ $training->from_date }}
+                                @endforeach</td>
+                                <td class="border border-black text-center p-2">
+                                    @foreach ($staff->trainings->where('training_location_id', 1) as $training)
+                                    {{ $training->to_date }}
+                                    @endforeach
+                                </td>
+                                <td class="border border-black text-center p-2">
+                                    @foreach ($staff->trainings->where('training_location_id', 1) as $training)
+                                    {{ $training->location }}@endforeach</td>
+                                <td class="border border-black text-center p-2">
+                                    @foreach ($staff->trainings->where('training_location_id', 1) as $training)
+                                    {{ $training->training_location?->name }}@endforeach</td>
+                           
                         </tr>
                         @endforeach
                     </tbody>

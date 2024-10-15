@@ -70,17 +70,10 @@
                             $totalLeaveCount = $this->leaveCount($division->id, $YearMonth );
 
                         }
-                     
-                            
-                            
-        
-        
-                               
                                 @endphp
                         {{$totalLeaveCount}}
                     </td>
                 </tr>
-                       
                    @endforeach
                 </tbody>
             </table>

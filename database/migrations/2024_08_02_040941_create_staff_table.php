@@ -170,11 +170,6 @@ return new class extends Migration
             $table->foreignId('foreigner_friend_country_id')->nullable()->constrained('countries')->onDelete('set null');
             $table->text('foreigner_friend_how_to_know')->nullable();
             $table->text('recommended_by_military_person')->nullable();
-            $table->text('last_serve_army')->nullable();
-            $table->text('life_insurance_proposal')->nullable();
-            $table->text('life_insurance_policy_no')->nullable();
-            $table->text('life_insurance_premium')->nullable();
-
             $table->boolean('is_active')->default(1);
             $table->string('status')->nullable();
             $table->string('previous_active_status')->default('1');

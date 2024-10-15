@@ -9,12 +9,12 @@ use App\Models\Staff;
 use Carbon\Carbon;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
+use PhpOffice\PhpWord\PhpWord;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class LeaveNuberPercent extends Component
 {
     public $staff_id;
-
     public $year, $month;
     public $dep_category;
     public $divisions;
@@ -26,17 +26,16 @@ class LeaveNuberPercent extends Component
 
         $this->dep_category = 1;
     }
-
-    public function go_word() {}
     public function go_pdf()
     {
-
-
-
-
         $leave_types = LeaveType::all();
-
-
+       
+    if (!($this->dep_category == 3)) {
+        $divisions = Division::where('division_type_id', $this->dep_category)->get();
+    }
+    $totalStaffCount = 0;
+    $totalLeaveCount = 0;
+    $totalLeaveTypeCounts = [];
         $divisions = Division::get();
         [$year, $month] = explode('-', $this->dateRange);
         $this->year = $year;
@@ -74,19 +73,102 @@ class LeaveNuberPercent extends Component
             'YearMonth' => $this->dateRange
         ];
         $pdf = PDF::loadView('pdf_reports.leave_nuber_percent_report', $data);
-
-
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'leave_nuber_precent_report_pdf.pdf');
     }
+    public function go_word()
+{
+    $leave_types = LeaveType::all();
+    [$year, $month] = explode('-', $this->dateRange);
+    $this->year = $year;
+    $this->month = $month;
+    if (!($this->dep_category == 3)) {
+        $divisions = Division::where('division_type_id', $this->dep_category)->get();
+    } else {
+        $divisions = Division::get();
+    }
+    $totalStaffCount = 0;
+    $totalLeaveCount = 0;
+    $totalLeaveTypeCounts = [];
+
+    foreach ($divisions as $division) {
+        $division->staffCount = $this->staffCount($division->id);
+        $division->leaveCount = $this->leaveCount($division->id);
+        $totalStaffCount += $division->staffCount;
+        $totalLeaveCount += $division->leaveCount;
+
+        foreach ($leave_types as $leave_type) {
+            $leaveTypeCount = $this->leaveType($division->id, $leave_type->id);
+            $totalLeaveTypeCounts[$leave_type->id] = ($totalLeaveTypeCounts[$leave_type->id] ?? 0) + $leaveTypeCount;
+        }
+    }
+    $phpWord = new PhpWord();
+    $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
+
+    // Add title
+    $section->addText(
+        'ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန',
+        ['bold' => true, 'size' => 14],
+        ['alignment' => 'center']
+    );
+    $section->addText(
+        mmDateFormat($year, $month) . ' ဝန်ထမ်းများ၏ ခွင့်ခံစားမှုအရေအတွက်နှင့်ရာခိုင်နှုန်း',
+        ['bold' => true, 'size' => 12],
+        ['alignment' => 'center']
+    );
+
+    // Add table
+    $table = $section->addTable(['borderSize' => 6, 'borderColor' => '000000', 'alignment' => 'center']);
+
+    // Add table header
+    $table->addRow();
+    $table->addCell(1000)->addText('စဥ်', ['bold' => true]);
+    $table->addCell(2000)->addText('ဌာနခွဲ', ['bold' => true]);
+    $table->addCell(2000)->addText('ဝန်ထမ်းအင်အား', ['bold' => true]);
+    $table->addCell(2000)->addText('ခွင့်ယူသည့်ဝန်ထမ်းဦးရေ', ['bold' => true]);
+    foreach ($leave_types as $leave_type) {
+        $table->addCell()->addText($leave_type->name, ['bold' => true]);
+    }
+    $table->addCell()->addText('ခွင့်ယူသည့်အင်အားရာခိုင်နှုန်း', ['bold' => true]);
+    foreach ($divisions as $index=> $division) {
+        $table->addRow();
+        $table->addCell(1000)->addText($index + 1);
+        $table->addCell(2000)->addText($division->name);
+        $table->addCell(2000)->addText($division->staffCount);
+        $table->addCell(2000)->addText($division->leaveCount);
+
+        foreach ($leave_types as $leave_type) {
+            $leaveTypeCount = $this->leaveType($division->id, $leave_type->id);
+            $table->addCell()->addText($leaveTypeCount);
+        }
+
+        $leavePercentage = $division->staffCount > 0 ? ($division->leaveCount / $division->staffCount) * 100 : 0;
+        $table->addCell()->addText(number_format($leavePercentage, 2) . '%');
+    }
+
+    // Add total row
+    $table->addRow();
+    $table->addCell(1000)->addText('', ['bold' => true]);
+    $table->addCell(2000)->addText('စုစုပေါင်း', ['bold' => true]);
+    $table->addCell(2000)->addText($totalStaffCount, ['bold' => true]);
+    $table->addCell(2000)->addText($totalLeaveCount, ['bold' => true]);
+    foreach ($leave_types as $leave_type) {
+        $table->addCell(2000)->addText($totalLeaveTypeCounts[$leave_type->id] ?? 0, ['bold' => true]);
+    }
+    $totalLeavePercentage = $totalStaffCount > 0 ? ($totalLeaveCount / $totalStaffCount) * 100 : 0;
+    $table->addCell(2000)->addText(number_format($totalLeavePercentage, 2) . '%', ['bold' => true]);
+    $fileName = 'leave_number_percent_report.docx';
+    $tempFile = tempnam(sys_get_temp_dir(), $fileName);
+    $phpWord->save($tempFile, 'Word2007');
+    return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
+}
     public function staffCount($division)
     {
         return Staff::where("current_division_id", $division)->count();
     }
     public function leaveCount($division)
     {
-
         $totalLeaveCount = 0;
         $staffs = Staff::where("current_division_id", $division)->get();
         foreach ($staffs as $staff) {
@@ -106,9 +188,6 @@ class LeaveNuberPercent extends Component
         $staffs = Staff::where("current_division_id", $division)->get();
 
         foreach ($staffs as $staff) {
-
-            // Get the count of leaves for the specific leave type and staff
-
             $leaveCount = Leave::where('staff_id', $staff->id)
                 ->where('leave_type_id', $leave_type_id)
                 ->whereYear('created_at', $this->year)
@@ -120,15 +199,9 @@ class LeaveNuberPercent extends Component
 
         return $totalCount;
     }
-
-
-
-
     public function render()
     {
         $leave_types = LeaveType::all();
-
-
         $divisions = Division::get();
         [$year, $month] = explode('-', $this->dateRange);
         $this->year = $year;

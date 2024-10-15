@@ -125,6 +125,7 @@ use App\Livewire\StaffReport\StaffReport2;
 use App\Livewire\Table\Table;
 use App\Livewire\Township\Township;
 use App\Livewire\Language;
+use App\Livewire\Leave\LeaveDate;
 use App\Livewire\Promotion as LivewirePromotion;
 use App\Livewire\Retirement;
 use App\Livewire\Salary;
@@ -257,6 +258,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/leaves3', LeaveNuberPercent3::class)->name('leaves3');
     Route::get('/leaves4', LeaveNuberPercent4::class)->name('leaves4');
     Route::get('/leaves5', LeaveNuberPercent5::class)->name('leaves5');
+    Route::get('/leave_date',LeaveDate::class)->name('leave_date');
     Route::get('/een', EnglishEffectiveNegotiations::class)->name('een');
     Route::get('/foreign_training_report', ForeignTrainingReport::class)->name('foreign_training_report');
     Route::get('/foreign_gone_total', ForeignGoneTotal::class)->name('foreign_gone_total');

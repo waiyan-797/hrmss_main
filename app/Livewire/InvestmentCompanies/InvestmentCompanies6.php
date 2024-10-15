@@ -15,11 +15,14 @@ class InvestmentCompanies6 extends Component
     public $year, $month;
     public function go_pdf()
     {
+        $punishments = Punishment::whereYear('created_at', $this->year)
+        ->whereMonth('created_at', $this->month)
+        ->get();
+      
         if ($this->filterRange) {
             [$year, $month] = explode('-', $this->filterRange);
             $this->year = $year;
             $this->month = $month;
-
             $punishments = Punishment::whereYear('created_at', $year)
                 ->whereMonth('created_at', $month)
                 ->get();
@@ -51,8 +54,6 @@ class InvestmentCompanies6 extends Component
             'borderColor' => '000000',
             'cellMargin' => 80,
         ]);
-
-
         $table->addRow();
         $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true]);
         $table->addCell(4000, ['vMerge' => 'restart'])->addText('ဌာနအမည်', ['bold' => true]);
@@ -74,8 +75,6 @@ class InvestmentCompanies6 extends Component
         $table->addCell(4000, ['vMerge' => 'continue']);
         $table->addCell(4000, ['vMerge' => 'continue']);
         $table->addCell(4000, ['vMerge' => 'continue']);
-
-
         $rowCount = 1;
         $table->addRow();
         $table->addCell(2000)->addText($rowCount);
@@ -90,7 +89,6 @@ class InvestmentCompanies6 extends Component
         $table->addCell(4000)->addText();
         $table->addCell(4000)->addText();
         $table->addCell(4000)->addText();
-
         $table->addRow();
         $table->addCell(2000)->addText();
         $table->addCell(4000)->addText('စုစုပေါင်း');
@@ -113,7 +111,6 @@ class InvestmentCompanies6 extends Component
     public function render()
     {
         if ($this->filterRange) {
-
             [$year, $month] = explode('-', $this->filterRange);
             $this->year = $year;
             $this->month = $month;
@@ -123,7 +120,6 @@ class InvestmentCompanies6 extends Component
         } else {
             $results = Punishment::all();
         }
-
         return view('livewire.investment-companies.investment-companies6', [
             'punishments' => $results,
         ]);

@@ -186,6 +186,7 @@
                         ['route_name' => 'finance_year_salary_list', 'name' => 'FinanceYearSalaryList'],
                         ['route_name' => 'information_list', 'name' => 'InformationList'],
                         ['route_name' => 'last_pay_certificate', 'name' => 'LastPayCertificate'],
+                        ['route_name' => 'detail_staff_salary', 'name' => 'DetailStaffSalary'],
                        
                     ]" />
             </li>
@@ -200,6 +201,7 @@
                     :lists="[
                         ['route_name' => 'leaves', 'name' => 'leaves'],
                         ['route_name' => 'leaves2', 'name' => 'leaves2'],
+                        ['route_name' => 'leave_date', 'name' => 'leaves3'],
                        
                     ]" />
             </li>

@@ -8,43 +8,31 @@ use Illuminate\Database\Eloquent\Model;
 class Division extends Model
 {
     use HasFactory;
-
     public function sections()
     {
         return $this->hasMany(Section::class);
     }
-
-
     public function divisionType()
     {
         return $this->belongsTo(DivisionType::class);
     }
-
     public function staffs()
     {
         return $this->hasMany(Staff::class, 'current_division_id', 'id');
     }
-
-
     public function leaveCount($division, $YearMonth)
     {
-
-
         [$year, $month] = explode('-', $YearMonth);
         $totalLeaveCount = 0;
         $staffs = Staff::where("current_division_id", $division)->get();
         foreach ($staffs as $staff) {
-            $leave = Leave::withWhere('staff_id', $staff->id)->whereYear('created_at', $year)->whereMonth('created_at', $month)->distinct('staff_id')->count('staff_id');
+            $leave = Leave::Where('staff_id', $staff->id)->whereYear('created_at', $year)->whereMonth('created_at', $month)->distinct('staff_id')->count('staff_id');
             $totalLeaveCount += $leave;
         }
         return $totalLeaveCount;
     }
-
-
     public function leaveCountWithLeaveType($division, $YearMonth, $leaveTypeId)
     {
-
-
         [$year, $month] = explode('-', $YearMonth);
         $totalLeaveCount = 0;
         $staffs = Staff::where("current_division_id", $division)->get();

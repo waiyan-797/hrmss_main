@@ -8,10 +8,11 @@ use App\Models\Staff;
 use Carbon\Carbon;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\PhpWord;
 
 class LeaveNuberPercent2 extends Component
 {
-
     public $startYr, $startMonth, $endYr, $endMonth;
     public $staff_id;
     public $fromDateRange, $toDateRange;
@@ -27,56 +28,85 @@ class LeaveNuberPercent2 extends Component
         $this->toDateRange = Carbon::now()->format('Y-m'); // current month
         $this->dep_category = 1;
     }
-
+    
     public function go_pdf($staff_id)
     {
         $staff = Staff::find($staff_id);
         $data = [
             'staff' => $staff,
-
             'startYr' => $this->startYr,
             'startMonth' => $this->startMonth,
             'endYr' => $this->endYr,
             'endMonth' => $this->endMonth,
-
             'months' => $this->months,
             'divisions' => $this->divisions,
             'monthly_leaves' => $this->monthly_leaves
         ];
+        
         $pdf = PDF::loadView('pdf_reports.leave_nuber_percent_report2', $data);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'leave_nuber_precent_report_pdf_2.pdf');
     }
+    public function go_word()
+    {
+        $phpWord = new PhpWord();
+        $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
+        $section->addText(
+            'ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန',
+            ['bold' => true, 'size' => 14],
+            ['alignment' => 'center']);
+        $section->addText(mmDateFormat($this->startYr, $this->startMonth) . ' မှ ' . mmDateFormat($this->endYr, $this->endMonth) . ' ခွင့်ခံစားမှု အနည်းအများအလိုက် ရာခိုင်နှုန်းဇယား',['bold' => true, 'size' => 12]);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+        $table->addRow();
+        $table->addCell(2000)->addText('စဥ်', ['bold' => true]);
+        $table->addCell(4000)->addText('ဌာနခွဲ', ['bold' => true]);
+
+        foreach ($this->months as $month) {
+            $table->addCell(2000)->addText(mmDateFormat(explode('-', $month)[0], explode('-', $month)[1]), ['bold' => true]);
+        }
+        $table->addCell(2000)->addText('စုစုပေါင်း', ['bold' => true]);
+
+        // Add data rows
+        foreach ($this->divisions as $division) {
+            $table->addRow();
+            $table->addCell(2000)->addText($division->id);
+            $table->addCell(4000)->addText($division->name);
+
+            $totalLeaveCount = 0;
+            foreach ($this->months as $YearMonth) {
+                $leaveCount = $this->leaveCount($division->id, $YearMonth);
+                $table->addCell(2000)->addText($leaveCount);
+                $totalLeaveCount += $leaveCount;
+            }
+
+            $table->addCell(2000)->addText($totalLeaveCount);
+        }
+
+        // Save the Word file to the output
+        $filePath = 'leave_report_2.docx';
+        $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
+        $objWriter->save($filePath);
+
+        return response()->download($filePath)->deleteFileAfterSend(true);
+    }
+
     public function render()
     {
         $staff = Staff::get()->first();
-
-
         $fromDate = Carbon::parse($this->fromDateRange); // Start date
-
         $toDate = Carbon::parse($this->toDateRange);     // End date
-
         $this->startYr  = explode('-', $fromDate)[0];
         $this->startMonth  = explode('-', $fromDate)[1];
         $this->endYr  = explode('-', $toDate)[0];
         $this->endMonth  = explode('-', $toDate)[1];
         $this->divisions = Division::where('division_type_id', $this->dep_category)->get();
-
-
-        // Debugging check
-
-
-
         $months = [];
-
-        while ($fromDate->lte($toDate)) { // Loop until fromDate is less than or equal to toDate
-            $months[] = $fromDate->format('Y-m'); // Add the month in 'Y-m' format
-            $fromDate->addMonth(); // Move to the next month
+        while ($fromDate->lte($toDate)) { 
+            $months[] = $fromDate->format('Y-m'); 
+            $fromDate->addMonth(); 
         }
         $this->months = $months;
-
-
         return view('livewire.leave.leave-nuber-percent2', [
             'staff' => $staff,
             'months' => $this->months,
@@ -85,8 +115,6 @@ class LeaveNuberPercent2 extends Component
 
         ]);
     }
-
-
     public function leaveCount($division, $YearMonth)
     {
 

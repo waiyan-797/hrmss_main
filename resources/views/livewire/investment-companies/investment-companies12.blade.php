@@ -5,7 +5,7 @@
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
             <input type="date" wire:model.live='filterRange'>
-            
+            <br><br>
             <table class="md:w-full">
                 <thead>
                     <tr>

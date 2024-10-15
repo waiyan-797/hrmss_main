@@ -40,40 +40,17 @@ class InvestmentCompanies7 extends Component
             ->whereYear('created_at', '<=', $year)
             ->whereMonth('created_at', '<=',  $this->previousMonth)  // To ensure they were active during the previous month
             ->count();
-
-
-
-
-
-
-
-
-
         $low_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', [2, 3]))
             ->where(function ($query) use ($previousMonthDate) {
                 $query->where(function ($subQuery) use ($previousMonthDate) {
-
-
-                    // Active and status hasn't changed during the previous month
                     $subQuery->where('status_changed_at', '<=', $previousMonthDate->endOfMonth())  // Status was set before this month
                         ->where('previous_active_status', '1');
                 })
-                    // ->orWhere(function ($subQuery) {
-                    //     // Active for users who never changed status
-                    //     $subQuery->whereNull('status_changed_at')
-                    //         ->where('is_active', '1');  // Never changed, still active
-                    // })
                 ;
             })
             ->whereYear('created_at', '<=', $year)
             ->whereMonth('created_at', '<=',  $this->previousMonth)  // To ensure they were active during the previous month
             ->count();
-
-
-
-
-
-
         $query = Staff::query();
         $high_reduced_staffs = Staff::whereNotNull('retire_type_id')->whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->whereYear('retire_date', $this->year)
             ->whereMonth('retire_date', $this->month)->get();

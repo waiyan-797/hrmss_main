@@ -39,7 +39,7 @@
                         <td class="border border-black text-center p-2">၇</td>
                         <td class="border border-black text-center p-2">၈</td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <td class="border border-black text-center p-2">၁</td>
                         <td class="border border-black text-center p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
                         <td class="border border-black text-right p-2">၁</td>
@@ -128,7 +128,60 @@
                         <td class="border border-black text-right p-2">၁၂၃</td>
                         <td class="border border-black text-right p-2">၁၂၃</td>
                         <td class="border border-black text-right p-2">၁၂၃</td>
+                    </tr> --}}
+                    @foreach ($first_payscales as $payscale)
+                    <tr>
+                        <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                        <td class="border border-black p-2">{{$payscale->name}}</td>
+                        <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
+                        <td class="border border-black p-2">{{en2mm($payscale->staff->count())}}</td>
+                        <td class="border border-black p-2"></td>
+                        <td class="border border-black p-2"></td>
                     </tr>
+                @endforeach
+                <tr>
+                    <td class="border border-black p-2 font-semibold" colspan="2">{{$first_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                    <td class="border border-black p-2 font-semibold"></td>
+                    <td class="border border-black p-2 font-semibold"></td>
+                </tr>
+
+                @foreach ($second_payscales as $payscale)
+                    <tr>
+                        <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                        <td class="border border-black p-2">{{$payscale->name}}</td>
+                        <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
+                        <td class="border border-black p-2">{{en2mm($payscale->staff->count())}}</td>
+                        <td class="border border-black p-2"></td>
+                        <td class="border border-black p-2"></td>
+                    </tr>
+                @endforeach
+                <tr>
+                    <td class="border border-black p-2 font-semibold" colspan="2">{{$second_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                    <td class="border border-black p-2 font-semibold"></td>
+                    <td class="border border-black p-2 font-semibold"></td>
+                </tr>
+                    @foreach($salaries as $index => $salary)
+            <tr>
+               
+                <td class="border border-black text-center p-2">{{ $salary->current_salary }}</td>
+                <td class="border border-black text-right p-2">၁</td>
+                <td class="border border-black text-right p-2">၁</td>
+                <td class="border border-black text-right p-2">၁</td>
+                <td class="border border-black text-right p-2">၁</td>
+                <td class="border border-black text-right p-2">{{ $salary->actual_salary }}</td>
+            </tr>
+        @endforeach
+        {{-- <tr class="font-bold">
+            <td colspan="7" class="border border-black text-center p-2">စုစုပေါင်း</td>
+            <td class="border border-black text-right p-2">
+                {{ $salaries->sum('actual_salary') }}
+            </td>
+        </tr> --}}
+
                 </tbody>
             </table>
 

@@ -1229,10 +1229,15 @@ class StaffDetail extends Component
     {
         $this->permanent_address_township_or_town_id = null;
     }
-    // public function updatedSpouseFatherAddressRegionId()
-    // {
-    //     $this->spouse_father_address_township_or_town_id = null;
-    // }
+    public function updatedSpouseFatherAddressRegionId()
+    {
+        $this->spouse_father_address_township_or_town_id = null;
+    }
+    public function updatedSpouseMotherAddressRegionId()
+    {
+        $this->spouse_mother_address_township_or_town_id = null;
+    }
+  
 
     public function updatedFatherAddressRegionId()
     {
@@ -1308,8 +1313,7 @@ class StaffDetail extends Component
                 $data['permanent_address_township_or_towns'] = Township::where('region_id', $this->permanent_address_region_id)->get();
                 $data['current_address_townships'] = Township::where('region_id', $this->current_address_region_id)->get();
                 $data['permanent_address_townships'] = Township::where('region_id', $this->permanent_address_region_id)->get();
-                // $data['spouse_father_address_township_or_towns'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
-                // $data['spouse_father_address_townships'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
+             
 
 
                 $data['nrc_region_ids'] = NrcRegionId::all();
@@ -1352,12 +1356,18 @@ class StaffDetail extends Component
                     'spouse_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည်၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_siblings],
                     'spouse_father_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အဘ၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_father_siblings],
                     'spouse_mother_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အမိ၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_mother_siblings],
+                
+
                 ];
                 $data['relations'] = Relation::all();
                 $data['father_township_or_towns'] = Township::where('region_id', $this->father_address_region_id)->get();
                 $data['father_townships'] = Township::where('region_id', $this->father_address_region_id)->get();
                 $data['mother_township_or_towns'] = Township::where('region_id', $this->mother_address_region_id)->get();
                 $data['mother_townships'] = Township::where('region_id', $this->mother_address_region_id)->get();
+                $data['spouse_father_townships_or_towns'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
+                $data['spouse_father_townships'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
+                $data['spouse_mother_townships_or_towns'] = Township::where('region_id', $this->spouse_mother_address_region_id)->get();
+                $data['spouse_mother_townships'] = Township::where('region_id', $this->spouse_mother_address_region_id)->get();
                 break;
         }
         $leave_modal_open = $this->leave_modal_open;

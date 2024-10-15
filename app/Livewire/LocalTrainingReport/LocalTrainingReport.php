@@ -40,8 +40,6 @@ class LocalTrainingReport extends Component
 
     
     $table = $section->addTable('TrainingTable');
-
-    
     $table->addRow();
     $table->addCell(1000, $cellStyle)->addText('စဥ်');
     $table->addCell(2000, $cellStyle)->addText('အမည်');
@@ -66,16 +64,10 @@ class LocalTrainingReport extends Component
             $table->addCell(2000, $cellStyle)->addText($training->training_location?->name);
         }
     }
-
-   
     $fileName = 'local_training_report.docx';
     $tempFile = tempnam(sys_get_temp_dir(), $fileName);
-
-  
     $writer = IOFactory::createWriter($phpWord, 'Word2007');
     $writer->save($tempFile);
-
-   
     return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
 }
 

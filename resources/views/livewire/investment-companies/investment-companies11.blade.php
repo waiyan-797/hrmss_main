@@ -6,12 +6,11 @@
             <br><br>
             
             <input type="date"  wire:model.live='filterRange'>   
-            
             <input type="date" wire:model.live='filterRangeTo'>
+            <br><br>
             <table class="w-full">
                 <thead>
                     <tr>
-                        
                         <th rowspan="2" class="border border-black p-2 text-center">စဥ်</th>
                         <th rowspan="2" class="border border-black p-2 text-center">အကြောင်းအရာ</th>
                         <th colspan="3" class="border border-black p-2 text-center">{{$day}}-{{$month}}-{{$year}}ထိ<br>အင်အား</th>

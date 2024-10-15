@@ -6,7 +6,6 @@
             <img src="{{ $photo ? $photo->temporaryUrl() :asset('img/user.png') }}" class="w-20 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
         @endif
     </div>
-   
     <div>
         <x-input-label for="ဓါတ်ပုံ" :value="__('ဓါတ်ပုံ')"/>
         <x-input-file wire:model='photo' id="photo" accept=".jpg, .jpeg, .png" name="photo"/>

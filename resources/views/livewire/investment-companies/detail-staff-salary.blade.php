@@ -1,7 +1,7 @@
-<div class=" mx-auto p-6 bg-white border border-gray-300 shadow-md  h-[83vh] overflow-y-auto">
+<div class=" mx-auto p-6 bg-white border border-gray-300 shadow-md  w-full h-[83vh] overflow-y-auto">
     <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
     <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button><br>
-    <h1 class="text-center font-bold text-xl mb-4">ဝန်ထမ်းများ၏ လစာငွေတောင်းခံလွှာ</h1>
+    <h1 class="text-center font-bold text-xl mb-4 ">ဝန်ထမ်းများ၏ လစာငွေတောင်းခံလွှာ</h1>
 
     <div class="mb-2">
         <label class="block font-semibold">ဝန်ထမ်းအမည် ဒေါ/ဦး------------------<br>
@@ -59,6 +59,7 @@
         .....    ........<br>
     </div>
     <div class="w-1/2 pl-4">
+        
             <table class="table-auto w-full border-collapse border border-black">
                 <thead>
                     <div class="font-semibold">လစာနှုန်း :</div>
@@ -66,7 +67,8 @@
                     <th class="border border-black text-center p-2">ပြား</th>
                    
                     <th class="border border-black text-center p-2">ကျပ်</th>
-                    <th class="border border-black text-center p-2" >ပြား</th></thead>
+                    <th class="border border-black text-center p-2" >ပြား</th>
+                </thead>
                     <tbody>
                             <tr>
                                 <td class="border border-black text-center p-2" >၃၁၆၀၀၀</td>
@@ -80,7 +82,6 @@
                               <td>စုစုပေါင်းတောင်းခံလွှာ
                               </td>
                               <td></td>
-                              
                               <td class="border border-black text-center p-2">၃၁၆၀၀၀</td>
                               <td class="border border-black text-center p-2"></td>
                           </tr>
@@ -98,6 +99,9 @@
                             </tr>
                             </tbody>
                 </table>
+               
+              
+               
     </div>
 </div>
 </div>
@@ -145,8 +149,8 @@
             </div>
             
         </div>
-    </div>
-    <hr class="border-black">
+    
+        <hr class="border-black">
 
     <div class="mb-4">
         <div class="flex justify-between mt-2">
@@ -197,119 +201,253 @@
         </div>
     </div>
     <br><br>
-
-
-    <table>
-        <thead>
-        <tr>
-          <th colspan="4">ရှေ့မျက်နှာတွင် ဖော်ပြထားသည့် ရံပုံငွေနှင့် <br>အခြားဖြတ်တောက်ငွေများ၏ အသေးစိတ်<br>
-            စာရင်း။</th>
-          <th class="border border-black text-center p-2" rowspan="20"></th>
-          
-          <th class="border border-black text-center p-2"></th>
-          <th class="border border-black text-center p-2" >ကျပ်</th>
-          <th class="border border-black text-center p-2" >ပြား</th>
-        </tr></thead>
-      <tbody class="text-center h-8 p-2">
-        <tr>
-          <td class="border border-black text-center p-2" rowspan="16">
-            ၁။<br>
-            ၂။<br>
-            ၃။<br>
-            ၄။<br>
-            ၅။<br>
-            <br>
-            ၇။<br>
-            <br>
-            ၈။<br>
-            <br>
-            ၉။<br>
-            <br>
-            ၁၀။<br>
-            <br>
-            ၁၁။<br>
-            <br>
-            ၁၂။
-          </td>
-          <td class="border border-black text-center p-2" rowspan="16">
-            အသက်အာမခံ ...<br>
-            ဝင်ငွေခွန်.....<br>
-            အိမ်လုံခ....<br>
-            အိုနာစာရံပုံငွေ...<br>
-            နယ်ပြောင်းရွေ့ရာတွင်လစာ<br>
-            ကြိုတင်ထုတ်ပေးငွေ<br>
-            နယ်ခရီးစရိတ်<br>
-            ကြိုတင်ထုတ်ပေးငွေ<br>
-            မီးဘေ လေဘေး ‌ရေဘေး<br>
-            ကြိုတင်ထုတ်ပေးငွေ<br>
-            မိုးတွင်းရိတ်ခါသိုလှောင်‌ရေး အတွက်<br>
-            ကြိုတင်ထုတ်ပေးငွေ<br>
-            ပိုငွေများပြန်လည်	<br>
-            ဖြတ်တောက်ခြင်း<br>
-            ခွင့်လစာ<br>
-            နှစ်လစာအတိုးမဲ့ထုတ် ချေးငွေပြန်လည်<br>
-            ဖြတ်တောက်ခြင်း......
-          </td>
-          <td class="border border-black text-center p-2" rowspan="16">ကျပ်
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            ၂၀,၅၃၃
-          </td>
-          <td class="border border-black text-center p-2" rowspan="16">ပြား
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            ၃၃
-          </td>
-          <td  class="border border-black text-center p-2" rowspan="25">
-            <br><br><br><br><br><br><br><br><br><br><br><br>
-             ၁။<br>
-            ၂။<br>
-            ၃။<br>
-            ၄။<br>
-            ၅။<br>
-            <br>
-            ၇။<br>
-            <br>
-            ၈။<br>
-            <br>
-            ၉။<br>
-            <br>
-            ၁၀။<br>
-            <br>
-            ၁၁။<br>
-            <br>
-            ၁၂။
-          </td>
-          <td class="border border-black text-center p-2" rowspan="35">(၄-၂၀၂၃)<br><br><br><br><br><br>ပေါင်း
-            <hr class="border-black">
-            မြှီရှင်<br>
-            <br><br>
-            <br>အသက်အာမခံ ...<br>
-            ဝင်ငွေခွန်.....<br>
-            အိမ်လုံခ....<br>
-            အိုနာစာရံပုံငွေ...<br>
-            နယ်ပြောင်းရွေ့ရာတွင်လစာ<br>
-            ကြိုတင်ထုတ်ပေးငွေ<br>
-            နယ်ခရီးစရိတ်<br>
-            ကြိုတင်ထုတ်ပေးငွေ<br>
-            မီးဘေ လေဘေး ‌ရေဘေး<br>
-            ကြိုတင်ထုတ်ပေးငွေ<br>
-            မိုးတွင်းရိတ်ခါသိုလှောင်‌ရေး အတွက်<br>
-            ကြိုတင်ထုတ်ပေးငွေ<br>
-            ပိုငွေများပြန်လည်	<br>
-            ဖြတ်တောက်ခြင်း<br>
-            ခွင့်လစာ<br>
-            နှစ်လစာအတိုးမဲ့ထုတ် ချေးငွေပြန်လည်<br>
-            ဖြတ်တောက်ခြင်း......
-          </td>
-          <td class="border border-black text-center p-2" rowspan="20"><br><br><br><br><br><br>
-           ၃၁၆,၀၀၀<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>၂၀၅၃၃
-           <hr class="border-black">
-          </td>
-          <td class="border border-black text-center p-2" rowspan="17"><br><br><br><br><br><br>၀<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>၃၃
-        </td>
-        </tr>
-      </tbody>
-    </table>
    
+        <div class="container mx-auto">
+            <table class="md:w-full">
+                <thead>
+                    <tr>
+                        <th class=" p-2" colspan="4">ရှေ့မျက်နှာတွင် ဖော်ပြထားသည့် ရံပုံငွေနှင့်
+                            အခြားဖြတ်တောက်ငွေများ၏ အသေးစိတ်
+                            စာရင်း။	</th>
+                        <th class="border border-black p-2"></th>
+                        <th class="border border-black p-2"></th>
+                        <th class="border border-black p-2" >ကျပ်</th>
+                        <th class="border border-black p-2">ပြား</th>
+                    </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                        <td class="border border-black" rowspan="12">၁။<br>
+                        ၂။<br>၃။<br>၄။<br>၅။<br><br>၆။<br><br>၇။<br><br>၈။<br><br>၉။<br><br>၁၀။<br><br>၁၁။<br>၁၂။<br><br></td>
+                        <td class="border border-black p-2" rowspan="12">အသက်အာမခံ...<br>ဝင်ငွေခွန်...<br>အိမ်လုံခ...<br>အိုနာစာရံပုံငွေ...<br>နယ်ပြောင်းရွေ့ရာတွင်လစာ<br>ကြိုတင်ထုတ်ပေးငွေ<br>နယ်ခရီးစရိတ်<br>ကြိုတင်ထုတ်ပေးငွေ<br>နယ်လှည့်ခရီးစရိတ်<br>ကြိုတင်ထုတ်ပေးငွေ<br>မီးဘေ လေဘေး ‌ရေဘေး<br>ကြိုတင်ထုတ်ပေးငွေ<br>မိုးတွင်းရိတ်ခါသိုလှောင်‌ရေး အတွက်<br>ကြိုတင်ထုတ်ပေးငွေ<br>ပိုငွေများပြန်လည်<br>ဖြတ်တောက်ခြင်း<br>ခွင့်လစာ<br>နှစ်လစာအတိုးမဲ့ထုတ် ချေးငွေပြန်လည်<br>ဖြတ်တောက်ခြင်း......	
+                        </td>
+                        <td class="border border-black" rowspan="12">ကျပ်<br><br><br><br><br><br><br>၂၀၅၃၃<br><br><br>
+                        <hr class="border-black"></td>
+                        <td class="border border-black" rowspan="12">ပြား<br><br><br><br><br><br><br>၃၃<br><br><br> <hr class="border-black"></td>
+                        <td class="border border-black p-2" rowspan="30"><br><br><br><br><br><br>၁။<br>
+                            ၂။<br>၃။<br>၄။<br>၅။<br><br>၆။<br><br>၇။<br><br>၈။<br><br>၉။<br><br>၁၀။<br><br>၁၁။<br>၁၂။<br><br></td>
+                        <td class="border border-black  p-2" rowspan="30">(၄-၂၀၂၃)<br><br><br><br><br>ပေါင်း<hr class="border-black">မြီရှင်<br>အသက်အာမခံ...<br>ဝင်ငွေခွန်...<br>အိမ်လုံခ...<br>အိုနာစာရံပုံငွေ...<br>နယ်ပြောင်းရွေ့ရာတွင်လစာ<br>ကြိုတင်ထုတ်ပေးငွေ<br>နယ်ခရီးစရိတ်<br>ကြိုတင်ထုတ်ပေးငွေ<br>နယ်လှည့်ခရီးစရိတ်<br>ကြိုတင်ထုတ်ပေးငွေ<br>မီးဘေ လေဘေး ‌ရေဘေး<br>ကြိုတင်ထုတ်ပေးငွေ<br>မိုးတွင်းရိတ်ခါသိုလှောင်‌ရေး အတွက်<br>ကြိုတင်ထုတ်ပေးငွေ<br>ပိုငွေများပြန်လည်<br>ဖြတ်တောက်ခြင်း<br>ခွင့်လစာ<br>နှစ်လစာအတိုးမဲ့ထုတ် ချေးငွေပြန်လည်<br>ဖြတ်တောက်ခြင်း......	</td>
+                        <td class="border border-black p-2" rowspan="30"></td>
+                        <td class="border border-black p-2" rowspan="30"></td> 
+                      
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
+                    <tr>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                        <td class=" p-2"></td>
+                    </tr>
 </div>
-
-    

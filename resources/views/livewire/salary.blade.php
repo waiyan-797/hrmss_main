@@ -2,7 +2,7 @@
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             @include('table', [
-                'data_values' => $salarys,
+                'data_values' => $salaries,
                 'modal' => 'modals/salary_modal',
                 'id' => $salary_id,
                 'title' => 'လစာ',

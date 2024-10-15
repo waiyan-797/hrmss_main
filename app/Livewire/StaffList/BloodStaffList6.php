@@ -25,7 +25,7 @@ class BloodStaffList6 extends Component
             'third_ranks' => $third_ranks,
             'all_ranks' => $all_ranks,
         ];
-        $pdf = PDF::loadView('pdf_reports.blood_staff_list_report', $data);
+        $pdf = PDF::loadView('pdf_reports.blood_staff_list6_report', $data);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'blood_staff_list_pdf.pdf');
