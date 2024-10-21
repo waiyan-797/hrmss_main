@@ -1,14 +1,12 @@
-<div class="overflow-x-auto">
+<div class="overflow-x-auto  h-[83vh] overflow-y-auto">
     <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
     <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
     <br><br>
     <table class="w-full border-collapse border border-black mt-4">
         <thead class="bg-white">
-            
             <tr>
                 <th class="border border-black p-2" rowspan="2">Indicator(s)</th>
                 <th class="border border-black p-2" colspan="12">1.4.A Women holding senior positions in the Civil Service (Director Level or equivalent and Above Posts)<br>as (a) A Percentage of Total Senior Civil Servants and ,(b) Increase in Percentage points from previous year</th>
-                
             </tr>
            
             <tr>
@@ -52,8 +50,26 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($payscales as $payscale)
+                                <tr>
+                                    <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                    <td class="border border-black p-2">{{$payscale->ranks[0]->name}}နှင့်အဆင့်တူ</td>
+                                    <td class="border border-black p-2">{{ en2mm(
+                                        $payscale->staff->where('gender_id', 1)->whereIn('payscale_id', $payscales->pluck('id'))->count() +
+                                        $payscale->staff->where('gender_id', 2)->whereIn('payscale_id', $payscales->pluck('id'))->count()
+                                       ) }}</td>
+                                    <td class="border border-black p-2">{{ en2mm($payscale->staff->where('gender_id', 1)->whereIn('payscale_id', $payscales->pluck('id'))->count()) }}</td>
+                                     <td class="border border-black p-2">{{ en2mm($payscale->staff->where('gender_id', 2)->whereIn('payscale_id', $payscales->pluck('id'))->count()) }}</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td class="border border-black p-2 font-semibold" colspan="2">စုစုပေါင်း</td>
+                                <td class="border border-black p-2 font-semibold" ></td>
+                                <td class="border border-black p-2 font-semibold" >{{en2mm($payscale->staff->where('gender_id', 1)->whereIn('payscale_id', $payscales->pluck('id'))->count())}}</td>
+                                <td class="border border-black p-2 font-semibold" >{{en2mm($payscale->staff->where('gender_id', 2)->whereIn('payscale_id', $payscales->pluck('id'))->count())}}</td>
+                            </tr>
            
-            <tr class="text-center">
+            {{-- <tr class="text-center">
                 <td class="border border-black p-2">1</td>
                 <td class="border border-black p-2">Director General / PS</td>
                 <td class="border border-black p-2"></td>
@@ -67,6 +83,17 @@
                 <td class="border border-black p-2"></td>
                 <td class="border border-black p-2"></td>
             </tr>
+             @foreach ($first_payscales as $payscale)
+                <tr>
+                    <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                    <td class="border border-black p-2">{{$payscale->name}}</td>
+                    <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
+                    <td class="border border-black p-2">{{ en2mm($payscale->staff->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}</td>
+                    <td class="border border-black p-2">{{ en2mm($payscale->staff->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}</td>
+                    <td class="border border-black p-2">{{ en2mm(
+                        $payscale->staff->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count() +
+                        $payscale->staff->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                    ) }}
           
             <tr class="text-center">
                 <td class="border border-black p-2">12</td>
@@ -95,7 +122,7 @@
                 <td class="border border-black p-2"></td>
                 <td class="border border-black p-2"></td>
                 <td class="border border-black p-2"></td>
-            </tr>
+            </tr> --}}
         </tbody>
     </table>
 </div>
