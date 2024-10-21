@@ -49,13 +49,13 @@
                                 <td class="border border-black p-2">{{$rank->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($rank->staffs->count())}}</td>
-                @foreach($salaries as  $salary)
-        <td class="border border-black text-right p-2">{{ $salary->actual_salary ?? 0 }}</td>
-        <td class="border border-black text-right p-2">{{ $salary->addition_education}}</td>
-        <td class="border border-black text-right p-2">{{ $salary->addition}}</td>
-        <td class="border border-black text-right p-2">{{ $salary->addition_ration ?? 0 }}</td>
-        <td class="border border-black text-right p-2">{{ $salary->actual_salary + $salary->addition_education+$salary->addition + $salary->addition_ration }}</td>
-    @endforeach 
+                
+        <td class="border border-black text-right p-2"> aa {{ $salaries[1]->actual_salary ?? 0 }}</td>
+        <td class="border border-black text-right p-2">{{ $salaries[1]->addition_education}}</td>
+        <td class="border border-black text-right p-2">{{ $salaries[1]->addition}}</td>
+        <td class="border border-black text-right p-2">{{ $salaries[1]->addition_ration ?? 0 }}</td>
+        <td class="border border-black text-right p-2">{{ $salaries[1]->actual_salary + $salaries[1]->addition_education+$salaries[1]->addition + $salaries[0]->addition_ration }}</td>
+    
                                
                             </tr>
                             @endforeach

@@ -39,112 +39,34 @@
                         <td class="border border-black text-center p-2">၇</td>
                         <td class="border border-black text-center p-2">၈</td>
                     </tr>
-                    {{-- <tr>
-                        <td class="border border-black text-center p-2">၁</td>
-                        <td class="border border-black text-center p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                        <td class="border border-black text-right p-2">၁</td>
-                        <td class="border border-black text-right p-2">၁</td>
-                        <td class="border border-black text-right p-2">၁</td>
-                        <td class="border border-black text-right p-2">၁</td>
-                        <td class="border border-black text-right p-2">၁</td>
-                        <td class="border border-black text-right p-2">၁</td>
-                    </tr>
-                    <tr class="font-bold">
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">အရာထမ်းပေါင်း</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                        <td class="border border-black text-right p-2">၆</td>
-                        <td class="border border-black text-right p-2">၅</td>
-                        <td class="border border-black text-right p-2">၇</td>
-                        <td class="border border-black text-right p-2">၆</td>
-                        <td class="border border-black text-right p-2">၆</td>
-                        <td class="border border-black text-right p-2">၆</td>
-                    </tr>
-                    <tr class="font-bold">
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">အမှုထမ်းပေါင်း</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                    </tr>
-                    <tr class="font-bold">
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">စုစုပေါင်း</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                    </tr>
-                    <tr class="font-bold">
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">နေ့စား</td>
-                        <td class="border border-black text-right p-2">၂၃</td>
-                        <td class="border border-black text-right p-2">၂၃</td>
-                        <td class="border border-black text-right p-2">၂၃</td>
-                        <td class="border border-black text-right p-2">၂၃</td>
-                        <td class="border border-black text-right p-2">၂၃</td>
-                        <td class="border border-black text-right p-2">၂၃</td>
-                    </tr>
-                    <tr class="font-bold">
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">စုစုပေါင်း</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                    </tr>
-                    <tr class="font-bold">
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">အပိုထောက်ပံ့ကြေး(အမြဲတမ်း)</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                    </tr>
-                    <tr class="font-bold">
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">အပိုထောက်ပံ့ကြေး(နေ့စား)</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                        <td class="border border-black text-right p-2">၁၂၃</td>
-                    </tr> --}}
+                
                     @foreach ($first_payscales as $payscale)
                     <tr>
-                        <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                        <td class="border border-black p-2">{{en2mm($loop->iteration)}}</td>
                         <td class="border border-black p-2">{{$payscale->name}}</td>
                         <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
-                        <td class="border border-black p-2">{{en2mm($payscale->staff->count())}}</td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
+                        <td class="border border-black p-2">{{en2mm($payscale->staff->where('is_active', 1)->count())}}</td>
+                        <td class="border border-black p-2"> {{en2mm($payscale->staff->where('is_active', 1)->where('side_department_id',1)->where('salary_paid_by',1)->count())}} </td>
+                        <td class="border border-black p-2"> {{en2mm($payscale->staff->where('is_active', 1)->where('current_department_id',1)->where('side_department_id', '!=' , 1)->where('salary_paid_by','!=' , 1)->count())}} </td>
+                        <td class="border border-black p-2"> {{en2mm($payscale->staff->where('is_active', 1)->where('salary_paid_by', 1)->count())}} </td>
+                        <td class="border border-black p-2"> 
+                            {{ en2mm($payscale->staff->sum(fn($each) =>  $each->salaries->last()?->actual_salary)) }}
+                        </td>
+                        
                     </tr>
                 @endforeach
                 <tr>
+                    
                     <td class="border border-black p-2 font-semibold" colspan="2">{{$first_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
                     <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
-                    <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
-                    <td class="border border-black p-2 font-semibold"></td>
-                    <td class="border border-black p-2 font-semibold"></td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->where('is_active', 1)->where('current_department_id',1)->count())) }}</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->where('is_active', 1)->where('side_department_id',1)->where('salary_paid_by',1)->count())) }}</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->where('is_active', 1)->where('current_department_id',1)->where('side_department_id', '!=' , 1)->where('salary_paid_by','!=' , 1)->count())) }}</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->where('is_active', 1)->where('salary_paid_by', 1)->count())) }}</td>
+                    <td class="border border-black p-2"> 
+                        {{ en2mm($first_payscales->sum(fn($payscale)=>$payscale->staff->where('is_active', 1)->sum(fn($each) =>  $each->salaries->last()?->actual_salary)) ) }}
+                    </td>
+                    
                 </tr>
 
                 @foreach ($second_payscales as $payscale)
@@ -152,35 +74,46 @@
                         <td class="border border-black p-2">{{$loop->index + 1}}</td>
                         <td class="border border-black p-2">{{$payscale->name}}</td>
                         <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
-                        <td class="border border-black p-2">{{en2mm($payscale->staff->count())}}</td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
+                        <td class="border border-black p-2">{{en2mm($payscale->staff->where('current_department_id',1)->where('is_active', 1)->count())}}</td>
+
+<td class="border border-black p-2"> {{en2mm($payscale->staff->where('side_department_id',1)->where('salary_paid_by',1)->where('is_active', 1)->count())}} </td>
+                        <td class="border border-black p-2"> {{en2mm($payscale->staff->where('is_active', 1)->where('current_department_id',1)->where('side_department_id', '!=' , 1)->where('salary_paid_by','!=' , 1)->count())}} </td>
+                        <td class="border border-black p-2"> {{en2mm($payscale->staff->where('is_active', 1)->where('salary_paid_by', 1)->count())}} </td> 
+                        <td class="border border-black p-2"> 
+                            {{ en2mm($payscale->staff->sum(fn($each) =>  $each->salaries->last()?->actual_salary)) }}
+                        </td>
                     </tr>
                 @endforeach
                 <tr>
                     <td class="border border-black p-2 font-semibold" colspan="2">{{$second_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
                     <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
-                    <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
-                    <td class="border border-black p-2 font-semibold"></td>
-                    <td class="border border-black p-2 font-semibold"></td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->where('current_department_id',1)->where('is_active', 1)->count())) }}</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->where('side_department_id',1)->where('salary_paid_by',1)->where('is_active', 1)->count())) }}</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->where('current_department_id',1)->where('side_department_id', '!=' , 1)->where('is_active', 1)->where('salary_paid_by','!=' , 1)->count())) }}</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->where('salary_paid_by', 1)->count())) }}</td>
+                    <td class="border border-black p-2"> 
+                        {{ en2mm($second_payscales->sum(fn($payscale)=>$payscale->staff->where('is_active', 1)->sum(fn($each) =>  $each->salaries->last()?->actual_salary))  ) }}
+                    </td>
                 </tr>
-                    @foreach($salaries as $index => $salary)
+                 
+                {{-- w  --}}
+                {{-- @foreach($salaries as $index => $salary) --}}
             <tr>
                
-                <td class="border border-black text-center p-2">{{ $salary->current_salary }}</td>
-                <td class="border border-black text-right p-2">၁</td>
-                <td class="border border-black text-right p-2">၁</td>
-                <td class="border border-black text-right p-2">၁</td>
-                <td class="border border-black text-right p-2">၁</td>
-                <td class="border border-black text-right p-2">{{ $salary->actual_salary }}</td>
+                <td class="border border-black text-center p-2 font-semibold " colspan="2">စုစုပေါင်း</td>
+                <td class="border border-black p-2 font-semibold" >{{en2mm($TotalAllowQty)}}</td>
+                <td class="border border-black p-2 font-semibold" >{{en2mm($currentStaffTotal)}}</td>
+                <td class="border border-black p-2 font-semibold" >{{en2mm($totalStaffFromOthersDept)}}</td>
+                <td class="border border-black p-2 font-semibold" >{{en2mm(  $totalStaffToOthersDept)}}</td>
+                <td class="border border-black p-2 font-semibold" >{{en2mm(  $totalSalaryPaidStaff)}}</td>
+                <td class="border border-black p-2 font-semibold" >
+                    {{ en2mm($second_payscales->sum(fn($payscale)=>$payscale->staff->sum(fn($each) =>  $each->salaries->last()?->actual_salary))  + $first_payscales->sum(fn($payscale)=>$payscale->staff->sum(fn($each) =>  $each->salaries->last()?->actual_salary)) ) }}
+
+                </td>
+             
+
             </tr>
-        @endforeach
-        {{-- <tr class="font-bold">
-            <td colspan="7" class="border border-black text-center p-2">စုစုပေါင်း</td>
-            <td class="border border-black text-right p-2">
-                {{ $salaries->sum('actual_salary') }}
-            </td>
-        </tr> --}}
+       
 
                 </tbody>
             </table>

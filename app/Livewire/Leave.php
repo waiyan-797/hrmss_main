@@ -100,7 +100,12 @@ class Leave extends Component
         $leave = ModelsLeave::findOrFail($this->leave_id);
         $leave->update([
             'staff_id' => $this->staff_name,
-            'leave_type_id' => $this->leave_type_name
+            'leave_type_id' => $this->leave_type_name,
+            'from_date' => $this->from_date,
+            'to_date' => $this->to_date,
+            'qty' => $this->qty,
+            'order_no' => $this->order_no,
+            'remark' => $this->remark,
         ]);
         $this->message = 'Updated successfully.';
 

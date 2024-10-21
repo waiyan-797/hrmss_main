@@ -49,70 +49,132 @@
                         <td class="border border-black text-center p-2">၁၀=၄+၆+၈</td>
                         <td class="border border-black text-center p-2">၁၁=၅+၇+၉</td>
                     </tr>
-                    <tr>
-                        <td class="border border-black text-center p-2">၁</td>
-                        <td class="border border-black text-center p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                        <td class="border border-black text-center p-2">ညွှန်ကြားရေးမှုးချုပ်</td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                    </tr>
+                    
+                @foreach ($payscales->where('staff_type_id',1) as $payscale)
+                <tr>
+                    <td class="border border-black text-center p-2">{{ en2mm($loop->index + 1 )}}  </td>
+                    {{-- @dd($payscale)  --}}
+                    <td class="border border-black text-center p-2">{{$payscale->name ?? 0 }}</td>
+                    <td class="border border-black text-center p-2">{{$payscale->similiar_rank ?? 0 }}</td>
+                    <td class="border border-black text-center p-2">{{$payscale->staff_count_addition_education ?? 0 }}</td>
+                    <td class="border border-black text-center p-2">{{$payscale->addition_education ?? 0 }}</td>
+                    <td class="border border-black text-center p-2">{{$payscale->staff_count_addition ?? 0 }}</td>
+                    <td class="border border-black text-center p-2">{{$payscale->addition ?? 0 }}</td>
+                    <td class="border border-black text-center p-2">{{$payscale->staff_count_addition_ration ?? 0 }}</td>
+                    <td class="border border-black text-center p-2">{{$payscale->addition_ration ?? 0 }}</td>
+                    <td class="border border-black text-center p-2">
+{{$payscale->staff_count_addition_education ?? 0  +$payscale->staff_count_addition ?? 0 +  $payscale->staff_count_addition_ration ?? 0 }}
+                    </td>
+                    <td class="border border-black text-center p-2">
+
+{{$payscale->addition_education ?? 0  +$payscale->addition ?? 0 +  $payscale->addition_ration ?? 0 }}
+                        
+                    </td>
+                  </tr>
+                @endforeach
                     <tr>
                         <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2">အရာထမ်းပေါင်း</td>
                         <td class="border border-black text-center p-2">-</td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">
+                            {{$payscales->where('staff_type_id',1)->sum(fn($q)=>$q->staff_count_addition_education)}}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{$payscales->where('staff_type_id',1)->sum(fn($q)=>$q->addition_education)}}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{$payscales->where('staff_type_id',1)->sum(fn($q)=>$q->staff_count_addition)}}
+
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{$payscales->where('staff_type_id',1)->sum(fn($q)=>$q->addition)}}
+
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{$payscales->where('staff_type_id',1)->sum(fn($q)=>$q->staff_count_addition_ration)}}
+
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{$payscales->where('staff_type_id',1)->sum(fn($q)=>$q->addition_ration)}}
+
+                        </td>
+                        <td class="border border-black text-center p-2">
+                                {{
+$payscales->where('staff_type_id',1)->sum(fn($q)=>$q->staff_count_addition_education) +  $payscales->where('staff_type_id',1)->sum(fn($q)=>$q->staff_count_addition) + $payscales->where('staff_type_id',1)->sum(fn($q)=>$q->staff_count_addition_ration)
+
+                                }}
+
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{
+$payscales->where('staff_type_id',1)->sum(fn($q)=>$q->addition_education) +  $payscales->where('staff_type_id',1)->sum(fn($q)=>$q->addition) + $payscales->where('staff_type_id',1)->sum(fn($q)=>$q->addition_ration)
+
+                            }}
+
+                    </td>
                     </tr>
+                    @foreach ($payscales->where('staff_type_id',2) as $payscale)
                     <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                        <td class="border border-black text-center p-2">ရုံးအုပ်နှင့်အဆင့်တူ</td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                    </tr>
+                        <td class="border border-black text-center p-2">{{ en2mm($loop->index + 1 )}}  </td>
+                        {{-- @dd($payscale)  --}}
+                        <td class="border border-black text-center p-2">{{$payscale->name ?? 0 }}</td>
+                        <td class="border border-black text-center p-2">{{$payscale->similiar_rank ?? 0 }}</td>
+                        <td class="border border-black text-center p-2">{{$payscale->staff_count_addition_education ?? 0 }}</td>
+                        <td class="border border-black text-center p-2">{{$payscale->addition_education ?? 0 }}</td>
+                        <td class="border border-black text-center p-2">{{$payscale->staff_count_addition ?? 0 }}</td>
+                        <td class="border border-black text-center p-2">{{$payscale->addition ?? 0 }}</td>
+                        <td class="border border-black text-center p-2">{{$payscale->staff_count_addition_ration ?? 0 }}</td>
+                        <td class="border border-black text-center p-2">{{$payscale->addition_ration ?? 0 }}</td>
+                        <td class="border border-black text-center p-2">
+    {{$payscale->staff_count_addition_education ?? 0  +$payscale->staff_count_addition ?? 0 +  $payscale->staff_count_addition_ration ?? 0 }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+    
+    {{$payscale->addition_education ?? 0  +$payscale->addition ?? 0 +  $payscale->addition_ration ?? 0 }}
+                            
+                        </td>
+                      </tr>
+                    @endforeach
                     <tr>
                         <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2">အမှုထမ်းပေါင်း</td>
                         <td class="border border-black text-center p-2">-</td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                    </tr>
-                    <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">စုစုပေါင်း</td>
-                        <td class="border border-black text-center p-2">-</td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">
+                            {{$payscales->where('staff_type_id',2)->sum(fn($q)=>$q->staff_count_addition_education)}}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{$payscales->where('staff_type_id',2)->sum(fn($q)=>$q->addition_education)}}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{$payscales->where('staff_type_id',2)->sum(fn($q)=>$q->staff_count_addition)}}
+
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{$payscales->where('staff_type_id',2)->sum(fn($q)=>$q->addition)}}
+
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{$payscales->where('staff_type_id',2)->sum(fn($q)=>$q->staff_count_addition_ration)}}
+
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{$payscales->where('staff_type_id',2)->sum(fn($q)=>$q->addition_ration)}}
+
+                        </td>
+                        <td class="border border-black text-center p-2">
+                                {{
+$payscales->where('staff_type_id',2)->sum(fn($q)=>$q->staff_count_addition_education) +  $payscales->where('staff_type_id',2)->sum(fn($q)=>$q->staff_count_addition) + $payscales->where('staff_type_id',2)->sum(fn($q)=>$q->staff_count_addition_ration)
+
+                                }}
+
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{
+$payscales->where('staff_type_id',2)->sum(fn($q)=>$q->addition_education) +  $payscales->where('staff_type_id',2)->sum(fn($q)=>$q->addition) + $payscales->where('staff_type_id',2)->sum(fn($q)=>$q->addition_ration)
+
+                            }}
+
+                    </td>
                     </tr>
                 </tbody>
             </table>
