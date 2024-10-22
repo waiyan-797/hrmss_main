@@ -90,98 +90,216 @@
         <p class="dash">-</p>
         <p>ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</p>
     </div>
-
-    <table>
+    <table class="md:w-full mx-8 my-2">
         <thead>
-            <tr>
-                <th rowspan="3">အမှတ်စဥ်</th>
-                <th rowspan="3">လစာနှုန်း(ကျပ်)</th>
-                <th colspan="4">၂၀၂၄-၂၀၂၅<br>(၃၁-၅-၂၀၂၄)</th>
-                <th rowspan="3">(၃၁-၅-၂၀၂၄)<br>ရက်နေ့တွင်အမှန်<br>တကယ်ထုတ်ပေး<br>ရမည့်လစာငွေ<br>(ကျပ်သန်း)</th>
-                <th rowspan="3">မှတ်ချက်</th>
+            <tr class="font-bold">
+                <th rowspan="3" class="border border-black text-center p-2">အမှတ်စဥ်</th>
+                <th rowspan="3" class="border border-black text-center p-2">လစာနှုန်း(ကျပ်)</th>
+                <th colspan="4" class="border border-black text-center p-2">၂၀၂၄-၂၀၂၅<br>{{ mmDateFormat($year,$month)}}  </th>
+                <th rowspan="3" class="border border-black text-center p-2">
+                    {{en2mm($day).'-'.en2mm($month).'-'.en2mm($year)}}<br>ရက်နေ့တွင်အမှန်<br>တကယ်ထုတ်ပေး<br>ရမည့်လစာငွေ<br>(ကျပ်သန်း)</th>
+                <th rowspan="3" class="border border-black text-center p-2">မှတ်ချက်</th>
             </tr>
-            <tr>
-                <th rowspan="2">ခွင့်ပြု</th>
-                <th colspan="3">ခန့်ပြီး</th>
+            <tr class="font-bold">
+                <th rowspan="2" class="border border-black text-center p-2">ခွင့်ပြု</th>
+                <th colspan="3" class="border border-black text-center p-2">ခန့်ပြီး</th>
             </tr>
-            <tr>
-                <th>ကျား</th>
-                <th>မ</th>
-                <th>ပေါင်း</th>
+            <tr class="font-bold">
+                <th class="border border-black text-center p-2">ကျား</th>
+                <th class="border border-black text-center p-2">မ</th>
+                <th class="border border-black text-center p-2">ပေါင်း</th>
             </tr>
         </thead>
         <tbody>
+            <tr class="font-bold">
+                <td class="border border-black text-center p-2">၁</td>
+                <td class="border border-black text-center p-2">၂</td>
+                <td class="border border-black text-center p-2">၃</td>
+                <td class="border border-black text-center p-2">၄</td>
+                <td class="border border-black text-center p-2">၅</td>
+                <td class="border border-black text-center p-2">၆</td>
+                <td class="border border-black text-center p-2">၇</td>
+                <td class="border border-black text-center p-2">၈</td>
+            </tr>
+           
+            @foreach ($first_payscales as $payscale)
             <tr>
-                <td>၁</td>
-                <td>၂</td>
-                <td>၃</td>
-                <td>၄</td>
-                <td>၅</td>
-                <td>၆</td>
-                <td>၇</td>
-                <td>၈</td>
+                <td class="border border-black p-2">{{en2mm($loop->iteration)}}</td>
+                <td class="border border-black p-2">{{$payscale->name}}</td>
+                <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
+                <td class="border border-black p-2">{{en2mm($payscale->staff->where('gender_id',1)->where('current_department_id',1)->where('is_active', 1)->where('salary_paid_by' , 1)->count())}}</td>
+                <td class="border border-black p-2"> {{en2mm($payscale->staff->where('gender_id',2)->where('current_department_id',1)->where('is_active', 1)->where('salary_paid_by',1)->count())}} </td>
+                <td class="border border-black p-2"> {{en2mm($payscale->staff->where('is_active', 1)->where('current_department_id',1)->count())}} </td>
+                <td class="border border-black p-2">
+                    @php
+                        $totalPaidForThisMonth = 0;
+                    
+                    @endphp
+                 
+                    @foreach($payscale->staff->where('is_active', 1)->where('salary_paid_by', 1) as $staff)
+                    {{-- @if ($loop->parent->iteration == 2)
+                    {{ dd($payscale->staff) }}
+                @endif --}}
+                        @php
+                   
+
+                       $totalPaidForThisMonth += $staff->paidForThisMonth($dateRange);
+                        @endphp
+                    @endforeach
+                  
+                    {{ en2mm($totalPaidForThisMonth) }}
+                </td>
+                <td class="border border-black p-2"> 
+                    
+                </td>
+    
+            </tr>
+        @endforeach
+            <tr class="font-bold">
+                <td class="border border-black text-center p-2"></td>
+                <td class="border border-black text-center p-2">အရာထမ်းပေါင်း</td>
+                <td class="border border-black text-right p-2">{{ en2mm($first_payscales->sum(fn($p)=>$p->allowed_qty))}}</td>
+                <td class="border border-black text-right p-2">{{ en2mm($first_payscales->sum(fn($p)=>$p->staff->where('gender_id',1)->where('current_department_id',1)->where('is_active', 1)->where('salary_paid_by',1)->count()))}}</td>
+                <td class="border border-black text-right p-2">{{ en2mm($first_payscales->sum(fn($p)=>$p->staff->where('gender_id',2)->where('current_department_id',1)->where('is_active', 1)->where('salary_paid_by',1)->count()))}}</td>
+
+                <td class="border border-black text-right p-2">{{en2mm($first_payscales->sum(fn($p)=>$p->staff->where('current_department_id',1)->where('is_active', 1)->where('salary_paid_by',1)->count()))}}</td>
+              
+              
+                <td class="border border-black p-2">
+                    @php
+                        $totalPaidForThisMonth = 0;
+                        
+                    @endphp
+                    @foreach($first_payscales as $payscale)
+                    @foreach($payscale->staff->where('is_active', 1)->where('current_department_id',1)->where('salary_paid_by', 1) as $staff)
+                        @php
+                            $totalPaidForThisMonth += $staff->paidForThisMonth($dateRange);
+                        @endphp
+                    @endforeach
+                    {{-- @php
+
+                    $allTotalForFirstPayScales +=  $totalPaidForThisMonth;
+                    @endphp --}}
+
+                    @endforeach
+                
+                    {{ en2mm($totalPaidForThisMonth) }}
+                </td>
+           
+
+
+                <td class="border border-black p-2"> 
+                    
+                </td>
+                <td class="border border-black text-right p-2"></td>
+            </tr>
+          
+            @foreach ($second_payscales as $payscale)
+            <tr>
+                <td class="border border-black p-2">{{en2mm($loop->iteration)}}</td>
+                <td class="border border-black p-2">{{$payscale->name}}</td>
+                <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
+                <td class="border border-black p-2">{{en2mm($payscale->staff->where('gender_id',1)->where('current_department_id',1)->where('is_active', 1)->where('salary_paid_by' , 1)->count())}}</td>
+                <td class="border border-black p-2"> {{en2mm($payscale->staff->where('gender_id',2)->where('current_department_id',1)->where('is_active', 1)->where('side_department_id',1)->where('salary_paid_by',1)->count())}} </td>
+                <td class="border border-black p-2"> {{en2mm($payscale->staff->where('is_active', 1)->where('current_department_id',1)->count())}} </td>
+                <td class="border border-black p-2">
+                    @php
+                        $totalPaidForThisMonth = 0;
+                    @endphp
+                
+                    @foreach($payscale->staff->where('is_active', 1)->where('salary_paid_by', 1) as $staff)
+                        @php
+                            $totalPaidForThisMonth += $staff->paidForThisMonth($dateRange);
+                        @endphp
+                    @endforeach
+                
+                    {{ en2mm($totalPaidForThisMonth) }}
+                </td>
+                <td class="border border-black p-2"> 
+                    
+                </td>
+                
+            </tr>
+        @endforeach
+        <tr class="font-bold">
+            <td class="border border-black text-center p-2"></td>
+            <td class="border border-black text-center p-2">အမှုထမ်းစုစုပေါင်း	</td>
+            <td class="border border-black text-right p-2">{{ en2mm($second_payscales->sum(fn($p)=>$p->allowed_qty))}}</td>
+            <td class="border border-black text-right p-2">{{ en2mm($second_payscales->sum(fn($p)=>$p->staff->where('gender_id',1)->where('current_department_id',1)->where('is_active', 1)->where('salary_paid_by',1)->count()))}}</td>
+            <td class="border border-black text-right p-2">{{ en2mm($second_payscales->sum(fn($p)=>$p->staff->where('gender_id',2)->where('current_department_id',1)->where('is_active', 1)->where('salary_paid_by',1)->count()))}}</td>
+
+            <td class="border border-black text-right p-2">{{en2mm($second_payscales->sum(fn($p)=>$p->staff->where('current_department_id',1)->where('is_active', 1)->where('salary_paid_by',1)->count()))}}</td>
+           
+            <td class="border border-black p-2">
+                @php
+                    $totalPaidForThisMonth = 0;
+                    
+                @endphp
+                @foreach($second_payscales as $payscale)
+                
+                @foreach($payscale->staff->where('is_active', 1)->where('current_department_id',1)->where('salary_paid_by', 1) as $staff)
+                
+                    @php
+                        $totalPaidForThisMonth += $staff->paidForThisMonth($dateRange);
+                    @endphp
+                @endforeach
+                {{-- @php
+
+                $allTotalForFirstPayScales +=  $totalPaidForThisMonth;
+                @endphp --}}
+
+                @endforeach
+            
+                {{ en2mm($totalPaidForThisMonth) }}
+            </td>
+            <td class="border border-black text-right p-2"></td>
+        </tr>
+            <tr class="font-bold">
+                <td class="border border-black text-center p-2"></td>
+                <td class="border border-black text-center p-2">စုစုပေါင်း</td>
+                <td class="border border-black text-right p-2">{{ en2mm($TotalAllowQty)}}</td>
+                <td class="border border-black text-right p-2">
+
+                    {{$currentMaleStaffTotal}}
+                </td>
+                <td class="border border-black text-right p-2">{{$currentFeMaleStaffTotal}}</td>
+                <td class="border border-black text-right p-2">                        {{en2mm($currentMaleStaffTotal + $currentFeMaleStaffTotal)}}
+                </td>
+                <td class="border border-black  p-2">
+                    @php
+                        $totalPaidForThisMonth = 0;
+                        
+                    @endphp
+                    @foreach($allPayScales as $payscale)
+                    @foreach($payscale->staff->where('is_active', 1)->where('salary_paid_by', 1) as $staff)
+                    {{-- @dd($staff) --}}
+                        @php
+                            $totalPaidForThisMonth += $staff->paidForThisMonth($dateRange);
+                            
+                        @endphp
+                    @endforeach
+                   
+
+                    @endforeach
+                
+                    {{ en2mm($totalPaidForThisMonth) }}
+                </td>
+                <td class="border border-black text-right p-2"></td>
             </tr>
             
             <tr>
-                <td>၁</td>
-                <td>၄၁၈၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                <td class="text-right">၄</td>
-                <td class="text-right">၂</td>
-                <td class="text-right">၂</td>
-                <td class="text-right">၄</td>
-                <td class="text-right">၁.၇၀၈</td>
-                <td class="text-right"></td>
+                <td class="border border-black text-center p-2"></td>
+                <td class="border border-black text-center p-2">(၁လအတွက်လစာစရိတ်(ကျပ်သန်း))</td>
+                <td class="border border-black text-center p-2">{{$maximumBudget}}</td>
+                <td class="border border-black text-center p-2"></td>
+                <td class="border border-black text-center p-2"></td>
+                <td class="border border-black text-center p-2"></td>
+                <td class="border border-black text-center p-2"></td>
+                <td class="border border-black text-center p-2">
+
+
+                </td>
             </tr>
-            <tr>
-                <td></td>
-                <td>အရာထမ်းပေါင်း</td>
-                <td class="text-right">၃၇၅</td>
-                <td class="text-right">၇၄</td>
-                <td class="text-right">၁၆၇</td>
-                <td class="text-right">၂၄၁</td>
-                <td class="text-right">၇၄.၀၀၈</td>
-                <td class="text-right"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                <td class="text-right">၆</td>
-                <td class="text-right">၁</td>
-                <td class="text-right">၄</td>
-                <td class="text-right">၅</td>
-                <td class="text-right">၁.၁၈၈</td>
-                <td class="text-right"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>အမှုထမ်းပေါင်း</td>
-                <td class="text-right">၄၈၄</td>
-                <td class="text-right">၆၄</td>
-                <td class="text-right">၁၄၇</td>
-                <td class="text-right">၂၁၁</td>
-                <td class="text-right">၄၀.၀၈၃</td>
-                <td class="text-right"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>စုစုပေါင်း</td>
-                <td class="text-right">၈၅၉</td>
-                <td class="text-right">၁၃၈</td>
-                <td class="text-right">၃၁၄</td>
-                <td class="text-right">၄၅၂</td>
-                <td class="text-right">၁၁၄.၀၉၁</td>
-                <td class="text-right"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>(၁လအတွက်လစာစရိတ်(ကျပ်သန်း))</td>
-                <td class="text-center">၂၁၄.၀၀၁</td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center">၁၁၄.၀၉၁</td>
-            </tr> 
         </tbody>
     </table>
 

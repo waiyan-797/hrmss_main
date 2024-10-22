@@ -6,3 +6,5 @@ side_department_id
 salary_paid_by
 
 similiarRank
+
+financeYearsalarylist

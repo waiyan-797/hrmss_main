@@ -7,7 +7,10 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
-            <x-text-input wire:model.live='nameSearch' class=" w-52"/>
+            <div  class=" w-52">
+                <x-text-input wire:model.live='nameSearch'/>
+                
+            </div>
           {{-- <div
             class=" mt-9"
           >            <x-select 

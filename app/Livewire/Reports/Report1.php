@@ -17,6 +17,13 @@ class Report1 extends Component
     public function go_pdf()
     {
         $staffs = Staff::get();
+        $staffQuery  = Staff::query();
+        if ($this->nameSearch) {
+            $staffQuery->where('name', 'like', '%' . $this->nameSearch . '%');
+        }
+        $this->staffs = $staffQuery->get();
+        // dd($this->staffs);
+
         $data = [
             'staffs' => $staffs,
         ];
@@ -113,6 +120,7 @@ class Report1 extends Component
             $staffQuery->where('name', 'like', '%' . $this->nameSearch . '%');
         }
         $this->staffs = $staffQuery->get();
+        // dd($this->staffs);
 
         return view('livewire.reports.report1', [
             'staffs' => $this->staffs,

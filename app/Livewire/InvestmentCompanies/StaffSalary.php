@@ -11,24 +11,32 @@ use PhpOffice\PhpWord\PhpWord;
 
 class StaffSalary extends Component
 {
+
+
+
     public function go_pdf()
     {
+        $salaries = Salary::with('staff')->get();
+        $first_payscales = Payscale::where('staff_type_id', 1)->get();
+        $second_payscales = Payscale::where('staff_type_id', 2)->get();
         $salaries = Salary::with('staff')->get();
         $TotalAllowQty = Payscale::sum('allowed_qty');
         $currentStaffTotal = Staff::where('current_department_id', 1)->where('is_active', 1)->count();
         $totalStaffToOthersDept = Staff::where('current_department_id', 1)->where('is_active', 1)->whereNotNull('side_department_id')->where('salary_paid_by', '!=', 1)->count();
         $totalStaffFromOthersDept = Staff::where('salary_paid_by', 1)->where('is_active', 1)->where('current_department_id', '!=', 1)->count();
         $totalSalaryPaidStaff = Staff::where('salary_paid_by', 1)->where('is_active', 1)->count();
+
         $data = [
             'salaries' => $salaries,
-            'first_payscales' => Payscale::where('staff_type_id', 1)->get(),
-            'second_payscales' => Payscale::where('staff_type_id', 2)->get(),
+            'first_payscales' => $first_payscales,
+            'second_payscales' => $second_payscales,
             'TotalAllowQty' => $TotalAllowQty,
             'currentStaffTotal' => $currentStaffTotal,
             'totalStaffFromOthersDept' => $totalStaffFromOthersDept,
             'totalStaffToOthersDept' => $totalStaffToOthersDept,
-            'totalSalaryPaidStaff' => $totalSalaryPaidStaff,
+            'totalSalaryPaidStaff' => $totalSalaryPaidStaff
         ];
+
         $pdf = PDF::loadView('pdf_reports.staff_salary_report', $data);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();

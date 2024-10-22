@@ -28,19 +28,19 @@
                 <tbody>
                     @foreach ($staffs as $staff)
                         <tr>
-                            <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->name }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->current_rank->name }}</td>
-                            <td class="border border-black text-center p-2">{{ Carbon\Carbon::parse($staff->dob)->age }} years</td>
-                            <td class="border border-black text-center p-2">{{ Carbon\Carbon::parse($staff->current_rank_date)->age }} years</td>
-                            <td class="border border-black text-center p-2">{{ $staff->ethnic->name }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->religion->name }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_district->name.'/'.$staff->permanent_address_township_or_town->name }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->gender->name }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->children->where('gender_id', 1)->count() }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->children->where('gender_id', 2)->count() }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->spouse_name != null ? 'ရှိ' : 'မရှိ'}}</td>
+                            <td class="border border-black text-center p-2">{{ $loop?->index + 1 }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff?->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff?->current_rank?->name }}</td>
+                            <td class="border border-black text-center p-2">{{ Carbon\Carbon::parse($staff?->dob)?->age }} years</td>
+                            <td class="border border-black text-center p-2">{{ Carbon\Carbon::parse($staff?->current_rank_date)?->age }} years</td>
+                            <td class="border border-black text-center p-2">{{ $staff?->ethnic?->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff?->religion?->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff?->current_address_street.'/'.$staff?->current_address_ward.'/'.$staff?->current_address_region?->name.'/'.$staff?->current_address_district?->name.'/'.$staff?->current_address_township_or_town?->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff?->permanent_address_street.'/'.$staff?->permanent_address_ward.'/'.$staff?->permanent_address_region?->name.'/'.$staff?->permanent_address_district?->name.'/'.$staff?->permanent_address_township_or_town?->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff?->gender?->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff?->children?->where('gender_id', 1)?->count() }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff?->children?->where('gender_id', 2)?->count() }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff?->spouse_name != null ? 'ရှိ' : 'မရှိ'}}</td>
                         </tr>
                     @endforeach
                 </tbody>

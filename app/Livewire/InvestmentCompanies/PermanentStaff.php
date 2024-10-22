@@ -17,13 +17,46 @@ class PermanentStaff extends Component
 
     public function go_pdf()
     {
+
+        [$year, $month, $day] = explode('-', $this->dateRange);
+        $this->year = $year;
+        $this->month = $month;
+        $this->day  = $day;
+
         $staffs = Staff::get();
-        $salaries = Salary::with('staff', 'rank')->get();
+
+        $first_payscales = Payscale::where('staff_type_id', 1)->get();
+        $second_payscales = Payscale::where('staff_type_id', 2)->get();
+        $salaries = Salary::with('staff')->get();
+        $allPayScales = Payscale::all();
+        $TotalAllowQty = Payscale::sum('allowed_qty');
+        $currentStaffTotal = Staff::where('current_department_id', 1)->where('is_active', 1)->count();
+        $currentMaleStaffTotal = Staff::where('current_department_id', 1)->where('gender_id', 1)->where('is_active', 1)->count();
+        $currentFeMaleStaffTotal = Staff::where('current_department_id', 1)->where('gender_id', 2)->where('is_active', 1)->count();
+
+        $totalStaffFromOthersDept = Staff::where('salary_paid_by', 1)->where('current_department_id', '!=', 1)->count();
+        $totalSalaryPaidStaff = Staff::where('salary_paid_by', 1)->count();
+        $maximumBudget = 0;
+        foreach ($allPayScales as $payscale) {
+            $budget = $payscale->min_salary  * $payscale->allowed_qty;
+            $maximumBudget += $budget;
+        }
         $data = [
             'salaries' => $salaries,
             'staffs' => $staffs,
             'first_payscales' => Payscale::where('staff_type_id', 1)->get(),
             'second_payscales' => Payscale::where('staff_type_id', 2)->get(),
+            'first_payscales' => $first_payscales,
+            'second_payscales' => $second_payscales,
+            'allPayScales' => $allPayScales,
+            'TotalAllowQty' => $TotalAllowQty,
+            'currentMaleStaffTotal' => $currentMaleStaffTotal,
+            'currentFeMaleStaffTotal' => $currentFeMaleStaffTotal,
+            'maximumBudget' => $maximumBudget,
+            'year' => $this->year,
+            'month' => $this->month,
+            'day' => $this->day,
+            'dateRange' => $this->dateRange
         ];
         $pdf = PDF::loadView('pdf_reports.permanent_staff_report', $data);
         return response()->streamDownload(function () use ($pdf) {
@@ -137,17 +170,17 @@ class PermanentStaff extends Component
         $table->addCell()->addText();
         $table->addCell()->addText();
         $table->addCell()->addText();
-       
 
-        
 
-   
+
+
+
 
         $tempFile = tempnam(sys_get_temp_dir(), 'word');
         $writer = IOFactory::createWriter($phpWord, 'Word2007');
         $writer->save($tempFile);
 
-        
+
         return response()->download($tempFile, 'permanent_staff_report.docx')->deleteFileAfterSend(true);
     }
 

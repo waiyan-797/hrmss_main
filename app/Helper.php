@@ -47,6 +47,7 @@ if (!function_exists('mmDateFormat')) {
             1 => 'ဇန်နဝါရီ',
             2 => 'ဖေဖော်ဝါရီ',
             3 => 'မတ်',
+            //
             4 => 'ဧပြီ',
             5 => 'မေ',
             6 => 'ဇွန်',
@@ -72,10 +73,10 @@ if (!function_exists('mmDateFormat')) {
         return "$year $myanmarMonth  ";
     }
 
-    if(!function_exists('getCountryNameById')){
-        function getCountryNameById($id){
+    if (!function_exists('getCountryNameById')) {
+        function getCountryNameById($id)
+        {
             return Country::where('id', $id)->first()->name;
-
         }
     }
 }

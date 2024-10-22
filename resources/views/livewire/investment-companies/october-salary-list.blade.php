@@ -5,9 +5,27 @@
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
             <h1 class="font-bold text-center text-sm mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့်
-                ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>......... ( ဒုတိယဦးစီးမှူး ) ...၏...<br>...အောက်တိုဘာလ အတွက်
+                ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>၏ <br> 
+                
+                {{$staff->name}}
+                အတွက်
                 လစာစာရင်းညှိနှုင်းခြင်း။ ...</h1>
+                
 
+                <div>
+                    
+                    <select wire:model.live='staff_id'>
+                 
+                    @foreach ($staffs as $staff)
+                    <option value="{{$staff->id}}">
+                        {{$staff->gender_id ==  1 ? "ဦိး" : "ဒေါ်" }} {{$staff->name}}
+                    </option>
+                @endforeach
+                    
+                    </select>
+                    <input type="month" wire:model='monthsSelect'> 
+                </div>
+    
             <table class="md:w-full text-sm">
                 <thead>
                     <tr>
@@ -32,10 +50,24 @@
                 <tbody>
                     <tr>
                         <td class="border border-black text-right p-2">၁</td>
-                        <td class="border border-black text-left p-2">၁-၁၀-၂၀၂၂ မှ<br>၁၁-၁၀-၂၀၂၂ထိ(၁၁)ရက်</td>
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2"></td>
+                        <td class="border border-black text-left p-2">
+                            <br> 
+                                
+                            {{ $startDateOfMonth}} မှ  
+                                {{' --------- '  . $staff->id  .  '-------------'}}
+                            {{$staff->increments->first()->increment_date}}
+                        
+                        
+                        
+                        </td>
+                        <td class="border border-black text-right p-2">
+                            
+                        </td>
+                        <td class="border border-black text-right p-2">
+                            {{$staff->current_salary}}
+
+                        </td>
+                        <td class="border border-black text-right p-2">ss</td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2"></td>
@@ -44,7 +76,7 @@
                     </tr>
                     <tr class="font-bold">
                         <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2"></td>
+                        <td class="border border-black text-right p-2">{{$endtDateOfMonth}}</td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2">၂၀၉,၆၁၂</td>
                         <td class="border border-black text-right p-2">၉၀</td>
