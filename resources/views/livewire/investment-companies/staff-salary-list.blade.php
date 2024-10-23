@@ -49,14 +49,14 @@
                                 <td class="border border-black p-2">{{$rank->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($rank->staffs->count())}}</td>
-                
-        <td class="border border-black text-right p-2"> aa {{ $salaries[1]->actual_salary ?? 0 }}</td>
+
+        <td class="border border-black text-right p-2">{{ $salaries[1]->actual_salary ?? 0 }}</td>
         <td class="border border-black text-right p-2">{{ $salaries[1]->addition_education}}</td>
         <td class="border border-black text-right p-2">{{ $salaries[1]->addition}}</td>
         <td class="border border-black text-right p-2">{{ $salaries[1]->addition_ration ?? 0 }}</td>
         <td class="border border-black text-right p-2">{{ $salaries[1]->actual_salary + $salaries[1]->addition_education+$salaries[1]->addition + $salaries[0]->addition_ration }}</td>
-    
-                               
+
+
                             </tr>
                             @endforeach
                             <tr>
@@ -69,7 +69,7 @@
                                 <td class="border border-black text-right p-2">{{ $salary->addition}}</td>
                                 <td class="border border-black text-right p-2">{{ $salary->addition_ration ?? 0 }}</td>
                                 <td class="border border-black text-right p-2">{{ $salary->actual_salary + $salary->addition_education + $salary->addition_ration }}</td>
-                            @endforeach 
+                            @endforeach
                             </tr>
                             @foreach ($second_ranks as $rank)
                                 <tr>
@@ -84,7 +84,7 @@
                                     <td class="border border-black text-right p-2">{{ $salary->addition}}</td>
                                     <td class="border border-black text-right p-2">{{ $salary->addition_ration ?? 0 }}</td>
                                     <td class="border border-black text-right p-2">{{ $salary->actual_salary + $salary->addition_education +$salary->addition+ $salary->addition_ration }}</td>
-                                @endforeach 
+                                @endforeach
                                 </tr>
                             @endforeach
                             <tr>
@@ -97,8 +97,8 @@
                             <td class="border border-black text-right p-2">{{ $salary->addition}}</td>
                             <td class="border border-black text-right p-2">{{ $salary->addition_ration ?? 0 }}</td>
                             <td class="border border-black text-right p-2">{{ $salary->actual_salary + $salary->addition_education +$salary->addition+ $salary->addition_ration }}</td>
-                        @endforeach 
-                            </tr>     
+                        @endforeach
+                            </tr>
                 </tbody>
             </table>
             <div class="mx-60 my-8">

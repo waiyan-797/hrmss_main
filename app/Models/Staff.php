@@ -253,8 +253,11 @@ class Staff extends Model
         return $this->hasMany(SocialActivity::class);
     }
 
+    public function mother_ethnic(){
+        return $this->belongsTo(Ethnic::class);
+    }
 
-    // Retire 
+    // Retire
     public function retire()
     {
         return $this->belongsTo(RetireType::class, 'retire_type_id');

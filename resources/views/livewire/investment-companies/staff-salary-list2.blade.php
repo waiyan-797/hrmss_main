@@ -20,8 +20,8 @@
                         <th colspan="2" class="border border-black p-2">ဒီပလိုမာ</th>
                         <th colspan="2" class="border border-black p-2">Fellowship/Membership</th>
                         <th colspan="2" class="border border-black p-2">မဟာဘွဲ့</th>
-                        <th colspan="2" class="border border-black p-2">စုစုပေါင်း</th>
                         <th colspan="2" class="border border-black p-2">ပါရဂူဘွဲ့</th>
+                        <th colspan="2" class="border border-black p-2">စုစုပေါင်း</th>
                     </tr>
                     <tr>
                         <th class="border border-black p-2">ဝန်ထမ်းဦးရေ</th>
@@ -47,85 +47,89 @@
                         <td class="border border-black p-2">၇</td>
                         <td class="border border-black p-2">၈</td>
                         <td class="border border-black p-2">၉</td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
                         <td class="border border-black p-2">၈</td>
                         <td class="border border-black p-2">၉</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-black p-2">၁</td>
-                        <td class="border border-black p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
                         <td class="border border-black p-2"></td>
                         <td class="border border-black p-2"></td>
                     </tr>
+                    @foreach ($high_staffs as $staff)
+                        <tr>
+                            <td class="border border-black p-2">{{ en2mm($loop->index + 1) }}</td>
+                            <td class="border border-black p-2">{{ $staff->payscale->name }}</td>
+                            <td class="border border-black p-2">{{ $staff->name }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 7)->isNotEmpty())->count()) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 7)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education'))) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 2)->isNotEmpty())->count()) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 2)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education'))) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 4)->isNotEmpty())->count()) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 4)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education'))) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 5)->isNotEmpty())->count()) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 5)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education'))) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->whereIn('education_group_id', [7, 2, 4, 5])->isNotEmpty())->count()) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->whereIn('education_group_id', [7, 2, 4, 5])->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education'))) }}</td>
+                        </tr>
+                    @endforeach
                     <tr>
                         <td class="border border-black p-2"></td>
                         <td class="border border-black p-2">အရာထမ်းပေါင်း</td>
                         <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
+                        <td class="border border-black p-2">{{ en2mm($high_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 7)->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($high_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 7)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($high_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 2)->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($high_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 2)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($high_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 4)->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($high_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 4)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($high_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 5)->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($high_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 5)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($high_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->whereIn('education_group_id', [7, 2, 4, 5])->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($high_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', [7, 2, 4, 5])->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
                     </tr>
-                    <tr>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                    </tr>
+                    @foreach ($low_staffs as $staff)
+                        <tr>
+                            <td class="border border-black p-2">{{ en2mm($loop->index + 1) }}</td>
+                            <td class="border border-black p-2">{{ $staff->payscale->name }}</td>
+                            <td class="border border-black p-2">{{ $staff->name }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 7)->isNotEmpty())->count()) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 7)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education'))) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 2)->isNotEmpty())->count()) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 2)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education'))) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 4)->isNotEmpty())->count()) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 4)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education'))) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 5)->isNotEmpty())->count()) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 5)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education'))) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->whereIn('education_group_id', [7, 2, 4, 5])->isNotEmpty())->count()) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->staffs->filter(fn($staff) => $staff->staff_educations->whereIn('education_group_id', [7, 2, 4, 5])->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education'))) }}</td>
+                        </tr>
+                    @endforeach
                     <tr>
                         <td class="border border-black p-2"></td>
                         <td class="border border-black p-2">အမှုထမ်းပေါင်း</td>
                         <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
+                        <td class="border border-black p-2">{{ en2mm($low_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 7)->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($low_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 7)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($low_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 2)->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($low_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 2)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($low_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 4)->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($low_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 4)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($low_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 5)->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($low_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 5)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($low_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->whereIn('education_group_id', [7, 2, 4, 5])->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($low_staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', [7, 2, 4, 5])->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
                     </tr>
                     <tr>
                         <td class="border border-black p-2"></td>
                         <td class="border border-black p-2">စုစုပေါင်း</td>
                         <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
-                        <td class="border border-black p-2"></td>
+                        <td class="border border-black p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 7)->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 7)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 2)->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 2)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 4)->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 4)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 5)->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', 5)->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->whereIn('education_group_id', [7, 2, 4, 5])->isNotEmpty())->count())) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->staffs->filter(fn($staff) => $staff->staff_educations->where('education_group_id', [7, 2, 4, 5])->isNotEmpty())->sum(fn($staff) => $staff->salaries->sum('addition_education')))) }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -155,7 +159,6 @@
                     <p></p>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

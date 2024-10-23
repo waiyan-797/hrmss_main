@@ -145,7 +145,7 @@
         ],
         'del_method' => 'remove_trainings',
     ])
-    
+
 
 </div>
 <div class="w-full h-auto py-5">
@@ -185,7 +185,7 @@
         ],
         'del_method' => 'remove_awardings',
     ])
-     
+
 </div>
 
 
@@ -270,7 +270,7 @@
         ],
         'del_method' => 'remove_past_occupations',
     ])
- 
+
 </div>
 <div class="grid grid-cols-4 gap-4 py-5">
     <div>
@@ -295,7 +295,7 @@
     </div>
 </div>
 
-<div class="w-full  py-5">
+<div class="w-full py-5">
     <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">နိုင်ငံခြားသွားရောက်ခြင်း</h1>
     @include('staff_multiple_table', [
         'column_names' => ['သွားရောက်ခဲ့သည့်နိုင်ငံ', 'သွားရောက်ခဲ့သည့်အကြောင်း','သင်တန်းတက်ခြင်းဖြစ်လျှင် အောင်','သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်','ထောက်ပံ့သည့်အဖွဲ့အစည်း', 'တွေ့ဆုံခဲ့သည့် ကုမ္ပဏီ၊ လူပုဂ္ဂိုလ်၊ ဌာန', 'သွားသည့်နေ့', 'ပြန်သည့်နေ့','နိုင်ငံခြားခရီးစဉ်','နိုင်ငံခြားသို့သွားရောက်မည်ံနေ့','ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး'],
@@ -361,7 +361,6 @@
         ],
         'del_method' => 'remove_abroads',
     ])
-    
 </div>
 <div class="grid grid-cols-4 gap-4 py-5">
     <div class="col-span-4">
@@ -426,5 +425,80 @@
             ],
         ],
         'del_method' => 'remove_punishments',
+    ])
+</div>
+
+<div class="w-full py-5">
+    <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">လူမှုရေးလှုပ်ရှားမှု</h1>
+    @include('staff_multiple_table', [
+        'column_names' => ['အကြောင်းအရာ', 'မှ', 'အထိ', 'မှတ်ချက်'],
+        'add_event' => 'add_socials',
+        'column_vals' => $socials,
+        'column_types' => [
+            [
+                'type' => 'text',
+                'wire_array_name' => 'socials',
+                'wire_array_key' => 'particular',
+            ],
+            [
+                'type' => 'date',
+                'wire_array_name' => 'socials',
+                'wire_array_key' => 'from_date',
+            ],
+            [
+                'type' => 'date',
+                'wire_array_name' => 'socials',
+                'wire_array_key' => 'to_date',
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'socials',
+                'wire_array_key' => 'remark',
+            ],
+        ],
+        'del_method' => 'remove_socials',
+    ])
+</div>
+
+<div class="w-full h-auto py-5">
+    <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">ဝန်ထမ်းဘာသာစကားကျွမ်းကျင်မှု</h1>
+    @include('staff_multiple_table', [
+        'column_names' => ['ဘာသာစကား', 'အဆင့်', 'အရေး', 'အဖတ်', 'အပြော', 'မှတ်ချက်'],
+        'add_event' => 'add_staff_languages',
+        'column_vals' => $staff_languages,
+        'column_types' => [
+            [
+                'type' => 'select',
+                'wire_array_name' => 'staff_languages',
+                'wire_array_key' => 'language',
+                'select_values' => $languages,
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'staff_languages',
+                'wire_array_key' => 'rank',
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'staff_languages',
+                'wire_array_key' => 'writing',
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'staff_languages',
+                'wire_array_key' => 'reading',
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'staff_languages',
+                'wire_array_key' => 'speaking',
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'staff_languages',
+                'wire_array_key' => 'remark',
+            ],
+        ],
+        'del_method' => 'remove_staff_languages',
     ])
 </div>

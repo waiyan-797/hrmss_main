@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('min_salary');
             $table->string('increment');
             $table->string('similiar_rank');
-
             $table->string('max_salary');
             $table->foreignIdFor(StaffType::class)->nullable()->constrained()->nullOnDelete();
             $table->integer('allowed_qty')->default(0);

@@ -18,8 +18,7 @@ class BloodTypeSeeder extends Seeder
         BloodType::truncate();
         Schema::enableForeignKeyConstraints();
         BloodType::create([
-            // 'name' => 'A',
-
+            'name' => 'A',
         ]);
     }
 }

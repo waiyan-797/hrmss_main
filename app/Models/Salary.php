@@ -10,7 +10,7 @@ class Salary extends Model
     use HasFactory;
     public function staff()
     {
-        return $this->belongsTo(Staff::class)->withDefault();
+        return $this->belongsTo(Staff::class);
     }
 
     /**
@@ -18,7 +18,7 @@ class Salary extends Model
      */
     public function rank()
     {
-        return $this->belongsTo(Rank::class)->withDefault();
+        return $this->belongsTo(Rank::class);
     }
 
 }

@@ -20,11 +20,7 @@ return new class extends Migration
             $table->text('nick_name');
             $table->foreignIdFor(DivisionType::class)->nullable()->nullOnDelete();
             $table->foreignIdFor(Department::class)->nullable()->nullOnDelete();
-            $table->foreignIdFor(Department::class)->nullable()->nullOnDelete();
             $table->foreignIdFor(DifficultyLevel::class)->nullable()->nullOnDelete();
-
-
-
             $table->timestamps();
         });
     }

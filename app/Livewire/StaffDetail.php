@@ -18,6 +18,7 @@ use App\Models\EducationType;
 use App\Models\Ethnic;
 use App\Models\FatherSibling;
 use App\Models\Gender;
+use App\Models\Language;
 use App\Models\MotherSibling;
 use App\Models\Nationality;
 use App\Models\NrcRegionId;
@@ -54,13 +55,15 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\LeaveType;
+use App\Models\SocialActivity;
+use App\Models\StaffLanguage;
 
 class StaffDetail extends Component
 {
     use WithFileUploads;
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     //personal_info
-    public $staff_photo, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $attendid, $gpms_staff_no, $spouse_name, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $government_staff_started_date, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $life_insurance_proposal, $life_insurance_policy_no, $life_insurance_premium, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension, $military_gazetted_no, $veteran_no, $veteran_date, $last_serve_army, $health_condition, $tax_exception;
+    public $staff_photo, $staff_nrc_front, $staff_nrc_back, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $attendid, $gpms_staff_no, $spouse_name, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $government_staff_started_date, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $life_insurance_proposal, $life_insurance_policy_no, $life_insurance_premium, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension, $military_gazetted_no, $veteran_no, $veteran_date, $last_serve_army, $health_condition, $tax_exception;
     public $leave_search, $leave_name, $leave_type_name, $leave_id, $staff_name, $from_date, $to_date, $qty, $order_no, $remark;
     public  $submit_button_text, $cancel_action, $submit_form, $leave_types;
 
@@ -82,7 +85,7 @@ class StaffDetail extends Component
 
 
     //relative
-    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_department_id, $is_newly_appointed,
+    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_department_id, $is_newly_appointed = false,
         $spouse_father_name, $spouse_father_ethnic_id, $spouse_father_religion_id, $spouse_father_place_of_birth, $spouse_father_occupation, $spouse_father_address_street, $spouse_father_address_ward, $spouse_father_address_township_or_town_id, $spouse_father_address_region_id,
         $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id,
         $spouse_mother_name, $spouse_mother_ethnic_id, $spouse_mother_religion_id, $spouse_mother_place_of_birth, $spouse_mother_occupation, $spouse_mother_address_street, $spouse_mother_address_ward, $spouse_mother_address_township_or_town_id, $spouse_mother_address_region_id,
@@ -105,6 +108,8 @@ class StaffDetail extends Component
     public $awards = [];
     public $past_occupations = [];
     public $abroads = [];
+    public $socials = [];
+    public $staff_languages = [];
     public $punishments = [];
 
     protected $personal_info_rules = [
@@ -141,12 +146,10 @@ class StaffDetail extends Component
         'current_address_street' => 'required',
         'current_address_ward' => 'required',
         'current_address_region_id' => 'required',
-        // 'current_address_district_id' => 'required',
         'current_address_township_or_town_id' => 'required',
         'permanent_address_street' => 'required',
         'permanent_address_ward' => 'required',
         'permanent_address_region_id' => 'required',
-        // 'permanent_address_district_id' => 'required',
         'permanent_address_township_or_town_id' => 'required',
         'previous_addresses' => 'required',
         'military_solider_no' => 'required',
@@ -200,7 +203,6 @@ class StaffDetail extends Component
         'father_address_street' => 'required',
         'father_address_ward' => 'required',
         'father_address_township_or_town_id' => 'required',
-        // 'father_address_district_id' => 'required',
         'father_address_region_id' => 'required',
         'spouse_father_name' => 'required',
         'spouse_father_ethnic_id' => 'required',
@@ -219,7 +221,6 @@ class StaffDetail extends Component
         'mother_address_street' => 'required',
         'mother_address_ward' => 'required',
         'mother_address_township_or_town_id' => 'required',
-        // 'mother_address_district_id' => 'required',
         'mother_address_region_id' => 'required',
         'spouse_mother_name' => 'required',
         'spouse_mother_ethnic_id' => 'required',
@@ -229,7 +230,6 @@ class StaffDetail extends Component
         'spouse_mother_address_street' => 'required',
         'spouse_mother_address_ward' => 'required',
         'spouse_mother_address_township_or_town_id' => 'required',
-
         'spouse_mother_address_region_id' => 'required',
         'family_in_politics' => 'required',
     ];
@@ -403,6 +403,7 @@ class StaffDetail extends Component
                 'name' => $sib->name,
                 'ethnic' => $sib->ethnic_id,
                 'religion' => $sib->religion_id,
+                'gender' => $sib->gender_id,
                 'place_of_birth' => $sib->place_of_birth,
                 'occupation' => $sib->occupation,
                 'address' => $sib->address,
@@ -480,20 +481,18 @@ class StaffDetail extends Component
         $this->nrc_township_code_id = $staff->nrc_township_code_id;
         $this->nrc_sign_id = $staff->nrc_sign_id;
         $this->nrc_code = $staff->nrc_code;
-        $this->nrc_front = $staff->nrc_front;
-        $this->nrc_back = $staff->nrc_back;
+        $this->staff_nrc_front = $staff->nrc_front;
+        $this->staff_nrc_back = $staff->nrc_back;
         $this->phone = $staff->phone;
         $this->mobile = $staff->mobile;
         $this->email = $staff->email;
         $this->current_address_street = $staff->current_address_street;
         $this->current_address_ward = $staff->current_address_ward;
         $this->current_address_region_id = $staff->current_address_region_id;
-        // $this->current_address_district_id = $staff->current_address_district_id;
         $this->current_address_township_or_town_id = $staff->current_address_township_or_town_id;
         $this->permanent_address_street = $staff->permanent_address_street;
         $this->permanent_address_ward = $staff->permanent_address_ward;
         $this->permanent_address_region_id = $staff->permanent_address_region_id;
-        // $this->permanent_address_district_id = $staff->permanent_address_district_id;
         $this->permanent_address_township_or_town_id = $staff->permanent_address_township_or_town_id;
         $this->previous_addresses = $staff->previous_addresses;
         $this->military_solider_no = $staff->military_solider_no;
@@ -548,7 +547,6 @@ class StaffDetail extends Component
         $this->father_address_street = $staff->father_address_street;
         $this->father_address_ward = $staff->father_address_ward;
         $this->father_address_township_or_town_id = $staff->father_address_township_or_town_id;
-        // $this->father_address_district_id = $staff->father_address_district_id;
         $this->father_address_region_id = $staff->father_address_region_id;
 
         $this->spouse_father_name = $staff->spouse_father_name;
@@ -683,7 +681,6 @@ class StaffDetail extends Component
         $this->past_occupations[] = ['rank' => '', 'department' => '', 'section' => '', 'from_date' => '', 'to_date' => '', 'remark' => ''];
     }
 
-
     public function add_punishments()
     {
         $this->punishments[] = ['penalty_type' => '', 'reason' => '', 'from_date' => '', 'to_date' => ''];
@@ -694,6 +691,15 @@ class StaffDetail extends Component
         $this->abroads[] = [['country' => '', 'particular' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '']];
     }
 
+    public function add_socials()
+    {
+        $this->socials[] = [['particular' => '', 'from_date' => '', 'to_date' => '', 'remark' => '']];
+    }
+
+    public function add_staff_languages()
+    {
+        $this->staff_languages[] = [['language' => '', 'rank' => '', 'writing' => '', 'reading' => '', 'speaking' => '', 'remark' => '']];
+    }
 
     public function removeEdu($index)
     {
@@ -791,6 +797,18 @@ class StaffDetail extends Component
         $this->abroads = array_values($this->abroads);
     }
 
+    public function remove_socials($index)
+    {
+        unset($this->socials[$index]);
+        $this->socials = array_values($this->socials);
+    }
+
+    public function remove_staff_languages($index)
+    {
+        unset($this->staff_languages[$index]);
+        $this->staff_languages = array_values($this->staff_languages);
+    }
+
     public function remove_punishments($index)
     {
         unset($this->punishments[$index]);
@@ -824,11 +842,14 @@ class StaffDetail extends Component
         }
 
         $personal_info = [
-            'staff_photo' => $this->photo ? $_photo : null,
+            'staff_photo' => $staff?->staff_photo ?: ($this->photo ? $_photo : null),
             'name' => $this->name,
             'nick_name' => $this->nick_name,
             'other_name' => $this->other_name,
             'staff_no' => $this->staff_no,
+            'attendid' => $this->attendid,
+            'gpms_staff_no' => $this->gpms_staff_no,
+            'spouse_name' => $this->spouse_name,
             'dob' => $this->dob,
             'gender_id' => $this->gender_id,
             'ethnic_id' => $this->ethnic_id,
@@ -846,20 +867,18 @@ class StaffDetail extends Component
             'nrc_township_code_id' => $this->nrc_township_code_id,
             'nrc_sign_id' => $this->nrc_sign_id,
             'nrc_code' => $this->nrc_code,
-            'nrc_front' => $this->nrc_front ? $_nrc_front : null,
-            'nrc_back' => $this->nrc_back ? $_nrc_back : null,
+            'nrc_front' => $staff?->nrc_front ?: ($this->nrc_front ? $_nrc_front : null),
+            'nrc_back' =>  $staff?->nrc_back ?: ($this->nrc_back ? $_nrc_back : null),
             'phone' => $this->phone,
             'mobile' => $this->mobile,
             'email' => $this->email,
             'current_address_street' => $this->current_address_street,
             'current_address_ward' => $this->current_address_ward,
             'current_address_region_id' => $this->current_address_region_id,
-            // 'current_address_district_id' => $this->current_address_district_id,
             'current_address_township_or_town_id' => $this->current_address_township_or_town_id,
             'permanent_address_street' => $this->permanent_address_street,
             'permanent_address_ward' => $this->permanent_address_ward,
             'permanent_address_region_id' => $this->permanent_address_region_id,
-            // 'permanent_address_district_id' => $this->permanent_address_district_id,
             'permanent_address_township_or_town_id' => $this->permanent_address_township_or_town_id,
             'previous_addresses' => $this->previous_addresses,
             'military_solider_no' => $this->military_solider_no,
@@ -871,9 +890,16 @@ class StaffDetail extends Component
             'military_served_army' => $this->military_served_army,
             'military_brief_history_or_penalty' => $this->military_brief_history_or_penalty,
             'military_pension' => $this->military_pension,
+            'military_gazetted_no' => $this->military_gazetted_no,
+            'veteran_no' => $this->veteran_no,
+            'veteran_date' => $this->veteran_date,
+            'last_serve_army' => $this->last_serve_army,
+            'health_condition' => $this->health_condition,
+            'tax_exception' => $this->tax_exception,
+            'life_insurance_proposal' => $this->life_insurance_proposal,
+            'life_insurance_policy_no' => $this->life_insurance_policy_no,
+            'life_insurance_premium' => $this->life_insurance_premium
         ];
-
-
 
         $job_info = [
             'is_parents_citizen_when_staff_born' => $this->is_parents_citizen_when_staff_born,
@@ -904,7 +930,6 @@ class StaffDetail extends Component
             'father_address_street' => $this->father_address_street,
             'father_address_ward' => $this->father_address_ward,
             'father_address_township_or_town_id' => $this->father_address_township_or_town_id,
-            // 'father_address_district_id' => $this->father_address_district_id,
             'father_address_region_id' => $this->father_address_region_id,
             'spouse_father_name' => $this->spouse_father_name,
             'spouse_father_ethnic_id' => $this->spouse_father_ethnic_id,
@@ -923,7 +948,6 @@ class StaffDetail extends Component
             'mother_address_street' => $this->mother_address_street,
             'mother_address_ward' => $this->mother_address_ward,
             'mother_address_township_or_town_id' => $this->mother_address_township_or_town_id,
-            // 'mother_address_district_id' => $this->mother_address_district_id,
             'mother_address_region_id' => $this->mother_address_region_id,
             'spouse_mother_name' => $this->spouse_mother_name,
             'spouse_mother_ethnic_id' => $this->spouse_mother_ethnic_id,
@@ -933,7 +957,6 @@ class StaffDetail extends Component
             'spouse_mother_address_street' => $this->spouse_mother_address_street,
             'spouse_mother_address_ward' => $this->spouse_mother_address_ward,
             'spouse_mother_address_township_or_town_id' => $this->spouse_mother_address_township_or_town_id,
-            // 'mother_address_district_id' => $this->mother_address_district_id,
             'spouse_mother_address_region_id' => $this->spouse_mother_address_region_id,
             'family_in_politics' => $this->family_in_politics,
         ];
@@ -968,8 +991,8 @@ class StaffDetail extends Component
         $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
         $this->staff_id = $staff->id;
         $this->staff_photo = $staff->staff_photo;
-        $this->nrc_front = $staff->nrc_front;
-        $this->nrc_back = $staff->nrc_back;
+        $this->staff_nrc_front = $staff->nrc_front;
+        $this->staff_nrc_back = $staff->nrc_back;
 
         switch ($this->tab) {
             case 'personal_info':
@@ -987,6 +1010,8 @@ class StaffDetail extends Component
 
             case 'detail_personal_info':
                 $this->saveAbroads($staff->id);
+                $this->saveSocials($staff->id);
+                $this->saveStaffLanguages($staff->id);
                 $this->saveSchools($staff->id);
                 $this->savePastOccupations($staff->id);
                 $this->saveAwards($staff->id);
@@ -1021,6 +1046,36 @@ class StaffDetail extends Component
         }
     }
 
+    private function saveSocials($staffId)
+    {
+        SocialActivity::where('staff_id', $staffId)->delete();
+        foreach ($this->socials as $social) {
+            SocialActivity::create([
+                'staff_id' => $staffId,
+                'particular' => $social['particular'],
+                'from_date' => $social['from_date'],
+                'to_date' => $social['to_date'],
+                'remark' => $social['remark'],
+            ]);
+        }
+    }
+
+    private function saveStaffLanguages($staffId)
+    {
+        StaffLanguage::where('staff_id', $staffId)->delete();
+        foreach ($this->staff_languages as $lang) {
+            StaffLanguage::create([
+                'staff_id' => $staffId,
+                'language_id' => $lang['language'],
+                'rank' => $lang['rank'],
+                'writing' => $lang['writing'],
+                'reading' => $lang['reading'],
+                'speaking' => $lang['speaking'],
+                'remark' => $lang['remark'],
+            ]);
+        }
+    }
+
     private function saveSchools($staffId)
     {
         School::where('staff_id', $staffId)->delete();
@@ -1044,8 +1099,6 @@ class StaffDetail extends Component
         }
     }
 
-
-
     private function savePastOccupations($staffId)
     {
         PastOccupation::where('staff_id', $staffId)->delete();
@@ -1063,7 +1116,6 @@ class StaffDetail extends Component
         }
     }
 
-
     private function saveAwards($staffId)
     {
         Awarding::where('staff_id', $staffId)->delete();
@@ -1078,7 +1130,6 @@ class StaffDetail extends Component
             ]);
         }
     }
-
 
     private function saveTrainings($staffId)
     {
@@ -1168,6 +1219,7 @@ class StaffDetail extends Component
             'ethnic_id' => $relative['ethnic'],
             'religion_id' => $relative['religion'],
             'place_of_birth' => $relative['place_of_birth'],
+            'gender_id' => $relative['gender'],
             'occupation' => $relative['occupation'],
             'address' => $relative['address'],
             'relation_id' => $relative['relation'],
@@ -1237,7 +1289,7 @@ class StaffDetail extends Component
     {
         $this->spouse_mother_address_township_or_town_id = null;
     }
-  
+
 
     public function updatedFatherAddressRegionId()
     {
@@ -1248,20 +1300,11 @@ class StaffDetail extends Component
     {
         $this->mother_address_township_or_town_id = null;
     }
-    // public function updatedSpouseFatherAddressRegionId()
-    // {
-
-    //     $this->spouse_father_address_township_or_town_id = null; 
-    // }
-
-
 
     public function updatedNrcRegionId()
     {
         $this->nrc_township_code_id = null;
     }
-
-
 
     public function render()
     {
@@ -1274,8 +1317,6 @@ class StaffDetail extends Component
             'education_groups' => null,
             'education_types' => null,
             '_educations' => null,
-            // 'current_address_districts' => null,
-            // 'permanent_address_districts' => null,
             'current_address_townships' => null,
             'permanent_address_townships' => null,
             'ranks' => null,
@@ -1291,12 +1332,13 @@ class StaffDetail extends Component
             '_awards' => null,
             'sections' => null,
             'penalty_types' => null,
+            'languages' => null,
             'relatives' => null,
             'relations' => null,
-            // 'father_districts' => null,
             'father_townships' => null,
-            // 'mother_districts' => null,
+            'spouse_father_townships' => null,
             'mother_townships' => null,
+            'spouse_mother_townships' => null,
             'nrc_region_ids' => null,
             'nrc_township_codes' => null,
             'nrc_signs' => null,
@@ -1313,7 +1355,7 @@ class StaffDetail extends Component
                 $data['permanent_address_township_or_towns'] = Township::where('region_id', $this->permanent_address_region_id)->get();
                 $data['current_address_townships'] = Township::where('region_id', $this->current_address_region_id)->get();
                 $data['permanent_address_townships'] = Township::where('region_id', $this->permanent_address_region_id)->get();
-             
+
 
 
                 $data['nrc_region_ids'] = NrcRegionId::all();
@@ -1342,6 +1384,7 @@ class StaffDetail extends Component
                 $data['_awards'] = Award::all();
                 $data['sections'] = Section::all();
                 $data['penalty_types'] = PenaltyType::all();
+                $data['languages'] = Language::all();
                 $data['ranks'] = Rank::all();
                 $data['departments'] = Department::all();
                 break;
@@ -1356,12 +1399,13 @@ class StaffDetail extends Component
                     'spouse_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည်၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_siblings],
                     'spouse_father_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အဘ၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_father_siblings],
                     'spouse_mother_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အမိ၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_mother_siblings],
-                
+
 
                 ];
                 $data['relations'] = Relation::all();
                 $data['father_township_or_towns'] = Township::where('region_id', $this->father_address_region_id)->get();
                 $data['father_townships'] = Township::where('region_id', $this->father_address_region_id)->get();
+                $data['spouse_father_townships'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
                 $data['mother_township_or_towns'] = Township::where('region_id', $this->mother_address_region_id)->get();
                 $data['mother_townships'] = Township::where('region_id', $this->mother_address_region_id)->get();
                 $data['spouse_father_townships_or_towns'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
@@ -1411,7 +1455,6 @@ class StaffDetail extends Component
         $this->message = 'Created successfully.';
         $this->close_modal();
     }
-
 
     public function edit_modal($id)
     {

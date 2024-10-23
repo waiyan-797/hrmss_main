@@ -20,17 +20,16 @@
                         <th colspan="2" class="border border-black text-center p-2">
                             အမြဲတမ်းအတွင်းဝန်<br>ချီးမြှင့်ငွေ</th>
                         <th colspan="2" class="border border-black text-center p-2">အခြားချီးမြှင့်ငွေ/စရိတ်</th>
-                        <th colspan="3" class="border border-black text-center p-2">ရက္ခာစရိတ်</th>
+                        <th colspan="2" class="border border-black text-center p-2">ရက္ခာစရိတ်</th>
                         <th colspan="2" class="border border-black text-center p-2">စုစုပေါင်း</th>
                     </tr>
                     <tr>
                         <th class="border border-black text-center p-2">ဝန်ထမ်းဦးရေ</th>
-                        <th class="border border-black text-center p-2">ဒေသစရိတ်ပေါင်း(ကျပ်သန်း)</th>
+                        <th class="border border-black text-center p-2">ချီးမြှင့်ငွေပေါင်း(ကျပ်သန်း)</th>
                         <th class="border border-black text-center p-2">ဝန်ထမ်းဦးရေ</th>
-                        <th class="border border-black text-center p-2">ဒေသစရိတ်ပေါင်း(ကျပ်သန်း)</th>
+                        <th class="border border-black text-center p-2">ချီးမြှင့်ငွေပေါင်း(ကျပ်သန်း)</th>
                         <th class="border border-black text-center p-2">ဝန်ထမ်းဦးရေ</th>
                         <th class="border border-black text-center p-2">ဒေသစရိတ်နှုန်းထား</th>
-                        <th class="border border-black text-center p-2">ချီးမြှင့်ငွေပေါင်း(ကျပ်သန်း)</th>
                         <th class="border border-black text-center p-2">ဝန်ထမ်းဦးရေ</th>
                         <th class="border border-black text-center p-2">ချီးမြှင့်ငွေပေါင်း(ကျပ်သန်း)</th>
                     </tr>
@@ -45,80 +44,211 @@
                         <td class="border border-black text-center p-2">၆</td>
                         <td class="border border-black text-center p-2">၇</td>
                         <td class="border border-black text-center p-2">၈</td>
-                        <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2">၉</td>
                         <td class="border border-black text-center p-2">၁၀=၄+၆+၈</td>
                         <td class="border border-black text-center p-2">၁၁=၅+၇+၉</td>
                     </tr>
-                    <tr>
-                        <td class="border border-black text-center p-2">၁</td>
-                        <td class="border border-black text-center p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                        <td class="border border-black text-center p-2">ညွှန်ကြားရေးမှုးချုပ်</td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                    </tr>
+
+                    @foreach ($high_staffs as $staff)
+                        @php
+                            $additionEducationCount = $staff->staffs->filter(fn($staff) => $staff->salaries->whereNotNull('addition_education')->isNotEmpty())->count();
+                            $additionEducationSum = $staff->staffs->sum(fn($staff) => $staff->salaries->sum('addition_education'));
+
+                            $additionCount = $staff->staffs->filter(fn($staff) => $staff->salaries->whereNotNull('addition')->isNotEmpty())->count();
+                            $additionSum = $staff->staffs->sum(fn($staff) => $staff->salaries->sum('addition'));
+
+                            $additionRationCount = $staff->staffs->filter(fn($staff) => $staff->salaries->whereNotNull('addition_ration')->isNotEmpty())->count();
+                            $additionRationSum = $staff->staffs->sum(fn($staff) => $staff->salaries->sum('addition_ration'));
+
+                            $totalCount = $staff->staffs->filter(fn($staff) => $staff->salaries->filter(fn($salary) =>
+                                $salary->addition_education !== null ||
+                                $salary->addition !== null ||
+                                $salary->addition_ration !== null
+                            )->isNotEmpty())->count();
+
+                            $totalSum = $staff->staffs->sum(fn($staff) =>
+                                $staff->salaries->sum(fn($salary) =>
+                                    ($salary->addition_education ?? 0) +
+                                    ($salary->addition ?? 0) +
+                                    ($salary->addition_ration ?? 0)
+                                )
+                            );
+                        @endphp
+                        <tr>
+                            <td class="border border-black text-center p-2">{{ en2mm($loop->index + 1) }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->payscale->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->name }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($additionEducationCount) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($additionEducationSum) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($additionCount) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($additionSum) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($additionRationCount) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($additionRationSum) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($totalCount) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($totalSum) }}</td>
+                        </tr>
+                    @endforeach
                     <tr>
                         <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2">အရာထမ်းပေါင်း</td>
                         <td class="border border-black text-center p-2">-</td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($high_staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->whereNotNull('addition_education')->count() : 0)) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($high_staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->sum('addition_education') : 0)) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($high_staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->whereNotNull('addition')->count() : 0)) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($high_staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->sum('addition') : 0)) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($high_staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->whereNotNull('addition_ration')->count() : 0)) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($high_staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->sum('addition_ration') : 0)) }}
+                        </td>
+                        <td class="border border-black text-center p-2">{{ en2mm(
+                            $high_staffs->sum(fn($staff) =>
+                                $staff->staffs->sum(fn($staff) =>
+                                    $staff->salaries->filter(fn($salary) =>
+                                        $salary->addition_education !== null ||
+                                        $salary->addition !== null ||
+                                        $salary->addition_ration !== null
+                                    )->count()
+                                )
+                            )
+                        ) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm(
+                            $high_staffs->sum(fn($staff) =>
+                                $staff->staffs->sum(fn($staff) =>
+                                    $staff->salaries->sum(fn($salary) =>
+                                        ($salary->addition_education ?? 0) +
+                                        ($salary->addition ?? 0) +
+                                        ($salary->addition_ration ?? 0)
+                                    )
+                                )
+                            )
+                        ) }}</td>
                     </tr>
-                    <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                        <td class="border border-black text-center p-2">ရုံးအုပ်နှင့်အဆင့်တူ</td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                    </tr>
+                    @foreach ($low_staffs as $staff)
+                        @php
+                            $additionEducationCount = $staff->staffs->filter(fn($staff) => $staff->salaries->whereNotNull('addition_education')->isNotEmpty())->count();
+                            $additionEducationSum = $staff->staffs->sum(fn($staff) => $staff->salaries->sum('addition_education'));
+
+                            $additionCount = $staff->staffs->filter(fn($staff) => $staff->salaries->whereNotNull('addition')->isNotEmpty())->count();
+                            $additionSum = $staff->staffs->sum(fn($staff) => $staff->salaries->sum('addition'));
+
+                            $additionRationCount = $staff->staffs->filter(fn($staff) => $staff->salaries->whereNotNull('addition_ration')->isNotEmpty())->count();
+                            $additionRationSum = $staff->staffs->sum(fn($staff) => $staff->salaries->sum('addition_ration'));
+
+                            $totalCount = $staff->staffs->filter(fn($staff) => $staff->salaries->filter(fn($salary) =>
+                                $salary->addition_education !== null ||
+                                $salary->addition !== null ||
+                                $salary->addition_ration !== null
+                            )->isNotEmpty())->count();
+
+                            $totalSum = $staff->staffs->sum(fn($staff) =>
+                                $staff->salaries->sum(fn($salary) =>
+                                    ($salary->addition_education ?? 0) +
+                                    ($salary->addition ?? 0) +
+                                    ($salary->addition_ration ?? 0)
+                                )
+                            );
+                        @endphp
+                        <tr>
+                            <td class="border border-black text-center p-2">{{ en2mm($loop->index + 1) }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->payscale->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->name }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($additionEducationCount) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($additionEducationSum) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($additionCount) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($additionSum) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($additionRationCount) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($additionRationSum) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($totalCount) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($totalSum) }}</td>
+                        </tr>
+                    @endforeach
                     <tr>
                         <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2">အမှုထမ်းပေါင်း</td>
-                        <td class="border border-black text-center p-2">-</td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">-</td>4
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($low_staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->whereNotNull('addition_education')->count() : 0)) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($low_staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->sum('addition_education') : 0)) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($low_staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->whereNotNull('addition')->count() : 0)) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($low_staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->sum('addition') : 0)) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($low_staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->whereNotNull('addition_ration')->count() : 0)) }}
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{ en2mm($low_staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->sum('addition_ration') : 0)) }}
+                        </td>
+                        <td class="border border-black text-center p-2">{{ en2mm(
+                            $low_staffs->sum(fn($staff) =>
+                                $staff->staffs->sum(fn($staff) =>
+                                    $staff->salaries->filter(fn($salary) =>
+                                        $salary->addition_education !== null ||
+                                        $salary->addition !== null ||
+                                        $salary->addition_ration !== null
+                                    )->count()
+                                )
+                            )
+                        ) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm(
+                            $low_staffs->sum(fn($staff) =>
+                                $staff->staffs->sum(fn($staff) =>
+                                    $staff->salaries->sum(fn($salary) =>
+                                        ($salary->addition_education ?? 0) +
+                                        ($salary->addition ?? 0) +
+                                        ($salary->addition_ration ?? 0)
+                                    )
+                                )
+                            )
+                        ) }}</td>
                     </tr>
                     <tr>
                         <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2">စုစုပေါင်း</td>
                         <td class="border border-black text-center p-2">-</td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->whereNotNull('addition_education')->count() : 0)) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->sum('addition_education') : 0)) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->whereNotNull('addition')->count() : 0)) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->sum('addition') : 0)) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->whereNotNull('addition_ration')->count() : 0)) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($staffs->sum(fn($staff) => $staff->salaries ? $staff->salaries->sum('addition_ration') : 0)) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm(
+                            $staffs->sum(fn($staff) =>
+                                $staff->staffs->sum(fn($staff) =>
+                                    $staff->salaries->filter(fn($salary) =>
+                                        $salary->addition_education !== null ||
+                                        $salary->addition !== null ||
+                                        $salary->addition_ration !== null
+                                    )->count()
+                                )
+                            )
+                        ) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm(
+                            $staffs->sum(fn($staff) =>
+                                $staff->staffs->sum(fn($staff) =>
+                                    $staff->salaries->sum(fn($salary) =>
+                                        ($salary->addition_education ?? 0) +
+                                        ($salary->addition ?? 0) +
+                                        ($salary->addition_ration ?? 0)
+                                    )
+                                )
+                            )
+                        ) }}</td>
                     </tr>
                 </tbody>
             </table>

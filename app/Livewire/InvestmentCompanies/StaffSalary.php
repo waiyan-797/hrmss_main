@@ -10,25 +10,6 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class StaffSalary extends Component
 {
-    // public function go_pdf(){
-    //     $staffs = Staff::get();
-    //     $data = [
-    //         'staffs' => $staffs,
-    //     ];
-    //     $pdf = PDF::loadView('pdf_reports.staff_salary_report', $data);
-    //     return response()->streamDownload(function() use ($pdf) {
-    //         echo $pdf->output();
-    //     }, 'staff_salary_report_pdf.pdf');
-    // }
-
-
-    //  public function render()
-    //  {
-    //     $staffs = Staff::get();
-    //   return view('livewire.investment-companies.staff-salary',[ 
-    //     'staffs' => $staffs,
-    // ]);
-    // }
     public function go_pdf()
     {
         $salaries = Salary::with('staff')->get();

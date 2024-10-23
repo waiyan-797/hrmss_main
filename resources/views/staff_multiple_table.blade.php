@@ -14,9 +14,9 @@
                 @foreach ($column_names as $name)
                     <th scope="col" class="px-6 py-3 w-1/{{count($column_names)}} ">{{$name}}</th>
                 @endforeach
-             
+
                 <th scope="col" class="px-6 py-3 w-1/{{count($column_names)}} "></th>
-                
+
 
             </tr>
         </thead>

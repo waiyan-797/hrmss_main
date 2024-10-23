@@ -26,7 +26,7 @@
             font-family: 'tharlon';
             font-size: 13px;
         }
-        
+
         .table-container {
             margin-top: 20px;
             width: 100%;
@@ -67,7 +67,7 @@
             }
         }
 
-       
+
     </style>
 </head>
 <body>
@@ -113,50 +113,97 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($payscales as $payscale)
+                    <tr>
+                        <td>{{ $loop->index + 1 }}</td>
+                        <td>{{ $payscale->ranks[0]->name }}နှင့်အဆင့်တူ</td>
+                        <td>{{ en2mm($payscale->staff->count()) }}</td>
+                        <td>{{ en2mm($payscale->staff->where('gender_id', 1)->count()) }}</td>
+                        <td>{{ en2mm($payscale->staff->where('gender_id', 2)->count()) }}</td>
+                        <td>
+                            {{ en2mm($payscale->staff->filter(fn($staff) =>
+                                \Carbon\Carbon::parse($staff->dob)->age >= 18 &&
+                                \Carbon\Carbon::parse($staff->dob)->age <= 30
+                            )->count()) }}
+                        </td>
+
+                        <td>
+                            {{ en2mm($payscale->staff->filter(fn($staff) =>
+                                \Carbon\Carbon::parse($staff->dob)->age >= 31 &&
+                                \Carbon\Carbon::parse($staff->dob)->age <= 40
+                            )->count()) }}
+                        </td>
+                        <td>
+                            {{ en2mm($payscale->staff->filter(fn($staff) =>
+                                \Carbon\Carbon::parse($staff->dob)->age >= 41 &&
+                                \Carbon\Carbon::parse($staff->dob)->age <= 50
+                            )->count()) }}
+                        </td>
+                        <td>
+                            {{ en2mm($payscale->staff->filter(fn($staff) =>
+                                \Carbon\Carbon::parse($staff->dob)->age >= 51 &&
+                                \Carbon\Carbon::parse($staff->dob)->age <= 60
+                            )->count()) }}
+                        </td>
+                        <td>
+                            {{ en2mm($payscale->staff->filter(fn($staff) =>
+                                \Carbon\Carbon::parse($staff->dob)->age >= 61
+                            )->count()) }}
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
                 <tr>
-                    <td>1</td>
-                    <td>Director General / PS</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                    <td>Peon</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr class="font-bold bg-gray">
-                    <td colspan="2">Total</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="border border-black p-2 font-semibold" colspan="2">စုစုပေါင်း</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($payscales->sum(fn($payscale) => $payscale->staff->count())) }}</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($payscales->sum(fn($payscale) => $payscale->staff->where('gender_id', 1)->count())) }}</td>
+                    <td class="border border-black p-2 font-semibold">{{ en2mm($payscales->sum(fn($payscale) => $payscale->staff->where('gender_id', 2)->count())) }}</td>
+                    <td class="border border-black p-2 font-semibold">
+                        {{ en2mm(
+                            $payscales->sum(fn($payscale) => $payscale->staff->filter(fn($staff) =>
+                                \Carbon\Carbon::parse($staff->dob)->age >= 18 &&
+                                \Carbon\Carbon::parse($staff->dob)->age <= 30
+                                )->count())
+                        ) }}
+                    </td>
+                    <td class="border border-black p-2 font-semibold">
+                        {{ en2mm(
+                            $payscales->sum(fn($payscale) => $payscale->staff->filter(fn($staff) =>
+                                \Carbon\Carbon::parse($staff->dob)->age >= 31 &&
+                                \Carbon\Carbon::parse($staff->dob)->age <= 40
+                                )->count())
+                        ) }}
+                    </td>
+                    <td class="border border-black p-2 font-semibold">
+                        {{ en2mm(
+                            $payscales->sum(fn($payscale) => $payscale->staff->filter(fn($staff) =>
+                                \Carbon\Carbon::parse($staff->dob)->age >= 41 &&
+                                \Carbon\Carbon::parse($staff->dob)->age <= 50
+                                )->count())
+                        ) }}
+                    </td>
+                    <td class="border border-black p-2 font-semibold">
+                        {{ en2mm(
+                            $payscales->sum(fn($payscale) => $payscale->staff->filter(fn($staff) =>
+                                \Carbon\Carbon::parse($staff->dob)->age >= 51 &&
+                                \Carbon\Carbon::parse($staff->dob)->age <= 60
+                                )->count())
+                        ) }}
+                    </td>
+                    <td class="border border-black p-2 font-semibold">
+                        {{ en2mm(
+                            $payscales->sum(fn($payscale) => $payscale->staff->filter(fn($staff) =>
+                                \Carbon\Carbon::parse($staff->dob)->age >= 61
+                                )->count())
+                        ) }}
+                    </td>
+                    <td class="border border-black p-2 font-semibold"></td>
+                    <td class="border border-black p-2 font-semibold"></td>
                 </tr>
             </tbody>
         </table>
-    
+
     </page>
 </body>
 </html>

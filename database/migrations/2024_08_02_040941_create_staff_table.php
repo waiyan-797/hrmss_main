@@ -134,9 +134,9 @@ return new class extends Migration
             $table->foreignId('spouse_mother_address_township_or_town_id')->nullable()->constrained('townships')->onDelete('set null');
             $table->foreignId('spouse_mother_address_district_id')->nullable()->constrained('districts')->onDelete('set null');
             $table->foreignId('spouse_mother_address_region_id')->nullable()->constrained('regions')->onDelete('set null');
-            $table->boolean('family_in_politics')->nullable();
+            $table->boolean('family_in_politics')->default(false);
             //job_info
-            $table->boolean('is_parents_citizen_when_staff_born')->nullable();
+            $table->boolean('is_parents_citizen_when_staff_born')->default(false);
             $table->foreignId('current_rank_id')->nullable()->constrained('ranks')->onDelete('set null');
             $table->date('current_rank_date')->nullable();
             $table->foreignId('current_department_id')->nullable()->constrained('departments')->onDelete('set null');
@@ -148,8 +148,8 @@ return new class extends Migration
             $table->foreignId('salary_paid_by')->nullable()->constrained('departments')->onDelete('set null');
             $table->date('join_date')->nullable();
             $table->date('government_staff_started_date')->nullable();
-            $table->boolean('is_newly_appointed')->nullable();
-            $table->boolean('is_direct_appointed')->nullable();
+            $table->boolean('is_newly_appointed')->default(false);
+            $table->boolean('is_direct_appointed')->default(false);
             $table->foreignIdFor(Payscale::class)->nullable()->constrained()->nullOnDelete();
             $table->integer('current_salary')->nullable();
             $table->integer('current_increment_time')->nullable();
@@ -173,10 +173,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(1);
             $table->string('status')->nullable();
             $table->string('previous_active_status')->default('1');
-
             $table->timestamp('status_changed_at')->nullable();
-
-
             $table->date('retire_date')->nullable();
             $table->foreignIdFor(RetireType::class)->nullable()->nullOnDelete();
             $table->date('lost_contact_from_date')->nullable();
