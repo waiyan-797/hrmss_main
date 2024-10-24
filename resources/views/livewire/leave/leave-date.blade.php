@@ -1,5 +1,7 @@
 <div class="container mx-auto">
-    <h1 class="text-right text-lg font-bold mb-4">ဝန်ထမ်းအမည်</h1>
+    <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+    <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+    <h1 class="text-left text-lg font-bold mb-4">ဝန်ထမ်းအမည်</h1>
     <table class="md:w-full">
         <thead>
             <tr>
@@ -29,7 +31,6 @@
                 <th class="border border-black p-2">(၁)</th>
                 <th class="border-none p-2" ></th>
                 <th class="border-black p-2" rowspan="3">(၂)</th>
-              
                 <th class=" p-2" ></th>
                 <th class="border border-black p-2"></th>
                 <th class="border border-black p-2">(၃)</th>
@@ -198,8 +199,8 @@
                 <td class=" p-2"></td>
             </tr>
             <tr>
-                <td class=" p-2"></td>
-                <td class=" p-2"></td>
+                <td class="p-2"></td>
+                <td class="p-2"></td>
                 <td class=" p-2"></td>
                 <td class=" p-2"></td>
                 <td class=" p-2"></td>
@@ -212,9 +213,6 @@
                 <td class=" p-2"></td>
                 <td class=" p-2"></td>
             </tr>
-
-          
-           
         </tbody>
     </table>
 </div>

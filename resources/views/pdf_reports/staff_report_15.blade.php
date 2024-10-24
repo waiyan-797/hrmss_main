@@ -7,7 +7,7 @@
     <title>PDF Report 15</title>
     <style type="text/css">
         page{
-            background: white;
+            background: white;s
         }
 
         page[size="A4"] {

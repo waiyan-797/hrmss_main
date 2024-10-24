@@ -39,17 +39,17 @@
     </div>
     <div>
         <x-input-label for="Attendid" :value="__('Attend Id')" />
-        <x-text-input wire:model="attendid" id="attendid" name="attendid" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="attendid" id="attendid" name="attendid" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('attendid')" />
     </div>
     <div>
         <x-input-label for="GPMSဝန်ထမ်းအမှတ်" :value="__('GPMS ဝန်ထမ်းအမှတ်')" />
-        <x-text-input wire:model="gpms_staff_no" id="gpms_staff_no" name="gpms_staff_no" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="gpms_staff_no" id="gpms_staff_no" name="gpms_staff_no" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('gpms_staff_no')" />
     </div>
     <div>
         <x-input-label for="ခင်ပွန်း/ဇနီး" :value="__('ခင်ပွန်း/ဇနီး')" />
-        <x-text-input wire:model="spouse_name" id="spouse_name" name="spouse_name" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="spouse_name" id="spouse_name" name="spouse_name" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('spouse_name')" />
     </div>
     <div>
@@ -234,68 +234,68 @@
 
     <div>
         <x-input-label for="တပ်မတော်သို့ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်(က)ကိုယ်ပိုင်အမှတ်" :value="__('(က)တပ်မတော်သို့ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင် ကိုယ်ပိုင်အမှတ်')" />
-        <x-text-input wire:model="military_solider_no" id="military_solider_no" name="military_solider_no" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="military_solider_no" id="military_solider_no" name="military_solider_no" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('military_solider_no')" />
     </div>
     <div>
         <x-input-label for="(ခ) တပ်သို့ဝင်သည့်နေ့" :value="__('(ခ) တပ်သို့ဝင်သည့်နေ့')" />
-        <x-text-input wire:model="military_join_date" id="military_join_date" name="military_join_date" type="date" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="military_join_date" id="military_join_date" name="military_join_date" type="date" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_join_date')" />
     </div>
     <div>
         <x-input-label for="(ဂ) ဗိုလ်လောင်းသင်တန်းအမှတ်စဉ်" :value="__('(ဂ) ဗိုလ်လောင်းသင်တန်းအမှတ်စဉ်')" />
-        <x-text-input wire:model="military_dsa_no" id="military_dsa_no" name="military_dsa_no" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="military_dsa_no" id="military_dsa_no" name="military_dsa_no" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_dsa_no')" />
     </div>
     <div>
         <x-input-label for="(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့" :value="__('(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့')" />
-        <x-text-input wire:model="military_gazetted_date" id="military_gazetted_date" name="military_gazetted_date" type="date" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="military_gazetted_date" id="military_gazetted_date" name="military_gazetted_date" type="date" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_gazetted_date')" />
     </div>
     <div>
         <x-input-label for="(င) တပ်ထွက်သည့်နေ့" :value="__('(င) တပ်ထွက်သည့်နေ့')" />
-        <x-text-input wire:model="military_leave_date" id="military_leave_date" name="military_leave_date" type="date" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="military_leave_date" id="military_leave_date" name="military_leave_date" type="date" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_leave_date')" />
     </div>
     <div>
         <x-input-label for="(စ) ထွက်သည့်အကြောင်း" :value="__('(စ) ထွက်သည့်အကြောင်း')" />
-        <x-text-input wire:model="military_leave_reason" id="military_leave_reason" name="military_leave_reason" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="military_leave_reason" id="military_leave_reason" name="military_leave_reason" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_leave_reason')" />
     </div>
     <div>
         <x-input-label for="(ဆ) အမှုထမ်းဆောင်ခဲ့သောတပ်များ" :value="__('(ဆ) အမှုထမ်းဆောင်ခဲ့သောတပ်များ')" />
-        <x-text-input wire:model="military_served_army" id="military_served_army" name="military_served_army" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="military_served_army" id="military_served_army" name="military_served_army" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_served_army')" />
     </div>
     <div>
         <x-input-label for="(ဇ) တပ်တွင်းရာဇဝင်အကျဉ်း/ပြစ်မှု" :value="__('(ဇ) တပ်တွင်းရာဇဝင်အကျဉ်း/ပြစ်မှု')" />
-        <x-textarea-input wire:model="military_brief_history_or_penalty" id="military_brief_history_or_penalty" name="military_brief_history_or_penalty" class="mt-1 block w-full" required/>
+        <x-textarea-input wire:model="military_brief_history_or_penalty" id="military_brief_history_or_penalty" name="military_brief_history_or_penalty" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_brief_history_or_penalty')" />
     </div>
     <div>
         <x-input-label for="(ဈ) အငြိမ်းစားလစာ" :value="__('(ဈ) အငြိမ်းစားလစာ')" />
-        <x-text-input wire:model="military_pension" id="military_pension" name="military_pension" type="number" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="military_pension" id="military_pension" name="military_pension" type="number" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_pension')" />
     </div>
 
     <div>
         <x-input-label for="ပြန်တမ်းဝင်အမှတ်" :value="__('ပြန်တမ်းဝင်အမှတ်')" />
-        <x-text-input wire:model="military_gazetted_no" id="military_gazetted_no" name="military_gazetted_no" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="military_gazetted_no" id="military_gazetted_no" name="military_gazetted_no" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_gazetted_no')" />
     </div>
     <div>
         <x-input-label for="စစ်မှုထမ်းဟောင်းအမှတ်" :value="__('စစ်မှုထမ်းဟောင်းအမှတ်')" />
-        <x-text-input wire:model="veteran_no" id="veteran_no" name="veteran_no" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="veteran_no" id="veteran_no" name="veteran_no" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('veteran_no')" />
     </div>
     <div>
         <x-input-label for="စစ်မှုထမ်းဟောင်းရက်စွဲ" :value="__('စစ်မှုထမ်းဟောင်းရက်စွဲ')" />
-        <x-text-input wire:model="veteran_date" id="veteran_date" name="veteran_date" type="date" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="veteran_date" id="veteran_date" name="veteran_date" type="date" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('veteran_date')" />
     </div>
     <div>
         <x-input-label for="နောက်ဆုံးတာဝန်ထမ်းဆောင်ခဲ့သောတပ်များ" :value="__('နောက်ဆုံးတာဝန်ထမ်းဆောင်ခဲ့သောတပ်များ')" />
-        <x-text-input wire:model="last_serve_army" id="last_serve_army" name="last_serve_army" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="last_serve_army" id="last_serve_army" name="last_serve_army" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('last_serve_army')" />
     </div>
     <div>
@@ -305,22 +305,22 @@
     </div>
     <div>
         <x-input-label for="ဝင်‌ငွေခွန်သက်သာခွင့်" :value="__('ဝင်‌ငွေခွန်သက်သာခွင့်')" />
-        <x-text-input wire:model="tax_exception" id="tax_exception" name="tax_exception" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="tax_exception" id="tax_exception" name="tax_exception" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('tax_exception')" />
     </div>
     <div>
         <x-input-label for="အဆိုပြုလွှာ" :value="__('အဆိုပြုလွှာ')" />
-        <x-text-input wire:model="life_insurance_proposal" id="life_insurance_proposal" name="life_insurance_proposal" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="life_insurance_proposal" id="life_insurance_proposal" name="life_insurance_proposal" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('life_insurance_proposal')" />
     </div>
     <div>
         <x-input-label for="ပေါ်လစီအမှတ်" :value="__('ပေါ်လစီအမှတ်')" />
-        <x-text-input wire:model="life_insurance_policy_no" id="life_insurance_policy_no" name="life_insurance_policy_no" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="life_insurance_policy_no" id="life_insurance_policy_no" name="life_insurance_policy_no" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('life_insurance_policy_no')" />
     </div>
     <div>
         <x-input-label for="ပရီမီယံ" :value="__('ပရီမီယံ')" />
-        <x-text-input wire:model="life_insurance_premium" id="life_insurance_premium" name="life_insurance_premium" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="life_insurance_premium" id="life_insurance_premium" name="life_insurance_premium" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('life_insurance_premium')" />
     </div>
 </div>

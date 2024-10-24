@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+s<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -69,24 +69,25 @@
                         </table>
                         <table style="border: none;">
                             <tbody>
+                                @foreach($staffs as $staff)
                                 <tr>
                                     <td style="border: none; width: 5%;"></td>
                                     <td style="border: none; width: 35%;">အမည်</td>
                                     <td style="border: none; width: 5%;">-</td>
-                                    <td style="border: none; width: 55%;"></td>
+                                    <td style="border: none; width: 55%;">{{ $staff->name}}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;"></td>
                                     <td style="border: none;">ရာထူး</td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">အငယ်တန်းစာရေး</td>
+                                    <td style="border: none;">{{ $staff->current_rank->name}}</td>
                                 </tr>
                                
                                 <tr>
                                     <td style="border: none;"></td>
                                     <td style="border: none;">စတင်ထမ်းဆောင်သည့်နေ့</td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">၂၅-၂-၂၀၂၄ မှ ၂၄-၃-၂၀၂၄ ခွင့်(၂၉)ရက်</td>
+                                    <td style="border: none;">{{ $staff->join_date}}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;"></td>
@@ -98,22 +99,19 @@
                                     <td style="border: none;"></td>
                                     <td style="border: none;">ဖေဖော်ဝါရီလ လစာ</td>
                                     <td style="border: none;">=</td>
-                                    <td style="border: none;">၁၈၀,၀၀၀x(၂၅/၂၉)ရက်=၁၅၅,၁၇၂.၄၁</td>
+                                    <td style="border: none;">{{ en2mm($staff->current_salary*(25/29))}}</td>
                                 </tr>
+                                @foreach($salaries as $salary)
                                 <tr>
                                     <td style="border: none;"></td>
                                     <td style="border: none;">ဖေဖော်ဝါရီလ အပိုထောက်ပံ့ငွေ</td>
                                     <td style="border: none;">=</td>
-                                    <td style="border: none;">၃၀,၀၀၀x(၂၅/၂၉)ရက်=၂၅,၈၆၂.၀၇</td>
+                                    <td style="border: none;">{{ en2mm($salary->addition)}}</td>
                                 </tr>
-                                
+                                @endforeach
+                                @endforeach
                             </tbody>
                         </table>
-                        
-                      
-                        
-                       
-                       
                     </div>
                 </div>
             </div>

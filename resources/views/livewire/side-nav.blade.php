@@ -46,7 +46,6 @@
                         ['route_name' => 'gender', 'name' => 'ကျား/မ'],
                         ['route_name' => 'blood_type', 'name' => 'သွေးအုပ်စု'],
                         ['route_name' => 'relation', 'name' => 'တော်စပ်ပုံ'],
-                        ['route_name' => 'leave', 'name' => 'ခွင့်'],
                         ['route_name' => 'ministry', 'name' => 'ဝန်ကြီးဌာန'],
                         ['route_name' => 'language', 'name' => 'ဘာသာစကား'],
                         ['route_name' => 'department', 'name' => 'ဌာန'],

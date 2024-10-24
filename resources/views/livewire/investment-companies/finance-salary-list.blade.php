@@ -48,10 +48,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+                     
                         <tr>
                             <td class="border border-black text-center p-2">၁</td>
-                            <td class="border border-black text-center p-2">၄/၂၀၂၄</td>
+                            <td class="border border-black text-center p-2">@php 
+                            for($i=1;$i<=12;$i++)
+                                @endphp</td>
                             <td class="border border-black text-center p-2"></td>
                            
                             <td class="border border-black text-center p-2"></td>
@@ -69,6 +71,7 @@
                             <td class="border border-black text-left p-1">   
                             </td>
                         </tr>
+                    
                         <tr>
                             <td class="border border-black text-center p-2">၂</td>
                             <td class="border border-black text-center p-2">၅/၂၀၂၄</td>

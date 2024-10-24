@@ -10,12 +10,11 @@
                 လစာစာရင်းညှိနှုင်းခြင်း။ ...</h1>
 
                 <div>
-                    
                     <select   wire:model.live='staff_id'>
                         @foreach ($staffs    as $staff)
                                 <option  value="{{$staff->id}}">
                                   {{$staff->gender_id ==  1 ? "ဦိး" : "ဒေါ်" }}    {{$staff->name}}
-                                                                </option>
+                        </option>
                         @endforeach
                     </select>
                     <input type="month" wire:model.live='monthsSelect'> 

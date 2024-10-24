@@ -194,31 +194,31 @@
         <x-input-label :value="__('နောက်ဆုံးအောင်မြင်ခဲ့သည့် ကျောင်း (အမည်, အတန်း, ခုံအမှတ်, ဘာသာရပ်)')" />
         <div class="flex flex-row justify-center gap-4">
             <div class="w-full">
-                <x-text-input wire:model="last_school_name" placeholder="အမည်" id="last_school_name" name="last_school_name" type="text" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="last_school_name" placeholder="အမည်" id="last_school_name" name="last_school_name" type="text" class="mt-1 block w-full"/>
                 <x-input-error class="mt-2" :messages="$errors->get('last_school_name')" />
             </div>
             <div class="w-full">
-                <x-text-input wire:model="last_school_subject" placeholder="အတန်း" id="last_school_subject" name="last_school_subject" type="text" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="last_school_subject" placeholder="အတန်း" id="last_school_subject" name="last_school_subject" type="text" class="mt-1 block w-full"/>
                 <x-input-error class="mt-2" :messages="$errors->get('last_school_subject')" />
             </div>
             <div class="w-full">
-                <x-text-input wire:model="last_school_row_no" placeholder="ခုံအမှတ်" id="last_school_row_no" name="last_school_row_no" type="text" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="last_school_row_no" placeholder="ခုံအမှတ်" id="last_school_row_no" name="last_school_row_no" type="text" class="mt-1 block w-full"/>
                 <x-input-error class="mt-2" :messages="$errors->get('last_school_row_no')" />
             </div>
             <div class="w-full">
-                <x-text-input wire:model="last_school_major" placeholder="ဘာသာရပ်" id="last_school_major" name="last_school_major" type="text" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="last_school_major" placeholder="ဘာသာရပ်" id="last_school_major" name="last_school_major" type="text" class="mt-1 block w-full"/>
                 <x-input-error class="mt-2" :messages="$errors->get('last_school_major')" />
             </div>
         </div>
     </div>
     <div>
         <x-input-label for="ကျောင်းသားဘဝတွင် နိုင်ငံရေး/မြို့ရေး/ရွာရေး ဆောင်ရွက်မှုများနှင့် အဆင့်အတန်း/တာဝန်" :value="__('ကျောင်းသားဘဝတွင် နိုင်ငံရေး/မြို့ရေး/ရွာရေး ဆောင်ရွက်မှုများနှင့် အဆင့်အတန်း/တာဝန်')" />
-        <x-textarea-input wire:model="student_life_political_social" id="student_life_political_social" name="student_life_political_social" class="mt-1 block w-full" required/>
+        <x-textarea-input wire:model="student_life_political_social" id="student_life_political_social" name="student_life_political_social" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('student_life_political_social')" />
     </div>
     <div>
         <x-input-label for="ဝါသနာပါပြီး၊ လေ့လာလိုက်စားခဲ့သော ကျန်းမာရေး၊ ကစားခုန်းစားမှုများ၊ အနုပညာဆိုင်ရာ အတီးအမှုတ်များ၊ ပညာရေး၊ စက်မှုလက်မှု" :value="__('ဝါသနာပါပြီး၊ လေ့လာလိုက်စားခဲ့သော ကျန်းမာရေး၊ ကစားခုန်းစားမှုများ၊ အနုပညာဆိုင်ရာ အတီးအမှုတ်များ၊ ပညာရေး၊ စက်မှုလက်မှု')" />
-        <x-text-input wire:model="habit" id="habit" name="habit" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="habit" id="habit" name="habit" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('habit')" />
     </div>
 </div>
@@ -275,17 +275,17 @@
 <div class="grid grid-cols-4 gap-4 py-5">
     <div>
         <x-input-label for="တောခိုခဲ့ဖူးလျှင်(သို့)သောင်းကျန်းသူများကြီးစိုးသော နယ်မြေတွင် နေခဲ့ဖူးလျှင် လုပ်ကိုင်ဆောင်ရွက်ချက်များကို ဖော်ပြပါ" :value="__('တောခိုခဲ့ဖူးလျှင်(သို့)သောင်းကျန်းသူများကြီးစိုးသော နယ်မြေတွင် နေခဲ့ဖူးလျှင် လုပ်ကိုင်ဆောင်ရွက်ချက်များကို ဖော်ပြပါ')" />
-        <x-textarea-input wire:model="revolution" id="revolution" name="revolution" class="mt-1 block w-full" required/>
+        <x-textarea-input wire:model="revolution" id="revolution" name="revolution" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('revolution')" />
     </div>
     <div>
         <x-input-label for="အလုပ်အကိုင်ပြောင်းရွှေ့ခဲ့သော အကြောင်းအကျိုးနှင့် လစာ" :value="__('အလုပ်အကိုင်ပြောင်းရွှေ့ခဲ့သော အကြောင်းအကျိုးနှင့် လစာ')" />
-        <x-text-input wire:model="transfer_reason_salary" id="transfer_reason_salary" name="transfer_reason_salary" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="transfer_reason_salary" id="transfer_reason_salary" name="transfer_reason_salary" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('transfer_reason_salary')" />
     </div>
     <div>
         <x-input-label for="အမှုထမ်းနေစဉ်(သို့)ကိုယ်ပိုင်အလုပ်အကိုင်ဆောင်ရွက်နေစဉ် နိုင်ငံရေး မြို့/ရွာရေး ဆောင်ရွက်မှုများ၊ ဆောင်ရွက်နေစဉ် အဆင့်အတန်းနှင့် တာဝန်" :value="__('အမှုထမ်းနေစဉ်(သို့)ကိုယ်ပိုင်အလုပ်အကိုင်ဆောင်ရွက်နေစဉ် နိုင်ငံရေး မြို့/ရွာရေး ဆောင်ရွက်မှုများ၊ ဆောင်ရွက်နေစဉ် အဆင့်အတန်းနှင့် တာဝန်')" />
-        <x-text-input wire:model="during_work_political_social" id="during_work_political_social" name="during_work_political_social" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="during_work_political_social" id="during_work_political_social" name="during_work_political_social" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('during_work_political_social')" />
     </div>
     <div>
@@ -367,31 +367,31 @@
         <x-input-label :value="__('မိမိနှင့် ခင်မင်ရင်းနှီးသော နိုင်ငံခြားသား (နိုင်ငံခြားအမည်,အလုပ်အကိုင် ,လူမျိုး, တိုင်းပြည်)')" />
         <div class="flex flex-row justify-center gap-4">
             <div class="w-full">
-                <x-text-input wire:model="foreigner_friend_name" placeholder="အမည်" id="foreigner_friend_name" name="foreigner_friend_name" type="text" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="foreigner_friend_name" placeholder="အမည်" id="foreigner_friend_name" name="foreigner_friend_name" type="text" class="mt-1 block w-full"/>
                 <x-input-error class="mt-2" :messages="$errors->get('foreigner_friend_name')" />
             </div>
             <div class="w-full">
-                <x-text-input wire:model="foreigner_friend_occupation" placeholder="အလုပ်အကိုင်" id="foreigner_friend_occupation" name="foreigner_friend_occupation" type="text" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="foreigner_friend_occupation" placeholder="အလုပ်အကိုင်" id="foreigner_friend_occupation" name="foreigner_friend_occupation" type="text" class="mt-1 block w-full"/>
                 <x-input-error class="mt-2" :messages="$errors->get('foreigner_friend_occupation')" />
             </div>
             <div class="w-full">
-                <x-select wire:model="foreigner_friend_nationality_id" :values="$nationalities" placeholder="Select Nationality" id="foreigner_friend_nationality_id" name="foreigner_friend_nationality_id" class="mt-1 block w-full" required/>
+                <x-select wire:model="foreigner_friend_nationality_id" :values="$nationalities" placeholder="Select Nationality" id="foreigner_friend_nationality_id" name="foreigner_friend_nationality_id" class="mt-1 block w-full"/>
                 <x-input-error class="mt-2" :messages="$errors->get('foreigner_friend_nationality_id')" />
             </div>
             <div class="w-full">
-                <x-select wire:model="foreigner_friend_country_id" :values="$countries" placeholder="Select Country" id="foreigner_friend_country_id" name="foreigner_friend_country_id" class="mt-1 block w-full" required/>
+                <x-select wire:model="foreigner_friend_country_id" :values="$countries" placeholder="Select Country" id="foreigner_friend_country_id" name="foreigner_friend_country_id" class="mt-1 block w-full"/>
                 <x-input-error class="mt-2" :messages="$errors->get('foreigner_friend_country_id')" />
             </div>
         </div>
     </div>
     <div>
         <x-input-label for="မည်ကဲ့သို့ ရင်းနှီးသည်" :value="__('မည်ကဲ့သို့ ရင်းနှီးသည်')" />
-        <x-textarea-input wire:model="foreigner_friend_how_to_know" id="foreigner_friend_how_to_know" name="foreigner_friend_how_to_know" class="mt-1 block w-full" required/>
+        <x-textarea-input wire:model="foreigner_friend_how_to_know" id="foreigner_friend_how_to_know" name="foreigner_friend_how_to_know" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('foreigner_friend_how_to_know')" />
     </div>
     <div>
         <x-input-label for="မိမိအား ထောက်ခံသည့် ပုဂ္ဂိုလ် (စစ်ဘက်/နယ်ဘက် အရာရှိ၊ မြို့နယ်/ကျေးရွာ/ရပ်ကွက်အုပ်ချုပ်ရေးမှူး)" :value="__('မိမိအား ထောက်ခံသည့် ပုဂ္ဂိုလ် (စစ်ဘက်/နယ်ဘက် အရာရှိ၊ မြို့နယ်/ကျေးရွာ/ရပ်ကွက်အုပ်ချုပ်ရေးမှူး)')" />
-        <x-text-input wire:model="recommended_by_military_person" id="recommended_by_military_person" name="recommended_by_military_person" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="recommended_by_military_person" id="recommended_by_military_person" name="recommended_by_military_person" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('recommended_by_military_person')" />
     </div>
 </div>

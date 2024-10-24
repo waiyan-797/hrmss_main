@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('increment');
             $table->string('similiar_rank');
             $table->string('max_salary');
+            $table->integer('supply')->default(0);
             $table->foreignIdFor(StaffType::class)->nullable()->constrained()->nullOnDelete();
             $table->integer('allowed_qty')->default(0);
             $table->timestamps();

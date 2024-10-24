@@ -58,6 +58,8 @@ class LocalTrainingReport2 extends Component
         $table->addCell(4000, ['vMerge' => 'continue']);
 
 
+      
+
         foreach ($staffs as $index => $staff) {
 
             $abroadCount = count($staff->abroads);
@@ -99,6 +101,15 @@ class LocalTrainingReport2 extends Component
                 } else {
                     $table->addCell(4000)->addText('');
                 }
+                $table->addRow();
+                $table->addCell(1000, ['vMerge' => 'continue']);
+                $table->addCell(2000, ['vMerge' => 'continue']);
+                $table->addCell(2000, ['vMerge' => 'continue']);
+                $table->addCell(2000)->addText($staff->abroads[$rowIndex]->from_date ?? '');
+                $table->addCell(2000)->addText($staff->abroads[$rowIndex]->to_date ?? '');
+                $table->addCell(2000,['vMerge' => 'continue'])->addText();
+                $table->addCell(2000,['vMerge' => 'continue'])->addText();
+                $table->addCell(2000, ['vMerge' => 'continue'])->addText();
             }
         }
 

@@ -1065,12 +1065,12 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">
-                                @foreach ($staff->awards as $index => $award)
+                                @foreach ($staff->awardings as $index => $awarding)
                                     <tr>
                                         <td class="p-2 border border-black">{{ $index + 1 }}။ </td>
-                                        <td class="p-2 border border-black">{{ $award->awardType->name ?? 'N/A' }}</td>
-                                        <td class="p-2 border border-black">{{ \Carbon\Carbon::parse($award->order_date)->format('d-m-Y') }}</td>
-                                        <td class="p-2 border border-black">{{ $award->order_no }}</td>
+                                        <td class="p-2 border border-black">{{ $awarding->awardType->name ?? 'N/A' }}</td>
+                                        <td class="p-2 border border-black">{{ \Carbon\Carbon::parse($awarding->order_date)->format('d-m-Y') }}</td>
+                                        <td class="p-2 border border-black">{{ $awarding->order_no }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

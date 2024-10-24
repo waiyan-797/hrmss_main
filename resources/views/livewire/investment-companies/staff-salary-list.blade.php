@@ -42,63 +42,386 @@
                         <td class="border border-black text-center p-2">၁၁</td>
                         <td class="border border-black text-center p-2">၁၂=၆+၇+၈+၉+၁၀+၁၁</td>
                     </tr>
-                    @foreach ($first_ranks as $rank)
-                            <tr>
-                                <td class="border border-black p-2">{{$loop->index + 1}}</td>
-                                <td class="border border-black p-2">{{$rank->payscale->name}}</td>
-                                <td class="border border-black p-2">{{$rank->name}}</td>
-                                <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
-                                <td class="border border-black p-2">{{en2mm($rank->staffs->count())}}</td>
-
-        <td class="border border-black text-right p-2">{{ $salaries[1]->actual_salary ?? 0 }}</td>
-        <td class="border border-black text-right p-2">{{ $salaries[1]->addition_education}}</td>
-        <td class="border border-black text-right p-2">{{ $salaries[1]->addition}}</td>
-        <td class="border border-black text-right p-2">{{ $salaries[1]->addition_ration ?? 0 }}</td>
-        <td class="border border-black text-right p-2">{{ $salaries[1]->actual_salary + $salaries[1]->addition_education+$salaries[1]->addition + $salaries[0]->addition_ration }}</td>
+                    {{-- @foreach ($first_payscales as $payscale)
+                        <tr>
+                            <td class="border border-black p-2">{{ $loop->index + 1 }}</td>
+                            <td class="border border-black p-2">{{ $payscale->name }}</td>
+                            <td class="border border-black p-2">{{ $payscale->ranks[0]->name }}နှင့်အဆင့်တူ</td>
+                            <td class="border border-black p-2">{{ en2mm($payscale->allowed_qty) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($payscale->staff->count()) }}</td>
 
 
-                            </tr>
-                            @endforeach
-                            <tr>
-                                <td class="border border-black p-2 font-semibold" colspan="3">{{$first_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
-                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
-                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
-                                @foreach($salaries as  $salary)
-                                <td class="border border-black text-right p-2">{{ $salary->actual_salary ?? 0 }}</td>
-                                <td class="border border-black text-right p-2">{{ $salary->addition_education}}</td>
-                                <td class="border border-black text-right p-2">{{ $salary->addition}}</td>
-                                <td class="border border-black text-right p-2">{{ $salary->addition_ration ?? 0 }}</td>
-                                <td class="border border-black text-right p-2">{{ $salary->actual_salary + $salary->addition_education + $salary->addition_ration }}</td>
-                            @endforeach
-                            </tr>
-                            @foreach ($second_ranks as $rank)
+
+
+
+                           
+                           
+                            <td class="border border-black text-right p-2">
+                                
+                            </td>
+                            <td class="border border-black text-right p-2">
+                                
+                            </td>
+                            <td class="border border-black text-right p-2">
+                               
+                            </td>
+                            <td class="border border-black text-right p-2">
+                                
+                            </td>
+                            <td class="border border-black text-right p-2">
+                        </tr>
+                    @endforeach --}}
+                    {{-- @foreach ($first_payscales as $payscale)
+    @php
+     
+        $additionCount = $payscale->staff->filter(fn($staff) => $staff->salaries->whereNotNull('addition')->isNotEmpty())->count();
+        $additionSum = $payscale->staff->sum(fn($staff) => $staff->salaries->sum('addition'));
+
+        $additionRationCount = $payscale->staff->filter(fn($staff) => $staff->salaries->whereNotNull('addition_ration')->isNotEmpty())->count();
+        $additionRationSum = $payscale->staff->sum(fn($staff) => $staff->salaries->sum('addition_ration'));
+
+        $totalCount = $payscale->staff->filter(fn($staff) => $staff->salaries->filter(fn($salary) =>
+            $salary->addition !== null ||
+            $salary->addition_ration !== null
+        )->isNotEmpty())->count();
+
+        $totalSum = $payscale->staff->sum(fn($staff) =>
+            $staff->salaries->sum(fn($salary) =>
+                ($salary->addition ?? 0) +
+                ($salary->addition_ration ?? 0)
+            )
+        );
+    @endphp
+    <tr>
+        <td class="border border-black p-2">{{ $loop->index + 1 }}</td>
+        <td class="border border-black p-2">{{ $payscale->name }}</td>
+        <td class="border border-black p-2">{{ $payscale->ranks[0]->name }} နှင့်အဆင့်တူ</td>
+        <td class="border border-black p-2">{{ en2mm($payscale->allowed_qty) }}</td>
+        <td class="border border-black p-2">{{ en2mm($payscale->staff->count()) }}</td>
+
+        <td class="border border-black text-right p-2">{{ en2mm($additionCount) }}</td>
+        <td class="border border-black text-right p-2">{{ en2mm($additionSum) }}</td>
+        <td class="border border-black text-right p-2">{{ en2mm($additionRationCount) }}</td>
+        <td class="border border-black text-right p-2">{{ en2mm($additionRationSum) }}</td>
+        <td class="border border-black text-right p-2">{{ en2mm($totalCount) }}</td>
+        <td class="border border-black text-right p-2">{{ en2mm($totalSum) }}</td>
+    </tr>
+@endforeach --}}
+                    {{-- @foreach ($first_payscales as $payscale)
+    @php
+        
+        $additionCount = $payscale->staff->filter(fn($staff) => $staff->salaries->whereNotNull('addition')->isNotEmpty())->count();
+        $additionSum = $payscale->staff->sum(fn($staff) => $staff->salaries->sum('addition'));
+
+        $additionRationCount = $payscale->staff->filter(fn($staff) => $staff->salaries->whereNotNull('addition_ration')->isNotEmpty())->count();
+        $additionRationSum = $payscale->staff->sum(fn($staff) => $staff->salaries->sum('addition_ration'));
+
+        $totalCount = $payscale->staff->filter(fn($staff) => $staff->salaries->filter(fn($salary) =>
+            $salary->addition !== null ||
+            $salary->addition_ration !== null
+        )->isNotEmpty())->count();
+
+        $totalSum = $payscale->staff->sum(fn($staff) =>
+            $staff->salaries->sum(fn($salary) =>
+                ($salary->addition ?? 0) +
+                ($salary->addition_ration ?? 0)
+            )
+        );
+    @endphp
+    <tr>
+        <td class="border border-black p-2">{{ $loop->index + 1 }}</td>
+        <td class="border border-black p-2">{{ $payscale->name }}</td>
+        <td class="border border-black p-2">{{ $payscale->ranks[0]->name }} နှင့်အဆင့်တူ</td>
+        <td class="border border-black p-2">{{ en2mm($payscale->allowed_qty) }}</td>
+        <td class="border border-black p-2">{{ en2mm($payscale->allowed_qty) }}</td>
+
+        <td class="border border-black text-right p-2">{{ en2mm($additionCount) }}</td>
+        <td class="border border-black text-right p-2">{{ en2mm($additionSum) }}</td>
+        <td class="border border-black text-right p-2">{{ en2mm($additionRationCount) }}</td>
+        <td class="border border-black text-right p-2">{{ en2mm($additionRationSum) }}</td>
+        <td class="border border-black text-right p-2">{{ en2mm($totalCount) }}</td>
+        <td class="border border-black text-right p-2">{{ en2mm($totalSum) }}</td>
+    </tr>
+@endforeach --}}
+                    {{-- @foreach ($first_payscales as $payscale)
+                        @php
+                            $additionCount = $payscale->staff
+                                ->filter(fn($staff) => $staff->salaries->whereNotNull('addition')->isNotEmpty())
+                                ->count();
+                            $additionSum = $payscale->staff->sum(fn($staff) => $staff->salaries->sum('addition'));
+
+                            $additionRationCount = $payscale->staff
+                                ->filter(fn($staff) => $staff->salaries->whereNotNull('addition_ration')->isNotEmpty())
+                                ->count();
+                            $additionRationSum = $payscale->staff->sum(
+                                fn($staff) => $staff->salaries->sum('addition_ration'),
+                            );
+
+                            $totalCount = $payscale->staff
+                                ->filter(
+                                    fn($staff) => $staff->salaries
+                                        ->filter(
+                                            fn($salary) => $salary->addition !== null ||
+                                                $salary->addition_ration !== null,
+                                        )
+                                        ->isNotEmpty(),
+                                )
+                                ->count();
+
+                            $totalSum = $payscale->staff->sum(
+                                fn($staff) => $staff->salaries->sum(
+                                    fn($salary) => ($salary->addition ?? 0) + ($salary->addition_ration ?? 0),
+                                ),
+                            );
+                        @endphp
+                        <tr>
+                            <td class="border border-black p-2">{{ $loop->index + 1 }}</td>
+                            <td class="border border-black p-2">{{ $payscale->name }}</td>
+                            <td class="border border-black p-2">{{ $payscale->ranks[0]->name }} နှင့်အဆင့်တူ</td>
+                            <td class="border border-black p-2">{{ en2mm($payscale->allowed_qty) }}</td>
+                            <td class="border border-black text-right p-2">{{ en2mm($additionCount) }}</td>
+                            <td class="border border-black text-right p-2">{{ en2mm($additionSum) }}</td>
+                            <td class="border border-black text-right p-2">{{ en2mm($additionRationCount) }}</td>
+                            <td class="border border-black text-right p-2">{{ en2mm($additionRationSum) }}</td>
+                            <td class="border border-black text-right p-2">{{ en2mm($totalCount) }}</td>
+                            <td class="border border-black text-right p-2">{{ en2mm($totalSum) }}</td>
+                        </tr>
+                    @endforeach --}}
+
+
+
+
+                    {{-- 
+                    @php
+
+                        $totalActualSalaryFirst = $first_payscales->sum(
+                            fn($payscale) => $salaries[0]->actual_salary ?? 0,
+                        );
+                        $totalAdditionEducationFirst = $first_payscales->sum(
+                            fn($payscale) => $salaries[0]->addition_education,
+                        );
+                        $totalAdditionFirst = $first_payscales->sum(fn($payscale) => $salaries[0]->addition);
+                        $totalAdditionRationFirst = $first_payscales->sum(
+                            fn($payscale) => $salaries[0]->addition_ration ?? 0,
+                        );
+                        $totalOverallFirst =
+                            $totalActualSalaryFirst +
+                            $totalAdditionEducationFirst +
+                            $totalAdditionFirst +
+                            $totalAdditionRationFirst;
+                    @endphp
+
+                    <tr>
+                        <td class="border border-black p-2 font-semibold"></td>
+                        <td class="border border-black p-2 font-semibold">{{ $first_payscales[0]->staff_type->name }}
+                            စုစုပေါင်း</td>
+                        <td class="border border-black p-2 font-semibold">-</td>
+                        <td class="border border-black p-2 font-semibold">
+                            {{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
+                        <td class="border border-black p-2 font-semibold">
+                            {{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                        <td class="border border-black text-right p-2 font-semibold">
+                            {{ en2mm($totalActualSalaryFirst) }}</td>
+                        <td class="border border-black text-right p-2 font-semibold">
+                            {{ en2mm($totalAdditionEducationFirst) }}</td>
+                        <td class="border border-black text-right p-2 font-semibold">{{ en2mm($totalAdditionFirst) }}
+                        </td>
+                        <td class="border border-black text-right p-2 font-semibold">
+                            {{ en2mm($totalAdditionRationFirst) }}</td>
+                        <td class="border border-black text-right p-2 font-semibold">{{ en2mm($totalOverallFirst) }}
+                        </td>
+                    </tr> --}}
+                    {{-- @php
+                        $totalActualSalaryFirst = $first_payscales->sum(function ($payscale) {
+                            return $payscale->staff->sum(function ($staff) {
+                                return $staff->salaries->sum('actual_salary') ?? 0;
+                            });
+                        });
+
+                        $totalAdditionEducationFirst = $first_payscales->sum(function ($payscale) {
+                            return $payscale->staff->sum(function ($staff) {
+                                return $staff->salaries->sum('addition_education') ?? 0;
+                            });
+                        });
+
+                        $totalAdditionFirst = $first_payscales->sum(function ($payscale) {
+                            return $payscale->staff->sum(function ($staff) {
+                                return $staff->salaries->sum('addition') ?? 0;
+                            });
+                        });
+
+                        $totalAdditionRationFirst = $first_payscales->sum(function ($payscale) {
+                            return $payscale->staff->sum(function ($staff) {
+                                return $staff->salaries->sum('addition_ration') ?? 0;
+                            });
+                        });
+
+                        $totalOverallFirst =
+                            $totalActualSalaryFirst +
+                            $totalAdditionEducationFirst +
+                            $totalAdditionFirst +
+                            $totalAdditionRationFirst;
+                    @endphp
+
+                    <tr>
+                        <td class="border border-black p-2 font-semibold"></td>
+                        <td class="border border-black p-2 font-semibold">{{ $first_payscales[0]->staff_type->name }}
+                            စုစုပေါင်း</td>
+                        <td class="border border-black p-2 font-semibold">-</td>
+                        <td class="border border-black p-2 font-semibold">
+                            {{ en2mm($first_payscales->sum('allowed_qty')) }}
+                        </td>
+                        <td class="border border-black p-2 font-semibold">
+                            {{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->count())) }}
+                        </td>
+                        <td class="border border-black text-right p-2 font-semibold">
+                            {{ en2mm($totalActualSalaryFirst) }}
+                        </td>
+                        <td class="border border-black text-right p-2 font-semibold">
+                            {{ en2mm($totalAdditionEducationFirst) }}
+                        </td>
+                        <td class="border border-black text-right p-2 font-semibold">
+                            {{ en2mm($totalAdditionFirst) }}
+                        </td>
+                        <td class="border border-black text-right p-2 font-semibold">
+                            {{ en2mm($totalAdditionRationFirst) }}
+                        </td>
+                        <td class="border border-black text-right p-2 font-semibold">
+                            {{ en2mm($totalOverallFirst) }}
+                        </td>
+                    </tr> --}}
+                 
+                        
+                            @foreach ($first_payscales as $payscale)
+                                @php
+                                    $additionCount = $payscale->staff->filter(fn($staff) => $staff->salaries->whereNotNull('addition')->isNotEmpty())->count();
+                                    $additionSum = $payscale->staff->sum(fn($staff) => $staff->salaries->sum('addition'));
+                    
+                                    $additionRationCount = $payscale->staff->filter(fn($staff) => $staff->salaries->whereNotNull('addition_ration')->isNotEmpty())->count();
+                                    $additionRationSum = $payscale->staff->sum(fn($staff) => $staff->salaries->sum('addition_ration'));
+                    
+                                    $totalCount = $payscale->staff->filter(fn($staff) => $staff->salaries->filter(fn($salary) =>
+                                        $salary->addition !== null ||
+                                        $salary->addition_ration !== null
+                                    )->isNotEmpty())->count();
+                    
+                                    $totalSum = $payscale->staff->sum(fn($staff) =>
+                                        $staff->salaries->sum(fn($salary) =>
+                                            ($salary->addition ?? 0) +
+                                            ($salary->addition_ration ?? 0)
+                                        )
+                                    );
+                                @endphp
                                 <tr>
-                                    <td class="border border-black p-2">{{$loop->index + 1}}</td>
-                                    <td class="border border-black p-2">{{$rank->payscale->name}}</td>
-                                    <td class="border border-black p-2">{{$rank->name}}</td>
-                                    <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
-                                    <td class="border border-black p-2">{{en2mm($rank->staffs->count())}}</td>
-                                    @foreach($salaries as  $salary)
-                                    <td class="border border-black text-right p-2">{{ $salary->actual_salary ?? 0 }}</td>
-                                    <td class="border border-black text-right p-2">{{ $salary->addition_education}}</td>
-                                    <td class="border border-black text-right p-2">{{ $salary->addition}}</td>
-                                    <td class="border border-black text-right p-2">{{ $salary->addition_ration ?? 0 }}</td>
-                                    <td class="border border-black text-right p-2">{{ $salary->actual_salary + $salary->addition_education +$salary->addition+ $salary->addition_ration }}</td>
-                                @endforeach
+                                    <td class="border border-black p-2">{{ $loop->index + 1 }}</td>
+                                    <td class="border border-black p-2">{{ $payscale->name }}</td>
+                                    <td class="border border-black p-2">{{ $payscale->ranks[0]->name }} နှင့်အဆင့်တူ</td>
+                                    <td class="border border-black p-2">{{ en2mm($payscale->allowed_qty) }}</td>
+                                    <td class="border border-black text-right p-2">{{ en2mm($additionCount) }}</td>
+                                    <td class="border border-black text-right p-2">{{ en2mm($additionSum) }}</td>
+                                    <td class="border border-black text-right p-2">{{ en2mm($additionRationCount) }}</td>
+                                    <td class="border border-black text-right p-2">{{ en2mm($additionRationSum) }}</td>
+                                    <td class="border border-black text-right p-2">{{ en2mm($totalCount) }}</td>
+                                    <td class="border border-black text-right p-2">{{ en2mm($totalSum) }}</td>
                                 </tr>
                             @endforeach
-                            <tr>
-                                <td class="border border-black p-2 font-semibold" colspan="3">{{$second_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
-                                <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
-                                <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
-                                @foreach($salaries as  $salary)
-                            <td class="border border-black text-right p-2">{{ $salary->actual_salary ?? 0 }}</td>
-                            <td class="border border-black text-right p-2">{{ $salary->addition_education}}</td>
-                            <td class="border border-black text-right p-2">{{ $salary->addition}}</td>
-                            <td class="border border-black text-right p-2">{{ $salary->addition_ration ?? 0 }}</td>
-                            <td class="border border-black text-right p-2">{{ $salary->actual_salary + $salary->addition_education +$salary->addition+ $salary->addition_ration }}</td>
-                        @endforeach
-                            </tr>
+                        
+
+
+
+                    @foreach ($second_payscales as $payscale)
+                        <tr>
+                            <td class="border border-black p-2">{{ $loop->index + 1 }}</td>
+                            <td class="border border-black p-2">{{ $payscale->name }}</td>
+                            <td class="border border-black p-2">{{ $payscale->ranks[0]->name }}နှင့်အဆင့်တူ</td>
+                            <td class="border border-black p-2">{{ en2mm($payscale->allowed_qty) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($payscale->staff->count()) }}</td>
+                            <td class="border border-black text-right p-2">
+                                {{ en2mm($salaries[0]->actual_salary ?? 0) }}</td>
+                            <td class="border border-black text-right p-2">
+                                {{ en2mm($salaries[0]->addition_education) }}</td>
+                            <td class="border border-black text-right p-2">{{ en2mm($salaries[0]->addition) }}</td>
+                            <td class="border border-black text-right p-2">
+                                {{ en2mm($salaries[0]->addition_ration ?? 0) }}</td>
+                            <td class="border border-black text-right p-2">
+                                {{ en2mm($salaries[0]->actual_salary + $salaries[0]->addition_education + $salaries[0]->addition + $salaries[0]->addition_ration) }}
+                            </td>
+
+
+
+                        </tr>
+                    @endforeach
+                    @php
+
+                        $totalActualSalarySecond = $second_payscales->sum(
+                            fn($payscale) => $salaries[0]->actual_salary ?? 0,
+                        );
+                        $totalAdditionEducationSecond = $second_payscales->sum(
+                            fn($payscale) => $salaries[0]->addition_education,
+                        );
+                        $totalAdditionSecond = $second_payscales->sum(fn($payscale) => $salaries[0]->addition);
+                        $totalAdditionRationSecond = $second_payscales->sum(
+                            fn($payscale) => $salaries[0]->addition_ration ?? 0,
+                        );
+                        $totalOverallSecond =
+                            $totalActualSalarySecond +
+                            $totalAdditionEducationSecond +
+                            $totalAdditionSecond +
+                            $totalAdditionRationSecond;
+                    @endphp
+
+                    <tr>
+                        <td class="border border-black p-2 font-semibold"></td>
+                        <td class="border border-black p-2 font-semibold">
+                            {{ $second_payscales[0]->staff_type->name }}စုစုပေါင်း</td>
+                        <td class="border border-black p-2 font-semibold">-</td>
+                        <td class="border border-black p-2 font-semibold">
+                            {{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
+                        <td class="border border-black p-2 font-semibold">
+                            {{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                        <td class="border border-black text-right p-2">{{ en2mm($totalActualSalarySecond) }}</td>
+                        <td class="border border-black text-right p-2">{{ en2mm($totalAdditionEducationSecond) }}</td>
+                        <td class="border border-black text-right p-2">{{ en2mm($totalAdditionSecond) }}</td>
+                        <td class="border border-black text-right p-2">{{ en2mm($totalAdditionRationSecond) }}</td>
+                        <td class="border border-black text-right p-2">{{ en2mm($totalOverallSecond) }}</td>
+                    </tr>
+
+                    {{-- <tr>
+                        <td class="border border-black p-2 font-semibold"></td>
+                        <td class="border border-black p-2 font-semibold">စုစုပေါင်း</td>
+                        <td class="border border-black p-2 font-semibold">-</td>
+                        <td class="border border-black p-2 font-semibold">
+                            {{ en2mm($first_payscales->sum('allowed_qty') + $second_payscales->sum('allowed_qty')) }}
+                        </td>
+                        <td class="border border-black p-2 font-semibold">
+                            {{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->count()) + $second_payscales->sum(fn($scale) => $scale->staff->count())) }}
+                        </td>
+                        <td class="border border-black text-right p-2">
+                            {{ en2mm($totalActualSalarySecond + $totalActualSalaryFirst) }}</td>
+                        <td class="border border-black text-right p-2">
+                            {{ en2mm($totalAdditionEducationSecond + $totalAdditionEducationFirst) }}</td>
+                        <td class="border border-black text-right p-2">
+                            {{ en2mm($totalAdditionSecond + $totalAdditionFirst) }}</td>
+                        <td class="border border-black text-right p-2">
+                            {{ en2mm($totalAdditionRationSecond + $totalAdditionRationFirst) }}</td>
+                        <td class="border border-black text-right p-2">
+                            {{ en2mm($totalOverallSecond + $totalOverallFirst) }}</td>
+
+                    </tr> --}}
+
+                    <tr>
+                        <td class="border border-black p-2 font-semibold"></td>
+                        <td class="border border-black p-2 font-semibold">ထောက်ပံ့ကြေး</td>
+                        <td class="border border-black p-2 font-semibold">-</td>
+                        <td class="border border-black p-2 font-semibold"></td>
+                        <td class="border border-black p-2 font-semibold"></td>
+                        <td class="border border-black text-right p-2"></td>
+                        <td class="border border-black text-right p-2"></td>
+                        <td class="border border-black text-right p-2"></td>
+                        <td class="border border-black text-right p-2"></td>
+                        <td class="border border-black text-right p-2"></td>
+                    </tr>
+
                 </tbody>
             </table>
             <div class="mx-60 my-8">

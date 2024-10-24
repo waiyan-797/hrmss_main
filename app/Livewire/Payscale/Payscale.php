@@ -15,7 +15,7 @@ class Payscale extends Component
     public $confirm_edit = false;
     public $confirm_add = false;
     public $message = null;
-    public $payscale_search, $payscale_name, $payscale_min_salary, $payscale_increment, $payscale_max_salary, $staff_type_name, $payscale_id,$allowed_qty;
+    public $payscale_search, $payscale_name, $payscale_min_salary, $payscale_increment,$supply, $payscale_max_salary, $staff_type_name, $payscale_id,$allowed_qty;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
     //Validation
@@ -26,11 +26,12 @@ class Payscale extends Component
         'payscale_max_salary' => 'required',
         'staff_type_name' => 'required',
         'allowed_qty'=>'required',
+        'supply'=>'required',
     ];
     //Add New
     public function add_new(){
         $this->resetValidation();
-        $this->reset(['payscale_name', 'payscale_min_salary', 'payscale_increment', 'payscale_max_salary', 'staff_type_name','allowed_qty']);
+        $this->reset(['payscale_name', 'payscale_min_salary', 'payscale_increment', 'payscale_max_salary', 'staff_type_name','allowed_qty','supply']);
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
@@ -53,6 +54,7 @@ class Payscale extends Component
             'max_salary' => $this->payscale_max_salary,
             'staff_type_id' => $this->staff_type_name,
             'allowed_qty'=>$this->allowed_qty,
+            'supply'=>$this->supply,
         ]);
         $this->message = 'Created successfully.';
         $this->close_modal();
@@ -60,7 +62,7 @@ class Payscale extends Component
     //close modal
     public function close_modal(){
         $this->resetValidation();
-        $this->reset(['payscale_name', 'payscale_min_salary', 'payscale_increment', 'payscale_max_salary', 'staff_type_name','allowed_qty']);
+        $this->reset(['payscale_name', 'payscale_min_salary', 'payscale_increment', 'payscale_max_salary', 'staff_type_name','allowed_qty','supply']);
         $this->confirm_edit = false;
         $this->confirm_add = false;
     }
@@ -77,6 +79,7 @@ class Payscale extends Component
         $this->payscale_max_salary = $payscale->max_salary;
         $this->staff_type_name = $payscale->staff_type_id;
         $this->allowed_qty=$payscale->allowed_qty;
+        $this->supply=$payscale->supply;
     }
 
     //update
@@ -91,6 +94,7 @@ class Payscale extends Component
             'max_salary' => $this->payscale_max_salary,
             'staff_type_id' => $this->staff_type_name,
             'allowed_qty'=>$this->allowed_qty,
+            'supply'=>$this->supply,
         ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();

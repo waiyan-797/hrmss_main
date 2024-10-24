@@ -270,7 +270,7 @@ class PdfStaffReport71 extends Component
             $table->addCell(2000)->addText($sibling->address);
             $table->addCell(2000)->addText($sibling->place_of_birth);
         }
-        $section->addText('၅၆။'.'အမိ၏ညီအကိုမောင်နှမများ', ['bold' => true]);
+       $section->addText('၅၆။'.'အမိ၏ညီအကိုမောင်နှမများ', ['bold' => true]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();
         $table->addCell(500)->addText('စဥ်', ['bold' => true]);
@@ -447,142 +447,132 @@ class PdfStaffReport71 extends Component
             $table->addCell(2000)->addText($sibling->address );
          
         }
-        $section->addText('၆၄။'.'ရရှိခဲ့သော Diploma/Certificateနှင့် တက်ရောက်ထားသောသင်တန်းများ', ['bold' => true]);
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(500)->addText('စဥ်', ['bold' => true]);
-        $table->addCell(2000)->addText('Diploma/Certificate အမည်', ['bold' => true]);
-        $table->addCell(2000)->addText('ကျောင်း/တက္ကသိုလ်/သင်တန်းအမည်', ['bold' => true]);
-        $table->addCell(2000)->addText('မှ<br>ရက်-လ-နှစ်', ['bold' => true]);
-        $table->addCell(2000)->addText('ထိ<br>ရက်-လ-နှစ်', ['bold' => true]);
-        $table->addCell(2000)->addText('သင်တန်းကြေး', ['bold' => true]);
-        $table->addCell(2000)->addText('TrainingType(local/foreign)', ['bold' => true]);
-        $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true]);
-       
-        foreach ($staff->trainings as $index => $training) {
-            $table->addRow();
-            $table->addCell(500)->addText($index + 1);
-            $table->addCell(2000)->addText($training->diploma_name);
-            $table->addCell(2000)->addText($training->trainingType->name ?? 'N/A');
-            $table->addCell(2000)->addText($training->from_date);
-            $table->addCell(2000)->addText($training->to_date);
-            $table->addCell(2000)->addText($training->fees);
-            $table->addCell(2000)->addText($training->trainingLocation->name ?? 'N/A');
-            $table->addCell(2000)->addText($training->remark);
-          
-        }
-        $section->addText('၆၅။'.'ရရှိခဲ့သောဆုတံဆိပ်များ', ['bold' => true]);
+        //  $section->addText('၆၄။'.'ရရှိခဲ့သော Diploma/Certificateနှင့်
+        // တက်ရောက်ထားသောသင်တန်းများ', ['bold' => true]);
+        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+        // $table->addRow();
+        // $table->addCell(500)->addText('စဥ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('Diploma/Certificate အမည်', ['bold' => true]);
+        // $table->addCell(2000)->addText('ကျောင်း/တက္ကသိုလ်/သင်တန်းအမည်', ['bold' => true]);
+        // $table->addCell(2000)->addText('မှ<br>ရက်-လ-နှစ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('ထိ<br>ရက်-လ-နှစ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('သင်တန်းကြေး', ['bold' => true]);
+        // $table->addCell(2000)->addText('Training<br>Type(local/foreign)', ['bold' => true]);
+        // $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true]);
+        
+        // foreach ($staff->trainings as $index => $training) {
+        //     $table->addRow();
+        //     $table->addCell(1000)->addText($index+1);
+        //     $table->addCell(2000)->addText($training->diploma_name);
+        //     $table->addCell(2000)->addText($training->trainingType->name ?? 'N/A');
+        //     $table->addCell(2000)->addText($training->from_date);
+        //     $table->addCell(2000)->addText($training->to_date);
+        //     $table->addCell(2000)->addText($training->fees);
+        //     $table->addCell(2000)->addText($training->trainingLocation->name ?? 'N/A');
+        //     $table->addCell(2000)->addText($training->remark);
+        // }
+         $section->addText('၆၅။'.'ရရှိခဲ့သောဆုတံဆိပ်များ', ['bold' => true]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();
         $table->addCell(500)->addText('စဥ်', ['bold' => true]);
         $table->addCell(2000)->addText('ဆုတံဆိပ်အမျိူးအစား', ['bold' => true]);
         $table->addCell(2000)->addText('ရက်-လ-နှစ်', ['bold' => true]);
         $table->addCell(2000)->addText('အမိန့်စာအမှတ်နှင့်အမှတ်စဥ်', ['bold' => true]);
-       
-        foreach ($staff->awards as $index => $award) {
+        foreach ($staff->awardings as $index => $awarding) {
             $table->addRow();
-            $table->addCell(500)->addText($index+1);
-            $table->addCell(2000)->addText($award->awardType->name ?? 'N/A');
-            $table->addCell(2000)->addText( \Carbon\Carbon::parse($award->order_date)->format('d-m-Y'));
-            $table->addCell(2000)->addText($award->order_no );
-          
-        }  
-        $section->addText('၆၆။'.'နိုင်ငံခြားခရီးစဥ်များ', ['bold' => true]);
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(500)->addText('စဥ်', ['bold' => true]);
-        $table->addCell(2000)->addText('သွား‌ရောက်သည့်နိုင်ငံ', ['bold' => true]);
-        $table->addCell(2000)->addText('မှ<br>ရက်-လ-နှစ်', ['bold' => true]);
-        $table->addCell(2000)->addText('ထိ<br>ရက်-လ-နှစ်', ['bold' => true]);
-        $table->addCell(2000)->addText('သွား‌ရောက်သည့်အကြောင်းအရာ', ['bold' => true]);
-        $table->addCell(2000)->addText('ထောက်ပံ့သည့်နိုင်ငံ/ အဖွဲ့အစည်း', ['bold' => true]);
-        foreach ($staff->abroads as $index => $abroad) {
-            $table->addRow();
-            $table->addCell(500)->addText($index+1);
-            $table->addCell(2000)->addText($abroad->country->name ?? 'N/A'); 
-            $table->addCell(2000)->addText($abroad->from_date); 
-            $table->addCell(2000)->addText($abroad->to_date); 
-            $table->addCell(2000)->addText($abroad->particular); 
-            $table->addCell(2000)->addText($abroad->sponser); 
+            $table->addCell(1000)->addText($index+1);
+            $table->addCell(2000)->addText($awarding->awardType->name ?? 'N/A');
+            $table->addCell(2000)->addText(\Carbon\Carbon::parse($awarding->order_date)->format('d-m-Y') );
+            $table->addCell(2000)->addText($awarding->order_no);
         }
-       
-        $section->addText('၆၇။'.'ယခင်လုပ်ကိုင်ခဲ့ဖူးသည့်အလုပ်အကိုင်', ['bold' => true]);
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(500)->addText('စဥ်', ['bold' => true]);
-        $table->addCell(2000)->addText('ဌာနအမည် (ဝန်ကြီးဌာန၊ ဦးစီးဌာန) အပြည့်အစုံဖော်ပြရန်	', ['bold' => true]);
-        $table->addCell(2000)->addText('ရာထူး', ['bold' => true]);
-        $table->addCell(2000)->addText('မှ<br>ရက်-လ-နှစ်', ['bold' => true]);
-        $table->addCell(2000)->addText('ထိ<br>ရက်-လ-နှစ်', ['bold' => true]);
-        $table->addCell(2000)->addText('လစာစကေး', ['bold' => true]);
-        $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true]);
-       
-       
-        foreach ($staff->postings as $index => $posting) {
-            $table->addRow();
-            $table->addCell(500)->addText( $index+1);
-            $table->addCell(2000)->addText($posting->department->name ?? ''); 
-            $table->addCell(2000)->addText($posting->rank->name ?? '-'); 
-            $table->addCell(2000)->addText($posting->from_date);
-            $table->addCell(2000)->addText($posting->to_date); 
-            $table->addCell(2000)->addText($posting->rank->payscale->name ?? '-'); 
-            $table->addCell(2000)->addText($posting->remark ?? '-'); 
-        }
-        
-        $section->addText('၆၈။'.'လူမှုရေးလုပ်ဆောင်ချက်', ['bold' => true]);
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(500)->addText('စဥ်', ['bold' => true]);
-        $table->addCell(2000)->addText('အသင်းအဖွဲ့အမည်နှင့်လုပ်ဆောင်မှုများ', ['bold' => true]);
-        $table->addCell(2000)->addText('မှ<br>ရက်-လ-နှစ်	', ['bold' => true]);
-        $table->addCell(2000)->addText('ထိ<br>ရက်-လ-နှစ်', ['bold' => true]);
-        $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true]);
-       
-        foreach ($staff->socialActivities as $index => $activity) {
-            $table->addRow();
-            $table->addCell(500)->addText($index+1);
-            $table->addCell(2000)->addText($activity->particular); 
-            $table->addCell(2000)->addText($activity->from_date); 
-            $table->addCell(2000)->addText($activity->to_date);  
-            $table->addCell(2000)->addText($activity->remark);  
-        }
-
-        $section->addText('၆၉။'.'ဘာသာစကားအချက်အလက်', ['bold' => true]);
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(500)->addText('စဥ်', ['bold' => true]);
-        $table->addCell(2000)->addText('ဘာသာစကား', ['bold' => true]);
-        $table->addCell(2000)->addText('အရေး', ['bold' => true]);
-        $table->addCell(2000)->addText('အဖတ်', ['bold' => true]);
-        $table->addCell(2000)->addText('အပြော', ['bold' => true]);
-        $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true]);
-        foreach ($staff->staff_languages as $index => $language) {
-            $table->addRow();
-            $table->addCell(500)->addText($index+1);
-            $table->addCell(2000)->addText($language->language->name ?? 'N/A'); 
-            $table->addCell(2000)->addText($language->writing ?? 'N/A'); 
-            $table->addCell(2000)->addText($language->reading ?? 'N/A'); 
-            $table->addCell(2000)->addText($language->speaking ?? 'N/A');
-            $table->addCell(2000)->addText($language->remark ?? 'N/A');  
-        }
-
-        $section->addText('၇၀။'.'ပြစ်ဒဏ်များ', ['bold' => true]);
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(500)->addText('စဥ်', ['bold' => true]);
-        $table->addCell(2000)->addText('ပြစ်ဒဏ်', ['bold' => true]);
-        $table->addCell(2000)->addText('မှ<br>ရက်-လ-နှစ်', ['bold' => true]);
-        $table->addCell(2000)->addText('ထိ<br>ရက်-လ-နှစ်', ['bold' => true]);
-        $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true]);
-        foreach ($staff->punishments as $index => $punishment) {
-            $table->addRow();
-            $table->addCell(500)->addText($index+1);
-            $table->addCell(2000)->addText($punishment->penaltyType?->name ?? 'N/A'); 
-            $table->addCell(2000)->addText(\Carbon\Carbon::parse($punishment->from_date)->format('d/m/Y')); 
-            $table->addCell(2000)->addText(\Carbon\Carbon::parse($punishment->to_date)->format('d/m/Y')); 
-            $table->addCell(2000)->addText($punishment->reason);
-        }
-       
+        // $section->addText('၆၆။'.'နိုင်ငံခြားခရီးစဥ်များ', ['bold' => true]);
+        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+        // $table->addRow();
+        // $table->addCell(500)->addText('စဥ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('သွား‌ရောက်သည့်နိုင်ငံ', ['bold' => true]);
+        // $table->addCell(2000)->addText('မှ<br>ရက်-လ-နှစ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('ထိ<br>ရက်-လ-နှစ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('သွား‌ရောက်သည့်အကြောင်းအရာ', ['bold' => true]);
+        // $table->addCell(2000)->addText('ထောက်ပံ့သည့်နိုင်ငံ/ အဖွဲ့အစည်း', ['bold' => true]);
+        // foreach ($staff->abroads as $index => $abroad) {
+        //     $table->addRow();
+        //     $table->addCell(1000)->addText($index+1);
+        //     $table->addCell(2000)->addText($abroad->country->name ?? 'N/A');
+        //     $table->addCell(2000)->addText($abroad->from_date);
+        //     $table->addCell(2000)->addText($abroad->to_date);
+        //     $table->addCell(2000)->addText($abroad->particular);
+        //     $table->addCell(2000)->addText($abroad->sponser);
+        // }
+        //  $section->addText('၆၇။'.'ယခင်လုပ်ကိုင်ခဲ့ဖူးသည့်အလုပ်အကိုင်', ['bold' => true]);
+        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+        // $table->addRow();
+        // $table->addCell(500)->addText('စဥ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('ဌာနအမည် (ဝန်ကြီးဌာန၊ ဦးစီးဌာန) အပြည့်အစုံဖော်ပြရန်', ['bold' => true]);
+        // $table->addCell(2000)->addText('ရာထူး', ['bold' => true]);
+        // $table->addCell(2000)->addText('မှ<br>ရက်-လ-နှစ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('ထိ<br>ရက်-လ-နှစ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('လစာစကေး', ['bold' => true]);
+        // $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true]);
+        // foreach ($staff->postings as $index => $posting) {
+        //     $table->addRow();
+        //     $table->addCell(1000)->addText($index+1);
+        //     $table->addCell(2000)->addText($posting->department->name ?? '-' );
+        //     $table->addCell(2000)->addText($posting->rank->name ?? '-');
+        //     $table->addCell(2000)->addText($posting->from_date);
+        //     $table->addCell(2000)->addText( $posting->to_date);
+        //     $table->addCell(2000)->addText($posting->rank->payscale->name ?? '-' );
+        //     $table->addCell(2000)->addText($posting->remark ?? '-' );
+        // }
+        //    $section->addText('၆၈။'.'လူမှုရေးလုပ်ဆောင်ချက်', ['bold' => true]);
+        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+        // $table->addRow();
+        // $table->addCell(500)->addText('စဥ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('အသင်းအဖွဲ့အမည်နှင့်လုပ်ဆောင်မှုများ', ['bold' => true]);
+        // $table->addCell(2000)->addText('မှ<br>ရက်-လ-နှစ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('ထိ<br>ရက်-လ-နှစ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true]);
+        // foreach ($staff->socialActivities as $index => $activity) {
+        //     $table->addRow();
+        //     $table->addCell(1000)->addText($index+1);
+        //     $table->addCell(2000)->addText($activity->particular);
+        //     $table->addCell(2000)->addText($activity->from_date);
+        //     $table->addCell(2000)->addText($activity->to_date);
+        //     $table->addCell(2000)->addText($activity->remark);
+        // }
+        // $section->addText('၆၉။'.'ဘာသာစကားအချက်အလက်', ['bold' => true]);
+        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+        // $table->addRow();
+        // $table->addCell(500)->addText('စဥ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('ဘာသာစကား', ['bold' => true]);
+        // $table->addCell(2000)->addText('အရေး', ['bold' => true]);
+        // $table->addCell(2000)->addText('အဖတ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('အပြော', ['bold' => true]);
+        // $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true]);
+        // foreach ($staff->staff_languages as $index => $language) {
+        //     $table->addRow();
+        //     $table->addCell(1000)->addText($index+1);
+        //     $table->addCell(2000)->addText($language->language->name ?? 'N/A');
+        //     $table->addCell(2000)->addText($language->writing ?? 'N/A');
+        //     $table->addCell(2000)->addText($language->reading ?? 'N/A');
+        //     $table->addCell(2000)->addText($language->speaking ?? 'N/A');
+        //     $table->addCell(2000)->addText($language->remark ?? 'N/A');
+        // }
+        // $section->addText('၇၀။'.'ပြစ်ဒဏ်များ', ['bold' => true]);
+        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+        // $table->addRow();
+        // $table->addCell(500)->addText('စဥ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('ပြစ်ဒဏ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('မှ<br>ရက်-လ-နှစ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('ထိ<br>ရက်-လ-နှစ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true]);
+        // foreach ($staff->punishments as $index => $punishment) {
+        //     $table->addRow();
+        //     $table->addCell(1000)->addText($index+1);
+        //     $table->addCell(2000)->addText($punishment->penaltyType?->name ?? 'N/A');
+        //     $table->addCell(2000)->addText(\Carbon\Carbon::parse($punishment->from_date)->format('d/m/Y'));
+        //     $table->addCell(2000)->addText(\Carbon\Carbon::parse($punishment->to_date)->format('d/m/Y') );
+        //     $table->addCell(2000)->addText();
+        // }
        $section->addText('၇၁။','အထက်ပါအချက်အလက်များမှန်ကန်ကြောင်းလက်မှတ်ရေးထိုးပါသည်။', ['bold' => true]);
        $section->addText('လက်မှတ်: -', ['align' => 'center']);
        $section->addText('အမည်: ', ['align' => 'center']);
@@ -608,6 +598,43 @@ class PdfStaffReport71 extends Component
     }
 }
 
+
+
+
+
+
+
+
+// <div class="w-full mb-4">
+// <div class="mb-2 flex justify-start space-x-2">
+//     <label>၇၀။ </label>
+//     <h2 class="font-semibold text-base">ပြစ်ဒဏ်များ</h2>
+// </div>
+// <div class="w-full rounded-lg">
+//     <table class="w-full text-center border-collapse border border-black">
+//         <thead>
+//             <tr class="bg-gray-100">
+//                 <th class="p-2 border border-black">စဥ်</th>
+//                 <th class="p-2 border border-black">ပြစ်ဒဏ်</th>
+//                 <th class="p-2 border border-black">မှ<br>ရက်-လ-နှစ်</th>
+//                 <th class="p-2 border border-black">ထိ<br>ရက်-လ-နှစ်</th>
+//                 <th class="p-2 border border-black">မှတ်ချက်</th>
+//             </tr>
+//         </thead>
+//         <tbody class="text-center h-8 p-2">
+//             @foreach($staff->punishments as $index => $punishment)
+//             <tr>
+//                 <td class="p-2 border border-black">{{ $index + 1 }}။</td>
+//                 <td class="p-2 border border-black">{{ $punishment->penaltyType?->name ?? 'N/A' }}</td>
+//                 <td class="p-2 border border-black">{{ \Carbon\Carbon::parse($punishment->from_date)->format('d/m/Y') }}</td>
+//                 <td class="p-2 border border-black">{{ \Carbon\Carbon::parse($punishment->to_date)->format('d/m/Y') }}</td>
+//                 <td class="p-2 border border-black">{{ $punishment->reason }}</td>
+//             </tr>
+//             @endforeach
+//         </tbody>
+//     </table>
+// </div>
+// </div>
 
 
 

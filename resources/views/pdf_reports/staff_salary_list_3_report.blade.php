@@ -85,84 +85,126 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($payscales->where('staff_type_id', 1) as $payscale)
                 <tr>
-                    <td>၁</td>
-                    <td>၂</td>
-                    <td>၃</td>
-                    <td>၄</td>
-                    <td>၅</td>
-                    <td>၆</td>
-                    <td>၇</td>
-                    <td>၈</td>
-                    <td>၉</td>
-                    <td>၁၀=၄+၆+၈</td>
-                    <td>၁၁=၅+၇+၉</td>
+                    <td>{{ en2mm($loop->index + 1) }} </td>
+                    <td>{{ en2mm($payscale->name ?? 0) }}</td>
+                    <td>{{en2mm($payscale->similiar_rank ?? 0) }}</td>
+                    <td>
+                        {{ en2mm($payscale->staff_count_addition_education ?? 0) }}</td>
+                    <td>{{ en2mm($payscale->addition_education ?? 0) }}
+                    </td>
+                    <td>{{ en2mm($payscale->staff_count_addition ?? 0) }}
+                    </td>
+                    <td>{{ en2mm($payscale->addition ?? 0) }}</td>
+                    <td>
+                        {{ en2mm($payscale->staff_count_addition_ration ?? 0) }}</td>
+                    <td>{{ en2mm($payscale->addition_ration ?? 0) }}</td>
+                    <td>
+                        {{ en2mm($payscale->staff_count_addition_education ?? (0 + $payscale->staff_count_addition ?? (0 + $payscale->staff_count_addition_ration ?? 0))) }}
+                    </td>
+                    <td>
+
+                        {{ en2mm($payscale->addition_education ?? (0 + $payscale->addition ?? (0 + $payscale->addition_ration ?? 0))) }}
+
+                    </td>
                 </tr>
+            @endforeach
+            <tr>
+                <td></td>
+                <td>အရာထမ်းပေါင်း</td>
+                <td>-</td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 1)->sum(fn($q) => $q->staff_count_addition_education)) }}
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 1)->sum(fn($q) => $q->addition_education)) }}
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 1)->sum(fn($q) => $q->staff_count_addition)) }}
+
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 1)->sum(fn($q) => $q->addition)) }}
+
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 1)->sum(fn($q) => $q->staff_count_addition_ration)) }}
+
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 1)->sum(fn($q) => $q->addition_ration)) }}
+
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 1)->sum(fn($q) => $q->staff_count_addition_education) + $payscales->where('staff_type_id', 1)->sum(fn($q) => $q->staff_count_addition) + $payscales->where('staff_type_id', 1)->sum(fn($q) => $q->staff_count_addition_ration)) }}
+
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 1)->sum(fn($q) => $q->addition_education) + $payscales->where('staff_type_id', 1)->sum(fn($q) => $q->addition) + $payscales->where('staff_type_id', 1)->sum(fn($q) => $q->addition_ration)) }}
+
+                </td>
+            </tr>
+            @foreach ($payscales->where('staff_type_id', 2) as $payscale)
                 <tr>
-                    <td>၁</td>
-                    <td>၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                    <td>ညွှန်ကြားရေးမှုးချုပ်</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ en2mm($loop->index + 1) }} </td>
+                    <td>{{ en2mm($payscale->name ?? 0 )}}</td>
+                    <td>{{ en2mm($payscale->similiar_rank ?? 0) }}</td>
+                    <td>
+                        {{ en2mm($payscale->staff_count_addition_education ?? 0) }}</td>
+                    <td>{{ en2mm($payscale->addition_education ?? 0) }}
+                    </td>
+                    <td>{{ en2mm($payscale->staff_count_addition ?? 0) }}
+                    </td>
+                    <td>{{ en2mm($payscale->addition ?? 0) }}</td>
+                    <td>
+                        {{ en2mm($payscale->staff_count_addition_ration ?? 0) }}</td>
+                    <td>{{ en2mm($payscale->addition_ration ?? 0) }}</td>
+                    <td>
+                        {{ en2mm($payscale->staff_count_addition_education ?? (0 + $payscale->staff_count_addition ?? (0 + $payscale->staff_count_addition_ration ?? 0))) }}
+                    </td>
+                    <td>
+
+                        {{ en2mm($payscale->addition_education ?? (0 + $payscale->addition ?? (0 + $payscale->addition_ration ?? 0))) }}
+
+                    </td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td>အရာထမ်းပေါင်း</td>
-                    <td>-</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>၁၂၃၀၀၀-၂၀၀၀-၁၂၃၀၀၀</td>
-                    <td>ရုံးအုပ်နှင့်အဆင့်တူ</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>အမှုထမ်းပေါင်း</td>
-                    <td>-</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>စုစုပေါင်း</td>
-                    <td>-</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+            @endforeach
+            <tr>
+                <td></td>
+                <td>အမှုထမ်းပေါင်း</td>
+                <td>-</td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 2)->sum(fn($q) => $q->staff_count_addition_education)) }}
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 2)->sum(fn($q) => $q->addition_education)) }}
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 2)->sum(fn($q) => $q->staff_count_addition)) }}
+
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 2)->sum(fn($q) => $q->addition)) }}
+
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 2)->sum(fn($q) => $q->staff_count_addition_ration)) }}
+
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 2)->sum(fn($q) => $q->addition_ration)) }}
+
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 2)->sum(fn($q) => $q->staff_count_addition_education) + $payscales->where('staff_type_id', 2)->sum(fn($q) => $q->staff_count_addition) + $payscales->where('staff_type_id', 2)->sum(fn($q) => $q->staff_count_addition_ration)) }}
+
+                </td>
+                <td>
+                    {{ en2mm($payscales->where('staff_type_id', 2)->sum(fn($q) => $q->addition_education) + $payscales->where('staff_type_id', 2)->sum(fn($q) => $q->addition) + $payscales->where('staff_type_id', 2)->sum(fn($q) => $q->addition_ration)) }}
+
+                </td>
+            </tr>
             </tbody>
         </table>
     

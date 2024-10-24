@@ -45,10 +45,6 @@
         th {
             background-color: #f2f2f2;
         }
-
-       
-
-
     </style>
 </head>
 <body>
@@ -70,45 +66,60 @@
                         </table>
                         <table style="border: none;">
                             <tbody>
+                                @foreach($leaves as $leave)
                                 <tr>
                                     <td style="border: none; width: 5%;"></td>
                                     <td style="border: none; width: 35%;">အမည်</td>
                                     <td style="border: none; width: 5%;">-</td>
-                                    <td style="border: none; width: 55%;"></td>
+                                    <td style="border: none; width: 55%;">{{ $leave->staff->name ?? 'N/A' }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;"></td>
                                     <td style="border: none;">ရာထူး</td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">လ/ထညွှန်ကြား‌ရေးမှူး</td>
+                                    <td style="border: none;">{{ $leave->staff->current_rank->name ?? 'N/A' }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;">ခွင့်အမျိုးအစား</td>
+                                    <td style="border: none;">-</td>
+                                    <td style="border: none;">{{ $leave->leave_type->name ?? 'N/A' }}</td>
                                 </tr>
                                
                                 <tr>
                                     <td style="border: none;"></td>
                                     <td style="border: none;">ခွင့်ယူသည့်ကာလ</td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">၂၅-၂-၂၀၂၄ မှ ၂၄-၃-၂၀၂၄ ခွင့်(၂၉)ရက်</td>
+                                    <td style="border: none;"> {{ \Carbon\Carbon::parse($leave->from_date)->format('Y-m-d') }} - {{ \Carbon\Carbon::parse($leave->to_date)->format('Y-m-d') }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;"></td>
                                     <td style="border: none;">ရုံးမိန့်</td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">၃၈/၂၀၂၄</td>
+                                    <td style="border: none;">{{ $leave->order_no }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;"></td>
                                     <td style="border: none;">ဖြတ်တောက်ရမည့်ခွင့်လစာ=၂၇၅,၀၀၀x(၄/၃၀)ရက်</td>
                                     <td style="border: none;">=</td>
-                                    <td style="border: none;">၃၆,၆၆၆.၆၇(ကျပ် သုံးသောင်းခြောက်ထောင် ခြောက်ရာ ‌ခြောက်ဆယ့်ခြောက် နှင့် ပြား၆၇တိတိ)</td>
+                                    <td style="border: none;">
+                                         
+                            @php
+                                if (!empty($leave->from_date) && !empty($leave->to_date)) {
+                                    $fromDate = \Carbon\Carbon::parse($leave->from_date);
+                                     $toDate = \Carbon\Carbon::parse($leave->to_date);
+                                     $dateDifference = $fromDate->diffInDays($toDate) + 1;  
+                                    } else {
+                                        $dateDifference = 0;
+                                    }
+                                    @endphp
+                                    {{ $leave->staff->current_salary/30*$dateDifference}}            
+
+                                        </td>
                                 </tr>
-                                
+                                @endforeach
                             </tbody>
                         </table>
-                        
-                      
-                        
-                       
-                       
                     </div>
                 </div>
             </div>

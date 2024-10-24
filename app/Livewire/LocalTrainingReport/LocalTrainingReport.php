@@ -39,7 +39,7 @@ class LocalTrainingReport extends Component
             'cellMargin' => 50,
         ];
         $firstRowStyle = ['bgColor' => 'f2f2f2'];
-        $cellStyle = ['valign' => 'center'];
+        // $cellStyle = ['valign' => 'center'];
         $phpWord->addTableStyle('TrainingTable', $tableStyle, $firstRowStyle);
 
 
@@ -54,32 +54,41 @@ class LocalTrainingReport extends Component
 
 
         $table->addRow();
-        $table->addCell(1000, $cellStyle)->addText('စဥ်');
-        $table->addCell(2000, $cellStyle)->addText('အမည်');
-        $table->addCell(2000, $cellStyle)->addText('ရာထူး');
-        $table->addCell(2000, $cellStyle)->addText('သင်တန်းအမည်');
-        $table->addCell(2000, $cellStyle)->addText('သင်တန်းကာလ(မှ)');
-        $table->addCell(2000, $cellStyle)->addText('သင်တန်းကာလ(အထိ)');
-        $table->addCell(2000, $cellStyle)->addText('သင်တန်းနေရာ/ဒေသ');
-        $table->addCell(2000, $cellStyle)->addText('သင်တန်းအမျိုးအစား');
+        $table->addCell(1000)->addText('စဥ်');
+        $table->addCell(2000)->addText('အမည်');
+        $table->addCell(2000)->addText('ရာထူး');
+        $table->addCell(2000)->addText('သင်တန်းအမည်');
+        $table->addCell(2000)->addText('သင်တန်းကာလ(မှ)');
+        $table->addCell(2000)->addText('သင်တန်းကာလ(အထိ)');
+        $table->addCell(2000)->addText('သင်တန်းနေရာ/ဒေသ');
+        $table->addCell(2000)->addText('သင်တန်းအမျိုးအစား');
 
 
         foreach ($staffs as $index => $staff) {
-            foreach ($staff->trainings->where('training_location_id', $this->trainingLocation) as $training) {
+            foreach ($staff->trainings as $index=> $training) {
 
                 $table->addRow();
-                $table->addCell(1000, $cellStyle)->addText($index + 1);
-                $table->addCell(2000, $cellStyle)->addText($staff->name);
-                $table->addCell(2000, $cellStyle)->addText($staff->current_rank->name);
-                $table->addCell(2000, $cellStyle)->addText($training->training_type->name);
-                $table->addCell(2000, $cellStyle)->addText($training->from_date);
-                $table->addCell(2000, $cellStyle)->addText($training->to_date);
-                $table->addCell(2000, $cellStyle)->addText($training->location);
-                $table->addCell(2000, $cellStyle)->addText($training->training_location?->name);
+                $table->addCell(1000,['vMerge' => 'restart'])->addText($index + 1);
+                $table->addCell(2000,['vMerge' => 'restart'])->addText($staff->name);
+                $table->addCell(2000,['vMerge' => 'restart'])->addText($staff->current_rank->name);
+                $table->addCell(2000,['vMerge' => 'restart'])->addText($training->training_type->name);
+                $table->addCell(2000,['vMerge' => 'restart'])->addText($training->from_date);
+                $table->addCell(2000,['vMerge' => 'restart'])->addText($training->to_date);
+                $table->addCell(2000,['vMerge' => 'restart'])->addText($training->location);
+                $table->addCell(2000,['vMerge' => 'restart'])->addText($training->training_location?->name);
+                $table->addRow();
+                $table->addCell(1000, ['vMerge' => 'continue']);
+                $table->addCell(2000, ['vMerge' => 'continue']);
+                $table->addCell(2000, ['vMerge' => 'continue']);
+                $table->addCell(2000)->addText($training->training_type->name);
+                $table->addCell(2000,['vMerge' => 'continue'])->addText();
+                $table->addCell(2000,['vMerge' => 'continue'])->addText();
+                $table->addCell(2000, ['vMerge' => 'continue'])->addText();
+                $table->addCell(2000, ['vMerge' => 'continue'])->addText();
             }
+          
         }
-
-
+       
         $fileName = 'local_training_report.docx';
         $tempFile = tempnam(sys_get_temp_dir(), $fileName);
 

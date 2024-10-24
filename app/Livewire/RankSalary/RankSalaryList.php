@@ -51,6 +51,11 @@ class RankSalaryList extends Component
         $table->addCell(4000)->addText($staff->current_rank?->name ?? '', null, ['align' => 'center']);
         $table->addCell(4000)->addText($staff->payscale?->name ?? '', null, ['align' => 'center']);
     }
+    $table->addRow();
+    $table->addCell(2000)->addText();
+    $table->addCell(4000)->addText();
+    $table->addCell(4000)->addText('စုစုပေါင်း');
+
     $fileName = 'rank_salary_list_report.docx';
     $tempFile = storage_path($fileName);
     $phpWordWriter = IOFactory::createWriter($phpWord, 'Word2007');

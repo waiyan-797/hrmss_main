@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Department;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Models\Division as ModelsDivision;
@@ -15,18 +16,20 @@ class Division extends Component
     public $confirm_edit = false;
     public $confirm_add = false;
     public $message = null;
-    public $division_search, $division_name, $division_type_name, $division_id;
+    public $division_search, $division_name,$nick_name, $division_type_name,$department_name, $division_id;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
     //Validation
     protected $rules = [
         'division_name' => 'required|string|max:255',
+        'nick_name' => 'required|string|max:255',
         'division_type_name' => 'required',
+        'department_name'=>'required',
     ];
     //Add New
     public function add_new(){
         $this->resetValidation();
-        $this->reset(['division_name', 'division_type_name']);
+        $this->reset(['division_name','nick_name', 'division_type_name','department_name']);
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
@@ -44,7 +47,10 @@ class Division extends Component
         $this->validate();
         ModelsDivision::create([
             'name' => $this->division_name,
+            'nick_name'=>$this->nick_name,
             'division_type_id' => $this->division_type_name,
+            'department_id'=>$this->department_name,
+            
         ]);
         $this->message = 'Created successfully.';
         $this->close_modal();
@@ -52,7 +58,7 @@ class Division extends Component
     //close modal
     public function close_modal(){
         $this->resetValidation();
-        $this->reset(['division_name', 'division_type_name']);
+        $this->reset(['division_name','nick_name', 'division_type_name','department_name']);
         $this->confirm_edit = false;
         $this->confirm_add = false;
     }
@@ -64,7 +70,9 @@ class Division extends Component
         $this->division_id = $id;
         $division = ModelsDivision::findOrFail($id);
         $this->division_name = $division->name;
+        $this->nick_name=$division->nick_name;
         $this->division_type_name = $division->division_type_id;
+        $this->department_name=$division->department_id;
     }
 
     //update
@@ -74,7 +82,9 @@ class Division extends Component
         $division = ModelsDivision::findOrFail($this->division_id);
         $division->update([
             'name' => $this->division_name,
-            'division_type_id' => $this->division_type_name
+            'nick_name'=>$this->nick_name,
+            'division_type_id' => $this->division_type_name,
+            'department_id'=>$this->department_name
         ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();
@@ -99,6 +109,7 @@ class Division extends Component
     public function render()
     {
         $division_types = divisionType::get();
+        $departments=Department::get();
         $this->modal_title = $this->confirm_add ? 'ဌာနခွဲအသစ်ထည့်ရန်
 ' : 'ဌာနခွဲပြင်ရန်
 ';
@@ -119,6 +130,7 @@ class Division extends Component
         return view('livewire.division', [
             'divisions' => $divisions,
             'division_types' => $division_types,
+            'departments'=>$departments,
         ]);
     }
 }
