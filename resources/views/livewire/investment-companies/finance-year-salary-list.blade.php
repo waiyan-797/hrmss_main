@@ -6,7 +6,11 @@
         <div class="w-full mx-auto px-3 py-4">
             
             <h1 class="font-bold text-center text-sm mb-3">ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-            <h2 class="font-bold text-center text-sm mb-3">၂၀၂၃-၂၀၂၄ခု ဘဏ္ဍာရေးနှစ်လစာ</h2>
+            <h2 class="font-bold text-center text-sm mb-3">{{$startYr}} - {{$endYr}} ခု ဘဏ္ဍာရေးနှစ်လစာ</h2>
+            <input type="number" min="2005" step="1" wire:model.live="endYr" />
+
+
+
             <table class="md:w-full">
                 <thead>
                     <tr>
@@ -42,16 +46,28 @@
                         </td>
                         <td class="border -black text-center p-2">     
                             {{-- {{$staff->name}} --}}
-                            {{$staff->currentRank?->name}}
+                            {{$staff->gender_id == 1 ? 'ဦး' : 'ဒေါ်'}}
                             
                   
               </td>
-              <td class="border -black text-center p-2">     
                   {{-- {{$staff->name}} --}}
-                  {{$staff->currentRank?->name}}
+                  @foreach ($highRanks as $highRank)
+                        
+                    @foreach($highRank->staffs as $staff )
+              <td class="border -black text-center p-2">     
+
+            {{$staff->currentRank->name}}
+    </td>
+
+    <td class="border -black text-center p-2">     
+
+      
+</td>
+
+                  @endforeach
+                  @endforeach
                   
         
-    </td>
                        </tr>
 
                    

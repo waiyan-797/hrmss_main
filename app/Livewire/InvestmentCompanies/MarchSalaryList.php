@@ -133,8 +133,8 @@ class MarchSalaryList extends Component
             ->orderBy('created_at', 'desc')
             ->first()?->current_salary;
         $newSalaryAfterPromotion = $this->staff?->currentRank->payscale->min_salary;
-        $totalPaidBeforePromotons = ($lastActualSalary / Carbon::now()->daysInMonth())  * ($dayPaidSalaryBeforePromotions - $totalLeaveDaysBeforeSpecificDate);
-        $totalPaidAfterPromotion = ($newSalaryAfterPromotion /  Carbon::now()->daysInMonth())  * ($dayPaidSalaryAfterPromotions - $totalLeaveDaysAfterSpecificDate);
+        $totalPaidBeforePromotons = ($lastActualSalary / Carbon::parse($this->monthsSelect)->daysInMonth())  * ($dayPaidSalaryBeforePromotions - $totalLeaveDaysBeforeSpecificDate);
+        $totalPaidAfterPromotion = ($newSalaryAfterPromotion /  Carbon::parse($this->monthsSelect)->daysInMonth())  * ($dayPaidSalaryAfterPromotions - $totalLeaveDaysAfterSpecificDate);
 
 
 

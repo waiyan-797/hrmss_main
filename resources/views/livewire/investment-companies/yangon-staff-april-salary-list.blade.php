@@ -8,6 +8,7 @@
                 ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>၂၀၂၄-၂၀၂၅ဘဏ္ဍာရေးနှစ်<br>ရန်ကုန်
                 ရန်ကုန်ရုံးချုပ်ရှိဝန်ထမ်းများ၏ဧပြီလစာရင်း</h1>
             <table class="md:w-full">
+                
                 <thead>
                     <tr>
                         <th class="border border-black text-center p-2">စဥ်</th>

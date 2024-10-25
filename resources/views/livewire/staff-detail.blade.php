@@ -62,7 +62,7 @@
                 @endif
                 
                 {{-- <div class="bg-white shadow-md   rounded-lg p-5"> --}}
-                    <div class="w-full py-5  h-96 overflow-y-auto">
+                    <div class="w-full py-5   overflow-y-auto">
 
                     @if ($tab == 'personal_info')
                         @include('staff.personal_info')

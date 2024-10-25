@@ -3,9 +3,19 @@
     <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button><br>
     <h1 class="text-center font-bold text-xl mb-4 ">ဝန်ထမ်းများ၏ လစာငွေတောင်းခံလွှာ</h1>
 
+    <div>
+        
+      
+        <select wire:model.live='staff_id'>
+            @foreach ($staffs as $staff)
+            <option value="{{$staff->id}}">{{$staff->name}}</option>
+
+            @endforeach
+        </select>
+    </div>
     <div class="mb-2">
-        <label class="block font-semibold">ဝန်ထမ်းအမည် ဒေါ/ဦး------------------<br>
-            -------------------
+        <label class="block font-semibold">ဝန်ထမ်းအမည်   {{$staff->gender_id ==  1 ? "ဦိး" : "ဒေါ်" }} {{$staff->name}}<br>
+            
         </label>
         
         <p class="text-justify">

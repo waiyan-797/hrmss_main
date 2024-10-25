@@ -5,25 +5,28 @@
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
             <h1 class="font-bold text-center text-sm mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့်
-                ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>၏ <br> 
+                ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန 
                 
-                {{$staff->name}}
+                {{$staff->gender_id ==  1 ? "ဦိး" : "ဒေါ်" }}      {{$staff->name}}
+                  
+                <br>၏ <br> 
+                {{mmDateFormat($year,$month)}}
                 အတွက်
                 လစာစာရင်းညှိနှုင်းခြင်း။ ...</h1>
                 
 
                 <div>
-                    
                     <select wire:model.live='staff_id'>
                  
-                    @foreach ($staffs as $staff)
-                    <option value="{{$staff->id}}">
-                        {{$staff->gender_id ==  1 ? "ဦိး" : "ဒေါ်" }} {{$staff->name}}
+                    @foreach ($staffs as $each)
+                    <option value="{{$each->id}}">
+                     
+                        {{$each->gender_id ==  1 ? "ဦိး" : "ဒေါ်" }} {{$each->name}}
                     </option>
                 @endforeach
                     
                     </select>
-                    <input type="month" wire:model='monthsSelect'> 
+                    <input type="month" wire:model.live='monthSelect'> 
                 </div>
     
             <table class="md:w-full text-sm">
@@ -54,38 +57,50 @@
                             <br> 
                                 
                             {{ $startDateOfMonth}} မှ  
-                                {{' --------- '  . $staff->id  .  '-------------'}}
-                            {{$staff->increments->first()->increment_date}}
-                        
-                        
-                        
-                        </td>
-                        <td class="border border-black text-right p-2">
                             
+                                {{ $incrementedDate->subDay()->toDateString()}} ထိ  
+                            
+                        {{$diffDaysFromStart}} ရက် 
+  @php 
+$incrementedDate->addDay();
+                            @endphp
+                        
                         </td>
                         <td class="border border-black text-right p-2">
-                            {{$staff->current_salary}}
+                       {{$lastActualSalary}}
+                        </td>
+                        <td class="border border-black text-right p-2">
+                            {{floor($salaryRatePerDayBeforeIncrement)}}
 
                         </td>
-                        <td class="border border-black text-right p-2">ss</td>
+                        <td class="border border-black text-right p-2">
+                            {{($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement)) * 100}}
+
+                            
+                        </td>
+                        <td class="border border-black text-right p-2"></td>
+                        <td class="border border-black text-right p-2">
+                            {{$lastActualSalary}}
+                             </td>
+                        <td class="border border-black text-right p-2"></td>
+                        <td class="border border-black text-right p-2">{{floor($totalPaidAfterIncrement -  $salaryRatePerDayBeforeIncrement)}}</td>
+                        <td class="border border-black text-right p-2"> {{  ( $totalPaidAfterIncrement - floor($totalPaidAfterIncrement))  - ($salaryRatePerDayBeforeIncrement -  floor($salaryRatePerDayBeforeIncrement))   }} </td>
+                    </tr>
+                    <tr class="">
+                        <td class="border border-black text-right p-2">၂ </td>
+                        <td class="border border-black text-right p-2">{{$incrementedDate->toDateString()}} မှ  {{$monthEnd }} ထိ</td>
+                        <td class="border border-black text-right p-2">{{$this?->staff?->current_salary}}</td>
+                        <td class="border border-black text-right p-2">{{floor($totalPaidAfterIncrement)}}</td>
+                        <td class="border border-black text-right p-2">{{$totalPaidAfterIncrement - floor($totalPaidAfterIncrement)}}</td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2"></td>
                     </tr>
-                    <tr class="font-bold">
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2">{{$endtDateOfMonth}}</td>
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2">၂၀၉,၆၁၂</td>
-                        <td class="border border-black text-right p-2">၉၀</td>
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2">၁၉၈,၀၀၀</td>
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2">၁၁,၆၁၂</td>
-                        <td class="border border-black text-right p-2">၉၀</td>
-                    </tr>
+
+
+
                 </tbody>
             </table>
 
