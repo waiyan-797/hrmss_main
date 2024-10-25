@@ -7,8 +7,8 @@
                 'id' => $township_id,
                 'title' => 'မြို့/မြို့နယ်',
                 'search_id' => 'township_search',
-                'columns' => ['စဉ်', 'မြို့/မြို့နယ်','ခရိုင်','လုပ်ဆောင်ချက်'],
-                'column_vals' => ['name', 'district'],
+                'columns' => ['စဉ်', 'မြို့/မြို့နယ်','ခရိုင်','တိုင်း‌‌ဒေသကြီး/ပြည်နယ်','လုပ်ဆောင်ချက်'],
+                'column_vals' => ['name', 'district','region'],
             ])
         </div>
     </div>

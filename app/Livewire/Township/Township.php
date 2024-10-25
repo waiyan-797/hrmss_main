@@ -3,6 +3,7 @@
 namespace App\Livewire\Township;
 
 use App\Models\District;
+use App\Models\Region;
 use App\Models\Township as ModelsTownship;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -15,19 +16,20 @@ class Township extends Component
     public $confirm_edit = false;
     public $confirm_add = false;
     public $message = null;
-    public $township_search, $township_name, $district_name, $township_id;
+    public $township_search, $township_name, $district_name, $township_id,$region_name;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
     //Validation
     protected $rules = [
         'township_name' => 'required|string|max:255',
         'district_name' => 'required',
+        'region_name'=>'required',
     ];
     //Add New
     public function add_new()
     {
         $this->resetValidation();
-        $this->reset(['township_name', 'district_name']);
+        $this->reset(['township_name', 'district_name','region_name']);
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
@@ -46,6 +48,7 @@ class Township extends Component
         ModelsTownship::create([
             'name' => $this->township_name,
             'district_id' => $this->district_name,
+            'region_id'=>$this->region_name,
         ]);
         $this->message = 'Created successfully.';
         $this->close_modal();
@@ -54,7 +57,7 @@ class Township extends Component
     public function close_modal()
     {
         $this->resetValidation();
-        $this->reset(['township_name', 'district_name']);
+        $this->reset(['township_name', 'district_name','region_name']);
         $this->confirm_edit = false;
         $this->confirm_add = false;
     }
@@ -68,6 +71,7 @@ class Township extends Component
         $township = ModelsTownship::findOrFail($id);
         $this->township_name = $township->name;
         $this->district_name = $township->district_id;
+        $this->region_name=$township->region_id;
     }
 
     //update
@@ -77,7 +81,8 @@ class Township extends Component
         $township = ModelsTownship::findOrFail($this->township_id);
         $township->update([
             'name' => $this->township_name,
-            'education_group_id' => $this->district_name
+            'district_id' => $this->district_name,
+            'region_id'=>$this->region_name
         ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();
@@ -105,6 +110,7 @@ class Township extends Component
     public function render()
     {
         $districts = District::get();
+        $regions=Region::get();
         $this->modal_title = $this->confirm_add ? 'မြို့/မြို့နယ်သိမ်းရန်
 ' : 'မြို့/မြို့နယ်ပြင်ရန်
 ';
@@ -125,6 +131,7 @@ class Township extends Component
         return view('livewire.township.township', [
             'townships' => $townships,
             'districts' => $districts,
+            'regions'=>$regions
         ]);
     }
 }

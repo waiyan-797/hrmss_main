@@ -110,7 +110,7 @@ class PensionYear extends Component
         $pensionYearQuery = ModelsPensionYear::query();
         if ($this->pension_year_search) {
             $this->resetPage();
-            $pensionYearQuery->where('name', 'LIKE', $pensionYearSearch);
+            $pensionYearQuery->where('year', 'LIKE', $pensionYearSearch);
             $pension_years = $pensionYearQuery->paginate($pensionYearQuery->count() > 10 ? $pensionYearQuery->count() : 10);
         } else {
             $pension_years = $pensionYearQuery->paginate(10);

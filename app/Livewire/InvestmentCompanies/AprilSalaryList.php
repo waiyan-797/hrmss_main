@@ -14,7 +14,7 @@ class AprilSalaryList extends Component
   public function go_pdf()
 {
     $salaries = Salary::with('staff', 'rank')->get(); 
-    $staffs = Staff::get();
+    $staffs = Rank::whereIn('staff_type_id', [1, 2, 3])->get();
     $leaves = Leave::where('leave_type_id', 1)->get();
     $divisions=Division::find(23);
     $high_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->get();
@@ -37,11 +37,13 @@ public function render()
 {
     $leaves = Leave::where('leave_type_id', 1)->get();
     $salaries = Salary::with('staff', 'rank')->get();
+    $staffs = Rank::whereIn('staff_type_id', [1, 2, 3])->get();
     $high_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->get();
     $low_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 2))->get();
     $divisions=Division::find(23);
 
     return view('livewire.investment-companies.april-salary-list',[ 
+        'staffs' => $staffs,
         'high_staffs' => $high_staffs,
         'low_staffs' => $low_staffs,
         'salaries' => $salaries,
