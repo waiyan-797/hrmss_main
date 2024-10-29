@@ -5,9 +5,11 @@
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
        
             <div class="md:w-full p-4">
-                <h1 class="text-center text-black font-semibold text-base">၂၀၂၄-၂၀၂၅ဘဏ္ဍာရေးနှစ်အတွက် လစာငွေထုတ်ယူမည့် စာရင်း</h1>
+                <h2 class="font-bold text-center text-sm mb-3">{{$startYr}} - {{$endYr}} ဘဏ္ဍာရေးနှစ်အတွက် လစာငွေထုတ်ယူမည့် စာရင်း</h2>
+                <input type="number" min="2005" step="1" wire:model.live="endYr" />
                 
                 
+{{--                 
                 <div class="flex justify-between w-full mb-2">
                     <label for="name" class="md:w-5"> </label>
                     <label for="name" class="md:w-1/3">အမည်</label>
@@ -25,8 +27,8 @@
                     <label for="name" class="md:w-1/3">လစာနှုန်း</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5"></label>
-                </div>
-                <table class="md:w-full">
+                </div> --}}
+                <table class="md:w-full mt-5 ">
                     <thead>
                         <tr>
                             <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
@@ -48,112 +50,56 @@
                         </tr>
                     </thead>
                     <tbody>
-                     
-                        <tr>
-                            <td class="border border-black text-center p-2">၁</td>
-                            <td class="border border-black text-center p-2">@php 
-                            for($i=1;$i<=12;$i++)
-                                @endphp</td>
-                            <td class="border border-black text-center p-2"></td>
-                           
-                            <td class="border border-black text-center p-2"></td>
-                            <td class="border border-black text-center p-2"></td>
-                            
-                            <td class="border border-black text-center p-2"></td>
-                            <td class="border border-black text-center p-2"></td>
-                           
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                        </tr>
-                    
-                        <tr>
-                            <td class="border border-black text-center p-2">၂</td>
-                            <td class="border border-black text-center p-2">၅/၂၀၂၄</td>
-                            <td class="border border-black text-center p-2"></td>
-                           
-                            <td class="border border-black text-center p-2"></td>
-                            <td class="border border-black text-center p-2"></td>
-                            
-                            <td class="border border-black text-center p-2"></td>
-                            <td class="border border-black text-center p-2"></td>
-                           
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-black text-center p-2">၃</td>
-                            <td class="border border-black text-center p-2">၆/၂၀၂၄</td>
-                            <td class="border border-black text-center p-2"></td>
-                           
-                            <td class="border border-black text-center p-2"></td>
-                            <td class="border border-black text-center p-2"></td>
-                            
-                            <td class="border border-black text-center p-2"></td>
-                            <td class="border border-black text-center p-2"></td>
-                           
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-black text-center p-2">၄</td>
-                            <td class="border border-black text-center p-2">၇/၂၀၂၄</td>
-                            <td class="border border-black text-center p-2"></td>
-                           
-                            <td class="border border-black text-center p-2"></td>
-                            <td class="border border-black text-center p-2"></td>
-                            
-                            <td class="border border-black text-center p-2"></td>
-                            <td class="border border-black text-center p-2"></td>
-                           
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-black text-center p-2"></td>
-                            <td class="border border-black text-center p-2">စုစုပေါင်း</td>
-                            <td class="border border-black text-center p-2"></td>
-                           
-                            <td class="border border-black text-center p-2"></td>
-                            <td class="border border-black text-center p-2"></td>
-                            
-                            <td class="border border-black text-center p-2"></td>
-                            <td class="border border-black text-center p-2"></td>
-                           
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                            <td class="border border-black text-left p-1">   
-                            </td>
-                        </tr>
+                        @php $count = 0; @endphp
+
+                        @foreach ([$startYr , $endYr] as $year)
+
+ @foreach (financeYear()[$loop->index] as $month)
+                          
+ <tr>
+    <td class="border border-black text-center p-2">
+
+        {{en2mm(++$count )}}
+    </td>
+
+    <td class="border border-black text-center p-2">{{en2mm($month) . '/' . en2mm($year)}}</td>
+   
+    <td class="border border-black text-center p-2">
+       
+                         
+      
+        {{  
+        
+        //    $salaries
+        //                  ->whereYear('salary_month' , $year)
+        //                  ->whereMonth('salary_month', 6)
+
+        //                  ->sum('current_salary')
+        getSalary($month, $year)
+        }}
+    </td>
+   
+    <td class="border border-black text-center p-2"></td>
+    <td class="border border-black text-center p-2"></td>
+    
+    <td class="border border-black text-center p-2"></td>
+    <td class="border border-black text-center p-2"></td>
+   
+    <td class="border border-black text-left p-1">   
+    </td>
+    <td class="border border-black text-left p-1">   
+    </td>
+    <td class="border border-black text-left p-1">   
+    </td>
+    <td class="border border-black text-left p-1">   
+    </td>
+</tr>
+
+ @endforeach
+
+                        @endforeach
                        
-                    </tbody>
+                          </tbody>
                 </table>
                 
                

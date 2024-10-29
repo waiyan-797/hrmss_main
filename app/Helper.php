@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Country;
+use App\Models\Salary;
 
 if (! function_exists('getcsv')) {
     function getcsv($f)
@@ -79,4 +80,38 @@ if (!function_exists('mmDateFormat')) {
             return Country::where('id', $id)->first()->name;
         }
     }
+}
+if (!function_exists('financeYear')) {
+
+    function financeYear()
+    {
+        return [
+            [
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12
+            ],
+            [
+                1,
+                2,
+                3
+            ]
+
+        ];
+    }
+}
+
+function getSalary($month, $year)
+{
+
+    return    Salary::whereYear('salary_month', $year)
+        ->whereMonth('salary_month', $month)
+
+        ->sum('current_salary');
 }

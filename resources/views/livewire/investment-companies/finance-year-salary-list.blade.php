@@ -9,18 +9,13 @@
             <h2 class="font-bold text-center text-sm mb-3">{{$startYr}} - {{$endYr}} ခု ဘဏ္ဍာရေးနှစ်လစာ</h2>
             <input type="number" min="2005" step="1" wire:model.live="endYr" />
 
-
-
             <table class="md:w-full">
                 <thead>
                     <tr>
                         <th class="border border-black text-center p-2">စဥ်</th>
-
                         <th class="border border-black text-center p-2">GivenName</th>
                         <th class="border border-black text-center p-2">ရာထူး</th>
-
                         <th class="border border-black text-center p-2">January</th>
-
                         <th class="border border-black text-center p-2">February</th>
                         <th class="border border-black text-center p-2">March</th>
                         <th class="border border-black text-center p-2">April</th>
@@ -32,53 +27,46 @@
                         <th class="border border-black text-center p-2">October</th>
                         <th class="border border-black text-center p-2">November</th>
                         <th class="border border-black text-center p-2">December</th>
-                     
                         <th class="border border-black text-center p-2">Total</th>
                     </tr>
                 </thead>
                 <tbody>
-                  
-               @foreach ($staffs as 
-               $staff )
-                       <tr>
-                        <td>
-                            {{$loop->index}}
-                        </td>
-                        <td class="border -black text-center p-2">     
-                            {{-- {{$staff->name}} --}}
-                            {{$staff->gender_id == 1 ? 'ဦး' : 'ဒေါ်'}}
-                            
-                  
-              </td>
-                  {{-- {{$staff->name}} --}}
-                  @foreach ($highRanks as $highRank)
+                    @foreach ($Ranks as $rank)
+                        @foreach($rank->staffs as $staff)
+                            <tr>
+                                <td>{{ $loop->index + 1 }}</td> 
+                                <td>{{ $staff->gener_id ? 'U' : 'Daw' }}</td> 
+                                <td>{{ $staff->currentRank->name }}</td>
+
+                   @for ($i = 1; $i <= 12; $i++)
+                   <td>{{$staff->salaries()->whereMonth('salary_month', $i)->whereYear('salary_month', $endYr)->first()?->actual_salary}}</td>
+                       
+                   @endfor
+
+                          
+                            </tr>
+                        @endforeach
+                        @if($rank->staffs->isNotEmpty())
+
+
+                        <tr>
+                            <td>
+                                {{ 
+                                    $rank->staffs->sum(fn($staff) => 
+                                        $staff->salaries()
+                                            
+                                            ->whereYear('salary_month', $endYr)
+                                            ->first()?->actual_salary ?? 0 
+                                    ) 
+                                }}
+                            </td>
+                        </tr>
                         
-                    @foreach($highRank->staffs as $staff )
-              <td class="border -black text-center p-2">     
-
-            {{$staff->currentRank->name}}
-    </td>
-
-    <td class="border -black text-center p-2">     
-
-      
-</td>
-
-                  @endforeach
-                  @endforeach
-                  
-        
-                       </tr>
-
+                         @endif 
                    
-               @endforeach
-
-                    {{-- ညွှန်ကြားရေးမှူးချုပ်	*  --}}
-                    
+                    @endforeach
                 </tbody>
             </table>
-            
-
         </div>
     </div>
 </div>

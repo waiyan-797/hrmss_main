@@ -20,5 +20,4 @@ class Salary extends Model
     {
         return $this->belongsTo(Rank::class);
     }
-
 }

@@ -2,28 +2,41 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Models\Salary;
 use App\Models\Staff;
+use Carbon\Carbon;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
+
 class FinanceSalaryList extends Component
 {
-    public function go_pdf(){
+    public $startYr, $endYr;
+
+    public function go_pdf()
+    {
         $staffs = Staff::get();
         $data = [
             'staffs' => $staffs,
         ];
         $pdf = PDF::loadView('pdf_reports.finance_salary_list_report', $data);
-        return response()->streamDownload(function() use ($pdf) {
+        return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'finance_salary_list_report_pdf.pdf');
     }
-    
-     public function render()
-     {
+    public function mount()
+    {
+        $this->endYr   = Carbon::now()->year;
+    }
+
+    public function render()
+    {
+        $this->startYr = $this->endYr - 1;
         $staffs = Staff::get();
-        return view('livewire.investment-companies.finance-salary-list',[ 
-        'staffs' => $staffs,
-    ]);
+        $salaries = Salary::query();
+        return view('livewire.investment-companies.finance-salary-list', [
+            'staffs' => $staffs,
+            'salaries' => $salaries
+        ]);
     }
     // public function render()
     // {

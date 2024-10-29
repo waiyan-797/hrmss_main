@@ -62,6 +62,7 @@ class Promotion extends Component
     {
         // $this->validate();
 
+
         ModelsPromotion::create([
             'staff_id' => $this->staff->id,
             'rank_id' => $this->rank_name,

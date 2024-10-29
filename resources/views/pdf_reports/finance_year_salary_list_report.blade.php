@@ -78,87 +78,73 @@
     <page size="A4">
         <div class="container">
             <div class="content">
-                <h1 class="font-bold text-center text-sm mb-3">ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-                <h2 class="font-bold text-center text-sm mb-3">၂၀၂၃-၂၀၂၄ခု ဘဏ္ဍာရေးနှစ်လစာ</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>စဥ်</th>
-                            <th>GivenName</th>
-                            <th>ရာထူး</th>
-                            <th>April</th>
-                            <th>May</th>
-                            <th>June</th>
-                            <th>July</th>
-                            <th>August</th>
-                            <th>September</th>
-                            <th>October</th>
-                            <th>November</th>
-                            <th>December</th>
-                            <th>January</th>
-                            <th>February</th>
-                            <th>March</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="font-bold">
-                            <td>၁</td>
-                            <td>U----</td>
-                            <td>ညွှန်ကြားရေးမှူးချုပ်</td>
-                            <td>၅၅၀,၀၀၀.၀၀</td>
-                            <td>၅၅၀,၀၀၀.၀၀</td>
-                            <td>၅၅၀,၀၀၀.၀၀</td>
-                            <td>၅၅၀,၀၀၀.၀၀</td>
-                            <td>၅၅၀,၀၀၀.၀၀</td>
-                            <td>၅၅၀,၀၀၀.၀၀</td>
-                            <td>၅၅၀,၀၀၀.၀၀</td>
-                            <td>၅၅၀,၀၀၀.၀၀</td>
-                            <td>၅၅၀,၀၀၀.၀၀</td>
-                            <td>၅၅၀,၀၀၀.၀၀</td>
-                            <td>၅၅၀,၀၀၀.၀၀</td>
-                            <td>၅၅၀,၀၀၀.၀၀</td>
-                            <td>၆,၆၀၀,၀၀၀.၀၀</td>
-                        </tr>
-                        <tr>
-                            <td>၂</td>
-                            <td>Daw----</td>
-                            <td>ဒုတိယညွှန်ကြားရေးမှူးချုပ်</td>
-                            <td>၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td>၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၅,၁၂၉,၃၃၃.၃၃</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>၆</td>
-                            <td>၂,၂၃၈,၀၀၀.၀၀</td>
-                            <td class="text-right">၂,၂၄၈,၀၁၁.၄၂</td>
-                            <td class="text-right">၂,၂၄၂,၀၁၁.၄၂</td>
-                            <td class="text-right">၂,၂၄၂,၀၁၁.၄၂</td>
-                            <td class="text-right">၂,၂၄၂,၀၁၁.၄၂</td>
-                            <td class="text-right">၂,၂၄၂,၀၁၁.၄၂</td>
-                            <td>၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၄၂၆,၀၀၀.၀၀</td>
-                            <td class="text-right">၅,၁၂၉,၃၃၃.၃၃</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
+                    <div class="w-full mx-auto px-3 py-4">
+                        
+                        <h1 class="font-bold text-center text-sm mb-3">ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+                        <h2 class="font-bold text-center text-sm mb-3">{{$startYr}} - {{$endYr}} ခု ဘဏ္ဍာရေးနှစ်လစာ</h2>
+                        <input type="number" min="2005" step="1" wire:model.live="endYr" />
+            
+                        <table class="md:w-full">
+                            <thead>
+                                <tr>
+                                    <th class="border border-black text-center p-2">စဥ်</th>
+                                    <th class="border border-black text-center p-2">GivenName</th>
+                                    <th class="border border-black text-center p-2">ရာထူး</th>
+                                    <th class="border border-black text-center p-2">January</th>
+                                    <th class="border border-black text-center p-2">February</th>
+                                    <th class="border border-black text-center p-2">March</th>
+                                    <th class="border border-black text-center p-2">April</th>
+                                    <th class="border border-black text-center p-2">May</th>
+                                    <th class="border border-black text-center p-2">June</th>
+                                    <th class="border border-black text-center p-2">July</th>
+                                    <th class="border border-black text-center p-2">August</th>
+                                    <th class="border border-black text-center p-2">September</th>
+                                    <th class="border border-black text-center p-2">October</th>
+                                    <th class="border border-black text-center p-2">November</th>
+                                    <th class="border border-black text-center p-2">December</th>
+                                    <th class="border border-black text-center p-2">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($Ranks as $rank)
+                                    @foreach($rank->staffs as $staff)
+                                        <tr>
+                                            <td>{{ $loop->index + 1 }}</td> 
+                                            <td>{{ $staff->gener_id ? 'U' : 'Daw' }}</td> 
+                                            <td>{{ $staff->currentRank->name }}</td>
+            
+                               @for ($i = 1; $i <= 12; $i++)
+                               <td>{{$staff->salaries()->whereMonth('salary_month', $i)->whereYear('salary_month', $endYr)->first()?->actual_salary}}</td>
+                                   
+                               @endfor
+            
+                                      
+                                        </tr>
+                                    @endforeach
+                                    @if($rank->staffs->isNotEmpty())
+            
+            
+                                    <tr>
+                                        <td>
+                                            {{ 
+                                                $rank->staffs->sum(fn($staff) => 
+                                                    $staff->salaries()
+                                                        
+                                                        ->whereYear('salary_month', $endYr)
+                                                        ->first()?->actual_salary ?? 0 
+                                                ) 
+                                            }}
+                                        </td>
+                                    </tr>
+                                    
+                                     @endif 
+                               
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>        </div>
         </div>
     
     </page>
