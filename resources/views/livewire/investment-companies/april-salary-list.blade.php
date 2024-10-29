@@ -104,7 +104,7 @@
 
                             <td class="border border-black p-2"></td>
                             <td class="border border-black p-2"></td>
-                        </tr>s
+                        </tr>
                     @endforeach
 
                     @foreach ($high_staffs as $staff)

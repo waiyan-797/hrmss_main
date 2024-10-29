@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Ministry;
 use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
@@ -16,7 +17,6 @@ public $staff_id;
    }
     public function go_pdf($staff_id){
         $staff = Staff::find($staff_id);
-        // dd($staff);
         $data = [
             'staff' => $staff,
            
@@ -92,11 +92,11 @@ public $staff_id;
         $section->addText('၅။'.'ဦးစီးဌာန:'. str_repeat(' ', 5).'ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန');
         $section->addText('၆။' . 'လစာဝင်ငွေ'. str_repeat(' ', 5).$staff->payscale->name);
         $section->addText('၇။' . 'လက်ရှိအလုပ်အကိုင်'. str_repeat(' ', 5).$staff->current_rank->name);
-        $section->addText('၈။' . 'လက်ရှိရာထူးရသည့်နေ့'. str_repeat(' ', 5).$staff->curret_rank_date);
+        $section->addText('၈။' . 'လက်ရှိရာထူးရသည့်နေ့'. str_repeat(' ', 5).$staff->current_rank_date);
         $section->addText('၉။' . 'ပြောင်းရွေ့သည့်မှတ်ချက်'. str_repeat(' ', 5).$staff->transfer_remark);
         $section->addText('၁၀။' . 'တွဲဖက်အင်အား ဖြစ်လျှင်'. str_repeat(' ', 5).$staff->side_department->name);
         $section->addText('၁၁။' . 'လစာနှင့် စရိတ်ကျခံမည့်ဌာန'. str_repeat(' ', 5).$staff->salary_paid_by);
-        $section->addText('၁၂။' . 'လက်ရှိ အလုပ်အကိုင်ရလာပုံ'. str_repeat(' ', 5));
+        $section->addText('၁၂။' . 'လက်ရှိ အလုပ်အကိုင်ရလာပုံ'. str_repeat(' ', 5).$staff->is_newly_appointed);
         $section->addText('၁၃။' . 'ပြိုင်အ‌‌ရွေးခံ(သို့)တိုက်ရိုက်ခန့်'. str_repeat(' ', 5).$staff->is_direct_appointed);
        
        $section->addText('၁၄။'.'အလုပ်အကိုင်အတွက် ထောက်ခံသူများ', ['bold' => true]);
@@ -346,10 +346,10 @@ public $staff_id;
         $table->addRow();
         $table->addCell(2000)->addText('ဘွဲ့ထူး၊ ဂုဏ်ထူး တံဆိပ်အမည်', ['bold' => true]);
         $table->addCell(2000)->addText('အမိန့်အမှတ်/ခုနှစ်', ['bold' => true]);
-        foreach ($staff->awards as $award) {
+        foreach ($staff->awardings as $awarding) {
             $table->addRow();
-            $table->addCell(2000)->addText($award->award->name ?? 'N/A' );
-            $table->addCell(2000)->addText($award->order_no .'/'.$award->order_date); 
+            $table->addCell(2000)->addText($awarding->award_type->name ?? 'N/A' );
+            $table->addCell(2000)->addText($awarding->order_no .'/'.$awarding->order_date); 
         }
         $section->addText('၄။'.'နောက်ဆုံးအောင်မြင်ခဲ့သည့်ကျောင်း/အတန်း၊ ခုံအမှတ်၊ ဘာသာရပ်အတိအကျဖော်ပြရန်: '. str_repeat(' ', 5).$staff->last_school_name.'၊'.$staff->last_school_subject.'၊'.$staff->last_school_row_no.'၊'.$staff->last_school_major);
         $section->addText('၅။'.'ကျောင်းသားဘဝတွင် နိုင်ငံရေး/မြို့ရေး ဆောင်ရွက်မှုများနှင့်အဆင့်အတန်း၊ တာဝန်: '. str_repeat(' ', 5).$staff->student_life_political_social);
@@ -406,7 +406,7 @@ public $staff_id;
         $table->addCell(2000)->addText('ထိ', ['bold' => true]);
         foreach ($staff->punishments as $punishment) {
             $table->addRow();
-            $table->addCell(2000)->addText($punishment->penaltyType->name ?? 'N/A');
+            $table->addCell(2000)->addText($punishment->penalty_type->name ?? 'N/A');
             $table->addCell(2000)->addText($punishment->reason); 
             $table->addCell(2000)->addText($punishment->from_date); 
             $table->addCell(2000)->addText($punishment->to_date ); 
@@ -435,6 +435,7 @@ public $staff_id;
         $staff=Staff::where('id',$this->staff_id)->first();
         return view('livewire.pdf-staff-report68', [
             'staff' => $staff,
+           
             
         ]);
     }

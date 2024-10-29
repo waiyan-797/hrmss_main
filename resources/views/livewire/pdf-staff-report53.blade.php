@@ -311,7 +311,7 @@
                     <label for="name" class="md:w-1/3">လက်ရှိအလုပ်အကိုင်ရလာပုံ</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ $staff->form_of_appointment }}</label>
+                        <label for="name" class="md:w-3/5">{{ $staff->is_newly_appointed }}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -405,7 +405,7 @@
                                     <td class="border border-black text-center p-2">
                                         {{ $posting->division->name ?? '' }} / {{ $posting->department->name ?? '' }}/{{ $posting->location }}
                                     </td>
-                                    <td class="border border-black text-center p-2">{{ $staff->remark}}</td>
+                                    <td class="border border-black text-center p-2">{{ $posting->remark}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -785,7 +785,7 @@
                     <label for="name" class="md:w-1/3">လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ $staff->past_occupation}}</label>
+                        <label for="name" class="md:w-3/5"></label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">

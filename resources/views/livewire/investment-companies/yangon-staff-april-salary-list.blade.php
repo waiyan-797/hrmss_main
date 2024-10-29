@@ -8,7 +8,7 @@
                 ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>၂၀၂၄-၂၀၂၅ဘဏ္ဍာရေးနှစ်<br>ရန်ကုန်
                 ရန်ကုန်ရုံးချုပ်ရှိဝန်ထမ်းများ၏ဧပြီလစာရင်း</h1>
             <table class="md:w-full">
-                
+
                 <thead>
                     <tr>
                         <th class="border border-black text-center p-2">စဥ်</th>
@@ -78,8 +78,8 @@
                         <td class="border border-black text-left p-1"></td>
                         <td class="border border-black text-left p-1"></td>
                     </tr>
-                  
                     @php
+                        // Initialize totals
                         $totalBaseSalaryHigh = 0;
                         $totalIncrementHigh = 0;
                         $totalDeductionHigh = 0;
@@ -91,117 +91,71 @@
                         $additionHigh = 0;
                         $totalSalaryAdditionHigh = 0;
                     @endphp
-                    @foreach ($high_staffs as $staff)
-                        <tr>
-                            <td class="border border-black p-2">{{ $loop->index + 1 }}</td>
-                            <td class="border border-black p-2">{{ $staff->name }}</td>
-                            <td class="border border-black p-2">{{ $staff->current_rank->name }}</td>
-                            <td class="border border-black p-2">{{ en2mm($staff->currentRank->payscale->min_salary) }}
-                            </td>
-                            <td class="border border-black p-2">
-                                {{ en2mm($staff->currentRank->payscale->increment * $staff->current_increment_time) }}
-                            </td>
-                            <td class="border border-black p-2">
-                                {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time) }}
-                            </td>
 
-                            @php
-                                $dateDifference = 0;
-                            @endphp
-
-                            @foreach ($leaves as $leave)
-                                @if ($leave->leave_type_id === 1)
-                                    @php
-                                        $fromDate = \Carbon\Carbon::parse($leave->from_date);
-                                        $toDate = \Carbon\Carbon::parse($leave->to_date);
-                                        $dateDifference = $fromDate->diffInDays($toDate) + 1;
-                                    @endphp
-                                @endif
-                            @endforeach
-
-                            <td class="border border-black p-2">
-                                {{ en2mm(($staff->current_salary / 30) * $dateDifference) }}
-                            </td>
-                            <td class="border border-black p-2">
-                                {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference) }}
-                            </td>
-
-                            @php
-                                $staffSalaries = $salaries->filter(fn($salary) => $salary->staff_id === $staff->id);
-                                $totalDeductionTaxHigh = $staffSalaries->sum('deduction_tax');
-                                $totalDeductionInsuranceHigh = $staffSalaries->sum('deduction_insurance');
-                                $totalDeductionHigh = $staffSalaries->sum('deduction');
-                                $totalAdditionHigh = $staffSalaries->sum('addition');
-                                $totalSalaryHigh += $staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference - $totalDeductionTaxHigh - $totalDeductionInsuranceHigh - $totalDeductionHigh;
-                            @endphp
-
-                            <td class="border border-black p-2">
-                                {{ en2mm($totalDeductionTaxHigh) }}
-                            </td>
-                            <td class="border border-black p-2">
-                                {{ en2mm($totalDeductionInsuranceHigh) }}
-                            </td>
-                            <td class="border border-black p-2">
-                                {{ en2mm($totalDeductionHigh) }}
-                            </td>
-                            <td class="border border-black p-2">
-                                {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference - $totalDeductionTaxHigh - $totalDeductionInsuranceHigh - $totalDeductionHigh) }}
-                            </td>
-
-                            <td class="border border-black p-2">
-                                {{ en2mm($totalAdditionHigh) }}
-                            </td>
-                            <td class="border border-black p-2">
-                                {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference - $totalDeductionTaxHigh - $totalDeductionInsuranceHigh - $totalDeductionHigh + $totalAdditionHigh) }}
-                            </td>
-
-                            <td class="border border-black p-2"></td>
-                            <td class="border border-black p-2"></td>
-                        </tr>
-                    @endforeach
-
-                    @foreach ($high_staffs as $staff)
+                    @foreach ($high_staffs as $index => $staff)
                         @php
+                            // Calculate base salary, increments, and current salary
                             $baseSalary = $staff->currentRank->payscale->min_salary;
                             $increment = $staff->currentRank->payscale->increment * $staff->current_increment_time;
                             $currentSalary = $baseSalary + $increment;
                             $totalBaseSalaryHigh += $baseSalary;
                             $totalIncrementHigh += $increment;
+
+                            // Calculate leave deductions
                             $leaveDeduction = 0;
                             $dateDifference = 0;
-                        @endphp
-
-                        @foreach ($leaves as $leave)
-                            @if ($leave->leave_type_id === 1)
-                                @php
+                            foreach ($staff->leaves as $leave) {
+                                if ($leave->leave_type_id === 1) {
                                     $fromDate = \Carbon\Carbon::parse($leave->from_date);
                                     $toDate = \Carbon\Carbon::parse($leave->to_date);
                                     $dateDifference = $fromDate->diffInDays($toDate) + 1;
-                                    $leaveDeduction = ($staff->current_salary / 30) * $dateDifference;
-                                    $totalDeductionHigh += $leaveDeduction;
-                                @endphp
-                            @endif
-                        @endforeach
-
-                        @php
+                                    $leaveDeduction += ($staff->current_salary / 30) * $dateDifference;
+                                }
+                            }
+                            $totalDeductionHigh += $leaveDeduction;
                             $netSalary = $currentSalary - $leaveDeduction;
+
+                            // Calculate salary deductions and additions
+                            $staffSalaries = $salaries->where('staff_id', $staff->id);
+                            $deductionTax = $staffSalaries->sum('deduction_tax');
+                            $deductionInsurance = $staffSalaries->sum('deduction_insurance');
+                            $deductionOther = $staffSalaries->sum('deduction');
+                            $addition = $staffSalaries->sum('addition');
+
+                            // Update totals
+                            $deductionTaxHigh += $deductionTax;
+                            $deductionInsuranceHigh += $deductionInsurance;
+                            $deductionHigh += $deductionOther;
+                            $additionHigh += $addition;
+
+                            // Final salary calculations
+                            $finalSalary = $netSalary - $deductionTax - $deductionInsurance - $deductionOther;
+                            $totalWithAddition = $finalSalary + $addition;
                             $totalFinalSalaryHigh += $netSalary;
+                            $totalSalaryHigh += $finalSalary;
+                            $totalSalaryAdditionHigh += $totalWithAddition;
                         @endphp
 
-                        @foreach ($salaries as $salary)
-                            @if ($salary->staff_id === $staff->id)
-                                @php
-                                    $deductionTaxHigh += $salary->deduction_tax;
-                                    $deductionInsuranceHigh += $salary->deduction_insurance;
-                                    $deductionHigh += $salary->deduction;
-                                    $additionHigh += $salary->addition;
-                                    $totalSalaryAdditionHigh += $totalSalaryHigh + $additionHigh;
-                                @endphp
-                            @endif
-                        @endforeach
+                        <tr>
+                            <td class="border border-black p-2">{{ $index + 1 }}</td>
+                            <td class="border border-black p-2">{{ $staff->name }}</td>
+                            <td class="border border-black p-2">{{ $staff->current_rank->name ?? '' }}</td>
+                            <td class="border border-black p-2">{{ en2mm($baseSalary) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($increment) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($currentSalary) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($leaveDeduction) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($netSalary) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($deductionTax) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($deductionInsurance) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($deductionOther) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($finalSalary) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($addition) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($totalWithAddition) }}</td>
+                            <td class="border border-black p-2"></td>
+                            <td class="border border-black p-2"></td>
+                        </tr>
                     @endforeach
 
-                    {{-- Totals for High Staff --}}
                     <tr class="font-bold">
                         <td class="border border-black p-2"></td>
                         <td class="border border-black p-2">အရာထမ်းစုစုပေါင်း</td>
@@ -222,166 +176,129 @@
                         <td class="border border-black p-2"></td>
                     </tr>
                     @php
-                    $totalBaseSalaryLow = 0;
-                    $totalIncrementLow = 0;
-                    $totalDeductionLow = 0;
-                    $totalFinalSalaryLow = 0;
-                    $deductionTaxLow = 0;
-                    $deductionInsuranceLow = 0;
-                    $deductionLow = 0;
-                    $totalSalaryLow = 0;
-                    $additionLow = 0;
-                    $totalSalaryAdditionLow = 0;
-                @endphp
-                @foreach ($low_staffs as $staff)
-                    <tr>
-                        <td class="border border-black p-2">{{ $loop->index + 1 }}</td>
-                        <td class="border border-black p-2">{{ $staff->name }}</td>
-                        <td class="border border-black p-2">{{ $staff->current_rank->name }}</td>
-                        <td class="border border-black p-2">{{ en2mm($staff->currentRank->payscale->min_salary) }}
-                        </td>
-                        <td class="border border-black p-2">
-                            {{ en2mm($staff->currentRank->payscale->increment * $staff->current_increment_time) }}
-                        </td>
-                        <td class="border border-black p-2">
-                            {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time) }}
-                        </td>
+                        // Initialize totals
+                        $totalBaseSalaryLow = 0;
+                        $totalIncrementLow = 0;
+                        $totalDeductionLow = 0;
+                        $totalFinalSalaryLow = 0;
+                        $deductionTaxLow = 0;
+                        $deductionInsuranceLow = 0;
+                        $deductionLow = 0;
+                        $totalSalaryLow = 0;
+                        $additionLow = 0;
+                        $totalSalaryAdditionLow = 0;
+                    @endphp
 
+                    @foreach ($low_staffs as $index => $staff)
                         @php
-                            $dateDifference = 0;
-                        @endphp
+                         
+                            $baseSalary = $staff->currentRank->payscale->min_salary;
+                            $increment = $staff->currentRank->payscale->increment * $staff->current_increment_time;
+                            $currentSalary = $baseSalary + $increment;
+                            $totalBaseSalaryLow += $baseSalary;
+                            $totalIncrementLow += $increment;
 
-                        @foreach ($leaves as $leave)
-                            @if ($leave->leave_type_id === 1)
-                                @php
+                          
+                            $leaveDeduction = 0;
+                            $dateDifference = 0;
+                            foreach ($staff->leaves as $leave) {
+                                if ($leave->leave_type_id === 1) {
                                     $fromDate = \Carbon\Carbon::parse($leave->from_date);
                                     $toDate = \Carbon\Carbon::parse($leave->to_date);
                                     $dateDifference = $fromDate->diffInDays($toDate) + 1;
-                                @endphp
-                            @endif
-                        @endforeach
+                                    $leaveDeduction += ($staff->current_salary / 30) * $dateDifference;
+                                }
+                            }
+                            $totalDeductionLow += $leaveDeduction;
+                            $netSalary = $currentSalary - $leaveDeduction;
 
-                        <td class="border border-black p-2">
-                            {{ en2mm(($staff->current_salary / 30) * $dateDifference) }}
-                        </td>
-                        <td class="border border-black p-2">
-                            {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference) }}
-                        </td>
+                            // Calculate salary deductions and additions
+                            $staffSalaries = $salaries->where('staff_id', $staff->id);
+                            $deductionTax = $staffSalaries->sum('deduction_tax');
+                            $deductionInsurance = $staffSalaries->sum('deduction_insurance');
+                            $deductionOther = $staffSalaries->sum('deduction');
+                            $addition = $staffSalaries->sum('addition');
 
-                        @php
-                            $staffSalaries = $salaries->filter(fn($salary) => $salary->staff_id === $staff->id);
-                            $totalDeductionTaxLow = $staffSalaries->sum('deduction_tax');
-                            $totalDeductionInsuranceLow = $staffSalaries->sum('deduction_insurance');
-                            $totalDeductionLow = $staffSalaries->sum('deduction');
-                            $totalAdditionLow = $staffSalaries->sum('addition');
-                            $totalSalaryLow += $staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference - $totalDeductionTaxLow - $totalDeductionInsuranceLow - $totalDeductionLow;
+                            // Update totals
+                            $deductionTaxLow += $deductionTax;
+                            $deductionInsuranceLow += $deductionInsurance;
+                            $deductionLow += $deductionOther;
+                            $additionLow += $addition;
+
+                            // Final salary calculations
+                            $finalSalary = $netSalary - $deductionTax - $deductionInsurance - $deductionOther;
+                            $totalWithAddition = $finalSalary + $addition;
+                            $totalFinalSalaryHigh += $netSalary;
+                            $totalSalaryHigh += $finalSalary;
+                            $totalSalaryAdditionHigh += $totalWithAddition;
                         @endphp
 
-                        <td class="border border-black p-2">
-                            {{ en2mm($totalDeductionTaxLow) }}
-                        </td>
-                        <td class="border border-black p-2">
-                            {{ en2mm($totalDeductionInsuranceLow) }}
-                        </td>
-                        <td class="border border-black p-2">
-                            {{ en2mm($totalDeductionLow) }}
-                        </td>
-                        <td class="border border-black p-2">
-                            {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference - $totalDeductionTaxLow - $totalDeductionInsuranceLow - $totalDeductionLow) }}
-                        </td>
+                        <tr>
+                            <td class="border border-black p-2">{{ $index + 1 }}</td>
+                            <td class="border border-black p-2">{{ $staff->name }}</td>
+                            <td class="border border-black p-2">{{ $staff->current_rank->name ?? '' }}</td>
+                            <td class="border border-black p-2">{{ en2mm($baseSalary) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($increment) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($currentSalary) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($leaveDeduction) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($netSalary) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($deductionTax) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($deductionInsurance) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($deductionOther) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($finalSalary) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($addition) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($totalWithAddition) }}</td>
+                            <td class="border border-black p-2"></td>
+                            <td class="border border-black p-2"></td>
+                        </tr>
+                    @endforeach
 
-                        <td class="border border-black p-2">
-                            {{ en2mm($totalAdditionLow) }}
+                    <tr class="font-bold">
+                        <td class="border border-black p-2"></td>
+                        <td class="border border-black p-2">အမှုထမ်းစုစုပေါင်း</td>
+                        <td class="border border-black p-2">{{ en2mm($low_staffs->count()) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($totalBaseSalaryLow) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($totalIncrementLow) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($totalBaseSalaryLow + $totalIncrementLow) }}
                         </td>
-                        <td class="border border-black p-2">
-                            {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference - $totalDeductionTaxLow - $totalDeductionInsuranceLow - $totalDeductionLow + $totalAdditionLow) }}
-                        </td>
-
+                        <td class="border border-black p-2">{{ en2mm($totalDeductionLow) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($totalFinalSalaryLow) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($deductionTaxLow) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($deductionInsuranceLow) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($deductionLow) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($totalSalaryLow) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($additionLow) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($totalSalaryAdditionLow) }}</td>
                         <td class="border border-black p-2"></td>
                         <td class="border border-black p-2"></td>
                     </tr>
-                @endforeach
 
-                @foreach ($low_staffs as $staff)
-                    @php
-                        $baseSalary = $staff->currentRank->payscale->min_salary;
-                        $increment = $staff->currentRank->payscale->increment * $staff->current_increment_time;
-                        $currentSalary = $baseSalary + $increment;
-                        $totalBaseSalaryLow += $baseSalary;
-                        $totalIncrementLow += $increment;
-                        $leaveDeduction = 0;
-                        $dateDifference = 0;
-                    @endphp
 
-                    @foreach ($leaves as $leave)
-                        @if ($leave->leave_type_id === 1)
-                            @php
-                                $fromDate = \Carbon\Carbon::parse($leave->from_date);
-                                $toDate = \Carbon\Carbon::parse($leave->to_date);
-                                $dateDifference = $fromDate->diffInDays($toDate) + 1;
-                                $leaveDeduction = ($staff->current_salary / 30) * $dateDifference;
-                                $totalDeductionLow += $leaveDeduction;
-                            @endphp
-                        @endif
-                    @endforeach
 
-                    @php
-                        $netSalary = $currentSalary - $leaveDeduction;
-                        $totalFinalSalaryLow += $netSalary;
-                    @endphp
-
-                    @foreach ($salaries as $salary)
-                        @if ($salary->staff_id === $staff->id)
-                            @php
-                                $deductionTaxLow += $salary->deduction_tax;
-                                $deductionInsuranceLow += $salary->deduction_insurance;
-                                $deductionLow += $salary->deduction;
-                                $additionLow += $salary->addition;
-                                $totalSalaryAdditionLow += $totalSalaryLow + $additionLow;
-                            @endphp
-                        @endif
-                    @endforeach
-                @endforeach
-
-                
-                <tr class="font-bold">
-                    <td class="border border-black p-2"></td>
-                    <td class="border border-black p-2">အမှုထမ်းစုစုပေါင်း</td>
-                    <td class="border border-black p-2">{{ en2mm($low_staffs->count()) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($totalBaseSalaryLow) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($totalIncrementLow) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($totalBaseSalaryLow + $totalIncrementLow) }}
-                    </td>
-                    <td class="border border-black p-2">{{ en2mm($totalDeductionLow) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($totalFinalSalaryLow) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($deductionTaxLow) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($deductionInsuranceLow) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($deductionLow) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($totalSalaryLow) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($additionLow) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($totalSalaryAdditionLow) }}</td>
-                    <td class="border border-black p-2"></td>
-                    <td class="border border-black p-2"></td>
-                </tr>
-                <tr class="font-bold">
-                    <td class="border border-black p-2"></td>
-                    <td class="border border-black p-2">စုစုပေါင်း(အရာထမ်း+အမှုထမ်း)</td>
-                    <td class="border border-black p-2">{{ en2mm($low_staffs->count()+$high_staffs->count()) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($totalBaseSalaryLow+$totalBaseSalaryHigh) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($totalIncrementLow+$totalIncrementHigh) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($totalBaseSalaryLow + $totalIncrementLow+$totalBaseSalaryHigh + $totalIncrementHigh) }}
-                    </td>
-                    <td class="border border-black p-2">{{ en2mm($totalDeductionLow+$totalDeductionHigh) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($totalFinalSalaryLow+$totalFinalSalaryHigh) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($deductionTaxLow+$deductionTaxHigh) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($deductionInsuranceLow+$deductionInsuranceHigh) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($deductionLow+$deductionHigh) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($totalSalaryLow+$totalSalaryHigh) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($additionLow+$additionHigh) }}</td>
-                    <td class="border border-black p-2">{{ en2mm($totalSalaryAdditionLow+$totalSalaryAdditionHigh) }}</td>
-                    <td class="border border-black p-2"></td>
-                    <td class="border border-black p-2"></td>
-                </tr>
+                    <tr class="font-bold">
+                        <td class="border border-black p-2"></td>
+                        <td class="border border-black p-2">စုစုပေါင်း(အရာထမ်း+အမှုထမ်း)</td>
+                        <td class="border border-black p-2">{{ en2mm($low_staffs->count() + $high_staffs->count()) }}
+                        </td>
+                        <td class="border border-black p-2">{{ en2mm($totalBaseSalaryLow + $totalBaseSalaryHigh) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($totalIncrementLow + $totalIncrementHigh) }}</td>
+                        <td class="border border-black p-2">
+                            {{ en2mm($totalBaseSalaryLow + $totalIncrementLow + $totalBaseSalaryHigh + $totalIncrementHigh) }}
+                        </td>
+                        <td class="border border-black p-2">{{ en2mm($totalDeductionLow + $totalDeductionHigh) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($totalFinalSalaryLow + $totalFinalSalaryHigh) }}
+                        </td>
+                        <td class="border border-black p-2">{{ en2mm($deductionTaxLow + $deductionTaxHigh) }}</td>
+                        <td class="border border-black p-2">
+                            {{ en2mm($deductionInsuranceLow + $deductionInsuranceHigh) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($deductionLow + $deductionHigh) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($totalSalaryLow + $totalSalaryHigh) }}</td>
+                        <td class="border border-black p-2">{{ en2mm($additionLow + $additionHigh) }}</td>
+                        <td class="border border-black p-2">
+                            {{ en2mm($totalSalaryAdditionLow + $totalSalaryAdditionHigh) }}</td>
+                        <td class="border border-black p-2"></td>
+                        <td class="border border-black p-2"></td>
+                    </tr>
                 </tbody>
             </table>
 

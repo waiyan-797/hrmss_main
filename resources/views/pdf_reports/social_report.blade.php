@@ -64,31 +64,30 @@
 <body>
     <page size="A4">
         <h1>Social Report</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>စဥ်</th>
-                <th>အမည်</th>
-                <th>ရာထူး</th>
-                <th>လုပ်ဆောင်မှုများ</th>
-            </tr>
-        </thead>
-        <tbody>
-           
-            @foreach($staffs as $staff)
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ $loop->index+1}}</td>
+                        <th>စဥ်</th>
+                        <th>အမည်</th>
+                        <th>ရာထူး</th>
+                        <th>လုပ်ဆောင်မှုများ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($staffs as $staff)
+                    <tr>
+                        <td class="border border-black text-right p-1">{{ $loop->index+1}}</td>
                         <td>{{ $staff->name}}</td>
                         <td>{{ $staff->current_rank->name}}</td>
                         <td>
-                            {{-- @foreach($staff->social_activities as $social_activity){{ $social_activity->particular}} 
-                            @endforeach --}}
-                        </td>
+                       @foreach($staff->socialActivities as $activity)
+                       {{ $activity->particular}}
+                       @endforeach
+                        </td>  
                     </tr>
                     @endforeach
-        </tbody>
-    </table>
-
+                </tbody>
+            </table>
     </page>
 </body>
 </html>

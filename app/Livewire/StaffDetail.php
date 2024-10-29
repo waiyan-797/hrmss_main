@@ -340,8 +340,8 @@ class StaffDetail extends Component
                 'department' => $post->department_id,
                 'division' => $post->division_id,
                 'location' => $post->location,
-                'remark' => $post->remark,
                 'ministry' => $post->ministry_id,
+                'remark' => $post->remark,
             ];
         }
 

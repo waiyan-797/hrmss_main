@@ -21,7 +21,7 @@
                         <th class="border border-black text-center p-2">စုစုပေါင်း</th>
                     </tr>
                 </thead>
-                <<tbody>
+                <tbody>
                     @foreach($staffs as $staff)
                         @php
                             // Get unique countries from both trainings and abroads

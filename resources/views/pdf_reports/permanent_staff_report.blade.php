@@ -70,9 +70,6 @@
         .text-right {
             text-align: right;
         }
-
-        
-       
     </style>
 </head>
 <body>
@@ -137,9 +134,6 @@
                     @endphp
                  
                     @foreach($payscale->staff->where('is_active', 1)->where('salary_paid_by', 1) as $staff)
-                    {{-- @if ($loop->parent->iteration == 2)
-                    {{ dd($payscale->staff) }}
-                @endif --}}
                         @php
                    
 
@@ -260,10 +254,10 @@
                 <td class="border border-black text-right p-2">{{ en2mm($TotalAllowQty)}}</td>
                 <td class="border border-black text-right p-2">
 
-                    {{$currentMaleStaffTotal}}
+                    {{en2mm($currentMaleStaffTotal)}}
                 </td>
-                <td class="border border-black text-right p-2">{{$currentFeMaleStaffTotal}}</td>
-                <td class="border border-black text-right p-2">                        {{en2mm($currentMaleStaffTotal + $currentFeMaleStaffTotal)}}
+                <td class="border border-black text-right p-2">{{en2mm($currentFeMaleStaffTotal)}}</td>
+                <td class="border border-black text-right p-2">{{en2mm($currentMaleStaffTotal + $currentFeMaleStaffTotal)}}
                 </td>
                 <td class="border border-black  p-2">
                     @php
@@ -290,7 +284,7 @@
             <tr>
                 <td class="border border-black text-center p-2"></td>
                 <td class="border border-black text-center p-2">(၁လအတွက်လစာစရိတ်(ကျပ်သန်း))</td>
-                <td class="border border-black text-center p-2">{{$maximumBudget}}</td>
+                <td class="border border-black text-center p-2">{{en2mm($maximumBudget)}}</td>
                 <td class="border border-black text-center p-2"></td>
                 <td class="border border-black text-center p-2"></td>
                 <td class="border border-black text-center p-2"></td>

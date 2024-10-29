@@ -102,6 +102,92 @@
         </thead>
         <tbody>
             <tr>
+                <td>၁</td>
+                <td class="border border-black text-left p-2">
+                    <br>
+                    {{ $startDateOfMonth }} မှ {{ $incrementedDate->subDay()->toDateString() }} ထိ
+                    {{ $diffDaysFromStart }} ရက်  
+                     @php 
+                        $incrementedDate->addDay();
+                    @endphp 
+                </td>
+                <td>
+                    {{ $lastActualSalary }}
+                </td>
+                <td>
+                    {{ floor($salaryRatePerDayBeforeIncrement) }}
+                </td>
+                <td>
+                    {{ ($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement)) * 100 }}
+                </td>
+                <td></td>
+                <td>
+                    {{ $lastActualSalary }}
+                </td>
+                <td></td>
+                <td>{{ floor($totalPaidAfterIncrement - $salaryRatePerDayBeforeIncrement) }}</td>
+                <td>{{ ($totalPaidAfterIncrement - floor($totalPaidAfterIncrement)) - ($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement)) }}</td>
+            </tr>
+            <tr>
+                <td>၂ </td>
+                <td>{{ $incrementedDate->toDateString() }} မှ {{ $monthEnd }} ထိ</td>
+                <td>{{ $staff?->current_salary }}</td>
+                <td>{{ floor($totalPaidAfterIncrement) }}</td>
+                <td>{{ $totalPaidAfterIncrement - floor($totalPaidAfterIncrement) }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+            {{-- <tr>
+                <td>၁</td>
+                <td>
+                    <br> 
+                        
+                    {{ $startDateOfMonth}} မှ  
+                        {{ $incrementedDate->subDay()->toDateString()}} ထိ  
+                    
+                {{$diffDaysFromStart}} ရက် 
+                @php 
+                    $incrementedDate->addDay();
+                @endphp
+                
+                </td>
+                <td>
+               {{$lastActualSalary}}
+                </td>
+                <td>
+                    {{floor($salaryRatePerDayBeforeIncrement)}}
+
+                </td>
+                <td>
+                    {{($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement)) * 100}}
+
+                    
+                </td>
+                <td></td>
+                <td>
+                    {{$lastActualSalary}}
+                     </td>
+                <td></td>
+                <td>{{floor($totalPaidAfterIncrement -  $salaryRatePerDayBeforeIncrement)}}</td>
+                <td> {{  ( $totalPaidAfterIncrement - floor($totalPaidAfterIncrement))  - ($salaryRatePerDayBeforeIncrement -  floor($salaryRatePerDayBeforeIncrement))   }} </td>
+            </tr>
+            <tr class="">
+                <td>၂ </td>
+                <td>{{$incrementedDate->toDateString()}} မှ  {{$monthEnd }} ထိ</td>
+                <td>{{$this?->staff?->current_salary}}</td>
+                <td>{{floor($totalPaidAfterIncrement)}}</td>
+                <td>{{$totalPaidAfterIncrement - floor($totalPaidAfterIncrement)}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr> --}}
+            {{-- <tr>
                 <td class="text-right">၁</td>
                 <td class="text-left">၁-၁၀-၂၀၂၂ မှ<br>၁၁-၁၀-၂၀၂၂ထိ(၁၁)ရက်</td>
                 <td class="text-right"></td>
@@ -124,7 +210,7 @@
                 <td class="text-right"></td>
                 <td class="text-right">၁၁,၆၁၂</td>
                 <td class="text-right">၉၀</td>
-            </tr>
+            </tr> --}}
         </tbody>
     </table>
     </page>

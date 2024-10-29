@@ -46,7 +46,12 @@ class SocialReport extends Component
         $table->addCell(2000)->addText($index + 1);
         $table->addCell(4000)->addText($staff->name);
         $table->addCell(4000)->addText($staff->current_rank->name);
-        $table->addCell(6000)->addText('');
+        foreach($staff->socialActivities as $activity){
+            $table->addCell(6000)->addText($activity->particular);
+
+        }
+       
+       
     }
 
     

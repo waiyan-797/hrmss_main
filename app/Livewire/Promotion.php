@@ -29,9 +29,6 @@ class Promotion extends Component
         'order_no' => 'required'
 
     ];
-
-
-
     public function add_new()
     {
 
@@ -44,7 +41,7 @@ class Promotion extends Component
             'order_no'
         ]);
 
-        $this->previous_rank_name = $this->staff->current_rank_id;
+        $this->previous_rank_name = $this->staff->previous_rank_id;
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
@@ -141,7 +138,7 @@ class Promotion extends Component
 
         $this->staff = Staff::find($staff_id);
         // dd($this->staff);
-        $this->rank_name = $this->staff->current_rank_id;
+        $this->rank_name = $this->staff->rank_id;
     }
 
 

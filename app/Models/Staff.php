@@ -362,7 +362,7 @@ class Staff extends Model
         $totalSalary = $this->current_salary;
         $OverAllTotalSalary = 0;
         $staffLastIncrement = Increment::where('staff_id', $this->id)
-            ->orderBy('id', 'desc') // Assuming 'id' or 'created_at' is the column for latest entry
+            ->orderBy('id', 'desc') 
             ->first();
         $ActualsalaryForBeforePromotion = 0;
 
@@ -476,42 +476,99 @@ class Staff extends Model
     }
 
 
+    // public function isIncrementInThisMonth($date)
+    // {
+    //     $filterDate = Carbon::parse($date)->format('Y-m-d');
+    //     $endOfCurrentMonth = Carbon::parse($date)->endOfMonth();
+    //     $staffLastIncrement = Increment::where('staff_id', $this->id);
+
+    //     $yearsPassed = $endOfCurrentMonth->diffInYears($staffLastIncrement?->increment_date);
+
+    //     $isSameMonth = Carbon::parse($staffLastIncrement?->increment_date)->month == $currentDate->month;
+        
+    //     $daysBeforePromotion = $PromotionDate->day - 1;
+    //     $daysAfterPromotion = $currentDate->endOfMonth()->day - $PromotionDate->day;
+    //     $lastActualSalary = $this->salaries->last()?->actual_salary;
+
+    //     $lastestIncrement = Increment::where('staff_id', $this->id)
+
+    //         ->max('increments');
+
+    //     $comingIncrement = $lastestIncrement + 1;
+
+    //     // Apply increment logic
+    //     if ($comingIncrement > 0 && $comingIncrement <= 5) {
+           
+    //         $ActualsalaryForBeforePromotion = ($daysBeforePromotion / 30) * $salaryForBeforePromotion;
+    //         $OverAllTotalSalary += $ActualsalaryForBeforePromotion;
+
+           
+    //         $ActualSalaryAfterPromotion = ($daysAfterPromotion / 30) * ($this->payscale->min_salary + $this->payscale->increment);
+    //         $OverAllTotalSalary += $ActualSalaryAfterPromotion;
+    //     }
+    // }
+    // public function stuffSalaryYear($year)
+    // {
+    //     $year = Carbon::parse($year);
+    //     $list = Salary::whereMonth('created_at', $year->isCurrentYear())->whereYear('creaed_at'->get());
+    // }
     public function isIncrementInThisMonth($date)
-    {
-        $filterDate = Carbon::parse($date)->format('Y-m-d');
-        $endOfCurrentMonth = Carbon::parse($date)->endOfMonth();
-        $staffLastIncrement = Increment::where('staff_id', $this->id);
+{
+    // Parse the given date
+    $filterDate = Carbon::parse($date)->format('Y-m-d');
+    $endOfCurrentMonth = Carbon::parse($date)->endOfMonth();
+    
+    // Get the last increment for the current staff
+    $staffLastIncrement = Increment::where('staff_id', $this->id)->orderBy('increment_date', 'desc')->first();
+    
+    // Check the number of years passed since the last increment date
+    $yearsPassed = $staffLastIncrement ? $endOfCurrentMonth->diffInYears($staffLastIncrement->increment_date) : 0;
 
-        $yearsPassed = $endOfCurrentMonth->diffInYears($staffLastIncrement?->increment_date);
+    // Check if the increment occurred in the same month as the current date
+    $isSameMonth = $staffLastIncrement && Carbon::parse($staffLastIncrement->increment_date)->month == Carbon::parse($filterDate)->month;
+    
+    // Placeholder for promotion date; this variable should be passed or defined somewhere
+    $promotionDate = Carbon::parse('2024-10-15'); // Example promotion date, adjust as needed
+    
+    // Calculate days before and after the promotion within the current month
+    $daysBeforePromotion = $promotionDate->day - 1;
+    $daysAfterPromotion = $endOfCurrentMonth->day - $promotionDate->day;
+    
+    // Get the staff's last recorded salary
+    $lastActualSalary = $this->salaries->last()?->actual_salary ?? 0;
+    
+    // Get the latest increment value for the staff
+    $latestIncrement = Increment::where('staff_id', $this->id)->max('increments') ?? 0;
+    $comingIncrement = $latestIncrement + 1;
+    
+    // Initialize total salary variable
+    $overallTotalSalary = 0;
+    
+    // Apply increment logic if the increment value is within the specified range
+    if ($comingIncrement > 0 && $comingIncrement <= 5) {
+        // Calculate salary before promotion
+        $salaryForBeforePromotion = $lastActualSalary + $this->payscale->increment;
+        $actualSalaryForBeforePromotion = ($daysBeforePromotion / 30) * $salaryForBeforePromotion;
+        $overallTotalSalary += $actualSalaryForBeforePromotion;
 
-        $isSameMonth = Carbon::parse($staffLastIncrement?->increment_date)->month == $currentDate->month;
-        // if ($isSameMonth && $yearsPassed >= 1) { 
-        $daysBeforePromotion = $PromotionDate->day - 1;
-        $daysAfterPromotion = $currentDate->endOfMonth()->day - $PromotionDate->day;
-        $lastActualSalary = $this->salaries->last()?->actual_salary;
-
-        $lastestIncrement = Increment::where('staff_id', $this->id)
-
-            ->max('increments');
-
-        $comingIncrement = $lastestIncrement + 1;
-
-        // Apply increment logic
-        if ($comingIncrement > 0 && $comingIncrement <= 5) {
-            // $salaryForBeforePromotion = $lastActualSalary + $previousBasicPayScale;
-            $ActualsalaryForBeforePromotion = ($daysBeforePromotion / 30) * $salaryForBeforePromotion;
-            $OverAllTotalSalary += $ActualsalaryForBeforePromotion;
-
-            // Salary after promotion (apply the same increment logic after promotion)
-            $ActualSalaryAfterPromotion = ($daysAfterPromotion / 30) * ($this->payscale->min_salary + $this->payscale->increment);
-            $OverAllTotalSalary += $ActualSalaryAfterPromotion;
-        }
+        // Calculate salary after promotion
+        $actualSalaryAfterPromotion = ($daysAfterPromotion / 30) * ($this->payscale->min_salary + $this->payscale->increment);
+        $overallTotalSalary += $actualSalaryAfterPromotion;
     }
+    
+    // Return the total calculated salary
+    return $overallTotalSalary;
+}
 
+public function staffSalaryYear($year)
+{
+    $year = Carbon::parse($year);
+    
+    // Fetch salaries for the specified year
+    $list = Salary::whereYear('created_at', $year->year)
+                  ->get();
+    
+    return $list;
+}
 
-    public function stuffSalaryYear($year)
-    {
-        $year = Carbon::parse($year);
-        $list = Salary::whereMonth('created_at', $year->isCurrentYear())->whereYear('creaed_at'->get());
-    }
 }

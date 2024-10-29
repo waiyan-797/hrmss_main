@@ -29,173 +29,136 @@
         h1 {
             font-weight: bold;
             text-align: center;
-            font-size: 14px;
-            margin-bottom: 16px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem; 
         }
-
-        .table-container {
+        table {
             width: 100%;
-            margin: 0 auto;
-            font-size: 12px;
             border-collapse: collapse;
+            font-size: 0.875rem; 
         }
-
-        .table-container th,
-        .table-container td {
+        th, td {
             border: 1px solid black;
-            padding: 8px;
+            padding: 0.5rem;
             text-align: center;
         }
-
-        .table-container th {
-            font-weight: bold;
+        th {
+            background-color: #f0f0f0;
         }
-
-        .table-container th[rowspan="2"] {
-            vertical-align: middle;
-        }
-
         .text-left {
             text-align: left;
         }
-
         .text-right {
             text-align: right;
         }
-
         .font-bold {
             font-weight: bold;
         }
-
-        .mb-4 {
-            margin-bottom: 16px;
+        .form-group {
+            margin-bottom: 1rem;
         }
-
-        
-       
+        select, input[type="month"] {
+            padding: 0.5rem;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
     <page size="A4">
-        <h1 class="font-bold text-center text-sm mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့်
-            ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br> {{$staff?->gender_id ==  1 ? "ဦိး" : "ဒေါ်" }}    {{$staff?->name}}( {{$staff?->currentRank->name}} )  ၏<br> {{mmDateFormat($year, $month)}}
-            လစာစာရင်းညှိနှုင်းခြင်း။ ...</h1>
-            
-
-    
-            <table class="md:w-full text-sm">
-                <thead>
-                    <tr>
-                        <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
-                        <th rowspan="2" class="border border-black text-center p-2">လစာထုတ်ယူသည့် လ/နှစ်</th>
-                        <th rowspan="2" class="border border-black text-center p-2">ထုတ်ယူရမည့်<br>လစာနှုန်း</th>
-                        <th colspan="2" class="border border-black text-center p-2">ထုတ်ပေးရမည့်<br>လစာနှုန်း</th>
-                        <th class="border border-black text-center p-2">ထုတ်ယူခဲ့ပြီး<br>လစာနှုန်း</th>
-                        <th colspan="2" class="border border-black text-center p-2">ထုတ်ယူပြီး<br>လစာငွေ</th>
-                        <th colspan="2" class="border border-black text-center p-2">ခြားနားလစာငွေ</th>
-                    </tr>
-                    <tr>
-                        <th class="border border-black text-center p-2">ကျပ်</th>
-                        <th class="border border-black text-left p-2">ပြား</th>
-                        <th class="border border-black text-right p-2"></th>
-                        <th class="border border-black text-right p-2">ကျပ်</th>
-                        <th class="border border-black text-right p-2">ပြား</th>
-                        <th class="border border-black text-right p-2">ကျပ်</th>
-                        <th class="border border-black text-right p-2">ပြား</th>
-                    </tr>
-                </thead>
-
+        <h1>ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+            {{$staff?->gender_id == 1 ? "ဦိး" : "ဒေါ်"}} {{$staff?->name}} ({{$staff?->currentRank->name}}) ၏<br>
+            {{mmDateFormat($year, $month)}} လစာစာရင်းညှိနှုင်းခြင်း။
+        </h1>
+        
+        <div class="form-group">
+            <select wire:model.live='staff_id'>
+                @foreach ($staffs as $staff)
+                    <option value="{{$staff->id}}">
+                        {{$staff->gender_id == 1 ? "ဦိး" : "ဒေါ်"}} {{$staff->name}}
+                    </option>
+                @endforeach
+            </select>
+            <input type="month" wire:model.live='monthsSelect'>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">စဥ်</th>
+                    <th rowspan="2">လစာထုတ်ယူသည့် လ/နှစ်</th>
+                    <th rowspan="2">ထုတ်ယူရမည့်<br>လစာနှုန်း</th>
+                    <th colspan="2">ထုတ်ပေးရမည့်<br>လစာနှုန်း</th>
+                    <th>ထုတ်ယူခဲ့ပြီး<br>လစာနှုန်း</th>
+                    <th colspan="2">ထုတ်ယူပြီး<br>လစာငွေ</th>
+                    <th colspan="2">ခြားနားလစာငွေ</th>
+                </tr>
+                <tr>
+                    <th>ကျပ်</th>
+                    <th>ပြား</th>
+                    <th></th>
+                    <th>ကျပ်</th>
+                    <th>ပြား</th>
+                    <th>ကျပ်</th>
+                    <th>ပြား</th>
+                </tr>
+            </thead>
+            <tbody>
                 @php
-                // Calculate total values
-                $totalPaid = $totalPaidBeforePromotons + $totalPaidAfterPromotion;
-            
-                // Get the integer and decimal parts
-                $integerPart = floor($totalPaid);
-                $decimalPart = $totalPaid - $integerPart;
-            @endphp
-            
-                <tbody>
-                    <tr>
-                        <td class="border border-black text-right p-2">၁</td>
-                            {{-- လစာထုတ်ယူသည့် လ/နှစ် --}}
-
-                        <td class="border border-black text-left p-2">
-                            ၁-{{ en2mm(explode('-', $monthsSelect)[1]) }}-{{ en2mm(explode('-', $monthsSelect)[0]) }}
-                            <br> မှ
-                            @if($promotionDate)
-                                {{ en2mm(explode('-', $promotionDate)[2]) }}-{{ en2mm(explode('-', $promotionDate)[1]) }}-{{ en2mm(explode('-', $promotionDate)[0]) }}
-                                <br> {{ en2mm($dayPaidSalaryBeforePromotions) }} ရက်
-                            @endif
-                        </td>
-                        <td class="border border-black text-right p-2">
-                            
-                            {{$lastActualSalary}}
-                        </td>
-                        <td class="border border-black text-right p-2">{{floor($totalPaidBeforePromotons)  }}</td>
-                        <td class="border border-black text-right p-2">{{$totalPaidBeforePromotons - floor($totalPaidBeforePromotons)  }}</td>
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2">
-                            
-                            {{floor($lastActualSalary)}}
-                        </td>
-                        <td class="border border-black text-right p-2">{{$lastActualSalary - floor($lastActualSalary)  }}</td>  
-                        <td class="border border-black text-right p-2">{{  floor($totalPaid - $totalPaidBeforePromotons)  }}</td>
-                        <td class="border border-black text-right p-2">{{ -floor( $totalPaid - $totalPaidBeforePromotons ) + ( $totalPaid - $totalPaidBeforePromotons )  }}</td>                    </tr>
-
-                    <tr>
-                        <td class="border border-black text-right p-2">၂</td>
-                        <td class="border border-black text-left p-2">
-                            @if($promotionDate)
-                                {{ en2mm(explode('-', ++$promotionDate)[2]) }}-{{ en2mm(explode('-', $promotionDate)[1]) }}-{{ en2mm(explode('-', $promotionDate)[0]) }}
-                                <br> မှ
-                                <br> {{ en2mm(explode('-', $lastDay)[2]) }}-{{ en2mm(explode('-', $lastDay)[1]) }}-{{ en2mm(explode('-', $lastDay)[0]) }}
-                                <br>ထိ
-                                <br> {{ en2mm($dayPaidSalaryAfterPromotions) }} ရက်
-                            @endif
-                        </td>
-                        <td class="border border-black text-right p-2">{{$staff?->current_salary}}</td>
-                        <td class="border border-black text-right p-2">{{floor($totalPaidAfterPromotion)}}</td>
-                        <td class="border border-black text-right p-2">{{$totalPaidAfterPromotion - floor($totalPaidAfterPromotion)}}</td>
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2"></td>
-
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2"></td>
-                      
-                    </tr>
-                    <tr class="font-bold">
-                        <td class="border border-black text-right p-2">total </td>
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2"></td>
-
-                        @php
-    // Calculate total values
-    $totalPaid = $totalPaidBeforePromotons + $totalPaidAfterPromotion;
-
-    // Get the integer and decimal parts
-    $integerPart = floor($totalPaid);
-    $decimalPart = $totalPaid - $integerPart;
-@endphp
-
-<td class="border border-black text-right p-2">
-    {{ $integerPart }}
-</td>
-<td class="border border-black text-right p-2">
-    {{ sprintf('%.10f', $decimalPart) }} 
-</td>
-
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2">
-
-                           
-                        </td>
-                        <td class="border border-black text-right p-2"></td>
-                    </tr>
-                </tbody>
-            </table>
+                    $totalPaid = $totalPaidBeforePromotons + $totalPaidAfterPromotion;
+                    $integerPart = floor($totalPaid);
+                    $decimalPart = $totalPaid - $integerPart;
+                @endphp
+                <tr>
+                    <td>၁</td>
+                    <td class="text-left">
+                        ၁-{{ en2mm(explode('-', $monthsSelect)[1]) }}-{{ en2mm(explode('-', $monthsSelect)[0]) }}<br> မှ
+                        @if($promotionDate)
+                            {{ en2mm(explode('-', $promotionDate)[2]) }}-{{ en2mm(explode('-', $promotionDate)[1]) }}-{{ en2mm(explode('-', $promotionDate)[0]) }}<br>
+                            {{ en2mm($dayPaidSalaryBeforePromotions) }} ရက်
+                        @endif
+                    </td>
+                    <td class="text-right">{{$lastActualSalary}}</td>
+                    <td class="text-right">{{floor($totalPaidBeforePromotons)}}</td>
+                    <td class="text-right">{{$totalPaidBeforePromotons - floor($totalPaidBeforePromotons)}}</td>
+                    <td class="text-right"></td>
+                    <td class="text-right">{{floor($lastActualSalary)}}</td>
+                    <td class="text-right">{{$lastActualSalary - floor($lastActualSalary)}}</td>
+                    <td class="text-right">{{floor($totalPaid - $totalPaidBeforePromotons)}}</td>
+                    <td class="text-right">{{-floor($totalPaid - $totalPaidBeforePromotons) + ($totalPaid - $totalPaidBeforePromotons)}}</td>
+                </tr>
+                <tr>
+                    <td>၂</td>
+                    <td class="text-left">
+                        @if($promotionDate)
+                            {{ en2mm(explode('-', $promotionDate)[2]) }}-{{ en2mm(explode('-', $promotionDate)[1]) }}-{{ en2mm(explode('-', $promotionDate)[0]) }}<br> မှ
+                            <br> {{ en2mm(explode('-', $lastDay)[2]) }}-{{ en2mm(explode('-', $lastDay)[1]) }}-{{ en2mm(explode('-', $lastDay)[0]) }}<br>ထိ
+                            <br> {{ en2mm($dayPaidSalaryAfterPromotions) }} ရက်
+                        @endif
+                    </td>
+                    <td class="text-right">{{$staff?->current_salary}}</td>
+                    <td class="text-right">{{floor($totalPaidAfterPromotion)}}</td>
+                    <td class="text-right">{{$totalPaidAfterPromotion - floor($totalPaidAfterPromotion)}}</td>
+                    <td class="text-right"></td>
+                    <td class="text-right"></td>
+                    <td class="text-right"></td>
+                    <td class="text-right"></td>
+                    <td class="text-right"></td>
+                </tr>
+                <tr class="font-bold">
+                    <td>total</td>
+                    <td></td>
+                    <td></td>
+                    <td class="text-right">{{ $integerPart }}</td>
+                    <td class="text-right">{{ sprintf('%.10f', $decimalPart) }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        
     </page>
 </body>
 </html>

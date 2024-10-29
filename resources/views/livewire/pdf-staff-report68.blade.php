@@ -105,7 +105,7 @@
                     <label for="name" class="md:w-1/3">သွေးအုပ်စု</label>
                     <label for="name" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->blood_type->name }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->blood_type?->name }}</label>
 
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -310,7 +310,8 @@
                     <label for="name" class="md:w-1/3">ဝန်ကြီးဌာန</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name"
-                        class="md:w-3/5">{{ $staff->ministry?->name}}</label>
+                        class="md:w-3/5">
+                   </label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၅။</label>
@@ -370,7 +371,7 @@
                     <label for="name" class="md:w-1/3">လက်ရှိ အလုပ်အကိုင်ရလာပုံ</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->form_of_appointment }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->is_newly_appointed}}</label>
 
                 </div>
                 <div class="flex justify-between w-full mb-4">
@@ -692,7 +693,6 @@
                             <tbody class="text-center h-8 p-2">
                                 @foreach($staff->spouseSiblings as $index => $sibling)
                                     <tr>
-                                        <td class="p-2 border border-black">{{ $index + 1 }}</td>
                                         <td class="p-2 border border-black">{{ $sibling->name }}</td>
                                         <td class="p-2 border border-black">
                                             {{ $sibling->ethnic->name ?? '' }} / {{ $sibling->religion->name ?? '' }}
@@ -869,14 +869,15 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">
-                                @foreach($staff->awards as $award)
+                                @foreach($staff->awardings as $awarding)
                                     <tr>
-                                        <td class="p-2 border border-black">{{ $award->award->name ?? 'N/A' }}</td>
-                                        <td class="p-2 border border-black">{{ $award->order_no }}/{{ $award->order_date }}</td>
+                                        <td class="p-2 border border-black">{{ $awarding->award_type->name ?? 'N/A' }}</td>
+                                        <td class="p-2 border border-black">{{ $awarding->order_no }}/{{ $awarding->order_date }}</td>
                                     </tr>
                                 
                                 @endforeach
                             </tbody>
+                           
                         </table>
                     </div>
                 </div>
@@ -1070,7 +1071,7 @@
                             <tbody class="text-center h-8 p-2">
                                 @foreach ($staff->punishments as $punishment)
                                     <tr>
-                                        <td class="p-2 border border-black">{{ $punishment->penaltyType->name ?? 'N/A' }}</td>
+                                        <td class="p-2 border border-black">{{ $punishment->penalty_type->name ?? 'N/A' }}</td>
                                         <td class="p-2 border border-black">{{ $punishment->reason }}</td>
                                         <td class="p-2 border border-black">{{ $punishment->from_date }}</td>
                                         <td class="p-2 border border-black">{{ $punishment->to_date }}</td>

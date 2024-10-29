@@ -15,4 +15,9 @@ class Posting extends Model
     public function department(){
         return $this->belongsTo(Department::class);
     }
+    public function rank()
+    {
+        return $this->belongsTo(Rank::class);
+    }
+
 }

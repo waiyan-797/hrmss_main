@@ -61,9 +61,9 @@
                                 {{ $incrementedDate->subDay()->toDateString()}} ထိ  
                             
                         {{$diffDaysFromStart}} ရက် 
-  @php 
-$incrementedDate->addDay();
-                            @endphp
+                        @php 
+                            $incrementedDate->addDay();
+                        @endphp
                         
                         </td>
                         <td class="border border-black text-right p-2">
@@ -98,9 +98,6 @@ $incrementedDate->addDay();
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2"></td>
                     </tr>
-
-
-
                 </tbody>
             </table>
 

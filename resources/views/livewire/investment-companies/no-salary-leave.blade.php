@@ -57,7 +57,7 @@
                     <label for="" class="md:w-5"> </label>
                     <label for="name" class="md:w-1/3">ဖြတ်တောက် ရမည့်ခွင့်လစာ</label>
                     <label for="" class="md:w-5">=</label>
-                    <label for="name" class="md:w-3/5">{{ $leave->staff->current_salary/30*$dateDifference}}</label>
+                    <label for="name" class="md:w-3/5">{{ $leave->staff?->current_salary/30*$dateDifference}}</label>
                 </div>
                 @endforeach
             </div>

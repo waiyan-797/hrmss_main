@@ -409,7 +409,7 @@
                                     <td style="border: none;">လက်ရှိအလုပ်အကိုင်ရလာပုံ
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->form_of_appointment }}</td>
+                                    <td style="border: none;">{{ $staff->is_newly_appointed }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၇။

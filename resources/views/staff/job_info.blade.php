@@ -148,7 +148,8 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['ရာထူး', 'အဆင့်', 'မှ', 'ထိ', 'ဌာန', 'ဌာနခွဲ', 'နေရာ', 'တည်နေရာ','ဝန်ကြီးဌာန'],
+        'column_names' => ['ရာထူး', 'အဆင့်', 'မှ', 'ထိ', 'ဌာန', 'ဌာနခွဲ', 'နေရာ','ဝန်ကြီးဌာန','မှတ်ချက်'],
+        'add_event' => 'add_posting',
         'column_vals' => $postings,
         'column_types' => [
             [
@@ -162,7 +163,7 @@
                 'wire_array_name' => 'postings',
                 'wire_array_key' => 'post',
                 'select_values' => $posts,
-            ],
+],
             [
                 'type' => 'date',
                 'wire_array_name' => 'postings',
@@ -190,16 +191,17 @@
                 'wire_array_name' => 'postings',
                 'wire_array_key' => 'location',
             ],
-            [
-                'type' => 'text',
-                'wire_array_name' => 'postings',
-                'wire_array_key' => 'remark',
-            ],
+           
             [
                 'type' => 'select',
                 'wire_array_name' => 'postings',
                 'wire_array_key' => 'ministry',
                 'select_values' => $ministrys,
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'postings',
+                'wire_array_key' => 'remark',
             ],
         ],
         'del_method' => 'removePosting',

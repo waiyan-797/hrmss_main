@@ -26,5 +26,10 @@ class Rank extends Model
     {
         return $this->hasMany(Increment::class, 'increment_rank_id');
     }
+    public function postings()
+    {
+        return $this->hasMany(Posting::class);
+    }
+
 
 }

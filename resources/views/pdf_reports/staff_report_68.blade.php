@@ -601,7 +601,7 @@
                                     <td style="border: none;">လက်ရှိ အလုပ်အကိုင်ရလာပုံ
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->form_of_appointment }}</td>
+                                    <td style="border: none;">{{ $staff->is_newly_appointed }}</td>
                                 </tr> 
                                 <tr>
                                     <td style="border: none;">၁၃။
@@ -1120,13 +1120,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($staff->awards as $award)
+                    @foreach($staff->awardings as $awarding)
                                     <tr>
-                                        <td>{{ $award->award->name ?? 'N/A' }}</td>
-                                        <td>{{ $award->order_no }}/{{ $award->order_date }}</td>
+                                        <td>{{ $awarding->award_type->name ?? 'N/A' }}</td>
+                                        <td>{{ $awarding->order_no }}/{{ $awarding->order_date }}</td>
                                     </tr>
                                 
                                 @endforeach
+                               
                 </tbody>
             </table>
         </div>
@@ -1317,7 +1318,7 @@
                 <tbody>
                     @foreach ($staff->punishments as $punishment)
                     <tr>
-                        <td>{{ $punishment->penaltyType->name ?? 'N/A' }}</td>
+                        <td>{{ $punishment->penalty_type->name ?? 'N/A' }}</td>
                         <td>{{ $punishment->reason }}</td>
                         <td>{{ $punishment->from_date }}</td>
                         <td>{{ $punishment->to_date }}</td>

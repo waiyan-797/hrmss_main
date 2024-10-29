@@ -41,18 +41,7 @@ class LocalTrainingReport extends Component
         $firstRowStyle = ['bgColor' => 'f2f2f2'];
         // $cellStyle = ['valign' => 'center'];
         $phpWord->addTableStyle('TrainingTable', $tableStyle, $firstRowStyle);
-
-
-
-
-
-
-
-
-
         $table = $section->addTable('TrainingTable');
-
-
         $table->addRow();
         $table->addCell(1000)->addText('စဥ်');
         $table->addCell(2000)->addText('အမည်');

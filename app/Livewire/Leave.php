@@ -163,8 +163,4 @@ class Leave extends Component
             'leave_types' => $leave_types,
         ]);
     }
-    // public function render()
-    // {
-    //     return view('livewire.leave');
-    // }
 }
