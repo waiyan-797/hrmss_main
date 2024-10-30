@@ -34,38 +34,61 @@
                     @foreach ($Ranks as $rank)
                         @foreach($rank->staffs as $staff)
                             <tr>
-                                <td>{{ $loop->index + 1 }}</td> 
-                                <td>{{ $staff->gener_id ? 'U' : 'Daw' }}</td> 
-                                <td>{{ $staff->currentRank->name }}</td>
+                                <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td> 
+                                <td class="border border-black text-center p-2">{{ $staff->gener_id ? 'U' : 'Daw' }}</td> 
+                                <td class="border border-black text-center p-2">{{ $staff->currentRank->name }}</td>
+                                @php
+                                    $totalForThisMonth = 0 ;
+                                @endphp
 
-                   @for ($i = 1; $i <= 12; $i++)
-                   <td>{{$staff->salaries()->whereMonth('salary_month', $i)->whereYear('salary_month', $endYr)->first()?->actual_salary}}</td>
-                       
-                   @endfor
-
-                          
+                                
+                                @for ($i = 1; $i <= 12; $i++)
+                                    <td class="border border-black text-center p-2">
+                                     @php
+                                         
+                                     
+                                        $totalForThisMonth +=  $staff->salaries()->whereMonth('salary_month', $i)->whereYear('salary_month', $endYr)->first()?->actual_salary  
+                                        @endphp
+                                        {{ $staff->salaries()->whereMonth('salary_month', $i)->whereYear('salary_month', $endYr)->first()?->actual_salary }}
+                                    </td>
+                                 
+                                @endfor
+                                <td class="border border-black text-center p-2">
+                                  
+                                    {{$totalForThisMonth }}
+   
+                                   </td>
+                                   
+                             
                             </tr>
                         @endforeach
+                
                         @if($rank->staffs->isNotEmpty())
-
-
-                        <tr>
-                            <td>
-                                {{ 
-                                    $rank->staffs->sum(fn($staff) => 
-                                        $staff->salaries()
-                                            
-                                            ->whereYear('salary_month', $endYr)
-                                            ->first()?->actual_salary ?? 0 
-                                    ) 
-                                }}
-                            </td>
-                        </tr>
-                        
-                         @endif 
-                   
+                            <tr>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                             <td  class="border border-black text-center p-2" > </td>
+                
+                                <td class="border border-black text-center p-2">
+                                    {{ $rank->staffs->sum(fn($staff) => $staff->salaries()->whereYear('salary_month', $endYr)->first()?->actual_salary ?? 0) }}
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
+                
             </table>
         </div>
     </div>

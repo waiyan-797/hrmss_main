@@ -70,27 +70,54 @@
       
         {{  
         
-        //    $salaries
-        //                  ->whereYear('salary_month' , $year)
-        //                  ->whereMonth('salary_month', 6)
-
-        //                  ->sum('current_salary')
+      
         getSalary($month, $year)
         }}
     </td>
    
-    <td class="border border-black text-center p-2"></td>
-    <td class="border border-black text-center p-2"></td>
+    <td class="border border-black text-center p-2">
+        {{  
+        
+      
+        getAddition($month, $year)
+            }}
+    </td>
+    <td class="border border-black text-center p-2">
+        
+
+        {{  
+        
+      
+        getDeductionInsurance($month, $year)
+                }}
+    </td>
     
-    <td class="border border-black text-center p-2"></td>
-    <td class="border border-black text-center p-2"></td>
+    <td class="border border-black text-center p-2">
+        {{
+        getLeveTypeone($month, $year)
+        }}
+    </td>
+    <td class="border border-black text-center p-2">
+        {{
+            getLeveTypeTwo($month, $year)
+            }}
+    </td>
    
     <td class="border border-black text-left p-1">   
+        {{
+           getDeductionTax($month, $year)
+            }}
     </td>
     <td class="border border-black text-left p-1">   
+        {{get2monthDeduction($month, $year)}}
     </td>
     <td class="border border-black text-left p-1">   
+        {{
+            getNetActualSalary($month, $year)
+             }}
+        
     </td>
+   
     <td class="border border-black text-left p-1">   
     </td>
 </tr>

@@ -14,6 +14,7 @@
               </svg>
               
             </a> --}}
+            
             <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'personal_info'])" :active="$tab == 'personal_info'" wire:navigate
                 class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32 "
                 >
@@ -37,10 +38,10 @@
                 >
                 {{ __('ငယ်စဉ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်') }}
             </x-nav-link>
-            <x-nav-link   class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32"  :href="route('staff_leave',[$staff_id])">ခွင့်</x-nav-link>
+            {{-- <x-nav-link   class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32"  :href="route('staff_leave',[$staff_id])">ခွင့်</x-nav-link>
             <x-nav-link    class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32" :href="route('staff_increment',[$staff_id])">နှစ်တိုး</x-nav-link>
             <x-nav-link   class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32"  :href="route('staff_promotion',[$staff_id])">ရာထူးတိုး</x-nav-link>
-            <x-nav-link    class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32" :href="route('staff_retirement',[$staff_id])" >ပြုန်းတီး</x-nav-link>
+            <x-nav-link    class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32" :href="route('staff_retirement',[$staff_id])" >ပြုန်းတီး</x-nav-link> --}}
             {{-- <h1 class="text-white font-semibold italic font-arial">{{$confirm_add == 1 ? 'Create ' : 'Update '}}Staff</h1> --}}
         </div>
     </div>

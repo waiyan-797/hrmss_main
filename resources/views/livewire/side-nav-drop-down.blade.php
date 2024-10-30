@@ -8,9 +8,15 @@
     </button>
     <ul x-show="open" x-cloak x-transition class="py-2 space-y-2 font-arial text-sm text-blue-700">
         @foreach ($lists as $list)
-            <li>
+        @if($list['route_name'] == 'sperator')
+       <div class=" bg-slate-600  h-[1px] w-full ">
+
+       </div>
+        @else 
+        <li>
                 <a href="{{ route($list['route_name']) }}" class="{{request()->routeIs($list['route_name']) ? 'bg-blue-100' : ''}} flex items-center p-2 pl-11 w-full rounded-lg transition duration-75 group hover:bg-gray-100 font-semibold" wire:navigate>{{ $list['name'] }}</a>
             </li>
+            @endif 
         @endforeach
     </ul>
 </div>

@@ -98,6 +98,7 @@ class Staff extends Component
             $staffs = $staffQuery->paginate(10);
         }
 
+
         return view('livewire.staff', [
             'staffs' => $staffs,
         ]);

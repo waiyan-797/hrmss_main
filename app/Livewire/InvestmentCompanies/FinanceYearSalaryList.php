@@ -16,58 +16,87 @@ class FinanceYearSalaryList extends Component
 
     public $startYr, $endYr;
 
-
     public function go_word()
     {
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
+        // Define styles for better formatting
+        $phpWord->addTableStyle('Salary Table', [
+            'borderSize' => 6,
+            'cellMargin' => 80
+        ]);
+
         // Create a new section
         $section = $phpWord->addSection();
 
-        // Add title
+        // Add title with formatting
         $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
         $section->addText("{$this->startYr} - {$this->endYr} ခု ဘဏ္ဍာရေးနှစ်လစာ", ['size' => 14]);
 
-        // Add table
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+        // Define table and cell styles
+        $table = $section->addTable('Salary Table');
+        $cellStyle = ['valign' => 'center'];
+        $headerStyle = ['bold' => true, 'align' => 'center'];
 
-        // Define table header
+        // Add table headers
+        $headers = [
+            'စဥ်',
+            'GivenName',
+            'ရာထူး',
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+            'Total'
+        ];
+
+        // Add headers row
         $table->addRow();
-        $headers = ['စဥ်', 'GivenName', 'ရာထူး', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Total'];
         foreach ($headers as $header) {
-            $table->addCell(2000)->addText($header, ['bold' => true, 'align' => 'center']);
+            $table->addCell(2000, $cellStyle)->addText($header, $headerStyle);
         }
 
-        $staffs = Staff::get();
+        // Loop through the Ranks and Staff to populate table
         $Ranks = Rank::all();
         foreach ($Ranks as $rank) {
             foreach ($rank->staffs as $key => $staff) {
                 $table->addRow();
-                $table->addCell(2000)->addText($key + 1);
-                $table->addCell(2000)->addText($staff->gener_id ? 'U' : 'Daw');
-                $table->addCell(2000)->addText($staff->currentRank->name);
+                $table->addCell(500, $cellStyle)->addText($key + 1); // Serial number
+                $table->addCell(1500, $cellStyle)->addText($staff->gener_id ? 'U' : 'Daw'); // Given name
+                $table->addCell(2000, $cellStyle)->addText($staff->currentRank->name); // Rank
 
                 $totalSalary = 0;
+
+                // Loop for monthly salaries
                 for ($i = 1; $i <= 12; $i++) {
-                    $salary = $staff->salaries()->whereMonth('salary_month', $i)->whereYear('salary_month', $this->endYr)->first()?->actual_salary ?? 0;
-                    $table->addCell(2000)->addText($salary);
-                    $totalSalary += $salary; // Accumulate total salary
+                    $salary = $staff->salaries()
+                        ->whereMonth('salary_month', $i)
+                        ->whereYear('salary_month', $this->endYr)
+                        ->first()?->actual_salary ?? 0;
+                    $table->addCell(1200, $cellStyle)->addText($salary); // Adjust cell width here
+                    $totalSalary += $salary;
                 }
 
-                // Add total salary in the last cell of the row
-                $table->addCell(2000)->addText($totalSalary);
+                // Total salary for the year
+                $table->addCell(1200, $cellStyle)->addText($totalSalary);
             }
 
-            // Add empty row if the rank has staff
+            // Total for rank
             if ($rank->staffs->isNotEmpty()) {
                 $table->addRow();
-                $table->addCell(2000)->addText('');
-                $table->addCell(2000)->addText('');
-                $table->addCell(2000)->addText('Total for Rank:');
+                $table->addCell(3000, ['gridSpan' => 15])->addText('Total for Rank:', ['bold' => true]);
                 $rankTotal = $rank->staffs->sum(function ($staff) {
                     return $staff->salaries()->whereYear('salary_month', $this->endYr)->sum('actual_salary');
                 });
-                $table->addCell(2000)->addText($rankTotal);
+                $table->addCell(1200, $cellStyle)->addText($rankTotal);
             }
         }
 
@@ -79,6 +108,7 @@ class FinanceYearSalaryList extends Component
         // Return the file as a response
         return response()->download($filePath)->deleteFileAfterSend(true);
     }
+
 
 
     public function go_pdf()

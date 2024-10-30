@@ -20,25 +20,41 @@
                     '
                     :lists="[
                         ['route_name' => 'region', 'name' => 'တိုင်းဒေသကြီး/ပြည်နယ်'],
+                        
                         ['route_name' => 'district', 'name' => 'ခရိုင်'],
                         ['route_name' => 'township', 'name' => 'မြို့/မြို့နယ်'],
+                        ['route_name' => 'sperator'],
+
                         ['route_name' => 'staff_type', 'name' => 'ဝန်ထမ်းအမျိုးအစား'],
+                        ['route_name' => 'sperator'],
                         ['route_name' => 'award', 'name' => 'ဘွဲ့တံဆိပ်'],
                         ['route_name' => 'award_type', 'name' => 'ဘွဲ့တံဆိပ်အမျိုးအစား'],
+                        ['route_name' => 'sperator'],
                         ['route_name' => 'post', 'name' => 'တာဝန်'],
                         ['route_name' => 'section', 'name' => 'ဌာနစိတ်'],
+                        ['route_name' => 'sperator'],
                         ['route_name' => 'leave_type', 'name' => 'ခွင့်အမျိုးအစား'],
+                        ['route_name' => 'sperator'],
                         ['route_name' => 'payscale', 'name' => 'လစာနှုန်း'],
+                        ['route_name' => 'sperator'],
                         ['route_name' => 'penalty_type', 'name' => 'ပြစ်ဒဏ်အမျိုးအစား'],
+                        ['route_name' => 'sperator'],
                         ['route_name' => 'rank', 'name' => 'ရာထူး'],
+                        ['route_name' => 'sperator'],
                         ['route_name' => 'division', 'name' => 'ဌာနခွဲ'],
+                        ['route_name' => 'sperator'],
                         ['route_name' => 'pension_year', 'name' => 'ပင်စင်နှစ်'],
                         ['route_name' => 'pension_type', 'name' => 'ပင်စင်အမျိုးအစား'],
+                        ['route_name' => 'sperator'],
+                        
                         ['route_name' => 'training_type', 'name' => 'သင်တန်းအမျိုးအစား'],
                         ['route_name' => 'training_location', 'name' => 'တည်နေရာ'],
+                        ['route_name' => 'sperator'],
                         ['route_name' => 'education_group', 'name' => 'ဘွဲ့အုပ်စု'],
                         ['route_name' => 'education_type', 'name' => 'ဘွဲ့အမျိုးအစား'],
                         ['route_name' => 'education', 'name' => 'ဘွဲ့'],
+                        ['route_name' => 'sperator'],
+
                         ['route_name' => 'nationality', 'name' => 'နိုင်ငံသား'],
                         ['route_name' => 'country', 'name' => 'နိုင်ငံ'],
                         ['route_name' => 'ethnic', 'name' => 'လူမျိုး'],
@@ -46,9 +62,13 @@
                         ['route_name' => 'gender', 'name' => 'ကျား/မ'],
                         ['route_name' => 'blood_type', 'name' => 'သွေးအုပ်စု'],
                         ['route_name' => 'relation', 'name' => 'တော်စပ်ပုံ'],
+                        ['route_name' => 'sperator'],
+
                         ['route_name' => 'ministry', 'name' => 'ဝန်ကြီးဌာန'],
                         ['route_name' => 'language', 'name' => 'ဘာသာစကား'],
                         ['route_name' => 'department', 'name' => 'ဌာန'],
+                        ['route_name' => 'sperator'],
+
                         ['route_name' => 'salary', 'name' => 'လစာ'],
                     
                     ]" />

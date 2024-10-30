@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Country;
+use App\Models\Leave;
 use App\Models\Salary;
 
 if (! function_exists('getcsv')) {
@@ -114,4 +115,77 @@ function getSalary($month, $year)
         ->whereMonth('salary_month', $month)
 
         ->sum('current_salary');
+}
+
+
+function getAddition($month, $year)
+{
+
+    return    Salary::whereYear('salary_month', $year)
+        ->whereMonth('salary_month', $month)
+
+        ->sum('addition');
+}
+
+
+function getDeductionInsurance($month, $year)
+{
+
+    return    Salary::whereYear('salary_month', $year)
+        ->whereMonth('salary_month', $month)
+
+        ->sum('deduction_insurance');
+}
+
+
+
+function getLeveTypeOne($month, $year)
+{
+
+    return    Leave::whereYear('created_at', $year)
+        ->whereMonth('created_at', $month)
+        ->where('leave_type_id', 1)
+        ->count();
+}
+
+
+function getLeveTypeTwo($month, $year)
+{
+
+    return    Leave::whereYear('created_at', $year)
+        ->whereMonth('created_at', $month)
+        ->where('leave_type_id', 2)
+        ->count();
+}
+
+
+function getDeductionTax($month, $year)
+{
+
+    return    Salary::whereYear('salary_month', $year)
+        ->whereMonth('salary_month', $month)
+
+        ->sum('deduction_tax');
+}
+
+
+
+function getNetActualSalary($month, $year)
+{
+
+    return    Salary::whereYear('salary_month', $year)
+        ->whereMonth('salary_month', $month)
+
+        ->sum('actual_salary');
+}
+
+
+
+function get2monthDeduction($month, $year)
+{
+
+    return    Salary::whereYear('salary_month', $year)
+        ->whereMonth('salary_month', $month)
+
+        ->sum('deduction');
 }

@@ -149,11 +149,11 @@ class Leave extends Component
         $this->submit_form = 'submitForm';
 
         $leaveSearch = '%' . $this->leave_search . '%';
-        $leaveQuery = ModelsLeave::query();
+        $leaveQuery = ModelsLeave::query()->where('staff_id', $this->staff_id);
         if ($this->leave_search) {
             $this->resetPage();
-            $leaveQuery->where(fn($q) => $q->where('remark', 'LIKE', $leaveSearch)->orWhereHas('leave_type', fn($query) => $query->where('name', 'LIKE', $leaveSearch)));
-            $leaves = $leaveQuery->with('leave_type')->paginate($leaveQuery->count() > 10 ? $leaveQuery->count() : 10);
+
+            $leaves = $leaveQuery->with('leave_type')->where('remark', 'LIKE', $leaveSearch)->paginate($leaveQuery->count() > 10 ? $leaveQuery->count() : 10);
         } else {
             $leaves = $leaveQuery->with('leave_type')->paginate(10);
         }

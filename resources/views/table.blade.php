@@ -46,6 +46,7 @@
             </thead>
             <tbody class="text-center">
                 @foreach ($data_values as $value)
+                
                     @php
                         $startIndex = ($data_values->currentPage() - 1) * $data_values->perPage() + 1;
                         $index = $startIndex + $loop->index;
@@ -97,6 +98,16 @@
                                 <button type="button" wire:click="delete_confirm({{ $value->id }})" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</button>
                             @endif
                             @endif
+                            
+
+                        </td>
+                        <td>
+                            @if($value instanceof \App\Models\Staff)
+<a  class="font-medium text-green-600 dark:text-green-500 hover:underline"  href={{route('staff_leave',[ $value->id ])}}>ခွင့်</a> |
+<a   class="font-medium text-green-600 dark:text-green-500 hover:underline" href={{route('staff_increment',[ $value->id ])}}>နှစ်တိုး</a> |
+<a  class="font-medium text-green-600 dark:text-green-500 hover:underline"  href={{route('staff_promotion',[ $value->id ])}}>ရာထူးတိုး</a> |
+<a   class="font-medium text-green-600 dark:text-green-500 hover:underline" href={{route('staff_retirement',[ $value->id ])}} >ပြုန်းတီး</a> |
+@endif 
                         </td>
                     </tr>
                 @endforeach
