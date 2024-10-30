@@ -20,13 +20,12 @@ class FinanceYearSalaryList extends Component
     {
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
-        // Define styles for better formatting
         $phpWord->addTableStyle('Salary Table', [
             'borderSize' => 6,
             'cellMargin' => 80
         ]);
 
-        // Create a new section
+
         $section = $phpWord->addSection();
 
         // Add title with formatting

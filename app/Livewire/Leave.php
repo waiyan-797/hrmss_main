@@ -141,8 +141,7 @@ class Leave extends Component
 
         $staff = Staff::find($this->staff_id);
         $leave_types = LeaveType::get();
-        $this->modal_title = $this->confirm_add ? 'ခွင့်အသစ်ထည့်ရန်
-' : 'ခွင့်ပြင်ရန်
+        $this->modal_title = $this->confirm_add ? 'ခွင့်အသစ်ထည့်ရန်' : 'ခွင့်ပြင်ရန်
 ';
         $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
