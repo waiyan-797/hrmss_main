@@ -40,7 +40,7 @@ $register = function () {
 ?>
 
 <div>
-    <a href="{{ route('welcome') }}" class="text-blue-700 uppercase font-semibold font-arial text-lg flex items-center justify-center hover:text-blue-800 py-3" wire:navigate>
+    <a href="{{ route('welcome') }}" class="text-green-700 uppercase font-semibold font-arial text-lg flex items-center justify-center hover:text-green-800 py-3" wire:navigate>
         HR Management System (HRMS)
     </a>
     <form wire:submit="register">
@@ -82,7 +82,7 @@ $register = function () {
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="font-arial font-medium underline text-sm text-blue-700 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
+            <a class="font-arial font-medium underline text-sm text-green-700 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
                 {{ __('Already registered?') }}
             </a>
 

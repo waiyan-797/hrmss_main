@@ -1,9 +1,9 @@
 <div class="grid grid-cols-4 gap-4 py-5">
     <div class="col-span-4">
         @if ($staff_photo && $photo == null)
-            <img src="{{ route('file', $staff_photo) }}" class="w-20 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
+            <img src="{{ route('file', $staff_photo) }}" class="w-20 h-20 rounded-full border-2 dark:border-green-600 border-green-400 mb-4">
         @else
-            <img src="{{ $photo ? $photo->temporaryUrl() :asset('img/user.png') }}" class="w-20 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
+            <img src="{{ $photo ? $photo->temporaryUrl() :asset('img/user.png') }}" class="w-20 h-20 rounded-full border-2 dark:border-green-600 border-green-400 mb-4">
         @endif
     </div>
 
@@ -325,9 +325,17 @@
     </div>
 </div>
 <div class="w-full h-auto py-5">
+    <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
+        <x-input-label :value="__('ပညာအရည်အချင်း')" class="font-semibold"/>
+        <button wire:click='add_edu' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span class="sr-only">Add Icon</span>
+        </button>
+    </div>
     @include('staff_multiple_table', [
         'column_names' => ['ပညာအရည်အချင်း အုပ်စု', 'ပညာအရည်အချင်း အမျိုးအစား', 'ပညာအရည်အချင်း'],
-        'add_event' => 'add_edu',
         'column_vals' => $educations,
         'column_types' => [
             [

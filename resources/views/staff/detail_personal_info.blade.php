@@ -1,9 +1,16 @@
 
-<div class="w-full py-5 h-auto overflow-y-auto">
-    <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ် ဖော်ပြရန်)</h1>
+<div class="w-full h-auto py-5">
+    <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
+        <x-input-label :value="__('နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ် ဖော်ပြရန်)')" class="font-semibold"/>
+        <button wire:click='add_schools' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span class="sr-only">Add Icon</span>
+        </button>
+    </div>
     @include('staff_multiple_table', [
-        'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သော ဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့','အတန်း','ခုံအမှတ်','မေဂျာ','မှ','ထိ', 'ခုနှစ်','ဘွဲ့လက်မှတ်','အမှတ်စာရင်း','မှတ်ချက်'],
-        'add_event' => 'add_schools',
+        'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သောဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့','အတန်း','ခုံအမှတ်','မေဂျာ','မှ','ထိ', 'ခုနှစ်','ဘွဲ့လက်မှတ်','အမှတ်စာရင်း','မှတ်ချက်'],
         'column_vals' => $schools,
         'column_types' => [
             [
@@ -60,7 +67,6 @@
                 'wire_array_key' => 'to_date',
             ],
 
-
             [
                 'type' => 'text',
                 'wire_array_name' => 'schools',
@@ -88,7 +94,15 @@
 </div>
 
 <div class="w-full h-auto py-5">
-    <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">သင်တန်း</h1>
+    <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
+        <x-input-label :value="__('သင်တန်း')" class="font-semibold"/>
+        <button wire:click='add_trainings' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span class="sr-only">Add Icon</span>
+        </button>
+    </div>
     @include('staff_multiple_table', [
         'column_names' => ['သင်တန်းအမည်','ဒီပလိုမာလက်မှတ်','သင်တန်းကြေး', 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းတည်နေရာ','မှတ်ချက်'],
         'add_event' => 'add_trainings',
@@ -149,10 +163,17 @@
 
 </div>
 <div class="w-full h-auto py-5">
-    <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်</h1>
+    <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
+        <x-input-label :value="__('ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်')" class="font-semibold"/>
+        <button wire:click='add_awardings' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span class="sr-only">Add Icon</span>
+        </button>
+    </div>
     @include('staff_multiple_table', [
         'column_names' => ['ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အမည်', 'ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်', 'အမိန့်အမှတ်', 'ရက်စွဲ','မှတ်ချက်'],
-        'add_event' => 'add_awardings',
         'column_vals' => $awards,
         'column_types' => [
             [
@@ -185,9 +206,7 @@
         ],
         'del_method' => 'remove_awardings',
     ])
-
 </div>
-
 
 <div class="grid grid-cols-4 gap-4 py-5">
     <div class="col-span-4">
@@ -223,10 +242,17 @@
     </div>
 </div>
 <div class="w-full h-auto py-5">
-    <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်</h1>
+    <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
+        <x-input-label :value="__('လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်')" class="font-semibold"/>
+        <button wire:click='add_past_occupations' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span class="sr-only">Add Icon</span>
+        </button>
+    </div>
     @include('staff_multiple_table', [
         'column_names' => ['ရာထူး', 'ဌာန', 'ဌာနခွဲ','လိပ်စာ' ,'မှ', 'ထိ', 'မှတ်ချက်'],
-        'add_event' => 'add_past_occupations',
         'column_vals' => $past_occupations,
         'column_types' => [
             [
@@ -296,10 +322,17 @@
 </div>
 
 <div class="w-full py-5">
-    <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">နိုင်ငံခြားသွားရောက်ခြင်း</h1>
+    <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
+        <x-input-label :value="__('နိုင်ငံခြားသွားရောက်ခြင်း')" class="font-semibold"/>
+        <button wire:click='add_abroads' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span class="sr-only">Add Icon</span>
+        </button>
+    </div>
     @include('staff_multiple_table', [
         'column_names' => ['သွားရောက်ခဲ့သည့်နိုင်ငံ', 'သွားရောက်ခဲ့သည့်အကြောင်း','သင်တန်းတက်ခြင်းဖြစ်လျှင် အောင်','သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်','ထောက်ပံ့သည့်အဖွဲ့အစည်း', 'တွေ့ဆုံခဲ့သည့် ကုမ္ပဏီ၊ လူပုဂ္ဂိုလ်၊ ဌာန', 'သွားသည့်နေ့', 'ပြန်သည့်နေ့','နိုင်ငံခြားခရီးစဉ်','နိုင်ငံခြားသို့သွားရောက်မည်ံနေ့','ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး'],
-        'add_event' => 'add_abroads',
         'column_vals' => $abroads,
         'column_types' => [
             [
@@ -396,10 +429,17 @@
     </div>
 </div>
 <div class="w-full h-auto py-5">
-    <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">ရာဇဝတ်ပြစ်မှုခံရခြင်း</h1>
+    <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
+        <x-input-label :value="__('ရာဇဝတ်ပြစ်မှုခံရခြင်း')" class="font-semibold"/>
+        <button wire:click='add_punishments' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span class="sr-only">Add Icon</span>
+        </button>
+    </div>
     @include('staff_multiple_table', [
         'column_names' => ['ပြစ်ဒဏ်အမျိုးအစား', 'ပြစ်ဒဏ်ချမှတ်ခံရသည့် အကြောင်းအရင်း', 'မှ', 'ထိ'],
-        'add_event' => 'add_punishments',
         'column_vals' => $punishments,
         'column_types' => [
             [
@@ -429,10 +469,17 @@
 </div>
 
 <div class="w-full py-5">
-    <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">လူမှုရေးလှုပ်ရှားမှု</h1>
+    <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
+        <x-input-label :value="__('လူမှုရေးလှုပ်ရှားမှု')" class="font-semibold"/>
+        <button wire:click='add_socials' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span class="sr-only">Add Icon</span>
+        </button>
+    </div>
     @include('staff_multiple_table', [
         'column_names' => ['အကြောင်းအရာ', 'မှ', 'အထိ', 'မှတ်ချက်'],
-        'add_event' => 'add_socials',
         'column_vals' => $socials,
         'column_types' => [
             [
@@ -461,10 +508,17 @@
 </div>
 
 <div class="w-full h-auto py-5">
-    <h1 class="text-gray-900 font-arial text-md mb-2 uppercase font-semibold">ဝန်ထမ်းဘာသာစကားကျွမ်းကျင်မှု</h1>
+    <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
+        <x-input-label :value="__('ဝန်ထမ်းဘာသာစကားကျွမ်းကျင်မှု')" class="font-semibold"/>
+        <button wire:click='add_staff_languages' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span class="sr-only">Add Icon</span>
+        </button>
+    </div>
     @include('staff_multiple_table', [
         'column_names' => ['ဘာသာစကား', 'အဆင့်', 'အရေး', 'အဖတ်', 'အပြော', 'မှတ်ချက်'],
-        'add_event' => 'add_staff_languages',
         'column_vals' => $staff_languages,
         'column_types' => [
             [

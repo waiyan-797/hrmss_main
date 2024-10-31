@@ -5,9 +5,9 @@
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
 
-            <h1 class="font-bold text-center text-base mb-2">Former Employee Record Report of April, 2021</h1>
+            <h1 class="font-bold text-center text-base mb-2 font-arial text-green-700">Former Employee Record Report of April, 2021</h1>
 
-            <table class="md:w-full">
+            <table class="md:w-full font-arial">
                 <thead>
                     <tr>
                         <th class="border border-black text-center p-1">စဥ်</th>
@@ -19,9 +19,9 @@
                 <tbody>
                     @foreach($staffs as $staff)
                     <tr>
-                        <td class="border border-black text-right p-1">{{ $loop->index+1}}</td>
+                        <td class="border border-black text-center p-1">{{ $loop->index+1}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->name}}</td>
-                        <td class="border border-black text-left p-1">{{ $staff->current_rank->name}}</td>
+                        <td class="border border-black text-left p-1">{{ $staff->current_rank ? $staff->current_rank->name : '-'}}</td>
                         <td class="border border-black text-center p-1">{{ $staff->retire_date}}</td>
                     </tr>
                     @endforeach

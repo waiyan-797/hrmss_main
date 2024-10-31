@@ -24,12 +24,12 @@ class EmpoyeeRecordReport extends Component
     {
         $staffs = Staff::get();
 
-       
+
         $phpWord = new PhpWord();
         $section = $phpWord->addSection(['orientation'=>'landscape','margin'=>600]);
         $section->addTitle('Former Employee Record Report of April, 2021', 1);
 
-       
+
         $table = $section->addTable(['borderSize' => 6, 'borderColor' => 'black', 'cellMargin' => 50]);
 
         // Add header row
@@ -61,7 +61,7 @@ class EmpoyeeRecordReport extends Component
  public function render()
      {
         $staffs = Staff::get();
-         return view('livewire.employee-record-report.empoyee-record-report',[ 
+         return view('livewire.employee-record-report.empoyee-record-report',[
         'staffs' => $staffs,
     ]);
      }

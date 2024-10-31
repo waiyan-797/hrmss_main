@@ -25,17 +25,6 @@ class User extends Component
     public $status;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
-
-
-
-    //validation
-    // protected $rules = [
-    //     'user_name' => 'required|max:255',
-    //     'email' => 'required|email|max:255|unique:users,email,' . $this->user_id,
-
-    //     'role_id' => 'required|exists:roles,id',
-
-    // ];
     public function rules()
     {
         return [
@@ -47,16 +36,11 @@ class User extends Component
 
     public function render()
     {
-
-
-        $this->modal_title = $this->confirm_add ? 'User အသစ်ထည့်ရန်
-' : 'User ပြင်ရန်';
+        $this->modal_title = $this->confirm_add ? 'User အသစ်ထည့်ရန်' : 'User ပြင်ရန်';
         $users  = ModelsUser::paginate(5);
         $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'သိမ်းရန်';
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
-
-
 
         $userSearch = '%' . $this->user_search . '%';
         $userQuery = ModelsUser::query();
@@ -74,8 +58,6 @@ class User extends Component
         ]);
     }
 
-
-
     public function updateStatus($id)
     {
         $user = ModelsUser::find($id);
@@ -87,7 +69,6 @@ class User extends Component
     public function add_new()
     {
         $this->roles = Role::all();
-
         $this->resetValidation();
         $this->reset('user_name');
         $this->reset('role_id');
@@ -155,9 +136,6 @@ class User extends Component
         $this->message = 'Updated successfully.';
         $this->close_modal();
     }
-
-
-
 
     //close modal
     public function close_modal()

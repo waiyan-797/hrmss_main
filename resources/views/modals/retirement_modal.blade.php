@@ -4,53 +4,53 @@
         <!-- Modal Content -->
         <h2 class="text-lg font-semibold mb-4 text-gray-500 dark:text-white font-arial uppercase">{{ $modal_title }}</h2>
         <form wire:submit.prevent="{{ $submit_form }}">
-            
+
             <!-- Grid Container -->
             <div class="grid grid-cols-2 gap-4 mb-4">
-                
+
                 <!-- Column 1: Retirement Type -->
                 <div class="mb-4">
-                    <label for="retirementType" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">ပင်စင်အမျိုးအစား</label>
-                    <select wire:model.change="retire_type_id" id="retirementType" class="text-sm font-arial block w-full p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                    <label for="retirementType" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ပင်စင်အမျိုးအစား</label>
+                    <select wire:model.change="retire_type_id" id="retirementType" class="text-sm font-arial block w-full p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                         <option value="" selected>ပင်စင်အမျိုးအစား</option>
                         @foreach ($retirementTypes as $retirementType)
                             <option value="{{ $retirementType->id }}">{{ $retirementType->name }}</option>
                         @endforeach
                     </select>
                 </div>
-                
+
                 <!-- Column 2: Retire Date -->
                 <div class="mb-4">
-                    <label for="retire_date" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">ပြုန်းတီးသည့်နေ့</label>
-                    <input required type="date" wire:model="retire_date" id="retire_date" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <label for="retire_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ပြုန်းတီးသည့်နေ့</label>
+                    <input required type="date" wire:model="retire_date" id="retire_date" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
                     @error('retire_date') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
                 </div>
 
                 <!-- Repeat for each field -->
                 <div class="mb-4">
-                    <label for="lost_contact_from_date" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">ထုတ်ပယ်သည့်နေ့</label>
-                    <input required type="date" wire:model="lost_contact_from_date" id="lost_contact_from_date" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <label for="lost_contact_from_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ထုတ်ပယ်သည့်နေ့</label>
+                    <input required type="date" wire:model="lost_contact_from_date" id="lost_contact_from_date" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
                     @error('lost_contact_from_date') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
                 </div>
-                
+
                 <div class="mb-4">
-                    <label for="retire_remark" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">မှတ်ချက်</label>
-                    <input required type="text" wire:model="retire_remark" id="retire_remark" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <label for="retire_remark" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">မှတ်ချက်</label>
+                    <input required type="text" wire:model="retire_remark" id="retire_remark" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
                     @error('retire_remark') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="mb-4">
-                    <label for="pension_salary" class="block mb-1 text-gray-600 dark:text-blue-500 font-arial">ပင်စင်လစာ</label>
-                    <input required type="number" wire:model="pension_salary" id="pension_salary" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <label for="pension_salary" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ပင်စင်လစာ</label>
+                    <input required type="number" wire:model="pension_salary" id="pension_salary" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
                     @error('pension_salary') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
                 </div>
-                
+
                 <!-- Continue the same for other fields -->
 
             </div>
 
             <div class="flex justify-end gap-2 mt-4">
-                <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded font-arial">{{ $submit_button_text }}</button>
+                <button type="submit" class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded font-arial">{{ $submit_button_text }}</button>
                 <button type="button" wire:click="{{ $cancel_action }}" class="font-arial bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">ထွက်ရန်</button>
             </div>
         </form>

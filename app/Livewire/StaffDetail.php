@@ -73,10 +73,6 @@ class StaffDetail extends Component
 
     public $confirm_delete = false;
 
-
-
-
-
     public $educations = [];
     //job_info
     public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_department_id, $side_division_id, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
@@ -294,6 +290,27 @@ class StaffDetail extends Component
         $spouse_siblings = SpouseSibling::where('staff_id', $staff_id)->get();
         $spouse_father_siblings = SpouseFatherSibling::where('staff_id', $staff_id)->get();
         $spouse_mother_siblings = SpouseMotherSibling::where('staff_id', $staff_id)->get();
+        $socials = SocialActivity::where('staff_id', $staff_id)->get();
+        $staff_languages = StaffLanguage::where('staff_id', $staff_id)->get();
+
+        $this->educations = [];
+        $this->recommendations = [];
+        $this->postings = [];
+        $this->schools = [];
+        $this->trainings = [];
+        $this->awards = [];
+        $this->past_occupations = [];
+        $this->punishments = [];
+        $this->siblings = [];
+        $this->father_siblings = [];
+        $this->mother_siblings = [];
+        $this->spouses = [];
+        $this->children = [];
+        $this->spouse_siblings = [];
+        $this->spouse_father_siblings = [];
+        $this->spouse_mother_siblings = [];
+        $this->socials = [];
+        $this->staff_languages = [];
 
         foreach ($staff_educations as $edu) {
             $this->educations[] = [
@@ -372,8 +389,6 @@ class StaffDetail extends Component
             ];
         }
 
-
-
         foreach ($past_occupations as $ocu) {
             $this->past_occupations[] = [
                 'rank' => $ocu->rank_id,
@@ -396,6 +411,25 @@ class StaffDetail extends Component
             ];
         }
 
+        foreach ($socials as $social) {
+            $this->socials[] = [
+                'particular' => $social->particular,
+                'from_date' => $social->from_date,
+                'to_date' => $social->to_date,
+                'remark' => $social->remark,
+            ];
+        }
+
+        foreach ($staff_languages as $lang) {
+            $this->staff_languages[] = [
+                'language' => $lang->language_id,
+                'rank' => $lang->rank,
+                'writing' => $lang->writing,
+                'reading' => $lang->reading,
+                'speaking' => $lang->speaking,
+                'remark' => $lang->remark,
+            ];
+        }
 
         function relative_array($sib)
         {
@@ -688,17 +722,17 @@ class StaffDetail extends Component
 
     public function add_abroads()
     {
-        $this->abroads[] = [['country' => '', 'particular' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '']];
+        $this->abroads[] = ['country' => '', 'particular' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => ''];
     }
 
     public function add_socials()
     {
-        $this->socials[] = [['particular' => '', 'from_date' => '', 'to_date' => '', 'remark' => '']];
+        $this->socials[] = ['particular' => '', 'from_date' => '', 'to_date' => '', 'remark' => ''];
     }
 
     public function add_staff_languages()
     {
-        $this->staff_languages[] = [['language' => '', 'rank' => '', 'writing' => '', 'reading' => '', 'speaking' => '', 'remark' => '']];
+        $this->staff_languages[] = ['language' => '', 'rank' => '', 'writing' => '', 'reading' => '', 'speaking' => '', 'remark' => ''];
     }
 
     public function removeEdu($index)

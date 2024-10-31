@@ -14,8 +14,8 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
             </svg>
         </div>
-        <input type="search" wire:model.live="nameSearch"  id="search" class="block  p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" required />
-    
+        <input type="search" wire:model.live="nameSearch"  id="search" class="block  p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Search" required />
+
     </div> --}}
 <div  class=" w-52">
     <x-text-input wire:model.live='nameSearch'/>
@@ -24,7 +24,7 @@
     <x-select   class=" mt-11"
     wire:model.live='trainingLocation'
     :values="[
-        (object) ['id' => 1, 'name' => 'ပြည်တွင်း'] ,   
+        (object) ['id' => 1, 'name' => 'ပြည်တွင်း'] ,
 
         (object) ['id' => 2, 'name' => 'ပြည်ပ'] ,
     ]"
@@ -53,13 +53,13 @@
                             <td class="border border-black text-right p-1">{{ $staff->name }}</td>
                             <td class="border border-black text-right p-1">{{ $staff->current_rank->name }}</td>
                             @foreach ($staff->trainings->whereIn('training_location_id', $trainingLocation ??  [1,2]) as $training)
-                                
+
                                  <td class="border border-black text-center p-2">{{ $training->training_type->name }}</td>
                                 <td class="border border-black text-center p-2">{{ $training->from_date }}</td>
                                 <td class="border border-black text-center p-2">{{ $training->to_date }}</td>
                                 <td class="border border-black text-center p-2">{{ $training->location }}</td>
                                 <td class="border border-black text-center p-2">{{ $training->training_location?->name }}</td>
-                                
+
                             @endforeach
                         </tr>
                         @endforeach
@@ -73,7 +73,7 @@
                                     <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $loop->index + 1 }}</td>
                                     <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->name }}</td>
                                     <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->current_rank->name }}</td>
-                                    
+
                                     <!-- First training record -->
                                     <td class="border border-black text-center p-2">{{ $firstTraining->training_type->name }}</td>
                                     <td class="border border-black text-center p-2">{{ $firstTraining->from_date }}</td>
@@ -81,7 +81,7 @@
                                     <td class="border border-black text-center p-2">{{ $firstTraining->location }}</td>
                                     <td class="border border-black text-center p-2">{{ $firstTraining->training_location?->name }}</td>
                                 </tr>
-                    
+
                                 <!-- For remaining trainings, create new rows -->
                                 @foreach($staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->skip(1) as $training)
                                     <tr>
@@ -95,7 +95,7 @@
                             @endif
                         @endforeach
                     </tbody>
-                    
+
                 </table>
             </div>
 

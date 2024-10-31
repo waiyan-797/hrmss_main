@@ -30,7 +30,7 @@
         <x-text-input wire:model="transfer_remark" id="transfer_remark" name="transfer_remark" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('transfer_remark')" />
     </div>
-   
+
     <div>
         <x-input-label for="လက်ရှိဌာနခွဲ" :value="__('လက်ရှိဌာနခွဲ')" />
         <x-select wire:model="current_division_id" :values="$divisions" placeholder="လက်ရှိဌာနခွဲ‌ရွေးပါ" id="current_division_id" name="current_division_id" class="mt-1 block w-full" required/>
@@ -89,12 +89,17 @@
     </div>
 </div>
 <div class="w-full h-auto py-5">
-    <div class="pb-2">
+    <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('အလုပ်အကိုင်အတွက် ထောက်ခံသူများ')" class="font-semibold"/>
+        <button wire:click='add_recommendation' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span class="sr-only">Add Icon</span>
+        </button>
     </div>
     @include('staff_multiple_table', [
         'column_names' => ['ထောက်ခံသူ', 'ဝန်ကြီးဌာန', 'ဦးစီးဌာန', 'ရာထူး', 'အကြောင်းအရာ','ထောက်ခံစာ'],
-        'add_event' => 'add_recommendation',
         'column_vals' => $recommendations,
         'column_types' => [
             [
@@ -133,12 +138,17 @@
 </div>
 
 <div class="w-full h-auto py-5">
-    <div class="pb-2">
+    <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('လုပ်ကိုင်ခဲ့ဖူးသည့်အလုပ်အကိုင်')" class="font-semibold"/>
+        <button wire:click='add_posting' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span class="sr-only">Add Icon</span>
+        </button>
     </div>
     @include('staff_multiple_table', [
         'column_names' => ['ရာထူး', 'အဆင့်', 'မှ', 'ထိ', 'ဌာန', 'ဌာနခွဲ', 'နေရာ', 'တည်နေရာ','ဝန်ကြီးဌာန'],
-        'add_event' => 'add_posting',
         'column_vals' => $postings,
         'column_types' => [
             [

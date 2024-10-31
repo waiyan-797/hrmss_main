@@ -62,11 +62,11 @@ $sendVerification = function () {
 
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900 font-arial">
+        <h2 class="text-lg font-medium text-green-700 font-arial">
             {{ __('ကိုယ်ရေးအချက်လက်') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600 font-arial">
+        <p class="mt-1 text-sm text-yellow-500 font-arial">
             {{ __("ကိုယ်ရေးအချက်လက်နှင့်အီးမေးလ်လိပ်စာပြင်ရန်") }}
         </p>
     </header>
@@ -74,9 +74,9 @@ $sendVerification = function () {
     <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
         <div>
             @if ($user->avatar)
-                <img src="{{ $avatar ? $avatar->temporaryUrl() : route('file', $user->avatar)}}" class="w-20 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
+                <img src="{{ $avatar ? $avatar->temporaryUrl() : route('file', $user->avatar)}}" class="w-20 h-20 rounded-full border-2 dark:border-green-600 border-green-400 mb-4">
             @else
-                <img src="{{ $avatar ? $avatar->temporaryUrl() : asset('img/user.png') }}" class="w-20 h-20 rounded-full border-2 dark:border-blue-600 border-blue-400 mb-4">
+                <img src="{{ $avatar ? $avatar->temporaryUrl() : asset('img/user.png') }}" class="w-20 h-20 rounded-full border-2 dark:border-green-600 border-green-400 mb-4">
             @endif
             <x-input-label for="ဓါတ်ပုံ" :value="__('ဓါတ်ပုံ')"/>
             <x-input-file wire:model='avatar' id="avatar" accept=".jpg, .jpeg, .png" name="avatar"/>

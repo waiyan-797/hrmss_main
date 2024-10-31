@@ -41,11 +41,11 @@ $updatePassword = function () {
 
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900 font-arial">
+        <h2 class="text-lg font-medium text-green-700 font-arial">
             {{ __('စကားဝှက်ပြင်ရန်') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600 font-arial">
+        <p class="mt-1 text-sm text-yellow-500 font-arial">
             {{ __('သင့်အကောင့်အားရှည်လျားသောစကားဝှက်ကို အသုံးပြု၍လုံခြုံအောင်ပြုလုပ်ပါ ') }}
         </p>
     </header>
