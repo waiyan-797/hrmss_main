@@ -40,7 +40,6 @@
                                     name="{{$type['wire_array_key']}}"
                                     type="checkbox"
                                     class="form-checkbox h-4 w-4 text-indigo-600"
-                                    required
                                 />
                             @endif
                         </td>

@@ -1,4 +1,4 @@
-<div class="w-full">
+<div class="w-[80%]">
     <div class="shadow flex items-center h-[6vh] mt-6 mb-3">
         <div class="flex flex-wrap gap-1 text-sm font-arial text-center w-full">
             <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'personal_info'])" :active="$tab == 'personal_info'" wire:navigate

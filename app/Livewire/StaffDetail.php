@@ -281,6 +281,7 @@ class StaffDetail extends Component
         $trainings = Training::where('staff_id', $staff_id)->get();
         $awards = Awarding::where('staff_id', $staff_id)->get();
         $past_occupations = PastOccupation::where('staff_id', $staff_id)->get();
+        $abroads = Abroad::where('staff_id', $staff_id)->get();
         $punishments = Punishment::where('staff_id', $staff_id)->get();
         $siblings = Sibling::where('staff_id', $staff_id)->get();
         $father_siblings = FatherSibling::where('staff_id', $staff_id)->get();
@@ -300,6 +301,7 @@ class StaffDetail extends Component
         $this->trainings = [];
         $this->awards = [];
         $this->past_occupations = [];
+        $this->abroads = [];
         $this->punishments = [];
         $this->siblings = [];
         $this->father_siblings = [];
@@ -360,6 +362,7 @@ class StaffDetail extends Component
                 'year' => $sch->year,
                 'certificate' => $sch->certificate,
                 'exam_mark' => $sch->exam_mark,
+                'remark' => $sch->remark,
             ];
         }
 
@@ -401,6 +404,21 @@ class StaffDetail extends Component
             ];
         }
 
+        foreach ($abroads as $abroad) {
+            $this->abroads[] = [
+                'country' => $abroad->country_id,
+                'particular' => $abroad->particular,
+                'training_success_fail' => $abroad->training_success_fail,
+                'training_success_count' => $abroad->training_success_count,
+                'sponser' => $abroad->sponser,
+                'meet_with' => $abroad->meet_with,
+                'from_date' => $abroad->from_date,
+                'to_date' => $abroad->to_date,
+                'status' => $abroad->status,
+                'actual_abroad_date' => $abroad->actual_abroad_date,
+                'position' => $abroad->position,
+            ];
+        }
 
         foreach ($punishments as $pun) {
             $this->punishments[] = [
@@ -695,7 +713,7 @@ class StaffDetail extends Component
 
     public function add_schools()
     {
-        $this->schools[] = ['education_group' => '', 'education_type' => '', 'education' => '', 'school_name' => '', 'town' => '', 'year' => '', 'certificate' => '', 'exam_mark' => ''];
+        $this->schools[] = ['education_group' => '', 'education_type' => '', 'education' => '', 'school_name' => '', 'town' => '', 'year' => '', 'certificate' => '', 'exam_mark' => '', 'remark' => ''];
     }
 
     public function add_trainings()
@@ -722,7 +740,7 @@ class StaffDetail extends Component
 
     public function add_abroads()
     {
-        $this->abroads[] = ['country' => '', 'particular' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => ''];
+        $this->abroads[] = [ 'country' => '', 'particular' => '', 'training_success_fail' => '', 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'status' => '', 'actual_abroad_date' => '', 'position' => ''];
     }
 
     public function add_socials()
@@ -1063,6 +1081,7 @@ class StaffDetail extends Component
     {
         Abroad::where('staff_id', $staffId)->delete();
         foreach ($this->abroads as $abroad) {
+            // dd($abroad);
             Abroad::create([
                 'staff_id' => $staffId,
                 'country_id' => $abroad['country'],
@@ -1129,6 +1148,7 @@ class StaffDetail extends Component
                 'year' => $school['year'],
                 'certificate' => $school['certificate'],
                 'exam_mark' => $school['exam_mark'],
+                'remark' => $school['remark'],
             ]);
         }
     }

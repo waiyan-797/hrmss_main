@@ -77,7 +77,7 @@ class District extends Component
         $district = ModelsDistrict::findOrFail($this->district_id);
         $district->update([
             'name' => $this->district_name,
-            'education_group_id' => $this->region_name
+            'region_id' => $this->region_name
         ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();
