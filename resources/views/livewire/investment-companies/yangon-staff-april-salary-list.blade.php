@@ -229,8 +229,8 @@
                             $finalSalary = $netSalary - $deductionTax - $deductionInsurance - $deductionOther;
                             $totalWithAddition = $finalSalary + $addition;
                             $totalFinalSalaryHigh += $netSalary;
-                            $totalSalaryHigh += $finalSalary;
-                            $totalSalaryAdditionHigh += $totalWithAddition;
+                            $totalSalaryLow += $finalSalary;
+                            $totalSalaryAdditionLow += $totalWithAddition;
                         @endphp
 
                         <tr>
