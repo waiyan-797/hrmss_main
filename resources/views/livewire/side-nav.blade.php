@@ -192,8 +192,6 @@
                     :lists="[
                         ['route_name' => 'leaves', 'name' => 'leaves'],
                         ['route_name' => 'leaves2', 'name' => 'leaves2'],
-                        ['route_name' => 'leave_date', 'name' => 'leaves3'],
-
                     ]" />
             </li>
 

@@ -205,7 +205,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pdf_staff_report15/{staff_id?}', PdfStaffReport15::class)->name('pdf_staff_report15');
     Route::get('/pdf_staff_report17/{staff_id?}', PdfStaffReport17::class)->name('pdf_staff_report17');
     Route::get('/pdf_staff_report19/{staff_id?}', PdfStaffReport19::class)->name('pdf_staff_report19');
-    Route::get('/pdf_staff_report71/{staff_id?}', PdfStaffReport71::class)->name('pdf_staff_report71');
+    // Route::get('/pdf_staff_report71/{staff_id?}', PdfStaffReport71::class)->name('pdf_staff_report71');
+    Route::get('/pdf_staff_report_leave_3/{staff_id?}', LeaveDate::class)->name('pdf_staff_report_leave_3');
     Route::get('/planning_accounting', PlanningAccounting::class)->name('planning_accounting');
     Route::get('/investment_companies', InvestmentCompanies::class)->name('investment_companies');
     Route::get('/investment_companies2', InvestmentCompanies2::class)->name('investment_companies2');

@@ -2,13 +2,19 @@
 
 namespace App\Livewire\Leave;
 
+use App\Models\Leave;
 use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class LeaveDate extends Component
 {
-    public function go_pdf(){
+    public $staff_id;
+    public function mount($staff_id = 0){
+        $this->staff_id = $staff_id;
+    }
+
+    public function go_pdf($staff_id){
         $staffs = Staff::get();
         $data = [
             'staffs' => $staffs,
@@ -20,9 +26,11 @@ class LeaveDate extends Component
     }
      public function render()
      {
-        $staffs = Staff::get();
-        return view('livewire.leave.leave-date',[ 
-        'staffs' => $staffs,
-    ]);
+        $staff = Staff::where('id', $this->staff_id)->first();
+        $leaves = Leave::where('staff_id', $this->staff_id)->where('leave_type_id', 2)->get();
+        return view('livewire.leave.leave-date',[
+            'staff' => $staff,
+            'leaves' => $leaves,
+        ]);
      }
 }

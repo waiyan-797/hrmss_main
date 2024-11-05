@@ -39,7 +39,21 @@ if (! function_exists('formatPeriodMM')) {
     }
 }
 
+if (! function_exists('formatDMY')) {
+    function formatDMY($date)
+    {
+        $formatted_date = Carbon\Carbon::parse($date)->format('d-m-y');
+        return $formatted_date;
+    }
+}
 
+if (! function_exists('dateDiff')) {
+    function dateDiff($from_date, $to_date)
+    {
+        $diff = Carbon\Carbon::parse($from_date)->diff(Carbon\Carbon::parse($to_date));
+        return $diff;
+    }
+}
 
 if (!function_exists('mmDateFormat')) {
     function mmDateFormat($year, $month)
