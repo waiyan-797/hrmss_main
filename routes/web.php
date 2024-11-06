@@ -207,6 +207,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pdf_staff_report19/{staff_id?}', PdfStaffReport19::class)->name('pdf_staff_report19');
     // Route::get('/pdf_staff_report71/{staff_id?}', PdfStaffReport71::class)->name('pdf_staff_report71');
     Route::get('/pdf_staff_report_leave_3/{staff_id?}', LeaveDate::class)->name('pdf_staff_report_leave_3');
+    Route::get('/pdf_staff_report_staff_list_2/{staff_id?}', StaffList2::class)->name('pdf_staff_report_staff_list_2');
     Route::get('/planning_accounting', PlanningAccounting::class)->name('planning_accounting');
     Route::get('/investment_companies', InvestmentCompanies::class)->name('investment_companies');
     Route::get('/investment_companies2', InvestmentCompanies2::class)->name('investment_companies2');
@@ -246,7 +247,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/last_pay_certificate', LastPayCertificate::class)->name('last_pay_certificate');
     Route::get('/detail_staff_salary', DetailStaffSalary::class)->name('detail_staff_salary');
     Route::get('/staff_list1', StaffList1::class)->name('staff_list1');
-    Route::get('/staff_list2', StaffList2::class)->name('staff_list2');
     Route::get('/staff_list3', StaffList3::class)->name('staff_list3');
     Route::get('/staff_list4', StaffList4::class)->name('staff_list4');
     Route::get('/staff_progeny', StaffProgeny::class)->name('staff_progeny');

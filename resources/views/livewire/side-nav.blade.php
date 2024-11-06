@@ -137,7 +137,6 @@
                     '
                     :lists="[
                         ['route_name' => 'staff_list1', 'name' => 'staff_list1'],
-                        ['route_name' => 'staff_list2', 'name' => 'staff_list2'],
                         ['route_name' => 'staff_list3', 'name' => 'staff_list3'],
                         ['route_name' => 'staff_list4', 'name' => 'staff_list4'],
                         ['route_name' => 'staff_progeny', 'name' => 'staff_progeny'],

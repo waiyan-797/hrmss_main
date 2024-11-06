@@ -2,6 +2,7 @@
 
 namespace App\Livewire\StaffList;
 
+use App\Models\Promotion;
 use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
@@ -9,6 +10,11 @@ use PhpOffice\PhpWord\PhpWord;
 
 class StaffList2 extends Component
 {
+    public $staff_id;
+    public function mount($staff_id = 0){
+        $this->staff_id = $staff_id;
+    }
+
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [
@@ -21,7 +27,7 @@ class StaffList2 extends Component
     }
     public function go_word()
     {
-       
+
         $phpWord = new PhpWord();
         $section = $phpWord->addSection(['orientation'=>'landscape','margin'=>600]);
         $section->addTitle('Staff List Report', 1);
@@ -31,7 +37,7 @@ class StaffList2 extends Component
             'borderSize' => 6,
             'cellMargin' => 80,
         ]);
-        
+
         // Define table header
         $table->addRow();
         $table->addCell(2000,['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true]);
@@ -51,84 +57,70 @@ class StaffList2 extends Component
         $table->addCell(3000)->addText('၄', ['alignment' => 'center']);
         $table->addCell(3000)->addText('၇', ['alignment' => 'center']);
 
-        
+
         $staffs = Staff::all();
         foreach ($staffs as $index=> $staff) {
             $table->addRow();
             $table->addCell(2000)->addText($index + 1);
             $table->addCell(4000)->addText("{$staff->name}၊ {$staff->current_rank->name}၊ {$staff->side_department->name}");
             $table->addCell(2000)->addText($staff->current_rank->name);
-            $table->addCell(2000)->addText(''); 
+            $table->addCell(2000)->addText('');
             $table->addCell(2000)->addText('');
             $table->addCell(2000)->addText('');
             $table->addCell(2000)->addText('');
         }
 
-        
         $fileName = 'staff_list_report.docx';
         $filePath = storage_path('app/' . $fileName);
         $phpWord->save($filePath, 'Word2007');
 
-      
+
         return response()->download($filePath)->deleteFileAfterSend(true);
     }
 
+    private function promotion_stages($rank_id){
+        return Promotion::where('rank_id', $rank_id)->where('staff_id', $this->staff_id)->first();
+    }
 
-     public function render()
-     {
-         $staffs = Staff::get();
-        return view('livewire.staff-list.staff-list2',[ 
-            'staffs' => $staffs,
+    private function calc_points($diff){
+        $points = 0;
+        $diff->y > 0 ? $points = $diff->y + $points : '';
+        $diff->m >= 6 ? $points++ : '';
+        return $points;
+    }
+
+    public function render()
+    {
+        $today = \Carbon\Carbon::now();
+        $staff = Staff::where('id', $this->staff_id)->first();
+        $promotions = Promotion::where('staff_id', $this->staff_id)->get();
+        $first_promotion = $this->promotion_stages($staff->current_rank_id);
+        $second_promotion =$this->promotion_stages($first_promotion->previous_rank_id);
+        $third_promotion = $this->promotion_stages($second_promotion->previous_rank_id);
+        $fourth_promotion = $this->promotion_stages($third_promotion->previous_rank_id);
+
+        //calc points
+        $first_promotion_points = $this->calc_points(dateDiff($first_promotion->promotion_date, $today));
+        $second_promotion_points = $this->calc_points(dateDiff($second_promotion->promotion_date, \Carbon\Carbon::parse($first_promotion->promotion_date)->subDay()));
+        $third_promotion_points = $this->calc_points(dateDiff($third_promotion->promotion_date, \Carbon\Carbon::parse($second_promotion->promotion_date)->subDay()));
+        $fourth_promotion_points = $this->calc_points(dateDiff($fourth_promotion->promotion_date, \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay()));
+        $total_points = $first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points;
+
+        return view('livewire.staff-list.staff-list2',[
+            'staff' => $staff,
+            'promotions' => $promotions,
+            'today' => $today,
+            'first_promotion' => $first_promotion,
+            'second_promotion' => $second_promotion,
+            'third_promotion' => $third_promotion,
+            'fourth_promotion' => $fourth_promotion,
+            'first_promotion_points' => $first_promotion_points,
+            'second_promotion_points' => $second_promotion_points,
+            'third_promotion_points' => $third_promotion_points,
+            'fourth_promotion_points' => $fourth_promotion_points,
+            'total_points' => $total_points,
         ]);
-     }
-    
+    }
+
 }
-
-// public function go_word()
-//     {
-//         $staffs = Staff::get();
-//         $phpWord = new PhpWord();
-//         $section = $phpWord->addSection(['orientation'=>'landscape','margin'=>600]);
-//         $section->addTitle('Foreign Training Report', 1);
-//         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-//         $table->addRow();
-//         $table->addCell(2000,['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true]);
-//         $table->addCell(2000,['vMerge' => 'restart'])->addText('အမည်', ['bold' => true]);
-//         $table->addCell(2000,['vMerge' => 'restart'])->addText('ရာထူး', ['bold' => true]);
-//         $table->addCell(6000, ['gridSpan' => 2, 'valign' => 'center'])->addText('သွားရောက်သည့်ကာလ');
-//         $table->addCell(2000,['vMerge' => 'restart'])->addText('သွားရောက်သည့်နိုင်ငံ', ['bold' => true]);
-//         $table->addCell(2000,['vMerge' => 'restart'])->addText('ပြည်ပသို့သွားရောက်ခဲ့သောအကြောင်းအရာ', ['bold' => true]);
-//         $table->addCell(2000,['vMerge' => 'restart'])->addText('ထောက်ပံ့သည့်အဖွဲ့အစည်း', ['bold' => true]);
-//         $table->addCell(2000,['vMerge' => 'restart'])->addText('မှတ်ချက်', ['bold' => true]);
-
-//         $table->addRow();
-//             $table->addCell(2000, ['vMerge' => 'continue']);
-//             $table->addCell(4000, ['vMerge' => 'continue']);
-//             $table->addCell(4000, ['vMerge' => 'continue']);
-//             $table->addCell(3000)->addText('မှ', ['alignment' => 'center']);
-//             $table->addCell(3000)->addText('ထိ', ['alignment' => 'center']);
-//             $table->addCell(4000, ['vMerge' => 'continue']);
-//             $table->addCell(4000, ['vMerge' => 'continue']);
-//             $table->addCell(4000, ['vMerge' => 'continue']);
-//             $table->addCell(4000, ['vMerge' => 'continue']);
-//         foreach ($staffs as $index=> $staff) {
-//             foreach ($staff->abroads as $abroad) {
-//                 $table->addRow();
-//                 $table->addCell(2000)->addText($index + 1);
-//                 $table->addCell(2000)->addText($staff->name);
-//                 $table->addCell(2000)->addText($staff->current_rank->name);
-//                 $table->addCell(2000)->addText($abroad->from_date);
-//                 $table->addCell(2000)->addText($abroad->to_date);
-//                 $table->addCell(2000)->addText($abroad->country->name);
-//                 $table->addCell(2000)->addText($abroad->particular);
-//                 $table->addCell(2000)->addText($abroad->sponser);
-//                 $table->addCell(2000)->addText(''); 
-//             }
-//         }
-//         $fileName = 'foreign_training_report.docx';
-//         $filePath = storage_path('app/' . $fileName);
-//         $phpWord->save($filePath);
-    
-//         return response()->download($filePath)->deleteFileAfterSend(true);
-//     }
 
