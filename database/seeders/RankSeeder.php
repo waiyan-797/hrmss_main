@@ -19,7 +19,7 @@ class RankSeeder extends Seeder
         Rank::truncate();
         Schema::enableForeignKeyConstraints();
 
-        $columns = ['id', 'name', 'payscale_id', 'staff_type_id', 'allowed_qty'];
+        $columns = ['id', 'name', 'payscale_id', 'staff_type_id', 'allowed_qty' ];
 
         $items = [
             [1,'ညွှန်ကြားရေးမှူးချုပ်', 1, 1, 1],

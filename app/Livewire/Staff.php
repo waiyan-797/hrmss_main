@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Promotion;
 use App\Models\Staff as ModelsStaff;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
@@ -102,5 +103,9 @@ class Staff extends Component
         return view('livewire.staff', [
             'staffs' => $staffs,
         ]);
+    }
+
+    public function check($id){
+        return Promotion::where('staff_id', $id)->get()->isEmpty()  ;
     }
 }

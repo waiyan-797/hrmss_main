@@ -17,8 +17,34 @@ class StaffList2 extends Component
 
     public function go_pdf(){
         $staffs = Staff::get();
+        $today = \Carbon\Carbon::now();
+        $staff = Staff::where('id', $this->staff_id)->first();
+        $promotions = Promotion::where('staff_id', $this->staff_id)->get();
+        $first_promotion = $this->promotion_stages($staff->current_rank_id);
+        $second_promotion = $first_promotion ? $this->promotion_stages($first_promotion->previous_rank_id) : null;
+        $third_promotion = $second_promotion ? $this->promotion_stages($second_promotion->previous_rank_id) : null;
+        $fourth_promotion = $third_promotion ? $this->promotion_stages($third_promotion->previous_rank_id) : null;
+
+        //calc points
+        $first_promotion_points = $this->calc_points(dateDiff($first_promotion->promotion_date, $today));
+        $second_promotion_points = $second_promotion ? $this->calc_points(dateDiff($second_promotion->promotion_date, \Carbon\Carbon::parse($first_promotion->promotion_date)->subDay())) : 0;
+        $third_promotion_points = $third_promotion ? $this->calc_points(dateDiff($third_promotion->promotion_date, \Carbon\Carbon::parse($second_promotion->promotion_date)->subDay())) : 0;
+        $fourth_promotion_points = $fourth_promotion ? $this->calc_points(dateDiff($fourth_promotion->promotion_date, \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay())) : 0;
+        $total_points = $first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points;
         $data = [
             'staffs' => $staffs,
+            'promotions' => $promotions,
+            'today' => $today,
+            'first_promotion' => $first_promotion,
+            'second_promotion' => $second_promotion,
+            'third_promotion' => $third_promotion,
+            'fourth_promotion' => $fourth_promotion,
+            'first_promotion_points' => $first_promotion_points,
+            'second_promotion_points' => $second_promotion_points,
+            'third_promotion_points' => $third_promotion_points,
+            'fourth_promotion_points' => $fourth_promotion_points,
+            'total_points' => $total_points, 
+            'staff' => $staff
         ];
         $pdf = PDF::loadView('pdf_reports.staff_list_report_2', $data);
         return response()->streamDownload(function() use ($pdf) {
@@ -27,56 +53,110 @@ class StaffList2 extends Component
     }
     public function go_word()
     {
-
         $phpWord = new PhpWord();
-        $section = $phpWord->addSection(['orientation'=>'landscape','margin'=>600]);
+        $section = $phpWord->addSection(['orientation'=>'landscape', 'margin'=>600]);
         $section->addTitle('Staff List Report', 1);
-
-        // Create a table
+    
+        // Create table with border and margins
         $table = $section->addTable([
             'borderSize' => 6,
             'cellMargin' => 80,
         ]);
+        $staff = Staff::where('id', $this->staff_id)->first();
 
-        // Define table header
+    
+        
         $table->addRow();
-        $table->addCell(2000,['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true]);
-        $table->addCell(4000,['vMerge' => 'restart'])->addText('အမည်/ရာထူး/ဌာန', ['bold' => true]);
-        $table->addCell(2000,['vMerge' => 'restart'])->addText('လက်ရှိရာထူး', ['bold' => true]);
-        $table->addCell(2000,['vMerge' => 'restart'])->addText('တစ်ဆင့်နိမ့်ရာထူး', ['bold' => true]);
-        $table->addCell(2000,['vMerge' => 'restart'])->addText('တစ်ဆင့်နိမ့်ရာထူး', ['bold' => true]);
-        $table->addCell(2000,['vMerge' => 'restart'])->addText('တစ်ဆင့်နိမ့်ရာထူး', ['bold' => true]);
-        $table->addCell(2000,['vMerge' => 'restart'])->addText('စူစုပေါင်း', ['bold' => true]);
-
+        $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true]);
+        $table->addCell(4000, ['vMerge' => 'restart'])->addText('အမည်/ရာထူး/ဌာန', ['bold' => true]);
+        $table->addCell(2000)->addText('လက်ရှိရာထူး', ['bold' => true]);
+        $table->addCell(2000)->addText('တစ်ဆင့်နိမ့်ရာထူး ၁', ['bold' => true]);
+        $table->addCell(2000)->addText('တစ်ဆင့်နိမ့်ရာထူး ၂', ['bold' => true]);
+        $table->addCell(2000)->addText('တစ်ဆင့်နိမ့်ရာထူး ၃', ['bold' => true]);
+        $table->addCell(2000)->addText('စူစုပေါင်း', ['bold' => true]);
+    
+        
         $table->addRow();
         $table->addCell(2000, ['vMerge' => 'continue']);
         $table->addCell(4000, ['vMerge' => 'continue']);
-        $table->addCell(3000)->addText('၁', ['alignment' => 'center']);
-        $table->addCell(3000)->addText('၂', ['alignment' => 'center']);
-        $table->addCell(3000)->addText('၃', ['alignment' => 'center']);
-        $table->addCell(3000)->addText('၄', ['alignment' => 'center']);
-        $table->addCell(3000)->addText('၇', ['alignment' => 'center']);
+        $table->addCell(2000)->addText('၁', ['alignment' => 'center']);
+        $table->addCell(2000)->addText('၂', ['alignment' => 'center']);
+        $table->addCell(2000)->addText('၃', ['alignment' => 'center']);
+        $table->addCell(2000)->addText('၄', ['alignment' => 'center']);
+        $table->addCell(2000)->addText('၇', ['alignment' => 'center']);
 
-
-        $staffs = Staff::all();
-        foreach ($staffs as $index=> $staff) {
+        $first_promotion = $this->promotion_stages($staff->current_rank_id);
+        $second_promotion = $first_promotion ? $this->promotion_stages($first_promotion->previous_rank_id) : null;
+        $third_promotion = $second_promotion ? $this->promotion_stages($second_promotion->previous_rank_id) : null;
+        $fourth_promotion = $third_promotion ? $this->promotion_stages($third_promotion->previous_rank_id) : null;
+            $today = \Carbon\Carbon::now();
+            $first_promotion_points = $this->calc_points(dateDiff($first_promotion?->promotion_date, $today));
+            $second_promotion_points = $second_promotion ? $this->calc_points(dateDiff($second_promotion?->promotion_date, \Carbon\Carbon::parse($first_promotion?->promotion_date)->subDay())) : 0;
+            $third_promotion_points = $third_promotion ? $this->calc_points(dateDiff($third_promotion?->promotion_date, \Carbon\Carbon::parse($second_promotion?->promotion_date)->subDay())) : 0;
+            $fourth_promotion_points = $fourth_promotion ? $this->calc_points(dateDiff($fourth_promotion?->promotion_date, \Carbon\Carbon::parse($third_promotion?->promotion_date)->subDay())) : 0;
+            $total_points = $first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points;
+    
+            // Add row data
             $table->addRow();
-            $table->addCell(2000)->addText($index + 1);
-            $table->addCell(4000)->addText("{$staff->name}၊ {$staff->current_rank->name}၊ {$staff->side_department->name}");
-            $table->addCell(2000)->addText($staff->current_rank->name);
+            $table->addCell(2000)->addText(1); // Serial number
+            $table->addCell(4000)->addText($staff->name); // Name, Rank, Department
+            $table->addCell(2000)->addText( $first_promotion ? $first_promotion->rank->name : ''); // Current Rank
+            $table->addCell(2000)->addText($second_promotion ? $second_promotion->rank->name : ''); // First Promotion Rank
+            
+            $table->addCell(2000)->addText($third_promotion ? $third_promotion->rank->name : ''); // Third Promotion Rank
+            $table->addCell(2000)->addText($fourth_promotion ? $fourth_promotion->rank->name : ''); // Total Points
             $table->addCell(2000)->addText('');
-            $table->addCell(2000)->addText('');
-            $table->addCell(2000)->addText('');
-            $table->addCell(2000)->addText('');
-        }
 
+            $table->addRow();
+            $table->addCell(2000)->addText(''); // Serial number
+            $table->addCell(4000)->addText( $staff->currentRank->name ); // Name, Rank, Department
+            $table->addCell(2000)->addText( $first_promotion ? en2mm(formatDMY($first_promotion->promotion_date)) .' မှ '. en2mm(formatDMY($today)) .' ထိ ' : '' ); // Current Rank
+            $table->addCell(2000)->addText($second_promotion ? en2mm(formatDMY($second_promotion->promotion_date)) .' မှ '. en2mm(formatDMY(\Carbon\Carbon::parse($first_promotion->promotion_date)->subDay())) .' ထိ ' : ''  ); // First Promotion Rank
+            $table->addCell(2000)->addText( $third_promotion ? en2mm(formatDMY($third_promotion->promotion_date)) .' မှ '. en2mm(formatDMY(\Carbon\Carbon::parse($second_promotion->promotion_date)->subDay())) .' ထိ ' : ''  ); // Second Promotion Rank
+            $table->addCell(2000)->addText(  $fourth_promotion ? en2mm(formatDMY($fourth_promotion->promotion_date)) .' မှ '. en2mm(formatDMY(\Carbon\Carbon::parse($third_promotion->promotion_date)->subDay())) .' ထိ ' : ''); // Third Promotion Rank
+            $table->addCell(2000)->addText(''); 
+            
+        
+
+
+            $table->addRow();
+            $table->addCell(2000)->addText(''); // Serial number
+            $table->addCell(4000)->addText( $staff->current_department->name); // Name, Rank, Department
+            $table->addCell(2000)->addText( $first_promotion ? dateDiffYMD($first_promotion->promotion_date, $today) : ''  ); // Current Rank
+            $table->addCell(2000)->addText($second_promotion ? dateDiffYMD($second_promotion->promotion_date, \Carbon\Carbon::parse($first_promotion->promotion_date)->subDay()) : ''  ); // First Promotion Rank
+            $table->addCell(2000)->addText(  $third_promotion ? dateDiffYMD($third_promotion->promotion_date, \Carbon\Carbon::parse($second_promotion->promotion_date)->subDay()) : ''   ); // Second Promotion Rank
+            $table->addCell(2000)->addText(  $fourth_promotion ? dateDiffYMD($fourth_promotion->promotion_date, \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay()) : ''); // Third Promotion Rank
+            $table->addCell(2000)->addText(''); 
+            
+
+
+            $table->addRow();
+            $table->addCell(2000)->addText(''); // Serial number
+            $table->addCell(2000)->addText(''); // Serial number
+            $table->addCell(4000)->addText( en2mm($first_promotion_points)); // Name, Rank, Department
+            $table->addCell(2000)->addText( en2mm($second_promotion_points) ); // Current Rank
+           
+
+            $table->addCell(4000)->addText( en2mm($third_promotion_points)); // Name, Rank, Department
+            $table->addCell(2000)->addText( en2mm($fourth_promotion_points) ); // Current Rank
+            $table->addCell(2000)->addText( en2mm($total_points) ); // Current Rank
+            
+
+            $table->addCell(2000)->addText(''); 
+
+
+
+
+    
+        // Save Word file
         $fileName = 'staff_list_report.docx';
         $filePath = storage_path('app/' . $fileName);
         $phpWord->save($filePath, 'Word2007');
-
-
+    
+        // Download the file
         return response()->download($filePath)->deleteFileAfterSend(true);
     }
+    
 
     private function promotion_stages($rank_id){
         return Promotion::where('rank_id', $rank_id)->where('staff_id', $this->staff_id)->first();
@@ -100,7 +180,7 @@ class StaffList2 extends Component
         $fourth_promotion = $third_promotion ? $this->promotion_stages($third_promotion->previous_rank_id) : null;
 
         //calc points
-        $first_promotion_points = $this->calc_points(dateDiff($first_promotion->promotion_date, $today));
+        $first_promotion_points = $this->calc_points(dateDiff($first_promotion?->promotion_date, $today));
         $second_promotion_points = $second_promotion ? $this->calc_points(dateDiff($second_promotion->promotion_date, \Carbon\Carbon::parse($first_promotion->promotion_date)->subDay())) : 0;
         $third_promotion_points = $third_promotion ? $this->calc_points(dateDiff($third_promotion->promotion_date, \Carbon\Carbon::parse($second_promotion->promotion_date)->subDay())) : 0;
         $fourth_promotion_points = $fourth_promotion ? $this->calc_points(dateDiff($fourth_promotion->promotion_date, \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay())) : 0;
@@ -123,4 +203,3 @@ class StaffList2 extends Component
     }
 
 }
-
