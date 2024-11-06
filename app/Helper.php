@@ -42,8 +42,16 @@ if (! function_exists('formatPeriodMM')) {
 if (! function_exists('formatDMY')) {
     function formatDMY($date)
     {
-        $formatted_date = Carbon\Carbon::parse($date)->format('d-m-y');
-        return $formatted_date;
+        
+        if($date){
+            $formatted_date = Carbon\Carbon::parse($date)->format('d-m-y');
+        
+            return $formatted_date;
+        }
+        else{
+            return '';
+        }
+   
     }
 }
 
@@ -63,7 +71,7 @@ if (! function_exists('dateDiffYMD')) {
         $diff_month = $diff->m ? en2mm($diff->m).' လ ' : '';
         $diff_day = $diff->d ? en2mm($diff->d).' ရက် ' : '';
         $diffYMD = "{$diff_year} {$diff_month} {$diff_day}";
-        return $diffYMD;
+        return $diffYMD  ;
     }
 }
 

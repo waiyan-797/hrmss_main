@@ -10,11 +10,12 @@
             <div class="mb-4">
                 <label for="previous_rank_name" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ယခင်လုပ်ကိုင်ခဲ့ဖူးသည့်ရာထူး</label>
                 <div class="relative">
+                    
                     <select
                         wire:model="previous_rank_name"
                         class="text-sm font-arial block w-full mb-4 p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                         <option value="" selected>ယခင်လုပ်ကိုင်ခဲ့ဖူးသည့်ရာထူး</option>
-                        @foreach ($ranks as $rank)
+                        @foreach ($allRanks as $rank)
                             <option value="{{ $rank->id }}"> {{ $rank->name }} </option>
                         @endforeach
                     </select>
