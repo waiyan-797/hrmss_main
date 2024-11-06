@@ -170,9 +170,9 @@ class Promotion extends Component
         }
 
         $this->previous_rank_name = $this->staff->current_rank_id;
-        
 
-        $promotions = $promotionQuery->with(['staff', 'rank'])
+
+        $promotions = $promotionQuery->where('staff_id', $this->staff_id)->with(['staff', 'rank'])
             ->paginate($promotionQuery->count() > 10 ? $promotionQuery->count() : 10);
         return view('livewire.promotion', [
             'promotions' => $promotions,

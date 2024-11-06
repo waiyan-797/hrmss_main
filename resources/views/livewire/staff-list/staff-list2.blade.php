@@ -28,28 +28,28 @@
                     <tr>
                         <td class="border border-black text-center p-2">{{ en2mm(1) }}</td>
                         <td class="border border-black text-center p-2">{{ $staff->name }}</td>
-                        <td class="border border-black text-center p-2">{{ $first_promotion->rank->name }}</td>
-                        <td class="border border-black text-center p-2">{{ $second_promotion->rank->name }}</td>
-                        <td class="border border-black text-center p-2">{{ $third_promotion->rank->name }}</td>
-                        <td class="border border-black text-center p-2">{{ $fourth_promotion->rank->name }}</td>
+                        <td class="border border-black text-center p-2">{{ $first_promotion ? $first_promotion->rank->name : '' }}</td>
+                        <td class="border border-black text-center p-2">{{ $second_promotion ? $second_promotion->rank->name : '' }}</td>
+                        <td class="border border-black text-center p-2">{{ $third_promotion ? $third_promotion->rank->name : '' }}</td>
+                        <td class="border border-black text-center p-2">{{ $fourth_promotion ? $fourth_promotion->rank->name : '' }}</td>
                         <td class="border border-black text-center p-2"></td>
                     </tr>
                     <tr>
                         <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2">{{ $staff->currentRank->name }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm(formatDMY($first_promotion->promotion_date)) .' မှ '. en2mm(formatDMY($today)) .' ထိ ' }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm(formatDMY($second_promotion->promotion_date)) .' မှ '. en2mm(formatDMY(\Carbon\Carbon::parse($first_promotion->promotion_date)->subDay())) .' ထိ ' }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm(formatDMY($third_promotion->promotion_date)) .' မှ '. en2mm(formatDMY(\Carbon\Carbon::parse($second_promotion->promotion_date)->subDay())) .' ထိ ' }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm(formatDMY($fourth_promotion->promotion_date)) .' မှ '. en2mm(formatDMY(\Carbon\Carbon::parse($third_promotion->promotion_date)->subDay())) .' ထိ ' }}</td>
+                        <td class="border border-black text-center p-2">{{ $first_promotion ? en2mm(formatDMY($first_promotion->promotion_date)) .' မှ '. en2mm(formatDMY($today)) .' ထိ ' : '' }}</td>
+                        <td class="border border-black text-center p-2">{{ $second_promotion ? en2mm(formatDMY($second_promotion->promotion_date)) .' မှ '. en2mm(formatDMY(\Carbon\Carbon::parse($first_promotion->promotion_date)->subDay())) .' ထိ ' : '' }}</td>
+                        <td class="border border-black text-center p-2">{{ $third_promotion ? en2mm(formatDMY($third_promotion->promotion_date)) .' မှ '. en2mm(formatDMY(\Carbon\Carbon::parse($second_promotion->promotion_date)->subDay())) .' ထိ ' : '' }}</td>
+                        <td class="border border-black text-center p-2">{{ $fourth_promotion ? en2mm(formatDMY($fourth_promotion->promotion_date)) .' မှ '. en2mm(formatDMY(\Carbon\Carbon::parse($third_promotion->promotion_date)->subDay())) .' ထိ ' : '' }}</td>
                         <td class="border border-black text-center p-2"></td>
                     </tr>
                     <tr>
                         <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2">{{ $staff->current_department->name }}</td>
-                        <td class="border border-black text-center p-2">{{ dateDiffYMD($first_promotion->promotion_date, $today) }}</td>
-                        <td class="border border-black text-center p-2">{{ dateDiffYMD($second_promotion->promotion_date, \Carbon\Carbon::parse($first_promotion->promotion_date)->subDay()) }}</td>
-                        <td class="border border-black text-center p-2">{{ dateDiffYMD($third_promotion->promotion_date, \Carbon\Carbon::parse($second_promotion->promotion_date)->subDay()) }}</td>
-                        <td class="border border-black text-center p-2">{{ dateDiffYMD($fourth_promotion->promotion_date, \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay()) }}</td>
+                        <td class="border border-black text-center p-2">{{ $first_promotion ? dateDiffYMD($first_promotion->promotion_date, $today) : '' }}</td>
+                        <td class="border border-black text-center p-2">{{ $second_promotion ? dateDiffYMD($second_promotion->promotion_date, \Carbon\Carbon::parse($first_promotion->promotion_date)->subDay()) : '' }}</td>
+                        <td class="border border-black text-center p-2">{{ $third_promotion ? dateDiffYMD($third_promotion->promotion_date, \Carbon\Carbon::parse($second_promotion->promotion_date)->subDay()) : '' }}</td>
+                        <td class="border border-black text-center p-2">{{ $fourth_promotion ? dateDiffYMD($fourth_promotion->promotion_date, \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay()) : '' }}</td>
                         <td class="border border-black text-center p-2"></td>
                     </tr>
                     <tr>

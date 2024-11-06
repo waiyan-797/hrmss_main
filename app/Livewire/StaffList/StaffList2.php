@@ -95,15 +95,15 @@ class StaffList2 extends Component
         $staff = Staff::where('id', $this->staff_id)->first();
         $promotions = Promotion::where('staff_id', $this->staff_id)->get();
         $first_promotion = $this->promotion_stages($staff->current_rank_id);
-        $second_promotion =$this->promotion_stages($first_promotion->previous_rank_id);
-        $third_promotion = $this->promotion_stages($second_promotion->previous_rank_id);
-        $fourth_promotion = $this->promotion_stages($third_promotion->previous_rank_id);
+        $second_promotion = $first_promotion ? $this->promotion_stages($first_promotion->previous_rank_id) : null;
+        $third_promotion = $second_promotion ? $this->promotion_stages($second_promotion->previous_rank_id) : null;
+        $fourth_promotion = $third_promotion ? $this->promotion_stages($third_promotion->previous_rank_id) : null;
 
         //calc points
         $first_promotion_points = $this->calc_points(dateDiff($first_promotion->promotion_date, $today));
-        $second_promotion_points = $this->calc_points(dateDiff($second_promotion->promotion_date, \Carbon\Carbon::parse($first_promotion->promotion_date)->subDay()));
-        $third_promotion_points = $this->calc_points(dateDiff($third_promotion->promotion_date, \Carbon\Carbon::parse($second_promotion->promotion_date)->subDay()));
-        $fourth_promotion_points = $this->calc_points(dateDiff($fourth_promotion->promotion_date, \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay()));
+        $second_promotion_points = $second_promotion ? $this->calc_points(dateDiff($second_promotion->promotion_date, \Carbon\Carbon::parse($first_promotion->promotion_date)->subDay())) : 0;
+        $third_promotion_points = $third_promotion ? $this->calc_points(dateDiff($third_promotion->promotion_date, \Carbon\Carbon::parse($second_promotion->promotion_date)->subDay())) : 0;
+        $fourth_promotion_points = $fourth_promotion ? $this->calc_points(dateDiff($fourth_promotion->promotion_date, \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay())) : 0;
         $total_points = $first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points;
 
         return view('livewire.staff-list.staff-list2',[
