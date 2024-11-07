@@ -7,7 +7,7 @@
 <div>
     <input type="text" wire:model.live='nameSearch'>
 
-    <input type="date" wire:model.live='filterDate'>
+    <input type="month" wire:model.live='filterDate'>
     <x-select
     :values="$depts"
     
@@ -16,9 +16,13 @@
     
     
 </div>
-            <h1 class="text-center text-base font-bold">ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>(၂၄-၇-၂၀၂၄)ရက်နေ့ ညွှန်ကြားရေးမှူးများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း</h1>
 
-            <div class="overflow-x-auto">
+            <h1 class="text-center mt-2 text-sm font-bold">ရ
+                င်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+                 {{mmDateFormat($year , $month )}} ရက်နေ့ 
+                ညွှန်ကြားရေးမှူးများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း</h1>
+
+            <div class="overflow-x-auto mt-2">
                 <table class="min-w-full border border-gray-300 border-collapse table-auto">
                     <thead>
                         <tr class="bg-gray-200">

@@ -29,7 +29,8 @@
                             <th class="p-2 border border-black">ရန်ကုန်ရုံးချုပ်</th>
                             <th class="p-2 border border-black">မကွေး</th>
                             <th class="p-2 border border-black">ပဲခူး</th>
-                            <th class="p-2 border border-black">တနင်သာရီ</th>
+                            <th class="p-2 border border-black">တနင်္သာရီမြို့
+                            </th>
                             <th class="p-2 border border-black">ဧရာဝတီ</th>
                             <th class="p-2 border border-black">စုစုပေါင်း</th>
                         </tr>

@@ -10,9 +10,9 @@ $logout = function (Logout $logout) {
 
 ?>
 
-<nav x-data="{ open: false }" class="  bg-white border-b py-4 border-gray-100 h-[10vh]">
+<nav x-data="{ open: false }" class=" bg-green-100 shadow-sm border-b-2 py-4  border-gray-400 h-[10vh]">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-8 flex flex-row items-center justify-between h-full">
+    <div class="w-full  px-8 flex flex-row items-center h-full">
         <div class=" w-full ">
 
             <a href="{{ route('home') }}" class="font-arial flex flex-row items-center gap-x-3 font-semibold text-md italic text-green-700" wire:navigate>
