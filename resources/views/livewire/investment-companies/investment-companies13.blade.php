@@ -28,6 +28,7 @@
                     <td class="border border-black p-2 text-left">{{ $school->country?->name }}</td>
                     <td class="border border-black p-2 text-left">{{ $school->year }}</td>
                     <td class="border border-black p-2 text-left">{{ $school->remark }}</td>
+                    @endforeach
                 </tr>
             
         @endforeach

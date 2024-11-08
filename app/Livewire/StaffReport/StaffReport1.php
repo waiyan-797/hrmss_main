@@ -23,6 +23,7 @@ class StaffReport1 extends Component
         $pension_year = PensionYear::first();
         $data = [
             'staffs' => $staffs,
+            'pension_year'=>$pension_year,
         ];
         $pdf = PDF::loadView('pdf_reports.staff_report_1', $data);
         return response()->streamDownload(function () use ($pdf) {
@@ -77,8 +78,6 @@ class StaffReport1 extends Component
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
         $temp_file = tempnam(sys_get_temp_dir(), 'phpword');
         $objWriter->save($temp_file);
-
-
         return response()->download($temp_file, $fileName)->deleteFileAfterSend(true);
     }
 
@@ -88,16 +87,9 @@ class StaffReport1 extends Component
     }
     public function render()
     {
-
-
-
         $year = explode('-', $this->filterDate)[0];
         $month = explode('-', $this->filterDate)[1];
-
         $staffQuery = Staff::query();
-
-
-
         $staffQuery->withWhereHas('postings', function ($query) use ($year, $month) {
 
             $query->whereYear('from_date', '<=', $year)->whereMonth('from_date', '<=', $month);
@@ -106,16 +98,12 @@ class StaffReport1 extends Component
                 $query->where('department_id', $this->deptId);
             }
         });
-
-
         if ($this->nameSearch) {
             $staffQuery->where('name', 'like', '%' . $this->nameSearch . '%');
         }
-
-
         $this->staffs = $staffQuery->get();
 
-
+        $staffs = Staff::get();
         $pension_year = PensionYear::first();
 
 

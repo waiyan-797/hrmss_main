@@ -135,29 +135,29 @@ class LeaveNuberPercent extends Component
         $table->addRow();
         $table->addCell(1000)->addText($index + 1);
         $table->addCell(2000)->addText($division->name);
-        $table->addCell(2000)->addText($division->staffCount);
-        $table->addCell(2000)->addText($division->leaveCount);
+        $table->addCell(2000)->addText(en2mm($division->staffCount));
+        $table->addCell(2000)->addText(en2mm($division->leaveCount));
 
         foreach ($leave_types as $leave_type) {
             $leaveTypeCount = $this->leaveType($division->id, $leave_type->id);
-            $table->addCell()->addText($leaveTypeCount);
+            $table->addCell()->addText(en2mm($leaveTypeCount));
         }
 
         $leavePercentage = $division->staffCount > 0 ? ($division->leaveCount / $division->staffCount) * 100 : 0;
-        $table->addCell()->addText(number_format($leavePercentage, 2) . '%');
+        $table->addCell()->addText(en2mm(number_format($leavePercentage, 2) . '%'));
     }
 
     // Add total row
     $table->addRow();
     $table->addCell(1000)->addText('', ['bold' => true]);
     $table->addCell(2000)->addText('စုစုပေါင်း', ['bold' => true]);
-    $table->addCell(2000)->addText($totalStaffCount, ['bold' => true]);
-    $table->addCell(2000)->addText($totalLeaveCount, ['bold' => true]);
+    $table->addCell(2000)->addText(en2mm($totalStaffCount), ['bold' => true]);
+    $table->addCell(2000)->addText(en2mm($totalLeaveCount), ['bold' => true]);
     foreach ($leave_types as $leave_type) {
-        $table->addCell(2000)->addText($totalLeaveTypeCounts[$leave_type->id] ?? 0, ['bold' => true]);
+        $table->addCell(2000)->addText(en2mm($totalLeaveTypeCounts[$leave_type->id] ?? 0), ['bold' => true]);
     }
     $totalLeavePercentage = $totalStaffCount > 0 ? ($totalLeaveCount / $totalStaffCount) * 100 : 0;
-    $table->addCell(2000)->addText(number_format($totalLeavePercentage, 2) . '%', ['bold' => true]);
+    $table->addCell(2000)->addText(en2mm(number_format($totalLeavePercentage, 2) . '%'), ['bold' => true]);
     $fileName = 'leave_number_percent_report.docx';
     $tempFile = tempnam(sys_get_temp_dir(), $fileName);
     $phpWord->save($tempFile, 'Word2007');

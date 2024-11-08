@@ -63,10 +63,6 @@
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(Carbon\Carbon::parse($staff->dob)->year + $pension_year->year) }}</td>
                             </tr>
                             @endforeach
-
-
-                         
-
                     </tbody>
                 </table>
             </div>

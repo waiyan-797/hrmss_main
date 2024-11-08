@@ -1,8 +1,8 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
             <h1 class="font-bold text-center text-base mb-2">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
             </h1>
@@ -21,14 +21,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($staffs as $staff)
                     <tr>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-left p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2"></td>
+                        <td class="border border-black text-center p-2">{{ $loop->index+1}}</td>
+                        <td class="border border-black text-left p-2">{{ $staff->name}}/{{ $staff->current_rank->name}}</td>
+                        <td class="border border-black text-center p-2">{{ $staff->dob}}</td>
+                        <td class="border border-black text-center p-2">{{ $staff->join_date}}</td>
+                        <td class="border border-black text-center p-2">            {{ \Carbon\Carbon::parse($staff->dob)->addYears(62)->subMonths(4)->format('Y-m-d') }}
+                        </td>
+                        <td class="border border-black text-center p-2">{{ \Carbon\Carbon::parse($staff->dob)->addYears(62)->format('Y-m-d') }}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
 

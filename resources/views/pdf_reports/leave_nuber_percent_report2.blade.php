@@ -94,7 +94,7 @@
                      
              <td class="border border-black text-center p-2">
                 
-                 {{$division->leaveCount($division->id, $YearMonth )}}
+                 {{en2mm($division->leaveCount($division->id, $YearMonth ))}}
                  
              </td>
 
@@ -109,14 +109,8 @@
                         $totalLeaveCount = $division->leaveCount($division->id, $YearMonth );
 
                     }
-                 
-                        
-                        
-    
-    
-                           
                             @endphp
-                    {{$totalLeaveCount}}
+                    {{en2mm($totalLeaveCount)}}
                 </td>
          </tr>
                 

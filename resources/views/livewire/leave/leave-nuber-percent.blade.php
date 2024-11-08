@@ -37,29 +37,29 @@
                 
                 <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td>
                 <td class="border border-black text-center p-2">{{ $division->name }}</td>
-                <td class="border border-black text-center p-2">{{ $division->staffCount }}</td>
-                <td class="border border-black text-center p-2">{{ $division->leaveCount }}</td>
+                <td class="border border-black text-center p-2">{{ en2mm($division->staffCount) }}</td>
+                <td class="border border-black text-center p-2">{{ en2mm($division->leaveCount) }}</td>
                 @foreach($leave_types as $leave_type)
                 <td class="border border-black text-center p-2">
                   {{-- {{ $totalLeaveTypeCounts[$leave_type->id] ?? 0 }} --}}
-                  {{$division->leaveCountWithLeaveType($division->id, $dateRange,$leave_type->id)}}
+                  {{en2mm($division->leaveCountWithLeaveType($division->id, $dateRange,$leave_type->id))}}
                 </td>
                 @endforeach
                 <td class="border border-black text-center p-2">
-                    {{ number_format($division->staffCount > 0 ? ($division->leaveCount / $division->staffCount) * 100 : 0, 2) }}%
+                    {{ en2mm(number_format($division->staffCount > 0 ? ($division->leaveCount / $division->staffCount) * 100 : 0, 2)) }}%
                 </td>
               </tr>
               @endforeach
               <tr class="font-bold">
                 <td class="border border-black text-center p-2"></td>
                 <td class="border border-black text-center p-2">စုစုပေါင်း</td>
-                <td class="border border-black text-center p-2">{{ $totalStaffCount }}</td>
-                <td class="border border-black text-center p-2">{{ $totalLeaveCount }}</td>
+                <td class="border border-black text-center p-2">{{ en2mm($totalStaffCount) }}</td>
+                <td class="border border-black text-center p-2">{{ en2mm($totalLeaveCount) }}</td>
                 @foreach($leave_types as $leave_type)
-                <td class="border border-black text-center p-2">{{ $totalLeaveTypeCounts[$leave_type->id] ?? 0 }}</td>
+                <td class="border border-black text-center p-2">{{ en2mm($totalLeaveTypeCounts[$leave_type->id] ?? 0) }}</td>
                 @endforeach
                 <td class="border border-black text-center p-2">
-                    {{ number_format($totalStaffCount > 0 ? ($totalLeaveCount / $totalStaffCount) * 100 : 0, 2) }}%
+                    {{ en2mm(number_format($totalStaffCount > 0 ? ($totalLeaveCount / $totalStaffCount) * 100 : 0, 2)) }}%
                 </td>
               </tr>
             </tbody>

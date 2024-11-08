@@ -65,28 +65,28 @@
             </li>
 
             <li>
-                <livewire:side-nav-drop-down label="Investment Companies Report"
+                <livewire:side-nav-drop-down label="ရင်းနှီးမြှပ်နှံမှု"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
                             <path fill-rule="evenodd" d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 0 1-.517.608 7.45 7.45 0 0 0-.478.198.798.798 0 0 1-.796-.064l-.453-.324a1.875 1.875 0 0 0-2.416.2l-.243.243a1.875 1.875 0 0 0-.2 2.416l.324.453a.798.798 0 0 1 .064.796 7.448 7.448 0 0 0-.198.478.798.798 0 0 1-.608.517l-.55.092a1.875 1.875 0 0 0-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 0 1-.064.796l-.324.453a1.875 1.875 0 0 0 .2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 0 1 .796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 0 1 .517-.608 7.52 7.52 0 0 0 .478-.198.798.798 0 0 1 .796.064l.453.324a1.875 1.875 0 0 0 2.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 0 1-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 0 0 1.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 0 1-.608-.517 7.507 7.507 0 0 0-.198-.478.798.798 0 0 1 .064-.796l.324-.453a1.875 1.875 0 0 0-.2-2.416l-.243-.243a1.875 1.875 0 0 0-2.416-.2l-.453.324a.798.798 0 0 1-.796.064 7.462 7.462 0 0 0-.478-.198.798.798 0 0 1-.517-.608l-.091-.55a1.875 1.875 0 0 0-1.85-1.566h-.344ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clip-rule="evenodd" />
                         </svg>
                     '
                     :lists="[
-                        ['route_name' => 'investment_companies', 'name' => 'investment_companies'],
-                        ['route_name' => 'investment_companies2', 'name' => 'investment_companies2'],
-                        ['route_name' => 'investment_companies3', 'name' => 'investment_companies3'],
-                        ['route_name' => 'investment_companies4', 'name' => 'investment_companies4'],
-                        ['route_name' => 'investment_companies5', 'name' => 'investment_companies5'],
-                        ['route_name' => 'investment_companies6', 'name' => 'investment_companies6'],
-                        ['route_name' => 'investment_companies7', 'name' => 'investment_companies7'],
-                        ['route_name' => 'investment_companies8', 'name' => 'investment_companies8'],
-                        ['route_name' => 'investment_companies9', 'name' => 'investment_companies9'],
-                        ['route_name' => 'investment_companies10', 'name' => 'investment_companies10'],
-                        ['route_name' => 'investment_companies11', 'name' => 'investment_companies11'],
-                        ['route_name' => 'investment_companies12', 'name' => 'investment_companies12'],
-                        ['route_name' => 'investment_companies13', 'name' => 'investment_companies13'],
-                        ['route_name' => 'investment_companies14', 'name' => 'investment_companies14'],
-                        ['route_name' => 'investment_companies15', 'name' => 'investment_companies15'],
+                        ['route_name' => 'investment_companies', 'name' => 'ကျား/မ ခွင့်ပြု'],
+                        ['route_name' => 'investment_companies2', 'name' => 'ကျား/မ အရင်းခန့်ပြီး'],
+                        ['route_name' => 'investment_companies3', 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(ရာထူး)'],
+                        ['route_name' => 'investment_companies4', 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(လစာနှုန်း)'],
+                        ['route_name' => 'investment_companies5', 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(အဆင့်တူ)'],
+                        ['route_name' => 'investment_companies6', 'name' => 'အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း'],
+                        ['route_name' => 'investment_companies7', 'name' => 'နပတရောက်ရှိအင်အား'],
+                        ['route_name' => 'investment_companies8', 'name' => 'အိမ်ထောင်သည်'],
+                        ['route_name' => 'investment_companies9', 'name' => 'ဝန်ထမ်းအဖြစ်မှထုတ်ပါယ်/ထုတ်ပစ်'],
+                        ['route_name' => 'investment_companies10', 'name' => 'လအလိုက်ဝန်ထမ်းအင်အားစာရင်းချုပ်'],
+                        ['route_name' => 'investment_companies11', 'name' => '၁၀နှစ်အထက်/၁၀နှစ်အောက်ပင်စင်ပို့စာရင်း'],
+                        ['route_name' => 'investment_companies12', 'name' => 'ပင်စင်ကိစ္စ(မနှင်းစု)'],
+                        ['route_name' => 'investment_companies13', 'name' => 'ဖွဲ့ခန့်ပိုလိုရုံးချုပ်'],
+                        ['route_name' => 'investment_companies14', 'name' => 'ဘွဲ့နှင့်သက်ဆိုင်သည့်စာရင်း'],
+                        ['route_name' => 'investment_companies15', 'name' => 'ဖွဲ့ခန့်ပိုလို(တိုင်းဒေသကြီး)'],
                     ]" />
             </li>
             <li>
@@ -97,15 +97,16 @@
                         </svg>
                     '
                     :lists="[
-                        ['route_name' => 'local_training_report', 'name' => 'local_training_report'],
-                        ['route_name' => 'local_training_report2', 'name' => 'local_training_report2'],
-                        ['route_name' => 'staff_report', 'name' => 'staff_report'],
-                        ['route_name' => 'staff_report1', 'name' => 'staff_report1'],
+                        ['route_name' => 'local_training_report', 'name' => 'တတ်ရောက်ခဲ့သည့်သင်တန်း(၁)'],
+                        ['route_name' => 'local_training_report2', 'name' => 'တတ်ရောက်ခဲ့သည့်သင်တန်း(၂)'],
+                        ['route_name' => 'staff_report', 'name' => 'ပင်စင်ကိစ္စ(မနှင်းစု)'],
+                        ['route_name' => 'staff_report1', 'name' => 'လက်ရှိဌာနရောက်ရှိရက်စွဲ'],
                         ['route_name' => 'staff_report2', 'name' => 'staff_report2'],
-                        ['route_name' => 'staff_report3', 'name' => 'staff_report3'],
-                        ['route_name' => 'pension_list', 'name' => 'pension_list'],
-                        ['route_name' => 'pension_family', 'name' => 'pension_family'],
-                        ['route_name' => 'pension_report', 'name' => 'pension_report'],
+                        ['route_name' => 'staff_report3', 'name' => 'ပင်စင်ပြည့်ဝန်ထမ်းများစာရင်း'],
+                        ['route_name' => 'pension_list', 'name' => 'ပင်စင်ခံစားခဲ့သူများစာရင်း'],
+                        ['route_name' => 'pension_family', 'name' => 'မိသားစုပင်စင်ခံစားခဲ့သူများစာရင်း'],
+                        ['route_name' => 'finance_pension_age62', 'name' => 'အသက်(၆၂)ပြည့်ပင်စင်ခံစားမည့်စာရင်း'],
+                        ['route_name' => 'pension_report', 'name' => 'ပင်စင်ယူသည့်ရက်စွဲ'],
 
                     ]" />
             </li>
@@ -117,80 +118,91 @@
                         </svg>
                     '
                     :lists="[
-                        ['route_name' => 'foreign_training_report', 'name' => 'foreign_training_report'],
-                        ['route_name' => 'foreign_gone_total', 'name' => 'foreign_gone_total'],
+                        ['route_name' => 'foreign_training_report', 'name' => 'တတ်‌ရောက်ခဲ့သည့်သင်တန်း'],
+                        ['route_name' => 'foreign_gone_total', 'name' => 'နိုင်ငံခြားသွားရောက်ခဲ့သောအကြိမ်ရေစုစုပေါင်းနှင့်အကြောင်းအရာ'],
                         ['route_name' => 'report1', 'name' => 'report1'],
                         ['route_name' => 'report2', 'name' => 'report2'],
                         ['route_name' => 'report3', 'name' => 'report3'],
                         ['route_name' => 'report4', 'name' => 'report4'],
-                        ['route_name' => 'pension_report', 'name' => 'pension_report'],
-                        ['route_name' => 'een', 'name' => 'een'],
+                        ['route_name' => 'een', 'name' => 'သင်တန်းတက်ရောက်ရန်အတွက် အဆိုပြုသင်တန်းသား အမည်စာရင်း'],
 
                     ]" />
             </li>
             <li>
-                <livewire:side-nav-drop-down label="Staff List"
+                <livewire:side-nav-drop-down label="ဝန်ထမ်းအင်အားစာရင်း"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
                             <path fill-rule="evenodd" d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 0 1-.517.608 7.45 7.45 0 0 0-.478.198.798.798 0 0 1-.796-.064l-.453-.324a1.875 1.875 0 0 0-2.416.2l-.243.243a1.875 1.875 0 0 0-.2 2.416l.324.453a.798.798 0 0 1 .064.796 7.448 7.448 0 0 0-.198.478.798.798 0 0 1-.608.517l-.55.092a1.875 1.875 0 0 0-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 0 1-.064.796l-.324.453a1.875 1.875 0 0 0 .2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 0 1 .796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 0 1 .517-.608 7.52 7.52 0 0 0 .478-.198.798.798 0 0 1 .796.064l.453.324a1.875 1.875 0 0 0 2.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 0 1-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 0 0 1.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 0 1-.608-.517 7.507 7.507 0 0 0-.198-.478.798.798 0 0 1 .064-.796l.324-.453a1.875 1.875 0 0 0-.2-2.416l-.243-.243a1.875 1.875 0 0 0-2.416-.2l-.453.324a.798.798 0 0 1-.796.064 7.462 7.462 0 0 0-.478-.198.798.798 0 0 1-.517-.608l-.091-.55a1.875 1.875 0 0 0-1.85-1.566h-.344ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clip-rule="evenodd" />
                         </svg>
                     '
                     :lists="[
-                        ['route_name' => 'staff_list1', 'name' => 'staff_list1'],
-                        ['route_name' => 'staff_list3', 'name' => 'staff_list3'],
-                        ['route_name' => 'staff_list4', 'name' => 'staff_list4'],
-                        ['route_name' => 'staff_progeny', 'name' => 'staff_progeny'],
-                        ['route_name' => 'staff_list5', 'name' => 'staff_list5'],
-                        ['route_name' => 'blood_staff_list6', 'name' => 'blood_staff_list6'],
-                        ['route_name' => 'we10over_staff_list', 'name' => 'we10over_staff_list'],
-                        ['route_name' => 'age18over_staff_list', 'name' => 'age18over_staff_list'],
-                        ['route_name' => 'planning_accounting', 'name' => 'planning_accounting'],
+                        ['route_name' => 'staff_list1', 'name' => 'ဝန်ထမ်းအင်အားစာရင်း(တိုင်းဒေသကြီး/ပြည်နယ်)'],
+                        ['route_name' => 'staff_list3', 'name' => 'ဝန်ထမ်းအင်အားစာရင်းအချုပ်'],
+                        ['route_name' => 'staff_list4', 'name' => 'စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲ ဝန်ထမ်းအင်အားစာရင်း'],
+                        ['route_name' => 'staff_progeny', 'name' => 'စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲ(၁)'],
+                        ['route_name' => 'staff_list5', 'name' => 'စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲ(၂)'],
+                        ['route_name' => 'blood_staff_list6', 'name' => 'သွေးအုပ်စုAရှိသောဝန်ထမ်းစာရင်း'],
+                        ['route_name' => 'we10over_staff_list', 'name' => 'လုပ်သက်၁၀နှစ် နှင့်အထက်ရှိသောဝန်ထမ်းဦး‌ရေစာရင်း'],
+                        ['route_name' => 'age18over_staff_list', 'name' => 'အသက်၁၈နှစ်နှင့်အထက်ရှိသောဝန်ထမ်းဦးရေ'],
+                        ['route_name' => 'planning_accounting', 'name' => 'စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲဝန်ထမ်းအင်အားစာရင်း'],
+                    ]" />
+            </li>
+            
+            <li>
+                <livewire:side-nav-drop-down label="ဝန်ထမ်းရေးရာ"
+                    icon='
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow- group-hover:text-yellow-500">
+                            <path fill-rule="evenodd" d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 0 1-.517.608 7.45 7.45 0 0 0-.478.198.798.798 0 0 1-.796-.064l-.453-.324a1.875 1.875 0 0 0-2.416.2l-.243.243a1.875 1.875 0 0 0-.2 2.416l.324.453a.798.798 0 0 1 .064.796 7.448 7.448 0 0 0-.198.478.798.798 0 0 1-.608.517l-.55.092a1.875 1.875 0 0 0-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 0 1-.064.796l-.324.453a1.875 1.875 0 0 0 .2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 0 1 .796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 0 1 .517-.608 7.52 7.52 0 0 0 .478-.198.798.798 0 0 1 .796.064l.453.324a1.875 1.875 0 0 0 2.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 0 1-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 0 0 1.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 0 1-.608-.517 7.507 7.507 0 0 0-.198-.478.798.798 0 0 1 .064-.796l.324-.453a1.875 1.875 0 0 0-.2-2.416l-.243-.243a1.875 1.875 0 0 0-2.416-.2l-.453.324a.798.798 0 0 1-.796.064 7.462 7.462 0 0 0-.478-.198.798.798 0 0 1-.517-.608l-.091-.55a1.875 1.875 0 0 0-1.85-1.566h-.344ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clip-rule="evenodd" />
+                        </svg>
+                    '
+                    :lists="[
+                        ['route_name' => 'staff_salary', 'name' => 'ဝန်ထမ်းအင်အား နှင့် လစာထုတ်ပေးမှုအခြေအနေ'],
+                        ['route_name' => 'permanent_staff', 'name' => 'အမြဲတမ်းဝန်ထမ်းအင်အားစာရင်း'],
                     ]" />
             </li>
             <li>
-                <livewire:side-nav-drop-down label="Staff Salary List"
+                <livewire:side-nav-drop-down label="ငွေစာရင်း"
                     icon='
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow- group-hover:text-yellow-500">
                             <path fill-rule="evenodd" d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 0 1-.517.608 7.45 7.45 0 0 0-.478.198.798.798 0 0 1-.796-.064l-.453-.324a1.875 1.875 0 0 0-2.416.2l-.243.243a1.875 1.875 0 0 0-.2 2.416l.324.453a.798.798 0 0 1 .064.796 7.448 7.448 0 0 0-.198.478.798.798 0 0 1-.608.517l-.55.092a1.875 1.875 0 0 0-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 0 1-.064.796l-.324.453a1.875 1.875 0 0 0 .2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 0 1 .796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 0 1 .517-.608 7.52 7.52 0 0 0 .478-.198.798.798 0 0 1 .796.064l.453.324a1.875 1.875 0 0 0 2.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 0 1-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 0 0 1.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 0 1-.608-.517 7.507 7.507 0 0 0-.198-.478.798.798 0 0 1 .064-.796l.324-.453a1.875 1.875 0 0 0-.2-2.416l-.243-.243a1.875 1.875 0 0 0-2.416-.2l-.453.324a.798.798 0 0 1-.796.064 7.462 7.462 0 0 0-.478-.198.798.798 0 0 1-.517-.608l-.091-.55a1.875 1.875 0 0 0-1.85-1.566h-.344ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clip-rule="evenodd" />
                         </svg>
                     '
                     :lists="[
-                        ['route_name' => 'staff_salary', 'name' => 'staff_salary'],
-                        ['route_name' => 'staff_salary_list', 'name' => 'staff_salary_list'],
-                        ['route_name' => 'staff_salary_list2', 'name' => 'staff_salary_list2'],
-                        ['route_name' => 'staff_salary_list3', 'name' => 'staff_salary_list3'],
-                        ['route_name' => 'staff_salary_list4', 'name' => 'staff_salary_list4'],
-                        ['route_name' => 'march_salary_list', 'name' => 'march_salary_list'],
-                        ['route_name' => 'october_salary_list', 'name' => 'october_salary_list'],
-                        ['route_name' => 'rank_salary_list', 'name' => 'rank_salary_list'],
-                        ['route_name' => 'permanent_staff', 'name' => 'permanent_staff'],
-                        ['route_name' => 'yangon_office_staff', 'name' => 'yangon_office_staff'],
-                        ['route_name' => 'yangon_office_staff2', 'name' => 'yangon_office_staff2'],
-                        ['route_name' => 'january_salary_list', 'name' => 'january_salary_list'],
-                        ['route_name' => 'april_salary_list', 'name' => 'april_salary_list'],
-                        ['route_name' => 'payscale_list', 'name' => 'payscale_list'],
-                        ['route_name' => 'salary_list', 'name' => 'salary_list'],
-                        ['route_name' => 'no_salary_leave', 'name' => 'no_salary_leave'],
-                        ['route_name' => 'started_salary_list', 'name' => 'started_salary_list'],
-                        ['route_name' => 'finance_salary_list', 'name' => 'finance_salary_list'],
-                        ['route_name' => 'yangon_staff_april_salary_list', 'name' => 'YangonStaffAprilSalaryList'],
-                        ['route_name' => 'finance_year_salary_list', 'name' => 'FinanceYearSalaryList'],
+                       
+                        ['route_name' => 'staff_salary_list', 'name' => 'လစာစရိတ်စာရင်းချုပ်(၁)'],
+                        ['route_name' => 'staff_salary_list2', 'name' => 'လစာစရိတ်စာရင်းချုပ်(၂)'],
+                        ['route_name' => 'staff_salary_list3', 'name' => 'လစာစရိတ်စာရင်းချုပ်(၃)'],
+                        ['route_name' => 'staff_salary_list4', 'name' => 'လစာစရိတ်စာရင်းချုပ်(၄)'],
+                        ['route_name' => 'march_salary_list', 'name' => 'လစာညှိနှိုင်း(ရာထူးတိုး)'],
+                        ['route_name' => 'october_salary_list', 'name' => 'လစာညှိနှိုင်း(နှစ်တိုး)'],
+                        ['route_name' => 'rank_salary_list', 'name' => 'ရာထူးအလိုက်လစာနှုန်းထားစာရင်း'],
+                        ['route_name' => 'yangon_office_staff', 'name' => 'လစာစာရင်း(၁)'],
+                        ['route_name' => 'yangon_office_staff2', 'name' => 'လစာစာရင်း(၂)'],
+                        ['route_name' => 'january_salary_list', 'name' => 'လစာစာရင်း(၃)'],
+                        ['route_name' => 'april_salary_list', 'name' => 'ရန်ကုန်ရုံးချုပ်ရှိဝန်ထမ်းများ၏ဧပြီလစာရင်း'],
+                        ['route_name' => 'payscale_list', 'name' => 'လစာအပေါ်ဝင်ငွေခွန်တွက်ချက်မှုပုံစံ'],
+                        ['route_name' => 'salary_list', 'name' => 'ပျှမ်းမျှလစာတွက်ချက်မှုဇယား'],
+                        ['route_name' => 'no_salary_leave', 'name' => 'လစာမဲ့ ခွင့်လစာ တွက်ချက်မှုဇယား'],
+                        ['route_name' => 'started_salary_list', 'name' => 'စတင်ခန့်ထားသည့်ဝန်ထမ်းများ၏လစာတွက်ချက်မှု'],
+                        ['route_name' => 'finance_salary_list', 'name' => 'ဘဏ္ဍာရေးနှစ်အတွက် လစာငွေထုတ်ယူမည့် စာရင်း'],
+                        ['route_name' => 'yangon_staff_april_salary_list', 'name' => 'ရန်ကုန် ရန်ကုန်ရုံးချုပ်ရှိဝန်ထမ်းများ၏ဧပြီလစာရင်း'],
+                        ['route_name' => 'finance_year_salary_list', 'name' => 'ဘဏ္ဍာရေးနှစ်လစာ'],
                         ['route_name' => 'information_list', 'name' => 'InformationList'],
                         ['route_name' => 'last_pay_certificate', 'name' => 'LastPayCertificate'],
-                        ['route_name' => 'detail_staff_salary', 'name' => 'DetailStaffSalary'],
+                        ['route_name' => 'detail_staff_salary', 'name' => 'ဝန်ထမ်းများ၏ လစာငွေတောင်းခံလွှာ'],
 
                     ]" />
             </li>
             <li>
-                <livewire:side-nav-drop-down label="Leave Staff"
+                <livewire:side-nav-drop-down label="ခွင့်ယူသည့်ဝန်ထမ်းစာရင်း"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
                             <path fill-rule="evenodd" d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 0 1-.517.608 7.45 7.45 0 0 0-.478.198.798.798 0 0 1-.796-.064l-.453-.324a1.875 1.875 0 0 0-2.416.2l-.243.243a1.875 1.875 0 0 0-.2 2.416l.324.453a.798.798 0 0 1 .064.796 7.448 7.448 0 0 0-.198.478.798.798 0 0 1-.608.517l-.55.092a1.875 1.875 0 0 0-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 0 1-.064.796l-.324.453a1.875 1.875 0 0 0 .2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 0 1 .796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 0 1 .517-.608 7.52 7.52 0 0 0 .478-.198.798.798 0 0 1 .796.064l.453.324a1.875 1.875 0 0 0 2.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 0 1-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 0 0 1.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 0 1-.608-.517 7.507 7.507 0 0 0-.198-.478.798.798 0 0 1 .064-.796l.324-.453a1.875 1.875 0 0 0-.2-2.416l-.243-.243a1.875 1.875 0 0 0-2.416-.2l-.453.324a.798.798 0 0 1-.796.064 7.462 7.462 0 0 0-.478-.198.798.798 0 0 1-.517-.608l-.091-.55a1.875 1.875 0 0 0-1.85-1.566h-.344ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clip-rule="evenodd" />
                         </svg>
                     '
                     :lists="[
-                        ['route_name' => 'leaves', 'name' => 'leaves'],
-                        ['route_name' => 'leaves2', 'name' => 'leaves2'],
+                        ['route_name' => 'leaves', 'name' => 'ခွင့်ခံစားမှုအရေအတွက်နှင့်ရာခိုင်နှုန်း'],
+                        ['route_name' => 'leaves2', 'name' => 'ခွင့်ခံစားမှု အနည်းအများအလိုက် ရာခိုင်နှုန်းဇယား'],
                     ]" />
             </li>
 
@@ -202,15 +214,15 @@
                         </svg>
                     '
                     :lists="[
-                        ['route_name' => 'employee_record_report', 'name' => 'employee_record_report'],
-                        ['route_name' => 'religion_report', 'name' => 'religion_report'],
-                        ['route_name' => 'language_report', 'name' => 'language_report'],
-                        ['route_name' => 'social_report', 'name' => 'social_report'],
-                        ['route_name' => 'award_report', 'name' => 'award_report'],
-                        ['route_name' => 'foreign_report', 'name' => 'foreign_report'],
-                        ['route_name' => 'education_report', 'name' => 'education_report'],
-                        ['route_name' => 'other_qualification_report', 'name' => 'other_qualification_report'],
-                        ['route_name' => 'punishment_report', 'name' => 'punishment_report'],
+                        ['route_name' => 'employee_record_report', 'name' => 'နှုတ်ထွက်သည့်စာရင်း'],
+                        ['route_name' => 'religion_report', 'name' => 'ဘာသာရေး'],
+                        ['route_name' => 'language_report', 'name' => 'ဘာသာစကား'],
+                        ['route_name' => 'social_report', 'name' => 'လူမှုရေး'],
+                        ['route_name' => 'award_report', 'name' => 'ဆုတံဆိပ်'],
+                        ['route_name' => 'foreign_report', 'name' => 'သွားရောက်ခဲ့သည့်နိုင်ငံ'],
+                        ['route_name' => 'education_report', 'name' => 'ပညာရေး'],
+                        ['route_name' => 'other_qualification_report', 'name' => 'ရရှိသောဒီပလိုမာ/ဘွဲ့'],
+                        ['route_name' => 'punishment_report', 'name' => 'ပြစ်ဒဏ်'],
                     ]" />
             </li>
 

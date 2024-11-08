@@ -56,7 +56,7 @@
                     @foreach ($months as $YearMonth)
                             
                     <td class="border border-black text-center p-2">
-                        {{$this->leaveCount($division->id, $YearMonth )}}
+                        {{en2mm($this->leaveCount($division->id, $YearMonth ))}}
                     </td>
 
 
@@ -71,7 +71,7 @@
 
                         }
                                 @endphp
-                        {{$totalLeaveCount}}
+                        {{en2mm($totalLeaveCount)}}
                     </td>
                 </tr>
                    @endforeach

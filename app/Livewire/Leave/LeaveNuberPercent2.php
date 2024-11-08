@@ -76,11 +76,11 @@ class LeaveNuberPercent2 extends Component
             $totalLeaveCount = 0;
             foreach ($this->months as $YearMonth) {
                 $leaveCount = $this->leaveCount($division->id, $YearMonth);
-                $table->addCell(2000)->addText($leaveCount);
+                $table->addCell(2000)->addText(en2mm($leaveCount));
                 $totalLeaveCount += $leaveCount;
             }
 
-            $table->addCell(2000)->addText($totalLeaveCount);
+            $table->addCell(2000)->addText(en2mm($totalLeaveCount));
         }
 
         // Save the Word file to the output

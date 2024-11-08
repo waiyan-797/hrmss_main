@@ -142,8 +142,6 @@ class StaffList2 extends Component
             $table->addCell(2000)->addText( en2mm($total_points) ); // Current Rank
             
 
-            $table->addCell(2000)->addText(''); 
-
 
 
 

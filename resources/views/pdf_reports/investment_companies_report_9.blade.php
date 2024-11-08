@@ -101,18 +101,25 @@
                             <td>(ဈ)</td>
                             <td>(ည)</td>
                         </tr>
+                        @foreach($staffs as $staff)
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $loop->index+1}}</td>
+                            <td>{{ $staff->name}}၊{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</td>
+                            <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
+                            <td>{{ $staff->current_rank?->name}}၊{{ $staff->payscale?->name}}၊{{ $staff->current_salary}}</td>
+                            <td>{{en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</td>
+                            <td>{{ $staff->lost_contact_from_date}}</td>
+                            <td>{{ $staff->retire_date}}</td>
+                            <td>
+                                  @php
+                                $join_date = Carbon\Carbon::parse($staff->join_date);
+                                $join_date_duration = $join_date->diff(Carbon\Carbon::now());
+                            @endphp
+                            {{formatPeriodMM($join_date_duration->y, $join_date_duration->m, $join_date_duration->d)}}</td>
+                            <td>{{ $staff->retire_remark}}</td>
                             <td></td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

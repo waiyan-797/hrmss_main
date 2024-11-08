@@ -92,273 +92,204 @@
             </thead>
             <tbody>
                 @php
-                        $totalBaseSalaryHigh = 0;
-                        $totalIncrementHigh = 0;
-                        $totalDeductionHigh = 0;
-                        $totalFinalSalaryHigh = 0;
-                        $deductionTaxHigh = 0;
-                        $deductionInsuranceHigh = 0;
-                        $deductionHigh = 0;
-                        $totalSalaryHigh = 0;
-                        $additionHigh = 0;
-                        $totalSalaryAdditionHigh = 0;
-                    @endphp
-                    @foreach ($high_staffs as $staff)
-                        <tr>
-                            <td>{{ $loop->index + 1 }}</td>
-                            <td>{{ $staff->name }}</td>
-                            <td>{{ $staff->current_division->nick_name }}</td>
-                            <td>{{ $staff->current_rank->name }}</td>
-                            <td>{{ en2mm($staff->currentRank->payscale->min_salary) }}
-                            </td>
+                            $totalBaseSalaryHigh = 0;
+                            $totalDeductionHigh = 0;
+                            $totalFinalSalaryHigh = 0;
+                            $deductionTaxHigh = 0;
+                            $deductionInsuranceHigh = 0;
+                            $deductionHigh = 0;
+                            $totalSalaryHigh = 0;
+                            $additionHigh = 0;
+                            $totalSalaryAdditionHigh = 0;
+                        @endphp
+                        @foreach ($high_staffs as $staff)
                             @php
-                                $dateDifference = 0;
-                            @endphp
+                                $baseSalary = $staff->currentRank->payscale->min_salary;
+                                $totalBaseSalaryHigh += $baseSalary;
 
-                            @foreach ($leaves as $leave)
-                                @if ($leave->leave_type_id === 1)
-                                    @php
+                                $leaveDeduction = 0;
+                                $dateDifference = 0;
+                                foreach ($staff->leaves as $leave) {
+                                    if ($leave->leave_type_id === 1) {
                                         $fromDate = \Carbon\Carbon::parse($leave->from_date);
                                         $toDate = \Carbon\Carbon::parse($leave->to_date);
                                         $dateDifference = $fromDate->diffInDays($toDate) + 1;
-                                    @endphp
-                                @endif
-                            @endforeach
+                                        $leaveDeduction = ($staff->current_salary / 30) * $dateDifference;
+                                    }
+                                }
+                                $totalDeductionHigh += $leaveDeduction;
+                                $netSalary = $baseSalary - $leaveDeduction;
 
-                            <td>
-                                {{ en2mm(($staff->current_salary / 30) * $dateDifference) }}
-                            </td>
-                            <td>
-                                {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference) }}
-                            </td>
+                                $staffSalaries = $salaries->where('staff_id', $staff->id);
+                                $deductionTax = $staffSalaries->sum('deduction_tax');
+                                $deductionInsurance = $staffSalaries->sum('deduction_insurance');
+                                $deductionOther = $staffSalaries->sum('deduction');
+                                $addition = $staffSalaries->sum('addition');
 
-                            @php
-                                $staffSalaries = $salaries->filter(fn($salary) => $salary->staff_id === $staff->id);
-                                $totalDeductionTaxHigh = $staffSalaries->sum('deduction_tax');
-                                $totalDeductionInsuranceHigh = $staffSalaries->sum('deduction_insurance');
-                                $totalDeductionHigh = $staffSalaries->sum('deduction');
-                                $totalAdditionHigh = $staffSalaries->sum('addition');
-                                $totalSalaryHigh += $staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference - $totalDeductionTaxHigh - $totalDeductionInsuranceHigh - $totalDeductionHigh;
+                                $deductionTaxHigh += $deductionTax;
+                                $deductionInsuranceHigh += $deductionInsurance;
+                                $deductionHigh += $deductionOther;
+                                $additionHigh += $addition;
+
+                                $finalSalary = $netSalary - $deductionTax - $deductionInsurance - $deductionOther;
+                                $totalWithAddition = $finalSalary + $addition;
+                                $totalFinalSalaryHigh += $netSalary;
+                                $totalSalaryHigh += $finalSalary;
+                                $totalSalaryAdditionHigh += $totalWithAddition;
+
                             @endphp
 
-                            <td>
-                                {{ en2mm($totalDeductionTaxHigh) }}
-                            </td>
-                            <td>
-                                {{ en2mm($totalDeductionInsuranceHigh) }}
-                            </td>
-                            <td>
-                                {{ en2mm($totalDeductionHigh) }}
-                            </td>
-                            <td>
-                                {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference - $totalDeductionTaxHigh - $totalDeductionInsuranceHigh - $totalDeductionHigh) }}
-                            </td>
 
-                            <td>
-                                {{ en2mm($totalAdditionHigh) }}
-                            </td>
-                            <td>
-                                {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference - $totalDeductionTaxHigh - $totalDeductionInsuranceHigh - $totalDeductionHigh + $totalAdditionHigh) }}
-                            </td>
+                            <tr>
+                                <td>{{ $loop->index + 1 }}</td>
+                                <td>{{ $staff->name }}</td>
+                                <td>{{ $staff->current_division->nick_name }}</td>
+                                <td>{{ $staff->current_rank->name }}</td>
+                                <td>{{ en2mm($baseSalary) }}
+                                </td>
+                                <td>
+                                    {{ en2mm($leaveDeduction) }}
+                                </td>
+                                <td>
+                                    {{ en2mm($netSalary) }}
+                                </td>
+                                <td>{{ en2mm($deductionTax) }}</td>
+                                <td>{{ en2mm($deductionInsurance) }}</td>
+                                <td>{{ en2mm($deductionOther) }}</td>
+                                
 
+                                <td>{{ en2mm($finalSalary) }}</td>
+                                <td>{{ en2mm($addition) }}
+
+                                </td>
+
+                                <td>{{ en2mm($totalWithAddition) }}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        @endforeach
+
+
+
+                        {{-- Totals for High Staff --}}
+                        <tr class="font-bold">
+                            <td></td>
+                            <td>အရာထမ်းစုစုပေါင်း</td>
+                            <td>-</td>
+                            <td>{{ en2mm($high_staffs->count()) }}</td>
+                            <td>{{ en2mm($totalBaseSalaryHigh) }}</td>
+                            <td>{{ en2mm($totalDeductionHigh) }}</td>
+                            <td>{{ en2mm($totalFinalSalaryHigh) }}</td>
+                            <td>{{ en2mm($deductionTaxHigh) }}</td>
+                            <td>{{ en2mm($deductionInsuranceHigh) }}</td>
+                            <td>{{ en2mm($deductionHigh) }}</td>
+
+                            <td>{{ en2mm($totalSalaryHigh) }}</td>
+                            <td>{{ en2mm($additionHigh) }}</td>
+                            <td>{{ en2mm($totalSalaryAdditionHigh) }}</td>
                             <td></td>
                             <td></td>
                         </tr>
-                    @endforeach
-
-                    @foreach ($high_staffs as $staff)
-                        @php
-                            $baseSalary = $staff->currentRank->payscale->min_salary;
-                            $increment = $staff->currentRank->payscale->increment * $staff->current_increment_time;
-                            $currentSalary = $baseSalary + $increment;
-                            $totalBaseSalaryHigh += $baseSalary;
-                            $totalIncrementHigh += $increment;
-                            $leaveDeduction = 0;
-                            $dateDifference = 0;
-                        @endphp
-
-                        @foreach ($leaves as $leave)
-                            @if ($leave->leave_type_id === 1)
-                                @php
-                                    $fromDate = \Carbon\Carbon::parse($leave->from_date);
-                                    $toDate = \Carbon\Carbon::parse($leave->to_date);
-                                    $dateDifference = $fromDate->diffInDays($toDate) + 1;
-                                    $leaveDeduction = ($staff->current_salary / 30) * $dateDifference;
-                                    $totalDeductionHigh += $leaveDeduction;
-                                @endphp
-                            @endif
-                        @endforeach
 
                         @php
-                            $netSalary = $currentSalary - $leaveDeduction;
-                            $totalFinalSalaryHigh += $netSalary;
+                            $totalBaseSalaryLow = 0;
+                            $totalDeductionLow = 0;
+                            $totalFinalSalaryLow = 0;
+                            $deductionTaxLow = 0;
+                            $deductionInsuranceLow = 0;
+                            $deductionLow = 0;
+                            $totalSalaryLow = 0;
+                            $additionLow = 0;
+                            $totalSalaryAdditionLow = 0;
                         @endphp
-
-                        @foreach ($salaries as $salary)
-                            @if ($salary->staff_id === $staff->id)
-                                @php
-                                    $deductionTaxHigh += $salary->deduction_tax;
-                                    $deductionInsuranceHigh += $salary->deduction_insurance;
-                                    $deductionHigh += $salary->deduction;
-                                    $additionHigh += $salary->addition;
-                                    $totalSalaryAdditionHigh += $totalSalaryHigh + $additionHigh;
-                                @endphp
-                            @endif
-                        @endforeach
-                    @endforeach
-
-                    {{-- Totals for High Staff --}}
-                    <tr class="font-bold">
-                        <td></td>
-                        <td>အရာထမ်းစုစုပေါင်း</td>
-                        <td>-</td>
-                        <td>{{ en2mm($high_staffs->count()) }}</td>
-                        <td>{{ en2mm($totalBaseSalaryHigh) }}</td>
-                        <td>{{ en2mm($totalDeductionHigh) }}</td>
-                        <td>{{ en2mm($totalFinalSalaryHigh) }}</td>
-                        <td>{{ en2mm($deductionTaxHigh) }}</td>
-                        <td>{{ en2mm($deductionInsuranceHigh) }}</td>
-                        <td>{{ en2mm($deductionHigh) }}</td>
-                        <td>{{ en2mm($totalSalaryHigh) }}</td>
-                        <td>{{ en2mm($additionHigh) }}</td>
-                        <td>{{ en2mm($totalSalaryAdditionHigh) }}</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    @php
-                        $totalBaseSalaryLow = 0;
-                        $totalIncrementLow = 0;
-                        $totalDeductionLow = 0;
-                        $totalFinalSalaryLow = 0;
-                        $deductionTaxLow = 0;
-                        $deductionInsuranceLow = 0;
-                        $deductionLow = 0;
-                        $totalSalaryLow = 0;
-                        $additionLow = 0;
-                        $totalSalaryAdditionLow = 0;
-                    @endphp
-                    @foreach ($low_staffs as $staff)
-                        <tr>
-                            <td>{{ $loop->index + 1 }}</td>
-                            <td>{{ $staff->name }}</td>
-                            <td>{{ $staff->current_division->nick_name }}</td>
-                            <td>{{ $staff->current_rank->name }}</td>
-                            <td>{{ en2mm($staff->currentRank->payscale->min_salary) }}
-                            </td>
+                        @foreach ($low_staffs as $staff)
                             @php
-                                $dateDifference = 0;
-                            @endphp
+                                $baseSalary = $staff->currentRank->payscale->min_salary;
+                                $totalBaseSalaryLow += $baseSalary;
 
-                            @foreach ($leaves as $leave)
-                                @if ($leave->leave_type_id === 1)
-                                    @php
+                                $leaveDeduction = 0;
+                                $dateDifference = 0;
+                                foreach ($staff->leaves as $leave) {
+                                    if ($leave->leave_type_id === 1) {
                                         $fromDate = \Carbon\Carbon::parse($leave->from_date);
                                         $toDate = \Carbon\Carbon::parse($leave->to_date);
                                         $dateDifference = $fromDate->diffInDays($toDate) + 1;
-                                    @endphp
-                                @endif
-                            @endforeach
+                                        $leaveDeduction = ($staff->current_salary / 30) * $dateDifference;
+                                    }
+                                }
+                                $totalDeductionLow += $leaveDeduction;
+                                $netSalary = $baseSalary - $leaveDeduction;
 
-                            <td>
-                                {{ en2mm(($staff->current_salary / 30) * $dateDifference) }}
-                            </td>
-                            <td>
-                                {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference) }}
-                            </td>
+                                $staffSalaries = $salaries->where('staff_id', $staff->id);
+                                $deductionTax = $staffSalaries->sum('deduction_tax');
+                                $deductionInsurance = $staffSalaries->sum('deduction_insurance');
+                                $deductionOther = $staffSalaries->sum('deduction');
+                                $addition = $staffSalaries->sum('addition');
 
-                            @php
-                                $staffSalaries = $salaries->filter(fn($salary) => $salary->staff_id === $staff->id);
-                                $totalDeductionTaxLow = $staffSalaries->sum('deduction_tax');
-                                $totalDeductionInsuranceLow = $staffSalaries->sum('deduction_insurance');
-                                $totalDeductionLow = $staffSalaries->sum('deduction');
-                                $totalAdditionLow = $staffSalaries->sum('addition');
-                                $totalSalaryLow += $staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference - $totalDeductionTaxLow - $totalDeductionInsuranceLow - $totalDeductionLow;
+                                $deductionTaxLow += $deductionTax;
+                                $deductionInsuranceLow += $deductionInsurance;
+                                $deductionLow += $deductionOther;
+                                $additionLow += $addition;
+
+                                $finalSalary = $netSalary - $deductionTax - $deductionInsurance - $deductionOther;
+                                $totalWithAddition = $finalSalary + $addition;
+                                $totalFinalSalaryLow += $netSalary;
+                                $totalSalaryLow += $finalSalary;
+                                $totalSalaryAdditionLow += $totalWithAddition;
+
                             @endphp
 
-                            <td>
-                                {{ en2mm($totalDeductionTaxLow) }}
-                            </td>
-                            <td>
-                                {{ en2mm($totalDeductionInsuranceLow) }}
-                            </td>
-                            <td>
-                                {{ en2mm($totalDeductionLow) }}
-                            </td>
-                            <td>
-                                {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference - $totalDeductionTaxLow - $totalDeductionInsuranceLow - $totalDeductionLow) }}
-                            </td>
 
-                            <td>
-                                {{ en2mm($totalAdditionLow) }}
-                            </td>
-                            <td>
-                                {{ en2mm($staff->currentRank->payscale->min_salary + $staff->currentRank->payscale->increment * $staff->current_increment_time - ($staff->current_salary / 30) * $dateDifference - $totalDeductionTaxLow - $totalDeductionInsuranceLow - $totalDeductionLow + $totalAdditionLow) }}
-                            </td>
+                            <tr>
+                                <td>{{ $loop->index + 1 }}</td>
+                                <td>{{ $staff->name }}</td>
+                                <td>{{ $staff->current_division->nick_name }}</td>
+                                <td>{{ $staff->current_rank->name }}</td>
+                                <td>{{ en2mm($baseSalary) }}
+                                </td>
+                                <td>
+                                    {{ en2mm($leaveDeduction) }}
+                                </td>
+                                <td>
+                                    {{ en2mm($netSalary) }}
+                                </td>
+                                <td>{{ en2mm($deductionTax) }}</td>
+                                <td>{{ en2mm($deductionInsurance) }}</td>
+                                <td>{{ en2mm($deductionOther) }}</td>
+                                
 
+                                <td>{{ en2mm($finalSalary) }}</td>
+                                <td>{{ en2mm($addition) }}
+
+                                </td>
+
+                                <td>{{ en2mm($totalWithAddition) }}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        @endforeach
+
+
+
+                        {{-- Totals for High Staff --}}
+                        <tr class="font-bold">
+                            <td></td>
+                            <td>အမှုထမ်းစုစုပေါင်း</td>
+                            <td>-</td>
+                            <td>{{ en2mm($low_staffs->count()) }}</td>
+                            <td>{{ en2mm($totalBaseSalaryLow) }}</td>
+                            <td>{{ en2mm($totalDeductionLow) }}</td>
+                            <td>{{ en2mm($totalFinalSalaryLow) }}</td>
+                            <td>{{ en2mm($deductionTaxLow) }}</td>
+                            <td>{{ en2mm($deductionInsuranceLow) }}</td>
+                            <td>{{ en2mm($deductionLow) }}</td>
+
+                            <td>{{ en2mm($totalSalaryLow) }}</td>
+                            <td>{{ en2mm($additionLow) }}</td>
+                            <td>{{ en2mm($totalSalaryAdditionLow) }}</td>
                             <td></td>
                             <td></td>
                         </tr>
-                    @endforeach
-
-                    @foreach ($low_staffs as $staff)
-                        @php
-                            $baseSalary = $staff->currentRank->payscale->min_salary;
-                            $increment = $staff->currentRank->payscale->increment * $staff->current_increment_time;
-                            $currentSalary = $baseSalary + $increment;
-                            $totalBaseSalaryLow += $baseSalary;
-                            $totalIncrementLow += $increment;
-                            $leaveDeduction = 0;
-                            $dateDifference = 0;
-                        @endphp
-
-                        @foreach ($leaves as $leave)
-                            @if ($leave->leave_type_id === 1)
-                                @php
-                                    $fromDate = \Carbon\Carbon::parse($leave->from_date);
-                                    $toDate = \Carbon\Carbon::parse($leave->to_date);
-                                    $dateDifference = $fromDate->diffInDays($toDate) + 1;
-                                    $leaveDeduction = ($staff->current_salary / 30) * $dateDifference;
-                                    $totalDeductionLow += $leaveDeduction;
-                                @endphp
-                            @endif
-                        @endforeach
-
-                        @php
-                            $netSalary = $currentSalary - $leaveDeduction;
-                            $totalFinalSalaryLow += $netSalary;
-                        @endphp
-
-                        @foreach ($salaries as $salary)
-                            @if ($salary->staff_id === $staff->id)
-                                @php
-                                    $deductionTaxLow += $salary->deduction_tax;
-                                    $deductionInsuranceLow += $salary->deduction_insurance;
-                                    $deductionLow += $salary->deduction;
-                                    $additionLow += $salary->addition;
-                                    $totalSalaryAdditionLow += $totalSalaryLow + $additionLow;
-                                @endphp
-                            @endif
-                        @endforeach
-                    @endforeach
-
-                    {{-- Totals for High Staff --}}
-                    <tr class="font-bold">
-                        <td></td>
-                        <td>အမှုထမ်းစုစုပေါင်း</td>
-                        <td>-</td>
-                        <td>{{ en2mm($low_staffs->count()) }}</td>
-                        <td>{{ en2mm($totalBaseSalaryLow) }}</td>
-                        <td>{{ en2mm($totalDeductionLow) }}</td>
-                        <td>{{ en2mm($totalFinalSalaryLow) }}</td>
-                        <td>{{ en2mm($deductionTaxLow) }}</td>
-                        <td>{{ en2mm($deductionInsuranceLow) }}</td>
-                        <td>{{ en2mm($deductionLow) }}</td>
-                        <td>{{ en2mm($totalSalaryLow) }}</td>
-                        <td>{{ en2mm($additionLow) }}</td>
-                        <td>{{ en2mm($totalSalaryAdditionLow) }}</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
             </tbody>
         </table>
     </page>

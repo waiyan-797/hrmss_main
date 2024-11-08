@@ -61,6 +61,7 @@
                         <td class="border border-black text-center p-2">{{ en2mm($fourth_promotion_points) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_points) }}</td>
                     </tr>
+                 
                 </tbody>
             </table>
         </div>

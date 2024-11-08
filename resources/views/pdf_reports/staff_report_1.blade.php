@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>PDF Report 15</title>
+    <title>PDF Report 1</title>
     <style type="text/css">
         page{
             background: white;
@@ -95,19 +95,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    @foreach($staffs as $staff)
+                            <tr>
+                                <td>{{ $loop->index+1}}
+                                </td>
+                                <td>{{ $staff->name }}
+                                </td>
+                                <td>{{ $staff->current_rank?->name }}</td>
+                                <td>{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}
+                                </td>
+                                <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}
+                                </td>
+                                <td>{{ en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y')) }}</td>
+                                <td>{{ en2mm(\Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y')) }}</td>
+                                <td>{{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y'))}}</td>
+                                <td>{{ $staff->side_department->name }}</td>
+                                <td>@foreach ($staff->staff_educations as $edu)
+                                    <div class="mb-2">
+                                        <span class="font-semibold">{{ $edu->education_group->name }}</span> -
+                                        <span>{{ $edu->education_type->name }}</span>,
+                                        <span>{{ $edu->education->name }}</span>
+                                    </div>@endforeach</td>
+                                <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->year + $pension_year->year) }}</td>
+                            </tr>
+                            @endforeach
                 </tbody>
             </table>
         </div>
