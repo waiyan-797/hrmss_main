@@ -5,10 +5,9 @@
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
 
-             <h1 class="font-bold text-center text-sm mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့်
-                ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br> {{$staff?->gender_id ==  1 ? "ဦိး" : "ဒေါ်" }}    {{$staff?->name}}( {{$staff->currentRank?
-                ->name}} )  ၏<br> {{mmDateFormat($year, $month)}}
-                လစာစာရင်းညှိနှုင်းခြင်း။ ...</h1> 
+            <h1 class="font-bold text-center text-sm mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့်
+                ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br> {{$staff?->gender_id ==  1 ? "ဦိး" : "ဒေါ်" }}    {{$staff?->name}}( {{$staff?->currentRank?->name}} )  ၏<br> {{mmDateFormat($year, $month)}}
+                လစာစာရင်းညှိနှုင်းခြင်း။ ...</h1>
                 
 
 

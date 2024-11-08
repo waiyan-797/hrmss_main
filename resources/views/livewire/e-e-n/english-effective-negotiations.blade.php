@@ -48,7 +48,7 @@
                                 @endphp
                                 {{ $diff->y == 0 ? '' : en2mm($diff->y) .' နှစ်'}} {{ $diff->m == 0 ? '' : en2mm($diff->m) .' လ' }} {{ $diff->d == 0 ? '' : en2mm($diff->d) .' ရက်' }}
                             </td>
-                            <td class="border border-black text-center p-2">{{ $staff->current_division->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->current_division?->name }}</td>
                             <td class="border border-black text-center p-2"></td>
                         </tr>
                     @endforeach

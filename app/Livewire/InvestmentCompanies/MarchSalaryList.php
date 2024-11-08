@@ -16,6 +16,8 @@ class MarchSalaryList extends Component
     public $staff_id, $monthsSelect;
     public $staffs, $staff;
     public $year, $month;
+    public $totalPaidBeforePromotons;
+
     public function go_pdf()
     {
         $staffs = Staff::get();

@@ -314,12 +314,14 @@ class OctoberSalaryList extends Component
         } else {
             $this->staff = $this->staffs->first();
         }
+        $this->staffs = Staff::all();
+        $this->staff = $this->staffs->first();
 
         $daysCountBeforeIncrement = 0;
         $daysCountAfterIncrement = 0;
         $startDateOfMonth = Carbon::parse($this->monthSelect)->startOfMonth()->toDateString();
         $endtDateOfMonth = Carbon::parse($this->monthSelect)->endOfMonth()->toDateString();
-        $incrementedDate = $this->staff->increments->first()->increment_date;
+        $incrementedDate = $this->staff?->increments->first()->increment_date;
 
 
         //diff days 

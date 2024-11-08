@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-        @foreach($staffs as $staff)
+        {{-- @foreach($staffs as $staff)
           
                 <tr>
                     <td class="border border-black p-2 text-center">{{ $loop->index + 1 }}</td>
@@ -31,7 +31,7 @@
                     @endforeach
                 </tr>
             
-        @endforeach
+        @endforeach --}}
                 </tbody>
             </table>
         </div>
