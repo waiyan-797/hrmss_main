@@ -5,15 +5,13 @@
         <a href="{{ route('inbox') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
             Inbox
         </a>
-        <a href="{{ route('inbox') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
+        <a href="{{ route('resubmit') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
+            resubmit
+        </a>
+        <a href="{{ route('reject') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
             Inbox
         </a>
-        <a href="{{ route('inbox') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            Inbox
-        </a>
-        <a href="{{ route('inbox') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            Inbox
-        </a>
+        
         
     </div>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
