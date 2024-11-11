@@ -17,14 +17,12 @@ class PermanentStaff extends Component
 
     public function go_pdf()
     {
-
         [$year, $month, $day] = explode('-', $this->dateRange);
         $this->year = $year;
         $this->month = $month;
-        $this->day  = $day;
+        $this->day = $day;
 
         $staffs = Staff::get();
-
         $first_payscales = Payscale::where('staff_type_id', 1)->get();
         $second_payscales = Payscale::where('staff_type_id', 2)->get();
         $salaries = Salary::with('staff')->get();
@@ -38,7 +36,7 @@ class PermanentStaff extends Component
         $totalSalaryPaidStaff = Staff::where('salary_paid_by', 1)->count();
         $maximumBudget = 0;
         foreach ($allPayScales as $payscale) {
-            $budget = $payscale->min_salary  * $payscale->allowed_qty;
+            $budget = $payscale->min_salary * $payscale->allowed_qty;
             $maximumBudget += $budget;
         }
         $data = [
@@ -56,7 +54,7 @@ class PermanentStaff extends Component
             'year' => $this->year,
             'month' => $this->month,
             'day' => $this->day,
-            'dateRange' => $this->dateRange
+            'dateRange' => $this->dateRange,
         ];
         $pdf = PDF::loadView('pdf_reports.permanent_staff_report', $data);
         return response()->streamDownload(function () use ($pdf) {
@@ -75,22 +73,22 @@ class PermanentStaff extends Component
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
 
         $table->addRow();
-        $table->addCell(2000)->addText('စဥ်');
-        $table->addCell(2000)->addText('လစာနှုန်း');
+        $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်');
+        $table->addCell(2000, ['vMerge' => 'restart'])->addText('လစာနှုန်း');
         $table->addCell(6000, ['gridSpan' => 2, 'valign' => 'center'])->addText("၂၀၂၄-၂၀၂၅\n၂၀၂၄ အောက်တိုဘာ", ['alignment' => 'center']);
         $table->addCell(2000)->addText('၂၂-၁၀-၂၀၂၄ရက်နေ့တွင်အမှန်တကယ်ထုတ်ပေးရမည့်လစာငွေ(ကျပ်သန်း)');
         $table->addCell(2000)->addText('မှတ်ချက်');
 
-        // Add the second row with merged cells
+      
         $table->addRow();
-        $table->addCell(2000, ['vMerge' => 'continue']);
-        $table->addCell(2000, ['vMerge' => 'continue']);
-        $table->addCell(3000)->addText('ခွင့်ပြု');
+        $table->addCell(2000, ['vMerge' => 'restart']);
+        $table->addCell(2000, ['vMerge' => 'restart']);
+        $table->addCell(3000,['vMerge' => 'restart'])->addText('ခွင့်ပြု');
         $table->addCell(3000, ['gridSpan' => 3])->addText('ခန့်ပြီး');
-        $table->addCell(2000, ['vMerge' => 'continue']);
-        $table->addCell(2000, ['vMerge' => 'continue']);
+        $table->addCell(2000, ['vMerge' => 'restart']);
+        $table->addCell(2000, ['vMerge' => 'restart']);
 
-        // Add the third row with gender columns
+      
         $table->addRow();
         $table->addCell(2000, ['vMerge' => 'continue']);
         $table->addCell(2000, ['vMerge' => 'continue']);
@@ -98,8 +96,8 @@ class PermanentStaff extends Component
         $table->addCell(1000)->addText('ကျား', ['alignment' => 'center']);
         $table->addCell(1000)->addText('မ', ['alignment' => 'center']);
         $table->addCell(1000)->addText('ပေါင်း', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue']);
-        $table->addCell(2000, ['vMerge' => 'continue']);
+        $table->addCell(2000,['vMerge' => 'continue']);
+        $table->addCell(2000,['vMerge' => 'continue']);
 
         foreach ($first_payscales as $index => $payscale) {
             $maleStaffCount = $payscale->staff->where('gender_id', 1)->where('current_department_id', 1)->where('is_active', 1)->where('salary_paid_by', 1)->count();
@@ -170,17 +168,9 @@ class PermanentStaff extends Component
         $table->addCell()->addText();
         $table->addCell()->addText();
         $table->addCell()->addText();
-
-
-
-
-
-
         $tempFile = tempnam(sys_get_temp_dir(), 'word');
         $writer = IOFactory::createWriter($phpWord, 'Word2007');
         $writer->save($tempFile);
-
-
         return response()->download($tempFile, 'permanent_staff_report.docx')->deleteFileAfterSend(true);
     }
 

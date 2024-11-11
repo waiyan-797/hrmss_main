@@ -4,17 +4,17 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
-<input type="month" wire:model.live='filterRange'>
+            <input type="month" wire:model.live='filterRange'>
 
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">
                     ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-                <h3 class="font-semibold text-base mb-2 text-center">{{mmDateFormat($year,$month      )}} </h3>
+                <h3 class="font-semibold text-base mb-2 text-center">{{ mmDateFormat($year, $month) }} </h3>
                 <div class="w-full rounded-lg">
                     <table class="md:w-auto">
                         <thead>
                             <tr>
-                                
+
                                 <th rowspan="3" class="border border-black text-center p-2">ဌာန</th>
                                 <th colspan="3" class="border border-black text-center p-2">မူလအင်အား</th>
                                 <th colspan="9" class="border border-black text-center p-2">ပြုန်းတီးအင်အား</th>
@@ -59,21 +59,32 @@
                         </thead>
                         <tbody class="md:w-auto">
                             <tr>
-                                
-                                <td class="border border-black text-center p-2">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
+
+                                <td class="border border-black text-center p-2">
+                                    ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
                                 {{-- staff_type_id --}}
-                                <td class="border border-black text-center p-2">{{ en2mm($high_staffs) }}</td>  
+                                <td class="border border-black text-center p-2">{{ en2mm($high_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($low_staffs) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($high_staffs + $low_staffs) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($high_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($low_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($high_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($low_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($high_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($low_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($high_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($low_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($total_reduced_staffs->count()) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($high_staffs + $low_staffs) }}
+                                </td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($high_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($low_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($high_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($low_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($high_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($low_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($high_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($low_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($total_reduced_staffs->count()) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($high_new_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($low_new_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($total_new_staffs) }}</td>
@@ -82,35 +93,48 @@
                                 <td class="border border-black text-center p-2">{{ en2mm($total_leave_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($high_transfer_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($low_transfer_staffs) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($total_transfer_staffs) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($total_transfer_staffs) }}
+                                </td>
                                 <td class="border border-black text-center p-2">{{ en2mm($high_left_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($low_left_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($total_left_staffs) }}</td>
                             </tr>
                             <tr class="font-bold">
-                              
+
                                 <td class="border border-black text-center p-2"></td>
                                 <td class="border border-black text-center p-2">{{ en2mm($high_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($low_staffs) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($high_staffs + $low_staffs) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($high_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($low_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($high_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($low_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($high_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($low_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($high_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($low_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($total_reduced_staffs->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($high_staffs + $low_staffs) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($high_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($low_reduced_staffs->where('retire_type_id', 1)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($high_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($low_reduced_staffs->where('retire_type_id', 2)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($high_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($low_reduced_staffs->where('retire_type_id', 4)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($high_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($low_reduced_staffs->where('retire_type_id', 5)->count()) }}</td>
+                                <td class="border border-black text-center p-2">
+                                    {{ en2mm($total_reduced_staffs->count()) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($high_new_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($low_new_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($total_new_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($high_leave_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($low_leave_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($total_leave_staffs) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($high_transfer_staffs) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($high_transfer_staffs) }}
+                                </td>
                                 <td class="border border-black text-center p-2">{{ en2mm($low_transfer_staffs) }}</td>
-                                <td class="border border-black text-center p-2">{{ en2mm($total_transfer_staffs) }}</td>
+                                <td class="border border-black text-center p-2">{{ en2mm($total_transfer_staffs) }}
+                                </td>
                                 <td class="border border-black text-center p-2">{{ en2mm($high_left_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($low_left_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($total_left_staffs) }}</td>

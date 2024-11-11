@@ -318,7 +318,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/inbox' , Inbox::class )->name('inbox');
-    Route::get('/inbox' , Inbox::class )->name('resubmit');
+    Route::get('/resubmit' , Inbox::class )->name('resubmit');
     Route::get('/reject' , Inbox::class )->name('reject');
     // Route::get('/resubmitcls')
 });

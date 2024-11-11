@@ -34,10 +34,6 @@ class Retirement extends Component
         $family_pension_inheritor_relation_id,
 
         $relations;
-
-
-
-
     public function mount($staff_id)
     {
         $this->submit_form = 'submitForm';

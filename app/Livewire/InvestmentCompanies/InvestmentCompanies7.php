@@ -179,41 +179,6 @@ class InvestmentCompanies7 extends Component
         $table->addCell(2000, ['vMerge' => 'continue'])->addText('အရာရှိ', ['alignment' => 'center']);
         $table->addCell(2000, ['vMerge' => 'continue'])->addText('အခြား', ['alignment' => 'center']);
         $table->addCell(2000, ['vMerge' => 'continue'])->addText('ပေါင်း', ['alignment' => 'center']);
-
-        $table->addRow();
-        $table->addCell(2000, ['vMerge' => 'continue']);
-        $table->addCell(4000, ['vMerge' => 'continue']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('အရာရှိ', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('အခြား', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('ပေါင်း', ['alignment' => 'center']);
-
-        $table->addCell(1000)->addText('ရှိ', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ခြား', ['alignment' => 'center']);
-        $table->addCell(
-            1000
-        )->addText('ရှိ	', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ခြား', ['alignment' => 'center']);
-
-        $table->addCell(1000)->addText('ရှိ', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ခြား', ['alignment' => 'center']);
-
-        $table->addCell(1000)->addText('ရှိ	', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ခြား', ['alignment' => 'center']);
-        $table->addCell(2000)->addText('ပေါင်း', ['alignment' => 'center']);
-
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('အရာရှိ', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('အခြား', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('ပေါင်း', ['alignment' => 'center']);
-
-        $table->addCell(1000)->addText('ရှိ', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ခြား', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ပေါင်း', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ရှိ', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ခြား', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ပေါင်း', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('အရာရှိ', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('အခြား', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('ပေါင်း', ['alignment' => 'center']);
         $table->addRow();
         $table->addCell(2000)->addText('1');
         $table->addCell(4000)->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန');
