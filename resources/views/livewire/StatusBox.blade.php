@@ -1,16 +1,31 @@
 <div class="w-full">
     
 
+                 
+                  
     <div>
+     @if(   auth()->user()->AdminHR() )
         <a href="{{ route('inbox') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            Inbox
+            Inbox ဝန်ထမ်းစာရင်းအသစ်
         </a>
         <a href="{{ route('resubmit') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            resubmit
+            resubmit  //ဝန်ထမ်းစာရင်းပြန်ပြင်ပြီး 
         </a>
+
         <a href="{{ route('reject') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            Inbox
+            resubmit  //ဝန်ထမ်းစာရင်းပြန်ပြင်ခိုင်းထား
         </a>
+
+        @else
+        <a href="{{ route('reject') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
+            Rejct // ဝန်ထမ်းစာရင်းပြန်ပြင်ရန်
+        </a>
+
+        <a href="{{ route('resubmitted') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
+            Resubmitted //ဝန်ထမ်းစာရင်းပြန်ပြင်ထား
+        </a>
+
+        @endif 
         
         
     </div>

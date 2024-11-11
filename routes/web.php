@@ -128,6 +128,9 @@ use App\Livewire\Township\Township;
 use App\Livewire\Language;
 use App\Livewire\Leave\LeaveDate;
 use App\Livewire\Promotion as LivewirePromotion;
+use App\Livewire\Reject;
+use App\Livewire\ReSubmit;
+use App\Livewire\Resubmitted;
 use App\Livewire\Retirement;
 use App\Livewire\Salary;
 use App\Livewire\User;
@@ -318,9 +321,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/inbox' , Inbox::class )->name('inbox');
-    Route::get('/inbox' , Inbox::class )->name('resubmit');
-    Route::get('/reject' , Inbox::class )->name('reject');
-    // Route::get('/resubmitcls')
+    
+    Route::get('/reject' , Reject::class )->name('reject'); // to original uploader 
+    
+    Route::get('/resubmit' , ReSubmit::class )->name('resubmit'); // resubmit to check
+    Route::get('/resubmitted' , Resubmitted::class )->name('resubmitted'); // resubmit to check
+    Route::get('/saft-draft' , Staff::class )->name('saftdraft'); // resubmit to check
+    
+    
 });
 
 require __DIR__ . '/auth.php';

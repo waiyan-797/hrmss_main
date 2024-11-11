@@ -8,3 +8,10 @@ salary_paid_by
 similiarRank
 
 financeYearsalarylist
+
+
+safet draf 
+submit 
+reject 
+resbmitte 
+approve 
