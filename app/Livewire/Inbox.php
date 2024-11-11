@@ -23,6 +23,6 @@ public $inbox_search;
     public function render()
     {
 $staffs = Staff::where('status_id' , 3 )->paginate(5);
-        return view('livewire.inbox' , compact('staffs'));
+        return view('livewire.StatusBox' , compact('staffs'));
     }
 }
