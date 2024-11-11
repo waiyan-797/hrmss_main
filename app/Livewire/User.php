@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Division;
 use App\Models\Role;
 use App\Models\User as ModelsUser;
 use Livewire\Component;
@@ -11,6 +12,7 @@ class User extends Component
 {
 
     use WithPagination;
+    public $division_id;
     public $confirm_delete = false;
     public $confirm_edit = false;
     public $confirm_add = false;
@@ -24,7 +26,7 @@ class User extends Component
     public $roles;
     public $status;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
-
+public $divisions;
     public function rules()
     {
         return [
@@ -32,6 +34,10 @@ class User extends Component
             'email' => 'required|email|max:255|unique:users,email,' . $this->user_id,
             'role_id' => 'required|exists:roles,id',
         ];
+    }
+
+    public function mount(){
+        $this->divisions = Division::all();
     }
 
     public function render()
@@ -42,6 +48,7 @@ class User extends Component
         $this->cancel_action = 'close_modal';
         $this->submit_form = 'submitForm';
 
+            
         $userSearch = '%' . $this->user_search . '%';
         $userQuery = ModelsUser::query();
         if ($this->user_search) {
@@ -96,7 +103,8 @@ class User extends Component
             'name' => $this->user_name,
             'role_id' => $this->role_id,
             'password' => $this->password,
-            'email' => $this->email
+            'email' => $this->email ,
+            'division_id' => $this->division_id
         ]);
         $this->message = 'Created successfully.';
         $this->close_modal();
@@ -116,7 +124,7 @@ class User extends Component
         $this->user_name = $relation->name;
         $this->role_id = $relation->role_id;
         $this->status = $relation->status;
-
+        $this->division_id = $relation->division_id;
         $this->email = $relation->email;
     }
 
@@ -130,7 +138,9 @@ class User extends Component
             'role_id' => $this->role_id,
             'email' => $this->email,
             'password' => $this->password,
-            'status' => $this->status
+            'status' => $this->status ,
+            'division_id' => $this->division_id
+
 
         ]);
         $this->message = 'Updated successfully.';

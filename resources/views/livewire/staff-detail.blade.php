@@ -61,6 +61,9 @@
                     @endif
 
                     <div class="pb-5">
+                        
+                        <x-primary-button>{{ $confirm_add == 1 ? (auth()->user()->isFromYgnDiv() ? __('Submit') : __('apply')) : __('Update') }}</x-primary-button>
+
                         <x-primary-button>{{ $confirm_add == 1 ? __('Save') : __('Update') }}</x-primary-button>
                     </div>
                 </div>
