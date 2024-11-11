@@ -1038,8 +1038,11 @@ class StaffDetail extends Component
             'detail_personal_info' => $detail_personal_info,
             'default' => $personal_info,
         ];
+        
 
         $staff_create = $dataMapping[$this->tab] ?? $dataMapping['default'];
+        $staff_create['status_id' ]  = auth()->user()->AdminHR() ? 1 : 3 ; // approve : pending
+        // dd($staff_create)
         $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
         $this->staff_id = $staff->id;
         $this->staff_photo = $staff->staff_photo;
@@ -1481,6 +1484,8 @@ class StaffDetail extends Component
 
     public function add_new()
     {
+
+        
         $this->resetValidation();
         $this->reset(['staff_name', 'leave_type_name', 'from_date', 'to_date', 'qty', 'order_no', 'remark']);
         $this->confirm_add = true;
@@ -1545,5 +1550,13 @@ class StaffDetail extends Component
     {
         ModelsLeave::find($id)->delete();
         $this->confirm_delete = false;
+    }
+
+    public function rejectStaff(){
+        $staff = Staff::find($this->staff_id);
+        $staff->status_id = 2; //reject 
+        $staff->update();
+        $this->message = 'Staff has been rejected.';
+        return redirect()->route('inbox');
     }
 }

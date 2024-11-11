@@ -59,6 +59,7 @@ use App\Livewire\Division;
 use App\Livewire\TrainingType;
 use App\Livewire\EmployeeRecordReport\EmpoyeeRecordReport;
 use App\Livewire\FTR\ForeignGoneTotal;
+use App\Livewire\Inbox;
 use App\Livewire\Increment;
 use App\Livewire\InvestmentCompanies\AprilSalaryList;
 use App\Livewire\InvestmentCompanies\DetailStaffSalary;
@@ -314,6 +315,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'user_create',
         User::class
     )->name('user_create');
+
+
+    Route::get('/inbox' , Inbox::class )->name('inbox');
+    // Route::get('/resubmitcls')
 });
 
 require __DIR__ . '/auth.php';

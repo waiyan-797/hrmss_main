@@ -187,6 +187,9 @@ return new class extends Migration
             $table->text('family_pension_inheritor')->nullable();
             $table->foreignId('family_pension_inheritor_relation_id')->nullable()->constrained('relations')->onDelete('set null');
             $table->date('family_pension_date')->nullable();
+            $table->string('status_id')->nullable();
+            
+
             $table->timestamps();
         });
     }

@@ -50,10 +50,9 @@ class User extends Authenticatable
         return $this->belongsTo(Leave::class);
     }
     
-    public function isFromYgnDiv(){
-        return  $this->division->id == 23 ;
-    }
-
+public function AdminHR(){
+    return $this->role_id == 2; // admin hr 
+}
     public function division(){
         return $this->belongsTo(Division::class);
     }

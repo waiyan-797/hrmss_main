@@ -12,13 +12,13 @@ use Livewire\WithPagination;
 class Staff extends Component
 {
     use WithPagination;
-    public $confirm_delete = false;
-    public $confirm_edit = false;
-    public $confirm_add = false;
-    public $open_staff_report = false;
-    public $message = null;
-    public $staff_search, $staff_name, $staff_id = 0;
-    public $modal_title;
+        public $confirm_delete = false;
+        public $confirm_edit = false;
+        public $confirm_add = false;
+        public $open_staff_report = false;
+        public $message = null;
+        public $staff_search, $staff_name, $staff_id = 0;
+        public $modal_title;
 
     //add new
     public function add_new()

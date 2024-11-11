@@ -46,6 +46,8 @@ class DatabaseSeeder extends Seeder
             PostSeeder::class,
             MaritalStatusSeeder::class,
             MinistrySeeder::class,
+            RoleSeeder::class ,
+            StatusSeeder::class
         ]);
     }
 }

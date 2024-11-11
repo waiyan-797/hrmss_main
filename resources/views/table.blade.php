@@ -21,12 +21,14 @@
                 </div>
                 <input wire:model.live='{{ $search_id }}' type="text" id="{{ $search_id }}" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-64 bg-gray-50 focus:ring-green-500 focus:border-green-500" placeholder="{{$title}} ရှာဖွေရန်">
             </div>
+            @if(!(isset($is_crud_modal) && $is_crud_modal == false ))
             <button wire:click='add_new' type="button" class="text-green-500 bg-white border border-white hover:bg-green-200 hover:text-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
                 <span class="sr-only">Add Icon</span>
             </button>
+            @endif 
         </div>
     </div>
     <table class="w-full text-sm text-gray-500 dark:text-gray-400">
@@ -64,6 +66,8 @@
                             </td>
                         @endforeach
                         <td class="px-6 py-4">
+                            @if(!(isset($is_crud_modal) && $is_crud_modal == false ))
+                            {{-- @if() --}}
                             @if($confirm_delete == true && $id === $value->id)
                                 <div>
                                     <div>Confirm?</div>
@@ -78,6 +82,18 @@
                                 @if(!($disabledMode ?? false) == 'toggle') |
                                     <button type="button" wire:click="delete_confirm({{ $value->id }})" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</button>
                                 @endif
+                            @endif
+                            @else
+                            <a 
+                            href="
+                            {{
+                                route('staff_detail', ['confirm_add' => 0 , 'confirm_edit' => 1, 'staff_id' => $value->id, 'tab' => 'personal_info'])
+                            }}
+                            "
+                            
+                            
+                             class="font-medium text-yellow-600 dark:text-yellow-500 hover:underline">Show</a> 
+                            
                             @endif
                         </td>
                         <td>
