@@ -14,20 +14,48 @@ class StatusSeeder extends Seeder
     public function run(): void
     {
         Status::insert(
-           [ [
-            'name' => 'approve'
-        ] 
+        //    [ 
+        //     [
+        //     'name' => 'approve'
+        // ] 
+        // ,
+        // [
+        //     'name' => 'reject'
+        // ],
+        // [ 'name' => 'pending']  ,
+        // [
+        //     'name' => 'resubmit'
+        // ] ,
+        
+        // ]
+
+     [      
+        [
+            'name' => 'saveDraft'
+        ]
+        
         ,
+
+        [
+            'name' => 'submit'
+        ]
+        ,
+
+
         [
             'name' => 'reject'
-        ],
-        [ 'name' => 'pending']  ,
+        ] ,
+
         [
             'name' => 'resubmit'
-        ] ,
-        [
-            'name' => 'draft'
         ]
+        ,
+
+        [
+            'name' => 'approve'
+        ]
+
+
         ]
         );
     }

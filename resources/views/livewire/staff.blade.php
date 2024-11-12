@@ -1,13 +1,57 @@
 <div class="w-full">
    
-        <a href="{{ route('staff') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
+
+<div
+class="flex justify-start items-center space-x-1 mb-4"
+>
+
+
+
+    @if(auth()->user()->role_id != 2 )
+
+    <a href="{{ route('staff' , ['status'=>1]) }}" 
+        class="{{ request()->path() == 'staff/1' ? 'bg-blue-700' : 'bg-green-500' }} text-white hover:bg-blue-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out"
+        >
+        Safe Draft
+    </a>
+    @endif
+
+    <a href="{{ route('staff' ,['status'=>2]) }}"
+        class="{{  request()->path() == 'staff/2'  ? 'bg-blue-700' : 'bg-green-500' }} text-white hover:bg-blue-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out"
+
+         >
+        Applied  {{-- submit  --}}
+            
+    </a>
+      
+
+        <a href="{{ route('staff' ,['status' => 3]) }}" 
+        class="{{  request()->path() == 'staff/3'  ? 'bg-blue-700' : 'bg-green-500' }} text-white hover:bg-blue-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out"
+
+            >
+            Reject
+        </a>
+
+        
+     
+        <a href="{{ route('staff' , ['status'=>4]) }}" 
+        class="{{  request()->path() == 'staff/4'  ? 'bg-blue-700' : 'bg-green-500' }} text-white hover:bg-blue-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out"
+
+            >
+          Resubmit
+        </a>
+
+     
+        <a href="{{ route('staff' , ['status'=>5]) }}" 
+        class="{{  request()->path() == 'staff/5'  ? 'bg-blue-700' : 'bg-green-500' }} text-white hover:bg-blue-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out"
+
+            >
             Approve Staff 
         </a>
-        <a href="{{ route('saftdraft') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            Safe Draft
-        </a>
+   
 
-
+        
+    </div>
 
 
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
@@ -15,10 +59,12 @@
             @include('table', [
                 'data_values' => $staffs,
                 'modal' => '',
+                'is_crud_modal' =>  $status == 5 ,
+                    'comment' => $status == 4 || $status == 3 ,
                 'id' => $staff_id,
-                'title' => 'ဝန်ထမ်း',
+                'title' => $status == 5  ? 'ဝန်ထမ်း' : '',
                 'search_id' => 'staff_search',
-                'columns' => ['No', 'Photo', 'Name', 'Staff No', 'Action' , 'Type'],
+                'columns' => ['No', 'Photo', 'Name', 'Staff No', 'Action' , $status == 5 ?  'Type' : ($status == 3 || $status == 4 ? 'Comment' : '')],
                 'column_vals' => ['staff_photo', 'name', 'staff_no'],
             ])
 

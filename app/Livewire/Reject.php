@@ -20,7 +20,7 @@ class Reject extends Component
     {
 
 
-        $staffs = Staff::where('status_id' ,2 )
+        $staffs = Staff::where('status_id' ,3 )
         
         ->when(!auth()->user()->AdminHR(), function ($query) {
             

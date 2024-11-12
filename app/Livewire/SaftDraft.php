@@ -1,15 +1,12 @@
 <?php
 
 namespace App\Livewire;
-
 use App\Models\Staff;
+
 use Livewire\Component;
 
-class Inbox extends Component
+class SaftDraft extends Component
 {
-
-public $inbox_search;
-
     public $confirm_delete = false;
     public $confirm_edit = false;
     public $confirm_add = false;
@@ -23,10 +20,7 @@ public $inbox_search;
     public function render()
     {
 
-$staffs = Staff::where('status_id' , 2 )->paginate(5); 
+$staffs = Staff::where('status_id' , 1)->paginate(5); 
         return view('livewire.staff' , compact('staffs'));
     }
 }
-
-
-// inbox is used as applied 

@@ -61,6 +61,7 @@ use App\Models\StaffLanguage;
 class StaffDetail extends Component
 {
     use WithFileUploads;
+    public $comment  ,$displayAlertBox ;
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     public $staff;
     //personal_info
@@ -1043,8 +1044,21 @@ class StaffDetail extends Component
         
 
         $staff_create = $dataMapping[$this->tab] ?? $dataMapping['default'];
-        $staff_create['status_id' ]  =  auth()->user()->AdminHR() ? 1 : ($staff->status_id == 2 ? 4 :  3 ); // 1 approve :   2 ->reject  // 3 pending // 4 resubmit
+        // before saftdraft  // $staff_create['status_id' ]  =  auth()->user()->AdminHR() ? 1 : ($staff->status_id == 2 ? 4 :  3 ); // 1 approve :   2 ->reject  // 3 pending // 4 resubmit
+
+
+    
+        // wtih saftdraft 
+        $staff_create['status_id'] = $staff?->status_id == 1  ? (  isset($staff?->comment) ? 4 :   2)  : 1 ;
+        // @dd($staff?->status_id);
+        if($staff?->status_id == 2 || $staff?->status_id == 4 ){
+            
+            $staff_create['status_id'] = 5;
+        }
         // dd($staff_create)
+if(            $staff_create['status_id'] = 5){
+    $staff_create['comment'] = null ;
+}
         $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
         $this->staff_id = $staff->id;
         $this->staff_photo = $staff->staff_photo;
@@ -1555,10 +1569,34 @@ class StaffDetail extends Component
     }
 
     public function rejectStaff(){
+        
+        $this->displayAlertBox = true ;
+        // $staff = Staff::find($this->staff_id);
+        // $staff->status_id = 3; //reject 
+        // // $staff->comment = $this->comment;
+
+        // $staff->update();
+        // $this->message = 'Staff has been rejected.';
+        // $this->displayAlertBox = false ;
+
+        // return redirect()->route('staff',['status' => 3]);
+       
+    }
+
+    public function submitReject(){
         $staff = Staff::find($this->staff_id);
-        $staff->status_id = 2; //reject 
+        $staff->status_id = 3; //reject 
+        $staff->comment = $this->comment;
+
         $staff->update();
         $this->message = 'Staff has been rejected.';
-        return redirect()->route('inbox');
+        $this->displayAlertBox = false ;
+
+        return redirect()->route('staff',['status' => 3]);
     }
+
+     public function closeModal(){
+        $this->displayAlertBox = false ;
+
+     }
 }
