@@ -84,6 +84,8 @@ use App\Livewire\InvestmentCompanies\StartedSalaryList;
 use App\Livewire\InvestmentCompanies\YangonOfficeStaff;
 use App\Livewire\InvestmentCompanies\YangonOfficeStaff2;
 use App\Livewire\InvestmentCompanies\YangonStaffAprilSalaryList;
+use App\Livewire\Labour;
+use App\Livewire\LabourDetails;
 use App\Livewire\Language as LivewireLanguage;
 use App\Livewire\Leave;
 use App\Livewire\Leave\LeaveNuberPercent;
@@ -323,10 +325,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     )->name('user_create');
 
 
-    // Route::get('/inbox' , Inbox::class )->name('inbox');
-    // Route::get('/resubmit' , Inbox::class )->name('resubmit');
-    // Route::get('/reject' , Inbox::class )->name('reject');
-    // Route::get('/resubmitcls')
+    Route::get('/labour',Labour::class)->name('labour');
+    Route::get('/labour_view/{id?}' , LabourDetails::class )->name('labourDetails');
+    
+    
 });
+
+// Route::get('/labour',
+    
+    
+//     function(){
+//         return (new ModelsStaff())->labour();
+//     }
+    
+//     )->name('labour');
 
 require __DIR__ . '/auth.php';

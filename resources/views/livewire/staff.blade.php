@@ -46,7 +46,7 @@ class="flex  justify-center items-center space-x-4  mt-10"
         class="{{  request()->path() == 'staff/5'  ? 'bg-blue-700' : 'bg-green-500' }} text-white hover:bg-blue-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out"
 
             >
-            Approve Staff 
+            Approve 
         </a>
    
 

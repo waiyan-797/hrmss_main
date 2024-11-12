@@ -1094,6 +1094,10 @@ if(            $staff_create['status_id'] == 5){
         $this->initializeArrays($this->staff_id);
         $this->loadStaffData($staff->id);
         $this->message = 'Saved Successfully';
+        if($staff->status_id){
+            
+            return redirect()->route('staff',['status'=>  $staff->status_id  ]);
+        }
     }
 
     private function saveAbroads($staffId)

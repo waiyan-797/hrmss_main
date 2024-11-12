@@ -571,4 +571,20 @@ public function staffSalaryYear($year)
     return $list;
 }
 
+
+ public function  Labour(){
+
+       return  Staff::where(
+        function($query) {
+             $query->whereHas('payscale' ,
+              function($subQuery)  {
+                $subQuery->where('staff_type_id' , 3 );
+            });
+        }
+
+    );
+        // $this->payscale->staff_type == 3 ;
+}
+
+
 }
