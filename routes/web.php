@@ -128,6 +128,7 @@ use App\Livewire\Language;
 use App\Livewire\Leave\LeaveDate;
 use App\Livewire\Promotion as LivewirePromotion;
 use App\Livewire\Retirement;
+use App\Livewire\SaftDraft;
 use App\Livewire\Salary;
 use App\Livewire\User;
 use App\Models\Ministry;
@@ -150,7 +151,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/district', District::class)->name('district');
     Route::get('/township', Township::class)->name('township');
     Route::get('/pension_year', PensionYear::class)->name('pension_year');
-    Route::get('/staff', Staff::class)->name('staff');
+    Route::get('/staff/{status?}', Staff::class)->name('staff')
+    ->defaults('status', 1);
+    ;
     Route::get('/payscale', Payscale::class)->name('payscale');
     Route::get('/rank', Rank::class)->name('rank');
     Route::get('/staff_type', StaffType::class)->name('staff_type');

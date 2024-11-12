@@ -17,6 +17,22 @@
             <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'personal_info'])" :active="$tab == 'personal_info'" wire:navigate
                 class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32 "
                 >
+<div class="w-[80%]">
+    @if($displayAlertBox)
+
+@include('livewire.alert')
+@endif
+
+    <div class="shadow flex items-center h-[6vh] mt-6 mb-3">
+        
+        <div class="flex flex-wrap gap-1 text-sm font-arial text-center w-full">
+            <x-nav-link :href="route('staff_detail', [
+                'confirm_add' => $confirm_add,
+                'confirm_edit' => $confirm_edit,
+                'staff_id' => $staff_id,
+                'tab' => 'personal_info',
+            ])" :active="$tab == 'personal_info'" wire:navigate
+                class="inline-block p-4 text-green-600  rounded-none active min-w-32 ">
                 {{ __('ကိုယ်ရေးအချက်အလက်ဖြည့်ရန်') }}
             </x-nav-link>
             <x-nav-link :href="route('staff_detail', ['confirm_add' => $confirm_add, 'confirm_edit' => $confirm_edit, 'staff_id' => $staff_id, 'tab' => 'job_info'])" :active="$tab == 'job_info'" wire:navigate
@@ -76,32 +92,44 @@
 
                     <div class="pb-5">
                         
-                        @if( ! (auth()->user()->role_id == 2 && $staff?->status_id  == 2) 
+                        @if( ! (auth()->user()->role_id == 2 && $staff?->status_id  == 3) 
                         
                           )                          
+                          
+
                           @if(
- !(auth()->user()->role_id != 2 && ($staff?->status_id == 3 ||  $staff?->status_id == 4) )
+ !(auth()->user()->role_id != 2 && ($staff?->status_id == 2 ||  $staff?->status_id == 4) )
 
                           )
                         <x-primary-button>{{ $confirm_add == 1 ? __('Submit')  : 
-                         ( auth()->user()->role_id != 2  ?  $staff->status_id  == 2  ?     __('Resubmit')  :    __('Update')  :
-                           __('Approve') )}}</x-primary-button>
+                         ( auth()->user()->role_id != 2   ?
+                           $staff?->status_id  == 3  ?     __('Resubmit SaveDraft')  :   ( $staff?->status_id == 1 && isset($staff?->comment) 
+                             ?
+                               __('ReSbumit')  :   ( $staff?->status_id == 5 ?  __('Update') : __('Submit')  )):
+                      (   $staff?->status_id == 1 ?  __('Sbumit')    :   ($staff?->status_id == 5 ?  __('Update') :    __('Approve') ) )
+                           
+                           )}}</x-primary-button>
 @endif
 @endif
                         
-@if( (auth()->user()->role_id == 2 && ($staff?->status_id == 3 ||  $staff?->status_id == 4) ))
+@if( (auth()->user()->role_id == 2 && ($staff?->status_id == 2 ||  $staff?->status_id == 4) ))
  {{-- // pending or resubmit --}}
-<button
+{{-- <button
 type='button'
 class='inline-flex items-center px-4 py-2 bg-red-700 border-transparent rounded-md font-medium text-sm text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 font-arial'
+<<<<<<< HEAD
 wire:click='rejectStaff'
+=======
+wire:click='rejectStaff'> --}}
+>>>>>>> ba797a4ec643a58fcd686e927fda905aed9c2fb9
 
 
                         @if (auth()->user()->role_id == 2)
                             <button type='button'
                                 class='inline-flex items-center px-4 py-2 bg-red-700 border-transparent rounded-md font-medium text-sm text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 font-arial'
                                 wire:click='rejectStaff'>{{ __('Reject') }}</button>
-                        @endif
+                                @endif
+                                @endif
 
 
                     </div>
