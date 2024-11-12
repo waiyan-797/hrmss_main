@@ -114,10 +114,10 @@
                         
 @if( (auth()->user()->role_id == 2 && ($staff?->status_id == 2 ||  $staff?->status_id == 4) ))
  {{-- // pending or resubmit --}}
-<button
+{{-- <button
 type='button'
 class='inline-flex items-center px-4 py-2 bg-red-700 border-transparent rounded-md font-medium text-sm text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 font-arial'
-wire:click='rejectStaff'>
+wire:click='rejectStaff'> --}}
 
 
                         @if (auth()->user()->role_id == 2)

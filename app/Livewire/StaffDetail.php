@@ -1050,13 +1050,13 @@ class StaffDetail extends Component
     
         // wtih saftdraft 
         $staff_create['status_id'] = $staff?->status_id == 1  ? (  isset($staff?->comment) ? 4 :   2)  : 1 ;
-        // @dd($staff?->status_id);
         if($staff?->status_id == 2 || $staff?->status_id == 4 ){
+
             
             $staff_create['status_id'] = 5;
         }
         // dd($staff_create)
-if(            $staff_create['status_id'] = 5){
+if(            $staff_create['status_id'] == 5){
     $staff_create['comment'] = null ;
 }
         $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
