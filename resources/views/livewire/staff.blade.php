@@ -2,7 +2,7 @@
    
 
 <div
-class="flex justify-start items-center space-x-1 mb-4"
+class="flex  justify-center items-center space-x-4  mt-10"
 >
 
 
