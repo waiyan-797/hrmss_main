@@ -321,11 +321,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/inbox' , Inbox::class )->name('inbox');
-<<<<<<< HEAD
-    Route::get('/resubmit' , Inbox::class )->name('resubmit');
-    Route::get('/reject' , Inbox::class )->name('reject');
-    // Route::get('/resubmitcls')
-=======
     
     Route::get('/reject' , Reject::class )->name('reject'); // to original uploader 
     
@@ -334,7 +329,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/saft-draft' , Staff::class )->name('saftdraft'); // resubmit to check
     
     
->>>>>>> f0d37f1e77227d843faccf9440a913fe8463a711
 });
 
 require __DIR__ . '/auth.php';

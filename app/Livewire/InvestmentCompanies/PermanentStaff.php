@@ -73,31 +73,42 @@ class PermanentStaff extends Component
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
 
         $table->addRow();
-        $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်');
-        $table->addCell(2000, ['vMerge' => 'restart'])->addText('လစာနှုန်း');
-        $table->addCell(6000, ['gridSpan' => 2, 'valign' => 'center'])->addText("၂၀၂၄-၂၀၂၅\n၂၀၂၄ အောက်တိုဘာ", ['alignment' => 'center']);
-        $table->addCell(2000)->addText('၂၂-၁၀-၂၀၂၄ရက်နေ့တွင်အမှန်တကယ်ထုတ်ပေးရမည့်လစာငွေ(ကျပ်သန်း)');
-        $table->addCell(2000)->addText('မှတ်ချက်');
+        $table->addCell(1000, ['vMerge' => 'restart'])->addText('အမှတ်စဥ်', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000, ['vMerge' => 'restart'])->addText('လစာနှုန်း(ကျပ်)', ['bold' => true], ['align' => 'center']);
+        $table->addCell(4000, ['gridSpan' => 4])->addText("၂၀၂၄-၂၀၂၅\n", ['bold' => true], ['align' => 'center']);
+        $table->addCell(2000, ['vMerge' => 'restart'])->addText('၁၂-၁၁-၂၀၂၄ ရက်နေ့တွင်အမှန်တကယ်ထုတ်ပေးရမည့်လစာငွေ(ကျပ်သန်း)', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000, ['vMerge' => 'restart'])->addText('မှတ်ချက်', ['bold' => true], ['align' => 'center']);
 
-      
+        // Second Row
         $table->addRow();
-        $table->addCell(2000, ['vMerge' => 'restart']);
-        $table->addCell(2000, ['vMerge' => 'restart']);
-        $table->addCell(3000,['vMerge' => 'restart'])->addText('ခွင့်ပြု');
-        $table->addCell(3000, ['gridSpan' => 3])->addText('ခန့်ပြီး');
-        $table->addCell(2000, ['vMerge' => 'restart']);
-        $table->addCell(2000, ['vMerge' => 'restart']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(1000, ['vMerge' => 'restart'])->addText('ခွင့်ပြု', ['bold' => true], ['align' => 'center']);
+        $table->addCell(3000, ['gridSpan' => 3])->addText('ခန့်ပြီး', ['bold' => true], ['align' => 'center']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(null, ['vMerge' => 'continue']);
 
-      
+        // Third Row
         $table->addRow();
-        $table->addCell(2000, ['vMerge' => 'continue']);
-        $table->addCell(2000, ['vMerge' => 'continue']);
-        $table->addCell(3000, ['vMerge' => 'continue']);
-        $table->addCell(1000)->addText('ကျား', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('မ', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ပေါင်း', ['alignment' => 'center']);
-        $table->addCell(2000,['vMerge' => 'continue']);
-        $table->addCell(2000,['vMerge' => 'continue']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(1000)->addText('ကျား', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('မ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ပေါင်း', ['bold' => true], ['align' => 'center']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+
+        // Sample Data Row
+        $table->addRow();
+        $table->addCell(1000)->addText('၁', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('၂', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('၃', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('၄', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('၅', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('၆', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('၇', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('၈', ['bold' => true], ['align' => 'center']);
 
         foreach ($first_payscales as $index => $payscale) {
             $maleStaffCount = $payscale->staff->where('gender_id', 1)->where('current_department_id', 1)->where('is_active', 1)->where('salary_paid_by', 1)->count();
@@ -113,6 +124,7 @@ class PermanentStaff extends Component
             $table->addCell()->addText($femaleStaffCount);
             $table->addCell()->addText($totalActiveStaff);
             $table->addCell()->addText($totalPaidForThisMonth);
+            $table->addCell()->addText();
         }
 
         // Add total row at the end
@@ -124,6 +136,7 @@ class PermanentStaff extends Component
         $table->addCell()->addText($first_payscales->sum(fn($p) => $p->staff->where('gender_id', 2)->where('current_department_id', 1)->where('is_active', 1)->where('salary_paid_by', 1)->count()));
         $table->addCell()->addText($first_payscales->sum(fn($p) => $p->staff->where('is_active', 1)->where('current_department_id', 1)->count()));
         $table->addCell()->addText($first_payscales->sum(fn($p) => $p->staff->where('is_active', 1)->where('salary_paid_by', 1)->sum(fn($staff) => $staff->paidForThisMonth($this->dateRange))));
+        $table->addCell()->addText();
 
         foreach ($second_payscales as $payscale) {
             $maleStaffCount = $payscale->staff->where('gender_id', 1)->where('current_department_id', 1)->where('is_active', 1)->where('salary_paid_by', 1)->count();
@@ -139,6 +152,7 @@ class PermanentStaff extends Component
             $table->addCell()->addText($femaleStaffCount);
             $table->addCell()->addText($totalActiveStaff);
             $table->addCell()->addText($totalPaidForThisMonth);
+            $table->addCell()->addText();
         }
 
         // Add total row at the end
@@ -150,6 +164,7 @@ class PermanentStaff extends Component
         $table->addCell()->addText($second_payscales->sum(fn($p) => $p->staff->where('gender_id', 2)->where('current_department_id', 1)->where('is_active', 1)->where('salary_paid_by', 1)->count()));
         $table->addCell()->addText($second_payscales->sum(fn($p) => $p->staff->where('is_active', 1)->where('current_department_id', 1)->count()));
         $table->addCell()->addText($second_payscales->sum(fn($p) => $p->staff->where('is_active', 1)->where('salary_paid_by', 1)->sum(fn($staff) => $staff->paidForThisMonth($this->dateRange))));
+        $table->addCell()->addText();
 
         $table->addRow();
         $table->addCell()->addText('');
@@ -159,10 +174,12 @@ class PermanentStaff extends Component
         $table->addCell()->addText();
         $table->addCell()->addText();
         $table->addCell()->addText();
+        $table->addCell()->addText();
 
         $table->addRow();
         $table->addCell()->addText('');
         $table->addCell()->addText('(၁လအတွက်လစာစရိတ်(ကျပ်သန်း))	');
+        $table->addCell()->addText();
         $table->addCell()->addText();
         $table->addCell()->addText();
         $table->addCell()->addText();

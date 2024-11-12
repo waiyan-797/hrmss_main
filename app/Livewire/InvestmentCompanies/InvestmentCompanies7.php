@@ -146,39 +146,104 @@ class InvestmentCompanies7 extends Component
         $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
         $section->addTitle('၂၀၂၄ ခုနှစ်၊ ဇွန်လ', 2);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်');
-        $table->addCell(4000, ['vMerge' => 'restart'])->addText('ဌာန');
-        $table->addCell(6000, ['gridSpan' => 3, 'valign' => 'center'])->addText('မူလအင်အား');
 
-        $table->addCell(10000, ['gridSpan' => 5, 'valign' => 'center'])->addText('ပြုန်းတီးအင်အား');
-        $table->addCell(6000, ['gridSpan' => 3, 'valign' => 'center'])->addText('ထပ်မံခန့်ထားခြင်း');
-        $table->addCell(6000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ပြောင်းရွေ့အင်အား');
-        $table->addCell(6000, ['gridSpan' => 3, 'valign' => 'center'])->addText('လက်ကျန်အင်အား');
 
         $table->addRow();
-        $table->addCell(2000, ['vMerge' => 'continue']);
-        $table->addCell(4000, ['vMerge' => 'continue']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('အရာရှိ', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('အခြား', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('ပေါင်း', ['alignment' => 'center']);
+        $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true], ['align' => 'center']);
+        $table->addCell(4000, ['vMerge' => 'restart'])->addText('ဌာန', ['bold' => true], ['align' => 'center']);
+        $table->addCell(90000, ['gridSpan' => 9])->addText('ပြုန်းတီးအင်အား', ['bold' => true], ['align' => 'center']);
+        $table->addCell(3000, ['gridSpan' => '3'])->addText('ထပ်မံခန့်ထားခြင်း', ['bold' => true], ['align' => 'center']);
+        $table->addCell(6000,['gridSpan' => '6'] )->addText('ပြောင်းရွေ့အင်အား', ['bold' => true], ['align' => 'center']);
+        $table->addCell(3000,['gridSpan' => '3'] )->addText('လက်ကျန်အင်အား', ['bold' => true], ['align' => 'center']);
 
-        $table->addCell(2000, ['gridSpan' => 2, 'valign' => 'center'])->addText('သေဆုံး');
-        $table->addCell(2000, ['gridSpan' => 2, 'valign' => 'center'])->addText('နုတ်ထွက်');
-        $table->addCell(2000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ထုတ်ပစ်');
-        $table->addCell(2000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ပင်စင်');
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('ပေါင်း', ['alignment' => 'center']);
+        // Second Row
+        $table->addRow();
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(1000)->addText('အရာရှိ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('အခြား', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ပေါင်း', ['bold' => true], ['align' => 'center']);
+        $table->addCell(2000, ['gridSpan' => 2])->addText('သေဆုံး', ['bold' => true], ['align' => 'center']);
+        $table->addCell(2000,['gridSpan' => 2])->addText('နုတ်ထွက်', ['bold' => true], ['align' => 'center']);
+        $table->addCell(2000,['gridSpan' => 2])->addText('ထုတ်ပစ်', ['bold' => true], ['align' => 'center']);
+        $table->addCell(2000,['gridSpan' => 2])->addText('ပင်စင်', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000,['gridSpan' => 1])->addText('ပေါင်း', ['bold' => true], ['align' => 'center']);
+        // $table->addCell(null, ['vMerge' => 'continue']);
+        // $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(3000,['gridSpan' => 3])->addText('ထွက်ခွာ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(3000,['gridSpan' => 3])->addText('ရောက်ရှိ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('အရာရှိ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('အခြား', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ပေါင်း', ['bold' => true], ['align' => 'center']);
 
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('အရာရှိ', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('အခြား', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('ပေါင်း', ['alignment' => 'center']);
+        // Third Row
+        $table->addRow();
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(1000)->addText('ရှိ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ခြား', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ရှိ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ခြား', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ရှိ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ခြား', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ရှိ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ခြား', ['bold' => true], ['align' => 'center']);
+        $table->addCell(null, ['vMerge' => 'continue']);
+        $table->addCell(1000)->addText('ရှိ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ခြား', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ပေါင်း', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ရှိ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ခြား', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ပေါင်း', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('အရာရှိ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('အခြား', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('ပေါင်း', ['bold' => true], ['align' => 'center']);
 
-        $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('ထွက်ခွာ');
-        $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('ရောက်ရှိ');
 
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('အရာရှိ', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('အခြား', ['alignment' => 'center']);
-        $table->addCell(2000, ['vMerge' => 'continue'])->addText('ပေါင်း', ['alignment' => 'center']);
+        
+
+        
+
+        // $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
+        // $section->addTitle('၂၀၂၄ ခုနှစ်၊ ဇွန်လ', 2);
+        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+        // $table->addRow();
+        // $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်');
+        // $table->addCell(4000, ['vMerge' => 'restart'])->addText('ဌာန');
+        // $table->addCell(6000, ['gridSpan' => 3, 'valign' => 'center'])->addText('မူလအင်အား');
+
+        // $table->addCell(10000, ['gridSpan' => 5, 'valign' => 'center'])->addText('ပြုန်းတီးအင်အား');
+        // $table->addCell(6000, ['gridSpan' => 3, 'valign' => 'center'])->addText('ထပ်မံခန့်ထားခြင်း');
+        // $table->addCell(6000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ပြောင်းရွေ့အင်အား');
+        // $table->addCell(6000, ['gridSpan' => 3, 'valign' => 'center'])->addText('လက်ကျန်အင်အား');
+
+        // $table->addRow();
+        // $table->addCell(2000, ['vMerge' => 'continue']);
+        // $table->addCell(4000, ['vMerge' => 'continue']);
+        // $table->addCell(2000, ['vMerge' => 'continue'])->addText('အရာရှိ', ['alignment' => 'center']);
+        // $table->addCell(2000, ['vMerge' => 'continue'])->addText('အခြား', ['alignment' => 'center']);
+        // $table->addCell(2000, ['vMerge' => 'continue'])->addText('ပေါင်း', ['alignment' => 'center']);
+
+        // $table->addCell(2000, ['gridSpan' => 2, 'valign' => 'center'])->addText('သေဆုံး');
+        // $table->addCell(2000, ['gridSpan' => 2, 'valign' => 'center'])->addText('နုတ်ထွက်');
+        // $table->addCell(2000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ထုတ်ပစ်');
+        // $table->addCell(2000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ပင်စင်');
+        // $table->addCell(2000, ['vMerge' => 'continue'])->addText('ပေါင်း', ['alignment' => 'center']);
+
+        // $table->addCell(2000, ['vMerge' => 'continue'])->addText('အရာရှိ', ['alignment' => 'center']);
+        // $table->addCell(2000, ['vMerge' => 'continue'])->addText('အခြား', ['alignment' => 'center']);
+        // $table->addCell(2000, ['vMerge' => 'continue'])->addText('ပေါင်း', ['alignment' => 'center']);
+
+        // $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('ထွက်ခွာ');
+        // $table->addCell(3000, ['gridSpan' => 3, 'valign' => 'center'])->addText('ရောက်ရှိ');
+
+        // $table->addCell(2000, ['vMerge' => 'continue'])->addText('အရာရှိ', ['alignment' => 'center']);
+        // $table->addCell(2000, ['vMerge' => 'continue'])->addText('အခြား', ['alignment' => 'center']);
+        // $table->addCell(2000, ['vMerge' => 'continue'])->addText('ပေါင်း', ['alignment' => 'center']);
+       
         $table->addRow();
         $table->addCell(2000)->addText('1');
         $table->addCell(4000)->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန');
