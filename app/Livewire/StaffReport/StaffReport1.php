@@ -90,9 +90,6 @@ class StaffReport1 extends Component
     {
         $year = explode('-', $this->filterDate)[0];
         $month = explode('-', $this->filterDate)[1];
-        $this->year = $year ;
-        $this->month = $month;
-
         $staffQuery = Staff::query();
         $staffQuery->withWhereHas('postings', function ($query) use ($year, $month) {
 
