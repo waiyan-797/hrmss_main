@@ -59,7 +59,6 @@ use App\Livewire\Division;
 use App\Livewire\TrainingType;
 use App\Livewire\EmployeeRecordReport\EmpoyeeRecordReport;
 use App\Livewire\FTR\ForeignGoneTotal;
-use App\Livewire\Inbox;
 use App\Livewire\Increment;
 use App\Livewire\InvestmentCompanies\AprilSalaryList;
 use App\Livewire\InvestmentCompanies\DetailStaffSalary;
@@ -128,9 +127,6 @@ use App\Livewire\Township\Township;
 use App\Livewire\Language;
 use App\Livewire\Leave\LeaveDate;
 use App\Livewire\Promotion as LivewirePromotion;
-use App\Livewire\Reject;
-use App\Livewire\ReSubmit;
-use App\Livewire\Resubmitted;
 use App\Livewire\Retirement;
 use App\Livewire\Salary;
 use App\Livewire\User;
@@ -163,7 +159,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/blood_type', BloodType::class)->name('blood_type');
     Route::get('/post', Post::class)->name('post');
     Route::get('/section', Section::class)->name('section');
-    Route::get('/leave', Leave::class)->name('leave'); //no longer use
+    Route::get('/leave', Leave::class)->name('leave'); //no longer use 
     Route::get('/leave/{staff_id}', Leave::class)->name('staff_leave');
     Route::get('/leave_type', LeaveType::class)->name('leave_type');
     Route::get('/nationality', Nationality::class)->name('nationality');
@@ -180,10 +176,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/religion', Religion::class)->name('religion');
     Route::get('/gender', Gender::class)->name('gender');
     Route::get('/salary', Salary::class)->name('salary');
-    Route::get('/promotion', LivewirePromotion::class)->name('promotion'); //no longer use
-    Route::get('/promotion/{staff_id}', LivewirePromotion::class)->name('staff_promotion'); //no longer use
-    Route::get('/increment', Increment::class)->name('increment'); //no longer use
-    Route::get('/retirement/{staff_id}', Retirement::class)->name('staff_retirement'); //no longer use
+    Route::get('/promotion', LivewirePromotion::class)->name('promotion'); //no longer use 
+    Route::get('/promotion/{staff_id}', LivewirePromotion::class)->name('staff_promotion'); //no longer use 
+    Route::get('/increment', Increment::class)->name('increment'); //no longer use 
+    Route::get('/retirement/{staff_id}', Retirement::class)->name('staff_retirement'); //no longer use 
 
 
     Route::get('/increment/{staff_id}', Increment::class)->name('staff_increment'); //currently use
@@ -209,9 +205,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pdf_staff_report15/{staff_id?}', PdfStaffReport15::class)->name('pdf_staff_report15');
     Route::get('/pdf_staff_report17/{staff_id?}', PdfStaffReport17::class)->name('pdf_staff_report17');
     Route::get('/pdf_staff_report19/{staff_id?}', PdfStaffReport19::class)->name('pdf_staff_report19');
-    // Route::get('/pdf_staff_report71/{staff_id?}', PdfStaffReport71::class)->name('pdf_staff_report71');
-    Route::get('/pdf_staff_report_leave_3/{staff_id?}', LeaveDate::class)->name('pdf_staff_report_leave_3');
-    Route::get('/pdf_staff_report_staff_list_2/{staff_id?}', StaffList2::class)->name('pdf_staff_report_staff_list_2');
+    Route::get('/pdf_staff_report71/{staff_id?}', PdfStaffReport71::class)->name('pdf_staff_report71');
     Route::get('/planning_accounting', PlanningAccounting::class)->name('planning_accounting');
     Route::get('/investment_companies', InvestmentCompanies::class)->name('investment_companies');
     Route::get('/investment_companies2', InvestmentCompanies2::class)->name('investment_companies2');
@@ -251,6 +245,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/last_pay_certificate', LastPayCertificate::class)->name('last_pay_certificate');
     Route::get('/detail_staff_salary', DetailStaffSalary::class)->name('detail_staff_salary');
     Route::get('/staff_list1', StaffList1::class)->name('staff_list1');
+    Route::get('/staff_list2', StaffList2::class)->name('staff_list2');
     Route::get('/staff_list3', StaffList3::class)->name('staff_list3');
     Route::get('/staff_list4', StaffList4::class)->name('staff_list4');
     Route::get('/staff_progeny', StaffProgeny::class)->name('staff_progeny');
@@ -314,19 +309,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('word_reports.staff_report_15', ['staff' => $staff]);
     })->name('word_report_15');
 
+
+
+
+
     Route::get(
         'user_create',
         User::class
     )->name('user_create');
 
 
-    Route::get('/inbox' , Inbox::class )->name('inbox');
-    
-    Route::get('/reject' , Reject::class )->name('reject'); // to original uploader 
-    
-    Route::get('/resubmit' , ReSubmit::class )->name('resubmit'); // resubmit to check
-    Route::get('/resubmitted' , Resubmitted::class )->name('resubmitted'); // resubmit to check
-    Route::get('/saft-draft' , Staff::class )->name('saftdraft'); // resubmit to check
+   
     
     
 });

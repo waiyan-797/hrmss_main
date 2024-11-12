@@ -12,6 +12,7 @@ use Livewire\WithPagination;
 class Staff extends Component
 {
     use WithPagination;
+    public $status;
         public $confirm_delete = false;
         public $confirm_edit = false;
         public $confirm_add = false;
@@ -19,6 +20,7 @@ class Staff extends Component
         public $message = null;
         public $staff_search, $staff_name, $staff_id = 0;
         public $modal_title;
+        public $show_comment;
 
     //add new
     public function add_new()
@@ -88,7 +90,7 @@ class Staff extends Component
     {
         $staffSearch = '%' . $this->staff_search . '%';
         $this->modal_title = 'Choose Report Type';
-        $staffQuery = ModelsStaff::query();
+        $staffQuery = ModelsStaff::query()->where('status_id' , $this->status);
         if ($this->staff_search) {
             $this->resetPage();
             $staffQuery->where(function ($q) use ($staffSearch) {
@@ -105,7 +107,20 @@ class Staff extends Component
         ]);
     }
 
+    public function mount($status){
+        $this->status = $status;
+    }
+
     public function check($id){
         return Promotion::where('staff_id', $id)->get()->isEmpty()  ;
     }
+
+    public function showComment(){
+            $this->show_comment = true ;
+    }
+
+    public function closeModal(){
+        $this->show_comment = false ;
+}
+    
 }

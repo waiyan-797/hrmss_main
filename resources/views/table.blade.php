@@ -21,14 +21,14 @@
                 </div>
                 <input wire:model.live='{{ $search_id }}' type="text" id="{{ $search_id }}" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-64 bg-gray-50 focus:ring-green-500 focus:border-green-500" placeholder="{{$title}} ရှာဖွေရန်">
             </div>
-            @if(!(isset($is_crud_modal) && $is_crud_modal == false ))
+         
             <button wire:click='add_new' type="button" class="text-green-500 bg-white border border-white hover:bg-green-200 hover:text-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
                 <span class="sr-only">Add Icon</span>
             </button>
-            @endif 
+            
         </div>
     </div>
     <table class="w-full text-sm text-gray-500 dark:text-gray-400">
@@ -96,14 +96,49 @@
                             
                             @endif
                         </td>
-                        <td>
                             @if($title == 'ဝန်ထမ်း')
+                        <td>
+
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_leave',[ $value->id ])}}>ခွင့်</a> |
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_increment',[ $value->id ])}}>နှစ်တိုး</a> |
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_promotion',[ $value->id ])}}>ရာထူးတိုး</a> |
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_retirement',[ $value->id ])}} >ပြုန်းတီး</a>
-                            @endif
                         </td>
+                            
+                                @endif
+                        @if(isset($comment) && $comment == true)
+                        <td class="">
+                            <a 
+                            class="font-arial text-green-600 dark:text-green-500 hover:underline"
+                             wire:click ='showComment'
+                             >
+                            Comment
+                            </a> 
+                            @if($show_comment)
+                            <div class="fixed w-screen h-screen inset-0 flex items-center justify-center bg-gray-600 bg-opacity-75 z-50">
+                                {{-- @dd('d') --}}
+                                <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+                                    
+                               <div
+                               
+                               class="font-arial text-red-600  hover:underline"
+                               >
+                               {{$value['comment']}}
+                                </div>
+                                    
+                                        <button wire:click="closeModal" class="ms-auto bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Cancel</button> 
+                                        
+
+                                </div>
+                            </div>
+                            
+                            @endif
+
+
+
+                            {{-- {{$value->comment}} --}}
+                        </td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>
