@@ -1,4 +1,15 @@
 <div class="w-full">
+   
+        <a href="{{ route('staff') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
+            Approve Staff 
+        </a>
+        <a href="{{ route('saftdraft') }}" class="text-white bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
+            Safe Draft
+        </a>
+
+
+
+
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             @include('table', [

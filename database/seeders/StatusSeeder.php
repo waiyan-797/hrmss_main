@@ -24,6 +24,9 @@ class StatusSeeder extends Seeder
         [ 'name' => 'pending']  ,
         [
             'name' => 'resubmit'
+        ] ,
+        [
+            'name' => 'draft'
         ]
         ]
         );

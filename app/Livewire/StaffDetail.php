@@ -62,6 +62,7 @@ class StaffDetail extends Component
 {
     use WithFileUploads;
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
+    public $staff;
     //personal_info
     public $staff_photo, $staff_nrc_front, $staff_nrc_back, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $attendid, $gpms_staff_no, $spouse_name, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $government_staff_started_date, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $life_insurance_proposal, $life_insurance_policy_no, $life_insurance_premium, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension, $military_gazetted_no, $veteran_no, $veteran_date, $last_serve_army, $health_condition, $tax_exception;
     public $leave_search, $leave_name, $leave_type_name, $leave_id, $staff_name, $from_date, $to_date, $qty, $order_no, $remark;
@@ -266,6 +267,7 @@ class StaffDetail extends Component
     public function mount()
     {
         if ($this->staff_id) {
+            $this->staff = Staff::find($this->staff_id);
             $this->initializeArrays($this->staff_id);
             $this->loadStaffData($this->staff_id);
         }
@@ -1041,7 +1043,7 @@ class StaffDetail extends Component
         
 
         $staff_create = $dataMapping[$this->tab] ?? $dataMapping['default'];
-        $staff_create['status_id' ]  = auth()->user()->AdminHR() ? 1 : 3 ; // approve : pending
+        $staff_create['status_id' ]  =  auth()->user()->AdminHR() ? 1 : ($staff->status_id == 2 ? 4 :  3 ); // 1 approve :   2 ->reject  // 3 pending // 4 resubmit
         // dd($staff_create)
         $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
         $this->staff_id = $staff->id;

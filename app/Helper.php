@@ -223,3 +223,5 @@ function get2monthDeduction($month, $year)
 
         ->sum('deduction');
 }
+
+

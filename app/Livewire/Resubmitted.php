@@ -3,12 +3,12 @@
 namespace App\Livewire;
 
 use App\Models\Staff;
+
+
 use Livewire\Component;
 
-class ReSubmit extends Component
+class Resubmitted extends Component
 {
-
-    
     public $confirm_delete = false;
     public $confirm_edit = false;
     public $confirm_add = false;
@@ -19,12 +19,8 @@ class ReSubmit extends Component
     
     public function render()
     {
-
-
-        $staffs = Staff::where('status_id' ,4 )->paginate(5);
+        $staffs = Staff::where('status_id' ,4 )->where('current_division_id', auth()->user()->division_id)->paginate(5);
         return view('livewire.StatusBox' , compact('staffs'));
 
     }
-
-
 }
