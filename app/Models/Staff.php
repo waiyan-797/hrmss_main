@@ -587,4 +587,23 @@ public function staffSalaryYear($year)
 }
 
 
+public function labourAttdence(){
+    return $this->hasOne(LabourAttendance::class);
+}
+
+public function labourLeave($year , $month){
+    $count = 0;
+      $arrs = json_decode($this->labourAttdence?->att_date );
+      if($arrs){
+        foreach($arrs as  $index => $arr){
+            
+            if($year == $arr[0] && $month == $arr[1]  ){
+                $count++;
+            }
+        
+      }
+      }
+     
+      return $count;
+}
 }

@@ -82,6 +82,12 @@
                                 @if(!($disabledMode ?? false) == 'toggle') |
                                     <button type="button" wire:click="delete_confirm({{ $value->id }})" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</button>
                                 @endif
+                                @if($is_labour ?? false)
+                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('calender',[ $value->id ])}}>ခွင့်</a> |
+                                
+                                @endif
+
+                                
                             @endif
                             @else
                             <a 

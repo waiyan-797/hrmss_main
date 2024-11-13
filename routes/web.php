@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\AppointmentsCalendar;
 use App\Livewire\Award\Award;
 use App\Livewire\AwardType\AwardType;
 use App\Livewire\BloodType\BloodType;
@@ -327,7 +328,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/labour',Labour::class)->name('labour');
     Route::get('/labour_view/{id?}' , LabourDetails::class )->name('labourDetails');
-    
+    Route::get('/calender/{id}' , AppointmentsCalendar::class)->name('calender');
     
 });
 

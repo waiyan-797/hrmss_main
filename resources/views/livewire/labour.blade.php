@@ -8,6 +8,7 @@
      
             'id' => $staff_id,
             'title' => 'နေ့စား',
+            'is_labour' => true ,
             'search_id' => 'staff_search',
             'columns' => ['No', 'Name' , ],
             'column_vals' => [ 'name', ],
