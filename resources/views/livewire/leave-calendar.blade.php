@@ -1,11 +1,15 @@
-<div x-data="calendar()" x-init="init()">
-    <div class="container mx-auto mt-10 max-w-md">
+<div x-data="calendar()"
+
+x-init="init()">
+    <div class="  w-[60rem] mt-20 ms-20">
         <div class="bg-white shadow-lg rounded-lg">
             <!-- Calendar header showing selected month and year -->
             <h3 class="text-center text-xl font-semibold py-3 bg-blue-500 text-white rounded-t-lg" x-text="monthAndYear"></h3>
-{{$totalAttDays }}
+<h1 class=" font-bold text-3xl text-center mt-8" > 
+    Attendance  Days - {{$totalAttDays }}
+</h1>
             <!-- Calendar Table -->
-            <table class="w-full table-auto text-center">
+            <table class="w-full table-auto text-center mt-8">
                 <thead>
                     <tr class="bg-gray-200">
                         <th class="py-2">Sun</th>
@@ -25,8 +29,8 @@
                                     :class="{'bg-blue-500 text-white': isAttend(day)}"
                                     class="py-2 border border-gray-300"
                                     {{-- @click="$wire.storeAttendance(day)" --}}
-                                    @click="toggleDay(day)"
-                                    @click ="$wire.storeAttendance(day)"
+                                 @click="toggleDay(day)"
+                                    {{-- @click ="$wire.storeAttendance(day)" --}}
                                     >
                                 </td>
                             </template>
@@ -52,27 +56,18 @@
         return {
             months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             selectedMonth: @entangle('selectedMonth'),  // Using Livewire's entangle for binding
-            attDays : @entangle('attDay'),
+            selectedDays : @entangle('attDays'),
             selectedYear: new Date().getFullYear(),  // Default to current year
             monthAndYear: "", // Displayed month and year string
             calendar: [], // Array to hold the weeks of the current month
-            attDays: @json($attDays),
+            // selectedDays: @json($attDays),
 
             init() {
                 this.updateCalendar();
             },
 
 
-            toggleDay(day) {
-            if (this.attDays.includes(day)) {
-                this.attDays = this.attDays.filter(d => d !== day);
-            } else {
-                this.attDays.push(day);
-            }
-
-            
-
-        },
+         
 
 
 
@@ -104,10 +99,27 @@
                     this.calendar.push(week);  // Add the week to the calendar
                 }
             },
+            toggleDay(day) {
+            if (this.selectedDays?.includes(day)) {
+                this.selectedDays = this.selectedDays?.filter(d => d !== day); // Remove day
+            } else {
+                
+if(this.selectedDays){
+    this.selectedDays.push(day)
+}else{
+    this.selectedDays = [day];
+}
+             
+                
+            }
+
             
+            @this.storeAttendance(day);
+        },
+
             
             isAttend(day){
-                return this.attDays.includes(day);
+                return this.selectedDays?.includes(day);
 
             }
         };
