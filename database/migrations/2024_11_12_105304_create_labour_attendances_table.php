@@ -16,7 +16,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Staff::class)->constrained('staff')->cascadeOnDelete();
             $table->json('att_date')->nullable();
-            
+            $table->integer('month');
+            $table->integer('year');
             $table->timestamps();
         });
     }

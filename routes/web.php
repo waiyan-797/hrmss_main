@@ -130,6 +130,7 @@ use App\Livewire\Table\Table;
 use App\Livewire\Township\Township;
 use App\Livewire\Language;
 use App\Livewire\Leave\LeaveDate;
+use App\Livewire\LeaveCalendar;
 use App\Livewire\Promotion as LivewirePromotion;
 use App\Livewire\Reject;
 use App\Livewire\ReSubmit;
@@ -329,6 +330,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/labour',Labour::class)->name('labour');
     Route::get('/labour_view/{id?}' , LabourDetails::class )->name('labourDetails');
     Route::get('/calender/{id}' , AppointmentsCalendar::class)->name('calender');
+    Route::get('/leave-calender/{id}' , LeaveCalendar::class)->name('leaveCalendar');
     
 });
 
