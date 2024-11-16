@@ -31,9 +31,21 @@
         <x-input-error class="mt-2" :messages="$errors->get('transfer_remark')" />
     </div>
 
+    
     <div>
-        <x-input-label for="လက်ရှိဌာနခွဲ" :value="__('လက်ရှိဌာနခွဲ')" />
-        <x-select wire:model="current_division_id" :values="$divisions" placeholder="လက်ရှိဌာနခွဲ‌ရွေးပါ" id="current_division_id" name="current_division_id" class="mt-1 block w-full" required/>
+        <x-input-label for="current_division_id" :value="__('လက်ရှိဌာနခွဲ')" />
+        <x-select
+            :disabled="!auth()->user()->AdminHR()"
+            wire:model="current_division_id"
+            :values="$divisions"
+            placeholder="လက်ရှိဌာနခွဲ‌ရွေးပါ"
+            id="current_division_id"
+            name="current_division_id"
+            class="mt-1 block w-full"
+            required
+        />
+        <x-input-error class="mt-2" :messages="$errors->get('current_division_id')" />
+        
         <x-input-error class="mt-2" :messages="$errors->get('current_division_id')" />
     </div>
     <div>

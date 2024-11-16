@@ -202,7 +202,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             abort(404, 'File Not Found');
         }
     })->name('file')->where('path', '.*');
-    Route::get('/local_training_report', LocalTrainingReport::class)->name('local_training_report');
+    Route::get('/local_training_report/{id}', LocalTrainingReport::class)->name('local_training_report');
     Route::get('/local_training_report2', LocalTrainingReport2::class)->name('local_training_report2');
     // Route::get('/staff_report', ReportName::class)->name('staff_report');
     Route::get('/staff_report1', StaffReport1::class)->name('staff_report1');
@@ -220,11 +220,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pdf_staff_report_leave_3/{staff_id?}', LeaveDate::class)->name('pdf_staff_report_leave_3');
     Route::get('/pdf_staff_report_staff_list_2/{staff_id?}', StaffList2::class)->name('pdf_staff_report_staff_list_2');
     Route::get('/planning_accounting', PlanningAccounting::class)->name('planning_accounting');
-    Route::get('/investment_companies', InvestmentCompanies::class)->name('investment_companies');
-    Route::get('/investment_companies2', InvestmentCompanies2::class)->name('investment_companies2');
-    Route::get('/investment_companies3', InvestmentCompanies3::class)->name('investment_companies3');
-    Route::get('/investment_companies4', InvestmentCompanies4::class)->name('investment_companies4');
-    Route::get('/investment_companies5', InvestmentCompanies5::class)->name('investment_companies5');
+    Route::get('/allowe-male-female-staffs', InvestmentCompanies::class)->name('investment_companies');
+    Route::get('/inservice-male-female-staffs', InvestmentCompanies2::class)->name('investment_companies2');
+    Route::get('/allow-inservice-free-by-rank', InvestmentCompanies3::class)->name('investment_companies3');
+    Route::get('/allow-inservice-free-by-payscale', InvestmentCompanies4::class)->name('investment_companies4');
+    Route::get('/allow-inservice-free-by-same-rank', InvestmentCompanies5::class)->name('investment_companies5');
     Route::get('/investment_companies6', InvestmentCompanies6::class)->name('investment_companies6');
     Route::get('/investment_companies7', InvestmentCompanies7::class)->name('investment_companies7');
     Route::get('/investment_companies8', InvestmentCompanies8::class)->name('investment_companies8');

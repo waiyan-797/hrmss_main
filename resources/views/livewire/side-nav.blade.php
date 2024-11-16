@@ -151,7 +151,7 @@
                         </svg>
                     '
                     :lists="[
-                        ['route_name' => 'local_training_report', 'name' => 'တတ်ရောက်ခဲ့သည့်သင်တန်း(၁)'],
+                        // ['route_name' => 'local_training_report', 'name' => 'တတ်ရောက်ခဲ့သည့်သင်တန်း(၁)'],
                         ['route_name' => 'local_training_report2', 'name' => 'တတ်ရောက်ခဲ့သည့်သင်တန်း(၂)'],
                         ['route_name' => 'staff_report', 'name' => 'ပင်စင်ကိစ္စ(မနှင်းစု)'],
                         ['route_name' => 'staff_report1', 'name' => 'လက်ရှိဌာနရောက်ရှိရက်စွဲ'],

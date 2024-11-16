@@ -101,7 +101,7 @@
  !(auth()->user()->role_id != 2 && ($staff?->status_id == 2 ||  $staff?->status_id == 4) )
 
                           )
-                        <x-primary-button>{{ $confirm_add == 1 ? __('Submit')  : 
+                        <x-primary-button>{{ $confirm_add == 1 ? __('Save')  : 
                          ( auth()->user()->role_id != 2   ?
                            $staff?->status_id  == 3  ?     __('Resubmit SaveDraft')  :   ( $staff?->status_id == 1 && isset($staff?->comment) 
                              ?
@@ -121,18 +121,30 @@ wire:click='rejectStaff'> --}}
 
 
                         @if (auth()->user()->role_id == 2)
-                            <button type='button'
+                            <button
+                             type='button'
                                 class='inline-flex items-center px-4 py-2 bg-red-700 border-transparent rounded-md font-medium text-sm text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 font-arial'
                                 wire:click='rejectStaff'>{{ __('Reject') }}</button>
                                 @endif
                                 @endif
 
+                            
 
                     </div>
                 </div>
 
 
+                @if($staff?->isInSaveDraft() )
+                <x-primary-button 
+                
+                class='inline-flex items-center px-4 py-2 !bg-blue-700 border-transparent rounded-md font-medium text-sm text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 font-arial'
+                wire:click='saveDraft'  
+                >
+                {{ __('Save Draft ') }} 
+               
+            </x-primary-button>
 
+                @endif 
             </form>
         </div>
     </div>

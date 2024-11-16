@@ -15,7 +15,7 @@ class LocalTrainingReport extends Component
 {
     public $trainingLocation;
 
-    public $nameSearch, $staffs;
+    public  $staff;
     public function go_pdf()
     {
 
@@ -89,17 +89,20 @@ class LocalTrainingReport extends Component
         return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
     }
 
+
+    public function mount($id){
+        $this->staff = Staff::findOrFail($id);
+    }
     public function render()
     {
+        
 
-        $staffQuery  = Staff::query();
-        if ($this->nameSearch) {
-            $staffQuery->where('name', 'like', '%' . $this->nameSearch . '%');
-        }
+       
+      
 
-        $this->staffs = $staffQuery->get();
+       
         return view('livewire.local-training-report.local-training-report', [
-            'staffs' => $this->staffs,
+            'staffs' => $this->staff,
         ]);
     }
 }

@@ -90,7 +90,12 @@ class Staff extends Component
     {
         $staffSearch = '%' . $this->staff_search . '%';
         $this->modal_title = 'Choose Report Type';
-        $staffQuery = ModelsStaff::query()->where('status_id' , $this->status);
+        $staffQuery = ModelsStaff::query()->where('status_id' , $this->status)
+        ->when(! auth()->user()->AdminHR() , function($q){
+            $q->where('current_division_id' , auth()->user()->division_id);
+        })
+        
+        ;
         if ($this->staff_search) {
             $this->resetPage();
             $staffQuery->where(function ($q) use ($staffSearch) {

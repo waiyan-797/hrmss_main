@@ -634,4 +634,9 @@ public function labourAtt($year, $month)
     return $count;
 }
 
+
+    public function isInSaveDraft(){
+        return $this->status_id == 1 ;
+    }
+
 }

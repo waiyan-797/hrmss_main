@@ -57,10 +57,14 @@ use Livewire\WithFileUploads;
 use App\Models\LeaveType;
 use App\Models\SocialActivity;
 use App\Models\StaffLanguage;
+use Illuminate\Support\Facades\Auth;
 
 class StaffDetail extends Component
 {
     use WithFileUploads;
+
+public $saveDraftCheck  ;
+
     public $comment  ,$displayAlertBox ;
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     public $staff;
@@ -266,7 +270,9 @@ class StaffDetail extends Component
     }
 
     public function mount()
-    {
+    {   
+
+        $this->saveDraftCheck = false ;
         if ($this->staff_id) {
             $this->staff = Staff::find($this->staff_id);
             $this->initializeArrays($this->staff_id);
@@ -573,13 +579,15 @@ class StaffDetail extends Component
 
     private function fillJobInfo($staff)
     {
+        
         $this->current_rank_id = $staff->current_rank_id;
         $this->current_rank_date = $staff->current_rank_date;
         $this->current_department_id = $staff->current_department_id;
         $this->transfer_department_id = $staff->transfer_department_id;
         $this->transfer_remark = $staff->transfer_remark;
         $this->government_staff_started_date = $staff->government_staff_started_date;
-        $this->current_division_id = $staff->current_division_id;
+        $this->current_division_id =  $staff->current_division_id ??  auth()->user()->division_id;
+        
         $this->side_department_id = $staff->side_department_id;
         $this->side_division_id = $staff->side_division_id;
         $this->salary_paid_by = $staff->salary_paid_by;
@@ -873,11 +881,13 @@ class StaffDetail extends Component
     public function submit_staff()
     {
         $rules = $this->validate_rules();
-        $this->validate($rules);
+        // $this->validate($rules);
         $staff = Staff::find($this->staff_id);
         if ($this->photo) {
+            
             $_photo = Storage::disk('upload')->put('staffs', $this->photo);
             if (($staff != null) && ($old = $staff->staff_photo)) {
+                $staff->staff_photo = null ;
                 Storage::disk('upload')->delete($old);
             }
         }
@@ -885,6 +895,8 @@ class StaffDetail extends Component
         if ($this->nrc_front) {
             $_nrc_front = Storage::disk('upload')->put('staffs', $this->nrc_front);
             if (($staff != null) && ($old = $staff->nrc_front)) {
+                $staff->nrc_front = null ;
+
                 Storage::disk('upload')->delete($old);
             }
         }
@@ -892,6 +904,8 @@ class StaffDetail extends Component
         if ($this->nrc_back) {
             $_nrc_back = Storage::disk('upload')->put('staffs', $this->nrc_back);
             if (($staff != null) && ($old = $staff->nrc_back)) {
+                $staff->nrc_back = null ;
+
                 Storage::disk('upload')->delete($old);
             }
         }
@@ -964,7 +978,7 @@ class StaffDetail extends Component
             'transfer_department_id' => $this->transfer_department_id,
             'transfer_remark' => $this->transfer_remark,
             'government_staff_started_date' => $this->government_staff_started_date,
-            'current_division_id' => $this->current_division_id,
+            'current_division_id' => $this->current_division_id ?? auth()->user()->division_id,
             'side_department_id' => $this->side_department_id,
             'side_division_id' => $this->side_division_id,
             'salary_paid_by' => $this->salary_paid_by,
@@ -1045,26 +1059,35 @@ class StaffDetail extends Component
 
         $staff_create = $dataMapping[$this->tab] ?? $dataMapping['default'];
         // before saftdraft  // $staff_create['status_id' ]  =  auth()->user()->AdminHR() ? 1 : ($staff->status_id == 2 ? 4 :  3 ); // 1 approve :   2 ->reject  // 3 pending // 4 resubmit
+        $staff_create['current_division_id'] = $this->current_division_id ?? auth()->user()->division_id;
 
 
-    
-        // wtih saftdraft 
-        $staff_create['status_id'] = $staff?->status_id == 1  ? (  isset($staff?->comment) ? 4 :   2)  : 1 ;
-        if($staff?->status_id == 2 || $staff?->status_id == 4 ){
+        
 
-            
-            $staff_create['status_id'] = 5;
+        if( $this->saveDraftCheck == true ){
+            $staff_create['status_id'] = 1 ;
+
+        }else{
+ // wtih saftdraft 
+ $staff_create['status_id'] = $staff?->status_id == 1  ? (  isset($staff?->comment) ? 4 :   2)  : 1 ;
+ if($staff?->status_id == 2 || $staff?->status_id == 4 ){
+
+     
+     $staff_create['status_id'] = 5;
+ }
         }
-        // dd($staff_create)
-if(            $staff_create['status_id'] == 5){
+        
+       
+if($staff_create['status_id'] == 5){
     $staff_create['comment'] = null ;
 }
+
+
         $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
         $this->staff_id = $staff->id;
         $this->staff_photo = $staff->staff_photo;
         $this->staff_nrc_front = $staff->nrc_front;
         $this->staff_nrc_back = $staff->nrc_back;
-
         switch ($this->tab) {
             case 'personal_info':
                 $this->saveEducations($staff->id);
@@ -1090,21 +1113,28 @@ if(            $staff_create['status_id'] == 5){
                 $this->savePunishments($staff->id);
                 break;
         }
+
         $this->reset(['photo', 'nrc_front', 'nrc_back']);
         $this->initializeArrays($this->staff_id);
+
         $this->loadStaffData($staff->id);
+
         $this->message = 'Saved Successfully';
         if($staff->status_id){
             
-            return redirect()->route('staff',['status'=>  $staff->status_id  ]);
+                redirect()->route('staff',['status'=>  $staff->status_id  ]);
+
+            
         }
+        
+
     }
 
     private function saveAbroads($staffId)
     {
         Abroad::where('staff_id', $staffId)->delete();
         foreach ($this->abroads as $abroad) {
-            // dd($abroad);
+            
             Abroad::create([
                 'staff_id' => $staffId,
                 'country_id' => $abroad['country'],
@@ -1120,6 +1150,7 @@ if(            $staff_create['status_id'] == 5){
                 'position' => $abroad['position'],
             ]);
         }
+        
     }
 
     private function saveSocials($staffId)
@@ -1603,4 +1634,11 @@ if(            $staff_create['status_id'] == 5){
         $this->displayAlertBox = false ;
 
      }
+     
+     public function saveDraft(){
+        $this->saveDraftCheck = true ;
+// $this->submit_staff();
+     }
+
+
 }

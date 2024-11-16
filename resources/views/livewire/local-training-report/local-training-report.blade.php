@@ -18,7 +18,7 @@
 
     </div> --}}
 <div  class=" w-52">
-    <x-text-input wire:model.live='nameSearch'/>
+        
 
 </div>
     <x-select   class=" mt-11"
@@ -46,26 +46,9 @@
                             <th class="border border-black text-center p-2">သင်တန်းအမျိုးအစား</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
-                        @foreach($staffs as $staff)
-                        <tr>
-                            <td class="border border-black text-right p-1">{{ $loop->index + 1 }}</td>
-                            <td class="border border-black text-right p-1">{{ $staff->name }}</td>
-                            <td class="border border-black text-right p-1">{{ $staff->current_rank->name }}</td>
-                            @foreach ($staff->trainings->whereIn('training_location_id', $trainingLocation ??  [1,2]) as $training)
-
-                                 <td class="border border-black text-center p-2">{{ $training->training_type->name }}</td>
-                                <td class="border border-black text-center p-2">{{ $training->from_date }}</td>
-                                <td class="border border-black text-center p-2">{{ $training->to_date }}</td>
-                                <td class="border border-black text-center p-2">{{ $training->location }}</td>
-                                <td class="border border-black text-center p-2">{{ $training->training_location?->name }}</td>
-
-                            @endforeach
-                        </tr>
-                        @endforeach
-                    </tbody> --}}
+                   
                     <tbody>
-                        @foreach($staffs as $staff)
+                        
                             @php $firstTraining = $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->first(); @endphp
                             @if($firstTraining)
                                 <tr>
@@ -93,7 +76,7 @@
                                     </tr>
                                 @endforeach
                             @endif
-                        @endforeach
+                                    
                     </tbody>
 
                 </table>
