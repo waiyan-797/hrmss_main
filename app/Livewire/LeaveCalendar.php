@@ -1,8 +1,10 @@
 <?php
 namespace App\Livewire;
 
+use App\Livewire\Payscale\Payscale;
 use App\Models\Staff;
 use App\Models\LabourAttendance;
+use App\Models\Payscale as ModelsPayscale;
 use Livewire\Component;
 use Carbon\Carbon;
 
@@ -14,11 +16,19 @@ class LeaveCalendar extends Component
     public $attendances = [];
     public $totalAttDays ; 
     public $attDays;
-// public $attendance;
+    public $clone ; 
+    public $min_salary ; 
+    public $increment ; 
+// public $attendance;p
+public $dailyServiceFee;
+public $dateToAdd;
     public function mount($id)
     {
         $this->staff = Staff::findOrFail($id);
         $this->selectedMonth = Carbon::now()->format('Y-m');
+        $labourPayscale =  ModelsPayscale::where('name' , '4800')->first();
+        $this->dailyServiceFee = $labourPayscale->max_salary;
+
     }
 
     public function updateMonth()
@@ -68,6 +78,15 @@ class LeaveCalendar extends Component
         }
     }
     
+    public function updatedselectedMonth(){
+        $this->dateToAdd = null ;
+    }
+
+
+    // public function updatedselectedyear(){
+    //     $this->dateToAdd = null ;
+    // }
+
 
     public function render()
     {
@@ -80,10 +99,33 @@ class LeaveCalendar extends Component
           $this->totalAttDays  = $this->staff->labourAtt($this->year ,$this->month);
         return view('livewire.leave-calendar'
         ,
-        ["attDays"=>$this->attDays]
+        [
+            "attDays"=>$this->attDays ,
+        
+        "dateToAdd" => $this->dateToAdd 
+        ] 
 
     
     
     );
+    }
+
+    public function updateAtt(){
+
+
+        foreach( $this->dateToAdd  as $date){
+            $this->storeAttendance($date);
+
+        }
+
+    }
+
+
+    public function storeDate($date){
+         
+            if(!empty($date)){
+                $this->dateToAdd[] = $date;
+
+            }
     }
 }

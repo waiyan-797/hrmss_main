@@ -29,13 +29,13 @@
     <label for="status_code" class="block mb-1 text-gray-600 dark:text-green-500 font-arial text-sm">Status</label>
 
         <select
-            wire:model='status' id="status_code"
+            wire:model.live='status' id="status_code"
             class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
         >
-            <option value="0">
+            <option value="1">
                 Active
             </option>
-            <option value="1">
+            <option value="0">
                 Inactive
             </option>
         </select>

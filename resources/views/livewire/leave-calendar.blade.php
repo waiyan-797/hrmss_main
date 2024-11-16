@@ -1,13 +1,11 @@
-<div x-data="calendar()"
-
-x-init="init()">
-    <div class="  w-[60rem] mt-20 ms-20">
+<div x-data="calendar()" x-init="init()">
+    <div class="w-[60rem] mt-20 ms-20">
         <div class="bg-white shadow-lg rounded-lg">
             <!-- Calendar header showing selected month and year -->
             <h3 class="text-center text-xl font-semibold py-3 bg-blue-500 text-white rounded-t-lg" x-text="monthAndYear"></h3>
-<h1 class=" font-bold text-3xl text-center mt-8" > 
-    Attendance  Days - {{$totalAttDays }}
-</h1>
+            <h1 class="font-bold text-3xl text-center mt-8">
+                Salary = {{$totalAttDays * $dailyServiceFee}}
+            </h1>
             <!-- Calendar Table -->
             <table class="w-full table-auto text-center mt-8">
                 <thead>
@@ -25,17 +23,17 @@ x-init="init()">
                     <template x-for="(week, i) in calendar" :key="i">
                         <tr>
                             <template x-for="(day, j) in week" :key="j">
-                                <td x-text="day"
-                                    :class="{'bg-blue-500 text-white': isAttend(day)}"
+                                <td
+                                    x-text="day"
+                                    :class="{
+                                        'bg-blue-500 text-white': isAttend(day), 
+                                        'bg-orange-500 text-white': isChanged(day)
+                                    }"
                                     class="py-2 border border-gray-300"
-                                    {{-- @click="$wire.storeAttendance(day)" --}}
-                                 @click="toggleDay(day)"
-                                    {{-- @click ="$wire.storeAttendance(day)" --}}
-                                    >
+                                    @click="toggleDay(day)"
+                                >
                                 </td>
                             </template>
-                            
-                            
                         </tr>
                     </template>
                 </tbody>
@@ -43,11 +41,12 @@ x-init="init()">
 
             <!-- Month input with Alpine.js model binding and Livewire sync -->
             <input type="month" x-model="selectedMonth" @change="updateCalendar(); $wire.updateMonth(selectedMonth)">
-        </div>
 
-        <!-- Hidden Year and Month Inputs -->
-        <input type="hidden" x-model="selectedYear">
-        <input type="hidden" x-model="selectedMonth">
+            <!-- Hidden Inputs (if needed) -->
+            <input type="hidden" x-model="selectedYear">
+
+            <button wire:click="updateAtt" class="button bg-blue-500 px-9 py-3 mt-5 rounded">Save</button>
+        </div>
     </div>
 </div>
 
@@ -56,20 +55,15 @@ x-init="init()">
         return {
             months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             selectedMonth: @entangle('selectedMonth'),  // Using Livewire's entangle for binding
-            selectedDays : @entangle('attDays'),
+            selectedDays: @entangle('attDays'),
             selectedYear: new Date().getFullYear(),  // Default to current year
+            toChangedDay: @entangle('dateToAdd'), // Dates to add (changed)
             monthAndYear: "", // Displayed month and year string
             calendar: [], // Array to hold the weeks of the current month
-            // selectedDays: @json($attDays),
 
             init() {
                 this.updateCalendar();
             },
-
-
-         
-
-
 
             updateCalendar() {
                 const month = this.selectedMonth.split('-')[1] - 1; // Get the numeric month
@@ -99,28 +93,26 @@ x-init="init()">
                     this.calendar.push(week);  // Add the week to the calendar
                 }
             },
+
             toggleDay(day) {
-            if (this.selectedDays?.includes(day)) {
-                this.selectedDays = this.selectedDays?.filter(d => d !== day); // Remove day
-            } else {
-                
-if(this.selectedDays){
-    this.selectedDays.push(day)
-}else{
-    this.selectedDays = [day];
-}
-             
-                
-            }
+                // if (!day) return;  // Prevent clicking on empty cells
 
-            
-            @this.storeAttendance(day);
-        },
+                // if (this.toChangedDay?.includes(day)) {
+                //     this.toChangedDay = this.toChangedDay.filter(d => d !== day);  // Remove day if already selected
+                // } else {
+                //     this.toChangedDay.push(day);  // Add day if not already selected
+                // }
 
-            
-            isAttend(day){
+                // Trigger Livewire method to handle attendance
+                @this.storeDate(day);
+            },
+
+            isAttend(day) {
                 return this.selectedDays?.includes(day);
+            },
 
+            isChanged(day) {
+                return this.toChangedDay?.includes(day);
             }
         };
     }

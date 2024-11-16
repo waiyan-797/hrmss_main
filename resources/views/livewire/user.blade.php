@@ -7,8 +7,8 @@
                 'id' => $user_id,
                 'title' => 'Users',
                 'search_id' => 'user_search',
-                'columns' => ['id', 'name', 'email','role id' , 'division'  ,'image',  'action' ] ,
-                'column_vals' => ['name','email','role'  ,'division','avatar' ],
+                'columns' => ['id', 'name', 'email','role id' , 'division'  , 'status'  ,'image',  'action' ] ,
+                'column_vals' => ['name','email','role'  ,'division'  , 'status' ,'avatar' ],
                 'disabledMode' => 'toggle' ,
             ])
         </div>
