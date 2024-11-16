@@ -5,6 +5,7 @@ use App\Livewire\AwardType\AwardType;
 use App\Livewire\BloodType\BloodType;
 use App\Livewire\Country\Country;
 use App\Livewire\Department;
+use App\Livewire\Depromotion;
 use App\Livewire\District\District;
 use App\Livewire\Education\Education;
 use App\Livewire\EducationGroup\EducationGroup;
@@ -183,7 +184,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/promotion/{staff_id}', LivewirePromotion::class)->name('staff_promotion'); //no longer use 
     Route::get('/increment', Increment::class)->name('increment'); //no longer use 
     Route::get('/retirement/{staff_id}', Retirement::class)->name('staff_retirement'); //no longer use 
-
+    Route::get('/depromotion',Depromotion::class)->name('depromotion');
+    Route::get('/depromotion/{staff_id}',Depromotion::class)->name('staff_depromotion');
 
     Route::get('/increment/{staff_id}', Increment::class)->name('staff_increment'); //currently use
     Route::get('/staff_detail/{confirm_add?}/{confirm_edit?}/{staff_id?}/{tab?}', StaffDetail::class)->name('staff_detail');
@@ -210,43 +212,43 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pdf_staff_report19/{staff_id?}', PdfStaffReport19::class)->name('pdf_staff_report19');
     Route::get('/pdf_staff_report71/{staff_id?}', PdfStaffReport71::class)->name('pdf_staff_report71');
     Route::get('/planning_accounting', PlanningAccounting::class)->name('planning_accounting');
-    Route::get('/investment_companies', InvestmentCompanies::class)->name('investment_companies');
-    Route::get('/investment_companies2', InvestmentCompanies2::class)->name('investment_companies2');
-    Route::get('/investment_companies3', InvestmentCompanies3::class)->name('investment_companies3');
-    Route::get('/investment_companies4', InvestmentCompanies4::class)->name('investment_companies4');
-    Route::get('/investment_companies5', InvestmentCompanies5::class)->name('investment_companies5');
-    Route::get('/investment_companies6', InvestmentCompanies6::class)->name('investment_companies6');
-    Route::get('/investment_companies7', InvestmentCompanies7::class)->name('investment_companies7');
-    Route::get('/investment_companies8', InvestmentCompanies8::class)->name('investment_companies8');
-    Route::get('/investment_companies9', InvestmentCompanies9::class)->name('investment_companies9');
-    Route::get('/investment_companies10', InvestmentCompanies10::class)->name('investment_companies10');
-    Route::get('/investment_companies11', InvestmentCompanies11::class)->name('investment_companies11');
-    Route::get('/investment_companies12', InvestmentCompanies12::class)->name('investment_companies12');
-    Route::get('/investment_companies13', InvestmentCompanies13::class)->name('investment_companies13');
-    Route::get('/investment_companies14', InvestmentCompanies14::class)->name('investment_companies14');
-    Route::get('/investment_companies15', InvestmentCompanies15::class)->name('investment_companies15');
-    Route::get('/march_salary_list', MarchSalaryList::class)->name('march_salary_list');
-    Route::get('/october_salary_list', OctoberSalaryList::class)->name('october_salary_list');
+    Route::get('/allowe-male-female-staffs', InvestmentCompanies::class)->name('investment_companies');
+    Route::get('/inservice-male-female-staffs', InvestmentCompanies2::class)->name('investment_companies2');
+    Route::get('/allow-inservice-free-by-rank', InvestmentCompanies3::class)->name('investment_companies3');
+    Route::get('/allow-inservice-free-by-payscale', InvestmentCompanies4::class)->name('investment_companies4');
+    Route::get('/allow-inservice-free-by-same-rank', InvestmentCompanies5::class)->name('investment_companies5');
+    Route::get('/action-completed-ongoing', InvestmentCompanies6::class)->name('investment_companies6');
+    Route::get('/napata-reach-strength', InvestmentCompanies7::class)->name('investment_companies7');
+    Route::get('/departmental-change-strength-report', InvestmentCompanies8::class)->name('investment_companies8');
+    Route::get('/dismissal-fired-employee', InvestmentCompanies9::class)->name('investment_companies9');
+    Route::get('/monthly-workforce-summary', InvestmentCompanies10::class)->name('investment_companies10');
+    Route::get('/over-10-under-10-pension-list', InvestmentCompanies11::class)->name('investment_companies11');
+    Route::get('/pension-issue', InvestmentCompanies12::class)->name('investment_companies12');
+    Route::get('/degree-related-list', InvestmentCompanies13::class)->name('investment_companies13');
+    Route::get('/organization-polo-headquarters', InvestmentCompanies14::class)->name('investment_companies14');
+    Route::get('/team-polo-regional', InvestmentCompanies15::class)->name('investment_companies15');
+    Route::get('/salary-negotiation-promotion', MarchSalaryList::class)->name('march_salary_list');
+    Route::get('/salary-adjustment-annual-increase', OctoberSalaryList::class)->name('october_salary_list');
     Route::get('/permanent_staff', PermanentStaff::class)->name('permanent_staff');
-    Route::get('/staff_salary_list', StaffSalaryList::class)->name('staff_salary_list');
-    Route::get('/staff_salary_list2', StaffSalaryList2::class)->name('staff_salary_list2');
-    Route::get('/staff_salary_list3', StaffSalaryList3::class)->name('staff_salary_list3');
-    Route::get('/staff_salary_list4', StaffSalaryList4::class)->name('staff_salary_list4');
-    Route::get('/yangon_office_staff', YangonOfficeStaff::class)->name('yangon_office_staff');
-    Route::get('/yangon_office_staff2', YangonOfficeStaff2::class)->name('yangon_office_staff2');
-    Route::get('/january_salary_list', JanuarySalaryList::class)->name('january_salary_list');
-    Route::get('/april_salary_list', AprilSalaryList::class)->name('april_salary_list');
-    Route::get('/payscale_list', PayscaleList::class)->name('payscale_list');
-    Route::get('/staff_salary', StaffSalary::class)->name('staff_salary');
-    Route::get('/salary_list', SalaryList::class)->name('salary_list');
-    Route::get('/no_salary_leave', NoSalaryLeave::class)->name('no_salary_leave');
-    Route::get('/started_salary_list', StartedSalaryList::class)->name('started_salary_list');
-    Route::get('/finance_salary_list', FinanceSalaryList::class)->name('finance_salary_list');
-    Route::get('/yangon_staff_april_salary_list', YangonStaffAprilSalaryList::class)->name('yangon_staff_april_salary_list');
-    Route::get('/finance_year_salary_list', FinanceYearSalaryList::class)->name('finance_year_salary_list');
-    Route::get('/information_list', InformationList::class)->name('information_list');
+    Route::get('/payroll-summary-1', StaffSalaryList::class)->name('staff_salary_list');
+    Route::get('/payroll-summary-2', StaffSalaryList2::class)->name('staff_salary_list2');
+    Route::get('/payroll-summary-3', StaffSalaryList3::class)->name('staff_salary_list3');
+    Route::get('/payroll-summary-4', StaffSalaryList4::class)->name('staff_salary_list4');
+    Route::get('/payroll-1', YangonOfficeStaff::class)->name('yangon_office_staff');
+    Route::get('/payroll-2', YangonOfficeStaff2::class)->name('yangon_office_staff2');
+    Route::get('/payroll-3', JanuarySalaryList::class)->name('january_salary_list');
+    Route::get('/april-list-yangon-headquarters', AprilSalaryList::class)->name('april_salary_list');
+    Route::get('/income-tax-calculation-form-salary', PayscaleList::class)->name('payscale_list');
+    Route::get('/staffing-payroll-status', StaffSalary::class)->name('staff_salary');
+    Route::get('/average-salary-calculation', SalaryList::class)->name('salary_list');
+    Route::get('/unpaid-leave-calculation', NoSalaryLeave::class)->name('no_salary_leave');
+    Route::get('/employee-commencement-calculation', StartedSalaryList::class)->name('started_salary_list');
+    Route::get('/payroll-for-financial-year', FinanceSalaryList::class)->name('finance_salary_list');
+    Route::get('/april-headquarters-yangon', YangonStaffAprilSalaryList::class)->name('yangon_staff_april_salary_list');
+    Route::get('/fiscal-year-salary', FinanceYearSalaryList::class)->name('finance_year_salary_list');
+    Route::get('/same-rank-gender-agegroup', InformationList::class)->name('information_list');
     Route::get('/last_pay_certificate', LastPayCertificate::class)->name('last_pay_certificate');
-    Route::get('/detail_staff_salary', DetailStaffSalary::class)->name('detail_staff_salary');
+    Route::get('/employee-salary-bill', DetailStaffSalary::class)->name('detail_staff_salary');
     Route::get('/staff_list1', StaffList1::class)->name('staff_list1');
     Route::get('/staff_list2', StaffList2::class)->name('staff_list2');
     Route::get('/staff_list3', StaffList3::class)->name('staff_list3');
@@ -256,8 +258,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/blood_staff_list6', BloodStaffList6::class)->name('blood_staff_list6');
     Route::get('/we10over_staff_list', WE10overStaffList::class)->name('we10over_staff_list');
     Route::get('/age18over_staff_list', Age18OverStaffList::class)->name('age18over_staff_list');
-    Route::get('/leaves', LeaveNuberPercent::class)->name('leaves');
-    Route::get('/leaves2', LeaveNuberPercent2::class)->name('leaves2');
+    Route::get('/allowance-number-percentage', LeaveNuberPercent::class)->name('leaves');
+    Route::get('/percentages-by-most-permissiveness', LeaveNuberPercent2::class)->name('leaves2');
     Route::get('/leaves3', LeaveNuberPercent3::class)->name('leaves3');
     Route::get('/leaves4', LeaveNuberPercent4::class)->name('leaves4');
     Route::get('/leaves5', LeaveNuberPercent5::class)->name('leaves5');
@@ -271,7 +273,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/report4', Report4::class)->name('report4');
     Route::get('/pension_report', PensionReport::class)->name('pension_report');
     Route::get('/pensioner', Pensioner::class)->name('pensioner');
-    Route::get('/employee_record_report', EmpoyeeRecordReport::class)->name('employee_record_report');
+    Route::get('/resignation-list', EmpoyeeRecordReport::class)->name('employee_record_report');
     Route::get('/finance_pension_age62', FinancePensionAge62::class)->name('finance_pension_age62');
     Route::get('/religion_report', ReligionReport::class)->name('religion_report');
     Route::get('/language_report', LanguageReport::class)->name('language_report');
@@ -281,7 +283,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/education_report', EducationReport::class)->name('education_report');
     Route::get('/other_qualification_report', OtherQualificationReport::class)->name('other_qualification_report');
     Route::get('/punishment_report', PunishmentReport::class)->name('punishment_report');
-    Route::get('/rank_salary_list', RankSalaryList::class)->name('rank_salary_list');
+    Route::get('/list-of-salary-rates-by-position', RankSalaryList::class)->name('rank_salary_list');
     Route::get('/staff_report', StaffReport::class)->name('staff_report');
     Route::get('/pdf_17/{staff_id?}', function ($staff_id) {
         $staff = ModelsStaff::find($staff_id);

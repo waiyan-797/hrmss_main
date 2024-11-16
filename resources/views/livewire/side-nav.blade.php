@@ -119,13 +119,13 @@
                         ['route_name' => 'investment_companies5', 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(အဆင့်တူ)'],
                         ['route_name' => 'investment_companies6', 'name' => 'အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း'],
                         ['route_name' => 'investment_companies7', 'name' => 'နပတရောက်ရှိအင်အား'],
-                        ['route_name' => 'investment_companies8', 'name' => 'အိမ်ထောင်သည်'],
+                        ['route_name' => 'investment_companies8', 'name' => 'ဌာနအလိုက်ပြောင်း‌ရွေ့အင်အားစာရင်း'],
                         ['route_name' => 'investment_companies9', 'name' => 'ဝန်ထမ်းအဖြစ်မှထုတ်ပါယ်/ထုတ်ပစ်'],
                         ['route_name' => 'investment_companies10', 'name' => 'လအလိုက်ဝန်ထမ်းအင်အားစာရင်းချုပ်'],
                         ['route_name' => 'investment_companies11', 'name' => '၁၀နှစ်အထက်/၁၀နှစ်အောက်ပင်စင်ပို့စာရင်း'],
                         ['route_name' => 'investment_companies12', 'name' => 'ပင်စင်ကိစ္စ(မနှင်းစု)'],
-                        ['route_name' => 'investment_companies13', 'name' => 'ဖွဲ့ခန့်ပိုလိုရုံးချုပ်'],
-                        ['route_name' => 'investment_companies14', 'name' => 'ဘွဲ့နှင့်သက်ဆိုင်သည့်စာရင်း'],
+                        ['route_name' => 'investment_companies13', 'name' => 'ဘွဲ့နှင့်သက်ဆိုင်သည့်စာရင်း'],
+                        ['route_name' => 'investment_companies14', 'name' => 'ဖွဲ့ခန့်ပိုလိုရုံးချုပ်'],
                         ['route_name' => 'investment_companies15', 'name' => 'ဖွဲ့ခန့်ပိုလို(တိုင်းဒေသကြီး)'],
                     ]" />
             </li>
@@ -227,7 +227,7 @@
                         ['route_name' => 'finance_salary_list', 'name' => 'ဘဏ္ဍာရေးနှစ်အတွက် လစာငွေထုတ်ယူမည့် စာရင်း'],
                         ['route_name' => 'yangon_staff_april_salary_list', 'name' => 'ရန်ကုန် ရန်ကုန်ရုံးချုပ်ရှိဝန်ထမ်းများ၏ဧပြီလစာရင်း'],
                         ['route_name' => 'finance_year_salary_list', 'name' => 'ဘဏ္ဍာရေးနှစ်လစာ'],
-                        ['route_name' => 'information_list', 'name' => 'InformationList'],
+                        ['route_name' => 'information_list', 'name' => 'အဆင့်တူ ကျားမ အသက်အုပ်စု'],
                         ['route_name' => 'last_pay_certificate', 'name' => 'LastPayCertificate'],
                         ['route_name' => 'detail_staff_salary', 'name' => 'ဝန်ထမ်းများ၏ လစာငွေတောင်းခံလွှာ'],
 

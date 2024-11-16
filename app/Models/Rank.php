@@ -30,6 +30,15 @@ class Rank extends Model
     {
         return $this->hasMany(Posting::class);
     }
+    // public function depromotions()
+    // {
+    //     return $this->hasMany(Depromotion::class, 'previous_rank_id');
+    // }
+    public function depromotions()
+{
+    return $this->hasMany(Depromotion::class, 'depromoted_rank_id');
+}
+
 
 
 }

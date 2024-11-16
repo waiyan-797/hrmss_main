@@ -15,7 +15,8 @@ class LocalTrainingReport extends Component
 {
     public $trainingLocation;
 
-    public $nameSearch, $staffs;
+    public $staffs;
+     public $nameSearch;
     public function go_pdf()
     {
 
@@ -98,6 +99,7 @@ class LocalTrainingReport extends Component
         }
 
         $this->staffs = $staffQuery->get();
+        // $staffs = Staff::get();
         return view('livewire.local-training-report.local-training-report', [
             'staffs' => $this->staffs,
         ]);
