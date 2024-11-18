@@ -65,12 +65,12 @@ public $divisions;
         ]);
     }
 
-    public function updateStatus($id)
-    {
-        $user = ModelsUser::find($id);
-        $user->status = !$user->status;
-        $user->update();
-    }
+    // public function updateStatus($id)
+    // {
+    //     $user = ModelsUser::find($id);
+    //     $user->status = !$user->status;
+    //     $user->update();
+    // }
 
     //add new
     public function add_new()
@@ -104,6 +104,7 @@ public $divisions;
             'role_id' => $this->role_id,
             'password' => $this->password,
             'email' => $this->email ,
+            'status'=>$this->status ,
             'division_id' => $this->division_id
         ]);
         $this->message = 'Created successfully.';
@@ -116,6 +117,7 @@ public $divisions;
     public function edit_modal($id)
     {
         $this->resetValidation($this->rules());
+        
         $this->confirm_add = false;
         $this->confirm_edit = true;
         $this->user_id = $id;
@@ -133,6 +135,7 @@ public $divisions;
     {
         $this->validate($this->rules());
 
+        
         ModelsUser::findOrFail($this->user_id)->update([
             'name' => $this->user_name,
             'role_id' => $this->role_id,

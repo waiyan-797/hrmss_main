@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('password');
             $table->foreignId('division_id')->nullable();
+            $table->boolean('status')->default(0)->nullable();
 
             $table->foreignIdFor(Role::class)->nullable()->constrained()->nullOnDelete();
             $table->string('email')->unique();

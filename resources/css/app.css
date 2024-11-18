@@ -13,3 +13,13 @@
 .customeHeight{
     /* height: 400vh !important; */
 }
+
+.leave{
+    /* background-color: lightgreen  !important; */
+}
+
+.no_leave{
+    /* background-color:  !important; */
+    background-color: lightgreen  !important;
+
+}

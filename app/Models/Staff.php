@@ -571,4 +571,72 @@ public function staffSalaryYear($year)
     return $list;
 }
 
+
+ public function  Labour(){
+
+       return  Staff::where(
+        function($query) {
+             $query->whereHas('payscale' ,
+              function($subQuery)  {
+                $subQuery->where('staff_type_id' , 3 );
+            });
+        }
+
+    );
+        // $this->payscale->staff_type == 3 ;
+}
+
+
+public function labourAttdence(){
+    return $this->hasMany(LabourAttendance::class);
+}
+
+
+public function getAttDate($year, $month){
+    $days= [ ];
+    $attendance = $this->labourAttdence()
+    ->where('year', $year)
+    ->where('month', $month)
+    ->first();
+
+if ($attendance) {
+    // Decode the 'att_date' field, which contains an array of day numbers
+    $attDates = json_decode($attendance->att_date, true);
+    
+    // Count the days (in 'att_date') for the specific month and year
+    return $attDates;
+}
+}
+
+
+public function labourAtt($year, $month)
+{
+    $count = 0;
+    
+    
+    
+    $attendance = $this->labourAttdence()
+        ->where('year', $year)
+        ->where('month', $month)
+        ->first();
+
+    if ($attendance) {
+        
+        $attDates = json_decode($attendance->att_date, true);
+        
+        
+        if ($attDates) {
+            
+            $count = count($attDates);
+        }
+    }
+    
+    return $count;
+}
+
+
+    public function isInSaveDraft(){
+        return $this->status_id == 1 ;
+    }
+
 }

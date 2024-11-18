@@ -20,6 +20,8 @@ class RankSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         $columns = ['id', 'name', 'payscale_id', 'staff_type_id', 'allowed_qty' ];
+                    
+
 
         $items = [
             [1,'ညွှန်ကြားရေးမှူးချုပ်', 1, 1, 1],
@@ -37,6 +39,7 @@ class RankSeeder extends Seeder
             [13,'စာရင်းကိုင်(၃)', 9, 2, 12],
             [14,'အငယ်တန်းစာရေး', 10, 2, 78],
             [15,'စာရင်းကိုင်(၄)', 10, 2, 12],
+          
             [16,'ယာဉ်မောင်းစက်ပြင်', 10, 2, 1],
             [17,'ရုံးအကူမှူး', 11, 2, 2],
             [18,'စာကူးစက်လှည့်', 11, 2, 1],
@@ -44,6 +47,7 @@ class RankSeeder extends Seeder
             [20,'ရုံးအကူ', 12, 2, 37],
             [21,'သန့်ရှင်း‌ရေးအကူ', 12, 2, 17],
             [22,'အစောင့်', 12, 2, 2],
+            [23,'နေ့စား', 13, 3,  100],
         ];
 
         foreach ($items as $item) {

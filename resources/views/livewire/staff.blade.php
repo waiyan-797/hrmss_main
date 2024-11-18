@@ -29,7 +29,7 @@
 
         <a href="{{ route('staff', ['status' => 5]) }}"
             class="{{ request()->path() == 'staff/5' ? 'bg-blue-700' : 'bg-green-500' }} text-white hover:bg-blue-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            Approve Staff
+            Approve 
         </a>
 
 
@@ -42,19 +42,12 @@
             @include('table', [
                 'data_values' => $staffs,
                 'modal' => '',
-                'is_crud_modal' => $status == 5,
-                'comment' => $status == 4 || $status == 3,
+                'is_crud_modal' =>  $status == 5 ,
+                    'comment' => $status == 4 || $status == 3 ,
                 'id' => $staff_id,
-                'title' => $status == 5 ? 'ဝန်ထမ်း' : '',
+                'title' => $status == 5  ? 'ဝန်ထမ်း' : '',
                 'search_id' => 'staff_search',
-                'columns' => [
-                    'No',
-                    'Photo',
-                    'Name',
-                    'Staff No',
-                    'Action',
-                    $status == 5 ? 'Type' : ($status == 3 || $status == 4 ? 'Comment' : ''),
-                ],
+                'columns' => ['No', 'Photo', 'Name', 'Staff No', 'Action' , $status == 5 ?  'Type' : ($status == 3 || $status == 4 ? 'Comment' : '')],
                 'column_vals' => ['staff_photo', 'name', 'staff_no'],
             ])
 

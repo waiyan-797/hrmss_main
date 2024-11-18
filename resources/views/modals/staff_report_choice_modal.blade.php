@@ -11,10 +11,13 @@
                 <button type="button" class="font-arial bg-blue-500 hover:bg-blue-600 text-white w-full h-auto py-2 rounded" wire:click="go_report({{$staff_id}}, 53)">Report 53</button>
                 <button type="button" class="font-arial bg-blue-500 hover:bg-blue-600 text-white w-full h-auto py-2 rounded" wire:click="go_report({{$staff_id}}, 68)">Report 68</button>
                 <button type="button" class="font-arial bg-blue-500 hover:bg-blue-600 text-white w-full h-auto py-2 rounded" wire:click="go_report({{$staff_id}}, '_leave_3')">Leave 3</button>
-              
-              @if(!$this->check($staff_id))
+                
+
+                
+               
+               @if(!$this->check($staff_id)) 
                 <button type="button" class="font-arial bg-blue-500 hover:bg-blue-600 text-white w-full h-auto py-2 rounded" wire:click="go_report({{$staff_id}}, '_staff_list_2')">ဝန်ထမ်းလုပ်သက်အတွက်အမှတ်ပေးခြင်း</button>
-                @endif
+                 @endif 
 
 
             </div>

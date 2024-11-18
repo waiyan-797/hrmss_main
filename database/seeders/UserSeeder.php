@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         User::create([
-            'name' => 'a',
-            'email' => 'a@gmail.com',
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('123'),
             
         ]);

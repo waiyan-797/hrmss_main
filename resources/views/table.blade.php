@@ -12,6 +12,18 @@
             </button>
         </div>
     @endif
+
+    @if ($errors->any())
+        <div class="mb-4">
+            <ul class="list-disc list-inside text-red-500">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
     <div class="font-arial text-md uppercase text-white bg-green-700 py-3 px-6 font-semibold flex flex-row justify-between items-center">
         {{ $title }}
         <div class="flex flex-row gap-3">
@@ -56,12 +68,19 @@
                         <td class="px-6 py-4 text-gray-500 dark:text-gray-300">{{$index}}</td>
                         @foreach ($column_vals as $val)
                             <td class="px-6 py-4 text-gray-500 dark:text-gray-300">
+
+                                @if($val == 'status')
+                                {{$value->$val  == 1 ? 'Active' : 'Inactive'}}
+                                @else 
                                 @if (gettype($value->$val) == 'object')
+                                
                                     {{ $value->$val->name }}
                                 @elseif (is_string($value->$val) && Str::contains($value->$val, 'staffs/') || Str::contains($value->$val, 'avatars/'))
                                     <img src="{{ route('file', $value->$val) }}" alt="Image" class="w-20 h-20 mx-auto rounded-full">
                                 @else
                                     {{ $value->$val ? $value->$val : '-' }}
+                                @endif
+
                                 @endif
                             </td>
                         @endforeach
@@ -82,6 +101,12 @@
                                 @if(!($disabledMode ?? false) == 'toggle') |
                                     <button type="button" wire:click="delete_confirm({{ $value->id }})" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</button>
                                 @endif
+                                @if($is_labour ?? false)
+                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('leaveCalendar',[ $value->id ])}}>ခွင့်</a> |
+                                
+                                @endif
+
+                                
                             @endif
                             @else
                             <a 

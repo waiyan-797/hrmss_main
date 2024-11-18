@@ -56,4 +56,7 @@ public function AdminHR(){
     public function division(){
         return $this->belongsTo(Division::class);
     }
+
+
+    
 }
