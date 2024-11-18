@@ -183,7 +183,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/promotion/{staff_id}', LivewirePromotion::class)->name('staff_promotion'); //no longer use
     Route::get('/increment', Increment::class)->name('increment'); //no longer use
     Route::get('/retirement/{staff_id}', Retirement::class)->name('staff_retirement'); //no longer use
-
+    Route::get('/depromotion',Depromotion::class)->name('depromotion');
+    Route::get('/depromotion/{staff_id}',Depromotion::class)->name('staff_depromotion');
 
     Route::get('/increment/{staff_id}', Increment::class)->name('staff_increment'); //currently use
     Route::get('/staff_detail/{confirm_add?}/{confirm_edit?}/{staff_id?}/{tab?}', StaffDetail::class)->name('staff_detail');
