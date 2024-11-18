@@ -2,6 +2,7 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Models\Division;
 use App\Models\Rank;
 use App\Models\Staff;
 use Carbon\Carbon;
@@ -16,6 +17,8 @@ class FinanceYearSalaryList extends Component
 
 
     public $startYr, $endYr;
+    public $divisionId;
+    public $divisions;
 
     public function go_word()
     {
@@ -131,12 +134,14 @@ class FinanceYearSalaryList extends Component
     public function mount()
     {
         $this->endYr   = Carbon::now()->year;
+        $this->divisions = Division::all();
+
     }
     public function render()
     {
 
         $this->startYr = $this->endYr - 1;
-        $staffs = Staff::get();
+        $staffs = Staff::where('current_division_id')   ;
         $Ranks = Rank::all();
 
         return view('livewire.investment-companies.finance-year-salary-list', [

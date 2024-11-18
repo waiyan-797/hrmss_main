@@ -435,6 +435,8 @@ class Staff extends Model
         return $this->hasMany(Salary::class);
     }
 
+    
+
     public function isPromotionThisMonth($date)
     {
         $currentDate  = Carbon::parse($date);
@@ -638,5 +640,7 @@ public function labourAtt($year, $month)
     public function isInSaveDraft(){
         return $this->status_id == 1 ;
     }
+
+
 
 }

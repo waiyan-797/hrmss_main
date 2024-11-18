@@ -65,7 +65,7 @@ class PunishmentReport extends Component
 
 public function render()
 {
-    $staffs = Staff::get();
+    $staffs = Staff::paginate(30);
     return view('livewire.reports.punishment-report',[ 
         'staffs' => $staffs,
     ]);

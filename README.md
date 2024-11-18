@@ -22,3 +22,6 @@ to_date ,
 previous_rank_id //current_rank_id ,
 depromoted_rank_id ,
 
+
+
+finance year salary list 

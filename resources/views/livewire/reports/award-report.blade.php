@@ -23,13 +23,20 @@
                      
                         <td class="border border-black text-left p-1">
                             @foreach($staff->awardings as $awarding)
-                            {{ $awarding->award_type->name}} @endforeach</td>
+                            <h1>
+                                <span>
+                                    {{$loop->iteration}}
+                                </span>
+                                {{ $awarding->award_type->name}}
+                            </h1>
+                             @endforeach
+                        </td>
                        
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-
+{{$staffs->links()}}
         </div>
     </div>
 </div>

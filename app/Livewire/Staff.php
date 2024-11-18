@@ -80,6 +80,7 @@ class Staff extends Component
 
     public function go_report($staff_id, $report_id)
     {
+        
         $routeName = "pdf_staff_report{$report_id}";
         $this->redirect(route($routeName, [
             'staff_id' => $staff_id,

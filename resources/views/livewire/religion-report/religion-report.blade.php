@@ -36,7 +36,7 @@
                     <tr>
                         <td class="border border-black text-right p-1">{{ $loop->index+1}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->name}}</td>
-                        <td class="border border-black text-left p-1">{{ $staff->current_rank->name}}</td>
+                        <td class="border border-black text-left p-1">{{ $staff->current_rank?->name}}</td>
 
                         {{-- Buddhist --}}
                         <td class="border border-black text-left p-1">

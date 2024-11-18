@@ -19,14 +19,17 @@
                         <td class="border border-black text-right p-1">{{ $loop->index+1}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->name}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->current_rank->name}}</td>
+                        <td      class="border border-black text-left p-1">
                         @foreach ($staff->staff_educations as $education)
-                        <td class="border border-black text-left p-1">{{$education->education->name}}</td>
+                          <h1>
+                            {{$loop->iteration}} {{$education->education->name}} <br>
+                          </h1>
                             @endforeach
-
+                        </td>
                     @endforeach
                 </tbody>
             </table>
-
+{{$staffs->links()}}
         </div>
     </div>
 </div>

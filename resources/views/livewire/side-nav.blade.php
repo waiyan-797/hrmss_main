@@ -242,8 +242,8 @@
                         ['route_name' => 'yangon_staff_april_salary_list', 'name' => 'ရန်ကုန် ရန်ကုန်ရုံးချုပ်ရှိဝန်ထမ်းများ၏ဧပြီလစာရင်း'],
                         ['route_name' => 'finance_year_salary_list', 'name' => 'ဘဏ္ဍာရေးနှစ်လစာ'],
                         ['route_name' => 'information_list', 'name' => 'InformationList'],
-                        ['route_name' => 'last_pay_certificate', 'name' => 'LastPayCertificate'],
-                        ['route_name' => 'detail_staff_salary', 'name' => 'ဝန်ထမ်းများ၏ လစာငွေတောင်းခံလွှာ'],
+                        // ['route_name' => 'last_pay_certificate', 'name' => 'LastPayCertificate'],
+                        // ['route_name' => 'detail_staff_salary', 'name' => 'ဝန်ထမ်းများ၏ လစာငွေတောင်းခံလွှာ'],
 
                     ]" />
             </li>

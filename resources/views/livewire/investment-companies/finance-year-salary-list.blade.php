@@ -7,7 +7,15 @@
             
             <h1 class="font-bold text-center text-sm mb-3">ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <h2 class="font-bold text-center text-sm mb-3">{{$startYr}} - {{$endYr}} ခု ဘဏ္ဍာရေးနှစ်လစာ</h2>
-            <input type="number" min="2005" step="1" wire:model.live="endYr" />
+            <input type="number"  step="1" wire:model.live="endYr" />
+            <select wire:model.live='divisionId' >
+
+                @foreach ($divisions as $division)
+                   <option value="{{$division->id}}">
+                    {{$division->name}}
+                   </option>
+                @endforeach
+            </select>
 
             <table class="md:w-full">
                 <thead>

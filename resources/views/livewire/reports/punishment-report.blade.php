@@ -17,13 +17,19 @@
                 <tbody>
                     @foreach($staffs as $staff)
                     <tr>
-                        <td class="border border-black text-right p-1">{{ $loop->index + 1 }}</td>
-                        <td class="border border-black text-right p-1">{{ $staff->name}}</td>
+                        <td class="border border-black text-left p-1">{{ $loop->index + 1 }}</td>
+                        <td class="border border-black text-left p-1">{{ $staff->name}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->current_rank->name}}</td>
                         
                         <td class="border border-black text-left p-1">
-                            @foreach($staff->punishments as $punishment )
-                            {{ $punishment->penalty_type->name}}
+                            @foreach($staff->punishments as   $punishment )
+                           
+                              <h1>
+                                <span>
+                                    {{$loop->iteration}}
+                                                                </span>
+                                {{ $punishment->penalty_type->name}} 
+                              </h1>
                             @endforeach
                         </td>
                        
@@ -32,7 +38,7 @@
                 </tbody>
             </table>
 
-
+            {{ $staffs->links() }}
         </div>
     </div>
 </div>
