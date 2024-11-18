@@ -58,7 +58,7 @@ class ForeignReport extends Component
 
 public function render()
 {
-    $staffs = Staff::get();
+    $staffs = Staff::paginate(30);
     return view('livewire.reports.foreign-report',[ 
         'staffs' => $staffs,
     ]);

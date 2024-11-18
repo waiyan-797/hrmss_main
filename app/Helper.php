@@ -3,6 +3,7 @@
 use App\Models\Country;
 use App\Models\Leave;
 use App\Models\Salary;
+use Carbon\Carbon;
 
 if (! function_exists('getcsv')) {
     function getcsv($f)
@@ -225,3 +226,12 @@ function get2monthDeduction($month, $year)
 }
 
 
+function getStartOfMonth($date){
+    return Carbon::parse($date)->startOfMonth()->format('d-m-Y');
+}
+
+
+
+function getNextDay($date){
+    return Carbon::parse($date)->addDay()->format('d-m-Y');
+}

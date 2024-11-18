@@ -5,10 +5,14 @@
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
 
-            <h1 class="text-center text-sm mb-2">နိုင်ငံတော်စီမံအုပ်ချုပ်ရေးကောင်စီလက်ထက်<br>ရင်းနှီးမြှပ်နှံမှုနှင့်
+            <h1 class="text-center text-sm mb-2">
+                နိုင်ငံတော်စီမံအုပ်ချုပ်ရေးကောင်စီလက်ထက်<br>ရင်းနှီးမြှပ်နှံမှုနှင့်
                 နိုင်ငံခြားစီးပွားဆက်သွယ်‌ရေးဝန်ကြီးဌာန၊ ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၏</h1>
             <h2 class="font-bold text-center text-sm mb-4">လစာ၊ ဘွဲ့အလိုက် ချီးမြှင့်ငွေနှင့်
-                အခြားချီးမြှင့်ငွေ/စရိတ်များ ရရှိသည့်<br>ဝန်ထမ်းဦးရေနှင့် စုစုပေါင်း လစာစရိတ်စာရင်းချုပ်(၃၁-၅-၂၀၂၄)
+                အခြားချီးမြှင့်ငွေ/စရိတ်များ ရရှိသည့်<br>ဝန်ထမ်းဦးရေနှင့် စုစုပေါင်း လစာစရိတ်စာရင်းချုပ်
+                    
+                
+                
             </h2>
             <table class="md:w-full font-bold text-sm">
                 <thead>
@@ -79,7 +83,7 @@
                             <td class="border border-black p-2">{{ $payscale->ranks[0]->name }} နှင့်အဆင့်တူ</td>
                             <td class="border border-black p-2">{{ en2mm($payscale->allowed_qty) }}</td>
                             <td class="border border-black p-2">{{ en2mm($payscale->staff->count()) }}</td>
-                            <td class="border border-black p-2">{{ en2mm($totalActualSalary) }}</td>
+                            <td class="border border-black p-2">{{ en2mm($totalActualSalary) }}  </td>
                             <td class="border border-black p-2">{{ en2mm($totalAdditionEducation) }}</td>
                             <td class="border border-black p-2">{{ en2mm($totalAddition) }}</td>
                             <td class="border border-black p-2">{{ en2mm($totalAdditionRation) }}</td>

@@ -1,14 +1,49 @@
+<div>
+    <div class="flex space-x-4">
 
+
+        <button wire:click="changeCurrentPage(1)" 
+            class="px-4 py-2 bg-blue-500 text-white font-medium rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            စာကြမ်း
+        </button>
+    
+        <button wire:click="changeCurrentPage(2)" 
+            class="px-4 py-2 bg-blue-500 text-white font-medium rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            form 
+        </button>
+    </div>
+    
+    @if($currentPage == 1 )
     <div class=" mx-auto p-6 bg-white border border-gray-300 shadow-md w-full h-[83vh] overflow-y-auto">
         <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button><br>
            <h1 class="text-center font-bold text-xl mb-4">Last Pay Certificate</h1>
        
            <div class="mb-2">
-               <label class="block font-semibold">Certificate ဒေါ/ဦး****(ဒုတိယဦးစီးမှူး)</label>
+               <label class="block font-semibold">
+                Certificate  of 
+                {{$staff->gender->id == 1 ? 'ဦး' : 'ေဒါ်'}} 
+                {{$staff->name}} 
+
+                ({{$staff->current_rank->name}} )
+                
+            </label>
                
                <p class="text-justify">
-                    <span> of the ...............ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန(ရုံးချုပ်).........................<br>proceeding on...စစ်ကိုင်းတိုင်း‌‌‌ဒေသကြီးညွှန်ကြား‌ရေးမှူးရုံး သို့ ပြောင်းရွေ့တာဝန်ထမ်းဆောင်ခြင်း...............<br>to-ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန၊ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၏ ၁၅-၅-၂၀၂၄ နေ့စွဲပါ စာအမှတ်၊၂၂/၂၁/၀၂(၀၉၇၀/၂၀၂၄) </span> 
+                    <span> of the  {{$staff->current_division->name}}<br>
+                proceeding on 
+
+             
+                သို့ ပြောင်းရွေ့တာဝန်ထမ်းဆောင်ခြင်း <br>to-
+
+                
+                        {{$toDivisionName}}
+                
+                 {{-- ordered_date --}}
+                 {{$ordered_date ?? '_________'}}
+                 စာအမှတ်၊
+                 ( {{$order_no ?? '_________'}})
+                  </span> 
                </p>
                 
            </div>
@@ -16,7 +51,10 @@
           
        
            <div class="mb-4">
-               <p><strong>2.</strong> He has been paid up to- .................၂၃-၅-၂၀၂၄..................... <br> at the following rates:</p>
+               <p><strong>2.</strong> He has been paid up to- 
+                {{-- till to date  --}}
+                {{$paid_up_to_date ?? '_________'}}
+                <br> at the following rates:</p>
                <div class="flex justify-between mt-2">
                    <div class="w-1/2">
                        <label class="block font-semibold">Pay</label>
@@ -29,8 +67,7 @@
                    </div>
                    <div class="w-1/2 pl-4">
                        <label class="block font-semibold">Rate</label>
-                       <p>၂၁၈,၀၀၀/--(၂၁၆၀၀၀-၂၀၀၀-၂၂၆၀၀၀)</p>
-                       <p>၁၆၁,၇၄၁/၉၃(ကျပ်တစ်သိန်းခြောက်သောင်းတစ်ထောင် ခုနှစ်ရာလေးဆယ့်တစ်နှင့်ပြားကိုးဆယ်တိတိ)</p>
+                     {{$amount ?? '_________'}}
                    </div>
                </div>
                <div class="flex justify-between mt-2">
@@ -68,13 +105,26 @@
            </div>
            <div class="w-1/2">
               
-              <p>....နိုင်ငံ့ဝန်ထမ်းထောက်ပံ့ကြေး ၁-၅-၂၀၂၄ မှ ၂၃-၅-၂၀၂၄ ထိ ၂၂၂၅၈/၀၆ အားထုတ်ပေးပြီးဖြစ်ပါသည်.......
-               <br>...............................................
+              <p>
+                နိုင်ငံ့ဝန်ထမ်းထောက်ပံ့ကြေး 
+                {{  getStartOfMonth($paid_up_to_date)}}
+                မှ 
+              
+              {{$paid_up_to_date}}
+              ထိ 
+                {{$amount ?? '_'}}
+                အားထုတ်ပေးပြီးဖြစ်ပါသည်
+               <br>
               </p>
            </div>
        
            <div class="mb-4">
-               <p><strong>3.</strong> He made over charge of the office of <span class="underline">ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန(ရန်ကုန်ရုံးချုပ်)</span><br> on the <span class="underline">နံနက်ပိုင်း</span> noon of <span class="underline">၂၄-၅-၂၀၂၄</span>.</p>
+               <p><strong>3.</strong> He made over charge of the office of <span class="underline">
+                {{$staff->current_division->name}}
+            </span><br> on the <span class="underline">နံနက်ပိုင်း
+                </span> noon of <span class="underline">
+                {{getNextDay($paid_up_to_date)}}
+                </span>.</p>
            </div>
        
            <div class="mb-4">
@@ -101,7 +151,8 @@
            </div>
        
            <div class="mb-4">
-               <p><strong>6.</strong> He is entitled to draw the following:၂၃-၅-၂၀၂၄ အထိ လစာထုတ် ပေးပြီး ဖြစ်ပါသည်</p>
+               <p><strong>6.</strong> He is entitled to draw the following:              {{$paid_up_to_date}}
+                 အထိ လစာထုတ် ပေးပြီး ဖြစ်ပါသည်</p>
                
            </div>
            <div class="mb-4">
@@ -135,7 +186,12 @@
        
           
            <div class="mb-2">
-               <label class="block font-semibold">Nature of recovery ဒေါ/ဦး**** /ဒုတိယဦးစီးမှူး</label>
+               <label class="block font-semibold">Nature of recovery 
+                {{$staff->gender->id == 1 ? 'ဦး' : 'ေဒါ်'}}  /
+                {{$staff->name}} 
+
+                ({{$staff->current_rank->name}} )
+            </label>
                
                <p class="text-justify">
                     <span> Amount K........................................................................................<br>To be recovered in ........................... instalments.</span> 
@@ -333,3 +389,72 @@
     
        
     
+
+        @else
+        
+        <form
+        wire:submit='submitForm'
+        class="space-y-4 p-4 bg-gray-50 rounded-lg shadow-md w-full max-w-md mx-auto">
+            <div>
+<label for="division_id">
+    ပြောင်းရွေ့တာဝန်ထမ်းဆောင်ခြင်း
+</label>
+                <select 
+                name="division_id" wire:model='to_division_id'>
+                    @foreach ($divisions as $division)
+                    <option value="{{$division->id}}">
+                    {{$division->name}}
+                    </option>
+                    @endforeach    
+                </select>
+
+
+                <label for="ordered_date" class="block text-sm font-medium text-gray-700">Ordered Date</label>
+                <input type="date" id="ordered_date" wire:model="ordered_date" 
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                    placeholder="Enter ordered date">
+            </div>
+        
+            <div>
+                <label for="order_no" class="block text-sm font-medium text-gray-700">Order Number</label>
+                <input type="text" id="order_no" wire:model="order_no" 
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                    placeholder="Enter order number">
+            </div>
+
+            <div>
+                <label for="transfer_date" class="block text-sm font-medium text-gray-700">transfer date</label>
+                <input type="date" id="transfer_date" wire:model="transfer_date" 
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                    placeholder="Enter order number">
+            </div>
+
+
+
+            
+        
+            <div>
+                <label for="paid_up_to_date" class="block text-sm font-medium text-gray-700">Paid Up To Date</label>
+                <input type="date" id="paid_up_to_date" wire:model="paid_up_to_date" 
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+        
+            <div>
+                <label for="amount" class="block text-sm font-medium text-gray-700">Amount</label>
+                <input type="number" id="amount" wire:model="amount" 
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                    placeholder="Enter amount">
+            </div>
+        
+            <div>
+                <button type="submit" 
+                
+                    class="w-full px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    Submit
+                </button>
+            </div>
+        </form>
+        
+        @endif 
+
+</div>

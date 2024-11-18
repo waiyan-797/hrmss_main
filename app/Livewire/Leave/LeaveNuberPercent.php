@@ -177,7 +177,7 @@ class LeaveNuberPercent extends Component
             $leave = Leave::whereYear('created_at', $this->year)
                 ->whereMonth('created_at', $this->month)
                 ->where('staff_id', $staff->id)
-                // ->distinct('staff_id')
+                ->distinct('staff_id')
                 ->count('staff_id');
                 // if($staff->id == 3 ){
                 //     dd($leave);

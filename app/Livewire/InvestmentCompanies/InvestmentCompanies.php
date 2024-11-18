@@ -209,6 +209,7 @@ class InvestmentCompanies extends Component
 
     public function render()
     {
+        
         $first_payscales = Payscale::where('staff_type_id', 1)->get();
         $second_payscales = Payscale::where('staff_type_id', 2)->get();
         $kachin_staffs = Staff::where('current_division_id', 12)->get();
@@ -248,7 +249,8 @@ class InvestmentCompanies extends Component
             'tnty_staffs' => $tnty_staffs,
             'aya_staffs' => $aya_staffs,
             'total_staffs' => $total_staffs,
-        ]);
+        ]
+    );
     }
 }
 

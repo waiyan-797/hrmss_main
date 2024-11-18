@@ -125,6 +125,7 @@ use App\Livewire\StaffReport\StaffReport2;
 use App\Livewire\Table\Table;
 use App\Livewire\Township\Township;
 use App\Livewire\Language;
+use App\Livewire\LastPayCertificateMain;
 use App\Livewire\Leave\LeaveDate;
 use App\Livewire\Promotion as LivewirePromotion;
 use App\Livewire\Retirement;
@@ -150,7 +151,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/district', District::class)->name('district');
     Route::get('/township', Township::class)->name('township');
     Route::get('/pension_year', PensionYear::class)->name('pension_year');
-    Route::get('/staff', Staff::class)->name('staff');
+    Route::get('/staff/{status?}', Staff::class)->name('staff')
+    ->defaults('status', 1);
     Route::get('/payscale', Payscale::class)->name('payscale');
     Route::get('/rank', Rank::class)->name('rank');
     Route::get('/staff_type', StaffType::class)->name('staff_type');
@@ -208,6 +210,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route::get('/pdf_staff_report71/{staff_id?}', PdfStaffReport71::class)->name('pdf_staff_report71');
     Route::get('/pdf_staff_report_leave_3/{staff_id?}', LeaveDate::class)->name('pdf_staff_report_leave_3');
     Route::get('/pdf_staff_report_staff_list_2/{staff_id?}', StaffList2::class)->name('pdf_staff_report_staff_list_2');
+    Route::get('/last_pay_certificate/{staff_id}/{cert_id?}', LastPayCertificate::class)->name('pdf_staff_report_last_pay_detail');
+    Route::get('/last_pay_certificate-main/{staff_id}', LastPayCertificateMain::class)->name('pdf_staff_report_last_pay_main');
+
     Route::get('/planning_accounting', PlanningAccounting::class)->name('planning_accounting');
     Route::get('/investment_companies', InvestmentCompanies::class)->name('investment_companies');
     Route::get('/investment_companies2', InvestmentCompanies2::class)->name('investment_companies2');
@@ -244,7 +249,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/yangon_staff_april_salary_list', YangonStaffAprilSalaryList::class)->name('yangon_staff_april_salary_list');
     Route::get('/finance_year_salary_list', FinanceYearSalaryList::class)->name('finance_year_salary_list');
     Route::get('/information_list', InformationList::class)->name('information_list');
-    Route::get('/last_pay_certificate', LastPayCertificate::class)->name('last_pay_certificate');
     Route::get('/detail_staff_salary', DetailStaffSalary::class)->name('detail_staff_salary');
     Route::get('/staff_list1', StaffList1::class)->name('staff_list1');
     Route::get('/staff_list3', StaffList3::class)->name('staff_list3');
