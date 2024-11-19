@@ -1,9 +1,4 @@
-<aside id="side_bar" class="left-0 z-40 w-[20%] 
-{{-- {{isset($header) ? 'h-[83vh]' : 'h-[90vh]'}} --}}
-{{-- disable auto scroll and make all green  --}}
- 
-"
->
+<aside id="side_bar" class="left-0 z-40 w-[20%] {{isset($header) ? 'h-[83vh]' : 'h-[90vh]'}}">
     <div class="overflow-y-auto py-5 px-3 h-full bg-green-700 border-r border-gray-200">
         <ul class="space-y-2">
             <li>
@@ -59,39 +54,6 @@
                     ]" />
             </li>
 
-{{--        
-         <li>
-            <livewire:side-nav-drop-down label="Staff Form Management" 
-            :lists="[
-                  ?      ['route_name' => '', 'name' => 'ဝန်ထမ်းစာရင်းအသစ်']:   ['route_name' => '', 'name' => 'ဝန်ထမ်းစာရင်းပြန်ပြင်ရန်'] ,
-                  auth()->user()->AdminHR() ?     ['route_name' => 'resubmit', 'name' => 'ဝန်ထမ်းစာရင်းပြန်ပြင်ပြီး'] :   ['route_name' => 'resubmitted', 'name' => 'ဝန်ထမ်းစာရင်းပြန်ပြင်ထား'] ,                    
-
-            ]"
-            icon='
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
-                        <path fill-rule="evenodd" d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 0 1-.517.608 7.45 7.45 0 0 0-.478.198.798.798 0 0 1-.796-.064l-.453-.324a1.875 1.875 0 0 0-2.416.2l-.243.243a1.875 1.875 0 0 0-.2 2.416l.324.453a.798.798 0 0 1 .064.796 7.448 7.448 0 0 0-.198.478.798.798 0 0 1-.608.517l-.55.092a1.875 1.875 0 0 0-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 0 1-.064.796l-.324.453a1.875 1.875 0 0 0 .2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 0 1 .796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 0 1 .517-.608 7.52 7.52 0 0 0 .478-.198.798.798 0 0 1 .796.064l.453.324a1.875 1.875 0 0 0 2.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 0 1-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 0 0 1.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 0 1-.608-.517 7.507 7.507 0 0 0-.198-.478.798.798 0 0 1 .064-.796l.324-.453a1.875 1.875 0 0 0-.2-2.416l-.243-.243a1.875 1.875 0 0 0-2.416-.2l-.453.324a.798.798 0 0 1-.796.064 7.462 7.462 0 0 0-.478-.198.798.798 0 0 1-.517-.608l-.091-.55a1.875 1.875 0 0 0-1.85-1.566h-.344ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clip-rule="evenodd" />
-                    </svg>
-
-                '
-            />
-        </li> --}}
-
-    
-
-        {{-- <li>
-            <livewire:side-nav-button label="Staff Form Management"
-            icon='
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-                </svg>
-            '
-            :route_name="auth()->user()->AdminHR() ? 'inbox' : 'reject'"
-
-
-            count="" 
-            />
-    </li> --}}
-         
             <li>
                 <livewire:side-nav-button label="ဝန်ထမ်း"
                     icon='
@@ -99,9 +61,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
                         </svg>
                     '
-                    route_name="staff" count=""
-                    
-                    />
+                    route_name="staff" count="" />
             </li>
 
             <li>
@@ -118,6 +78,8 @@
             </li>
 
 
+            
+
             <li>
                 <livewire:side-nav-drop-down label="ရင်းနှီးမြှပ်နှံမှု"
                     icon='
@@ -133,13 +95,13 @@
                         ['route_name' => 'investment_companies5', 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(အဆင့်တူ)'],
                         ['route_name' => 'investment_companies6', 'name' => 'အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း'],
                         ['route_name' => 'investment_companies7', 'name' => 'နပတရောက်ရှိအင်အား'],
-                        ['route_name' => 'investment_companies8', 'name' => 'အိမ်ထောင်သည်'],
+                        ['route_name' => 'investment_companies8', 'name' => 'ဌာနအလိုက်ပြောင်း‌ရွေ့အင်အားစာရင်း'],
                         ['route_name' => 'investment_companies9', 'name' => 'ဝန်ထမ်းအဖြစ်မှထုတ်ပါယ်/ထုတ်ပစ်'],
                         ['route_name' => 'investment_companies10', 'name' => 'လအလိုက်ဝန်ထမ်းအင်အားစာရင်းချုပ်'],
                         ['route_name' => 'investment_companies11', 'name' => '၁၀နှစ်အထက်/၁၀နှစ်အောက်ပင်စင်ပို့စာရင်း'],
                         ['route_name' => 'investment_companies12', 'name' => 'ပင်စင်ကိစ္စ(မနှင်းစု)'],
-                        ['route_name' => 'investment_companies13', 'name' => 'ဖွဲ့ခန့်ပိုလိုရုံးချုပ်'],
-                        ['route_name' => 'investment_companies14', 'name' => 'ဘွဲ့နှင့်သက်ဆိုင်သည့်စာရင်း'],
+                        ['route_name' => 'investment_companies13', 'name' => 'ဘွဲ့နှင့်သက်ဆိုင်သည့်စာရင်း'],
+                        ['route_name' => 'investment_companies14', 'name' => 'ဖွဲ့ခန့်ပိုလိုရုံးချုပ်'],
                         ['route_name' => 'investment_companies15', 'name' => 'ဖွဲ့ခန့်ပိုလို(တိုင်းဒေသကြီး)'],
                     ]" />
             </li>
@@ -151,11 +113,10 @@
                         </svg>
                     '
                     :lists="[
-                        // ['route_name' => 'local_training_report', 'name' => 'တတ်ရောက်ခဲ့သည့်သင်တန်း(၁)'],
+                        ['route_name' => 'local_training_report', 'name' => 'တတ်ရောက်ခဲ့သည့်သင်တန်း(၁)'],
                         ['route_name' => 'local_training_report2', 'name' => 'တတ်ရောက်ခဲ့သည့်သင်တန်း(၂)'],
-                        ['route_name' => 'staff_report', 'name' => 'ပင်စင်ကိစ္စ(မနှင်းစု)'],
                         ['route_name' => 'staff_report1', 'name' => 'လက်ရှိဌာနရောက်ရှိရက်စွဲ'],
-                        ['route_name' => 'staff_report2', 'name' => 'staff_report2'],
+                        ['route_name' => 'staff_report2', 'name' => 'ပင်စင်ကိစ္စ(မနှင်းစု)'],
                         ['route_name' => 'staff_report3', 'name' => 'ပင်စင်ပြည့်ဝန်ထမ်းများစာရင်း'],
                         ['route_name' => 'pension_list', 'name' => 'ပင်စင်ခံစားခဲ့သူများစာရင်း'],
                         ['route_name' => 'pension_family', 'name' => 'မိသားစုပင်စင်ခံစားခဲ့သူများစာရင်း'],
@@ -241,9 +202,9 @@
                         ['route_name' => 'finance_salary_list', 'name' => 'ဘဏ္ဍာရေးနှစ်အတွက် လစာငွေထုတ်ယူမည့် စာရင်း'],
                         ['route_name' => 'yangon_staff_april_salary_list', 'name' => 'ရန်ကုန် ရန်ကုန်ရုံးချုပ်ရှိဝန်ထမ်းများ၏ဧပြီလစာရင်း'],
                         ['route_name' => 'finance_year_salary_list', 'name' => 'ဘဏ္ဍာရေးနှစ်လစာ'],
-                        ['route_name' => 'information_list', 'name' => 'InformationList'],
+                        ['route_name' => 'information_list', 'name' => 'အဆင့်တူ ကျားမ အသက်အုပ်စု'],
                         // ['route_name' => 'last_pay_certificate', 'name' => 'LastPayCertificate'],
-                        // ['route_name' => 'detail_staff_salary', 'name' => 'ဝန်ထမ်းများ၏ လစာငွေတောင်းခံလွှာ'],
+                        ['route_name' => 'detail_staff_salary', 'name' => 'ဝန်ထမ်းများ၏ လစာငွေတောင်းခံလွှာ'],
 
                     ]" />
             </li>

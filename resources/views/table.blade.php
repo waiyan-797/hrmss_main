@@ -127,8 +127,8 @@
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_leave',[ $value->id ])}}>ခွင့်</a> |
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_increment',[ $value->id ])}}>နှစ်တိုး</a> |
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_promotion',[ $value->id ])}}>ရာထူးတိုး</a> |
-                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_retirement',[ $value->id ])}} >ပြုန်းတီး</a> |
-                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('local_training_report',[ $value->id ])}} >သင်တန်း</a>
+                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_depromotion',[ $value->id ])}}>ရာထူးလျော့</a> |
+                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_retirement',[ $value->id ])}} >ပြုန်းတီး</a>
                         </td>
                             
                                 @endif

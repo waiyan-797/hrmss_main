@@ -90,19 +90,13 @@ class LocalTrainingReport extends Component
     }
 
 
-    public function mount($id){
-        $this->staff = Staff::findOrFail($id);
-    }
+   
     public function render()
     {
-        
-
-       
-      
-
-       
         return view('livewire.local-training-report.local-training-report', [
             'staffs' => $this->staff,
         ]);
     }
+
+
 }
