@@ -211,6 +211,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/staff_report3', StaffReport3::class)->name('staff_report3');
     Route::get('/pension_list', PensionList::class)->name('pension_list');
     Route::get('/pension_family', PensionFamily::class)->name('pension_family');
+    
     Route::get('/pdf_staff_report68/{staff_id?}', PdfStaffReport68::class)->name('pdf_staff_report68');
     Route::get('/pdf_staff_report18/{staff_id?}', PdfStaffReport18::class)->name('pdf_staff_report18');
     Route::get('/pdf_staff_report53/{staff_id?}', PdfStaffReport53::class)->name('pdf_staff_report53');
