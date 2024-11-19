@@ -1,4 +1,4 @@
-6 7 8 11 12
+<!-- 6 7 8 11 12
 
 localtraining 1 , need to change table table
 
@@ -24,4 +24,9 @@ depromoted_rank_id ,
 
 
 
-finance year salary list 
+finance year salary list  -->
+<!-- ခွင့်ယူသည့်ဝန်ထမ်းစာရင်း
+
+id  -->
+<!-- id name bonus  -->
+<!-- difficulty_level_id nullable() -->

@@ -49,7 +49,7 @@
                    
                     <tbody>
                         
-                            @php $firstTraining = $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->first(); @endphp
+                            @php $firstTraining = $staff?->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->first(); @endphp
                             @if($firstTraining)
                                 <tr>
                                     <!-- First staff details row with first training -->

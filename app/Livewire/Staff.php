@@ -114,8 +114,15 @@ class Staff extends Component
     }
 
     public function mount($status){
-        $this->status = $status;
-    }
+
+        if(auth()->user()->AdminHR()){
+
+        //    return redirect()->route('staff' , ['status'=>2]);
+        }
+                    $this->status = $status;
+                    // dd($this->status);
+
+            }
 
     public function check($id){
         return Promotion::where('staff_id', $id)->get()->isEmpty()  ;
