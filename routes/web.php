@@ -266,7 +266,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/permanent_staff', PermanentStaff::class)->name('permanent_staff');
-    Route::get('/staff_salary_list', StaffSalaryList::class)->name('staff_salary_list');
+    
     Route::get('/staff_salary_list2', StaffSalaryList2::class)->name('staff_salary_list2');
     Route::get('/staff_salary_list3', StaffSalaryList3::class)->name('staff_salary_list3');
     Route::get('/staff_salary_list4', StaffSalaryList4::class)->name('staff_salary_list4');
@@ -282,8 +282,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/finance_salary_list', FinanceSalaryList::class)->name('finance_salary_list');
     Route::get('/yangon_staff_april_salary_list', YangonStaffAprilSalaryList::class)->name('yangon_staff_april_salary_list');
     Route::get('/finance_year_salary_list', FinanceYearSalaryList::class)->name('finance_year_salary_list');
-    Route::get('/information_list', InformationList::class)->name('information_list');
-    Route::get('/last_pay_certificate', LastPayCertificate::class)->name('last_pay_certificate');
+    // Route::get('/information_list', InformationList::class)->name('information_list');
+    // Route::get('/last_pay_certificate', LastPayCertificate::class)->name('last_pay_certificate');
     Route::get('/detail_staff_salary', DetailStaffSalary::class)->name('detail_staff_salary');
     Route::get('/staff_list1', StaffList1::class)->name('staff_list1');
     Route::get('/staff_list3', StaffList3::class)->name('staff_list3');
