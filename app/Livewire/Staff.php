@@ -120,7 +120,9 @@ class Staff extends Component
         //    return redirect()->route('staff' , ['status'=>2]);
         }
                     $this->status = $status;
-                    // dd($this->status);
+                
+
+                    
 
             }
 
