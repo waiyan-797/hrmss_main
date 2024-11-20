@@ -67,6 +67,7 @@
                     <tr class="font-arial bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-4 text-gray-500 dark:text-gray-300">{{$index}}</td>
                         @foreach ($column_vals as $val)
+                       
                             <td class="px-6 py-4 text-gray-500 dark:text-gray-300">
 
                                 @if($val == 'status')
@@ -74,6 +75,7 @@
                                 @else 
                                 @if (gettype($value->$val) == 'object')
                                 
+                               
                                     {{ $value->$val->name }}
                                 @elseif (is_string($value->$val) && Str::contains($value->$val, 'staffs/') || Str::contains($value->$val, 'avatars/'))
                                     <img src="{{ route('file', $value->$val) }}" alt="Image" class="w-20 h-20 mx-auto rounded-full">

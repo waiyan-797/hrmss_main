@@ -7,7 +7,7 @@
             <h1 class="font-bold text-center text-sm mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့်
                 ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန 
                 
-                {{$staff->gender_id ==  1 ? "ဦိး" : "ဒေါ်" }}      {{$staff->name}}
+                {{$staff?->gender_id ==  1 ? "ဦိး" : "ဒေါ်" }}      {{$staff?->name}}
                   
                 <br>၏ <br> 
                 {{mmDateFormat($year,$month)}}

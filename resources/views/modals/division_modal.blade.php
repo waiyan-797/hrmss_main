@@ -40,6 +40,19 @@
                     </select>
                 </div>
             </div>
+            <div class="mb-4">
+                <label for="difficulty_level" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">အခက်အခဲအဆင့်</label>
+                <div class="relative">
+                    <select
+                        wire:model="difficulty_level_name"
+                        class="text-sm font-arial block w-full mb-4 p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        <option value="" selected>အခက်အခဲအဆင့်ရွေးပါ</option>
+                        @foreach ($difficulty_levels as $difficulty)
+                            <option value="{{ $difficulty->id }}"> {{ $difficulty->name }} </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <button type="submit" class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded font-arial">{{ $submit_button_text }}</button>
             <button type="button" wire:click="{{ $cancel_action }}" class="font-arial bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">ထွက်ရန်</button>
         </form>

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             TrainingLocationSeeder::class,
             CountrySeeder::class,
             DivisionTypeSeeder::class,
+            DifficultyLevelSeeder::class,
             DivisionSeeder::class,
             RegionSeeder::class,
             EducationGroupSeeder::class,

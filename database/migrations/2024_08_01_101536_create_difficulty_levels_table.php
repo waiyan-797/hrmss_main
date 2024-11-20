@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('difficulty_levels', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-
+            $table->string('name');
+            $table->integer('hardship_allowance');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('difficulty_levels');
     }
 };

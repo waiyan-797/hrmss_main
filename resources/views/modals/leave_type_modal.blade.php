@@ -12,7 +12,7 @@
             </div>
             <label for="allowed" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ခွင့်
             </label>
-            <input required type="text" wire:model="leave_type" id="allowed" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
+            <input required type="number" wire:model="leave_type" id="allowed" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
             @error('leave_type') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
             <br>
 

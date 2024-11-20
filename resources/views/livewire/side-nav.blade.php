@@ -50,6 +50,7 @@
                         ['route_name' => 'language', 'name' => 'ဘာသာစကား'],
                         ['route_name' => 'department', 'name' => 'ဌာန'],
                         ['route_name' => 'salary', 'name' => 'လစာ'],
+                        ['route_name' => 'difficulty_level', 'name' => 'အခက်အခဲအဆင့်'],
 
                     ]" />
             </li>

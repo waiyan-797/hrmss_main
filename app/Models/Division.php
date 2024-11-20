@@ -20,6 +20,18 @@ class Division extends Model
     {
         return $this->hasMany(Staff::class, 'current_division_id', 'id');
     }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function difficultyLevel()
+    {
+        return $this->belongsTo(DifficultyLevel::class);
+        
+    }
+
     public function leaveCount($division, $YearMonth)
     {
         [$year, $month] = explode('-', $YearMonth);

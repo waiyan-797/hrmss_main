@@ -93,7 +93,7 @@
                                 @if($i == 0)
                                     <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $loop->index + 1 }}</td>
                                     <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->name }}</td>
-                                    <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->current_rank->name }}</td>
+                                    <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->currentRank->name }}</td>
                                 @endif
                 
                                 <!-- Abroads -->

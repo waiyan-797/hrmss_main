@@ -16,10 +16,15 @@ class Leave extends Model
         
     }
 
-    public function leave_type()
-    {
-        return $this->belongsTo(LeaveType::class);
-    }
+    // public function leave_type()
+    // {
+    //     return $this->belongsTo(LeaveType::class);
+    // }
+    public function leaveType()
+{
+    return $this->belongsTo(LeaveType::class);
+}
+
 
     public function dayOrMonth()
     {
