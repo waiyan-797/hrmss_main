@@ -61,7 +61,7 @@ class EducationReport extends Component
 
 public function render()
 {
-    $staffs = Staff::get();
+    $staffs = Staff::paginate(20);
     return view('livewire.reports.education-report',[ 
         'staffs' => $staffs,
     ]);

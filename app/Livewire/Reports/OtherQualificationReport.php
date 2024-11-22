@@ -64,7 +64,7 @@ class OtherQualificationReport extends Component
     }
      public function render()
     {
-        $staffs = Staff::paginate(30);
+        $staffs = Staff::paginate(20);
         return view('livewire.reports.other-qualification-report',[ 
         'staffs' => $staffs,
     ]);

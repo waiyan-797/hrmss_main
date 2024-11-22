@@ -20,7 +20,7 @@ class Leave extends Model
     // {
     //     return $this->belongsTo(LeaveType::class);
     // }
-    public function leaveType()
+    public function leave_type()
 {
     return $this->belongsTo(LeaveType::class);
 }

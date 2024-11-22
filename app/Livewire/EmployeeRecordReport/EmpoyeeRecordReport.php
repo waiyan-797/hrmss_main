@@ -10,7 +10,10 @@ use PhpOffice\PhpWord\PhpWord;
 class EmpoyeeRecordReport extends Component
 {
 
-    public function go_pdf(){
+
+
+    public function go_pdf()
+    {
         $staffs = Staff::get();
         $data = [
             'staffs' => $staffs,
@@ -20,15 +23,15 @@ class EmpoyeeRecordReport extends Component
             echo $pdf->output();
         }, 'employee_record_report_pdf.pdf');
     }
+
+    // Method to generate Word document
     public function go_word()
     {
-        $staffs = Staff::get();
-
+        $staffs = Staff::get(); 
 
         $phpWord = new PhpWord();
         $section = $phpWord->addSection(['orientation'=>'landscape','margin'=>600]);
         $section->addTitle('Former Employee Record Report of April, 2021', 1);
-
 
         $table = $section->addTable(['borderSize' => 6, 'borderColor' => 'black', 'cellMargin' => 50]);
 
@@ -40,7 +43,7 @@ class EmpoyeeRecordReport extends Component
         }
 
         // Add data rows
-        foreach ($staffs as $index=> $staff) {
+        foreach ($staffs as $index => $staff) {
             $table->addRow();
             $table->addCell(2000)->addText($index + 1);
             $table->addCell(2000)->addText($staff->name);
@@ -57,12 +60,17 @@ class EmpoyeeRecordReport extends Component
         return response()->download($temp_file, $fileName)->deleteFileAfterSend(true);
     }
 
+   
+    public function render()
+    {
+        $staffs = Staff::paginate(20); 
+         $currentPage = $staffs->currentPage();
+        $perPage = $staffs->perPage();
+        $startIndex = ($currentPage - 1) * $perPage + 1;
+        return view('livewire.employee-record-report.empoyee-record-report', [
+            'staffs' => $staffs,
+            'startIndex'=>$startIndex,
+        ]);
+    }
 
- public function render()
-     {
-        $staffs = Staff::get();
-         return view('livewire.employee-record-report.empoyee-record-report',[
-        'staffs' => $staffs,
-    ]);
-     }
 }

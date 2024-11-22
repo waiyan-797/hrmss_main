@@ -88,9 +88,13 @@ class ReligionReport extends Component
     }
      public function render()
     {
-        $staffs = Staff::get();
+        $staffs = Staff::paginate(20);
+        $currentPage = $staffs->currentPage();
+        $perPage = $staffs->perPage();
+        $startIndex = ($currentPage - 1) * $perPage + 1;
         return view('livewire.religion-report.religion-report',[ 
         'staffs' => $staffs,
+        'startIndex'=>$startIndex,
     ]);
     }
 }

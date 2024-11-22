@@ -260,22 +260,22 @@ class OctoberSalaryList extends Component
             $table->addRow();
             $table->addCell(2000)->addText('၁');
             $table->addCell(2000)->addText();
-            $table->addCell(2000)->addText($lastActualSalary);
-            $table->addCell(2000)->addText(floor($salaryRatePerDayBeforeIncrement));
-            $table->addCell(2000)->addText(($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement)) * 100);
+            $table->addCell(2000)->addText(en2mm($lastActualSalary));
+            $table->addCell(2000)->addText(en2mm(floor($salaryRatePerDayBeforeIncrement)));
+            $table->addCell(2000)->addText((en2mm($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement)) * 100));
             $table->addCell(2000)->addText();
-            $table->addCell(2000)->addText($lastActualSalary);
+            $table->addCell(2000)->addText(en2mm($lastActualSalary));
             $table->addCell(2000)->addText();
-            $table->addCell(2000)->addText(floor($totalPaidAfterIncrement -  $salaryRatePerDayBeforeIncrement));
-            $table->addCell(2000)->addText( ( $totalPaidAfterIncrement - floor($totalPaidAfterIncrement))  - ($salaryRatePerDayBeforeIncrement -  floor($salaryRatePerDayBeforeIncrement)));
+            $table->addCell(2000)->addText(en2mm(floor($totalPaidAfterIncrement -  $salaryRatePerDayBeforeIncrement)));
+            $table->addCell(2000)->addText( ( en2mm($totalPaidAfterIncrement - floor($totalPaidAfterIncrement))  - ($salaryRatePerDayBeforeIncrement -  floor($salaryRatePerDayBeforeIncrement))));
            
 
         $table->addRow();
         $table->addCell(2000)->addText('၂');
         $table->addCell(2000)->addText();
-        $table->addCell(2000)->addText($this?->staff?->current_salary);
-        $table->addCell(2000)->addText(floor($totalPaidAfterIncrement));
-        $table->addCell(2000)->addText($totalPaidAfterIncrement - floor($totalPaidAfterIncrement));
+        $table->addCell(2000)->addText(en2mm($this?->staff?->current_salary));
+        $table->addCell(2000)->addText(en2mm(floor($totalPaidAfterIncrement)));
+        $table->addCell(2000)->addText(en2mm($totalPaidAfterIncrement - floor($totalPaidAfterIncrement)));
         $table->addCell(2000)->addText();
         $table->addCell(2000)->addText();
         $table->addCell(2000)->addText();
@@ -321,7 +321,7 @@ class OctoberSalaryList extends Component
         $daysCountAfterIncrement = 0;
         $startDateOfMonth = Carbon::parse($this->monthSelect)->startOfMonth()->toDateString();
         $endtDateOfMonth = Carbon::parse($this->monthSelect)->endOfMonth()->toDateString();
-        $incrementedDate = $this->staff?->increments->first()->increment_date;
+        $incrementedDate = $this->staff?->increments->first()?->increment_date;
 
 
         //diff days 

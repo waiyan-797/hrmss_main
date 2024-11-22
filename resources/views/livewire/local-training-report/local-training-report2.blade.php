@@ -11,7 +11,7 @@
                 <x-text-input wire:model.live='nameSearch'/>
                 
             </div>
-          {{-- <div
+          <div
             class=" mt-9"
           >            <x-select 
          :all='true'
@@ -27,7 +27,7 @@
                  
             ]"
         />
-          </div> --}}
+          </div> 
             <h1 class="text-center text-sm font-bold">Local Training Report2</h1>
 
             <table class="md:w-full mt-9">
@@ -93,7 +93,7 @@
                                 @if($i == 0)
                                     <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $loop->index + 1 }}</td>
                                     <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->name }}</td>
-                                    <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->currentRank->name }}</td>
+                                    <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->currentRank?->name }}</td>
                                 @endif
                 
                                 <!-- Abroads -->

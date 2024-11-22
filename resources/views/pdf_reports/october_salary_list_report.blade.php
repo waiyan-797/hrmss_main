@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>March Salary List</title>
+    <title>October Salary List</title>
     <style type="text/css">
         page{
             background: white;
@@ -105,112 +105,41 @@
                 <td>၁</td>
                 <td class="border border-black text-left p-2">
                     <br>
-                    {{ $startDateOfMonth }} မှ {{ $incrementedDate->subDay()->toDateString() }} ထိ
-                    {{ $diffDaysFromStart }} ရက်  
+                    {{ en2mm($startDateOfMonth) }} မှ {{ en2mm($incrementedDate->subDay()->toDateString()) }} ထိ
+                    {{ en2mm($diffDaysFromStart) }} ရက်  
                      @php 
                         $incrementedDate->addDay();
                     @endphp 
                 </td>
                 <td>
-                    {{ $lastActualSalary }}
+                    {{ en2mm($lastActualSalary) }}
                 </td>
                 <td>
-                    {{ floor($salaryRatePerDayBeforeIncrement) }}
+                    {{ en2mm(floor($salaryRatePerDayBeforeIncrement)) }}
                 </td>
                 <td>
-                    {{ ($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement)) * 100 }}
+                    {{ en2mm(($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement)) * 100) }}
                 </td>
                 <td></td>
                 <td>
-                    {{ $lastActualSalary }}
+                    {{ en2mm($lastActualSalary) }}
                 </td>
                 <td></td>
-                <td>{{ floor($totalPaidAfterIncrement - $salaryRatePerDayBeforeIncrement) }}</td>
-                <td>{{ ($totalPaidAfterIncrement - floor($totalPaidAfterIncrement)) - ($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement)) }}</td>
+                <td>{{ en2mm(floor($totalPaidAfterIncrement - $salaryRatePerDayBeforeIncrement)) }}</td>
+                <td>{{ en2mm(($totalPaidAfterIncrement - floor($totalPaidAfterIncrement)) - ($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement))) }}</td>
             </tr>
             <tr>
                 <td>၂ </td>
-                <td>{{ $incrementedDate->toDateString() }} မှ {{ $monthEnd }} ထိ</td>
-                <td>{{ $staff?->current_salary }}</td>
-                <td>{{ floor($totalPaidAfterIncrement) }}</td>
-                <td>{{ $totalPaidAfterIncrement - floor($totalPaidAfterIncrement) }}</td>
+                <td>{{ en2mm($incrementedDate->toDateString()) }} မှ {{ en2mm($monthEnd) }} ထိ</td>
+                <td>{{ en2mm($staff?->current_salary) }}</td>
+                <td>{{ en2mm(floor($totalPaidAfterIncrement)) }}</td>
+                <td>{{ en2mm($totalPaidAfterIncrement - floor($totalPaidAfterIncrement)) }}</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
-            
-            {{-- <tr>
-                <td>၁</td>
-                <td>
-                    <br> 
-                        
-                    {{ $startDateOfMonth}} မှ  
-                        {{ $incrementedDate->subDay()->toDateString()}} ထိ  
-                    
-                {{$diffDaysFromStart}} ရက် 
-                @php 
-                    $incrementedDate->addDay();
-                @endphp
-                
-                </td>
-                <td>
-               {{$lastActualSalary}}
-                </td>
-                <td>
-                    {{floor($salaryRatePerDayBeforeIncrement)}}
-
-                </td>
-                <td>
-                    {{($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement)) * 100}}
-
-                    
-                </td>
-                <td></td>
-                <td>
-                    {{$lastActualSalary}}
-                     </td>
-                <td></td>
-                <td>{{floor($totalPaidAfterIncrement -  $salaryRatePerDayBeforeIncrement)}}</td>
-                <td> {{  ( $totalPaidAfterIncrement - floor($totalPaidAfterIncrement))  - ($salaryRatePerDayBeforeIncrement -  floor($salaryRatePerDayBeforeIncrement))   }} </td>
-            </tr>
-            <tr class="">
-                <td>၂ </td>
-                <td>{{$incrementedDate->toDateString()}} မှ  {{$monthEnd }} ထိ</td>
-                <td>{{$this?->staff?->current_salary}}</td>
-                <td>{{floor($totalPaidAfterIncrement)}}</td>
-                <td>{{$totalPaidAfterIncrement - floor($totalPaidAfterIncrement)}}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr> --}}
-            {{-- <tr>
-                <td class="text-right">၁</td>
-                <td class="text-left">၁-၁၀-၂၀၂၂ မှ<br>၁၁-၁၀-၂၀၂၂ထိ(၁၁)ရက်</td>
-                <td class="text-right"></td>
-                <td class="text-right"></td>
-                <td class="text-right"></td>
-                <td class="text-right"></td>
-                <td class="text-right"></td>
-                <td class="text-right"></td>
-                <td class="text-right"></td>
-                <td class="text-right"></td>
-            </tr>
-            <tr class="font-bold">
-                <td class="text-right"></td>
-                <td class="text-right"></td>
-                <td class="text-right"></td>
-                <td class="text-right">၂၀၉,၆၁၂</td>
-                <td class="text-right">၉၀</td>
-                <td class="text-right"></td>
-                <td class="text-right">၁၉၈,၀၀၀</td>
-                <td class="text-right"></td>
-                <td class="text-right">၁၁,၆၁၂</td>
-                <td class="text-right">၉၀</td>
-            </tr> --}}
         </tbody>
     </table>
     </page>

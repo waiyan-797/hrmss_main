@@ -45,7 +45,7 @@ if (! function_exists('formatDMY')) {
     {
         
         if($date){
-            $formatted_date = Carbon\Carbon::parse($date)->format('d-m-y');
+            $formatted_date = \Carbon\Carbon::parse($date)->format('d-m-y');
         
             return $formatted_date;
         }
@@ -59,7 +59,7 @@ if (! function_exists('formatDMY')) {
 if (! function_exists('dateDiff')) {
     function dateDiff($from_date, $to_date)
     {
-        $diff = Carbon\Carbon::parse($from_date)->diff(Carbon\Carbon::parse($to_date));
+        $diff = \Carbon\Carbon::parse($from_date)->diff(\Carbon\Carbon::parse($to_date));
         return $diff;
     }
 }
@@ -67,7 +67,7 @@ if (! function_exists('dateDiff')) {
 if (! function_exists('dateDiffYMD')) {
     function dateDiffYMD($from_date, $to_date)
     {
-        $diff = Carbon\Carbon::parse($from_date)->diff(Carbon\Carbon::parse($to_date));
+        $diff = \Carbon\Carbon::parse($from_date)->diff(\Carbon\Carbon::parse($to_date));
         $diff_year = $diff->y ? en2mm($diff->y).' နှစ် ' : '';
         $diff_month = $diff->m ? en2mm($diff->m).' လ ' : '';
         $diff_day = $diff->d ? en2mm($diff->d).' ရက် ' : '';

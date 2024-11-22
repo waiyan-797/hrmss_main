@@ -242,7 +242,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/organization-polo-headquarters', InvestmentCompanies14::class)->name('investment_companies14');
     Route::get('/team-polo-regional', InvestmentCompanies15::class)->name('investment_companies15');
     Route::get('/salary-negotiation-promotion', MarchSalaryList::class)->name('march_salary_list');
+    Route::get('/salary-negotiation-promotion/{staff_id?}', MarchSalaryList::class)
+    ->name('pdf_staff_report_salary-negotiation-promotion');
+
+
     Route::get('/salary-adjustment-annual-increase', OctoberSalaryList::class)->name('october_salary_list');
+    Route::get('/salary-adjustment-annual-increase/{staff_id?}', OctoberSalaryList::class)
+    ->name('pdf_staff_report_salary-adjustment-annual-increase');
 
 
     Route::get('/payroll-summary-1', StaffSalaryList::class)->name('staff_salary_list');

@@ -21,8 +21,8 @@
                     wire:model="day_or_month_name"
                     class="text-sm font-arial block w-full mb-4 p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                     <option value="" selected>နေ့(သို့မဟုတ်)လရွေးပါ</option>
-                    @foreach ($day_or_months as $day_or_month)
-                        <option value="{{ $day_or_month->id }}"> {{ $day_or_month->name }} </option>
+                    @foreach ($dayOrMonths as $dayOrMonth)
+                        <option value="{{ $dayOrMonth->id }}"> {{ $dayOrMonth->name }} </option>
                     @endforeach
                 </select>
             </div>

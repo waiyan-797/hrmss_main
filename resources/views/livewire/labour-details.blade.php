@@ -1,4 +1,4 @@
-<div>
+ <div>
 
 
     <div>
@@ -74,4 +74,4 @@
     >
         {{$staff ? 'Update' : 'Save'}}
     </x-primary-button >
-</div>
+</div> 

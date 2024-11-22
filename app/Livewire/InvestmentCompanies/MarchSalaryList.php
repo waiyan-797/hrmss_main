@@ -149,6 +149,7 @@ class MarchSalaryList extends Component
             echo $pdf->output();
         }, 'march_salary_list_report_pdf.pdf');
     }
+
     public function go_word()
 {
     // Retrieve staff data
@@ -268,20 +269,20 @@ private function addTableData($table, $lastSalary, $beforePromotion, $afterPromo
     $table->addRow();
     $table->addCell(2000)->addText('1');
     $table->addCell(2000)->addText('၁-'. en2mm($this->month) .'-'. en2mm($this->year));
-    $table->addCell(2000)->addText(number_format($lastSalary, 2));
-    $table->addCell(2000)->addText(floor($beforePromotion));
-    $table->addCell(2000)->addText(number_format($beforePromotion - floor($beforePromotion), 2));
-    $table->addCell(2000)->addText(floor($afterPromotion));
-    $table->addCell(2000)->addText(number_format($afterPromotion - floor($afterPromotion), 2));
-    $table->addCell(2000)->addText(floor($totalPaid));
-    $table->addCell(2000)->addText(number_format($decimalPart, 2));
-    $table->addCell(2000)->addText(floor($totalPaid));
+    $table->addCell(2000)->addText(en2mm(number_format($lastSalary, 2)));
+    $table->addCell(2000)->addText(en2mm(floor($beforePromotion)));
+    $table->addCell(2000)->addText(en2mm(number_format($beforePromotion - floor($beforePromotion), 2)));
+    $table->addCell(2000)->addText(en2mm(floor($afterPromotion)));
+    $table->addCell(2000)->addText(en2mm(number_format($afterPromotion - floor($afterPromotion), 2)));
+    $table->addCell(2000)->addText(en2mm(floor($totalPaid)));
+    $table->addCell(2000)->addText(en2mm(number_format($decimalPart, 2)));
+    $table->addCell(2000)->addText(en2mm(floor($totalPaid)));
 
     $table->addRow();
     $table->addCell(2000)->addText('2');
     $table->addCell(2000)->addText();
     $table->addCell(2000)->addText();
-    $table->addCell(2000)->addText($this?->staff?->current_salary);
+    $table->addCell(2000)->addText(en2mm($this?->staff?->current_salary));
     $table->addCell(2000)->addText();
     $table->addCell(2000)->addText();
     $table->addCell(2000)->addText();

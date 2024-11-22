@@ -15,14 +15,15 @@
                 <div>
                     <input type="month" wire:model.live='fromDateRange'>
                     <input type="month" wire:model.live='toDateRange'>
-                </div>
+                    
+                </div><br>
 
                 <div>
                     <select wire:model.live='dep_category' id="">
                       <option value="1">ရုံးချုပ်</option>
                       <option value="2">တိုင်းဒေသကြီး/ပြည်နယ်</option>
                     </select>
-                  </div>
+                  </div> <br>
             <table class="md:w-full">
                 <thead>
                     <tr class="font-bold">

@@ -27,7 +27,7 @@
                     
                     </select>
                     <input type="month" wire:model.live='monthSelect'> 
-                </div>
+                </div><br>
     
             <table class="md:w-full text-sm">
                 <thead>
@@ -56,42 +56,42 @@
                         <td class="border border-black text-left p-2">
                             <br> 
                                 
-                            {{ $startDateOfMonth}} မှ  
+                            {{ en2mm($startDateOfMonth)}} မှ  
                             
-                                {{ $incrementedDate->subDay()->toDateString()}} ထိ  
+                                {{ en2mm($incrementedDate->subDay()->toDateString())}} ထိ  
                             
-                        {{$diffDaysFromStart}} ရက် 
+                        {{en2mm($diffDaysFromStart)}} ရက် 
                         @php 
                             $incrementedDate->addDay();
                         @endphp
                         
                         </td>
                         <td class="border border-black text-right p-2">
-                       {{$lastActualSalary}}
+                       {{en2mm($lastActualSalary)}}
                         </td>
                         <td class="border border-black text-right p-2">
-                            {{floor($salaryRatePerDayBeforeIncrement)}}
+                            {{en2mm(floor($salaryRatePerDayBeforeIncrement))}}
 
                         </td>
                         <td class="border border-black text-right p-2">
-                            {{($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement)) * 100}}
+                            {{en2mm(($salaryRatePerDayBeforeIncrement - floor($salaryRatePerDayBeforeIncrement)) * 100)}}
 
                             
                         </td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2">
-                            {{$lastActualSalary}}
+                            {{en2mm($lastActualSalary)}}
                              </td>
                         <td class="border border-black text-right p-2"></td>
-                        <td class="border border-black text-right p-2">{{floor($totalPaidAfterIncrement -  $salaryRatePerDayBeforeIncrement)}}</td>
-                        <td class="border border-black text-right p-2"> {{  ( $totalPaidAfterIncrement - floor($totalPaidAfterIncrement))  - ($salaryRatePerDayBeforeIncrement -  floor($salaryRatePerDayBeforeIncrement))   }} </td>
+                        <td class="border border-black text-right p-2">{{en2mm(floor($totalPaidAfterIncrement -  $salaryRatePerDayBeforeIncrement))}}</td>
+                        <td class="border border-black text-right p-2"> {{  en2mm(( $totalPaidAfterIncrement - floor($totalPaidAfterIncrement))  - ($salaryRatePerDayBeforeIncrement -  floor($salaryRatePerDayBeforeIncrement)))   }} </td>
                     </tr>
                     <tr class="">
                         <td class="border border-black text-right p-2">၂ </td>
-                        <td class="border border-black text-right p-2">{{$incrementedDate->toDateString()}} မှ  {{$monthEnd }} ထိ</td>
-                        <td class="border border-black text-right p-2">{{$this?->staff?->current_salary}}</td>
-                        <td class="border border-black text-right p-2">{{floor($totalPaidAfterIncrement)}}</td>
-                        <td class="border border-black text-right p-2">{{$totalPaidAfterIncrement - floor($totalPaidAfterIncrement)}}</td>
+                        <td class="border border-black text-right p-2">{{en2mm($incrementedDate->toDateString())}} မှ  {{en2mm($monthEnd) }} ထိ</td>
+                        <td class="border border-black text-right p-2">{{en2mm($this?->staff?->current_salary)}}</td>
+                        <td class="border border-black text-right p-2">{{en2mm(floor($totalPaidAfterIncrement))}}</td>
+                        <td class="border border-black text-right p-2">{{en2mm($totalPaidAfterIncrement - floor($totalPaidAfterIncrement))}}</td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2"></td>

@@ -26,7 +26,7 @@
                     @endforeach
                 </select>
                 <input type="month" wire:model.live='monthsSelect'> 
-            </div>
+            </div><br>
 
             <table class="md:w-full text-sm">
                 <thead>
@@ -74,18 +74,19 @@
                         </td>
                         <td class="border border-black text-right p-2">
                             
-                            {{$lastActualSalary}}
+                            {{en2mm($lastActualSalary)}}
                         </td>
-                        <td class="border border-black text-right p-2">{{floor($totalPaidBeforePromotons)  }}</td>
-                        <td class="border border-black text-right p-2">{{$totalPaidBeforePromotons - floor($totalPaidBeforePromotons)  }}</td>
+                        <td class="border border-black text-right p-2">{{ en2mm(floor($totalPaidBeforePromotons)) }}</td>
+
+                        <td class="border border-black text-right p-2">{{en2mm($totalPaidBeforePromotons - floor($totalPaidBeforePromotons) ) }}</td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2">
                             
-                            {{floor($lastActualSalary)}}
+                            {{en2mm(floor($lastActualSalary))}}
                         </td>
-                        <td class="border border-black text-right p-2">{{$lastActualSalary - floor($lastActualSalary)  }}</td>  
-                        <td class="border border-black text-right p-2">{{  floor($totalPaid - $totalPaidBeforePromotons)  }}</td>
-                        <td class="border border-black text-right p-2">{{ -floor( $totalPaid - $totalPaidBeforePromotons ) + ( $totalPaid - $totalPaidBeforePromotons )  }}</td>                    </tr>
+                        <td class="border border-black text-right p-2">{{en2mm($lastActualSalary - floor($lastActualSalary))  }}</td>  
+                        <td class="border border-black text-right p-2">{{  en2mm(floor($totalPaid - $totalPaidBeforePromotons))  }}</td>
+                        <td class="border border-black text-right p-2">{{ en2mm(-floor( $totalPaid - $totalPaidBeforePromotons ) + ( $totalPaid - $totalPaidBeforePromotons ))  }}</td>                    </tr>
 
                     <tr>
                         <td class="border border-black text-right p-2">၂</td>
@@ -98,9 +99,9 @@
                                 <br> {{ en2mm($dayPaidSalaryAfterPromotions) }} ရက်
                             @endif
                         </td>
-                        <td class="border border-black text-right p-2">{{$this?->staff?->current_salary}}</td>
-                        <td class="border border-black text-right p-2">{{floor($totalPaidAfterPromotion)}}</td>
-                        <td class="border border-black text-right p-2">{{$totalPaidAfterPromotion - floor($totalPaidAfterPromotion)}}</td>
+                        <td class="border border-black text-right p-2">{{en2mm($this?->staff?->current_salary)}}</td>
+                        <td class="border border-black text-right p-2">{{en2mm(floor($totalPaidAfterPromotion))}}</td>
+                        <td class="border border-black text-right p-2">{{en2mm($totalPaidAfterPromotion - floor($totalPaidAfterPromotion))}}</td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2"></td>
                         <td class="border border-black text-right p-2"></td>
@@ -124,10 +125,10 @@
 @endphp
 
 <td class="border border-black text-right p-2">
-    {{ $integerPart }}
+    {{ en2mm($integerPart) }}
 </td>
 <td class="border border-black text-right p-2">
-    {{ sprintf('%.10f', $decimalPart) }} 
+    {{ en2mm(sprintf('%.10f', $decimalPart)) }} 
 </td>
 
                         <td class="border border-black text-right p-2"></td>

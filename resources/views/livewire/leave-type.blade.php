@@ -9,7 +9,7 @@
                 'search_id' => 'leave_type_search',
                 // 'columns' => ['No', 'Name', 'Allowed', 'Day Or Month','Is Yearly','Action'],
                 'columns' => ['စဉ်', 'ခွင့်အမျိုးအစား','ခွင့်','နေ့(သို.မဟုတ်)လ','နှစ်စဉ်','လုပ်ဆောင်ချက်'],
-                'column_vals' => ['name', 'allowed', 'day_or_month','is_yearly'],
+                'column_vals' => ['name', 'allowed', 'dayOrMonth','is_yearly'],
             ])
         </div>
     </div>

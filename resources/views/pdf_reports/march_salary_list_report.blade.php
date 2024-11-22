@@ -117,14 +117,14 @@
                             {{ en2mm($dayPaidSalaryBeforePromotions) }} ရက်
                         @endif
                     </td>
-                    <td class="text-right">{{$lastActualSalary}}</td>
-                    <td class="text-right">{{floor($totalPaidBeforePromotons)}}</td>
-                    <td class="text-right">{{$totalPaidBeforePromotons - floor($totalPaidBeforePromotons)}}</td>
+                    <td class="text-right">{{en2mm($lastActualSalary)}}</td>
+                    <td class="text-right">{{en2mm(floor($totalPaidBeforePromotons))}}</td>
+                    <td class="text-right">{{en2mm($totalPaidBeforePromotons - floor($totalPaidBeforePromotons))}}</td>
                     <td class="text-right"></td>
-                    <td class="text-right">{{floor($lastActualSalary)}}</td>
-                    <td class="text-right">{{$lastActualSalary - floor($lastActualSalary)}}</td>
-                    <td class="text-right">{{floor($totalPaid - $totalPaidBeforePromotons)}}</td>
-                    <td class="text-right">{{-floor($totalPaid - $totalPaidBeforePromotons) + ($totalPaid - $totalPaidBeforePromotons)}}</td>
+                    <td class="text-right">{{en2mm(floor($lastActualSalary))}}</td>
+                    <td class="text-right">{{en2mm($lastActualSalary - floor($lastActualSalary))}}</td>
+                    <td class="text-right">{{en2mm(floor($totalPaid - $totalPaidBeforePromotons))}}</td>
+                    <td class="text-right">{{en2mm(-floor($totalPaid - $totalPaidBeforePromotons) + ($totalPaid - $totalPaidBeforePromotons))}}</td>
                 </tr>
                 <tr>
                     <td>၂</td>
@@ -135,9 +135,9 @@
                             <br> {{ en2mm($dayPaidSalaryAfterPromotions) }} ရက်
                         @endif
                     </td>
-                    <td class="text-right">{{$staff?->current_salary}}</td>
-                    <td class="text-right">{{floor($totalPaidAfterPromotion)}}</td>
-                    <td class="text-right">{{$totalPaidAfterPromotion - floor($totalPaidAfterPromotion)}}</td>
+                    <td class="text-right">{{en2mm($staff?->current_salary)}}</td>
+                    <td class="text-right">{{en2mm(floor($totalPaidAfterPromotion))}}</td>
+                    <td class="text-right">{{en2mm($totalPaidAfterPromotion - floor($totalPaidAfterPromotion))}}</td>
                     <td class="text-right"></td>
                     <td class="text-right"></td>
                     <td class="text-right"></td>
@@ -148,8 +148,8 @@
                     <td>total</td>
                     <td></td>
                     <td></td>
-                    <td class="text-right">{{ $integerPart }}</td>
-                    <td class="text-right">{{ sprintf('%.10f', $decimalPart) }}</td>
+                    <td class="text-right">{{ en2mm($integerPart) }}</td>
+                    <td class="text-right">{{ en2mm(sprintf('%.10f', $decimalPart)) }}</td>
                     <td></td>
                     <td></td>
                     <td></td>

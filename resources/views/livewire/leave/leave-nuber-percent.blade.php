@@ -7,16 +7,22 @@
 
           <h1 class="font-bold text-center text-base mb-4">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
             {{mmDateFormat($year,$month)}}    ဝန်ထမ်းများ၏<br>ခွင့်ခံစားမှုအရေအတွက်နှင့်ရာခိုင်နှုန်း</h1>
-          <div>
-            <select wire:model.live='dep_category' id="">
-              <option value="1">ရုံးချုပ်</option>
-              <option value="2">တိုင်းဒေသကြီး/ပြည်နယ်</option>
-              <option value="3">အချုပ်</option>
-            </select>
-          </div>
-          <div>
-            <input type="month" wire:model.live='dateRange'>
-          </div>
+         
+          <div class="flex space-x-4">
+            <div>
+              <select wire:model.live='dep_category' id="" class="border rounded p-2">
+                <option value="1">ရုံးချုပ်</option>
+                <option value="2">တိုင်းဒေသကြီး/ပြည်နယ်</option>
+                <option value="3">အချုပ်</option>
+              </select>
+            </div>
+          
+           
+            <div>
+              <input type="month" wire:model.live='dateRange' class="border rounded p-2">
+            </div>
+          </div><br>
+          
           <table class="md:w-full">
             <thead>
               <tr class="font-bold">

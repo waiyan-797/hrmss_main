@@ -9,7 +9,7 @@ use PhpOffice\PhpWord\PhpWord;
 
 class LanguageReport extends Component
 {
-    
+    public $search = '';
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [
@@ -58,12 +58,27 @@ class LanguageReport extends Component
         // Download the file
         return response()->download($filePath)->deleteFileAfterSend(true);
     }
+    public function getFilteredStaff()
+    {
+        return Staff::where('name', 'like', '%' . $this->search . '%')->get();
+    }
+
+
 
      public function render()
     {
-        $staffs = Staff::get();
+        // $staffs = Staff::paginate(20);
+        // $currentPage = $staffs->currentPage();
+        // $perPage = $staffs->perPage();
+        // $startIndex = ($currentPage - 1) * $perPage + 1;
+        $staffs = Staff::where('name', 'like', '%' . $this->search . '%')->paginate(20);
+        $currentPage = $staffs->currentPage();
+        $perPage = $staffs->perPage();
+        $startIndex = ($currentPage - 1) * $perPage + 1;
+
         return view('livewire.reports.language-report',[ 
         'staffs' => $staffs,
+        'startIndex'=>$startIndex,
     ]);
     }
 }

@@ -1,9 +1,15 @@
-<div class="w-full">
+ <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
+           
+
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <h1 class="font-bold text-center text-base mb-1">Punishment Report</h1>
+            <input type="text" wire:model="search" placeholder="Search by Name" class="p-2 border border-gray-300 rounded mb-4">
+
+
+
 
             <table class="md:w-full">
                 <thead>
@@ -15,11 +21,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($staffs as $staff)
+                    
+
+                    @foreach($staffs as $index=> $staff)
                     <tr>
-                        <td class="border border-black text-left p-1">{{ $loop->index + 1 }}</td>
+                        <td class="border border-black text-left p-1">{{ $startIndex + $index }}</td>
+
                         <td class="border border-black text-left p-1">{{ $staff->name}}</td>
-                        <td class="border border-black text-left p-1">{{ $staff->current_rank->name}}</td>
+                        <td class="border border-black text-left p-1">{{ $staff->currentRank?->name}}</td>
                         
                         <td class="border border-black text-left p-1">
                             @foreach($staff->punishments as   $punishment )
@@ -37,8 +46,11 @@
                     @endforeach
                 </tbody>
             </table>
-
+            <div>
             {{ $staffs->links() }}
         </div>
+
+        </div>
     </div>
-</div>
+</div>  
+
