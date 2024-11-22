@@ -24,7 +24,7 @@
                         <tr>
                             <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td>
                             <td class="border border-black text-left p-2">{{ $staff->name }}</td>
-                            <td class="border border-black text-left p-2">{{ $staff->current_rank->name }}</td>
+                            <td class="border border-black text-left p-2">{{ $staff->currentRank?->name }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($staff->children->where('gender_id', 1)->count()) }}</td>
                             <td class="border border-black text-left p-2">{{ en2mm($staff->children->where('gender_id', 2)->count()) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($staff->children->count()) }}</td>

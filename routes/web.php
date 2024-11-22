@@ -272,7 +272,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/employee-salary-bill', DetailStaffSalary::class)->name('detail_staff_salary');
     Route::get('/permanent_staff', PermanentStaff::class)->name('permanent_staff');
-    Route::get('/detail_staff_salary', DetailStaffSalary::class)->name('detail_staff_salary');
     Route::get('/staff-list-region-state', StaffList1::class)->name('staff_list1');
     Route::get('/general-staff-statistics', StaffList3::class)->name('staff_list3');
     Route::get('/planning-accounting-division-staff-list', StaffList4::class)->name('staff_list4');
@@ -354,13 +353,3 @@ Route::get('/leave-calender/{id}' , LeaveCalendar::class)->name('leaveCalendar')
 });
 
 require __DIR__ . '/auth.php';
-
-
-// Route::get('/labour',
-
-
-//     function(){
-//         return (new ModelsStaff())->labour();
-//     }
-
-//     )->name('labour');

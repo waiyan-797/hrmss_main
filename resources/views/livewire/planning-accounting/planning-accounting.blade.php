@@ -21,7 +21,7 @@
                         <tr>
                             <td class="border border-black p-2">{{ $loop->index+1}}</td>
                             <td class="border border-black p-2">{{ $staff->name}}</td>
-                            <td class="border border-black p-2">{{ $staff->current_rank->name}}</td>
+                            <td class="border border-black p-2">{{ $staff->currentRank?->name}}</td>
                             <td class="border border-black p-2"></td>
                         </tr>
                         @endforeach
