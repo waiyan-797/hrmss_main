@@ -24,7 +24,7 @@
                     @foreach($staffs as $staff)
                     <tr>
                         <td class="border border-black text-center p-2">{{ $loop->index+1}}</td>
-                        <td class="border border-black text-left p-2">{{ $staff->name}}/{{ $staff->current_rank->name}}</td>
+                        <td class="border border-black text-left p-2">{{ $staff->name}}/{{ $staff->currentRank?->name}}</td>
                         <td class="border border-black text-center p-2">{{ $staff->dob}}</td>
                         <td class="border border-black text-center p-2">{{ $staff->join_date}}</td>
                         <td class="border border-black text-center p-2">            {{ \Carbon\Carbon::parse($staff->dob)->addYears(62)->subMonths(4)->format('Y-m-d') }}

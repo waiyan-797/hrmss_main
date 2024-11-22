@@ -6,11 +6,12 @@ use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
+use Livewire\WithPagination;
 
 class EmpoyeeRecordReport extends Component
 {
 
-
+    use WithPagination;
 
     public function go_pdf()
     {
@@ -63,13 +64,13 @@ class EmpoyeeRecordReport extends Component
    
     public function render()
     {
-        $staffs = Staff::paginate(20); 
-         $currentPage = $staffs->currentPage();
+        $staffs = Staff::paginate(2);
+        $currentPage = $staffs->currentPage();
         $perPage = $staffs->perPage();
-        $startIndex = ($currentPage - 1) * $perPage + 1;
+        $start = ($currentPage - 1) * $perPage + 1;
         return view('livewire.employee-record-report.empoyee-record-report', [
             'staffs' => $staffs,
-            'startIndex'=>$startIndex,
+            'start' => $start,
         ]);
     }
 

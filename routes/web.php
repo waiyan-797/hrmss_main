@@ -308,35 +308,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/punishment_report', PunishmentReport::class)->name('punishment_report');
     Route::get('/list-of-salary-rates-by-position', RankSalaryList::class)->name('rank_salary_list');
     Route::get('/staff_report', StaffReport::class)->name('staff_report');
-    Route::get('/pdf_17/{staff_id?}', function ($staff_id) {
-        $staff = ModelsStaff::find($staff_id);
-        return view('pdf_reports.staff_report_17', ['staff' => $staff]);
-    })->name('pdf');
-    Route::get('/pdf_15/{staff_id?}', function ($staff_id) {
-        $staff = ModelsStaff::find($staff_id);
-        return view('pdf_reports.staff_report_15', ['staff' => $staff]);
-    })->name('pdf');
-    Route::get('/pdf_18/{staff_id?}', function ($staff_id) {
-        $staff = ModelsStaff::find($staff_id);
-        return view('pdf_reports.staff_report_18', ['staff' => $staff]);
-    })->name('pdf');
-    Route::get('/pdf_19/{staff_id?}', function ($staff_id) {
-        $staff = ModelsStaff::find($staff_id);
-        return view('pdf_reports.staff_report_19', ['staff' => $staff]);
-    })->name('pdf');
-    Route::get('/pdf_53/{staff_id?}', function ($staff_id) {
-        $staff = ModelsStaff::find($staff_id);
-        return view('pdf_reports.staff_report_53', ['staff' => $staff]);
-    })->name('pdf');
-    Route::get('/pdf_71/{staff_id?}', function ($staff_id) {
-        $staff = ModelsStaff::find($staff_id);
-        return view('pdf_reports.staff_report_71', ['staff' => $staff]);
-    })->name('pdf');
-    Route::get('/word_15/{staff_id?}', function ($staff_id) {
-        $staff = ModelsStaff::find($staff_id);
-        return view('word_reports.staff_report_15', ['staff' => $staff]);
-    })->name('word_report_15');
-
+   
 
 Route::get('/labour',Labour::class)->name('labour');
 Route::get('/labour_view/{id?}' , LabourDetails::class )->name('labourDetails');

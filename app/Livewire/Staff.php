@@ -102,9 +102,9 @@ class Staff extends Component
             $staffQuery->where(function ($q) use ($staffSearch) {
                 $q->where('name', 'LIKE', $staffSearch)->orWhere('staff_no', 'LIKE', $staffSearch);
             });
-            $staffs = $staffQuery->paginate($staffQuery->count() > 10 ? $staffQuery->count() : 10);
+            $staffs = $staffQuery->paginate($staffQuery->count() > 1 ? $staffQuery->count() : 1);
         } else {
-            $staffs = $staffQuery->paginate(10);
+            $staffs = $staffQuery->paginate(1);
         }
 
 

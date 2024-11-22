@@ -54,7 +54,7 @@
 
                                 <td class="border border-black text-right p-1">{{ $staff->pension_bank}}</td>
                                 <td class="border border-black text-right p-1">{{ $staff->pension_salary}}၊{{ $staff->gratuity}}</td>
-                                <td class="border border-black text-right p-1">{{ $staff->permanent_address_ward.'၊'.$staff->permanent_address_street.'၊'.$staff->permanent_address_township_or_town->name.'၊'.$staff->permanent_address_region->name }}၊{{ $staff->phone}}</td>
+                                <td class="border border-black text-right p-1">{{ $staff->permanent_address_ward.'၊'.$staff->permanent_address_street.'၊'.$staff->permanent_address_township_or_town?->name.'၊'.$staff->permanent_address_region?->name }}၊{{ $staff->phone}}</td>
                             </tr>
                        @endforeach
                     </tbody> 

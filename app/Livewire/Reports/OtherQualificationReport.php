@@ -65,8 +65,12 @@ class OtherQualificationReport extends Component
      public function render()
     {
         $staffs = Staff::paginate(20);
+        $currentPage = $staffs->currentPage();
+        $perPage = $staffs->perPage();
+        $startIndex = ($currentPage - 1) * $perPage + 1;
         return view('livewire.reports.other-qualification-report',[ 
         'staffs' => $staffs,
+        'startIndex'=>$startIndex,
     ]);
     }
 }

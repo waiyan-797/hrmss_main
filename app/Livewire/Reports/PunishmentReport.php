@@ -66,7 +66,7 @@ class PunishmentReport extends Component
 
 public function render()
 {
-    $staffs = Staff::where('name', 'like', '%' . $this->search . '%')->paginate(2);
+    $staffs = Staff::where('name', 'like', '%' . $this->search . '%')->paginate(20);
 
         $currentPage = $staffs->currentPage();
         $perPage = $staffs->perPage();
