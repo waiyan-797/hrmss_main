@@ -20,7 +20,8 @@ class LastPayCertificate extends Component
     public $certificate ;
     public $salaries ;
 
-
+    
+    
     // form 
 
     public $ordered_date , $order_no , $paid_up_to_date ,$amount;
@@ -52,6 +53,8 @@ class LastPayCertificate extends Component
         if($this->to_division_id){
             $this->toDivisionName = ModelsDivision::findOrFail($this->to_division_id)->name;
         }
+
+        
        return view('livewire.investment-companies.last-pay-certificate',[ 
         'staffs' => $staffs,
     ]);
@@ -72,6 +75,10 @@ class LastPayCertificate extends Component
             $this->to_division_id = ModelsDivision::first()->id;
 
         }
+
+
+
+
         if($this->certificate){
 
 
@@ -89,7 +96,12 @@ class LastPayCertificate extends Component
 
         }
 
-        // $this->salaries = $this->staff->salaries()->where()
+        $lastPosting  =  $this->staff->postings->last();
+        // dd($lastPosting->from_date, $lastPosting->to_date);
+        $this->salaries =  $this->staff->salaries()
+    ->whereBetween('salary_month', [$lastPosting?->from_date, $lastPosting?->to_date])
+    ->get();
+    // dd($this->salaries);
 
      }
 

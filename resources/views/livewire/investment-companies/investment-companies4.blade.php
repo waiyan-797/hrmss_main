@@ -30,7 +30,7 @@
                                 <td class="border border-black p-2 font-semibold" colspan="2">{{$first_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
-                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum('allowed_qty') - $first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm((-$first_payscales->sum('allowed_qty') + $first_payscales->sum(fn($scale) => $scale->staff->count()))) }}</td>
                             </tr>
 
                             @foreach ($second_payscales as $payscale)

@@ -38,13 +38,13 @@
                                 <!-- Merge the first three columns for each staff -->
                                 <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $loop->index + 1 }}</td>
                                 <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->name }}</td>
-                                <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->current_rank->name }}</td>
+                                <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->current_rank?->name }}</td>
                             @endif
                 
                             <!-- Training information -->
                             @if(isset($staff->trainings[$i]))
                                 <td class="border border-black text-center p-2">{{ $staff->trainings[$i]->diploma_name }}</td>
-                                <td class="border border-black text-center p-2">{{ $staff->trainings[$i]->training_type->name }}</td>
+                                <td class="border border-black text-center p-2">{{ $staff->trainings[$i]->training_type?->name }}</td>
                                 <td class="border border-black text-center p-2">{{ $staff->trainings[$i]->from_date }}</td>
                                 <td class="border border-black text-center p-2">{{ $staff->trainings[$i]->to_date }}</td>
                             @else

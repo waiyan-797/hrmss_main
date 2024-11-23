@@ -111,12 +111,15 @@
                         ['route_name' => 'investment_companies4', 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(လစာနှုန်း)'],
                         ['route_name' => 'investment_companies5', 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(အဆင့်တူ)'],
                         ['route_name' => 'investment_companies6', 'name' => 'အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း'],
-                        ['route_name' => 'investment_companies7', 'name' => 'နပတရောက်ရှိအင်အား'],
-                        ['route_name' => 'investment_companies8', 'name' => 'ဌာနအလိုက်ပြောင်း‌ရွေ့အင်အားစာရင်း'],
+                        ['route_name' => 'investment_companies7', 'name' => 'နပတ၁ '],
+                        ['route_name' => 'investment_companies8', 'name' => 'နပတ ၂'],
+                        ['route_name' => 'investment_companies10', 'name' => 'နပတ ၄'],
+                        ['route_name' => 'staff_report1', 'name' => 'လက်ရှိဌာနရောက်ရှိရက်စွဲ'],
+                        ['route_name' => 'staff_report1', 'name' => 'အသက်ဇယား'], //without လက်ရှိဌာနရောက်ရှိရက်စွဲ
+
                         ['route_name' => 'investment_companies9', 'name' => 'ဝန်ထမ်းအဖြစ်မှထုတ်ပါယ်/ထုတ်ပစ်'],
-                        ['route_name' => 'investment_companies10', 'name' => 'လအလိုက်ဝန်ထမ်းအင်အားစာရင်းချုပ်'],
                         ['route_name' => 'investment_companies11', 'name' => '၁၀နှစ်အထက်/၁၀နှစ်အောက်ပင်စင်ပို့စာရင်း'],
-                        ['route_name' => 'investment_companies12', 'name' => 'ပင်စင်ကိစ္စ(မနှင်းစု)'],
+                        ['route_name' => 'investment_companies12', 'name' => 'ပင်စင်ကိစ္စ(မနှင်းစု) skip '],
                         ['route_name' => 'investment_companies13', 'name' => 'ဘွဲ့နှင့်သက်ဆိုင်သည့်စာရင်း'],
                         ['route_name' => 'investment_companies14', 'name' => 'ဖွဲ့ခန့်ပိုလိုရုံးချုပ်'],
                         ['route_name' => 'investment_companies15', 'name' => 'ဖွဲ့ခန့်ပိုလို(တိုင်းဒေသကြီး)'],
@@ -132,7 +135,6 @@
                     :lists="[
                         ['route_name' => 'local_training_report', 'name' => 'တတ်ရောက်ခဲ့သည့်သင်တန်း(၁)'],
                         ['route_name' => 'local_training_report2', 'name' => 'တတ်ရောက်ခဲ့သည့်သင်တန်း(၂)'],
-                        ['route_name' => 'staff_report1', 'name' => 'လက်ရှိဌာနရောက်ရှိရက်စွဲ'],
                         ['route_name' => 'staff_report2', 'name' => 'ပင်စင်ကိစ္စ(မနှင်းစု)'],
                         ['route_name' => 'staff_report3', 'name' => 'ပင်စင်ပြည့်ဝန်ထမ်းများစာရင်း'],
                         ['route_name' => 'pension_list', 'name' => 'ပင်စင်ခံစားခဲ့သူများစာရင်း'],

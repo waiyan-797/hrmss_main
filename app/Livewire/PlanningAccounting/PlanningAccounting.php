@@ -2,6 +2,7 @@
 
 namespace App\Livewire\PlanningAccounting;
 
+use App\Models\Division;
 use App\Models\Staff;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,6 +12,9 @@ use PhpOffice\PhpWord\PhpWord;
 class PlanningAccounting extends Component
 {
     use WithPagination;
+
+    public $divisions , $selectedDivisionId;
+    
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [
@@ -60,5 +64,12 @@ class PlanningAccounting extends Component
         'start'=>$start,
     ]);
     }
-    
+
+
+    public function mount(){
+        $this->divisions = Division::all();
+         $this->selectedDivisionId = getFirstOf('Division')->id;
+         
+
+    }    
 }

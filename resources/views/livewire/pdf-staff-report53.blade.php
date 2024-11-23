@@ -114,7 +114,7 @@
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၄။ </label>
-                    <label for="name" class="md:w-1/3">လက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ</label>
+                    <label for="name" class="md:w-1/3">ယခုနေရပ်လိပ်စာအပြည့်အစုံ</label>
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name"
@@ -247,7 +247,7 @@
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၉။ </label>
-                    <label for="name" class="md:w-1/3">အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာနှင့် ဇာတိနှင့်
+                    <label for="name" class="md:w-1/3">အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့်
                         အလုပ်အကိုင်</label>
                     <label for="" class="md:w-5">-</label>
                         <label for="name" class="md:w-3/5">{{ $staff->father_name.'၊'.$staff->father_ethnic?->name.'၊'.$staff->father_religion?->name.'၊'.$staff->father_place_of_birth.'၊'.$staff->father_occupation }}
@@ -264,7 +264,7 @@
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၂၁။ </label>
-                    <label for="name" class="md:w-1/3">အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာနှင့် ဇာတိနှင့်
+                    <label for="name" class="md:w-1/3">အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့်
                         အလုပ်အကိုင်</label>
                     <label for="" class="md:w-5">-</label>
                    
@@ -342,11 +342,20 @@
                                     <div class="w-full mb-4">
                                         <div class="flex justify-start mb-2 space-x-3">
                                             <label for="">၃၀။ </label>
-                                            <h1 class="font-semibold text-base">
-                                                အလုပ်အကိုင်အတွက် ထောက်ခံသူများ
-                                            </h1>
+                                            <p class="font-semibold text-base">
+                                            အလုပ်အကိုင်အတွက် ထောက်ခံသူများ   
+                                            ဉီးဝင်းကျော်နိုင် ( ညွန်ကြားရေးမှုး)
+
+                                            ဉီးဝင်းကျော်နိုင် ( ညွန်ကြားရေးမှုး)
+                                            </p>
                                         </div>
-                                        <table class="md:w-full">
+                                        <h1>
+
+                                        </h1>
+                                        <h1>
+
+                                        </h1>
+                                        {{-- <table class="md:w-full">
                                             <thead>
                                                 <tr>
                                                     <th class="border border-black text-center p-2">စဉ်</th>
@@ -369,7 +378,7 @@
                                                     </tr>
                                                 @endforeach
                                             </tbody>
-                                        </table>
+                                        </table> --}}
                                     </div>
             </div>
 
@@ -424,6 +433,7 @@
                         <table class="w-full text-center ml-8 border-collapse border border-black">
                             <thead>
                                 <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">စဉ်</th>
                                     <th class="p-2 border border-black">အမည်</th>
                                     <th class="p-2 border border-black">လူမျိုး/ဘာသာ</th>
                                     <th class="p-2 border border-black">ဇာတိ</th>
@@ -531,7 +541,7 @@
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၅။ </label>
-                        <h2 class="text-base">ခင်ပွန်း၊ ဇနီးသည်</h2>
+                        <h2 class="text-base">ခင်ပွန်း / ဇနီးသည်</h2>
                     </div>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center ml-8">
@@ -762,7 +772,7 @@
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၃။ </label>
-                    <label for="name" class="md:w-1/3">ကျောင်းသားဘဝတွင် နိုင်ငံရေး/မြို့ရေး
+                    <label for="name" class="md:w-1/3">ကျောင်းသားဘဝတွင် နိုင်ငံရေး/မြို့ရေး/ရွာရေး
                         ဆောင်ရွက်မှုများနှင့်အဆင့်အတန်း၊
                         တာဝန်</label>
                     <label for="" class="md:w-5">-</label>
@@ -774,7 +784,7 @@
                     <label for="" class="md:w-5">၄။ </label>
                     <label for="name" class="md:w-1/3">ဝါသနာပါပြီး၊
                         လေ့လာလိုက်စားခဲ့သောကျန်းမာရေးကစားခုန်စားမှုများ၊
-                        အနုပညာဆိုင်ရာ အတီးအမှုတ်များ၊ ပညာရေးစက်မှုလက်မှု</label>
+                        အနုပညာဆိုင်ရာ အတီးအမှုတ်များ၊ ပညာရေး ၊ စက်မှုလက်မှု</label>
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name" class="md:w-3/5">{{ $staff->habit }}</label>
@@ -887,43 +897,43 @@
                     <label for="name" class="md:w-3/5">{{en2mm($staff->punishments->count())}}</label>
                 </div>
             </div>
+            <p class="mb-8">အထက်ပါဇယားကွက်များအတွင်း ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း
+                တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။</p>
+            <div class="p-6 ms-96">
+               
 
-            <div class="p-6">
-                <p class="mb-8">အထက်ပါဇယားကွက်များအတွင်း ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း
-                    တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။</p>
-
-                <div class="flex justify-start mb-2">
-                    <p class="md:w-1/3 ml-36">လက်မှတ်</p>
+                <div class="flex justify-end mb-2">
+                    <p class="md:w-1/3 ">လက်မှတ်</p>
                     <p class="md:w-5">၊</p>
                     <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start mb-2">
-                    <p class="md:w-1/3 ml-36">ကိုယ်ပိုင်အမှတ်(သို့မဟုတ်)</p>
+                    <p class="md:w-1/3 ">ကိုယ်ပိုင်အမှတ်(သို့မဟုတ်)</p>
                     <p class="md:w-5">၊</p>
                     <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start mb-2">
-                    <p class="md:w-1/3 ml-36">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</p>
+                    <p class="md:w-1/3 ">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</p>
                     <p class="md:w-5">၊</p>
                     <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start mb-2">
-                    <p class="md:w-1/3 ml-36">အဆင့်၊ ရာထူး</p>
+                    <p class="md:w-1/3 ">အဆင့်၊ ရာထူး</p>
                     <p class="md:w-5">၊</p>
                     <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start mb-2">
-                    <p class="md:w-1/3 ml-36">အမည်</p>
+                    <p class="md:w-1/3 ">အမည်</p>
                     <p class="md:w-5">၊</p>
                     <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start mb-4">
-                    <p class="md:w-1/3 ml-36">တပ်/ဌာန</p>
+                    <p class="md:w-1/3 ">တပ်/ဌာန</p>
                     <p class="md:w-5">၊</p>
                     <p class="md:w-3/5"></p>
                 </div>

@@ -117,6 +117,7 @@ class Staff extends Component
 
         if(auth()->user()->AdminHR()){
 
+            
         //    return redirect()->route('staff' , ['status'=>2]);
         }
                     $this->status = $status;

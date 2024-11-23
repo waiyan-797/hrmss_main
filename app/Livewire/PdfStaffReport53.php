@@ -49,9 +49,9 @@ class PdfStaffReport53 extends Component
         $section->addText('၁၁။'.'ကိုယ်အလေးချိန်: '. str_repeat(' ', 5).$staff->weight);
         $section->addText('၁၂။'.'မွေးဖွားရာဇာတိ: '. str_repeat(' ', 5).$staff->place_of_birth);
         $section->addText('၁၃။'.'နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်: '. str_repeat(' ', 5). $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code);
-        $section->addText('၁၄။'.'လက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ: '. str_repeat(' ', 5).$staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name);
+        $section->addText('၁၄။'.'ယခုနေရပ်လိပ်စာအပြည့်အစုံ: '. str_repeat(' ', 5).$staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name);
         $section->addText('၁၅။'.'အမြဲတမ်းနေရပ်လိပ်စာအပြည့်အစုံ: '. str_repeat(' ', 5).$staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name);
-        $section->addText('၁၆။'.'ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာ ဖော်ပြရန်): '. str_repeat(' ', 5).$staff->previous_addresses);
+        $section->addText('၁၆။'.'ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာ ဖော်ပြရန်မလိုပါ): '. str_repeat(' ', 5).$staff->previous_addresses);
         $section->addText('၁၇။'.'တပ်မတော်သို့ ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်: '. str_repeat(' ', 5));
         $section->addText('(က)'.'ကိုယ်ပိုင်အမှတ်: '. str_repeat(' ', 5).$staff->military_solider_no);
         $section->addText('(ခ)'.'တပ်သို့ဝင်သည့်နေ့: '. str_repeat(' ', 5).$staff->military_join_date);
@@ -76,9 +76,9 @@ class PdfStaffReport53 extends Component
             $table->addCell(2000)->addText($education->education_type->name);
             $table->addCell(2000)->addText($education->education->name);
         }
-        $section->addText('၁၉။'.'အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာနှင့် ဇာတိနှင့် အလုပ်အကိုင်: '. str_repeat(' ', 5).$staff->father_name.'၊'.$staff->father_ethnic?->name.'၊'.$staff->father_religion?->name.'၊'.$staff->father_place_of_birth.'၊'.$staff->father_occupation);
+        $section->addText('၁၉။'.'အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်: '. str_repeat(' ', 5).$staff->father_name.'၊'.$staff->father_ethnic?->name.'၊'.$staff->father_religion?->name.'၊'.$staff->father_place_of_birth.'၊'.$staff->father_occupation);
         $section->addText('၂၀။'.'၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ: '. str_repeat(' ', 5). $staff->father_address_street.'၊'.$staff->father_address_ward.'၊'.$staff->father_address_township_or_town?->name.'၊'.$staff->father_address_region?->name);
-        $section->addText('၂၁။'.'အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာနှင့် ဇာတိနှင့် အလုပ်အကိုင်: '. str_repeat(' ', 5).$staff->mother_name.'၊'.$staff->mother_ethnic?->name.'၊'.$staff->mother_religion?->name.'၊'.$staff->mother_place_of_birth.'၊'.$staff->mother_occupation);
+        $section->addText('၂၁။'.'အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်: '. str_repeat(' ', 5).$staff->mother_name.'၊'.$staff->mother_ethnic?->name.'၊'.$staff->mother_religion?->name.'၊'.$staff->mother_place_of_birth.'၊'.$staff->mother_occupation);
         $section->addText('၂၂။'.'၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ: '. str_repeat(' ', 5).$staff->mother_address_street.'၊'.$staff->mother_address_ward.'၊'.$staff->mother_address_township_or_town?->name.'၊'.$staff->mother_address_region?->name);
         $section->addText('၂၃။'.'ကာယကံရှင် မွေးဖွားချိန်၌ မိဘနှစ်ပါးသည် နိုင်ငံသားဟုတ်/ မဟုတ်: '. str_repeat(' ', 5).$staff->is_parents_citizen_when_staff_born);
         $section->addText('၂၄။'.'လက်ရှိအလုပ်အကိုင်နှင့်အဆင့်: '. str_repeat(' ', 5).$staff->current_rank->name);

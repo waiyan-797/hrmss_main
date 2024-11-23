@@ -6,10 +6,28 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use PhpParser\Node\Expr\FuncCall;
+use Illuminate\Database\Eloquent\Builder;
+
+use App\Scopes\NotLabourScope;
 
 class Staff extends Model
 {
-    use HasFactory;
+    use HasFactory; 
+
+    protected static function booted()
+    {
+        // static::addGlobalScope(new NotLabourScope);
+    }
+
+    // public function scopeLabour(Builder $query)
+    // {
+    //     return $query->withoutGlobalScope(NotLabourScope::class)
+    //                  ->whereHas('payscale', function ($subQuery) {
+    //                      $subQuery->where('staff_type_id', '=', 3);
+    //                  });
+    // }
+
+
 
     protected $casts = [
         'increment_date' => 'date',  // Or 'datetime' if you need time as well
@@ -642,5 +660,9 @@ public function labourAtt($year, $month)
     }
 
 
+
+    public function getSalaryDuringThisDept(){
+        // return $this->postings()->where('')
+    }
 
 }

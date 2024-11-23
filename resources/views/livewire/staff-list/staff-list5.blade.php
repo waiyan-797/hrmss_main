@@ -5,9 +5,10 @@
           <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
 
             <h1 class="font-bold text-center text-base mb-4">
-                ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဌာန အလိုက်ဝန်ထမ်းအင်အားစာရင်း<br>၁။
-                စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲ
+                ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဌာန အလိုက်ဝန်ထမ်းအင်အားစာရင်း<br>
+                
             </h1>
+            <select name=""  wire:model.live='' id=""></select>
 
             <table class="md:w-full">
                 <thead>
