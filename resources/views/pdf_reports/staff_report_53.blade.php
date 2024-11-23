@@ -209,7 +209,7 @@
 
                                 <tr>
                                     <td style="border: none;">၁၄။</td>
-                                    <td style="border: none;">လက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ
+                                    <td style="border: none;">ယခုနေရပ်လိပ်စာအပြည့်အစုံ
                                     </td>
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}</td>
@@ -224,7 +224,7 @@
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၁၆။</td>
-                                    <td style="border: none;">ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာ ဖော်ပြရန်)
+                                    <td style="border: none;">ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာ ဖော်ပြရန်မလိုပါ)
                                     </td>
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">{{ $staff->previous_addresses }}</td>
@@ -349,7 +349,7 @@
                                 <tr>
                                     <td style="border: none;">၁၉။
                                     </td>
-                                    <td style="border: none;">အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာနှင့် ဇာတိနှင့် အလုပ်အကိုင်
+                                    <td style="border: none;">အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်
                                     </td>
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">{{ $staff->father_name.'၊'.$staff->father_ethnic?->name.'၊'.$staff->father_religion?->name.'၊'.$staff->father_place_of_birth.'၊'.$staff->father_occupation }}</td>
@@ -365,7 +365,7 @@
                                 <tr>
                                     <td style="border: none;">၂၁။
                                     </td>
-                                    <td style="border: none;">အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာနှင့် ဇာတိနှင့် အလုပ်အကိုင်
+                                    <td style="border: none;">အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်
                                     </td>
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">{{ $staff->mother_name.'၊'.$staff->mother_ethnic?->name.'၊'.$staff->mother_religion?->name.'၊'.$staff->mother_place_of_birth.'၊'.$staff->mother_occupation }}</td>

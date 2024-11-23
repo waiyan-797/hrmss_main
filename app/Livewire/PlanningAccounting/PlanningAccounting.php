@@ -2,6 +2,7 @@
 
 namespace App\Livewire\PlanningAccounting;
 
+use App\Models\Division;
 use App\Models\Staff;
 use Livewire\Component;
 
@@ -10,6 +11,9 @@ use PhpOffice\PhpWord\PhpWord;
 
 class PlanningAccounting extends Component
 {
+
+    public $divisions , $selectedDivisionId;
+    
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [
@@ -50,10 +54,18 @@ class PlanningAccounting extends Component
 }
      public function render()
     {
-        $staffs = Staff::get();
+        $staffs = Staff::where('current_division_id' , $this->selectedDivisionId)->paginate(20);
+        
         return view('livewire.planning-accounting.planning-accounting',[ 
         'staffs' => $staffs,
     ]);
     }
-    
+
+
+    public function mount(){
+        $this->divisions = Division::all();
+         $this->selectedDivisionId = getFirstOf('Division')->id;
+         
+
+    }    
 }

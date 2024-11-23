@@ -29,7 +29,7 @@
                         <tr>
                             <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td>
                             <td class="border border-black text-center p-2">{{ $staff->name. ', ' .$staff->email. ', ' .$staff->phone }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->current_rank->name. ', ' .$staff->current_department->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->current_rank?->name. ', ' .$staff->current_department?->name }}</td>
                             <td class="border border-black text-center p-2">
                                 @foreach ($staff->staff_educations as $edu)
                                     <div class="mb-2">

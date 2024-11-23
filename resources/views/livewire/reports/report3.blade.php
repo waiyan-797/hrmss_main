@@ -52,22 +52,22 @@
                                     </div>
                                 @endforeach
                             </td>
-                            <td class="border border-black text-center p-2">{{ $staff->gender->name }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->ethnic->name }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->religion->name }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->gender?->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->ethnic?->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->religion?->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region?->name.'/'.$staff->current_address_township_or_town?->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region?->name.'/'.$staff->permanent_address_township_or_town?->name }}</td>
                             <td class="border border-black text-center p-2">{{ $staff->children->where('gender_id', 1)->count() }}</td>
                             <td class="border border-black text-center p-2">{{ $staff->children->where('gender_id', 2)->count() }}</td>
                             <td class="border border-black text-center p-2">{{ $staff->spouse_name != null ? 'ရှိ' : 'မရှိ'}}</td>
                             <td class="border border-black text-center p-2">{{ $staff->health_condition }}</td>
-                            <td class="border border-black text-center p-2">{{ $staff->blood_type->name }}</td>
+                            <td class="border border-black text-center p-2">{{ $staff->blood_type?->name }}</td>
                             <td class="border border-black text-center p-2">{{ $staff->height_feet.'/'.$staff->height_inch  }}</td>
                             <td class="border border-black text-center p-2">{{ $staff->habit }}</td>
                             <td class="border border-black text-center p-2">
                                 @foreach ($staff->staff_languages as $lang)
                                     <div class="mb-2">
-                                        <span class="font-semibold">{{ $lang->language->name }}</span>
+                                        <span class="font-semibold">{{ $lang?->language?->name }}</span>
                                     </div>
                                 @endforeach
                             </td>

@@ -16,6 +16,8 @@
                     <tr>
                         <th class="border border-black text-center p-2">အရာထမ်း</th>
                         <th class="border border-black text-center p-2">အမှုထမ်း</th>
+                        <th class="border border-black text-center p-2">နေ့စား</th>
+                        <th class="border border-black text-center p-2">ခန့်ပြီးရာခိုင်နှုန်း</th>
                         <th class="border border-black text-center p-2">စုစုပေါင်း</th>
                     </tr>
                 </thead>
@@ -33,6 +35,11 @@
                             <td class="border border-black text-center p-2">{{ en2mm($division->staffs->count() )}}</td>
                         </tr>
                     @endforeach
+                    <tr>
+                        <td>
+                            စုစုပေါင်း
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 

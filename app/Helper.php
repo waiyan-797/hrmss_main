@@ -1,9 +1,12 @@
 <?php
 
 use App\Models\Country;
+use App\Models\Division;
 use App\Models\Leave;
 use App\Models\Salary;
+use App\Models\Staff;
 use Carbon\Carbon;
+use League\Flysystem\UrlGeneration\PublicUrlGenerator;
 
 if (! function_exists('getcsv')) {
     function getcsv($f)
@@ -114,6 +117,14 @@ if (!function_exists('mmDateFormat')) {
         function getCountryNameById($id)
         {
             return Country::where('id', $id)->first()->name;
+        }
+    }
+
+
+    if (!function_exists('getDivisionBy')) {
+        function getDivisionBy($id)
+        {
+            return Division::findOrFail($id);
         }
     }
 }
@@ -234,4 +245,50 @@ function getStartOfMonth($date){
 
 function getNextDay($date){
     return Carbon::parse($date)->addDay()->format('d-m-Y');
+}
+
+
+function toMMText($integer) {
+    $name = ['', 'ဆယ်', 'ရာ', 'ထောင်', 'သောင်း', 'သိန်း', 'သန်း'];
+
+    $integerArray = array_reverse(array_map('intval', str_split((string)$integer))); 
+
+    $strr = '';
+    foreach ($integerArray as $index => $value) {
+
+        if ($value > 0) { 
+            $mmSay =  $index  > 6 ?  ''   :    $name[$index];
+            $strr = en2mmText($value) . $mmSay . $strr; 
+        }
+    }
+    return $strr.'ကျပ်';
+}
+
+if (! function_exists('en2mmText')) {
+    function en2mmText($content)
+    {
+        $en = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $my = ['သုည', 'တစ်', 'နှစ်', 'သုံး', 'လေး', 'ငါး', 'ခြောက်', 'ခုနှစ်', 'ရှစ်', 'ကိုး', 'ဆယ်'];
+
+        return str_replace($en, $my, (string) $content);
+    }
+}
+
+
+
+if (!function_exists('getFirstOf')) {
+    function getFirstOf($modelName)
+    {
+        // Build the fully qualified class name
+        $class = 'App\Models\\' . $modelName;
+
+        // Check if the class exists
+        if (class_exists($class)) {
+            // Instantiate the model and return the first record
+            return (new $class)->first();
+        }
+
+    
+        throw new Exception("Model {$modelName} does not exist.");
+    }
 }

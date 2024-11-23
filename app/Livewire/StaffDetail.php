@@ -1122,7 +1122,7 @@ if($staff_create['status_id'] == 5){
         $this->message = 'Saved Successfully';
         if($staff->status_id){
             
-                redirect()->route('staff',['status'=>  $staff->status_id  ]);
+                redirect()->route('staff',['status'=>   auth()->user()->AdminHR() &&  $staff->status_id == 1  ? 2   :  $staff->status_id ]);
 
             
         }

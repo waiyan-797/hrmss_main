@@ -150,7 +150,7 @@
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="name" class="md:w-5">၂၂။ </label>
-                    <label for="name" class="md:w-1/3">လက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ</label>
+                    <label for="name" class="md:w-1/3">ယခုနေရပ်လိပ်စာအပြည့်အစုံ</label>
                     <label for="name" class="md:w-5">-</label>
 
                     <label for="name" class="md:w-3/5">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}</label>
@@ -459,7 +459,7 @@
                             <tbody class="text-center h-8 p-2">
                                 <tr>
                                     <td class="p-2 w-14 border border-black">၁။</td>
-                                    <td class="p-2 w-100 border border-black">အဘအမည်၊လူမျိုး၊ကိုးကွယ်သည့်ဘာသာနှင့်
+                                    <td class="p-2 w-100 border border-black">အဘအမည်၊လူမျိုး၊ကိုးကွယ်သည့်ဘာသာ နှင့်
                                         အလုပ်အကိုင်</td>
                                     <td class="p-2 w-6 border border-black">-</td>
                                     <td class="p-2 w-100 border border-black">
@@ -479,7 +479,7 @@
                             <tbody class="text-center h-8 p-2">
                                 <tr>
                                     <td class="p-2 w-14 border border-black">၃။</td>
-                                    <td class="p-2 w-100 border border-black">အမိအမည်၊လူမျိုး၊ကိုးကွယ်သည့်ဘာသာနှင့်
+                                    <td class="p-2 w-100 border border-black">အမိအမည်၊လူမျိုး၊ကိုးကွယ်သည့်ဘာသာ  နှင့်
                                         အလုပ်အကိုင်</td>
                                     <td class="p-2 w-6 border border-black">-</td>
                                     <td class="p-2 w-100 border border-black"> {{ $staff->mother_name.'၊'.$staff->mother_ethnic?->name.'၊'.$staff->mother_religion?->name.'၊'.$staff->mother_place_of_birth.'၊'.$staff->mother_occupation }}
@@ -606,7 +606,7 @@
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-5">
                         <label>၈။ </label>
-                        <h2 class="font-semibold text-base">ဇနီး၊ခင်ပွန်း</h2>
+                        <h2 class="font-semibold text-base">ဇနီး / ခင်ပွန်း</h2>
                     </div>
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center ml-9">
@@ -897,7 +897,7 @@
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၅။ </label>
-                    <label for="name" class="md:w-1/3">ကျောင်းသားဘဝတွင် နိုင်ငံရေး/မြို့ရေး
+                    <label for="name" class="md:w-1/3">ကျောင်းသားဘဝတွင် နိုင်ငံရေး/မြို့ရေး/ရွာရေး
                         ဆောင်ရွက်မှုများနှင့်အဆင့်အတန်း၊
                         တာဝန်</label>
                     <label for="" class="md:w-5">-</label>
@@ -931,7 +931,7 @@
                                     <th class="p-2 border border-black">ဦးစီးဌာန</th>
                                     <th class="p-2 border border-black">ဝန်ကြီးဌာန</th>
                                     <th class="p-2 border border-black">မှ</th>
-                                    <th class="p-2 border border-black">အထိ</th>
+                                    <th class="p-2 border border-black">ထိ</th>
                                     <th class="p-2 border border-black">မှတ်ချက်</th>
                                 </tr>
                             </thead>

@@ -15,7 +15,7 @@
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၂။ </label>
-                    <label for="name" class="md:w-1/3">နိုင်ငံသားစီစစ်ရေးကတ်ပြားအမှတ်</label>
+                    <label for="name" class="md:w-1/3">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</label>
                 </div>
@@ -271,6 +271,13 @@
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၈။ </label>
                     <label for="name" class="md:w-1/3">အခြားတင်ပြလိုသည့်အချက်များ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"></label>
+                </div>
+
+                <div class="flex justify-between w-full mb-4">
+                    <label for="" class="md:w-5"> </label>
+                    <label for="name" class="md:w-1/3">ဝန်ထမ်း၏ထိုးမြဲလက်မှတ်</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5"></label>
                 </div>

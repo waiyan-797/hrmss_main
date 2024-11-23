@@ -112,7 +112,12 @@
               
               {{$paid_up_to_date}}
               ထိ 
-                {{$amount ?? '_'}}
+                {{ toMMText(
+                    $staff->salaries->last()->actual_salary
+                    // 574638
+                    // 80000000
+                    ) ?? '_'
+                    }}
                 အားထုတ်ပေးပြီးဖြစ်ပါသည်
                <br>
               </p>
@@ -259,115 +264,34 @@
                        </tr>
                    </thead>
                    <tbody>
-                       <tr>
-                           <td class="border border-gray-300 p-2">June -2023</td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                       </tr>
-                       <tr>
-                           <td class="border border-gray-300 p-2">July -2023</td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                       </tr>
-                       <tr>
-                           <td class="border border-gray-300 p-2">August -2023</td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                       </tr>
-                       <tr>
-                           <td class="border border-gray-300 p-2">September -2023</td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                       </tr>
-                       <tr>
-                           <td class="border border-gray-300 p-2">October -2023</td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2">၃၀,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2">၂၄၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                       </tr>
-                       <tr>
-                           <td class="border border-gray-300 p-2">November -2023</td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2">၃၀,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2">၂၄၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                       </tr>
-                       <tr>
-                           <td class="border border-gray-300 p-2">December -2023</td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2">၃၀,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2">၂၄၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                       </tr>
-                       <tr>
-                           <td class="border border-gray-300 p-2">January -2024</td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2">၃၀,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2">၂၄၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                       </tr>
-                       <tr>
-                           <td class="border border-gray-300 p-2">February -2024</td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2">၃၀,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2">၂၄၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                       </tr>
-                       <tr>
-                           <td class="border border-gray-300 p-2">March -2024</td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2">၃၀,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2">၂၄၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                       </tr>
-                       <tr>
-                           <td class="border border-gray-300 p-2">April -2024</td>
-                           <td class="border border-gray-300 p-2">၂၁၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2">၃၀,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2">၂၄၈,၀၀၀.၀၀</td>
-                           <td class="border border-gray-300 p-2"></td>
-                       </tr>
-                       <tr>
-                           <td class="border border-gray-300 p-2">May -2024</td>
-                           <td class="border border-gray-300 p-2">၁၆၁,၇၄၁.၉၃</td>
-                           <td class="border border-gray-300 p-2">၂၂,၂၅၈.၀၆</td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2"></td>
-                           <td class="border border-gray-300 p-2">၁၈၃,၉၉၉.၉၉</td>
-                           <td class="border border-gray-300 p-2">၂၃-၅-၂၄ အထိလစာပေးပြီး</td>
-                       </tr>
-                       
+                     @foreach ($salaries as $salary)
+                         <tr>
+                            <td>
+                                {{ $salary->salary_month }}
+                            </td>
+                            <td>
+                                {{ $salary->actual_salary   }}
+                            </td>
+                            <td>
+                                {{ $salary->addition }}
+                            </td>
+                            <td>
+                                {{ $salary->deduction_insurance }}
+                                
+                            </td>
+                            <td>
+                                I D K 
+                            </td>
+                            <td>
+                                {{ $salary->deduction_tax }}
+
+                            </td>
+                            <td>
+                                {{ $salary->remark }}
+
+                            </td>
+                         </tr>
+                     @endforeach
                    </tbody>
                </table>
            </div>

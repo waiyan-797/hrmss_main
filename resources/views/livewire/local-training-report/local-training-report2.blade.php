@@ -36,10 +36,12 @@
                         <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
                         <th rowspan="2" class="border border-black text-center p-2">အမည်</th>
                         <th rowspan="2" class="border border-black text-center p-2">ရာထူး</th>
+                        <th rowspan="2" class="border border-black text-center p-2">ပညာအရည်အချင်း</th>
+
                         <th colspan="2" class="border border-black text-center p-2">သွားရောက်သည့်ကာလ</th>
                         <th rowspan="2" class="border border-black text-center p-2">ပြည်တွင်းသင်တန်း/ဆွေးနွေးပွဲတတ်ရောက်ခဲ့သည့်နေရာ</th>
                         <th rowspan="2" class="border border-black text-center p-2">တတ်ရောက်ခဲ့သည့်အကြောင်းအရာ</th>
-                        <th rowspan="2" class="border border-black text-center p-2">ပညာအရည်အချင်း</th>
+                        <th rowspan="2" class="border border-black text-center p-2">သင်တန်းအမျိုးအစား</th>
                         
                     </tr>
                     <tr>
@@ -95,7 +97,15 @@
                                     <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->name }}</td>
                                     <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->currentRank?->name }}</td>
                                 @endif
-                
+                                <td class="border border-black text-left p-1">
+                                    @if(isset($staff->staff_educations[$i]))
+                                        <div>
+                                            <span>{{ $staff->staff_educations[$i]->education_group->name }}</span>
+                                            <span>{{ $staff->staff_educations[$i]->education_type->name }}</span>
+                                            <span>{{ $staff->staff_educations[$i]->education->name }}</span>
+                                        </div>
+                                    @endif
+                                </td>
                                 <!-- Abroads -->
                                 <td class="border border-black text-center p-2">
                                     {{ optional($staff->abroads[$i] ?? null)->from_date ?? '' }}
@@ -113,15 +123,11 @@
                                 </td>
                 
                                 <!-- Staff Educations -->
-                                <td class="border border-black text-left p-1">
-                                    @if(isset($staff->staff_educations[$i]))
-                                        <div>
-                                            <span>{{ $staff->staff_educations[$i]->education_group->name }}</span>
-                                            <span>{{ $staff->staff_educations[$i]->education_type->name }}</span>
-                                            <span>{{ $staff->staff_educations[$i]->education->name }}</span>
-                                        </div>
-                                    @endif
+                            
+                                <td class="border border-black text-center p-2">
+                                သင်တန်းအမျိုးအစား
                                 </td>
+
                             </tr>
                         @endfor
                     @endforeach

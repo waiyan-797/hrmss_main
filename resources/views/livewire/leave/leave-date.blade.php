@@ -6,10 +6,10 @@
         <thead>
             <tr>
                 <th class="border border-black p-2" colspan="4">တာဝန်ချိန် ကာလ</th>
-                <th class="border border-black p-2" colspan="2">စာတိုင်(၂)အရ ခံစာခွင့်ရှိသည့်လုပ်သက်</th>
-                <th class="border border-black p-2" colspan="2">စုစုပေါင်းခံစားခွင့်ရှိသည့်လုပ်သက်ခွင့်စာတိုင်(၃)+(၇)</th>
+                <th class="border border-black p-2" colspan="2">စာတိုင်(၂)အရ ခံစားခွင့်ရှိသည့်လုပ်သက်ခွင့်</th>
+                <th class="border border-black p-2" colspan="2">စုစုပေါင်းခံစားခွင့်ရှိသည့်လုပ်သက်ခွင့်စာတိုင် <br> (၃)+(၇)</th>
                 <th class="border border-black p-2" colspan="3">လုပ်သက်ခွင့်ခံစားသည့်ကာလ </th>
-                <th class="border border-black p-2" colspan="2">လုပ်သက်ခွင့်စာတိုင်(၄)-(၆)</th>
+                <th class="border border-black p-2" colspan="2">လုပ်သက်ခွင့်လက်ကျန်စာတိုင် <br>(၄)-(၆)</th>
             </tr>
             <tr>
                 <th class="border border-black p-2">မှ---ထိ</th>

@@ -32,10 +32,10 @@
                         </td>
                         
                         <td class="border border-black text-left p-2">{{ isset($staff->postings[0]) ? $staff->postings[0]->department->name  : ''}}</td>
-                        <td class="border border-black text-center p-2">{{ $posting->from_date}}<br>{{ $posting->to_date}}</td>
+                        <td class="border border-black text-center p-2">{{ $posting?->from_date}}<br>{{ $posting?->to_date}}</td>
                         <td class="border border-black text-left p-2">{{ $staff->side_department?->name}}</td>
                         <td class="border border-black text-center p-2">  
-                            {{ \Carbon\Carbon::parse($posting->to_date)->format('d m Y') }}-{{ \Carbon\Carbon::now()->format('d-m-Y')}}
+                            {{ \Carbon\Carbon::parse($posting?->to_date)->format('d m Y') }}-{{ \Carbon\Carbon::now()->format('d-m-Y')}}
 <br>
                         
                     

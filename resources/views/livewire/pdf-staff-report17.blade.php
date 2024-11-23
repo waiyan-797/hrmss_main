@@ -107,7 +107,7 @@
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၃။ </label>
                     <label for="name"
-                        class="md:w-1/3">နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်)</label>
+                        class="md:w-1/3">နိုင်ငံခြားသွားရောက်ခဲ့ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်)</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="" class="md:w-3/5">{{en2mm($staff->abroads->count())}}</label>
                 </div>
@@ -116,7 +116,7 @@
                     <table class="w-full">
                         <thead>
                             <tr>
-                                <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
+                                
                                 <th colspan="2" class="border border-black text-center p-2">ကာလ</th>
                                 <th rowspan="2" class="border border-black text-center p-2">
                                     နောက်ဆုံးသွားရောက်ခဲ့သည့်(၅)နှိင်ငံ</th>

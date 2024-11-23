@@ -1,12 +1,26 @@
 <div class="w-full">
-    <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
+    <div class="flex justify-center w-full   h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
 
+
+
+            <select  class="  " wire:model.live='selectedDivisionId' id="">
+                @foreach ($divisions as $division)
+                    <option value="{{$division->id}}">
+                    {{
+                        $division->name
+                    }}
+                    </option>
+                @endforeach
+            </select>
+        
             <div class="w-full mb-4">
-                <h2 class="font-semibold text-base">စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲဝန်ထမ်းအင်အားစာရင်း</h2>
+                <h2 class="font-semibold text-base">
+                    {{getDivisionBy($selectedDivisionId)->name}} 
+                    ဝန်ထမ်းအင်အားစာရင်း</h2>
                 <table class="w-full text-center">
                     <thead>
                         <tr class="bg-gray-100">
@@ -29,6 +43,8 @@
                     </tbody>
                 </table>
             </div>
+
+            {{$staffs->links()}}
         </div>
 
     </div>

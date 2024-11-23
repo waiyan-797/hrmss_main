@@ -225,7 +225,7 @@
                     <table class="md:w-full">
                         <thead>
                             <tr>
-                                <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
+                                {{-- <th rowspan="2" class="border border-black text-center p-2">စဉ်</th> --}}
                                 <th rowspan="2" class="border border-black text-center p-2">ပြစ်ဒဏ်</th>
                                 <th rowspan="2" class="border border-black text-center p-2">ပြစ်ဒဏ်ချမှတ်ခံရသည့်
                                     အကြောင်းအရာ</th>
@@ -280,8 +280,8 @@
             </div>
 
             <div class="p-6">
-                <p class="mb-8">အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း
-                    တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။</p>
+                <p class="mb-8">အထက်ပါ ဖြည့်စွက်ချက်များ မှန်ကန်ကြောင်း
+                    လက်မှတ်ရေးထိုးပါသည်။</p>
 
                 <div class="flex justify-start mb-2">
                     <p class="md:w-1/3 ml-36">လက်မှတ်</p>

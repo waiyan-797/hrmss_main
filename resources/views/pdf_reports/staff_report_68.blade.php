@@ -367,7 +367,7 @@
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၂။</td>
-                                    <td style="border: none;">လက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ
+                                    <td style="border: none;">ယခုနေရပ်လိပ်စာအပြည့်အစုံ
                                     </td>
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}</td>
@@ -690,7 +690,7 @@
                                     <tbody>
                                         <tr>
                                             <td class="col-number">၁။</td>
-                                            <td class="col-label">အဘအမည်၊လူမျိုး၊ကိုးကွယ်သည့်ဘာသာနှင့် အလုပ်အကိုင်</td>
+                                            <td class="col-label">အဘအမည်၊လူမျိုး၊ကိုးကွယ်သည့်ဘာသာ အလုပ်အကိုင်</td>
                                             <td class="col-dash">-</td>
                                             <td class="col-data"> {{ $staff->father_name.'၊'.$staff->father_ethnic?->name.'၊'.$staff->father_religion?->name.'၊'.$staff->father_place_of_birth.'၊'.$staff->father_occupation }}</td>
                                         </tr>
@@ -706,7 +706,7 @@
                                     <tbody>
                                         <tr>
                                             <td class="col-number">၃။</td>
-                                            <td class="col-label">အမိအမည်၊လူမျိုး၊ကိုးကွယ်သည့်ဘာသာနှင့် အလုပ်အကိုင်</td>
+                                            <td class="col-label">အမိအမည်၊လူမျိုး၊ကိုးကွယ်သည့်ဘာသာ အလုပ်အကိုင်</td>
                                             <td class="col-dash">-</td>
                                             <td class="col-data">{{ $staff->mother_name.'၊'.$staff->mother_ethnic?->name.'၊'.$staff->mother_religion?->name.'၊'.$staff->mother_place_of_birth.'၊'.$staff->mother_occupation }}</td>
                                         </tr>

@@ -44,6 +44,7 @@
                             <th class="border border-black text-center p-2">သင်တန်းကာလ(အထိ)</th>
                             <th class="border border-black text-center p-2">သင်တန်းနေရာ/ဒေသ</th>
                             <th class="border border-black text-center p-2">သင်တန်းအမျိုးအစား</th>
+                            <th class="border border-black text-center p-2">မှတ်ချက်</th>
                         </tr>
                     </thead>
                    
@@ -73,6 +74,7 @@
                                         <td class="border border-black text-center p-2">{{ $training->to_date }}</td>
                                         <td class="border border-black text-center p-2">{{ $training->location }}</td>
                                         <td class="border border-black text-center p-2">{{ $training->training_location?->name }}</td>
+                                        <td class="border border-black text-center p-2"></td>
                                     </tr>
                                 @endforeach
                             @endif

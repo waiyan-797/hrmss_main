@@ -9,7 +9,7 @@ use PhpOffice\PhpWord\PhpWord;
 
 class StaffList4 extends Component
 {
-    
+    public $posting;
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [
