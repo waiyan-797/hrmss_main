@@ -4,11 +4,13 @@ namespace App\Livewire\StaffList;
 
 use App\Models\Staff;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
 class StaffProgeny extends Component
 {
+    use WithPagination;
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [
@@ -69,9 +71,13 @@ class StaffProgeny extends Component
 
      public function render()
      {
-        $staffs = Staff::get();
+        $staffs = Staff::paginate(20);
+        $currentPage = $staffs->currentPage();
+        $perPage = $staffs->perPage();
+        $start = ($currentPage - 1) * $perPage + 1;
         return view('livewire.staff-list.staff-progeny',[
             'staffs' => $staffs,
+            'start'=>$start,
         ]);
      }
 }

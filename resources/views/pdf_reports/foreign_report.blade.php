@@ -65,13 +65,8 @@
             </tr>
         </thead>
         <tbody>
-            {{-- <tr>
-                <td class="text-right">1</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr> --}}
-            @foreach($staffs as $staff)
+          
+            {{-- @foreach($staffs as $staff)
             <tr>
                 <td>{{ $loop->index + 1 }}</td>
                 <td>{{ $staff->name}}</td>
@@ -80,7 +75,35 @@
                     <td>{{$abroad->from_date}}</td>
             @endforeach
             
-            @endforeach
+            @endforeach --}}
+            @foreach($staffs as $index=> $staff)
+                    <tr>
+                        <td  rowspan="{{ max(1, $staff->abroads->count()) }}">
+                            {{ $index++ }}
+                        </td>
+                        <td  rowspan="{{ max(1, $staff->abroads->count()) }}">
+                            {{ $staff->name }}
+                        </td>
+
+                        @if($staff->abroads->isNotEmpty())
+                        
+                        <td>{{ $staff->abroads[0]->country->name }}</td>
+                        <td>{{ $staff->abroads[0]->from_date }}</td>
+                    </tr>
+                    
+                    @foreach($staff->abroads->skip(1) as $abroad)
+                    <tr>
+                        <td>{{ $abroad->country->name }}</td>
+                        <td>{{ $abroad->from_date }}</td>
+                    </tr>
+                    @endforeach
+                    @else
+                    <!-- No abroads case -->
+                    <td colspan="2">no </td>
+                    </tr>
+                    @endif
+
+                    @endforeach
         </tbody>
     </table>
 

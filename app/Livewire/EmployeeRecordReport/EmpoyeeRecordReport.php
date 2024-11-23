@@ -64,7 +64,7 @@ class EmpoyeeRecordReport extends Component
    
     public function render()
     {
-        $staffs = Staff::paginate(2);
+        $staffs = Staff::paginate(20);
         $currentPage = $staffs->currentPage();
         $perPage = $staffs->perPage();
         $start = ($currentPage - 1) * $perPage + 1;

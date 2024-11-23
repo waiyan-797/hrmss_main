@@ -78,7 +78,7 @@
                     <tr>
                         <td class="border border-black text-right p-1">{{ $loop->index+1}}</td>
                         <td>{{ $staff->name}}</td>
-                        <td>{{ $staff->current_rank->name}}</td>
+                        <td>{{ $staff->currentRank?->name}}</td>
                         <td>
                        @foreach($staff->socialActivities as $activity)
                        {{ $activity->particular}}

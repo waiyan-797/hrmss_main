@@ -5,11 +5,13 @@ namespace App\Livewire\Reports;
 use App\Models\Staff;
 use App\Models\StaffEducation;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
 class EducationReport extends Component
 {
+    use WithPagination;
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [

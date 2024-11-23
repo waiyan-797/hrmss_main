@@ -19,7 +19,7 @@
                     <tbody class="text-center h-8 p-2">
                        @foreach($staffs as $staff)
                         <tr>
-                            <td class="border border-black p-2">{{ $loop->index+1}}</td>
+                            <td class="border border-black p-2">{{ $start++}}</td>
                             <td class="border border-black p-2">{{ $staff->name}}</td>
                             <td class="border border-black p-2">{{ $staff->currentRank?->name}}</td>
                             <td class="border border-black p-2"></td>
@@ -28,6 +28,9 @@
                        
                     </tbody>
                 </table>
+                <div class="mt-4">
+                    {{ $staffs->links('pagination') }}
+                </div>
             </div>
         </div>
 

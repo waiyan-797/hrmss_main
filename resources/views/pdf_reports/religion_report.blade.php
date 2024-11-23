@@ -91,26 +91,11 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- <tr>
-                    <td class="text-right">1</td>
-                    <td class="text-left"></td>
-                    <td class="text-left"></td>
-                    <td class="text-left"></td>
-                    <td class="text-left"></td>
-                    <td class="text-left"></td>
-                    <td class="text-left"></td>
-                    <td class="text-left"></td>
-                    <td class="text-left"></td>
-                    <td class="text-left"></td>
-                    <td class="text-left"></td>
-                    <td class="text-left"></td>
-                    <td class="text-left"></td>
-                </tr> --}}
                 @foreach($staffs as $staff)
                 <tr>
                     <td>{{ $loop->index+1}}</td>
                     <td>{{ $staff->name}}</td>
-                    <td>{{ $staff->current_rank->name}}</td>
+                    <td>{{ $staff->currentRank?->name}}</td>
 
                     {{-- Buddhist --}}
                     <td>

@@ -4,12 +4,13 @@ namespace App\Livewire\ReligionReport;
 
 use App\Models\Staff;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
 class ReligionReport extends Component
 {
-    
+    use WithPagination;
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [
@@ -91,10 +92,10 @@ class ReligionReport extends Component
         $staffs = Staff::paginate(20);
         $currentPage = $staffs->currentPage();
         $perPage = $staffs->perPage();
-        $startIndex = ($currentPage - 1) * $perPage + 1;
+        $start = ($currentPage - 1) * $perPage + 1;
         return view('livewire.religion-report.religion-report',[ 
         'staffs' => $staffs,
-        'startIndex'=>$startIndex,
+        'start'=>$start,
     ]);
     }
 }

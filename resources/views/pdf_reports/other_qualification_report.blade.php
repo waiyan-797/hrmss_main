@@ -70,7 +70,7 @@
                     <tr>
                         <td>{{ $loop->index+1}}</td>
                         <td>{{ $staff->name}}</td>
-                        <td>{{ $staff->current_rank->name}}</td>
+                        <td>{{ $staff->currentRank?->name}}</td>
                         @foreach ($staff->staff_educations as $education)
                         <td>{{$education->education->name}}</td>
                             @endforeach

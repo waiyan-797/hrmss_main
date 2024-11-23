@@ -18,7 +18,7 @@
                     <label for="" class="md:w-5"> </label>
                     <label for="name" class="md:w-1/3">ရာထူး</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->current_rank->name}}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->currentRank?->name}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5"> </label>

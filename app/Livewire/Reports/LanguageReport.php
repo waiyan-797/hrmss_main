@@ -4,11 +4,13 @@ namespace App\Livewire\Reports;
 
 use App\Models\Staff;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
 class LanguageReport extends Component
 {
+    use WithPagination;
     public $search = '';
     public function go_pdf(){
         $staffs = Staff::get();
@@ -67,18 +69,15 @@ class LanguageReport extends Component
 
      public function render()
     {
-        // $staffs = Staff::paginate(20);
-        // $currentPage = $staffs->currentPage();
-        // $perPage = $staffs->perPage();
-        // $startIndex = ($currentPage - 1) * $perPage + 1;
+        
         $staffs = Staff::where('name', 'like', '%' . $this->search . '%')->paginate(20);
         $currentPage = $staffs->currentPage();
         $perPage = $staffs->perPage();
-        $startIndex = ($currentPage - 1) * $perPage + 1;
+        $start = ($currentPage - 1) * $perPage + 1;
 
         return view('livewire.reports.language-report',[ 
         'staffs' => $staffs,
-        'startIndex'=>$startIndex,
+        'start'=>$start,
     ]);
     }
 }

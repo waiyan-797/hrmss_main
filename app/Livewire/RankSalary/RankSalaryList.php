@@ -4,12 +4,14 @@ namespace App\Livewire\RankSalary;
 
 use App\Models\Staff;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 
 class RankSalaryList extends Component
 {
+    use WithPagination;
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [
@@ -65,9 +67,13 @@ class RankSalaryList extends Component
 
      public function render()
      {
-        $staffs = Staff::get();
+        $staffs = Staff::paginate(20);
+        $currentPage = $staffs->currentPage();
+        $perPage = $staffs->perPage();
+        $start = ($currentPage - 1) * $perPage + 1;
       return view('livewire.rank-salary.rank-salary-list',[ 
         'staffs' => $staffs,
+        'start'=>$start,
     ]);
     }
 }

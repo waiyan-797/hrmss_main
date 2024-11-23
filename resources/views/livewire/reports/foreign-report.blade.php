@@ -20,7 +20,7 @@
                     @foreach($staffs as $staff)
                     <tr>
                         <td class="border border-black text-right p-1 align-top" rowspan="{{ max(1, $staff->abroads->count()) }}">
-                            {{ $loop->index + 1 }}
+                            {{ $startIndex++ }}
                         </td>
                         <td class="border border-black text-left p-1 align-top" rowspan="{{ max(1, $staff->abroads->count()) }}">
                             {{ $staff->name }}
@@ -48,8 +48,8 @@
                 </tbody>
             </table>
 
-            <div>
-                {{$staffs->links()}}
+            <div class="mt-4">
+                {{ $staffs->links('pagination') }}
             </div>
         </div>
     </div>

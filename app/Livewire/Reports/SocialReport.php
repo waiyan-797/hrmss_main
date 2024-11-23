@@ -4,13 +4,14 @@ namespace App\Livewire\Reports;
 
 use App\Models\Staff;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 
 class SocialReport extends Component
 {
-   
+    use WithPagination;
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [
@@ -73,10 +74,10 @@ class SocialReport extends Component
         $staffs = Staff::paginate(20);
         $currentPage = $staffs->currentPage();
         $perPage = $staffs->perPage();
-        $startIndex = ($currentPage - 1) * $perPage + 1;
+        $start = ($currentPage - 1) * $perPage + 1;
         return view('livewire.reports.social-report',[ 
         'staffs' => $staffs,
-        'startIndex'=>$startIndex,
+        'start'=>$start,
     ]);
     }
 }

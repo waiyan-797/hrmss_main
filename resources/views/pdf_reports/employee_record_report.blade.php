@@ -79,27 +79,16 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach ($staffs as $staff)
-                    <tr>
-                        <td class="text-right">{{ $loop->index + 1 }}</td>
-                        <td>{{ $staff->name }}</td>
-                        <td>{{ $staff->current_rank->name }}</td>
-                        <td class="text-center">{{ $staff->retire_date }}</td>
-                    </tr>
-                @endforeach --}}
-                @foreach($staffs as $index => $staff)
+                @foreach($staffs as $index=> $staff)
                 <tr>
-                    <td>{{ $startIndex + $index }}</td>
-                    <td>{{ $staff->name }}</td>
-                    <td>{{ $staff->current_rank->name }}</td>
-                    <td>{{ $staff->retire_date }}</td>
+                    {{-- <td class="border border-black text-center p-1">{{ $loop->index+1}}</td> --}}
+                    <td>{{ $index+1 }}</td>
+                    <td>{{ $staff->name}}</td>
+                    <td>{{ $staff->currentRank ? $staff->currentRank?->name : '-'}}</td>
+                    <td >{{ $staff->retire_date}}</td>
                 </tr>
-            @endforeach
-
-            </tbody>
-        </table>
-        <!-- Pagination Links -->
-    {{ $staffs->links() }}
+                @endforeach
+             
 
     </page>
 </body>

@@ -92,16 +92,35 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($staffs as $index=> $staff)
+                        <tr>
+                            <td>{{ $index+1 }}</td>
+                            <td>{{ $staff->name }}၊
+                                @foreach ($staff->postings as $posting)
+                                    {{ $staff->rank?->name }}
+                                @endforeach
+                            </td>
+
+                            <td>
+                                {{ isset($staff->postings[0]) ? $staff->postings[0]->department->name : '' }}</td>
+                            <td>
+                                {{ en2mm($posting->from_date) }}<br>{{ en2mm($posting->to_date) }}</td>
+                            <td>{{ $staff->side_department?->name }}</td>
+
+                            <td>
+                                {{ $posting->to_date
+                                    ? en2mm(\Carbon\Carbon::parse($posting->to_date)->format('d-m-Y')) .
+                                        ' - ' .
+                                        en2mm(\Carbon\Carbon::now()->format('d-m-Y'))
+                                    : 'No Date Range' }}
+                                <br>
+                            </td>
+                            <td>
+                                {{ en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y')) }}
+                            </td>
+                            <td></td>
+                        </tr>
+                    @endforeach
             </tbody>
         </table>
     

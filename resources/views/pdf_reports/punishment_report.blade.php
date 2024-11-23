@@ -74,16 +74,27 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($staffs as $staff)
-                <tr>
-                    <td>{{ $loop->index + 1 }}</td>
-                    <td>{{ $staff->name}}</td>
-                    <td>{{ $staff->current_rank->name}}</td>
-                    @foreach($staff->punishments as $punishment )
-                    <td>{{ $punishment->penalty_type->name}}</td>
+                @foreach($staffs as $index=> $staff)
+                    <tr>
+                        <td>{{ $index+1}}</td>
+
+                        <td>{{ $staff->name}}</td>
+                        <td>{{ $staff->currentRank?->name}}</td>
+                        
+                        <td>
+                            @foreach($staff->punishments as   $punishment )
+                           
+                              <h1>
+                                <span>
+                                    {{$loop->iteration}}
+                                                                </span>
+                                {{ $punishment->penalty_type->name}} 
+                              </h1>
+                            @endforeach
+                        </td>
+                       
+                    </tr>
                     @endforeach
-                </tr>
-                @endforeach
             </tbody>
         </table>
     

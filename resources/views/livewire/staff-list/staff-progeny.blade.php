@@ -13,7 +13,7 @@
                     <tr>
                         <th class="border border-black text-center p-2">စဥ်</th>
                         <th class="border border-black text-left p-2">အမည်</th>
-                        <th class="border border-black text-left p-2">ရာထူး</th>
+                        <th class="border border-black text-left ps-2">ရာထူး</th>
                         <th class="border border-black text-center p-2">ကျား</th>
                         <th class="border border-black text-left p-2">မ</th>
                         <th class="border border-black text-center p-2">စုစုပေါင်း</th>
@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach ($staffs as $staff)
                         <tr>
-                            <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td>
+                            <td class="border border-black text-center p-2">{{ $start++ }}</td>
                             <td class="border border-black text-left p-2">{{ $staff->name }}</td>
                             <td class="border border-black text-left p-2">{{ $staff->currentRank?->name }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($staff->children->where('gender_id', 1)->count()) }}</td>
@@ -32,6 +32,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="mt-4">
+                {{ $staffs->links('pagination') }}
+            </div>
 
         </div>
     </div>

@@ -69,12 +69,25 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($staffs as $index=> $staff)
                 <tr>
-                    <td class="text-right">1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ $index+1}}</td>
+                    <td>{{ $staff->name}}</td>
+                    <td>{{ $staff->currentRank?->name}}</td>
+                 
+                    <td>
+                        @foreach($staff->awardings as $awarding)
+                        <h1>
+                            <span>
+                                {{$loop->iteration}}
+                            </span>
+                            {{ $awarding->award_type->name}}
+                        </h1>
+                         @endforeach
+                    </td>
+                   
                 </tr>
+                @endforeach
             </tbody>
         </table>
     
