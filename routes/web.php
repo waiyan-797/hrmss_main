@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\AgeFilter;
 use App\Livewire\AppointmentsCalendar;
 use App\Livewire\Award\Award;
 use App\Livewire\AwardType\AwardType;
@@ -287,6 +288,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/list-employees-blood-A', BloodStaffList6::class)->name('blood_staff_list6');
     Route::get('/we10over_staff_list', WE10overStaffList::class)->name('we10over_staff_list');
     Route::get('/age18over_staff_list', Age18OverStaffList::class)->name('age18over_staff_list');
+    Route::get('/age-filter', AgeFilter::class)->name('age_filter');
     Route::get('/allowance-number-percentage', LeaveNuberPercent::class)->name('leaves');
     Route::get('/percentages-by-most-permissiveness', LeaveNuberPercent2::class)->name('leaves2');
 

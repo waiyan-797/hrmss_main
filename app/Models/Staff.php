@@ -665,6 +665,9 @@ public function labourAtt($year, $month)
         // return $this->postings()->where('')
     }
 
+
+    
+
     
 
 }

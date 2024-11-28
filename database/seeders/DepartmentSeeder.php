@@ -14,7 +14,7 @@ class DepartmentSeeder extends Seeder
     public function run(): void
     {
         Department::create([
-            'name' => 'test',
+            'name' => 'ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန',
         ]);
     }
 }

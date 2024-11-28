@@ -206,6 +206,9 @@
                         ['route_name' => 'blood_staff_list6', 'name' => 'သွေးအုပ်စုAရှိသောဝန်ထမ်းစာရင်း'],
                         ['route_name' => 'we10over_staff_list', 'name' => 'လုပ်သက်၁၀နှစ် နှင့်အထက်ရှိသောဝန်ထမ်းဦး‌ရေစာရင်း'],
                         ['route_name' => 'age18over_staff_list', 'name' => 'အသက်၁၈နှစ်နှင့်အထက်ရှိသောဝန်ထမ်းဦးရေ'],
+                        ['route_name' => 'age_filter', 'name' => 'age filter '],
+
+                        
                         ['route_name' => 'planning_accounting', 'name' => 'စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲဝန်ထမ်းအင်အားစာရင်း'],
                         ['route_name' => 'labour-staff', 'name' => 'နေ့စားဝန်ထမ်းစာရင်း'],
                         
