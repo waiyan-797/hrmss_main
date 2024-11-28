@@ -60,7 +60,7 @@ public $staff_id;
         $section->addText('၂၁။'.'နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်: '.str_repeat(' ',5). $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code);
         $section->addText('၂၂။'.'ယခုနေရပ်လိပ်စာအပြည့်အစုံ: '.str_repeat(' ',5). $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name );
         $section->addText('၂၃။'.'အမြဲတမ်းလက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ: '.str_repeat(' ',5).$staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name);
-        $section->addText('၂၄။'.'ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာဖော်ပြရန်): '.str_repeat(' ',5).$staff->previous_addresses);
+        $section->addText('၂၄။'.'ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာဖော်ပြရန်မလို): '.str_repeat(' ',5).$staff->previous_addresses);
         $section->addText('၂၅။'.'ပညာအရည်အချင်း', ['bold' => true]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();

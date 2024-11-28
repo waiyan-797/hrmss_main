@@ -9,11 +9,11 @@
             <h1 class="font-bold text-center text-base mb-2">
                 ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
             </h1>
-            <h2 class="text-center text-base font-bold mb-1">လက်ရှိရာထူးတွင် လုပ်သက် ၁၀ နှစ်နှင့်အထက်
+            <h2 class="text-center text-base font-bold mb-1">လက်ရှိရာထူးတွင် လုပ်သက် {{en2mm($exp_years)}} နှစ်နှင့်အထက်
                 ရှိသောဝန်ထမ်းဦးရေစာရင်း</h2>
 
             <div>
-                <input wire:model.live='exp_years'  type="number" min="10" max='44' >
+                <input wire:model.live='exp_years'  type="number" max='44' >
             </div>
 
             <table class="md:w-full">

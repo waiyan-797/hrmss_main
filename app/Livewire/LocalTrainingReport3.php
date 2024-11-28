@@ -1,18 +1,22 @@
 <?php
 
-namespace App\Livewire\LocalTrainingReport;
+namespace App\Livewire;
+
+use Livewire\Component;
 
 use App\Models\Staff;
 use App\Models\Training;
 use App\Models\TrainingType;
-use Livewire\Component;
+
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 
 
-class LocalTrainingReport extends Component
+class LocalTrainingReport3 extends Component
 {
+
+
     public $trainingLocation = 3 ;
 public $nameSearch;
     
@@ -102,10 +106,13 @@ public $nameSearch;
         
         
         
-        return view('livewire.local-training-report.local-training-report', [
+        return view('livewire.local-training-report3', [
             'staffs' => $this->staffsAll,
         ]);
     }
+    
 
 
+
+ 
 }

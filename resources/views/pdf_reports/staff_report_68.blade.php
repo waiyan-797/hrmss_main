@@ -381,7 +381,7 @@
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၄။</td>
-                                    <td style="border: none;">ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာဖော်ပြရန်)
+                                    <td style="border: none;">ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာဖော်ပြရန်မလို)
                                     </td>
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">{{ $staff->previous_addresses }}</td>

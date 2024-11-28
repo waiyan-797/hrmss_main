@@ -169,7 +169,7 @@
                     <label for="" class="md:w-5">၂၄။ </label>
                     <label for="name"
                         class="md:w-1/3">ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က
-                        တပ်လိပ်စာဖော်ပြရန်)</label>
+                        တပ်လိပ်စာဖော်ပြရန်မလို)</label>
                     <label for="" class="md:w-5">-</label>
 
                     <label for="name" class="md:w-3/5">{{ $staff->previous_addresses }}</label>

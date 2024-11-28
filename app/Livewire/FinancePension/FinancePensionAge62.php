@@ -3,12 +3,14 @@
 namespace App\Livewire\FinancePension;
 
 use App\Models\Staff;
+use Carbon\Carbon;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
 class FinancePensionAge62 extends Component
 {
+    public $startDate , $endDate;
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [
@@ -66,7 +68,19 @@ class FinancePensionAge62 extends Component
     
      public function render()
      {
-        $staffs = Staff::get();
+        $staffs = collect();
+    if (is_numeric($this->startDate) && is_numeric($this->endDate)) {
+        $startDate = Carbon::create($this->startDate, 4); // April of the start year
+        $endDate = Carbon::create($this->endDate, 3); // March of the end year
+
+        $staffs = Staff::where(function ($query) use ($startDate, $endDate) {
+            $query->whereBetween('dob', [
+                $startDate->copy()->subYears(62)->toDateString(),
+                $endDate->copy()->endOfMonth()->subYears(62)->toDateString()
+            ]);
+        })->get();
+    }
+        
          return view('livewire.finance-pension.finance-pension-age62',[ 
             'staffs' => $staffs,
         ]);

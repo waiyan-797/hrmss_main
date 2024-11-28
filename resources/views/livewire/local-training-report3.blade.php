@@ -42,13 +42,23 @@
                             <th class="border border-black text-center p-2">စဥ်</th>
                             <th class="border border-black text-center p-2">အမည်</th>
                             <th class="border border-black text-center p-2">ရာထူး</th>
-                            <th class="border border-black text-center p-2">သင်တန်းအမည်</th>
-                            <th class="border border-black text-center p-2">သင်တန်းကာလ(မှ)</th>
-                            <th class="border border-black text-center p-2">သင်တန်းကာလ(အထိ)</th>
-                            <th class="border border-black text-center p-2">သင်တန်းနေရာ/ဒေသ</th>
-                            <th class="border border-black text-center p-2">သင်တန်းအမျိုးအစား</th>
-                            <th class="border border-black text-center p-2">မှတ်ချက်</th>
+                            <th class="border border-black text-center p-2" colspan="2">သွားရောက်သည့်ကာလ</th>
+                            <th class="border border-black text-center p-2">ပြည်တွင်းသင်တန်းတက်ရောက်ခဲ့သည်နေရာ</th>
+                            <th class="border border-black text-center p-2">တက်ရောက်ခဲ့သည်အကြောင်းအရာ</th>
+                            <th class="border border-black text-center p-2">ပညာအရည်အချင်း</th>
+                            <th class="border border-black text-center p-2">ရရှိသည့်အဆင့်</th>
                         </tr>
+                        <tr>
+                            <th class="border border-black text-center p-2"></th>
+                            <th class="border border-black text-center p-2"></th>
+                            <th class="border border-black text-center p-2"></th>
+                            <th class="border border-black text-center p-2">မှ</th>
+                            <th class="border border-black text-center p-2">ထိ</th>
+                            <th class="border border-black text-center p-2"></th>
+                            <th class="border border-black text-center p-2"></th>
+                            <th class="border border-black text-center p-2"></th>
+                            <th class="border border-black text-center p-2"></th>
+                          </tr>
                     </thead>
                    
                     <tbody>
@@ -69,11 +79,24 @@
                                 <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->currentRank->name }}</td>
 
                                 <!-- First training record -->
-                                <td class="border border-black text-center p-2">{{ $firstTraining->training_type->name }}</td>
                                 <td class="border border-black text-center p-2">{{ $firstTraining->from_date }}</td>
+                                
                                 <td class="border border-black text-center p-2">{{ $firstTraining->to_date }}</td>
                                 <td class="border border-black text-center p-2">{{ $firstTraining->location }}</td>
-                                <td class="border border-black text-center p-2">{{ $firstTraining->training_type?->name }}</td>
+                                <td class="border border-black text-center p-2">  </td>
+                                <td class="border border-black text-center p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">
+
+                                    @foreach ($staff->staff_educations as $education)
+                                    
+                                        {{$education->education->name}}
+                                    
+                                                                
+                            
+                               
+                                
+            
+                                @endforeach
+                                </td>
 
                                 <td class="border border-black text-center p-2">
                                     {{ $firstTraining->remark }}
@@ -85,11 +108,14 @@
                               $trainingLocation == 3 ? [1,2] : $trainingLocation
                             )->skip(1) as $training)
                                 <tr>
-                                    <td class="border border-black text-center p-2">{{ $training->training_type->name }}</td>
+                                    
                                     <td class="border border-black text-center p-2">{{ $training->from_date }}</td>
                                     <td class="border border-black text-center p-2">{{ $training->to_date }}</td>
                                     <td class="border border-black text-center p-2">{{ $training->location }}</td>
-                                    <td class="border border-black text-center p-2">{{ $training->training_type?->name }}</td>
+
+                                    <td class="border border-black text-center p-2">  </td>
+                         
+                                    
                                     <td class="border border-black text-center p-2">
                                         {{ $training->remark }}
                                     </td>
