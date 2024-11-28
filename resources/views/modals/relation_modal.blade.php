@@ -3,6 +3,8 @@
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-96 p-4">
         <!-- Modal Content -->
         <h2 class="text-lg font-semibold mb-4 text-gray-500 dark:text-white font-arial uppercase">{{ $modal_title }}</h2>
+
+        {{-- dsfdsf --}}
         <form wire:submit.prevent="{{$submit_form}}">
             <div class="mb-4">
                 <label for="name" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">တော်စပ်ပုံ</label>
