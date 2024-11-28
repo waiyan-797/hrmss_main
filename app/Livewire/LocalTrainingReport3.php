@@ -1,26 +1,29 @@
 <?php
 
-namespace App\Livewire\LocalTrainingReport;
+namespace App\Livewire;
 
-use App\Models\LetterType;
+use Livewire\Component;
+
 use App\Models\Staff;
 use App\Models\Training;
 use App\Models\TrainingType;
-use Livewire\Component;
+
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 
 
-class LocalTrainingReport extends Component
+class LocalTrainingReport3 extends Component
 {
+
+
     public $trainingLocation = 3 ;
 public $nameSearch;
     
     public  $staffsAll;
     public function go_pdf()
     {
-      
+
         $data = [
             'staffs' => $this->staffsAll,
             'trainingLocation' => $this->trainingLocation
@@ -96,21 +99,20 @@ public $nameSearch;
    
     public function render()
     {
+
         $this->staffsAll = Staff::
         where('name', 'like', '%' . $this->nameSearch . '%')
         ->whereHas('trainings')->with('trainings')->get();
-        $letter_types = LetterType::all();
-        return view('livewire.local-training-report.local-training-report', [
+        
+        
+        
+        return view('livewire.local-training-report3', [
             'staffs' => $this->staffsAll,
-            'letter_types'=>$letter_types,
-
-        
-        
-        
-        
-        
         ]);
     }
+    
 
 
+
+ 
 }

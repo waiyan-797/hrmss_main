@@ -87,8 +87,9 @@ use App\Livewire\InvestmentCompanies\YangonOfficeStaff;
 use App\Livewire\InvestmentCompanies\YangonOfficeStaff2;
 use App\Livewire\InvestmentCompanies\YangonStaffAprilSalaryList;
 use App\Livewire\Labour;
+use App\Livewire\labour\LabourStaff;
 use App\Livewire\LabourDetails;
-
+use App\Livewire\LabourStaff as LivewireLabourStaff;
 use App\Livewire\Language as LivewireLanguage;
 use App\Livewire\Leave;
 use App\Livewire\Leave\LeaveNuberPercent;
@@ -135,6 +136,7 @@ use App\Livewire\LastPayCertificateMain;
 use App\Livewire\Leave\LeaveDate;
 use App\Livewire\LeaveCalendar;
 use App\Livewire\LetterType;
+use App\Livewire\LocalTrainingReport3;
 use App\Livewire\Promotion as LivewirePromotion;
 use App\Livewire\Report;
 use App\Livewire\Retirement;
@@ -208,6 +210,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         }
     })->name('file')->where('path', '.*');
     Route::get('/local_training_report', LocalTrainingReport::class)->name('local_training_report');
+    Route::get('/local_training_report_3',  LocalTrainingReport3::class)->name('local_training_report_3'); // new 
     Route::get('/local_training_report2', LocalTrainingReport2::class)->name('local_training_report2');
     // Route::get('/staff_report', ReportName::class)->name('staff_report');
     Route::get('/current-department-arrival-date', StaffReport1::class)->name('staff_report1');
@@ -319,6 +322,9 @@ Route::get('/labour',Labour::class)->name('labour');
 Route::get('/labour_view/{id?}' , LabourDetails::class )->name('labourDetails');
 Route::get('/calender/{id}' , AppointmentsCalendar::class)->name('calender');
 Route::get('/leave-calender/{id}' , LeaveCalendar::class)->name('leaveCalendar');
+Route::get('/labour-staff' , LivewireLabourStaff::class )->name('labour-staff');
+
+
 
 
 

@@ -17,30 +17,9 @@
         <input type="search" wire:model.live="nameSearch"  id="search" class="block  p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Search" required />
 
     </div> 
- 
-<div class="flex justify-start space-x-6">
-    <div class="w-1/3">
-        <x-select
-            class="mt-11"
-            wire:model.live="trainingLocation"
-            :values="[
-                (object) ['id' => 1, 'name' => 'ပြည်တွင်း'],
-                (object) ['id' => 2, 'name' => 'ပြည်ပ'],
-            ]"
-        />
-    </div>
-    <div class="w-1/3">
-        <x-select
-            wire:model="letter_type_id"
-            :values="$letter_types"
-            placeholder="စာအဆင့်အတန်းရွေးပါ"
-            id="letter_type_id"
-            name="letter_type_id"
-            class="mt-11 block w-full"
-            required
-        />
-        <x-input-error class="mt-2" :messages="$errors->get('letter_type_id')" />
-    </div>
+<div  class=" w-52">
+        
+
 </div>
     <x-select   class=" mt-11"
     wire:model.live='trainingLocation'
@@ -63,13 +42,23 @@
                             <th class="border border-black text-center p-2">စဥ်</th>
                             <th class="border border-black text-center p-2">အမည်</th>
                             <th class="border border-black text-center p-2">ရာထူး</th>
-                            <th class="border border-black text-center p-2">သင်တန်းအမည်</th>
-                            <th class="border border-black text-center p-2">သင်တန်းကာလ(မှ)</th>
-                            <th class="border border-black text-center p-2">သင်တန်းကာလ(အထိ)</th>
-                            <th class="border border-black text-center p-2">သင်တန်းနေရာ/ဒေသ</th>
-                            <th class="border border-black text-center p-2">သင်တန်းအမျိုးအစား</th>
-                            <th class="border border-black text-center p-2">မှတ်ချက်</th>
+                            <th class="border border-black text-center p-2" colspan="2">သွားရောက်သည့်ကာလ</th>
+                            <th class="border border-black text-center p-2">ပြည်တွင်းသင်တန်းတက်ရောက်ခဲ့သည်နေရာ</th>
+                            <th class="border border-black text-center p-2">တက်ရောက်ခဲ့သည်အကြောင်းအရာ</th>
+                            <th class="border border-black text-center p-2">ပညာအရည်အချင်း</th>
+                            <th class="border border-black text-center p-2">ရရှိသည့်အဆင့်</th>
                         </tr>
+                        <tr>
+                            <th class="border border-black text-center p-2"></th>
+                            <th class="border border-black text-center p-2"></th>
+                            <th class="border border-black text-center p-2"></th>
+                            <th class="border border-black text-center p-2">မှ</th>
+                            <th class="border border-black text-center p-2">ထိ</th>
+                            <th class="border border-black text-center p-2"></th>
+                            <th class="border border-black text-center p-2"></th>
+                            <th class="border border-black text-center p-2"></th>
+                            <th class="border border-black text-center p-2"></th>
+                          </tr>
                     </thead>
                    
                     <tbody>
@@ -90,11 +79,24 @@
                                 <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->currentRank->name }}</td>
 
                                 <!-- First training record -->
-                                <td class="border border-black text-center p-2">{{ $firstTraining->training_type->name }}</td>
                                 <td class="border border-black text-center p-2">{{ $firstTraining->from_date }}</td>
+                                
                                 <td class="border border-black text-center p-2">{{ $firstTraining->to_date }}</td>
                                 <td class="border border-black text-center p-2">{{ $firstTraining->location }}</td>
-                                <td class="border border-black text-center p-2">{{ $firstTraining->training_type?->name }}</td>
+                                <td class="border border-black text-center p-2">  </td>
+                                <td class="border border-black text-center p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">
+
+                                    @foreach ($staff->staff_educations as $education)
+                                    
+                                        {{$education->education->name}}
+                                    
+                                                                
+                            
+                               
+                                
+            
+                                @endforeach
+                                </td>
 
                                 <td class="border border-black text-center p-2">
                                     {{ $firstTraining->remark }}
@@ -106,11 +108,14 @@
                               $trainingLocation == 3 ? [1,2] : $trainingLocation
                             )->skip(1) as $training)
                                 <tr>
-                                    <td class="border border-black text-center p-2">{{ $training->training_type->name }}</td>
+                                    
                                     <td class="border border-black text-center p-2">{{ $training->from_date }}</td>
                                     <td class="border border-black text-center p-2">{{ $training->to_date }}</td>
                                     <td class="border border-black text-center p-2">{{ $training->location }}</td>
-                                    <td class="border border-black text-center p-2">{{ $training->training_type?->name }}</td>
+
+                                    <td class="border border-black text-center p-2">  </td>
+                         
+                                    
                                     <td class="border border-black text-center p-2">
                                         {{ $training->remark }}
                                     </td>

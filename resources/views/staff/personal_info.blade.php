@@ -71,11 +71,11 @@
         <x-input-label :value="__('အရပ်အမြင့်(ပေ, လက်မ)')" />
         <div class="flex flex-row gap-2">
             <div>
-                <x-text-input wire:model="height_feet" placeholder="ပေ" id="height_feet" name="height_feet" type="number" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="height_feet" placeholder="ပေ" id="height_feet" name="height_feet" type="text" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('height_feet')" />
             </div>
             <div>
-                <x-text-input wire:model="height_inch" placeholder="လက်မ" id="height_inch" name="height_inch" type="number" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="height_inch" placeholder="လက်မ" id="height_inch" name="height_inch" type="text" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('height_inch')" />
             </div>
         </div>
@@ -133,7 +133,7 @@
                 <x-input-error class="mt-2" :messages="$errors->get('nrc_sign_id')" />
             </div>
             <div class="w-full">
-                <x-text-input wire:model="nrc_code" id="nrc_code" placeholder="Code" name="nrc_code" type="number" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="nrc_code" id="nrc_code" placeholder="Code" name="nrc_code" type="text" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('nrc_code')" />
             </div>
         </div>
@@ -274,7 +274,7 @@
     </div>
     <div>
         <x-input-label for="(ဈ) အငြိမ်းစားလစာ" :value="__('(ဈ) အငြိမ်းစားလစာ')" />
-        <x-text-input wire:model="military_pension" id="military_pension" name="military_pension" type="number" class="mt-1 block w-full" />
+        <x-text-input wire:model="military_pension" id="military_pension" name="military_pension" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_pension')" />
     </div>
 

@@ -6,7 +6,18 @@
             <br><br>
             <h1 class="font-bold text-center text-base mb-2">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
             </h1>
-            <h2 class="font-bold text-center text-base mb-2">၂၀၂၄-၂၀၂၅ ဘဏ္ဍာရေးနှစ်တွင် အသက် (၆၂)ပြည့်
+
+        <input type="text"  wire:model.live='startDate'>
+        <input type="text"  wire:model.live='endDate'>
+        
+            <h2 class="font-bold text-center text-base mb-2">
+                {{en2mm($startDate)}}
+                
+                -       
+                
+                {{en2mm($endDate)}}
+
+                 ဘဏ္ဍာရေးနှစ်တွင် အသက် (၆၂)ပြည့်
                 ပင်စင်ခံစားမည့်စာရင်း</h2>
 
             <table class="md:w-full">
@@ -27,9 +38,11 @@
                         <td class="border border-black text-left p-2">{{ $staff->name}}/{{ $staff->currentRank?->name}}</td>
                         <td class="border border-black text-center p-2">{{ $staff->dob}}</td>
                         <td class="border border-black text-center p-2">{{ $staff->join_date}}</td>
-                        <td class="border border-black text-center p-2">            {{ \Carbon\Carbon::parse($staff->dob)->addYears(62)->subMonths(4)->format('Y-m-d') }}
+                        <td class="border border-black text-center p-2">            {{
+                      en2mm(   \Carbon\Carbon::parse($staff->dob)->addYears(62)->subMonths(4)->format('d-m-y')) }} မှ  {{ 
+                      en2mm(\Carbon\Carbon::parse($staff->dob)->addYears(62)->subDay()->format('Y-m-d')) }}ထိ 
                         </td>
-                        <td class="border border-black text-center p-2">{{ \Carbon\Carbon::parse($staff->dob)->addYears(62)->format('Y-m-d') }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm(\Carbon\Carbon::parse($staff->dob)->addYears(62)->format('d-m-y')) }}</td>
                     </tr>
                     @endforeach
                 </tbody>

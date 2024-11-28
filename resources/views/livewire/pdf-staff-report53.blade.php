@@ -134,7 +134,7 @@
                     <label for="" class="md:w-5">၁၆။ </label>
                     <label for="name"
                         class="md:w-1/3">ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာ
-                        ဖော်ပြရန်)</label>
+                        ဖော်ပြရန်မလို)</label>
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name" class="md:w-3/5">{{ $staff->previous_addresses }}</label>
@@ -216,34 +216,23 @@
                     </div>
                 </div>
 
+                <div class="flex justify-start w-full mb-4 ml-1">
+                    <label for="" class="md:w-5">၈။ </label>
+                    <label for="name" class="md:w-80 ml-3">ပညာအရည်အချင်း</label>
+                    <label for="" class="md:w-5 ml-10">-</label>
+                    @foreach ($staff->staff_educations as $education)
+                        <label for="name" class="md:w-3/5 ml-4">
+                            {{$education->education->name}}
+                        </label>
+                                                    
                 
-                                    <div class="w-full mb-4">
-                                        <div class="flex justify-start mb-2 space-x-3">
-                                            <label for="">၈။ </label>
-                                            <h1 class="font-semibold text-base">ပညာအရည်အချင်း
-                                            </h1>
-                                        </div>
-                                        <table class="md:w-full">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border border-black text-center p-2">စဉ်</th>
-                                                    <th class="border border-black text-center p-2">Education Group</th>
-                                                    <th class="border border-black text-center p-2">Education Type</th>
-                                                    <th class="border border-black text-center p-2">Education</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($staff->staff_educations as $education)
-                                                    <tr>
-                                                        <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
-                                                        <td class="border border-black text-center p-2">{{$education->education_group->name}}</td>
-                                                        <td class="border border-black text-center p-2">{{$education->education_type->name}}</td>
-                                                        <td class="border border-black text-center p-2">{{$education->education->name}}</td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                   
+                    
+
+                    @endforeach
+                                            </div>
+
+                                   
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၉။ </label>

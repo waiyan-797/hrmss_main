@@ -82,37 +82,56 @@
                             <th>လစ်လပ်အင်အား</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center h-8 p-2">
                         @foreach ($first_payscales as $payscale)
                             <tr>
-                                <td style="border: 1px solid black; padding: 0.5rem; text-align: center;">{{$loop->index + 1}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem;">{{$payscale->name}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->allowed_qty)}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->staff->count())}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->allowed_qty - $payscale->staff->count())}}</td>
+                                <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                <td class="border border-black p-2">{{$payscale->name}}</td>
+                                <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
+                                <td class="border border-black p-2">{{en2mm($payscale->staff->count())}}</td>
+                                <td class="border border-black p-2">{{en2mm( $payscale->staff->count()  - $payscale->allowed_qty)}}</td>
                             </tr>
                         @endforeach
                         <tr>
-                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;" colspan="2">{{$first_payscales[0]->staff_type->name}}</td>
-                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
-                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
-                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($first_payscales->sum('allowed_qty') - $first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                            <td class="border border-black p-2 font-semibold" colspan="2">{{$first_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
+                            <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
+                            <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                            <td class="border border-black p-2 font-semibold">{{ en2mm((
+                                
+                           $first_payscales->sum(fn($scale) => $scale->staff->count())  - $first_payscales->sum('allowed_qty')
+                            )) }}</td>
                         </tr>
+
                         @foreach ($second_payscales as $payscale)
                             <tr>
-                                <td style="border: 1px solid black; padding: 0.5rem; text-align: center;">{{$loop->index + 1}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem;">{{$payscale->name}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->allowed_qty)}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->staff->count())}}</td>
-                                <td style="border: 1px solid black; padding: 0.5rem;">{{en2mm($payscale->allowed_qty - $payscale->staff->count())}}</td>
+                                <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                <td class="border border-black p-2">{{$payscale->name}}</td>
+                                <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
+                                <td class="border border-black p-2">{{en2mm($payscale->staff->count())}}</td>
+                                <td class="border border-black p-2">{{en2mm( 
+                                    
+                                    $payscale->staff->count() - $payscale->allowed_qty 
+                                    )}}</td>
                             </tr>
                         @endforeach
                         <tr>
-                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;" colspan="2">{{$second_payscales[0]->staff_type->name}}</td>
-                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
-                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
-                            <td style="border: 1px solid black; padding: 0.5rem; font-weight: bold;">{{ en2mm($second_payscales->sum('allowed_qty') - $second_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                            <td class="border border-black p-2 font-semibold" colspan="2">{{$second_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
+                            <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
+                            <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                            <td class="border border-black p-2 font-semibold">{{ en2mm(
+                                 $second_payscales->sum(fn($scale) => $scale->staff->count() ) - $second_payscales->sum('allowed_qty')
+                                ) }}</td>
                         </tr>
+
+                        <tr>
+                            <td class="border border-black p-2 font-semibold" colspan="2">
+                               စုစုပေါင်း</td>
+                            <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum('allowed_qty') + $first_payscales->sum('allowed_qty')) }}</td>
+                            <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count()) + $first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                            <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count() ) - $second_payscales->sum('allowed_qty') + $first_payscales->sum(fn($scale) => $scale->staff->count() ) - $first_payscales->sum('allowed_qty')) }}</td>
+                        </tr>
+
+
                     </tbody>
                 </table>
             </div>

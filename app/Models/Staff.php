@@ -592,7 +592,7 @@ public function staffSalaryYear($year)
 }
 
 
- public function  Labour(){
+ public static  function   Labour(){
 
        return  Staff::where(
         function($query) {
@@ -664,5 +664,7 @@ public function labourAtt($year, $month)
     public function getSalaryDuringThisDept(){
         // return $this->postings()->where('')
     }
+
+    
 
 }

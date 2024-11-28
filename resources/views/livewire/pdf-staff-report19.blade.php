@@ -100,25 +100,16 @@
                     <div class="flex justify-start mb-2 space-x-3">
                         <label for="">၁၂။ </label>
                         <h1 class="font-semibold text-base">တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်</h1>
+                        @foreach ($staff->staff_languages as $lang)
+                    <p>
+                        <span class="">{{$lang->language->name}}</span> , 
+                        <span class="">{{$lang->rank}}</span>
+                        <br>
+                    </p>
+                @endforeach
+
                     </div>
-                    <div class="w-full rounded-lg">
-                        <table class="w-full text-center">
-                            <thead>
-                                <tr class="bg-gray-100">
-                                    <th class="p-2 border border-black">ဘာသာစကား</th>
-                                    <th class="p-2 border border-black">တတ်ကျွမ်းသည့်အဆင့်</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
-                                @foreach ($staff->staff_languages as $lang)
-                                    <tr>
-                                        <td class="border border-black p-2">{{$lang->language}}</td>
-                                        <td class="border border-black p-2">{{$lang->rank}}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                    
                 </div>
 
                 <div class="w-full mb-4">
@@ -131,7 +122,9 @@
                             <thead>
                                 <tr class="bg-gray-100">
                                     <th class="p-2 border border-black">ကျောင်း/တက္ကသိုလ်/သင်တန်း</th>
-                                    <th class="p-2 border border-black">မှ-ထိ</th>
+                                    <th class="p-2 border border-black">မှ</th>
+                                    <th class="p-2 border border-black">ထိ</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody class="text-center">

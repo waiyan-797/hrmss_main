@@ -54,4 +54,6 @@ class Division extends Model
         }
         return $totalLeaveCount;
     }
+
+    
 }
