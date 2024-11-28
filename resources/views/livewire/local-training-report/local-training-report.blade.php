@@ -17,18 +17,32 @@
         <input type="search" wire:model.live="nameSearch"  id="search" class="block  p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Search" required />
 
     </div> 
-<div  class=" w-52">
-        
-
+ 
+<div class="flex justify-start space-x-6">
+    <div class="w-1/3">
+        <x-select
+            class="mt-11"
+            wire:model.live="trainingLocation"
+            :values="[
+                (object) ['id' => 1, 'name' => 'ပြည်တွင်း'],
+                (object) ['id' => 2, 'name' => 'ပြည်ပ'],
+            ]"
+        />
+    </div>
+    <div class="w-1/3">
+        <x-select
+            wire:model="letter_type_id"
+            :values="$letter_types"
+            placeholder="စာအဆင့်အတန်းရွေးပါ"
+            id="letter_type_id"
+            name="letter_type_id"
+            class="mt-11 block w-full"
+            required
+        />
+        <x-input-error class="mt-2" :messages="$errors->get('letter_type_id')" />
+    </div>
 </div>
-    <x-select   class=" mt-11"
-    wire:model.live='trainingLocation'
-    :values="[
-        (object) ['id' => 1, 'name' => 'ပြည်တွင်း'] ,
 
-        (object) ['id' => 2, 'name' => 'ပြည်ပ'] ,
-    ]"
-/>
 
 
             </div> 

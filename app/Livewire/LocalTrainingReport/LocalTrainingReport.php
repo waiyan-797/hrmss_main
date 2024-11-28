@@ -2,6 +2,7 @@
 
 namespace App\Livewire\LocalTrainingReport;
 
+use App\Models\LetterType;
 use App\Models\Staff;
 use App\Models\Training;
 use App\Models\TrainingType;
@@ -16,9 +17,10 @@ class LocalTrainingReport extends Component
     public $trainingLocation;
 
     public  $staff;
+    
     public function go_pdf()
     {
-
+      
         $data = [
             'staffs' => $this->staffs,
         ];
@@ -93,8 +95,10 @@ class LocalTrainingReport extends Component
    
     public function render()
     {
+        $letter_types = LetterType::all();
         return view('livewire.local-training-report.local-training-report', [
             'staffs' => $this->staff,
+            'letter_types'=>$letter_types,
         ]);
     }
 

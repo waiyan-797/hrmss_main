@@ -10,8 +10,8 @@
             'title' => 'နေ့စား',
             'is_labour' => true ,
             'search_id' => 'staff_search',
-            'columns' => ['No', 'Name' , ],
-            'column_vals' => [ 'name', ],
+            'columns' => ['စဉ်', 'အမည်' ,'လုပ်ဆောင်ချက်' ],
+            'column_vals' => [ 'name' ],
         ])
 
 

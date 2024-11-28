@@ -300,7 +300,7 @@
     </div>
     <div>
         <x-input-label for="ကျန်းမာရေးအခြေအနေ" :value="__('ကျန်းမာရေးအခြေအနေ')" />
-        <x-text-input wire:model="health_condition" id="health_condition" name="health_condition" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="health_condition" id="health_condition" name="health_condition" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('health_condition')" />
     </div>
     <div>

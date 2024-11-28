@@ -2,6 +2,7 @@
 
 namespace App\Livewire\LocalTrainingReport;
 
+use App\Models\LetterType;
 use App\Models\Staff;
 use App\Models\Training;
 use Livewire\Component;
@@ -14,13 +15,16 @@ class LocalTrainingReport2 extends Component
     public $trainingLocation = null;
 
     public $nameSearch, $staffs;
-
-
     public function go_pdf()
     {
         $staffs = Staff::get();
+      
+           
         $data = [
             'staffs' => $staffs,
+         
+      
+       
         ];
         $pdf = PDF::loadView('pdf_reports.local_training_report_2', $data);
         return response()->streamDownload(function () use ($pdf) {
@@ -32,6 +36,8 @@ class LocalTrainingReport2 extends Component
     {
         $staffs = Staff::with(['current_rank', 'abroads', 'trainings', 'staff_educations.education_group'])->get();
         $phpWord = new PhpWord();
+        $phpWord->setDefaultFontName('Pyidaungsu');
+        $phpWord->setDefaultFontSize(12);
         $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
         $section->addTitle('Local Training Report2', 1);
@@ -125,13 +131,17 @@ class LocalTrainingReport2 extends Component
     public function render()
     {
         $staffQuery  = Staff::query();
+
         if ($this->nameSearch) {
             $staffQuery->where('name', 'like', '%' . $this->nameSearch . '%');
         }
         $this->staffs = $staffQuery->get();
+        $letter_types=LetterType::all();
 
         return view('livewire.local-training-report.local-training-report2', [
             'staffs' => $this->staffs,
+            'letter_types'=>$letter_types,
         ]);
     }
+    
 }

@@ -36,6 +36,8 @@ class StaffReport3 extends Component
         ];
 
         $phpWord = new PhpWord();
+        $phpWord->setDefaultFontName('Pyidaungsu');
+        $phpWord->setDefaultFontSize(12);
 
         $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
@@ -72,12 +74,12 @@ class StaffReport3 extends Component
             $table->addRow();
             $table->addCell(2000)->addText($index + 1);
             $table->addCell(2000)->addText($staff->name);
-            $table->addCell(2000)->addText($staff->current_rank->name);
+            $table->addCell(2000)->addText($staff->currentRank?->name);
             $table->addCell(2000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
             $table->addCell(2000)->addText(en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')));
             $table->addCell(2000)->addText(en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y')));
             $table->addCell(2000)->addText(en2mm(\Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y')));
-            $table->addCell(2000)->addText($staff->side_department->name);
+            $table->addCell(2000)->addText($staff->side_department?->name);
             $table->addCell(2000)->addText($this->getEducationString($staff));
             $table->addCell(2000)->addText(en2mm(\Carbon\Carbon::parse($staff->dob)->year + $pension_year->year));
             $table->addCell(2000)->addText('');

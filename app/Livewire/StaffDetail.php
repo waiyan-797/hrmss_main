@@ -167,7 +167,7 @@ public $saveDraftCheck  ;
         'veteran_no' => '',
         'veteran_date' => '',
         'last_serve_army' => '',
-        'health_condition' => 'required',
+        'health_condition' => '',
         'tax_exception' => '',
         'life_insurance_proposal' => '',
         'life_insurance_policy_no' => '',

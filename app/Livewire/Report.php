@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Livewire;
+
+use Illuminate\Pagination\LengthAwarePaginator;
+use Livewire\Component;
+use Livewire\WithPagination;
+
+class Report extends Component
+{
+    // use WithPagination;
+
+    public $reports = [];
+
+    public function mount()
+    {
+        $this->reports = [
+            ['id' => 1, 'name' => 'ကျား/မ ခွင့်ပြု'],
+            ['id' => 2, 'name' => 'ကျား/မ အရင်းခန့်ပြီး'],
+            ['id' => 3, 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(ရာထူး)'],
+            ['id' => 4, 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(လစာနှုန်း)'],
+            ['id' => 5, 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(အဆင့်တူ)'],
+            ['id' => 6, 'name' => '‌အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့်ဆောင်ရွက်ဆဲ'],
+            ['id' => 7, 'name' => 'နပတ၁'],
+            ['id' => 8, 'name' => 'နပတ၂'],
+            ['id' => 9, 'name' => 'ဝန်ထမ်းအဖြစ်မှထုတ်ပါယ်/ထုတ်ပစ်'],
+            ['id' => 10, 'name' => 'နပတ၄'],
+            ['id' => 11, 'name' => '၁၀နှစ်အထက်/၁၀နှစ်အောက်ပင်စင်ပို့စာရင်း'],
+            ['id' => 12, 'name' => 'ပင်စင်ကိစ္စ(မနှင်းစု)'],
+            ['id' => 13, 'name' => 'ဘွဲ့နှင့်သက်ဆိုင်သည့်စာရင်း'],
+            ['id' => 14, 'name' => 'ဖွဲ့ခန့်ပိုလိုရုံးချုပ်'],
+            ['id' => 15, 'name' => 'ဖွဲ့ခန့်ပိုလို(တိုင်းဒေသကြီး)'],
+            ['id' => 16, 'name' => 'တက်‌ရောက်ခဲ့သည့်သင်တန်း(၁)'],
+            ['id' => 17, 'name' => 'တက်‌ရောက်ခဲ့သည့်သင်တန်း(၂)'],
+        ];
+    }
+
+    
+    // // Route::get('/staff_report', ReportName::class)->name('staff_report');
+    // Route::get('/current-department-arrival-date', StaffReport1::class)->name('staff_report1');
+    // Route::get('/pension_issue2', StaffReport2::class)->name('staff_report2');
+    // Route::get('/list-of-retired-employees', StaffReport3::class)->name('staff_report3');
+    // Route::get('/pension_list', PensionList::class)->name('pension_list');
+    // Route::get('/pension_family', PensionFamily::class)->name('pension_family');
+
+    public function showReport($id)
+    {
+        $routes = [
+            1 => route('investment_companies'),
+            2 => route('investment_companies2'),
+            3 => route('investment_companies3'),
+            4 => route('investment_companies4'),
+            5 => route('investment_companies5'),
+            6 => route('investment_companies6'),
+            7 => route('investment_companies7'),
+            8 =>route('investment_companies8'),
+            9 =>route('investment_companies9'),
+            10 =>route('investment_companies10'),
+            11 =>route('investment_companies11'),
+            12 =>route('investment_companies12'),
+            13 =>route('investment_companies13'),
+            14 =>route('investment_companies14'),
+            15 =>route('investment_companies15'),
+            16 =>route('local_training_report'),
+            17 =>route('local_training_report2'),
+        ];
+
+        if (array_key_exists($id, $routes)) {
+            return redirect()->to($routes[$id]);
+        }
+
+        session()->flash('message', 'Invalid Report ID!');
+    }
+
+    public function render()
+    {
+        return view('livewire.report', [
+            'reports' => $this->reports,
+        ]);
+    }
+ 
+}

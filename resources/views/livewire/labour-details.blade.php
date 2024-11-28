@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        {{-- <div class="col-span-3">
+        <div class="col-span-3">
             <x-input-label :value="__('လက်ရှိနေရပ်လိပ်စာ အပြည့်အစုံ (လမ်း,ရပ်ကွက်,မြို့/မြို့နယ်,ခရိုင်,ပြည်နယ်/တိုင်းဒေသကြီး)')" />
             <div class="flex flex-row gap-2">
                 <div>
@@ -105,7 +105,7 @@
                     <x-input-error class="mt-2" :messages="$errors->get('permanent_address_street')" />
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         <x-input-label for="ဖုန်းနံပါတ်" :value="__('ဖုန်းနံပါတ်')" />
         <x-text-input wire:model="phone" id="phone" name="phone" type="text" class="mt-1 block w-full" required/>

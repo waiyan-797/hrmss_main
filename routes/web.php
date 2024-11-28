@@ -134,7 +134,9 @@ use App\Livewire\Language;
 use App\Livewire\LastPayCertificateMain;
 use App\Livewire\Leave\LeaveDate;
 use App\Livewire\LeaveCalendar;
+use App\Livewire\LetterType;
 use App\Livewire\Promotion as LivewirePromotion;
+use App\Livewire\Report;
 use App\Livewire\Retirement;
 use App\Livewire\Salary;
 use App\Livewire\User;
@@ -167,6 +169,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/award', Award::class)->name('award');
     Route::get('/award_type', AwardType::class)->name('award_type');
     Route::get('/blood_type', BloodType::class)->name('blood_type');
+    
+    Route::get('/letter_type', LetterType::class)->name('letter_type');
     Route::get('/post', Post::class)->name('post');
     Route::get('/section', Section::class)->name('section');
     Route::get('/leave', Leave::class)->name('leave'); //no longer use
@@ -294,6 +298,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/report2', Report2::class)->name('report2');
     Route::get('/report3', Report3::class)->name('report3');
     Route::get('/report4', Report4::class)->name('report4');
+    Route::get('/report',Report::class)->name('report');
     Route::get('/pension_report', PensionReport::class)->name('pension_report');
     Route::get('/pensioner', Pensioner::class)->name('pensioner');
     Route::get('/resignation-list', EmpoyeeRecordReport::class)->name('employee_record_report');

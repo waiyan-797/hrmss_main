@@ -97,59 +97,68 @@
                         </td>
                     </tr>
                     @endforeach
-            </tbody> --}}
+            </tbody>  --}}
 
             <tbody>
+                
                 @foreach($staffs as $staff)
-                    @php 
-                        $abroadCount = $staff->abroads->count();
-                        $trainingCount = $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count(); // Filter by training location
-                        $educationCount = $staff->staff_educations->count();
-                        $maxRows = max($abroadCount, $trainingCount, $educationCount); // Find the maximum count of related items
-                    @endphp
-            
-                    @for ($i = 0; $i < $maxRows; $i++)
-                        <tr>
-                            @if($i == 0)
-                                <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $loop->index + 1 }}</td>
-                                <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->name }}</td>
-                                <td class="border border-black text-center p-2" rowspan="{{ $maxRows }}">{{ $staff->current_rank->name }}</td>
-                            @endif
-            
-                            <!-- Abroads -->
-                            <td class="border border-black text-center p-2">
-                                {{ optional($staff->abroads[$i] ?? null)->from_date ?? '' }}
-                            </td>
-                            <td class="border border-black text-center p-2">
-                                {{ optional($staff->abroads[$i] ?? null)->to_date ?? '' }}
-                            </td>
-            
-                            <!-- Trainings (filtered by training location) -->
-                            <td class="border border-black text-center p-2">
-                                {{ optional($staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->values()[$i] ?? null)->location ?? '' }}
-                            </td>
-                            <td class="border border-black text-center p-2">
-                                {{ optional($staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->values()[$i] ?? null)->remark ?? '' }}
-                            </td>
-            
-                            <!-- Staff Educations -->
-                            <td class="border border-black text-left p-1">
-                                @if(isset($staff->staff_educations[$i]))
-                                    <div>
-                                        <span>{{ $staff->staff_educations[$i]->education_group->name }}</span>
-                                        <span>{{ $staff->staff_educations[$i]->education_type->name }}</span>
-                                        <span>{{ $staff->staff_educations[$i]->education->name }}</span>
-                                    </div>
+                        @php 
+                            $abroadCount = $staff->abroads->count();
+                            $trainingCount = $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count(); // Filter by training location
+                            $educationCount = $staff->staff_educations->count();
+                            $maxRows = max($abroadCount, $trainingCount, $educationCount); // Find the maximum count of related items
+                        @endphp
+                
+                        @for ($i = 0; $i < $maxRows; $i++)
+                            <tr>
+                                @if($i == 0)
+                                    <td rowspan="{{ $maxRows }}">{{ $loop->index + 1 }}</td>
+                                    <td rowspan="{{ $maxRows }}">{{ $staff->name }}</td>
+                                    <td rowspan="{{ $maxRows }}">{{ $staff->currentRank?->name }}</td>
                                 @endif
-                            </td>
-                        </tr>
-                    @endfor
-                @endforeach
+                                <td class="border border-black text-left p-1">
+                                    @if(isset($staff->staff_educations[$i]))
+                                        <div>
+                                            <span>{{ $staff->staff_educations[$i]->education_group->name }}</span>
+                                            <span>{{ $staff->staff_educations[$i]->education_type->name }}</span>
+                                            <span>{{ $staff->staff_educations[$i]->education->name }}</span>
+                                        </div>
+                                    @endif
+                                </td>
+                                <!-- Abroads -->
+                                <td>
+                                    {{ optional($staff->abroads[$i] ?? null)->from_date ?? '' }}
+                                </td>
+                                <td>
+                                    {{ optional($staff->abroads[$i] ?? null)->to_date ?? '' }}
+                                </td>
+                
+                                <!-- Trainings (filtered by training location) -->
+                                <td>
+                                    {{ optional($staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->values()[$i] ?? null)->location ?? '' }}
+                                </td>
+                                <td>
+                                    {{ optional($staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->values()[$i] ?? null)->remark ?? '' }}
+                                </td>
+                
+                                <!-- Staff Educations -->
+                            
+                                <td>
+                                သင်တန်းအမျိုးအစား
+                                </td>
+
+                            </tr>
+                        @endfor
+                    @endforeach
             </tbody>
-            
+             
 
         
         </table>
+         {{-- <p>{{ $letter_types->Where('id', $letter_type_id)?->name }}</p>   --}}
+      
+
+      
         
     </page>
         

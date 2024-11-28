@@ -15,6 +15,7 @@ class Labour extends Component
     public $staff_search,
         $staff_name,
         $staff_id = 0;
+
     public $modal_title;
 
     public function mount()

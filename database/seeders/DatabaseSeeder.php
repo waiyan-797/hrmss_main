@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             EducationTypeSeeder::class,
             GenderSeeder::class,
             LeaveTypeSeeder::class,
+            LetterTypeSeeder::class,
             PayscaleSeeder::class,
             PenaltyTypeSeeder::class,
             PensionTypeSeeder::class,
