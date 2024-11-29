@@ -69,7 +69,7 @@ public $saveDraftCheck  ;
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     public $staff;
     //personal_info
-    public $staff_photo, $staff_nrc_front, $staff_nrc_back, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $attendid, $gpms_staff_no, $spouse_name, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $government_staff_started_date, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $life_insurance_proposal, $life_insurance_policy_no, $life_insurance_premium, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension, $military_gazetted_no, $veteran_no, $veteran_date, $last_serve_army, $health_condition, $tax_exception;
+    public $staff_photo, $staff_nrc_front, $staff_nrc_back, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $attendid, $gpms_staff_no, $spouse_name, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $government_staff_started_date, $prominent_mark, $skin_color, $weight, $blood_type_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward,$current_address_house_no, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward,$permanent_address_house_no, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $life_insurance_proposal, $life_insurance_policy_no, $life_insurance_premium, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension, $military_gazetted_no, $veteran_no, $veteran_date, $last_serve_army, $health_condition, $tax_exception;
     public $leave_search, $leave_name, $leave_type_name, $leave_id, $staff_name, $from_date, $to_date, $qty, $order_no, $remark;
     public  $submit_button_text, $cancel_action, $submit_form, $leave_types;
 
@@ -87,10 +87,10 @@ public $saveDraftCheck  ;
 
 
     //relative
-    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_department_id, $is_newly_appointed = false,
-        $spouse_father_name, $spouse_father_ethnic_id, $spouse_father_religion_id, $spouse_father_place_of_birth, $spouse_father_occupation, $spouse_father_address_street, $spouse_father_address_ward, $spouse_father_address_township_or_town_id, $spouse_father_address_region_id,
-        $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id,
-        $spouse_mother_name, $spouse_mother_ethnic_id, $spouse_mother_religion_id, $spouse_mother_place_of_birth, $spouse_mother_occupation, $spouse_mother_address_street, $spouse_mother_address_ward, $spouse_mother_address_township_or_town_id, $spouse_mother_address_region_id,
+    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street,$father_address_house_no, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_department_id, $is_newly_appointed = false,
+        $spouse_father_name, $spouse_father_ethnic_id, $spouse_father_religion_id, $spouse_father_place_of_birth, $spouse_father_occupation, $spouse_father_address_street,$spouse_father_address_house_no, $spouse_father_address_ward, $spouse_father_address_township_or_town_id, $spouse_father_address_region_id,
+        $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street,$mother_address_house_no, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id,
+        $spouse_mother_name, $spouse_mother_ethnic_id, $spouse_mother_religion_id, $spouse_mother_place_of_birth, $spouse_mother_occupation, $spouse_mother_address_street,$spouse_mother_address_house_no, $spouse_mother_address_ward, $spouse_mother_address_township_or_town_id, $spouse_mother_address_region_id,
         $family_in_politics = false;
 
     public $siblings = [];
@@ -117,8 +117,8 @@ public $saveDraftCheck  ;
     protected $personal_info_rules = [
         'photo' => '',
         'name' => 'required',
-        'nick_name' => 'required',
-        'other_name' => 'required',
+        'nick_name' => '',
+        'other_name' => '',
         'staff_no' => 'required',
         'dob' => 'required',
         'attendid' => '',
@@ -145,15 +145,17 @@ public $saveDraftCheck  ;
         'phone' => 'required',
         'mobile' => 'required',
         'email' => 'required',
-        'current_address_street' => 'required',
-        'current_address_ward' => 'required',
+        'current_address_street' => '',
+        'current_address_ward' => '',
+        'current_address_house_no'=>'',
         'current_address_region_id' => 'required',
         'current_address_township_or_town_id' => 'required',
-        'permanent_address_street' => 'required',
-        'permanent_address_ward' => 'required',
+        'permanent_address_street' => '',
+        'permanent_address_ward' => '',
+        'permanent_address_house_no'=>'',
         'permanent_address_region_id' => 'required',
         'permanent_address_township_or_town_id' => 'required',
-        'previous_addresses' => 'required',
+        'previous_addresses' => '',
         'military_solider_no' => '',
         'military_join_date' => '',
         'military_dsa_no' => '',
@@ -202,37 +204,41 @@ public $saveDraftCheck  ;
         'father_religion_id' => 'required',
         'father_place_of_birth' => 'required',
         'father_occupation' => 'required',
-        'father_address_street' => 'required',
-        'father_address_ward' => 'required',
+        'father_address_house_no'=>'',
+        'father_address_street' => '',
+        'father_address_ward' => '',
         'father_address_township_or_town_id' => 'required',
         'father_address_region_id' => 'required',
-        'spouse_father_name' => 'required',
-        'spouse_father_ethnic_id' => 'required',
-        'spouse_father_religion_id' => 'required',
-        'spouse_father_place_of_birth' => 'required',
-        'spouse_father_occupation' => 'required',
-        'spouse_father_address_street' => 'required',
-        'spouse_father_address_ward' => 'required',
-        'spouse_father_address_township_or_town_id' => 'required',
-        'spouse_father_address_region_id' => 'required',
+        'spouse_father_name' => '',
+        'spouse_father_ethnic_id' => '',
+        'spouse_father_religion_id' => '',
+        'spouse_father_place_of_birth' => '',
+        'spouse_father_occupation' => '',
+        'spouse_father_address_house_no'=>'',
+        'spouse_father_address_street' => '',
+        'spouse_father_address_ward' => '',
+        'spouse_father_address_township_or_town_id' => '',
+        'spouse_father_address_region_id' => '',
         'mother_name' => 'required',
         'mother_ethnic_id' => 'required',
         'mother_religion_id' => 'required',
         'mother_place_of_birth' => 'required',
         'mother_occupation' => 'required',
-        'mother_address_street' => 'required',
-        'mother_address_ward' => 'required',
+        'mother_address_house_no'=>'',
+        'mother_address_street' => '',
+        'mother_address_ward' => '',
         'mother_address_township_or_town_id' => 'required',
         'mother_address_region_id' => 'required',
-        'spouse_mother_name' => 'required',
-        'spouse_mother_ethnic_id' => 'required',
-        'spouse_mother_religion_id' => 'required',
-        'spouse_mother_place_of_birth' => 'required',
-        'spouse_mother_occupation' => 'required',
-        'spouse_mother_address_street' => 'required',
-        'spouse_mother_address_ward' => 'required',
-        'spouse_mother_address_township_or_town_id' => 'required',
-        'spouse_mother_address_region_id' => 'required',
+        'spouse_mother_name' => '',
+        'spouse_mother_ethnic_id' => '',
+        'spouse_mother_religion_id' => '',
+        'spouse_mother_place_of_birth' => '',
+        'spouse_mother_occupation' => '',
+        'spouse_mother_address_house_no'=>'',
+        'spouse_mother_address_street' => '',
+        'spouse_mother_address_ward' => '',
+        'spouse_mother_address_township_or_town_id' => '',
+        'spouse_mother_address_region_id' => '',
         'family_in_politics' => '',
     ];
 
@@ -549,10 +555,12 @@ public $saveDraftCheck  ;
         $this->email = $staff->email;
         $this->current_address_street = $staff->current_address_street;
         $this->current_address_ward = $staff->current_address_ward;
+        $this->current_address_house_no=$staff->current_address_house_no;
         $this->current_address_region_id = $staff->current_address_region_id;
         $this->current_address_township_or_town_id = $staff->current_address_township_or_town_id;
         $this->permanent_address_street = $staff->permanent_address_street;
         $this->permanent_address_ward = $staff->permanent_address_ward;
+        $this->permanent_address_house_no=$staff->permanent_address_house_no;
         $this->permanent_address_region_id = $staff->permanent_address_region_id;
         $this->permanent_address_township_or_town_id = $staff->permanent_address_township_or_town_id;
         $this->previous_addresses = $staff->previous_addresses;
@@ -607,6 +615,7 @@ public $saveDraftCheck  ;
         $this->father_religion_id = $staff->father_religion_id;
         $this->father_place_of_birth = $staff->father_place_of_birth;
         $this->father_occupation = $staff->father_occupation;
+        $this->father_address_house_no=$staff->father_address_house_no;
         $this->father_address_street = $staff->father_address_street;
         $this->father_address_ward = $staff->father_address_ward;
         $this->father_address_township_or_town_id = $staff->father_address_township_or_town_id;
@@ -617,6 +626,7 @@ public $saveDraftCheck  ;
         $this->spouse_father_religion_id = $staff->spouse_father_religion_id;
         $this->spouse_father_place_of_birth = $staff->spouse_father_place_of_birth;
         $this->spouse_father_occupation = $staff->spouse_father_occupation;
+        $this->spouse_father_address_house_no=$staff->spouse_father_address_house_no;
         $this->spouse_father_address_street = $staff->spouse_father_address_street;
         $this->spouse_father_address_ward = $staff->spouse_father_address_ward;
         $this->spouse_father_address_township_or_town_id = $staff->spouse_father_address_township_or_town_id;
@@ -627,6 +637,7 @@ public $saveDraftCheck  ;
         $this->mother_religion_id = $staff->mother_religion_id;
         $this->mother_place_of_birth = $staff->mother_place_of_birth;
         $this->mother_occupation = $staff->mother_occupation;
+        $this->mother_address_house_no=$staff->mother_address_house_no;
         $this->mother_address_street = $staff->mother_address_street;
         $this->mother_address_ward = $staff->mother_address_ward;
         $this->mother_address_township_or_town_id = $staff->mother_address_township_or_town_id;
@@ -638,6 +649,7 @@ public $saveDraftCheck  ;
         $this->spouse_mother_religion_id = $staff->spouse_mother_religion_id;
         $this->spouse_mother_place_of_birth = $staff->spouse_mother_place_of_birth;
         $this->spouse_mother_occupation = $staff->spouse_mother_occupation;
+        $this->spouse_mother_address_house_no=$staff->spouse_mother_address_house_no;
         $this->spouse_mother_address_street = $staff->spouse_mother_address_street;
         $this->spouse_mother_address_ward = $staff->spouse_mother_address_ward;
         $this->spouse_mother_address_township_or_town_id = $staff->spouse_mother_address_township_or_town_id;
@@ -943,10 +955,12 @@ public $saveDraftCheck  ;
             'email' => $this->email,
             'current_address_street' => $this->current_address_street,
             'current_address_ward' => $this->current_address_ward,
+            'current_address_house_no'=>$this->current_address_house_no,
             'current_address_region_id' => $this->current_address_region_id,
             'current_address_township_or_town_id' => $this->current_address_township_or_town_id,
             'permanent_address_street' => $this->permanent_address_street,
             'permanent_address_ward' => $this->permanent_address_ward,
+            'permanent_address_house_no'=>$this->permanent_address_house_no,
             'permanent_address_region_id' => $this->permanent_address_region_id,
             'permanent_address_township_or_town_id' => $this->permanent_address_township_or_town_id,
             'previous_addresses' => $this->previous_addresses,
@@ -996,6 +1010,7 @@ public $saveDraftCheck  ;
             'father_religion_id' => $this->father_religion_id,
             'father_place_of_birth' => $this->father_place_of_birth,
             'father_occupation' => $this->father_occupation,
+            'father_address_house_no'=>$this->father_address_house_no,
             'father_address_street' => $this->father_address_street,
             'father_address_ward' => $this->father_address_ward,
             'father_address_township_or_town_id' => $this->father_address_township_or_town_id,
@@ -1005,6 +1020,7 @@ public $saveDraftCheck  ;
             'spouse_father_religion_id' => $this->spouse_father_religion_id,
             'spouse_father_place_of_birth' => $this->spouse_father_place_of_birth,
             'spouse_father_occupation' => $this->spouse_father_occupation,
+            'spouse_father_address_house_no'=>$this->spouse_father_address_house_no,
             'spouse_father_address_street' => $this->spouse_father_address_street,
             'spouse_father_address_ward' => $this->spouse_father_address_ward,
             'spouse_father_address_township_or_town_id' => $this->spouse_father_address_township_or_town_id,
@@ -1014,6 +1030,7 @@ public $saveDraftCheck  ;
             'mother_religion_id' => $this->mother_religion_id,
             'mother_place_of_birth' => $this->mother_place_of_birth,
             'mother_occupation' => $this->mother_occupation,
+            'mother_address_house_no'=>$this->mother_address_house_no,
             'mother_address_street' => $this->mother_address_street,
             'mother_address_ward' => $this->mother_address_ward,
             'mother_address_township_or_town_id' => $this->mother_address_township_or_town_id,
@@ -1023,6 +1040,7 @@ public $saveDraftCheck  ;
             'spouse_mother_religion_id' => $this->spouse_mother_religion_id,
             'spouse_mother_place_of_birth' => $this->spouse_mother_place_of_birth,
             'spouse_mother_occupation' => $this->spouse_mother_occupation,
+            'spouse_mother_address_house_no'=>$this->spouse_mother_address_house_no,
             'spouse_mother_address_street' => $this->spouse_mother_address_street,
             'spouse_mother_address_ward' => $this->spouse_mother_address_ward,
             'spouse_mother_address_township_or_town_id' => $this->spouse_mother_address_township_or_town_id,

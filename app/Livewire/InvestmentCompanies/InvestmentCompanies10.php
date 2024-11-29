@@ -31,7 +31,16 @@ class InvestmentCompanies10 extends Component
     $all_ranks = Rank::whereIn('staff_type_id', [1, 2])->withCount('staffs')->get();
 
     $phpWord = new PhpWord();
-    $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
+    $section = $phpWord->addSection([
+        'orientation' => 'landscape',
+        'pageSizeW' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(14), 
+        'pageSizeH' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(8.5), 
+        'marginLeft' => 600, 
+        'marginRight' => 600, 
+        'marginTop' => 600, 
+        'marginBottom' => 600 
+    ]);
+    
     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
     $table->addRow();
     $table->addCell(2000)->addText('စဥ်');

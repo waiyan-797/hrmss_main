@@ -35,6 +35,8 @@ public $nameSearch;
 
         $staffs = Staff::get();
         $phpWord = new PhpWord();
+        $phpWord->setDefaultFontName('Pyidaungsu');
+        $phpWord->setDefaultFontSize(12);
         $section = $phpWord->addSection();
         $tableStyle = [
             'borderSize' => 6,
@@ -42,7 +44,7 @@ public $nameSearch;
             'cellMargin' => 50,
         ];
         $firstRowStyle = ['bgColor' => 'f2f2f2'];
-        // $cellStyle = ['valign' => 'center'];
+       
         $phpWord->addTableStyle('TrainingTable', $tableStyle, $firstRowStyle);
         $table = $section->addTable('TrainingTable');
         $table->addRow();

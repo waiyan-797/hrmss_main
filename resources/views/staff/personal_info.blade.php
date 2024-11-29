@@ -19,12 +19,12 @@
     </div>
     <div>
         <x-input-label for="ငယ်အမည်" :value="__('ငယ်အမည်')" />
-        <x-text-input wire:model="nick_name" id="nick_name" name="nick_name" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="nick_name" id="nick_name" name="nick_name" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('nick_name')" />
     </div>
     <div>
         <x-input-label for="အခြားအမည်" :value="__('အခြားအမည်')" />
-        <x-text-input wire:model="other_name" id="other_name" name="other_name" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="other_name" id="other_name" name="other_name" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('other_name')" />
     </div>
     <div>
@@ -71,11 +71,11 @@
         <x-input-label :value="__('အရပ်အမြင့်(ပေ, လက်မ)')" />
         <div class="flex flex-row gap-2">
             <div>
-                <x-text-input wire:model="height_feet" placeholder="ပေ" id="height_feet" name="height_feet" type="text" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="height_feet" placeholder="ပေ" id="height_feet" name="height_feet" type="number" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('height_feet')" />
             </div>
             <div>
-                <x-text-input wire:model="height_inch" placeholder="လက်မ" id="height_inch" name="height_inch" type="text" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="height_inch" placeholder="လက်မ" id="height_inch" name="height_inch" type="number" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('height_inch')" />
             </div>
         </div>
@@ -184,7 +184,7 @@
         <x-input-error class="mt-2" :messages="$errors->get('email')" />
     </div>
     <div class="col-span-3">
-        <x-input-label :value="__('လက်ရှိနေရပ်လိပ်စာ အပြည့်အစုံ (လမ်း,ရပ်ကွက်,မြို့/မြို့နယ်,ခရိုင်,ပြည်နယ်/တိုင်းဒေသကြီး)')" />
+        <x-input-label :value="__('လက်ရှိနေရပ်လိပ်စာ အပြည့်အစုံ (ပြည်နယ်/တိုင်းဒေသကြီး,ခရိုင်,မြို့/မြို့နယ်,ရပ်ကွက်,လမ်း,အိမ်နံပါတ်)')" />
         <div class="flex flex-row gap-2">
             <div>
                 <x-select wire:model.change="current_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="current_address_region_id" name="current_address_region_id" class="mt-1 block w-full" required/>
@@ -195,17 +195,21 @@
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_township_or_town_id')" />
             </div>
             <div>
-                <x-text-input wire:model="current_address_ward" placeholder="ရပ်ကွက်" id="current_address_ward" name="current_address_ward" type="text" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="current_address_ward" placeholder="ရပ်ကွက်" id="current_address_ward" name="current_address_ward" type="text" class="mt-1 block w-full" />
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_ward')" />
             </div>
             <div>
-                <x-text-input wire:model="current_address_street" placeholder="လမ်း" id="current_address_street" name="current_address_street" type="text" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="current_address_street" placeholder="လမ်း" id="current_address_street" name="current_address_street" type="text" class="mt-1 block w-full" />
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_street')" />
+            </div>
+            <div>
+                <x-text-input wire:model="current_address_house_no" placeholder="အိမ်နံပါတ်" id="current_address_house_no" name="current_address_house_no" type="text" class="mt-1 block w-full" />
+                <x-input-error class="mt-2" :messages="$errors->get('current_address_house_no')" />
             </div>
         </div>
     </div>
     <div class="col-span-3">
-        <x-input-label :value="__('အမြဲတမ်းနေရပ်လိပ်စာ အပြည့်အစုံ (လမ်း,ရပ်ကွက်,မြို့/မြို့နယ်,ခရိုင်,ပြည်နယ်/တိုင်းဒေသကြီး)')" />
+        <x-input-label :value="__('အမြဲတမ်းနေရပ်လိပ်စာ အပြည့်အစုံ (ပြည်နယ်/တိုင်းဒေသကြီး,ခရိုင်,မြို့/မြို့နယ်,ရပ်ကွက်,လမ်း,အိမ်နံပါတ်)')" />
         <div class="flex flex-row gap-2">
             <div>
                 <x-select wire:model.change="permanent_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="permanent_address_region_id" name="permanent_address_region_id" class="mt-1 block w-full" required/>
@@ -216,18 +220,22 @@
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_township_or_town_id')" />
             </div>
             <div>
-                <x-text-input wire:model="permanent_address_ward" placeholder="ရပ်ကွက်" id="permanent_address_ward" name="permanent_address_ward" type="text" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="permanent_address_ward" placeholder="ရပ်ကွက်" id="permanent_address_ward" name="permanent_address_ward" type="text" class="mt-1 block w-full" />
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_ward')" />
             </div>
             <div>
-                <x-text-input wire:model="permanent_address_street" placeholder="လမ်း" id="permanent_address_street" name="permanent_address_street" type="text" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="permanent_address_street" placeholder="လမ်း" id="permanent_address_street" name="permanent_address_street" type="text" class="mt-1 block w-full" />
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_street')" />
+            </div>
+            <div>
+                <x-text-input wire:model="permanent_address_house_no" placeholder="အိမ်နံပါတ်" id="permanent_address_house_no" name="permanent_address_house_no" type="text" class="mt-1 block w-full"/>
+                <x-input-error class="mt-2" :messages="$errors->get('permanent_address_house_no')" />
             </div>
         </div>
     </div>
     <div>
         <x-input-label for="ယခင်နေခဲ့ဖူးသောဒေသနှင့် နေရပ်လိပ်စာ အပြည့်အစုံ" :value="__('ယခင်နေခဲ့ဖူးသောဒေသနှင့် နေရပ်လိပ်စာ အပြည့်အစုံ')" />
-        <x-textarea-input wire:model="previous_addresses" id="previous_addresses" name="previous_addresses" class="mt-1 block w-full" required/>
+        <x-textarea-input wire:model="previous_addresses" id="previous_addresses" name="previous_addresses" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('previous_addresses')" />
     </div>
 
@@ -274,7 +282,7 @@
     </div>
     <div>
         <x-input-label for="(ဈ) အငြိမ်းစားလစာ" :value="__('(ဈ) အငြိမ်းစားလစာ')" />
-        <x-text-input wire:model="military_pension" id="military_pension" name="military_pension" type="text" class="mt-1 block w-full" />
+        <x-text-input wire:model="military_pension" id="military_pension" name="military_pension" type="number" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_pension')" />
     </div>
 

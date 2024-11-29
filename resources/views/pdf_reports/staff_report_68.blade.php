@@ -386,10 +386,19 @@
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">{{ $staff->previous_addresses }}</td>
                                 </tr>
+                                <tr>
+                                    <td style="border: none;">၂၅။</td>
+                                    <td style="border: none;">ပညာအရည်အချင်း
+                                    </td>
+                                    <td style="border: none;">-</td>
+                                    <td style="border: none;">@foreach ($staff->staff_educations as $education)
+                                            {{$education->education->name.','}}
+                                        @endforeach</td>
+                                </tr>
                             </tbody>
                         </table>
                                
-                                <div style="margin-top: 16px;">
+                                {{-- <div style="margin-top: 16px;">
                                     <table style="border: none;">
                                         <tbody style="border: none;">
                                             <tr style="border: none;">
@@ -422,7 +431,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                </div>
+                                </div>  --}}
                                 <table style="border: none;">
                                     <tbody>
                                 <tr>

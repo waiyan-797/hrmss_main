@@ -5,7 +5,7 @@
             <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
             <div class="w-full ml-4 mb-4">
                 <h1 class="text-center font-semibold text-base">ကိုယ်ရေးမှတ်တမ်း</h1>
-                    <img src="{{ $staff->staff_photo }}" alt="" class="w-20 h-20 float-right mr-28">
+                    <img src="{{ $staff->staff_photo ? route('file', $staff->staff_photo) : asset('img/user.png') }}" alt="" class="w-20 h-20 float-right mr-28">
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁။ </label>
@@ -220,16 +220,13 @@
                     <label for="" class="md:w-5">၈။ </label>
                     <label for="name" class="md:w-80 ml-3">ပညာအရည်အချင်း</label>
                     <label for="" class="md:w-5 ml-10">-</label>
-                    @foreach ($staff->staff_educations as $education)
-                        <label for="name" class="md:w-3/5 ml-4">
-                            {{$education->education->name}}
+                  
+                        <label for="name" class="md:w-3/5">
+                            @foreach ($staff->staff_educations as $education)
+                            {{$education->education->name.','}}
+                            @endforeach
                         </label>
-                                                    
-                
-                   
-                    
-
-                    @endforeach
+                  
                                             </div>
 
                                    
@@ -888,13 +885,13 @@
             </div>
             <p class="mb-8">အထက်ပါဇယားကွက်များအတွင်း ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း
                 တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။</p>
-            <div class="p-6 ms-96">
+             {{-- <div class="p-6 ms-96">
                
 
-                <div class="flex justify-end mb-2">
-                    <p class="md:w-1/3 ">လက်မှတ်</p>
-                    <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5"></p>
+                <div class="flex justify-left mb-2">
+                    <p >လက်မှတ်</p>
+                    <p >၊</p>
+                    <p ></p>
                 </div>
 
                 <div class="flex justify-start mb-2">
@@ -933,7 +930,53 @@
                     <p>လ၊</p>
                     <p>ရက်</p>
                 </div>
-            </div>
+            </div>  --}}
+              <div>
+                <div class="flex mb-2">
+                    <p class="w-1/3">လက်မှတ်</p>
+                    <p class="w-5">၊</p>
+                    <p class="w-3/5"></p>
+                </div>
+            
+                <div class="flex mb-2">
+                    <p class="w-1/3">ကိုယ်ပိုင်အမှတ်(သို့မဟုတ်)</p>
+                    <p class="w-5">၊</p>
+                    <p class="w-3/5"></p>
+                </div>
+            
+                <div class="flex mb-2">
+                    <p class="w-1/3">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</p>
+                    <p class="w-5">၊</p>
+                    <p class="w-3/5"></p>
+                </div>
+            
+                <div class="flex mb-2">
+                    <p class="w-1/3">အဆင့်၊ ရာထူး</p>
+                    <p class="w-5">၊</p>
+                    <p class="w-3/5"></p>
+                </div>
+            
+                <div class="flex mb-2">
+                    <p class="w-1/3">အမည်</p>
+                    <p class="w-5">၊</p>
+                    <p class="w-3/5"></p>
+                </div>
+            
+                <div class="flex mb-4">
+                    <p class="w-1/3">တပ်/ဌာန</p>
+                    <p class="w-5">၊</p>
+                    <p class="w-3/5"></p>
+                </div>
+            
+                <div class="flex space-x-10">
+                    <p>ရက်စွဲ၊</p>
+                    <p>ခုနှစ်၊</p>
+                    <p>လ၊</p>
+                    <p>ရက်</p>
+                </div>
+            </div> 
+            
+             
 
 
 

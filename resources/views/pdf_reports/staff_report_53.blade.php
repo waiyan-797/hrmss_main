@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>PDF Report 18</title>
+    <title>PDF Report 53</title>
     <style type="text/css">
         page{
             background: white;
@@ -313,9 +313,19 @@
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">{{ $staff->military_pension }}</td>
                                 </tr>
+                                <tr>
+                                    <td style="border: none;">၁၈။ 
+                                    </td>
+                                    <td style="border: none;">ပညာအရည်အချင်း
+                                    </td>
+                                    <td style="border: none;">-</td>
+                                    <td style="border: none;"> @foreach ($staff->staff_educations as $education)
+                                            {{$education->education->name.','}}
+                                    @endforeach</td>
+                                </tr>
                             </tbody>
                         </table>
-                        <div class="section">
+                        {{-- <div class="section">
                             <div class="section-title">
                                 <label>၁၈။ </label>
                                 <h2 class="text-base">ပညာအရည်အချင်း</h2>
@@ -342,7 +352,7 @@
                                 </table>
                             </div>
                         </div>
-                    
+                     --}}
                                
                                 <table style="border: none;">
                                     <tbody>

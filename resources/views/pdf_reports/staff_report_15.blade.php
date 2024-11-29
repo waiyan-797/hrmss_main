@@ -109,9 +109,23 @@
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}</td>
                                 </tr>
+                                <tr>
+                                    <td style="border: none;">၇။</td>
+                                    <td style="border: none;">လက်ရှိနေရပ်</td>
+                                    <td style="border: none;">-</td>
+                                    <td style="border: none;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;">၈။</td>
+                                    <td style="border: none;">ပညာအရည်အချင်း</td>
+                                    <td style="border: none;">-</td>
+                                    <td style="border: none;">@foreach ($staff->staff_educations as $education)
+                                            {{$education->education->name.','}}
+                                        @endforeach
+                                </tr>
                             </tbody>
                         </table>
-                        <div style="margin-top: 16px;">
+                        {{-- <div style="margin-top: 16px;">
                             <table style="border: none;">
                                 <tbody style="border: none;">
                                     <tr style="border: none;">
@@ -144,7 +158,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
+                        </div> --}}
                         <div style="margin-top: 16px;">
                             <table style="border: none;">
                                 <tbody style="border: none;">

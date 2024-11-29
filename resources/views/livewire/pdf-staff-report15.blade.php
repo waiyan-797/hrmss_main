@@ -50,7 +50,7 @@
                         {{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}
                     </label>`
                 </div>
-                <div class="w-full mb-4">
+                {{-- <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">
                         <label for="">၈။ </label>
                         <h1 class="font-semibold text-base">ပညာအရည်အချင်း
@@ -75,7 +75,19 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                    </table> 
+                    
+
+                </div> --}}
+                <div class="flex justify-between w-full mb-4">
+                    <label for="" class="md:w-5">၈။ </label>
+                    <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">
+                        @foreach ($staff->staff_educations as $education)
+                                   {{$education->education->name.','}}
+                            @endforeach
+                    </label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၉။ </label>
@@ -179,25 +191,25 @@
                             တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။</p>
                     </div>
 
-                    <div class="flex justify-center mb-2 items-center">
+                    <div class="flex justify-left mb-2 items-center">
                         <p class="md:w-20 mr-6">လက်မှတ်</p>
                         <p>-</p>
                         <p></p>
                     </div>
 
-                    <div class="flex justify-center mb-2 items-center">
+                    <div class="flex justify-left mb-2 items-center">
                         <p class="md:w-20 mr-6">အမည်</p>
                         <p>-</p>
                         <p>{{auth()->user()->name}}</p>
                     </div>
 
-                    <div class="flex justify-center mb-2 items-center">
+                    <div class="flex justify-left mb-2 items-center">
                         <p class="md:w-20 mr-6">အဆင့်</p>
                         <p>-</p>
                         <p>{{auth()->user()->role->name ?? ''}}</p>
                     </div>
 
-                    <div class="flex justify-center mb-2 items-center">
+                    <div class="flex justify-left mb-2 items-center">
                         <p class="md:w-20 mr-6">တပ်/ ဌာန</p>
                         <p>-</p>
                         <p></p>

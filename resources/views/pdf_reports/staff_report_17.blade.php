@@ -152,13 +152,21 @@
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}</td>
                                 </tr>
-                                <tr style="font-weight: bold">
+                                {{-- <tr style="font-weight: bold">
                                     <td style="border: none;">၈။</td>
                                     <td style="border: none;">ပညာအရည်အချင်း</td>
+                                </tr> --}}
+                                <tr>
+                                    <td style="border: none;">၈။</td>
+                                    <td style="border: none;">ပညာအရည်အချင်း</td>
+                                    <td style="border: none;">-</td>
+                                    <td style="border: none;">@foreach ($staff->staff_educations as $education)
+                                            {{$education->education->name.','}}
+                                        @endforeach</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="margin-top: 16px;">
+                        {{-- <div style="margin-top: 16px;">
                             <table>
                                 <thead>
                                     <tr>
@@ -179,7 +187,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
+                        </div> --}}
                         <div style="margin-top: 16px;">
                             <table style="border: none;">
                                 <tbody style="border: none;">

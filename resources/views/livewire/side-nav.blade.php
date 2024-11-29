@@ -88,18 +88,20 @@
                     
                     />
             </li>
-            <li>
-                <livewire:side-nav-button label="Report"
+           
+             <li>
+                <livewire:side-nav-drop-down label="Report"
                     icon='
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow- group-hover:text-yellow-500">
+                            <path fill-rule="evenodd" d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 0 1-.517.608 7.45 7.45 0 0 0-.478.198.798.798 0 0 1-.796-.064l-.453-.324a1.875 1.875 0 0 0-2.416.2l-.243.243a1.875 1.875 0 0 0-.2 2.416l.324.453a.798.798 0 0 1 .064.796 7.448 7.448 0 0 0-.198.478.798.798 0 0 1-.608.517l-.55.092a1.875 1.875 0 0 0-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 0 1-.064.796l-.324.453a1.875 1.875 0 0 0 .2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 0 1 .796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 0 1 .517-.608 7.52 7.52 0 0 0 .478-.198.798.798 0 0 1 .796.064l.453.324a1.875 1.875 0 0 0 2.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 0 1-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 0 0 1.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 0 1-.608-.517 7.507 7.507 0 0 0-.198-.478.798.798 0 0 1 .064-.796l.324-.453a1.875 1.875 0 0 0-.2-2.416l-.243-.243a1.875 1.875 0 0 0-2.416-.2l-.453.324a.798.798 0 0 1-.796.064 7.462 7.462 0 0 0-.478-.198.798.798 0 0 1-.517-.608l-.091-.55a1.875 1.875 0 0 0-1.85-1.566h-.344ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clip-rule="evenodd" />
                         </svg>
                     '
-                    route_name="report"
-                     count=""
-                    
-                    />
-            </li>
+                    :lists="[
+                        ['route_name' => 'report', 'name' => 'ဝန်ထမ်းရေးရာ'],
+                        ['route_name' => 'attend_training', 'name' => 'သင်တန်းတတ်ရောက်'],
+                        ['route_name' => 'pension', 'name' => 'ပင်စင်ကိစ္စ'],
+                    ]" />
+            </li> 
 
 
             
@@ -130,10 +132,10 @@
                         ['route_name' => 'investment_companies14', 'name' => 'ဖွဲ့ခန့်ပိုလိုရုံးချုပ်'],
                         ['route_name' => 'investment_companies15', 'name' => 'ဖွဲ့ခန့်ပိုလို(တိုင်းဒေသကြီး)'],
                     ]" />
-            </li>
+            </li> 
 
             
-            <li>
+             <li>
                 <livewire:side-nav-drop-down label="သင်တန်းတက်ရောက်"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
@@ -148,9 +150,9 @@
                      
 
                     ]" />
-            </li>
+            </li> 
 
-            <li>
+             <li>
                 <livewire:side-nav-drop-down label="ပင်စင်ကိစ္စများ"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
@@ -165,14 +167,14 @@
                         ['route_name' => 'pension_family', 'name' => 'မိသားစုပင်စင်ခံစားခဲ့သူများစာရင်း'],
                         ['route_name' => 'finance_pension_age62', 'name' => 'အသက်(၆၂)ပြည့်ပင်စင်ခံစားမည့်စာရင်း'],
                         ['route_name' => 'pension_report', 'name' => 'ပင်စင်ယူသည့်ရက်စွဲ'],
-                        ['route_name' => 'investment_companies12', 'name' => 'ပင်စင်ကိစ္စ(မနှင်းစု) skip '],
+                        
 
 
                     ]" />
-            </li>
+            </li> 
 
 
-            <li>
+             <li>
                 <livewire:side-nav-drop-down label="နိုင်ငံခြားသွားရောက်မှုများ"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
@@ -189,8 +191,8 @@
                         ['route_name' => 'een', 'name' => 'သင်တန်းတက်ရောက်ရန်အတွက် အဆိုပြုသင်တန်းသား အမည်စာရင်း'],
 
                     ]" />
-            </li>
-            <li>
+            </li> 
+             <li>
                 <livewire:side-nav-drop-down label="ဝန်ထမ်းအင်အားစာရင်း"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
@@ -210,9 +212,9 @@
                         ['route_name' => 'labour-staff', 'name' => 'နေ့စားဝန်ထမ်းစာရင်း'],
                         
                     ]" />
-            </li>
+            </li> 
             
-            <li>
+             <li>
                 <livewire:side-nav-drop-down label="ဝန်ထမ်းရေးရာ + ငွေစာရင်း"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow- group-hover:text-yellow-500">
@@ -223,7 +225,8 @@
                         ['route_name' => 'staff_salary', 'name' => 'ဝန်ထမ်းအင်အား နှင့် လစာထုတ်ပေးမှုအခြေအနေ'],
                         ['route_name' => 'permanent_staff', 'name' => 'အမြဲတမ်းဝန်ထမ်းအင်အားစာရင်း'],
                     ]" />
-            </li>
+            </li> 
+
             <li>
                 <livewire:side-nav-drop-down label="ငွေစာရင်း"
                     icon='

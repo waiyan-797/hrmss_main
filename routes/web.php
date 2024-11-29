@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\AppointmentsCalendar;
+use App\Livewire\AttendTraining;
 use App\Livewire\Award\Award;
 use App\Livewire\AwardType\AwardType;
 use App\Livewire\BloodType\BloodType;
@@ -137,6 +138,7 @@ use App\Livewire\Leave\LeaveDate;
 use App\Livewire\LeaveCalendar;
 use App\Livewire\LetterType;
 use App\Livewire\LocalTrainingReport3;
+use App\Livewire\Pension;
 use App\Livewire\Promotion as LivewirePromotion;
 use App\Livewire\Report;
 use App\Livewire\Retirement;
@@ -302,10 +304,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/report3', Report3::class)->name('report3');
     Route::get('/report4', Report4::class)->name('report4');
     Route::get('/report',Report::class)->name('report');
+    Route::get('/attend_training',AttendTraining::class)->name('attend_training');
     Route::get('/pension_report', PensionReport::class)->name('pension_report');
     Route::get('/pensioner', Pensioner::class)->name('pensioner');
     Route::get('/resignation-list', EmpoyeeRecordReport::class)->name('employee_record_report');
     Route::get('/finance_pension_age62', FinancePensionAge62::class)->name('finance_pension_age62');
+    Route::get('/penison',Pension::class)->name('pension');
     Route::get('/religion_report', ReligionReport::class)->name('religion_report');
     Route::get('/language_report', LanguageReport::class)->name('language_report');
     Route::get('/social_report', SocialReport::class)->name('social_report');

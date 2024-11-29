@@ -175,8 +175,19 @@
                     <label for="name" class="md:w-3/5">{{ $staff->previous_addresses }}</label>
 
                 </div>
+                <div class="flex justify-between w-full mb-2">
+                    <label for="" class="md:w-5">၂၅။ </label>
+                    <label for="name"
+                        class="md:w-1/3">ပညာအရည်အချင်း(ရရှိထားသောတက္ကသိုလ်/ဘွဲ့/ဒီပလိုမာ)</label>
+                    <label for="" class="md:w-5">-</label>
+
+                    <label for="name" class="md:w-3/5">@foreach ($staff->staff_educations as $education)
+                           {{$education->education->name.','}}
+                    @endforeach</label>
+
+                </div>
                 
-                <div class="w-full mb-4">
+                {{-- <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">
                         <label for="">၂၅။ </label>
                         <h1 class="font-semibold text-base">ပညာအရည်အချင်း(ရရှိထားသောတက္ကသိုလ်/ဘွဲ့/ဒီပလိုမာ)
@@ -202,7 +213,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                </div> --}}
 
             </div>
 

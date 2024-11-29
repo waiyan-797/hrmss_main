@@ -66,11 +66,13 @@ return new class extends Migration
             $table->text('life_insurance_premium')->nullable();
             $table->text('current_address_street')->nullable();
             $table->text('current_address_ward')->nullable();
+            $table->text('current_address_house_no')->nullable();
             $table->foreignId('current_address_township_or_town_id')->nullable()->constrained('townships')->onDelete('set null');
             $table->foreignId('current_address_district_id')->nullable()->constrained('districts')->onDelete('set null');
             $table->foreignId('current_address_region_id')->nullable()->constrained('regions')->onDelete('set null');
             $table->text('permanent_address_street')->nullable();
             $table->text('permanent_address_ward')->nullable();
+            $table->text('permanent_address_house_no')->nullable();
             $table->foreignId('permanent_address_township_or_town_id')->nullable()->constrained('townships')->onDelete('set null');
             $table->foreignId('permanent_address_district_id')->nullable()->constrained('districts')->onDelete('set null');
             $table->foreignId('permanent_address_region_id')->nullable()->constrained('regions')->onDelete('set null');
@@ -99,6 +101,7 @@ return new class extends Migration
             $table->foreignId('father_religion_id')->nullable()->constrained('religions')->onDelete('set null');
             $table->text('father_place_of_birth')->nullable();
             $table->text('father_occupation')->nullable();
+            $table->text('father_address_house_no')->nullable();
             $table->text('father_address_street')->nullable();
             $table->text('father_address_ward')->nullable();
             $table->foreignId('father_address_township_or_town_id')->nullable()->constrained('townships')->onDelete('set null');
@@ -109,6 +112,7 @@ return new class extends Migration
             $table->foreignId('spouse_father_religion_id')->nullable()->constrained('religions')->onDelete('set null');
             $table->text('spouse_father_place_of_birth')->nullable();
             $table->text('spouse_father_occupation')->nullable();
+            $table->text('spouse_father_address_house_no')->nullable();
             $table->text('spouse_father_address_street')->nullable();
             $table->text('spouse_father_address_ward')->nullable();
             $table->foreignId('spouse_father_address_township_or_town_id')->nullable()->constrained('townships')->onDelete('set null');
@@ -119,6 +123,7 @@ return new class extends Migration
             $table->foreignId('mother_religion_id')->nullable()->constrained('religions')->onDelete('set null');
             $table->text('mother_place_of_birth')->nullable();
             $table->text('mother_occupation')->nullable();
+            $table->text('mother_address_house_no')->nullable();
             $table->text('mother_address_street')->nullable();
             $table->text('mother_address_ward')->nullable();
             $table->foreignId('mother_address_township_or_town_id')->nullable()->constrained('townships')->onDelete('set null');
@@ -129,6 +134,7 @@ return new class extends Migration
             $table->foreignId('spouse_mother_religion_id')->nullable()->constrained('religions')->onDelete('set null');
             $table->text('spouse_mother_place_of_birth')->nullable();
             $table->text('spouse_mother_occupation')->nullable();
+            $table->text('spouse_mother_address_house_no')->nullable();
             $table->text('spouse_mother_address_street')->nullable();
             $table->text('spouse_mother_address_ward')->nullable();
             $table->foreignId('spouse_mother_address_township_or_town_id')->nullable()->constrained('townships')->onDelete('set null');

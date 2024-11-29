@@ -241,10 +241,22 @@
                                         {{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td style="border: none; width: 5%;">၁၁။</td>
+                                    <td style="border: none; width: 35%;">ပညာအရည်အချင်း
+
+                                    </td>
+                                    <td style="border: none; width: 5%;">-</td>
+                                    <td style="border: none; width: 55%;">
+                                        @foreach ($staff->staff_educations as $education)
+                                           {{$education->education->name.','}}
+                                        @endforeach
+                                    </td>
+                                </tr>
 
                             </tbody>
                         </table>
-                        <div style="margin-top: 16px;">
+                        {{-- <div style="margin-top: 16px;">
                             <label for="">၁၁။ ပညာအရည်အချင်း</label>
                             <table>
                                 <thead>
@@ -266,7 +278,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
+                        </div> --}}
                     <div class="container">
                         <div class="section-header">
                             <label for="">၁၂။ တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်</label>
