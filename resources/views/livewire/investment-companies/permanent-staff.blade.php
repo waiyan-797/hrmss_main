@@ -213,7 +213,7 @@
                     <td class="border border-black text-center p-2"></td>
                     <td class="border border-black text-center p-2"></td>
                     <td class="border border-black text-center p-2"></td>
-                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">a</td>
                     <td class="border border-black text-center p-2">
 
 
@@ -223,7 +223,7 @@
                 <tr>
                     <td class="border border-black text-center p-2"></td>
                     <td class="border border-black text-center p-2">(၁နှစ်အတွက်လစာစရိတ်(ကျပ်သန်း))</td>
-                    <td class="border border-black text-center p-2">{{en2mm($maximumBudget)}}</td>
+                    <td class="border border-black text-center p-2">{{en2mm($maximumBudget * 12 )}}</td>
                     <td class="border border-black text-center p-2"></td>
                     <td class="border border-black text-center p-2"></td>
                     <td class="border border-black text-center p-2"></td>
