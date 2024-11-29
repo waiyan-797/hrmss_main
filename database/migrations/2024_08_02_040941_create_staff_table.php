@@ -8,6 +8,7 @@ use App\Models\EducationGroup;
 use App\Models\EducationType;
 use App\Models\Ethnic;
 use App\Models\Gender;
+use App\Models\MaritalStatus;
 use App\Models\NrcRegionId;
 use App\Models\NrcSign;
 use App\Models\NrcTownshipCode;
@@ -51,6 +52,7 @@ return new class extends Migration
             $table->text('skin_color')->nullable();
             $table->text('weight')->nullable();
             $table->foreignIdFor(BloodType::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(MaritalStatus::class)->nullable()->constrained()->nullOnDelete();
             $table->text('place_of_birth')->nullable();
             $table->foreignIdFor(NrcRegionId::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(NrcTownshipCode::class)->nullable()->constrained()->nullOnDelete();

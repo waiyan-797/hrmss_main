@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Staff::class)->nullable()->nullOnDelete();
             $table->foreignIdFor(LeaveType::class)->nullable()->nullOnDelete();
+            $table->foreignId('current_division_id')->nullable()->constrained('divisions')->onDelete('set null');
             $table->date('from_date')->nullable();
             $table->date('to_date')->nullable();
             $table->integer('qty')->nullable();
