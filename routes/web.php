@@ -153,7 +153,7 @@ use App\Models\Promotion;
 use App\Models\Staff as ModelsStaff;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
-
+// dkfj
 // Route::view('/', 'welcome')->name('welcome');
 
 Route::middleware(['auth', 'verified'])->group(function () {
