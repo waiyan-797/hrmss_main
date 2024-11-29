@@ -104,7 +104,7 @@ class Staff extends Component
             });
             $staffs = $staffQuery->paginate($staffQuery->count() > 1 ? $staffQuery->count() : 1);
         } else {
-            $staffs = $staffQuery->paginate(1);
+            $staffs = $staffQuery->paginate(10);
         }
 
 

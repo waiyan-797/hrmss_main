@@ -91,8 +91,8 @@
 
                                 <!-- First training record -->
                                 <td class="border border-black text-center p-2">{{ $firstTraining->training_type->name }}</td>
-                                <td class="border border-black text-center p-2">{{ $firstTraining->from_date }}</td>
-                                <td class="border border-black text-center p-2">{{ $firstTraining->to_date }}</td>
+                                <td class="border border-black text-center p-2">{{formatDMYmm( $firstTraining->from_date) }}</td>
+                                <td class="border border-black text-center p-2">{{ formatDMYmm($firstTraining->to_date )}}</td>
                                 <td class="border border-black text-center p-2">{{ $firstTraining->location }}</td>
                                 <td class="border border-black text-center p-2">{{ $firstTraining->training_type?->name }}</td>
 
@@ -107,8 +107,8 @@
                             )->skip(1) as $training)
                                 <tr>
                                     <td class="border border-black text-center p-2">{{ $training->training_type->name }}</td>
-                                    <td class="border border-black text-center p-2">{{ $training->from_date }}</td>
-                                    <td class="border border-black text-center p-2">{{ $training->to_date }}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm( $training->from_date) }}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm( $training->to_date )}}</td>
                                     <td class="border border-black text-center p-2">{{ $training->location }}</td>
                                     <td class="border border-black text-center p-2">{{ $training->training_type?->name }}</td>
                                     <td class="border border-black text-center p-2">

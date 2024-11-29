@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\AgeFilter;
 use App\Livewire\AppointmentsCalendar;
 use App\Livewire\AttendTraining;
 use App\Livewire\Award\Award;
@@ -136,13 +137,16 @@ use App\Livewire\Language;
 use App\Livewire\LastPayCertificateMain;
 use App\Livewire\Leave\LeaveDate;
 use App\Livewire\LeaveCalendar;
+use App\Livewire\LeaveSummary;
 use App\Livewire\LetterType;
 use App\Livewire\LocalTrainingReport3;
 use App\Livewire\Pension;
+use App\Livewire\NptBySamePayScale;
 use App\Livewire\Promotion as LivewirePromotion;
 use App\Livewire\Report;
 use App\Livewire\Retirement;
 use App\Livewire\Salary;
+use App\Livewire\StaffInNpt;
 use App\Livewire\User;
 use App\Models\Ministry;
 use App\Models\Promotion;
@@ -242,6 +246,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/allow-inservice-free-by-same-rank', InvestmentCompanies5::class)->name('investment_companies5');
     Route::get('/action-completed-ongoing', InvestmentCompanies6::class)->name('investment_companies6');
     Route::get('/napata-reach-strength', InvestmentCompanies7::class)->name('investment_companies7');
+    Route::get('/npt_by_same_payscale', NptBySamePayScale::class)->name('npt_by_same_payscale');
+    Route::get('/staff_in_npt', StaffInNpt::class)->name('staff_in_npt');
     Route::get('/departmental-change-strength-report', InvestmentCompanies8::class)->name('investment_companies8');
     Route::get('/dismissal-fired-employee', InvestmentCompanies9::class)->name('investment_companies9');
     Route::get('/monthly-workforce-summary', InvestmentCompanies10::class)->name('investment_companies10');
@@ -289,6 +295,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/list-employees-blood-A', BloodStaffList6::class)->name('blood_staff_list6');
     Route::get('/we10over_staff_list', WE10overStaffList::class)->name('we10over_staff_list');
     Route::get('/age18over_staff_list', Age18OverStaffList::class)->name('age18over_staff_list');
+    Route::get('/age-filter', AgeFilter::class)->name('age_filter');
     Route::get('/allowance-number-percentage', LeaveNuberPercent::class)->name('leaves');
     Route::get('/percentages-by-most-permissiveness', LeaveNuberPercent2::class)->name('leaves2');
 
@@ -327,7 +334,7 @@ Route::get('/labour_view/{id?}' , LabourDetails::class )->name('labourDetails');
 Route::get('/calender/{id}' , AppointmentsCalendar::class)->name('calender');
 Route::get('/leave-calender/{id}' , LeaveCalendar::class)->name('leaveCalendar');
 Route::get('/labour-staff' , LivewireLabourStaff::class )->name('labour-staff');
-
+Route::get('/leave_summary', LeaveSummary::class)->name('leave_summary');
 
 
 

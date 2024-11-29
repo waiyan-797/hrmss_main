@@ -57,7 +57,7 @@
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y')) }}</td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(\Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y')) }}</td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y'))}}</td>
-                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->side_department->name }}</td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->side_department?->name }}</td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">@foreach ($staff->staff_educations as $edu)
                                     <div class="mb-2">
                                         <span class="font-semibold">{{ $edu->education_group->name }}</span> -

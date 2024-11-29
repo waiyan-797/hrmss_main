@@ -3,8 +3,10 @@
 use App\Models\Country;
 use App\Models\Division;
 use App\Models\Leave;
+use App\Models\Region;
 use App\Models\Salary;
 use App\Models\Staff;
+use App\Models\Township;
 use Carbon\Carbon;
 use League\Flysystem\UrlGeneration\PublicUrlGenerator;
 
@@ -24,6 +26,8 @@ if (! function_exists('getcsv')) {
     }
 }
 
+
+
 if (! function_exists('en2mm')) {
     function en2mm($content)
     {
@@ -34,6 +38,10 @@ if (! function_exists('en2mm')) {
     }
 }
 
+
+
+
+
 if (! function_exists('formatPeriodMM')) {
     function formatPeriodMM($year = 0, $month = 0, $day = 0)
     {
@@ -42,6 +50,8 @@ if (! function_exists('formatPeriodMM')) {
         return collect([$year, $month, $day])->map(fn($c, $i) => ($c ? en2mm($c) . ' ' . $units[$i] : ''))->join(' ');
     }
 }
+
+
 
 if (! function_exists('formatDMY')) {
     function formatDMY($date)
@@ -58,6 +68,25 @@ if (! function_exists('formatDMY')) {
    
     }
 }
+
+
+
+if (! function_exists('formatDMYmm')) {
+    function formatDMYmm($date)
+    {
+        
+        if($date){
+            $formatted_date = \Carbon\Carbon::parse($date)->format('j-n-Y');
+        
+            return en2mm($formatted_date);
+        }
+        else{
+            return '';
+        }
+   
+    }
+}
+
 
 if (! function_exists('dateDiff')) {
     function dateDiff($from_date, $to_date)
@@ -83,6 +112,7 @@ if (!function_exists('mmDateFormat')) {
     function mmDateFormat($year, $month)
     {
         // Array of Myanmar month names
+        
         $monthsInMyanmar = [
             1 => 'ဇန်နဝါရီ',
             2 => 'ဖေဖော်ဝါရီ',
@@ -292,3 +322,26 @@ if (!function_exists('getFirstOf')) {
         throw new Exception("Model {$modelName} does not exist.");
     }
 }
+
+
+
+
+
+if (!function_exists('getAddress')) {
+    function getAddress(  $street , $ward  , $townshipId ,$regionId)
+    {
+        $regionName = Region::find($regionId)->name;
+        $townshipName = Township::find($townshipId)->name;
+
+
+
+      
+
+    
+        return $street . '၊' . $ward  . '၊' . $townshipName . '၊' . $regionName ;
+    }
+}
+
+
+
+

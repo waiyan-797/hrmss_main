@@ -17,16 +17,12 @@ class LeaveTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('leave_types')->insert([
-            'name'=>'လစာမဲ့ခွင့်',
-        ]);
 
+        DB::table('leave_types')->insert([
+            'name'=>'ရှောင်တခင်ခွင့်',
+        ]);
         DB::table('leave_types')->insert([
             'name'=>'လုပ်သက်ခွင့်',
-        ]);
-
-        DB::table('leave_types')->insert([
-            'name'=>'ဆေးခွင့်',
         ]);
 
         DB::table('leave_types')->insert([
@@ -34,8 +30,18 @@ class LeaveTypeSeeder extends Seeder
         ]);
 
         DB::table('leave_types')->insert([
-            'name'=>'ရှောင်တခင်ခွင့်',
+            'name'=>'ဆေးခွင့်',
         ]);
+
+        DB::table('leave_types')->insert([
+            'name'=>'လစာမဲ့ခွင့်',
+        ]);
+
+       
+
+    
+
+    
         DB::table('leave_types')->insert([
             'name'=>'ကြိုတင်ပြင်ဆင်ခွင့်',
         ]);

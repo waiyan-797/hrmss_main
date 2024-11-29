@@ -120,6 +120,9 @@
                         ['route_name' => 'investment_companies4', 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(လစာနှုန်း)'],
                         ['route_name' => 'investment_companies5', 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(အဆင့်တူ)'],
                         ['route_name' => 'investment_companies6', 'name' => 'အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း'],
+                        ['route_name' => 'npt_by_same_payscale', 'name' => 'နပတ အိမ်ထောင် ရှိ/မရှိ(အဆင့်တူ)'],
+                        ['route_name' => 'staff_in_npt', 'name' => 'နပတ တာဝန်ထမ်းဆောင်လျက်ရှိ ဝန်ထမ်းများစာရင်း'],
+                        
                         ['route_name' => 'investment_companies7', 'name' => 'နပတ၁ '],
                         ['route_name' => 'investment_companies8', 'name' => 'နပတ ၂'],
                         ['route_name' => 'investment_companies10', 'name' => 'နပတ ၄'],
@@ -208,6 +211,9 @@
                         ['route_name' => 'blood_staff_list6', 'name' => 'သွေးအုပ်စုAရှိသောဝန်ထမ်းစာရင်း'],
                         ['route_name' => 'we10over_staff_list', 'name' => 'လုပ်သက်၁၀နှစ် နှင့်အထက်ရှိသောဝန်ထမ်းဦး‌ရေစာရင်း'],
                         ['route_name' => 'age18over_staff_list', 'name' => 'အသက်၁၈နှစ်နှင့်အထက်ရှိသောဝန်ထမ်းဦးရေ'],
+                        ['route_name' => 'age_filter', 'name' => 'age filter '],
+
+                        
                         ['route_name' => 'planning_accounting', 'name' => 'စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲဝန်ထမ်းအင်အားစာရင်း'],
                         ['route_name' => 'labour-staff', 'name' => 'နေ့စားဝန်ထမ်းစာရင်း'],
                         
@@ -271,6 +277,7 @@
                     :lists="[
                         ['route_name' => 'leaves', 'name' => 'ခွင့်ခံစားမှုအရေအတွက်နှင့်ရာခိုင်နှုန်း'],
                         ['route_name' => 'leaves2', 'name' => 'ခွင့်ခံစားမှု အနည်းအများအလိုက် ရာခိုင်နှုန်းဇယား'],
+                        ['route_name' => 'leave_summary', 'name' => 'ခွင့်ခံစားမှု အချုပ်ဇယား'],
                     ]" />
             </li>
 

@@ -70,7 +70,9 @@ class LanguageReport extends Component
      public function render()
     {
         
-        $staffs = Staff::where('name', 'like', '%' . $this->search . '%')->paginate(20);
+        $staffs = Staff::where('name', 'like', '%' . $this->search . '%')
+        ->whereHas('staff_languages')
+        ->paginate(20);
         $currentPage = $staffs->currentPage();
         $perPage = $staffs->perPage();
         $start = ($currentPage - 1) * $perPage + 1;

@@ -10,12 +10,15 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="overflow-y-hidden min:h-screen bg-white dark:bg-gray-900">
-            <livewire:layout.navigation />
 
-            <!-- Page Heading -->
-            @if (isset($header))
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Page-->
+        <div class="docs-page d-flex flex-row flex-column-fluid">
+        {{-- @include('layout/docs/_aside') --}}
+
+        <!--begin::Wrapper-->
+            <div class="docs-wrapper d-flex flex-column flex-row-fluid" id="kt_docs_wrapper">
+                @if (isset($header))
                 <header class="bg-green-700 shadow h-[8vh] flex items-center">
                     <div class="w-4/5 mx-auto py-4 px-6 flex justify-end items-center gap-3">
                         {{ $header }}
@@ -23,13 +26,18 @@
                 </header>
             @endif
 
-            <!-- Page Content -->
-            <main>
-                <div class="flex flex-row">
-                    <livewire:side-nav />
+            <!--begin::Content-->
+                <div class="docs-content d-flex flex-column flex-column-fluid" id="kt_docs_content">
                     {{ $slot }}
                 </div>
-            </main>
+
+                
+5q
+            </div>
+            <!--end::Wrapper-->
         </div>
-    </body>
+        <!--end::Page-->
+    </div>
+
+
 </html>

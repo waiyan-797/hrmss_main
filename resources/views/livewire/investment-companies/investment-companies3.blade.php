@@ -3,7 +3,10 @@
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
-
+            <x-text-input
+            class=" w-32"
+            wire:model.live='year'
+            />
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
                 <div class="w-full rounded-lg">
@@ -25,15 +28,15 @@
                                 <td class="border border-black p-2">{{$rank->name}}</td>
                                 <td class="border border-black p-2">{{$rank->payscale->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
-                                <td class="border border-black p-2">{{en2mm($rank->staffs->count())}}</td>
-                                <td class="border border-black p-2">{{en2mm($rank->allowed_qty - $rank->staffs->count())}}</td>
+                                <td class="border border-black p-2">{{en2mm($rank->StaffCountInRankByYear($year))}}</td>
+                                <td class="border border-black p-2">{{en2mm($rank->allowed_qty -$rank->StaffCountInRankByYear($year))}}</td>
                             </tr>
                             @endforeach
                             <tr>
                                 <td class="border border-black p-2 font-semibold" colspan="3">{{$first_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
-                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
-                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
                             </tr>
                             @foreach ($second_ranks as $rank)
                                 <tr>
@@ -41,15 +44,15 @@
                                     <td class="border border-black p-2">{{$rank->name}}</td>
                                     <td class="border border-black p-2">{{$rank->payscale->name}}</td>
                                     <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
-                                    <td class="border border-black p-2">{{en2mm($rank->staffs->count())}}</td>
-                                    <td class="border border-black p-2">{{en2mm($rank->allowed_qty - $rank->staffs->count())}}</td>
+                                    <td class="border border-black p-2">{{en2mm($rank->StaffCountInRankByYear($year))}}</td>
+                                    <td class="border border-black p-2">{{en2mm($rank->allowed_qty - $rank->StaffCountInRankByYear($year))}}</td>
                                 </tr>
                             @endforeach
                             <tr>
                                 <td class="border border-black p-2 font-semibold" colspan="3">{{$second_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
-                                <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
-                                <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
                             </tr>
                         </tbody>
                     </table>

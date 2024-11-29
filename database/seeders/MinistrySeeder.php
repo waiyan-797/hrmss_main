@@ -19,7 +19,7 @@ class MinistrySeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         Ministry::create([
-            'name' => 'a',
+            'name' => 'ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေး ၀န်ကြီးဌာန',
         ]);
     }
 }

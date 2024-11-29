@@ -8,9 +8,12 @@ use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
+
+
 class InvestmentCompanies3 extends Component
 {
 
+        public $year; 
     public function go_pdf(){
         $data = [
             'first_ranks' => Rank::where('staff_type_id', 1)->get(),
@@ -78,6 +81,10 @@ class InvestmentCompanies3 extends Component
     {
         $first_ranks = Rank::where('staff_type_id', 1)->get();
         $second_ranks = Rank::where('staff_type_id', 2)->get();
+        
+        
+
+        
         return view('livewire.investment-companies.investment-companies3',[
             'first_ranks' => $first_ranks,
             'second_ranks' => $second_ranks
