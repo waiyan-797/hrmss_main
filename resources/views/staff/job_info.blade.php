@@ -91,7 +91,7 @@
     </div>
     <div>
         <x-input-label for="လက်ရှိလစာ" :value="__('လက်ရှိလစာ')" />
-        <x-text-input wire:model="current_salary" id="current_salary" name="current_salary" type="number" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="current_salary" id="current_salary" name="current_salary" type="text" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('current_salary')" />
     </div>
     <div>
