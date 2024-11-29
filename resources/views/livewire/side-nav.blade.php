@@ -118,6 +118,9 @@
                         ['route_name' => 'investment_companies4', 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(လစာနှုန်း)'],
                         ['route_name' => 'investment_companies5', 'name' => 'ဖွဲ့ခန့်ပိုလိုအချုပ်ဇယား(အဆင့်တူ)'],
                         ['route_name' => 'investment_companies6', 'name' => 'အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း'],
+                        ['route_name' => 'npt_by_same_payscale', 'name' => 'နပတ အိမ်ထောင် ရှိ/မရှိ(အဆင့်တူ)'],
+                        ['route_name' => 'staff_in_npt', 'name' => 'နပတ တာဝန်ထမ်းဆောင်လျက်ရှိ ဝန်ထမ်းများစာရင်း'],
+                        
                         ['route_name' => 'investment_companies7', 'name' => 'နပတ၁ '],
                         ['route_name' => 'investment_companies8', 'name' => 'နပတ ၂'],
                         ['route_name' => 'investment_companies10', 'name' => 'နပတ ၄'],
@@ -270,6 +273,7 @@
                     :lists="[
                         ['route_name' => 'leaves', 'name' => 'ခွင့်ခံစားမှုအရေအတွက်နှင့်ရာခိုင်နှုန်း'],
                         ['route_name' => 'leaves2', 'name' => 'ခွင့်ခံစားမှု အနည်းအများအလိုက် ရာခိုင်နှုန်းဇယား'],
+                        ['route_name' => 'leave_summary', 'name' => 'ခွင့်ခံစားမှု အချုပ်ဇယား'],
                     ]" />
             </li>
 

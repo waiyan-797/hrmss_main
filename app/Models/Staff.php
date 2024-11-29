@@ -666,8 +666,25 @@ public function labourAtt($year, $month)
     }
 
 
-    
+    public function howOldAmI(){
+        $now = Carbon::now();
+        $dob = $this->dob;
+        $age = $now->diff($dob);
 
+        
+        $years = $age->y;
+        $months = $age->m;
+        $days = $age->d;
+    
+        return  en2mm($years) ."နှစ်". en2mm($months)."လ"
+        // .en2mm($days)."ရက်"
+        ;
+    }
+
+    
+    public static  function FromNPt(){
+        return Staff::where("current_division_id", 26)->get();
+    }
     
 
 }

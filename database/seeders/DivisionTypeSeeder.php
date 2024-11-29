@@ -19,11 +19,11 @@ class DivisionTypeSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         DivisionType::create([
-            'name' => 'Head Office',
+            'name' => 'ရန်ကုန်ရုံးချုပ်',
         ]);
 
         DivisionType::create([
-            'name' => 'State & Region',
+            'name' => 'တိုင်းဒေသကြီး/ပြည်နယ်',
         ]);
     }
 }

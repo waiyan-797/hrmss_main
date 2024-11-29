@@ -136,12 +136,15 @@ use App\Livewire\Language;
 use App\Livewire\LastPayCertificateMain;
 use App\Livewire\Leave\LeaveDate;
 use App\Livewire\LeaveCalendar;
+use App\Livewire\LeaveSummary;
 use App\Livewire\LetterType;
 use App\Livewire\LocalTrainingReport3;
+use App\Livewire\NptBySamePayScale;
 use App\Livewire\Promotion as LivewirePromotion;
 use App\Livewire\Report;
 use App\Livewire\Retirement;
 use App\Livewire\Salary;
+use App\Livewire\StaffInNpt;
 use App\Livewire\User;
 use App\Models\Ministry;
 use App\Models\Promotion;
@@ -241,6 +244,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/allow-inservice-free-by-same-rank', InvestmentCompanies5::class)->name('investment_companies5');
     Route::get('/action-completed-ongoing', InvestmentCompanies6::class)->name('investment_companies6');
     Route::get('/napata-reach-strength', InvestmentCompanies7::class)->name('investment_companies7');
+    Route::get('/npt_by_same_payscale', NptBySamePayScale::class)->name('npt_by_same_payscale');
+    Route::get('/staff_in_npt', StaffInNpt::class)->name('staff_in_npt');
     Route::get('/departmental-change-strength-report', InvestmentCompanies8::class)->name('investment_companies8');
     Route::get('/dismissal-fired-employee', InvestmentCompanies9::class)->name('investment_companies9');
     Route::get('/monthly-workforce-summary', InvestmentCompanies10::class)->name('investment_companies10');
@@ -325,7 +330,7 @@ Route::get('/labour_view/{id?}' , LabourDetails::class )->name('labourDetails');
 Route::get('/calender/{id}' , AppointmentsCalendar::class)->name('calender');
 Route::get('/leave-calender/{id}' , LeaveCalendar::class)->name('leaveCalendar');
 Route::get('/labour-staff' , LivewireLabourStaff::class )->name('labour-staff');
-
+Route::get('/leave_summary', LeaveSummary::class)->name('leave_summary');
 
 
 
