@@ -18,7 +18,7 @@ class Department extends Component
     public $department_search, $department_name, $ministry_name, $department_id;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
-    //Validation
+   
     protected $rules = [
         'department_name' => 'required|string|max:255',
         'ministry_name' => 'required',
