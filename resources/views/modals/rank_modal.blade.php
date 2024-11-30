@@ -35,6 +35,16 @@
                     </select>
                 </div>
             </div>
+            <div class="mb-4">
+                <label for="allowed_qty" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ခွင့်ပြုသည့်အကြိမ်အရေအတွက်</label>
+                <input required type="number" wire:model="allowed_qty" id="allowed_qty" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
+                @error('allowed_qty') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
+            </div>
+            <div class="mb-4">
+                <label for="sort_no" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">SortNo</label>
+                <input required type="number" wire:model="sort_no" id="sort_no" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
+                @error('sort_no') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
+            </div>
             <button type="submit" class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded font-arial">{{ $submit_button_text }}</button>
             <button type="button" wire:click="{{ $cancel_action }}" class="font-arial bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">ထွက်ရန်</button>
         </form>

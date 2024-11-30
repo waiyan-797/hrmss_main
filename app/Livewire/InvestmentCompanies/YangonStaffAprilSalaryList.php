@@ -16,7 +16,7 @@ class YangonStaffAprilSalaryList extends Component
     {
         $salaries = Salary::with('staff', 'rank')->get(); 
         $staffs = Rank::whereIn('staff_type_id', [1, 2, 3])->get();
-        $leaves = Leave::where('leave_type_id', 1)->get();
+        $leaves = Leave::where('leave_type_id', 5)->get();
         $high_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->get();
         $low_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 2))->get();
         $data = [
@@ -37,7 +37,7 @@ class YangonStaffAprilSalaryList extends Component
 {
     $salaries = Salary::with('staff', 'rank')->get(); 
     $staffs = Rank::whereIn('staff_type_id', [1, 2, 3])->get();
-    $leaves = Leave::where('leave_type_id', 1)->get();
+    $leaves = Leave::where('leave_type_id', 5)->get();
     $high_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->get();
     $low_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 2))->get();
     $phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -94,7 +94,7 @@ class YangonStaffAprilSalaryList extends Component
         $leaveDeduction = 0;
         $dateDifference = 0;
         foreach ($staff->leaves as $leave) {
-            if ($leave->leave_type_id === 1) {
+            if ($leave->leave_type_id === 5) {
                 $fromDate = \Carbon\Carbon::parse($leave->from_date);
                 $toDate = \Carbon\Carbon::parse($leave->to_date);
                 $dateDifference = $fromDate->diffInDays($toDate) + 1;
@@ -184,7 +184,7 @@ class YangonStaffAprilSalaryList extends Component
         $leaveDeduction = 0;
         $dateDifference = 0;
         foreach ($staff->leaves as $leave) {
-            if ($leave->leave_type_id === 1) {
+            if ($leave->leave_type_id === 5) {
                 $fromDate = \Carbon\Carbon::parse($leave->from_date);
                 $toDate = \Carbon\Carbon::parse($leave->to_date);
                 $dateDifference = $fromDate->diffInDays($toDate) + 1;
@@ -290,7 +290,7 @@ class YangonStaffAprilSalaryList extends Component
 
     public function render()
     {
-        $leaves = Leave::where('leave_type_id', 1)->get();
+        $leaves = Leave::where('leave_type_id', 5)->get();
         $salaries = Salary::with('staff', 'rank')->get();
         $staffs = Rank::whereIn('staff_type_id', [1, 2, 3])->get();
         $high_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->get();

@@ -152,7 +152,7 @@
                             @endphp
 
                             @foreach ($leaves as $leave)
-                                @if ($leave->leave_type_id === 1)
+                                @if ($leave->leave_type_id === 5)
                                     @php
                                         $fromDate = \Carbon\Carbon::parse($leave->from_date);
                                         $toDate = \Carbon\Carbon::parse($leave->to_date);
@@ -214,7 +214,7 @@
                         @endphp
 
                         @foreach ($leaves as $leave)
-                            @if ($leave->leave_type_id === 1)
+                            @if ($leave->leave_type_id === 5)
                                 @php
                                     $fromDate = \Carbon\Carbon::parse($leave->from_date);
                                     $toDate = \Carbon\Carbon::parse($leave->to_date);
@@ -294,7 +294,7 @@
                         @endphp
 
                         @foreach ($leaves as $leave)
-                            @if ($leave->leave_type_id === 1)
+                            @if ($leave->leave_type_id === 5)
                                 @php
                                     $fromDate = \Carbon\Carbon::parse($leave->from_date);
                                     $toDate = \Carbon\Carbon::parse($leave->to_date);
@@ -356,7 +356,7 @@
                     @endphp
 
                     @foreach ($leaves as $leave)
-                        @if ($leave->leave_type_id === 1)
+                        @if ($leave->leave_type_id === 5)
                             @php
                                 $fromDate = \Carbon\Carbon::parse($leave->from_date);
                                 $toDate = \Carbon\Carbon::parse($leave->to_date);

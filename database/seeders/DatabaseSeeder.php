@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             EducationGroupSeeder::class,
             EducationTypeSeeder::class,
             GenderSeeder::class,
+            DayOrMonthSeeder::class,
             LeaveTypeSeeder::class,
             LetterTypeSeeder::class,
             PayscaleSeeder::class,

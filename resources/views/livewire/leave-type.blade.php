@@ -7,9 +7,8 @@
                 'id' => $leave_type_id,
                 'title' => 'ခွင့်အမျိုးအစား',
                 'search_id' => 'leave_type_search',
-                // 'columns' => ['No', 'Name', 'Allowed', 'Day Or Month','Is Yearly','Action'],
-                'columns' => ['စဉ်', 'ခွင့်အမျိုးအစား','ခွင့်','နေ့(သို.မဟုတ်)လ','နှစ်စဉ်','လုပ်ဆောင်ချက်'],
-                'column_vals' => ['name', 'allowed', 'dayOrMonth','is_yearly'],
+                'columns' => ['စဉ်', 'ခွင့်အမျိုးအစား','ခွင့်','နေ့(သို.မဟုတ်)လ','SortNo','နှစ်စဉ်','လုပ်ဆောင်ချက်'],
+                'column_vals' => ['name', 'allowed', 'dayOrMonths','sort_no','is_yearly'],
             ])
         </div>
     </div>

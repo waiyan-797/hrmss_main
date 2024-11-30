@@ -21,7 +21,6 @@ return new class extends Migration
             $table->text('nick_name');
             $table->foreignIdFor(DivisionType::class)->nullable()->nullOnDelete();
             $table->foreignIdFor(Department::class)->nullable()->nullOnDelete();
-            $table->foreignIdFor(Rank::class)->nullable()->nullOnDelete();
             $table->integer('sort_no')->nullable();
             $table->foreignIdFor(DifficultyLevel::class)->nullable()->nullOnDelete();
             $table->timestamps();

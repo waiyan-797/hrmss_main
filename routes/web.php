@@ -61,9 +61,13 @@ use App\Livewire\StaffReport\StaffReport3;
 use App\Livewire\StaffType\StaffType;
 use App\Livewire\TrainingLocation\TrainingLocation;
 use App\Livewire\Division;
+use App\Livewire\EmployeeInformation;
 use App\Livewire\TrainingType;
 use App\Livewire\EmployeeRecordReport\EmpoyeeRecordReport;
+use App\Livewire\EmployeeTakingLeave;
+use App\Livewire\Finance;
 use App\Livewire\FTR\ForeignGoneTotal;
+use App\Livewire\FTR\ForeignTrainingReport2;
 use App\Livewire\Increment;
 use App\Livewire\InvestmentCompanies\AprilSalaryList;
 use App\Livewire\InvestmentCompanies\DetailStaffSalary;
@@ -140,13 +144,17 @@ use App\Livewire\LeaveCalendar;
 use App\Livewire\LeaveSummary;
 use App\Livewire\LetterType;
 use App\Livewire\LocalTrainingReport3;
+use App\Livewire\MaritalStatus;
 use App\Livewire\Pension;
 use App\Livewire\NptBySamePayScale;
+use App\Livewire\PersonnelAccount;
 use App\Livewire\Promotion as LivewirePromotion;
 use App\Livewire\Report;
 use App\Livewire\Retirement;
 use App\Livewire\Salary;
 use App\Livewire\StaffInNpt;
+use App\Livewire\StaffStrengthList;
+use App\Livewire\TravelAbroad;
 use App\Livewire\User;
 use App\Models\Ministry;
 use App\Models\Promotion;
@@ -179,6 +187,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/blood_type', BloodType::class)->name('blood_type');
     
     Route::get('/letter_type', LetterType::class)->name('letter_type');
+    Route::get('marital_status',MaritalStatus::class)->name('marital_status');
     Route::get('/post', Post::class)->name('post');
     Route::get('/section', Section::class)->name('section');
     Route::get('/leave', Leave::class)->name('leave'); //no longer use
@@ -305,6 +314,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/leave_date',LeaveDate::class)->name('leave_date');
     Route::get('/een', EnglishEffectiveNegotiations::class)->name('een');
     Route::get('/foreign_training_report', ForeignTrainingReport::class)->name('foreign_training_report');
+    Route::get('/foreign_training_report2',ForeignTrainingReport2::class)->name('foreign_training_report2');
     Route::get('/foreign_gone_total', ForeignGoneTotal::class)->name('foreign_gone_total');
     Route::get('/report1', Report1::class)->name('report1');
     Route::get('/report2', Report2::class)->name('report2');
@@ -312,11 +322,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/report4', Report4::class)->name('report4');
     Route::get('/report',Report::class)->name('report');
     Route::get('/attend_training',AttendTraining::class)->name('attend_training');
+    Route::get('/penison',Pension::class)->name('pension');
+    Route::get('/travel_abroad',TravelAbroad::class)->name('travel_abroad');
+    Route::get('/employee_taking_leave',EmployeeTakingLeave::class)->name('employee_taking_leave');
+    Route::get('/staff_strength_list',StaffStrengthList::class)->name('staff_strength_list');
+    Route::get('/personnel_account',PersonnelAccount::class)->name('personnel_account');
+    Route::get('/finance',Finance::class)->name('finance');
+    Route::get('/employee_information',EmployeeInformation::class)->name('employee_information');
     Route::get('/pension_report', PensionReport::class)->name('pension_report');
     Route::get('/pensioner', Pensioner::class)->name('pensioner');
     Route::get('/resignation-list', EmpoyeeRecordReport::class)->name('employee_record_report');
     Route::get('/finance_pension_age62', FinancePensionAge62::class)->name('finance_pension_age62');
-    Route::get('/penison',Pension::class)->name('pension');
+   
     Route::get('/religion_report', ReligionReport::class)->name('religion_report');
     Route::get('/language_report', LanguageReport::class)->name('language_report');
     Route::get('/social_report', SocialReport::class)->name('social_report');
@@ -335,11 +352,6 @@ Route::get('/calender/{id}' , AppointmentsCalendar::class)->name('calender');
 Route::get('/leave-calender/{id}' , LeaveCalendar::class)->name('leaveCalendar');
 Route::get('/labour-staff' , LivewireLabourStaff::class )->name('labour-staff');
 Route::get('/leave_summary', LeaveSummary::class)->name('leave_summary');
-
-
-
-
-
     Route::get(
         'user_create',
         User::class

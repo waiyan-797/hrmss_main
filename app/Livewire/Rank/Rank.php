@@ -16,7 +16,7 @@ class Rank extends Component
     public $confirm_edit = false;
     public $confirm_add = false;
     public $message = null;
-    public $rank_search, $rank_name, $payscale_name, $staff_type_name, $rank_id,$allowed_qty;
+    public $rank_search, $rank_name, $payscale_name, $staff_type_name,$sort_no, $rank_id,$allowed_qty;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
     //Validation
@@ -25,12 +25,13 @@ class Rank extends Component
         'payscale_name' => 'required',
         'staff_type_name' => 'required',
         'allowed_qty'=>'required',
+        'sort_no'=>'required|integer',
     ];
     //Add New
     public function add_new()
     {
         $this->resetValidation();
-        $this->reset(['rank_name', 'payscale_name', 'staff_type_name','allowed_qty']);
+        $this->reset(['rank_name', 'payscale_name', 'staff_type_name','allowed_qty','sort_no']);
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
@@ -51,6 +52,7 @@ class Rank extends Component
             'payscale_id' => $this->payscale_name,
             'staff_type_id' => $this->staff_type_name,
             'allowed_qty'=>$this->allowed_qty,
+            'sort_no'=>$this->sort_no,
         ]);
         $this->message = 'Created successfully.';
         $this->close_modal();
@@ -59,7 +61,7 @@ class Rank extends Component
     public function close_modal()
     {
         $this->resetValidation();
-        $this->reset(['rank_name', 'payscale_name', 'staff_type_name','allowed_qty']);
+        $this->reset(['rank_name', 'payscale_name', 'staff_type_name','allowed_qty','sort_no']);
         $this->confirm_edit = false;
         $this->confirm_add = false;
     }
@@ -75,6 +77,7 @@ class Rank extends Component
         $this->payscale_name = $rank->payscale_id;
         $this->staff_type_name = $rank->staff_type_id;
         $this->allowed_qty=$rank->allowed_qty;
+        $this->sort_no=$rank->sort_no;
     }
 
     //update
@@ -87,6 +90,7 @@ class Rank extends Component
             'payscale_id' => $this->payscale_name,
             'staff_type_id' => $this->staff_type_name,
             'allowed_qty'=>$this->allowed_qty,
+            'sort_no'=>$this->sort_no,
         ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();

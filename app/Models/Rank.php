@@ -18,6 +18,11 @@ class Rank extends Model
     {
         return $this->belongsTo(StaffType::class);
     }
+    public function leaveTypes()
+    {
+        return $this->hasMany(LeaveType::class);
+    }
+
 
     public function staffs()
     {

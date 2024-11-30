@@ -47,11 +47,7 @@
         <x-text-input wire:model="gpms_staff_no" id="gpms_staff_no" name="gpms_staff_no" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('gpms_staff_no')" />
     </div>
-    <div>
-        <x-input-label for="ခင်ပွန်း/ဇနီး" :value="__('ခင်ပွန်း/ဇနီး')" />
-        <x-text-input wire:model="spouse_name" id="spouse_name" name="spouse_name" type="text" class="mt-1 block w-full"/>
-        <x-input-error class="mt-2" :messages="$errors->get('spouse_name')" />
-    </div>
+   
     <div>
         <x-input-label for="ကျား/မ" :value="__('ကျား/မ')" />
         <x-select wire:model="gender_id" :values="$genders" placeholder="ကျား/မရွေးပါ" id="gender_id" name="gender_id" class="mt-1 block w-full" required/>
@@ -109,6 +105,16 @@
         <x-input-label for="သွေးအုပ်စု" :value="__('သွေးအုပ်စု')" />
         <x-select wire:model="blood_type_id" :values="$blood_types" placeholder="သွေးအုပ်စုရွေးပါ" id="blood_type_id" name="blood_type_id" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('blood_type_id')" />
+    </div>
+    <div>
+        <x-input-label for="အိမ်ထောင်သည်" :value="__('အိမ်ထောင်သည်')" />
+        <x-select wire:model="marital_status_id" :values="$marital_statuses" placeholder="အိမ်ထောင်သည်ရွေးပါ" id="marital_status_id" name="marital_status_id" class="mt-1 block w-full"/>
+        <x-input-error class="mt-2" :messages="$errors->get('marital_status_id')" />
+    </div>
+    <div>
+        <x-input-label for="ခင်ပွန်း/ဇနီး" :value="__('ခင်ပွန်း/ဇနီးအမည်')" />
+        <x-text-input wire:model="spouse_name" id="spouse_name" name="spouse_name" type="text" class="mt-1 block w-full"/>
+        <x-input-error class="mt-2" :messages="$errors->get('spouse_name')" />
     </div>
     <div class="col-span-2">
         <div>

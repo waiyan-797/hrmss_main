@@ -105,7 +105,7 @@
                             $leaveDeduction = 0;
                             $dateDifference = 0;
                             foreach ($staff->leaves as $leave) {
-                                if ($leave->leave_type_id === 1) {
+                                if ($leave->leave_type_id === 5) {
                                     $fromDate = \Carbon\Carbon::parse($leave->from_date);
                                     $toDate = \Carbon\Carbon::parse($leave->to_date);
                                     $dateDifference = $fromDate->diffInDays($toDate) + 1;
@@ -202,7 +202,7 @@
                             $leaveDeduction = 0;
                             $dateDifference = 0;
                             foreach ($staff->leaves as $leave) {
-                                if ($leave->leave_type_id === 1) {
+                                if ($leave->leave_type_id === 5) {
                                     $fromDate = \Carbon\Carbon::parse($leave->from_date);
                                     $toDate = \Carbon\Carbon::parse($leave->to_date);
                                     $dateDifference = $fromDate->diffInDays($toDate) + 1;

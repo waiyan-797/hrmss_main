@@ -219,6 +219,107 @@
 
                     </td>
                 </tr>
+
+                <tr>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">(၁နှစ်အတွက်လစာစရိတ်(ကျပ်သန်း))</td>
+                    <td class="border border-black text-center p-2">{{en2mm($maximumBudget)}}</td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">(၁လအတွက်ချီးမြှင့်ငွေ(ကျပ်သန်း))</td>
+                    <td class="border border-black text-center p-2">{{en2mm($maximumBudget)}}</td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">(၁နှစ်အတွက်ချီးမြှင့်ငွေ(ကျပ်သန်း))</td>
+                    <td class="border border-black text-center p-2">{{en2mm($maximumBudget)}}</td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">(၁လအတွက်ဒေသစရိတ်(ကျပ်သန်း))</td>
+                    <td class="border border-black text-center p-2">{{en2mm($maximumBudget)}}</td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">(၁နှစ်အတွက်ဒေသစရိတ်(ကျပ်သန်း))</td>
+                    <td class="border border-black text-center p-2">{{en2mm($maximumBudget)}}</td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">(၁လအတွက်ထောက်ပံကြေး(ကျပ်သန်း))</td>
+                    <td class="border border-black text-center p-2">{{en2mm($maximumBudget)}}</td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">(၁နှစ်အတွက်ထောက်ပံကြေး(ကျပ်သန်း))</td>
+                    <td class="border border-black text-center p-2">{{en2mm($maximumBudget)}}</td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">
+
+
+                    </td>
+                </tr>
+
+
+
             </tbody>
         </table>
 

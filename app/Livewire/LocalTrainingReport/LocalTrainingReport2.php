@@ -22,9 +22,6 @@ class LocalTrainingReport2 extends Component
            
         $data = [
             'staffs' => $staffs,
-         
-      
-       
         ];
         $pdf = PDF::loadView('pdf_reports.local_training_report_2', $data);
         return response()->streamDownload(function () use ($pdf) {
@@ -36,8 +33,6 @@ class LocalTrainingReport2 extends Component
     {
         $staffs = Staff::with(['current_rank', 'abroads', 'trainings', 'staff_educations.education_group'])->get();
         $phpWord = new PhpWord();
-        $phpWord->setDefaultFontName('Pyidaungsu');
-        $phpWord->setDefaultFontSize(12);
         $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
         $section->addTitle('Local Training Report2', 1);

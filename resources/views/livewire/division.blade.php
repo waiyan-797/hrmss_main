@@ -7,8 +7,8 @@
                 'id' => $division_id,
                 'title' => 'ဌာနခွဲ',
                 'search_id' => 'division_search',
-                'columns' => ['စဉ်', 'ဌာနခွဲ','ဌာနခွဲအတိုကောက်','ဌာနခွဲ အမျိုးအစား','ဌာန','အခက်အခဲအဆင့်','လုပ်ဆောင်ချက်'],
-                'column_vals' => ['name','nick_name','DivisionType','department','difficultyLevel'],
+                'columns' => ['စဉ်', 'ဌာနခွဲ','ဌာနခွဲအတိုကောက်','ဌာနခွဲ အမျိုးအစား','ဌာန','အခက်အခဲအဆင့်','SortNo','လုပ်ဆောင်ချက်'],
+                'column_vals' => ['name','nick_name','divisionType','department','difficultyLevel','sort_no'],
             ])
         </div>
     </div>

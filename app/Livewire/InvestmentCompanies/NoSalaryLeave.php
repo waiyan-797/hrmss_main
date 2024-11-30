@@ -13,7 +13,7 @@ class NoSalaryLeave extends Component
 {
     public function go_pdf()
 {
-    $leaves = Leave::where('leave_type_id', 1)->with('staff')->get();
+    $leaves = Leave::where('leave_type_id', 5)->with('staff')->get();
     $data = [
         
         'leaves' => $leaves, 
@@ -25,7 +25,7 @@ class NoSalaryLeave extends Component
 }
 public function go_word()
 {
-    $leaves = Leave::where('leave_type_id', 1)->with(['staff', 'staff.currentRank', 'leave_type'])->get();
+    $leaves = Leave::where('leave_type_id', 5)->with(['staff', 'staff.currentRank', 'leave_type'])->get();
     $phpWord = new PhpWord();
     $section = $phpWord->addSection();
     $section->addText(
@@ -64,7 +64,7 @@ public function go_word()
     public function render()
 {
     
-    $leaves = Leave::where('leave_type_id', 1)->with('staff')->get();
+    $leaves = Leave::where('leave_type_id', 5)->with('staff')->get();
 
     return view('livewire.investment-companies.no-salary-leave', [
         'leaves' => $leaves,

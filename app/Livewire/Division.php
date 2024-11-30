@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Models\Division as ModelsDivision;
 use App\Models\DivisionType;
+use App\Models\Rank;
 use Livewire\WithPagination;
 
 class Division extends Component
@@ -17,23 +18,23 @@ class Division extends Component
     public $confirm_edit = false;
     public $confirm_add = false;
     public $message = null;
-    public $division_search, $division_name,$nick_name, $division_type_name,$rank_name,$department_name,$difficulty_level_name,$sort_no, $division_id;
+    public $division_search, $division_name,$nick_name, $division_type_name,$department_name,$difficulty_level_name,$sort_no, $division_id;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
     //Validation
     protected $rules = [
-        'division_name' => 'requierd|string|max:255',
+        'division_name' => 'required|string|max:255',
         'nick_name' => 'required|string|max:255',
         'division_type_name' => 'required',
-        'department_name'=>'required',
-        'difficulty_level_name'=>'required',
-        'rank_name'=>'required',
-        'sort_no'=>'required|integer',
+        'department_name' => 'required',
+        'difficulty_level_name' => 'required',
+        'sort_no' => 'required|integer',
     ];
+    
     //Add New
     public function add_new(){
         $this->resetValidation();
-        $this->reset(['division_name','nick_name', 'division_type_name','department_name','difficulty_level_name','rank_name','sort_no']);
+        $this->reset(['division_name','nick_name', 'division_type_name','department_name','difficulty_level_name','sort_no']);
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
@@ -55,7 +56,6 @@ class Division extends Component
             'division_type_id' => $this->division_type_name,
             'department_id'=>$this->department_name,
             'difficulty_level_id'=>$this->difficulty_level_name,
-            'rank_id'=>$this->rank_name,
             'sort_no'=>$this->sort_no,
             
         ]);
@@ -65,7 +65,7 @@ class Division extends Component
     //close modal
     public function close_modal(){
         $this->resetValidation();
-        $this->reset(['division_name','nick_name', 'division_type_name','department_name','difficulty_level_name','rank_name','sort_no']);
+        $this->reset(['division_name','nick_name', 'division_type_name','department_name','difficulty_level_name','sort_no']);
         $this->confirm_edit = false;
         $this->confirm_add = false;
     }
@@ -81,7 +81,6 @@ class Division extends Component
         $this->division_type_name = $division->division_type_id;
         $this->department_name=$division->department_id;
         $this->difficulty_level_name=$division->difficulty_level_id;
-        $this->rank_name=$division->rank_id;
         $this->sort_no=$division->sort_no;
     }
 
@@ -96,7 +95,6 @@ class Division extends Component
             'division_type_id' => $this->division_type_name,
             'department_id'=>$this->department_name,
             'difficulty_level_id'=>$this->difficulty_level_name,
-            'rank_id'=>$this->rank_name,
             'sort_no'=>$this->sort_no
         ]);
         $this->message = 'Updated successfully.';

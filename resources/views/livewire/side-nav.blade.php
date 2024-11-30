@@ -52,6 +52,7 @@
                         ['route_name' => 'department', 'name' => 'ဌာန'],
                         ['route_name' => 'salary', 'name' => 'လစာ'],
                         ['route_name' => 'difficulty_level', 'name' => 'အခက်အခဲအဆင့်'],
+                        ['route_name' => 'marital_status', 'name' => 'အိမ်ထောင်သည်'],
 
                     ]" />
             </li>
@@ -100,13 +101,19 @@
                         ['route_name' => 'report', 'name' => 'ဝန်ထမ်းရေးရာ'],
                         ['route_name' => 'attend_training', 'name' => 'သင်တန်းတတ်ရောက်'],
                         ['route_name' => 'pension', 'name' => 'ပင်စင်ကိစ္စ'],
+                        ['route_name' => 'travel_abroad', 'name' => 'နိုင်ငံခြားသွားရောက်မှုများ'],
+                        ['route_name' => 'employee_taking_leave', 'name' => 'ခွင့်ယူသည့်ဝန်ထမ်းစာရင်း'],
+                        ['route_name' => 'staff_strength_list', 'name' => 'ဝန်ထမ်းအင်အားစာရင်း'],
+                        ['route_name' => 'personnel_account', 'name' => 'ဝန်ထမ်းရေးရာ+ငွေစာရင်း'],
+                        ['route_name' => 'finance', 'name' => 'ငွေစာရင်း'],
+                        ['route_name' => 'employee_information', 'name' => 'ဝန်ထမ်းအချက်အလက်များ'],
                     ]" />
             </li> 
 
 
             
 
-            <li>
+            {{-- <li>
                 <livewire:side-nav-drop-down label="ဝန်ထမ်းရေးရာ"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
@@ -135,10 +142,10 @@
                         ['route_name' => 'investment_companies14', 'name' => 'ဖွဲ့ခန့်ပိုလိုရုံးချုပ်'],
                         ['route_name' => 'investment_companies15', 'name' => 'ဖွဲ့ခန့်ပိုလို(တိုင်းဒေသကြီး)'],
                     ]" />
-            </li> 
+            </li>  --}}
 
             
-             <li>
+             {{-- <li>
                 <livewire:side-nav-drop-down label="သင်တန်းတက်ရောက်"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
@@ -153,9 +160,9 @@
                      
 
                     ]" />
-            </li> 
+            </li>  --}}
 
-             <li>
+             {{-- <li>
                 <livewire:side-nav-drop-down label="ပင်စင်ကိစ္စများ"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
@@ -174,10 +181,10 @@
 
 
                     ]" />
-            </li> 
+            </li>  --}}
 
 
-             <li>
+             {{-- <li>
                 <livewire:side-nav-drop-down label="နိုင်ငံခြားသွားရောက်မှုများ"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
@@ -186,6 +193,7 @@
                     '
                     :lists="[
                         ['route_name' => 'foreign_training_report', 'name' => 'နိုင်ငံခြားသွားရောက်သည့်ကိစ္စများ'],
+                        ['route_name' => 'foreign_training_report2', 'name' => 'နိုင်ငံခြားသွားရောက်သည့်ကိစ္စများ(၂)'],
                         ['route_name' => 'foreign_gone_total', 'name' => 'နိုင်ငံခြားသွားရောက်ခဲ့သောအကြိမ်ရေစုစုပေါင်းနှင့်အကြောင်းအရာ'],
                         ['route_name' => 'report1', 'name' => 'report1'],
                         ['route_name' => 'report2', 'name' => 'report2'],
@@ -194,8 +202,8 @@
                         ['route_name' => 'een', 'name' => 'သင်တန်းတက်ရောက်ရန်အတွက် အဆိုပြုသင်တန်းသား အမည်စာရင်း'],
 
                     ]" />
-            </li> 
-             <li>
+            </li>  --}}
+             {{-- <li>
                 <livewire:side-nav-drop-down label="ဝန်ထမ်းအင်အားစာရင်း"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
@@ -219,8 +227,8 @@
                         
                     ]" />
             </li> 
-            
-             <li>
+             --}}
+             {{-- <li>
                 <livewire:side-nav-drop-down label="ဝန်ထမ်းရေးရာ + ငွေစာရင်း"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow- group-hover:text-yellow-500">
@@ -231,9 +239,9 @@
                         ['route_name' => 'staff_salary', 'name' => 'ဝန်ထမ်းအင်အား နှင့် လစာထုတ်ပေးမှုအခြေအနေ'],
                         ['route_name' => 'permanent_staff', 'name' => 'အမြဲတမ်းဝန်ထမ်းအင်အားစာရင်း'],
                     ]" />
-            </li> 
+            </li>  --}}
 
-            <li>
+            {{-- <li>
                 <livewire:side-nav-drop-down label="ငွေစာရင်း"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow- group-hover:text-yellow-500">
@@ -246,8 +254,6 @@
                         ['route_name' => 'staff_salary_list2', 'name' => 'လစာစရိတ်စာရင်းချုပ်(၂)'],
                         ['route_name' => 'staff_salary_list3', 'name' => 'လစာစရိတ်စာရင်းချုပ်(၃)'],
                         ['route_name' => 'staff_salary_list4', 'name' => 'လစာစရိတ်စာရင်းချုပ်(၄)'],
-                        // ['route_name' => 'march_salary_list', 'name' => 'လစာညှိနှိုင်း(ရာထူးတိုး)'],
-                        // ['route_name' => 'october_salary_list', 'name' => 'လစာညှိနှိုင်း(နှစ်တိုး)'],
                         ['route_name' => 'rank_salary_list', 'name' => 'ရာထူးအလိုက်လစာနှုန်းထားစာရင်း'],
                         ['route_name' => 'yangon_office_staff', 'name' => 'လစာစာရင်း(၁)'],
                         ['route_name' => 'yangon_office_staff2', 'name' => 'လစာစာရင်း(၂)'],
@@ -261,13 +267,13 @@
                         ['route_name' => 'yangon_staff_april_salary_list', 'name' => 'ရန်ကုန် ရန်ကုန်ရုံးချုပ်ရှိဝန်ထမ်းများ၏ဧပြီလစာရင်း'],
                         ['route_name' => 'finance_year_salary_list', 'name' => 'ဘဏ္ဍာရေးနှစ်လစာ'],
                         ['route_name' => 'information_list', 'name' => 'အဆင့်တူ ကျားမ အသက်အုပ်စု'],
-                        // ['route_name' => 'last_pay_certificate', 'name' => 'LastPayCertificate'],
+                        
                         ['route_name' => 'detail_staff_salary', 'name' => 'ဝန်ထမ်းများ၏ လစာငွေတောင်းခံလွှာ'],
 
                     ]" />
-            </li>
-            <li>
-                {{-- dslkfjdkg --}}
+            </li> --}}
+            {{-- <li>
+              
                 <livewire:side-nav-drop-down label="ခွင့်ယူသည့်ဝန်ထမ်းစာရင်း"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
@@ -279,9 +285,9 @@
                         ['route_name' => 'leaves2', 'name' => 'ခွင့်ခံစားမှု အနည်းအများအလိုက် ရာခိုင်နှုန်းဇယား'],
                         ['route_name' => 'leave_summary', 'name' => 'ခွင့်ခံစားမှု အချုပ်ဇယား'],
                     ]" />
-            </li>
+            </li> --}}
 
-            <li>
+            {{-- <li>
                 <livewire:side-nav-drop-down label="ဝန်ထမ်းအချက်အလက်များ"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
@@ -299,7 +305,7 @@
                         ['route_name' => 'other_qualification_report', 'name' => 'ရရှိသောဒီပလိုမာ/ဘွဲ့'],
                         ['route_name' => 'punishment_report', 'name' => 'ပြစ်ဒဏ်'],
                     ]" />
-            </li>
+            </li> --}}
 
             <li>
                 <livewire:side-nav-drop-down label="Users"

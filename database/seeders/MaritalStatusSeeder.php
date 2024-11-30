@@ -18,13 +18,14 @@ class MaritalStatusSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
         MaritalStatus::truncate();
         Schema::enableForeignKeyConstraints();
-        $columns = ['id', 'name'];
+        $columns = ['id', 'name','marital_status_type_id'];
         $items = [
-            [1,'လူပျို'],
-            [2,'အပျို'],
-            [3,'မုဆိုးဖို'],
-            [4,'မုဆိုးမ'],
-            [5,'တခုလပ်'],
+            [1,'လူပျို',1],
+            [2,'အပျို',1],
+            [3,'မုဆိုးဖို',1],
+            [4,'မုဆိုးမ',1],
+            [5,'တခုလပ်',1],
+            [6,'အိမ်ထောင်သည်',2],
            
         ];
         foreach ($items as $item) {

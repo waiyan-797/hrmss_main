@@ -1,7 +1,7 @@
 <div class=" w-full bg-white shadow-md rounded-lg">
     <div class="flex justify-center items-center mb-4">
         <h2 class="text-xl font-bold text-gray-700">Reports</h2>
-
+       
     </div>
     <div class="overflow-x-auto mt-6">
         <table class="min-w-full border-collapse border border-gray-200">
@@ -28,17 +28,18 @@
                             {{ $report['name'] }}
                         </td>
                         <td class="px-4 py-2 border border-gray-200 text-sm">
-                            <a href="#"
+                            <button
                                 class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 focus:outline-none"
-                                wire:click.prevent="showReport({{ $report['id'] }})">
-                                <span>Show</span>
-                            </a>
-
+                                wire:click="showReport({{ $report['id'] }})"
+                            >
+                                Show
+                            </button>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-
+    
 </div>
+

@@ -58,6 +58,11 @@ class Division extends Model
     public function staffCountTotal(){
         return   Staff::where("current_division_id", $this->id)->count();
     }
+    public function leaves()
+{
+    return $this->hasMany(Leave::class, 'current_division_id');
+}
+
 
     
    

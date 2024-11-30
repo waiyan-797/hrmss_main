@@ -10,12 +10,9 @@ class DayOrMonth extends Model
     use HasFactory;
 
     
-    // public function leaveTypes()
-    // {
-    //     return $this->hasMany(LeaveType::class, 'day_or_month_id');
-    // }
+   
 
-        public function leaveTypes()
+        public function LeaveTypes()
 {
     return $this->hasMany(LeaveType::class);
 }

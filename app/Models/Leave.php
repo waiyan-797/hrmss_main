@@ -15,6 +15,11 @@ class Leave extends Model
         return $this->belongsTo(Staff::class);
         
     }
+    public function currentDivision()
+    {
+        return $this->belongsTo(Division::class, 'current_division_id');
+    }
+
 
     // public function leave_type()
     // {

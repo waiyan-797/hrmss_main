@@ -1,14 +1,11 @@
 <?php
 
 namespace Database\Seeders;
+
+
 use App\Models\LeaveType;
-use Illuminate\Support\Facades\DB;
-
-
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\Schema;
 
 class LeaveTypeSeeder extends Seeder
 {
@@ -17,37 +14,24 @@ class LeaveTypeSeeder extends Seeder
      */
     public function run(): void
     {
+        Schema::disableForeignKeyConstraints();
+        LeaveType::truncate();
+        Schema::enableForeignKeyConstraints();
 
-        DB::table('leave_types')->insert([
-            'name'=>'ရှောင်တခင်ခွင့်',
-        ]);
-        DB::table('leave_types')->insert([
-            'name'=>'လုပ်သက်ခွင့်',
-        ]);
+        $columns = ['id', 'name','sort_no'];
+        $items = [
+            [1, 'ရှောင်တခင်ခွင့်',1],
+            [2, 'လုပ်သက်ခွင့်',2],
+            [3, 'မီးဖွားခွင့်/သားပျက်ခွင့်',3],
+            [4, 'ဆေးခွင့်',4],
+            [5, 'လစာမဲ့ခွင့်',5],
+            [6, 'ကြိုတင်ပြင်ဆင်ခွင့်',6],
+            [7, 'ကလေးပြုစုစောင့်ရှောက်ခွင့်',7]
+            
+        ];
 
-        DB::table('leave_types')->insert([
-            'name'=>'မီးဖွားခွင့်/သားပျက်ခွင့်',
-        ]);
-
-        DB::table('leave_types')->insert([
-            'name'=>'ဆေးခွင့်',
-        ]);
-
-        DB::table('leave_types')->insert([
-            'name'=>'လစာမဲ့ခွင့်',
-        ]);
-
-       
-
-    
-
-    
-        DB::table('leave_types')->insert([
-            'name'=>'ကြိုတင်ပြင်ဆင်ခွင့်',
-        ]);
-        DB::table('leave_types')->insert([
-            'name'=>'ကလေးပြုစုစောင့်ရှောက်ခွင့်',
-        ]);
-
+        foreach ($items as $item) {
+            LeaveType::create(array_combine($columns, $item));
+        }
     }
 }

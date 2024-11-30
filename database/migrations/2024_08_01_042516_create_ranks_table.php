@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(StaffType::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Payscale::class)->nullable()->constrained()->nullOnDelete();
             $table->integer('allowed_qty')->default(0);
+            $table->integer('sort_no')->nullable();
             $table->timestamps();
         });
     }

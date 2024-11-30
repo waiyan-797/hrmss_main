@@ -28,12 +28,11 @@
                             {{ $report['name'] }}
                         </td>
                         <td class="px-4 py-2 border border-gray-200 text-sm">
-                            <button
-                                class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 focus:outline-none"
-                                wire:click="showReport({{ $report['id'] }})"
-                            >
-                                Show
-                            </button>
+                            <a href="#"
+                            class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 focus:outline-none"
+                            wire:click.prevent="showReport({{ $report['id'] }})">
+                            <span>Show</span>
+                        </a>
                         </td>
                     </tr>
                 @endforeach

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name');
             $table->integer('allowed')->nullable();
             $table->foreignIdFor(DayOrMonth::class)->nullable()->constrained()->nullOnDelete();
-            $table->foreignIdFor(Rank::class)->nullable()->constrained()->nullOnDelete();
             $table->integer('sort_no')->nullable();
             $table->boolean('is_yearly')->default(false);
             $table->timestamps();
