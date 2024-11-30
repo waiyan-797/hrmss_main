@@ -102,7 +102,7 @@ class PdfStaffReport17 extends Component
      $table->addCell(2000)->addText('ဇာတိ', ['bold' => true]);
      $table->addCell(2000)->addText('အလုပ်အကိုင်နှင့်ဌာန', ['bold' => true]);
      $table->addCell(2000)->addText('နေရပ်', ['bold' => true]);
-     
+    //  asdf
      foreach ($staff->spouses as $spouse) {
          $table->addRow();
          $table->addCell(2000)->addText($spouse->name);
