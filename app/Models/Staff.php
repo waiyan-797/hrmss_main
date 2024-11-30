@@ -318,55 +318,11 @@ class Staff extends Model
 
         $previousBasicPayScale = Rank::where('id', $previousRankId)->first()?->payscale->increment;
 
-        // Check if there is a promotion
-        if ($this->promotion && $this->promotion->isNotEmpty()) {
-            $PromotionDate = Carbon::parse($this->promotion->last()->promotion_date);
-            $isInCurrentMonth = $PromotionDate->isSameMonth($currentDate);
-            $daysBeforePromotion = 0;
-            $lastActualSalary = 0;
 
-            // Promotion happens in this month
-            if ($isSameMonth && $yearsPassed >= 1) {
-                $daysBeforePromotion = $PromotionDate->day - 1;
-                $daysAfterPromotion = $currentDate->endOfMonth()->day - $PromotionDate->day;
-                $lastActualSalary = $this->salaries->last()?->actual_salary;
-
-                $lastestIncrement = Increment::where('staff_id', $this->id)
-
-                    ->max('increments');
-
-                $comingIncrement = $lastestIncrement + 1;
-
-                // Apply increment logic
-                if ($comingIncrement > 0 && $comingIncrement <= 5) {
-                    $salaryForBeforePromotion = $lastActualSalary + $previousBasicPayScale;
-                    $ActualsalaryForBeforePromotion = ($daysBeforePromotion / 30) * $salaryForBeforePromotion;
-                    $OverAllTotalSalary += $ActualsalaryForBeforePromotion;
-
-                    // Salary after promotion (apply the same increment logic after promotion)
-                    $ActualSalaryAfterPromotion = ($daysAfterPromotion / 30) * ($this->payscale->min_salary + $this->payscale->increment);
-                    $OverAllTotalSalary += $ActualSalaryAfterPromotion;
-                }
-            }
-        } else {
-            // No promotion in this month
-            $lastActualSalary = $this->salaries->last()?->actual_salary;
-
-            $lastestIncrement = Increment::where('staff_id', $this->id)->max('increment_time');
-            $comingIncrement = $lastestIncrement + 1;
-
-            if ($comingIncrement > 0 && $comingIncrement <= 5) {
-                // Apply increment if it's within the 1-5 range
-                $OverAllTotalSalary += $lastActualSalary + $this->payscale->increment;
-            } else {
-                // Cap increment at 5
-                $OverAllTotalSalary += $lastActualSalary + ($this->payscale->increment * 5);
-            }
-        }
-
-        // Return the final calculated salary for this month
-        return $OverAllTotalSalary;
     }
+
+
+
 
 
     public function salaries()

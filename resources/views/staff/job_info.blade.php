@@ -160,7 +160,7 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['ရာထူး', 'အဆင့်', 'မှ', 'ထိ', 'ဌာန', 'ဌာနခွဲ', 'နေရာ','ဝန်ကြီးဌာန','မှတ်ချက်'],
+        'column_names' => ['ရာထူး',  'မှ', 'ထိ', 'ဌာန', 'ဌာနခွဲ', 'နေရာ','ဝန်ကြီးဌာန','မှတ်ချက်'],
         'add_event' => 'add_posting',
         'column_vals' => $postings,
         'column_types' => [
@@ -170,12 +170,7 @@
                 'wire_array_key' => 'rank',
                 'select_values' => $ranks,
             ],
-            [
-                'type' => 'select',
-                'wire_array_name' => 'postings',
-                'wire_array_key' => 'post',
-                'select_values' => $posts,
-],
+        
             [
                 'type' => 'date',
                 'wire_array_name' => 'postings',

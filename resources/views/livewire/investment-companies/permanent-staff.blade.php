@@ -213,7 +213,34 @@
                     <td class="border border-black text-center p-2"></td>
                     <td class="border border-black text-center p-2"></td>
                     <td class="border border-black text-center p-2"></td>
-                    <td class="border border-black text-center p-2">a</td>
+                    <td class="border border-black p-2">
+                        @php
+                            $totalPaidForThisMonth = 0;
+                            
+                        @endphp
+                        @foreach($first_payscales as $payscale)
+                        @foreach($payscale->staff->where('is_active', 1)->where('current_department_id',1)->where('salary_paid_by', 1) as $staff)
+                            @php
+                                $totalPaidForThisMonth += $staff->paidForThisMonth($dateRange);
+                            @endphp
+                        @endforeach
+                       
+
+                        @endforeach
+                        @foreach($second_payscales as $payscale)
+                        @foreach($payscale->staff->where('is_active', 1)->where('current_department_id',1)->where('salary_paid_by', 1) as $staff)
+                            @php
+                                $totalPaidForThisMonth += $staff->paidForThisMonth($dateRange);
+                            @endphp
+                        @endforeach
+                       
+
+                        @endforeach
+
+
+                    
+                        {{ en2mm($totalPaidForThisMonth) }}
+                    </td>
                     <td class="border border-black text-center p-2">
 
 
@@ -227,7 +254,34 @@
                     <td class="border border-black text-center p-2"></td>
                     <td class="border border-black text-center p-2"></td>
                     <td class="border border-black text-center p-2"></td>
-                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black p-2">
+                        @php
+                            $totalPaidForThisMonth = 0;
+                            
+                        @endphp
+                        @foreach($first_payscales as $payscale)
+                        @foreach($payscale->staff->where('is_active', 1)->where('current_department_id',1)->where('salary_paid_by', 1) as $staff)
+                            @php
+                                $totalPaidForThisMonth += $staff->paidForThisMonth($dateRange);
+                            @endphp
+                        @endforeach
+                       
+
+                        @endforeach
+                        @foreach($second_payscales as $payscale)
+                        @foreach($payscale->staff->where('is_active', 1)->where('current_department_id',1)->where('salary_paid_by', 1) as $staff)
+                            @php
+                                $totalPaidForThisMonth += $staff->paidForThisMonth($dateRange);
+                            @endphp
+                        @endforeach
+                       
+
+                        @endforeach
+
+
+                    
+                        {{ en2mm($totalPaidForThisMonth * 12 )  }}
+                    </td>
                     <td class="border border-black text-center p-2">
 
 
@@ -237,11 +291,11 @@
                 <tr>
                     <td class="border border-black text-center p-2"></td>
                     <td class="border border-black text-center p-2">(၁လအတွက်ချီးမြှင့်ငွေ(ကျပ်သန်း))</td>
-                    <td class="border border-black text-center p-2">{{en2mm($maximumBudget)}}</td>
+                    <td class="border border-black text-center p-2"> </td>
                     <td class="border border-black text-center p-2"></td>
                     <td class="border border-black text-center p-2"></td>
                     <td class="border border-black text-center p-2"></td>
-                    <td class="border border-black text-center p-2"></td>
+                    <td class="border border-black text-center p-2">dd</td>
                     <td class="border border-black text-center p-2">
 
 

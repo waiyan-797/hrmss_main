@@ -61,10 +61,10 @@
                         {{ $work_diff->y > 0 ? en2mm($work_diff->y) . ' နှစ် ' : '-' }}
                     </td>
                     <td class="border border-black p-2">
-                        {{ $work_diff->m > 0 ? en2mm($work_diff->m) . ' လ ' : '-' }}
+                        {{ $work_diff->m > 0 ? en2mm($work_diff->m) . ' လ ' : en2mm('0') }}
                     </td>
                     <td class="border border-black p-2">
-                        {{ $work_diff->d > 0 ? en2mm($work_diff->d) . ' ရက် ' : '-' }}
+                        {{ $work_diff->d > 0 ? en2mm($work_diff->d) . ' ရက် ' : en2mm('0')}}
                     </td>
                     @php
                         $total_days_worked = Carbon\Carbon::parse($workStartDate)->diffInDays(Carbon\Carbon::parse($workEndDate));
@@ -93,7 +93,7 @@
                     <td class="border border-black p-2">
                         {{ $total_leave_days > 0 ? en2mm($total_leave_days) . ' ရက် ' : '-' }}
                     </td>
-                    <td class="border border-black p-2">{{ en2mm(formatDMY($leave->from_date)).' မှ '.en2mm(formatDMY($leave->to_date)).' ထိ '}}</td>
+                    <td class="border border-black p-2">{{formatDMYmm($leave->from_date).' မှ'.formatDMYmm($leave->to_date).' ထိ '}}</td>
                     <td class="border border-black p-2">
                         {{ $leave_diff->m > 0 ? en2mm($leave_diff->m) . ' လ ' : '-' }}
                     </td>

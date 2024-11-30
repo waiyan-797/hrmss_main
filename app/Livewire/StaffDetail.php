@@ -1331,7 +1331,7 @@ if($staff_create['status_id'] == 5){
             Posting::create([
                 'staff_id' => $staffId,
                 'rank_id' => $posting['rank'],
-                'post_id' => $posting['post'],
+                // 'post_id' => 1,
                 'from_date' => $posting['from_date'],
                 'to_date' => $posting['to_date'],
                 'department_id' => $posting['department'],

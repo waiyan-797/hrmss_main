@@ -22,7 +22,7 @@
                                     :values="$type['select_values']"
                                     placeholder="Select an Option..."
                                     class="mt-1 block w-full"
-                                    
+                                    required
                                 />
                             @elseif ($type['type'] == 'text' || $type['type'] == 'number' || $type['type'] == 'date' || $type['type']=='file')
                                 <x-text-input
@@ -31,7 +31,7 @@
                                     name="{{$type['wire_array_key']}}"
                                     type="{{$type['type']}}"
                                     class="mt-1 block w-full"
-                                    
+                                    required
                                 />
                             @elseif ($type['type'] == 'checkbox')
                                 <x-text-input
