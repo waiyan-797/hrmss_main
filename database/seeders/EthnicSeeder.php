@@ -14,6 +14,7 @@ class EthnicSeeder extends Seeder
      */
     public function run(): void
     {
+        
         Schema::disableForeignKeyConstraints();
         Ethnic::truncate();
         Schema::enableForeignKeyConstraints();

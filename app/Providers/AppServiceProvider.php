@@ -21,8 +21,8 @@ class AppServiceProvider extends ServiceProvider
     //  */
     public function boot(): void
     {
-        Settings::setDefaultFontName('Pyidaungsu'); 
-        Settings::setDefaultFontSize(12); 
+        Settings::setDefaultFontName('Pyidaungsu'); // Replace 'Arial' with your desired font
+        
         Model::unguard();
     }
 }

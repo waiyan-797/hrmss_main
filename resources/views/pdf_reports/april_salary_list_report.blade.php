@@ -26,7 +26,7 @@
         }
 
         body {
-            font-family: 'tharlon';
+           font-family: 'pyidaungsu', sans-serif !important;
             font-size: 13px;
         }
 

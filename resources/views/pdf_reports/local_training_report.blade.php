@@ -24,7 +24,8 @@
         }
 
         body {
-            font-family: 'tharlon';
+            
+            font-family: 'pyidaungsu', sans-serif !important;
             font-size: 13px;
         }
         .table-container {
@@ -61,6 +62,7 @@
     </style>
 </head>
 <body>
+    
     <page size="A4">
         <div class="table-container">
             <table class="min-w-full border border-black">
