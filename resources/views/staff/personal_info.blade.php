@@ -288,7 +288,7 @@
     </div>
     <div>
         <x-input-label for="(ဈ) အငြိမ်းစားလစာ" :value="__('(ဈ) အငြိမ်းစားလစာ')" />
-        <x-text-input wire:model="military_pension" id="military_pension" name="military_pension" type="number" class="mt-1 block w-full" />
+        <x-text-input wire:model="military_pension" id="military_pension" name="military_pension" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_pension')" />
     </div>
 

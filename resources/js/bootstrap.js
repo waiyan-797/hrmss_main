@@ -7,4 +7,4 @@ import Pikaday from 'pikaday';
 window.Pikaday = Pikaday; 
 
 import moment from 'moment';
-window.moment = moment; // 
+window.moment = moment; //
