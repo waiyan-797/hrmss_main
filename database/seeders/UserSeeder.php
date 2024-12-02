@@ -27,5 +27,15 @@ class UserSeeder extends Seeder
             
             
         ]);
+
+        User::create([
+            'name' => 'User',
+            'email' => 'users@gmail.com',
+            'password' => bcrypt('11111111'),
+            'division_id' => 1  ,
+            'role_id' => 2 ,
+            
+            
+        ]);
     }
 }

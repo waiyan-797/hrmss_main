@@ -17,7 +17,7 @@
                     <label for="" class="md:w-5">၂။ </label>
                     <label for="name" class="md:w-1/3">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .en2mm( $staff->nrc_code )}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၃။ </label>
@@ -134,8 +134,7 @@
                         <table class="w-full text-center">
                             <thead>
                                 <tr class="bg-gray-100">
-                                    <th class="p-2 border border-black">ကျောင်း/တက္ကသိုလ်/သင်တန်း</th>
-                                    <th class="p-2 border border-black">မှ</th>
+အ                                    <th class="p-2 border border-black">မှ</th>
                                     <th class="p-2 border border-black">ထိ</th>
                                     
                                 </tr>

@@ -46,7 +46,7 @@
                     <label for="name" class="md:w-5">၇။</label>
                     <label for="name" class="md:w-1/3">နိုင်ငံသားစိစစ်ရေးအမှတ်</label>
                     <label for="name" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .en2mm( $staff->nrc_code )}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="name" class="md:w-5">၈။ </label>

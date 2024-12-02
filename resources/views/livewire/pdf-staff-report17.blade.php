@@ -28,7 +28,7 @@
                     <label for="" class="md:w-5">၄။ </label>
                     <label for="name" class="md:w-1/3">အမျိုးသားမှတ်ပုံတင်အမှတ်</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .en2mm( $staff->nrc_code )}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၅။ </label>
