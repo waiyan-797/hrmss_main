@@ -5,8 +5,10 @@
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
             
-            <input type="date"  wire:model.live='filterRange'>   
-            <input type="date" wire:model.live='filterRangeTo'>
+            {{-- <input type="date"  wire:model.live='filterRange'>    --}}
+            <x-date-picker wire:model.live='filterRange' />
+            
+            <x-date-picker wire:model.live='filterRangeTo'/>
             <br><br>
             <table class="w-full">
                 <thead>
