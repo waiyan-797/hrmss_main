@@ -8,7 +8,7 @@
                 'title' => 'ခွင့်အမျိုးအစား',
                 'search_id' => 'leave_type_search',
                 'columns' => ['စဉ်', 'ခွင့်အမျိုးအစား','ခွင့်','နေ့(သို.မဟုတ်)လ','SortNo','နှစ်စဉ်','လုပ်ဆောင်ချက်'],
-                'column_vals' => ['name', 'allowed', 'dayOrMonths','sort_no','is_yearly'],
+                'column_vals' => ['name', 'allowed', 'dayOrMonth','sort_no','is_yearly'],
             ])
         </div>
     </div>
