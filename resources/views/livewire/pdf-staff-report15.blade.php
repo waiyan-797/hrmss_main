@@ -47,7 +47,7 @@
                     <label for="name" class="md:w-1/3">လက်ရှိနေရပ်</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">
-                        {{ $staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_region->name.''.$staff->current_address_township_or_town->name }}
+                        {{ $staff->current_address_street. $staff->current_address_ward. '၊'.$staff->current_address_township_or_town->name . '၊' . $staff->current_address_region->name }}
                     </label>`
                 </div>
                 {{-- <div class="w-full mb-4">
