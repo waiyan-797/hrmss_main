@@ -264,7 +264,7 @@ class Staff extends Model
     }
     public function marital_statuses()
     {
-        return $this->belongsTo(MaritalStatus::class);
+        return $this->belongsTo(MaritalStatus::class , 'marital_status_id');
     }
     public function socialActivities()
     {
@@ -497,8 +497,11 @@ public function labourAtt($year, $month)
 
     
     public static  function FromNPt(){
-        return Staff::where("current_division_id", 26)->get();
+        return Staff::where("current_division_id", 26);
     }
     
-
+    public function isInRs(){
+   
+        return $this->marital_statuses?->marital_status_type->id == 2;
+    }
 }

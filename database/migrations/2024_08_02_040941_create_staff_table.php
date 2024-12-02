@@ -197,8 +197,6 @@ return new class extends Migration
             $table->date('family_pension_date')->nullable();
             $table->longText('comment')->nullable();
             $table->string('status_id')->nullable();
-            
-
             $table->timestamps();
         });
     }

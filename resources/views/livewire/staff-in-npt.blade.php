@@ -57,7 +57,7 @@
 
 
                             <td 
-                            class="border border-black text-right p-1">{{ $staff->name }}</td>
+                            class="border border-black text-right p-1">{{ $staff->isInRs()  ? 'ရှိ' : 'မရှိ'}}</td>
 
                             <td 
                             class="border border-black text-right p-1">{{getAddress( $staff->current_address_street , $staff->current_address_ward , $staff->current_address_township_or_town_id  ,$staff->current_address_region_id) }}</td>
