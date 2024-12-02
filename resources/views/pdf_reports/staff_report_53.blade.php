@@ -534,6 +534,7 @@
                                     <table class="table">
                                         <thead class="thead-bg">
                                             <tr>
+                                               
                                                 <th>အမည်</th>
                                                 <th>လူမျိုး/ဘာသာ</th>
                                                 <th>ဇာတိ</th>

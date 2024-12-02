@@ -9,6 +9,7 @@ use App\Models\LeaveType;
 use App\Models\Staff;
 use Carbon\Carbon;
 use Livewire\Component;
+use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class LeaveSummary extends Component
 {
@@ -18,7 +19,7 @@ class LeaveSummary extends Component
     
     public $HeadOfficeLeaves , $DivisionLeaves ;
     public $divisionTypes; 
-public $dateRange;
+    public $dateRange;
     public function mount()
     {
 
@@ -29,6 +30,23 @@ $this->divisionTypes = DivisionType::all();
         
     }
 
+    public function go_pdf()
+    {
+        [$this->year, $this->month] = explode('-', $this->dateRange);
+    
+        $data = [
+            'year' => $this->year,
+            'month' => $this->month,
+            'leave_types' => $this->leave_types,
+            'divisionTypes' => $this->divisionTypes,
+        ];
+    
+        $pdf = PDF::loadView('pdf_reports.leave_summary_report', $data);
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, 'leave_summary_report.pdf');
+    }
+   
   
     public function render()
     {
@@ -40,12 +58,6 @@ $this->divisionTypes = DivisionType::all();
         foreach($this->divisionTypes as $divisionType){
             foreach ($divisionType->divisions as $division) {
              
-    
-                // foreach ($leave_types as $leave_type) {
-                //     $leaveTypeCount = $this->leaveType($division->id, $leave_type->id);
-    
-                //     $totalLeaveTypeCounts[$leave_type->id] = ($totalLeaveTypeCounts[$leave_type->id] ?? 0) + $leaveTypeCount;
-                // }
             }
         }
       

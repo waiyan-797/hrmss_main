@@ -31,11 +31,13 @@ class PdfStaffReport15 extends Component
     {
         $staff = Staff::find($staff_id);
         $phpWord = new PhpWord();
+        $phpWord->setDefaultFontName('Pyidaungsu');
+        $phpWord->setDefaultFontSize(12);
         $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
-        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
-        $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+        
+
         $section->addText('၁။'.'အမည်: '. str_repeat('- ', 5). $staff->name);
         $section->addText('၂။'.'အသက်(မွေးနေ့သက္ကရာဇ်): '. str_repeat('- ', 5) . $staff->dob);
         $section->addText('၃။'.'လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ: '. str_repeat(' ', 5) . ($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));

@@ -15,7 +15,7 @@
                     {{$division->name}}
                    </option>
                 @endforeach
-            </select>
+            </select><br><br>
 
             <table class="md:w-full">
                 <thead>

@@ -17,8 +17,10 @@
             <p>ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</p>
         </div>
         <div class="mt-7 mb-3 ms-7">
-            <input type="date" wire:model.live="dateRange">
-        </div>>
+            Date
+            {{-- <input type="date" wire:model.live="dateRange"> --}}
+            <x-date-picker wire:model.live='filterRange' />
+        </div>
         <table class="md:w-full mx-8 my-2">
             <thead>
                 <tr class="font-bold">

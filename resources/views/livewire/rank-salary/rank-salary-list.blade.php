@@ -23,7 +23,7 @@
                     <tr>
                         <td class="border border-black p-2 text-center">{{ $staff->name}}</td>
                         <td class="border border-black p-2 text-center">{{ $staff->current_rank?->name}}</td>
-                        <td class="border border-black p-2 text-center">{{ $staff->payscale?->name}}</td>
+                        <td class="border border-black p-2 text-center">{{ en2mm($staff->payscale?->name)}}</td>
                     </tr>
                     @endforeach
                     <tr>

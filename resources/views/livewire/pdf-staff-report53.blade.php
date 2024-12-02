@@ -429,8 +429,9 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">
-                                @foreach($staff->siblings as $sibling)
+                                @foreach($staff->siblings as $index=> $sibling)
                                     <tr>
+                                        <td class="p-2 border border-black">{{ $index+1}}</td>
                                         <td class="p-2 border border-black">{{ $sibling->name }}</td>
                                         <td class="p-2 border border-black">{{ $sibling->ethnic?->name}}၊{{ $sibling->religion?->name  }}</td>
                                         <td class="p-2 border border-black">{{ $sibling->place_of_birth }}</td>
