@@ -14,12 +14,30 @@ class BloodTypeSeeder extends Seeder
      */
     public function run(): void
     {
+       
         Schema::disableForeignKeyConstraints();
         BloodType::truncate();
         Schema::enableForeignKeyConstraints();
-        BloodType::create([
-            'name' => 'A',
 
-        ]);
+        $columns = ['id', 'name'];
+        $items = [
+            [1, 'A'],
+            [2, 'A+'],
+            [3, 'A-'],
+            [4, 'B'],
+            [5, 'B+'],
+            [6, 'B-'],
+            [7, 'O'],
+            [8, 'O+'],
+            [9, 'O-'],
+            [10, 'AB'],
+            [11, 'AB+'],
+            [12, 'AB-']
+        ];
+
+        foreach ($items as $item) {
+            BloodType::create(array_combine($columns, $item));
+        }
     }
-}
+    }
+

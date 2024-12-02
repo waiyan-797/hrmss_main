@@ -79,7 +79,7 @@
             <tr>
                 <td>{{ $staff->name}}</td>
                 <td>{{ $staff->current_rank?->name}}</td>
-                <td>{{ $staff->payscale?->name}}</td>
+                <td>{{ en2mm($staff->payscale?->name)}}</td>
             </tr>
             @endforeach
             <tr class="total-row">
