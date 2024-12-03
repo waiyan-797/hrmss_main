@@ -76,6 +76,7 @@ $this->divisionTypes = DivisionType::all();
             $leave = Leave::whereYear('created_at', $this->year)
                 ->whereMonth('created_at', $this->month)
                 ->where('staff_id', $staff->id)
+                ->where('current_division_id' ,  $division->id)
                 ->distinct('staff_id')
                 ->count('staff_id');
                 // if($staff->id == 3 ){
