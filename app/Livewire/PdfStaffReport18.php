@@ -33,7 +33,7 @@ class PdfStaffReport18 extends Component
     {
         $staff = Staff::find($staff_id);
         $phpWord = new PhpWord();
-        $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
+        $section = $phpWord->addSection(); 
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
         $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
@@ -50,21 +50,11 @@ class PdfStaffReport18 extends Component
 
         $section->addText('၉။'.'သား/သမီးအမည်: '. str_repeat(' ', 5).$staff->children->first()?->name );
         $section->addText('၁၀။'.'လိပ်စာ: '. str_repeat(' ', 5). $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name );
+        $section->addText('၁၁။' . 'ပညာအရည်အချင်း');
 
-        $section->addText('၁၁။'.'ပညာအရည်အချင်း', ['bold' => true]);
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(1000)->addText('စဉ်', ['bold' => true]);
-        $table->addCell(2000)->addText('Education Group', ['bold' => true]);
-        $table->addCell(2000)->addText('Education Type', ['bold' => true]);
-        $table->addCell(2000)->addText('Education', ['bold' => true]);
-        foreach ($staff->staff_educations as $index=> $education) {
-            $table->addRow();
-            $table->addCell(1000)->addText($index + 1);
-            $table->addCell(2000)->addText($education->education_group->name);
-            $table->addCell(2000)->addText($education->education_type->name);
-            $table->addCell(2000)->addText($education->education->name);
-        }
+        foreach ($staff->staff_educations as  $education) {
+        $section->addText( $education->education->name.'၊');
+       }
         $section->addText('၁၂။'.'လက်ရှိရာထူး/လစာနှုန်း/ဌာန: '. $staff->father_name);
         $section->addText('၁၃။'.'သွေးအုပ်စု: '. $staff->father_occupation);
 
@@ -82,7 +72,7 @@ class PdfStaffReport18 extends Component
        $table->addCell(2000)->addText('မှ', ['alignment' => 'center']);
        $table->addCell(2000)->addText('ထိ', ['alignment' => 'center']);
        $table->addCell(2000, ['vMerge' => 'continue']);
-       foreach ($staff->past_occupations as $occupation) {
+       foreach ($staff->past_occupations as $index=> $occupation) {
            $table->addRow();
            $table->addCell(500)->addText($index + 1);
            $table->addCell(1500)->addText($occupation->rank->name);
@@ -124,7 +114,7 @@ class PdfStaffReport18 extends Component
        $table->addCell(2000)->addText('မှ', ['alignment' => 'center']);
        $table->addCell(2000)->addText('ထိ', ['alignment' => 'center']);
        $table->addCell(2000, ['vMerge' => 'continue']);
-       foreach ($staff->trainings->where('training_location_id', 2) as  $training) {
+       foreach ($staff->trainings->where('training_location_id', 2) as $index=>  $training) {
            $table->addRow();
            $table->addCell(500)->addText($index + 1);
            $table->addCell(1500)->addText($training->training_type->name);

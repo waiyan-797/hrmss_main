@@ -13,8 +13,6 @@ class Report extends Component
 
     public function mount()
     {
-
-    
         $this->reports = [
             ['id' => 1, 'name' => 'ရုံးခွဲအလိုက်ခွင့်ပြုနှင့်ခန့်ပြီးဝန်ထမ်း'],
             ['id' => 2, 'name' => 'ရုံးခွဲအလိုက်ကျား/မ ခန့်ပြီး အင်အား'],

@@ -31,7 +31,7 @@ public $staff_id;
     {
         $staff = Staff::find($staff_id);
         $phpWord = new PhpWord();
-        $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
+        $section = $phpWord->addSection(); 
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
         $phpWord->addTitleStyle(2, ['bold' => true, 'size' =>10 ], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
@@ -61,20 +61,25 @@ public $staff_id;
         $section->addText('၂၂။'.'ယခုနေရပ်လိပ်စာအပြည့်အစုံ: '.str_repeat(' ',5). $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name );
         $section->addText('၂၃။'.'အမြဲတမ်းလက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ: '.str_repeat(' ',5).$staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name);
         $section->addText('၂၄။'.'ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာဖော်ပြရန်မလို): '.str_repeat(' ',5).$staff->previous_addresses);
-        $section->addText('၂၅။'.'ပညာအရည်အချင်း', ['bold' => true]);
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(1000)->addText('စဉ်', ['bold' => true]);
-        $table->addCell(2000)->addText('Education Group', ['bold' => true]);
-        $table->addCell(2000)->addText('Education Type', ['bold' => true]);
-        $table->addCell(2000)->addText('Education', ['bold' => true]);
-        foreach ($staff->staff_educations as $index=> $education) {
-            $table->addRow();
-            $table->addCell(1000)->addText($index + 1);
-            $table->addCell(2000)->addText($education->education_group->name);
-            $table->addCell(2000)->addText($education->education_type->name);
-            $table->addCell(2000)->addText($education->education->name);
-        }
+        // $section->addText('၂၅။'.'ပညာအရည်အချင်း', ['bold' => true]);
+        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+        // $table->addRow();
+        // $table->addCell(1000)->addText('စဉ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('Education Group', ['bold' => true]);
+        // $table->addCell(2000)->addText('Education Type', ['bold' => true]);
+        // $table->addCell(2000)->addText('Education', ['bold' => true]);
+        // foreach ($staff->staff_educations as $index=> $education) {
+        //     $table->addRow();
+        //     $table->addCell(1000)->addText($index + 1);
+        //     $table->addCell(2000)->addText($education->education_group->name);
+        //     $table->addCell(2000)->addText($education->education_type->name);
+        //     $table->addCell(2000)->addText($education->education->name);
+        // }
+        $section->addText('၂၅။' . 'ပညာအရည်အချင်း');
+
+        foreach ($staff->staff_educations as  $education) {
+        $section->addText( $education->education->name.'၊');
+       }
         $section->addText('၁။'.'တပ်မတော်သို့ ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်: '. str_repeat(' ', 5));
         $section->addText('(က)'.'ကိုယ်ပိုင်အမှတ်: '. str_repeat(' ', 5).$staff->military_solider_no);
         $section->addText('(ခ)'.'တပ်သို့ဝင်သည့်နေ့: '. str_repeat(' ', 5).$staff->military_join_date);
@@ -90,11 +95,11 @@ public $staff_id;
         $section->addText('၃။'.'ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်နေ့: '. str_repeat(' ', 5).$staff->join_date);
         $section->addText('၄။'.'ဝန်ကြီးဌာန'. str_repeat(' ', 5).$staff->ministry?->name);
         $section->addText('၅။'.'ဦးစီးဌာန:'. str_repeat(' ', 5).'ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန');
-        $section->addText('၆။' . 'လစာဝင်ငွေ'. str_repeat(' ', 5).$staff->payscale->name);
+        $section->addText('၆။' . 'လစာဝင်ငွေ'. str_repeat(' ', 5).$staff->payscale?->name);
         $section->addText('၇။' . 'လက်ရှိအလုပ်အကိုင်'. str_repeat(' ', 5).$staff->current_rank->name);
         $section->addText('၈။' . 'လက်ရှိရာထူးရသည့်နေ့'. str_repeat(' ', 5).$staff->current_rank_date);
         $section->addText('၉။' . 'ပြောင်းရွေ့သည့်မှတ်ချက်'. str_repeat(' ', 5).$staff->transfer_remark);
-        $section->addText('၁၀။' . 'တွဲဖက်အင်အား ဖြစ်လျှင်'. str_repeat(' ', 5).$staff->side_department->name);
+        $section->addText('၁၀။' . 'တွဲဖက်အင်အား ဖြစ်လျှင်'. str_repeat(' ', 5).$staff->side_department?->name);
         $section->addText('၁၁။' . 'လစာနှင့် စရိတ်ကျခံမည့်ဌာန'. str_repeat(' ', 5).$staff->salary_paid_by);
         $section->addText('၁၂။' . 'လက်ရှိ အလုပ်အကိုင်ရလာပုံ'. str_repeat(' ', 5).$staff->is_newly_appointed);
         $section->addText('၁၃။' . 'ပြိုင်အ‌‌ရွေးခံ(သို့)တိုက်ရိုက်ခန့်'. str_repeat(' ', 5).$staff->is_direct_appointed);

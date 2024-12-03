@@ -31,36 +31,26 @@ class PdfStaffReport15 extends Component
     {
         $staff = Staff::find($staff_id);
         $phpWord = new PhpWord();
-        $phpWord->setDefaultFontName('Pyidaungsu');
-        $phpWord->setDefaultFontSize(12);
-        $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
+        $section = $phpWord->addSection(); 
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
         
 
-        $section->addText('၁။'.'အမည်: '. str_repeat('- ', 5). $staff->name);
-        $section->addText('၂။'.'အသက်(မွေးနေ့သက္ကရာဇ်): '. str_repeat('- ', 5) . $staff->dob);
-        $section->addText('၃။'.'လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ: '. str_repeat(' ', 5) . ($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
+        $section->addText('၁။'.'အမည်: '. str_repeat(' ', 20).'-'. $staff->name);
+        $section->addText('၂။'.'အသက်(မွေးနေ့သက္ကရာဇ်): '. str_repeat('', 20) .'-'. $staff->dob);
+        $section->addText('၃။'.'လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ: '. str_repeat(' ', 20) . '-'.($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
         $section->addText('၄။'.'အမျိုးသားမှတ်ပုံတင်အမှတ်: '. str_repeat(' ', 5) . $staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
         $section->addText('၅။'.'အလုပ်အကိုင်နှင့် ဌာန: '. str_repeat(' ', 5) . $staff->current_rank->name . '/' . $staff->current_department->name);
         $joinDate = \Carbon\Carbon::parse($staff->join_date);
         $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());
         $section->addText('၆။'.'အမှုထမ်းလုပ်သက်၊ ဝင်ရောက်သည့်ရက်စွဲ: ' . formatPeriodMM($joinDateDuration->y, $joinDateDuration->m, $joinDateDuration->d) . ', ' . en2mm($joinDate->format('d-m-y')));
         $section->addText('၇။'.'လက်ရှိနေရပ်: ' . $staff->current_address_street . '/' . $staff->current_address_ward . '/' . $staff->current_address_region->name . '/' .  $staff->current_address_township_or_town->name);
-        $section->addText('၈။'.'ပညာအရည်အချင်း', ['bold' => true]);
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(1000)->addText('စဉ်', ['bold' => true]);
-        $table->addCell(2000)->addText('Education Group', ['bold' => true]);
-        $table->addCell(2000)->addText('Education Type', ['bold' => true]);
-        $table->addCell(2000)->addText('Education', ['bold' => true]);
-        foreach ($staff->staff_educations as $index=> $education) {
-            $table->addRow();
-            $table->addCell(1000)->addText($index + 1);
-            $table->addCell(2000)->addText($education->education_group->name);
-            $table->addCell(2000)->addText($education->education_type->name);
-            $table->addCell(2000)->addText($education->education->name);
-        }
+        $section->addText('၈။' . 'ပညာအရည်အချင်း');
+
+        foreach ($staff->staff_educations as $education) {
+        $section->addText( $education->education->name.'၊');
+       }
+
     
         $section->addText('၉။'.'အဘအမည်: '. $staff->father_name);
         $section->addText('၁၀။'.'အလုပ်အကိုင်

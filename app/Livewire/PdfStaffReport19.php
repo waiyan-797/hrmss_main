@@ -45,20 +45,12 @@ class PdfStaffReport19 extends Component
         $section->addText('၈။'.'လက်ရှိရာထူး: '. str_repeat(' ', 5).$staff->current_rank->name );
         $section->addText('၉။'.'လက်ရှိနေရပ်လိပ်စာ: '. str_repeat(' ', 5).$staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name);
         $section->addText('၁၀။'.'အမြဲတမ်းနေရပ်လိပ်စာ: '. str_repeat(' ', 5).$staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name);
-        $section->addText('၁၁။'.'ပညာအရည်အချင်း', ['bold' => true]);
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(1000)->addText('စဉ်', ['bold' => true]);
-        $table->addCell(2000)->addText('Education Group', ['bold' => true]);
-        $table->addCell(2000)->addText('Education Type', ['bold' => true]);
-        $table->addCell(2000)->addText('Education', ['bold' => true]);
-        foreach ($staff->staff_educations as $index=> $education) {
-            $table->addRow();
-            $table->addCell(1000)->addText($index + 1);
-            $table->addCell(2000)->addText($education->education_group->name);
-            $table->addCell(2000)->addText($education->education_type->name);
-            $table->addCell(2000)->addText($education->education->name);
-        }
+       
+        $section->addText('၁၁။' . 'ပညာအရည်အချင်း');
+
+        foreach ($staff->staff_educations as  $education) {
+        $section->addText( $education->education->name.'၊');
+       }
         $section->addText('၁၂။'.'တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်', ['bold' => true]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();
