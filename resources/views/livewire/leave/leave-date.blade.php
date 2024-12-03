@@ -68,7 +68,9 @@
                     </td>
                     @php
                         $total_days_worked = Carbon\Carbon::parse($workStartDate)->diffInDays(Carbon\Carbon::parse($workEndDate));
+                        
                         $free_leave_days = floor($total_days_worked / 11); //floor is to change float numbers to round numbers
+                        
                         $free_leave_months = floor($free_leave_days / 30);
                         $remaining_free_leave_days = $free_leave_days % 30; // Remaining days after extracting full months
                     @endphp

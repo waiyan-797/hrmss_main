@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\AboutToIncrement;
 use App\Livewire\AgeFilter;
 use App\Livewire\AppointmentsCalendar;
 use App\Livewire\AttendTraining;
@@ -210,7 +211,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/salary', Salary::class)->name('salary');
     Route::get('/promotion', LivewirePromotion::class)->name('promotion'); //no longer use
     Route::get('/promotion/{staff_id}', LivewirePromotion::class)->name('staff_promotion'); //no longer use
-    Route::get('/increment', Increment::class)->name('increment'); //no longer use
+    // Route::get('/increment', Increment::class)->name('increment'); //no longer use
     Route::get('/retirement/{staff_id}', Retirement::class)->name('staff_retirement'); //no longer use
     Route::get('/depromotion',Depromotion::class)->name('depromotion');
     Route::get('/depromotion/{staff_id}',Depromotion::class)->name('staff_depromotion');
@@ -344,6 +345,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/punishment_report', PunishmentReport::class)->name('punishment_report');
     Route::get('/list-of-salary-rates-by-position', RankSalaryList::class)->name('rank_salary_list');
     Route::get('/staff_report', StaffReport::class)->name('staff_report');
+    
    
 
 Route::get('/labour',Labour::class)->name('labour');
@@ -352,6 +354,11 @@ Route::get('/calender/{id}' , AppointmentsCalendar::class)->name('calender');
 Route::get('/leave-calender/{id}' , LeaveCalendar::class)->name('leaveCalendar');
 Route::get('/labour-staff' , LivewireLabourStaff::class )->name('labour-staff');
 Route::get('/leave_summary', LeaveSummary::class)->name('leave_summary');
+
+Route::get('/about_to_increment', AboutToIncrement::class)->name('about_to_increment');  //new 
+
+
+
     Route::get(
         'user_create',
         User::class
