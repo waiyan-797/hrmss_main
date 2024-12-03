@@ -4,7 +4,11 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
+<<<<<<< HEAD
             {{-- <input type="date" wire:model.live='filterRange'> --}}
+=======
+       
+>>>>>>> 4e4d2e1c3d5f4c9217036e456c4462e3cf9c76b4
             Date
             <x-date-picker wire:model.live='filterRange' />
             <br><br>

@@ -12,7 +12,9 @@
     </div>
     <div>
         <x-input-label for="လက်ရှိရာထူးရသည့်နေ့" :value="__('လက်ရှိရာထူးရသည့်နေ့')" />
-        <x-text-input wire:model="current_rank_date" id="current_rank_date" name="current_rank_date" type="date" class="mt-1 block w-full" required/>
+        <x-date-picker wire:model="current_rank_date" id="current_rank_date"  lass="mt-1 block w-full"/>
+
+       
         <x-input-error class="mt-2" :messages="$errors->get('current_rank_date')" />
     </div>
     <div>
@@ -65,12 +67,18 @@
     </div>
     <div>
         <x-input-label for="အလုပ်စတင်ဝင်ရောက်သည့်နေ့" :value="__('အလုပ်စတင်ဝင်ရောက်သည့်နေ့')" />
-        <x-text-input wire:model="join_date" id="join_date" name="join_date" type="date" class="mt-1 block w-full" required/>
+        <x-date-picker wire:model="join_date" id="join_date"  class="mt-1 block w-full"/>
+
+
+        
         <x-input-error class="mt-2" :messages="$errors->get('join_date')" />
     </div>
     <div>
         <x-input-label for="အစိုးရဝန်ထမ်းစဖြစ်သည့်နေ" :value="__('အစိုးရဝန်ထမ်းစဖြစ်သည့်နေ')" />
-        <x-text-input wire:model="government_staff_started_date" id="government_staff_started_date" name="government_staff_started_date" type="date" class="mt-1 block w-full" required/>
+
+        <x-date-picker wire:model="government_staff_started_date" id="government_staff_started_date"  class="mt-1 block w-full"/>
+
+        
         <x-input-error class="mt-2" :messages="$errors->get('government_staff_started_date')" />
     </div>
     <div>

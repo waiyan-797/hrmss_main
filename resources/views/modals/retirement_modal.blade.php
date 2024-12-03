@@ -22,14 +22,17 @@
                 <!-- Column 2: Retire Date -->
                 <div class="mb-4">
                     <label for="retire_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ပြုန်းတီးသည့်နေ့</label>
-                    <input required type="date" wire:model="retire_date" id="retire_date" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
+                    <x-date-picker wire:model="retire_date" id="retire_date"  class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"/>
+
+                    
                     @error('retire_date') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
                 </div>
 
                 <!-- Repeat for each field -->
                 <div class="mb-4">
                     <label for="lost_contact_from_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ထုတ်ပယ်သည့်နေ့</label>
-                    <input required type="date" wire:model="lost_contact_from_date" id="lost_contact_from_date" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
+                    <x-date-picker wire:model="lost_contact_from_date" id="lost_contact_from_date"  class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"/>
+
                     @error('lost_contact_from_date') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
                 </div>
 

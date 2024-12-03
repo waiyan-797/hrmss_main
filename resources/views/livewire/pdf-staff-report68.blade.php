@@ -54,7 +54,7 @@
                     <label for="" class="md:w-5">၈။ </label>
                     <label for="name" class="md:w-1/3">အရပ်အမြင့်</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->height_feet }}/{{ $staff->height_inch }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->height_feet }}ပေ {{ $staff->height_inch }} လက်မ</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၉။ </label>
@@ -145,7 +145,8 @@
                     <label for="name" class="md:w-1/3">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</label>
                     <label for="name" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</label>
+                    <label for="name" class="md:w-3/5">
+                        {{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name . en2mm($staff->nrc_code)  }} </label>
 
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -153,7 +154,9 @@
                     <label for="name" class="md:w-1/3">ယခုနေရပ်လိပ်စာအပြည့်အစုံ</label>
                     <label for="name" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name }}</label>
+                    <label for="name" class="md:w-3/5">
+                        {{ $staff->current_address_street. $staff->current_address_ward. '၊'.$staff->current_address_township_or_town->name . '၊' . $staff->current_address_region->name }}
+                    </label>
 
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -336,7 +339,7 @@
                     <label for="name" class="md:w-1/3">လစာဝင်ငွေ</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->payscale->name }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->payscale?->name }}</label>
 
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -366,7 +369,7 @@
                     <label for="name" class="md:w-1/3">တွဲဖက်အင်အား ဖြစ်လျှင်</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->side_department->name }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->side_department?->name }}</label>
 
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -902,7 +905,15 @@
                         ဘာသာရပ်အတိအကျဖော်ပြရန်</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->last_school_name.'၊'.$staff->last_school_subject.'၊'.$staff->last_school_row_no.'၊'.$staff->last_school_major }}</label>
+                    <label for="name" class="md:w-3/5">
+                        {{ collect([
+                            $staff->last_school_name,
+                            $staff->last_school_subject,
+                            $staff->last_school_row_no,
+                            $staff->last_school_major,
+                        ])->filter()->implode('၊') }}
+                        
+                    </label>
 
                 </div>
 
@@ -1048,7 +1059,16 @@
                         အလုပ်အကိုင်၊ လူမျိူး၊ တိုင်းပြည်၊ မည်ကဲ့သို့ ရင်းနှီးသည်</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->foreigner_friend_name.'၊'.$staff->foreigner_friend_occupation.'၊'.$staff->foreigner_friend_nationality?->name.'၊'.$staff->foreigner_friend_country?->name.'၊'.$staff->foreigner_friend_how_to_know }}</label>
+                    <label for="name" class="md:w-3/5">
+                        {{ collect([
+                            $staff->foreigner_friend_name,
+                            $staff->foreigner_friend_occupation,
+                            $staff->foreigner_friend_nationality?->name,
+                            $staff->foreigner_friend_country?->name,
+                            $staff->foreigner_friend_how_to_know,
+                        ])->filter()->implode('၊') }}
+                        
+                    </label>
 
                 </div>
 
@@ -1115,19 +1135,22 @@
                 <div class="flex justify-start mb-2">
                     <p class="md:w-1/3 ml-36">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</p>
                     <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5">{{ $staff->nrc }}</p>
+                    <p class="md:w-3/5">
+                        {{-- {{ $staff->nrc }} --}}
+                        
+                    </p>
                 </div>
 
                 <div class="flex justify-start mb-2">
                     <p class="md:w-1/3 ml-36">အဆင့်/ရာထူး</p>
                     <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5">ဦးစီးအရာရှိ</p>
+                    <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start mb-2">
                     <p class="md:w-1/3 ml-36">အမည်</p>
                     <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5">ပြည့်စုံသူ</p>
+                    <p class="md:w-3/5"></p>
                 </div>
 
                 <div class="flex justify-start mb-4">

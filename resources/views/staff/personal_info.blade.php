@@ -29,12 +29,15 @@
     </div>
     <div>
         <x-input-label for="ဝန်ထမ်းအမှတ်" :value="__('ဝန်ထမ်းအမှတ်')" />
-        <x-text-input wire:model="staff_no" id="staff_no" name="staff_no" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="staff_no" id="staff_no" name="staff_no" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('staff_no')" />
     </div>
     <div>
         <x-input-label for="မွေးသက္ကရာဇ်" :value="__('မွေးသက္ကရာဇ်')" />
-        <x-text-input wire:model="dob" id="dob" name="dob" type="date" class="mt-1 block w-full" required/>
+        <x-date-picker wire:model="dob" id="dob"   name="dob" class="mt-1 block w-full"/>
+
+
+        
         <x-input-error class="mt-2" :messages="$errors->get('dob')" />
     </div>
     <div>
@@ -67,11 +70,11 @@
         <x-input-label :value="__('အရပ်အမြင့်(ပေ, လက်မ)')" />
         <div class="flex flex-row gap-2">
             <div>
-                <x-text-input wire:model="height_feet" placeholder="ပေ" id="height_feet" name="height_feet" type="number" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="height_feet" placeholder="ပေ" id="height_feet" name="height_feet" type="number" class="mt-1 block w-full" />
                 <x-input-error class="mt-2" :messages="$errors->get('height_feet')" />
             </div>
             <div>
-                <x-text-input wire:model="height_inch" placeholder="လက်မ" id="height_inch" name="height_inch" type="number" class="mt-1 block w-full" required/>
+                <x-text-input wire:model="height_inch" placeholder="လက်မ" id="height_inch" name="height_inch" type="number" class="mt-1 block w-full" />
                 <x-input-error class="mt-2" :messages="$errors->get('height_inch')" />
             </div>
         </div>
@@ -98,7 +101,7 @@
     </div>
     <div>
         <x-input-label for="ကိုယ်အလေးချိန် (ပေါင်)" :value="__('ကိုယ်အလေးချိန် (ပေါင်)')" />
-        <x-text-input wire:model="weight" placeholder="ကိုယ်အလေးချိန်" id="weight" name="weight" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="weight" placeholder="ကိုယ်အလေးချိန်" id="weight" name="weight" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('weight')" />
     </div>
     <div>
@@ -181,7 +184,7 @@
     </div>
     <div>
         <x-input-label for="လက်ကိုင်ဖုန်း" :value="__('လက်ကိုင်ဖုန်း')" />
-        <x-text-input wire:model="mobile" id="mobile" name="mobile" type="text" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="mobile" id="mobile" name="mobile" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('mobile')" />
     </div>
     <div>
@@ -201,7 +204,7 @@
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_township_or_town_id')" />
             </div>
             <div>
-                <x-text-input wire:model="current_address_ward" placeholder="ရပ်ကွက်" id="current_address_ward" name="current_address_ward" type="text" class="mt-1 block w-full" />
+                <x-text-input wire:model="current_address_ward" placeholder="ရပ်ကွက်/ရွာ" id="current_address_ward" name="current_address_ward" type="text" class="mt-1 block w-full" />
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_ward')" />
             </div>
             <div>
@@ -226,7 +229,7 @@
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_township_or_town_id')" />
             </div>
             <div>
-                <x-text-input wire:model="permanent_address_ward" placeholder="ရပ်ကွက်" id="permanent_address_ward" name="permanent_address_ward" type="text" class="mt-1 block w-full" />
+                <x-text-input wire:model="permanent_address_ward" placeholder="ရပ်ကွက်/ရွာ" id="permanent_address_ward" name="permanent_address_ward" type="text" class="mt-1 block w-full" />
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_ward')" />
             </div>
             <div>
@@ -253,7 +256,10 @@
     </div>
     <div>
         <x-input-label for="(ခ) တပ်သို့ဝင်သည့်နေ့" :value="__('(ခ) တပ်သို့ဝင်သည့်နေ့')" />
-        <x-text-input wire:model="military_join_date" id="military_join_date" name="military_join_date" type="date" class="mt-1 block w-full" />
+        
+        <x-date-picker wire:model="military_join_date" id="military_join_date"  name="military_join_date" class="mt-1 block w-full"/>
+
+        
         <x-input-error class="mt-2" :messages="$errors->get('military_join_date')" />
     </div>
     <div>
@@ -263,12 +269,15 @@
     </div>
     <div>
         <x-input-label for="(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့" :value="__('(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့')" />
-        <x-text-input wire:model="military_gazetted_date" id="military_gazetted_date" name="military_gazetted_date" type="date" class="mt-1 block w-full" />
+        <x-date-picker wire:model="military_gazetted_date" id="military_gazetted_date"  name="military_gazetted_date" class="mt-1 block w-full"/>
+        
         <x-input-error class="mt-2" :messages="$errors->get('military_gazetted_date')" />
     </div>
     <div>
         <x-input-label for="(င) တပ်ထွက်သည့်နေ့" :value="__('(င) တပ်ထွက်သည့်နေ့')" />
-        <x-text-input wire:model="military_leave_date" id="military_leave_date" name="military_leave_date" type="date" class="mt-1 block w-full" />
+        <x-date-picker wire:model="military_leave_date" id="military_leave_date"  name="military_leave_date" class="mt-1 block w-full"/>
+
+        
         <x-input-error class="mt-2" :messages="$errors->get('military_leave_date')" />
     </div>
     <div>
@@ -288,7 +297,7 @@
     </div>
     <div>
         <x-input-label for="(ဈ) အငြိမ်းစားလစာ" :value="__('(ဈ) အငြိမ်းစားလစာ')" />
-        <x-text-input wire:model="military_pension" id="military_pension" name="military_pension" type="number" class="mt-1 block w-full" />
+        <x-text-input wire:model="military_pension" id="military_pension" name="military_pension" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_pension')" />
     </div>
 
@@ -304,7 +313,8 @@
     </div>
     <div>
         <x-input-label for="စစ်မှုထမ်းဟောင်းရက်စွဲ" :value="__('စစ်မှုထမ်းဟောင်းရက်စွဲ')" />
-        <x-text-input wire:model="veteran_date" id="veteran_date" name="veteran_date" type="date" class="mt-1 block w-full" />
+        <x-date-picker wire:model="veteran_date" id="veteran_date"  name="veteran_date" class="mt-1 block w-full"/>
+        
         <x-input-error class="mt-2" :messages="$errors->get('veteran_date')" />
     </div>
     <div>

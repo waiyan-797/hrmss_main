@@ -28,12 +28,17 @@ return [
     'custom_font_dir'          => resource_path('fonts/'), 
     'custom_font_data'         => [
         'pyidaungsu' => [ // Name of the font
-            'R'  => 'pyidaungsu_Regular.ttf',
+            'R'  => 'One_pyidaungsu_Regular.ttf',
+          
+    'B' => "PYIDAUNGSU-2.5.1_BOLD.ttf",
+    // 'I' => "verdanai.ttf",
+    // 'BI' => "verdanaz.ttf",
         ],
     ],
-    'auto_language_detection'  => false,
+    'auto_language_detection'  => true,
     'temp_dir'                 => storage_path('app'),
     'pdfa'                     => false,
     'pdfaauto'                 => false,
     'use_active_forms'         => false,
+    
 ];

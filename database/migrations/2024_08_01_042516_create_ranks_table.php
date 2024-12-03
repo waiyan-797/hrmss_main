@@ -14,6 +14,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // dfdg
         Schema::create('ranks', function (Blueprint $table) {
             $table->id();
             $table->string('name');

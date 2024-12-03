@@ -9,7 +9,10 @@
     {{$nrc_region_id}}
     <div>
         <x-input-label for="မွေးသက္ကရာဇ်" :value="__('မွေးသက္ကရာဇ်')" />
-        <x-text-input wire:model="dob" id="dob" name="dob" type="date" class="mt-1 block w-full" required/>
+       
+            <x-date-picker id="dob" name="dob" wire:model.live="dob" class="mt-1 block w-full" />
+       
+        
         <x-input-error class="mt-2" :messages="$errors->get('dob')" />
     </div>
     <div class="col-span-4">
