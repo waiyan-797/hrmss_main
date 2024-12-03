@@ -34,11 +34,7 @@ class PdfStaffReport53 extends Component
         $staff = Staff::find($staff_id);
         $phpWord = new PhpWord();
         $section = $phpWord->addSection(); 
-        $style = [
-            'valign' => 'center', 
-            // 'align' => 'both', 
-            'spaceAfter' => 100,  // Adjust this value based on your spacing requirement
-        ];
+      
         
        
 
@@ -47,9 +43,9 @@ class PdfStaffReport53 extends Component
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
         $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
         $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']); 
-        $section->addText('၁။'.'အမည်: '.'-'. $staff->name,$style);
-        $section->addText('၂။'.'ငယ်အမည်: '.'-'.$staff->nick_name,$style);
-        $section->addText('၃။'.'အခြားအမည်: '.'-'.$staff->other_name,$style);
+        $section->addText('၁။'.'အမည်: '.'-'. $staff->name);
+        $section->addText('၂။'.'ငယ်အမည်: '.'-'.$staff->nick_name);
+        $section->addText('၃။'.'အခြားအမည်: '.'-'.$staff->other_name);
 //         $section->addText('၁။' . 'အမည်: '.str_repeat(' ', 20) . '-' . $staff->name, ['valign' => 'center']);
 // $section->addText('၂။' . 'ငယ်အမည်: '.str_repeat(' ', 20) . '-' . $staff->nick_name, ['valign' => 'center']);
 // $section->addText('၃။' . 'အခြားအမည်: '.str_repeat(' ', 20) . '-' . $staff->other_name, ['valign' => 'center']);
