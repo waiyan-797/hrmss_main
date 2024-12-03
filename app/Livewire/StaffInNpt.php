@@ -19,7 +19,8 @@ class StaffInNpt extends Component
     {
 
 
-        $this->staffs =  Staff::FromNPt();
+        $this->staffs = Staff::FromNPt()->get();
+
         return view('livewire.staff-in-npt');
     }
 }

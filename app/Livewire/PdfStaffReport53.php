@@ -8,6 +8,9 @@ use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\SimpleType\TextAlignment;
+use PhpOffice\PhpWord\SimpleType\VerticalAlign;
+use PhpOffice\PhpWord\SimpleType\VerticalJc;
 
 class PdfStaffReport53 extends Component
 {
@@ -30,15 +33,31 @@ class PdfStaffReport53 extends Component
     {
         $staff = Staff::find($staff_id);
         $phpWord = new PhpWord();
-        $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
+        $section = $phpWord->addSection(); 
+        $style = [
+            'valign' => 'center', 
+            // 'align' => 'both', 
+            'spaceAfter' => 100,  // Adjust this value based on your spacing requirement
+        ];
+        
+       
+
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
         $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
         $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
         $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']); 
-        $section->addText('၁။'.'အမည်: '. str_repeat(' ', 5). $staff->name);
-        $section->addText('၂။'.'ငယ်အမည်: '. str_repeat(' ', 5).$staff->nick_name);
-        $section->addText('၃။'.'အခြားအမည်: '. str_repeat(' ', 5).$staff->other_name);
+        $section->addText('၁။'.'အမည်: '.'-'. $staff->name,$style);
+        $section->addText('၂။'.'ငယ်အမည်: '.'-'.$staff->nick_name,$style);
+        $section->addText('၃။'.'အခြားအမည်: '.'-'.$staff->other_name,$style);
+//         $section->addText('၁။' . 'အမည်: '.str_repeat(' ', 20) . '-' . $staff->name, ['valign' => 'center']);
+// $section->addText('၂။' . 'ငယ်အမည်: '.str_repeat(' ', 20) . '-' . $staff->nick_name, ['valign' => 'center']);
+// $section->addText('၃။' . 'အခြားအမည်: '.str_repeat(' ', 20) . '-' . $staff->other_name, ['valign' => 'center']);
+
+
+       
+       
+
         $section->addText('၄။'.'အသက်(မွေးသက္ကရာဇ်): '. str_repeat(' ', 5).en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')));
         $section->addText('၅။'.'လူမျိုးနှင့် ကိုးကွယ်သည့်ဘာသာ: '. str_repeat(' ', 5). ($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
         $section->addText('၆။'.'အရပ်အမြင့်: '. str_repeat(' ', 5).$staff->height_feet);
@@ -331,6 +350,7 @@ class PdfStaffReport53 extends Component
        $section->addText('အမည်: ', ['align' => 'center']);
        $section->addText('တပ်/ဌာန: ', ['align' => 'center']);
        $section->addText('ရက်စွဲ: '. formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day), ['align' => 'center']);
+       
         $fileName = 'staff_report_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
     

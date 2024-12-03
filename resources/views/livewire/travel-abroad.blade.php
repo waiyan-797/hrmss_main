@@ -11,6 +11,9 @@
                         No
                     </th>
                     <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">
+                        CodeNo
+                    </th>
+                    <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">
                         Report Name
                     </th>
                     <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">
@@ -24,6 +27,9 @@
                         <td class="px-4 py-2 border border-gray-200 text-sm text-gray-700">
                             {{ $index + 1 }}
                         </td>
+                        <td class="px-4 py-2 border border-gray-200 text-sm text-gray-700">
+                            {{ 'A' . str_pad($report['id'], 2, '0', STR_PAD_LEFT) }}
+                          </td>
                         <td class="px-4 py-2 border border-gray-200 text-sm text-gray-700">
                             {{ $report['name'] }}
                         </td>

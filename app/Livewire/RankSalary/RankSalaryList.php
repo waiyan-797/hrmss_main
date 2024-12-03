@@ -51,7 +51,7 @@ class RankSalaryList extends Component
         $table->addRow();
         $table->addCell(2000)->addText($index + 1, null, ['align' => 'center']);
         $table->addCell(4000)->addText($staff->current_rank?->name ?? '', null, ['align' => 'center']);
-        $table->addCell(4000)->addText($staff->payscale?->name ?? '', null, ['align' => 'center']);
+        $table->addCell(4000)->addText(en2mm($staff->payscale?->name ?? '', null, ['align' => 'center']));
     }
     $table->addRow();
     $table->addCell(2000)->addText();

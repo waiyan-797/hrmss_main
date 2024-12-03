@@ -1,7 +1,6 @@
 <div class=" w-full bg-white shadow-md rounded-lg">
     <div class="flex justify-center items-center mb-4">
         <h2 class="text-xl font-bold text-gray-700">Reports</h2>
-       
     </div>
     <div class="overflow-x-auto mt-6">
         <table class="min-w-full border-collapse border border-gray-200">
@@ -9,6 +8,9 @@
                 <tr>
                     <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">
                         No
+                    </th>
+                    <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">
+                        CodeNo
                     </th>
                     <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">
                         Report Name
@@ -24,6 +26,9 @@
                         <td class="px-4 py-2 border border-gray-200 text-sm text-gray-700">
                             {{ $index + 1 }}
                         </td>
+                        <td class="px-4 py-2 border border-gray-200 text-sm text-gray-700">
+                            {{ 'E' . str_pad($report['id'], 2, '0', STR_PAD_LEFT) }}
+                          </td>
                         <td class="px-4 py-2 border border-gray-200 text-sm text-gray-700">
                             {{ $report['name'] }}
                         </td>
