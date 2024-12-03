@@ -35,7 +35,7 @@ class PdfStaffReport15 extends Component
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
         
-
+// sdsf
         $section->addText('၁။'.'အမည်: '. str_repeat(' ', 20).'-'. $staff->name);
         $section->addText('၂။'.'အသက်(မွေးနေ့သက္ကရာဇ်): '. str_repeat('', 20) .'-'. $staff->dob);
         $section->addText('၃။'.'လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ: '. str_repeat(' ', 20) . '-'.($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
