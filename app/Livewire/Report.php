@@ -34,6 +34,8 @@ class Report extends Component
             ['id' => 16, 'name' => 'လက်ရှိဌာနရောက်ရှိရက်စွဲ'],
             ['id' => 17, 'name' => 'အသက်ဇယား'],
             ['id' => 18, 'name' => 'နပတရှိ အရာထမ်း/အမှုထမ်း ဝန်ထမ်းအင်အားစာရင်း'],
+            ['id' => 19, 'name' => 'အသက်ဖြင့်ရှာမည်'],
+            
 
         ];
     }
@@ -58,6 +60,8 @@ class Report extends Component
             16 =>route('staff_report1'),
             17 =>route('staff_report2'),
             18 =>route('staff_in_npt'),
+            19 =>route('age_filter'),
+            
 
         ];
         if (array_key_exists($id, $routes)) {
