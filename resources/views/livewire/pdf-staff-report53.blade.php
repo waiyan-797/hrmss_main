@@ -128,7 +128,7 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name"
-                            class="md:w-3/5">{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name }}</label>
+                            class="md:w-3/5">{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_township_or_town->name.'/'.$staff->permanent_address_region->name }}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -237,7 +237,14 @@
                     <label for="name" class="md:w-1/3">အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့်
                         အလုပ်အကိုင်</label>
                     <label for="" class="md:w-5">-</label>
-                        <label for="name" class="md:w-3/5">{{ $staff->father_name.'၊'.$staff->father_ethnic?->name.'၊'.$staff->father_religion?->name.'၊'.$staff->father_place_of_birth.'၊'.$staff->father_occupation }}
+                        <label for="name" class="md:w-3/5">{{ collect([
+                            $staff->father_name,
+                            $staff->father_ethnic?->name,
+                            $staff->father_religion?->name,
+                            $staff->father_place_of_birth,
+                            $staff->father_occupation,
+                        ])->filter()->implode('၊') }}
+                        
                            </label>
                                     </div>
 
@@ -246,7 +253,16 @@
                     <label for="name" class="md:w-1/3">၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ</label>
                     <label for="" class="md:w-5">-</label>
                         <label for="name"
-                            class="md:w-3/5">{{ $staff->father_address_street.'၊'.$staff->father_address_ward.'၊'.$staff->father_address_township_or_town?->name.'၊'.$staff->father_address_district?->name.'၊'.$staff->father_address_region?->name }}</label>
+                            class="md:w-3/5">
+                            {{ collect([
+                                $staff->father_address_street,
+                                $staff->father_address_ward,
+                                $staff->father_address_township_or_town?->name,
+                                $staff->father_address_district?->name,
+                                $staff->father_address_region?->name,
+                            ])->filter()->implode('၊') }}
+                            
+                            </label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -255,7 +271,16 @@
                         အလုပ်အကိုင်</label>
                     <label for="" class="md:w-5">-</label>
                    
-                        <label for="name" class="md:w-3/5">{{ $staff->mother_name.'၊'.$staff->mother_ethnic?->name.'၊'.$staff->mother_religion?->name.'၊'.$staff->mother_place_of_birth.'၊'.$staff->mother_occupation }}</label>
+                        <label for="name" class="md:w-3/5">
+                            {{ collect([
+                                $staff->mother_name,
+                                $staff->mother_ethnic?->name,
+                                $staff->mother_religion?->name,
+                                $staff->mother_place_of_birth,
+                                $staff->mother_occupation,
+                            ])->filter()->implode('၊') }}
+                            
+                        </label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -264,7 +289,16 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name"
-                            class="md:w-3/5">{{ $staff->mother_address_street.'၊'.$staff->mother_address_ward.'၊'.$staff->mother_address_township_or_town?->name.'၊'.$staff->mother_address_district?->name.'၊'.$staff->mother_address_region?->name }}</label>
+                            class="md:w-3/5">
+                            {{ collect([
+                                $staff->mother_address_street,
+                                $staff->mother_address_ward,
+                                $staff->mother_address_township_or_town?->name,
+                                $staff->mother_address_district?->name,
+                                $staff->mother_address_region?->name,
+                            ])->filter()->implode('၊') }}
+                            
+                        </label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -290,7 +324,10 @@
                     <label for="name" class="md:w-1/3">အလုပ်စတင်ဝင်ရောက်သည့်နေ့နှင့်လက်ရှိရာထူးရသည့်နေ့</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ $staff->join_date }}/{{ $staff->current_rank_date}}</label>
+                        <label for="name" class="md:w-3/5">
+                            {{ collect([$staff->join_date, $staff->current_rank_date])->filter()->implode('/') }}
+
+                        </label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">

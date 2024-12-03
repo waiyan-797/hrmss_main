@@ -36,29 +36,51 @@ class PdfStaffReport53 extends Component
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
         $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
         $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']); 
-        $section->addText('၁။'.'အမည်: '. str_repeat(' ', 5). $staff->name);
-        $section->addText('၂။'.'ငယ်အမည်: '. str_repeat(' ', 5).$staff->nick_name);
-        $section->addText('၃။'.'အခြားအမည်: '. str_repeat(' ', 5).$staff->other_name);
-        $section->addText('၄။'.'အသက်(မွေးသက္ကရာဇ်): '. str_repeat(' ', 5).en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')));
-        $section->addText('၅။'.'လူမျိုးနှင့် ကိုးကွယ်သည့်ဘာသာ: '. str_repeat(' ', 5). ($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
-        $section->addText('၆။'.'အရပ်အမြင့်: '. str_repeat(' ', 5).$staff->height_feet);
-        $section->addText('၇။'.'ဆံပင်အရောင်: '. str_repeat(' ', 5).$staff->hair_color );
-        $section->addText('၈။'.'မျက်စိအရောင်: '. str_repeat(' ', 5).$staff->eye_color);
-        $section->addText('၉။'.'ထင်ရှားသည့် အမှတ်အသား: '. str_repeat(' ', 5).$staff->prominent_mark);
-        $section->addText('၁၀။'.'အသားအရောင်: '. str_repeat(' ', 5).$staff->skin_color);
-        $section->addText('၁၁။'.'ကိုယ်အလေးချိန်: '. str_repeat(' ', 5).$staff->weight);
-        $section->addText('၁၂။'.'မွေးဖွားရာဇာတိ: '. str_repeat(' ', 5).$staff->place_of_birth);
-        $section->addText('၁၃။'.'နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်: '. str_repeat(' ', 5). $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code);
-        $section->addText('၁၄။'.'ယခုနေရပ်လိပ်စာအပြည့်အစုံ: '. str_repeat(' ', 5).$staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name);
-        $section->addText('၁၅။'.'အမြဲတမ်းနေရပ်လိပ်စာအပြည့်အစုံ: '. str_repeat(' ', 5).$staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name);
-        $section->addText('၁၆။'.'ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာ ဖော်ပြရန်မလိုပါ): '. str_repeat(' ', 5).$staff->previous_addresses);
+        $section->addText('၁။'.'အမည်: '. str_repeat(' ', 10
+        ).('-'). $staff->name);
+        $section->addText('၂။'.'ငယ်အမည်: '. str_repeat(' ', 10
+        ).('-'). $staff->nick_name);
+        $section->addText('၃။'.'အခြားအမည်: '. str_repeat(' ', 10
+        ).('-'). $staff->other_name);
+        $section->addText('၄။'.'အသက်(မွေးသက္ကရာဇ်): '. str_repeat(' ', 10
+        ).('-'). en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')));
+        $section->addText('၅။'.'လူမျိုးနှင့် ကိုးကွယ်သည့်ဘာသာ: '. str_repeat(' ', 10
+        ).('-').  ($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
+        $section->addText('၆။'.'အရပ်အမြင့်: '. str_repeat(' ', 10
+        ).('-'). $staff->height_feet);
+        $section->addText('၇။'.'ဆံပင်အရောင်: '. str_repeat(' ', 10
+        ).('-'). $staff->hair_color );
+        $section->addText('၈။'.'မျက်စိအရောင်: '. str_repeat(' ', 10
+        ).('-'). $staff->eye_color);
+        $section->addText('၉။'.'ထင်ရှားသည့် အမှတ်အသား: '. str_repeat(' ', 10
+        ).('-'). $staff->prominent_mark);
+        $section->addText('၁၀။'.'အသားအရောင်: '. str_repeat(' ', 10
+        ).('-'). $staff->skin_color);
+        $section->addText('၁၁။'.'ကိုယ်အလေးချိန်: '. str_repeat(' ', 10
+        ).('-'). $staff->weight);
+        $section->addText('၁၂။'.'မွေးဖွားရာဇာတိ: '. str_repeat(' ', 10
+        ).('-'). $staff->place_of_birth);
+        $section->addText('၁၃။'.'နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်: '. str_repeat(' ', 10
+        ).('-').  $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code);
+        $section->addText('၁၄။'.'ယခုနေရပ်လိပ်စာအပြည့်အစုံ: '. str_repeat(' ', 10
+        ).('-'). $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name);
+        $section->addText('၁၅။'.'အမြဲတမ်းနေရပ်လိပ်စာအပြည့်အစုံ: '. str_repeat(' ', 10
+        ).('-'). $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_township_or_town->name.'/'.$staff->permanent_address_region->name);
+        $section->addText('၁၆။'.'ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာ ဖော်ပြရန်မလိုပါ): '. str_repeat(' ', 10
+        ).('-'). $staff->previous_addresses);
         $section->addText('၁၇။'.'တပ်မတော်သို့ ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်: '. str_repeat(' ', 5));
-        $section->addText('(က)'.'ကိုယ်ပိုင်အမှတ်: '. str_repeat(' ', 5).$staff->military_solider_no);
-        $section->addText('(ခ)'.'တပ်သို့ဝင်သည့်နေ့: '. str_repeat(' ', 5).$staff->military_join_date);
-        $section->addText('(ဂ)'.'ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်: '. str_repeat(' ', 5).$staff->military_dsa_no);
-        $section->addText('(ဃ)'.'ပြန်တမ်းဝင်ဖြစ်သည့်နေ့: '. str_repeat(' ', 5).$staff->military_gazetted_date);
-        $section->addText('(င)'.'တပ်ထွက်သည့်နေ့: '. str_repeat(' ', 5).$staff->military_leave_date);
-        $section->addText('(စ)'.'ထွက်သည့်အကြောင်း: '. str_repeat(' ', 5).$staff->military_leave_reason);
+        $section->addText('(က)'.'ကိုယ်ပိုင်အမှတ်: '. str_repeat(' ', 10
+        ).('-'). $staff->military_solider_no);
+        $section->addText('(ခ)'.'တပ်သို့ဝင်သည့်နေ့: '. str_repeat(' ', 10
+        ).('-'). $staff->military_join_date);
+        $section->addText('(ဂ)'.'ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်: '. str_repeat(' ', 10
+        ).('-'). $staff->military_dsa_no);
+        $section->addText('(ဃ)'.'ပြန်တမ်းဝင်ဖြစ်သည့်နေ့: '. str_repeat(' ', 10
+        ).('-'). $staff->military_gazetted_date);
+        $section->addText('(င)'.'တပ်ထွက်သည့်နေ့: '. str_repeat(' ', 10
+        ).('-'). $staff->military_leave_date);
+        $section->addText('(စ)'.'ထွက်သည့်အကြောင်း: '. str_repeat(' ', 10
+        ).('-'). $staff->military_leave_reason);
         $section->addText('(ဆ)'.'အမှုထမ်းဆောင်ခဲ့သောတပ်များ: '. str_repeat(' ', 5).$staff->military_served_army );
         $section->addText('(ဇ)'.'တပ်တွင်းရာဇဝင်အကျဥ်း/ပြစ်မှု: '. str_repeat(' ', 5).$staff->military_brief_history_or_penalty );
         $section->addText('(ဈ)'.'အငြိမ်းစားလစာ: '. str_repeat(' ', 5).$staff->military_pension);

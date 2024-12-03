@@ -43,5 +43,9 @@ class EducationGroupSeeder extends Seeder
         EducationGroup::create([
             'name' => 'ဒီပလိုမာဘွဲ့',
         ]);
+
+        EducationGroup::create([
+            'name' => 'အခြား',
+        ]);
     }
 }

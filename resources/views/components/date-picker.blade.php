@@ -11,7 +11,7 @@
             new Pikaday({
                 field: $refs.input,
                 format: 'DD-MM-YYYY',
-                yearRange: [1800, new Date().getFullYear()],
+                yearRange: [1800,3000],
                 onSelect: function(date) {
                     const formattedDate = date.toLocaleDateString('en-GB'); // UI format
                     const livewireDate = date.getFullYear() + '-' 
@@ -22,6 +22,7 @@
                 }
             });
         "
+        placeholder="{{ now()->format('d-m-Y') }}"
         type="text"
     />
 </div>

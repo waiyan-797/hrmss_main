@@ -18,7 +18,7 @@
         </div>
         <div class="mt-7 mb-3 ms-7">
             Date
-            {{-- <input type="date" wire:model.live="dateRange"> --}}
+          
             <x-date-picker wire:model.live='filterRange' />
         </div>
         <table class="md:w-full mx-8 my-2">

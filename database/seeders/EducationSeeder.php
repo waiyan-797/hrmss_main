@@ -81,6 +81,7 @@ $items = [
 [57, 'BPA','4'],
 [58, 'B.A (DSA)','4'],
 [59, 'BED','4'],
+
 [60, 'BED (Correspondence)','4'],
 [61, 'B.BSC (Bachelor of Business Science)','4'],
 [62, 'B.Sc (Biochemistry)','5'],
@@ -585,6 +586,8 @@ $items = [
 [561, 'CPA','15'],
 [562, 'DA','15'],
 [563, 'M.E','15'],
+[564, 'PGDCA','5'],
+
 ];
 foreach($items as $item){
     Education::create(array_combine($columns,$item));

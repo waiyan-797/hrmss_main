@@ -334,9 +334,8 @@
 
 
                 <label for="ordered_date" class="block text-sm font-medium text-gray-700">Ordered Date</label>
-                <input type="date" id="ordered_date" wire:model="ordered_date" 
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
-                    placeholder="Enter ordered date">
+                <x-date-picker id="ordered_date" name="ordered_date" wire:model.live="ordered_date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                />
             </div>
         
             <div>
@@ -348,9 +347,10 @@
 
             <div>
                 <label for="transfer_date" class="block text-sm font-medium text-gray-700">transfer date</label>
-                <input type="date" id="transfer_date" wire:model="transfer_date" 
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
-                    placeholder="Enter order number">
+                <x-date-picker id="transfer_date" name="transfer_date" wire:model.live="transfer_date" 
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                />
+                
             </div>
 
 
@@ -359,8 +359,10 @@
         
             <div>
                 <label for="paid_up_to_date" class="block text-sm font-medium text-gray-700">Paid Up To Date</label>
-                <input type="date" id="paid_up_to_date" wire:model="paid_up_to_date" 
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <x-date-picker id="paid_up_to_date" name="paid_up_to_date" wire:model.live="paid_up_to_date" 
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                />
+                
             </div>
         
             <div>

@@ -11,7 +11,7 @@
                 အခြားချီးမြှင့်ငွေ/စရိတ်များ ရရှိသည့်<br>ဝန်ထမ်းဦးရေနှင့် စုစုပေါင်း လစာစရိတ်စာရင်းချုပ်
                 (၃၁-၅-၂၀၂၄)
             </h2>
-{{-- <input type="date" wire:model.live='selectedDate'> --}}
+
              Date
             <x-date-picker wire:model.live='filterRange' />
             <br>

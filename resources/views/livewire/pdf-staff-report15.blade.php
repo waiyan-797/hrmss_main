@@ -16,7 +16,7 @@
                     <label for="" class="md:w-5">၂။ </label>
                     <label for="name" class="md:w-1/3">အသက်(မွေးနေ့သက္ကရာဇ်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->dob }}</label>
+                    <label for="name" class="md:w-3/5">{{ formatDMYmm($staff->dob )}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၃။ </label>
@@ -40,7 +40,7 @@
                     <label for="" class="md:w-5">၆။ </label>
                     <label for="name" class="md:w-1/3">အမှုထမ်းသက်(ဝင်ရောက်သည့်နေ့စွဲ)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</label>
+                    <label for="name" class="md:w-3/5">{{formatDMYmm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၇။ </label>
@@ -118,13 +118,13 @@
                     <label for="name"
                         class="md:w-1/3">နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="" class="md:w-3/5">{{en2mm($staff->abroads->count())}}</label>
+                    <label for="" class="md:w-3/5">{{ $staff->abroads->count() > 0 ? en2mm($staff->abroads->count()  ) : 'မရှိပါ'}}</label>
                 </div>
                 <div class="md:w-full mb-4">
                     <table class="w-full">
                         <thead>
                             <tr>
-                                <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
+                                
                                 <th colspan="2" class="border border-black text-center p-2">ကာလ</th>
                                 <th rowspan="2" class="border border-black text-center p-2">
                                     နောက်ဆုံးသွားရောက်ခဲ့သည့်(၅)နှိင်ငံ</th>
@@ -140,7 +140,7 @@
                         <tbody>
                             @foreach ($staff->abroads as $abroad)
                                 <tr>
-                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
+                                    
                                     <td class="border border-black text-center p-2">{{$abroad->from_date}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->to_date}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
@@ -186,9 +186,9 @@
                 <div class="mb-4">
                     <div class="flex justify-start mb-8">
                         <p class="md:w-8">၁၅။ </p>
-                        <p>အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား
-                            မှန်ကန်ကြောင်း
-                            တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။</p>
+                        <p>
+                            
+                          အထက်ပါ အချက်အလက်များကို မှန်ကန်သည့်အတိုင်းဖြည့်သွင်းရေးသားပါကြောင်း ကိုယ်တိုင် လက်မှန်ရေးထိုးပါသည်။</p>
                     </div>
 
                     <div class="flex justify-left mb-2 items-center">
