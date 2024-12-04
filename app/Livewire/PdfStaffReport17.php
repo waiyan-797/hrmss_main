@@ -30,6 +30,7 @@ class PdfStaffReport17 extends Component
         }, 'staff_pdf_17.pdf');
     }
 
+
     public function go_word($staff_id)
 {
     $staff = Staff::find($staff_id);

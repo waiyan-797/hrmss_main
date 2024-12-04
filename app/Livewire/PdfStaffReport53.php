@@ -31,6 +31,47 @@ class PdfStaffReport53 extends Component
             echo $pdf->output();
         }, 'staff_pdf_53.pdf');
     }
+    public function go_wordd(){
+        $inputFileName = resource_path('samples/aa.docx');
+$phpWord = IOFactory::load($inputFileName);
+$newPhpWord = new PhpWord();
+foreach ($phpWord->getSections() as $section) {
+    // Add a section to the new document
+    $newSection = $newPhpWord->addSection();
+
+    // Iterate through elements in the original section
+    foreach ($section->getElements() as $element) {
+        if (get_class($element) === 'PhpOffice\PhpWord\Element\Text') {
+            // Copy text elements (you can modify how text is added here)
+            $newSection->addText($element->getText(), $element->getFontStyle(), $element->getParagraphStyle());
+        } elseif (get_class($element) === 'PhpOffice\PhpWord\Element\Table') {
+            // Copy table elements
+            $newSection->addTable($element->getStyle());
+            foreach ($element->getRows() as $row) {
+                $newRow = $newSection->addRow();
+                foreach ($row->getCells() as $cell) {
+                    $newRow->addCell($cell->getWidth(), $cell->getCellStyle())->addText($cell->getText());
+                }
+            }
+        }
+        $fileName = 'staff_report_' . '.docx';
+        $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
+
+        return response()->stream(
+            function () use ($objWriter) {
+                $objWriter->save('php://output');
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+            ],
+        );
+
+     }
+}
+
+    }
     public function go_word($staff_id)
     {
         $staff = Staff::find($staff_id);

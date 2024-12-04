@@ -45,9 +45,9 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name"
-                            class="md:w-3/5">{{ $staff->ethnic->name }}/{{ $staff->religion?->name }}</label>
+                            class="md:w-3/5">{{collect([$staff->ethnic->name,$staff->religion?->name,])->filter()->implode('၊')}}</label>
                                     </div>
-
+                                   
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၆။ </label>
                     <label for="name" class="md:w-1/3">အရပ်အမြင့်</label>
@@ -109,7 +109,7 @@
                     <label for="name" class="md:w-1/3">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</label>
                     <label for="" class="md:w-5">-</label>
                   
-                    <label for="name" class="md:w-3/5">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .en2mm( $staff->nrc_code )}}</label>
+                    <label for="name" class="md:w-3/5">{{collect([$staff->nrc_region_id->name,$staff->nrc_township_code->name,$staff->nrc_sign->name,en2mm( $staff->nrc_code )])->filter()->implode('၊')}}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -118,9 +118,10 @@
                     <label for="" class="md:w-5">-</label>
 
                     <label for="name" class="md:w-3/5">
-                        {{ $staff->current_address_street. $staff->current_address_ward. '၊'.$staff->current_address_township_or_town->name . '၊' . $staff->current_address_region->name }}
+                        {{collect([$staff->current_address_street,$staff->current_address_ward,$staff->current_address_township_or_town->name,$staff->current_address_region->name,])->filter()->implode('၊')}}
                     </label>
                                     </div>
+                                   
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၅။ </label>
@@ -128,8 +129,9 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name"
-                            class="md:w-3/5">{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_township_or_town->name.'/'.$staff->permanent_address_region->name }}</label>
+                            class="md:w-3/5">{{collect([$staff->permanent_address_street,$staff->permanent_address_ward,$staff->permanent_address_township_or_town->name,$staff->permanent_address_region->name,])->filter()->implode('၊')}}</label>
                                     </div>
+                                   
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၆။ </label>
@@ -790,10 +792,15 @@
                         ဘာသာရပ်အတိအကျဖော်ပြရန်</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ $staff->last_school_name }}၊
-                            {{ $staff->last_school_subject }}၊ {{ $staff->last_school_row_no }}၊
-                            {{ $staff->last_school_major }}</label>
+                        <label for="name" class="md:w-3/5">{{ collect([
+                            $staff->last_school_name,
+                            $staff->last_school_subject,
+                            $staff->last_school_row_no,
+                            $staff->last_school_major,
+                        ])->filter()->implode('၊') }}</label>
                                     </div>
+
+                                   
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၃။ </label>
@@ -902,9 +909,13 @@
                         အလုပ်အကိုင်၊ လူမျိူး၊ တိုင်းပြည်၊ မည်ကဲ့သို့ ရင်းနှီးသည်</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ $staff->foreigner_friend_name.'၊'.$staff->foreigner_friend_occupation.'၊'.$staff->foreigner_friend_nationality?->name.'၊'.$staff->foreigner_friend_country?->name.'၊'.$staff->foreigner_friend_how_to_know }}</label>
+                        <label for="name" class="md:w-3/5">{{ collect([
+                            $staff->foreigner_friend_name,
+                            $staff->foreigner_friend_occupation,
+                            $staff->foreigner_friend_nationality?->name,
+                            $staff->foreigner_friend_country?->name,$staff->foreigner_friend_how_to_know,
+                        ])->filter()->implode('၊') }}</label>
                                     </div>
-
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၂။ </label>
                     <label for="name" class="md:w-1/3">မိမိအား ထောက်ခံသည့်ပုဂ္ဂိုလ် (စစ်ဘက်/နယ်ဘက်အရာရှိ/

@@ -22,20 +22,24 @@
                     <label for="" class="md:w-5">၃။ </label>
                     <label for="name" class="md:w-1/3">လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->ethnic->name }}/{{ $staff->religion?->name }}</label>
+                    <label for="name" class="md:w-3/5">{{ collect([$staff->ethnic->name,$staff->religion?->name,])->filter()->implode('၊')}}</label>
                 </div>
+                 {{-- {{ $staff->ethnic->name }}/{{ $staff->religion?->name }} --}}
+                
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၄။ </label>
                     <label for="name" class="md:w-1/3">အမျိုးသားမှတ်ပုံတင်အမှတ်</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .en2mm( $staff->nrc_code )}}</label>
+                    <label for="name" class="md:w-3/5">{{ collect([$staff->nrc_region_id->name,$staff->nrc_township_code->name,$staff->nrc_sign->name,en2mm( $staff->nrc_code )])->filter()->implode('၊') }}</label>
+                    {{-- {{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .en2mm( $staff->nrc_code )}} --}}
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၅။ </label>
                     <label for="name" class="md:w-1/3">ရာထူး/ ဌာန</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{$staff->current_rank->name .'/'. $staff->current_department->name}}</label>
+                    <label for="name" class="md:w-3/5">{{collect([$staff->current_rank->name,$staff->current_department->name,])->filter()->implode('၊')}}</label>
                 </div>
+                {{-- {{$staff->current_rank->name .'/'. $staff->current_department->name}} --}}
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၆။ </label>
                     <label for="name" class="md:w-1/3">အမှုထမ်းလုပ်သက်၊ ဝင်ရောက်သည့်ရက်စွဲ</label>
@@ -50,11 +54,12 @@
                     <label for="" class="md:w-5">၇။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိ နေရပ်လိပ်စာ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">
-                        {{ $staff->current_address_street. $staff->current_address_ward. '၊'.$staff->current_address_township_or_town->name . '၊' . $staff->current_address_region->name }}
+                    <label for="name" class="md:w-3/5">{{collect([$staff->current_address_street,$staff->current_address_ward,$staff->current_address_township_or_town->name,$staff->current_address_region->name])->filter()->implode('၊')}}
+                        
                     </label>
                     
                 </div>
+                {{-- {{ $staff->current_address_street. $staff->current_address_ward. '၊'.$staff->current_address_township_or_town->name . '၊' . $staff->current_address_region->name }} --}}
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၈။ </label>
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
@@ -175,7 +180,7 @@
                                 @foreach ($staff->spouses as $spouse)
                                     <tr>
                                         <td class="border border-black p-2">{{$spouse->name}}</td>
-                                        <td class="border border-black p-2">{{$spouse->ethnic->name .'/'. $spouse->religion->name}}</td>
+                                        <td class="border border-black p-2">{{collect([$spouse->ethnic->name,$spouse->religion->name,])->filter()->implode('၊')}}</td>
                                         <td class="border border-black p-2">{{$spouse->place_of_birth}}</td>
                                         <td class="border border-black p-2">{{$spouse->occupation}}</td>
                                         <td class="border border-black p-2">{{$spouse->address}}</td>

@@ -145,8 +145,13 @@
                     <label for="name" class="md:w-1/3">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</label>
                     <label for="name" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">
-                        {{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name . en2mm($staff->nrc_code)  }} </label>
+                    <label for="name" class="md:w-3/5">{{ collect([
+                        $staff->nrc_region_id->name,
+                        $staff->nrc_township_code->name,
+                        $staff->nrc_sign->name,
+                        en2mm($staff->nrc_code),
+                    ])->filter()->implode('၊') }}
+                         </label>
 
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -155,19 +160,31 @@
                     <label for="name" class="md:w-5">-</label>
 
                     <label for="name" class="md:w-3/5">
-                        {{ $staff->current_address_street. $staff->current_address_ward. '၊'.$staff->current_address_township_or_town->name . '၊' . $staff->current_address_region->name }}
+                        {{ collect([
+                            $staff->current_address_street,
+                            $staff->current_address_ward,
+                            $staff->current_address_township_or_town->name,
+                            $staff->current_address_region->name ,
+                        ])->filter()->implode('၊') }}
                     </label>
 
                 </div>
+                
                 <div class="flex justify-between w-full mb-2">
                     <label for="name" class="md:w-5">၂၃။ </label>
                     <label for="name" class="md:w-1/3">အမြဲတမ်းလက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ</label>
                     <label for="name" class="md:w-5">-</label>
 
                     <label for="name"
-                        class="md:w-3/5">{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name }}</label>
+                        class="md:w-3/5">{{ collect([
+                            $staff->permanent_address_street,
+                            $staff->permanent_address_ward,
+                            $staff->permanent_address_township_or_town->name,
+                            $staff->permanent_address_region->name ,
+                        ])->filter()->implode('၊') }}</label>
 
                 </div>
+                
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၄။ </label>
                     <label for="name"
@@ -477,38 +494,64 @@
                                         အလုပ်အကိုင်</td>
                                     <td class="p-2 w-6 border border-black">-</td>
                                     <td class="p-2 w-100 border border-black">
-                                        {{ $staff->father_name.'၊'.$staff->father_ethnic?->name.'၊'.$staff->father_religion?->name.'၊'.$staff->father_place_of_birth.'၊'.$staff->father_occupation }}
+                                        {{ collect([
+                                            $staff->father_name,
+                                            $staff->father_ethnic?->name,
+                                            $staff->father_religion?->name,
+                                            $staff->father_place_of_birth,
+                                            $staff->father_occupation,
+                                        ])->filter()->implode('၊') }}
                                     </td>
                                 </tr>
                             </tbody>
+                            
                             <tbody class="text-center h-8 p-2">
                                 <tr>
                                     <td class="p-2 w-14 border border-black">၂။</td>
                                     <td class="p-2 w-100 border border-black">၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ</td>
                                     <td class="p-2 w-6 border border-black">-</td>
-                                    <td class="p-2 w-100 border border-black">
-                                        {{ $staff->father_address_street.'၊'.$staff->father_address_ward.'၊'.$staff->father_address_township_or_town?->name.'၊'.$staff->father_address_district?->name.'၊'.$staff->father_address_region?->name }}</td>
+                                    <td class="p-2 w-100 border border-black">{{ collect([
+                                        $staff->father_address_street,
+                                        $staff->father_address_ward,
+                                        $staff->father_address_township_or_town?->name,
+                                        $staff->father_address_region?->name,
+                                    ])->filter()->implode('၊') }}
+                                       </td>
                                 </tr>
                             </tbody>
+                            
                             <tbody class="text-center h-8 p-2">
                                 <tr>
                                     <td class="p-2 w-14 border border-black">၃။</td>
                                     <td class="p-2 w-100 border border-black">အမိအမည်၊လူမျိုး၊ကိုးကွယ်သည့်ဘာသာ  နှင့်
                                         အလုပ်အကိုင်</td>
                                     <td class="p-2 w-6 border border-black">-</td>
-                                    <td class="p-2 w-100 border border-black"> {{ $staff->mother_name.'၊'.$staff->mother_ethnic?->name.'၊'.$staff->mother_religion?->name.'၊'.$staff->mother_place_of_birth.'၊'.$staff->mother_occupation }}
+                                    <td class="p-2 w-100 border border-black"> {{ collect([
+                                        $staff->mother_name,
+                                        $staff->mother_ethnic?->name,
+                                        $staff->mother_religion?->name,
+                                        $staff->mother_place_of_birth,
+                                        $staff->mother_occupation,
+                                    ])->filter()->implode('၊') }} 
                                     </td>
                                 </tr>
                             </tbody>
+                           
                             <tbody class="text-center h-8 p-2">
                                 <tr>
                                     <td class="p-2 w-14 border border-black">၄။</td>
                                     <td class="p-2 w-100 border border-black">၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ</td>
                                     <td class="p-2 w-6 border border-black">-</td>
                                     <td class="p-2 w-100 border border-black">
-                                        {{ $staff->mother_address_street.'၊'.$staff->mother_address_ward.'၊'.$staff->mother_address_township_or_town?->name.'၊'.$staff->mother_address_district?->name.'၊'.$staff->mother_address_region?->name }}</td>
+                                        {{ collect([
+                                            $staff->mother_address_street,
+                                            $staff->mother_address_ward,
+                                            $staff->mother_address_township_or_town?->name,
+                                            $staff->mother_address_region?->name,
+                                        ])->filter()->implode('၊') }}</td>
                                 </tr>
                             </tbody>
+                            
                         </table>
                     </div>
                 </div>
