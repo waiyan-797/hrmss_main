@@ -7,7 +7,7 @@
     </div>
     <div>
         <x-input-label for="လက်ရှိအလုပ်အကိုင်နှင့်အဆင့်" :value="__('လက်ရှိအလုပ်အကိုင်နှင့်အဆင့်')" />
-        <x-select wire:model="current_rank_id" :values="$ranks" placeholder="လက်ရှိအလုပ်အကိုင်နှင့်အဆင့်ရွေးပါ" id="current_rank_id" name="current_rank_id" class="mt-1 block w-full" required/>
+        <x-searchable-select property="current_rank_id" :values="$ranks" placeholder="လက်ရှိအလုပ်အကိုင်နှင့်အဆင့်ရွေးပါ" id="current_rank_id" name="current_rank_id" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('current_rank_id')" />
     </div>
     <div>
@@ -19,12 +19,12 @@
     </div>
     <div>
         <x-input-label for="လက်ရှိဌာန" :value="__('လက်ရှိဌာန')" />
-        <x-select wire:model="current_department_id" :values="$departments" placeholder="လက်ရှိဌာနရွေးပါ" id="current_department_id" name="current_department_id" class="mt-1 block w-full" required/>
+        <x-searchable-select property="current_department_id" :values="$departments" placeholder="လက်ရှိဌာနရွေးပါ" id="current_department_id" name="current_department_id" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('current_department_id')" />
     </div>
     <div>
         <x-input-label for="ပြောင်းရွေ့သည့်ဌာန" :value="__('ပြောင်းရွေ့သည့်ဌာန')" />
-        <x-select wire:model="transfer_department_id" :values="$departments" placeholder="ပြောင်းရွေ့သည့်ဌာနရွေးပါ" id="transfer_department_id" name="transfer_department_id" class="mt-1 block w-full" />
+        <x-searchable-select property="transfer_department_id" :values="$departments" placeholder="ပြောင်းရွေ့သည့်ဌာနရွေးပါ" id="transfer_department_id" name="transfer_department_id" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('transfer_department_id')" />
     </div>
     <div>
@@ -36,9 +36,9 @@
     
     <div>
         <x-input-label for="current_division_id" :value="__('လက်ရှိဌာနခွဲ')" />
-        <x-select
+        <x-searchable-select 
             :disabled="!auth()->user()->AdminHR()"
-            wire:model="current_division_id"
+            property="current_division_id"
             :values="$divisions"
             placeholder="လက်ရှိဌာနခွဲ‌ရွေးပါ"
             id="current_division_id"
@@ -52,17 +52,17 @@
     </div>
     <div>
         <x-input-label for="တွဲဖက်အင်အားဖြစ်လျှင် ဌာန" :value="__('တွဲဖက်အင်အားဖြစ်လျှင် ဌာန')" />
-        <x-select wire:model="side_department_id" :values="$departments" placeholder="တွဲဖက်အင်အားဖြစ်လျှင် ဌာနရွေးပါ" id="side_department_id" name="side_department_id" class="mt-1 block w-full" />
+        <x-searchable-select property="side_department_id" :values="$departments" placeholder="တွဲဖက်အင်အားဖြစ်လျှင် ဌာနရွေးပါ" id="side_department_id" name="side_department_id" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('side_department_id')" />
     </div>
     <div>
         <x-input-label for="တွဲဖက်အင်အားဖြစ်လျှင် ဌာနခွဲ" :value="__('တွဲဖက်အင်အားဖြစ်လျှင် ဌာနခွဲ')" />
-        <x-select wire:model="side_division_id" :values="$divisions" placeholder="တွဲဖက်အင်အားဖြစ်လျှင် ဌာနခွဲရွေးပါ" id="side_division_id" name="side_division_id" class="mt-1 block w-full" />
+        <x-searchable-select property="side_division_id" :values="$divisions" placeholder="တွဲဖက်အင်အားဖြစ်လျှင် ဌာနခွဲရွေးပါ" id="side_division_id" name="side_division_id" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('side_division_id')" />
     </div>
     <div>
         <x-input-label for="လစာနှင့်စရိတ် ကုန်ကျခံမည့်ဌာန" :value="__('လစာနှင့်စရိတ် ကုန်ကျခံမည့်ဌာန')" />
-        <x-select wire:model="salary_paid_by" :values="$departments" placeholder="လစာနှင့်စရိတ် ကုန်ကျခံမည့်ဌာနရွေးပါ" id="salary_paid_by" name="salary_paid_by" class="mt-1 block w-full" />
+        <x-searchable-select property="salary_paid_by" :values="$departments" placeholder="လစာနှင့်စရိတ် ကုန်ကျခံမည့်ဌာနရွေးပါ" id="salary_paid_by" name="salary_paid_by" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('salary_paid_by')" />
     </div>
     <div>
@@ -94,7 +94,7 @@
 
     <div>
         <x-input-label for="လစာဝင်ငွေ" :value="__('လစာဝင်ငွေ')" />
-        <x-select wire:model="payscale_id" :values="$payscales" placeholder="လစာဝင်ငွေရွေးပါ" id="payscale_id" name="payscale_id" class="mt-1 block w-full" required/>
+        <x-searchable-select property="payscale_id" :values="$payscales" placeholder="လစာဝင်ငွေရွေးပါ" id="payscale_id" name="payscale_id" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('payscale_id')" />
     </div>
     <div>

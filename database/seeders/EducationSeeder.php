@@ -588,8 +588,8 @@ $items = [
 [563, 'M.E','15'],
 [564, 'PGDCA','5'],
 [565, 'B.C.SC(DSA)','2'],
-[565, 'M.Sc(Engg:&Tech)','5'],
-[565, 'B.E(Electrical Power)(DSTA)','5'],
+[566, 'M.Sc(Engg:&Tech)','5'],
+[567, 'B.E(Electrical Power)(DSTA)','5'],
 
 ];
 foreach($items as $item){

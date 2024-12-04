@@ -53,17 +53,21 @@
    
     <div>
         <x-input-label for="ကျား/မ" :value="__('ကျား/မ')" />
-        <x-select wire:model="gender_id" :values="$genders" placeholder="ကျား/မရွေးပါ" id="gender_id" name="gender_id" class="mt-1 block w-full" required/>
+        <x-searchable-select :values="$genders" property="gender_id"   placeholder="ကျား/မရွေးပါ" name="gender_id" class="mt-1 block w-full" />
+
+        
         <x-input-error class="mt-2" :messages="$errors->get('gender_id')" />
     </div>
     <div>
         <x-input-label for="လူမျိုး" :value="__('လူမျိုး')" />
-        <x-select wire:model="ethnic_id" :values="$ethnics" placeholder="လူမျိုးရွေးပါ" id="ethnic_id" name="ethnic_id" class="mt-1 block w-full"/>
+        <x-searchable-select  id="ethnic_id" name="ethnic_id" class="mt-1 block w-full" :values="$ethnics" property="ethnic_id"  placeholder="လူမျိုးရွေးပါ"   placeholder="ကျား/မရွေးပါ" name="gender_id" class="mt-1 block w-full" />
+
+        
         <x-input-error class="mt-2" :messages="$errors->get('ethnic_id')" />
     </div>
     <div>
         <x-input-label for="ဘာသာ" :value="__('ဘာသာ')" />
-        <x-select wire:model="religion_id" :values="$religions" placeholder="ဘာသာရွေးပါ" id="religion_id" name="religion_id" class="mt-1 block w-full" />
+        <x-searchable-select property="religion_id" :values="$religions" placeholder="ဘာသာရွေးပါ" id="religion_id" name="religion_id" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('religion_id')" />
     </div>
     <div>
@@ -106,12 +110,12 @@
     </div>
     <div>
         <x-input-label for="သွေးအုပ်စု" :value="__('သွေးအုပ်စု')" />
-        <x-select wire:model="blood_type_id" :values="$blood_types" placeholder="သွေးအုပ်စုရွေးပါ" id="blood_type_id" name="blood_type_id" class="mt-1 block w-full"/>
+        <x-searchable-select property="blood_type_id" :values="$blood_types" placeholder="သွေးအုပ်စုရွေးပါ" id="blood_type_id" name="blood_type_id" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('blood_type_id')" />
     </div>
     <div>
         <x-input-label for="အိမ်ထောင်သည်" :value="__('အိမ်ထောင်သည်')" />
-        <x-select wire:model="marital_status_id" :values="$marital_statuses" placeholder="အိမ်ထောင်သည်ရွေးပါ" id="marital_status_id" name="marital_status_id" class="mt-1 block w-full"/>
+        <x-searchable-select property="marital_status_id" :values="$marital_statuses" placeholder="အိမ်ထောင်သည်ရွေးပါ" id="marital_status_id" name="marital_status_id" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('marital_status_id')" />
     </div>
     <div>
@@ -130,15 +134,15 @@
         <x-input-label :value="__('နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်(တိုင်းဒေသကြီး/ပြည်နယ်, မြို့/မြို့နယ်, အမှတ်အသား, ကုဒ်)')" />
         <div class="flex flex-row justify-center gap-4">
             <div class="w-full">
-                <x-select wire:model.change="nrc_region_id" :values="$nrc_region_ids" placeholder="Select Region ID" id="nrc_region_id" name="nrc_region_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.live="nrc_region_id" :values="$nrc_region_ids" placeholder="Select Region ID" id="nrc_region_id" name="nrc_region_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('nrc_region_id')" />
             </div>
             <div class="w-full">
-                <x-select wire:model.change="nrc_township_code_id" :values="$nrc_township_codes" placeholder="Select Township Code" id="nrc_township_code_id" name="nrc_township_code_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.live="nrc_township_code_id" :values="$nrc_township_codes" placeholder="Select Township Code" id="nrc_township_code_id" name="nrc_township_code_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('nrc_township_code_id')" />
             </div>
             <div class="w-full">
-                <x-select wire:model.change="nrc_sign_id" :values="$nrc_signs" placeholder="Select Sign" id="nrc_sign_id" name="nrc_sign_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.live="nrc_sign_id" :values="$nrc_signs" placeholder="Select Sign" id="nrc_sign_id" name="nrc_sign_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('nrc_sign_id')" />
             </div>
             <div class="w-full">
@@ -196,11 +200,11 @@
         <x-input-label :value="__('လက်ရှိနေရပ်လိပ်စာ အပြည့်အစုံ (ပြည်နယ်/တိုင်းဒေသကြီး,ခရိုင်,မြို့/မြို့နယ်,ရပ်ကွက်,လမ်း,အိမ်နံပါတ်)')" />
         <div class="flex flex-row gap-2">
             <div>
-                <x-select wire:model.change="current_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="current_address_region_id" name="current_address_region_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.live="current_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="current_address_region_id" name="current_address_region_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_region_id')" />
             </div>
             <div>
-                <x-select wire:model="current_address_township_or_town_id" :values="$current_address_townships" placeholder="မြို့/မြို့နယ်" id="current_address_township_or_town_id" name="current_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.live="current_address_township_or_town_id" :values="$current_address_townships" placeholder="မြို့/မြို့နယ်" id="current_address_township_or_town_id" name="current_address_township_or_town_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_township_or_town_id')" />
             </div>
             <div>
@@ -221,11 +225,11 @@
         <x-input-label :value="__('အမြဲတမ်းနေရပ်လိပ်စာ အပြည့်အစုံ (ပြည်နယ်/တိုင်းဒေသကြီး,ခရိုင်,မြို့/မြို့နယ်,ရပ်ကွက်,လမ်း,အိမ်နံပါတ်)')" />
         <div class="flex flex-row gap-2">
             <div>
-                <x-select wire:model.change="permanent_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="permanent_address_region_id" name="permanent_address_region_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.live="permanent_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="permanent_address_region_id" name="permanent_address_region_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_region_id')" />
             </div>
             <div>
-                <x-select wire:model="permanent_address_township_or_town_id" :values="$permanent_address_townships" placeholder="မြို့/မြို့နယ်" id="permanent_address_township_or_town_id" name="permanent_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-select wire:model.live="permanent_address_township_or_town_id" :values="$permanent_address_townships" placeholder="မြို့/မြို့နယ်" id="permanent_address_township_or_town_id" name="permanent_address_township_or_town_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_township_or_town_id')" />
             </div>
             <div>

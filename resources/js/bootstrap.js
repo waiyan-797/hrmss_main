@@ -8,3 +8,4 @@ window.Pikaday = Pikaday;
 
 import moment from 'moment';
 window.moment = moment; //
+
