@@ -99,6 +99,7 @@ if (! function_exists('dateDiff')) {
 if (! function_exists('dateDiffYMD')) {
     function dateDiffYMD($from_date, $to_date)
     {
+        
         $diff = \Carbon\Carbon::parse($from_date)->diff(\Carbon\Carbon::parse($to_date));
         $diff_year = $diff->y ? en2mm($diff->y).' နှစ် ' : '';
         $diff_month = $diff->m ? en2mm($diff->m).' လ ' : '';
@@ -107,6 +108,23 @@ if (! function_exists('dateDiffYMD')) {
         return $diffYMD  ;
     }
 }
+
+
+if (! function_exists('dateDiffYMDWithoutDays')) {  //ရက်မပါ နှစ်နှင့်လပါပဲ
+    function dateDiffYMDWithoutDays($from_date, $to_date)
+    {
+        
+        $diff = \Carbon\Carbon::parse($from_date)->diff(\Carbon\Carbon::parse($to_date));
+        $diff_year = $diff->y ? en2mm($diff->y).' နှစ် ' : '';
+        $diff_month = $diff->m ? en2mm($diff->m).' လ ' : '';
+        // $diff_day = $diff->d ? en2mm($diff->d).' ရက် ' : '';
+        $diffYMD = "{$diff_year} {$diff_month} ";
+        return $diffYMD  ;
+    }
+}
+
+
+
 
 if (!function_exists('mmDateFormat')) {
     function mmDateFormat($year, $month)
