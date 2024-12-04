@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -85,7 +85,7 @@
     </style>
 </head>
 <body>
-    <page size="A4">
+    <page size="A4"> --}}
 
         <table class="border-collapse">
             <thead>
@@ -204,15 +204,11 @@
             </tbody>
         </table>
 
-        <div class="my-2">
-            <p class="ml-10 w-1-5">ရှင်းလင်းချက်။</p>
-            <p class="w-3-4">လက်ထောက်ညွှန်ကြားရေးမှူး ဒေါ်ဧဧသန့်သည် လုပ်သက် ၁၀နှစ်အထက်သို့ရောက်ရှိ<br>လက်ထောက်ညွှန်ကြားရေးမှူး ‌ဒေါ်မေသူဇာဝင့်သည် လုပ်သက် ၁၀နှစ်အထက်သို့ရောက်ရှိ</p>
-        </div>
-
-        <p class="float-right mr-32">(လက်မှတ်)<br>တာဝန်ခံအရာရှိ</p>
+        
+            {{-- <p class="float-right mr-32">(လက်မှတ်)<br>တာဝန်ခံအရာရှိ</p>
 
 
 
 
-</body>
-</html>
+    </body>
+    </html> --}}

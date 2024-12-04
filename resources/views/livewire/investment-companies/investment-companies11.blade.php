@@ -3,6 +3,7 @@
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
             <br><br>
             
             {{-- <input type="date"  wire:model.live='filterRange'>    --}}
@@ -142,12 +143,11 @@
                 </tbody>
             </table>
 
-            <div class="flex justify-start my-2">
-              <p class="w-1/5 ml-10">ရှင်းလင်းချက်။</p>
-              <p class="w-3/4">လက်ထောက်ညွှန်ကြားရေးမှူး ဒေါ်ဧဧသန့်သည် လုပ်သက် ၁၀နှစ်အထက်သို့ရောက်ရှိ<br>လက်ထောက်ညွှန်ကြားရေးမှူး ‌ဒေါ်မေသူဇာဝင့်သည် လုပ်သက် ၁၀နှစ်အထက်သို့ရောက်ရှိ</p>
+            <div>
+            <p class="float-right mr-32">(လက်မှတ်)<br>တာဝန်ခံအရာရှိ</p>
+
             </div>
 
-            <p class="float-right mr-32">(လက်မှတ်)<br>တာဝန်ခံအရာရှိ</p>
 
         </div>
     </div>

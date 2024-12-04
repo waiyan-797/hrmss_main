@@ -97,20 +97,17 @@ class PdfStaffReport19 extends Component
             $table->addCell(2000)->addText('-', ['align' => 'center']);
             $table->addCell(5000)->addText($education->education->name . '၊', ['align' => 'right']);
         }
-        // sdfdf
+        
         $table->addRow();
-        $table->addCell(5000)->addText('၁၂။တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်:');
+        $table->addCell(4000)->addText('၁၂။တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
-        $table->addCell(5000)->addText();
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(2000)->addText('ဘာသာစကား', ['bold' => true]);
-        $table->addCell(2000)->addText('တတ်ကျွမ်းသည့်အဆင့်', ['bold' => true]);
-        foreach ($staff->staff_languages as $lang) {
+        $table->addCell(5000)->addText('', ['align' => 'right']);
+
+       foreach ($staff->staff_languages as $lang) {
             $table->addRow();
-            $table->addCell(2000)->addText($lang->language);
-            $table->addCell(2000)->addText($lang->rank);
-           
+            $table->addCell(4000)->addText('', ['align' => 'center']);
+            $table->addCell(2000)->addText('-', ['align' => 'center']);
+            $table->addCell(5000)->addText($lang->language.'၊'.$lang->rank , ['align' => 'right']);
         }
         $section->addText('၁၃။'.'တက်ရောက်ခဲ့သည့်သင်တန်းများ', ['bold' => true]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);

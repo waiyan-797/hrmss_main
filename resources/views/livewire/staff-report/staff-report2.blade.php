@@ -34,21 +34,40 @@
                     <tbody>
                         @foreach ($staffs as $staff)
                             <tr class="border-b">
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{$loop->index + 1}}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{ en2mm($loop->index + 1)}}</td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600">{{$staff->name}}</td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600">{{$staff->currentRank?->name}}</td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{$staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code  }}</td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{$staff->current_department?->name}}</td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y'))}}</td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{en2mm(Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y'))}}</td>
-                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{en2mm(Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y'))}}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{$staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .en2mm( $staff->nrc_code ) }}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{$staff->current_division?->nick_name}}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{en2mm(
+                                    Carbon\Carbon::parse($staff->dob)->format('j-n-Y')
+                                    )}}</td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">{{en2mm(Carbon\Carbon::parse($staff->join_date)->format('j-n-Y'))}}
+                                <br>
+                                {{dateDiffYMDWithoutDays($staff->join_date , now())}}
+                                </td>
                                 <td class="px-4 py-2 text-center text-sm text-gray-600">
-                                    @foreach ($staff->staff_educations as $edu)
+                                    {{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')
+                                    ->slice(1, 1)
+                                    ->first()?->from_date)->format('j-n-Y'))}}
+                                    <br>
+                                    {{dateDiffYMDWithoutDays(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('j-n-Y') , now())}}
+                                </td>
+
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">
+                                    {{en2mm(Carbon\Carbon::parse($staff->current_rank_date)->format('j-n-Y'))}}
+                                <br>
+                                {{dateDiffYMDWithoutDays(Carbon\Carbon::parse($staff->current_rank_date)->format('j-n-Y') , now())}}
+                                </td>
+                                <td class="px-4 py-2 text-center text-sm text-gray-600">
+                                    @foreach ($staff->staff_educations as  $key=>  $edu)
                                         <div class="mb-2">
-                                            <span class="font-semibold">{{ $edu->education_group->name }}</span> -
-                                            <span>{{ $edu->education_type->name }}</span>,
+                                            {{-- <span class="font-semibold">{{ $edu->education_group?->name }}</span> - --}}
+                                            {{-- <span>{{ $edu->education_type?->name }}</span>, --}}
                                             <span>{{ $edu->education?->name }}</span>
+                                            @if($key > 0 ) 
+                                            ,
+                                            @endif 
                                         </div>
                                     @endforeach
                                 </td>

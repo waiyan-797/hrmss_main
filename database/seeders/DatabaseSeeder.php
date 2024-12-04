@@ -52,7 +52,8 @@ class DatabaseSeeder extends Seeder
             MinistrySeeder::class,
             RoleSeeder::class ,
             StatusSeeder::class,
-            UserSeeder::class
+            UserSeeder::class ,
+            LanguageSeeder::class
         ]);
     }
 }

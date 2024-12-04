@@ -102,15 +102,10 @@ $table->addRow();
 $table->addCell(4000)->addText('၁၂။ မွေးဖွားရာဇာတိ:');
 $table->addCell(2000)->addText('-', ['align' => 'center']);
 $table->addCell(5000)->addText($staff->place_of_birth, ['align' => 'right']);
-
 $table->addRow();
-$table->addCell(4000)->addText('၁၃။ နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်:');
+$table->addCell(4000)->addText('၁၃။နိုင်ငံသားစီစစ်ရေးကတ်ပြားအမှတ် :');
 $table->addCell(2000)->addText('-', ['align' => 'center']);
-$table->addCell(5000)->addText(
-    $staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . 
-    $staff->nrc_sign->name . '/' . $staff->nrc_code, 
-    ['align' => 'right']
-);
+$table->addCell(5000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
 
 $table->addRow();
 $table->addCell(4000)->addText('၁၄။ ယခုနေရပ်လိပ်စာအပြည့်အစုံ:');
@@ -120,26 +115,18 @@ $table->addCell(5000)->addText(
     $staff->current_address_ward . '/' . 
     $staff->current_address_region->name . '/' . 
     $staff->current_address_township_or_town->name, 
-    ['align' => 'right']
+    
 );
+$table->addRow();
+$table->addCell(4000)->addText('၁၅။အမြဲတမ်းနေရပ်လိပ်စာ:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name);
 
 $table->addRow();
-$table->addCell(4000)->addText('၁၅။ အမြဲတမ်းနေရပ်လိပ်စာအပြည့်အစုံ:');
+$table->addCell(4000)->addText('၁၆။ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ:');
 $table->addCell(2000)->addText('-', ['align' => 'center']);
-$table->addCell(5000)->addText(
-    $staff->permanent_address_street . '/' . 
-    $staff->permanent_address_ward . '/' . 
-    $staff->permanent_address_region->name . '/' . 
-    $staff->permanent_address_township_or_town->name, 
-    ['align' => 'right']
-);
-
-
+$table->addCell(5000)->addText($staff->previous_addresses);
 $table->addRow();
-$table->addCell(4000)->addText('၁၆။ ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ:');
-$table->addCell(2000)->addText('-', ['align' => 'center']);
-$table->addCell(5000)->addText($staff->previous_addresses, ['align' => 'right']);
-    $table->addRow();
 $table->addCell(4000)->addText('၁၇။ တပ်မတော်သို့ ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်:');
 $table->addCell(2000)->addText('-', ['align' => 'center']);
 $table->addCell(5000)->addText('', ['align' => 'right']);

@@ -2,11 +2,14 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Exports\PA11;
 use App\Models\Staff;
 use Carbon\Carbon;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class InvestmentCompanies11 extends Component
 {
@@ -20,6 +23,14 @@ class InvestmentCompanies11 extends Component
     public $Tomonth;
     public $Toyear;
 
+
+    public function go_excel() 
+    {
+        return Excel::download(new PA11($this->filterRange ,
+        $this->filterRangeTo), 'users.xlsx');
+    }
+
+    
     public function go_pdf()
     {
 
@@ -320,7 +331,7 @@ $table->addCell(2000, ['vMerge' => 'continue']);
 
     public function mount()
     {
-        $this->filterRange = Carbon::now()->subMonth()->format('Y-m-d'); // Format: 'YYYY-MM'
+        $this->filterRange = Carbon::now()->subMonth()->format('Y-m-d'); 
 
         [$year, $month, $day] = explode('-', $this->filterRange);
         $this->year = $year;

@@ -43,25 +43,26 @@ class PdfStaffReport15 extends Component
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->name);
         
-        $table->addRow();
-        $table->addCell(5000)->addText('၂။ အသက်(မွေးနေ့သက္ကရာဇ်):');
-        $table->addCell(2000)->addText('-', ['align' => 'center']);
-        $table->addCell(5000)->addText($staff->dob);
         
         $table->addRow();
-        $table->addCell(5000)->addText('၃။ လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ:');
-        $table->addCell(2000)->addText('-', ['align' => 'center']);
-        $table->addCell(5000)->addText(($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
-        
-        $table->addRow();
-        $table->addCell(5000)->addText('၄။ အမျိုးသားမှတ်ပုံတင်အမှတ်:');
-        $table->addCell(2000)->addText('-', ['align' => 'center']);
-        $table->addCell(5000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
+$table->addCell(5000)->addText('၂။ အသက်(မွေးနေ့သက္ကရာဇ်):');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->dob);
+
+$table->addRow();
+$table->addCell(5000)->addText('၃။ လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText(($staff->ethnic_id ? $staff->ethnic->name : '-') . '၊' . ($staff->religion_id ? $staff->religion->name : '-'));
+
+$table->addRow();
+$table->addCell(5000)->addText('၄။ အမျိုးသားမှတ်ပုံတင်အမှတ်:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . '၊' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
         
         $table->addRow();
         $table->addCell(5000)->addText('၅။ အလုပ်အကိုင်နှင့် ဌာန:');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
-        $table->addCell(5000)->addText($staff->current_rank->name . '/' . $staff->current_department->name);
+        $table->addCell(5000)->addText($staff->current_rank->name . '၊' . $staff->current_department->name);
         
         $joinDate = \Carbon\Carbon::parse($staff->join_date);
         $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());

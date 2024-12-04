@@ -28,3 +28,21 @@
 }
 
 
+.superZ{
+    z-index: 9999999999999999999999;
+}
+::-webkit-scrollbar {
+    height: 10px;
+    width: 0px;
+    border: 1px solid #fff;
+  }
+  
+  ::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: #eeeeee;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: #b0b0b0;
+  }
