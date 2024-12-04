@@ -97,6 +97,7 @@ class PdfStaffReport19 extends Component
             $table->addCell(2000)->addText('-', ['align' => 'center']);
             $table->addCell(5000)->addText($education->education->name . '၊', ['align' => 'right']);
         }
+        // sdfdf
         $table->addRow();
         $table->addCell(5000)->addText('၁၂။တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်:');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
