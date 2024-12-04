@@ -124,6 +124,6 @@ class PA11 implements FromView
         ];
 
 
-        return view('pdf_reports.investment_companies_report_11', $data);
+        return view('excel_reports.investment_companies_report_11', $data);
     }
 }
