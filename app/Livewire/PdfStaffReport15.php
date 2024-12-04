@@ -39,86 +39,72 @@ class PdfStaffReport15 extends Component
         $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
         $table = $section->addTable();
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၁။ အမည်:', null, ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText($staff->dob, null, ['alignment' => 'right']);
+        $table->addCell(5000)->addText('၁။ အမည်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->name);
+        
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၂။ အသက် (မွေးနေ့သက္ကရာဇ်):', null, ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText($staff->dob, null, ['alignment' => 'right']);
-
+        $table->addCell(5000)->addText('၂။ အသက်(မွေးနေ့သက္ကရာဇ်):');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->dob);
+        
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၃။ လူမျိုး/ကိုးကွယ်သည့်ဘာသာ:', null, ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText($staff->ethnic->name . ' / ' . $staff->religion->name, null, ['alignment' => 'right']);
-
+        $table->addCell(5000)->addText('၃။ လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText(($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
+        
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၄။ အမျိုးသားမှတ်ပုံတင်အမှတ်:', null, ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText(
-            collect([$staff->nrc_region_id->name, $staff->nrc_township_code->name, $staff->nrc_sign->name, en2mm($staff->nrc_code)])
-                ->filter()
-                ->implode('၊'),
-            null,
-            ['alignment' => 'right'],
-        );
+        $table->addCell(5000)->addText('၄။ အမျိုးသားမှတ်ပုံတင်အမှတ်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
+        
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၅။အလုပ်အကိုင်နှင့် ဌာန :', ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText($staff->current_rank->name . ' / ' . $staff->current_department->name, null, ['alignment' => 'right']);
-
+        $table->addCell(5000)->addText('၅။ အလုပ်အကိုင်နှင့် ဌာန:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->current_rank->name . '/' . $staff->current_department->name);
+        
         $joinDate = \Carbon\Carbon::parse($staff->join_date);
         $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၆။အမှုထမ်းလုပ်သက်၊ ဝင်ရောက်သည့်ရက်စွဲ :', ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText(formatPeriodMM($joinDateDuration->y, $joinDateDuration->m, $joinDateDuration->d) . ', ' . en2mm($joinDate->format('d-m-y')), null, ['alignment' => 'right']);
-
+        $table->addCell(5000)->addText('၆။ အမှုထမ်းလုပ်သက်၊ ဝင်ရောက်သည့်ရက်စွဲ:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText(formatPeriodMM($joinDateDuration->y, $joinDateDuration->m, $joinDateDuration->d) . ', ' . en2mm($joinDate->format('d-m-y')));
+        
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၇။လက်ရှိနေရပ် :', ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText($staff->current_address_street . ' / ' . $staff->current_address_ward . ' / ' . $staff->current_address_region->name . ' / ' . $staff->current_address_township_or_town->name, null, ['alignment' => 'right']);
-
+        $table->addCell(5000)->addText('၇။ လက်ရှိနေရပ်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->current_address_street . '/' . $staff->current_address_ward . '/' . $staff->current_address_region->name . '/' .  $staff->current_address_township_or_town->name);
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၈။ ပညာအရည်အချင်း:', ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText(
-            collect($staff->staff_educations)
-                ->map(function ($education) {
-                    return $education->education->name;
-                })
-                ->implode('၊ '),
-            null,
-            ['alignment' => 'right'],
-        );
-
+        $table->addCell(4000)->addText('၈။ ပညာအရည်အချင်း:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText('', ['align' => 'right']);
+        
+        foreach ($staff->staff_educations as $education) {
+            $table->addRow();
+            $table->addCell(4000)->addText('', ['align' => 'center']);
+            $table->addCell(2000)->addText('-', ['align' => 'center']);
+            $table->addCell(5000)->addText($education->education->name . '၊', ['align' => 'right']);
+        }
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၉။အဘအမည်:', ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText($staff->father_name, null, ['alignment' => 'right']);
-
+        $table->addCell(5000)->addText('၉။အဖအမည် :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->father_name);
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၁၀။အလုပ်အကိုင်:', ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText($staff->father_occupation, null, ['alignment' => 'right']);
-
+        $table->addCell(5000)->addText('၁၀။အလုပ်အကိုင် :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->father_occupation);
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၁၁။အမိအမည်:', ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText($staff->mother_name, null, ['alignment' => 'right']);
-
-        // $table->addRow();
-        // $table->addCell(6000)->addText('၁၂။ အလုပ်အကိုင်:', ['alignment' => 'left']);
-        // $table->addCell(6000)->addText($staff->mother_occupation, ['alignment' => 'right']);
+        $table->addCell(5000)->addText('၁၁။အမိအမည် :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->mother_name);
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၁၂။အလုပ်အကိုင်:', ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText($staff->mother_occupation, null, ['alignment' => 'right']);
-
+        $table->addCell(5000)->addText('၁၂။အလုပ်အကိုင် :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->mother_occupation);
         $table->addRow();
-        $table->addCell(4000, ['valign' => 'top', 'textWrap' => false])->addText('၁၃။နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ (အကြိမ်အရေအတွက်):', ['alignment' => 'left']);
-        $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(6000)->addText();
+        $table->addCell(5000)->addText('၁၃။နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်) :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText(en2mm($staff->abroads->count()));
 
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();

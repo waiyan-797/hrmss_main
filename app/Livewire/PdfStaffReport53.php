@@ -31,47 +31,6 @@ class PdfStaffReport53 extends Component
             echo $pdf->output();
         }, 'staff_pdf_53.pdf');
     }
-    public function go_wordd(){
-        $inputFileName = resource_path('samples/aa.docx');
-$phpWord = IOFactory::load($inputFileName);
-$newPhpWord = new PhpWord();
-foreach ($phpWord->getSections() as $section) {
-    // Add a section to the new document
-    $newSection = $newPhpWord->addSection();
-
-    // Iterate through elements in the original section
-    foreach ($section->getElements() as $element) {
-        if (get_class($element) === 'PhpOffice\PhpWord\Element\Text') {
-            // Copy text elements (you can modify how text is added here)
-            $newSection->addText($element->getText(), $element->getFontStyle(), $element->getParagraphStyle());
-        } elseif (get_class($element) === 'PhpOffice\PhpWord\Element\Table') {
-            // Copy table elements
-            $newSection->addTable($element->getStyle());
-            foreach ($element->getRows() as $row) {
-                $newRow = $newSection->addRow();
-                foreach ($row->getCells() as $cell) {
-                    $newRow->addCell($cell->getWidth(), $cell->getCellStyle())->addText($cell->getText());
-                }
-            }
-        }
-        $fileName = 'staff_report_' . '.docx';
-        $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
-
-        return response()->stream(
-            function () use ($objWriter) {
-                $objWriter->save('php://output');
-            },
-            200,
-            [
-                'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
-            ],
-        );
-
-     }
-}
-
-    }
     public function go_word($staff_id)
     {
         $staff = Staff::find($staff_id);
@@ -83,54 +42,221 @@ foreach ($phpWord->getSections() as $section) {
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
         $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
         $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
-        // $section->addText('၁။'.'အမည်: '.str_repeat(' ', 10).'-'. $staff->name);
-        // $section->addText('၂။'.'ငယ်အမည်: '.str_repeat(' ', 10).'-'.$staff->nick_name);
-        // $section->addText('၃။'.'အခြားအမည်: '.str_repeat(' ', 10).'-'.$staff->other_name);
-        // $section->addText('၄။'.'အသက်(မွေးသက္ကရာဇ်): '. str_repeat(' ', 5).en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')));
-        $section->addText('၁။' . 'အမည်: ' . str_repeat(' ', 10) . '-' . ' ' . $staff->name);
-        $section->addText('၂။' . 'ငယ်အမည်: ' . str_repeat(' ', 10) . '-' . ' ' . $staff->nick_name);
-        $section->addText('၃။' . 'အခြားအမည်: ' . str_repeat(' ', 10) . '-' . ' ' . $staff->other_name);
-        $section->addText('၄။' . 'အသက်(မွေးသက္ကရာဇ်): ' . str_repeat(' ', 5) . '-' . ' ' . en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')));
+        $table = $section->addTable();
+        $table->addRow();
+        $table->addCell(4000)->addText('၁။ အမည်:'); 
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->name, ['align' => 'right']); 
 
-        $section->addText('၅။' . 'လူမျိုးနှင့် ကိုးကွယ်သည့်ဘာသာ: ' . str_repeat(' ', 5) . ($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
-        $section->addText('၆။' . 'အရပ်အမြင့်: ' . str_repeat(' ', 5) . $staff->height_feet);
-        $section->addText('၇။' . 'ဆံပင်အရောင်: ' . str_repeat(' ', 5) . $staff->hair_color);
-        $section->addText('၈။' . 'မျက်စိအရောင်: ' . str_repeat(' ', 5) . $staff->eye_color);
-        $section->addText('၉။' . 'ထင်ရှားသည့် အမှတ်အသား: ' . str_repeat(' ', 5) . $staff->prominent_mark);
-        $section->addText('၁၀။' . 'အသားအရောင်: ' . str_repeat(' ', 5) . $staff->skin_color);
-        $section->addText('၁၁။' . 'ကိုယ်အလေးချိန်: ' . str_repeat(' ', 5) . $staff->weight);
-        $section->addText('၁၂။' . 'မွေးဖွားရာဇာတိ: ' . str_repeat(' ', 5) . $staff->place_of_birth);
-        $section->addText('၁၃။' . 'နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်: ' . str_repeat(' ', 5) . $staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
-        $section->addText('၁၄။' . 'ယခုနေရပ်လိပ်စာအပြည့်အစုံ: ' . str_repeat(' ', 5) . $staff->current_address_street . '/' . $staff->current_address_ward . '/' . $staff->current_address_region->name . '/' . $staff->current_address_township_or_town->name);
-        $section->addText('၁၅။' . 'အမြဲတမ်းနေရပ်လိပ်စာအပြည့်အစုံ: ' . str_repeat(' ', 5) . $staff->permanent_address_street . '/' . $staff->permanent_address_ward . '/' . $staff->permanent_address_region->name . '/' . $staff->permanent_address_township_or_town->name);
-        $section->addText('၁၆။' . 'ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာ ဖော်ပြရန်မလိုပါ): ' . str_repeat(' ', 5) . $staff->previous_addresses);
-        $section->addText('၁၇။' . 'တပ်မတော်သို့ ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်: ' . str_repeat(' ', 5));
-        $section->addText('(က)' . 'ကိုယ်ပိုင်အမှတ်: ' . str_repeat(' ', 5) . $staff->military_solider_no);
-        $section->addText('(ခ)' . 'တပ်သို့ဝင်သည့်နေ့: ' . str_repeat(' ', 5) . $staff->military_join_date);
-        $section->addText('(ဂ)' . 'ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်: ' . str_repeat(' ', 5) . $staff->military_dsa_no);
-        $section->addText('(ဃ)' . 'ပြန်တမ်းဝင်ဖြစ်သည့်နေ့: ' . str_repeat(' ', 5) . $staff->military_gazetted_date);
-        $section->addText('(င)' . 'တပ်ထွက်သည့်နေ့: ' . str_repeat(' ', 5) . $staff->military_leave_date);
-        $section->addText('(စ)' . 'ထွက်သည့်အကြောင်း: ' . str_repeat(' ', 5) . $staff->military_leave_reason);
-        $section->addText('(ဆ)' . 'အမှုထမ်းဆောင်ခဲ့သောတပ်များ: ' . str_repeat(' ', 5) . $staff->military_served_army);
-        $section->addText('(ဇ)' . 'တပ်တွင်းရာဇဝင်အကျဥ်း/ပြစ်မှု: ' . str_repeat(' ', 5) . $staff->military_brief_history_or_penalty);
-        $section->addText('(ဈ)' . 'အငြိမ်းစားလစာ: ' . str_repeat(' ', 5) . $staff->military_pension);
-        $section->addText('၁၈။' . 'ပညာအရည်အချင်း');
+        $table->addRow();
+        $table->addCell(4000)->addText('၂။ ငယ်အမည်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->nick_name, ['align' => 'right']);
 
-        foreach ($staff->staff_educations as  $education) {
-        $section->addText( $education->education->name.'၊');
-       }
-        $section->addText('၁၉။' . 'အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်: ' . str_repeat(' ', 5) . $staff->father_name . '၊' . $staff->father_ethnic?->name . '၊' . $staff->father_religion?->name . '၊' . $staff->father_place_of_birth . '၊' . $staff->father_occupation);
-        $section->addText('၂၀။' . '၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ: ' . str_repeat(' ', 5) . $staff->father_address_street . '၊' . $staff->father_address_ward . '၊' . $staff->father_address_township_or_town?->name . '၊' . $staff->father_address_region?->name);
-        $section->addText('၂၁။' . 'အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်: ' . str_repeat(' ', 5) . $staff->mother_name . '၊' . $staff->mother_ethnic?->name . '၊' . $staff->mother_religion?->name . '၊' . $staff->mother_place_of_birth . '၊' . $staff->mother_occupation);
-        $section->addText('၂၂။' . '၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ: ' . str_repeat(' ', 5) . $staff->mother_address_street . '၊' . $staff->mother_address_ward . '၊' . $staff->mother_address_township_or_town?->name . '၊' . $staff->mother_address_region?->name);
-        $section->addText('၂၃။' . 'ကာယကံရှင် မွေးဖွားချိန်၌ မိဘနှစ်ပါးသည် နိုင်ငံသားဟုတ်/ မဟုတ်: ' . str_repeat(' ', 5) . $staff->is_parents_citizen_when_staff_born);
-        $section->addText('၂၄။' . 'လက်ရှိအလုပ်အကိုင်နှင့်အဆင့်: ' . str_repeat(' ', 5) . $staff->current_rank->name);
-        $section->addText('၂၅။' . 'အလုပ်စတင်ဝင်ရောက်သည့်နေ့နှင့်လက်ရှိရာထူးရသည့်နေ့: ' . str_repeat(' ', 5) . $staff->join_date);
-        $section->addText('၂၆။' . 'လက်ရှိအလုပ်အကိုင်ရလာပုံ: ' . str_repeat(' ', 5) . $staff->form_of_appointment);
-        $section->addText('၂၇။' . 'ပြိုင်အ‌‌ရွေးခံ(သို့)တိုက်ရိုက်ခန့်: ' . str_repeat(' ', 5) . $staff->is_direct_appointed);
-        $section->addText('၂၈။' . 'လစာဝင်ငွေ: ' . str_repeat(' ', 5) . $staff->payscale?->name);
-        $section->addText('၂၉။' . 'ဌာန၊ နေရာ: ' . str_repeat(' ', 5) . 'ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၊ရန်ကုန်မြို့။');
+        $table->addRow();
+        $table->addCell(4000)->addText('၃။အခြားအမည် :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->other_name, ['align' => 'right']);
 
+        $table->addRow();
+        $table->addCell(4000)->addText('၄။အသက်(မွေးသက္ကရာဇ်) :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText(en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')), ['align' => 'right']); 
+
+        $table->addRow();
+        $table->addCell(4000)->addText('၅။လူမျိုးနှင့် ကိုးကွယ်သည့်ဘာသာ :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText(($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-')); 
+
+        $table->addRow();
+        $table->addCell(4000)->addText('၆။အရပ်အမြင့်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->height_feet); 
+
+        $table->addRow();
+        $table->addCell(4000)->addText('၇။ဆံပင်အရောင်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->hair_color); 
+        
+        $table->addRow();
+        $table->addCell(4000)->addText('၈။မျက်စိအရောင်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->eye_color); 
+
+        $table->addRow();
+        $table->addCell(4000)->addText('၉။ထင်ရှားသည့် အမှတ်အသား:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->prominent_mark); 
+
+        $table->addRow();
+$table->addCell(4000)->addText('၁၀။ အသားအရောင်:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->skin_color, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('၁၁။ ကိုယ်အလေးချိန်:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->weight, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('၁၂။ မွေးဖွားရာဇာတိ:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->place_of_birth, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('၁၃။ နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText(
+    $staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . 
+    $staff->nrc_sign->name . '/' . $staff->nrc_code, 
+    ['align' => 'right']
+);
+
+$table->addRow();
+$table->addCell(4000)->addText('၁၄။ ယခုနေရပ်လိပ်စာအပြည့်အစုံ:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText(
+    $staff->current_address_street . '/' . 
+    $staff->current_address_ward . '/' . 
+    $staff->current_address_region->name . '/' . 
+    $staff->current_address_township_or_town->name, 
+    ['align' => 'right']
+);
+
+$table->addRow();
+$table->addCell(4000)->addText('၁၅။ အမြဲတမ်းနေရပ်လိပ်စာအပြည့်အစုံ:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText(
+    $staff->permanent_address_street . '/' . 
+    $staff->permanent_address_ward . '/' . 
+    $staff->permanent_address_region->name . '/' . 
+    $staff->permanent_address_township_or_town->name, 
+    ['align' => 'right']
+);
+
+
+$table->addRow();
+$table->addCell(4000)->addText('၁၆။ ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->previous_addresses, ['align' => 'right']);
+    $table->addRow();
+$table->addCell(4000)->addText('၁၇။ တပ်မတော်သို့ ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText('', ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('(က) ကိုယ်ပိုင်အမှတ်:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->military_solider_no, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('(ခ) တပ်သို့ဝင်သည့်နေ့:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->military_join_date, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('(ဂ) ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->military_dsa_no, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->military_gazetted_date, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('(င) တပ်ထွက်သည့်နေ့:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->military_leave_date, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('(စ) ထွက်သည့်အကြောင်း:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->military_leave_reason, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('(ဆ) အမှုထမ်းဆောင်ခဲ့သောတပ်များ:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->military_served_army, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('(ဇ) တပ်တွင်းရာဇဝင်အကျဥ်း/ပြစ်မှု:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->military_brief_history_or_penalty, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('(ဈ) အငြိမ်းစားလစာ:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->military_pension, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('၁၈။ ပညာအရည်အချင်း:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText('', ['align' => 'right']);
+
+foreach ($staff->staff_educations as $education) {
+    $table->addRow();
+    $table->addCell(4000)->addText('', ['align' => 'center']);
+    $table->addCell(2000)->addText('-', ['align' => 'center']);
+    $table->addCell(5000)->addText($education->education->name . '၊', ['align' => 'right']);
+}
+
+$table->addRow();
+$table->addCell(4000)->addText('၁၉။ အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->father_name . '၊' . $staff->father_ethnic?->name . '၊' . $staff->father_religion?->name . '၊' . $staff->father_place_of_birth . '၊' . $staff->father_occupation, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('၂၀။ ၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ:');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->father_address_street . '၊' . $staff->father_address_ward . '၊' . $staff->father_address_township_or_town?->name . '၊' . $staff->father_address_region?->name, ['align' => 'right']);
+
+
+$table->addRow();
+$table->addCell(4000)->addText('၂၁။အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင် :');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->mother_name . '၊' . $staff->mother_ethnic?->name . '၊' . $staff->mother_religion?->name . '၊' . $staff->mother_place_of_birth . '၊' . $staff->mother_occupation, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('၂၂။၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ :');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->mother_address_street . '၊' . $staff->mother_address_ward . '၊' . $staff->mother_address_township_or_town?->name . '၊' . $staff->mother_address_region?->name, ['align' => 'right']);
+
+
+$table->addRow();
+$table->addCell(4000)->addText('၂၃။ကာယကံရှင် မွေးဖွားချိန်၌ မိဘနှစ်ပါးသည် နိုင်ငံသားဟုတ်/ မဟုတ် :');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->is_parents_citizen_when_staff_born, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('၂၄။လက်ရှိအလုပ်အကိုင်နှင့်အဆင့် :');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->current_rank->name, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('၂၅။အလုပ်စတင်ဝင်ရောက်သည့်နေ့နှင့်လက်ရှိရာထူးရသည့်နေ့ :');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->join_date, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('၂၆။လက်ရှိအလုပ်အကိုင်ရလာပုံ :');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->form_of_appointment, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('၂၇။ပြိုင်အ‌‌ရွေးခံ(သို့)တိုက်ရိုက်ခန့် :');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->is_direct_appointed, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('၂၈။လစာဝင်ငွေ :');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText($staff->payscale?->name, ['align' => 'right']);
+
+$table->addRow();
+$table->addCell(4000)->addText('၂၉။ဌာန၊ နေရာ :');
+$table->addCell(2000)->addText('-', ['align' => 'center']);
+$table->addCell(5000)->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၊ရန်ကုန်မြို့။', ['align' => 'right']);
         $section->addText('၃၀။' . 'အလုပ်အကိုင်အတွက် ထောက်ခံသူများ', ['bold' => true]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();
@@ -332,17 +458,54 @@ foreach ($phpWord->getSections() as $section) {
             $table->addCell(2000)->addText($sibling->address);
             $table->addCell(2000)->addText($sibling->relation?->name);
         }
-        $section->addText('၄၀။' . 'မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်းတို့၏မိဘ၊ ညီအကိုမောင်နှမများ၊ သားသမီးများသည် နိုင်ငံရေးပါတီဝင်များတွင် ဝင်ရောက်ဆောင်ရွက်မှု ရှိ/မရှိ (ရှိက အသေးစိတ်ဖော်ပြရန်): ' . str_repeat(' ', 5) . $staff->family_in_politics);
+       
+        $table = $section->addTable();
+        $table->addRow();
+        $table->addCell(4000)->addText('၄၀။မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်းတို့၏မိဘ၊ ညီအကိုမောင်နှမများ၊ သားသမီးများသည် နိုင်ငံရေးပါတီဝင်များတွင် ဝင်ရောက်ဆောင်ရွက်မှု ရှိ/မရှိ (ရှိက အသေးစိတ်ဖော်ပြရန်) :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->family_in_politics, ['align' => 'right']);
         $section->addTitle('ငယ်စဥ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်', 2);
-        $section->addText('၁။' . 'နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ်ဖော်ပြရန်): ' . str_repeat(' ', 5) . $staff->schools_year);
-        $section->addText('၂။' . 'နောက်ဆုံးအောင်မြင်ခဲ့သည့်ကျောင်း/အတန်း၊ ခုံအမှတ်၊ ဘာသာရပ်အတိအကျဖော်ပြရန်: ' . str_repeat(' ', 5) . $staff->last_school_name . '၊' . $staff->last_school_subject . '၊' . $staff->last_school_row_no . '၊' . $staff->last_school_major);
-        $section->addText('၃။' . 'ကျောင်းသားဘဝတွင် နိုင်ငံရေး/မြို့ရေး ဆောင်ရွက်မှုများနှင့်အဆင့်အတန်း၊ တာဝန်: ' . str_repeat(' ', 5) . $staff->student_life_political_social);
-        $section->addText('၄။' . 'ဝါသနာပါပြီး၊ လေ့လာလိုက်စားခဲ့သောကျန်းမာရေးကစားခုန်စားမှုများ၊ အနုပညာဆိုင်ရာ အတီးအမှုတ်များ၊ ပညာရေးစက်မှုလက်မှု: ' . str_repeat(' ', 5) . $staff->habit);
-        $section->addText('၅။' . 'လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်: ' . str_repeat(' ', 5) . $staff->past_occupation);
-        $section->addText('၆။' . 'တောခိုခဲ့ဖူးလျှင်(သို့)သောင်းကျန်းသူများကြီးစိုးသော နယ်မြေတွင် နေခဲ့ဖူးလျှင်လုပ်ကိုင်ဆောင်ရွက်ချက်များကိုဖော်ပြပါ: ' . str_repeat(' ', 5) . $staff->revolution);
-        $section->addText('၇။' . 'အလုပ်အကိုင် ပြောင်းရွှေ့ခဲ့သောအကြောင်းအကျိူးနှင့်လစာ: ' . str_repeat(' ', 5) . $staff->transfer_reason_salary);
-        $section->addText('၈။' . 'အမှုထမ်းနေစဥ်(သို့)ကိုယ်ပိုင်အလုပ်အကိုင်ဆောင်ရွက်နေစဥ်နိုင်ငံရေး၊ မြို့/ရွာရေး ဆောင်ရွက်မှုများ၊ဆောင်ရွက်နေစဥ် အဆင့်အတန်းနှင့်တာဝန်: ' . str_repeat(' ', 5) . $staff->during_work_political_social);
-        $section->addText('၉။' . 'စစ်ဘက်/ နယ်ဘက်/ ရဲဘက်နှင့်နိုင်ငံရေးဘက်တွင် ခင်မင်ရင်းနှီးသော မိတ်ဆွေများရှိ/ မရှိ: ' . str_repeat(' ', 5) . $staff->has_military_friend);
+       
+        $table->addRow();
+        $table->addCell(4000)->addText('၁။နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ်ဖော်ပြရန်):');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->schools_year, ['align' => 'right']);
+
+        $table->addRow();
+        $table->addCell(4000)->addText('၂။နောက်ဆုံးအောင်မြင်ခဲ့သည့်ကျောင်း/အတန်း၊ ခုံအမှတ်၊ ဘာသာရပ်အတိအကျဖော်ပြရန်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->last_school_name . '၊' . $staff->last_school_subject . '၊' . $staff->last_school_row_no . '၊' . $staff->last_school_major, ['align' => 'right']);
+
+        $table->addRow();
+        $table->addCell(4000)->addText('၃။ကျောင်းသားဘဝတွင် နိုင်ငံရေး/မြို့ရေး ဆောင်ရွက်မှုများနှင့်အဆင့်အတန်း၊ တာဝန်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->student_life_political_social, ['align' => 'right']);
+
+        $table->addRow();
+        $table->addCell(4000)->addText('၄။ဝါသနာပါပြီး၊ လေ့လာလိုက်စားခဲ့သောကျန်းမာရေးကစားခုန်စားမှုများ၊ အနုပညာဆိုင်ရာ အတီးအမှုတ်များ၊ ပညာရေးစက်မှုလက်မှု:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->habit, ['align' => 'right']);
+        $table->addRow();
+        $table->addCell(4000)->addText('၅။လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->past_occupation, ['align' => 'right']);
+        $table->addRow();
+        $table->addCell(4000)->addText('၆။တောခိုခဲ့ဖူးလျှင်(သို့)သောင်းကျန်းသူများကြီးစိုးသော နယ်မြေတွင် နေခဲ့ဖူးလျှင်လုပ်ကိုင်ဆောင်ရွက်ချက်များကိုဖော်ပြပါ:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->revolution, ['align' => 'right']);
+        $table->addRow();
+        $table->addCell(4000)->addText('၇။အလုပ်အကိုင် ပြောင်းရွှေ့ခဲ့သောအကြောင်းအကျိူးနှင့်လစာ:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->transfer_reason_salary, ['align' => 'right']);
+        $table->addRow();
+        $table->addCell(4000)->addText('၈။အမှုထမ်းနေစဥ်(သို့)ကိုယ်ပိုင်အလုပ်အကိုင်ဆောင်ရွက်နေစဥ်နိုင်ငံရေး၊ မြို့/ရွာရေး ဆောင်ရွက်မှုများ၊ဆောင်ရွက်နေစဥ် အဆင့်အတန်းနှင့်တာဝန်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->during_work_political_social, ['align' => 'right']);
+        $table->addRow();
+        $table->addCell(4000)->addText('၉။စစ်ဘက်/ နယ်ဘက်/ ရဲဘက်နှင့်နိုင်ငံရေးဘက်တွင် ခင်မင်ရင်းနှီးသော မိတ်ဆွေများရှိ/ မရှိ:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->has_military_friend, ['align' => 'right']);
+
         $section->addText('၁၀။' . 'နိုင်ငံခြားသို့သွားရောက်ခဲ့ဖူးလျှင်', ['bold' => true]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();
@@ -359,9 +522,19 @@ foreach ($phpWord->getSections() as $section) {
             $table->addCell(2000)->addText($abroad->meet_with);
             $table->addCell(2000)->addText($abroad->from_date . '-' . $abroad->to_date);
         }
-        $section->addText('၁၁။' . 'မိမိနှင့်ခင်မင်ရင်းနှီးသော နိုင်ငံခြားသားရှိ/မရှိ၊ ရှိက မည်သည့် အလုပ်အကိုင်၊ လူမျိူး၊ တိုင်းပြည်၊ မည်ကဲ့သို့ ရင်းနှီးသည်: ' . str_repeat(' ', 5) . $staff->foreigner_friend_name . '၊' . $staff->foreigner_friend_occupation . '၊' . $staff->foreigner_friend_nationality?->name . '၊' . $staff->foreigner_friend_country?->name . '၊' . $staff->foreigner_friend_how_to_know);
-        $section->addText('၁၂။' . 'မိမိအား ထောက်ခံသည့်ပုဂ္ဂိုလ် (စစ်ဘက်/နယ်ဘက်အရာရှိ/ မြို့နယ်/ ကျေးရွာ/ ရပ်ကွက်အုပ်ချုပ်ရေးမှူး): ' . str_repeat(' ', 5) . $staff->recommended_by_military_person);
-        $section->addText('၁၃။' . 'ရာဇဝတ်ပြစ်မှုခံရခြင်း ရှိ/မရှိ: ' . str_repeat(' ', 5) . en2mm($staff->punishments->count()));
+        $table = $section->addTable();
+        $table->addRow();
+        $table->addCell(4000)->addText('၁၁။မိမိနှင့်ခင်မင်ရင်းနှီးသော နိုင်ငံခြားသားရှိ/မရှိ၊ ရှိက မည်သည့် အလုပ်အကိုင်၊ လူမျိူး၊ တိုင်းပြည်၊ မည်ကဲ့သို့ ရင်းနှီးသည်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->foreigner_friend_name . '၊' . $staff->foreigner_friend_occupation . '၊' . $staff->foreigner_friend_nationality?->name . '၊' . $staff->foreigner_friend_country?->name . '၊' . $staff->foreigner_friend_how_to_know, ['align' => 'right']);
+        $table->addRow();
+        $table->addCell(4000)->addText('၁၂။မိမိအား ထောက်ခံသည့်ပုဂ္ဂိုလ် (စစ်ဘက်/နယ်ဘက်အရာရှိ/ မြို့နယ်/ ကျေးရွာ/ ရပ်ကွက်အုပ်ချုပ်ရေးမှူး:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->recommended_by_military_person, ['align' => 'right']);
+        $table->addRow();
+        $table->addCell(4000)->addText('၁၃။ရာဇဝတ်ပြစ်မှုခံရခြင်း ရှိ/မရှိ:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText(en2mm($staff->punishments->count()), ['align' => 'right']);
         $section->addText('အထက်ပါဇယားကွက်များအတွင်း ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။', ['bold' => true]);
         $section->addText('လက်မှတ်: -', ['align' => 'center']);
         $section->addText('ကိုယ်ပိုင်အမှတ်(သို့မဟုတ်): -', ['align' => 'center']);

@@ -38,27 +38,68 @@ class PdfStaffReport18 extends Component
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
         $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
         $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']); 
-        $section->addText('၁။'.'အမည်(ကျား/မ): '. str_repeat(' ', 5). $staff->name);
-        $section->addText('၂။'.'ဝန်ထမ်းအမှတ်: '. str_repeat(' ', 5) . $staff->staff_no );
-        $section->addText('၃။'.'မွေးနေ့ (ရက်၊ လ၊ နှစ်): '. str_repeat(' ', 5) .en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')) );
-        $section->addText('၄။'.'လူမျိုး/ဘာသာ: '. str_repeat(' ', 5) .($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
-        $section->addText('၅။'.'အဘအမည်: '. str_repeat(' ', 5) .$staff->father_name );
-       
-        $section->addText('၆။'.'အမိအမည်: '. str_repeat(' ', 5) .$staff->mother_name );
-        $section->addText('၇။'.'နိုင်ငံသားစိစစ်ရေးအမှတ်: ' .($staff->nrc_region_id->name . $staff->nrc_township_code->name) .'/'. str_repeat(' ', 5) .($staff->nrc_sign->name .'/'. $staff->nrc_code));
-        $section->addText('၈။'.'ဇနီး/ခင်ပွန်းအမည်:'. str_repeat(' ', 5) . $staff?->spouses->first()?->name );
+        $table = $section->addTable();
+        $table->addRow();
+        $table->addCell(5000)->addText('၁။အမည်(ကျား/မ) :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->name);
 
-        $section->addText('၉။'.'သား/သမီးအမည်: '. str_repeat(' ', 5).$staff->children->first()?->name );
-        $section->addText('၁၀။'.'လိပ်စာ: '. str_repeat(' ', 5). $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name );
-        $section->addText('၁၁။' . 'ပညာအရည်အချင်း');
+        $table->addRow();
+        $table->addCell(5000)->addText('၂။ဝန်ထမ်းအမှတ် :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->staff_no);
 
-        foreach ($staff->staff_educations as  $education) {
-        $section->addText( $education->education->name.'၊');
-       }
-        $section->addText('၁၂။'.'လက်ရှိရာထူး/လစာနှုန်း/ဌာန: '. $staff->father_name);
-        $section->addText('၁၃။'.'သွေးအုပ်စု: '. $staff->father_occupation);
+        $table->addRow();
+        $table->addCell(5000)->addText('၃။မွေးနေ့ (ရက်၊ လ၊ နှစ်) :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText(en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')));
+        $table->addRow();
+        $table->addCell(5000)->addText('၄။လူမျိုး/ဘာသာ :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText(($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
+        $table->addRow();
+        $table->addCell(5000)->addText('၅။အဘအမည် :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->father_name);
+        $table->addRow();
+        $table->addCell(5000)->addText('၆။အမိအမည် :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->mother_name);
+        $table->addRow();
+        $table->addCell(5000)->addText('၇။နိုင်ငံသားစိစစ်ရေးအမှတ်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText(($staff->nrc_region_id->name . $staff->nrc_township_code->name) .'/'. ($staff->nrc_sign->name .'/'. $staff->nrc_code));
+        $table->addRow();
+        $table->addCell(5000)->addText('၈။ဇနီး/ခင်ပွန်းအမည်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff?->spouses->first()?->name);
+        $table->addRow();
+        $table->addCell(5000)->addText('၉။သား/သမီးအမည်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->children->first()?->name);
+        $table->addRow();
+        $table->addCell(5000)->addText('၁၀။လိပ်စာ:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_township_or_town->name.'/'.$staff->current_address_region->name);
+        $table->addRow();
+        $table->addCell(4000)->addText('၁၁။ ပညာအရည်အချင်း:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText('', ['align' => 'right']);
 
-      
+       foreach ($staff->staff_educations as $education) {
+            $table->addRow();
+            $table->addCell(4000)->addText('', ['align' => 'center']);
+            $table->addCell(2000)->addText('-', ['align' => 'center']);
+            $table->addCell(5000)->addText($education->education->name . '၊', ['align' => 'right']);
+        }
+        $table->addRow();
+        $table->addCell(5000)->addText('၁၂။လက်ရှိရာထူး/လစာနှုန်း/ဌာန:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->current_rank?->name.'၊'.$staff->payscale?->name.'၊'.$staff?->current_department->name);
+        $table->addRow();
+        $table->addCell(5000)->addText('၁၃။သွေးအုပ်စု:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->blood_type->name);
        $section->addText('၁၄။' . 'နိုင်ငံ့ဝန်ထမ်းတာဝန်ထမ်းဆောင်မှုမှတ်တမ်း (စစ်ဘက်/နယ်ဘက်)', ['bold' => true]);
        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
        $table->addRow();

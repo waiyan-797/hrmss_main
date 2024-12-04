@@ -28,30 +28,79 @@ class PdfStaffReport19 extends Component
     {
         $staff = Staff::find($staff_id);
         $phpWord = new PhpWord();
-        $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
+        $section = $phpWord->addSection(); 
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
         $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
         $section->addTitle('[နည်းဥပဒေ ၃၅ (ဇ) (၄)၊ ၄၇ (စ) (၄)]', 2);
         $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
         $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']); 
-        $section->addText('၁။'.'အမည်: '. str_repeat(' ', 5). $staff->name);
-        $section->addText('၂။'.'နိုင်ငံသားစီစစ်ရေးကတ်ပြားအမှတ်: '. str_repeat(' ', 5) .$staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
-        $section->addText('၃။'.'လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ: '. str_repeat(' ', 5) . ($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
-        $section->addText('၄။'.'မွေးဖွားရာအရပ်: '. str_repeat(' ', 5).$staff->place_of_birth );
-        $section->addText('၅။'.'အဘအမည်: '. str_repeat(' ', 5).$staff->father_name );
-        $section->addText('၆။'.'မွေးဖွားသည့် ရက်၊ လ၊ ခုနှစ်: '. str_repeat(' ', 5).en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')));
-        $section->addText('၇။'.'ကိုယ်တွင်ထင်ရှားသည့် အမှတ်အသား: '. str_repeat(' ', 5). $staff->prominent_mark );
-        $section->addText('၈။'.'လက်ရှိရာထူး: '. str_repeat(' ', 5).$staff->current_rank->name );
-        $section->addText('၉။'.'လက်ရှိနေရပ်လိပ်စာ: '. str_repeat(' ', 5).$staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name);
-        $section->addText('၁၀။'.'အမြဲတမ်းနေရပ်လိပ်စာ: '. str_repeat(' ', 5).$staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name);
-       
-        $section->addText('၁၁။' . 'ပညာအရည်အချင်း');
+        $table = $section->addTable();
+        $table->addRow();
+        $table->addCell(5000)->addText('၁။အမည်(ကျား/မ) :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->name);
 
-        foreach ($staff->staff_educations as  $education) {
-        $section->addText( $education->education->name.'၊');
-       }
-        $section->addText('၁၂။'.'တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်', ['bold' => true]);
+        $table->addRow();
+        $table->addCell(5000)->addText('၂။နိုင်ငံသားစီစစ်ရေးကတ်ပြားအမှတ် :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
+
+        $table->addRow();
+        $table->addCell(5000)->addText('၃။လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText(($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'));
+
+        $table->addRow();
+        $table->addCell(5000)->addText('၄။မွေးဖွားရာအရပ် :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->place_of_birth);
+
+        $table->addRow();
+        $table->addCell(5000)->addText('၅။အဘအမည် :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->father_name);
+
+        $table->addRow();
+        $table->addCell(5000)->addText('၆။မွေးဖွားသည့် ရက်၊ လ၊ ခုနှစ် :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText(en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')));
+
+        $table->addRow();
+        $table->addCell(5000)->addText('၇။ကိုယ်တွင်ထင်ရှားသည့် အမှတ်အသား :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->prominent_mark);
+
+        $table->addRow();
+        $table->addCell(5000)->addText('၈။လက်ရှိရာထူး :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->current_rank->name);
+
+        $table->addRow();
+        $table->addCell(5000)->addText('၉။လက်ရှိနေရပ်လိပ်စာ :');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_township_or_town->name);
+
+        $table->addRow();
+        $table->addCell(5000)->addText('၁၀။အမြဲတမ်းနေရပ်လိပ်စာ:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_township_or_town->name);
+
+        $table->addRow();
+        $table->addCell(4000)->addText('၁၁။ ပညာအရည်အချင်း:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText('', ['align' => 'right']);
+
+       foreach ($staff->staff_educations as $education) {
+            $table->addRow();
+            $table->addCell(4000)->addText('', ['align' => 'center']);
+            $table->addCell(2000)->addText('-', ['align' => 'center']);
+            $table->addCell(5000)->addText($education->education->name . '၊', ['align' => 'right']);
+        }
+        $table->addRow();
+        $table->addCell(5000)->addText('၁၂။တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText();
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();
         $table->addCell(2000)->addText('ဘာသာစကား', ['bold' => true]);
