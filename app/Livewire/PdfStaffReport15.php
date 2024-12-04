@@ -45,14 +45,14 @@ class PdfStaffReport15 extends Component
         
         
         $table->addRow();
-$table->addCell(5000)->addText('၂။ အသက်(မွေးနေ့သက္ကရာဇ်):');
-$table->addCell(2000)->addText('-', ['align' => 'center']);
-$table->addCell(5000)->addText($staff->dob);
+        $table->addCell(5000)->addText('၂။ အသက်(မွေးနေ့သက္ကရာဇ်):');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText($staff->dob);
 
-$table->addRow();
-$table->addCell(5000)->addText('၃။ လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ:');
-$table->addCell(2000)->addText('-', ['align' => 'center']);
-$table->addCell(5000)->addText(($staff->ethnic_id ? $staff->ethnic->name : '-') . '၊' . ($staff->religion_id ? $staff->religion->name : '-'));
+        $table->addRow();
+        $table->addCell(5000)->addText('၃။ လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ:');
+        $table->addCell(2000)->addText('-', ['align' => 'center']);
+        $table->addCell(5000)->addText(($staff->ethnic_id ? $staff->ethnic->name : '-') . '၊' . ($staff->religion_id ? $staff->religion->name : '-'));
 
 $table->addRow();
 $table->addCell(5000)->addText('၄။ အမျိုးသားမှတ်ပုံတင်အမှတ်:');
