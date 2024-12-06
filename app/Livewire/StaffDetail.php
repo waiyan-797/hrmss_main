@@ -338,7 +338,8 @@ public $saveDraftCheck  ;
             $this->educations[] = [
                 'education_group' => $edu->education_group_id,
                 'education_type' => $edu->education_type_id,
-                'education' => $edu->education_id
+                'education' => $edu->education_id , 
+                'country_id' => $edu->country_id
             ];
         }
 
@@ -389,12 +390,16 @@ public $saveDraftCheck  ;
 
         foreach ($trainings as $tra) {
             $this->trainings[] = [
+
                 'training_type' => $tra->training_type_id,
+                'batch' => $tra->batch ,
+
                 'diploma_name' => $tra->diploma_name,
                 'fees' => $tra->fees,
                 'from_date' => $tra->from_date,
                 'to_date' => $tra->to_date,
                 'location' => $tra->location,
+                'fees' => $tra->fees ,
                 'country' => $tra->country_id,
                 'training_location' => $tra->training_location_id,
                 'remark' => $tra->remark,
@@ -688,7 +693,10 @@ public $saveDraftCheck  ;
 
     public function add_edu()
     {
-        $this->educations[] = ['education_group' => '', 'education_type' => '', 'education' => ''];
+        $this->educations[] = ['education_group' => '',
+         'education_type' => '', 'education' => ''
+            ,'country_id' => ''
+        ];
     }
 
     public function add_recommendation()
@@ -703,7 +711,7 @@ public $saveDraftCheck  ;
 
     public function add_siblings()
     {
-        $this->siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender' => ''];
     }
 
 
@@ -744,12 +752,24 @@ public $saveDraftCheck  ;
 
     public function add_schools()
     {
-        $this->schools[] = ['education_group' => '', 'education_type' => '', 'education' => '', 'school_name' => '', 'town' => '', 'year' => '', 'certificate' => '', 'exam_mark' => '', 'remark' => ''];
+        $this->schools[] = [
+            'education_group' => '', 'education_type' => '', 'education' => '', 'school_name' => '', 'town' => '', 'year' => '', 'certificate' => '', 'exam_mark' => '', 'remark' => '' , 
+        'from_date' => '' ,
+        'to_date' => '' ,
+        'semester' => '' ,
+        'roll_no' => '' ,
+        'major' => ''
+
+
+    ];
     }
 
     public function add_trainings()
     {
-        $this->trainings[] = ['training_type' => '', 'from_date' => '', 'to_date' => '', 'location' => '', 'country' => '', 'training_location' => ''];
+        $this->trainings[] = [ 'batch'=>'', 'training_type' => '', 'from_date' => '', 'to_date' => '', 'location' => '', 'country' => '', 'training_location' => ''  ,
+       
+        'fees' => ''
+    ];
     }
 
 
@@ -1277,6 +1297,7 @@ if($staff_create['status_id'] == 5){
                 'training_type_id' => $training['training_type'],
                 'diploma_name' => $training['diploma_name'],
                 'fees' => $training['fees'],
+                'batch'=>$training['batch'],
                 'from_date' => $training['from_date'],
                 'to_date' => $training['to_date'],
                 'location' => $training['location'],
@@ -1310,6 +1331,7 @@ if($staff_create['status_id'] == 5){
                 'education_type_id' => $education['education_type'],
                 'education_id' => $education['education'],
                 'staff_id' => $staffId,
+                'country_id' =>  $education['country_id']
             ]);
         }
     }
@@ -1490,6 +1512,7 @@ if($staff_create['status_id'] == 5){
                 $data['education_groups'] = EducationGroup::all();
                 $data['education_types'] = EducationType::all();
                 $data['_educations'] = Education::all();
+                $data['_countries'] = Country::all();
                 $data['current_address_township_or_towns'] = Township::where('region_id', $this->current_address_region_id)->get();
                 $data['permanent_address_township_or_towns'] = Township::where('region_id', $this->permanent_address_region_id)->get();
                 $data['current_address_townships'] = Township::where('region_id', $this->current_address_region_id)->get();
@@ -1515,6 +1538,8 @@ if($staff_create['status_id'] == 5){
                 $data['education_groups'] = EducationGroup::all();
                 $data['education_types'] = EducationType::all();
                 $data['_educations'] = Education::all();
+                $data['_countries'] = Country::all();
+
                 $data['nationalities'] = Nationality::all();
                 $data['countries'] = Country::all();
                 $data['training_types'] = TrainingType::all();
