@@ -34,8 +34,10 @@
                                 @foreach ($staff->staff_educations as $edu)
                                     <div class="mb-2">
                                         <span class="font-semibold">{{ $edu->education_group->name }}</span> -
-                                        <span>{{ $edu->education_type->name }}</span>,
-                                        <span>{{ $edu->education->name }}</span>
+                                        {{-- <span>{{ $edu->education_type->name }}</span>, --}}
+                                        {{-- <span>{{ $edu->education->name }}</span> --}}
+                                        <span>{{ $edu?->education_type?->name }}</span>,
+                                        <span>{{ $edu->education?->name }}</span>
                                     </div>
                                 @endforeach
                             </td>

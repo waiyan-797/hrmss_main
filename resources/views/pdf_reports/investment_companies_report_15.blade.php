@@ -11,7 +11,7 @@
             background: white;
         }
 
-        page[size="A4"] {
+        page[size="legal"] {
             width: 210mm;
             height: 297mm;
         }
@@ -52,11 +52,20 @@
         }
 
 
-
+        h1 {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <page size="A4">
+    <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာနရှိ</h1>    
+        <h1>
+            တိုင်းဒေသကြီး/ပြည်နယ်ဦးစီးမှုးရုံးများ၏ ဖွဲ့စည်းပုံ ၊ ခန့်အပ် ၊ ပို/လို အင်အားစာရင်း 
+        </h1>
         <table>
             <thead>
                 <tr>

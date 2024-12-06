@@ -60,7 +60,9 @@ class InvestmentCompanies9 extends Component
         $table->addCell(1000)->addText($index + 1);
         $table->addCell(3000)->addText($staff->name . '၊ ' . $staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
         $table->addCell(2000)->addText(\Carbon\Carbon::parse($staff->dob)->format('d-m-Y'));
-        $table->addCell(3000)->addText($staff->current_rank->name . '၊ ' . $staff->payscale->name . '၊ ' . $staff->current_salary);
+        // $table->addCell(3000)->addText($staff->current_rank->name . '၊ ' . $staff->payscale->name . '၊ ' . $staff->current_salary);
+        $table->addCell(3000)->addText($staff->current_rank?->name . '၊ ' . $staff->payscale?->name . '၊ ' . $staff->current_salary);
+
         $table->addCell(2000)->addText(\Carbon\Carbon::parse($staff->join_date)->format('d-m-Y'));
         $table->addCell(2000)->addText($staff->lost_contact_from_date);
         $table->addCell(3000)->addText($staff->retire_date);

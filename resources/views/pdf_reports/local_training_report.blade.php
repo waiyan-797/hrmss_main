@@ -65,65 +65,73 @@
     
     <page size="A4">
         <div class="table-container">
-            <table class="min-w-full border border-black">
-                <thead>
-                    <tr class="bg-gray-100">
-                        <th class="border border-black text-center p-2">စဥ်</th>
-                        <th class="border border-black text-center p-2">အမည်</th>
-                        <th class="border border-black text-center p-2">ရာထူး</th>
-                        <th class="border border-black text-center p-2">သင်တန်းအမည်</th>
-                        <th class="border border-black text-center p-2">သင်တန်းကာလ(မှ)</th>
-                        <th class="border border-black text-center p-2">သင်တန်းကာလ(အထိ)</th>
-                        <th class="border border-black text-center p-2">သင်တန်းနေရာ/ဒေသ</th>
-                        <th class="border border-black text-center p-2">သင်တန်းအမျိုးအစား</th>
-                        <th class="border border-black text-center p-2">မှတ်ချက်</th>
-                    </tr>
-                </thead>
-               
-                <tbody>
-
-                    @foreach ($staffs as $staff)
-                    @php $firstTraining = $staff?->trainings->whereIn('training_location_id', $trainingLocation == 3 ? null : $trainingLocation )->first(); @endphp
-                    @if($firstTraining)
-                        <tr>
-                            <!-- First staff details row with first training -->
-                            <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $loop->index + 1 }}</td>
-                            <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->name }}</td>
-                            <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->currentRank->name }}</td>
-
-                            <!-- First training record -->
-                            <td class="border border-black text-center p-2">{{ $firstTraining->training_type->name }}</td>
-                            <td class="border border-black text-center p-2">{{ $firstTraining->from_date }}</td>
-                            <td class="border border-black text-center p-2">{{ $firstTraining->to_date }}</td>
-                            <td class="border border-black text-center p-2">{{ $firstTraining->location }}</td>
-                            <td class="border border-black text-center p-2">{{ $firstTraining->training_type?->name }}</td>
-
-                            <td class="border border-black text-center p-2">
-                                {{ $firstTraining->remark }}
-                            </td>
+        <table class="min-w-full border border-black">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            
+                            <th class="border border-black text-center p-2">အမည်</th>
+                            <th class="border border-black text-center p-2">ရာထူး</th>
+                            <th class="border border-black text-center p-2">သင်တန်းအမည်</th>
+                            <th class="border border-black text-center p-2">သင်တန်းကာလ(မှ)</th>
+                            <th class="border border-black text-center p-2">သင်တန်းကာလ(အထိ)</th>
+                            <th class="border border-black text-center p-2">သင်တန်းနေရာ/ဒေသ</th>
+                            <th class="border border-black text-center p-2">သင်တန်းအမျိုးအစား</th>
+                            <th class="border border-black text-center p-2">မှတ်ချက်</th>
                         </tr>
+                    </thead>
+                   
+                    <tbody>
 
-                        <!-- For remaining trainings, create new rows -->
-                        @foreach($staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->skip(1) as $training)
+                        @foreach ($staffs as $staff)
+                        @php 
+                        $firstTraining = $staff?->trainings->whereIn('training_location_id', 
+                        $trainingLocation == 3 ? [1,2] : $trainingLocation
+                        
+                         )->first();
+                         
+                          @endphp
+                        @if($firstTraining)
                             <tr>
-                                <td class="border border-black text-center p-2">{{ $training->training_type->name }}</td>
-                                <td class="border border-black text-center p-2">{{ $training->from_date }}</td>
-                                <td class="border border-black text-center p-2">{{ $training->to_date }}</td>
-                                <td class="border border-black text-center p-2">{{ $training->location }}</td>
-                                <td class="border border-black text-center p-2">{{ $training->training_type?->name }}</td>
+                              
+                                <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->name }}</td>
+                                <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->currentRank->name }}</td>
+
+                                <!-- First training record -->
+                                <td class="border border-black text-center p-2">{{ $firstTraining->training_type->name }}</td>
+                                <td class="border border-black text-center p-2">{{formatDMYmm( $firstTraining->from_date) }}</td>
+                                <td class="border border-black text-center p-2">{{ formatDMYmm($firstTraining->to_date )}}</td>
+                                <td class="border border-black text-center p-2">{{ $firstTraining->location }}</td>
+                                <td class="border border-black text-center p-2">{{ $firstTraining->training_type?->name }}</td>
+
                                 <td class="border border-black text-center p-2">
-                                    {{ $training->remark }}
+                                    {{ $firstTraining->remark }}
                                 </td>
                             </tr>
-                        @endforeach
-                    @endif
-                    @endforeach
-                    
-                     
-                                
-                </tbody>
 
-            </table>
+                            <!-- For remaining trainings, create new rows -->
+                            @foreach($staff->trainings->whereIn('training_location_id',
+                              $trainingLocation == 3 ? [1,2] : $trainingLocation
+                            )->skip(1) as $training)
+                                <tr>
+                            <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->name }}</td>
+                                    <td class="border border-black text-center p-2">{{ $training->training_type->name }}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm( $training->from_date) }}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm( $training->to_date )}}</td>
+                                    <td class="border border-black text-center p-2">{{ $training->location }}</td>
+                                    <td class="border border-black text-center p-2">{{ $training->training_type?->name }}</td>
+                                    <td class="border border-black text-center p-2">
+                                        {{ $training->remark }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        @endforeach
+                        
+                         
+                                    
+                    </tbody>
+
+                </table>
            
         </div>
         

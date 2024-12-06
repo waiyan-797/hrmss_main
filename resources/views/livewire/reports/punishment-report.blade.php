@@ -1,4 +1,4 @@
- <div class="w-full">
+<div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
            
@@ -35,7 +35,7 @@
                            
                               <h1>
                                 <span>
-                                    {{$loop->iteration}}
+                                    
                                                                 </span>
                                 {{ $punishment->penalty_type->name}} 
                               </h1>
