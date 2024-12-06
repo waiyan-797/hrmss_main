@@ -13,11 +13,27 @@ class PA11 implements FromView
 
 
     public $filterRange , $filterRangeTo;
+   public $year ,$month ,$day ,$toDay ,$Tomonth ,$Toyear;
 
-    public function __construct($filterRange , $filterRangeTo)
+
+    public function __construct($filterRange , $filterRangeTo ,
+    $year ,
+$month,
+$day,
+$toDay,
+$Tomonth,
+$Toyear
+    )
     {
         $this->filterRange = $filterRange ;
         $this->filterRangeTo = $filterRangeTo;
+        $this->year  =  $year;
+         $this->month  =  $month;
+         $this->day  =  $day;
+         $this->toDay  =  $toDay;
+         $this->Tomonth  =  $Tomonth;
+         $this->Toyear = $Toyear;
+
     }
 
     public function view(): View
@@ -113,6 +129,12 @@ class PA11 implements FromView
             'low_q2' => $low_q2,
             'high_dlimit2_staffs2' => $high_dlimit2_staffs2,
             'low_dlimit2_staffs2' => $low_dlimit2_staffs2,
+             'year' => $this->year ,
+             'month' => $this->month,
+             'day' => $this->day,
+             'toDay' => $this->toDay,
+             'Tomonth' => $this->Tomonth,
+             'Toyear' => $this->Toyear
         ];
 
 

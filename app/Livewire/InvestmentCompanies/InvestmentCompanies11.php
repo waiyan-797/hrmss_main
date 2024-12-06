@@ -11,6 +11,7 @@ use PhpOffice\PhpWord\PhpWord;
 use Maatwebsite\Excel\Facades\Excel;
 
 
+
 class InvestmentCompanies11 extends Component
 {
 
@@ -27,7 +28,10 @@ class InvestmentCompanies11 extends Component
     public function go_excel() 
     {
         return Excel::download(new PA11($this->filterRange ,
-        $this->filterRangeTo), 'users.xlsx');
+        $this->filterRangeTo  , 
+    
+    $this->year , $this->month , $this->day , $this->toDay , $this->Tomonth , $this->Toyear
+    ), 'users.xlsx');
     }
 
     
@@ -123,7 +127,13 @@ class InvestmentCompanies11 extends Component
             'high_dlimit2_staffs2' => $high_dlimit2_staffs2,
             'low_dlimit2_staffs2' => $low_dlimit2_staffs2,
         ];
-        $pdf = PDF::loadView('pdf_reports.investment_companies_report_11', $data);
+        $pdf = PDF::loadView('pdf_reports.investment_companies_report_11', $data , [] , [
+            // 'format' => 'A4-L', //a4 
+            'format' => 'Legal',//legal 
+            // 'orientation' => 'L' //lanscade
+            'orientation' => 'P' //lanscade
+
+        ]);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_11.pdf');
