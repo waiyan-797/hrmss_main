@@ -7,6 +7,7 @@
 -- Database: mysql
 -- Generation Time: 2024-12-06 10:57:52.565294
 -- -------------------------------------------------------------
+SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE `hrmsNew`.`abroads`;
 
@@ -4123,3 +4124,4 @@ INSERT INTO `hrmsNew`.`users` (`id`, `avatar`, `name`, `password`, `division_id`
 (1, NULL, 'admin', '$2y$12$L5fsnXVQmzJPo9igqnHhVOGXdNr1cPT0Ov8UF3JhmgELIUB5zxYGS', 11, 0, 2, 'admin@gmail.com', NULL, NULL, '2024-12-04 04:50:31', '2024-12-04 04:50:31'),
 (2, NULL, 'User', '$2y$12$F4/buyMwKwdmGXSCFxOShOroW/5b9irGGyWvFIDPteCpZhfc9yNoW', 11, 0, 4, 'users@gmail.com', NULL, NULL, '2024-12-04 04:50:31', '2024-12-05 06:35:49');
 
+SET FOREIGN_KEY_CHECKS = 1;
