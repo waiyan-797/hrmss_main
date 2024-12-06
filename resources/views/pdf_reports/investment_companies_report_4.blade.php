@@ -70,6 +70,7 @@
 <body>
     <page size="A4">
         <div class="container">
+            <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
             <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <div class="table-container">
                 <table>
@@ -85,7 +86,7 @@
                     <tbody class="text-center h-8 p-2">
                         @foreach ($first_payscales as $payscale)
                             <tr>
-                                <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                <td class="border border-black p-2">{{en2mm($loop->index + 1)}}</td>
                                 <td class="border border-black p-2">{{$payscale->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($payscale->staff->count())}}</td>
