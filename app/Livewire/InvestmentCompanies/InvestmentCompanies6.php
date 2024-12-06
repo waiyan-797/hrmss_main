@@ -110,6 +110,7 @@ class InvestmentCompanies6 extends Component
     }
     public function render()
     {
+        
         if ($this->filterRange) {
             [$year, $month] = explode('-', $this->filterRange);
             $this->year = $year;

@@ -10,8 +10,8 @@
                 <h1 class="font-semibold text-base mb-2 text-center">
                     ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
                 <h2 class="font-semibold text-base mb-2 text-center"> 
-                    {{-- {en2mm($year)}}ခုနှစ်၊ {{en2mm($month)}} --}}
-            {{mmDateFormat(2024 , 8)}}
+                    {{en2mm($year)}}ခုနှစ်၊ {{en2mm($month)}}
+            {{-- {{mmDateFormat(2024 , 8)}} --}}
                     လအတွင်း တာဝန်ပျက်ကွက်သူဝန်ထမ်းများအား
                     အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း</h2>
                 <div class="w-full rounded-lg">

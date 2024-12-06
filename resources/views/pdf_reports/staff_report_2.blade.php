@@ -104,13 +104,13 @@
                                 {{$staff->name}}
                             </td>
                             <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{$staff->current_rank->name}}
+                                {{$staff->current_rank?->name}}
                             </td>
                             <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
                                 {{$staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code}}
                             </td>
                             <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{$staff->current_department->name}}
+                                {{$staff->current_department?->name}}
                             </td>
                             <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
                                 {{$staff->dob}}
