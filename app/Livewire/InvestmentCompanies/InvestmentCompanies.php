@@ -50,11 +50,6 @@ class InvestmentCompanies extends Component
             'tnty_staffs' => $tnty_staffs,
             'aya_staffs' => $aya_staffs,
             'total_staffs' => $total_staffs,
-
-           
-
-
-
         ];
         $pdf = PDF::loadView('pdf_reports.investment_companies_report', $data);
         return response()->streamDownload(function() use ($pdf) {
