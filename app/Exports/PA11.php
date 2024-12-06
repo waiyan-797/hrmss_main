@@ -22,14 +22,6 @@ class PA11 implements FromView
 
     public function view(): View
     {
-
-
-
-
-
-
-
-
         $date_limit = $this->filterRange;
         $_date_limit = $this->filterRangeTo;
         $ten_years_ago = Carbon::now()->subYears(10);

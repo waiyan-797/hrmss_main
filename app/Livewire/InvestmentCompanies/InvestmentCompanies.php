@@ -5,6 +5,7 @@ namespace App\Livewire\InvestmentCompanies;
 use App\Models\Payscale;
 use App\Models\Staff;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -49,12 +50,19 @@ class InvestmentCompanies extends Component
             'tnty_staffs' => $tnty_staffs,
             'aya_staffs' => $aya_staffs,
             'total_staffs' => $total_staffs,
+
+           
+
+
+
         ];
         $pdf = PDF::loadView('pdf_reports.investment_companies_report', $data);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf.pdf');
     }
+   
+
     public function go_word()
     {
         $kachin_staffs = Staff::where('current_division_id', 12)->get();

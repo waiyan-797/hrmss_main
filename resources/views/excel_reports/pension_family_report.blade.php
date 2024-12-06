@@ -10,10 +10,17 @@
             background: white;
         }
 
-        page[size="A4"] {
+        /* page[size="A4"] {
             width: 210mm;
             height: 297mm;
-        }
+        } */
+        page[size="A4-L"] {
+        width: 297mm;
+        height: 210mm;
+        orientation: landscape;
+        display: block;
+    }
+
 
         @media print {
             body, page {
@@ -95,7 +102,8 @@
     </style>
 </head>
 <body>
-    <page size="A4">
+    {{-- <page size="A4"> --}}
+        <page size="A4-L"> 
         <div class="table-container">
             <table>
                 <thead>

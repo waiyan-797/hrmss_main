@@ -11,10 +11,11 @@
             background: white;
         }
 
-        page[size="A4"] {
-            width: 210mm;
+         page[size="A4"] {
+            width:297mm;
             height: 297mm;
-        }
+        } 
+
 
         @media print {
             body, page {
@@ -100,7 +101,9 @@
     </style>
 </head>
 <body>
-    <page size="A4">
+     <page size="A4"> 
+        <page layout="landscape">
+
         <div class="container">
             <div class="content">
                 <div class="inner-content">

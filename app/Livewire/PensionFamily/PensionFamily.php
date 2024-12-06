@@ -20,17 +20,19 @@ class PensionFamily extends Component
         $data = [
             'staffs' => $staffs,
         ];
-        $pdf = PDF::loadView('pdf_reports.pension_family_report', $data);
+        $pdf = PDF::loadView('pdf_reports.pension_family_report',$data) ;
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'pension_family_report_pdf.pdf');
     }
+   
+
     public function go_word()
     {
         $staffs = Staff::get();
         $phpWord = new PhpWord();
-        $section = $phpWord->addSection();
-        $section->addTitle('Pension Family Report', 1);
+        $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
+        $section->addTitle('မိသားစုပင်စင်ခံစားခဲ့သူများစာရင်း', 1,);
 
         // Add table
         $table = $section->addTable([

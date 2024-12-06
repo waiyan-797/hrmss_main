@@ -10,9 +10,11 @@
             background: white;
         }
 
-        page[size="A4"] {
-            width: 210mm;
+        page[size="A4-L"] {
+            width: 400mm;
             height: 297mm;
+            orientation: landscape;
+            
         }
 
         @media print {
@@ -95,7 +97,9 @@
     </style>
 </head>
 <body>
-    <page size="A4">
+    <page size="A4-L"> 
+       
+
         <div class="table-container">
             <table>
                 <thead>
@@ -117,22 +121,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    @foreach($staffs as $staff)
+                            <tr>
+                                <td>{{ $loop->index+1}}</td>
+                                <td>{{ $staff->name}}</td>
+                                <td>@foreach($staff->postings as $posting)
+                                    {{ $posting->rank?->name}}
+                                    @endforeach</td>
+                                <td>{{ en2mm(Carbon\Carbon::parse($staff->join_date)->format('d-m-y')) }}</td>
+                                <td>{{ en2mm(Carbon\Carbon::parse($staff->retire_date)->format('d-m-y')) }}</td>
+                                <td>@php
+                                    $currentDate = Carbon\Carbon::now();
+                                    $rankDate = Carbon\Carbon::parse($staff->current_rank_date);
+                                    $diff = $rankDate->diff($currentDate);
+                                @endphp
+                                {{ $diff->y == 0 ? '' : en2mm($diff->y) .' နှစ်'}} {{ $diff->m == 0 ? '' : en2mm($diff->m) .' လ' }} {{ $diff->d == 0 ? '' : en2mm($diff->d) .' ရက်' }}</td>
+                                <td>{{ en2mm(Carbon\Carbon::parse($staff->date_of_death)->format('d-m-y')) }}</td>
+                                <td>{{ $staff->family_pension_inheritor}}</td>
+                                <td>{{ en2mm(Carbon\Carbon::parse($staff->retire_date)->format('d-m-y')) }}</td>
+                                <td>{{ $staff->family_pension_inheritor_relation?->name}}</td>
+                                <td>{{ en2mm(Carbon\Carbon::parse($staff->family_pension_date)->format('d-m-y')) }}</td>
+
+                                <td>{{ $staff->pension_bank}}</td>
+                                <td>{{ $staff->pension_salary}}၊{{ $staff->gratuity}}</td>
+                                <td>{{ $staff->permanent_address_ward.'၊'.$staff->permanent_address_street.'၊'.$staff->permanent_address_township_or_town?->name.'၊'.$staff->permanent_address_region?->name }}၊{{ $staff->phone}}</td>
+                            </tr>
+                       @endforeach
                 </tbody>
             </table>
         </div>
