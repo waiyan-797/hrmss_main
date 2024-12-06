@@ -10,4 +10,9 @@ current rank date < serach date s
 
 ခင်ပွန်း/ဇနီး  -- just select -->
 
-hello 
+change databasae to hrmsNew 
+
+php artisan migrate 
+run the command  
+
+php artisan db:import-sql database/sql/5122024HrmsBackup.sql
