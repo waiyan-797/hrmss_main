@@ -363,7 +363,7 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['ပညာအရည်အချင်း အုပ်စု', 'ပညာအရည်အချင်း အမျိုးအစား', 'ပညာအရည်အချင်း'],
+        'column_names' => ['ပညာအရည်အချင်း အုပ်စု', 'ပညာအရည်အချင်း အမျိုးအစား', 'ပညာအရည်အချင်း' , 'ပေးအပ်သည့်နိုင်ငံ'],
         'column_vals' => $educations,
         'column_types' => [
             [
@@ -383,6 +383,12 @@
                 'wire_array_name' => 'educations',
                 'wire_array_key' => 'education',
                 'select_values' => $_educations,
+            ],
+            [
+                'type' => 'select',
+                'wire_array_name' => 'educations',
+                'wire_array_key' => 'country_id',
+                'select_values' => $_countries,
             ],
         ],
         'del_method' => 'removeEdu',

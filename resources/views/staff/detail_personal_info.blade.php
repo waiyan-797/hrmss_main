@@ -104,11 +104,13 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['သင်တန်းအမည်','ဒီပလိုမာလက်မှတ်','သင်တန်းကြေး', 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းတည်နေရာ','မှတ်ချက်'],
+        'column_names' => ['သင်တန်းအမည်', 'သင်တန်းအမှတ်စဉ်' , 'သင်တန်းအမျိုးအစား','သင်တန်းကြေး', 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းတည်နေရာ','မှတ်ချက်'],
         'add_event' => 'add_trainings',
         'column_vals' => $trainings,
         'column_types' => [
-            [
+            [ 
+               
+
                 'type' => 'select',
                 'wire_array_name' => 'trainings',
                 'wire_array_key' => 'training_type',
@@ -117,8 +119,15 @@
             [
                 'type' => 'text',
                 'wire_array_name' => 'trainings',
+                'wire_array_key' => 'batch',
+            ],
+
+            [
+                'type' => 'text',
+                'wire_array_name' => 'trainings',
                 'wire_array_key' => 'diploma_name',
             ],
+            
             [
                 'type' => 'number',
                 'wire_array_name' => 'trainings',
