@@ -83,7 +83,7 @@ class InvestmentCompanies8 extends Component
 
         $all_ranks = Rank::get();
         $phpWord = new PhpWord();
-        // $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
+     
         $section = $phpWord->addSection([
             'orientation' => 'landscape',
             'paperSize' => 'A4',
