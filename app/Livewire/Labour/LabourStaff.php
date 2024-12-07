@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Livewire\labour;
+namespace App\Livewire\Labour;
 
 use Livewire\Component;
 

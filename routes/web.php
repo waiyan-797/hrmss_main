@@ -95,7 +95,7 @@ use App\Livewire\InvestmentCompanies\YangonOfficeStaff;
 use App\Livewire\InvestmentCompanies\YangonOfficeStaff2;
 use App\Livewire\InvestmentCompanies\YangonStaffAprilSalaryList;
 use App\Livewire\Labour;
-use App\Livewire\labour\LabourStaff;
+use App\Livewire\Labour\LabourStaff;
 use App\Livewire\LabourDetails;
 use App\Livewire\LabourStaff as LivewireLabourStaff;
 use App\Livewire\Language as LivewireLanguage;

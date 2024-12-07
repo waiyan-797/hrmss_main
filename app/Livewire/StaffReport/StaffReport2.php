@@ -3,9 +3,13 @@
 namespace App\Livewire\StaffReport;
 
 use App\Models\Staff;
+
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
-use PhpOffice\PhpWord\PhpWord;
+
+
+
+
 
 class StaffReport2 extends Component
 {
@@ -18,6 +22,10 @@ class StaffReport2 extends Component
         $data = [
             'staffs' => $staffs,
         ];
+        
+      
+       
+
         $pdf = PDF::loadView('pdf_reports.staff_report_2', $data);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();

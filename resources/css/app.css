@@ -12,7 +12,10 @@
     background-size: 100%;
 }
 
-
+  body {
+           font-family: 'Pyidaungsu', sans-serif !important;
+            font-size: 13px;
+        }
 .customeHeight{
     /* height: 400vh !important; */
 }

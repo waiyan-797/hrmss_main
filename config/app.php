@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -123,5 +124,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
     'charset' => 'UTF-8',
+   
 
 ];
