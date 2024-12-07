@@ -83,7 +83,7 @@
                         @foreach ($payscales as $payscale)
                             <tr>
                                 <td class="border border-black p-2">{{$loop->index + 1}}</td>
-                                <td class="border border-black p-2">{{$payscale->ranks[0]->name}}နှင့်အဆင့်တူ</td>
+                                <td class="border border-black p-2">{{$payscale->ranks[0]->name}} နှင့်အဆင့်တူ</td>
                                 <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($payscale->staff->count())}}</td>
                                 <td class="border border-black p-2">{{en2mm(

@@ -499,6 +499,12 @@ public function labourAtt($year, $month)
     public static  function FromNPt(){
         return Staff::where("current_division_id", 26);
     }
+
+    public function scopeFromNPt($query)
+{
+    return $query->where('current_division_id', 26);
+}
+
     
     public function isInRs(){
    
