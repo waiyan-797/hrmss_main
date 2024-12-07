@@ -4,7 +4,6 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <div class="w-full mb-4">
-                <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
                 <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
                 <h2 class="font-semibold text-base mb-2 text-center">၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိဝန်ထမ်းအင်အားစာရင်း</h2>
                 <div class="w-full rounded-lg">
@@ -21,7 +20,7 @@
                         <tbody class="text-center h-8 p-2">
                             @foreach ($first_payscales as $payscale)
                                 <tr>
-                                    <td class="border border-black p-2">{{en2mm($loop->index + 1)}}</td>
+                                    <td class="border border-black p-2">{{$loop->index + 1}}</td>
                                     <td class="border border-black p-2">{{$payscale->name}}</td>
                                     <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
                                     <td class="border border-black p-2">{{en2mm($payscale->staff->count())}}</td>
@@ -40,7 +39,7 @@
 
                             @foreach ($second_payscales as $payscale)
                                 <tr>
-                                    <td class="border border-black p-2">{{en2mm($loop->index + 1)}}</td>
+                                    <td class="border border-black p-2">{{$loop->index + 1}}</td>
                                     <td class="border border-black p-2">{{$payscale->name}}</td>
                                     <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
                                     <td class="border border-black p-2">{{en2mm($payscale->staff->count())}}</td>

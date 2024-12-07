@@ -62,7 +62,7 @@ class StaffReport1 extends Component
             $table->addCell(2000)->addText(en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y')));
             $table->addCell(2000)->addText(en2mm(\Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y')));
             $table->addCell(2000)->addText(en2mm(\Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y')));
-            $table->addCell(2000)->addText($staff->side_department->name);
+            $table->addCell(2000)->addText($staff->side_department?->name);
 
 
             $educations = '';

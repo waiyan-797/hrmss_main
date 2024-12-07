@@ -58,50 +58,50 @@ class InvestmentCompanies6 extends Component
             'cellMargin' => 80,
         ]);
         $table->addRow();
-        $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true]);
-        $table->addCell(4000, ['vMerge' => 'restart'])->addText('ဌာနအမည်', ['bold' => true]);
-        $table->addCell(7000, ['gridSpan' => 7, 'valign' => 'center'])->addText('နိုင်ငံ့ဝန်ထမ်းဥပ‌‌ဒေနည်းပညာအရ အရေးယူမှုပြီးစီးမှု');
-        $table->addCell(3000, ['vMerge' => 'restart'])->addText('ပုဒ်မ၅၀၅ဖြင့်အရေးယူပြီးစီးမှု', ['bold' => true]);
-        $table->addCell(3000, ['vMerge' => 'restart'])->addText('အရေးယူဆောင်ရွက်ဆဲအင်အား', ['bold' => true]);
-        $table->addCell(3000, ['vMerge' => 'restart'])->addText('စုစုပေါင်း', ['bold' => true]);
+        $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true] , ['align'=>'center'] );
+        $table->addCell(4000, ['vMerge' => 'restart'])->addText('ဌာနအမည်', ['bold' => true] , ['align'=>'center'] );
+        $table->addCell(7000, ['gridSpan' => 7, 'valign' => 'center'])->addText('နိုင်ငံ့ဝန်ထမ်းဥပ‌‌ဒေ နည်းဥပ‌‌ဒေအရ အရေးယူမှုပြီးစီးမှု' , ['bold' => true] , ['align'=>'center'] );
+        $table->addCell(3000, ['vMerge' => 'restart'])->addText('ပုဒ်မ၅၀၅ဖြင့်အရေးယူပြီးစီးမှု', ['bold' => true] , ['align'=>'center'] );
+        $table->addCell(3000, ['vMerge' => 'restart'])->addText('အရေးယူဆောင်ရွက်ဆဲအင်အား', ['bold' => true] , ['align'=>'center'] );
+        $table->addCell(3000, ['vMerge' => 'restart'])->addText('စုစုပေါင်း', ['bold' => true] , ['align'=>'center'] );
 
         $table->addRow();
         $table->addCell(2000, ['vMerge' => 'continue']);
         $table->addCell(4000, ['vMerge' => 'continue']);
-        $table->addCell(1000)->addText('စာဖြင့် သတိပေးခြင်း', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('နှစ်တိုးလစာရပ်ဆိုင်းခြင်း', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ရာထူးတိုးမြှင့်ခြင်းကိုရပ်ဆိုင်းခြင်း', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('လစာနှုန်းအတွင်းလစာလျှော့ချခြင်း', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ရာထူးအဆင့်လျှော့ချခြင်း', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ရာထူးမှထုတ်ပယ်ခြင်း', ['alignment' => 'center']);
-        $table->addCell(1000)->addText('ရာထူးအဖြစ်မှထုတ်ပစ်ခြင်း', ['alignment' => 'center']);
+        $table->addCell(1000)->addText('စာဖြင့် သတိပေးခြင်း', ['bold' => true] , ['alignment' => 'center']);
+        $table->addCell(1000)->addText('နှစ်တိုးလစာရပ်ဆိုင်းခြင်း',  ['bold' => true] , ['alignment' => 'center']);
+        $table->addCell(1000)->addText('ရာထူးတိုးမြှင့်ခြင်းကိုရပ်ဆိုင်းခြင်း',  ['bold' => true] , ['alignment' => 'center']);
+        $table->addCell(1000)->addText('လစာနှုန်းအတွင်းလစာလျှော့ချခြင်း',  ['bold' => true] , ['alignment' => 'center']);
+        $table->addCell(1000)->addText('ရာထူးအဆင့်လျှော့ချခြင်း',  ['bold' => true] , ['alignment' => 'center']);
+        $table->addCell(1000)->addText('ရာထူးမှထုတ်ပယ်ခြင်း',  ['bold' => true] , ['alignment' => 'center']);
+        $table->addCell(1000)->addText('ရာထူးအဖြစ်မှထုတ်ပစ်ခြင်း',  ['bold' => true] , ['alignment' => 'center']);
         $table->addCell(4000, ['vMerge' => 'continue']);
         $table->addCell(4000, ['vMerge' => 'continue']);
         $table->addCell(4000, ['vMerge' => 'continue']);
         $rowCount = 1;
         $table->addRow();
-        $table->addCell(2000)->addText($rowCount);
+        $table->addCell(2000)->addText( en2mm($rowCount) ,['bold'=> false] , ['align' => 'center']);
         $table->addCell(4000)->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန');
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 1)->count()));
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 2)->count()));
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 3)->count()));
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 4)->count()));
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 5)->count()));
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 8)->count()));
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 9)->count()));
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 1)->count()) ,['bold'=> false] , ['align' => 'center']);
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 2)->count()) ,['bold'=> false] , ['align' => 'center']);
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 3)->count()) ,['bold'=> false] , ['align' => 'center']);
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 4)->count()) ,['bold'=> false] , ['align' => 'center']);
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 5)->count()) ,['bold'=> false] , ['align' => 'center']);
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 8)->count()) ,['bold'=> false] , ['align' => 'center']);
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 9)->count()) ,['bold'=> false] , ['align' => 'center']);
         $table->addCell(4000)->addText();
         $table->addCell(4000)->addText();
         $table->addCell(4000)->addText();
         $table->addRow();
         $table->addCell(2000)->addText();
         $table->addCell(4000)->addText('စုစုပေါင်း');
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 1)->count()));
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 2)->count()));
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 3)->count()));
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 4)->count()));
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 5)->count()));
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 8)->count()));
-        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 9)->count()));
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 1)->count()) ,['bold'=> false] , ['align' => 'center']);
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 2)->count()) ,['bold'=> false] , ['align' => 'center']);
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 3)->count()) ,['bold'=> false] , ['align' => 'center']);
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 4)->count()) ,['bold'=> false] , ['align' => 'center']);
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 5)->count()) ,['bold'=> false] , ['align' => 'center']);
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 8)->count()) ,['bold'=> false] , ['align' => 'center']);
+        $table->addCell(1000)->addText(en2mm($punishments->where('penalty_type_id', 9)->count()) ,['bold'=> false] , ['align' => 'center']);
         $table->addCell(4000)->addText();
         $table->addCell(4000)->addText();
         $table->addCell(4000)->addText();
@@ -116,6 +116,7 @@ class InvestmentCompanies6 extends Component
     }
     public function render()
     {
+        
         if ($this->filterRange) {
             [$year, $month] = explode('-', $this->filterRange);
             $this->year = $year;

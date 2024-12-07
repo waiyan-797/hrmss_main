@@ -37,16 +37,16 @@ class InvestmentCompanies9 extends Component
         'cellMargin' => 80,
     ]);
     $table->addRow();
-    $table->addCell(1000)->addText('စဥ်');
-    $table->addCell(3000)->addText('အမည်နှင့်အမျိုးသားမှတ်ပုံတင်အမှတ်');
-    $table->addCell(2000)->addText('မွေးနေ့သက္ကရာဇာ်');
-    $table->addCell(3000)->addText('(က)ရာထူး (ခ) လစာနှုန်း (ဂ)နောက်ဆုံးထုတ်လစာ');
-    $table->addCell(2000)->addText('စတင်အမှုထမ်းသည့်နေ့');
-    $table->addCell(2000)->addText('စတင်ကင်းကွာ/ပျက်ကွက်သည့်နေ့');
-    $table->addCell(3000)->addText('ဝန်ထမ်းအဖြစ်မှထုတ်ပစ်/ရာထူးမှထုတ်ပယ်သည့်နေ့အမိန့်စာရက်စွဲ');
-    $table->addCell(2000)->addText('လုပ်သက်');
-    $table->addCell(3000)->addText('ထုတ်ပယ်ခံရသည့်အကြောင်းအရင်း');
-    $table->addCell(2000)->addText('မှတ်ချက်');
+    $table->addCell(1000)->addText('စဥ်', ['bold'=>true],['align'=>'center']);
+    $table->addCell(3000)->addText('အမည်နှင့်အမျိုးသားမှတ်ပုံတင်အမှတ်' , ['bold'=>true],['align'=>'center']);
+    $table->addCell(2000)->addText('မွေးနေ့သက္ကရာဇာ်' , ['bold'=>true],['align'=>'center']);
+    $table->addCell(3000)->addText('(က)ရာထူး (ခ) လစာနှုန်း (ဂ)နောက်ဆုံးထုတ်လစာ' , ['bold'=>true],['align'=>'center']);
+    $table->addCell(2000)->addText('စတင်အမှုထမ်းသည့်နေ့' , ['bold'=>true],['align'=>'center']);
+    $table->addCell(2000)->addText('စတင်ကင်းကွာ/ပျက်ကွက်သည့်နေ့' , ['bold'=>true],['align'=>'center']);
+    $table->addCell(3000)->addText('ဝန်ထမ်းအဖြစ်မှထုတ်ပစ်/ရာထူးမှထုတ်ပယ်သည့်နေ့အမိန့်စာရက်စွဲ' , ['bold'=>true],['align'=>'center']);
+    $table->addCell(2000)->addText('လုပ်သက်' , ['bold'=>true],['align'=>'center']);
+    $table->addCell(3000)->addText('ထုတ်ပယ်ခံရသည့်အကြောင်းအရင်း' ,['bold'=>true],['align'=>'center']);
+    $table->addCell(2000)->addText('မှတ်ချက်' , ['bold'=>true],['align'=>'center']);
     
     $table->addRow();
     $table->addCell(1000)->addText('(က)');
