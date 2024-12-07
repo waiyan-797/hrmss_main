@@ -149,6 +149,7 @@ use App\Livewire\LocalTrainingReport3;
 use App\Livewire\MaritalStatus;
 use App\Livewire\Pension;
 use App\Livewire\NptBySamePayScale;
+use App\Livewire\NPTThreee;
 use App\Livewire\PersonnelAccount;
 use App\Livewire\Promotion as LivewirePromotion;
 use App\Livewire\Report;
@@ -260,6 +261,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/action-completed-ongoing', InvestmentCompanies6::class)->name('investment_companies6');
     Route::get('/napata-reach-strength', InvestmentCompanies7::class)->name('investment_companies7');
     Route::get('/npt_by_same_payscale', NptBySamePayScale::class)->name('npt_by_same_payscale');
+    Route::get('/npt-three', NPTThreee::class)->name('npt-three');
     Route::get('/staff_in_npt', StaffInNpt::class)->name('staff_in_npt');
     Route::get('/departmental-change-strength-report', InvestmentCompanies8::class)->name('investment_companies8');
     Route::get('/dismissal-fired-employee', InvestmentCompanies9::class)->name('investment_companies9');
