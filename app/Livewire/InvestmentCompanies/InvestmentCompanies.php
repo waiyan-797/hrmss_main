@@ -2,6 +2,7 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Exports\AllowInserviceFreeExport;
 use App\Models\Payscale;
 use App\Models\Staff;
 use Livewire\Component;
@@ -51,12 +52,14 @@ class InvestmentCompanies extends Component
             'aya_staffs' => $aya_staffs,
             'total_staffs' => $total_staffs,
         ];
-        $pdf = PDF::loadView('pdf_reports.investment_companies_report', $data);
+        $pdf = PDF::loadView('pdf_reports.investment_companies_report', $data, [],['format' => 'A4-L',
+          'orientation' => 'L'
+]);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf.pdf');
     }
-   
+    
 
     public function go_word()
     {
@@ -82,9 +85,9 @@ class InvestmentCompanies extends Component
         $second_payscales = Payscale::where('staff_type_id', 2)->get();
         $phpWord = new PhpWord();
         $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
-    
-     
-       
+        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
+        $section->addTitle('ဝန်ကြီးဌာန၊ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
+        $section->addTitle('ဦးစီးဌာန ၊ ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();
         $table->addCell(1000)->addText('အမှတ်စဥ်');
@@ -113,7 +116,7 @@ class InvestmentCompanies extends Component
         
         foreach ($first_payscales as $index=> $payscale) {
             $table->addRow();
-            $table->addCell(2000)->addText($index + 1);
+            $table->addCell(2000)->addText(en2mm($index + 1));
             $table->addCell(4000)->addText($payscale->name);
             $table->addCell(2000)->addText(en2mm($payscale->allowed_qty));
             $table->addCell(2000)->addText(en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count()));
@@ -159,7 +162,7 @@ class InvestmentCompanies extends Component
 
             foreach ($second_payscales as $index=> $payscale) {
                 $table->addRow();
-                $table->addCell(2000)->addText($index + 1);
+                $table->addCell(2000)->addText(en2mm($index + 1));
                 $table->addCell(4000)->addText($payscale->name);
                 $table->addCell(2000)->addText(en2mm($payscale->allowed_qty));
                 $table->addCell(2000)->addText(en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count()));
@@ -200,7 +203,8 @@ class InvestmentCompanies extends Component
             $table->addCell(2000)->addText(en2mm($tnty_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
             $table->addCell(2000)->addText(en2mm($aya_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
             $table->addCell(2000)->addText(en2mm($total_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
-    
+            $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
+            $section->addTitle('ကန့်သက်', 1);
     
         $tempFile = tempnam(sys_get_temp_dir(), 'word');
         $phpWord->save($tempFile, 'Word2007');
@@ -232,6 +236,8 @@ class InvestmentCompanies extends Component
         $tnty_staffs = Staff::where('current_division_id', 17)->get();
         $aya_staffs = Staff::where('current_division_id', 25)->get();
         $total_staffs = Staff::whereIn('current_division_id', [1, 2, 12, 13, 14, 15, 21, 22, 24, 16, 20, 26, 23, 19, 18, 17, 25])->get();
+       
+      
         return view('livewire.investment-companies.investment-companies',[
             'first_payscales' => $first_payscales,
             'second_payscales' => $second_payscales,

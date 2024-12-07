@@ -8,7 +8,9 @@
 
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">
-                    ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+                    ၂၀၂၄-၂၀၂၅ ဘဏ္ဍာရေးနှစ်အတွင်း ဝန်ထမ်းအဖြစ်မှ ထုတ်ပစ်ခံရသော ဝန်ထမ်းများစာရင်း</h1>
+                    <h1 class="font-semibold text-base mb-2 text-base">
+                       ဝန်ထမ်းအဖွဲ့အစည်းအမည်၊ရင်းနှီးမြှုပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
                 <div class="w-full rounded-lg">
                     <table class="w-full text-center">
                         <thead>
@@ -43,7 +45,7 @@
                             </tr>
                             @foreach($staffs as $staff)
                             <tr>
-                                <td class="border border-black p-2">{{ $loop->index+1}}</td>
+                                <td class="border border-black p-2">{{ en2mm($loop->index+1)}}</td>
                                 <td class="border border-black p-2">{{ $staff->name}}၊{{ $staff->nrc_region_id?->name . $staff->nrc_township_code?->name .'/'. $staff->nrc_sign?->name .'/'. $staff->nrc_code }}</td>
                                 <td class="border border-black p-2">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
                                 <td class="border border-black p-2">{{ $staff->current_rank?->name}}၊{{ $staff->payscale?->name}}၊{{ $staff->current_salary}}</td>

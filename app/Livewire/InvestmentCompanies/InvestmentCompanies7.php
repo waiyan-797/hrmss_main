@@ -135,13 +135,19 @@ class InvestmentCompanies7 extends Component
             'year' => $this->year,
             'month' => $this->month,
         ];
-        $pdf = PDF::loadView('pdf_reports.investment_companies_report_7', $data);
+        $pdf = PDF::loadView('pdf_reports.investment_companies_report_7', $data,[],[
+            'format'=>'legal',
+            'orientation'=>'L'
+        ]);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_7.pdf');
     }
     public function go_word()
     {
+        [$year, $month] = explode('-', $this->filterRange);
+        $this->year = $year;
+        $this->month = $month;
         $high_staffs = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->count();
         $low_staffs = Staff::whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->count();
         $high_reduced_staffs = Staff::whereNotNull('retire_type_id')->whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->get();
@@ -172,12 +178,21 @@ class InvestmentCompanies7 extends Component
         $total_left_staffs = $high_left_staffs + $low_left_staffs;
 
         $phpWord = new PhpWord();
-        $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
-
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+        // $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
+        $section = $phpWord->addSection([
+            'orientation' => 'landscape',
+            'marginLeft' => 600,
+            'marginRight' => 600,
+            'marginTop' => 600,
+            'marginBottom' => 600,
+           
+        ]);
+        
+        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+        $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
         $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
-        $section->addTitle('၂၀၂၄ ခုနှစ်၊ ဇွန်လ', 2);
-
+        $section->addTitle(mmDateFormat($year, $month), 1);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();
         $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true], ['align' => 'center']);
         $table->addCell(4000, ['vMerge' => 'restart'])->addText('ဌာန', ['bold' => true], ['align' => 'center']);

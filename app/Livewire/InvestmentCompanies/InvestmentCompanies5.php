@@ -2,6 +2,8 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Exports\AllowInserviceFreeExport;
+use App\Exports\PA05Export;
 use App\Models\Payscale;
 use App\Models\Rank;
 use App\Models\Staff;
@@ -9,6 +11,7 @@ use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InvestmentCompanies5 extends Component
 {
@@ -21,6 +24,12 @@ class InvestmentCompanies5 extends Component
             echo $pdf->output();
         }, 'investment_companies_pdf_5.pdf');
     }
+    public function go_excel()
+    {
+        return Excel::download(new PA05Export, 'payscales.xlsx');
+    }
+  
+
     public function go_word()
 {
     $payscales = Payscale::with('ranks', 'staff')->get();

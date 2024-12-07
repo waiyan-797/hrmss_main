@@ -65,8 +65,8 @@
         <tbody>
             @foreach($staffs as $staff)
                     <tr>
-                        <td>{{ $loop->index+1}}</td>
-                        <td class="border border-black text-left p-2">{{ $staff->name}}/{{ $staff->current_rank->name}}</td>
+                        <td>{{ en2mm($loop->index+1)}}</td>
+                        <td class="border border-black text-left p-2">{{ $staff?->name}}/{{ $staff->current_rank?->name}}</td>
                         <td>{{ $staff->dob}}</td>
                         <td>{{ $staff->join_date}}</td>
                         <td>            {{ \Carbon\Carbon::parse($staff->dob)->addYears(62)->subMonths(4)->format('Y-m-d') }}

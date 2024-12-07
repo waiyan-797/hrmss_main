@@ -16,7 +16,10 @@ class InvestmentCompanies9 extends Component
         $data = [
             'staffs' => $staffs,
         ];
-        $pdf = PDF::loadView('pdf_reports.investment_companies_report_9', $data);
+        $pdf = PDF::loadView('pdf_reports.investment_companies_report_9', $data,[],[
+            'format'=>'A4-L',
+            'orientation'=>'L'
+        ]);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_report_pdf_9.pdf');
@@ -25,8 +28,9 @@ class InvestmentCompanies9 extends Component
 {
     $staffs = Staff::get(); 
     $phpWord = new PhpWord();
-    $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
-    $section->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 14], ['alignment' => 'center']);
+    $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 200]); 
+    $section->addText('၂၀၂၄-၂၀၂၅ ဘဏ္ဍာရေးနှစ်အတွင်း ဝန်ထမ်းအဖြစ်မှ ထုတ်ပစ်ခံရသော ဝန်ထမ်းများစာရင်း', ['bold' => true, 'size' => 14], ['alignment' => 'center']);
+    $section->addText('ဝန်ထမ်းအဖွဲ့အစည်းအမည်၊ရင်းနှီးမြှုပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 14]);
     $table = $section->addTable([
         'borderSize' => 6,
         'borderColor' => '000000',
@@ -57,10 +61,9 @@ class InvestmentCompanies9 extends Component
     $table->addCell(2000)->addText('(ည)');
     foreach ($staffs as $index => $staff) {
         $table->addRow();
-        $table->addCell(1000)->addText($index + 1);
+        $table->addCell(1000)->addText(en2mm($index + 1));
         $table->addCell(3000)->addText($staff->name . '၊ ' . $staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
         $table->addCell(2000)->addText(\Carbon\Carbon::parse($staff->dob)->format('d-m-Y'));
-        // $table->addCell(3000)->addText($staff->current_rank->name . '၊ ' . $staff->payscale->name . '၊ ' . $staff->current_salary);
         $table->addCell(3000)->addText($staff->current_rank?->name . '၊ ' . $staff->payscale?->name . '၊ ' . $staff->current_salary);
 
         $table->addCell(2000)->addText(\Carbon\Carbon::parse($staff->join_date)->format('d-m-Y'));

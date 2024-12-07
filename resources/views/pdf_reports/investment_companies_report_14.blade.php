@@ -23,10 +23,57 @@
             }
         }
 
-        body {
+        /* body {
            font-family: 'pyidaungsu', sans-serif !important;
             font-size: 13px;
-        }
+        } */
+        body {
+    font-family: 'pyidaungsu', sans-serif !important;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f3f4f6;
+}
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.page {
+    width: 8.5in; 
+    height: 14in; 
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+        .heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+}
+
+/* Subheading style */
+.subheading {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #555;
+}
 
         table {
             width: 100%;
@@ -56,6 +103,8 @@
 </head>
 <body>
     <page size="A4">
+        <h1 class="heading">ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
+    <h1 class="subheading">ရင်နှီးမြှုပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာနရှိ(ရုံးချုပ်)၏ ဖွဲ့စည်းပုံ၊ခန့်အပ် ပို/လို အင်အားစာရင်း</h1>
         <table>
             <thead>
                 <tr>

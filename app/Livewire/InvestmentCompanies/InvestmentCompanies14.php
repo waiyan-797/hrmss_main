@@ -77,7 +77,10 @@ class InvestmentCompanies14 extends Component
             'hr' => $hr,
             'total' => $total,
         ];
-        $pdf = PDF::loadView('pdf_reports.investment_companies_report_14', $data);
+        $pdf = PDF::loadView('pdf_reports.investment_companies_report_14', $data, [],[
+            'format' => 'legal',
+            'orientation' => 'L'
+          ]);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_14.pdf');
@@ -86,9 +89,22 @@ class InvestmentCompanies14 extends Component
 {
     $ranks = Rank::get();
    $phpWord = new PhpWord();
-   $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
-   $section->addText('Investment Companies Report', ['bold' => true, 'size' => 16]);
-   $table = $section->addTable(['borderSize' => 16, 'borderColor' => '000000', 'cellMargin' => 80]);
+
+$section = $phpWord->addSection([
+    'orientation' => 'landscape', // Set orientation to landscape
+    'pageSizeW' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(14),
+    'pageSizeH' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(8.5), 
+    'marginTop' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(72), // Margin top in points (e.g., 1 inch = 72 points)
+    'marginLeft' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(72), // Margin left
+    'marginRight' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(72), // Margin right
+    'marginBottom' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(72) // Margin bottom
+]);
+
+   $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
+        $section->addTitle('ဝန်ကြီးဌာန၊ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
+        $section->addTitle('ရင်နှီးမြှုပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာနရှိ(ရုံးချုပ်)၏ ဖွဲ့စည်းပုံ၊ခန့်အပ် ပို/လို အင်အားစာရင်း', 1);
+ 
+   $table = $section->addTable(['borderSize' => 10, 'borderColor' => '000000', 'cellMargin' => 60]);
    $table->addRow();
    $table->addCell(1000)->addText("စဥ်", ['bold' => true]);
    $table->addCell(4000)->addText("ရာထူး", ['bold' => true]);

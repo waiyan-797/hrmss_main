@@ -33,12 +33,26 @@
             margin-bottom: 16px;
         }
 
-        h1 {
+        /* h1 {
             font-weight: 600;
             font-size: 16px;
             margin-bottom: 8px;
             text-align: center;
+        } */
+        h1 {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
         }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-2 {
+            margin-bottom: 16px;
+        }
+
 
         .table-container {
             width: 100%;
@@ -71,7 +85,14 @@
 <body>
     <page size="A4">
         <div class="container">
-            <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+        
+            <h1 class="text-center mb-2">
+                ၂၀၂၄-၂၀၂၅ ဘဏ္ဍာရေးနှစ်အတွင်း ဝန်ထမ်းအဖြစ်မှ ထုတ်ပစ်ခံရသော ဝန်ထမ်းများစာရင်း
+            </h1>
+            <h1 class="mb-2">
+                ဝန်ထမ်းအဖွဲ့အစည်းအမည်၊ရင်းနှီးမြှုပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+            </h1>
+    
             <div class="table-container">
                 <table>
                     <thead>
@@ -103,7 +124,7 @@
                         </tr>
                         @foreach($staffs as $staff)
                         <tr>
-                            <td>{{ $loop->index+1}}</td>
+                            <td>{{ en2mm($loop->index+1)}}</td>
                             <td>{{ $staff->name}}၊{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}</td>
                             <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
                             <td>{{ $staff->current_rank?->name}}၊{{ $staff->payscale?->name}}၊{{ $staff->current_salary}}</td>

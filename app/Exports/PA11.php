@@ -7,9 +7,11 @@ use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class PA11 implements FromView
-{
+class PA11 implements FromView ,WithStyles
+{ 
 
 
     public $filterRange , $filterRangeTo;
@@ -139,5 +141,19 @@ $Toyear
 
 
         return view('excel_reports.investment_companies_report_11', $data);
+    }
+
+
+    public function styles(Worksheet $sheet)
+    {
+        // Apply the Pyidaungsu font to the entire sheet
+        $sheet->getStyle('A1:Z1000')->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 12, // Adjust size as needed
+            ],
+        ]);
+
+        return [];
     }
 }

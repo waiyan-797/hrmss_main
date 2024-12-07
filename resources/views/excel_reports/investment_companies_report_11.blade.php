@@ -81,7 +81,7 @@
         <table class="border-collapse">
             <thead>
                 <tr>
-                    <th rowspan="2">စဥ်</th>
+                    <th rowspan="2">မှူး</th>
                     <th rowspan="2">အကြောင်းအရာ</th>
                     <th colspan="3">၃၁-၁၂-၂၀၂၃ထိ<br>အင်အား</th>
                     <th colspan="2">အသစ်ခန့်အပ်</th>

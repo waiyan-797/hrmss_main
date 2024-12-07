@@ -11,7 +11,7 @@
             background: white;
         }
 
-        page[size="A4"] {
+        page[size="legal"] {
             width: 210mm;
             height: 297mm;
         }
@@ -23,10 +23,41 @@
             }
         }
 
-        body {
+        /* body {
            font-family: 'pyidaungsu', sans-serif !important;
             font-size: 13px;
-        }
+        } */
+        body {
+    font-family: 'pyidaungsu', sans-serif !important;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f3f4f6;
+}
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.page {
+    width: 8.5in; 
+    height: 14in; 
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 
         .container {
             width: 100%;
@@ -70,8 +101,9 @@
     </style>
 </head>
 <body>
-    <page size="A4">
+    <page>
         <div class="container">
+            <h1>ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
             <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <h3>{{mmDateFormat($year,$month      )}} </h3>
 

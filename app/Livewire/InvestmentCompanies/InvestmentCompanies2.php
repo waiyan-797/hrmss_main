@@ -31,6 +31,7 @@ class InvestmentCompanies2 extends Component
         $data = [
             'first_payscales' => Payscale::where('staff_type_id', 1)->get(),
             'second_payscales' => Payscale::where('staff_type_id', 2)->get(),
+            'third_payscales'=>Payscale::where('staff_type_id',3)->get(),
             'kachin_staffs' => $kachin_staffs,
             'kayah_staffs' => $kayah_staffs,
             'kayin_staffs' => $kayin_staffs,
@@ -49,7 +50,9 @@ class InvestmentCompanies2 extends Component
             'aya_staffs' => $aya_staffs,
             'total_staffs' => $total_staffs,
         ];
-        $pdf = PDF::loadView('pdf_reports.investment_companies_report_2', $data);
+        $pdf = PDF::loadView('pdf_reports.investment_companies_report_2', $data,[],['format' => 'A4-L',
+          'orientation' => 'L'
+]);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_2.pdf');
@@ -77,11 +80,15 @@ class InvestmentCompanies2 extends Component
     
     $first_payscales = Payscale::where('staff_type_id', 1)->get();
     $second_payscales =Payscale::where('staff_type_id', 2)->get();
+    $third_payscales=Payscale::where('staff_type_id',3)->get();
    
 
     
     $phpWord = new PhpWord();
-    $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
+    $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 800]); 
+    $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
+    $section->addTitle('ဝန်ကြီးဌာန၊ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
+    $section->addTitle('ဦးစီးဌာန ၊ ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
     $table->addRow();
     $table->addCell(2000,['vMerge' => 'restart'])->addText('စဥ်');
@@ -147,7 +154,7 @@ class InvestmentCompanies2 extends Component
     $table->addCell(1500)->addText('မ', ['alignment' => 'center']);
     foreach ($first_payscales as $index=> $payscale) {
         $table->addRow();
-        $table->addCell(2000)->addText($index + 1);
+        $table->addCell(2000)->addText(en2mm($index + 1));
         $table->addCell(2000)->addText($payscale->name);
         $table->addCell(2000)->addText(en2mm($payscale->allowed_qty));
         $table->addCell(1500)->addText(en2mm($kachin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count()));
@@ -225,7 +232,7 @@ class InvestmentCompanies2 extends Component
             $table->addCell(1500)->addText(en2mm($total_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
             foreach ($second_payscales as $index=> $payscale) {
                 $table->addRow();
-                $table->addCell(2000)->addText($index + 1);
+                $table->addCell(2000)->addText(en2mm($index + 1));
                 $table->addCell(2000)->addText($payscale->name);
                 $table->addCell(2000)->addText(en2mm($payscale->allowed_qty));
                 $table->addCell(1500)->addText(en2mm($kachin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count()));
@@ -265,7 +272,7 @@ class InvestmentCompanies2 extends Component
                
             }
             $table->addRow();
-            $table->addCell(2000,['gridSpan' => 2])->addText($second_payscales[0]->staff_type->name.'စုစုပေါင်း');
+            $table->addCell(2000,['gridSpan' => 2])->addText(en2mm($second_payscales[0]->staff_type->name).'စုစုပေါင်း');
             $table->addCell(2000)->addText( en2mm($second_payscales->sum('allowed_qty')) );
             $table->addCell(2000)->addText(en2mm($kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
             $table->addCell(1500)->addText(en2mm($kachin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
@@ -302,6 +309,88 @@ class InvestmentCompanies2 extends Component
             $table->addCell(1500)->addText(en2mm($total_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
             $table->addCell(1500)->addText(en2mm($total_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
           
+
+
+         
+            $table->addRow();
+            $table->addCell(2000,['gridSpan' => 2])->addText('ပေါင်း');
+            $table->addCell(2000)->addText( en2mm($second_payscales->sum('allowed_qty')+$first_payscales->sum('allowed_qty')) );
+            $table->addCell(2000)->addText(en2mm($kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($kachin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$kachin_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($kayah_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$kayah_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($kayah_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$kayah_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($kayin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$kayin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($kayin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$kayin_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText( en2mm($chin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$chin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($chin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$chin_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($mon_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$mon_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($mon_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$mon_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($rakhine_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$rakhine_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($rakhine_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$rakhine_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($shan_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$shan_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($shan_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$shan_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($sagaing_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$sagaing_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($sagaing_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$sagaing_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($mdy_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$mdy_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) );
+            $table->addCell(1500)->addText(en2mm($mdy_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$mdy_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($npt_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$npt_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) );
+            $table->addCell(1500)->addText(en2mm($npt_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($ygn_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$ygn_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($ygn_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$ygn_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($head_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$head_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText( en2mm($head_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$head_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText( en2mm($mag_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$mag_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($mag_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$mag_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($pagu_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$pagu_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($pagu_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$pagu_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($tnty_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$tnty_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText( en2mm($tnty_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$tnty_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText( en2mm($aya_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$aya_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($aya_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$aya_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($total_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$total_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($total_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$total_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+
+
+            $table->addRow();
+            $table->addCell(2000,['gridSpan' => 2])->addText('နေ့စား');
+            $table->addCell(2000)->addText(en2mm($third_payscales->sum('allowed_qty')) );
+            $table->addCell(2000)->addText(en2mm($kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($kachin_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($kayah_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($kayah_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($kayin_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($kayin_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($chin_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($chin_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($mon_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($mon_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($rakhine_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($rakhine_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($shan_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($shan_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($sagaing_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($sagaing_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($mdy_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($mdy_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($npt_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($npt_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($ygn_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($ygn_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) );
+            $table->addCell(1500)->addText(en2mm($head_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($head_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($mag_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($mag_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($pagu_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($pagu_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($tnty_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($tnty_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($aya_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($aya_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($total_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $table->addCell(1500)->addText(en2mm($total_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()));
+            $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
+    $section->addTitle('ကန့်သတ်', 1);
+  
     $filePath = storage_path('app/public/investment_companies_report.docx');
     $phpWord->save($filePath, 'Word2007');
     return response()->download($filePath)->deleteFileAfterSend(true);
@@ -310,6 +399,7 @@ class InvestmentCompanies2 extends Component
     {
         $first_payscales = Payscale::where('staff_type_id', 1)->get();
         $second_payscales = Payscale::where('staff_type_id', 2)->get();
+        $third_payscales=Payscale::where('staff_type_id',3)->get();
         $kachin_staffs = Staff::where('current_division_id', 12)->get();
         $kayah_staffs = Staff::where('current_division_id', 13)->get();
         $kayin_staffs = Staff::where('current_division_id', 14)->get();
@@ -330,6 +420,7 @@ class InvestmentCompanies2 extends Component
         return view('livewire.investment-companies.investment-companies2',[
             'first_payscales' => $first_payscales,
             'second_payscales' => $second_payscales,
+            'third_payscales'=>$third_payscales,
             'kachin_staffs' => $kachin_staffs,
             'kayah_staffs' => $kayah_staffs,
             'kayin_staffs' => $kayin_staffs,

@@ -4,6 +4,9 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
+           
+            <h2 class="font-semibold text-center">ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h2>
+            <h2 class="font-semibold text-center">ဝန်ထမ်းအင်အားစာရင်း(တိုင်းဒေသကြီး/ပြည်နယ်)</h2>
 
 
             <table class="md:w-full">
@@ -12,10 +15,11 @@
                         <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
                         <th rowspan="2" class="border border-black text-center p-2">တိုင်း/ပြည်နယ်</th>
                         <th colspan="3" class="border border-black text-center p-2">ခန့်ပြီးအမြဲတမ်းဝန်ထမ်း</th>
+                       
+                    </tr>
+                    <tr>
                         <th class="border border-black text-center p-2">အရာထမ်း</th>
                         <th class="border border-black text-center p-2">အမှုထမ်း</th>
-                        <th class="border border-black text-center p-2">နေ့စား</th>
-                        <th class="border border-black text-center p-2">ခန့်ပြီးရာခိုင်နှုန်း</th>
                         <th class="border border-black text-center p-2">စုစုပေါင်း</th>
                     </tr>
                    

@@ -23,7 +23,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Settings::setDefaultFontName('Pyidaungsu'); 
         Settings::setDefaultFontSize(13);
-        
+        ini_set('memory_limit','2048M');
+
         Model::unguard();
     }
 }

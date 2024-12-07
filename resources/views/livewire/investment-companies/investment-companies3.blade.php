@@ -3,12 +3,17 @@
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            <h1 class="font-semibold text-base mb-2 text-center">ရင်နှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
+            <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+            <h1 class="font-semibold text-base mb-2 text-center">၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း</h1>
+            <br><br>
             <x-text-input
             class=" w-32"
             wire:model.live='year'
             />
             <div class="w-full mb-4">
-                <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+              
+                
                 <div class="w-full rounded-lg">
                     <table class="w-full text-center">
                         <thead>
@@ -24,7 +29,7 @@
                         <tbody class="text-center h-8 p-2">
                             @foreach ($first_ranks as $rank)
                             <tr>
-                                <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                <td class="border border-black p-2">{{en2mm($loop->index + 1)}}</td>
                                 <td class="border border-black p-2">{{$rank->name}}</td>
                                 <td class="border border-black p-2">{{$rank->payscale->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
@@ -40,7 +45,7 @@
                             </tr>
                             @foreach ($second_ranks as $rank)
                                 <tr>
-                                    <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                    <td class="border border-black p-2">{{en2mm($loop->index + 1)}}</td>
                                     <td class="border border-black p-2">{{$rank->name}}</td>
                                     <td class="border border-black p-2">{{$rank->payscale->name}}</td>
                                     <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>

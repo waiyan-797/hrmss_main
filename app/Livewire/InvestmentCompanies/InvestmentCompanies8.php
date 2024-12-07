@@ -13,12 +13,6 @@ use PhpOffice\PhpWord\PhpWord;
 class InvestmentCompanies8 extends Component
 {
 
-
-
-
-
-
-
     public function go_pdf()
     {
         $first_ranks = Rank::where('staff_type_id', 1)
@@ -53,7 +47,10 @@ class InvestmentCompanies8 extends Component
             'third_ranks' => $third_ranks,
             'all_ranks' => $all_ranks,
         ];
-        $pdf = PDF::loadView('pdf_reports.investment_companies_report_8', $data);
+        $pdf = PDF::loadView('pdf_reports.investment_companies_report_8', $data,[],[
+            'format'=>'A4',
+            'orientation'=>'L'
+        ]);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_8.pdf');
@@ -86,26 +83,34 @@ class InvestmentCompanies8 extends Component
 
         $all_ranks = Rank::get();
         $phpWord = new PhpWord();
-        $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
-        $phpWord->setDefaultFontName('Arial');
-        $phpWord->setDefaultFontSize(12);
+        // $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
+        $section = $phpWord->addSection([
+            'orientation' => 'landscape',
+            'paperSize' => 'A4',
+            'marginTop' => 600,
+            'marginRight' => 600,
+            'marginBottom' => 600,
+            'marginLeft' => 600,
+        ]);
+        
+        
 
         $section->addText(
             'ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန',
-            ['bold' => true, 'size' => 16],
+            ['bold' => true, 'size' => 13],
             ['alignment' => 'center']
         );
         $section->addText(
             'ဌာနအလိုက်နေပြည်တော်သို့ပြောင်းရွေ့ရောက်ရှိအင်အားစာရင်း',
-            ['bold' => true, 'size' => 14],
+            ['bold' => true, 'size' => 13],
             ['alignment' => 'center']
         );
         $section->addText(
             '၂၀၂၄ ခုနှစ်၊ ဇွန်လ',
-            ['bold' => true, 'size' => 12],
+            ['bold' => true, 'size' => 13],
             ['alignment' => 'center']
         );
-        $tableStyle = ['borderSize' => 14, 'borderColor' => '000000', 'cellMargin' => 80];
+        $tableStyle = ['borderSize' => 14, 'borderColor' => '000000', 'cellMargin' => 50];
         $phpWord->addTableStyle('Ranks Table', $tableStyle);
         $table = $section->addTable('Ranks Table');
         $table->addRow();

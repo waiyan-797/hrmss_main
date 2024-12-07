@@ -69,7 +69,8 @@
 <body>
     <page size="A4">
         <div class="container">
-            <h1 class="title">ဦးစီးဌာန ၊ ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+            <h1 class="title">ဝန်ကြီးဌာန၊ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
+            <h1 class="title">ဦးစီးဌာန၊ ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <div class="table-container">
                 <table>
                     <thead>
@@ -134,156 +135,537 @@
                     </thead>
                     <tbody class="text-center h-8 p-2">
                         @foreach ($first_payscales as $payscale)
+                                <tr>
+                                    <td>{{en2mm($loop->index + 1)}}</td>
+                                    <td>{{$payscale->name}}</td>
+                                    <td>{{en2mm($payscale->allowed_qty)}}</td>
+                                    <td>{{en2mm($kachin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($kachin_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($kayah_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($kayah_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($kayin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($kayin_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($chin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($chin_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($mon_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($mon_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($rakhine_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($rakhine_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($shan_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($shan_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($sagaing_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($sagaing_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($mdy_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($mdy_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($npt_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($npt_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($ygn_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($ygn_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($head_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($head_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($mag_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($mag_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($pagu_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($pagu_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($tnty_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($tnty_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($aya_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($aya_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($total_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($total_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                </tr>
+                            @endforeach
                             <tr>
-                                <td>{{$loop->index + 1}}</td>
-                                <td>{{$payscale->name}}</td>
-                                <td>{{en2mm($payscale->allowed_qty)}}</td>
-                                <td>{{en2mm($kachin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($kachin_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($kayah_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($kayah_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($kayin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($kayin_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($chin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($chin_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($mon_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($mon_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($rakhine_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($rakhine_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($shan_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($shan_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($sagaing_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($sagaing_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($mdy_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($mdy_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($npt_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($npt_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($ygn_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($ygn_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($head_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($head_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($mag_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($mag_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($pagu_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($pagu_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($tnty_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($tnty_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($aya_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($aya_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($total_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
-                                <td>{{en2mm($total_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                <td class="border border-black p-2 font-semibold" colspan="2">{{$first_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kachin_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kayah_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kayah_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kayin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kayin_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($chin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($chin_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($mon_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($mon_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($rakhine_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($rakhine_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($shan_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($shan_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($sagaing_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($sagaing_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($mdy_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($mdy_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($npt_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($npt_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($ygn_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($ygn_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($head_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($head_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($mag_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($mag_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($pagu_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($pagu_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($tnty_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($tnty_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($aya_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($aya_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($total_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($total_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
                             </tr>
-                        @endforeach
-                        <tr>
-                            <td colspan="2">{{$first_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
-                            <td>{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
-                            <td>
-                                {{ en2mm($kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($kachin_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($kayah_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($kayah_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($kayin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($kayin_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($chin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($chin_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($mon_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($mon_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($rakhine_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($rakhine_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($shan_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($shan_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($sagaing_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($sagaing_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($mdy_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($mdy_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($npt_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($npt_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($ygn_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($ygn_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($head_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($head_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($mag_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($mag_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($pagu_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($pagu_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($tnty_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($tnty_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($aya_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($aya_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($total_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                            <td>
-                                {{ en2mm($total_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
-                            </td>
-                        </tr>
 
-                        @foreach ($second_payscales as $payscale)
+                            @foreach ($second_payscales as $payscale)
+                                <tr>
+                                    <td>{{en2mm($loop->index + 1)}}</td>
+                                    <td>{{$payscale->name}}</td>
+                                    <td>{{en2mm($payscale->allowed_qty)}}</td>
+                                    <td>{{en2mm($kachin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($kachin_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($kayah_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($kayah_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($kayin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($kayin_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($chin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($chin_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($mon_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($mon_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($rakhine_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($rakhine_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($shan_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($shan_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($sagaing_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($sagaing_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($mdy_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($mdy_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($npt_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($npt_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($ygn_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($ygn_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($head_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($head_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($mag_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($mag_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($pagu_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($pagu_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($tnty_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($tnty_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($aya_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($aya_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($total_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
+                                    <td>{{en2mm($total_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
+                                </tr>
+                            @endforeach
                             <tr>
-                                <td>{{$loop->index + 1}}</td>
+                                <td class="border border-black p-2 font-semibold" colspan="2">{{$second_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kachin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kayah_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kayah_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kayin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kayin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($chin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($chin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($mon_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($mon_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($rakhine_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($rakhine_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($shan_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($shan_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($sagaing_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($sagaing_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($mdy_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($mdy_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($npt_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($npt_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($ygn_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($ygn_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($head_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($head_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($mag_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($mag_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($pagu_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($pagu_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($tnty_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($tnty_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($aya_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($aya_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($total_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($total_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td class="border border-black p-2 font-semibold" colspan="2">ပေါင်း</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum('allowed_qty') + $first_payscales->sum('allowed_qty')) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count() + $kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kachin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count() + $kachin_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kayah_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                    +
+                                    $kayah_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                    ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kayah_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                    +
+                                    $kayah_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                    ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kayin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                    +
+                                    $kayin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                    ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($kayin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                    +
+                                    $kayin_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                    ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm($chin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                    +
+                                    $chin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                    ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $chin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $chin_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $mon_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $mon_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $mon_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $mon_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $rakhine_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $rakhine_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $rakhine_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $rakhine_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $shan_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $shan_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $shan_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $shan_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $sagaing_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $sagaing_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $sagaing_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $sagaing_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $mdy_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $mdy_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $mdy_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $mdy_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $npt_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $npt_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $npt_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $npt_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $ygn_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $ygn_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $ygn_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $ygn_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $head_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $head_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $head_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $head_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $mag_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $mag_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $mag_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $mag_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $pagu_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $pagu_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $pagu_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $pagu_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $tnty_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $tnty_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $tnty_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $tnty_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $aya_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $aya_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $aya_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $aya_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $total_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $total_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                                <td class="border border-black p-2 font-semibold">
+                                    {{ en2mm(
+                                        $total_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()
+                                        +
+                                        $total_staffs->where('gender_id', 2)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()
+                                        ) }}
+                                </td>
+                            </tr>
+
+                            {{-- @foreach ($third_payscales as $payscale)
+                            <tr>
+                                <td></td>
                                 <td>{{$payscale->name}}</td>
                                 <td>{{en2mm($payscale->allowed_qty)}}</td>
                                 <td>{{en2mm($kachin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
@@ -321,115 +703,116 @@
                                 <td>{{en2mm($total_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
                                 <td>{{en2mm($total_staffs->where('gender_id', 2)->where('payscale_id', $payscale->id)->count())}}</td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                         <tr>
-                            <td colspan="2">{{$second_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
-                            <td>{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
-                            <td>
-                                {{ en2mm($kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold" colspan="2">{{$third_payscales[0]->staff_type->name}}</td>
+                            <td class="border border-black p-2 font-semibold">{{ en2mm($third_payscales->sum('allowed_qty')) }}</td>
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($kachin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($kachin_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($kayah_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($kayah_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($kayah_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($kayah_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($kayin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($kayin_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($kayin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($kayin_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($chin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($chin_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($chin_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($chin_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($mon_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($mon_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($mon_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($mon_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($rakhine_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($rakhine_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($rakhine_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($rakhine_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($shan_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($shan_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($shan_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($shan_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($sagaing_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($sagaing_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($sagaing_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($sagaing_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($mdy_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($mdy_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($mdy_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($mdy_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($npt_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($npt_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($npt_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($npt_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($ygn_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($ygn_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($ygn_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($ygn_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($head_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($head_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($head_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($head_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($mag_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($mag_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($mag_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($mag_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($pagu_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($pagu_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($pagu_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($pagu_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($tnty_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($tnty_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($tnty_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($tnty_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($aya_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($aya_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($aya_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($aya_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($total_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($total_staffs->where('gender_id', 1)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
-                            <td>
-                                {{ en2mm($total_staffs->where('gender_id', 2)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
+                            <td class="border border-black p-2 font-semibold">
+                                {{ en2mm($total_staffs->where('gender_id', 2)->whereIn('payscale_id', $third_payscales->pluck('id'))->count()) }}
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <div style="text-align: center;">ကန့်သတ်</div>
             </div>
         </div>
 </body>

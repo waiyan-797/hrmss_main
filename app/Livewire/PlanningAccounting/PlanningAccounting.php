@@ -44,8 +44,8 @@ class PlanningAccounting extends Component
     foreach ($staffs as $index=> $staff) {
         $table->addRow();
         $table->addCell(2000)->addText($index + 1);
-        $table->addCell(4000)->addText($staff->name);
-        $table->addCell(4000)->addText($staff->current_rank->name);
+        $table->addCell(4000)->addText($staff?->name);
+        $table->addCell(4000)->addText($staff->current_rank?->name);
         $table->addCell(4000)->addText(''); 
     }
     $fileName = 'planning_accounting_report.docx';

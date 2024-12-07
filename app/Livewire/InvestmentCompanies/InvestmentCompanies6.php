@@ -33,7 +33,10 @@ class InvestmentCompanies6 extends Component
         $data = [
             'punishments' => $punishments,
         ];
-        $pdf = PDF::loadView('pdf_reports.investment_companies_report_6', $data);
+        $pdf = PDF::loadView('pdf_reports.investment_companies_report_6', $data,[],[
+            'format'=>'A4',
+            'orientation'=>'L'
+        ]);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_6.pdf');
@@ -45,7 +48,7 @@ class InvestmentCompanies6 extends Component
             ->get();
         $phpWord = new PhpWord();
         $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
-        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 14], ['alignment' => 'center']);
+        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
         $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
         $section->addTitle(en2mm($this->year) . 'ခုနှစ်၊' . en2mm($this->month) . 'လအတွင်း တာဝန်ပျက်ကွက်သူဝန်ထမ်းများအား အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း', 2);
@@ -102,6 +105,9 @@ class InvestmentCompanies6 extends Component
         $table->addCell(4000)->addText();
         $table->addCell(4000)->addText();
         $table->addCell(4000)->addText();
+        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
+        $section->addTitle('လျှို့ဝှက်', 1);
+       
         $fileName = 'investment_companies_report.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
         $filePath = storage_path($fileName);

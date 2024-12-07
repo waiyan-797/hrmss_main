@@ -96,12 +96,14 @@ class InvestmentCompanies15 extends Component
             'total' => $total,
             'ranks' => $ranks,
         ];
-        $pdf = PDF::loadView('pdf_reports.investment_companies_report_15', $data);
+        $pdf = PDF::loadView('pdf_reports.investment_companies_report_15', $data,[],[
+            'format'=>'Legal',
+            'orientation'=>'L'
+        ]);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_15.pdf');
     }
-
     public function go_word()
     {
         $yangon = Rank::whereHas('staffs', function($query){

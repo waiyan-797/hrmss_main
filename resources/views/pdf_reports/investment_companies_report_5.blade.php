@@ -11,10 +11,12 @@
             background: white;
         }
 
-        page[size="A4"] {
+       
+        page[size="A4 portrait"] {
             width: 210mm;
             height: 297mm;
         }
+
 
         @media print {
             body, page {
@@ -67,8 +69,10 @@
     </style>
 </head>
 <body>
-    <page size="A4">
+    {{-- <page size="A4"> --}}
+        <page size="A4 portrait">
         <div class="container">
+            <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
             <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <div class="table-container">
                 <table>

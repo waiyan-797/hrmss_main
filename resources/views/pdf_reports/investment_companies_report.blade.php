@@ -11,8 +11,12 @@
             background: white;
         }
 
-        page[size="A4"] {
+        /* page[size="A4"] {
             width: 210mm;
+            height: 297mm;
+        } */
+        page[size="A4 landscape"] {
+            width: 800mm;
             height: 297mm;
         }
 
@@ -100,11 +104,16 @@
     </style>
 </head>
 <body>
-    <page size="A4">
+    {{-- <page size="A4"> --}}
+        <page size="A4 landscape">
         <div class="container">
             <div class="content">
                 <div class="inner-content">
+                    <div class="title">ဝန်ကြီးဌာန၊ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</div>
                     <div class="title">ဦးစီးဌာန ၊ ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</div>
+                    <div class="title"></div>
+
+
 
                     <table>
                         <thead>
@@ -134,7 +143,7 @@
                         <tbody>
                             @foreach ($first_payscales as $payscale)
                             <tr>
-                                <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                <td class="border border-black p-2">{{en2mm($loop->index + 1)}}</td>
                                 <td class="border border-black p-2">{{$payscale->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
@@ -215,7 +224,7 @@
 
                         @foreach ($second_payscales as $payscale)
                             <tr>
-                                <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                <td class="border border-black p-2">{{en2mm($loop->index + 1)}}</td>
                                 <td class="border border-black p-2">{{$payscale->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
@@ -292,7 +301,7 @@
                                 {{ en2mm($total_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
                             </td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td class="border border-black p-2 font-semibold" colspan="2">{{$second_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
                             <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
                             <td class="border border-black p-2 font-semibold">
@@ -346,7 +355,7 @@
                             <td class="border border-black p-2 font-semibold">
                                 {{ en2mm($total_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
                             </td>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <td class="border border-black p-2 font-semibold" colspan="2">
                               စုစုပေါင်း
@@ -464,11 +473,16 @@
 
                         </tr>
 
+
                         
                        
                         </tbody>
                     </table>
+                    
+                      
                 </div>
+                <div style="text-align: center;">ကန့်သတ်</div>
+                  
             </div>
         </div>
     </body>

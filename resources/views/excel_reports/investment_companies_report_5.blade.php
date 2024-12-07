@@ -2,29 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-rank=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Investment Companies Report</title>
 
     <style type="text/css">
-        page{
-            background: white;
-        }
-
-        page[size="A4"] {
-            width: 210mm;
-            height: 297mm;
-        }
-
-        @media print {
-            body, page {
-                margin: 0;
-                box-shadow: 0;
-            }
-        }
-
         body {
-           font-family: 'pyidaungsu', sans-serif !important;
+            font-family: 'pyidaungsu', sans-serif !important;
             font-size: 13px;
         }
 
@@ -67,41 +51,38 @@
     </style>
 </head>
 <body>
-    <page size="A4">
-        <div class="container">
-            <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-            <div class="table-container">
-                <table>
-                    <thead>
+    <div class="container">
+        <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>စဥ်</th>
+                        <th>ရာထူးအမည်</th>
+                        <th>ခွင့်ပြုအင်အား</th>
+                        <th>ခန့်ပြီးအင်အား</th>
+                        <th>လစ်လပ်အင်အား</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($payscales as $payscale)
                         <tr>
-                            <th>စဥ်</th>
-                            <th>ရာထူးအမည်</th>
-                            <th>ခွင့်ပြုအင်အား</th>
-                            <th>ခန့်ပြီးအင်အား</th>
-                            <th>လစ်လပ်အင်အား</th>
+                            <td>{{$loop->index + 1}}</td>
+                            <td>{{$payscale->ranks[0]->name}}နှင့်အဆင့်တူ</td>
+                            <td>{{en2mm($payscale->allowed_qty)}}</td>
+                            <td>{{en2mm($payscale->staff->count())}}</td>
+                            <td>{{en2mm($payscale->allowed_qty - $payscale->staff->count())}}</td>
                         </tr>
-                    </thead>
-                    <tbody class="text-center h-8 p-2">
-                        @foreach ($payscales as $payscale)
-                            <tr>
-                                <td class="border border-black p-2">{{$loop->index + 1}}</td>
-                                <td class="border border-black p-2">{{$payscale->ranks[0]->name}}နှင့်အဆင့်တူ</td>
-                                <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
-                                <td class="border border-black p-2">{{en2mm($payscale->staff->count())}}</td>
-                                <td class="border border-black p-2">{{en2mm(
-                           $payscale->staff->count() -            $payscale->allowed_qty)}}</td>
-                            </tr>
-                        @endforeach
-                        <tr>
-                            <td class="border border-black p-2 font-semibold" colspan="2">စုစုပေါင်း</td>
-                            <td class="border border-black p-2 font-semibold">{{ en2mm($payscales->sum('allowed_qty')) }}</td>
-                            <td class="border border-black p-2 font-semibold">{{ en2mm($payscales->sum(fn($payscale) => $payscale->staff->count())) }}</td>
-                            <td class="border border-black p-2 font-semibold">{{ en2mm(
-          $payscales->sum(fn($payscale) => $payscale->staff->count()) -                        $payscales->sum('allowed_qty')) }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    @endforeach
+                    <tr>
+                        <td colspan="2" style="font-weight: bold;">စုစုပေါင်း</td>
+                        <td>{{en2mm($payscales->sum('allowed_qty'))}}</td>
+                        <td>{{en2mm($payscales->sum(fn($payscale) => $payscale->staff->count()))}}</td>
+                        <td>{{en2mm($payscales->sum(fn($payscale) => $payscale->staff->count()) - $payscales->sum('allowed_qty'))}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+    </div>
 </body>
 </html>

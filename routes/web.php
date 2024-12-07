@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\AllowInserviceFreeExport;
 use App\Livewire\AboutToIncrement;
 use App\Livewire\AgeFilter;
 use App\Livewire\AppointmentsCalendar;
@@ -254,6 +255,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/allow-inservice-free-by-rank', InvestmentCompanies3::class)->name('investment_companies3');
     Route::get('/allow-inservice-free-by-payscale', InvestmentCompanies4::class)->name('investment_companies4');
     Route::get('/allow-inservice-free-by-same-rank', InvestmentCompanies5::class)->name('investment_companies5');
+   
+
     Route::get('/action-completed-ongoing', InvestmentCompanies6::class)->name('investment_companies6');
     Route::get('/napata-reach-strength', InvestmentCompanies7::class)->name('investment_companies7');
     Route::get('/npt_by_same_payscale', NptBySamePayScale::class)->name('npt_by_same_payscale');

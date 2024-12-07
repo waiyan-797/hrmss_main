@@ -25,12 +25,16 @@ class InvestmentCompanies4 extends Component
     $first_payscales = Payscale::where('staff_type_id', 1)->get();
     $second_payscales = Payscale::where('staff_type_id', 2)->get();
     $phpWord = new PhpWord();
-    $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
-    $section->addText(
-        'ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 
-        ['bold' => true, 'size' => 14],
-        ['align' => 'center']
-    );
+    $section = $phpWord->addSection(); 
+    // $section->addText(
+    //     'ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 
+    //     ['bold' => true, 'size' => 14],
+    //     ['align' => 'center']
+    // );
+    $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+        $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
+        $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
+        $section->addTitle('၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိဝန်ထမ်းအင်အားစာရင်း', 1);
     $table = $section->addTable(['borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 50]);
     $table->addRow();
     $table->addCell(2000)->addText("စဥ်");
@@ -40,7 +44,7 @@ class InvestmentCompanies4 extends Component
     $table->addCell(3000)->addText("လစ်လပ်အင်အား");
     foreach ($first_payscales as $index => $payscale) {
         $table->addRow();
-        $table->addCell(2000)->addText($index + 1);
+        $table->addCell(2000)->addText(en2mm($index + 1));
         $table->addCell(4000)->addText($payscale->name);
         $table->addCell(3000)->addText(en2mm($payscale->allowed_qty));
         $table->addCell(3000)->addText(en2mm($payscale->staff->count()));
@@ -54,7 +58,7 @@ class InvestmentCompanies4 extends Component
     $table = $section->addTable(['borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 50]);
     foreach ($second_payscales as $index => $payscale) {
         $table->addRow();
-        $table->addCell(2000)->addText($index + 1);
+        $table->addCell(2000)->addText(en2mm($index + 1));
         $table->addCell(4000)->addText($payscale->name);
         $table->addCell(3000)->addText(en2mm($payscale->allowed_qty));
         $table->addCell(3000)->addText(en2mm($payscale->staff->count()));
@@ -65,6 +69,12 @@ class InvestmentCompanies4 extends Component
     $table->addCell(3000)->addText(en2mm($second_payscales->sum('allowed_qty')), ['bold' => true]);
     $table->addCell(3000)->addText(en2mm($second_payscales->sum(fn($scale) => $scale->staff->count())), ['bold' => true]);
     $table->addCell(3000)->addText(en2mm($second_payscales->sum('allowed_qty') - $second_payscales->sum(fn($scale) => $scale->staff->count())), ['bold' => true]);
+
+    $table->addRow();
+    $table->addCell(6000, ['gridSpan' => 2])->addText( 'စုစုပေါင်း', ['bold' => true],['align'=>'center']);
+    $table->addCell(3000)->addText(en2mm($second_payscales->sum('allowed_qty')+$first_payscales->sum('allowed_qty')));
+    $table->addCell(3000)->addText(en2mm($second_payscales->sum(fn($scale) => $scale->staff->count())+$first_payscales->sum(fn($scale) => $scale->staff->count())));
+    $table->addCell(3000)->addText(en2mm($second_payscales->sum('allowed_qty') - $second_payscales->sum(fn($scale) => $scale->staff->count())+$second_payscales->sum('allowed_qty') - $first_payscales->sum(fn($scale) => $scale->staff->count())));
     $fileName = 'investment_companies_report_4.docx';
     $tempFile = storage_path('app/public/' . $fileName);
     $phpWord->save($tempFile, 'Word2007');
