@@ -42,7 +42,7 @@ class FinancePensionAge62 extends Component
         $table->addCell(500)->addText('စဥ်', ['bold' => true], ['align' => 'center']);
         $table->addCell(2000)->addText('အမည်/ရာထူး', ['bold' => true], ['align' => 'left']);
         $table->addCell(1000)->addText('မွေးသက္ကရာဇ်', ['bold' => true], ['align' => 'center']);
-        $table->addCell(1000)->addText('အလုပ်စတင်ဝင်ရောက်သည့်နေ့စွဲ', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('လက်ရှိဌာနအလုပ်ဝင်ရက်စွဲစွဲ', ['bold' => true], ['align' => 'center']);
         $table->addCell(1000)->addText('ကြိုတင်ပြင်ဆင်ခွင့်', ['bold' => true], ['align' => 'center']);
         $table->addCell(1000)->addText('ပင်စင်ပြည့်သည့်နေ့စွဲ', ['bold' => true], ['align' => 'center']);
     

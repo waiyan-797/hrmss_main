@@ -323,7 +323,7 @@
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၂၅။ </label>
-                    <label for="name" class="md:w-1/3">အလုပ်စတင်ဝင်ရောက်သည့်နေ့နှင့်လက်ရှိရာထူးရသည့်နေ့</label>
+                    <label for="name" class="md:w-1/3">လက်ရှိဌာနအလုပ်ဝင်ရက်စွဲနှင့်လက်ရှိရာထူးရသည့်နေ့</label>
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name" class="md:w-3/5">
