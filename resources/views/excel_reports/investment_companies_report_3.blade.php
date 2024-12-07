@@ -76,6 +76,7 @@
                                 <th>လစ်လပ်အင်အား</th>
                             </tr>
                         </thead>
+                        {{-- sfdfd --}}
                         <tbody>
                             @foreach ($first_ranks as $rank)
                             <tr>
