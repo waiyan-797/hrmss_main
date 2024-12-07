@@ -9,8 +9,15 @@ use PhpOffice\PhpWord\PhpWord;
 
 class PensionReport extends Component
 {
+    public $searchName;
     public function go_pdf(){
-        $staffs = Staff::get();
+        $staffs = Staff::whereHas('pension_type')
+      
+        ->when($this->searchName, function($q){
+            $q->where('name', 'like', '%' . $this->searchName . '%');
+        })
+      ->get();
+
         $data = [
             'staffs' => $staffs,
         ];
@@ -21,9 +28,12 @@ class PensionReport extends Component
     }
     public function go_word()
 {
-    // Retrieve the staff data
-    $staffs = Staff::get();
-    
+    $staffs = Staff::whereHas('pension_type')
+      
+        ->when($this->searchName, function($q){
+            $q->where('name', 'like', '%' . $this->searchName . '%');
+        })
+      ->get();
     // Create a new Word document
     $phpWord = new PhpWord();
     $section = $phpWord->addSection(['orientation'=>'landscape','margin'=>600]);
@@ -83,7 +93,12 @@ class PensionReport extends Component
     
       public function render()
      {
-        $staffs = Staff::get();
+      $staffs = Staff::whereHas('pension_type')
+      
+        ->when($this->searchName, function($q){
+            $q->where('name', 'like', '%' . $this->searchName . '%');
+        })
+      ->get();
        return view('livewire.pension-report.pension-report',[ 
             'staffs' => $staffs,
         ]);

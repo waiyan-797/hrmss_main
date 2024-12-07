@@ -16,7 +16,13 @@ class PensionFamily extends Component
 
     public function go_pdf()
     {
-        $staffs = Staff::get();
+        $staffsQuery = Staff::query();
+        if ($this->searchName) {
+            $staffsQuery->where('name', 'like', '%' . $this->searchName . '%');
+        }
+        $staffsQuery->whereHas('pension_type');
+        $staffs =  $staffsQuery->get();
+
         $data = [
             'staffs' => $staffs,
         ];
@@ -29,7 +35,13 @@ class PensionFamily extends Component
 
     public function go_word()
     {
-        $staffs = Staff::get();
+        $staffsQuery = Staff::query();
+        if ($this->searchName) {
+            $staffsQuery->where('name', 'like', '%' . $this->searchName . '%');
+        }
+        $staffsQuery->whereHas('pension_type');
+        $staffs =  $staffsQuery->get();
+        
         $phpWord = new PhpWord();
         $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
         $section->addTitle('မိသားစုပင်စင်ခံစားခဲ့သူများစာရင်း', 1,);
@@ -116,6 +128,7 @@ class PensionFamily extends Component
         if ($this->searchName) {
             $staffQuery->where('name', 'like', '%' . $this->searchName . '%');
         }
+        $staffQuery->whereHas('pension_type');
         $this->staffs = $staffQuery->get();
         return view('livewire.pension-family.pension-family', [
             'staffs' => $this->staffs,
