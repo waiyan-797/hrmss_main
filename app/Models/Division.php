@@ -2,12 +2,20 @@
 
 namespace App\Models;
 
+use App\Scopes\SortNoScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Division extends Model
 {
     use HasFactory;
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new SortNoScope());
+    }
+
+
     public function sections()
     {
         return $this->hasMany(Section::class);

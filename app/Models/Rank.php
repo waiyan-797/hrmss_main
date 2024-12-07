@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\SortNoScope;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,14 @@ use Illuminate\Database\Eloquent\Model;
 class Rank extends Model
 {
     use HasFactory;
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new SortNoScope());
+    }
+
+
+
     public function payscale()
     {
         return $this->belongsTo(Payscale::class);
