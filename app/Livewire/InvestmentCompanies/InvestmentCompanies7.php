@@ -2,10 +2,12 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Exports\PA07;
 use App\Models\Promotion;
 use App\Models\Staff;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
@@ -143,6 +145,14 @@ class InvestmentCompanies7 extends Component
             echo $pdf->output();
         }, 'investment_companies_pdf_7.pdf');
     }
+    // public $year, $month, $filterRange;
+    // public $previousYear, $previousMonthDate, $previousMonth;
+    public function go_excel() 
+    {
+        return Excel::download(new PA07($this->year,$this->month,$this->filterRange,$this->previousMonthDate,$this->previousMonth
+    ), 'PA07.xlsx');
+    }
+   
     public function go_word()
     {
         [$year, $month] = explode('-', $this->filterRange);
@@ -178,7 +188,6 @@ class InvestmentCompanies7 extends Component
         $total_left_staffs = $high_left_staffs + $low_left_staffs;
 
         $phpWord = new PhpWord();
-        // $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
         $section = $phpWord->addSection([
             'orientation' => 'landscape',
             'marginLeft' => 600,

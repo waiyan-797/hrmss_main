@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-rank=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+
 
     <style type="text/css">
-        page{
+        /* page{
             background: white;
         }
 
@@ -23,7 +17,7 @@
                 margin: 0;
                 box-shadow: 0;
             }
-        }
+        } */
 
         body {
            font-family: 'pyidaungsu', sans-serif !important;
@@ -69,8 +63,8 @@
     </style>
 </head>
 <body>
-    {{-- <page size="A4"> --}}
-        <page size="A4 portrait">
+   
+       
         <div class="container">
             <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
             <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
@@ -107,5 +101,4 @@
                 </table>
             </div>
         </div>
-</body>
-</html>
+

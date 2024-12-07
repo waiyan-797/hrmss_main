@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
 
     <style type="text/css">
         page{
@@ -77,7 +70,7 @@
     </style>
 </head>
 <body>
-    <page size="A4">
+   
         <div class="container">
             <h1 class="heading">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဌာနအလိုက်နေပြည်တော်သို့ပြောင်းရွေ့ရောက်ရှိအင်အားစာရင်း</h1>
             <h2 class="sub-heading">၂၀၂၄ ခုနှစ်၊ ဇွန်လ</h2>
@@ -175,7 +168,3 @@
                 </div>
             </div>
         </div>
-
-
-</body>
-</html>
