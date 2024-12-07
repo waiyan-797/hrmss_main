@@ -86,7 +86,7 @@ class InvestmentCompanies2 extends Component
     
     $phpWord = new PhpWord();
     $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 800]); 
-    $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
+    $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
     $section->addTitle('ဝန်ကြီးဌာန၊ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
     $section->addTitle('ဦးစီးဌာန ၊ ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);

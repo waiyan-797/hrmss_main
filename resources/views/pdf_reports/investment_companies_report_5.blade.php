@@ -73,7 +73,8 @@
         <page size="A4 portrait">
         <div class="container">
             <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
-            <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+            <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+            <h3 class="header-title">ဝန်ထမ်းအင်အားစာရင်း</h3>
             <div class="table-container">
                 <table>
                     <thead>

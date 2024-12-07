@@ -108,7 +108,7 @@
         <table>
             <thead>
                 <tr>
-                    <th rowspan="2">စဥ်</th>
+                    <th rowspan="2">စဉ်</th>
                     <th rowspan="2">ရာထူး</th>
                     <th colspan="3">စီမံ</th>
                     <th colspan="3">ရင်းနှီး(၁)</th>

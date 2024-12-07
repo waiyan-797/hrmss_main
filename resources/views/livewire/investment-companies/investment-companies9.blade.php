@@ -15,7 +15,7 @@
                     <table class="w-full text-center">
                         <thead>
                             <tr class="bg-gray-100">
-                                <th class="p-2 border border-black">စဥ်</th>
+                                <th class="p-2 border border-black">စဉ်</th>
                                 <th class="p-2 border border-black">အမည်နှင့်အမျိုးသားမှတ်ပုံတင်အမှတ်</th>
                                 <th class="p-2 border border-black">မွေးနေ့သက္ကရာဇာ်</th>
                                 <th class="p-2 border border-black text-left">(က)ရာထူး<br>(ခ)

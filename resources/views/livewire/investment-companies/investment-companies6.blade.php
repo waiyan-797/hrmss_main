@@ -18,7 +18,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
+                                <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
                                 <th rowspan="2" class="border border-black text-center p-2">ဌာနအမည်</th>
                                 <th colspan="7" class="border border-black text-center p-2">နိုင်ငံ့ဝန်ထမ်းဥပ‌‌ဒေနည်းဉပဒေအရ အရေးယူမှုပြီးစီးမှု</th>
                                 <th rowspan="2" class="border border-black text-center p-2">ပုဒ်မ၅၀၅ဖြင့်အရေးယူပြီးစီးမှု</th>

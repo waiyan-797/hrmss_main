@@ -93,7 +93,7 @@
         <table>
             <thead>
                 <tr>
-                    <th rowspan="2">စဥ်</th>
+                    <th rowspan="2">စဉ်</th>
                     <th rowspan="2">ရာထူး</th>
                     <th colspan="3">ရန်ကုန်</th>
                     <th colspan="3">နေပြည်တော်</th>

@@ -85,38 +85,38 @@ class InvestmentCompanies extends Component
         $second_payscales = Payscale::where('staff_type_id', 2)->get();
         $phpWord = new PhpWord();
         $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
-        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
+        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $section->addTitle('ဝန်ကြီးဌာန၊ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
         $section->addTitle('ဦးစီးဌာန ၊ ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();
         $table->addCell(1000)->addText('အမှတ်စဥ်');
-        $table->addCell(1500)->addText('လစာနှုန်း (ကျပ်)');
+        $table->addCell(4000)->addText('လစာနှုန်း (ကျပ်)');
         $table->addCell(1500)->addText('ခွင့်ပြုအင်အား');
-        $table->addCell(1000)->addText('ကချင်');
-        $table->addCell(1000)->addText('ကယား');
-        $table->addCell(1000)->addText('ကရင်');
-        $table->addCell(1000)->addText('ချင်း');
-        $table->addCell(1000)->addText('မွန်');
-        $table->addCell(1000)->addText('ရခိုင်');
-        $table->addCell(1000)->addText('ရှမ်း');
-        $table->addCell(1000)->addText('စစ်ကိုင်း');
-        $table->addCell(1000)->addText('မန္တလေး');
-        $table->addCell(1000)->addText('နေပြည်တော်');
-        $table->addCell(1000)->addText('ရန်ကုန်');
-        $table->addCell(1000)->addText('ရန်ကုန်ရုံးချုပ်');
-        $table->addCell(1000)->addText('မကွေး');
-        $table->addCell(1000)->addText('ပဲခူး');
-        $table->addCell(1000)->addText('တနင်သာရီ');
-        $table->addCell(1000)->addText('ဧရာဝတီ');
-        $table->addCell(1000)->addText('စုစုပေါင်း');
+        $table->addCell(2000)->addText('ကချင်');
+        $table->addCell(2000)->addText('ကယား');
+        $table->addCell(2000)->addText('ကရင်');
+        $table->addCell(2000)->addText('ချင်း');
+        $table->addCell(2000)->addText('မွန်');
+        $table->addCell(2000)->addText('ရခိုင်');
+        $table->addCell(2000)->addText('ရှမ်း');
+        $table->addCell(2000)->addText('စစ်ကိုင်း');
+        $table->addCell(2000)->addText('မန္တလေး');
+        $table->addCell(2000)->addText('နေပြည်တော်');
+        $table->addCell(2000)->addText('ရန်ကုန်');
+        $table->addCell(2000)->addText('ရန်ကုန်ရုံးချုပ်');
+        $table->addCell(2000)->addText('မကွေး');
+        $table->addCell(2000)->addText('ပဲခူး');
+        $table->addCell(2000)->addText('တနင်သာရီ');
+        $table->addCell(2000)->addText('ဧရာဝတီ');
+        $table->addCell(2000)->addText('စုစုပေါင်း');
     
     
     
         
         foreach ($first_payscales as $index=> $payscale) {
             $table->addRow();
-            $table->addCell(2000)->addText(en2mm($index + 1));
+            $table->addCell(1000)->addText(en2mm($index + 1));
             $table->addCell(4000)->addText($payscale->name);
             $table->addCell(2000)->addText(en2mm($payscale->allowed_qty));
             $table->addCell(2000)->addText(en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count()));
@@ -162,7 +162,7 @@ class InvestmentCompanies extends Component
 
             foreach ($second_payscales as $index=> $payscale) {
                 $table->addRow();
-                $table->addCell(2000)->addText(en2mm($index + 1));
+                $table->addCell(1000)->addText(en2mm($index + 1));
                 $table->addCell(4000)->addText($payscale->name);
                 $table->addCell(2000)->addText(en2mm($payscale->allowed_qty));
                 $table->addCell(2000)->addText(en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count()));
@@ -195,7 +195,7 @@ class InvestmentCompanies extends Component
             $table->addCell(2000)->addText(en2mm($shan_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
             $table->addCell(2000)->addText(en2mm($sagaing_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
             $table->addCell(2000)->addText(en2mm($mdy_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
-            $table->addCell(2000)->addText(en2mm($npt_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
+            $table->addCell(2000)->addText(en2mm(content: $npt_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
             $table->addCell(2000)->addText(en2mm($ygn_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
             $table->addCell(2000)->addText(en2mm($head_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
             $table->addCell(2000)->addText(en2mm($mag_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
@@ -204,6 +204,30 @@ class InvestmentCompanies extends Component
             $table->addCell(2000)->addText(en2mm($aya_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
             $table->addCell(2000)->addText(en2mm($total_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()));
             $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
+
+            $table->addRow();
+            $table->addCell(2000,['gridSpan' => 2])->addText('စုစုပေါင်း');
+            $table->addCell(2000)->addText(en2mm( $first_payscales->sum('allowed_qty') +  $second_payscales->sum('allowed_qty')));
+            $table->addCell(2000)->addText(en2mm($kachin_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$kachin_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(2000)->addText( en2mm($kayah_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$kayah_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(2000)->addText(en2mm($kayin_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count() + $kayin_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(2000)->addText(en2mm($chin_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$chin_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(2000)->addText(en2mm($mon_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$mon_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(2000)->addText(en2mm($rakhine_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$rakhine_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) );
+            $table->addCell(2000)->addText(en2mm($shan_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+ $shan_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(2000)->addText(en2mm($sagaing_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$sagaing_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(2000)->addText(en2mm($mdy_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$mdy_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(2000)->addText(en2mm($npt_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$npt_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(2000)->addText(en2mm($ygn_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count() +$ygn_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) );
+            $table->addCell(2000)->addText(en2mm($head_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$head_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) );
+            $table->addCell(2000)->addText(en2mm($mag_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$mag_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(2000)->addText(en2mm($pagu_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$pagu_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) );
+            $table->addCell(2000)->addText(en2mm($tnty_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$tnty_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) );
+            $table->addCell(2000)->addText(en2mm($aya_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$aya_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()));
+            $table->addCell(2000)->addText(en2mm($total_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()+$total_staffs->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) );
+            $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
+           
+
             $section->addTitle('ကန့်သက်', 1);
     
         $tempFile = tempnam(sys_get_temp_dir(), 'word');

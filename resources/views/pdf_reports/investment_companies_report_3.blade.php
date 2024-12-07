@@ -71,7 +71,7 @@
         <page size="A4">
             <div class="container">
                 <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
-                <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+                <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
                 <h1 class="header-title">၂၀၂၄ခုနှစ်၊နိုဝင်ဘာ ၃၀ ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း</h1>
                 <div class="table-container">
                     <table>
@@ -121,7 +121,8 @@
                         </tbody>
                     </table>
                 </div>
-                <div style="text-align: center;"></div>
+                <br>
+                <div style="text-align: center;"> အတွင်းရေး </div>
             </div>
         </page>
     </body>

@@ -2,7 +2,7 @@
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
             <br><br>
             <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
             <h1 class="font-semibold text-base mb-2 text-center">ရင်နှီးမြှုပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာနရှိ(ရုံးချုပ်)၏ ဖွဲ့စည်းပုံ၊ခန့်အပ် ပို/လို အင်အားစာရင်း</h1>
@@ -11,7 +11,7 @@
             <table class="md:w-full">
                 <thead>
                     <tr>
-                        <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
+                        <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
                         <th rowspan="2" class="border border-black text-center p-2">ရာထူး</th>
                         <th colspan="3" class="border border-black text-center p-2">စီမံ</th>
                         <th colspan="3" class="border border-black text-center p-2">ရင်းနှီး(၁)</th>

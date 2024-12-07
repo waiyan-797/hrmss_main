@@ -15,10 +15,7 @@ class InvestmentCompanies4 extends Component
             'first_payscales' => Payscale::where('staff_type_id', 1)->get(),
             'second_payscales' => Payscale::where('staff_type_id', 2)->get(),
         ];
-        $pdf = PDF::loadView('pdf_reports.investment_companies_report_4', $data, [],[
-            'format'=>'A4-L',
-            'orientation'=>'P'
-        ]);
+        $pdf = PDF::loadView('pdf_reports.investment_companies_report_4', $data);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_4.pdf');

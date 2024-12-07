@@ -11,7 +11,7 @@
             background: white;
         }
 
-        page[size="A4"] {
+        page[size="A4 portrait"] {
             width: 210mm;
             height: 297mm;
         }
@@ -71,13 +71,13 @@
     <page size="A4">
         <div class="container">
             <h1 class="header-title">ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
-            <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+            <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <h1 class="header-title">၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိဝန်ထမ်းအင်အားစာရင်း</h1>
             <div class="table-container">
                 <table>
                     <thead>
                         <tr>
-                            <th>စဥ်</th>
+                            <th>စဉ်</th>
                             <th>လစာနှုန်း (ကျပ်)</th>
                             <th>ခွင့်ပြုအင်အား</th>
                             <th>ခန့်ပြီးအင်အား</th>

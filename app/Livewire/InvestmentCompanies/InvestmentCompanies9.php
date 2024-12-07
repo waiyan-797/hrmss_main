@@ -29,8 +29,8 @@ class InvestmentCompanies9 extends Component
     $staffs = Staff::get(); 
     $phpWord = new PhpWord();
     $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 200]); 
-    $section->addText('၂၀၂၄-၂၀၂၅ ဘဏ္ဍာရေးနှစ်အတွင်း ဝန်ထမ်းအဖြစ်မှ ထုတ်ပစ်ခံရသော ဝန်ထမ်းများစာရင်း', ['bold' => true, 'size' => 14], ['alignment' => 'center']);
-    $section->addText('ဝန်ထမ်းအဖွဲ့အစည်းအမည်၊ရင်းနှီးမြှုပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 14]);
+    $section->addText('၂၀၂၄-၂၀၂၅ ဘဏ္ဍာရေးနှစ်အတွင်း ဝန်ထမ်းအဖြစ်မှ ထုတ်ပစ်ခံရသော ဝန်ထမ်းများစာရင်း', ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+    $section->addText('ဝန်ထမ်းအဖွဲ့အစည်းအမည်၊ရင်းနှီးမြှုပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 13]);
     $table = $section->addTable([
         'borderSize' => 6,
         'borderColor' => '000000',
