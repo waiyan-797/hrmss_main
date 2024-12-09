@@ -19,7 +19,10 @@ class InvestmentCompanies10 extends Component
             'second_ranks' => $second_ranks,
             'all_ranks' => $all_ranks,
         ];
-        $pdf = PDF::loadView('pdf_reports.investment_companies_report_10', $data);
+        $pdf = PDF::loadView('pdf_reports.investment_companies_report_10', $data,[],[
+            'format'=>'legal',
+            'orientation'=>'L'
+        ]);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_10.pdf');

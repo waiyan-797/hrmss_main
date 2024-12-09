@@ -2,9 +2,11 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Exports\PA03;
 use App\Models\Rank;
 use App\Models\Staff;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
@@ -24,6 +26,12 @@ class InvestmentCompanies3 extends Component
             echo $pdf->output();
         }, 'investment_companies_pdf_3.pdf');
     }
+    public function go_excel() 
+    {
+        return Excel::download(new PA03(
+    ), 'PA05.xlsx');
+    }
+  
     public function go_word()
 {
     $first_ranks = Rank::where('staff_type_id', 1)->get();

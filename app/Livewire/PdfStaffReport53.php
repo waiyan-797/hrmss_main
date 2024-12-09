@@ -221,7 +221,7 @@ $table->addCell(2000)->addText('-', ['align' => 'center']);
 $table->addCell(5000)->addText($staff->current_rank->name, ['align' => 'right']);
 
 $table->addRow();
-$table->addCell(4000)->addText('၂၅။အလုပ်စတင်ဝင်ရောက်သည့်နေ့နှင့်လက်ရှိရာထူးရသည့်နေ့ :');
+$table->addCell(4000)->addText('၂၅။လက်ရှိဌာနအလုပ်ဝင်ရက်စွဲနှင့်လက်ရှိရာထူးရသည့်နေ့ :');
 $table->addCell(2000)->addText('-', ['align' => 'center']);
 $table->addCell(5000)->addText($staff->join_date, ['align' => 'right']);
 

@@ -34,6 +34,8 @@ class Report extends Component
             ['id' => 18, 'name' => 'နပတရှိ အရာထမ်း/အမှုထမ်း ဝန်ထမ်းအင်အားစာရင်း'],
             ['id' => 19, 'name' => 'အသက်ဖြင့်ရှာမည်'],
             ['id' => 20, 'name' => 'နှစ်တိုးရတော့မည်သူများ'],
+            ['id' => 21, 'name' => 'နပတ၃'],
+
             
             
 
@@ -62,6 +64,7 @@ class Report extends Component
             18 =>route('staff_in_npt'),
             19 =>route('age_filter'),
             20 =>route('about_to_increment'),
+            21 =>route('npt_three'),
             
 
         ];

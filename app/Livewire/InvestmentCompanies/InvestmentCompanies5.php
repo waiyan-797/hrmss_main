@@ -3,6 +3,7 @@
 namespace App\Livewire\InvestmentCompanies;
 
 use App\Exports\AllowInserviceFreeExport;
+use App\Exports\PA05;
 use App\Exports\PA05Export;
 use App\Models\Payscale;
 use App\Models\Rank;
@@ -24,9 +25,10 @@ class InvestmentCompanies5 extends Component
             echo $pdf->output();
         }, 'investment_companies_pdf_5.pdf');
     }
-    public function go_excel()
+    public function go_excel() 
     {
-        return Excel::download(new PA05Export, 'payscales.xlsx');
+        return Excel::download(new PA05(
+    ), 'PA05.xlsx');
     }
   
 

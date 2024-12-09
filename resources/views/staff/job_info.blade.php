@@ -66,7 +66,7 @@
         <x-input-error class="mt-2" :messages="$errors->get('salary_paid_by')" />
     </div>
     <div>
-        <x-input-label for="အလုပ်စတင်ဝင်ရောက်သည့်နေ့" :value="__('အလုပ်စတင်ဝင်ရောက်သည့်နေ့')" />
+        <x-input-label for="လက်ရှိဌာနအလုပ်ဝင်ရက်စွဲ" :value="__('လက်ရှိဌာနအလုပ်ဝင်ရက်စွဲ')" />
         <x-date-picker wire:model="join_date" id="join_date"  class="mt-1 block w-full"/>
 
 

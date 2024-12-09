@@ -408,7 +408,7 @@
                                 <tr>
                                     <td style="border: none;">၂၅။
                                     </td>
-                                    <td style="border: none;">အလုပ်စတင်ဝင်ရောက်သည့်နေ့နှင့်လက်ရှိရာထူးရသည့်နေ့
+                                    <td style="border: none;">လက်ရှိဌာနအလုပ်ဝင်ရက်စွဲနှင့်လက်ရှိရာထူးရသည့်နေ့
                                     </td>
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">{{ $staff->join_date }}/{{ $staff->current_rank_date}}</td>

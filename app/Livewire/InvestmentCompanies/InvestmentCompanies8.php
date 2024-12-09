@@ -2,10 +2,12 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Exports\PA08;
 use App\Models\Rank;
 use App\Models\Staff;
 use Carbon\Carbon;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -55,6 +57,11 @@ class InvestmentCompanies8 extends Component
             echo $pdf->output();
         }, 'investment_companies_pdf_8.pdf');
     }
+    public function go_excel() 
+    {
+        return Excel::download(new PA08(
+    ), 'PA05.xlsx');
+    }
     public function go_word()
     {
         $first_ranks = Rank::where('staff_type_id', 1)
@@ -86,7 +93,6 @@ class InvestmentCompanies8 extends Component
      
         $section = $phpWord->addSection([
             'orientation' => 'landscape',
-            'paperSize' => 'A4',
             'marginTop' => 600,
             'marginRight' => 600,
             'marginBottom' => 600,
@@ -110,7 +116,7 @@ class InvestmentCompanies8 extends Component
             ['bold' => true, 'size' => 13],
             ['alignment' => 'center']
         );
-        $tableStyle = ['borderSize' => 14, 'borderColor' => '000000', 'cellMargin' => 50];
+        $tableStyle = ['borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 50];
         $phpWord->addTableStyle('Ranks Table', $tableStyle);
         $table = $section->addTable('Ranks Table');
         $table->addRow();

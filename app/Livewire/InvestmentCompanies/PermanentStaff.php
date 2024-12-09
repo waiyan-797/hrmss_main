@@ -44,7 +44,7 @@ class PermanentStaff extends Component
             'staffs' => $staffs,
             'first_payscales' => Payscale::where('staff_type_id', 1)->get(),
             'second_payscales' => Payscale::where('staff_type_id', 2)->get(),
-            'first_payscales' => $first_payscales,
+            // 'first_payscales' => $first_payscales,
             'second_payscales' => $second_payscales,
             'allPayScales' => $allPayScales,
             'TotalAllowQty' => $TotalAllowQty,

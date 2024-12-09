@@ -53,7 +53,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class ,
             StatusSeeder::class,
             UserSeeder::class ,
-            LanguageSeeder::class
+            LanguageSeeder::class ,
+            RetireTypeSeeder::class,
         ]);
     }
 }
