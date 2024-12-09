@@ -136,7 +136,9 @@
                         <table class="w-full text-center">
                             <thead>
                                 <tr class="bg-gray-100">
-အ                                    <th class="p-2 border border-black">မှ</th>
+                                    <th class="p-2 border border-black">သင်တန်း</th>
+
+                                    <th class="p-2 border border-black">မှ</th>
                                     <th class="p-2 border border-black">ထိ</th>
                                     
                                 </tr>
@@ -144,7 +146,7 @@
                             <tbody class="text-center">
                                 @foreach ($staff->trainings as $training)
                                     <tr>
-                                        <td class="border border-black p-2">{{$training->training_type->name}}</td>
+                                        <td class="border border-black p-2">{{$training->training_type_id  == 32 ? $training->diploma_name :  $training->training_type->name  }}</td>
                                         <td class="border border-black p-2">{{$training->from_date}}</td>
                                         <td class="border border-black p-2">{{$training->to_date}}</td>
                                     </tr>

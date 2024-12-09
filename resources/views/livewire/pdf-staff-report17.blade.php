@@ -146,9 +146,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($staff->abroads as $abroad)
+                            @foreach ($staff->abroads->slice(-5) as $abroad)
                                 <tr>
-                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
+                                    
                                     <td class="border border-black text-center p-2">{{$abroad->from_date}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->to_date}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
@@ -212,20 +212,7 @@
                                 <th class="border border-black text-center p-2">ထိ</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($staff->abroads as $abroad)
-                                <tr>
-                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
-                                    <td class="border border-black text-center p-2">{{$abroad->particular}}</td>
-                                    <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$abroad->from_date}}</td>
-                                    <td class="border border-black text-center p-2">{{$abroad->to_date}}</td>
-                                    <td class="border border-black text-center p-2">{{$abroad->actual_abroad_date}}</td>
-                                    <td class="border border-black text-center p-2">{{$abroad->sponser}}</td>
-                                    <td class="border border-black text-center p-2">{{$abroad->position}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                      
                     </table>
                 </div>
 
