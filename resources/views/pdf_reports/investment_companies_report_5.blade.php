@@ -68,6 +68,7 @@
     </style>
 </head>
 <body>
+<<<<<<< HEAD
     <div class="container">
         {{-- <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
         <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1> --}}
@@ -84,6 +85,17 @@
                 </thead>
                 <tbody class="text-center h-8 p-2">
                     @foreach ($payscales as $payscale)
+=======
+   
+       
+        <div class="container">
+            <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
+            <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+            <h3 class="header-title">ဝန်ထမ်းအင်အားစာရင်း</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+>>>>>>> dc67cedaa12a97b46104c7cfa124fbfff78759f7
                         <tr>
                             <td class="border border-black p-2">{{$loop->index + 1}}</td>
                             <td class="border border-black p-2">{{$payscale->ranks[0]->name}} နှင့်အဆင့်တူ</td>

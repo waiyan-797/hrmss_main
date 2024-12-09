@@ -82,9 +82,9 @@
                 <table>
                     <thead>
                         <tr>
-                            <th rowspan="2">စဥ်</th>
+                            <th rowspan="2">စဉ်</th>
                             <th rowspan="2">ဌာနအမည်</th>
-                            <th colspan="7">နိုင်ငံ့ဝန်ထမ်းဥပ‌ဒေနည်းဉပဒေအရ အရေးယူမှုပြီးစီးမှု</th>
+                            <th colspan="7">နိုင်ငံ့ဝန်ထမ်းဥပဒေ နည်းဥပဒေအရ အရေးယူမှုပြီးစီးမှု</th>
                             <th rowspan="2">ပုဒ်မ၅၀၅ဖြင့်အရေးယူပြီးစီးမှု</th>
                             <th rowspan="2">အရေးယူဆောင်ရွက်ဆဲအင်အား</th>
                             <th rowspan="2">စုစုပေါင်း</th>
@@ -102,7 +102,7 @@
                     <tbody>
                         <tr>
                             <td>(က)</td>
-                            <td>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
+                            <td>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
                             <td>{{ en2mm($punishments->where('penalty_type_id', 1)->count()) }}</td>
                             <td>{{ en2mm($punishments->where('penalty_type_id', 2)->count()) }}</td>
                             <td>{{ en2mm($punishments->where('penalty_type_id', 3)->count()) }}</td>
