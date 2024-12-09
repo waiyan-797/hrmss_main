@@ -23,7 +23,7 @@ class StaffList3 extends Component
             'third_ranks' => $third_ranks,
             'all_ranks' => $all_ranks,
         ];
-        $pdf = PDF::loadView('pdf_reports.staff_list3_report', $data);
+        $pdf = PDF::loadView('pdf_reports.staff_list_report_3', $data);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'staff_list3_report.pdf'); 

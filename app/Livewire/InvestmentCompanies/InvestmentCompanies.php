@@ -14,6 +14,7 @@ use PhpOffice\PhpWord\PhpWord;
 
 class InvestmentCompanies extends Component
 {
+    
     public function go_pdf(){
         $kachin_staffs = Staff::where('current_division_id', 12)->get();
         $kayah_staffs = Staff::where('current_division_id', 13)->get(); 

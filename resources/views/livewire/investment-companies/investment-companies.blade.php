@@ -3,12 +3,8 @@
         <div class="w-full mx-auto px-3 py-4">
 
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-<<<<<<< HEAD
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
-=======
-            {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
->>>>>>> dc67cedaa12a97b46104c7cfa124fbfff78759f7
             <br><br>
 
 
@@ -44,7 +40,7 @@
                     <tbody class="text-center h-8 p-2">
                         @foreach ($first_payscales as $payscale)
                             <tr>
-                                <td class="border border-black p-2">{{en2mm($loop->index + 1)}}</td>
+                                <td class="border border-black p-2"></td>
                                 <td class="border border-black p-2">{{$payscale->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
@@ -125,7 +121,7 @@
 
                         @foreach ($second_payscales as $payscale)
                             <tr>
-                                <td class="border border-black p-2">{{en2mm($loop->index + 1)}}</td>
+                                <td class="border border-black p-2"></td>
                                 <td class="border border-black p-2">{{$payscale->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
