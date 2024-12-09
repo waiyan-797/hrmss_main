@@ -22,7 +22,7 @@ class AboutToIncrement extends Component
                 $staffsA = Staff::all();
                 $this->staffs = Staff::all()->filter(function ($staff) use ($startDate, $endDate) {
             
-                    $totalLeaveDays = $staff->leaves->reduce(function ($carry, $leave) {
+                    $totalLeaveDays = $staff->leaves->where('leve_type','5')->  reduce(function ($carry, $leave) {
                         $fromDate = Carbon::parse($leave->from_date);
                         $toDate = Carbon::parse($leave->to_date);
                         return $carry + $fromDate->diffInDays($toDate);
@@ -34,7 +34,9 @@ class AboutToIncrement extends Component
                         $lastIncrementDate = $staff->increments->last()->increment_date;
                 
                         // Adjust the last increment date by adding leave days
-                        $adjustedIncrementDate = Carbon::parse($lastIncrementDate)->addDays($totalLeaveDays);
+                        $adjustedIncrementDate = Carbon::parse($lastIncrementDate)
+                        ->addDays($totalLeaveDays)
+                        ;
                 
                         // Calculate the 2-year mark based on the adjusted increment date
                         $promotionDate = $adjustedIncrementDate->addYears(2);

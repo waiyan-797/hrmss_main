@@ -358,7 +358,7 @@
             [
                 'type' => 'checkbox',
                 'wire_array_name' => 'abroads',
-                'wire_array_key' => 'training_success_fail',
+                'wire_array_key' => '   ',
             ],
             [
                 'type' => 'text',

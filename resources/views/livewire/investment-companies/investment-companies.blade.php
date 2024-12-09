@@ -3,12 +3,8 @@
         <div class="w-full mx-auto px-3 py-4">
 
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-<<<<<<< HEAD
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
-=======
-            {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
->>>>>>> dc67cedaa12a97b46104c7cfa124fbfff78759f7
             <br><br>
 
 

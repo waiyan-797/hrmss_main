@@ -188,11 +188,18 @@ class Increment extends Component
             $incrementQuery->where(function ($q) use ($incrementSearch) {
                 $q->where('order_no', 'LIKE', $incrementSearch)->orWhereHas('staff', function ($query) use ($incrementSearch) {
                     $query->where('name', 'LIKE', $incrementSearch);
-                });
-            });
+                })
+                
+                ;
+            })
+            
+           
+            ;
         }
 
-        $increments = $incrementQuery->with(['staff', 'rank'])
+        $increments = $incrementQuery
+        ->where('staff_id' ,$this->staff_id)
+        ->with(['staff', 'rank'])
             ->paginate($incrementQuery->count() > 10 ? $incrementQuery->count() : 10);
         return view('livewire.increment', [
             'increments' => $increments,

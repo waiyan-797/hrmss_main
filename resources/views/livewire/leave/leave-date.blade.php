@@ -100,13 +100,13 @@
                         {{ $leave_diff->m > 0 ? en2mm($leave_diff->m) . ' လ ' : '-' }}
                     </td>
                     <td class="border border-black p-2">
-                        {{ $leave_diff->d > 0 ? en2mm($leave_diff->d) . ' ရက် ' : '-' }}
+                        {{ $leave_diff->d > 0 ? en2mm($leave_diff->d + 1    ) . ' ရက် ' : '-' }}
                     </td>
                     <td class="border border-black p-2">
                         {{ $diff_leave_months > 0 ? en2mm($diff_leave_months) . ' လ' : '-' }}
                     </td>
                     <td class="border border-black p-2">
-                        {{ $diff_leave_days > 0 ? en2mm($diff_leave_days) . ' ရက်' : '-' }}
+                        {{ $diff_leave_days > 0 ? en2mm($diff_leave_days  - 1 ) . ' ရက်' : '-' }}
                     </td>
                 </tr>
                 @php
