@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+
 
     <style type="text/css">
         page{
@@ -99,15 +93,13 @@
         }
 
     </style>
-</head>
-<body>
-     <page size="A4"> 
-        <page layout="landscape">
+
+     
 
         <div class="container">
             <div class="content">
                 <div class="inner-content">
-                    <div class="title">ဦးစီးဌာန ၊ ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</div>
+                    {{-- <div class="title">ဦးစီးဌာန ၊ ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</div> --}}
 
                     <table>
                         <thead>
@@ -474,5 +466,4 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+   

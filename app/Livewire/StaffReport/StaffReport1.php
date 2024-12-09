@@ -2,11 +2,13 @@
 
 namespace App\Livewire\StaffReport;
 
+use App\Exports\PA16;
 use App\Models\Department;
 use App\Models\PensionYear;
 use App\Models\Staff;
 use Carbon\Carbon;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -30,6 +32,14 @@ class StaffReport1 extends Component
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'staff_pdf_1.pdf');
+    }
+   
+    public function go_excel() 
+    {
+        return Excel::download(new PA16($this->nameSearch ,
+        $this->deptId ,$this->staffs,
+    
+    $this->year , $this->month), 'PA16.xlsx');
     }
 
     public function go_word()
@@ -56,7 +66,7 @@ class StaffReport1 extends Component
             $table->addRow();
             $table->addCell(2000)->addText($index + 1);
             $table->addCell(2000)->addText($staff->name);
-            $table->addCell(2000)->addText($staff->current_rank->name);
+            $table->addCell(2000)->addText($staff->current_rank?->name);
             $table->addCell(2000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
             $table->addCell(2000)->addText(en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')));
             $table->addCell(2000)->addText(en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y')));
@@ -67,7 +77,7 @@ class StaffReport1 extends Component
 
             $educations = '';
             foreach ($staff->staff_educations as $edu) {
-                $educations .= $edu->education_group->name . ' - ' . $edu->education_type->name . ', ' . $edu->education->name . "\n";
+                $educations .= $edu->education_group?->name . ' - ' . $edu->education_type?->name . ', ' . $edu->education?->name . "\n";
             }
             $table->addCell(2000)->addText($educations);
 

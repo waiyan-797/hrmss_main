@@ -3,6 +3,7 @@
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
             <br><br>
 <div>
     <input type="text" wire:model.live='nameSearch'>
@@ -45,11 +46,11 @@
                     <tbody>
                         @foreach($staffs as $staff)
                             <tr>
-                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $loop->index+1}}
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm($loop->index+1)}}
                                 </td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->name }}
                                 </td>
-                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->current_rank->name }}</td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->current_rank?->name }}</td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}
                                 </td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}
@@ -60,9 +61,9 @@
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->side_department?->name }}</td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">@foreach ($staff->staff_educations as $edu)
                                     <div class="mb-2">
-                                        <span class="font-semibold">{{ $edu->education_group->name }}</span> -
-                                        <span>{{ $edu->education_type->name }}</span>,
-                                        <span>{{ $edu->education->name }}</span>
+                                        <span class="font-semibold">{{ $edu->education_group?->name }}</span> -
+                                        <span>{{ $edu->education_type?->name }}</span>,
+                                        <span>{{ $edu->education?->name }}</span>
                                     </div>@endforeach</td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm(Carbon\Carbon::parse($staff->dob)->year + $pension_year->year) }}</td>
                             </tr>

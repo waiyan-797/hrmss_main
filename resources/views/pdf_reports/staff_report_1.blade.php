@@ -99,7 +99,7 @@
                 <tbody>
                     @foreach($staffs as $staff)
                             <tr>
-                                <td>{{ $loop->index+1}}
+                                <td>{{ en2mm($loop->index+1)}}
                                 </td>
                                 <td>{{ $staff->name }}
                                 </td>
@@ -111,12 +111,12 @@
                                 <td>{{ en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y')) }}</td>
                                 <td>{{ en2mm(\Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y')) }}</td>
                                 <td>{{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y'))}}</td>
-                                <td>{{ $staff->side_department->name }}</td>
+                                <td>{{ $staff->side_department?->name }}</td>
                                 <td>@foreach ($staff->staff_educations as $edu)
                                     <div class="mb-2">
-                                        <span class="font-semibold">{{ $edu->education_group->name }}</span> -
-                                        <span>{{ $edu->education_type->name }}</span>,
-                                        <span>{{ $edu->education->name }}</span>
+                                        <span class="font-semibold">{{ $edu->education_group?->name }}</span> -
+                                        <span>{{ $edu->education_type?->name }}</span>,
+                                        <span>{{ $edu->education?->name }}</span>
                                     </div>@endforeach</td>
                                 <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->year + $pension_year->year) }}</td>
                             </tr>

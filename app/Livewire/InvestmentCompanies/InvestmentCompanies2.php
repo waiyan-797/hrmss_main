@@ -2,9 +2,11 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Exports\PA02;
 use App\Models\Payscale;
 use App\Models\Staff;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
@@ -57,6 +59,12 @@ class InvestmentCompanies2 extends Component
             echo $pdf->output();
         }, 'investment_companies_pdf_2.pdf');
     }
+    public function go_excel() 
+    {
+        return Excel::download(new PA02(
+    ), 'PA02.xlsx');
+    }
+  
     public function go_word()
 {
     $kachin_staffs = Staff::where('current_division_id', 12)->get();

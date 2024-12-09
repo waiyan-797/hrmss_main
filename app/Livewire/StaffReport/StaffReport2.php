@@ -2,14 +2,13 @@
 
 namespace App\Livewire\StaffReport;
 
+use App\Exports\PA17;
 use App\Models\Staff;
 
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
-
-
-
-
+use PhpOffice\PhpWord\PhpWord;
 
 class StaffReport2 extends Component
 {
@@ -30,6 +29,10 @@ class StaffReport2 extends Component
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'staff_pdf_2.pdf');
+    }
+    public function go_excel() 
+    {
+        return Excel::download(new PA17($this->searchName,$this->staffs), 'PA17.xlsx');
     }
     public function go_word()
     {

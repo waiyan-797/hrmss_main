@@ -2,8 +2,10 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Exports\PA13;
 use App\Models\Staff;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -20,6 +22,11 @@ class InvestmentCompanies13 extends Component
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_report_pdf_13.pdf');
+    }
+    public function go_excel() 
+    {
+        return Excel::download(new PA13(
+    ), 'PA13.xlsx');
     }
     public function go_word()
 {
@@ -47,41 +54,26 @@ class InvestmentCompanies13 extends Component
     $table->addCell(1500)->addText('မှတ်ချက်', ['bold' => true], $cellStyle);
     foreach ($staffs as $index => $staff) {
         foreach ($staff->schools as  $school) {
-            // $table->addRow();
-            // $table->addCell(500)->addText(($index + 1), null, $cellStyle);
-            // $table->addCell(2000)->addText($staff->name . ' / ' . $staff->current_rank->name . ' / ' . $staff->side_department->name, null, $cellStyle);
-            // $table->addCell(2000)->addText($school->education?->name . '၊ ' . $school->major, null, $cellStyle);
-            // $table->addCell(2000)->addText($school->name, null, $cellStyle);
-            // $table->addCell(1500)->addText($school->country?->name, null, $cellStyle);
-            // $table->addCell(1500)->addText($school->year, null, $cellStyle);
-            // $table->addCell(1500)->addText($school->remark, null, $cellStyle);
-
-
             $table->addRow();
-            $table->addCell(500)->addText(($index + 1), null, $cellStyle);
-     
-
+            $table->addCell(500)->addText((en2mm($index + 1)), null, $cellStyle);
             $table->addCell(2000)->addText($staff?->name . ' / ' . $staff->current_rank?->name . ' / ' . $staff->side_department?->name, null, $cellStyle);
             $table->addCell(2000)->addText($school?->education?->name . '၊ ' . $school?->major, null, $cellStyle);
             $table->addCell(2000)->addText($school?->name, null, $cellStyle);
             $table->addCell(1500)->addText($school?->country?->name, null, $cellStyle);
-            $table->addCell(1500)->addText($school?->year, null, $cellStyle);
-            $table->addCell(1500)->addText($school?->remark, null, $cellStyle);
-
-
-            
+            $table->addCell(1500)->addText(en2mm($school?->year), null, $cellStyle);
+            $table->addCell(1500)->addText($school?->remark, null, $cellStyle); 
         }
     }
 
       $table->addRow();
-            $table->addCell(500)->addText(($index + 1), null, $cellStyle);
+            $table->addCell(500)->addText((en2mm($index + 1)), null, $cellStyle);
      
 
             $table->addCell(2000)->addText($staff?->name . ' / ' . $staff->current_rank?->name . ' / ' . $staff->side_department?->name, null, $cellStyle);
             $table->addCell(2000)->addText($school?->education?->name . '၊ ' . $school?->major, null, $cellStyle);
             $table->addCell(2000)->addText($school?->name, null, $cellStyle);
             $table->addCell(1500)->addText($school?->country?->name, null, $cellStyle);
-            $table->addCell(1500)->addText($school?->year, null, $cellStyle);
+            $table->addCell(1500)->addText(en2mm($school?->year), null, $cellStyle);
             $table->addCell(1500)->addText($school?->remark, null, $cellStyle);
     $writer = IOFactory::createWriter($phpWord, 'Word2007');
     return response()->streamDownload(function() use ($writer) {

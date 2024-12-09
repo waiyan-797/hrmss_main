@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
 
     <style type="text/css">
         page{
@@ -56,9 +49,7 @@
 
    
     </style>
-</head>
-<body>
-    <page size="A4">
+
         <table class="custom-table">
             <thead>
                 <tr>
@@ -76,9 +67,9 @@
                     @foreach($staffs as $staff)
                     @foreach($staff->schools as $school)
                         <tr>
-                            <td>{{ $loop->index + 1 }}</td>
-                            <td>{{ $staff->name }} / {{ $staff->current_rank->name }} / {{ $staff->side_department->name }}</td>
-                            <td>{{ $school->education?->name }}၊ {{ $school->major }}</td>
+                            <td>{{ en2mm($loop->index + 1) }}</td>
+                            <td>{{ $staff->name }} / {{ $staff->current_rank?->name }} / {{ $staff->side_department?->name }}</td>
+                            <td>{{ $school->education?->name }}၊ {{ $school?->major }}</td>
                             <td>{{ $school->name }}</td>
                             <td>{{ $school->country?->name }}</td>
                             <td>{{ $school->year }}</td>
@@ -88,6 +79,3 @@
                 @endforeach
             </tbody>
         </table>
-        
-</body>
-</html>

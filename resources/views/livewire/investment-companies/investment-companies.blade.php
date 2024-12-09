@@ -4,6 +4,7 @@
 
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
             <br><br>
 
 

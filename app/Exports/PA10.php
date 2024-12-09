@@ -3,37 +3,37 @@
 namespace App\Exports;
 
 use App\Models\Rank;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use App\Models\Staff;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithStyles;
-
-
-
 use Maatwebsite\Excel\Concerns\FromCollection;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class PA03 implements  FromView ,WithStyles
+class PA10 implements FromView ,WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-
-    public $year; 
+    // public function collection()
+    // {
+    //     return PA10::all();
+    // }
     public function view(): View
     {
-        
-       
-
+        $first_ranks = Rank::where('staff_type_id', 1)->withCount('staffs')->get();
+        $second_ranks = Rank::where('staff_type_id', 2)->withCount('staffs')->get();
+        $all_ranks = Rank::whereIn('staff_type_id', [1, 2])->withCount('staffs')->get();
+      
         $data = [
-            'first_ranks' => Rank::where('staff_type_id', 1)->get(),
-            'second_ranks' => Rank::where('staff_type_id', 2)->get(),
+            'first_ranks' => $first_ranks,
+            'second_ranks' => $second_ranks,
+            'all_ranks' => $all_ranks,
           
         ];
-
-
-        return view('excel_reports.investment_companies_report_3', $data);
+        return view('excel_reports.investment_companies_report_10', $data);
     }
-public function styles(Worksheet $sheet)
+    public function styles(Worksheet $sheet)
 {
     // Apply global font style
     $sheet->getStyle('A1:Z1000')->applyFromArray([
@@ -42,9 +42,7 @@ public function styles(Worksheet $sheet)
             'size' => 13,
         ],
     ]);
-
-    // Apply borders to all cells with black border
-    $sheet->getStyle('A1:F100')->applyFromArray([
+    $sheet->getStyle('A1:AC100')->applyFromArray([
         'borders' => [
             'allBorders' => [
                 'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -60,10 +58,4 @@ public function styles(Worksheet $sheet)
 
     return [];
 }
-
-
-
-
-
-   
 }

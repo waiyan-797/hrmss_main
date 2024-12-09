@@ -2,36 +2,33 @@
 
 namespace App\Exports;
 
-use App\Models\Rank;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use App\Models\Payscale;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithStyles;
-
-
-
 use Maatwebsite\Excel\Concerns\FromCollection;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class PA03 implements  FromView ,WithStyles
+class PA21 implements FromView ,WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-
-    public $year; 
+    // public function collection()
+    // {
+    //     return PA21::all();
+    // }
     public function view(): View
     {
-        
-       
-
+        $first_payscales = Payscale::where('staff_type_id', 1)->get();
+        $second_payscales = Payscale::where('staff_type_id', 2)->get();
+      
         $data = [
-            'first_ranks' => Rank::where('staff_type_id', 1)->get(),
-            'second_ranks' => Rank::where('staff_type_id', 2)->get(),
-          
+            'first_payscales' => $first_payscales,
+             'second_payscales' => $second_payscales,
+            
         ];
-
-
-        return view('excel_reports.investment_companies_report_3', $data);
+        return view('excel_reports.npt_three', $data);
     }
 public function styles(Worksheet $sheet)
 {
@@ -44,7 +41,7 @@ public function styles(Worksheet $sheet)
     ]);
 
     // Apply borders to all cells with black border
-    $sheet->getStyle('A1:F100')->applyFromArray([
+    $sheet->getStyle('A1:L100')->applyFromArray([
         'borders' => [
             'allBorders' => [
                 'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -54,16 +51,10 @@ public function styles(Worksheet $sheet)
     ]);
 
     // Auto-size columns for the table
-    foreach (range('A', 'F') as $column) {
+    foreach (range('A', 'J') as $column) {
         $sheet->getColumnDimension($column)->setAutoSize(true);
     }
 
     return [];
 }
-
-
-
-
-
-   
 }

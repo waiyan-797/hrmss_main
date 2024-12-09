@@ -29,7 +29,7 @@ class InvestmentCompanies3 extends Component
     public function go_excel() 
     {
         return Excel::download(new PA03(
-    ), 'PA05.xlsx');
+    ), 'PA03.xlsx');
     }
   
     public function go_word()

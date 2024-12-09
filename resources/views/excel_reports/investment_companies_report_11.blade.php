@@ -1,20 +1,6 @@
 
     <style type="text/css">
-        /* page{
-            background: white;
-        }
-
-        page[size="A4"] {
-            width: 210mm;
-            height: 297mm;
-        }
-
-        @media print {
-            body, page {
-                margin: 0;
-                box-shadow: 0;
-            }
-        } */
+        
 
         body {
            font-family: 'pyidaungsu', sans-serif !important;
@@ -81,7 +67,7 @@
         <table class="border-collapse">
             <thead>
                 <tr>
-                    <th rowspan="2">မှူး</th>
+                    <th rowspan="2">စဉ်</th>
                     <th rowspan="2">အကြောင်းအရာ</th>
                     <th colspan="3">၃၁-၁၂-၂၀၂၃ထိ<br>အင်အား</th>
                     <th colspan="2">အသစ်ခန့်အပ်</th>

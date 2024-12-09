@@ -44,42 +44,67 @@ class PA05 implements FromView ,WithStyles
 
     //     return [];
     // }
-    public function styles(Worksheet $sheet)
+//     public function styles(Worksheet $sheet)
+// {
+//     // Apply styles to the header row
+//     $sheet->getStyle('A1:Z1000')->applyFromArray([
+//         'font' => [
+//             'name' => 'Pyidaungsu',
+//             'size' => 13,
+//             'bold' => true,
+//         ],
+//         'alignment' => [
+//             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+//             'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+//         ],
+//         'borders' => [
+//             'allBorders' => [
+//                 'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+//             ],
+//         ],
+//     ]);
+
+//     // Apply styles to the body rows
+//     $sheet->getStyle('A2:F1000')->applyFromArray([
+//         'font' => [
+//             'name' => 'Pyidaungsu',
+//             'size' => 13,
+//         ],
+//         'alignment' => [
+//             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+//             'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+//         ],
+//         'borders' => [
+//             'allBorders' => [
+//                 'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+//             ],
+//         ],
+//     ]);
+
+//     return [];
+// }
+public function styles(Worksheet $sheet)
 {
-    // Apply styles to the header row
-    $sheet->getStyle('A1:E1')->applyFromArray([
+    // Apply global font style
+    $sheet->getStyle('A1:Z1000')->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
             'size' => 13,
-            'bold' => true,
         ],
-        'alignment' => [
-            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-        ],
+    ]);
+    $sheet->getStyle('A1:T100')->applyFromArray([
         'borders' => [
             'allBorders' => [
                 'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                'color' => ['argb' => '000000'], // Black border
             ],
         ],
     ]);
 
-    // Apply styles to the body rows
-    $sheet->getStyle('A2:E1000')->applyFromArray([
-        'font' => [
-            'name' => 'Pyidaungsu',
-            'size' => 13,
-        ],
-        'alignment' => [
-            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-        ],
-        'borders' => [
-            'allBorders' => [
-                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-            ],
-        ],
-    ]);
+    // Auto-size columns for the table
+    foreach (range('A', 'F') as $column) {
+        $sheet->getColumnDimension($column)->setAutoSize(true);
+    }
 
     return [];
 }

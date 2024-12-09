@@ -66,6 +66,7 @@ class PA08 implements FromView ,WithStyles
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 13 , 
+                'color' => ['argb' => '000000'], 
             ],
         ]);
 

@@ -2,9 +2,11 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Exports\PA04;
 use App\Models\Payscale;
 use App\Models\Staff;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
@@ -22,6 +24,11 @@ class InvestmentCompanies4 extends Component
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_4.pdf');
+    }
+    public function go_excel() 
+    {
+        return Excel::download(new PA04(
+    ), 'PA04.xlsx');
     }
     public function go_word()
 {

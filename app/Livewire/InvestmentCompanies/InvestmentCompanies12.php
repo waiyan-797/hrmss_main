@@ -2,9 +2,11 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Exports\PA12;
 use App\Models\Staff;
 use Carbon\Carbon;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
@@ -60,6 +62,13 @@ class InvestmentCompanies12 extends Component
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_12.pdf');
+    }
+    
+    public function go_excel() 
+    {
+        return Excel::download(new PA12($this->filterRange , 
+    $this->year , $this->month , $this->date
+    ), 'PA12.xlsx');
     }
     public function go_word()
 {

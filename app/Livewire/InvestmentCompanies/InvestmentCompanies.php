@@ -3,6 +3,7 @@
 namespace App\Livewire\InvestmentCompanies;
 
 use App\Exports\AllowInserviceFreeExport;
+use App\Exports\PA01;
 use App\Models\Payscale;
 use App\Models\Staff;
 use Livewire\Component;
@@ -59,6 +60,12 @@ class InvestmentCompanies extends Component
             echo $pdf->output();
         }, 'investment_companies_pdf.pdf');
     }
+    public function go_excel() 
+    {
+        return Excel::download(new PA01(
+    ), 'PA01.xlsx');
+    }
+  
     
 
     public function go_word()

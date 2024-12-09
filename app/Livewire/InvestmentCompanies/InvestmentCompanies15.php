@@ -2,9 +2,11 @@
 
 namespace App\Livewire\InvestmentCompanies;
 
+use App\Exports\PA15;
 use App\Models\Rank;
 use App\Models\Staff;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -103,6 +105,11 @@ class InvestmentCompanies15 extends Component
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_15.pdf');
+    }
+    public function go_excel() 
+    {
+        return Excel::download(new PA15(
+    ), 'PA15.xlsx');
     }
     public function go_word()
     {

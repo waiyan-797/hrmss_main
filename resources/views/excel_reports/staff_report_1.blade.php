@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>PDF Report 1</title>
+
     <style type="text/css">
         page{
             background: white;
@@ -72,12 +66,11 @@
 
         
     </style>
-</head>
-<body>
-    <page size="A4">
-        <h1>ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+
+    
+        {{-- <h1>ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>  --}}
             {{-- (၂၄-၇-၂၀၂၄)ရက်နေ့  --}}
-            ညွှန်ကြားရေးမှူးများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း</h1>
+           {{-- <h1> ညွှန်ကြားရေးမှူးများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း</h1> --}}
 
         <div class="table-container">
             <table>
@@ -99,7 +92,7 @@
                 <tbody>
                     @foreach($staffs as $staff)
                             <tr>
-                                <td>{{ $loop->index+1}}
+                                <td>{{ en2mm($loop->index+1)}}
                                 </td>
                                 <td>{{ $staff->name }}
                                 </td>
@@ -111,12 +104,12 @@
                                 <td>{{ en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y')) }}</td>
                                 <td>{{ en2mm(\Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y')) }}</td>
                                 <td>{{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y'))}}</td>
-                                <td>{{ $staff->side_department->name }}</td>
+                                <td>{{ $staff->side_department?->name }}</td>
                                 <td>@foreach ($staff->staff_educations as $edu)
                                     <div class="mb-2">
-                                        <span class="font-semibold">{{ $edu->education_group->name }}</span> -
-                                        <span>{{ $edu->education_type->name }}</span>,
-                                        <span>{{ $edu->education->name }}</span>
+                                        <span class="font-semibold">{{ $edu->education_group?->name }}</span> -
+                                        <span>{{ $edu->education_type?->name }}</span>,
+                                        <span>{{ $edu->education?->name }}</span>
                                     </div>@endforeach</td>
                                 <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->year + $pension_year->year) }}</td>
                             </tr>
@@ -125,6 +118,4 @@
             </table>
         </div>
     
-    </page>
-</body>
-</html>
+    

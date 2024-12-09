@@ -144,16 +144,41 @@ $Toyear
     }
 
 
+    // public function styles(Worksheet $sheet)
+    // {
+    //     // Apply the Pyidaungsu font to the entire sheet
+    //     $sheet->getStyle('A1:Z1000')->applyFromArray([
+    //         'font' => [
+    //             'name' => 'Pyidaungsu',
+    //             'size' => 13 , 
+    //         ],
+    //     ]);
+
+    //     return [];
+    // }
     public function styles(Worksheet $sheet)
     {
-        // Apply the Pyidaungsu font to the entire sheet
+        // Apply global font style
         $sheet->getStyle('A1:Z1000')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
-                'size' => 13 , 
+                'size' => 13,
             ],
         ]);
-
+        $sheet->getStyle('A1:W100')->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'], // Black border
+                ],
+            ],
+        ]);
+    
+        // Auto-size columns for the table
+        foreach (range('A', 'W') as $column) {
+            $sheet->getColumnDimension($column)->setAutoSize(true);
+        }
+    
         return [];
     }
 }

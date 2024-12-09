@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Staff Report 2</title>
+
     <style type="text/css">
         page{
             background: white;
@@ -71,12 +65,10 @@
 }
 
     </style>
-</head>
-<body>
-    <page size="A4">
-        <h1 class="heading">
+
+        {{-- <h1 class="heading">
             ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
-        </h1>
+        </h1> --}}
 
         <div class="table-container">
             <table class="custom-table">
@@ -104,13 +96,13 @@
                                 {{$staff->name}}
                             </td>
                             <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{$staff->current_rank->name}}
+                                {{$staff->current_rank?->name}}
                             </td>
                             <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
                                 {{$staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code}}
                             </td>
                             <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{$staff->current_department->name}}
+                                {{$staff->current_department?->name}}
                             </td>
                             <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
                                 {{$staff->dob}}
@@ -127,9 +119,9 @@
                             <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
                                 @foreach ($staff->staff_educations as $edu)
                                     <div style="margin-bottom: 8px;">
-                                        <span style="font-weight: 600;">{{ $edu->education_group->name }}</span> -
-                                        <span>{{ $edu->education_type->name }}</span>,
-                                        <span>{{ $edu->education->name }}</span>
+                                        <span style="font-weight: 600;">{{ $edu->education_group?->name }}</span> -
+                                        <span>{{ $edu->education_type?->name }}</span>,
+                                        <span>{{ $edu->education?->name }}</span>
                                     </div>
                                 @endforeach
                             </td>
@@ -138,6 +130,4 @@
                 </tbody>
             </table>
         </div>
-    </page>
-</body>
-</html>
+    

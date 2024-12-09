@@ -90,7 +90,9 @@
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">
                         @foreach ($staff->staff_educations as $education)
-                                   {{$education->education->name.','}}
+                                 {{ $education->education_type->name}}၊
+                                 {{ $education->education_group->name}}၊
+                                   {{$education->education->name}}
                             @endforeach
                     </label>
                 </div>

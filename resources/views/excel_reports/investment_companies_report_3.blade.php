@@ -1,69 +1,57 @@
 
-        <style type="text/css">
-            page{
-                background: white;
-            }
-
-            page[size="A4"] {
-                width: 210mm;
-                height: 297mm;
-            }
-
-            @media print {
-                body, page {
-                    margin: 0;
-                    box-shadow: 0;
-                }
-            }
-
+       
+        <style>
             body {
-               font-family: 'pyidaungsu', sans-serif !important;
+                font-family: 'Pyidaungsu', sans-serif !important;
                 font-size: 13px;
             }
-
-            .container {
-                width: 100%;
-                margin-bottom: 16px;
-            }
-
-            .header-title {
-                font-weight: 600;
-                font-size: 16px;
-                margin-bottom: 8px;
-                text-align: center;
-            }
-
+        
             .table-container {
                 width: 100%;
                 border-radius: 8px;
                 overflow: hidden;
             }
-
+        
             table {
                 width: 100%;
                 text-align: center;
                 border-collapse: collapse;
+                table-layout: fixed; /* Ensures equal-width columns */
             }
-
+        
+            th, td {
+                padding: 8px;
+                border: 1px solid black; /* Black border */
+                word-wrap: break-word; /* Prevent overflow */
+            }
+        
+            th {
+                background-color: #f3f4f6;
+                font-weight: bold;
+            }
+        
             thead tr {
                 background-color: #f3f4f6;
             }
-
-            th, td {
-                padding: 8px;
-                border: 1px solid black;
-            }
-
+        
             tbody tr td {
                 height: 32px;
             }
-
+        
+            /* Optional: Make the table header sticky when scrolling */
+            thead th {
+                position: sticky;
+                top: 0;
+                background: #f3f4f6;
+            }
         </style>
+        
+        
     </head>
     <body>
         
             <div class="container">
-                <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+                {{-- <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1> --}}
                 <div class="table-container">
                     <table>
                         <thead>
