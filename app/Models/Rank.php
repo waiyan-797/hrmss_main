@@ -92,5 +92,9 @@ $staffs = Staff::query();
   
 }
 
+public function isDicaAll(){
+    return $this->where('is_dica' , 1 )->get();
+}
+
 
 }

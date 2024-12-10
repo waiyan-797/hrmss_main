@@ -2,6 +2,7 @@
 
 namespace App\Livewire\StaffList;
 
+use App\Models\Rank;
 use App\Models\Staff;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,7 +12,9 @@ use PhpOffice\PhpWord\PhpWord;
 class StaffList4 extends Component
 {
     use WithPagination;
+    public $ranks;
     public $posting;
+    public $selectedRankId= null ;
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [
@@ -73,9 +76,20 @@ class StaffList4 extends Component
     return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
 }
 
+public function mount(){
+    $this->ranks = (new Rank )->isDicaAll();
+}
+
      public function render()
      {
-        $staffs = Staff::paginate(20);
+        $staffs = Staff::when(
+
+            $this->selectedRankId  , function($q){
+                return $q->where('current_rank_id' , $this->selectedRankId) ;
+            }
+        )
+        
+        ->paginate(20);
 
         $currentPage = $staffs->currentPage();
         $perPage = $staffs->perPage();

@@ -107,35 +107,6 @@
 
                         </tr>
 
-<<<<<<< HEAD
-                        @foreach ($second_payscales as $payscale)
-                            <tr>
-                                <td class="border border-black p-2">{{ en2mm($loop->iteration) }}</td>
-                                <td class="border border-black p-2">{{ $payscale->name }}</td>
-                                <td class="border border-black p-2">
-                                    {{ en2mm($payscale->staff->where('current_division_id', 26)->where('marital_status_id', 6)->count()) }}
-                                </td>
-                                <td class="border border-black p-2">
-                                    {{ en2mm(
-                                        $payscale->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)->count(),
-                                    ) }}
-                                </td>
-                                <td class="border border-black p-2">
-                                    {{ en2mm(
-                                        $payscale->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)->count(),
-                                    ) }}
-                                </td>
-
-                                <td class="border border-black p-2">
-
-
-                                    {{ en2mm($payscale->staff->where('current_division_id', 26)->count()) }}
-                                </td>
-
-
-                            </tr>
-                        @endforeach
-=======
                           @foreach ($second_payscales as $payscale)
                         <tr>
                             <td class="border border-black p-2">{{en2mm($loop->iteration)}}</td>
@@ -167,7 +138,6 @@
                 
                         </tr>
                     @endforeach
->>>>>>> 4176855 (change paysacle name to rank name in npt3)
                         <tr class="font-bold">
                             <td class="border border-black text-center p-2"></td>
                             <td class="border border-black text-center p-2">အရာထမ်းပေါင်း</td>

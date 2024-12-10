@@ -3,6 +3,9 @@
     <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
+          <h1 class=" text-end">
+            {{mmDateFormatYearMonthDay($printedDate[0] ,$printedDate[1]  , $printedDate[2])}}
+          </h1>
             <table class="md:w-full">
                 <thead>
                     <tr>
@@ -16,7 +19,9 @@
                 <tbody>
                     @foreach ($first_ranks as $rank)
                         <tr>
-                            <td class="border border-black text-center p-2">{{ en2mm($loop->index + 1) }}</td>
+                            <td class="border border-black text-center p-2">
+                                {{en2mm(++$count) }}
+                                 </td>
                             <td class="border border-black text-center p-2">{{ $rank->name }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($rank->staffs->where('gender_id', 1)->count()) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($rank->staffs->where('gender_id', 2)->count()) }}</td>
@@ -38,7 +43,9 @@
                     </tr>
                     @foreach ($second_ranks as $rank)
                         <tr>
-                            <td class="border border-black text-center p-2">{{ en2mm($loop->index + 1) }}</td>
+                            <td class="border border-black text-center p-2">
+                                {{en2mm(++$count) }}
+                            </td>
                             <td class="border border-black text-center p-2">{{ $rank->name }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($rank->staffs->where('gender_id', 1)->count()) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($rank->staffs->where('gender_id', 2)->count()) }}</td>
@@ -72,7 +79,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="border border-black text-center p-2">၁</td>
+                        <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2">နေ့စား</td>
                         <td class="border border-black text-center p-2">
                             {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())) }}
@@ -84,7 +91,7 @@
                             {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())) }}
                         </td>
                     </tr>
-                    <tr class="font-bold">
+                    {{-- <tr class="font-bold">
                         <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2">စုစုပေါင်း ဝန်ထမ်းဦးရေ</td>
                         <td class="border border-black text-center p-2">
@@ -96,7 +103,7 @@
                         <td class="border border-black text-center p-2">
                             {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())) }}
                         </td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
               </table>
         </div>

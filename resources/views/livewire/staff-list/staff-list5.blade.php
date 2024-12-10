@@ -8,7 +8,7 @@
                 ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဌာန အလိုက်ဝန်ထမ်းအင်အားစာရင်း<br>
                 
             </h1>
-            <select name=""  wire:model.live='' id=""></select>
+            {{-- <select name=""  wire:model.live='' id=""></select> --}}
 
             <table class="md:w-full">
                 <thead>

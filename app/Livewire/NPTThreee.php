@@ -35,7 +35,8 @@ class NPTThreee extends Component
         return Excel::download(new PA21(), 'PA21.xlsx');
     }
     public function render()
-    {$first_payscales = ModelsPayscale::where('staff_type_id', 1)->get();
+    {
+        $first_payscales = ModelsPayscale::where('staff_type_id', 1)->get();
         $second_payscales = ModelsPayscale::where('staff_type_id', 2)->get();
 
         return view('livewire.n-p-t-threee' , [

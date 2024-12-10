@@ -3,6 +3,7 @@
 namespace App\Livewire\StaffList;
 
 use App\Models\Rank;
+use Carbon\Carbon;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
@@ -10,6 +11,11 @@ use PhpOffice\PhpWord\PhpWord;
 
 class StaffList3 extends Component
 {
+
+    public $count  = 0 ;
+
+    public $printedDate;
+
     public function go_pdf(){
         $first_ranks = Rank::where('staff_type_id', 1)->withCount('staffs')->get();
         $second_ranks = Rank::where('staff_type_id', 2)->withCount('staffs')->get();
@@ -22,8 +28,9 @@ class StaffList3 extends Component
             'first_second_ranks' => $first_second_ranks,
             'third_ranks' => $third_ranks,
             'all_ranks' => $all_ranks,
+            'count' => 0 ,
         ];
-        $pdf = PDF::loadView('pdf_reports.staff_list3_report', $data);
+        $pdf = PDF::loadView('pdf_reports.staff_salary_list_3_report', $data);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'staff_list3_report.pdf'); 
@@ -116,6 +123,11 @@ class StaffList3 extends Component
         ]);
     }
     
+
+    public function mount(){
+        
+        $this->printedDate =   explode('-',Carbon::now()->format('Y-m-d'));
+        }
 
     public function render()
     {
