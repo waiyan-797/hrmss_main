@@ -160,8 +160,8 @@
                                 <tr>
                                     <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
                                     <td class="border border-black text-center p-2">{{$occupation->rank->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$occupation->from_date}}</td>
-                                    <td class="border border-black text-center p-2">{{$occupation->to_date}}</td>
+                                    <td class="border border-black text-center p-2">{{en2mm($occupation->from_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{en2mm($occupation->to_date)}}</td>
                                     <td class="border border-black text-center p-2">{{$occupation->address}}</td>
                                 </tr>
                             @endforeach
@@ -192,8 +192,8 @@
                                 <tr>
                                     <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
                                     <td class="border border-black text-center p-2">{{$training->training_type->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$training->from_date}}</td>
-                                    <td class="border border-black text-center p-2">{{$training->to_date}}</td>
+                                    <td class="border border-black text-center p-2">{{en2mm($training->from_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{en2mm($training->to_date)}}</td>
                                     <td class="border border-black text-center p-2">{{$training->location}}</td>
                                 </tr>
                             @endforeach
@@ -224,8 +224,8 @@
                                 <tr>
                                     <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
                                     <td class="border border-black text-center p-2">{{$training->training_type->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$training->from_date}}</td>
-                                    <td class="border border-black text-center p-2">{{$training->to_date}}</td>
+                                    <td class="border border-black text-center p-2">{{en2mm($training->from_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{en2mm($training->to_date)}}</td>
                                     <td class="border border-black text-center p-2">{{$training->location}}</td>
                                 </tr>
                             @endforeach
@@ -259,8 +259,8 @@
                                     <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
                                     <td class="border border-black text-center p-2">{{$punishment->penalty_type->name}}</td>
                                     <td class="border border-black text-center p-2">{{$punishment->reason}}</td>
-                                    <td class="border border-black text-center p-2">{{$punishment->from_date}}</td>
-                                    <td class="border border-black text-center p-2">{{$punishment->to_date}}</td>
+                                    <td class="border border-black text-center p-2">{{en2mm($punishment->from_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{en2mm($punishment->to_date)}}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -286,7 +286,7 @@
                                     <tr>
                                         <td class="border border-black p-2">{{$loop->index + 1}}</td>
                                         <td class="border border-black p-2">{{$awarding->award_type->name .'/'. $awarding->award->name}}</td>
-                                        <td class="border border-black p-2">{{$awarding->order_no.'/'.$awarding->order_date}}</td>
+                                        <td class="border border-black p-2">{{$awarding->order_no.'/'.en2mm($awarding->order_date)}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

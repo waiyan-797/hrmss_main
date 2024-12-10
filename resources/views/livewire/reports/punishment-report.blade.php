@@ -1,4 +1,4 @@
-<div class="w-full">
+ <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
            
@@ -14,7 +14,7 @@
             <table class="md:w-full">
                 <thead>
                     <tr>
-                        <th class="border border-black text-left p-1">စဥ်</th>
+                        <th class="border border-black text-left p-1">ဦးစီး</th>
                         <th class="border border-black text-left p-1">အမည်</th>
                         <th class="border border-black text-left p-1">ရာထူး</th>
                         <th class="border border-black text-left p-1">txtpenalty</th>

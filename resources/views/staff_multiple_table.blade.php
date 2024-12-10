@@ -38,6 +38,7 @@
 
                                 <x-date-picker
                                 
+                                
                                 wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
                                 class="w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
 

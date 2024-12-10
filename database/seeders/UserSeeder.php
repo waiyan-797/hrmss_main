@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'email' => 'users@gmail.com',
             'password' => bcrypt('123'),
             'division_id' => 1  ,
-            'role_id' => 2 ,
+            'role_id' => 4 ,
             
             
         ]);

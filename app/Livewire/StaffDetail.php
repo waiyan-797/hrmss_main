@@ -433,7 +433,8 @@ public $saveDraftCheck  ;
             $this->abroads[] = [
                 'country' => $abroad->country_id,
                 'particular' => $abroad->particular,
-                'training_success_fail' => $abroad->training_success_fail,
+                'training_success_fail' => false ,
+                // 'training_success_fail' => $abroad->training_success_fail,
                 'training_success_count' => $abroad->training_success_count,
                 'sponser' => $abroad->sponser,
                 'meet_with' => $abroad->meet_with,
@@ -766,16 +767,23 @@ public $saveDraftCheck  ;
 
     public function add_trainings()
     {
-        $this->trainings[] = [ 'batch'=>'', 'training_type' => '', 'from_date' => '', 'to_date' => '', 'location' => '', 'country' => '', 'training_location' => ''  ,
+        $this->trainings[] = [
+             'batch'=>'', 'training_type' => '',
+              'from_date' => '', 'to_date' => '', 'location' => '', 'country' => '', 'training_location' => ''  ,
+              'remark'=> '' ,
        
-        'fees' => ''
+        'fees' => '' ,
+        'diploma_name' => ''
     ];
     }
 
 
     public function add_awardings()
     {
-        $this->awards[] = ['award_type' => '', 'award' => '', 'order_no' => '', 'order_date' => ''];
+        $this->awards[] = ['award_type' => '', 'award' => '', 'order_no' => '', 'order_date' => ''
+        ,'remark' => ''
+    
+    ];
     }
 
 
@@ -1188,14 +1196,18 @@ if($staff_create['status_id'] == 5){
                 'staff_id' => $staffId,
                 'country_id' => $abroad['country'],
                 'particular' => $abroad['particular'],
-                'training_success_fail' => $abroad['training_success_fail'],
+                'training_success_fail' => false ,
+                // $abroad['training_success_fail'],
                 'training_success_count' => $abroad['training_success_count'],
                 'sponser' => $abroad['sponser'],
                 'meet_with' => $abroad['meet_with'],
                 'from_date' => $abroad['from_date'],
                 'to_date' => $abroad['to_date'],
-                'status' => $abroad['status'],
-                'actual_abroad_date' => $abroad['actual_abroad_date'],
+                // 'status' => $abroad['status'],
+                'status' => 4,
+                'actual_abroad_date' => '2024-12-09'
+                //  $abroad['actual_abroad_date']
+                 ,
                 'position' => $abroad['position'],
             ]);
         }

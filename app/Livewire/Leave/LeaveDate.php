@@ -42,16 +42,16 @@ class LeaveDate extends Component
         $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();
-
-        $table->addCell(4000, ['gridSpan' => 2, 'valign' => 'center'])->addText('တာဝန်ချိန် ကာလ	');
+        $table->addCell(5000, ['gridSpan' => 4, 'valign' => 'center'])->addText('တာဝန်ချိန် ကာလ	');
         $table->addCell(4000, ['gridSpan' => 2, 'valign' => 'center'])->addText('စာတိုင်(၂)အရ ခံစာခွင့်ရှိသည့်လုပ်သက်');
         $table->addCell(4000, ['gridSpan' => 2, 'valign' => 'center'])->addText('စုစုပေါင်းခံစားခွင့်ရှိသည့်လုပ်သက်ခွင့်စာတိုင်(၃)+(၇)');
         $table->addCell(6000, ['gridSpan' => 3, 'valign' => 'center'])->addText('လုပ်သက်ခွင့်ခံစားသည့်ကာလ');
-        $table->addCell(4000, ['gridSpan' => 2, 'valign' => 'center'])->addText('လုပ်သက်ခွင့်စာတိုင်(၄)-(၆)
-');
+        $table->addCell(4000, ['gridSpan' => 2, 'valign' => 'center'])->addText('လုပ်သက်ခွင့်စာတိုင်(၄)-(၆)');
         $table->addRow();
         $table->addCell(2000)->addText('မှ---ထိ', ['alignment' => 'center']);
-        $table->addCell(2000)->addText('နှစ်	လ	ရက်', ['alignment' => 'center']);
+        $table->addCell(1000)->addText('နှစ်', ['alignment' => 'center']);
+        $table->addCell(1000)->addText('လ', ['alignment' => 'center']);
+        $table->addCell(1000)->addText('ရက်', ['alignment' => 'center']);
         $table->addCell(2000)->addText('လ', ['alignment' => 'center']);
         $table->addCell(2000)->addText('ရက်', ['alignment' => 'center']);
         $table->addCell(2000)->addText('လ', ['alignment' => 'center']);
@@ -61,34 +61,7 @@ class LeaveDate extends Component
         $table->addCell(2000)->addText('ရက်', ['alignment' => 'center']);
         $table->addCell(2000)->addText('လ', ['alignment' => 'center']);
         $table->addCell(2000)->addText('ရက်', ['alignment' => 'center']);
-
-        $table->addRow();
-        $table->addCell(2000)->addText('(၁)', ['alignment' => 'center']);
-        $table->addCell(2000)->addText('(၂)', ['alignment' => 'center']);
-        $table->addCell(2000)->addText();
-        $table->addCell(2000)->addText('(၃)', ['alignment' => 'center']);
-        $table->addCell(2000)->addText();
-        $table->addCell(2000)->addText('(၄)', ['alignment' => 'center']);
-        $table->addCell(2000)->addText('(၅)', ['alignment' => 'center']);
-        $table->addCell(2000)->addText();
-        $table->addCell(2000)->addText('(၆)', ['alignment' => 'center']);
-        $table->addCell(2000)->addText();
-        $table->addCell(2000)->addText('(၇)', ['alignment' => 'center']);
-
-        // $table->addRow();
-        // $table->addCell(2000)->addText();
-        // $table->addCell(2000)->addText();
-        // $table->addCell(2000)->addText();
-        // $table->addCell(2000)->addText();
-        // $table->addCell(2000)->addText();
-        // $table->addCell(2000)->addText();
-        // $table->addCell(2000)->addText();
-        // $table->addCell(2000)->addText();
-        // $table->addCell(2000)->addText();
-        // $table->addCell(2000)->addText();
-        // $table->addCell(2000)->addText();
-
-        $workStartDate = $staff->join_date;
+    $workStartDate = $staff->join_date;
     $previous_total_leave_months = 0;
     $previous_total_leave_days = 0;
 
@@ -101,39 +74,39 @@ class LeaveDate extends Component
         $free_leave_months = floor($free_leave_days / 30);
         $remaining_free_leave_days = $free_leave_days % 30;
 
+
         // Calculate leave taken period and remaining leave
         $leave_diff = dateDiff($leave->from_date, $leave->to_date);
         $total_leave_months = $previous_total_leave_months + $free_leave_months;
         $total_leave_days = $previous_total_leave_days + $remaining_free_leave_days;
         $diff_leave_months = $total_leave_months - $leave_diff->m;
         $diff_leave_days = $total_leave_days - $leave_diff->d;
-
         // Add a new row for each leave entry
         $table->addRow();
-        $table->addCell(2000)->addText(en2mm(formatDMY($workStartDate)) . ' မှ ' . en2mm(formatDMY($workEndDate)) . ' ထိ');
-        $table->addCell(2000)->addText($work_diff->y > 0 ? en2mm($work_diff->y) . ' နှစ်' : '-');
-        $table->addCell(2000)->addText($work_diff->m > 0 ? en2mm($work_diff->m) . ' လ' : '-');
-        $table->addCell(2000)->addText($work_diff->d > 0 ? en2mm($work_diff->d) . ' ရက်' : '-');
-        $table->addCell(2000)->addText($free_leave_months > 0 ? en2mm($free_leave_months) . ' လ' : '-');
-        $table->addCell(2000)->addText($remaining_free_leave_days > 0 ? en2mm($remaining_free_leave_days) . ' ရက်' : '-');
-        $table->addCell(2000)->addText(en2mm(formatDMY($leave->from_date)) . ' မှ ' . en2mm(formatDMY($leave->to_date)) . ' ထိ');
-        $table->addCell(2000)->addText($leave_diff->m > 0 ? en2mm($leave_diff->m) . ' လ' : '-');
-        $table->addCell(2000)->addText($leave_diff->d > 0 ? en2mm($leave_diff->d) . ' ရက်' : '-');
+        $table->addCell(2000)->addText(en2mm(formatDMY($workStartDate)).'မှ'.en2mm(formatDMY($workEndDate)));
+        $table->addCell(2000)->addText( $work_diff->y > 0 ? en2mm($work_diff->y) . ' နှစ် ' : '-');
+        $table->addCell(2000)->addText($work_diff->m > 0 ? en2mm($work_diff->m) . ' လ ' : en2mm('0'));
+        $table->addCell(2000)->addText($work_diff->d > 0 ? en2mm($work_diff->d) . ' ရက် ' : en2mm('0'));
+        $table->addCell(2000)->addText($free_leave_months > 0 ? en2mm($free_leave_months).' လ' : '-');
+        $table->addCell(2000)->addText($remaining_free_leave_days > 0 ? en2mm($remaining_free_leave_days).' ရက်' : '-');
+        $table->addCell(2000)->addText($total_leave_months > 0 ? en2mm($total_leave_months) . ' လ ' : '-');
+        $table->addCell(2000)->addText($total_leave_days > 0 ? en2mm($total_leave_days) . ' ရက် ' : '-');
+        $table->addCell(2000)->addText(formatDMYmm($leave->from_date).'မှ'.formatDMYmm($leave->to_date).'ထိ');
+        $table->addCell(2000)->addText($leave_diff->m > 0 ? en2mm($leave_diff->m) . ' လ ' : '-');
+        $table->addCell(2000)->addText( $leave_diff->d > 0 ? en2mm($leave_diff->d + 1    ) . ' ရက် ' : '-');
         $table->addCell(2000)->addText($diff_leave_months > 0 ? en2mm($diff_leave_months) . ' လ' : '-');
-        $table->addCell(2000)->addText($diff_leave_days > 0 ? en2mm($diff_leave_days) . ' ရက်' : '-');
+        $table->addCell(2000)->addText($diff_leave_days > 0 ? en2mm($diff_leave_days  - 1 ) . ' ရက်' : '-');
 
         // Update start date for the next period
         $workStartDate = \Carbon\Carbon::parse($leave->to_date)->addDay()->toDateString();
         $previous_total_leave_months = $diff_leave_months;
         $previous_total_leave_days = $diff_leave_days;
     }
-
-
-
         $filePath = storage_path('app/public/leave_report.docx');
         $phpWord->save($filePath, 'Word2007');
         return response()->download($filePath)->deleteFileAfterSend(true);
     }
+
     public function render()
     {
         $staff = Staff::where('id', $this->staff_id)->first();

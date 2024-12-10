@@ -163,17 +163,17 @@ $table->addCell(5000)->addText(en2mm($staff->abroads->count()));
     $table->addCell(2000)->addText('ထောက်ပံ့သည့်အဖွဲ့အစည်း', ['bold' => true]);
     $table->addCell(2000)->addText('ပြန်ရောက်လျှင်အမှုထမ်းမည့်ဌာန/ရာထူး', ['bold' => true]);
 
-    foreach ($staff->abroads as $index => $abroad) {
-        $table->addRow();
-        $table->addCell(500)->addText($index + 1);
-        $table->addCell(2000)->addText($abroad->particular);
-        $table->addCell(2000)->addText($abroad->country->name);
-        $table->addCell(1500)->addText($abroad->from_date);
-        $table->addCell(1500)->addText($abroad->to_date);
-        $table->addCell(2000)->addText($abroad->actual_abroad_date);
-        $table->addCell(2000)->addText($abroad->sponser);
-        $table->addCell(2000)->addText($abroad->position);
-    }
+    
+        // $table->addRow();
+        // $table->addCell(500)->addText($index + 1);
+        // $table->addCell(2000)->addText($abroad->particular);
+        // $table->addCell(2000)->addText($abroad->country->name);
+        // $table->addCell(1500)->addText($abroad->from_date);
+        // $table->addCell(1500)->addText($abroad->to_date);
+        // $table->addCell(2000)->addText($abroad->actual_abroad_date);
+        // $table->addCell(2000)->addText($abroad->sponser);
+        // $table->addCell(2000)->addText($abroad->position);
+    
     $section->addText('၁၆။', ['bold' => true]);
     $section->addText('အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။', ['bold' => false]);
     $section->addTextBreak(1); 

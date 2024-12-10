@@ -1,4 +1,7 @@
 <div class="p-6 bg-gray-100 min-h-screen w-full">
+    <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+    <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+    <br><br>
     <div class="mb-6">
         <label class="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
         <x-date-picker wire:model.live="startDate" class="w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />

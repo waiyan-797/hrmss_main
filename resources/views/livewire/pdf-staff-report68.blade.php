@@ -5,7 +5,9 @@
             <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
             <div class="md:w-full p-4">
                 <h1 class="text-center font-semibold text-base">ကိုယ်ရေးမှတ်တမ်း</h1>
-                <img src="{{ $staff->staff_photo }}" alt="" class="w-20 h-20 float-right mr-28">
+               
+                <!-- <img src="{{ $staff->staff_photo }}" alt="" class="w-20 h-20 float-right mr-28"> -->
+                <img src="{{ $staff->staff_photo ? route('file', $staff->staff_photo) : asset('img/user.png') }}" alt="" class="w-20 h-20 float-right mr-28">
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၁။ </label>
                     <label for="name" class="md:w-1/3">ဝန်ထမ်းအမှတ်</label>

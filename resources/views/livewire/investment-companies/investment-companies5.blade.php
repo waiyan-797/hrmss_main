@@ -2,11 +2,9 @@
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-            {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
-            {{-- <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button> --}}
-            <x-primary-button type="button" wire:click="go_excel">
-                Excel
-            </x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button> 
+           
 
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
