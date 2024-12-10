@@ -29,7 +29,7 @@
                 </h1>
                 <h1 class="font-bold text-center text-base">
 
-                  {{  is_null($selectedDivisionId) ? '' :   ဖွဲ့စည်းပုံ ၊ ခွင့်ပြု ၊ လစ်လပ်အင်အားစာရင်း}}
+                  {{  is_null($selectedDivisionId) ? '' : '  ဖွဲ့စည်းပုံ ၊ ခွင့်ပြု ၊ လစ်လပ်အင်အားစာရင်း'}}
                                
                     
                 </h1>
