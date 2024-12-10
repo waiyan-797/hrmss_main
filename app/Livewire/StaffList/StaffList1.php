@@ -10,6 +10,7 @@ use PhpOffice\PhpWord\PhpWord;
 
 class StaffList1 extends Component
 {
+public $selsectedDivisionTypeId = 3 ;    
     public function go_pdf(){
         $divisions = Division::where('division_type_id', 2)->get();
         $data = [
@@ -74,7 +75,16 @@ class StaffList1 extends Component
 
      public function render()
      {
-        $divisions = Division::where('division_type_id', 2)->get();
+        $divisions =
+         Division::query();
+         if($this->selsectedDivisionTypeId){
+            $divisions->where('division_type_id', $this->selsectedDivisionTypeId
+         
+         );
+         }
+         
+         
+         $divisions->get();
         return view('livewire.staff-list.staff-list1',[
             'divisions' => $divisions,
         ]);
