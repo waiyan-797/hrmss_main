@@ -8,7 +8,24 @@
 
             <h2 class="font-semibold text-center">ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h2>
 
-            <h2 class="font-semibold text-center">ဝန်ထမ်းအင်အားစာရင်း(တိုင်းဒေသကြီး/ပြည်နယ်)</h2>
+            <h2 class="font-semibold text-center">
+      
+               {{$selsectedDivisionTypeId  == 1 ? ' ရုံးချုပ် ဌာနခွဲ' : ($selsectedDivisionTypeId  == 2 ? 'တိုင်းဒေသကြီး/ပြည်နယ်ဦးစီးမှုးရုံး' :  'ရုံးချုပ် ဌာနခွဲ နှင့် တိုင်းဒေသကြီး/ပြည်နယ်ဦးစီးမှုးရုံး')  }} 
+                
+                များ၏ အရာထမ်း၊အမှုထမ်းများစာရင်း
+            
+            </h2>
+
+                    
+                <x-select wire:model.live="selsectedDivisionTypeId" :values="$divisionTypes" 
+                placeholder='All'
+    
+    />
+    <h1 class=" text-right ">
+        ရက်စွဲ - {{getTdyDateInMyanmarYearMonthDay(2)}}
+    </h1>
+
+
 
 
             <table class="md:w-full">
@@ -16,7 +33,7 @@
                     <tr>
                         <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
                         <th rowspan="2" class="border border-black text-center p-2">
-                            တိုင်း/ပြည်နယ်
+                            ဌာနအမည်
                         </th>
                         
                         <th class="border border-black text-center p-2">အရာထမ်း</th>
@@ -27,6 +44,7 @@
                    
                 </thead>
                 <tbody>
+                    
                     @foreach ($divisions as $division)
                         <tr>
                             <td class="border border-black text-center p-2">
@@ -35,7 +53,7 @@
                             <td class="border border-black text-left p-2">{{ $division->name }}</td>
                             <td class="border border-black text-center p-2">
                                 {{ en2mm($division->staffs->filter(fn($staff) => $staff->currentRank &&
-                                 $staff->currentRank->staff_type_id == 1
+                                 $staff->currentRank->staff_type_id ==1 
                                  )->count()) }}
                             </td>
                             <td class="border border-black text-center p-2">
@@ -53,15 +71,18 @@
 
                     <tr>
                         <td class="border border-black text-center p-2">
-                            နယ်ရုံးခွဲ
+
+
+
+                        </td>
+                        <td class="border border-black text-center p-2">
+                            {{$selsectedDivisionTypeId  == 1 ? ' ရုံးချုပ်စုစုပေါင်း' : 'နယ်ရုံးခွဲ' }} 
                         </td>
                     
                         
                     
                         
                         @php
-                            
-
                         $divisionStaffCount = $divisions->sum(function($division) {
                             
                             return $division->staffs->filter(function($staff) {
@@ -71,9 +92,45 @@
                     @endphp
 
                     <td class="border border-black text-center p-2">
-                        {{-- {{ $divisionStaffCount }} --}}
-                        11
+                        {{ en2mm($divisionStaffCount )}}
                     </td>
+                    
+                    @php
+                    $secondPayscale = $divisions->sum(function($division) {
+                        
+                        return $division->staffs->filter(function($staff) {
+                            return $staff->currentRank && $staff->currentRank->staff_type_id == 2;
+                        })->count();
+                    });
+                @endphp
+
+                <td class="border border-black text-center p-2">
+                    {{ en2mm($secondPayscale )}}
+                </td>
+                
+              
+
+            <td class="border border-black text-center p-2">
+                {{ en2mm($divisionStaffCount  + $secondPayscale)}}
+            </td>
+            
+
+
+            @php
+            $labour = $divisions->sum(function($division) {
+                
+                return $division->staffs->filter(function($staff) {
+                    return $staff->currentRank && $staff->currentRank->staff_type_id ==3;
+                })->count();
+            });
+        @endphp
+
+        <td class="border border-black text-center p-2">
+            {{ en2mm($labour )}}
+        </td>
+
+
+
                     
 
                     </tr>

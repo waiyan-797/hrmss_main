@@ -743,7 +743,7 @@ public $saveDraftCheck  ;
 
     public function add_spouse_father_siblings()
     {
-        $this->spouse_father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
+        $this->spouse_father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ' '];
     }
 
     public function add_spouse_mother_siblings()
