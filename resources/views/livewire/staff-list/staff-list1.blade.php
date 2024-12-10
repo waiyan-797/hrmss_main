@@ -22,27 +22,60 @@
                         <th class="border border-black text-center p-2">အရာထမ်း</th>
                         <th class="border border-black text-center p-2">အမှုထမ်း</th>
                         <th class="border border-black text-center p-2">စုစုပေါင်း</th>
+                        <th class="border border-black text-center p-2">နေ့စား</th>
                     </tr>
                    
                 </thead>
                 <tbody>
                     @foreach ($divisions as $division)
                         <tr>
-                            <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td>
+                            <td class="border border-black text-center p-2">
+                                {{ $loop->index + 1 }}
+                            </td>
                             <td class="border border-black text-left p-2">{{ $division->name }}</td>
                             <td class="border border-black text-center p-2">
-                                {{ en2mm($division->staffs->filter(fn($staff) => $staff->currentRank && $staff->currentRank->staff_type_id == 1)->count()) }}
+                                {{ en2mm($division->staffs->filter(fn($staff) => $staff->currentRank &&
+                                 $staff->currentRank->staff_type_id == 1
+                                 )->count()) }}
                             </td>
                             <td class="border border-black text-center p-2">
                                 {{ en2mm($division->staffs->filter(fn($staff) => $staff->currentRank && $staff->currentRank->staff_type_id == 2)->count()) }}
                             </td>
                             <td class="border border-black text-center p-2">{{ en2mm($division->staffs->count() )}}</td>
+                            <td class="border border-black text-center p-2">
+                                {{ en2mm($division->staffs->filter(fn($staff) => $staff->currentRank && $staff->currentRank->staff_type_id == 3)->count()) }}
+
+                            </td>
+
                         </tr>
                     @endforeach
+
+
                     <tr>
-                        <td>
-                            စုစုပေါင်း
+                        <td class="border border-black text-center p-2">
+                            နယ်ရုံးခွဲ
                         </td>
+                    
+                        
+                    
+                        
+                        @php
+                            
+
+                        $divisionStaffCount = $divisions->sum(function($division) {
+                            
+                            return $division->staffs->filter(function($staff) {
+                                return $staff->currentRank && $staff->currentRank->staff_type_id == 1;
+                            })->count();
+                        });
+                    @endphp
+
+                    <td class="border border-black text-center p-2">
+                        {{-- {{ $divisionStaffCount }} --}}
+                        11
+                    </td>
+                    
+
                     </tr>
                 </tbody>
             </table>

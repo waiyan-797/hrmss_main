@@ -77,14 +77,22 @@ public $selsectedDivisionTypeId = 3 ;
      {
         $divisions =
          Division::query();
+
          if($this->selsectedDivisionTypeId){
             $divisions->where('division_type_id', $this->selsectedDivisionTypeId
          
          );
          }
+
          
-         
-         $divisions->get();
+
+         $allTypeOneStaff = Division::all()->map(
+            function($each){
+                 
+               
+            }
+         );
+                  $divisions->get();
         return view('livewire.staff-list.staff-list1',[
             'divisions' => $divisions,
         ]);
