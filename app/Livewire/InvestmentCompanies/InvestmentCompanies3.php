@@ -15,9 +15,14 @@ use PhpOffice\PhpWord\PhpWord;
 class InvestmentCompanies3 extends Component
 {
 
+    // public $selected
+
         public $year; 
+        public $count=0;
     public function go_pdf(){
+        $count=0;
         $data = [
+            'count'=>$count,
             'first_ranks' => Rank::where('staff_type_id', 1)->get(),
             'second_ranks' => Rank::where('staff_type_id', 2)->get(),
         ];

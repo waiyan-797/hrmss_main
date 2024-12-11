@@ -18,6 +18,7 @@ class PA01 implements FromView ,WithStyles
    
     public function view(): View
     {
+        $count=0;
         $kachin_staffs = Staff::where('current_division_id', 12)->get();
         $kayah_staffs = Staff::where('current_division_id', 13)->get(); 
         $kayin_staffs = Staff::where('current_division_id', 14)->get();
@@ -36,6 +37,7 @@ class PA01 implements FromView ,WithStyles
         $aya_staffs = Staff::where('current_division_id', 25)->get();
         $total_staffs = Staff::whereIn('current_division_id', [1, 2, 12, 13, 14, 15, 21, 22, 24, 16, 20, 26, 23, 19, 18, 17, 25])->get();
         $data = [
+            'count'=>$count,
             'first_payscales' => Payscale::where('staff_type_id', 1)->get(),
             'second_payscales' => Payscale::where('staff_type_id', 2)->get(),
             'kachin_staffs' => $kachin_staffs,
@@ -62,28 +64,62 @@ class PA01 implements FromView ,WithStyles
         return view('excel_reports.investment_companies_report', $data);
     }
     public function styles(Worksheet $sheet)
-{
-    // Apply global font style
-    $sheet->getStyle('A1:Z1000')->applyFromArray([
-        'font' => [
-            'name' => 'Pyidaungsu',
-            'size' => 13,
-        ],
-    ]);
-    $sheet->getStyle('A1:T100')->applyFromArray([
-        'borders' => [
-            'allBorders' => [
-                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                'color' => ['argb' => '000000'], // Black border
+    {
+        // Set paper size and orientation
+        $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
+        $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+
+        // Fit to page width
+        $sheet->getPageSetup()->setFitToWidth(1);
+        $sheet->getPageSetup()->setFitToHeight(0);
+
+        // Enable gridlines for unbordered areas
+        $sheet->setShowGridlines(true);
+        $sheet->setPrintGridlines(true);
+
+        // Dynamically calculate the highest row and column
+        $highestRow = $sheet->getHighestRow(); // e.g. 19
+        $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
+
+        // Apply custom borders to the dynamic range
+        $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
             ],
-        ],
-    ]);
+        ]);
 
-    // Auto-size columns for the table
-    foreach (range('A', 'F') as $column) {
-        $sheet->getColumnDimension($column)->setAutoSize(true);
+        // Center-align text and set font
+        $sheet->getStyle("A1:$highestColumn$highestRow")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+
+        // Auto-size columns based on dynamic range
+        foreach (range('A', $highestColumn) as $column) {
+            $sheet->getColumnDimension($column)->setAutoSize(true);
+        }
+
+        // Set row heights manually for dynamic rows
+        foreach (range(3, $highestRow) as $row) {
+            $sheet->getRowDimension($row)->setRowHeight(-1); // Auto-adjust height
+        }
+
+        // Define the print area dynamically
+        $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
+
+        // Set a margin for better printing output
+        $sheet->getPageMargins()->setTop(0.5);
+        $sheet->getPageMargins()->setRight(0.5);
+        $sheet->getPageMargins()->setLeft(0.5);
+        $sheet->getPageMargins()->setBottom(0.5);
     }
-
-    return [];
-}
 }

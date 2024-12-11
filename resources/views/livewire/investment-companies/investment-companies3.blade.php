@@ -19,7 +19,7 @@
                     <table class="w-full text-center">
                         <thead>
                             <tr class="bg-gray-100">
-                                <th class="p-2 border border-black">စဥ်</th>
+                                <th class="p-2 border border-black">စဉ်</th>
                                 <th class="p-2 border border-black">ရာထူးအမည်</th>
                                 <th class="p-2 border border-black">လစာနှုန်း (ကျပ်)</th>
                                 <th class="p-2 border border-black">ခွင့်ပြုအင်အား</th>
@@ -30,7 +30,7 @@
                         <tbody class="text-center h-8 p-2">
                             @foreach ($first_ranks as $rank)
                             <tr>
-                                <td class="border border-black p-2">{{en2mm($loop->index + 1)}}</td>
+                                <td class="border border-black p-2">{{en2mm(++$count)}}</td>
                                 <td class="border border-black p-2">{{$rank->name}}</td>
                                 <td class="border border-black p-2">{{$rank->payscale->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
@@ -46,7 +46,7 @@
                             </tr>
                             @foreach ($second_ranks as $rank)
                                 <tr>
-                                    <td class="border border-black p-2">{{en2mm($loop->index + 1)}}</td>
+                                    <td class="border border-black p-2">{{en2mm(++$count)}}</td>
                                     <td class="border border-black p-2">{{$rank->name}}</td>
                                     <td class="border border-black p-2">{{$rank->payscale->name}}</td>
                                     <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
@@ -59,6 +59,13 @@
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm( - $second_ranks->sum('allowed_qty') +  $second_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
+                            </tr>
+
+                            <tr>
+                                <td class="border border-black p-2 font-semibold" colspan="3">စုစုပေါင်း</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty') + $second_ranks->sum('allowed_qty')) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year)) + $second_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year)) + $second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
                             </tr>
                         </tbody>
                     </table>

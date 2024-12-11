@@ -92,7 +92,7 @@ public $saveDraftCheck  ;
         $spouse_father_name, $spouse_father_ethnic_id, $spouse_father_religion_id, $spouse_father_place_of_birth, $spouse_father_occupation, $spouse_father_address_street,$spouse_father_address_house_no, $spouse_father_address_ward, $spouse_father_address_township_or_town_id, $spouse_father_address_region_id,
         $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street,$mother_address_house_no, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id,
         $spouse_mother_name, $spouse_mother_ethnic_id, $spouse_mother_religion_id, $spouse_mother_place_of_birth, $spouse_mother_occupation, $spouse_mother_address_street,$spouse_mother_address_house_no, $spouse_mother_address_ward, $spouse_mother_address_township_or_town_id, $spouse_mother_address_region_id,
-        $family_in_politics  , $family_in_politics_text = false;
+        $family_in_politics = false   , $family_in_politics_text ;
 
     public $siblings = [];
     public $father_siblings = [];
@@ -1441,6 +1441,7 @@ if($staff_create['status_id'] == 5){
         foreach ($this->spouse_mother_siblings as $relative) {
             SpouseMotherSibling::create($this->relativeFields($staffId, $relative));
         }
+
     }
 
     public function updatedCurrentAddressRegionId()

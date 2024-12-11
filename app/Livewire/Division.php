@@ -31,7 +31,6 @@ class Division extends Component
         'sort_no' => 'required|integer',
     ];
     
-    //Add New
     public function add_new(){
         $this->resetValidation();
         $this->reset(['division_name','nick_name', 'division_type_name','department_name','difficulty_level_name','sort_no']);

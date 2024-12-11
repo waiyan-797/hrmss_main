@@ -1,6 +1,6 @@
 
 
-    <style type="text/css">
+    {{-- <style type="text/css">
         page{
             background: white;
         }
@@ -70,7 +70,7 @@
             background-color: #0056b3;
         }
 
-        table {
+        .table {
             width: 100%;
             border-collapse: collapse;
             text-align: center;
@@ -78,7 +78,7 @@
         }
 
         th, td {
-            border: 1px solid black;
+            /* border: 1px solid black; */
             padding: 10px;
         }
 
@@ -92,21 +92,59 @@
             margin-bottom: 15px;
         }
 
-    </style>
+        
+    </style> --}}
 
      
 
         <div class="container">
             <div class="content">
+                <table class="tabletitle">
+                    <tr>
+                        <th colspan="20" rowspan="2">
+                            ဝန်ကြီးဌာန၊ ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>
+                            ဦးစီးဌာန ၊ ရင်းနှီးမြှုပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+                            ခွင့်ပြု
+                        </th>
+                    </tr>
+                </table>
                 <div class="inner-content">
-                    {{-- <div class="title">ဦးစီးဌာန ၊ ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</div> --}}
+                    
+                    
+                         
+                    <table class="table">
 
-                    <table>
+                        
                         <thead>
-                            <tr>
-                                <th>အမှတ်စဥ်</th>
+                            {{-- <tr rowspan="3" >
+                                <th   colspan="20">
+                                    ဝန်ကြီးဌာန၊ ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                                    ဦးစီးဌာန ၊ ရင်းနှီးမြှုပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                                    ခွင့်ပြု
+                               
+                                </th>
+                            </tr>
+                            <tr rowspan="3" >
+                                <th   colspan="20">
+                                    ဝန်ကြီးဌာန၊ ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                                    ဦးစီးဌာန ၊ ရင်းနှီးမြှုပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                                    ခွင့်ပြု
+                               
+                                </th>
+                            </tr>
+                            <tr rowspan="3" >
+                                <th   colspan="20">
+                                    ဝန်ကြီးဌာန၊ ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                                    ဦးစီးဌာန ၊ ရင်းနှီးမြှုပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                                    ခွင့်ပြု
+                               
+                                </th>
+                            </tr> --}}
+                            <tr rowspan="12">
+                                
+                                <th>အ<br>မှတ်<br>စဥ်</th>
                                 <th>လစာနှုန်း (ကျပ်)</th>
-                                <th>ခွင့်ပြုအင်အား</th>
+                                <th>ခွင့်ပြု<br>အင်အား</th>
                                 <th>ကချင်</th>
                                 <th>ကယား</th>
                                 <th>ကရင်</th>
@@ -116,20 +154,44 @@
                                 <th>ရှမ်း</th>
                                 <th>စစ်ကိုင်း</th>
                                 <th>မန္တလေး</th>
-                                <th>နေပြည်တော်</th>
+                                <th>နေပြည်<br>တော်</th>
                                 <th>ရန်ကုန်</th>
-                                <th>ရန်ကုန်ရုံးချုပ်</th>
+                                <th>ရန်ကုန်<br>ရုံးချုပ်</th>
                                 <th>မကွေး</th>
                                 <th>ပဲခူး</th>
-                                <th>တနင်သာရီ</th>
+                                <th>တနင်္သာရီ</th>
                                 <th>ဧရာဝတီ</th>
                                 <th>စုစုပေါင်း</th>
                             </tr>
                         </thead>
                         <tbody>
+
+                            <tr class="">
+                                <td>၁</td>
+                                <td>၂</td>
+                                <td class="slide_right">၃</td>
+                                <td class="slide_right">၄</td>
+                                <td class="slide_right">၅</td>
+                                <td class="slide_right">၆</td>
+                                <td class="slide_right">၇</td>
+                                <td class="slide_right">၈</td>
+                                <td class="slide_right">၉</td>
+                                <td class="slide_right">၁၀</td>
+                                <td class="slide_right">၁၁</td>
+                                <td class="slide_right">၁၂</td>
+                                <td class="slide_right">၁၃</td>
+                                <td class="slide_right">၁၄</td>
+                                <td class="slide_right">၁၅</td>
+                                <td class="slide_right">၁၆</td>
+                                <td class="slide_right">၁၇</td>
+                                <td class="slide_right">၁၈</td>
+                                <td class="slide_right">၁၉</td>
+                                <td class="slide_right">၂၀</td>
+                            </tr>
+
                             @foreach ($first_payscales as $payscale)
                             <tr>
-                                <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                <td class="border border-black p-2">{{en2mm(++$count)}}</td>
                                 <td class="border border-black p-2">{{$payscale->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
@@ -152,7 +214,8 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td colspan="2">{{$first_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
+                            <td class="border border-black p-2 font-semibold"></td>
+                            <td style="font-weight:bold;">{{$first_payscales[0]->staff_type->name}}ပေါင်း</td>
                             
                             <td>{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
                             <td>
@@ -210,9 +273,9 @@
 
                         @foreach ($second_payscales as $payscale)
                             <tr>
-                                <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                <td class="border border-black p-2">{{en2mm(++$count)}}</td>
                                 <td class="border border-black p-2">{{$payscale->name}}</td>
-                                <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
+                                <td class="border border-black p-2 text-center">{{en2mm($payscale->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
                                 <td class="border border-black p-2">{{en2mm($kayah_staffs->where('payscale_id', $payscale->id)->count())}}</td>
                                 <td class="border border-black p-2">{{en2mm($kayin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
@@ -233,7 +296,8 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td colspan="2">{{$second_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
+                            <td class="border border-black p-2 font-semibold"></td>
+                            <td >{{$second_payscales[0]->staff_type->name}}ပေါင်း</td>
                             <td>{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
                             <td>
                                 {{ en2mm($kachin_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
@@ -287,7 +351,7 @@
                                 {{ en2mm($total_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
                             </td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td class="border border-black p-2 font-semibold" colspan="2">{{$second_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
                             <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
                             <td class="border border-black p-2 font-semibold">
@@ -341,10 +405,11 @@
                             <td class="border border-black p-2 font-semibold">
                                 {{ en2mm($total_staffs->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}
                             </td>
-                        </tr>
+                        </tr> --}}
                         <tr>
-                            <td class="border border-black p-2 font-semibold" colspan="2">
-                              စုစုပေါင်း
+                            <td class="border border-black p-2 font-semibold"></td>
+                            <td class="border border-black p-2 font-semibold" >
+                              ပေါင်း
                             </td>
 
                             <td class="border border-black p-2 font-semibold">{{ en2mm( $first_payscales->sum('allowed_qty') +  $second_payscales->sum('allowed_qty')) }}</td>
