@@ -12,8 +12,11 @@ use PhpOffice\PhpWord\PhpWord;
 
 class InvestmentCompanies4 extends Component
 {
+    public $count=0;
     public function go_pdf(){
+        $count=0;
         $data = [
+            'count'=>$count,
             'first_payscales' => Payscale::where('staff_type_id', 1)->get(),
             'second_payscales' => Payscale::where('staff_type_id', 2)->get(),
         ];

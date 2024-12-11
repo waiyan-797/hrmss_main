@@ -51,8 +51,21 @@
     <body>
         
             <div class="container">
+                
                 {{-- <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1> --}}
                 <div class="table-container">
+
+                    <table class="tabletitle">
+                        <tr>
+                            <th colspan="6" rowspan="2">
+                                <br>
+                                ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>
+                                ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+                                ၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
+                            </th>
+                        </tr>
+                    </table>
+
                     <table>
                         <thead>
                             <tr>
@@ -68,7 +81,7 @@
                         <tbody>
                             @foreach ($first_ranks as $rank)
                             <tr>
-                                <td>{{$loop->index + 1}}</td>
+                                <td>{{en2mm(++$count)}}</td>
                                 <td>{{$rank->name}}</td>
                                 <td>{{$rank->payscale->name}}</td>
                                 <td>{{en2mm($rank->allowed_qty)}}</td>
@@ -77,14 +90,14 @@
                             </tr>
                             @endforeach
                             <tr>
-                                <td colspan="3">{{$first_ranks[0]->staff_type->name}}</td>
+                                <td colspan="3">{{$first_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
                                 <td>{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
                                 <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
                                 <td>{{ en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
                             </tr>
                             @foreach ($second_ranks as $rank)
                                 <tr>
-                                    <td>{{$loop->index + 1}}</td>
+                                    <td>{{en2mm(++$count)}}</td>
                                     <td>{{$rank->name}}</td>
                                     <td>{{$rank->payscale->name}}</td>
                                     <td>{{en2mm($rank->allowed_qty)}}</td>
@@ -93,10 +106,17 @@
                                 </tr>
                             @endforeach
                             <tr>
-                                <td colspan="3">{{$second_ranks[0]->staff_type->name}}</td>
+                                <td colspan="3">{{$second_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
                                 <td>{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
                                 <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
                                 <td>{{ en2mm($second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                            </tr>
+
+                            <tr>
+                                <td class="border border-black p-2 font-semibold" colspan="3">စုစုပေါင်း</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty') + $second_ranks->sum('allowed_qty')) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count()) + $second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->staffs->count()) + $second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
                             </tr>
                         </tbody>
                     </table>
