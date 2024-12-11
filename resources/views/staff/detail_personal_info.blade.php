@@ -346,7 +346,7 @@
         'column_vals' => $abroads,
         'column_types' => [
             [
-                'type' => 'select',
+                'type' => 'multiple-select',
                 'wire_array_name' => 'abroads',
                 'wire_array_key' => 'country',
                 'select_values' => $countries,
@@ -359,7 +359,7 @@
             [
                 'type' => 'checkbox',
                 'wire_array_name' => 'abroads',
-                'wire_array_key' => '   ',
+                'wire_array_key' => 'training_success_fail',
             ],
             [
                 'type' => 'text',
