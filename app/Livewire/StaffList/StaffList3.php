@@ -2,14 +2,22 @@
 
 namespace App\Livewire\StaffList;
 
+use App\Exports\SSL02;
 use App\Models\Rank;
+use Carbon\Carbon;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 
 class StaffList3 extends Component
 {
+
+    public $count  = 0 ;
+
+    public $printedDate;
+
     public function go_pdf(){
         $first_ranks = Rank::where('staff_type_id', 1)->withCount('staffs')->get();
         $second_ranks = Rank::where('staff_type_id', 2)->withCount('staffs')->get();
@@ -22,11 +30,17 @@ class StaffList3 extends Component
             'first_second_ranks' => $first_second_ranks,
             'third_ranks' => $third_ranks,
             'all_ranks' => $all_ranks,
+            'count' => 0 ,
         ];
         $pdf = PDF::loadView('pdf_reports.staff_list_report_3', $data);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'staff_list3_report.pdf'); 
+    }
+    public function go_excel() 
+    {
+        return Excel::download(new SSL02(
+    ), 'SSL02.xlsx');
     }
     public function go_word()
     {
@@ -116,6 +130,11 @@ class StaffList3 extends Component
         ]);
     }
     
+
+    public function mount(){
+        
+        $this->printedDate =   explode('-',Carbon::now()->format('Y-m-d'));
+        }
 
     public function render()
     {

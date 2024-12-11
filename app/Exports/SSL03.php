@@ -2,34 +2,33 @@
 
 namespace App\Exports;
 
-use App\Models\Payscale;
+use App\Models\Staff;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class PA05 implements FromView ,WithStyles
+class SSL03 implements FromView ,WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     // public function collection()
     // {
-    //     return PA05::all();
+    //     return SSL03::all();
     // }
-
     public function view(): View
     {
-        
-     
-
+        // $staffs = Staff::get();
+        $staffs = Staff::with('postings', 'currentRank')->get();
+       
         $data = [
-           'payscales' => Payscale::get(),
+          'staffs' => $staffs,
         ];
 
 
-        return view('excel_reports.investment_companies_report_5', $data);
+        return view('excel_reports.staff_list_4_report', $data);
     }
 public function styles(Worksheet $sheet)
 {
@@ -56,5 +55,4 @@ public function styles(Worksheet $sheet)
 
     return [];
 }
-
 }

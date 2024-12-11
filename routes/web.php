@@ -159,6 +159,7 @@ use App\Livewire\StaffInNpt;
 use App\Livewire\StaffStrengthList;
 use App\Livewire\TravelAbroad;
 use App\Livewire\User;
+use App\Livewire\VacancyOverByDivision;
 use App\Models\Ministry;
 use App\Models\Promotion;
 use App\Models\Staff as ModelsStaff;
@@ -361,6 +362,8 @@ Route::get('/labour-staff' , LivewireLabourStaff::class )->name('labour-staff');
 Route::get('/leave_summary', LeaveSummary::class)->name('leave_summary');
 
 Route::get('/about_to_increment', AboutToIncrement::class)->name('about_to_increment');  //new 
+
+Route::get('vacancy_over_by_division' , VacancyOverByDivision::class)->name('vacancy_over_by_division');    
 
 
 

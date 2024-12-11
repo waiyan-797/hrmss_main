@@ -20,4 +20,9 @@ class Posting extends Model
         return $this->belongsTo(Rank::class);
     }
 
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
+    }
+
 }

@@ -40,7 +40,7 @@
                     <tbody class="text-center h-8 p-2">
                         @foreach ($first_payscales as $payscale)
                             <tr>
-                                <td class="border border-black p-2"></td>
+                                <td class="border border-black p-2">{{en2mm(++$count )}}</td>
                                 <td class="border border-black p-2">{{$payscale->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
@@ -121,7 +121,8 @@
 
                         @foreach ($second_payscales as $payscale)
                             <tr>
-                                <td class="border border-black p-2"></td>
+                                <td class="border border-black p-2">{{en2mm(++$count )}}</td>
+
                                 <td class="border border-black p-2">{{$payscale->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($payscale->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($kachin_staffs->where('payscale_id', $payscale->id)->count())}}</td>
