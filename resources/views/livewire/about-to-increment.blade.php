@@ -20,6 +20,10 @@
                         Name
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        နှစ်တိုးအကြိမ်အရေအတွက်
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 Increment Date
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -33,6 +37,9 @@ Increment Date
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                                 {{ $staff->name }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                {{ $staff->current_increment_time }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
 

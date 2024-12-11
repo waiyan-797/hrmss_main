@@ -481,7 +481,7 @@ public $saveDraftCheck  ;
                 'name' => $sib->name,
                 'ethnic' => $sib->ethnic_id,
                 'religion' => $sib->religion_id,
-                'gender' => $sib->gender_id,
+                'gender_id' => $sib->gender_id,
                 'place_of_birth' => $sib->place_of_birth,
                 'occupation' => $sib->occupation,
                 'address' => $sib->address,
@@ -712,43 +712,43 @@ public $saveDraftCheck  ;
 
     public function add_siblings()
     {
-        $this->siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender' => ''];
+        $this->siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
 
     public function add_father_siblings()
     {
-        $this->father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
     public function add_mother_siblings()
     {
-        $this->mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
     public function add_spouses()
     {
-        $this->spouses[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->spouses[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
     public function add_children()
     {
-        $this->children[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->children[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
     public function add_spouse_siblings()
     {
-        $this->spouse_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->spouse_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
     public function add_spouse_father_siblings()
     {
-        $this->spouse_father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->spouse_father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ' '];
     }
 
     public function add_spouse_mother_siblings()
     {
-        $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
     public function add_schools()
@@ -1390,7 +1390,7 @@ if($staff_create['status_id'] == 5){
             'ethnic_id' => $relative['ethnic'],
             'religion_id' => $relative['religion'],
             'place_of_birth' => $relative['place_of_birth'],
-            'gender_id' => $relative['gender'],
+            'gender_id' => $relative['gender_id'],
             'occupation' => $relative['occupation'],
             'address' => $relative['address'],
             'relation_id' => $relative['relation'],

@@ -278,7 +278,7 @@
                 [
                     'type' => 'select',
                     'wire_array_name' => $key,
-                    'wire_array_key' => 'gender',
+                    'wire_array_key' => 'gender_id',
                     'select_values' => $genders,
                 ],
                 [
