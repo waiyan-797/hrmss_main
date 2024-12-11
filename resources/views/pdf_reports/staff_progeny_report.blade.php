@@ -56,32 +56,60 @@
 <body>
     <page size="A4">
         <h1>
+            ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>
             ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
-            ဝန်ထမ်းများ၏ သားသမီးအရေအတွက် စာရင်း<br>
-            ၁။ စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲ
+            ဝန်ထမ်းများ၏ သားသမီးအရေအတွက် စာရင်း
+           
         </h1>
         <table>
             <thead>
                 <tr>
-                    <th>စဥ်</th>
-                    <th class="text-left">အမည်</th>
-                    <th class="text-left">ရာထူး</th>
+                    <th rowspan="2">စဥ်</th>
+                    <th rowspan="2">ဝန်ထမ်း၏အမည်/ရာထူး</th>
+                    <th colspan="2">သား/သမီးအရေအတွက်</th>
+                    <th rowspan="2">သား/သမီးအမည်</th>
+
+                    <th rowspan="2">မှတ်ချက်</th>
+                </tr>
+                <tr>
                     <th>ကျား</th>
-                    <th class="text-left">မ</th>
-                    <th>စုစုပေါင်း</th>
+                    <th>မ</th>
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $start=0;
+                @endphp
                 @foreach ($staffs as $staff)
-                    <tr>
-                        <td>{{ $loop->index + 1 }}</td>
-                        <td>{{ $staff->name }}</td>
-                        <td>{{ $staff->current_rank->name }}</td>
-                        <td>{{ en2mm($staff->children->where('gender_id', 1)->count()) }}</td>
-                        <td>{{ en2mm($staff->children->where('gender_id', 2)->count()) }}</td>
-                        <td>{{ en2mm($staff->children->count()) }}</td>
-                    </tr>
-                @endforeach
+                        <tr>
+                            <td>{{ $start++ }}</td>
+                            <td>{{ $staff->name  }}
+                            <br>
+                            
+                                {{$staff->currentRank->name}}
+                            
+                            </td>
+                            
+                            <td>
+                                {{ en2mm($staff->children->where('gender_id', 1)->count()) }}
+                            </td>
+                            <td>
+                                {{ en2mm($staff->children->where('gender_id', 2)->count()) }}
+                            </td>
+                            <td>
+                                
+                                @foreach ($staff->children as $key => $child ) 
+ {{$child->name}}
+                                @endforeach
+                                    
+                                
+                                
+                                                            </td>
+                                                            <td>
+                                                             
+                                                            </td>
+                        </tr>
+                    @endforeach
             </tbody>
         </table>
     </page>

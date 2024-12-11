@@ -99,7 +99,9 @@
     </div>
     <div>
         <x-input-label for="လက်ရှိလစာ" :value="__('လက်ရှိလစာ')" />
-        <x-text-input wire:model="current_salary" id="current_salary" name="current_salary" type="text" class="mt-1 block w-full" required/>
+        <input
+         wire:model="current_salary" id="current_salary" name="current_salary" type="text" class="block w-full text-sm border rounded-lg cursor-pointer text-gray-700 focus:outline-none placeholder-gray-400 mt-1 font-arial bg-white border-gray-300" oninput="this.value = this.value.replace(/[^0-9]/g, '');" 
+        required/>
         <x-input-error class="mt-2" :messages="$errors->get('current_salary')" />
     </div>
     <div>

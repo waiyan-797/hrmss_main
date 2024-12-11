@@ -5,7 +5,6 @@
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <h1 class="font-bold text-center text-base mb-4">
             ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
-                
             </h1>
             <h1 class="font-bold text-center text-base mb-4">
                 ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာနရှိ သား/သမီးများ၏အရေအတွက်စာရင်း
@@ -33,7 +32,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($)
                     @foreach ($divisions as $key=> $division)
                         <tr>
                             <td class="border border-black text-center p-2">{{ en2mm($key + 1 ) }}</td>

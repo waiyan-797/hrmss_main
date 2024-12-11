@@ -5,16 +5,16 @@
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <h1 class="font-bold text-center text-base mb-4">
                 ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
-                ရှိ 
-                 သား/သမီးများ၏အရေအတွက် စာရင်း
-                
+                ရှိ
+                သား/သမီးများ၏အရေအတွက် စာရင်း
+
             </h1>
 
 
-            
- <h1 class=" text-right ">
-     ရက်စွဲ - {{getTdyDateInMyanmarYearMonthDay(2)}}
- </h1>
+
+            <h1 class=" text-right ">
+                ရက်စွဲ - {{ getTdyDateInMyanmarYearMonthDay(2) }}
+            </h1>
 
             <table class="md:w-full">
                 <thead>
@@ -28,108 +28,97 @@
                     </tr>
                     <tr>
                         <th class="border border-black text-center p-2">
-ကျား 
+                            ကျား
                         </th>
                         <th class="border border-black text-center p-2">
                             မ
                         </th>
                     </tr>
-                  
+
                 </thead>
                 <tbody>
-                    @foreach ($divisionTypes as  $key=> $divisionType)
-                    <tr>
-                    <td class="border border-black text-center p-2">{{ en2mm($key + 1 ) }}</td>
-                    <td class="border border-black text-left p-2">{{ $divisionType->name  }}
+                    @foreach ($divisionTypes as $key => $divisionType)
+                        <tr>
+                            <td class="border border-black text-center p-2">{{ en2mm($key + 1) }}</td>
+                            <td class="border border-black text-left p-2">{{ $divisionType->name }}
 
-                        @if($key == 1 )
-                        ညွှန်ကြားရေးမှုးရုံးများတွင်
-                        @endif 
- 
-                        တွင်တာဝန်ထမ်းဆောင်နေသည့်မိသားစုဝင်သား/သမီးများ
-   
-                        </td>
-                       
-                        
-                    
-                        
-                        <td class="border border-black text-center p-2">
-                            {{ en2mm(
-                                $divisionType->divisions->sum(function($division) {
-                                    return $division->staffs->sum(function($staff) {
-                                        return $staff->children->where('gender_id', 1)->count();
-                                    });
-                                })
-                            ) }}
-                        </td>
-                        
-                        <td class="border border-black text-center p-2">
-                            {{ en2mm(
-                                $divisionType->divisions->sum(function($division) {
-                                    return $division->staffs->sum(function($staff) {
-                                        return $staff->children->where('gender_id', 2 )->count();
-                                    });
-                                })
-                            ) }}
-                        </td>
-                        <td class="border border-black text-center p-2">
-                            {{ en2mm(
-                                $divisionType->divisions->sum(function($division) {
-                                    return $division->staffs->sum(function($staff) {
-                                        return $staff->children->count();
-                                    });
-                                })
-                            ) }}
-                        </td>
-                                  
-                                                        <td class="border border-black text-left p-2">
-                                                         
-                                                        </td>
-                </tr>
-                    
-                
+                                @if ($key == 1)
+                                    ညွှန်ကြားရေးမှုးရုံးများတွင်
+                                @endif
+
+                                တွင်တာဝန်ထမ်းဆောင်နေသည့်မိသားစုဝင်သား/သမီးများ
+
+                            </td>
+
+
+
+
+                            <td class="border border-black text-center p-2">
+                                {{ en2mm(
+                                    $divisionType->divisions->sum(function ($division) {
+                                        return $division->staffs->sum(function ($staff) {
+                                            return $staff->children->where('gender_id', 1)->count();
+                                        });
+                                    }),
+                                ) }}
+                            </td>
+
+                            <td class="border border-black text-center p-2">
+                                {{ en2mm(
+                                    $divisionType->divisions->sum(function ($division) {
+                                        return $division->staffs->sum(function ($staff) {
+                                            return $staff->children->where('gender_id', 2)->count();
+                                        });
+                                    }),
+                                ) }}
+                            </td>
+                            <td class="border border-black text-center p-2">
+                                {{ en2mm(
+                                    $divisionType->divisions->sum(function ($division) {
+                                        return $division->staffs->sum(function ($staff) {
+                                            return $staff->children->count();
+                                        });
+                                    }),
+                                ) }}
+                            </td>
+
+                            <td class="border border-black text-left p-2">
+
+                            </td>
+                        </tr>
                     @endforeach
-                   
+
                     <tr>
                         <td class="border border-black text-center p-2">
 
-                          
+
                         </td>
                         <td class="border border-black text-center p-2">
 
                             ပေါင်း
                         </td>
                         <td class="border border-black text-center p-2">
-                          
-                            {{ 
-                                
-                                $children->where('gender_id' , 1 )->count()
-                    }}
+
+                            {{ en2mm($children->where('gender_id', 1)->count()) }}
                         </td>
-                        
+
                         <td class="border border-black text-center p-2">
-                          
-                            {{ 
-                                
-                                $children->where('gender_id' , 1 )->count()
-                    }}
+
+                            {{ en2mm($children->where('gender_id', 1)->count()) }}
                         </td>
                         <td class="border border-black text-center p-2">
-                          
-                            {{ 
-                                
-                                en2mm($children->count())
-                    }}
+
+                            {{ en2mm($children->count()) }}
                         </td>
                         <td class="border border-black text-center p-2">
-                           
+
                         </td>
 
 
                     </tr>
                 </tbody>
             </table>
-            
+
         </div>
     </div>
 </div>
