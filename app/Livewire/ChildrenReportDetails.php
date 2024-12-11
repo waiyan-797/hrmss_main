@@ -36,6 +36,7 @@ public function go_pdf(){
         echo $pdf->output();
     }, 'children_report_detail_pdf.pdf');
 }
+// skdfjkd
 public function go_word()
 {
     $divisions = Division::query();
