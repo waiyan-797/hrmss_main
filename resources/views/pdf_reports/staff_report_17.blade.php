@@ -326,19 +326,7 @@
                                             <th style="text-align: center">ထိ</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @foreach ($staff->abroads as $abroad)
-                                            <tr>
-                                                <td>{{$abroad->particular}}</td>
-                                                <td>{{$abroad->country->name}}</td>
-                                                <td>{{$abroad->from_date}}</td>
-                                                <td>{{$abroad->to_date}}</td>
-                                                <td>{{$abroad->actual_abroad_date}}</td>
-                                                <td>{{$abroad->sponser}}</td>
-                                                <td>{{$abroad->position}}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
+                                   
                                 </table>
                             </div>
                         </div>

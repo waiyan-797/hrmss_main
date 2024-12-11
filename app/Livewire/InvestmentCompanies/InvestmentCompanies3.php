@@ -15,6 +15,8 @@ use PhpOffice\PhpWord\PhpWord;
 class InvestmentCompanies3 extends Component
 {
 
+    // public $selected
+
         public $year; 
         public $count=0;
     public function go_pdf(){

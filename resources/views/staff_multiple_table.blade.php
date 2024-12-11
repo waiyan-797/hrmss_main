@@ -38,6 +38,7 @@
 
                                 <x-date-picker
                                 
+                                
                                 wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
                                 class="w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
 
@@ -51,7 +52,19 @@
                                     type="checkbox"
                                     class="form-checkbox h-4 w-4 text-indigo-600"
                                 />
+                            
+                            @elseif ($type['type'] == 'multiple-select')
+                                <x-multiple-searchable-select
+                                property="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
+                                :values="$type['select_values']"
+                                placeholder="Select an Option..."
+                                class="mt-1 block w-full h-40"
+                                isHighNeeded=true
+                                />
                             @endif
+
+
+                            
                         </td>
                     @endforeach
                     <td class="px-6 py-4 {{ count($column_names) > 12 ? 'w-[' . (int)(200 / count($column_names)) . '%]' : 'w-' . (int)(1 / count($column_names)) }}">

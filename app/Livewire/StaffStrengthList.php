@@ -21,6 +21,8 @@ class StaffStrengthList extends Component
             ['id' => 8, 'name' => 'အသက်၁၈နှစ်နှင့်အထက်ရှိသောဝန်ထမ်းဦးရေ'],
             ['id' => 9, 'name' => 'စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲဝန်ထမ်းအင်အားစာရင်း'],
             ['id' => 10, 'name' => 'နေ့စားဝန်ထမ်းစာရင်း'],
+            ['id' => 11, 'name' => 'ဖွဲ့ခန်ပိုလို(division အလိုက်)'],
+           
            
         ];
     }
@@ -37,6 +39,7 @@ class StaffStrengthList extends Component
             8 =>route('age18over_staff_list'),
             9 =>route('planning_accounting'),
             10 =>route('labour-staff'),
+            11 =>route('vacancy_over_by_division'),
             
         ];
         if (array_key_exists($id, $routes)) {

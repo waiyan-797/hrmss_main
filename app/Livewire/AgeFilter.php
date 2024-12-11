@@ -14,7 +14,7 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 class AgeFilter extends Component
 {
     public $age, $ageTwo;
-    public $divisions, $division_id = 11 ;
+    public $divisions, $division_id  ;
     public $genders, $gender_id;
     public $staffs;
     public $signID;

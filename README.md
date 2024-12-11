@@ -19,4 +19,6 @@ php artisan migrate
 
 run the command  
 
-php artisan db:import-sql database/sql/5122024HrmsBackup.sql
+php artisan db:import-sql database/sql/10DEC.sql 
+
+//10 dec 

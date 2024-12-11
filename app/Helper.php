@@ -3,6 +3,7 @@
 use App\Models\Country;
 use App\Models\Division;
 use App\Models\Leave;
+use App\Models\Rank;
 use App\Models\Region;
 use App\Models\Salary;
 use App\Models\Staff;
@@ -158,9 +159,69 @@ if (!function_exists('mmDateFormat')) {
         // Return formatted date
 
         $year = en2mm($year);
-        return "$year $myanmarMonth  ";
+        return "$year ခုနှစ် $myanmarMonth လ "; // ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ 
     }
 
+}
+
+    if (!function_exists('mmDateFormatYearMonthDay')) {
+        function mmDateFormatYearMonthDay($year, $month , $day )
+        {
+            // Array of Myanmar month names
+            
+            $monthsInMyanmar = [
+                1 => 'ဇန်နဝါရီ',
+                2 => 'ဖေဖော်ဝါရီ',
+                3 => 'မတ်',
+                //
+                4 => 'ဧပြီ',
+                5 => 'မေ',
+                6 => 'ဇွန်',
+                7 => 'ဇူလိုင်',
+                8 => 'ဩဂုတ်',
+                9 => 'စက်တင်ဘာ',
+                10 => 'အောက်တိုဘာ',
+                11 => 'နိုဝင်ဘာ',
+                12 => 'ဒီဇင်ဘာ',
+            ];
+    
+            $month = intval($month);
+            if ($month < 1 || $month > 12) {
+                return 'Invalid month. Please provide a month between 1 and 12.';
+            }
+    
+            // Get the Myanmar month name
+            $myanmarMonth = $monthsInMyanmar[$month];
+    
+            // Return formatted date
+    
+            $year = en2mm($year);
+            return "$year ခုနှစ် $myanmarMonth လ  $day ရက်"; // ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ 
+        }
+
+    }
+
+    if (!function_exists('getTdyDateInMyanmarYearMonthDay')) { // ယနေ့ရက်စွဲရန်
+        function getTdyDateInMyanmarYearMonthDay($type)
+        {
+
+            // $type 1 // ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ  3ရက်
+            // $type 2 // ၂၀၂၄-၁၂-၃ 
+
+            $now  = explode('-' ,Carbon::now()->format('Y-m-d'));
+          if($type == 1 ) {
+            return mmDateFormatYearMonthDay($now[0], $now[1] , $now[2]);
+
+          }
+          if(
+            $type == 2 
+          ){
+            return formatDMYmm(Carbon::now());
+
+          }
+        }
+    }
+    
     if (!function_exists('getCountryNameById')) {
         function getCountryNameById($id)
         {
@@ -175,7 +236,18 @@ if (!function_exists('mmDateFormat')) {
             return Division::findOrFail($id);
         }
     }
-}
+
+
+
+    if (!function_exists('getRankById')) {
+        function getRankById($id)
+        {
+            return Rank::findOrFail($id);
+        }
+    }
+
+    
+
 if (!function_exists('financeYear')) {
 
     function financeYear()

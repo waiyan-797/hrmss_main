@@ -36,9 +36,6 @@ class Report extends Component
             ['id' => 20, 'name' => 'နှစ်တိုးရတော့မည်သူများ'],
             ['id' => 21, 'name' => 'နပတ၃'],
 
-            
-            
-
         ];
     }
     public function showReport($id)

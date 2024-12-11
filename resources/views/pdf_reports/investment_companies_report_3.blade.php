@@ -90,7 +90,10 @@
                 </div>
                 <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
                 <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-                <h1 class="header-title">၂၀၂၄ခုနှစ်၊နိုဝင်ဘာ ၃၀ ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း</h1>
+                <h1 class="header-title">
+                    ၂၀၂၄ခုနှစ်၊နိုဝင်ဘာ ၃၀
+                     ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
+                </h1>
                 <div class="table-container">
                     <table>
                         <thead>
@@ -111,14 +114,14 @@
                                 <td>{{$rank->payscale->name}}</td>
                                 <td>{{en2mm($rank->allowed_qty)}}</td>
                                 <td>{{en2mm($rank->staffs->count())}}</td>
-                                <td>{{en2mm($rank->allowed_qty - $rank->staffs->count())}}</td>
+                                <td>{{en2mm(- $rank->allowed_qty + $rank->staffs->count())}}</td>
                             </tr>
                             @endforeach
                             <tr>
                                 <td colspan="3">{{$first_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
                                 <td>{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
                                 <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
-                                <td>{{ en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                                <td>{{ en2mm( - $first_ranks->sum('allowed_qty') + $first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
                             </tr>
                             @foreach ($second_ranks as $rank)
                                 <tr>
@@ -127,14 +130,14 @@
                                     <td>{{$rank->payscale->name}}</td>
                                     <td>{{en2mm($rank->allowed_qty)}}</td>
                                     <td>{{en2mm($rank->staffs->count())}}</td>
-                                    <td>{{en2mm($rank->allowed_qty - $rank->staffs->count())}}</td>
+                                    <td>{{en2mm( - $rank->allowed_qty + $rank->staffs->count())}}</td>
                                 </tr>
                             @endforeach
                             <tr>
                                 <td colspan="3">{{$second_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
                                 <td>{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
                                 <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
-                                <td>{{ en2mm($second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                                <td>{{ en2mm(- $second_ranks->sum('allowed_qty') + $second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
                             </tr>
 
                             <tr>

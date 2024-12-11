@@ -35,14 +35,14 @@
                                 <td class="border border-black p-2">{{$rank->payscale->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($rank->StaffCountInRankByYear($year))}}</td>
-                                <td class="border border-black p-2">{{en2mm($rank->allowed_qty -$rank->StaffCountInRankByYear($year))}}</td>
+                                <td class="border border-black p-2">{{en2mm(- $rank->allowed_qty + $rank->StaffCountInRankByYear($year))}}</td>
                             </tr>
                             @endforeach
                             <tr>
                                 <td class="border border-black p-2 font-semibold" colspan="3">{{$first_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
-                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm( - $first_ranks->sum('allowed_qty') + $first_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
                             </tr>
                             @foreach ($second_ranks as $rank)
                                 <tr>
@@ -51,14 +51,14 @@
                                     <td class="border border-black p-2">{{$rank->payscale->name}}</td>
                                     <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
                                     <td class="border border-black p-2">{{en2mm($rank->StaffCountInRankByYear($year))}}</td>
-                                    <td class="border border-black p-2">{{en2mm($rank->allowed_qty - $rank->StaffCountInRankByYear($year))}}</td>
+                                    <td class="border border-black p-2">{{en2mm( - $rank->allowed_qty + $rank->StaffCountInRankByYear($year))}}</td>
                                 </tr>
                             @endforeach
                             <tr>
                                 <td class="border border-black p-2 font-semibold" colspan="3">{{$second_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
-                                <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm( - $second_ranks->sum('allowed_qty') +  $second_ranks->sum(fn($rank) => $rank->StaffCountInRankByYear($year))) }}</td>
                             </tr>
 
                             <tr>

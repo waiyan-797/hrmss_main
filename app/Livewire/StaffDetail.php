@@ -92,7 +92,7 @@ public $saveDraftCheck  ;
         $spouse_father_name, $spouse_father_ethnic_id, $spouse_father_religion_id, $spouse_father_place_of_birth, $spouse_father_occupation, $spouse_father_address_street,$spouse_father_address_house_no, $spouse_father_address_ward, $spouse_father_address_township_or_town_id, $spouse_father_address_region_id,
         $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street,$mother_address_house_no, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id,
         $spouse_mother_name, $spouse_mother_ethnic_id, $spouse_mother_religion_id, $spouse_mother_place_of_birth, $spouse_mother_occupation, $spouse_mother_address_street,$spouse_mother_address_house_no, $spouse_mother_address_ward, $spouse_mother_address_township_or_town_id, $spouse_mother_address_region_id,
-        $family_in_politics  , $family_in_politics_text = false;
+        $family_in_politics = false   , $family_in_politics_text ;
 
     public $siblings = [];
     public $father_siblings = [];
@@ -433,7 +433,8 @@ public $saveDraftCheck  ;
             $this->abroads[] = [
                 'country' => $abroad->country_id,
                 'particular' => $abroad->particular,
-                'training_success_fail' => $abroad->training_success_fail,
+                'training_success_fail' => false ,
+                // 'training_success_fail' => $abroad->training_success_fail,
                 'training_success_count' => $abroad->training_success_count,
                 'sponser' => $abroad->sponser,
                 'meet_with' => $abroad->meet_with,
@@ -480,7 +481,7 @@ public $saveDraftCheck  ;
                 'name' => $sib->name,
                 'ethnic' => $sib->ethnic_id,
                 'religion' => $sib->religion_id,
-                'gender' => $sib->gender_id,
+                'gender_id' => $sib->gender_id,
                 'place_of_birth' => $sib->place_of_birth,
                 'occupation' => $sib->occupation,
                 'address' => $sib->address,
@@ -711,43 +712,43 @@ public $saveDraftCheck  ;
 
     public function add_siblings()
     {
-        $this->siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender' => ''];
+        $this->siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
 
     public function add_father_siblings()
     {
-        $this->father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
     public function add_mother_siblings()
     {
-        $this->mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
     public function add_spouses()
     {
-        $this->spouses[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->spouses[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
     public function add_children()
     {
-        $this->children[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->children[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
     public function add_spouse_siblings()
     {
-        $this->spouse_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->spouse_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
     public function add_spouse_father_siblings()
     {
-        $this->spouse_father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->spouse_father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ' '];
     }
 
     public function add_spouse_mother_siblings()
     {
-        $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => ''];
+        $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
     }
 
     public function add_schools()
@@ -766,16 +767,23 @@ public $saveDraftCheck  ;
 
     public function add_trainings()
     {
-        $this->trainings[] = [ 'batch'=>'', 'training_type' => '', 'from_date' => '', 'to_date' => '', 'location' => '', 'country' => '', 'training_location' => ''  ,
+        $this->trainings[] = [
+             'batch'=>'', 'training_type' => '',
+              'from_date' => '', 'to_date' => '', 'location' => '', 'country' => '', 'training_location' => ''  ,
+              'remark'=> '' ,
        
-        'fees' => ''
+        'fees' => '' ,
+        'diploma_name' => ''
     ];
     }
 
 
     public function add_awardings()
     {
-        $this->awards[] = ['award_type' => '', 'award' => '', 'order_no' => '', 'order_date' => ''];
+        $this->awards[] = ['award_type' => '', 'award' => '', 'order_no' => '', 'order_date' => ''
+        ,'remark' => ''
+    
+    ];
     }
 
 
@@ -1188,14 +1196,18 @@ if($staff_create['status_id'] == 5){
                 'staff_id' => $staffId,
                 'country_id' => $abroad['country'],
                 'particular' => $abroad['particular'],
-                'training_success_fail' => $abroad['training_success_fail'],
+                'training_success_fail' => false ,
+                // $abroad['training_success_fail'],
                 'training_success_count' => $abroad['training_success_count'],
                 'sponser' => $abroad['sponser'],
                 'meet_with' => $abroad['meet_with'],
                 'from_date' => $abroad['from_date'],
                 'to_date' => $abroad['to_date'],
-                'status' => $abroad['status'],
-                'actual_abroad_date' => $abroad['actual_abroad_date'],
+                // 'status' => $abroad['status'],
+                'status' => 4,
+                'actual_abroad_date' => '2024-12-09'
+                //  $abroad['actual_abroad_date']
+                 ,
                 'position' => $abroad['position'],
             ]);
         }
@@ -1378,7 +1390,7 @@ if($staff_create['status_id'] == 5){
             'ethnic_id' => $relative['ethnic'],
             'religion_id' => $relative['religion'],
             'place_of_birth' => $relative['place_of_birth'],
-            'gender_id' => $relative['gender'],
+            'gender_id' => $relative['gender_id'],
             'occupation' => $relative['occupation'],
             'address' => $relative['address'],
             'relation_id' => $relative['relation'],
@@ -1429,6 +1441,7 @@ if($staff_create['status_id'] == 5){
         foreach ($this->spouse_mother_siblings as $relative) {
             SpouseMotherSibling::create($this->relativeFields($staffId, $relative));
         }
+
     }
 
     public function updatedCurrentAddressRegionId()

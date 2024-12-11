@@ -55,35 +55,7 @@
                 </div>
                 
 
-                {{-- <div class="w-full mb-4">
-                    <div class="flex justify-start mb-2 space-x-3">
-                        <label for="">၈။ </label>
-                        <h1 class="font-semibold text-base">ပညာအရည်အချင်း
-                        </h1>
-                    </div>
-                    <table class="md:w-full">
-                        <thead>
-                            <tr>
-                                <th class="border border-black text-center p-2">စဉ်</th>
-                                <th class="border border-black text-center p-2">Education Group</th>
-                                <th class="border border-black text-center p-2">Education Type</th>
-                                <th class="border border-black text-center p-2">Education</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($staff->staff_educations as $education)
-                                <tr>
-                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
-                                    <td class="border border-black text-center p-2">{{$education->education_group->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$education->education_type->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$education->education->name}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table> 
-                    
-
-                </div> --}}
+               
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၈။ </label>
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
@@ -148,8 +120,8 @@
                             @foreach ($staff->abroads as $abroad)
                                 <tr>
                                     
-                                    <td class="border border-black text-center p-2">{{$abroad->from_date}}</td>
-                                    <td class="border border-black text-center p-2">{{$abroad->to_date}}</td>
+                                    <td class="border border-black text-center p-2">{{en2mm($abroad->from_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{en2mm($abroad->to_date)}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->particular}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->training_success_count}}</td>
@@ -198,25 +170,25 @@
                           အထက်ပါ အချက်အလက်များကို မှန်ကန်သည့်အတိုင်းဖြည့်သွင်းရေးသားပါကြောင်း ကိုယ်တိုင် လက်မှန်ရေးထိုးပါသည်။</p>
                     </div>
 
-                    {{-- <div class="flex justify-left mb-2 items-center">
+                     <div class="flex justify-center mb-2 items-center">
                         <p class="md:w-20 mr-6">လက်မှတ်</p>
                         <p>-</p>
                         <p></p>
                     </div>
 
-                    <div class="flex justify-right mb-2 items-center">
+                    <div class="flex justify-center mb-2 items-center">
                         <p class="md:w-20 mr-6">အမည်</p>
                         <p>-</p>
                         <p>{{auth()->user()->name}}</p>
                     </div>
 
-                    <div class="flex justify-right mb-2 items-center">
+                    <div class="flex justify-center mb-2 items-center">
                         <p class="md:w-20 mr-6">အဆင့်</p>
                         <p>-</p>
                         <p>{{auth()->user()->role->name ?? ''}}</p>
                     </div>
 
-                    <div class="flex justify-right mb-2 items-center">
+                    <div class="flex justify-center mb-2 items-center">
                         <p class="md:w-20 mr-6">တပ်/ ဌာန</p>
                         <p>-</p>
                         <p></p>
@@ -225,29 +197,7 @@
                     <div class="flex justify-start space-x-1">
                         <p>ရက်စွဲ - </p>
                         <p>{{ formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day) }}</p>
-                    </div> --}}
-                    <div class="flex justify-end mb-2 items-left">
-                        <p class="md:w-20 text-right mr-6">အမည်</p>
-                        <p class="mr-2">-</p>
-                        <p>{{ auth()->user()->name }}</p>
-                    </div>
-                    
-                    <div class="flex justify-end mb-2 items-left">
-                        <p class="md:w-20 text-right mr-6">အဆင့်</p>
-                        <p class="mr-2">-</p>
-                        <p>{{ auth()->user()->role->name ?? '' }}</p>
-                    </div>
-                    
-                    <div class="flex justify-end mb-2 items-left">
-                        <p class="md:w-20 text-right mr-6">တပ်/ ဌာန</p>
-                        <p class="mr-2">-</p>
-                        <p></p>
-                    </div>
-                    
-                    <div class="flex justify-end space-x-1">
-                        <p class="text-right">ရက်စွဲ -</p>
-                        <p>{{ formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day) }}</p>
-                    </div>
+                    </div> 
                     
                 </div>
             </div>
