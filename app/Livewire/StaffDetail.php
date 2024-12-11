@@ -66,6 +66,7 @@ class StaffDetail extends Component
 
 public $saveDraftCheck  ;
 
+public $has_military_friend_text ;
     public $comment  ,$displayAlertBox ;
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     public $staff;
@@ -258,6 +259,8 @@ public $saveDraftCheck  ;
         'transfer_reason_salary' => '',
         'during_work_political_social' => '',
         'has_military_friend' => '',
+        'has_military_friend_text' => '',
+        
         'foreigner_friend_name' => '',
         'foreigner_friend_occupation' => '',
         'foreigner_friend_nationality_id' => '',
@@ -683,6 +686,8 @@ public $saveDraftCheck  ;
         $this->transfer_reason_salary = $staff->transfer_reason_salary;
         $this->during_work_political_social = $staff->during_work_political_social;
         $this->has_military_friend = $staff->has_military_friend;
+        $this->has_military_friend_text = $staff->has_military_friend_text;
+        
         $this->foreigner_friend_name = $staff->foreigner_friend_name;
         $this->foreigner_friend_occupation = $staff->foreigner_friend_occupation;
         $this->foreigner_friend_nationality_id = $staff->foreigner_friend_nationality_id;
@@ -1098,6 +1103,8 @@ public $saveDraftCheck  ;
             'transfer_reason_salary' => $this->transfer_reason_salary,
             'during_work_political_social' => $this->during_work_political_social,
             'has_military_friend' => $this->has_military_friend,
+            'has_military_friend_text' => $this->has_military_friend_text,
+            
             'foreigner_friend_name' => $this->foreigner_friend_name,
             'foreigner_friend_occupation' => $this->foreigner_friend_occupation,
             'foreigner_friend_nationality_id' => $this->foreigner_friend_nationality_id,

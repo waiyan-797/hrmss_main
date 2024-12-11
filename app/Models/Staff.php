@@ -214,6 +214,8 @@ class Staff extends Model
 
     public function past_occupations()
     {
+        return $this->hasMany(Posting::class);
+
         return $this->hasMany(PastOccupation::class);
     }
 

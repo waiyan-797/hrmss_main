@@ -329,6 +329,9 @@
         <x-radio-input id1="has_military_friend_1" id2="has_military_friend_2" wire="has_military_friend" />
         <x-input-error class="mt-2" :messages="$errors->get('has_military_friend')" />
     </div>
+    @if($has_military_friend)
+    <x-textarea-input  wire:model='has_military_friend_text' />
+    @endif 
 </div>
 
 <div class="w-full py-5">

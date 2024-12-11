@@ -3,7 +3,7 @@
         @if ($staff_photo && $photo == null)
             <img src="{{ route('file', $staff_photo) }}" class="w-20 h-20 rounded-full border-2 dark:border-green-600 border-green-400 mb-4">
         @else
-            <img src="{{ $photo ? $photo->temporaryUrl() :asset('img/user.png') }}" class="w-20 h-20 rounded-full border-2 dark:border-green-600 border-green-400 mb-4">
+            <img src="{{ $photo ? $photo->temporaryUrl() :asset('img/user.png')}}" class="w-20 h-20 rounded-full border-2 dark:border-green-600 border-green-400 mb-4">
         @endif
     </div>
 

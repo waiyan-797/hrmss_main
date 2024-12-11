@@ -369,8 +369,8 @@ Route::get('vacancy_over_by_division' , VacancyOverByDivision::class)->name('vac
 
 
 
-Route::get('children_report_detials' , ChildrenReportDetails::class)->name('children_report_detials');    
-Route::get('children_report_summary' , ChildrenReportSummary::class)->name('children_report_summary');    
+Route::get('/children_report_detials' , ChildrenReportDetails::class)->name('children_report_detials');    
+Route::get('/children_report_summary' , ChildrenReportSummary::class)->name('children_report_summary');    
 
 
 
