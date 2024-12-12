@@ -50,7 +50,6 @@
     </style>
 </head>
 <body>
-    <page size="A4">
         <table>
             <thead>
                 <tr>
@@ -289,3 +288,4 @@
                 </tr>
             </tbody>
         </table>
+</body>

@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
 class PA01 implements FromView ,WithStyles
 {
@@ -66,42 +67,79 @@ class PA01 implements FromView ,WithStyles
     public function styles(Worksheet $sheet)
     {
         // Set paper size and orientation
-        $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
-        $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+        $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4); // Set paper size to A4
+        $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
 
         // Fit to page width
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
 
+        // $sheet->getPageSetup()->setScale(80);
+
         // Enable gridlines for unbordered areas
         $sheet->setShowGridlines(true);
-        $sheet->setPrintGridlines(true);
+        // $sheet->setPrintGridlines(true);
 
         // Dynamically calculate the highest row and column
         $highestRow = $sheet->getHighestRow(); // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
-        // Apply custom borders to the dynamic range
-        $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
-                    'color' => ['argb' => 'FF000000'], // Black border
-                ],
-            ],
-        ]);
-
-        // Center-align text and set font
-        $sheet->getStyle("A1:$highestColumn$highestRow")->applyFromArray([
+        $sheet->getStyle('A1:A2')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
-                'size' => 11,
+                'size' => 13,
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
             ],
+            'borders' => [
+                'outline' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+                ],
+            ],
         ]);
+
+        $sheet->getRowDimension(1)->setRowHeight(45);
+            $sheet->getRowDimension(2)->setRowHeight(45);
+
+        $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 13,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+        // // Apply custom borders to the dynamic range
+        // $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
+        //     'borders' => [
+        //         'allBorders' => [
+        //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        //             'color' => ['argb' => 'FF000000'], // Black border
+        //         ],
+        //     ],
+        // ]);
+
+        // // Center-align text and set font
+        // $sheet->getStyle("A1:$highestColumn$highestRow")->applyFromArray([
+        //     'font' => [
+        //         'name' => 'Pyidaungsu',
+        //         'size' => 11,
+        //     ],
+        //     'alignment' => [
+        //         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+        //         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        //     ],
+        // ]);
 
         // Auto-size columns based on dynamic range
         foreach (range('A', $highestColumn) as $column) {

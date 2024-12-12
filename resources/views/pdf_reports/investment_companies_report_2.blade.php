@@ -134,9 +134,50 @@
                         </tr>
                     </thead>
                     <tbody class="text-center h-8 p-2">
+
+                        <tr class="">
+                            <td class="p-2 border border-black">၁</td>
+                            <td class="p-2 border border-black">၂</td>
+                            <td class="p-2 border border-black text-right">၃</td>
+                            <td class="p-2 border border-black text-right">၄</td>
+                            <td class="p-2 border border-black text-right">၅</td>
+                            <td class="p-2 border border-black text-right">၆</td>
+                            <td class="p-2 border border-black text-right">၇</td>
+                            <td class="p-2 border border-black text-right">၈</td>
+                            <td class="p-2 border border-black text-right">၉</td>
+                            <td class="p-2 border border-black text-right">၁၀</td>
+                            <td class="p-2 border border-black text-right">၁၁</td>
+                            <td class="p-2 border border-black text-right">၁၂</td>
+                            <td class="p-2 border border-black text-right">၁၃</td>
+                            <td class="p-2 border border-black text-right">၁၄</td>
+                            <td class="p-2 border border-black text-right">၁၅</td>
+                            <td class="p-2 border border-black text-right">၁၆</td>
+                            <td class="p-2 border border-black text-right">၁၇</td>
+                            <td class="p-2 border border-black text-right">၁၈</td>
+                            <td class="p-2 border border-black text-right">၁၉</td>
+                            <td class="p-2 border border-black text-right">၂၀</td>
+                            <td class="p-2 border border-black text-right">၂၁</td>
+                            <td class="p-2 border border-black text-right">၂၂</td>
+                            <td class="p-2 border border-black text-right">၂၃</td>
+                            <td class="p-2 border border-black text-right">၂၄</td>
+                            <td class="p-2 border border-black text-right">၂၅</td>
+                            <td class="p-2 border border-black text-right">၂၆</td>
+                            <td class="p-2 border border-black text-right">၂၇</td>
+                            <td class="p-2 border border-black text-right">၂၈</td>
+                            <td class="p-2 border border-black text-right">၂၉</td>
+                            <td class="p-2 border border-black text-right">၃၀</td>
+                            <td class="p-2 border border-black text-right">၃၁</td>
+                            <td class="p-2 border border-black text-right">၃၂</td>
+                            <td class="p-2 border border-black text-right">၃၃</td>
+                            <td class="p-2 border border-black text-right">၃၄</td>
+                            <td class="p-2 border border-black text-right">၃၅</td>
+                            <td class="p-2 border border-black text-right">၃၆</td>
+                            <td class="p-2 border border-black text-right">၃၇</td>
+                        </tr>
+
                         @foreach ($first_payscales as $payscale)
                                 <tr>
-                                    <td>{{en2mm($loop->index + 1)}}</td>
+                                    <td>{{en2mm(++$count)}}</td>
                                     <td>{{$payscale->name}}</td>
                                     <td>{{en2mm($payscale->allowed_qty)}}</td>
                                     <td>{{en2mm($kachin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
@@ -176,7 +217,7 @@
                                 </tr>
                             @endforeach
                             <tr>
-                                <td class="border border-black p-2 font-semibold" colspan="2">{{$first_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
+                                <td class="border border-black p-2 font-semibold" colspan="2">{{$first_payscales[0]->staff_type->name}}ပေါင်း</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
                                 <td class="border border-black p-2 font-semibold">
                                     {{ en2mm($kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $first_payscales->pluck('id'))->count()) }}
@@ -284,7 +325,7 @@
 
                             @foreach ($second_payscales as $payscale)
                                 <tr>
-                                    <td>{{en2mm($loop->index + 1)}}</td>
+                                    <td>{{en2mm(++$count)}}</td>
                                     <td>{{$payscale->name}}</td>
                                     <td>{{en2mm($payscale->allowed_qty)}}</td>
                                     <td>{{en2mm($kachin_staffs->where('gender_id', 1)->where('payscale_id', $payscale->id)->count())}}</td>
@@ -324,7 +365,7 @@
                                 </tr>
                             @endforeach
                             <tr>
-                                <td class="border border-black p-2 font-semibold" colspan="2">{{$second_payscales[0]->staff_type->name}}စုစုပေါင်း</td>
+                                <td class="border border-black p-2 font-semibold" colspan="2">{{$second_payscales[0]->staff_type->name}}ပေါင်း</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
                                 <td class="border border-black p-2 font-semibold">
                                     {{ en2mm($kachin_staffs->where('gender_id', 1)->whereIn('payscale_id', $second_payscales->pluck('id'))->count()) }}

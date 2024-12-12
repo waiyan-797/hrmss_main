@@ -2,7 +2,7 @@
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">
@@ -13,7 +13,7 @@
                     <table class="md:w-full">
                         <thead>
                             <tr>
-                                <th rowspan="3" class="border border-black text-center p-2">စဥ်</th>
+                                <th rowspan="3" class="border border-black text-center p-2">စဉ်</th>
                                 <th rowspan="3" class="border border-black text-center p-2">ဌာန</th>
                                 <th colspan="8" class="border border-black text-center p-2">အိမ်ထောင်သည်</th>
                                 <th colspan="2" class="border border-black text-center p-2">အရာရှိ</th>

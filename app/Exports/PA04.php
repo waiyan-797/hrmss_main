@@ -31,18 +31,7 @@ class PA04 implements FromView ,WithStyles
         return view('excel_reports.investment_companies_report_4', $data);
     }
 
-    // public function styles(Worksheet $sheet)
-    // {
-    //     $sheet->getStyle('A1:Z1000')->applyFromArray([
-    //         'font' => [
-    //             'name' => 'Pyidaungsu',
-    //             'size' => 13 , 
-    //         ],
-    //     ]);
-
-    //     return [];
-    // }
-    public function styles(Worksheet $sheet)
+        public function styles(Worksheet $sheet)
     {
 
         // Set paper size and orientation

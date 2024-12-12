@@ -104,8 +104,9 @@
     <page>
         <div class="container">
             <h1>ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
-            <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-            <h3>{{mmDateFormat($year,$month      )}} </h3>
+
+            <h1>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+            <h3>{{mmDateFormat($year,$month)}} </h3>
 
             <div class="table-container">
                 <table>
@@ -156,8 +157,8 @@
                     </thead>
                     <tbody class="md:w-auto">
                         <tr>
-                            <td>၁</td>
-                            <td>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
+                            <td>{{en2mm(++$count)}}</td>
+                            <td>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
                             <td>{{ en2mm($high_staffs) }}</td>
                             <td>{{ en2mm($low_staffs) }}</td>
                             <td>{{ en2mm($high_staffs + $low_staffs) }}</td>

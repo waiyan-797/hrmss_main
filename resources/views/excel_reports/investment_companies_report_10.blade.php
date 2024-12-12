@@ -49,7 +49,23 @@
             padding: 10px;
         }
     </style>
+</head>
+<body>
 
+    <div class="container">
+            
+        <div class="table-container">
+
+            <table>
+                <tr>
+                    <th colspan="29" rowspan="2">
+                        ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>
+                        ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+                        {{-- ၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း --}}
+                    </th>
+                </tr>
+            </table>
+    
         <table>
             <thead>
                 <tr>
@@ -160,4 +176,9 @@
                 </tr>
             </tbody>
         </table>
+
+        </div>
+    </div>
+</body>
+</html>
 

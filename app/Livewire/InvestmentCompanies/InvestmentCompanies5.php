@@ -16,8 +16,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class InvestmentCompanies5 extends Component
 {
+    public $count=0;
     public function go_pdf(){
+        $count=0;
         $data = [
+            'count'=>$count,
             'payscales' => Payscale::get(),
         ];
         $pdf = PDF::loadView('pdf_reports.investment_companies_report_5', $data);

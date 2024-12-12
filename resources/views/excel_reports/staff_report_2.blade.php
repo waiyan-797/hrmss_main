@@ -71,62 +71,79 @@
         </h1> --}}
 
         <div class="table-container">
+
+            <table>
+                <tr>
+                    <th colspan="11" rowspan="2">
+                        
+                    ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+                    {{-- {{mmDateFormat($year , $month )}}  --}}ရက်နေ့ 
+                    ညွှန်ကြားရေးမှူးများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း
+
+                    </th>
+                </tr>
+            </table>
+
             <table class="custom-table">
                 <thead>
                     <tr>
-                        <th>စဥ်</th>
+                        <th>စဉ်</th>
                         <th>အမည်</th>
                         <th>ရာထူး</th>
                         <th>နိုင်ငံသားစိစစ်ရေးအမှတ်</th>
-                        <th>ဌာနခွဲ</th>
                         <th>မွေးသက္ကရာဇ်</th>
                         <th>အလုပ်စတင်ဝင်ရောက်သည့်ရက်စွဲ</th>
-                        <th>တစ်ဆင့်နိမ့်ရာထူးရရက်စွဲ ရက်၊လ၊နှစ်</th>
                         <th>လက်ရှိရာထူးရရက်စွဲ ရက်၊လ၊နှစ်</th>
+                        <th>ဌာနခွဲ</th>
                         <th>ပညာအရည်အချင်း</th>
+                        <th>ပင်စင်ပြည့်သည့်နေ့စွဲ</th>
+                        <th>မှတ်ချက်</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($staffs as $staff)
-                        <tr style="border-bottom: 1px solid #e5e7eb;">
-                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{$loop->index + 1}}
-                            </td>
-                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{$staff->name}}
-                            </td>
-                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{$staff->current_rank?->name}}
-                            </td>
-                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{$staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code}}
-                            </td>
-                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{$staff->current_department?->name}}
-                            </td>
-                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{$staff->dob}}
-                            </td>
-                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{en2mm(Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}
-                            </td>
-                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y'))}}
-                            </td>
-                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                {{en2mm(Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y'))}}
-                            </td>
-                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                                @foreach ($staff->staff_educations as $edu)
-                                    <div style="margin-bottom: 8px;">
-                                        <span style="font-weight: 600;">{{ $edu->education_group?->name }}</span> -
-                                        <span>{{ $edu->education_type?->name }}</span>,
-                                        <span>{{ $edu->education?->name }}</span>
-                                    </div>
-                                @endforeach
-                            </td>
-                        </tr>
-                    @endforeach
+                    <tr style="border-bottom: 1px solid #e5e7eb;">
+                        <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                            {{en2mm($loop->index + 1)}}
+                        </td>
+                        <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                            {{$staff->name}}
+                        </td>
+                        <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                            {{$staff->current_rank?->name}}
+                        </td>
+                        <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                            {{en2mm($staff->nrc_region_id?->name . $staff->nrc_township_code?->name . '/' . $staff->nrc_sign?->name . '/' . $staff->nrc_code)}}
+                        </td>
+                        
+                        <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                            {{en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-Y'))}}
+                        </td>
+                        <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                            {{en2mm(Carbon\Carbon::parse($staff->join_date)->format('d-m-Y'))}}
+                        </td>
+                        {{-- <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                            {{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y'))}}
+                        </td> --}}
+                        <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                            {{en2mm(Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-Y'))}}
+                        </td>
+                        <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                            {{$staff->current_department?->name}}
+                        </td>
+                        <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
+                            @foreach ($staff->staff_educations as $edu)
+                                <div style="margin-bottom: 8px;">
+                                    <span style="font-weight: 600;">{{ $edu->education_group->name }}</span> -
+                                    <span>{{ $edu->education_type?->name }}</span>,
+                                    <span>{{ $edu->education->name }}</span>
+                                </div>
+                            @endforeach
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

@@ -2,14 +2,20 @@
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
             <br><br>
+            
+            <h1 class="font-semibold text-base mb-2 text-center">
+                ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
+            <h1 class="font-semibold text-base mb-2 text-center">
+                ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+
             <table>
                 <thead>
                     <tr>
-                        <th rowspan="2" class="border border-black p-2">စဥ်</th>
-                        <th rowspan="2" class="border border-black p-2">ဦစီးဌာန</th>
+                        <th rowspan="2" class="border border-black p-2">စဉ်</th>
+                        <th rowspan="2" class="border border-black p-2">ဦးစီးဌာန</th>
                         <th colspan="3" class="border border-black p-2">အမြဲတမ်းအတွင်းဝန်/<br>ညွှန်ကြားရေးမှူးချုပ်</th>
                         <th colspan="3" class="border border-black p-2">
                             ဒုတိယအမြဲတမ်းအတွင်းဝန်/<br>ဒုတိယညွှန်ကြားရေးမှူးချုပ်</th>

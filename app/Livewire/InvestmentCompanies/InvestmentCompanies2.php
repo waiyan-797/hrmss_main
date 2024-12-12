@@ -12,7 +12,9 @@ use PhpOffice\PhpWord\PhpWord;
 
 class InvestmentCompanies2 extends Component
 {
+    public $count=0;
     public function go_pdf(){
+        $count=0;
         $kachin_staffs = Staff::where('current_division_id', 12)->get();
         $kayah_staffs = Staff::where('current_division_id', 13)->get();
         $kayin_staffs = Staff::where('current_division_id', 14)->get();
@@ -31,6 +33,7 @@ class InvestmentCompanies2 extends Component
         $aya_staffs = Staff::where('current_division_id', 25)->get();
         $total_staffs = Staff::whereIn('current_division_id', [1, 2, 12, 13, 14, 15, 21, 22, 24, 16, 20, 26, 23, 19, 18, 17, 25])->get();
         $data = [
+            'count'=>$count,
             'first_payscales' => Payscale::where('staff_type_id', 1)->get(),
             'second_payscales' => Payscale::where('staff_type_id', 2)->get(),
             'third_payscales'=>Payscale::where('staff_type_id',3)->get(),

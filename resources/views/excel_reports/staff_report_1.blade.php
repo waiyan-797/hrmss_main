@@ -73,6 +73,19 @@
            {{-- <h1> ညွှန်ကြားရေးမှူးများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း</h1> --}}
 
         <div class="table-container">
+
+            <table>
+                <tr>
+                    <th colspan="12" rowspan="2">
+                        
+                        ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+                        {{-- (၂၄-၇-၂၀၂၄)ရက်နေ့  --}}
+                        ညွှန်ကြားရေးမှူးများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း
+
+                    </th>
+                </tr>
+            </table>
+
             <table>
                 <thead>
                     <tr class="bg-gray">
@@ -86,7 +99,7 @@
                         <th>လက်ရှိဌာနရောက်ရှိရက်စွဲ</th>
                         <th>ဌာနခွဲ</th>
                         <th>ပညာအရည်အချင်း</th>
-                        <th>ပင်စင်ပြည့်သည့်နေ့စွဲ</th>
+                        {{-- <th>ပင်စင်ပြည့်သည့်နေ့စွဲ</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -97,7 +110,7 @@
                                 <td>{{ $staff->name }}
                                 </td>
                                 <td>{{ $staff->current_rank?->name }}</td>
-                                <td>{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}
+                                <td>{{ $staff->nrc_region_id?->name . $staff->nrc_township_code?->name .'/'. $staff->nrc_sign?->name .'/'. $staff->nrc_code }}
                                 </td>
                                 <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}
                                 </td>
@@ -111,7 +124,7 @@
                                         <span>{{ $edu->education_type?->name }}</span>,
                                         <span>{{ $edu->education?->name }}</span>
                                     </div>@endforeach</td>
-                                <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->year + $pension_year->year) }}</td>
+                                {{-- <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->year + $pension_year->year) }}</td> --}}
                             </tr>
                             @endforeach
                 </tbody>

@@ -52,13 +52,24 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+        {{-- <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1> --}}
         <div class="table-container">
+
+            <table class="tabletitle">
+                <tr>
+                    <th colspan="6" rowspan="2">
+                        ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>
+                        ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+                        ၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
+                    </th>
+                </tr>
+            </table>
+            
             <table>
                 <thead>
                     <tr>
                         <th>စဥ်</th>
-                        <th>ရာထူးအမည်</th>
+                        <th>ရာထူး</th>
                         <th>ခွင့်ပြုအင်အား</th>
                         <th>ခန့်ပြီးအင်အား</th>
                         <th>လစ်လပ်အင်အား</th>
@@ -67,7 +78,7 @@
                 <tbody>
                     @foreach ($payscales as $payscale)
                         <tr>
-                            <td>{{$loop->index + 1}}</td>
+                            <td>{{en2mm(++$count)}}</td>
                             <td>{{$payscale->ranks[0]->name}}နှင့်အဆင့်တူ</td>
                             <td>{{en2mm($payscale->allowed_qty)}}</td>
                             <td>{{en2mm($payscale->staff->count())}}</td>
