@@ -4,9 +4,10 @@
         formattedValue: '' 
     }" 
     x-init="
-        let initialDate = value ? new Date(value) : new Date(); // Use today's date if value is null/empty
+        let initialDate = value ? new Date(value) : new Date(); 
+        // Use today's date if value is null/empty
         if (!isNaN(initialDate)) {
-            formattedValue = initialDate.toLocaleDateString('en-GB'); // Initialize UI value
+            formattedValue = initialDate.toLocaleDateString('en-GB');  // Initialize UI value 
         }
 
         new Pikaday({

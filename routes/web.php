@@ -157,6 +157,7 @@ use App\Livewire\Promotion as LivewirePromotion;
 use App\Livewire\Report;
 use App\Livewire\Retirement;
 use App\Livewire\Salary;
+use App\Livewire\SortableStaff;
 use App\Livewire\StaffInNpt;
 use App\Livewire\StaffStrengthList;
 use App\Livewire\TravelAbroad;
@@ -373,6 +374,12 @@ Route::get('/children_report_detials' , ChildrenReportDetails::class)->name('chi
 Route::get('/children_report_summary' , ChildrenReportSummary::class)->name('children_report_summary');    
 
 
+
+//sortable staff 
+
+
+
+Route::get('/sortable' , SortableStaff::class)->name('sortable');
 
     Route::get(
         'user_create',

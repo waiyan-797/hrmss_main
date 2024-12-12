@@ -9,3 +9,7 @@ window.Pikaday = Pikaday;
 import moment from 'moment';
 window.moment = moment; //
 
+import 'livewire-sortable';
+
+
+import '@wotz/livewire-sortablejs';

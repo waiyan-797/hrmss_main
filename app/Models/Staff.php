@@ -9,6 +9,7 @@ use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Database\Eloquent\Builder;
 
 use App\Scopes\NotLabourScope;
+use App\Scopes\StaffOrder;
 
 class Staff extends Model
 {
@@ -16,7 +17,7 @@ class Staff extends Model
 
     protected static function booted()
     {
-        // static::addGlobalScope(new NotLabourScope);
+        static::addGlobalScope(new StaffOrder);
     }
 
     // public function scopeLabour(Builder $query)
@@ -33,6 +34,9 @@ class Staff extends Model
         'increment_date' => 'date',  // Or 'datetime' if you need time as well
     ];
 
+
+
+    
     public function staff_educations()
     {
         return $this->hasMany(StaffEducation::class);
