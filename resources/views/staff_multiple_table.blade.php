@@ -24,12 +24,9 @@
                                     class="mt-1 block w-full h-40"
                                     isHighNeeded=true
                                     err="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
-<<<<<<< Updated upstream
                                     
-=======
 
 
->>>>>>> Stashed changes
                                 />
                             @elseif ($type['type'] == 'text' || $type['type'] == 'number'|| $type['type']=='file')
                                 <x-text-input
@@ -39,10 +36,7 @@
                                     type="{{$type['type']}}"
                                     class="mt-1 block w-full"
                                     err="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
                                 />
                                 @elseif($type['type'] == 'date' )
 

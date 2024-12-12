@@ -69,12 +69,9 @@ class StaffDetail extends Component
 
     public $saveDraftCheck;
 
-<<<<<<< Updated upstream
 public $has_military_friend_text ;
     public $comment  ,$displayAlertBox ;
-=======
-    public $comment, $displayAlertBox;
->>>>>>> Stashed changes
+    
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     public $staff;
     //personal_info
@@ -258,26 +255,6 @@ public $has_military_friend_text ;
 
 
     protected $detail_personal_info_rules = [
-<<<<<<< Updated upstream
-        'last_school_name' => '',
-        'last_school_subject' => '',
-        'last_school_row_no' => '',
-        'last_school_major' => '',
-        'student_life_political_social' => '',
-        'habit' => '',
-        'revolution' => '',
-        'transfer_reason_salary' => '',
-        'during_work_political_social' => '',
-        'has_military_friend' => '',
-        'has_military_friend_text' => '',
-        
-        'foreigner_friend_name' => '',
-        'foreigner_friend_occupation' => '',
-        'foreigner_friend_nationality_id' => '',
-        'foreigner_friend_country_id' => '',
-        'foreigner_friend_how_to_know' => '',
-        'recommended_by_military_person' => '',
-=======
         'last_school_name' => 'nullable|string',
         'last_school_subject' => 'nullable|string',
         'last_school_row_no' => 'nullable|string',
@@ -294,7 +271,6 @@ public $has_military_friend_text ;
         'foreigner_friend_country_id' => 'nullable|exists:countries,id',
         'foreigner_friend_how_to_know' => 'nullable|string',
         'recommended_by_military_person' => 'nullable|string',
->>>>>>> Stashed changes
     ];
 
     protected $messages = [
@@ -1319,47 +1295,10 @@ public $has_military_friend_text ;
     //validation done
     private function saveSchools($staffId)
     {
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
         $rules = [
             'schools.*.education_group' => 'required',
             'schools.*.education_type' => 'required',
             'schools.*.education' => 'required',
-<<<<<<< Updated upstream
-            
-            'schools.*.school_name' => 'required',
-            'schools.*.town' => 'required',
-            'schools.*.semester' => 'required',
-            'schools.*.from_date' => 'required',
-            'schools.*.to_date' => 'required',
-            'schools.*.year' => 'required',
-
-
-       
-      
-        
-       
-        ]        
-        ;
-
-        $message   = [
-            'schools.*.education_group' => 'required',
-            'schools.*.education_type' => 'required',
-            'schools.*.education' => 'required',
-            
-            'schools.*.school_name' => 'required',
-            'schools.*.town' => 'required',
-            'schools.*.semester' => 'required',
-            'schools.*.from_date' => 'required',
-            'schools.*.to_date' => 'required',
-            'schools.*.year' => 'required',
-        ];
-
-            $this->validate($rules);
-=======
             'schools.*.school_name' => 'required|string|max:255',
             'schools.*.town' => 'required|string|max:255',
             'schools.*.semester' => 'nullable|string|max:50',
@@ -1426,7 +1365,6 @@ public $has_military_friend_text ;
     
 
      
->>>>>>> Stashed changes
 
         School::where('staff_id', $staffId)->delete();
         foreach ($this->schools as $school) {
