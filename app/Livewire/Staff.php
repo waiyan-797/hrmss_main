@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 class Staff extends Component
 {
     use WithPagination;
-    public $status;
+        public $status;
         public $confirm_delete = false;
         public $confirm_edit = false;
         public $confirm_add = false;

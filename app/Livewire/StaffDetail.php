@@ -59,19 +59,26 @@ use App\Models\MaritalStatus;
 use App\Models\SocialActivity;
 use App\Models\StaffLanguage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
+use function Livewire\Volt\rules;
 
 class StaffDetail extends Component
 {
     use WithFileUploads;
 
-public $saveDraftCheck  ;
+    public $saveDraftCheck;
 
+<<<<<<< Updated upstream
 public $has_military_friend_text ;
     public $comment  ,$displayAlertBox ;
+=======
+    public $comment, $displayAlertBox;
+>>>>>>> Stashed changes
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     public $staff;
     //personal_info
-    public $staff_photo, $staff_nrc_front, $staff_nrc_back, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $attendid, $gpms_staff_no, $spouse_name, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $government_staff_started_date, $prominent_mark, $skin_color, $weight, $blood_type_id,$marital_status_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward,$current_address_house_no, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward,$permanent_address_house_no, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $life_insurance_proposal, $life_insurance_policy_no, $life_insurance_premium, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension, $military_gazetted_no, $veteran_no, $veteran_date, $last_serve_army, $health_condition, $tax_exception;
+    public $staff_photo, $staff_nrc_front, $staff_nrc_back, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $attendid, $gpms_staff_no, $spouse_name, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $government_staff_started_date, $prominent_mark, $skin_color, $weight, $blood_type_id, $marital_status_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_house_no, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_house_no, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $life_insurance_proposal, $life_insurance_policy_no, $life_insurance_premium, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension, $military_gazetted_no, $veteran_no, $veteran_date, $last_serve_army, $health_condition, $tax_exception;
     public $leave_search, $leave_name, $leave_type_name, $leave_id, $staff_name, $from_date, $to_date, $qty, $order_no, $remark;
     public  $submit_button_text, $cancel_action, $submit_form, $leave_types;
 
@@ -89,11 +96,11 @@ public $has_military_friend_text ;
 
 
     //relative
-    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street,$father_address_house_no, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_department_id, $is_newly_appointed = false,
-        $spouse_father_name, $spouse_father_ethnic_id, $spouse_father_religion_id, $spouse_father_place_of_birth, $spouse_father_occupation, $spouse_father_address_street,$spouse_father_address_house_no, $spouse_father_address_ward, $spouse_father_address_township_or_town_id, $spouse_father_address_region_id,
-        $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street,$mother_address_house_no, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id,
-        $spouse_mother_name, $spouse_mother_ethnic_id, $spouse_mother_religion_id, $spouse_mother_place_of_birth, $spouse_mother_occupation, $spouse_mother_address_street,$spouse_mother_address_house_no, $spouse_mother_address_ward, $spouse_mother_address_township_or_town_id, $spouse_mother_address_region_id,
-        $family_in_politics = false   , $family_in_politics_text ;
+    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street, $father_address_house_no, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_department_id, $is_newly_appointed = false,
+        $spouse_father_name, $spouse_father_ethnic_id, $spouse_father_religion_id, $spouse_father_place_of_birth, $spouse_father_occupation, $spouse_father_address_street, $spouse_father_address_house_no, $spouse_father_address_ward, $spouse_father_address_township_or_town_id, $spouse_father_address_region_id,
+        $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street, $mother_address_house_no, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id,
+        $spouse_mother_name, $spouse_mother_ethnic_id, $spouse_mother_religion_id, $spouse_mother_place_of_birth, $spouse_mother_occupation, $spouse_mother_address_street, $spouse_mother_address_house_no, $spouse_mother_address_ward, $spouse_mother_address_township_or_town_id, $spouse_mother_address_region_id,
+        $family_in_politics = false, $family_in_politics_text;
 
     public $siblings = [];
     public $father_siblings = [];
@@ -107,6 +114,7 @@ public $has_military_friend_text ;
 
     //detail_personal_info
     public $last_school_name, $last_school_subject, $last_school_row_no, $last_school_major, $student_life_political_social, $habit, $revolution, $transfer_reason_salary, $during_work_political_social, $has_military_friend = false, $foreigner_friend_name, $foreigner_friend_occupation, $foreigner_friend_nationality_id, $foreigner_friend_country_id, $foreigner_friend_how_to_know, $recommended_by_military_person;
+    // public $education_group,$education_type,$education,$school_name,$town,$semester,$roll_no,$major,$certificate,$year,$exam_mark;
     public $schools = [];
     public $trainings = [];
     public $awards = [];
@@ -127,7 +135,7 @@ public $has_military_friend_text ;
         'gpms_staff_no' => '',
         'spouse_name' => '',
         'gender_id' => '',
-        
+
         'ethnic_id' => '',
         'religion_id' => '',
         'height_feet' => 'required',
@@ -138,7 +146,7 @@ public $has_military_friend_text ;
         'skin_color' => 'required',
         'weight' => 'required',
         'blood_type_id' => '',
-        'marital_status_id'=>'',
+        'marital_status_id' => '',
         'place_of_birth' => 'required',
         'nrc_region_id' => 'required',
         'nrc_township_code_id' => 'required',
@@ -151,12 +159,12 @@ public $has_military_friend_text ;
         'email' => 'required',
         'current_address_street' => '',
         'current_address_ward' => '',
-        'current_address_house_no'=>'',
+        'current_address_house_no' => '',
         'current_address_region_id' => 'required',
         'current_address_township_or_town_id' => 'required',
         'permanent_address_street' => '',
         'permanent_address_ward' => '',
-        'permanent_address_house_no'=>'',
+        'permanent_address_house_no' => '',
         'permanent_address_region_id' => 'required',
         'permanent_address_township_or_town_id' => 'required',
         'previous_addresses' => '',
@@ -208,7 +216,7 @@ public $has_military_friend_text ;
         'father_religion_id' => 'required',
         'father_place_of_birth' => 'required',
         'father_occupation' => 'required',
-        'father_address_house_no'=>'',
+        'father_address_house_no' => '',
         'father_address_street' => '',
         'father_address_ward' => '',
         'father_address_township_or_town_id' => 'required',
@@ -218,7 +226,7 @@ public $has_military_friend_text ;
         'spouse_father_religion_id' => '',
         'spouse_father_place_of_birth' => '',
         'spouse_father_occupation' => '',
-        'spouse_father_address_house_no'=>'',
+        'spouse_father_address_house_no' => '',
         'spouse_father_address_street' => '',
         'spouse_father_address_ward' => '',
         'spouse_father_address_township_or_town_id' => '',
@@ -228,7 +236,7 @@ public $has_military_friend_text ;
         'mother_religion_id' => 'required',
         'mother_place_of_birth' => 'required',
         'mother_occupation' => 'required',
-        'mother_address_house_no'=>'',
+        'mother_address_house_no' => '',
         'mother_address_street' => '',
         'mother_address_ward' => '',
         'mother_address_township_or_town_id' => 'required',
@@ -238,17 +246,19 @@ public $has_military_friend_text ;
         'spouse_mother_religion_id' => '',
         'spouse_mother_place_of_birth' => '',
         'spouse_mother_occupation' => '',
-        'spouse_mother_address_house_no'=>'',
+        'spouse_mother_address_house_no' => '',
         'spouse_mother_address_street' => '',
         'spouse_mother_address_ward' => '',
         'spouse_mother_address_township_or_town_id' => '',
         'spouse_mother_address_region_id' => '',
         'family_in_politics' => '',
         'family_in_politics_text' => '',
-        
+
     ];
 
+
     protected $detail_personal_info_rules = [
+<<<<<<< Updated upstream
         'last_school_name' => '',
         'last_school_subject' => '',
         'last_school_row_no' => '',
@@ -267,7 +277,44 @@ public $has_military_friend_text ;
         'foreigner_friend_country_id' => '',
         'foreigner_friend_how_to_know' => '',
         'recommended_by_military_person' => '',
+=======
+        'last_school_name' => 'nullable|string',
+        'last_school_subject' => 'nullable|string',
+        'last_school_row_no' => 'nullable|string',
+        'last_school_major' => 'nullable|string',
+        'student_life_political_social' => 'nullable|string',
+        'habit' => 'nullable|string',
+        'revolution' => 'nullable|string',
+        'transfer_reason_salary' => 'nullable|string',
+        'during_work_political_social' => 'nullable|string',
+        'has_military_friend' => 'nullable|boolean',
+        'foreigner_friend_name' => 'nullable|string',
+        'foreigner_friend_occupation' => 'nullable|string',
+        'foreigner_friend_nationality_id' => 'nullable|exists:nationalities,id',
+        'foreigner_friend_country_id' => 'nullable|exists:countries,id',
+        'foreigner_friend_how_to_know' => 'nullable|string',
+        'recommended_by_military_person' => 'nullable|string',
+>>>>>>> Stashed changes
     ];
+
+    protected $messages = [
+        'last_school_name.max' => 'The last school name may not exceed 1000 characters.',
+        'last_school_major.max' => 'The major may not exceed 255 characters.',
+        'student_life_political_social.max' => 'The student life political or social field may not exceed 1000 characters.',
+        'habit.max' => 'The habit field may not exceed 500 characters.',
+        'revolution.max' => 'The revolution field may not exceed 1000 characters.',
+        'transfer_reason_salary.max' => 'The transfer reason or salary field may not exceed 1000 characters.',
+        'during_work_political_social.max' => 'The during work political or social field may not exceed 1000 characters.',
+        'has_military_friend.boolean' => 'The has military friend field must be true or false.',
+        'foreigner_friend_name.max' => 'The foreigner friend name may not exceed 255 characters.',
+        'foreigner_friend_occupation.max' => 'The foreigner friend occupation may not exceed 255 characters.',
+        'foreigner_friend_nationality_id.exists' => 'The selected foreigner friend nationality is invalid.',
+        'foreigner_friend_country_id.exists' => 'The selected foreigner friend country is invalid.',
+        'foreigner_friend_how_to_know.max' => 'The foreigner friend how-to-know field may not exceed 1000 characters.',
+        'recommended_by_military_person.max' => 'The recommended by military person field may not exceed 255 characters.',
+        
+    ];
+    
 
     public function validate_rules()
     {
@@ -284,9 +331,9 @@ public $has_military_friend_text ;
     }
 
     public function mount()
-    {   
+    {
 
-        $this->saveDraftCheck = false ;
+        $this->saveDraftCheck = false;
         if ($this->staff_id) {
             $this->staff = Staff::find($this->staff_id);
             $this->initializeArrays($this->staff_id);
@@ -341,7 +388,7 @@ public $has_military_friend_text ;
             $this->educations[] = [
                 'education_group' => $edu->education_group_id,
                 'education_type' => $edu->education_type_id,
-                'education' => $edu->education_id , 
+                'education' => $edu->education_id,
                 'country_id' => $edu->country_id
             ];
         }
@@ -390,6 +437,7 @@ public $has_military_friend_text ;
                 'exam_mark' => $sch->exam_mark,
                 'remark' => $sch->remark,
             ];
+           
         }
 
 
@@ -397,14 +445,14 @@ public $has_military_friend_text ;
             $this->trainings[] = [
 
                 'training_type' => $tra->training_type_id,
-                'batch' => $tra->batch ,
+                'batch' => $tra->batch,
 
                 'diploma_name' => $tra->diploma_name,
                 'fees' => $tra->fees,
                 'from_date' => $tra->from_date,
                 'to_date' => $tra->to_date,
                 'location' => $tra->location,
-                'fees' => $tra->fees ,
+                'fees' => $tra->fees,
                 'country' => $tra->country_id,
                 'training_location' => $tra->training_location_id,
                 'remark' => $tra->remark,
@@ -438,7 +486,7 @@ public $has_military_friend_text ;
             $this->abroads[] = [
                 'country' => $abroad->country_id,
                 'particular' => $abroad->particular,
-                'training_success_fail' => false ,
+                'training_success_fail' => false,
                 // 'training_success_fail' => $abroad->training_success_fail,
                 'training_success_count' => $abroad->training_success_count,
                 'sponser' => $abroad->sponser,
@@ -559,7 +607,7 @@ public $has_military_friend_text ;
         $this->skin_color = $staff->skin_color;
         $this->weight = $staff->weight;
         $this->blood_type_id = $staff->blood_type_id;
-        $this->marital_status_id=$staff->marital_status_id;
+        $this->marital_status_id = $staff->marital_status_id;
         $this->place_of_birth = $staff->place_of_birth;
         $this->nrc_region_id = $staff->nrc_region_id_id;
         $this->nrc_township_code_id = $staff->nrc_township_code_id;
@@ -572,12 +620,12 @@ public $has_military_friend_text ;
         $this->email = $staff->email;
         $this->current_address_street = $staff->current_address_street;
         $this->current_address_ward = $staff->current_address_ward;
-        $this->current_address_house_no=$staff->current_address_house_no;
+        $this->current_address_house_no = $staff->current_address_house_no;
         $this->current_address_region_id = $staff->current_address_region_id;
         $this->current_address_township_or_town_id = $staff->current_address_township_or_town_id;
         $this->permanent_address_street = $staff->permanent_address_street;
         $this->permanent_address_ward = $staff->permanent_address_ward;
-        $this->permanent_address_house_no=$staff->permanent_address_house_no;
+        $this->permanent_address_house_no = $staff->permanent_address_house_no;
         $this->permanent_address_region_id = $staff->permanent_address_region_id;
         $this->permanent_address_township_or_town_id = $staff->permanent_address_township_or_town_id;
         $this->previous_addresses = $staff->previous_addresses;
@@ -604,7 +652,7 @@ public $has_military_friend_text ;
 
     private function fillJobInfo($staff)
     {
-        
+
         $this->current_rank_id = $staff->current_rank_id;
         $this->current_rank_date = $staff->current_rank_date;
         $this->current_department_id = $staff->current_department_id;
@@ -612,7 +660,7 @@ public $has_military_friend_text ;
         $this->transfer_remark = $staff->transfer_remark;
         $this->government_staff_started_date = $staff->government_staff_started_date;
         $this->current_division_id =  $staff->current_division_id ??  auth()->user()->division_id;
-        
+
         $this->side_department_id = $staff->side_department_id;
         $this->side_division_id = $staff->side_division_id;
         $this->salary_paid_by = $staff->salary_paid_by;
@@ -632,7 +680,7 @@ public $has_military_friend_text ;
         $this->father_religion_id = $staff->father_religion_id;
         $this->father_place_of_birth = $staff->father_place_of_birth;
         $this->father_occupation = $staff->father_occupation;
-        $this->father_address_house_no=$staff->father_address_house_no;
+        $this->father_address_house_no = $staff->father_address_house_no;
         $this->father_address_street = $staff->father_address_street;
         $this->father_address_ward = $staff->father_address_ward;
         $this->father_address_township_or_town_id = $staff->father_address_township_or_town_id;
@@ -643,7 +691,7 @@ public $has_military_friend_text ;
         $this->spouse_father_religion_id = $staff->spouse_father_religion_id;
         $this->spouse_father_place_of_birth = $staff->spouse_father_place_of_birth;
         $this->spouse_father_occupation = $staff->spouse_father_occupation;
-        $this->spouse_father_address_house_no=$staff->spouse_father_address_house_no;
+        $this->spouse_father_address_house_no = $staff->spouse_father_address_house_no;
         $this->spouse_father_address_street = $staff->spouse_father_address_street;
         $this->spouse_father_address_ward = $staff->spouse_father_address_ward;
         $this->spouse_father_address_township_or_town_id = $staff->spouse_father_address_township_or_town_id;
@@ -654,7 +702,7 @@ public $has_military_friend_text ;
         $this->mother_religion_id = $staff->mother_religion_id;
         $this->mother_place_of_birth = $staff->mother_place_of_birth;
         $this->mother_occupation = $staff->mother_occupation;
-        $this->mother_address_house_no=$staff->mother_address_house_no;
+        $this->mother_address_house_no = $staff->mother_address_house_no;
         $this->mother_address_street = $staff->mother_address_street;
         $this->mother_address_ward = $staff->mother_address_ward;
         $this->mother_address_township_or_town_id = $staff->mother_address_township_or_town_id;
@@ -666,14 +714,13 @@ public $has_military_friend_text ;
         $this->spouse_mother_religion_id = $staff->spouse_mother_religion_id;
         $this->spouse_mother_place_of_birth = $staff->spouse_mother_place_of_birth;
         $this->spouse_mother_occupation = $staff->spouse_mother_occupation;
-        $this->spouse_mother_address_house_no=$staff->spouse_mother_address_house_no;
+        $this->spouse_mother_address_house_no = $staff->spouse_mother_address_house_no;
         $this->spouse_mother_address_street = $staff->spouse_mother_address_street;
         $this->spouse_mother_address_ward = $staff->spouse_mother_address_ward;
         $this->spouse_mother_address_township_or_town_id = $staff->spouse_mother_address_township_or_town_id;
         $this->spouse_mother_address_region_id = $staff->spouse_mother_address_region_id;
         $this->family_in_politics = $staff->family_in_politics;
         $this->family_in_politics_text = $staff->family_in_politics_text;
-        
     }
 
     private function fillDetailPersonalInfo($staff)
@@ -701,9 +748,11 @@ public $has_military_friend_text ;
 
     public function add_edu()
     {
-        $this->educations[] = ['education_group' => '',
-         'education_type' => '', 'education' => ''
-            ,'country_id' => ''
+        $this->educations[] = [
+            'education_group' => '',
+            'education_type' => '',
+            'education' => '',
+            'country_id' => ''
         ];
     }
 
@@ -719,78 +768,96 @@ public $has_military_friend_text ;
 
     public function add_siblings()
     {
-        $this->siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
+        $this->siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
 
     public function add_father_siblings()
     {
-        $this->father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
+        $this->father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
     public function add_mother_siblings()
     {
-        $this->mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
+        $this->mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
     public function add_spouses()
     {
-        $this->spouses[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
+        $this->spouses[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
     public function add_children()
     {
-        $this->children[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
+        $this->children[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
     public function add_spouse_siblings()
     {
-        $this->spouse_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
+        $this->spouse_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
     public function add_spouse_father_siblings()
     {
-        $this->spouse_father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ' '];
+        $this->spouse_father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ' '];
     }
 
     public function add_spouse_mother_siblings()
     {
-        $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''];
+        $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
     public function add_schools()
     {
+
+
         $this->schools[] = [
-            'education_group' => '', 'education_type' => '', 'education' => '', 'school_name' => '', 'town' => '', 'year' => '', 'certificate' => '', 'exam_mark' => '', 'remark' => '' , 
-        'from_date' => '' ,
-        'to_date' => '' ,
-        'semester' => '' ,
-        'roll_no' => '' ,
-        'major' => ''
+            'education_group' => '',
+            'education_type' => '',
+            'education' => '',
+            'school_name' => '',
+            'town' => '',
+            'year' => '',
+            'certificate' => '',
+            'exam_mark' => '',
+            'remark' => '',
+            'from_date' => '',
+            'to_date' => '',
+            'semester' => '',
+            'roll_no' => '',
+            'major' => '',
 
-
-    ];
+        ];
     }
 
     public function add_trainings()
     {
         $this->trainings[] = [
-             'batch'=>'', 'training_type' => '',
-              'from_date' => '', 'to_date' => '', 'location' => '', 'country' => '', 'training_location' => ''  ,
-              'remark'=> '' ,
-       
-        'fees' => '' ,
-        'diploma_name' => ''
-    ];
+            'batch' => '',
+            'training_type' => '',
+            'from_date' => '',
+            'to_date' => '',
+            'location' => '',
+            'country' => '',
+            'training_location' => '',
+            'remark' => '',
+
+            'fees' => '',
+            'diploma_name' => ''
+        ];
     }
 
 
     public function add_awardings()
     {
-        $this->awards[] = ['award_type' => '', 'award' => '', 'order_no' => '', 'order_date' => ''
-        ,'remark' => ''
-    
-    ];
+        $this->awards[] = [
+            'award_type' => '',
+            'award' => '',
+            'order_no' => '',
+            'order_date' => '',
+            'remark' => ''
+
+        ];
     }
 
 
@@ -806,7 +873,7 @@ public $has_military_friend_text ;
 
     public function add_abroads()
     {
-        $this->abroads[] = [ 'country' => '', 'particular' => '', 'training_success_fail' => '', 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'status' => '', 'actual_abroad_date' => '', 'position' => ''];
+        $this->abroads[] = ['country' => '', 'particular' => '', 'training_success_fail' => '', 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'status' => '', 'actual_abroad_date' => '', 'position' => ''];
     }
 
     public function add_socials()
@@ -936,13 +1003,14 @@ public $has_military_friend_text ;
     public function submit_staff()
     {
         $rules = $this->validate_rules();
-        // $this->validate($rules);
+        $this->validate($rules);
+
         $staff = Staff::find($this->staff_id);
         if ($this->photo) {
-            
+
             $_photo = Storage::disk('upload')->put('staffs', $this->photo);
             if (($staff != null) && ($old = $staff->staff_photo)) {
-                $staff->staff_photo = null ;
+                $staff->staff_photo = null;
                 Storage::disk('upload')->delete($old);
             }
         }
@@ -950,7 +1018,7 @@ public $has_military_friend_text ;
         if ($this->nrc_front) {
             $_nrc_front = Storage::disk('upload')->put('staffs', $this->nrc_front);
             if (($staff != null) && ($old = $staff->nrc_front)) {
-                $staff->nrc_front = null ;
+                $staff->nrc_front = null;
 
                 Storage::disk('upload')->delete($old);
             }
@@ -959,7 +1027,7 @@ public $has_military_friend_text ;
         if ($this->nrc_back) {
             $_nrc_back = Storage::disk('upload')->put('staffs', $this->nrc_back);
             if (($staff != null) && ($old = $staff->nrc_back)) {
-                $staff->nrc_back = null ;
+                $staff->nrc_back = null;
 
                 Storage::disk('upload')->delete($old);
             }
@@ -986,7 +1054,7 @@ public $has_military_friend_text ;
             'skin_color' => $this->skin_color,
             'weight' => $this->weight,
             'blood_type_id' => $this->blood_type_id,
-            'marital_status_id'=>$this->marital_status_id,
+            'marital_status_id' => $this->marital_status_id,
             'place_of_birth' => $this->place_of_birth,
             'nrc_region_id_id' => $this->nrc_region_id,
             'nrc_township_code_id' => $this->nrc_township_code_id,
@@ -999,12 +1067,12 @@ public $has_military_friend_text ;
             'email' => $this->email,
             'current_address_street' => $this->current_address_street,
             'current_address_ward' => $this->current_address_ward,
-            'current_address_house_no'=>$this->current_address_house_no,
+            'current_address_house_no' => $this->current_address_house_no,
             'current_address_region_id' => $this->current_address_region_id,
             'current_address_township_or_town_id' => $this->current_address_township_or_town_id,
             'permanent_address_street' => $this->permanent_address_street,
             'permanent_address_ward' => $this->permanent_address_ward,
-            'permanent_address_house_no'=>$this->permanent_address_house_no,
+            'permanent_address_house_no' => $this->permanent_address_house_no,
             'permanent_address_region_id' => $this->permanent_address_region_id,
             'permanent_address_township_or_town_id' => $this->permanent_address_township_or_town_id,
             'previous_addresses' => $this->previous_addresses,
@@ -1054,7 +1122,7 @@ public $has_military_friend_text ;
             'father_religion_id' => $this->father_religion_id,
             'father_place_of_birth' => $this->father_place_of_birth,
             'father_occupation' => $this->father_occupation,
-            'father_address_house_no'=>$this->father_address_house_no,
+            'father_address_house_no' => $this->father_address_house_no,
             'father_address_street' => $this->father_address_street,
             'father_address_ward' => $this->father_address_ward,
             'father_address_township_or_town_id' => $this->father_address_township_or_town_id,
@@ -1064,7 +1132,7 @@ public $has_military_friend_text ;
             'spouse_father_religion_id' => $this->spouse_father_religion_id,
             'spouse_father_place_of_birth' => $this->spouse_father_place_of_birth,
             'spouse_father_occupation' => $this->spouse_father_occupation,
-            'spouse_father_address_house_no'=>$this->spouse_father_address_house_no,
+            'spouse_father_address_house_no' => $this->spouse_father_address_house_no,
             'spouse_father_address_street' => $this->spouse_father_address_street,
             'spouse_father_address_ward' => $this->spouse_father_address_ward,
             'spouse_father_address_township_or_town_id' => $this->spouse_father_address_township_or_town_id,
@@ -1074,7 +1142,7 @@ public $has_military_friend_text ;
             'mother_religion_id' => $this->mother_religion_id,
             'mother_place_of_birth' => $this->mother_place_of_birth,
             'mother_occupation' => $this->mother_occupation,
-            'mother_address_house_no'=>$this->mother_address_house_no,
+            'mother_address_house_no' => $this->mother_address_house_no,
             'mother_address_street' => $this->mother_address_street,
             'mother_address_ward' => $this->mother_address_ward,
             'mother_address_township_or_town_id' => $this->mother_address_township_or_town_id,
@@ -1084,14 +1152,14 @@ public $has_military_friend_text ;
             'spouse_mother_religion_id' => $this->spouse_mother_religion_id,
             'spouse_mother_place_of_birth' => $this->spouse_mother_place_of_birth,
             'spouse_mother_occupation' => $this->spouse_mother_occupation,
-            'spouse_mother_address_house_no'=>$this->spouse_mother_address_house_no,
+            'spouse_mother_address_house_no' => $this->spouse_mother_address_house_no,
             'spouse_mother_address_street' => $this->spouse_mother_address_street,
             'spouse_mother_address_ward' => $this->spouse_mother_address_ward,
             'spouse_mother_address_township_or_town_id' => $this->spouse_mother_address_township_or_town_id,
             'spouse_mother_address_region_id' => $this->spouse_mother_address_region_id,
             'family_in_politics' => $this->family_in_politics,
             'family_in_politics_text' => $this->family_in_politics_text,
-            
+
         ];
 
         $detail_personal_info = [
@@ -1115,38 +1183,38 @@ public $has_military_friend_text ;
             'recommended_by_military_person' => $this->recommended_by_military_person,
         ];
 
+        // dd($detail_personal_info);
         $dataMapping = [
             'job_info' => $job_info,
             'relative' => $relative,
             'detail_personal_info' => $detail_personal_info,
             'default' => $personal_info,
         ];
-        
+
 
         $staff_create = $dataMapping[$this->tab] ?? $dataMapping['default'];
         // before saftdraft  // $staff_create['status_id' ]  =  auth()->user()->AdminHR() ? 1 : ($staff->status_id == 2 ? 4 :  3 ); // 1 approve :   2 ->reject  // 3 pending // 4 resubmit
         $staff_create['current_division_id'] = $this->current_division_id ?? auth()->user()->division_id;
 
 
-        
 
-        if( $this->saveDraftCheck == true ){
-            $staff_create['status_id'] = 1 ;
 
-        }else{
- // wtih saftdraft 
- $staff_create['status_id'] = $staff?->status_id == 1  ? (  isset($staff?->comment) ? 4 :   2)  : 1 ;
- if($staff?->status_id == 2 || $staff?->status_id == 4 ){
+        if ($this->saveDraftCheck == true) {
+            $staff_create['status_id'] = 1;
+        } else {
+            // wtih saftdraft 
+            $staff_create['status_id'] = $staff?->status_id == 1  ? (isset($staff?->comment) ? 4 :   2)  : 1;
+            if ($staff?->status_id == 2 || $staff?->status_id == 4) {
 
-     
-     $staff_create['status_id'] = 5;
- }
+
+                $staff_create['status_id'] = 5;
+            }
         }
-        
-       
-if($staff_create['status_id'] == 5){
-    $staff_create['comment'] = null ;
-}
+
+
+        if ($staff_create['status_id'] == 5) {
+            $staff_create['comment'] = null;
+        }
 
 
         $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
@@ -1186,26 +1254,22 @@ if($staff_create['status_id'] == 5){
         $this->loadStaffData($staff->id);
 
         $this->message = 'Saved Successfully';
-        if($staff->status_id){
-            
-                redirect()->route('staff',['status'=>   auth()->user()->AdminHR() &&  $staff->status_id == 1  ? 2   :  $staff->status_id ]);
+        if ($staff->status_id) {
 
-            
+            redirect()->route('staff', ['status' =>   auth()->user()->AdminHR() &&  $staff->status_id == 1  ? 2   :  $staff->status_id]);
         }
-        
-
     }
 
     private function saveAbroads($staffId)
     {
         Abroad::where('staff_id', $staffId)->delete();
         foreach ($this->abroads as $abroad) {
-            
+
             Abroad::create([
                 'staff_id' => $staffId,
                 'country_id' => $abroad['country'],
                 'particular' => $abroad['particular'],
-                'training_success_fail' => false ,
+                'training_success_fail' => false,
                 // $abroad['training_success_fail'],
                 'training_success_count' => $abroad['training_success_count'],
                 'sponser' => $abroad['sponser'],
@@ -1216,11 +1280,10 @@ if($staff_create['status_id'] == 5){
                 'status' => 4,
                 'actual_abroad_date' => '2024-12-09'
                 //  $abroad['actual_abroad_date']
-                 ,
+                ,
                 'position' => $abroad['position'],
             ]);
         }
-        
     }
 
     private function saveSocials($staffId)
@@ -1253,14 +1316,19 @@ if($staff_create['status_id'] == 5){
         }
     }
 
+    //validation done
     private function saveSchools($staffId)
     {
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
         $rules = [
             'schools.*.education_group' => 'required',
             'schools.*.education_type' => 'required',
             'schools.*.education' => 'required',
+<<<<<<< Updated upstream
             
             'schools.*.school_name' => 'required',
             'schools.*.town' => 'required',
@@ -1291,6 +1359,74 @@ if($staff_create['status_id'] == 5){
         ];
 
             $this->validate($rules);
+=======
+            'schools.*.school_name' => 'required|string|max:255',
+            'schools.*.town' => 'required|string|max:255',
+            'schools.*.semester' => 'nullable|string|max:50',
+            'schools.*.from_date' => 'required|date|date_format:Y-m-d',
+            'schools.*.to_date' => 'required|date|after_or_equal:from_date|date_format:Y-m-d',
+            'schools.*.year' => 'required|integer|min:1900|max:' . date('Y'),
+            'schools.*.certificate' => 'nullable|string|max:255',
+            'schools.*.exam_mark' => 'nullable|numeric|min:0|max:100',
+            'schools.*.remark' => 'nullable|string|max:1000',
+            'schools.*.roll_no' => 'nullable|string|max:50',
+            'schools.*.major' => 'nullable|string|max:255',
+        ];
+    
+        // Custom validation messages
+        $messages = [
+            'schools.*.education_group.required' => 'The education group field is required.',
+            'schools.*.education_type.required' => 'The education type field is required.',
+            'schools.*.education.required' => 'The education level field is required.',
+            'schools.*.school_name.required' => 'The school name field is required.',
+            'schools.*.school_name.string' => 'The school name must be a string.',
+            'schools.*.school_name.max' => 'The school name may not exceed 255 characters.',
+            
+            'schools.*.town.required' => 'The town field is required.',
+            'schools.*.town.string' => 'The town must be a string.',
+            'schools.*.town.max' => 'The town may not exceed 255 characters.',
+            
+            'schools.*.semester.string' => 'The semester must be a string.',
+            'schools.*.semester.max' => 'The semester may not exceed 50 characters.',
+            
+            'schools.*.from_date.required' => 'The start date is required.',
+            'schools.*.from_date.date' => 'The start date must be a valid date.',
+            'schools.*.from_date.date_format' => 'The start date must be in the format YYYY-MM-DD.',
+            
+            'schools.*.to_date.required' => 'The end date is required.',
+            'schools.*.to_date.date' => 'The end date must be a valid date.',
+            'schools.*.to_date.after_or_equal' => 'The end date must be after or equal to the start date.',
+            'schools.*.to_date.date_format' => 'The end date must be in the format YYYY-MM-DD.',
+            
+            'schools.*.year.required' => 'The year field is required.',
+            'schools.*.year.integer' => 'The year must be an integer.',
+            'schools.*.year.min' => 'The year must be at least 1900.',
+            'schools.*.year.max' => 'The year may not be greater than ' . date('Y') . '.',
+            
+            'schools.*.certificate.string' => 'The certificate must be a string.',
+            'schools.*.certificate.max' => 'The certificate may not exceed 255 characters.',
+            
+            'schools.*.exam_mark.numeric' => 'The exam mark must be a number.',
+            'schools.*.exam_mark.min' => 'The exam mark must be at least 0.',
+            'schools.*.exam_mark.max' => 'The exam mark may not exceed 100.',
+            
+            'schools.*.remark.string' => 'The remark must be a string.',
+            'schools.*.remark.max' => 'The remark may not exceed 1000 characters.',
+            
+            'schools.*.roll_no.string' => 'The roll number must be a string.',
+            'schools.*.roll_no.max' => 'The roll number may not exceed 50 characters.',
+            
+            'schools.*.major.string' => 'The major must be a string.',
+            'schools.*.major.max' => 'The major may not exceed 255 characters.',
+        ];
+        
+    
+        // Perform validation
+        $this->validate($rules, $messages);
+    
+
+     
+>>>>>>> Stashed changes
 
         School::where('staff_id', $staffId)->delete();
         foreach ($this->schools as $school) {
@@ -1316,6 +1452,43 @@ if($staff_create['status_id'] == 5){
 
     private function savePastOccupations($staffId)
     {
+
+        $rules = [
+            'past_occupations.*.rank' => 'required',
+            'past_occupations.*.department' => 'required',
+            'past_occupations.*.section' => 'required|nullable',
+            'past_occupations.*.address' => 'required|string',
+            'past_occupations.*.from_date' => 'required|date|date_format:Y-m-d',
+            'past_occupations.*.to_date' => 'required|date|after_or_equal:occupations.*.from_date|date_format:Y-m-d',
+            'past_occupations.*.remark' => 'nullable|string',
+        ];
+
+        $messages = [
+            'past_occupations.*.rank.required' => 'The rank field is required.',
+            
+            'past_occupations.*.department.required' => 'The department field is required.',
+
+            'past_occupations.*.section.required' => 'The section field is required.',
+            
+            
+            'past_occupations.*.address.required' => 'The address field is required.',
+            'past_occupations.*.address.string' => 'The address must be a string.',
+            
+            'past_occupations.*.from_date.required' => 'The from date is required.',
+            'past_occupations.*.from_date.date' => 'The from date must be a valid date.',
+            'past_occupations.*.from_date.date_format' => 'The from date must be in the format YYYY-MM-DD.',
+            
+            'past_occupations.*.to_date.required' => 'The from to date is required.',
+            'past_occupations.*.to_date.date' => 'The to date must be a valid date.',
+            'past_occupations.*.to_date.after_or_equal' => 'The to date must be after or equal to the from date.',
+            'past_occupations.*.to_date.date_format' => 'The to date must be in the format YYYY-MM-DD.',
+            
+            'past_occupations.*.remark.string' => 'The remark must be a string.',
+        ];
+        
+        $this->validate($rules,$messages);
+        
+
         PastOccupation::where('staff_id', $staffId)->delete();
         foreach ($this->past_occupations as $occupation) {
             PastOccupation::create([
@@ -1331,8 +1504,36 @@ if($staff_create['status_id'] == 5){
         }
     }
 
+    // validation done 
     private function saveAwards($staffId)
     {
+
+        $rules = [
+            'awards.*.award_type' => 'required',
+            'awards.*.award' => 'required',
+            'awards.*.order_no' => 'required|string',
+            'awards.*.order_date' => 'required|date|date_format:Y-m-d',
+            'awards.*.remark' => ''
+        ];
+    
+        $messages = [
+            'awards.*.award_type.required' => 'The award type is required.',
+
+            'awards.*.award.required' => 'The award is required.',
+          
+            'awards.*.order_no.string' => 'The order number must be a string.',
+            'awards.*.order_no.required' => 'The order no is required.',
+            
+            'awards.*.order_date.required' => 'The order date is required.',
+            'awards.*.order_date.date' => 'The order date must be a valid date.',
+            'awards.*.order_date.date_format' => 'The order date must be in the format YYYY-MM-DD.',
+        ];
+    
+        $this->validate($rules, $messages);   
+        
+        
+
+
         Awarding::where('staff_id', $staffId)->delete();
         foreach ($this->awards as $award) {
             Awarding::create([
@@ -1346,16 +1547,70 @@ if($staff_create['status_id'] == 5){
         }
     }
 
+    //validation done
     private function saveTrainings($staffId)
     {
+
+
+        $rules = [
+            'trainings.*.training_type' => 'required|numeric',
+            'trainings.*.diploma_name' => 'required|string',
+            'trainings.*.fees' => 'required|numeric|min:0',
+            'trainings.*.from_date' => 'required|date|date_format:Y-m-d',
+            'trainings.*.to_date' => 'required|date|after_or_equal:trainings.*.from_date|date_format:Y-m-d',
+            'trainings.*.location' => 'nullable|string',
+            'trainings.*.country_id' => 'nullable|numeric',
+            'trainings.*.remark' => 'nullable|string',
+            'trainings.*.training_location_id' => 'nullable|numeric',
+        ];
+        
+        $messages = [
+            'trainings.*.training_type.required' => 'The training type is required.',
+            'trainings.*.training_type.numeric' => 'The training type must be a valid number.',
+            'trainings.*.training_type.exists' => 'The selected training type is invalid.',
+            
+            'trainings.*.diploma_name.required' => 'The diploma name is required.',
+            'trainings.*.diploma_name.string' => 'The diploma name must be a string.',
+            'trainings.*.diploma_name.max' => 'The diploma name may not exceed 255 characters.',
+        
+            'trainings.*.fees.required' => 'The fees are required.',
+            'trainings.*.fees.numeric' => 'The fees must be a number.',
+            'trainings.*.fees.min' => 'The fees must be at least 0.',
+        
+            'trainings.*.from_date.required' => 'The start date is required.',
+            'trainings.*.from_date.date' => 'The start date must be a valid date.',
+            'trainings.*.from_date.date_format' => 'The start date must be in the format YYYY-MM-DD.',
+        
+            'trainings.*.to_date.required' => 'The end date is required.',
+            'trainings.*.to_date.date' => 'The end date must be a valid date.',
+            'trainings.*.to_date.after_or_equal' => 'The end date must be after or equal to the start date.',
+            'trainings.*.to_date.date_format' => 'The end date must be in the format YYYY-MM-DD.',
+        
+            'trainings.*.location.string' => 'The location must be a string.',
+            'trainings.*.location.max' => 'The location may not exceed 255 characters.',
+        
+            'trainings.*.country_id.numeric' => 'The country must be a valid number.',
+            'trainings.*.country_id.exists' => 'The selected country is invalid.',
+        
+            'trainings.*.remark.string' => 'The remark must be a string.',
+            'trainings.*.remark.max' => 'The remark may not exceed 1000 characters.',
+        
+            'trainings.*.training_location_id.numeric' => 'The training location must be a valid number.',
+            'trainings.*.training_location_id.exists' => 'The selected training location is invalid.',
+        ];
+        
+    
+        // Perform validation
+        $this->validate($rules, $messages);
         Training::where('staff_id', $staffId)->delete();
+        // dd($this->trainings);
         foreach ($this->trainings as $training) {
             Training::create([
                 'staff_id' => $staffId,
                 'training_type_id' => $training['training_type'],
                 'diploma_name' => $training['diploma_name'],
                 'fees' => $training['fees'],
-                'batch'=>$training['batch'],
+                'batch' => $training['batch'],
                 'from_date' => $training['from_date'],
                 'to_date' => $training['to_date'],
                 'location' => $training['location'],
@@ -1487,7 +1742,6 @@ if($staff_create['status_id'] == 5){
         foreach ($this->spouse_mother_siblings as $relative) {
             SpouseMotherSibling::create($this->relativeFields($staffId, $relative));
         }
-
     }
 
     public function updatedCurrentAddressRegionId()
@@ -1532,7 +1786,7 @@ if($staff_create['status_id'] == 5){
             'regions' => Region::all(),
             'genders' => Gender::all(),
             'blood_types' => null,
-            'marital_statuses'=>null,
+            'marital_statuses' => null,
             'education_groups' => null,
             'education_types' => null,
             '_educations' => null,
@@ -1567,7 +1821,7 @@ if($staff_create['status_id'] == 5){
             case 'personal_info':
                 $data['genders'] = Gender::all();
                 $data['blood_types'] = BloodType::all();
-                $data['marital_statuses']=MaritalStatus::all();
+                $data['marital_statuses'] = MaritalStatus::all();
                 $data['education_groups'] = EducationGroup::all();
                 $data['education_types'] = EducationType::all();
                 $data['_educations'] = Education::all();
@@ -1651,7 +1905,7 @@ if($staff_create['status_id'] == 5){
     public function add_new()
     {
 
-        
+
         $this->resetValidation();
         $this->reset(['staff_name', 'leave_type_name', 'from_date', 'to_date', 'qty', 'order_no', 'remark']);
         $this->confirm_add = true;
@@ -1718,9 +1972,10 @@ if($staff_create['status_id'] == 5){
         $this->confirm_delete = false;
     }
 
-    public function rejectStaff(){
-        
-        $this->displayAlertBox = true ;
+    public function rejectStaff()
+    {
+
+        $this->displayAlertBox = true;
         // $staff = Staff::find($this->staff_id);
         // $staff->status_id = 3; //reject 
         // // $staff->comment = $this->comment;
@@ -1730,30 +1985,30 @@ if($staff_create['status_id'] == 5){
         // $this->displayAlertBox = false ;
 
         // return redirect()->route('staff',['status' => 3]);
-       
+
     }
 
-    public function submitReject(){
+    public function submitReject()
+    {
         $staff = Staff::find($this->staff_id);
         $staff->status_id = 3; //reject 
         $staff->comment = $this->comment;
 
         $staff->update();
         $this->message = 'Staff has been rejected.';
-        $this->displayAlertBox = false ;
+        $this->displayAlertBox = false;
 
-        return redirect()->route('staff',['status' => 3]);
+        return redirect()->route('staff', ['status' => 3]);
     }
 
-     public function closeModal(){
-        $this->displayAlertBox = false ;
+    public function closeModal()
+    {
+        $this->displayAlertBox = false;
+    }
 
-     }
-     
-     public function saveDraft(){
-        $this->saveDraftCheck = true ;
-// $this->submit_staff();
-     }
-
-
+    public function saveDraft()
+    {
+        $this->saveDraftCheck = true;
+        // $this->submit_staff();
+    }
 }

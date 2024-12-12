@@ -1,3 +1,5 @@
+@props([ 'err' => null ])
+
 <div 
     x-data="{ 
         value: @entangle($attributes->wire('model')), 
@@ -33,4 +35,9 @@
         placeholder="{{ now()->format('d-m-Y') }}"
         type="text"
     />
+
+
+@error($err)
+<p class="mt-2 text-sm text-red-600 font-medium">{{ $message }}</p>
+@enderror
 </div>
