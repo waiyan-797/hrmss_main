@@ -372,6 +372,8 @@ public $has_military_friend_text ;
         }
 
         foreach ($schools as $sch) {
+
+
             $this->schools[] = [
                 'education_group' => $sch->education_group_id,
                 'education_type' => $sch->education_type_id,
@@ -1253,6 +1255,43 @@ if($staff_create['status_id'] == 5){
 
     private function saveSchools($staffId)
     {
+
+
+        $rules = [
+            'schools.*.education_group' => 'required',
+            'schools.*.education_type' => 'required',
+            'schools.*.education' => 'required',
+            
+            'schools.*.school_name' => 'required',
+            'schools.*.town' => 'required',
+            'schools.*.semester' => 'required',
+            'schools.*.from_date' => 'required',
+            'schools.*.to_date' => 'required',
+            'schools.*.year' => 'required',
+
+
+       
+      
+        
+       
+        ]        
+        ;
+
+        $message   = [
+            'schools.*.education_group' => 'required',
+            'schools.*.education_type' => 'required',
+            'schools.*.education' => 'required',
+            
+            'schools.*.school_name' => 'required',
+            'schools.*.town' => 'required',
+            'schools.*.semester' => 'required',
+            'schools.*.from_date' => 'required',
+            'schools.*.to_date' => 'required',
+            'schools.*.year' => 'required',
+        ];
+
+            $this->validate($rules);
+
         School::where('staff_id', $staffId)->delete();
         foreach ($this->schools as $school) {
             School::create([

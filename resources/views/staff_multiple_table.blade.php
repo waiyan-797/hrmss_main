@@ -23,6 +23,7 @@
                                     placeholder="Select an Option..."
                                     class="mt-1 block w-full h-40"
                                     isHighNeeded=true
+                                    err="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
                                     
                                 />
                             @elseif ($type['type'] == 'text' || $type['type'] == 'number'|| $type['type']=='file')
@@ -32,7 +33,7 @@
                                     name="{{$type['wire_array_key']}}"
                                     type="{{$type['type']}}"
                                     class="mt-1 block w-full"
-                                    
+                                    err="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
                                 />
                                 @elseif($type['type'] == 'date' )
 

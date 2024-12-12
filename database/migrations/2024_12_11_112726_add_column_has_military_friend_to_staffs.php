@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('staffs', function (Blueprint $table) {
+        Schema::table('staff', function (Blueprint $table) {
             $table->longText('has_military_friend_text')->nullable();
         });
     }
