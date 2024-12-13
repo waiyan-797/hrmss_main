@@ -346,7 +346,7 @@
     <div>
         <x-input-label for="ပရီမီယံ" :value="__('ပရီမီယံ')" />
         <x-text-input wire:model="life_insurance_premium" id="life_insurance_premium" name="life_insurance_premium" type="text" class="mt-1 block w-full" />
-        <x-input-error class="mt-2" :messages="$errors->get('life_insurance_premium')" />g
+        <x-input-error class="mt-2" :messages="$errors->get('life_insurance_premium')" />
     </div>
 </div>
 <div class="w-full h-auto py-5">

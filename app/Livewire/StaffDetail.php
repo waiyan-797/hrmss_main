@@ -1494,8 +1494,8 @@ public $has_military_friend_text ;
 
         $rules = [
             'trainings.*.training_type' => 'required|numeric',
-            'trainings.*.diploma_name' => 'required|string',
-            'trainings.*.fees' => 'required|numeric|min:0',
+            // 'trainings.*.diploma_name' => 'string',
+            'trainings.*.fees' => 'numeric|min:0',
             'trainings.*.from_date' => 'required|date|date_format:Y-m-d',
             'trainings.*.to_date' => 'required|date|after_or_equal:trainings.*.from_date|date_format:Y-m-d',
             'trainings.*.location' => 'nullable|string',

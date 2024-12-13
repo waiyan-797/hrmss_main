@@ -22,10 +22,10 @@ class Rank extends Component
     //Validation
     protected $rules = [
         'rank_name' => 'required|string|max:255',
-        'payscale_name' => 'required',
-        'staff_type_name' => 'required',
-        'allowed_qty'=>'required',
-        'sort_no'=>'required|integer',
+        // 'payscale_name' => 'required',
+        // 'staff_type_name' => 'required',
+        // 'allowed_qty'=>'required',
+        // 'sort_no'=>'required|integer',
     ];
     //Add New
     public function add_new()
@@ -87,10 +87,10 @@ class Rank extends Component
         $rank = ModelsRank::findOrFail($this->rank_id);
         $rank->update([
             'name' => $this->rank_name,
-            'payscale_id' => $this->payscale_name,
-            'staff_type_id' => $this->staff_type_name,
-            'allowed_qty'=>$this->allowed_qty,
-            'sort_no'=>$this->sort_no,
+            // 'payscale_id' => $this->payscale_name,
+            // 'staff_type_id' => $this->staff_type_name,
+            // 'allowed_qty'=>$this->allowed_qty,
+            // 'sort_no'=>$this->sort_no,
         ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();
