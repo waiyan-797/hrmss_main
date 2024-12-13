@@ -51,7 +51,7 @@ $table->addCell(5000)->addText($staff->name);
 $table->addRow();
 $table->addCell(5000)->addText('၂။ အသက်(မွေးနေ့သက္ကရာဇ်):');
 $table->addCell(2000)->addText('-', ['align' => 'center']);
-$table->addCell(5000)->addText($staff->dob);
+$table->addCell(5000)->addText(en2mm($staff->dob));
 
 $table->addRow();
 $table->addCell(5000)->addText('၃။ လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ:');
@@ -68,7 +68,7 @@ $table->addCell(5000)->addText('၅။ ရာထူး/ ဌာန:');
 $table->addCell(2000)->addText('-', ['align' => 'center']);
 $table->addCell(5000)->addText($staff->current_rank->name . '/' . $staff->current_department->name);
 
-$joinDate = \Carbon\Carbon::parse($staff->join_date);
+$joinDate = \Carbon\Carbon::parse(en2mm($staff->join_date));
 $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());
 $table->addRow();
 $table->addCell(5000)->addText('၆။ အမှုထမ်းလုပ်သက်၊ ဝင်ရောက်သည့်ရက်စွဲ:');
@@ -88,7 +88,7 @@ foreach ($staff->staff_educations as $education) {
     $table->addRow();
     $table->addCell(4000)->addText('', ['align' => 'center']);
     $table->addCell(2000)->addText('-', ['align' => 'center']);
-    $table->addCell(5000)->addText($education->education->name . '၊', ['align' => 'right']);
+    $table->addCell(5000)->addText($education->education_group->name.','.$education->education_type->name.','.$education->education->name . '၊', ['align' => 'right']);
 }
 $table->addRow();
 $table->addCell(5000)->addText('၉။အဘအမည် :');
@@ -109,7 +109,7 @@ $table->addCell(5000)->addText($staff->mother_occupation);
 $table->addRow();
 $table->addCell(5000)->addText('၁၃။နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်) :');
 $table->addCell(2000)->addText('-', ['align' => 'center']);
-$table->addCell(5000)->addText(en2mm($staff->abroads->count()));
+$table->addCell(5000)->addText(en2mm($staff->abroads->count()?'ရှိ':'မရှိ'));
     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
     $table->addRow();
     $table->addCell(500,['vMerge' => 'restart'])->addText('စဉ်', ['bold' => true]);
@@ -126,9 +126,9 @@ $table->addCell(5000)->addText(en2mm($staff->abroads->count()));
     $table->addCell(2000, ['vMerge' => 'continue']);
     foreach ($staff->abroads as $index => $abroad) {
         $table->addRow();
-        $table->addCell(500)->addText($index + 1);
-        $table->addCell(1500)->addText($abroad->from_date);
-        $table->addCell(1500)->addText($abroad->to_date);
+        $table->addCell(500)->addText(en2mm($index + 1));
+        $table->addCell(1500)->addText(en2mm($abroad->from_date));
+        $table->addCell(1500)->addText(en2mm($abroad->to_date));
         $table->addCell(2000)->addText($abroad->country->name);
         $table->addCell(2500)->addText($abroad->particular);
         $table->addCell(2000)->addText($abroad->meet_with);
@@ -153,37 +153,45 @@ $table->addCell(5000)->addText(en2mm($staff->abroads->count()));
      }
      $section->addText('၁၅။'.'နိုင်ငံခြားသွားရောက်မည့်ကိစ္စ', ['bold' => true]);
     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+    
     $table->addRow();
-    $table->addCell(500, ['vMerge' => 'restart'])->addText('စဉ်', ['bold' => true]);
-    $table->addCell(2000)->addText('သွားရောက်သည့်ကိစ္စ', ['bold' => true]);
-    $table->addCell(2000)->addText('စေလွှတ်သည့်နိုင်ငံ', ['bold' => true]);
-    $table->addCell(1500)->addText('မှ', ['bold' => true]);
-    $table->addCell(1500)->addText('ထိ', ['bold' => true]);
-    $table->addCell(2000)->addText('နိုင်ငံခြားသို့သွားရောက်မည့်နေ့', ['bold' => true]);
-    $table->addCell(2000)->addText('ထောက်ပံ့သည့်အဖွဲ့အစည်း', ['bold' => true]);
-    $table->addCell(2000)->addText('ပြန်ရောက်လျှင်အမှုထမ်းမည့်ဌာန/ရာထူး', ['bold' => true]);
+    $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်');
+    $table->addCell(4000, ['vMerge' => 'restart'])->addText('သွားရောက်သည့်ကိစ');
+    $table->addCell(4000, ['vMerge' => 'restart'])->addText('စေလွှတ်သည့်နိုင်ငံ');
+    $table->addCell(6000, ['gridSpan' => 2, 'valign' => 'center'])->addText('အချိန်ကာလ');
+    $table->addCell(4000, ['vMerge' => 'restart'])->addText('နိုင်ငံခြားသို့သွားရောက်မည့်နေ့');
+    $table->addCell(4000, ['vMerge' => 'restart'])->addText('ထောက်ပံ့သည့်အဖွဲ့အစည်း');
+    $table->addCell(4000, ['vMerge' => 'restart'])->addText('ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး');
 
-    
-        // $table->addRow();
-        // $table->addCell(500)->addText($index + 1);
-        // $table->addCell(2000)->addText($abroad->particular);
-        // $table->addCell(2000)->addText($abroad->country->name);
-        // $table->addCell(1500)->addText($abroad->from_date);
-        // $table->addCell(1500)->addText($abroad->to_date);
-        // $table->addCell(2000)->addText($abroad->actual_abroad_date);
-        // $table->addCell(2000)->addText($abroad->sponser);
-        // $table->addCell(2000)->addText($abroad->position);
-    
-    $section->addText('၁၆။', ['bold' => true]);
-    $section->addText('အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။', ['bold' => false]);
+    $table->addRow();
+    $table->addCell(2000, ['vMerge' => 'continue']);
+    $table->addCell(4000, ['vMerge' => 'continue']);
+    $table->addCell(4000, ['vMerge' => 'continue']);
+    $table->addCell(3000)->addText('မှ', ['alignment' => 'center']);
+    $table->addCell(3000)->addText('ထိ', ['alignment' => 'center']);
+    $table->addCell(4000, ['vMerge' => 'continue']);
+    $table->addCell(4000, ['vMerge' => 'continue']);
+    $table->addCell(4000, ['vMerge' => 'continue']);
+
+    foreach ($staff->abroads as $index=> $abroad) {
+        $table->addRow();
+        $table->addCell(1000)->addText(en2mm($index+1));
+        $table->addCell(2000)->addText($abroad->particular);
+        $table->addCell(2000)->addText($abroad->country->name);
+        $table->addCell(2000)->addText(en2mm($abroad->from_date));
+        $table->addCell(2000)->addText(en2mm($abroad->to_date));
+        $table->addCell(2000)->addText(en2mm($abroad->actual_abroad_date));
+        $table->addCell(2000)->addText($abroad->position);
+    }
+   
+    $section->addText('၁၆။'.'အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။', ['bold' => false]);
     $section->addTextBreak(1); 
     $section->addText('လက်မှတ်: ________________', null, ['alignment' => 'center']);
     $section->addText('အမည်: ________________', null, ['alignment' => 'center']);
     $section->addText('ရာထူး: ________________', null, ['alignment' => 'center']);
     $section->addText('ဌာန: ________________', null, ['alignment' => 'center']);
     $section->addText('ရက်စွဲ: '. formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day), ['align' => 'center']);
-    $section->addText('၁၇။', ['bold' => true]);
-    $section->addText('နိုင်ငံခြားသို့ သွားရောက်မည့်ပုဂ္ဂိုလ်၏လုပ်ရည်ကိုင်ရည်နှင့် အကျင့်စာရိတ္တ ကောင်းမွန်ကြောင်းထပ်ဆင့် လက်မှတ်ရေးထိုးပါသည်။', ['bold' => false]);
+    $section->addText('၁၇။'.'နိုင်ငံခြားသို့ သွားရောက်မည့်ပုဂ္ဂိုလ်၏လုပ်ရည်ကိုင်ရည်နှင့် အကျင့်စာရိတ္တ ကောင်းမွန်ကြောင်းထပ်ဆင့် လက်မှတ်ရေးထိုးပါသည်။', ['bold' => false]);
     $section->addTextBreak(1); 
     $section->addText('လက်မှတ်: ________________', null, ['alignment' => 'center']);
     $section->addText('အမည်: ________________', null, ['alignment' => 'center']);

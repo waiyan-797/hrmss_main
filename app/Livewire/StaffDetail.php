@@ -120,17 +120,16 @@ public $saveDraftCheck  ;
         'name' => 'required',
         'nick_name' => '',
         'other_name' => '',
-        'staff_no' => 'required',
+        'staff_no' => '',
         'dob' => 'required',
         'attendid' => '',
         'gpms_staff_no' => '',
         'spouse_name' => '',
         'gender_id' => '',
-        
         'ethnic_id' => '',
         'religion_id' => '',
         'height_feet' => 'required',
-        'height_inch' => 'required',
+        'height_inch' => '',
         'hair_color' => 'required',
         'eye_color' => 'required',
         'prominent_mark' => 'required',
@@ -146,7 +145,7 @@ public $saveDraftCheck  ;
         'nrc_front' => '',
         'nrc_back' => '',
         'phone' => 'required',
-        'mobile' => 'required',
+        'mobile' => '',
         'email' => 'required',
         'current_address_street' => '',
         'current_address_ward' => '',
@@ -188,7 +187,7 @@ public $saveDraftCheck  ;
         'current_department_id' => 'required',
         'transfer_department_id' => '',
         'transfer_remark' => '',
-        'government_staff_started_date' => 'required|date',
+        'government_staff_started_date' => '',
         'current_division_id' => '',
         'side_department_id' => '',
         'side_division_id' => '',
@@ -243,8 +242,7 @@ public $saveDraftCheck  ;
         'spouse_mother_address_township_or_town_id' => '',
         'spouse_mother_address_region_id' => '',
         'family_in_politics' => '',
-        'family_in_politics_text' => '',
-        
+        'family_in_politics_text' => '',  
     ];
 
     protected $detail_personal_info_rules = [

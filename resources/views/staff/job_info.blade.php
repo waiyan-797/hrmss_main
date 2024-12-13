@@ -1,8 +1,7 @@
-
 <div class="grid grid-cols-4 gap-4 py-5">
     <div>
         <x-input-label for="ကာယကံရှင် မွေးဖွားချိန်၌ မိဘနှစ်ပါးသည် နိုင်ငံသား ဟုတ်/မဟုတ်" :value="__('ကာယကံရှင် မွေးဖွားချိန်၌ မိဘနှစ်ပါးသည် နိုင်ငံသား ဟုတ်/မဟုတ်')" />
-        <x-radio-input id1="parent_citizen_1" id2="parent_citizen_2" wire="is_parents_citizen_when_staff_born" />
+        <x-radio-input id1="parent_citizen_1" id2="parent_citizen_2" wire="is_parents_citizen_when_staff_born" required/>
         <x-input-error class="mt-2" :messages="$errors->get('is_parents_citizen_when_staff_born')" />
     </div>
     <div>
@@ -12,9 +11,7 @@
     </div>
     <div>
         <x-input-label for="လက်ရှိရာထူးရသည့်နေ့" :value="__('လက်ရှိရာထူးရသည့်နေ့')" />
-        <x-date-picker wire:model="current_rank_date" id="current_rank_date"  lass="mt-1 block w-full"/>
-
-       
+        <x-date-picker wire:model="current_rank_date" id="current_rank_date"  class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('current_rank_date')" />
     </div>
     <div>
@@ -47,8 +44,6 @@
             required
         />
         <x-input-error class="mt-2" :messages="$errors->get('current_division_id')" />
-        
-        <x-input-error class="mt-2" :messages="$errors->get('current_division_id')" />
     </div>
     <div>
         <x-input-label for="တွဲဖက်အင်အားဖြစ်လျှင် ဌာန" :value="__('တွဲဖက်အင်အားဖြစ်လျှင် ဌာန')" />
@@ -67,28 +62,23 @@
     </div>
     <div>
         <x-input-label for="လက်ရှိဌာနအလုပ်ဝင်ရက်စွဲ" :value="__('လက်ရှိဌာနအလုပ်ဝင်ရက်စွဲ')" />
-        <x-date-picker wire:model="join_date" id="join_date"  class="mt-1 block w-full"/>
-
-
-        
+        <x-date-picker wire:model="join_date" id="join_date"  class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('join_date')" />
     </div>
     <div>
         <x-input-label for="အစိုးရဝန်ထမ်းစဖြစ်သည့်နေ" :value="__('အစိုးရဝန်ထမ်းစဖြစ်သည့်နေ')" />
 
         <x-date-picker wire:model="government_staff_started_date" id="government_staff_started_date"  class="mt-1 block w-full"/>
-
-        
         <x-input-error class="mt-2" :messages="$errors->get('government_staff_started_date')" />
     </div>
     <div>
         <x-input-label for="အသစ်ခန့်" :value="__('အသစ်ခန့်')" />
-        <x-radio-input id1="newly_appointed_1" id2="newly_appointed_2" wire="is_newly_appointed" />
+        <x-radio-input id1="newly_appointed_1" id2="newly_appointed_2" wire="is_newly_appointed" required/>
         <x-input-error class="mt-2" :messages="$errors->get('is_newly_appointed')" />
     </div>
     <div>
         <x-input-label for="ပြိုင်ရွေးခံ (သို့) တိုက်ရိုက်ခန့်" :value="__('ပြိုင်ရွေးခံ (သို့) တိုက်ရိုက်ခန့်')" />
-        <x-radio-input id1="direct_appointed_1" id2="direct_appointed_2" wire="is_direct_appointed" />
+        <x-radio-input id1="direct_appointed_1" id2="direct_appointed_2" wire="is_direct_appointed" required/>
         <x-input-error class="mt-2" :messages="$errors->get('is_direct_appointed')" />
     </div>
 

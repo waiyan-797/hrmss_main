@@ -161,7 +161,7 @@
                             <label for="name" class="md:w-80 ml-3">တပ်သို့ဝင်သည့်နေ့</label>
                             <label for="" class="md:w-5 ml-10">-</label>
 
-                                <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_join_date }}</label>
+                                <label for="name" class="md:w-3/5 ml-4">{{ en2mm($staff->military_join_date) }}</label>
                                                     </div>
                         <div class="flex justify-start w-full mb-4 ml-1">
                             <label for="" class="md:w-5">(ဂ) </label>
@@ -176,14 +176,14 @@
                             <label for="" class="md:w-5 ml-10">-</label>
 
                                 <label for="name"
-                                    class="md:w-3/5 ml-4">{{ $staff->military_gazetted_date }}</label>
+                                    class="md:w-3/5 ml-4">{{ en2mm($staff->military_gazetted_date) }}</label>
                                                     </div>
                         <div class="flex justify-start w-full mb-4 ml-1">
                             <label for="" class="md:w-5">(င) </label>
                             <label for="name" class="md:w-80 ml-3">တပ်ထွက်သည့်နေ့</label>
                             <label for="" class="md:w-5 ml-10">-</label>
 
-                                <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_leave_date }}</label>
+                                <label for="name" class="md:w-3/5 ml-4">{{ en2mm($staff->military_leave_date) }}</label>
                                                     </div>
                         <div class="flex justify-start w-full mb-4 ml-1">
                             <label for="" class="md:w-5">(စ) </label>
@@ -214,7 +214,7 @@
                             <label for="name" class="md:w-80 ml-3">အငြိမ်းစားလစာ</label>
                             <label for="" class="md:w-5 ml-10">-</label>
 
-                                <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_pension }}</label>
+                                <label for="name" class="md:w-3/5 ml-4">{{ en2mm($staff->military_pension) }}</label>
                                                     </div>
                     </div>
                 </div>
@@ -226,7 +226,7 @@
                   
                         <label for="name" class="md:w-3/5">
                             @foreach ($staff->staff_educations as $education)
-                            {{$education->education->name.','}}
+                            {{$education->education_group->name.','.$education->education_type->name.','.$education->education->name}}
                             @endforeach
                         </label>
                   
@@ -310,7 +310,7 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name"
-                            class="md:w-3/5">{{ $staff->is_parents_citizen_when_staff_born }}</label>
+                            class="md:w-3/5">{{ $staff->is_parents_citizen_when_staff_born?'ဟုတ်':'မဟုတ်' }}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -327,7 +327,7 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name" class="md:w-3/5">
-                            {{ collect([$staff->join_date, $staff->current_rank_date])->filter()->implode('/') }}
+                            {{ collect([en2mm($staff->join_date), en2mm($staff->current_rank_date)])->filter()->implode('/') }}
 
                         </label>
                                     </div>
@@ -337,7 +337,7 @@
                     <label for="name" class="md:w-1/3">လက်ရှိအလုပ်အကိုင်ရလာပုံ</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ $staff->is_newly_appointed }}</label>
+                        <label for="name" class="md:w-3/5">{{ $staff->is_newly_appointed?'ဟုတ်':'မဟုတ်' }}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -345,7 +345,7 @@
                     <label for="name" class="md:w-1/3">ပြိုင်အ‌‌ရွေးခံ(သို့)တိုက်ရိုက်ခန့်</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ $staff->is_direct_appointed }}</label>
+                        <label for="name" class="md:w-3/5">{{ $staff->is_direct_appointed?'ဟုတ်':'မဟုတ်' }}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -372,7 +372,6 @@
                                             အလုပ်အကိုင်အတွက် ထောက်ခံသူများ   
                                             ဉီးဝင်းကျော်နိုင် ( ညွန်ကြားရေးမှုး)
 
-                                            ဉီးဝင်းကျော်နိုင် ( ညွန်ကြားရေးမှုး)
                                             </p>
                                         </div>
                                         <h1>
@@ -435,8 +434,8 @@
                                 <tr>
                                     <td class="border border-black text-center p-2">{{ $index + 1 }}</td>
                                     <td class="border border-black text-center p-2">{{ $posting->rank->name ?? '' }}</td>
-                                    <td class="border border-black text-center p-2">{{ $posting->from_date }}</td>
-                                    <td class="border border-black text-center p-2">{{ $posting->to_date }}</td>
+                                    <td class="border border-black text-center p-2">{{ en2mm($posting->from_date) }}</td>
+                                    <td class="border border-black text-center p-2">{{ en2mm($posting->to_date) }}</td>
                                     <td class="border border-black text-center p-2">
                                         {{ $posting->division->name ?? '' }} / {{ $posting->department->name ?? '' }}/{{ $posting->location }}
                                     </td>
@@ -866,7 +865,7 @@
                         မိတ်ဆွေများရှိ/ မရှိ</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ $staff->has_military_friend}}</label>
+                        <label for="name" class="md:w-3/5">{{ en2mm($staff->has_military_friend)?'ရှိ':'မရှိ'}}</label>
                                     </div>
 
                
@@ -893,7 +892,7 @@
                                         <td class="p-2 border border-black">{{ $abroad->country->name ?? 'မရှိပါ' }}</td>
                                         <td class="p-2 border border-black">{{ $abroad->particular }}</td>
                                         <td class="p-2 border border-black">{{ $abroad->meet_with }}</td>
-                                        <td class="p-2 border border-black">{{ $abroad->from_date }} - {{ $abroad->to_date }}</td>
+                                        <td class="p-2 border border-black">{{ en2mm($abroad->from_date) }} - {{ en2mm($abroad->to_date) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -930,7 +929,8 @@
                     <label for="" class="md:w-5">၁၃။ </label>
                     <label for="name" class="md:w-1/3">ရာဇဝတ်ပြစ်မှုခံရခြင်း ရှိ/မရှိ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{en2mm($staff->punishments->count())}}</label>
+                    <label for="name" class="md:w-3/5">        {{ en2mm($staff->punishments->count() ? 'ရှိ' : 'မရှိ') }}
+                    </label>
                 </div>
             </div>
             <p class="mb-8">အထက်ပါဇယားကွက်များအတွင်း ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း
@@ -983,7 +983,7 @@
             </div>  --}}
               <div>
                 <div class="flex mb-2">
-                    <p class="w-1/3">လက်မှတ်</p>
+                    <p class="w-3/">လက်မှတ်</p>
                     <p class="w-5">၊</p>
                     <p class="w-3/5"></p>
                 </div>

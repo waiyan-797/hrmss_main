@@ -37,9 +37,8 @@ class StaffList4 extends Component
     }
     public function go_word()
 {
-    // $staffs = Staff::get();
-    $staffs = Staff::with(['postings.department', 'postings.division', 'currentRank'])->get();
-
+    
+    $staffs = Staff::with('postings', 'currentRank')->get();
     $phpWord = new PhpWord();
     $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
     $section->addText(
@@ -66,9 +65,9 @@ class StaffList4 extends Component
     $table->addCell(1500)->addText('လက်ရှိဌာနရောက်ရှိရက်စွဲ', ['bold' => true], ['align' => 'center']);
     $table->addCell(1500)->addText('မှတ်ချက်', ['bold' => true], ['align' => 'center']);
     foreach ($staffs as $index => $staff) {
-        foreach ($staff->postings as $postingIndex => $posting) {
+        foreach ($staff->postings as $index => $posting) {
             $table->addRow();
-            $table->addCell(500)->addText($index + 1); // Sequence
+            $table->addCell(500)->addText(en2mm($index + 1)); // Sequence
             $table->addCell(2000)->addText($staff->name . " / " . ($staff->currentRank?->name ?? '')); // Name / Rank
             $table->addCell(2000)->addText(($posting->department?->name ?? '') . ' (' . ($posting->division?->nick_name ?? '') . ')'); // Original Department
             $table->addCell(1500)->addText(en2mm(
@@ -91,8 +90,6 @@ class StaffList4 extends Component
 
     return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
 }
-
-
      public function render()
      {
         $staffs = Staff::when(
@@ -101,7 +98,6 @@ class StaffList4 extends Component
                 return $q->where('current_rank_id' , $this->selectedRankId) ;
             }
         )
-        
         ->paginate(20);
 
         $currentPage = $staffs->currentPage();

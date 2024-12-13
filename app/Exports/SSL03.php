@@ -18,17 +18,22 @@ class SSL03 implements FromView ,WithStyles
     // {
     //     return SSL03::all();
     // }
+    public $ranks;
+    public $posting;
+    public $selectedRankId= null ;
     public function view(): View
     {
-        // $staffs = Staff::get();
         $staffs = Staff::with('postings', 'currentRank')->get();
-       
+        // $staffs = Staff::when(
+
+        //     $this->selectedRankId  , function($q){
+        //         return $q->where('current_rank_id' , $this->selectedRankId) ;
+        //     }
+        // );
         $data = [
           'staffs' => $staffs,
         ];
-
-
-        return view('excel_reports.staff_list_4_report', $data);
+        return view('excel_reports.staff_list_report_4', $data);
     }
 public function styles(Worksheet $sheet)
 {

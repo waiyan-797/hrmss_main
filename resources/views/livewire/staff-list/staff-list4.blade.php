@@ -3,7 +3,7 @@
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
-             {{-- <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button> --}}
+             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button> 
             <br><br>
             <h1 class="font-bold text-center text-base">
                 ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန

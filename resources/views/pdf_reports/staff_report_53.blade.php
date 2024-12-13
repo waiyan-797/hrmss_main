@@ -251,7 +251,7 @@
                                     <td style="border: none;">တပ်သို့ဝင်သည့်နေ့
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->military_join_date}}</td>
+                                    <td style="border: none;">{{ en2mm($staff->military_join_date)}}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">(ဂ)
@@ -268,7 +268,7 @@
                                     <td style="border: none;">ပြန်တမ်းဝင်ဖြစ်သည့်နေ့
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->military_gazetted_date}}</td>
+                                    <td style="border: none;">{{ en2mm($staff->military_gazetted_date)}}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">(င)
@@ -276,7 +276,7 @@
                                     <td style="border: none;">တပ်ထွက်သည့်နေ့
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->military_leave_date}}</td>
+                                    <td style="border: none;">{{ en2mm($staff->military_leave_date)}}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">(စ)
@@ -411,7 +411,7 @@
                                     <td style="border: none;">လက်ရှိဌာနအလုပ်ဝင်ရက်စွဲနှင့်လက်ရှိရာထူးရသည့်နေ့
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->join_date }}/{{ $staff->current_rank_date}}</td>
+                                    <td style="border: none;">{{ en2mm($staff->join_date) }}/{{ en2mm($staff->current_rank_date)}}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၆။
@@ -419,7 +419,7 @@
                                     <td style="border: none;">လက်ရှိအလုပ်အကိုင်ရလာပုံ
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->is_newly_appointed }}</td>
+                                    <td style="border: none;">{{ $staff->is_newly_appointed?'ဟုတ်':'မဟုတ်' }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၇။
@@ -427,7 +427,7 @@
                                     <td style="border: none;">ပြိုင်အ‌‌ရွေးခံ(သို့)တိုက်ရိုက်ခန့်
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->is_direct_appointed }}</td>
+                                    <td style="border: none;">{{ $staff->is_direct_appointed?'ဟုတ်':'မဟုတ်' }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၈။
@@ -512,8 +512,8 @@
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
                                                 <td>{{ $posting->rank->name ?? '' }}</td>
-                                                <td>{{ $posting->from_date }}</td>
-                                                <td>{{ $posting->to_date }}</td>
+                                                <td>{{ en2mm($posting->from_date) }}</td>
+                                                <td>{{ en2mm($posting->to_date) }}</td>
                                                 <td>
                                                     {{ $posting->division->name ?? '' }} / {{ $posting->department->name ?? '' }}
                                                 </td>
@@ -943,7 +943,7 @@
                                         <td>{{ $abroad->country->name ?? 'မရှိပါ' }}</td>
                                         <td>{{ $abroad->particular }}</td>
                                         <td>{{ $abroad->meet_with }}</td>
-                                        <td>{{ $abroad->from_date }} - {{ $abroad->to_date }}</td>
+                                        <td>{{ en2mm($abroad->from_date) }} - {{ en2mm($abroad->to_date) }}</td>
                                     </tr>
                                 @endforeach
                                     </tbody>

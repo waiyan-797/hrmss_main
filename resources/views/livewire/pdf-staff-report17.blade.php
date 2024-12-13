@@ -211,9 +211,24 @@
                                 <th class="border border-black text-center p-2">ထိ</th>
                             </tr>
                         </thead>
+                        <tbody class="text-center h-8 p-2">
+                            @foreach ($staff->abroads as $index=> $abroad)
+                                <tr>
+                                    <td class="border border-black p-2">{{en2mm($index+1)}}</td>
+                                    <td class="border border-black p-2">{{ $abroad->particular}}</td>
+                                    <td class="border border-black p-2">{{$abroad->country->name}}</td>
+                                    <td class="border border-black p-2">{{en2mm($abroad->from_date)}}</td>
+                                    <td class="border border-black p-2">{{en2mm($abroad->to_date)}}</td>
+                                    <td class="border border-black p-2">{{en2mm($abroad->actual_abroad_date)}}</td>
+                                    <td class="border border-black p-2">{{$abroad->position}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                       
                     </table>
                 </div>
+
+             
 
                 <div class="mb-4">
                     <div class="flex justify-start mb-8">

@@ -117,7 +117,7 @@
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                     <label for="name" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">  @foreach ($staff->staff_educations as $education)
-                            {{$education->education->name.','}}
+                            {{$education->education_group->name.','.$education->education_type->name.','.$education->education->name.'၊'}}
                     @endforeach</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -128,7 +128,6 @@
                         class="md:w-3/5">{{collect([$staff->current_rank->name,$staff->current_salary,$staff->current_department->name ])->filter()->implode('၊')}}</label>
                         </label>
                 </div>
-                {{-- sdfdf --}}
                 <div class="flex justify-between w-full mb-4">
                     <label for="name" class="md:w-5">၁၃။ </label>
                     <label for="name" class="md:w-1/3">သွေးအုပ်စု</label>

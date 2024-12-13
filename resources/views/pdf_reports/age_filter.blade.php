@@ -36,10 +36,10 @@
         <tbody>
             @foreach($staffs as $index => $staff)
             <tr>
-                <td>{{ $index + 1 }}</td>
+                <td>{{ en2mm($index + 1) }}</td>
                 <td>{{ $staff->name }}</td>
                 <td>{{ $staff->currentRank?->name }}</td>
-                <td>{{ $staff->dob }}</td>
+                <td>{{ en2mm($staff->dob) }}</td>
                 <td>{{ $staff->howOldAmI() }}</td>
             </tr>
             @endforeach

@@ -15,7 +15,7 @@
     <div>
         <x-input-label for="အမည်" :value="__('အမည်')" />
         <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required/>
-        <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        <x-input-error class="mt-2" :messages="$errors->get('name')" required/>
     </div>
     <div>
         <x-input-label for="ငယ်အမည်" :value="__('ငယ်အမည်')" />
@@ -29,16 +29,13 @@
     </div>
     <div>
         <x-input-label for="ဝန်ထမ်းအမှတ်" :value="__('ဝန်ထမ်းအမှတ်')" />
-        <x-text-input wire:model="staff_no" id="staff_no" name="staff_no" type="text" class="mt-1 block w-full" />
+        <x-text-input wire:model="staff_no" id="staff_no" name="staff_no" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('staff_no')" />
     </div>
     <div>
         <x-input-label for="မွေးသက္ကရာဇ်" :value="__('မွေးသက္ကရာဇ်')" />
-        <x-date-picker wire:model="dob" id="dob"   name="dob" class="mt-1 block w-full"/>
-
-
-        
-        <x-input-error class="mt-2" :messages="$errors->get('dob')" />
+        <x-date-picker wire:model="dob" id="dob"   name="dob" class="mt-1 block w-full" required/>
+        <x-input-error class="mt-2" :messages="$errors->get('dob')" required/>
     </div>
     <div>
         <x-input-label for="Attendid" :value="__('Attend Id')" />
@@ -74,39 +71,39 @@
         <x-input-label :value="__('အရပ်အမြင့်(ပေ, လက်မ)')" />
         <div class="flex flex-row gap-2">
             <div>
-                <x-text-input wire:model="height_feet" placeholder="ပေ" id="height_feet" name="height_feet" type="number" class="mt-1 block w-full" />
-                <x-input-error class="mt-2" :messages="$errors->get('height_feet')" />
+                <x-text-input wire:model="height_feet" placeholder="ပေ" id="height_feet" name="height_feet" type="number" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('height_feet')" required/>
             </div>
             <div>
                 <x-text-input wire:model="height_inch" placeholder="လက်မ" id="height_inch" name="height_inch" type="number" class="mt-1 block w-full" />
-                <x-input-error class="mt-2" :messages="$errors->get('height_inch')" />
+                <x-input-error class="mt-2" :messages="$errors->get('height_inch')"/>
             </div>
         </div>
     </div>
     <div>
         <x-input-label for="ဆံပင်အရောင်" :value="__('ဆံပင်အရောင်')" />
         <x-text-input wire:model="hair_color" id="hair_color" name="hair_color" type="text" class="mt-1 block w-full" required/>
-        <x-input-error class="mt-2" :messages="$errors->get('hair_color')" />
+        <x-input-error class="mt-2" :messages="$errors->get('hair_color')" required/>
     </div>
     <div>
         <x-input-label for="မျက်စိအရောင်" :value="__('မျက်စိအရောင်')" />
         <x-text-input wire:model="eye_color" id="eye_color" name="eye_color" type="text" class="mt-1 block w-full" required/>
-        <x-input-error class="mt-2" :messages="$errors->get('eye_color')" />
+        <x-input-error class="mt-2" :messages="$errors->get('eye_color')" required/>
     </div>
     <div>
         <x-input-label for="ထင်ရှားသည့်အမှတ်အသား" :value="__('ထင်ရှားသည့်အမှတ်အသား')" />
         <x-text-input wire:model="prominent_mark" id="prominent_mark" name="prominent_mark" type="text" class="mt-1 block w-full" required/>
-        <x-input-error class="mt-2" :messages="$errors->get('prominent_mark')" />
+        <x-input-error class="mt-2" :messages="$errors->get('prominent_mark')" required/>
     </div>
     <div>
         <x-input-label for="အသားအရောင်" :value="__('အသားအရောင်')" />
         <x-text-input wire:model="skin_color" id="skin_color" name="skin_color" type="text" class="mt-1 block w-full" required/>
-        <x-input-error class="mt-2" :messages="$errors->get('skin_color')" />
+        <x-input-error class="mt-2" :messages="$errors->get('skin_color')" required/>
     </div>
     <div>
         <x-input-label for="ကိုယ်အလေးချိန် (ပေါင်)" :value="__('ကိုယ်အလေးချိန် (ပေါင်)')" />
-        <x-text-input wire:model="weight" placeholder="ကိုယ်အလေးချိန်" id="weight" name="weight" type="text" class="mt-1 block w-full" />
-        <x-input-error class="mt-2" :messages="$errors->get('weight')" />
+        <x-text-input wire:model="weight" placeholder="ကိုယ်အလေးချိန်" id="weight" name="weight" type="text" class="mt-1 block w-full" required/>
+        <x-input-error class="mt-2" :messages="$errors->get('weight')" required/>
     </div>
     <div>
         <x-input-label for="သွေးအုပ်စု" :value="__('သွေးအုပ်စု')" />
@@ -127,7 +124,7 @@
         <div>
             <x-input-label for="မွေးဖွားရာဇာတိ" :value="__('မွေးဖွားရာဇာတိ')" />
             <x-textarea-input wire:model="place_of_birth" id="place_of_birth" name="place_of_birth" class="mt-1 block w-full" required/>
-            <x-input-error class="mt-2" :messages="$errors->get('place_of_birth')" />
+            <x-input-error class="mt-2" :messages="$errors->get('place_of_birth')" required/>
         </div>
     </div>
     <div class="col-span-4">

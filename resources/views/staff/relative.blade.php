@@ -1,30 +1,34 @@
-
 <div class="grid grid-cols-4 gap-4 py-5">
     <div class="col-span-4">
         <x-input-label :value="__('အဘ(အမည်, လူမျိုး, ဘာသာ, အလုပ်အကိုင်)')" />
         <div class="flex flex-row justify-center gap-4">
             <div class="w-full">
-                <x-input-label  value="အမည်" />
-
-                <x-text-input wire:model="father_name" placeholder="အမည်" id="father_name" name="father_name" type="text" class="mt-1 block w-full" />
+                <!-- Label -->
+                <x-input-label value="အမည်" />
+                <x-text-input wire:model="father_name" placeholder="အမည်" id="father_name" name="father_name" type="text" class="mt-1 block w-full" required />
                 <x-input-error class="mt-2" :messages="$errors->get('father_name')" />
             </div>
+            
             <div class="w-full">
                 <x-input-label  value="လူမျိုးရွေးပါ" />
-                <x-searchable-select property="father_ethnic_id" :values="$ethnics" placeholder=" " id="father_ethnic_id" name="father_ethnic_id" class="mt-1 block w-full" />
+                <x-searchable-select property="father_ethnic_id" :values="$ethnics" placeholder=" " id="father_ethnic_id" name="father_ethnic_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('father_ethnic_id')" />
             </div>
             <div class="w-full">
                 <x-input-label  value="ဘာသာရွေးပါ" />
 
-                <x-searchable-select property="father_religion_id" :values="$religions" placeholder="" id="father_religion_id" name="father_religion_id" class="mt-1 block w-full" />
+                <x-searchable-select property="father_religion_id" :values="$religions" placeholder="" id="father_religion_id" name="father_religion_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('father_religion_id')" />
             </div>
             <div class="w-full">
                 <x-input-label  value="အလုပ်အကိုင်" />
 
-                <x-text-input wire:model="father_occupation" placeholder="" id="father_occupation" name="father_occupation" type="text" class="mt-1 block w-full" />
+                <x-text-input wire:model="father_occupation" placeholder="" id="father_occupation" name="father_occupation" type="text" class="mt-1 block w-full" 
+                required/>
                 <x-input-error class="mt-2" :messages="$errors->get('father_occupation')" />
+                    @error('father_occupation')
+                    <div class="mt-2 text-red-600 text-sm">{{ $message }}</div>
+                @enderror
             </div>
         </div>
     </div>
@@ -33,15 +37,15 @@
         <x-input-label :value="__('အဘ (ဇာတိ, ပြည်နယ်/တိုင်းဒေသကြီး, ခရိုင်, မြို့/မြို့နယ်, လမ်း, ရပ်ကွက်,အိမ်နံပါတ်)')" />
         <div class="flex flex-row justify-center gap-4">
             <div class="w-full">
-                <x-textarea-input wire:model="father_place_of_birth" placeholder="ဇာတိ" id="father_place_of_birth" name="father_place_of_birth" class="mt-1 block w-full" />
+                <x-textarea-input wire:model="father_place_of_birth" placeholder="ဇာတိ" id="father_place_of_birth" name="father_place_of_birth" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('father_place_of_birth')" />
             </div>
             <div class="w-full">
-                <x-select wire:model.change="father_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီးရွေးပါ" id="father_address_region_id" name="father_address_region_id" class="mt-1 block w-full" />
+                <x-select wire:model.change="father_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီးရွေးပါ" id="father_address_region_id" name="father_address_region_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('father_address_region_id')" />
             </div>
             <div class="w-full">
-                <x-select wire:model="father_address_township_or_town_id" :values="$father_townships" placeholder=" မြို့/မြို့နယ်ရွေးပါ" id="father_address_township_or_town_id" name="father_address_township_or_town_id" class="mt-1 block w-full" />
+                <x-select wire:model="father_address_township_or_town_id" :values="$father_townships" placeholder=" မြို့/မြို့နယ်ရွေးပါ" id="father_address_township_or_town_id" name="father_address_township_or_town_id" class="mt-1 block w-full" required />
                 <x-input-error class="mt-2" :messages="$errors->get('father_address_township_or_town_id')" />
             </div>
         </div>
@@ -65,25 +69,25 @@
         <div class="flex flex-row items-center justify-center gap-4">
             <div class="w-full">
                 <x-input-label value='အမည်'/>
-                <x-text-input wire:model="mother_name" placeholder="အမည်" id="mother_name" name="mother_name" type="text" class="mt-1 block w-full" />
+                <x-text-input wire:model="mother_name" placeholder="အမည်" id="mother_name" name="mother_name" type="text" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('mother_name')" />
             </div>
             <div class="w-full">
                 <x-input-label value='လူမျိုးရွေးပါ'/>
 
-                <x-searchable-select property="mother_ethnic_id" :values="$ethnics" placeholder="လူမျိုးရွေးပါ" id="mother_ethnic_id" name="mother_ethnic_id" class="mt-1 block w-full" />
+                <x-searchable-select property="mother_ethnic_id" :values="$ethnics" placeholder="လူမျိုးရွေးပါ" id="mother_ethnic_id" name="mother_ethnic_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('mother_ethnic_id')" />
             </div>
             <div class="w-full">
                 <x-input-label value='ဘာသာ‌ရွေးပါ'/>
 
-                <x-searchable-select property="mother_religion_id" :values="$religions" placeholder="ဘာသာ‌ရွေးပါ" id="mother_religion_id" name="mother_religion_id" class="mt-1 block w-full" />
+                <x-searchable-select property="mother_religion_id" :values="$religions" placeholder="ဘာသာ‌ရွေးပါ" id="mother_religion_id" name="mother_religion_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('mother_religion_id')" />
             </div>
             <div class="w-full">
                 <x-input-label value='အလုပ်အကိုင်'/>
 
-                <x-text-input wire:model="mother_occupation" placeholder="အလုပ်အကိုင်" id="mother_occupation" name="mother_occupation" type="text" class="mt-1 block w-full" />
+                <x-text-input wire:model="mother_occupation" placeholder="အလုပ်အကိုင်" id="mother_occupation" name="mother_occupation" type="text" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('mother_occupation')" />
             </div>
         </div>
@@ -92,15 +96,15 @@
         <x-input-label :value="__('အမိ (ဇာတိ, ပြည်နယ်/တိုင်းဒေသကြီး, ခရိုင်, မြို့/မြို့နယ်, လမ်း, ရပ်ကွက်,အိမ်နံပါတ်)')" />
         <div class="flex flex-row justify-center gap-4">
             <div class="w-full">
-                <x-textarea-input wire:model="mother_place_of_birth" placeholder="ဇာတိ" id="mother_place_of_birth" name="mother_place_of_birth" class="mt-1 block w-full" />
+                <x-textarea-input wire:model="mother_place_of_birth" placeholder="ဇာတိ" id="mother_place_of_birth" name="mother_place_of_birth" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('mother_place_of_birth')" />
             </div>
             <div class="w-full">
-                <x-select wire:model.change="mother_address_region_id"  placeholder="ပြည်နယ်/တိုင်းဒေသကြီး‌ရွေးပါ" :values="$regions" id="mother_address_region_id" name="mother_address_region_id" class="mt-1 block w-full" />
+                <x-select wire:model.change="mother_address_region_id"  placeholder="ပြည်နယ်/တိုင်းဒေသကြီး‌ရွေးပါ" :values="$regions" id="mother_address_region_id" name="mother_address_region_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('mother_address_region_id')" />
             </div>
             <div class="w-full">
-                <x-select wire:model="mother_address_township_or_town_id"  placeholder="မြို့/မြို့နယ်ရွေးပါ" id="mother_address_township_or_town_id" :values="$mother_townships" name="mother_address_township_or_town_id" class="mt-1 block w-full" />
+                <x-select wire:model="mother_address_township_or_town_id"  placeholder="မြို့/မြို့နယ်ရွေးပါ" id="mother_address_township_or_town_id" :values="$mother_townships" name="mother_address_township_or_town_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('mother_address_township_or_town_id')" />
             </div>
         </div>
@@ -206,7 +210,7 @@
 <x-input-label value='အလုပ်အကိုင်' />
 
                 <x-text-input wire:model="spouse_mother_occupation" placeholder="အလုပ်အကိုင်" id="spouse_mother_occupation" name="spouse_mother_occupation" type="text" class="mt-1 block w-full" />
-                <x-input-error class="mt-2" :messages="$errors->get('mother_occupation')" />
+                <x-input-error class="mt-2" :messages="$errors->get('spouse_mother_occupation')" />
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@
             <!-- Buttons for PDF and Word export -->
             <div class="flex justify-center gap-x-4 mb-4">
                 <x-primary-button type="button" wire:click="go_pdf()" class="w-32">PDF</x-primary-button>
-                {{-- <x-primary-button type="button" wire:click="go_word()" class="w-32">WORD</x-primary-button> --}}
+                 <x-primary-button type="button" wire:click="go_word()" class="w-32">WORD</x-primary-button>
             </div>
 
             <!-- Title Section -->
@@ -68,10 +68,10 @@
                         @php $i = 0; @endphp
                         @foreach($staffs as $index => $staff)
                         <tr class="hover:bg-gray-50">
-                            <td class="border border-black p-2">{{ $index + 1 }}</td>
+                            <td class="border border-black p-2">{{ en2mm($index + 1) }}</td>
                             <td class="border border-black p-2">{{ $staff->name }}</td>
                             <td class="border border-black p-2">{{ $staff->currentRank?->name }}</td>
-                            <td class="border border-black p-2">{{ $staff->dob }}</td>
+                            <td class="border border-black p-2">{{ en2mm($staff->dob) }}</td>
                             <td class="border border-black p-2">{{ $staff->howOldAmI() }}</td>
                         </tr>
                         @endforeach

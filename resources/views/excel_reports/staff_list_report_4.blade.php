@@ -11,37 +11,12 @@
             font-size: 1.2rem;
             margin-bottom: 20px;
         }
-
-        /* .staff-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .staff-table th, .staff-table td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .staff-table th {
-            background-color: #f2f2f2;
-            text-align: center;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-left {
-            text-align: left;
-        } */
     </style>
-    <h1 class="heading">
+     {{-- <h1>
         ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲ<br>ဝန်ထမ်းအင်အားစာရင်း
-    </h1>
+    </h1>  --}}
 
-    <table class="staff-table">
+    <table>
         <thead>
             <tr>
                 <th>စဥ်</th>
