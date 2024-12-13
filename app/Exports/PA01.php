@@ -108,9 +108,9 @@ class PA01 implements FromView ,WithStyles
             $sheet->getColumnDimension($column)->setAutoSize(true);
         }
 
-        // Set row heights manually for dynamic rows
+       
         foreach (range(3, $highestRow) as $row) {
-            $sheet->getRowDimension($row)->setRowHeight(-1); // Auto-adjust height
+            $sheet->getRowDimension($row)->setRowHeight(-1); 
         }
 
         // Define the print area dynamically
