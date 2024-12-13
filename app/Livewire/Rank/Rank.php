@@ -125,7 +125,7 @@ class Rank extends Component
         $this->submit_form = 'submitForm';
 
         $rankSearch = '%' . $this->rank_search . '%';
-        $rankQuery = ModelsRank::query();
+        $rankQuery = ModelsRank::query()->withoutGlobalScopes();
         if ($this->rank_search) {
             $this->resetPage();
             $rankQuery->where(fn($q) => $q->where('name', 'LIKE', $rankSearch)

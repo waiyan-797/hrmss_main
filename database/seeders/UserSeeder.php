@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123'),
-            'division_id' => 1  ,
+            'division_id' => 11  ,
             'role_id' => 2 ,
             
             
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'name' => 'User',
             'email' => 'users@gmail.com',
             'password' => bcrypt('123'),
-            'division_id' => 1  ,
+            'division_id' => 11  ,
             'role_id' => 4 ,
             
             

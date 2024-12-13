@@ -93,11 +93,11 @@ public $has_military_friend_text ;
 
 
     //relative
-    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street, $father_address_house_no, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_department_id, $is_newly_appointed = false,
-        $spouse_father_name, $spouse_father_ethnic_id, $spouse_father_religion_id, $spouse_father_place_of_birth, $spouse_father_occupation, $spouse_father_address_street, $spouse_father_address_house_no, $spouse_father_address_ward, $spouse_father_address_township_or_town_id, $spouse_father_address_region_id,
-        $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street, $mother_address_house_no, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id,
-        $spouse_mother_name, $spouse_mother_ethnic_id, $spouse_mother_religion_id, $spouse_mother_place_of_birth, $spouse_mother_occupation, $spouse_mother_address_street, $spouse_mother_address_house_no, $spouse_mother_address_ward, $spouse_mother_address_township_or_town_id, $spouse_mother_address_region_id,
-        $family_in_politics = false, $family_in_politics_text;
+    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street,$father_address_house_no, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_department_id, $is_newly_appointed = false,
+        $spouse_father_name, $spouse_father_ethnic_id, $spouse_father_religion_id, $spouse_father_place_of_birth, $spouse_father_occupation, $spouse_father_address_street,$spouse_father_address_house_no, $spouse_father_address_ward, $spouse_father_address_township_or_town_id, $spouse_father_address_region_id,
+        $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street,$mother_address_house_no, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id,
+        $spouse_mother_name, $spouse_mother_ethnic_id, $spouse_mother_religion_id, $spouse_mother_place_of_birth, $spouse_mother_occupation, $spouse_mother_address_street,$spouse_mother_address_house_no, $spouse_mother_address_ward, $spouse_mother_address_township_or_town_id, $spouse_mother_address_region_id,
+        $family_in_politics = false , $family_in_politics_text ;
 
     public $siblings = [];
     public $father_siblings = [];
@@ -120,7 +120,7 @@ public $has_military_friend_text ;
     public $socials = [];
     public $staff_languages = [];
     public $punishments = [];
-
+    public $withoutScopeRanks ;
     protected $personal_info_rules = [
         'photo' => '',
         'name' => 'required',
@@ -314,6 +314,9 @@ public $has_military_friend_text ;
             $this->loadStaffData($this->staff_id);
         }
         $this->leave_types = LeaveType::all();
+
+        // $this->withoutScopeRanks = Rank::withoutGlobalScope(App\Scopes\SortNoScope::class)->where(true)->get();
+        $this->withoutScopeRanks = Rank::withoutGlobalScopes()->get();
     }
 
     private function initializeArrays($staff_id)
@@ -778,7 +781,8 @@ public $has_military_friend_text ;
 
     public function add_spouse_mother_siblings()
     {
-        $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''
+    ];
     }
 
     public function add_schools()
@@ -1776,7 +1780,8 @@ public $has_military_friend_text ;
 
             case 'job_info':
                 $data['posts'] = Post::all();
-                $data['ranks'] = Rank::all();
+    
+                $data['ranks'] = $this->withoutScopeRanks; 
                 $data['ministrys'] = Ministry::all();
                 $data['divisions'] = Division::all();
                 $data['departments'] = Department::all();
@@ -1798,7 +1803,7 @@ public $has_military_friend_text ;
                 $data['sections'] = Section::all();
                 $data['penalty_types'] = PenaltyType::all();
                 $data['languages'] = Language::all();
-                $data['ranks'] = Rank::all();
+                $data['ranks'] =$this->withoutScopeRanks;
                 $data['departments'] = Department::all();
                 break;
 

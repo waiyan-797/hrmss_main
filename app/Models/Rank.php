@@ -15,6 +15,10 @@ class Rank extends Model
     {
         static::addGlobalScope(new SortNoScope());
     }
+    public function removeGroupScope()
+    {
+        static::withoutGlobalScope(new SortNoScope());
+    }
 
 
 

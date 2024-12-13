@@ -8,11 +8,12 @@
  
     <div class=" mt-5 flex justify-center items-center    ">
         <ul wire:sortable="updateOrder" class="  w-screen" wire:sortable.options="{ animation: 100 }" >
-            @foreach($staffs as $member)
+            @foreach($staffs as  $key=> $member)
                 <li wire:sortable.item="{{ $member->id}}" wire:key="staff-{{ $member->id }}" class="p-2 border mb-1">
                     <div wire:sortable.handle >
                     <span class=" text-lg  ">
-                        {{$member->sort_no}}
+                        
+                         {{$key + 1  }} 
                     </span>
                     <span class=" text-lg">
                         {{ $member->name }}
