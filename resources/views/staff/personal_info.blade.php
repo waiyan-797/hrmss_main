@@ -3,7 +3,7 @@
         @if ($staff_photo && $photo == null)
             <img src="{{ route('file', $staff_photo) }}" class="w-20 h-20 rounded-full border-2 dark:border-green-600 border-green-400 mb-4">
         @else
-            <img src="{{ $photo ? $photo->temporaryUrl() :asset('img/user.png') }}" class="w-20 h-20 rounded-full border-2 dark:border-green-600 border-green-400 mb-4">
+            <img src="{{ $photo ? $photo->temporaryUrl() :asset('img/user.png')}}" class="w-20 h-20 rounded-full border-2 dark:border-green-600 border-green-400 mb-4">
         @endif
     </div>
 
@@ -346,7 +346,7 @@
     <div>
         <x-input-label for="ပရီမီယံ" :value="__('ပရီမီယံ')" />
         <x-text-input wire:model="life_insurance_premium" id="life_insurance_premium" name="life_insurance_premium" type="text" class="mt-1 block w-full" />
-        <x-input-error class="mt-2" :messages="$errors->get('life_insurance_premium')" />
+        <x-input-error class="mt-2" :messages="$errors->get('life_insurance_premium')" />g
     </div>
 </div>
 <div class="w-full h-auto py-5">

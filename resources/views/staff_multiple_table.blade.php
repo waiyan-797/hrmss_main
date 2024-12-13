@@ -23,7 +23,10 @@
                                     placeholder="Select an Option..."
                                     class="mt-1 block w-full h-40"
                                     isHighNeeded=true
+                                    err="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
                                     
+
+
                                 />
                             @elseif ($type['type'] == 'text' || $type['type'] == 'number'|| $type['type']=='file')
                                 <x-text-input
@@ -32,7 +35,8 @@
                                     name="{{$type['wire_array_key']}}"
                                     type="{{$type['type']}}"
                                     class="mt-1 block w-full"
-                                    
+                                    err="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
+
                                 />
                                 @elseif($type['type'] == 'date' )
 
@@ -42,6 +46,7 @@
                                 wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
                                 class="w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
 
+                                err="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
 
                                 />
                             @elseif ($type['type'] == 'checkbox')
@@ -51,16 +56,19 @@
                                     name="{{$type['wire_array_key']}}"
                                     type="checkbox"
                                     class="form-checkbox h-4 w-4 text-indigo-600"
+
                                 />
                             
                             @elseif ($type['type'] == 'multiple-select')
-                                <x-multiple-searchable-select
-                                property="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
-                                :values="$type['select_values']"
-                                placeholder="Select an Option..."
-                                class="mt-1 block w-full h-40"
-                                isHighNeeded=true
-                                />
+                            
+                            <x-multiple-select
+                            property="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
+                            :values="$type['select_values']"
+                            placeholder="Select an Option..."
+                            class="mt-1 block w-full h-40"
+                            isHighNeeded=true
+                        />
+                        
                             @endif
 
 

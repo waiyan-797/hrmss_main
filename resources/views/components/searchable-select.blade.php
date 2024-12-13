@@ -1,8 +1,8 @@
-@props(['values', 'property' , 'isHighNeeded'=>false])
+@props(['values', 'property' , 'isHighNeeded'=>false , 'err' => null ])
 
 <div 
 :class="open && isHighNeeded ? 'h-60' : ''"
-{{-- class is jsut to fix temporary  --}}
+
 x-data="{
         open: false,
         search: '',
@@ -44,4 +44,10 @@ x-data="{
             </ul>
         </div>
     </div>
+
 </div>
+
+
+@error($err)
+<p class="mt-2 text-sm text-red-600 font-medium">{{ $message }}</p>
+@enderror

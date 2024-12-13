@@ -32,6 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
                     @foreach ($divisions as $key=> $division)
                         <tr>
                             <td class="border border-black text-center p-2">{{ en2mm($key + 1 ) }}</td>

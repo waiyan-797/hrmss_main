@@ -60,7 +60,7 @@ class InvestmentCompanies8 extends Component
     public function go_excel() 
     {
         return Excel::download(new PA08(
-    ), 'PA05.xlsx');
+    ), 'PA08.xlsx');
     }
     public function go_word()
     {

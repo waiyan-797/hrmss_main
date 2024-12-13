@@ -6,24 +6,23 @@
              <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button> 
             <br><br>
 
+            <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
+                <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+                <h2 class="font-semibold text-base mb-2 text-center">နေပြည်တော်ရှိ အရာထမ်း / အမှုထမ်း ဝန်ထမ်းအင်အားစာရင်း</h2>
+
             <div>
-
-
-
                 <div class="w-1/3">
                     <x-select wire:model="letter_type_id" :values="$letter_types" placeholder="စာအဆင့်အတန်းရွေးပါ"
                         id="letter_type_id" name="letter_type_id" class="mt-11 block w-full" />
                     <x-input-error class="mt-2" :messages="$errors->get('letter_type_id')" />
                 </div>
-
-
-
             </div>
+
             <div class="overflow-x-auto mt-6">
                 <table class="min-w-full border border-black">
                     <thead>
                         <tr class="bg-gray-100">
-                            <th class="border border-black text-center p-2">စဥ်</th>
+                            <th class="border border-black text-center p-2">စဉ်</th>
                             <th class="border border-black text-center p-2">ရာထူး/အဆင့်</th>
                             <th class="border border-black text-center p-2">အိမ်ထောင်သည်</th>
 

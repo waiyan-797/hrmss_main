@@ -2,7 +2,7 @@
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
             <br><br>
             <input type="month" wire:model.live='filterRange'>
@@ -11,13 +11,13 @@
                 <h1 class="font-semibold text-base mb-2 text-center">
                     ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
                 <h1 class="font-semibold text-base mb-2 text-center">
-                    ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+                    ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
                 <h3 class="font-semibold text-base mb-2 text-center">{{ mmDateFormat($year, $month) }} </h3>
                 <div class="w-full rounded-lg">
                     <table class="md:w-auto">
                         <thead>
                             <tr>
-
+                                <th rowspan="3" class="border border-black text-center p-2">စဉ်</th>
                                 <th rowspan="3" class="border border-black text-center p-2">ဌာန</th>
                                 <th colspan="3" class="border border-black text-center p-2">မူလအင်အား</th>
                                 <th colspan="9" class="border border-black text-center p-2">ပြုန်းတီးအင်အား</th>
@@ -62,7 +62,7 @@
                         </thead>
                         <tbody class="md:w-auto">
                             <tr>
-
+                                <td class="border border-black text-center p-2">{{en2mm(++$count)}}</td>
                                 <td class="border border-black text-center p-2">
                                     ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
                                 {{-- staff_type_id --}}
@@ -104,6 +104,7 @@
                             </tr>
                             <tr class="font-bold">
 
+                                <td class="border border-black text-center p-2"></td>
                                 <td class="border border-black text-center p-2"></td>
                                 <td class="border border-black text-center p-2">{{ en2mm($high_staffs) }}</td>
                                 <td class="border border-black text-center p-2">{{ en2mm($low_staffs) }}</td>

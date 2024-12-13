@@ -18,7 +18,7 @@ class StaffReport1 extends Component
 
     public $nameSearch, $deptId, $filterDate;
     public $staffs;
-    public $year , $month ;
+    // public $year , $month ;
 
     public function go_pdf()
     {
@@ -100,6 +100,7 @@ class StaffReport1 extends Component
     {
         $year = explode('-', $this->filterDate)[0];
         $month = explode('-', $this->filterDate)[1];
+        
         $staffQuery = Staff::query();
         $staffQuery->withWhereHas('postings', function ($query) use ($year, $month) {
 
@@ -117,12 +118,15 @@ class StaffReport1 extends Component
         $staffs = Staff::get();
         $pension_year = PensionYear::first();
         
+        
 
 
         return view('livewire.staff-report.staff-report1', [
             'staffs' => $this->staffs,
             'pension_year' => $pension_year,
-            'depts' => Department::all()
+            'depts' => Department::all() ,
+            'year' => $year ,
+            'month' => $month
         ]);
     }
 }

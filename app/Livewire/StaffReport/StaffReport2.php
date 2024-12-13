@@ -21,10 +21,7 @@ class StaffReport2 extends Component
         $data = [
             'staffs' => $staffs,
         ];
-        
-      
        
-
         $pdf = PDF::loadView('pdf_reports.staff_report_2', $data);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();

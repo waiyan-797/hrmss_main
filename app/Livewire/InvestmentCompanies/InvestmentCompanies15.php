@@ -384,6 +384,10 @@ class InvestmentCompanies15 extends Component
 
     public function render()
     {
+
+
+
+
         $yangon = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 23);
         });
@@ -448,7 +452,11 @@ class InvestmentCompanies15 extends Component
             return $query->whereIn('current_division_id', [23, 26, 20, 24, 21, 25, 16, 17, 14, 18, 19, 13, 12, 22, 15]);
         });
 
+
+
         $ranks = Rank::get();
+        
+
         return view('livewire.investment-companies.investment-companies15',[
             'yangon' => $yangon,
             'nay_pyi_thaw' => $nay_pyi_thaw,

@@ -83,7 +83,7 @@
             <table>
                 <thead>
                     <tr class="bg-gray">
-                        <th>စဥ်</th>
+                        <th>စဉ်</th>
                         <th>အမည်</th>
                         <th>ရာထူး</th>
                         <th>နိုင်ငံသားစိစစ်ရေးအမှတ်</th>
@@ -93,7 +93,7 @@
                         <th>လက်ရှိဌာနရောက်ရှိရက်စွဲ</th>
                         <th>ဌာနခွဲ</th>
                         <th>ပညာအရည်အချင်း</th>
-                        <th>ပင်စင်ပြည့်သည့်နေ့စွဲ</th>
+                        {{-- <th>ပင်စင်ပြည့်သည့်နေ့စွဲ</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -104,13 +104,13 @@
                                 <td>{{ $staff->name }}
                                 </td>
                                 <td>{{ $staff->current_rank?->name }}</td>
-                                <td>{{ $staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code }}
+                                <td>{{ $staff->nrc_region_id?->name . $staff->nrc_township_code?->name .'/'. $staff->nrc_sign?->name .'/'. $staff->nrc_code }}
                                 </td>
-                                <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}
+                                <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-Y')) }}
                                 </td>
-                                <td>{{ en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y')) }}</td>
-                                <td>{{ en2mm(\Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y')) }}</td>
-                                <td>{{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y'))}}</td>
+                                <td>{{ en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-Y')) }}</td>
+                                <td>{{ en2mm(\Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-Y')) }}</td>
+                                <td>{{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-Y'))}}</td>
                                 <td>{{ $staff->side_department?->name }}</td>
                                 <td>@foreach ($staff->staff_educations as $edu)
                                     <div class="mb-2">
@@ -118,7 +118,7 @@
                                         <span>{{ $edu->education_type?->name }}</span>,
                                         <span>{{ $edu->education?->name }}</span>
                                     </div>@endforeach</td>
-                                <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->year + $pension_year->year) }}</td>
+                                {{-- <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->year + $pension_year->year) }}</td> --}}
                             </tr>
                             @endforeach
                 </tbody>

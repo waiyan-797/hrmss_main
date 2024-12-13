@@ -15,9 +15,11 @@ class InvestmentCompanies7 extends Component
 {
     public $year, $month, $filterRange;
     public $previousYear, $previousMonthDate, $previousMonth;
+     public $count=0;
 
     public function go_pdf()
     {
+        $count=0;
         [$year, $month] = explode('-', $this->filterRange);
         $this->year = $year;
         $this->month = $month;
@@ -117,6 +119,7 @@ class InvestmentCompanies7 extends Component
         $low_left_staffs = $low_staffs + $low_new_staffs + $low_transfer_staffs - ($low_leave_staffs + $low_reduced_total);
         $total_left_staffs = $high_left_staffs + $low_left_staffs;
         $data = [
+            'count'=>$count,
             'high_staffs' => $high_staffs,
             'low_staffs' => $low_staffs,
             'high_reduced_staffs' => $high_reduced_staffs,

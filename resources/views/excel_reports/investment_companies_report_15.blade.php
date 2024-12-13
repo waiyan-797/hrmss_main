@@ -1,22 +1,7 @@
 
 
     <style type="text/css">
-        page{
-            background: white;
-        }
-
-        page[size="A4"] {
-            width: 210mm;
-            height: 297mm;
-        }
-
-        @media print {
-            body, page {
-                margin: 0;
-                box-shadow: 0;
-            }
-        }
-
+      
         body {
            font-family: 'pyidaungsu', sans-serif !important;
             font-size: 13px;
@@ -50,7 +35,6 @@
     </style>
 </head>
 <body>
-    <page size="A4">
         <table>
             <thead>
                 <tr>
@@ -289,3 +273,4 @@
                 </tr>
             </tbody>
         </table>
+</body>

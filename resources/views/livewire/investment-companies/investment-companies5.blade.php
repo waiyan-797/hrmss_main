@@ -2,7 +2,7 @@
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
              <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button> 
            
 
@@ -14,7 +14,7 @@
                     <table class="w-full text-center">
                         <thead>
                             <tr class="bg-gray-100">
-                                <th class="p-2 border border-black">စဥ်</th>
+                                <th class="p-2 border border-black">စဉ်</th>
                                 <th class="p-2 border border-black">ရာထူး</th>
                                 <th class="p-2 border border-black">ခွင့်ပြုအင်အား</th>
                                 <th class="p-2 border border-black">ခန့်ပြီးအင်အား</th>

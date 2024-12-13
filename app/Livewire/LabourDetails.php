@@ -93,6 +93,10 @@ class LabourDetails extends Component
                 'permanent_address_region_id' => $this->permanent_address_region_id,
             ]
         );
+
+
+        return redirect()->to('/labour');
+
     }
 
     public function mount($id)
