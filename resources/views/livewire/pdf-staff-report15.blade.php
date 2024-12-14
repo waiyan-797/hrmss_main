@@ -161,45 +161,44 @@
                         </table>
                     </div>
                 </div>
-
                 <div class="mb-4">
                     <div class="flex justify-start mb-8">
-                        <p class="md:w-8">၁၅။ </p>
-                        <p>
-                            
-                          အထက်ပါ အချက်အလက်များကို မှန်ကန်သည့်အတိုင်းဖြည့်သွင်းရေးသားပါကြောင်း ကိုယ်တိုင် လက်မှန်ရေးထိုးပါသည်။</p>
+                        <p class="w-12 md:w-8">၁၅။ </p>
+                        <p>အထက်ပါ အချက်အလက်များကို မှန်ကန်သည့်အတိုင်းဖြည့်သွင်းရေးသားပါကြောင်း ကိုယ်တိုင် လက်မှန်ရေးထိုးပါသည်။</p>
                     </div>
-
-                     <div class="flex justify-center mb-2 items-center">
-                        <p class="md:w-20 mr-6">လက်မှတ်</p>
-                        <p>-</p>
-                        <p></p>
+    
+                    <div class="flex justify-center items-center mb-2 ml-96">
+                        <p class="w-24 md:w-20 mr-6">လက်မှတ်</p>
+                        <p class="w-8">-</p>
+                        <p class="w-full"></p>
                     </div>
-
-                    <div class="flex justify-center mb-2 items-center">
-                        <p class="md:w-20 mr-6">အမည်</p>
-                        <p>-</p>
-                        <p>{{auth()->user()->name}}</p>
+    
+                    <div class="flex justify-center items-center mb-2 ml-96">
+                        <p class="w-24 md:w-20 mr-6">အမည်</p>
+                        <p class="w-8">-</p>
+                        <p class="w-full"></p>
                     </div>
-
-                    <div class="flex justify-center mb-2 items-center">
-                        <p class="md:w-20 mr-6">အဆင့်</p>
-                        <p>-</p>
-                        <p>{{auth()->user()->role->name ?? ''}}</p>
+    
+                    <div class="flex justify-center items-center mb-2 ml-96">
+                        <p class="w-24 md:w-20 mr-6">အဆင့်</p>
+                        <p class="w-8">-</p>
+                        <p class="w-full"></p>
                     </div>
-
-                    <div class="flex justify-center mb-2 items-center">
-                        <p class="md:w-20 mr-6">တပ်/ ဌာန</p>
-                        <p>-</p>
-                        <p></p>
+    
+                    <div class="flex justify-center items-center mb-4 ml-96">
+                        <p class="w-24 md:w-20 mr-6">တပ်/ ဌာန</p>
+                        <p class="w-8">-</p>
+                        <p class="w-full"></p>
                     </div>
-
+    
                     <div class="flex justify-start space-x-1">
                         <p>ရက်စွဲ - </p>
                         <p>{{ formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day) }}</p>
-                    </div> 
-                    
+                    </div>
                 </div>
+
+
+
             </div>
         </div>
     </div>

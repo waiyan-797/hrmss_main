@@ -10,7 +10,7 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သောဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့','အတန်း','ခုံအမှတ်','မေဂျာ','မှ','ထိ', 'ခုနှစ်','ဘွဲ့လက်မှတ်','အမှတ်စာရင်း','မှတ်ချက်'],
+        'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သောဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့','အတန်း','မေဂျာ','မှ','ထိ', 'ဘွဲ့ရရှိခဲ့သည့်ခုနှစ်','ဘွဲ့လက်မှတ်','မှတ်ချက်'],
         'column_vals' => $schools,
         'column_types' => [
             [
@@ -46,23 +46,19 @@
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'semester',
             ],
-            [
-                'type' => 'text',
-                'wire_array_name' => 'schools',
-                'wire_array_key' => 'roll_no',
-            ],
+           
             [
                 'type' => 'text',
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'major',
             ],
             [
-                'type' => 'date',
+                'type' => 'number',
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'from_date',
             ],
             [
-                'type' => 'date',
+                'type' => 'number',
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'to_date',
             ],
@@ -73,14 +69,9 @@
                 'wire_array_key' => 'year',
             ],
             [
-                'type' => 'text',
+                'type' => 'file',
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'certificate',
-            ],
-            [
-                'type' => 'text',
-                'wire_array_name' => 'schools',
-                'wire_array_key' => 'exam_mark',
             ],
             [
                 'type' => 'text',
@@ -126,9 +117,6 @@
                 'wire_array_name' => 'trainings',
                 'wire_array_key' => 'batch',
             ],
-
-            
-            
             [
                 'type' => 'number',
                 'wire_array_name' => 'trainings',
@@ -183,7 +171,7 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အမည်', 'ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်', 'အမိန့်အမှတ်', 'ရက်စွဲ','မှတ်ချက်'],
+        'column_names' => ['ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အမည်', 'ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်', 'အမိန့်အမှတ်/ရက်စွဲ','မှတ်ချက်'],
         'column_vals' => $awards,
         'column_types' => [
             [
@@ -202,11 +190,6 @@
                 'type' => 'text',
                 'wire_array_name' => 'awards',
                 'wire_array_key' => 'order_no',
-            ],
-            [
-                'type' => 'date',
-                'wire_array_name' => 'awards',
-                'wire_array_key' => 'order_date',
             ],
             [
                 'type' => 'text',

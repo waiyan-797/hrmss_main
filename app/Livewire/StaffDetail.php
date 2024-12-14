@@ -405,13 +405,11 @@ public $has_military_friend_text ;
                 'school_name' => $sch->school_name,
                 'town' => $sch->town,
                 'semester' => $sch->semester,
-                'roll_no' => $sch->roll_no,
                 'major' => $sch->major,
                 'from_date' => $sch->from_date,
                 'to_date' => $sch->to_date,
                 'year' => $sch->year,
                 'certificate' => $sch->certificate,
-                'exam_mark' => $sch->exam_mark,
                 'remark' => $sch->remark,
             ];
            
@@ -442,7 +440,6 @@ public $has_military_friend_text ;
                 'award_type' => $awa->award_type_id,
                 'award' => $awa->award_id,
                 'order_no' => $awa->order_no,
-                'order_date' => $awa->order_date,
                 'remark' => $awa->remark,
             ];
         }
@@ -797,12 +794,10 @@ public $has_military_friend_text ;
             'town' => '',
             'year' => '',
             'certificate' => '',
-            'exam_mark' => '',
             'remark' => '',
             'from_date' => '',
             'to_date' => '',
             'semester' => '',
-            'roll_no' => '',
             'major' => '',
 
         ];
@@ -832,7 +827,6 @@ public $has_military_friend_text ;
             'award_type' => '',
             'award' => '',
             'order_no' => '',
-            'order_date' => '',
             'remark' => ''
 
         ];
@@ -1293,102 +1287,80 @@ public $has_military_friend_text ;
             ]);
         }
     }
-
-    //validation done
     private function saveSchools($staffId)
-    {
-        $rules = [
-            'schools.*.education_group' => 'required',
-            'schools.*.education_type' => 'required',
-            'schools.*.education' => 'required',
-            'schools.*.school_name' => 'required|string|max:255',
-            'schools.*.town' => 'required|string|max:255',
-            'schools.*.semester' => 'nullable|string|max:50',
-            'schools.*.from_date' => 'required|date|date_format:Y-m-d',
-            'schools.*.to_date' => 'required|date|after_or_equal:from_date|date_format:Y-m-d',
-            'schools.*.year' => 'required|integer|min:1900|max:' . date('Y'),
-            'schools.*.certificate' => 'nullable|string|max:255',
-            'schools.*.exam_mark' => 'nullable|numeric|min:0|max:100',
-            'schools.*.remark' => 'nullable|string|max:1000',
-            'schools.*.roll_no' => 'nullable|string|max:50',
-            'schools.*.major' => 'nullable|string|max:255',
-        ];
-    
-        // Custom validation messages
-        $messages = [
-            'schools.*.education_group.required' => 'The education group field is required.',
-            'schools.*.education_type.required' => 'The education type field is required.',
-            'schools.*.education.required' => 'The education level field is required.',
-            'schools.*.school_name.required' => 'The school name field is required.',
-            'schools.*.school_name.string' => 'The school name must be a string.',
-            'schools.*.school_name.max' => 'The school name may not exceed 255 characters.',
-            
-            'schools.*.town.required' => 'The town field is required.',
-            'schools.*.town.string' => 'The town must be a string.',
-            'schools.*.town.max' => 'The town may not exceed 255 characters.',
-            
-            'schools.*.semester.string' => 'The semester must be a string.',
-            'schools.*.semester.max' => 'The semester may not exceed 50 characters.',
-            
-            'schools.*.from_date.required' => 'The start date is required.',
-            'schools.*.from_date.date' => 'The start date must be a valid date.',
-            'schools.*.from_date.date_format' => 'The start date must be in the format YYYY-MM-DD.',
-            
-            'schools.*.to_date.required' => 'The end date is required.',
-            'schools.*.to_date.date' => 'The end date must be a valid date.',
-            'schools.*.to_date.after_or_equal' => 'The end date must be after or equal to the start date.',
-            'schools.*.to_date.date_format' => 'The end date must be in the format YYYY-MM-DD.',
-            
-            'schools.*.year.required' => 'The year field is required.',
-            'schools.*.year.integer' => 'The year must be an integer.',
-            'schools.*.year.min' => 'The year must be at least 1900.',
-            'schools.*.year.max' => 'The year may not be greater than ' . date('Y') . '.',
-            
-            'schools.*.certificate.string' => 'The certificate must be a string.',
-            'schools.*.certificate.max' => 'The certificate may not exceed 255 characters.',
-            
-            'schools.*.exam_mark.numeric' => 'The exam mark must be a number.',
-            'schools.*.exam_mark.min' => 'The exam mark must be at least 0.',
-            'schools.*.exam_mark.max' => 'The exam mark may not exceed 100.',
-            
-            'schools.*.remark.string' => 'The remark must be a string.',
-            'schools.*.remark.max' => 'The remark may not exceed 1000 characters.',
-            
-            'schools.*.roll_no.string' => 'The roll number must be a string.',
-            'schools.*.roll_no.max' => 'The roll number may not exceed 50 characters.',
-            
-            'schools.*.major.string' => 'The major must be a string.',
-            'schools.*.major.max' => 'The major may not exceed 255 characters.',
-        ];
-        
-    
-        // Perform validation
-        $this->validate($rules, $messages);
-    
+{
+    $rules = [
+        'schools.*.education_group' => 'required',
+        'schools.*.education_type' => 'required',
+        'schools.*.education' => 'required',
+        'schools.*.school_name' => 'required|string|max:255',
+        'schools.*.town' => 'required|string|max:255',
+        'schools.*.semester' => 'nullable|string|max:50',
+        'schools.*.from_date' => 'required|integer',
+        'schools.*.to_date' => 'required|integer',
+        'schools.*.year' => 'required|integer|min:1900|max:' . date('Y'),
+        'schools.*.certificate' => 'nullable|file|mimes:jpg,png,pdf|max:2048',
+        'schools.*.remark' => 'nullable|string|max:1000',
+        'schools.*.major' => 'nullable|string|max:255',
+    ];
 
-     
+    $messages = [
+        'schools.*.education_group.required' => 'The education group field is required.',
+        'schools.*.education_type.required' => 'The education type field is required.',
+        'schools.*.education.required' => 'The education level field is required.',
+        'schools.*.school_name.required' => 'The school name field is required.',
+        'schools.*.school_name.string' => 'The school name must be a string.',
+        'schools.*.school_name.max' => 'The school name may not exceed 255 characters.',
+        'schools.*.town.required' => 'The town field is required.',
+        'schools.*.town.string' => 'The town must be a string.',
+        'schools.*.town.max' => 'The town may not exceed 255 characters.',
+        'schools.*.semester.string' => 'The semester must be a string.',
+        'schools.*.semester.max' => 'The semester may not exceed 50 characters.',
+        'schools.*.from_date.required' => 'The start date is required.',
+        'schools.*.to_date.required' => 'The end date is required.',
+        'schools.*.year.required' => 'The year field is required.',
+        'schools.*.certificate.file' => 'The certificate must be a valid file.',
+        'schools.*.certificate.mimes' => 'The certificate must be a file of type: jpg, png, pdf.',
+        'schools.*.certificate.max' => 'The certificate may not exceed 2MB.',
+        'schools.*.remark.string' => 'The remark must be a string.',
+        'schools.*.remark.max' => 'The remark may not exceed 1000 characters.',
+        'schools.*.major.string' => 'The major must be a string.',
+        'schools.*.major.max' => 'The major may not exceed 255 characters.',
+    ];
 
-        School::where('staff_id', $staffId)->delete();
-        foreach ($this->schools as $school) {
-            School::create([
-                'staff_id' => $staffId,
-                'education_group_id' => $school['education_group'],
-                'education_type_id' => $school['education_type'],
-                'education_id' => $school['education'],
-                'school_name' => $school['school_name'],
-                'town' => $school['town'],
-                'semester' => $school['semester'],
-                'roll_no' => $school['roll_no'],
-                'major' => $school['major'],
-                'from_date' => $school['from_date'],
-                'to_date' => $school['to_date'],
-                'year' => $school['year'],
-                'certificate' => $school['certificate'],
-                'exam_mark' => $school['exam_mark'],
-                'remark' => $school['remark'],
-            ]);
+    // Validate the data
+    $this->validate($rules, $messages);
+
+    // Delete old school records for the staff member
+    School::where('staff_id', $staffId)->delete();
+
+    // Save schools and handle certificate uploads
+    foreach ($this->schools as $school) {
+        $certificatePath = null;
+
+        if (isset($school['certificate']) && $school['certificate'] instanceof \Illuminate\Http\UploadedFile) {
+            $certificatePath = $school['certificate']->store('certificates', 'public');
         }
+
+        School::create([
+            'staff_id' => $staffId,
+            'education_group_id' => $school['education_group'],
+            'education_type_id' => $school['education_type'],
+            'education_id' => $school['education'],
+            'school_name' => $school['school_name'],
+            'town' => $school['town'],
+            'semester' => $school['semester'],
+            'major' => $school['major'],
+            'from_date' => $school['from_date'],
+            'to_date' => $school['to_date'],
+            'year' => $school['year'],
+            'certificate' => $certificatePath,
+            'remark' => $school['remark'],
+        ]);
     }
+}
+
+    
 
     private function savePastOccupations($staffId)
     {
@@ -1452,7 +1424,6 @@ public $has_military_friend_text ;
             'awards.*.award_type' => 'required',
             'awards.*.award' => 'required',
             'awards.*.order_no' => 'required|string',
-            'awards.*.order_date' => 'required|date|date_format:Y-m-d',
             'awards.*.remark' => ''
         ];
     
@@ -1463,10 +1434,6 @@ public $has_military_friend_text ;
           
             'awards.*.order_no.string' => 'The order number must be a string.',
             'awards.*.order_no.required' => 'The order no is required.',
-            
-            'awards.*.order_date.required' => 'The order date is required.',
-            'awards.*.order_date.date' => 'The order date must be a valid date.',
-            'awards.*.order_date.date_format' => 'The order date must be in the format YYYY-MM-DD.',
         ];
     
         $this->validate($rules, $messages);   
@@ -1481,7 +1448,6 @@ public $has_military_friend_text ;
                 'award_type_id' => $award['award_type'],
                 'award_id' => $award['award'],
                 'order_no' => $award['order_no'],
-                'order_date' => $award['order_date'],
                 'remark' => $award['remark'],
             ]);
         }

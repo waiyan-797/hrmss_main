@@ -123,77 +123,38 @@
                                             {{$education->education->name.','}}
                                         @endforeach
                                 </tr>
+                                <tr>
+                                    <td style="border: none;">၉။</td>
+                                    <td style="border: none;">အဖအမည်</td>
+                                    <td style="border: none;">-</td>
+                                    <td style="border: none;">{{ $staff->father_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;">၁၀။</td>
+                                    <td style="border: none;">အလုပ်အကိုင်</td>
+                                    <td style="border: none;">-</td>
+                                    <td style="border: none;">{{$staff->father_occupation}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;">၁၁။</td>
+                                    <td style="border: none;">အမိအမည်</td>
+                                    <td style="border: none;">-</td>
+                                    <td style="border: none;">{{$staff->mother_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;">၁၂။</td>
+                                    <td style="border: none;">အလုပ်အကိုင်</td>
+                                    <td style="border: none;">-</td>
+                                    <td style="border: none;">{{$staff->mother_occupation}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;">၁၃။</td>
+                                    <td style="border: none;">နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်)</td>
+                                    <td style="border: none;">-</td>
+                                    <td style="border: none;">{{en2mm($staff->abroads->count())}}</td>
+                                </tr>
                             </tbody>
                         </table>
-                        {{-- <div style="margin-top: 16px;">
-                            <table style="border: none;">
-                                <tbody style="border: none;">
-                                    <tr style="border: none;">
-                                        <td style="border: none; width: 5%;">၈။</td>
-                                        <td style="border: none; width: 35%;">ပညာအရည်အချင်း</td>
-                                        <td style="border: none; width: 5%;"></td>
-                                        <td style="border: none; width: 55%;"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div style="margin-top: 16px;">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>စဉ်</th>
-                                        <th>Education Group</th>
-                                        <th>Education Type</th>
-                                        <th>Education</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($staff->staff_educations as $education)
-                                    <tr>
-                                        <td style="text-align: center;">{{$loop->index + 1}}</td>
-                                        <td>{{$education->education_group->name}}</td>
-                                        <td>{{$education->education_type->name}}</td>
-                                        <td>{{$education->education->name}}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div> --}}
-                        <div style="margin-top: 16px;">
-                            <table style="border: none;">
-                                <tbody style="border: none;">
-                                    <tr style="border: none;">
-                                        <td style="border: none; width: 5%;">၉။</td>
-                                        <td style="border: none; width: 35%;">အဖအမည်</td>
-                                        <td style="border: none; width: 5%;">-</td>
-                                        <td style="border: none; width: 55%;">{{$staff->father_name}}</td>
-                                    </tr>
-                                    <tr style="border: none;">
-                                        <td style="border: none;">၁၀။</td>
-                                        <td style="border: none;">အလုပ်အကိုင်</td>
-                                        <td style="border: none;">-</td>
-                                        <td style="border: none;">{{$staff->father_occupation}}</td>
-                                    </tr>
-                                    <tr style="border: none;">
-                                        <td style="border: none;">၁၁။</td>
-                                        <td style="border: none;">အမိအမည်</td>
-                                        <td style="border: none;">-</td>
-                                        <td style="border: none;">{{$staff->mother_name}}</td>
-                                    </tr>
-                                    <tr style="border: none;">
-                                        <td style="border: none;">၁၂။</td>
-                                        <td style="border: none;">အလုပ်အကိုင်</td>
-                                        <td style="border: none;">-</td>
-                                        <td style="border: none;">{{$staff->mother_occupation}}</td>
-                                    </tr>
-                                    <tr style="border: none;">
-                                        <td style="border: none;">၁၃။</td>
-                                        <td style="border: none;">နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်)</td>
-                                        <td style="border: none;">-</td>
-                                        <td style="border: none;">{{en2mm($staff->abroads->count())}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                         <div style="margin-top: 16px;">
                             <table>
