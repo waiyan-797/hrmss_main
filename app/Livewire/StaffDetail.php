@@ -71,7 +71,7 @@ class StaffDetail extends Component
 
 public $has_military_friend_text ;
     public $comment  ,$displayAlertBox ;
-    
+
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     public $staff;
     //personal_info
@@ -248,7 +248,7 @@ public $has_military_friend_text ;
         'spouse_mother_address_township_or_town_id' => '',
         'spouse_mother_address_region_id' => '',
         'family_in_politics' => '',
-        'family_in_politics_text' => '',  
+        'family_in_politics_text' => '',
     ];
 
 
@@ -286,9 +286,9 @@ public $has_military_friend_text ;
         'foreigner_friend_country_id.exists' => 'The selected foreigner friend country is invalid.',
         'foreigner_friend_how_to_know.max' => 'The foreigner friend how-to-know field may not exceed 1000 characters.',
         'recommended_by_military_person.max' => 'The recommended by military person field may not exceed 255 characters.',
-        
+
     ];
-    
+
 
     public function validate_rules()
     {
@@ -412,7 +412,7 @@ public $has_military_friend_text ;
                 'certificate' => $sch->certificate,
                 'remark' => $sch->remark,
             ];
-           
+
         }
 
 
@@ -710,7 +710,7 @@ public $has_military_friend_text ;
         $this->during_work_political_social = $staff->during_work_political_social;
         $this->has_military_friend = $staff->has_military_friend;
         $this->has_military_friend_text = $staff->has_military_friend_text;
-        
+
         $this->foreigner_friend_name = $staff->foreigner_friend_name;
         $this->foreigner_friend_occupation = $staff->foreigner_friend_occupation;
         $this->foreigner_friend_nationality_id = $staff->foreigner_friend_nationality_id;
@@ -1146,7 +1146,7 @@ public $has_military_friend_text ;
             'during_work_political_social' => $this->during_work_political_social,
             'has_military_friend' => $this->has_military_friend,
             'has_military_friend_text' => $this->has_military_friend_text,
-            
+
             'foreigner_friend_name' => $this->foreigner_friend_name,
             'foreigner_friend_occupation' => $this->foreigner_friend_occupation,
             'foreigner_friend_nationality_id' => $this->foreigner_friend_nationality_id,
@@ -1174,7 +1174,7 @@ public $has_military_friend_text ;
         if ($this->saveDraftCheck == true) {
             $staff_create['status_id'] = 1;
         } else {
-            // wtih saftdraft 
+            // wtih saftdraft
             $staff_create['status_id'] = $staff?->status_id == 1  ? (isset($staff?->comment) ? 4 :   2)  : 1;
             if ($staff?->status_id == 2 || $staff?->status_id == 4) {
 
@@ -1360,7 +1360,7 @@ public $has_military_friend_text ;
     }
 }
 
-    
+
 
     private function savePastOccupations($staffId)
     {
@@ -1377,29 +1377,29 @@ public $has_military_friend_text ;
 
         $messages = [
             'past_occupations.*.rank.required' => 'The rank field is required.',
-            
+
             'past_occupations.*.department.required' => 'The department field is required.',
 
             'past_occupations.*.section.required' => 'The section field is required.',
-            
-            
+
+
             'past_occupations.*.address.required' => 'The address field is required.',
             'past_occupations.*.address.string' => 'The address must be a string.',
-            
+
             'past_occupations.*.from_date.required' => 'The from date is required.',
             'past_occupations.*.from_date.date' => 'The from date must be a valid date.',
             'past_occupations.*.from_date.date_format' => 'The from date must be in the format YYYY-MM-DD.',
-            
+
             'past_occupations.*.to_date.required' => 'The from to date is required.',
             'past_occupations.*.to_date.date' => 'The to date must be a valid date.',
             'past_occupations.*.to_date.after_or_equal' => 'The to date must be after or equal to the from date.',
             'past_occupations.*.to_date.date_format' => 'The to date must be in the format YYYY-MM-DD.',
-            
+
             'past_occupations.*.remark.string' => 'The remark must be a string.',
         ];
-        
+
         $this->validate($rules,$messages);
-        
+
 
         PastOccupation::where('staff_id', $staffId)->delete();
         foreach ($this->past_occupations as $occupation) {
@@ -1416,7 +1416,7 @@ public $has_military_friend_text ;
         }
     }
 
-    // validation done 
+    // validation done
     private function saveAwards($staffId)
     {
 
@@ -1426,19 +1426,19 @@ public $has_military_friend_text ;
             'awards.*.order_no' => 'required|string',
             'awards.*.remark' => ''
         ];
-    
+
         $messages = [
             'awards.*.award_type.required' => 'The award type is required.',
 
             'awards.*.award.required' => 'The award is required.',
-          
+
             'awards.*.order_no.string' => 'The order number must be a string.',
             'awards.*.order_no.required' => 'The order no is required.',
         ];
-    
-        $this->validate($rules, $messages);   
-        
-        
+
+        $this->validate($rules, $messages);
+
+
 
 
         Awarding::where('staff_id', $staffId)->delete();
@@ -1469,43 +1469,43 @@ public $has_military_friend_text ;
             'trainings.*.remark' => 'nullable|string',
             'trainings.*.training_location_id' => 'nullable|numeric',
         ];
-        
+
         $messages = [
             'trainings.*.training_type.required' => 'The training type is required.',
             'trainings.*.training_type.numeric' => 'The training type must be a valid number.',
             'trainings.*.training_type.exists' => 'The selected training type is invalid.',
-            
+
             'trainings.*.diploma_name.required' => 'The diploma name is required.',
             'trainings.*.diploma_name.string' => 'The diploma name must be a string.',
             'trainings.*.diploma_name.max' => 'The diploma name may not exceed 255 characters.',
-        
+
             'trainings.*.fees.required' => 'The fees are required.',
             'trainings.*.fees.numeric' => 'The fees must be a number.',
             'trainings.*.fees.min' => 'The fees must be at least 0.',
-        
+
             'trainings.*.from_date.required' => 'The start date is required.',
             'trainings.*.from_date.date' => 'The start date must be a valid date.',
             'trainings.*.from_date.date_format' => 'The start date must be in the format YYYY-MM-DD.',
-        
+
             'trainings.*.to_date.required' => 'The end date is required.',
             'trainings.*.to_date.date' => 'The end date must be a valid date.',
             'trainings.*.to_date.after_or_equal' => 'The end date must be after or equal to the start date.',
             'trainings.*.to_date.date_format' => 'The end date must be in the format YYYY-MM-DD.',
-        
+
             'trainings.*.location.string' => 'The location must be a string.',
             'trainings.*.location.max' => 'The location may not exceed 255 characters.',
-        
+
             'trainings.*.country_id.numeric' => 'The country must be a valid number.',
             'trainings.*.country_id.exists' => 'The selected country is invalid.',
-        
+
             'trainings.*.remark.string' => 'The remark must be a string.',
             'trainings.*.remark.max' => 'The remark may not exceed 1000 characters.',
-        
+
             'trainings.*.training_location_id.numeric' => 'The training location must be a valid number.',
             'trainings.*.training_location_id.exists' => 'The selected training location is invalid.',
         ];
-        
-    
+
+
         // Perform validation
         $this->validate($rules, $messages);
         Training::where('staff_id', $staffId)->delete();
@@ -1746,8 +1746,8 @@ public $has_military_friend_text ;
 
             case 'job_info':
                 $data['posts'] = Post::all();
-    
-                $data['ranks'] = $this->withoutScopeRanks; 
+
+                $data['ranks'] = $this->withoutScopeRanks;
                 $data['ministrys'] = Ministry::all();
                 $data['divisions'] = Division::all();
                 $data['departments'] = Department::all();
@@ -1884,7 +1884,7 @@ public $has_military_friend_text ;
 
         $this->displayAlertBox = true;
         // $staff = Staff::find($this->staff_id);
-        // $staff->status_id = 3; //reject 
+        // $staff->status_id = 3; //reject
         // // $staff->comment = $this->comment;
 
         // $staff->update();
@@ -1898,7 +1898,7 @@ public $has_military_friend_text ;
     public function submitReject()
     {
         $staff = Staff::find($this->staff_id);
-        $staff->status_id = 3; //reject 
+        $staff->status_id = 3; //reject
         $staff->comment = $this->comment;
 
         $staff->update();

@@ -47,24 +47,38 @@
         <x-text-input wire:model="gpms_staff_no" id="gpms_staff_no" name="gpms_staff_no" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('gpms_staff_no')" />
     </div>
-   
+
     <div>
         <x-input-label for="ကျား/မ" :value="__('ကျား/မ')" />
-        <x-searchable-select :values="$genders" property="gender_id"   placeholder="ကျား/မရွေးပါ" name="gender_id" class="mt-1 block w-full" />
-
-        
+        <x-select
+            wire:model="gender_id"
+            :values="$genders"
+            placeholder="ကျား/မရွေးပါ"
+            name="gender_id"
+            class="mt-1 block w-full"
+        />
         <x-input-error class="mt-2" :messages="$errors->get('gender_id')" />
     </div>
     <div>
         <x-input-label for="လူမျိုး" :value="__('လူမျိုး')" />
-        <x-searchable-select  id="ethnic_id" name="ethnic_id" class="mt-1 block w-full" :values="$ethnics" property="ethnic_id"  placeholder="လူမျိုးရွေးပါ"   placeholder="ကျား/မရွေးပါ" name="gender_id" class="mt-1 block w-full" />
-
-        
+        <x-select
+            wire:model="ethnic_id"
+            :values="$ethnics"
+            placeholder="လူမျိုးရွေးပါ"
+            name="ethnic_id"
+            class="mt-1 block w-full"
+        />
         <x-input-error class="mt-2" :messages="$errors->get('ethnic_id')" />
     </div>
     <div>
         <x-input-label for="ဘာသာ" :value="__('ဘာသာ')" />
-        <x-searchable-select property="religion_id" :values="$religions" placeholder="ဘာသာရွေးပါ" id="religion_id" name="religion_id" class="mt-1 block w-full" />
+        <x-select
+            wire:model="religion_id"
+            :values="$religions"
+            placeholder="ဘာသာရွေးပါ"
+            name="religion_id"
+            class="mt-1 block w-full"
+        />
         <x-input-error class="mt-2" :messages="$errors->get('religion_id')" />
     </div>
     <div>
@@ -107,12 +121,26 @@
     </div>
     <div>
         <x-input-label for="သွေးအုပ်စု" :value="__('သွေးအုပ်စု')" />
-        <x-searchable-select property="blood_type_id" :values="$blood_types" placeholder="သွေးအုပ်စုရွေးပါ" id="blood_type_id" name="blood_type_id" class="mt-1 block w-full"/>
+        <x-select
+            wire:model="blood_type_id"
+            :values="$blood_types"
+            placeholder="သွေးအုပ်စုရွေးပါ"
+            id="blood_type_id"
+            name="blood_type_id"
+            class="mt-1 block w-full"
+        />
         <x-input-error class="mt-2" :messages="$errors->get('blood_type_id')" />
     </div>
     <div>
         <x-input-label for="အိမ်ထောင်သည်" :value="__('အိမ်ထောင်သည်')" />
-        <x-searchable-select property="marital_status_id" :values="$marital_statuses" placeholder="အိမ်ထောင်သည်ရွေးပါ" id="marital_status_id" name="marital_status_id" class="mt-1 block w-full"/>
+        <x-select
+            wire:model="marital_status_id"
+            :values="$marital_statuses"
+            placeholder="အိမ်ထောင်သည်ရွေးပါ"
+            id="marital_status_id"
+            name="marital_status_id"
+            class="mt-1 block w-full"
+        />
         <x-input-error class="mt-2" :messages="$errors->get('marital_status_id')" />
     </div>
     <div>
@@ -121,11 +149,9 @@
         <x-input-error class="mt-2" :messages="$errors->get('spouse_name')" />
     </div>
     <div class="col-span-2">
-        <div>
-            <x-input-label for="မွေးဖွားရာဇာတိ" :value="__('မွေးဖွားရာဇာတိ')" />
-            <x-textarea-input wire:model="place_of_birth" id="place_of_birth" name="place_of_birth" class="mt-1 block w-full" required/>
-            <x-input-error class="mt-2" :messages="$errors->get('place_of_birth')" required/>
-        </div>
+        <x-input-label for="မွေးဖွားရာဇာတိ" :value="__('မွေးဖွားရာဇာတိ')" />
+        <x-textarea-input wire:model="place_of_birth" id="place_of_birth" name="place_of_birth" class="mt-1 block w-full" required/>
+        <x-input-error class="mt-2" :messages="$errors->get('place_of_birth')" required/>
     </div>
     <div class="col-span-4">
         <x-input-label :value="__('နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်(တိုင်းဒေသကြီး/ပြည်နယ်, မြို့/မြို့နယ်, အမှတ်အသား, ကုဒ်)')" />
@@ -178,24 +204,29 @@
                 <x-input-error class="mt-1" :messages="$errors->get('nrc_back')" />
             </div>
         </div>
-
-        <x-input-label for="ဖုန်းနံပါတ်" :value="__('ဖုန်းနံပါတ်')" />
-        <x-text-input wire:model="phone" id="phone" name="phone" type="text" class="mt-1 block w-full" required/>
-        <x-input-error class="mt-2" :messages="$errors->get('phone')" />
     </div>
-    <div>
-        <x-input-label for="လက်ကိုင်ဖုန်း" :value="__('လက်ကိုင်ဖုန်း')" />
-        <x-text-input wire:model="mobile" id="mobile" name="mobile" type="text" class="mt-1 block w-full" />
-        <x-input-error class="mt-2" :messages="$errors->get('mobile')" />
+    <div class="col-span-4">
+        <div class="grid grid-cols-3 gap-4">
+            <div>
+                <x-input-label for="ဖုန်းနံပါတ်" :value="__('ဖုန်းနံပါတ်')" />
+                <x-text-input wire:model="phone" id="phone" name="phone" type="text" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('phone')" />
+            </div>
+            <div>
+                <x-input-label for="လက်ကိုင်ဖုန်း" :value="__('လက်ကိုင်ဖုန်း')" />
+                <x-text-input wire:model="mobile" id="mobile" name="mobile" type="text" class="mt-1 block w-full" />
+                <x-input-error class="mt-2" :messages="$errors->get('mobile')" />
+            </div>
+            <div>
+                <x-input-label for="အီးမေးလ်" :value="__('အီးမေးလ်')" />
+                <x-text-input wire:model="email" id="email" name="email" type="text" class="mt-1 block w-full" required/>
+                <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            </div>
+        </div>
     </div>
-    <div>
-        <x-input-label for="အီးမေးလ်" :value="__('အီးမေးလ်')" />
-        <x-text-input wire:model="email" id="email" name="email" type="text" class="mt-1 block w-full" required/>
-        <x-input-error class="mt-2" :messages="$errors->get('email')" />
-    </div>
-    <div class="col-span-3">
+    <div class="col-span-4">
         <x-input-label :value="__('လက်ရှိနေရပ်လိပ်စာ အပြည့်အစုံ (ပြည်နယ်/တိုင်းဒေသကြီး,ခရိုင်,မြို့/မြို့နယ်,ရပ်ကွက်,လမ်း,အိမ်နံပါတ်)')" />
-        <div class="flex flex-row gap-2">
+        <div class="grid grid-cols-5 gap-4">
             <div>
                 <x-select wire:model.live="current_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="current_address_region_id" name="current_address_region_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_region_id')" />
@@ -218,9 +249,9 @@
             </div>
         </div>
     </div>
-    <div class="col-span-3">
+    <div class="col-span-4">
         <x-input-label :value="__('အမြဲတမ်းနေရပ်လိပ်စာ အပြည့်အစုံ (ပြည်နယ်/တိုင်းဒေသကြီး,ခရိုင်,မြို့/မြို့နယ်,ရပ်ကွက်,လမ်း,အိမ်နံပါတ်)')" />
-        <div class="flex flex-row gap-2">
+        <div class="grid grid-cols-5 gap-4">
             <div>
                 <x-select wire:model.live="permanent_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="permanent_address_region_id" name="permanent_address_region_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_region_id')" />
@@ -243,24 +274,19 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="col-span-2">
         <x-input-label for="ယခင်နေခဲ့ဖူးသောဒေသနှင့် နေရပ်လိပ်စာ အပြည့်အစုံ" :value="__('ယခင်နေခဲ့ဖူးသောဒေသနှင့် နေရပ်လိပ်စာ အပြည့်အစုံ')" />
         <x-textarea-input wire:model="previous_addresses" id="previous_addresses" name="previous_addresses" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('previous_addresses')" />
     </div>
-
-
-    <div>
-        <x-input-label for="တပ်မတော်သို့ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်(က)ကိုယ်ပိုင်အမှတ်" :value="__('(က)တပ်မတော်သို့ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင် ကိုယ်ပိုင်အမှတ်')" />
+    <div class="col-span-2">
+        <x-input-label for="တပ်မတော်သို့ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်(က)ကိုယ်ပိုင်အမှတ်" :value="__('(က) တပ်မတော်သို့ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင် ကိုယ်ပိုင်အမှတ်')" />
         <x-text-input wire:model="military_solider_no" id="military_solider_no" name="military_solider_no" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('military_solider_no')" />
     </div>
     <div>
         <x-input-label for="(ခ) တပ်သို့ဝင်သည့်နေ့" :value="__('(ခ) တပ်သို့ဝင်သည့်နေ့')" />
-        
         <x-date-picker wire:model="military_join_date" id="military_join_date"  name="military_join_date" class="mt-1 block w-full"/>
-
-        
         <x-input-error class="mt-2" :messages="$errors->get('military_join_date')" />
     </div>
     <div>
@@ -271,14 +297,12 @@
     <div>
         <x-input-label for="(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့" :value="__('(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့')" />
         <x-date-picker wire:model="military_gazetted_date" id="military_gazetted_date"  name="military_gazetted_date" class="mt-1 block w-full"/>
-        
+
         <x-input-error class="mt-2" :messages="$errors->get('military_gazetted_date')" />
     </div>
     <div>
         <x-input-label for="(င) တပ်ထွက်သည့်နေ့" :value="__('(င) တပ်ထွက်သည့်နေ့')" />
         <x-date-picker wire:model="military_leave_date" id="military_leave_date"  name="military_leave_date" class="mt-1 block w-full"/>
-
-        
         <x-input-error class="mt-2" :messages="$errors->get('military_leave_date')" />
     </div>
     <div>
@@ -291,7 +315,8 @@
         <x-text-input wire:model="military_served_army" id="military_served_army" name="military_served_army" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_served_army')" />
     </div>
-    <div>
+    <div class="col-span-2"></div>
+    <div class="col-span-2">
         <x-input-label for="(ဇ) တပ်တွင်းရာဇဝင်အကျဉ်း/ပြစ်မှု" :value="__('(ဇ) တပ်တွင်းရာဇဝင်အကျဉ်း/ပြစ်မှု')" />
         <x-textarea-input wire:model="military_brief_history_or_penalty" id="military_brief_history_or_penalty" name="military_brief_history_or_penalty" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_brief_history_or_penalty')" />
@@ -315,7 +340,6 @@
     <div>
         <x-input-label for="စစ်မှုထမ်းဟောင်းရက်စွဲ" :value="__('စစ်မှုထမ်းဟောင်းရက်စွဲ')" />
         <x-date-picker wire:model="veteran_date" id="veteran_date"  name="veteran_date" class="mt-1 block w-full"/>
-        
         <x-input-error class="mt-2" :messages="$errors->get('veteran_date')" />
     </div>
     <div>
@@ -370,19 +394,19 @@
                 'select_values' => $education_groups,
             ],
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'educations',
                 'wire_array_key' => 'education_type',
                 'select_values' => $education_types,
             ],
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'educations',
                 'wire_array_key' => 'education',
                 'select_values' => $_educations,
             ],
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'educations',
                 'wire_array_key' => 'country_id',
                 'select_values' => $_countries,

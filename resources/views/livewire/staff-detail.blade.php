@@ -75,10 +75,7 @@
                     </div>
                 @endif
 
-                <div class="w-full
-                     {{-- h-[75vh]    comment to disable auto scroll  --}}
-                 overflow-y-auto">
-
+                <div class="w-full h-[75vh] overflow-y-auto">
                     @if ($tab == 'personal_info')
                         @include('staff.personal_info')
                     @elseif ($tab == 'job_info')
@@ -92,7 +89,7 @@
                     <div class="pb-5">
 
 
-                        
+
                         @if (!(auth()->user()->role_id == 2 && $staff?->status_id == 3))
 
 
@@ -130,23 +127,24 @@ wire:click='rejectStaff'> --}}
                             @endif
                         @endif
 
-                            
+
 
                     </div>
+                    @if($staff?->isInSaveDraft() &&  !( auth()->user()->AdminHR() ))
+                    <x-primary-button
+
+                    class='inline-flex items-center px-4 py-2 !bg-blue-700 border-transparent rounded-md font-medium text-sm text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 font-arial'
+                    wire:click='saveDraft'
+                    >
+                    {{ __('Save Draft ') }}
+
+                </x-primary-button>
+
+                    @endif
                 </div>
 
 
-                @if($staff?->isInSaveDraft() &&  !( auth()->user()->AdminHR() ))
-                <x-primary-button 
-                
-                class='inline-flex items-center px-4 py-2 !bg-blue-700 border-transparent rounded-md font-medium text-sm text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 font-arial'
-                wire:click='saveDraft'  
-                >
-                {{ __('Save Draft ') }} 
-               
-            </x-primary-button>
 
-                @endif 
             </form>
         </div>
     </div>
