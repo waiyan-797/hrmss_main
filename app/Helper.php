@@ -70,8 +70,6 @@ if (! function_exists('formatDMY')) {
     }
 }
 
-
-
 if (! function_exists('formatDMYmm')) {
     function formatDMYmm($date)
     {
@@ -85,6 +83,15 @@ if (! function_exists('formatDMYmm')) {
             return '';
         }
    
+    }
+}
+
+if (! function_exists('myanmarAlphabet')) {
+    function myanmarAlphabet($id)
+    {
+        $alphabets = ['က', 'ခ', 'ဂ', 'ဃ', 'င', 'စ', 'ဆ', 'ဇ', 'ဈ', 'ည', 'ဋ', 'ဌ', 'ဍ', 'ဎ', 'ဏ', 'တ', 'ထ', 'ဒ', 'ဓ', 'န', 'ပ', 'ဖ', 'ဗ', 'ဘ', 'မ', 'ယ', 'ရ', 'လ', 'ဝ', 'သ', 'ဟ', 'ဠ', 'အ'];
+
+        return $id ? $alphabets[$id] : '';
     }
 }
 

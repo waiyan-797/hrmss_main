@@ -67,33 +67,6 @@
                         {{$education->education->name}}
                     @endforeach</label>
                 </div>
-                {{-- <div class="w-full mb-4">
-                    <div class="flex justify-start mb-2 space-x-3">
-                        <label for="">၈။ </label>
-                        <h1 class="font-semibold text-base">ပညာအရည်အချင်း
-                        </h1>
-                    </div>
-                    <table class="md:w-full">
-                        <thead>
-                            <tr>
-                                <th class="border border-black text-center p-2">စဉ်</th>
-                                <th class="border border-black text-center p-2">Education Group</th>
-                                <th class="border border-black text-center p-2">Education Type</th>
-                                <th class="border border-black text-center p-2">Education</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($staff->staff_educations as $education)
-                                <tr>
-                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
-                                    <td class="border border-black text-center p-2">{{$education->education_group->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$education->education_type->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$education->education->name}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div> --}}
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၉။ </label>
                     <label for="name" class="md:w-1/3">အဘအမည်</label>
@@ -131,13 +104,15 @@
                     <table class="w-full">
                         <thead>
                             <tr>
-                                
                                 <th colspan="2" class="border border-black text-center p-2">ကာလ</th>
                                 <th rowspan="2" class="border border-black text-center p-2">
                                     နောက်ဆုံးသွားရောက်ခဲ့သည့်(၅)နှိင်ငံ</th>
                                 <th rowspan="2" class="border border-black text-center p-2">သွားရောက်သည့်ကိစ္စ</th>
                                 <th rowspan="2" class="border border-black text-center p-2">
-                                    Meet With</th>
+                                    သင်တန်းတတ်ခြင်းဖြစ်လျှင် အောင်/မအောင်နှင့် အကြိမ်မည်မျှဖြင့် အောင်မြင်သည်</th>
+                                    <th rowspan="2" class="border border-black text-center p-2">
+                                        မည်သည့်အစိုးရ အဖွဲ့အစည်းအထောက်အပံ့ဖြင့်သွားရောက်သည်
+                                        </th>
                             </tr>
                             <tr>
                                 <th class="border border-black text-center p-2">မှ</th>
@@ -150,9 +125,14 @@
                                     
                                     <td class="border border-black text-center p-2">{{en2mm($abroad->from_date)}}</td>
                                     <td class="border border-black text-center p-2">{{en2mm($abroad->to_date)}}</td>
+                                    
                                     <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->particular}}</td>
-                                    <td class="border border-black text-center p-2">{{$abroad->meet_with}}</td>
+                                    
+                                    <td class="border border-black text-center p-2">{{$abroad->training_success_count}}</td> 
+                                    <td class="border border-black text-center p-2">{{$abroad->sponser}}</td> 
+
+                                 
                                 </tr>
                             @endforeach
                         </tbody>
@@ -168,21 +148,27 @@
                         <table class="w-full text-center">
                             <thead>
                                 <tr class="bg-gray-100">
-                                    <th class="p-2 border border-black">အမည်(အခြားအမည်များရှိလျှင်လည်း ဖော်ပြရန်)</th>
-                                    <th class="p-2 border border-black">လူမျိုး/နိုင်ငံသား</th>
+                                    <th class="p-2 border border-black">အမည်(အခြားအမည်များရှိလျှင် ဖော်ပြရန်)</th>
+                                    <th class="p-2 border border-black">တော်စပ်ပုံ</th>
+                                    <th class="p-2 border border-black">ကျား/မ</th>
+                                    <th class="p-2 border border-black">လူမျိုး/ဘာသာ</th>
                                     <th class="p-2 border border-black">ဇာတိ</th>
-                                    <th class="p-2 border border-black">အလုပ်အကိုင်နှင့်ဌာန</th>
+                                    <th class="p-2 border border-black">အလုပ်အကိုင်</th>
                                     <th class="p-2 border border-black">နေရပ်</th>
+                                    <th class="p-2 border border-black">မှတ်ချက်</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">
                                 @foreach ($staff->spouses as $spouse)
                                     <tr>
                                         <td class="border border-black p-2">{{$spouse->name}}</td>
+                                        <td class="border border-black p-2">{{ $spouse->relation->name}}</td>
+                                        <td class="border border-black p-2">{{ $spouse->gender->name}}</td>
                                         <td class="border border-black p-2">{{collect([$spouse->ethnic->name,$spouse->religion->name,])->filter()->implode('၊')}}</td>
                                         <td class="border border-black p-2">{{$spouse->place_of_birth}}</td>
                                         <td class="border border-black p-2">{{$spouse->occupation}}</td>
                                         <td class="border border-black p-2">{{$spouse->address}}</td>
+                                        <td class="border border-black p-2"></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -220,6 +206,8 @@
                                     <td class="border border-black p-2">{{en2mm($abroad->from_date)}}</td>
                                     <td class="border border-black p-2">{{en2mm($abroad->to_date)}}</td>
                                     <td class="border border-black p-2">{{en2mm($abroad->actual_abroad_date)}}</td>
+                                    <td class="border border-black p-2">{{$abroad->sponser}}</td>
+                                    
                                     <td class="border border-black p-2">{{$abroad->position}}</td>
                                 </tr>
                             @endforeach

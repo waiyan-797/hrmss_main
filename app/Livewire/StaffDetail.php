@@ -94,9 +94,7 @@ public $has_military_friend_text ;
 
     //relative
     public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street,$father_address_house_no, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_department_id, $is_newly_appointed = false,
-        $spouse_father_name, $spouse_father_ethnic_id, $spouse_father_religion_id, $spouse_father_place_of_birth, $spouse_father_occupation, $spouse_father_address_street,$spouse_father_address_house_no, $spouse_father_address_ward, $spouse_father_address_township_or_town_id, $spouse_father_address_region_id,
         $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street,$mother_address_house_no, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id,
-        $spouse_mother_name, $spouse_mother_ethnic_id, $spouse_mother_religion_id, $spouse_mother_place_of_birth, $spouse_mother_occupation, $spouse_mother_address_street,$spouse_mother_address_house_no, $spouse_mother_address_ward, $spouse_mother_address_township_or_town_id, $spouse_mother_address_region_id,
         $family_in_politics = false , $family_in_politics_text ;
 
     public $siblings = [];
@@ -111,7 +109,6 @@ public $has_military_friend_text ;
 
     //detail_personal_info
     public $last_school_name, $last_school_subject, $last_school_row_no, $last_school_major, $student_life_political_social, $habit, $revolution, $transfer_reason_salary, $during_work_political_social, $has_military_friend = false, $foreigner_friend_name, $foreigner_friend_occupation, $foreigner_friend_nationality_id, $foreigner_friend_country_id, $foreigner_friend_how_to_know, $recommended_by_military_person;
-    // public $education_group,$education_type,$education,$school_name,$town,$semester,$roll_no,$major,$certificate,$year,$exam_mark;
     public $schools = [];
     public $trainings = [];
     public $awards = [];
@@ -208,45 +205,25 @@ public $has_military_friend_text ;
 
     protected $relative_info_rules = [
         'father_name' => 'required',
-        'father_ethnic_id' => 'required',
-        'father_religion_id' => 'required',
-        'father_place_of_birth' => 'required',
-        'father_occupation' => 'required',
+        'father_ethnic_id' => '',
+        'father_religion_id' => '',
+        'father_place_of_birth' => '',
+        'father_occupation' => '',
         'father_address_house_no' => '',
         'father_address_street' => '',
         'father_address_ward' => '',
-        'father_address_township_or_town_id' => 'required',
-        'father_address_region_id' => 'required',
-        'spouse_father_name' => '',
-        'spouse_father_ethnic_id' => '',
-        'spouse_father_religion_id' => '',
-        'spouse_father_place_of_birth' => '',
-        'spouse_father_occupation' => '',
-        'spouse_father_address_house_no' => '',
-        'spouse_father_address_street' => '',
-        'spouse_father_address_ward' => '',
-        'spouse_father_address_township_or_town_id' => '',
-        'spouse_father_address_region_id' => '',
+        'father_address_township_or_town_id' => '',
+        'father_address_region_id' => '',
         'mother_name' => 'required',
-        'mother_ethnic_id' => 'required',
-        'mother_religion_id' => 'required',
-        'mother_place_of_birth' => 'required',
-        'mother_occupation' => 'required',
+        'mother_ethnic_id' => '',
+        'mother_religion_id' => '',
+        'mother_place_of_birth' => '',
+        'mother_occupation' => '',
         'mother_address_house_no' => '',
         'mother_address_street' => '',
         'mother_address_ward' => '',
-        'mother_address_township_or_town_id' => 'required',
-        'mother_address_region_id' => 'required',
-        'spouse_mother_name' => '',
-        'spouse_mother_ethnic_id' => '',
-        'spouse_mother_religion_id' => '',
-        'spouse_mother_place_of_birth' => '',
-        'spouse_mother_occupation' => '',
-        'spouse_mother_address_house_no' => '',
-        'spouse_mother_address_street' => '',
-        'spouse_mother_address_ward' => '',
-        'spouse_mother_address_township_or_town_id' => '',
-        'spouse_mother_address_region_id' => '',
+        'mother_address_township_or_town_id' => '',
+        'mother_address_region_id' => '',
         'family_in_politics' => '',
         'family_in_politics_text' => '',
     ];
@@ -314,8 +291,6 @@ public $has_military_friend_text ;
             $this->loadStaffData($this->staff_id);
         }
         $this->leave_types = LeaveType::all();
-
-        // $this->withoutScopeRanks = Rank::withoutGlobalScope(App\Scopes\SortNoScope::class)->where(true)->get();
         $this->withoutScopeRanks = Rank::withoutGlobalScopes()->get();
     }
 
@@ -404,12 +379,8 @@ public $has_military_friend_text ;
                 'education' => $sch->education_id,
                 'school_name' => $sch->school_name,
                 'town' => $sch->town,
-                'semester' => $sch->semester,
-                'major' => $sch->major,
                 'from_date' => $sch->from_date,
                 'to_date' => $sch->to_date,
-                'year' => $sch->year,
-                'certificate' => $sch->certificate,
                 'remark' => $sch->remark,
             ];
 
@@ -421,13 +392,10 @@ public $has_military_friend_text ;
 
                 'training_type' => $tra->training_type_id,
                 'batch' => $tra->batch,
-
                 'diploma_name' => $tra->diploma_name,
-                'fees' => $tra->fees,
                 'from_date' => $tra->from_date,
                 'to_date' => $tra->to_date,
                 'location' => $tra->location,
-                'fees' => $tra->fees,
                 'country' => $tra->country_id,
                 'training_location' => $tra->training_location_id,
                 'remark' => $tra->remark,
@@ -660,16 +628,7 @@ public $has_military_friend_text ;
         $this->father_address_township_or_town_id = $staff->father_address_township_or_town_id;
         $this->father_address_region_id = $staff->father_address_region_id;
 
-        $this->spouse_father_name = $staff->spouse_father_name;
-        $this->spouse_father_ethnic_id = $staff->spouse_father_ethnic_id;
-        $this->spouse_father_religion_id = $staff->spouse_father_religion_id;
-        $this->spouse_father_place_of_birth = $staff->spouse_father_place_of_birth;
-        $this->spouse_father_occupation = $staff->spouse_father_occupation;
-        $this->spouse_father_address_house_no = $staff->spouse_father_address_house_no;
-        $this->spouse_father_address_street = $staff->spouse_father_address_street;
-        $this->spouse_father_address_ward = $staff->spouse_father_address_ward;
-        $this->spouse_father_address_township_or_town_id = $staff->spouse_father_address_township_or_town_id;
-        $this->spouse_father_address_region_id = $staff->spouse_father_address_region_id;
+        
 
         $this->mother_name = $staff->mother_name;
         $this->mother_ethnic_id = $staff->mother_ethnic_id;
@@ -682,17 +641,6 @@ public $has_military_friend_text ;
         $this->mother_address_township_or_town_id = $staff->mother_address_township_or_town_id;
         $this->mother_address_region_id = $staff->mother_address_region_id;
 
-
-        $this->spouse_mother_name = $staff->spouse_mother_name;
-        $this->spouse_mother_ethnic_id = $staff->spouse_mother_ethnic_id;
-        $this->spouse_mother_religion_id = $staff->spouse_mother_religion_id;
-        $this->spouse_mother_place_of_birth = $staff->spouse_mother_place_of_birth;
-        $this->spouse_mother_occupation = $staff->spouse_mother_occupation;
-        $this->spouse_mother_address_house_no = $staff->spouse_mother_address_house_no;
-        $this->spouse_mother_address_street = $staff->spouse_mother_address_street;
-        $this->spouse_mother_address_ward = $staff->spouse_mother_address_ward;
-        $this->spouse_mother_address_township_or_town_id = $staff->spouse_mother_address_township_or_town_id;
-        $this->spouse_mother_address_region_id = $staff->spouse_mother_address_region_id;
         $this->family_in_politics = $staff->family_in_politics;
         $this->family_in_politics_text = $staff->family_in_politics_text;
     }
@@ -792,13 +740,9 @@ public $has_military_friend_text ;
             'education' => '',
             'school_name' => '',
             'town' => '',
-            'year' => '',
-            'certificate' => '',
             'remark' => '',
             'from_date' => '',
             'to_date' => '',
-            'semester' => '',
-            'major' => '',
 
         ];
     }
@@ -814,8 +758,6 @@ public $has_military_friend_text ;
             'country' => '',
             'training_location' => '',
             'remark' => '',
-
-            'fees' => '',
             'diploma_name' => ''
         ];
     }
@@ -1099,16 +1041,6 @@ public $has_military_friend_text ;
             'father_address_ward' => $this->father_address_ward,
             'father_address_township_or_town_id' => $this->father_address_township_or_town_id,
             'father_address_region_id' => $this->father_address_region_id,
-            'spouse_father_name' => $this->spouse_father_name,
-            'spouse_father_ethnic_id' => $this->spouse_father_ethnic_id,
-            'spouse_father_religion_id' => $this->spouse_father_religion_id,
-            'spouse_father_place_of_birth' => $this->spouse_father_place_of_birth,
-            'spouse_father_occupation' => $this->spouse_father_occupation,
-            'spouse_father_address_house_no' => $this->spouse_father_address_house_no,
-            'spouse_father_address_street' => $this->spouse_father_address_street,
-            'spouse_father_address_ward' => $this->spouse_father_address_ward,
-            'spouse_father_address_township_or_town_id' => $this->spouse_father_address_township_or_town_id,
-            'spouse_father_address_region_id' => $this->spouse_father_address_region_id,
             'mother_name' => $this->mother_name,
             'mother_ethnic_id' => $this->mother_ethnic_id,
             'mother_religion_id' => $this->mother_religion_id,
@@ -1119,16 +1051,6 @@ public $has_military_friend_text ;
             'mother_address_ward' => $this->mother_address_ward,
             'mother_address_township_or_town_id' => $this->mother_address_township_or_town_id,
             'mother_address_region_id' => $this->mother_address_region_id,
-            'spouse_mother_name' => $this->spouse_mother_name,
-            'spouse_mother_ethnic_id' => $this->spouse_mother_ethnic_id,
-            'spouse_mother_religion_id' => $this->spouse_mother_religion_id,
-            'spouse_mother_place_of_birth' => $this->spouse_mother_place_of_birth,
-            'spouse_mother_occupation' => $this->spouse_mother_occupation,
-            'spouse_mother_address_house_no' => $this->spouse_mother_address_house_no,
-            'spouse_mother_address_street' => $this->spouse_mother_address_street,
-            'spouse_mother_address_ward' => $this->spouse_mother_address_ward,
-            'spouse_mother_address_township_or_town_id' => $this->spouse_mother_address_township_or_town_id,
-            'spouse_mother_address_region_id' => $this->spouse_mother_address_region_id,
             'family_in_politics' => $this->family_in_politics,
             'family_in_politics_text' => $this->family_in_politics_text,
 
@@ -1287,21 +1209,18 @@ public $has_military_friend_text ;
             ]);
         }
     }
-    private function saveSchools($staffId)
+private function saveSchools($staffId)
 {
+    // Validation rules and messages
     $rules = [
         'schools.*.education_group' => 'required',
         'schools.*.education_type' => 'required',
         'schools.*.education' => 'required',
         'schools.*.school_name' => 'required|string|max:255',
         'schools.*.town' => 'required|string|max:255',
-        'schools.*.semester' => 'nullable|string|max:50',
-        'schools.*.from_date' => 'required|integer',
-        'schools.*.to_date' => 'required|integer',
-        'schools.*.year' => 'required|integer|min:1900|max:' . date('Y'),
-        'schools.*.certificate' => 'nullable|file|mimes:jpg,png,pdf|max:2048',
+        'schools.*.from_date' => 'required',
+        'schools.*.to_date' => 'required',
         'schools.*.remark' => 'nullable|string|max:1000',
-        'schools.*.major' => 'nullable|string|max:255',
     ];
 
     $messages = [
@@ -1314,34 +1233,20 @@ public $has_military_friend_text ;
         'schools.*.town.required' => 'The town field is required.',
         'schools.*.town.string' => 'The town must be a string.',
         'schools.*.town.max' => 'The town may not exceed 255 characters.',
-        'schools.*.semester.string' => 'The semester must be a string.',
-        'schools.*.semester.max' => 'The semester may not exceed 50 characters.',
         'schools.*.from_date.required' => 'The start date is required.',
         'schools.*.to_date.required' => 'The end date is required.',
-        'schools.*.year.required' => 'The year field is required.',
-        'schools.*.certificate.file' => 'The certificate must be a valid file.',
-        'schools.*.certificate.mimes' => 'The certificate must be a file of type: jpg, png, pdf.',
-        'schools.*.certificate.max' => 'The certificate may not exceed 2MB.',
         'schools.*.remark.string' => 'The remark must be a string.',
         'schools.*.remark.max' => 'The remark may not exceed 1000 characters.',
-        'schools.*.major.string' => 'The major must be a string.',
-        'schools.*.major.max' => 'The major may not exceed 255 characters.',
     ];
 
-    // Validate the data
+    // Validate the input
     $this->validate($rules, $messages);
 
-    // Delete old school records for the staff member
+    // Delete existing records
     School::where('staff_id', $staffId)->delete();
 
-    // Save schools and handle certificate uploads
+    // Save each school record
     foreach ($this->schools as $school) {
-        $certificatePath = null;
-
-        if (isset($school['certificate']) && $school['certificate'] instanceof \Illuminate\Http\UploadedFile) {
-            $certificatePath = $school['certificate']->store('certificates', 'public');
-        }
-
         School::create([
             'staff_id' => $staffId,
             'education_group_id' => $school['education_group'],
@@ -1349,16 +1254,14 @@ public $has_military_friend_text ;
             'education_id' => $school['education'],
             'school_name' => $school['school_name'],
             'town' => $school['town'],
-            'semester' => $school['semester'],
-            'major' => $school['major'],
             'from_date' => $school['from_date'],
             'to_date' => $school['to_date'],
-            'year' => $school['year'],
-            'certificate' => $certificatePath,
             'remark' => $school['remark'],
         ]);
     }
 }
+
+
 
 
 
@@ -1448,7 +1351,7 @@ public $has_military_friend_text ;
                 'award_type_id' => $award['award_type'],
                 'award_id' => $award['award'],
                 'order_no' => $award['order_no'],
-                'remark' => $award['remark'],
+                'remark' => $award['remark'] ? :null,
             ]);
         }
     }
@@ -1460,8 +1363,8 @@ public $has_military_friend_text ;
 
         $rules = [
             'trainings.*.training_type' => 'required|numeric',
-            // 'trainings.*.diploma_name' => 'string',
-            'trainings.*.fees' => 'numeric|min:0',
+            'trainings.*.diploma_name' => 'string',
+          
             'trainings.*.from_date' => 'required|date|date_format:Y-m-d',
             'trainings.*.to_date' => 'required|date|after_or_equal:trainings.*.from_date|date_format:Y-m-d',
             'trainings.*.location' => 'nullable|string',
@@ -1478,10 +1381,6 @@ public $has_military_friend_text ;
             'trainings.*.diploma_name.required' => 'The diploma name is required.',
             'trainings.*.diploma_name.string' => 'The diploma name must be a string.',
             'trainings.*.diploma_name.max' => 'The diploma name may not exceed 255 characters.',
-
-            'trainings.*.fees.required' => 'The fees are required.',
-            'trainings.*.fees.numeric' => 'The fees must be a number.',
-            'trainings.*.fees.min' => 'The fees must be at least 0.',
 
             'trainings.*.from_date.required' => 'The start date is required.',
             'trainings.*.from_date.date' => 'The start date must be a valid date.',
@@ -1515,7 +1414,6 @@ public $has_military_friend_text ;
                 'staff_id' => $staffId,
                 'training_type_id' => $training['training_type'],
                 'diploma_name' => $training['diploma_name'],
-                'fees' => $training['fees'],
                 'batch' => $training['batch'],
                 'from_date' => $training['from_date'],
                 'to_date' => $training['to_date'],
@@ -1578,17 +1476,17 @@ public $has_military_friend_text ;
             Posting::create([
                 'staff_id' => $staffId,
                 'rank_id' => $posting['rank'],
-                // 'post_id' => 1,
                 'from_date' => $posting['from_date'],
                 'to_date' => $posting['to_date'],
                 'department_id' => $posting['department'],
-                'division_id' => $posting['division'],
+                'division_id' => $posting['division'] ?: null,
                 'location' => $posting['location'],
-                'remark' => $posting['remark'],
+                'remark' => $posting['remark'] ?: null,
                 'ministry_id' => $posting['ministry'],
             ]);
         }
     }
+       
     private function relativeFields($staffId, $relative)
     {
         $fields = [
@@ -1659,14 +1557,14 @@ public $has_military_friend_text ;
     {
         $this->permanent_address_township_or_town_id = null;
     }
-    public function updatedSpouseFatherAddressRegionId()
-    {
-        $this->spouse_father_address_township_or_town_id = null;
-    }
-    public function updatedSpouseMotherAddressRegionId()
-    {
-        $this->spouse_mother_address_township_or_town_id = null;
-    }
+    // public function updatedSpouseFatherAddressRegionId()
+    // {
+    //     $this->spouse_father_address_township_or_town_id = null;
+    // }
+    // public function updatedSpouseMotherAddressRegionId()
+    // {
+    //     $this->spouse_mother_address_township_or_town_id = null;
+    // }
 
 
     public function updatedFatherAddressRegionId()
@@ -1781,21 +1679,21 @@ public $has_military_friend_text ;
                     'spouses' => ['label' => 'ခင်ပွန်း/ဇနီးသည်', 'data' => $this->spouses],
                     'children' => ['label' => 'သားသမီးများ', 'data' => $this->children],
                     'spouse_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည်၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_siblings],
-                    'spouse_father_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အဘ၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_father_siblings],
-                    'spouse_mother_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အမိ၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_mother_siblings],
+                    'spouse_father_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အဘနှင့် ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_father_siblings],
+                    'spouse_mother_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အမိနှင့် ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_mother_siblings],
 
 
                 ];
                 $data['relations'] = Relation::all();
                 $data['father_township_or_towns'] = Township::where('region_id', $this->father_address_region_id)->get();
                 $data['father_townships'] = Township::where('region_id', $this->father_address_region_id)->get();
-                $data['spouse_father_townships'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
+                // $data['spouse_father_townships'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
                 $data['mother_township_or_towns'] = Township::where('region_id', $this->mother_address_region_id)->get();
                 $data['mother_townships'] = Township::where('region_id', $this->mother_address_region_id)->get();
-                $data['spouse_father_townships_or_towns'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
-                $data['spouse_father_townships'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
-                $data['spouse_mother_townships_or_towns'] = Township::where('region_id', $this->spouse_mother_address_region_id)->get();
-                $data['spouse_mother_townships'] = Township::where('region_id', $this->spouse_mother_address_region_id)->get();
+                // $data['spouse_father_townships_or_towns'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
+                // $data['spouse_father_townships'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
+                // $data['spouse_mother_townships_or_towns'] = Township::where('region_id', $this->spouse_mother_address_region_id)->get();
+                // $data['spouse_mother_townships'] = Township::where('region_id', $this->spouse_mother_address_region_id)->get();
                 break;
         }
         $leave_modal_open = $this->leave_modal_open;

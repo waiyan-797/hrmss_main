@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('schools', function (Blueprint $table) {
-            $table->dropColumn('roll_no')->nullable();
-            $table->dropColumn('exam_mark')->nullable();
-            
+            $table->dropColumn('semester')->nullable();
+            $table->dropColumn('major')->nullable();
+            $table->dropColumn('year')->nullable();
+            $table->dropColumn('certificate')->nullable();
         });
     }
 

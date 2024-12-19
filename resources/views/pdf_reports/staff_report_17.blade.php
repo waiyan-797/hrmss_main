@@ -274,11 +274,26 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>အမည်(အခြားအမည်များရှိလျှင်လည်း ဖော်ပြရန်)</th>
+                                            {{-- <th>အမည်(အခြားအမည်များရှိလျှင်လည်း ဖော်ပြရန်)</th>
                                             <th>လူမျိုး/နိုင်ငံသား</th>
                                             <th>ဇာတိ</th>
                                             <th>အလုပ်အကိုင်နှင့်ဌာန</th>
-                                            <th>နေရပ်</th>
+                                            <th>နေရပ်</th> --}}
+                                            <tr>
+                                <th colspan="2" class="border border-black text-center p-2">ကာလ</th>
+                                <th rowspan="2" class="border border-black text-center p-2">
+                                    နောက်ဆုံးသွားရောက်ခဲ့သည့်(၅)နှိင်ငံ</th>
+                                <th rowspan="2" class="border border-black text-center p-2">သွားရောက်သည့်ကိစ္စ</th>
+                                <th rowspan="2" class="border border-black text-center p-2">
+                                    သင်တန်းတတ်ခြင်းဖြစ်လျှင် အောင်/မအောင်နှင့် အကြိမ်မည်မျှဖြင့် အောင်မြင်သည်</th>
+                                    <th rowspan="2" class="border border-black text-center p-2">
+                                        မည်သည့်အစိုးရ အဖွဲ့အစည်းအထောက်အပံ့ဖြင့်သွားရောက်သည်
+                                        </th>
+                            </tr>
+                            <tr>
+                                <th class="border border-black text-center p-2">မှ</th>
+                                <th class="border border-black text-center p-2">ထိ</th>
+                            </tr>
                                         </tr>
                                     </thead>
                                     <tbody>

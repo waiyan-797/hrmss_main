@@ -44,12 +44,12 @@ class PdfStaffReport53 extends Component
         $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
         $table = $section->addTable();
         $table->addRow();
-        $table->addCell(4000)->addText('၁။ အမည်');
+        $table->addCell(4000)->addText('၁။အမည်');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->name, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၂။ ငယ်အမည်');
+        $table->addCell(4000)->addText('၂။ငယ်အမည်');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->nick_name, ['align' => 'right']);
 
@@ -133,8 +133,7 @@ class PdfStaffReport53 extends Component
         $table->addRow();
         $table->addCell(4000)->addText('(ခ) တပ်သို့ဝင်သည့်နေ့');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
-        $table->addCell(5000)->addText(en2mm($staff->military_join_date), ['align' => 'right']);
-
+        $table->addCell(5000)->addText(en2mm(\Carbon\Carbon::parse($staff->military_join_date)->format('d-m-y')), ['align' => 'right']);
         $table->addRow();
         $table->addCell(4000)->addText('(ဂ) ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
@@ -517,13 +516,13 @@ class PdfStaffReport53 extends Component
         
         $section->addText('အထက်ပါဇယားကွက်များအတွင်း ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။', ['bold' => false]);
     $section->addTextBreak(1); 
-    $section->addText('လက်မှတ်- ________________', null, ['alignment' => 'center']);
-    $section->addText('ကိုယ်ပိုင်အမှတ်- ________________', null, ['alignment' => 'center']);
-    $section->addText('နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်- ________________', null, ['alignment' => 'center']);
-    $section->addText('အဆင့်၊ရာထူး- ________________', null, ['alignment' => 'center']);
-    $section->addText('အမည်- ________________', null, ['alignment' => 'center']);
-    $section->addText('တပ်/ဌာန- ________________', null, ['alignment' => 'center']);
-    $section->addText('ရက်စွဲ: '. formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day), ['align' => 'center']);
+    $section->addText('လက်မှတ်________________', null, ['alignment' => 'center']);
+    $section->addText('ကိုယ်ပိုင်အမှတ်________________', null, ['alignment' => 'center']);
+    $section->addText('နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်________________', null, ['alignment' => 'center']);
+    $section->addText('အဆင့်၊ရာထူး ________________', null, ['alignment' => 'center']);
+    $section->addText('အမည် ________________', null, ['alignment' => 'center']);
+    $section->addText('တပ်/ဌာန ________________', null, ['alignment' => 'center']);
+    $section->addText('ရက်စွဲ '. formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day), ['align' => 'center']);
 
         $fileName = 'staff_report_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');

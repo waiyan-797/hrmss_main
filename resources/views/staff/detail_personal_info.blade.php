@@ -10,7 +10,7 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သောဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့','အတန်း','မေဂျာ','မှ','ထိ', 'ဘွဲ့ရရှိခဲ့သည့်ခုနှစ်','ဘွဲ့လက်မှတ်','မှတ်ချက်'],
+        'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သောဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့','မှ','ထိ','မှတ်ချက်'],
         'column_vals' => $schools,
         'column_types' => [
             [
@@ -44,34 +44,12 @@
             [
                 'type' => 'text',
                 'wire_array_name' => 'schools',
-                'wire_array_key' => 'semester',
-            ],
-           
-            [
-                'type' => 'text',
-                'wire_array_name' => 'schools',
-                'wire_array_key' => 'major',
-            ],
-            [
-                'type' => 'number',
-                'wire_array_name' => 'schools',
                 'wire_array_key' => 'from_date',
             ],
             [
-                'type' => 'number',
-                'wire_array_name' => 'schools',
-                'wire_array_key' => 'to_date',
-            ],
-
-            [
                 'type' => 'text',
                 'wire_array_name' => 'schools',
-                'wire_array_key' => 'year',
-            ],
-            [
-                'type' => 'file',
-                'wire_array_name' => 'schools',
-                'wire_array_key' => 'certificate',
+                'wire_array_key' => 'to_date',
             ],
             [
                 'type' => 'text',
@@ -95,7 +73,7 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['သင်တန်းအမည်', 'သင်တန်းအမည်', 'သင်တန်းအမှတ်စဉ်' , 'သင်တန်းကြေး', 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းအမျိုးအစား','အဆင့်အတန်း'],
+        'column_names' => ['သင်တန်းအမည်', 'သင်တန်းအမည်', 'သင်တန်းအမှတ်စဉ်' , 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းအမျိုးအစား','အဆင့်အတန်း'],
         'add_event' => 'add_trainings',
         'column_vals' => $trainings,
         'column_types' => [
@@ -116,11 +94,6 @@
                 'type' => 'text',
                 'wire_array_name' => 'trainings',
                 'wire_array_key' => 'batch',
-            ],
-            [
-                'type' => 'number',
-                'wire_array_name' => 'trainings',
-                'wire_array_key' => 'fees',
             ],
             [
                 'type' => 'date',
@@ -171,7 +144,7 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အမည်', 'ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်', 'အမိန့်အမှတ်/ရက်စွဲ','မှတ်ချက်'],
+        'column_names' => ['ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အမည်', 'ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်', 'အမိန့်အမှတ်/ခုနှစ်','မှတ်ချက်'],
         'column_vals' => $awards,
         'column_types' => [
             [
@@ -508,7 +481,7 @@
 
 <div class="w-full h-auto py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
-        <x-input-label :value="__('ဝန်ထမ်းဘာသာစကားကျွမ်းကျင်မှု')" class="font-semibold"/>
+        <x-input-label :value="__('ဘာသာစကားကျွမ်းကျင်မှု')" class="font-semibold"/>
         <button wire:click='add_staff_languages' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

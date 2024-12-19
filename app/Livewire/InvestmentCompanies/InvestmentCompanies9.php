@@ -12,7 +12,7 @@ class InvestmentCompanies9 extends Component
 {
 
     public function go_pdf(){
-        $staffs = Staff::get();
+        $staffs = Staff::whereIn('retire_type_id', [3, 4])->get();
         $data = [
             'staffs' => $staffs,
         ];
@@ -26,7 +26,7 @@ class InvestmentCompanies9 extends Component
     }
     public function go_word()
 {
-    $staffs = Staff::get(); 
+    $staffs = Staff::whereIn('retire_type_id', [3, 4])->get();
     $phpWord = new PhpWord();
     $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 200]); 
     $section->addText('၂၀၂၄-၂၀၂၅ ဘဏ္ဍာရေးနှစ်အတွင်း ဝန်ထမ်းအဖြစ်မှ ထုတ်ပစ်ခံရသော ဝန်ထမ်းများစာရင်း', ['bold' => true, 'size' => 13], ['alignment' => 'center']);
@@ -62,18 +62,16 @@ class InvestmentCompanies9 extends Component
     foreach ($staffs as $index => $staff) {
         $table->addRow();
         $table->addCell(1000)->addText(en2mm($index + 1));
-        $table->addCell(3000)->addText($staff->name . '၊ ' . $staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
-        $table->addCell(2000)->addText(\Carbon\Carbon::parse($staff->dob)->format('d-m-Y'));
+        $table->addCell(3000)->addText($staff->name . '၊ ' . $staff->nrc_region_id?->name . $staff->nrc_township_code?->name . '/' . $staff->nrc_sign?->name . '/' . $staff->nrc_code);
+        $table->addCell(2000)->addText(en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-Y')));
         $table->addCell(3000)->addText($staff->current_rank?->name . '၊ ' . $staff->payscale?->name . '၊ ' . $staff->current_salary);
-
-        $table->addCell(2000)->addText(\Carbon\Carbon::parse($staff->join_date)->format('d-m-Y'));
-        $table->addCell(2000)->addText($staff->lost_contact_from_date);
-        $table->addCell(3000)->addText($staff->retire_date);
+        $table->addCell(2000)->addText(en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-Y')));
+        $table->addCell(2000)->addText(en2mm($staff->lost_contact_from_date));
+        $table->addCell(3000)->addText(en2mm($staff->retire_date));
         $join_date = \Carbon\Carbon::parse($staff->join_date);
         $join_date_duration = $join_date->diff(\Carbon\Carbon::now());
         $duration = "{$join_date_duration->y} နှစ် {$join_date_duration->m} လ {$join_date_duration->d} ရက်";
         $table->addCell(2000)->addText($duration);
-
         $table->addCell(3000)->addText($staff->retire_remark);
         $table->addCell(2000)->addText('');
     }
@@ -88,7 +86,7 @@ class InvestmentCompanies9 extends Component
 }
      public function render()
     {
-        $staffs = Staff::get();
+        $staffs = Staff::whereIn('retire_type_id', [3, 4])->get();
         return view('livewire.investment-companies.investment-companies9',[ 
             'staffs' => $staffs,
         ]);

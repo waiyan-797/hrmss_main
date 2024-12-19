@@ -77,7 +77,7 @@
                                     <td style="border: none;">၂။</td>
                                     <td style="border: none;">အသက်(မွေးနေ့သက္ကရာဇ်)</td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ $staff->dob }}</td>
+                                    <td style="border: none;">{{ formatDMYmm($staff->dob) }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၃။</td>

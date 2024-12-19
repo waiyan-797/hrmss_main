@@ -35,133 +35,140 @@ public $staff_id;
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
         $phpWord->addTitleStyle(2, ['bold' => true, 'size' =>10 ], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
-        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
-        $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']); 
+        // $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
+        // $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']); 
+        // $table = $section->addTable();
+        // $table->addRow();
+        // $table->addCell(2000)->addText('၁။', null, ['alignment' => 'center']);
+        // $table->addCell(15000)->addText('အမည်', null, ['alignment' => 'both']);
+        // $table->addCell(1000)->addText('-', ['alignment' => 'center']);
+        // $table->addCell(16000)->addText($staff->name, null, ['alignment' => 'both']);
+
         $table = $section->addTable();
         $table->addRow();
-        $table->addCell(4000)->addText('၁။ဝန်ထမ်းအမှတ် :'); 
+        $table->addCell(4000)->addText('၁။ဝန်ထမ်းအမှတ် '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->staff_no, ['align' => 'right']); 
         $table->addRow();
-        $table->addCell(4000)->addText('၂။ အမည်:'); 
+        $table->addCell(4000)->addText('၂။ အမည်'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->name, ['align' => 'right']); 
 
         $table->addRow();
-        $table->addCell(4000)->addText('၃။ ငယ်အမည်:'); 
+        $table->addCell(4000)->addText('၃။ ငယ်အမည်'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->nick_name, ['align' => 'right']); 
 
         $table->addRow();
-        $table->addCell(4000)->addText('၄။ အခြားအမည်:'); 
+        $table->addCell(4000)->addText('၄။ အခြားအမည်'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->other_name, ['align' => 'right']);
         
         $table->addRow();
-        $table->addCell(4000)->addText('၅။မွေးသက္ကရာဇ် :'); 
+        $table->addCell(4000)->addText('၅။မွေးသက္ကရာဇ် '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText(en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-y')), ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၆။လူမျိုး :'); 
+        $table->addCell(4000)->addText('၆။လူမျိုး '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->ethnic->name, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၇။ဘာသာ :'); 
+        $table->addCell(4000)->addText('၇။ဘာသာ '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->religion?->name, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၈။အရပ်အမြင့် :'); 
+        $table->addCell(4000)->addText('၈။အရပ်အမြင့် '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->height_feet.'/'.$staff->height_inch, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၉။ဆံပင်အရောင် :'); 
+        $table->addCell(4000)->addText('၉။ဆံပင်အရောင် '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->hair_color, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၁၀။မျက်စိအရောင် :'); 
+        $table->addCell(4000)->addText('၁၀။မျက်စိအရောင် '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->eye_color, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၁၁။ထင်ရှားသည့်အမှတ်အသား :'); 
+        $table->addCell(4000)->addText('၁၁။ထင်ရှားသည့်အမှတ်အသား'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->prominent_mark, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၁၂။အသားအရောင် :'); 
+        $table->addCell(4000)->addText('၁၂။အသားအရောင်'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->skin_color, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၁၃။ကိုယ်အလေးချိန် :'); 
+        $table->addCell(4000)->addText('၁၃။ကိုယ်အလေးချိန်'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->weight, ['align' => 'right']);
         $table->addRow();
-        $table->addCell(4000)->addText('၁၄။မွေးဖွားရာဇာတိ :'); 
+        $table->addCell(4000)->addText('၁၄။မွေးဖွားရာဇာတိ'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->place_of_birth, ['align' => 'right']);
         $table->addRow();
-        $table->addCell(4000)->addText('၁၅။ကျား/မ :'); 
+        $table->addCell(4000)->addText('၁၅။ကျား/မ'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->gender->name, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၁၆။သွေးအုပ်စု :'); 
+        $table->addCell(4000)->addText('၁၆။သွေးအုပ်စု '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->blood_type->name, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၁၇။ဖုန်းနံပါတ် :'); 
+        $table->addCell(4000)->addText('၁၇။ဖုန်းနံပါတ် '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->phone, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၁၈။ရုံး :'); 
+        $table->addCell(4000)->addText('၁၈။ရုံး '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText('ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၁၉။လက်ကိုင်ဖုန်း :'); 
+        $table->addCell(4000)->addText('၁၉။လက်ကိုင်ဖုန်း '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->mobile, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၂၀။လက်ကိုင်ဖုန်း :'); 
+        $table->addCell(4000)->addText('၂၀။လက်ကိုင်ဖုန်း '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->mobile, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၂၀။အီး‌မေးလ် :'); 
+        $table->addCell(4000)->addText('၂၀။အီး‌မေးလ် '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->email, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၂၁။နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ် :'); 
+        $table->addCell(4000)->addText('၂၁။နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ် '); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name .'/'. $staff->nrc_sign->name .'/'. $staff->nrc_code, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၂၂။ယခုနေရပ်လိပ်စာအပြည့်အစုံ:'); 
+        $table->addCell(4000)->addText('၂၂။ယခုနေရပ်လိပ်စာအပြည့်အစုံ'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_township_or_town->name.'၊'.$staff->current_address_region->name, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၂၃။အမြဲတမ်းလက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ:'); 
+        $table->addCell(4000)->addText('၂၃။အမြဲတမ်းလက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->permanent_address_street.'၊'.$staff->permanent_address_ward.'၊'.$staff->permanent_address_township_or_town->name.'၊'.$staff->permanent_address_region->name, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၂၄။ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာဖော်ပြရန်မလို):'); 
+        $table->addCell(4000)->addText('၂၄။ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာဖော်ပြရန်မလို)'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->previous_addresses, ['align' => 'right']);
         
     $table->addRow();
-    $table->addCell(4000)->addText('၁၈။ ပညာအရည်အချင်း:');
+    $table->addCell(4000)->addText('၁၈။ ပညာအရည်အချင်း');
     $table->addCell(2000)->addText('-', ['align' => 'center']);
     $table->addCell(5000)->addText('', ['align' => 'right']);
 
@@ -172,107 +179,107 @@ foreach ($staff->staff_educations as $education) {
     $table->addCell(5000)->addText($education->education->name . '၊', ['align' => 'right']);
 }
         $table->addRow();
-        $table->addCell(4000)->addText('၁။ တပ်မတော်သို့ ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်:');
+        $table->addCell(4000)->addText('၁။ တပ်မတော်သို့ ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText('', ['align' => 'right']);
         
         $table->addRow();
-        $table->addCell(4000)->addText('(က) ကိုယ်ပိုင်အမှတ်:');
+        $table->addCell(4000)->addText('(က) ကိုယ်ပိုင်အမှတ်');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->military_solider_no, ['align' => 'right']);
         
         $table->addRow();
-        $table->addCell(4000)->addText('(ခ) တပ်သို့ဝင်သည့်နေ့:');
+        $table->addCell(4000)->addText('(ခ) တပ်သို့ဝင်သည့်နေ့');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->military_join_date, ['align' => 'right']);
         
         $table->addRow();
-        $table->addCell(4000)->addText('(ဂ) ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်:');
+        $table->addCell(4000)->addText('(ဂ) ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->military_dsa_no, ['align' => 'right']);
         
         $table->addRow();
-        $table->addCell(4000)->addText('(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့:');
+        $table->addCell(4000)->addText('(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->military_gazetted_date, ['align' => 'right']);
         
         $table->addRow();
-        $table->addCell(4000)->addText('(င) တပ်ထွက်သည့်နေ့:');
+        $table->addCell(4000)->addText('(င) တပ်ထွက်သည့်နေ့');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->military_leave_date, ['align' => 'right']);
         
         $table->addRow();
-        $table->addCell(4000)->addText('(စ) ထွက်သည့်အကြောင်း:');
+        $table->addCell(4000)->addText('(စ) ထွက်သည့်အကြောင်း');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->military_leave_reason, ['align' => 'right']);
         
         $table->addRow();
-        $table->addCell(4000)->addText('(ဆ) အမှုထမ်းဆောင်ခဲ့သောတပ်များ:');
+        $table->addCell(4000)->addText('(ဆ) အမှုထမ်းဆောင်ခဲ့သောတပ်များ');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->military_served_army, ['align' => 'right']);
         
         $table->addRow();
-        $table->addCell(4000)->addText('(ဇ) တပ်တွင်းရာဇဝင်အကျဥ်း/ပြစ်မှု:');
+        $table->addCell(4000)->addText('(ဇ) တပ်တွင်းရာဇဝင်အကျဥ်း/ပြစ်မှု');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->military_brief_history_or_penalty, ['align' => 'right']);
         
         $table->addRow();
-        $table->addCell(4000)->addText('(ဈ) အငြိမ်းစားလစာ:');
+        $table->addCell(4000)->addText('(ဈ) အငြိမ်းစားလစာ');
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->military_pension, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၂။ကာယကံရှင်မွေးဖွားချိန်၌မိဘနှစ်ပါးသည်နိုင်ငံသားဟုတ်/မဟုတ်:'); 
+        $table->addCell(4000)->addText('၂။ကာယကံရှင်မွေးဖွားချိန်၌မိဘနှစ်ပါးသည်နိုင်ငံသားဟုတ်/မဟုတ်'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->is_parents_citizen_when_staff_born, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၃။ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်နေ့:'); 
+        $table->addCell(4000)->addText('၃။ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်နေ့'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->join_date, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၄။ဝန်ကြီးဌာန:'); 
+        $table->addCell(4000)->addText('၄။ဝန်ကြီးဌာန'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->ministry?->name, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၅။ဦးစီးဌာန:'); 
+        $table->addCell(4000)->addText('၅။ဦးစီးဌာန'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၆။လစာဝင်ငွေ:'); 
+        $table->addCell(4000)->addText('၆။လစာဝင်ငွေ'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->payscale?->name, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၇။လက်ရှိအလုပ်အကိုင်:'); 
+        $table->addCell(4000)->addText('၇။လက်ရှိအလုပ်အကိုင်'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->current_rank->name, ['align' => 'right']);
 
         $table->addRow();
-        $table->addCell(4000)->addText('၈။လက်ရှိရာထူးရသည့်နေ့:'); 
+        $table->addCell(4000)->addText('၈။လက်ရှိရာထူးရသည့်နေ့'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->current_rank_date, ['align' => 'right']);
         $table->addRow();
-        $table->addCell(4000)->addText('၉။ပြောင်းရွေ့သည့်မှတ်ချက်:'); 
+        $table->addCell(4000)->addText('၉။ပြောင်းရွေ့သည့်မှတ်ချက်'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->transfer_remark, ['align' => 'right']);
         $table->addRow();
-        $table->addCell(4000)->addText('၁၀။တွဲဖက်အင်အား ဖြစ်လျှင်:'); 
+        $table->addCell(4000)->addText('၁၀။တွဲဖက်အင်အား ဖြစ်လျှင်'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->side_department?->name, ['align' => 'right']);
         $table->addRow();
-        $table->addCell(4000)->addText('၁၁။လစာနှင့် စရိတ်ကျခံမည့်ဌာန:'); 
+        $table->addCell(4000)->addText('၁၁။လစာနှင့် စရိတ်ကျခံမည့်ဌာန'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->salary_paid_by, ['align' => 'right']);
         $table->addRow();
-        $table->addCell(4000)->addText('၁၂။လက်ရှိ အလုပ်အကိုင်ရလာပုံ:'); 
+        $table->addCell(4000)->addText('၁၂။လက်ရှိ အလုပ်အကိုင်ရလာပုံ'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->is_newly_appointed, ['align' => 'right']);
         $table->addRow();
-        $table->addCell(4000)->addText('၁၃။ပြိုင်အ‌‌ရွေးခံ(သို့)တိုက်ရိုက်ခန့်:'); 
+        $table->addCell(4000)->addText('၁၃။ပြိုင်အ‌‌ရွေးခံ(သို့)တိုက်ရိုက်ခန့်'); 
         $table->addCell(2000)->addText('-', ['align' => 'center']);
         $table->addCell(5000)->addText($staff->is_direct_appointed, ['align' => 'right']);
        

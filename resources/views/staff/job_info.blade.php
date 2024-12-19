@@ -69,7 +69,7 @@
         <x-input-error class="mt-2" :messages="$errors->get('join_date')" />
     </div>
     <div>
-        <x-input-label for="အစိုးရဝန်ထမ်းစဖြစ်သည့်နေ" :value="__('အစိုးရဝန်ထမ်းစဖြစ်သည့်နေ')" />
+        <x-input-label for="ဝန်ထမ်းအဖြစ်စတင်သည့်‌နေ့" :value="__('ဝန်ထမ်းအဖြစ်စတင်သည့်‌နေ့')" />
 
         <x-date-picker wire:model="government_staff_started_date" id="government_staff_started_date"  class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('government_staff_started_date')" />

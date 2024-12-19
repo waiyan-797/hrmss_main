@@ -109,17 +109,6 @@ return new class extends Migration
             $table->foreignId('father_address_township_or_town_id')->nullable()->constrained('townships')->onDelete('set null');
             $table->foreignId('father_address_district_id')->nullable()->constrained('districts')->onDelete('set null');
             $table->foreignId('father_address_region_id')->nullable()->constrained('regions')->onDelete('set null');
-            $table->text('spouse_father_name')->nullable();
-            $table->foreignId('spouse_father_ethnic_id')->nullable()->constrained('ethnics')->onDelete('set null');
-            $table->foreignId('spouse_father_religion_id')->nullable()->constrained('religions')->onDelete('set null');
-            $table->text('spouse_father_place_of_birth')->nullable();
-            $table->text('spouse_father_occupation')->nullable();
-            $table->text('spouse_father_address_house_no')->nullable();
-            $table->text('spouse_father_address_street')->nullable();
-            $table->text('spouse_father_address_ward')->nullable();
-            $table->foreignId('spouse_father_address_township_or_town_id')->nullable()->constrained('townships')->onDelete('set null');
-            $table->foreignId('spouse_father_address_district_id')->nullable()->constrained('districts')->onDelete('set null');
-            $table->foreignId('spouse_father_address_region_id')->nullable()->constrained('regions')->onDelete('set null');
             $table->text('mother_name')->nullable();
             $table->foreignId('mother_ethnic_id')->nullable()->constrained('ethnics')->onDelete('set null');
             $table->foreignId('mother_religion_id')->nullable()->constrained('religions')->onDelete('set null');
@@ -131,17 +120,6 @@ return new class extends Migration
             $table->foreignId('mother_address_township_or_town_id')->nullable()->constrained('townships')->onDelete('set null');
             $table->foreignId('mother_address_district_id')->nullable()->constrained('districts')->onDelete('set null');
             $table->foreignId('mother_address_region_id')->nullable()->constrained('regions')->onDelete('set null');
-            $table->text('spouse_mother_name')->nullable();
-            $table->foreignId('spouse_mother_ethnic_id')->nullable()->constrained('ethnics')->onDelete('set null');
-            $table->foreignId('spouse_mother_religion_id')->nullable()->constrained('religions')->onDelete('set null');
-            $table->text('spouse_mother_place_of_birth')->nullable();
-            $table->text('spouse_mother_occupation')->nullable();
-            $table->text('spouse_mother_address_house_no')->nullable();
-            $table->text('spouse_mother_address_street')->nullable();
-            $table->text('spouse_mother_address_ward')->nullable();
-            $table->foreignId('spouse_mother_address_township_or_town_id')->nullable()->constrained('townships')->onDelete('set null');
-            $table->foreignId('spouse_mother_address_district_id')->nullable()->constrained('districts')->onDelete('set null');
-            $table->foreignId('spouse_mother_address_region_id')->nullable()->constrained('regions')->onDelete('set null');
             $table->boolean('family_in_politics')->default(false);
             //job_info
             $table->boolean('is_parents_citizen_when_staff_born')->default(false);

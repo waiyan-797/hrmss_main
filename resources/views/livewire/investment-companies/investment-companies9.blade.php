@@ -50,8 +50,8 @@
                                 <td class="border border-black p-2">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
                                 <td class="border border-black p-2">{{ $staff->current_rank?->name}}၊{{ $staff->payscale?->name}}၊{{ $staff->current_salary}}</td>
                                 <td class="border border-black p-2">{{en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</td>
-                                <td class="border border-black p-2">{{ $staff->lost_contact_from_date}}</td>
-                                <td class="border border-black p-2">{{ $staff->retire_date}}</td>
+                                <td class="border border-black p-2">{{ en2mm($staff->lost_contact_from_date)}}</td>
+                                <td class="border border-black p-2">{{ en2mm($staff->retire_date)}}</td>
                                 <td class="border border-black p-2">
                                       @php
                                     $join_date = Carbon\Carbon::parse($staff->join_date);

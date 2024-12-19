@@ -119,9 +119,8 @@
                         <tbody>
                             @foreach ($staff->abroads as $abroad)
                                 <tr>
-                                    
-                                    <td class="border border-black text-center p-2">{{en2mm($abroad->from_date)}}</td>
-                                    <td class="border border-black text-center p-2">{{en2mm($abroad->to_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{en2mm(\Carbon\Carbon::parse($abroad->from_date)->format('d-m-Y'))}}</td>
+                                    <td class="border border-black text-center p-2">{{en2mm(\Carbon\Carbon::parse($abroad->to_date)->format('d-m-Y'))}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->particular}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->training_success_count}}</td>
@@ -200,6 +199,8 @@
 
 
             </div>
+
+
         </div>
     </div>
 </div>
