@@ -171,7 +171,7 @@ class PdfStaffReport18 extends Component
                 $table->addCell(700)->addText(en2mm($index + 1), null, $pStyle_6);
                 $table->addCell(4000)->addText($occupation->rank->name."\n".$occupation->department->name, null, $pStyle_3);
                 $table->addCell(1750)->addText(formatDMYmm($occupation->from_date), null, $pStyle_6);
-                $table->addCell(1750)->addText(formatDMYMM($occupation->to_date), null, $pStyle_6);
+                $table->addCell(1750)->addText(formatDMYmm($occupation->to_date), null, $pStyle_6);
                 $table->addCell(2000)->addText($occupation->address, null, $pStyle_3);
             }
         }else{
@@ -201,8 +201,8 @@ class PdfStaffReport18 extends Component
                 $table->addRow(50);
                 $table->addCell(700)->addText(en2mm($index + 1), null, $pStyle_6);
                 $table->addCell(4000)->addText($training->training_type->name, null, $pStyle_3);
-                $table->addCell(1750)->addText($training->from_date, null, $pStyle_6);
-                $table->addCell(1750)->addText($training->to_date, null, $pStyle_6);
+                $table->addCell(1750)->addText(formatDMYmm($training->from_date), null, $pStyle_6);
+                $table->addCell(1750)->addText(formatDMYmm($training->to_date), null, $pStyle_6);
                 $table->addCell(2000)->addText($training->location, null, $pStyle_3);
             }
         }else{
@@ -231,8 +231,8 @@ class PdfStaffReport18 extends Component
                 $table->addRow(50);
                 $table->addCell(700)->addText(en2mm($index + 1), null, $pStyle_6);
                 $table->addCell(4000)->addText($training->training_type->name, null, $pStyle_3);
-                $table->addCell(1750)->addText($training->from_date, null, $pStyle_6);
-                $table->addCell(1750)->addText($training->to_date, null, $pStyle_6);
+                $table->addCell(1750)->addText(formatDMYmm($training->from_date), null, $pStyle_6);
+                $table->addCell(1750)->addText(formatDMYmm($training->to_date), null, $pStyle_6);
                 $table->addCell(2000)->addText($training->location, null, $pStyle_3);
             }
         }else{
