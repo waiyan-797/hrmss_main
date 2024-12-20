@@ -40,11 +40,15 @@ class PdfStaffReport15 extends Component
             'marginTop' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5), // 0.5 inch
             'marginBottom' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5), // 0.5 inch
         ]);
+        $header = $section->addHeader();
+        $header->addText('လျှို့ဝှက်',null,array('align'=>'center'));
+        $footer = $section->addFooter();
+        $footer->addText('လျှို့ဝှက်',null,array('align'=>'center', 'spaceBefore' => 200));
 
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
-        // $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
-        // $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
+        $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
         $table = $section->addTable();
         $table->addRow();
         $table->addCell(2000)->addText('၁။', null, ['alignment' => 'center']);
@@ -136,51 +140,17 @@ class PdfStaffReport15 extends Component
         $pStyle_5 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100];
         $section->addPageBreak();
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-
         $table->addRow(50, ['tblHeader' => true]);
         $table->addCell(9000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ကာလ', ['bold' => true], $pStyle_1);
-        // $table->addCell(8000, [ 'vMerge' => 'restart'])->addText('နောက်ဆုံးသွားရောက်ခဲ့သည့်(၅)နှိင်ငံ');
-
-        // $textRun=$table->addCell(8000, ['vMerge' => 'restart'])->addTextRun($pStyle_2);
-        // $textRun->addText('နောက်ဆုံးသွား',['bold'=>true]);
-        // $textRun->addTextBreak();
-        // $textRun->addText('ရောက်ခဲ့သည့်',['bold'=>true]);
-        // $textRun->addTextBreak();
-        // $textRun->addText('(၅)နိုင်ငံ',['bold'=>true]);
-
-        $textContent_1 = 'နောက်ဆုံးသွားရောက်ခဲ့သည့်(၅)နိုင်ငံ';
+        $textContent_1 = "နောက်ဆုံးသွား\nရောက်ခဲ့သည့်\n(၅)နိုင်ငံ";
         $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_2);
 
         $table->addCell(8000, ['vMerge' => 'restart'])->addText('သွားရောက်သည့်ကိစ္စ', ['bold' => true], $pStyle_3);
 
-        // $table->addCell(8000, ['vMerge' => 'restart'])->addText("သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်",['bold'=>true]);
-
-        // $textRun=$table->addCell(8000, ['vMerge' => 'restart'])->addTextRun($pStyle_4);
-        // $textRun->addText('သင်တန်းတက်',['bold'=>true]);
-        // $textRun->addTextBreak();
-        // $textRun->addText('ခြင်းဖြစ်လျှင် ',['bold'=>true]);
-        // $textRun->addTextBreak();
-        // $textRun->addText('အကြိမ်မည်မျှဖြင့်',['bold'=>true]);
-        // $textRun->addTextBreak();
-        // $textRun->addText('အောင်မြင်သည်',['bold'=>true]);
-
-        $textContent_2 = 'သင်တန်းတက်\nခြင်းဖြစ်လျှင် \nအကြိမ်မည်မျှဖြင့်\nအောင်မြင်သည်';
+        $textContent_2 = "သင်တန်းတက်\nခြင်းဖြစ်လျှင် \nအကြိမ်မည်မျှဖြင့်\nအောင်မြင်သည်";
         $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent_2, ['bold' => true], $pStyle_4);
-        // $table->addCell(8000, ['vMerge' => 'restart'])->addText('မည်သည့်အစိုးရအဖွဲ့အစည်းအထောက်အပံ့ဖြင့်သွားရောက်သည်',['bold'=>true]);
-        // $textRun=$table->addCell(8000, ['vMerge' => 'restart'])->addTextRun($pStyle_5);
-        // $textRun->addText('မည်သည့်',['bold'=>true]);
-        // $textRun->addTextBreak();
-        // $textRun->addText('အစိုးရ',['bold'=>true]);
-        // $textRun->addTextBreak();
-        // $textRun->addText('အဖွဲ့အစည်း',['bold'=>true]);
-        // $textRun->addTextBreak();
-        // $textRun->addText('အထောက်အပံ့ဖြင့်',['bold'=>true]);
-        // $textRun->addTextBreak();
-        // $textRun->addText('သွားရောက်သည်',['bold'=>true]);
-
-        $textContent_3 = 'မည်သည့်အစိုးရအဖွဲ့အစည်းအထောက်အပံ့ဖြင့်သွားရောက်သည်';
+        $textContent_3 = "မည်သည့်အစိုးရ\n အဖွဲ့အစည်း\nအထောက်အပံ့ဖြင့်\nသွားရောက်သည်";
         $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent_3, ['bold' => true], $pStyle_5);
-
         $table->addRow(50, ['tblHeader' => true]);
         $table->addCell(4500)->addText('မှ', ['bold' => true], ['alignment' => 'center']);
         $table->addCell(4500)->addText('ထိ', ['bold' => true], ['alignment' => 'center']);
@@ -211,9 +181,8 @@ class PdfStaffReport15 extends Component
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
         $table->addRow();
-        $textContent_1= 'အမည်(အခြားအမည်များရှိလျှင်လည်းဖော်ပြရန်)';
+        $textContent_1= "အမည်\n(အခြားအမည်များ\nရှိလျှင်လည်း\nဖော်ပြရန်)";
         $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent_3, ['bold' => true], $pStyle_1);
-        // $table->addCell(4000)->addText('အမည်(အခြားအမည်များရှိလျှင်လည်း ဖော်ပြရန်)', ['bold' => true], $pStyle_1);
         $table->addCell(6000)->addText('လူမျိုး/နိုင်ငံသား', ['bold' => true], $pStyle_1);
         $table->addCell(5000)->addText('အလုပ်အကိုင်နှင့်ဌာန', ['bold' => true], $pStyle_1);
         $table->addCell(4000)->addText('နေရပ်', ['bold' => true], $pStyle_1);

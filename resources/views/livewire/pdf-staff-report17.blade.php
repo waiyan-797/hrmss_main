@@ -120,11 +120,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($staff->abroads->slice(-5) as $abroad)
+                            @php
+                                $latestAbroads = $staff->abroads->sortByDesc('to_date')->take(5);
+                            @endphp
+                            
+                            @foreach ($latestAbroads as $abroad)
                                 <tr>
                                     
-                                    <td class="border border-black text-center p-2">{{en2mm($abroad->from_date)}}</td>
-                                    <td class="border border-black text-center p-2">{{en2mm($abroad->to_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm($abroad->from_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm($abroad->to_date)}}</td>
                                     
                                     <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->particular}}</td>
@@ -203,9 +207,9 @@
                                     <td class="border border-black p-2">{{en2mm($index+1)}}</td>
                                     <td class="border border-black p-2">{{ $abroad->particular}}</td>
                                     <td class="border border-black p-2">{{$abroad->country->name}}</td>
-                                    <td class="border border-black p-2">{{en2mm($abroad->from_date)}}</td>
-                                    <td class="border border-black p-2">{{en2mm($abroad->to_date)}}</td>
-                                    <td class="border border-black p-2">{{en2mm($abroad->actual_abroad_date)}}</td>
+                                    <td class="border border-black p-2">{{formatDMYmm($abroad->from_date)}}</td>
+                                    <td class="border border-black p-2">{{formatDMYmm($abroad->to_date)}}</td>
+                                    <td class="border border-black p-2">{{formatDMYmm($abroad->actual_abroad_date)}}</td>
                                     <td class="border border-black p-2">{{$abroad->sponser}}</td>
                                     
                                     <td class="border border-black p-2">{{$abroad->position}}</td>
