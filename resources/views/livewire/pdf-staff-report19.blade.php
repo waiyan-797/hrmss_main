@@ -81,7 +81,7 @@
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">@foreach ($staff->staff_educations as $education)
-                            <td class="border border-black text-center p-2">{{$education->education->name.','}}</td>
+                            <td class="border border-black text-center p-2">{{$education->education?->name.','}}</td>
                     @endforeach</label>
                 </div>
                 {{-- <div class="w-full mb-4">

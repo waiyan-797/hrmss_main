@@ -91,7 +91,7 @@ if (! function_exists('myanmarAlphabet')) {
     {
         $alphabets = ['က', 'ခ', 'ဂ', 'ဃ', 'င', 'စ', 'ဆ', 'ဇ', 'ဈ', 'ည', 'ဋ', 'ဌ', 'ဍ', 'ဎ', 'ဏ', 'တ', 'ထ', 'ဒ', 'ဓ', 'န', 'ပ', 'ဖ', 'ဗ', 'ဘ', 'မ', 'ယ', 'ရ', 'လ', 'ဝ', 'သ', 'ဟ', 'ဠ', 'အ'];
 
-        return $id ? $alphabets[$id] : '';
+        return isset($alphabets[$id]) ? $alphabets[$id] : '';
     }
 }
 

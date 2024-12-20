@@ -168,7 +168,7 @@ class PdfStaffReport18 extends Component
        if($staff->past_occupations->isNotEmpty()){
             foreach ($staff->past_occupations as $index=> $occupation) {
                 $table->addRow(50);
-                $table->addCell(700)->addText(en2mm($index + 1), null, $pStyle_6);
+                $table->addCell(700)->addText( '('.myanmarAlphabet($index).')', null, $pStyle_6);
                 $table->addCell(4000)->addText($occupation->rank->name."\n".$occupation->department->name, null, $pStyle_3);
                 $table->addCell(1750)->addText(formatDMYmm($occupation->from_date), null, $pStyle_6);
                 $table->addCell(1750)->addText(formatDMYmm($occupation->to_date), null, $pStyle_6);
@@ -196,14 +196,17 @@ class PdfStaffReport18 extends Component
        $table->addCell(1750)->addText('မှ', ['alignment' => 'center'], $pStyle_1);
        $table->addCell(1750)->addText('ထိ', ['alignment' => 'center'], $pStyle_1);
        $table->addCell(2000, ['vMerge' => 'continue']);
+       
        if($staff->trainings->isNotEmpty()){
-            foreach ($staff->trainings->where('training_location_id', 1) as $index=> $training) {
+            $index=0;
+            foreach ($staff->trainings->where('training_location_id', 1) as  $training) {
                 $table->addRow(50);
-                $table->addCell(700)->addText(en2mm($index + 1), null, $pStyle_6);
+                $table->addCell(700)->addText('('.myanmarAlphabet($index).')', null, $pStyle_6);
                 $table->addCell(4000)->addText($training->training_type->name, null, $pStyle_3);
                 $table->addCell(1750)->addText(formatDMYmm($training->from_date), null, $pStyle_6);
                 $table->addCell(1750)->addText(formatDMYmm($training->to_date), null, $pStyle_6);
                 $table->addCell(2000)->addText($training->location, null, $pStyle_3);
+                $index++;
             }
         }else{
                 $table->addRow(50);
@@ -226,14 +229,17 @@ class PdfStaffReport18 extends Component
        $table->addCell(1750)->addText('မှ', ['alignment' => 'center'], $pStyle_1);
        $table->addCell(1750)->addText('ထိ', ['alignment' => 'center'], $pStyle_1);
        $table->addCell(2000, ['vMerge' => 'continue']);
+       
        if($staff->trainings->isNotEmpty()){
-            foreach ($staff->trainings->where('training_location_id', 2) as $index=>  $training) {
+            $index=0;
+            foreach ($staff->trainings->where('training_location_id', 2) as  $training) {
                 $table->addRow(50);
-                $table->addCell(700)->addText(en2mm($index + 1), null, $pStyle_6);
+                $table->addCell(700)->addText('('.myanmarAlphabet($index).')', null, $pStyle_6);
                 $table->addCell(4000)->addText($training->training_type->name, null, $pStyle_3);
                 $table->addCell(1750)->addText(formatDMYmm($training->from_date), null, $pStyle_6);
                 $table->addCell(1750)->addText(formatDMYmm($training->to_date), null, $pStyle_6);
                 $table->addCell(2000)->addText($training->location, null, $pStyle_3);
+                $index++;
             }
         }else{
                 $table->addRow(50);
@@ -263,8 +269,8 @@ class PdfStaffReport18 extends Component
         //      $table->addCell(700)->addText($index + 1);
                 $table->addCell(2000)->addText($punishment->penalty_type->name, null, $pStyle_3);
                 $table->addCell(4700)->addText($punishment->reason,null, $pStyle_3);
-                $table->addCell(1750)->addText($punishment->from_date, null, $pStyle_6);
-                $table->addCell(1750)->addText($punishment->to_date, null, $pStyle_6);
+                $table->addCell(1750)->addText(formatDMYmm($punishment->from_date), null, $pStyle_6);
+                $table->addCell(1750)->addText(formatDMYmm($punishment->to_date), null, $pStyle_6);
             }
         }else{
                 $table->addRow(50);
@@ -277,16 +283,16 @@ class PdfStaffReport18 extends Component
        $section->addText('၁၈။'.'ချီးမြှင့်ခံရသည့် ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်များ', ['bold' => true], array('spaceBefore' => 200));
        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
        $table->addRow(50, array('tblHeader' => true));
-       $table->addCell(700)->addText('စဉ်', ['bold' => true], $pStyle_1);
+       $table->addCell(1000)->addText('စဉ်', ['bold' => true], $pStyle_1);
        $table->addCell(5700)->addText('ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အမည်', ['bold' => true], $pStyle_1);
        $table->addCell(3300)->addText('အမိန့်အမှတ်/ခုနှစ်', ['bold' => true], $pStyle_1);
        
        if($staff->awardings->isNotEmpty()){
-                foreach ($staff->awardings as $awarding) {
+                foreach ($staff->awardings as $index=>$awarding) {
                     $table->addRow(50);
-                    $table->addCell(700)->addText(en2mm($index+1),null, $pStyle_6);
+                    $table->addCell(1000)->addText('('.myanmarAlphabet($index).')',null, $pStyle_6);
                     $table->addCell(5700)->addText($awarding->award_type->name .'/'. $awarding->award->name, null ,$pStyle_3);
-                    $table->addCell(3300)->addText($awarding->order_no.'/'.$awarding->order_date, null, $pStyle_6);
+                    $table->addCell(3300)->addText($awarding->order_no, null, $pStyle_6);
                 }
             }else{
                 $table->addRow(50);

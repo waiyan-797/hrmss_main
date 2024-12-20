@@ -132,7 +132,7 @@ class PdfStaffReport19 extends Component
             $table->addCell(1500);
             $table->addCell(13000);
             $table->addCell(700)->addText('-', ['align' => 'center'],$pStyle_5);
-            $table->addCell(13000)->addText($education->education->name . '၊', ['align' => 'right'],$pStyle_4);
+            $table->addCell(13000)->addText($education->education?->name . '၊', ['align' => 'right'],$pStyle_4);
         }
         
           // $textRun=$table->addCell(8000, ['vMerge' => 'restart'])->addTextRun();
@@ -182,16 +182,16 @@ class PdfStaffReport19 extends Component
         $section->addText('၁၄။ '.'ထမ်းဆောင်ခဲ့သောတာဝန်များ', null,array('spaceBefore' => 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader'=>true));
-        $table->addCell(500)->addText('တာဝန်', ['bold' => true],$pStyle_1);
-        $table->addCell(800)->addText('ရုံး/ ဌာန/ အဖွဲ့အစည်း', ['bold' => true],$pStyle_1);
+        $table->addCell(1500)->addText('တာဝန်', ['bold' => true],$pStyle_1);
+        $table->addCell(3000)->addText('ရုံး/ ဌာန/ အဖွဲ့အစည်း', ['bold' => true],$pStyle_1);
         $table->addCell(1600)->addText('နေ့ရက်မှ', ['bold' => true],$pStyle_1);
         $table->addCell(1600)->addText('နေ့ရက်ထိ', ['bold' => true],$pStyle_1);
         $table->addCell(500)->addText('မှတ်ချက်', ['bold' => true],$pStyle_1);
         if($staff->past_occupations->isNotEmpty()){
             foreach ($staff->past_occupations as $occupation) {
                 $table->addRow(50);
-                $table->addCell(500)->addText($occupation->rank->name,null,$pStyle_7);
-                $table->addCell(800)->addText($occupation->department->name,null,$pStyle_7);
+                $table->addCell(1500)->addText($occupation->rank->name,null,$pStyle_7);
+                $table->addCell(3000)->addText($occupation->department->name,null,$pStyle_7);
                 $table->addCell(1600)->addText(formatDMYmm($occupation->from_date),null,$pStyle_1);
                 $table->addCell(1600)->addText(formatDMYmm($occupation->to_date), null, $pStyle_1);
                 $table->addCell(500)->addText($occupation->remark,null, $pStyle_1);
@@ -215,7 +215,7 @@ class PdfStaffReport19 extends Component
         if($staff->past_occupations->isNotEmpty()){
             foreach ($staff->past_occupations as $index=> $occupation) {
                 $table->addRow();
-                $table->addCell(500)->addText(en2mm($index+1),null, $pStyle_1);
+                $table->addCell(500)->addText('('.myanmarAlphabet($index).')',null, $pStyle_1);
                 $table->addCell(4800)->addText($occupation->department->name,null,$pStyle_7);
                 $table->addCell(2800)->addText($occupation->remark, null, $pStyle_7);
                 $table->addCell(1800)->addText($occupation->remark, null, $pStyle_7);
@@ -239,7 +239,7 @@ class PdfStaffReport19 extends Component
             if($staff->awardings->isNotEmpty()){
                 foreach ($staff->awardings as $index => $awarding) {
                     $table->addRow();
-                    $table->addCell(500)->addText(en2mm($index+1),null, $pStyle_1);
+                    $table->addCell(700)->addText('('.myanmarAlphabet($index).')',null, $pStyle_1);
                     $table->addCell(4800)->addText($awarding->award_type->name .'/'. $awarding->award->name,null,$pStyle_7);
                     $table->addCell(2800)->addText(formatDMYmm($awarding->order_date), null, $pStyle_7);
                     $table->addCell(1800)->addText( $awarding->remark, null, $pStyle_7);
@@ -277,13 +277,15 @@ class PdfStaffReport19 extends Component
         $section->addText('၁၈။'.'အခြားတင်ပြလိုသည့်အချက်များ '. str_repeat(' ', 5));
         $section->addText(''); 
         $section->addText(''); 
+        $section->addText('');  
+        $section->addText('');  
         $section->addText(''); 
 
         $section->addText('('.'ဝန်ထမ်း၏ထိုးမြဲလက်မှတ်'.')',null,['alignment' => Jc::END]);
         $textStyle=[
             'alignment' => Jc::BOTH 
         ];
-        $section->addText('၁၉။ '.'အထက်ဖော်ပြပါဝန်ထမ်း၏ကိုယ်ရေးမှတ်တမ်းနှင့်ပတ်သတ်၍မှန်ကန်စွာဖြည့်သွင်းရေးသားထားပါကြောင်းစိစစ်အတည်ပြုပါသည်။',null,$textStyle);
+        $section->addText('၁၉။အထက်ဖော်ပြပါဝန်ထမ်း၏ကိုယ်ရေးမှတ်တမ်းနှင့်ပတ်သတ်၍မှန်ကန်စွာဖြည့်သွင်းရေးသားထားပါကြောင်းစိစစ်အတည်ပြုပါသည်။',null,$textStyle);
         $section->addText(''); 
 
         $tableStyle = [
