@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('abroads', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Staff::class)->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Country::class)->nullable()->constrained()->nullOnDelete();
             $table->string('particular');
             $table->boolean('training_success_fail')->nullable()->default(false);
             $table->text('training_success_count')->nullable();

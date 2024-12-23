@@ -14,7 +14,7 @@
             @foreach ($column_vals as $index => $val)
                 <tr class="font-arial bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     @foreach ($column_types as $type)
-                        <td class="px-2 py-3 min-w-[120px] text-gray-500 dark:text-gray-300">
+                        <td class="px-4 py-4 min-w-[300px] text-gray-500 dark:text-gray-300">
                             @if ($type['type'] == 'select')
                                 <x-select
                                     wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
@@ -28,20 +28,15 @@
                                 <x-searchable-select
                                     :values="$type['select_values']"
                                     property="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
-                                    class="block w-full p-2 text-sm border rounded"
+                                    class="block w-full p-2 text-sm border rounded font-arial"
                                 />
-                            @elseif ($type['type'] == 'text' || $type['type'] == 'number' || $type['type'] == 'file')
+                            @elseif ($type['type'] == 'text' || $type['type'] == 'number' || $type['type'] == 'file' || $type['type'] == 'date')
                                 <x-text-input
                                     wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
                                     id="{{$type['wire_array_key']}}"
                                     name="{{$type['wire_array_key']}}"
                                     type="{{$type['type']}}"
                                     class="block w-full p-2 text-sm border rounded"
-                                />
-                            @elseif ($type['type'] == 'date')
-                                <x-date-picker
-                                    wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
-                                    class="w-full px-1 py-1 text-sm border rounded"
                                 />
                             @elseif ($type['type'] == 'checkbox')
                                 <input
@@ -51,10 +46,10 @@
                                 />
                             @elseif ($type['type'] == 'multiple-select')
                                 <x-multiple-select
-                                    property="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
-                                    :values="$type['select_values']"
-                                    placeholder="Select..."
-                                    class="block w-full px-1 py-1 text-sm border rounded"
+                                    model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
+                                    class="block w-full text-sm border rounded"
+                                    placeholderValue="Select..."
+                                    :options="$type['select_values']"
                                 />
                             @endif
                         </td>

@@ -9,7 +9,8 @@ class Abroad extends Model
 {
     use HasFactory;
 
-    public function country(){
-        return $this->belongsTo(Country::class);
+    public function countries()
+    {
+        return $this->belongsToMany(Country::class, 'abroad_countries');
     }
 }

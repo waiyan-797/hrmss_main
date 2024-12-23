@@ -33,8 +33,8 @@
         <x-input-error class="mt-2" :messages="$errors->get('staff_no')" />
     </div>
     <div>
-        <x-input-label for="မွေးသက္ကရာဇ်" :value="__('မွေးသက္ကရာဇ်')" />
-        <x-date-picker wire:model="dob" id="dob"   name="dob" class="mt-1 block w-full" required/>
+        <x-input-label for="မွေးသက္ကရာဇ်" :value="__('မွေးသက္ကရာဇ် (လ ၊ ရက် ၊ နှစ်)')" />
+        <x-text-input wire:model="dob" id="dob" name="dob" class="mt-1 block w-full" type="date" required/>
         <x-input-error class="mt-2" :messages="$errors->get('dob')" required/>
     </div>
     <div>
@@ -148,9 +148,9 @@
         <x-text-input wire:model="spouse_name" id="spouse_name" name="spouse_name" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('spouse_name')" />
     </div>
-    <div class="col-span-2">
+    <div>
         <x-input-label for="မွေးဖွားရာဇာတိ" :value="__('မွေးဖွားရာဇာတိ')" />
-        <x-textarea-input wire:model="place_of_birth" id="place_of_birth" name="place_of_birth" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="place_of_birth" id="place_of_birth" name="place_of_birth" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('place_of_birth')" required/>
     </div>
     <div class="col-span-4">
@@ -285,8 +285,8 @@
         <x-input-error class="mt-2" :messages="$errors->get('military_solider_no')" />
     </div>
     <div>
-        <x-input-label for="(ခ) တပ်သို့ဝင်သည့်နေ့" :value="__('(ခ) တပ်သို့ဝင်သည့်နေ့')" />
-        <x-date-picker wire:model="military_join_date" id="military_join_date"  name="military_join_date" class="mt-1 block w-full"/>
+        <x-input-label for="(ခ) တပ်သို့ဝင်သည့်နေ့" :value="__('(ခ) တပ်သို့ဝင်သည့်နေ့ (လ ၊ ရက် ၊ နှစ်)')" />
+        <x-text-input wire:model="military_join_date" id="military_join_date" name="military_join_date" type="date" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('military_join_date')" />
     </div>
     <div>
@@ -295,14 +295,13 @@
         <x-input-error class="mt-2" :messages="$errors->get('military_dsa_no')" />
     </div>
     <div>
-        <x-input-label for="(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့" :value="__('(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့')" />
-        <x-date-picker wire:model="military_gazetted_date" id="military_gazetted_date"  name="military_gazetted_date" class="mt-1 block w-full"/>
-
+        <x-input-label for="(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့" :value="__('(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့ (လ ၊ ရက် ၊ နှစ်)')" />
+        <x-text-input wire:model="military_gazetted_date" id="military_gazetted_date"  name="military_gazetted_date" type="date" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('military_gazetted_date')" />
     </div>
     <div>
-        <x-input-label for="(င) တပ်ထွက်သည့်နေ့" :value="__('(င) တပ်ထွက်သည့်နေ့')" />
-        <x-date-picker wire:model="military_leave_date" id="military_leave_date"  name="military_leave_date" class="mt-1 block w-full"/>
+        <x-input-label for="(င) တပ်ထွက်သည့်နေ့" :value="__('(င) တပ်ထွက်သည့်နေ့ (လ ၊ ရက် ၊ နှစ်)')" />
+        <x-text-input wire:model="military_leave_date" id="military_leave_date"  name="military_leave_date" type="date" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('military_leave_date')" />
     </div>
     <div>
@@ -338,8 +337,8 @@
         <x-input-error class="mt-2" :messages="$errors->get('veteran_no')" />
     </div>
     <div>
-        <x-input-label for="စစ်မှုထမ်းဟောင်းရက်စွဲ" :value="__('စစ်မှုထမ်းဟောင်းရက်စွဲ')" />
-        <x-date-picker wire:model="veteran_date" id="veteran_date"  name="veteran_date" class="mt-1 block w-full"/>
+        <x-input-label for="စစ်မှုထမ်းဟောင်းရက်စွဲ" :value="__('စစ်မှုထမ်းဟောင်းရက်စွဲ (လ ၊ ရက် ၊ နှစ်)')" />
+        <x-text-input wire:model="veteran_date" id="veteran_date"  name="veteran_date" type="date" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('veteran_date')" />
     </div>
     <div>

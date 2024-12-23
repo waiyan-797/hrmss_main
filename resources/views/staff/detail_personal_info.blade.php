@@ -77,8 +77,8 @@
         'add_event' => 'add_trainings',
         'column_vals' => $trainings,
         'column_types' => [
-            [ 
-               
+            [
+
 
                 'type' => 'select',
                 'wire_array_name' => 'trainings',
@@ -265,7 +265,7 @@
     ])
 
 </div>
-<div class="grid grid-cols-4 gap-4 py-5">
+<div class="grid grid-cols-3 gap-4 py-5">
     <div>
         <x-input-label for="တောခိုခဲ့ဖူးလျှင်(သို့)သောင်းကျန်းသူများကြီးစိုးသော နယ်မြေတွင် နေခဲ့ဖူးလျှင် လုပ်ကိုင်ဆောင်ရွက်ချက်များကို ဖော်ပြပါ" :value="__('တောခိုခဲ့ဖူးလျှင်(သို့)သောင်းကျန်းသူများကြီးစိုးသော နယ်မြေတွင် နေခဲ့ဖူးလျှင် လုပ်ကိုင်ဆောင်ရွက်ချက်များကို ဖော်ပြပါ')" />
         <x-textarea-input wire:model="revolution" id="revolution" name="revolution" class="mt-1 block w-full"/>
@@ -281,14 +281,19 @@
         <x-text-input :NoneedValidate=true  wire:model="during_work_political_social" id="during_work_political_social" name="during_work_political_social" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('during_work_political_social')" />
     </div>
+</div>
+<div class="grid grid-cols-2 gap-4 py-5">
     <div>
         <x-input-label for="စစ်ဘက်/နယ်ဘက်/ရဲဘက်နှင့် နိုင်ငံရေးဘက်တွင် ခင်မင်ရင်းနှီးသော မိတ်ဆွေများ ရှိ မရှိ" :value="__('စစ်ဘက်/နယ်ဘက်/ရဲဘက်နှင့် နိုင်ငံရေးဘက်တွင် ခင်မင်ရင်းနှီးသော မိတ်ဆွေများ ရှိ မရှိ')" />
         <x-radio-input id1="has_military_friend_1" id2="has_military_friend_2" wire="has_military_friend" />
         <x-input-error class="mt-2" :messages="$errors->get('has_military_friend')" />
     </div>
     @if($has_military_friend)
-    <x-textarea-input  wire:model='has_military_friend_text' />
-    @endif 
+        <div>
+            <x-input-label for="စစ်ဘက်/နယ်ဘက်/ရဲဘက်နှင့် နိုင်ငံရေးဘက်တွင် ခင်မင်ရင်းနှီးသော မိတ်ဆွေများ" :value="__('စစ်ဘက်/နယ်ဘက်/ရဲဘက်နှင့် နိုင်ငံရေးဘက်တွင် ခင်မင်ရင်းနှီးသော မိတ်ဆွေများ')" />
+            <x-textarea-input wire:model='has_military_friend_text' class="mt-1 block w-full"/>
+        </div>
+    @endif
 </div>
 
 <div class="w-full py-5">
@@ -302,7 +307,7 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['သွားရောက်ခဲ့သည့်နိုင်ငံ', 'သွားရောက်ခဲ့သည့်အကြောင်း','သင်တန်းတက်ခြင်းဖြစ်လျှင် အောင်','သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်','ထောက်ပံ့သည့်အဖွဲ့အစည်း', 'တွေ့ဆုံခဲ့သည့် ကုမ္ပဏီ၊ လူပုဂ္ဂိုလ်၊ ဌာန', 'သွားသည့်နေ့', 'ပြန်သည့်နေ့','နိုင်ငံခြားခရီးစဉ်','နိုင်ငံခြားသို့သွားရောက်မည်ံနေ့','ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး'],
+        'column_names' => ['သွားရောက်ခဲ့သည့်နိုင်ငံ', 'သွားရောက်ခဲ့သည့်အကြောင်း','သင်တန်းတက်ခြင်းဖြစ်လျှင် အောင်','သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်','ထောက်ပံ့သည့်အဖွဲ့အစည်း', 'တွေ့ဆုံခဲ့သည့် ကုမ္ပဏီ၊ လူပုဂ္ဂိုလ်၊ ဌာန', 'သွားသည့်နေ့ (လ၊ ရက်၊ နှစ်)', 'ပြန်သည့်နေ့ (လ၊ ရက်၊ နှစ်)', 'နိုင်ငံခြားသို့သွားရောက်မည်ံနေ့ (လ၊ ရက်၊ နှစ်)','ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး'],
         'column_vals' => $abroads,
         'column_types' => [
             [
@@ -345,11 +350,6 @@
                 'type' => 'date',
                 'wire_array_name' => 'abroads',
                 'wire_array_key' => 'to_date',
-            ],
-            [
-                'type' => 'number',
-                'wire_array_name' => 'abroads',
-                'wire_array_key' => 'status',
             ],
             [
                 'type' => 'date',

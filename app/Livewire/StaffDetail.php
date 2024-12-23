@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Abroad;
+use App\Models\AbroadCountry;
 use App\Models\Award;
 use App\Models\Awarding;
 use App\Models\AwardType;
@@ -348,11 +349,6 @@ public $has_military_friend_text ;
         foreach ($recommendations as $rec) {
             $this->recommendations[] = [
                 'recommend_by' => $rec->recommend_by,
-                'ministry' => $rec->ministry,
-                'department' => $rec->department,
-                'rank' => $rec->rank,
-                'remark' => $rec->remark,
-                'recommendation_letter' => $rec->recommendation_letter,
             ];
         }
 
@@ -426,7 +422,7 @@ public $has_military_friend_text ;
 
         foreach ($abroads as $abroad) {
             $this->abroads[] = [
-                'country' => $abroad->country_id,
+                'country' => $abroad->countries()->pluck('country_id')->toArray(),
                 'particular' => $abroad->particular,
                 'training_success_fail' => false,
                 // 'training_success_fail' => $abroad->training_success_fail,
@@ -435,7 +431,6 @@ public $has_military_friend_text ;
                 'meet_with' => $abroad->meet_with,
                 'from_date' => $abroad->from_date,
                 'to_date' => $abroad->to_date,
-                'status' => $abroad->status,
                 'actual_abroad_date' => $abroad->actual_abroad_date,
                 'position' => $abroad->position,
             ];
@@ -680,7 +675,7 @@ public $has_military_friend_text ;
 
     public function add_recommendation()
     {
-        $this->recommendations[] = ['recommend_by' => '', 'ministry' => '', 'department' => '', 'rank' => '', 'remark' => '', 'recommendation_letter' => ''];
+        $this->recommendations[] = ['recommend_by' => ''];
     }
 
     public function add_posting()
@@ -787,7 +782,7 @@ public $has_military_friend_text ;
 
     public function add_abroads()
     {
-        $this->abroads[] = ['country' => '', 'particular' => '', 'training_success_fail' => '', 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'status' => '', 'actual_abroad_date' => '', 'position' => ''];
+        $this->abroads[] = ['country' => [], 'particular' => '', 'training_success_fail' => '', 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
     }
 
     public function add_socials()
@@ -1158,25 +1153,20 @@ public $has_military_friend_text ;
     {
         Abroad::where('staff_id', $staffId)->delete();
         foreach ($this->abroads as $abroad) {
+            $ab = Abroad::create([
+                    'staff_id' => $staffId,
+                    'particular' => $abroad['particular'],
+                    'training_success_fail' => false,
+                    'training_success_count' => $abroad['training_success_count'],
+                    'sponser' => $abroad['sponser'],
+                    'meet_with' => $abroad['meet_with'],
+                    'from_date' => $abroad['from_date'],
+                    'to_date' => $abroad['to_date'],
+                    'actual_abroad_date' => '2024-12-09',
+                    'position' => $abroad['position'],
+                ]);
 
-            Abroad::create([
-                'staff_id' => $staffId,
-                'country_id' => $abroad['country'],
-                'particular' => $abroad['particular'],
-                'training_success_fail' => false,
-                // $abroad['training_success_fail'],
-                'training_success_count' => $abroad['training_success_count'],
-                'sponser' => $abroad['sponser'],
-                'meet_with' => $abroad['meet_with'],
-                'from_date' => $abroad['from_date'],
-                'to_date' => $abroad['to_date'],
-                // 'status' => $abroad['status'],
-                'status' => 4,
-                'actual_abroad_date' => '2024-12-09'
-                //  $abroad['actual_abroad_date']
-                ,
-                'position' => $abroad['position'],
-            ]);
+            $ab->countries()->attach($abroad['country']);
         }
     }
 
@@ -1459,11 +1449,6 @@ private function saveSchools($staffId)
         foreach ($this->recommendations as $recommendation) {
             Recommendation::create([
                 'recommend_by' => $recommendation['recommend_by'],
-                'ministry' => $recommendation['ministry'],
-                'department' => $recommendation['department'],
-                'rank' => $recommendation['rank'],
-                'remark' => $recommendation['remark'],
-                'recommendation_letter' => $recommendation['recommendation_letter'],
                 'staff_id' => $staffId,
             ]);
         }

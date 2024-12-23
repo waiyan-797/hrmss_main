@@ -37,8 +37,8 @@
         </button>
     </div>
     <div x-show="open" @click.away="open = false" x-cloak class="fixed z-50 max-h-40 overflow-auto rounded-md bg-white py-1 text-sm shadow-lg" :style="dropdownStyles">
-        <input type="text" x-model="search" placeholder="Search..." class="block w-full border-0 border-b border-gray-300 bg-white pb-2 pl-3 text-left focus:ring-0">
-        <ul class="max-h-60 overflow-auto">
+        <input type="text" x-model="search" placeholder="Search..." class="font-arial block w-full border-0 border-b border-gray-300 bg-white pb-2 pl-3 text-left focus:ring-0">
+        <ul class="max-h-60 overflow-auto font-arial">
             <li @click="selectOption('')" class="cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-gray-100 hover:text-gray-800" :class="{'bg-sky-600 text-white': selectedOption == ''}">
                 <span class="font-normal block truncate">Select...</span>
             </li>
