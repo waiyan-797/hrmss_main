@@ -11,6 +11,7 @@ use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\SimpleType\Jc;
 use PhpOffice\PhpWord\Style\Tab;
 
+
 class PdfStaffReport15 extends Component
 {
     public $staff_id;
@@ -274,6 +275,10 @@ class PdfStaffReport15 extends Component
             ],
         );
     }
+
+
+
+
     public function render()
     {
         $staff = Staff::where('id', $this->staff_id)->first();

@@ -21,6 +21,20 @@ class PdfStaffReport19 extends Component
         $data = [
             'staff' => $staff,
         ];
+
+         
+        // // Define margin settings in millimeters
+        // $pdf = PDF::loadView('pdf_reports.staff_report_19', $data, [], [
+        //     'default_font_size' => 13,       // Optional, set default font size
+        //     'default_font' => 'Pyidaungsu',      // Optional, set default font
+        //     'format' => 'A4',               // Set paper size
+        //     'orientation' => 'P',           // Portrait orientation
+        //     'margin_left' => 25.4,          // 1 inch = 25.4 mm
+        //     'margin_right' => 12.7,         // 0.5 inches = 12.7 mm
+        //     'margin_top' => 12.7,           // 0.5 inches = 12.7 mm
+        //     'margin_bottom' => 12.7         // 0.5 inches = 12.7 mm
+        // ]);
+
         $pdf = PDF::loadView('pdf_reports.staff_report_19', $data);
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
@@ -38,15 +52,24 @@ class PdfStaffReport19 extends Component
             'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
         ]);
         // $section = $phpWord->addSection(); 
-        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
-        // $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
-        $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း',1);
-        $section->addTitle('[နည်းဥပဒေ ၃၅ (ဇ) (၄)၊ ၄၇ (စ) (၄)]',1);
-        // $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
-        // $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']); 
+        
+        $header_page_1 = $section->addHeader();
+        $header_page_1->firstPage();
+        $header_page_1->addText('လျှို့ဝှက်', null, [
+            'align' => 'center',
+            'spaceBefore' => 0, 
+            'spaceAfter' => 0, 
+            'lineHeight' => 1, 
+        ]);
+        $header_subseq = $section->addHeader();
+        $header_subseq->addText('လျှို့ဝှက်', null, [
+            'align' => 'center',
+            'spaceBefore' => 0,
+            'spaceAfter' => 0,
+            'lineHeight' => 1,
+        ]);
 
-        $header = $section->addHeader();
-        $header->addText('လျှို့ဝှက်',null,array('align'=>'center'));
+        $header_subseq->addPreserveText('{PAGE}', ['name' => 'Pyidaungsu Numbers', 'size' => 13], ['alignment' => 'center', 'spaceBefore' => 0, 'spaceAfter' => 0]);
         $footer = $section->addFooter();
         $footer->addText('လျှို့ဝှက်',null,array('align'=>'center', 'spaceBefore' => 200));
 
@@ -59,6 +82,19 @@ class PdfStaffReport19 extends Component
         //for no.1 to no.13
         $pStyle_4=array('align' => 'both', 'spaceAfter' => 10, 'spaceBefore' => 20, 'indentation' => ['left' => 100]);
         $pStyle_5=array('align' => 'center', 'spaceAfter' => 15, 'spaceBefore' => 20);
+
+        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+        // $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
+        $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း',1);
+        $section->addTitle('[နည်းဥပဒေ ၃၅ (ဇ) (၄)၊ ၄၇ (စ) (၄)]',1);
+        
+        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
+        if ($imagePath && file_exists($imagePath)) {
+        $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+        } else {
+        $defaultImagePath = public_path('img/user.png');
+        $section->addImage($defaultImagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+       }
 
         $table = $section->addTable();
         $table->addRow(50);
@@ -113,13 +149,13 @@ class PdfStaffReport19 extends Component
         $table->addCell(1500)->addText('၉။',null, $pStyle_5);
         $table->addCell(13000)->addText('လက်ရှိနေရပ်လိပ်စာ',null, $pStyle_4);
         $table->addCell(700)->addText('-', ['align' => 'center'],$pStyle_5);
-        $table->addCell(13000)->addText($staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_region->name.'၊'.$staff->current_address_township_or_town->name,null, $pStyle_4);
+        $table->addCell(13000)->addText($staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'။',null, $pStyle_4);
 
         $table->addRow(50);
         $table->addCell(1500)->addText('၁၀။',null,$pStyle_5);
         $table->addCell(13000)->addText('အမြဲတမ်းနေရပ်လိပ်စာ',null,$pStyle_4);
         $table->addCell(700)->addText('-', ['align' => 'center'], $pStyle_5);
-        $table->addCell(13000)->addText($staff->permanent_address_street.'၊'.$staff->permanent_address_ward.'၊'.$staff->permanent_address_region->name.'၊'.$staff->permanent_address_township_or_town->name,null,$pStyle_4);
+        $table->addCell(13000)->addText($staff->permanent_address_street.'၊'.$staff->permanent_address_ward.'၊'.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'။',null,$pStyle_4);
 
         $table->addRow(50);
         $table->addCell(1500)->addText('၁၁။',null,$pStyle_5);
@@ -166,9 +202,9 @@ class PdfStaffReport19 extends Component
         if($staff->trainings->isNotEmpty()){
             foreach ($staff->trainings as $training) {
                     $table->addRow(50);
-                        $table->addCell(6500)->addText($training->training_type->name,null, $pStyle_7);
-                        $table->addCell(2000)->addText(en2mm($training->from_date),null, $pStyle_1);
-                        $table->addCell(2000)->addText(en2mm($training->to_date),null, $pStyle_1);
+                        $table->addCell(6500)->addText($training->training_type_id  == 32 ? $training->diploma_name :  $training->training_type->name,null, $pStyle_7);
+                        $table->addCell(2000)->addText(formatDMYmm($training->from_date),null, $pStyle_1);
+                        $table->addCell(2000)->addText(formatDMYmm($training->to_date),null, $pStyle_1);
            
             }
         }else{
@@ -256,8 +292,8 @@ class PdfStaffReport19 extends Component
         
                 // $section->addText('', null, ['spaceBefore' => 200]);
 
-        $section->addText('၁၇။', null,['spaceBefore' => 200]);
-        $section->addTex( 'အပြစ်ပေးခံရခြင်းများ', null,['spaceBefore' => 200]);
+        $section->addText('၁၇။အပြစ်ပေးခံရခြင်းများ', null,['spaceBefore' => 200]);
+        // $section->addTex( '', null,['spaceBefore' => 200]);
 
         foreach ($staff->punishments as $punishment) {
             // Create a formatted string for each punishment

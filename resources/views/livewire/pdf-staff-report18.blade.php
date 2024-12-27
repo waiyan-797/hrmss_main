@@ -22,7 +22,7 @@
                     <label for="name" class="md:w-5">၃။ </label>
                     <label for="name" class="md:w-1/3">မွေးနေ့ (ရက်၊ လ၊ နှစ်)</label>
                     <label for="name" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</label>
+                    <label for="name" class="md:w-3/5">{{formatDMYmm($staff->dob)}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="name" class="md:w-5">၄။ </label>
@@ -47,7 +47,7 @@
                     <label for="name" class="md:w-5">၇။</label>
                     <label for="name" class="md:w-1/3">နိုင်ငံသားစိစစ်ရေးအမှတ်</label>
                     <label for="name" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{collect([$staff->nrc_region_id->name,$staff->nrc_township_code->name , $staff->nrc_sign->name,en2mm( $staff->nrc_code )])->filter()->implode('၊')}}</label>
+                    <label for="name" class="md:w-3/5">{{collect([$staff->nrc_region_id->name.$staff->nrc_township_code->name . $staff->nrc_sign->name.en2mm( $staff->nrc_code )])->filter()->implode('၊')}}</label>
                 </div>
                 
                 <div class="flex justify-between w-full mb-2">
@@ -79,7 +79,7 @@
                     <label for="name" class="md:w-1/3">လိပ်စာ</label>
                     <label for="name" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">
-                        {{collect([$staff->current_address_street,$staff->current_address_ward,$staff->current_address_township_or_town->name ,$staff->current_address_region->name])->filter()->implode('၊')}}
+                        {{collect([$staff->current_address_street.$staff->current_address_ward.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'။'])->filter()->implode('၊')}}
                     </label>
                 </div>
                
@@ -117,15 +117,15 @@
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                     <label for="name" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">  @foreach ($staff->staff_educations as $education)
-                            {{$education->education_group?->name.','.$education->education_type?->name.','.$education->education?->name.'၊'}}
+                            {{$education->education?->name}}
                     @endforeach</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="name" class="md:w-5">၁၂။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိရာထူး/လစာနှုန်း/ဌာန</label>
                     <label for="name" class="md:w-5">-</label>
-                    <label for="name"
-                        class="md:w-3/5">{{collect([$staff->current_rank?->name,$staff->current_salary,$staff->current_department?->name ])->filter()->implode('၊')}}</label>
+                    <label for="name" class="md:w-3/5">
+                        {!!collect([$staff->current_rank?->name , $staff->payscale?->name , $staff->current_department?->name ])->filter()->implode('<br>')!!}</label>
                         </label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
@@ -155,15 +155,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($staff->past_occupations as $occupation)
+                            @if($staff->past_occupations->isNotEmpty())
+                            $index=0;
+                            @foreach ($staff->past_occupations as $index=>$occupation)
                                 <tr>
-                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
+                                    <td class="border border-black text-center p-2">{{'('.myanmarAlphabet($loop->index).')'}}</td>
                                     <td class="border border-black text-center p-2">{{$occupation->rank->name}}</td>
-                                    <td class="border border-black text-center p-2">{{en2mm($occupation->from_date)}}</td>
-                                    <td class="border border-black text-center p-2">{{en2mm($occupation->to_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm($occupation->from_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm($occupation->to_date)}}</td>
                                     <td class="border border-black text-center p-2">{{$occupation->address}}</td>
                                 </tr>
                             @endforeach
+                        @else
+                            <tr>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4"></td>
+                            </tr>
+                        @endif
                         </tbody>
                     </table>
                 </div>
@@ -187,15 +198,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($staff->trainings->where('training_location_id', 1) as $training)
+                            @if ($staff->trainings->isNotEmpty()) 
+                            @foreach ($staff->trainings->where('training_location_id', 1) as $index=>$training)
                                 <tr>
-                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
+                                    <td class="border border-black text-center p-2">{{'('.myanmarAlphabet($loop->index).')'}}</td>
                                     <td class="border border-black text-center p-2">{{$training->training_type->name}}</td>
-                                    <td class="border border-black text-center p-2">{{en2mm($training->from_date)}}</td>
-                                    <td class="border border-black text-center p-2">{{en2mm($training->to_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm($training->from_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm($training->to_date)}}</td>
                                     <td class="border border-black text-center p-2">{{$training->location}}</td>
                                 </tr>
                             @endforeach
+                            @else
+                            <tr>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4"></td>
+                            </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -219,15 +240,25 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if ($staff->trainings->isNotEmpty())
                             @foreach ($staff->trainings->where('training_location_id', 2) as $training)
                                 <tr>
-                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
+                                    <td class="border border-black text-center p-2">{{'('.myanmarAlphabet($loop->index).')'}}</td>
                                     <td class="border border-black text-center p-2">{{$training->training_type->name}}</td>
-                                    <td class="border border-black text-center p-2">{{en2mm($training->from_date)}}</td>
-                                    <td class="border border-black text-center p-2">{{en2mm($training->to_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm($training->from_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm($training->to_date)}}</td>
                                     <td class="border border-black text-center p-2">{{$training->location}}</td>
                                 </tr>
                             @endforeach
+                            @else
+                            <tr>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4"></td>
+                            </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -253,15 +284,24 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if ($staff->punishments->isNotEmpty())
                             @foreach ($staff->punishments as $punishment)
                                 <tr>
-                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
+                                    <td class="border border-black text-center p-2">{{'('.myanmarAlphabet($loop->index).')'}}</td>
                                     <td class="border border-black text-center p-2">{{$punishment->penalty_type->name}}</td>
                                     <td class="border border-black text-center p-2">{{$punishment->reason}}</td>
-                                    <td class="border border-black text-center p-2">{{en2mm($punishment->from_date)}}</td>
-                                    <td class="border border-black text-center p-2">{{en2mm($punishment->to_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm($punishment->from_date)}}</td>
+                                    <td class="border border-black text-center p-2">{{formatDMYmm($punishment->to_date)}}</td>
                                 </tr>
                             @endforeach
+                            @else
+                                <tr>
+                                    <td class="border border-black text-center p-4"></td>
+                                    <td class="border border-black text-center p-4"></td>
+                                    <td class="border border-black text-center p-4"></td>
+                                    <td class="border border-black text-center p-4"></td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -274,20 +314,26 @@
                     <div class="w-full rounded-lg">
                         <table class="w-full text-center">
                             <thead>
-                                <tr class="bg-gray-100">
+                                <tr class="">
                                     <th class="p-2 border border-black">စဉ်</th>
                                     <th class="p-2 border border-black">ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အမည်</th>
                                     <th class="p-2 border border-black">အမိန့်အမှတ်/ခုနှစ်</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
+                                @if ($staff->awardings->isNotEmpty())
                                 @foreach ($staff->awardings as $awarding)
                                     <tr>
-                                        <td class="border border-black p-2">{{$loop->index + 1}}</td>
+                                        <td class="border border-black p-2">{{'('.myanmarAlphabet($loop->index).')'}}</td>
                                         <td class="border border-black p-2">{{$awarding->award_type->name .'/'. $awarding->award->name}}</td>
-                                        <td class="border border-black p-2">{{$awarding->order_no.'/'.en2mm($awarding->order_date)}}</td>
+                                        <td class="border border-black p-2">{{$awarding->order_no.'/'.formatDMYmm($awarding->order_date)}}</td>
                                     </tr>
                                 @endforeach
+                                @else
+                                    <td class="border border-black text-center p-4"></td>
+                                    <td class="border border-black text-center p-4"></td>
+                                    <td class="border border-black text-center p-4"></td>
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -298,41 +344,39 @@
                 <p class="mb-8">အထက်ပါ ဖြည့်စွက်ချက်များ မှန်ကန်ကြောင်း
                     လက်မှတ်ရေးထိုးပါသည်။</p>
 
-                <div class="flex justify-start mb-2">
-                    <p class="md:w-1/3 ml-36">လက်မှတ်</p>
-                    <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5"></p>
-                </div>
-
-                <div class="flex justify-start mb-2">
-                    <p class="md:w-1/3 ml-36">အမည်</p>
-                    <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5">
-
-                    </p>
-                </div>
-
-                <div class="flex justify-start mb-2">
-                    <p class="md:w-1/3 ml-36">ရာထူး</p>
-                    <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5"></p>
-                </div>
-
-                <div class="flex justify-start mb-2">
-                    <p class="md:w-1/3 ml-36">ဖုန်းနံပါတ်(ရုံး/လက်ကိုင်ဖုန်း)</p>
-                    <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5"></p>
-                </div>
-
-                <div class="flex justify-start mb-4">
-                    <p class="md:w-1/3 ml-36">အီး‌မေးလ်</p>
-                    <p class="md:w-5">၊</p>
-                    <p class="md:w-3/5"></p>
-                </div>
+                    <div class="flex justify-end mb-2 ml-80">
+                        <p class="md:w-1/4">လက်မှတ်</p>
+                        <p class="md:w-5">၊</p>
+                        <p class="md:w-1/2"></p>
+                    </div>
+                    
+                    <div class="flex justify-end mb-2 ml-80">
+                        <p class="md:w-1/4">အမည်</p>
+                        <p class="md:w-5">၊</p>
+                        <p class="md:w-1/2">{{$staff->name}}</p>
+                    </div>
+                    
+                    <div class="flex justify-end mb-2 ml-80">
+                        <p class="md:w-1/4">ရာထူး</p>
+                        <p class="md:w-5">၊</p>
+                        <p class="md:w-1/2">{{$staff->current_rank->name}}</p>
+                    </div>
+                    
+                    <div class="flex justify-end mb-2 ml-80">
+                        <p class="md:w-1/4">ဖုန်းနံပါတ်(ရုံး/လက်ကိုင်ဖုန်း)</p>
+                        <p class="md:w-5">၊</p>
+                        <p class="md:w-1/2">{{$staff->phone}} <br> {{$staff->mobile}}</p>
+                    </div>
+                    
+                    <div class="flex justify-end mb-4 ml-80">
+                        <p class="md:w-1/4">အီး‌မေးလ်</p>
+                        <p class="md:w-5">၊</p>
+                        <p class="md:w-1/2">{{$staff->email}}</p>
+                    </div>
 
                 <div class="flex justify-start space-x-1">
                     <p>ရက်စွဲ - </p>
-                    <p>{{ formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day) }}</p>
+                    <p>{{  mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)) }}</p>
                 </div>
             </div>
 

@@ -26,7 +26,21 @@ class PdfStaffReport18 extends Component
         $data = [
             'staff' => $staff,
         ];
+         
+        // Define margin settings in millimeters
+        $pdf = PDF::loadView('pdf_reports.staff_report_18', $data, [], [
+            'default_font_size' => 13,       // Optional, set default font size
+            'default_font' => 'Pyidaungsu',      // Optional, set default font
+            'format' => 'A4',               // Set paper size
+            'orientation' => 'P',           // Portrait orientation
+            'margin_left' => 25.4,          // 1 inch = 25.4 mm
+            'margin_right' => 12.7,         // 0.5 inches = 12.7 mm
+            'margin_top' => 12.7,           // 0.5 inches = 12.7 mm
+            'margin_bottom' => 12.7         // 0.5 inches = 12.7 mm
+        ]);
+
         $pdf = PDF::loadView('pdf_reports.staff_report_18', $data);
+        
         return response()->streamDownload(function() use ($pdf) {
             echo $pdf->output();
         }, 'staff_pdf_18.pdf');
@@ -35,8 +49,9 @@ class PdfStaffReport18 extends Component
     {
         $staff = Staff::find($staff_id);
         $phpWord = new PhpWord();
+        $phpWord->addFontStyle('pyidaungsu Numbers Font', ['name' => 'Pyidaungsu Numbers', 'size' => 13]);
         $section = $phpWord->addSection([
-            // 'headerHeight' => 350,
+            'headerHeight' => 350,
             'orientation' => 'portrait',
             'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),     // 1 inch
             'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
@@ -52,10 +67,23 @@ class PdfStaffReport18 extends Component
         $pStyle_4=array('align' => 'both', 'spaceAfter' => 10, 'spaceBefore' => 20, 'indentation' => ['left' => 100]);
         $pStyle_5=array('align' => 'center', 'spaceAfter' => 15, 'spaceBefore' => 20);
 
-        $header = $section->addHeader();
-        $header->addText('လျှို့ဝှက်',null,array('align'=>'center'));
-        // $header->addPreserveText(en2mm('{PAGE}'),null,array('align'=>'center'));
-        
+        $header_page_1 = $section->addHeader();
+        $header_page_1->firstPage();
+        $header_page_1->addText('လျှို့ဝှက်', null, [
+            'align' => 'center',
+            'spaceBefore' => 0, 
+            'spaceAfter' => 0, 
+            'lineHeight' => 1, 
+        ]);
+        $header_subseq = $section->addHeader();
+        $header_subseq->addText('လျှို့ဝှက်', null, [
+            'align' => 'center',
+            'spaceBefore' => 0,
+            'spaceAfter' => 0,
+            'lineHeight' => 1,
+        ]);
+
+        $header_subseq->addPreserveText('{PAGE}', ['name' => 'Pyidaungsu Numbers', 'size' => 13], ['alignment' => 'center', 'spaceBefore' => 0, 'spaceAfter' => 0]);
         
         $footer = $section->addFooter();
         $footer->addText('လျှို့ဝှက်',null,array('align'=>'center', 'spaceBefore' => 200));
@@ -63,8 +91,14 @@ class PdfStaffReport18 extends Component
         // $section = $phpWord->addSection(); 
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
-        // $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
-        // $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']); 
+        
+        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
+        if ($imagePath && file_exists($imagePath)) {
+        $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+        } else {
+        $defaultImagePath = public_path('img/user.png');
+        $section->addImage($defaultImagePath, ['width' => 80, 'height' => 80, 'align' => 'right' ]);
+       }
         $table = $section->addTable();
         $table->addRow(50);
         $table->addCell(700)->addText('၁။', null, $pStyle_5);
@@ -106,7 +140,7 @@ class PdfStaffReport18 extends Component
         $table->addCell(700)->addText('၇။', null, $pStyle_5);
         $table->addCell(10000)->addText('နိုင်ငံသားစိစစ်ရေးအမှတ်:',null ,$pStyle_4);
         $table->addCell(900)->addText('-', null, $pStyle_5);
-        $table->addCell(16000)->addText(($staff->nrc_region_id->name . $staff->nrc_township_code->name) .'/'. ($staff->nrc_sign->name . en2mm($staff->nrc_code)),null ,$pStyle_4);
+        $table->addCell(16000)->addText(($staff->nrc_region_id->name . $staff->nrc_township_code->name) . ($staff->nrc_sign->name . en2mm($staff->nrc_code)),null ,$pStyle_4);
         
         $table->addRow();
         $table->addCell(700)->addText('၈။', null, $pStyle_5);
@@ -124,7 +158,7 @@ class PdfStaffReport18 extends Component
         $table->addCell(700)->addText('၁၀။', null, $pStyle_5);
         $table->addCell(10000)->addText('လိပ်စာ:',null ,$pStyle_4);
         $table->addCell(900)->addText('-', null, $pStyle_5);
-        $table->addCell(16000)->addText($staff->current_address_street.$staff->current_address_ward.$staff->current_address_township_or_town->name.'၊'.$staff->current_address_region->name.'။',null ,$pStyle_4);
+        $table->addCell(16000)->addText($staff->current_address_street.$staff->current_address_ward.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'။',null ,$pStyle_4);
         
         $table->addRow();
         $table->addCell(700)->addText('၁၁။', null, $pStyle_5);
@@ -338,7 +372,7 @@ class PdfStaffReport18 extends Component
         $table->addCell(300)->addText('၊',  null, $pStyle_5);
         $table->addCell(2100)->addText($staff->email,null ,$pStyle_4);
 
-        $section->addText('ရက်စွဲ: '. formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day), ['align' => 'center'],array('spaceBefore' => 300));
+        $section->addText('ရက်စွဲ: '. mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center'],array('spaceBefore' => 300));
      
         $fileName = 'staff_report_18_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
