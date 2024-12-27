@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('recommendations', function (Blueprint $table) {
-            $table->removeColumn('ministry');
-            $table->removeColumn('department');
-            $table->removeColumn('rank');
-            $table->removeColumn('remark');
-            $table->removeColumn('recommendation_letter');
+            $table->dropColumn('ministry');
+            $table->dropColumn('department');
+            $table->dropColumn('rank');
+            $table->dropColumn('remark');
+            $table->dropColumn('recommendation_letter');
         });
     }
 

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->foreignIdFor(Division::class)->nullable()->constrained()->nullOnDelete();
             $table->string('location')->nullable();
             $table->string('remark')->nullable();
-            $table->foreignIdFor(Ministry::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(Ministry::class)->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

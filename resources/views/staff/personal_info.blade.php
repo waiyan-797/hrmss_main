@@ -279,7 +279,8 @@
         <x-textarea-input wire:model="previous_addresses" id="previous_addresses" name="previous_addresses" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('previous_addresses')" />
     </div>
-    <div class="col-span-2">
+    <div class="col-span-2"></div>
+    <div>
         <x-input-label for="တပ်မတော်သို့ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်(က)ကိုယ်ပိုင်အမှတ်" :value="__('(က) တပ်မတော်သို့ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင် ကိုယ်ပိုင်အမှတ်')" />
         <x-text-input wire:model="military_solider_no" id="military_solider_no" name="military_solider_no" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('military_solider_no')" />
@@ -314,7 +315,6 @@
         <x-text-input wire:model="military_served_army" id="military_served_army" name="military_served_army" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('military_served_army')" />
     </div>
-    <div class="col-span-2"></div>
     <div class="col-span-2">
         <x-input-label for="(ဇ) တပ်တွင်းရာဇဝင်အကျဉ်း/ပြစ်မှု" :value="__('(ဇ) တပ်တွင်းရာဇဝင်အကျဉ်း/ပြစ်မှု')" />
         <x-textarea-input wire:model="military_brief_history_or_penalty" id="military_brief_history_or_penalty" name="military_brief_history_or_penalty" class="mt-1 block w-full" />
@@ -383,7 +383,7 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['ပညာအရည်အချင်း အုပ်စု', 'ပညာအရည်အချင်း အမျိုးအစား', 'ပညာအရည်အချင်း' , 'ပေးအပ်သည့်နိုင်ငံ'],
+        'column_names' => ['ပညာအရည်အချင်း အုပ်စု', 'ပညာအရည်အချင်း အမျိုးအစား', 'ပညာအရည်အချင်း' , 'ပေးအပ်သည့်နိုင်ငံ', 'ဘွဲ့လက်မှတ်'],
         'column_vals' => $educations,
         'column_types' => [
             [
@@ -409,6 +409,11 @@
                 'wire_array_name' => 'educations',
                 'wire_array_key' => 'country_id',
                 'select_values' => $_countries,
+            ],
+            [
+                'type' => 'file',
+                'wire_array_name' => 'educations',
+                'wire_array_key' => 'degree_certificate',
             ],
         ],
         'del_method' => 'removeEdu',

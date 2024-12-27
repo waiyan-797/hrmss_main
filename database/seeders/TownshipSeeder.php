@@ -1,6 +1,8 @@
 <?php
 
 namespace Database\Seeders;
+
+use App\Models\Township;
 use Illuminate\Support\Facades\DB;
 
 
@@ -14,6 +16,8 @@ class TownshipSeeder extends Seeder
      */
     public function run(): void
     {
-      #seeder
+      Township::find(277)->update([
+        'name' => 'တောင်ကြီး',
+      ]);
     }
 }

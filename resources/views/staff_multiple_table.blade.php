@@ -30,13 +30,23 @@
                                     property="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
                                     class="block w-full p-2 text-sm border rounded font-arial"
                                 />
-                            @elseif ($type['type'] == 'text' || $type['type'] == 'number' || $type['type'] == 'file' || $type['type'] == 'date')
+                            @elseif ($type['type'] == 'text' || $type['type'] == 'number' || $type['type'] == 'date')
                                 <x-text-input
                                     wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
                                     id="{{$type['wire_array_key']}}"
                                     name="{{$type['wire_array_key']}}"
                                     type="{{$type['type']}}"
                                     class="block w-full p-2 text-sm border rounded"
+                                />
+                            @elseif ($type['type'] == 'file')
+                                <x-input-file
+                                    wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
+                                    id="{{$type['wire_array_key']}}"
+                                    name="{{$type['wire_array_key']}}"
+                                    type="{{$type['type']}}"
+                                    file="{{$this->getFileValue($type['wire_array_name'], $index, $type['wire_array_key'])}}"
+                                    class="block w-full text-sm border mb-1 rounded"
+                                    accept=".pdf"
                                 />
                             @elseif ($type['type'] == 'checkbox')
                                 <input

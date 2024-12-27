@@ -1,5 +1,5 @@
 
-@props(['disabled' => false , 'err' => null  , 'NoneedValidate' => null    ])
+@props(['disabled' => false ])
 
 <input {{ $disabled ? 'disabled' : '' }}
  {!! $attributes->merge(['class' =>

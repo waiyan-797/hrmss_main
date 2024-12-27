@@ -2,9 +2,9 @@
 
 return [
     'mode'                     => 'utf-8',
-    // 'format'                   => 'A4',
-    // 'default_font_size'        => '13',
-    'default_font'             => 'Pyidaungsu', 
+    'format'                   => 'A4',
+    // 'default_font_size'        => '30',
+    'default_font'             => 'Pyidaungsu',
     // 'margin_left'              => 10,
     // 'margin_right'             => 10,
     // 'margin_top'               => 10,
@@ -25,24 +25,13 @@ return [
     'watermark_image_alpha'    => 0.2,
     'watermark_image_size'     => 'D',
     'watermark_image_position' => 'P',
-    'custom_font_dir'          => public_path('fonts/'), 
+    'custom_font_dir'          => public_path('fonts/'),
     'custom_font_data'         => [
-        'Pyidaungsu' => [ // Name of the font
-            // 'R'  => 'One_Pyidaungsu_Regular.ttf',
+        'Pyidaungsu' => [
             'R'  => 'pyidaungsu-1.3.ttf',
             'B'  => 'pyidaungsu-1.3.ttf',
             'I'  => 'pyidaungsu-1.3.ttf',
             'BI'  => 'pyidaungsu-1.3.ttf',
-            
-            
-          
-    // 'B' => "Pyidaungsu-2.5.1_BOLD.ttf",
-    // 'I'  => 'One_Pyidaungsu_Regular.ttf',
-
-    // 'BI'  => 'One_Pyidaungsu_Regular.ttf',
-
-    // 'I' => "verdanai.ttf",
-    // 'BI' => "verdanaz.ttf",
         ],
     ],
     'auto_language_detection'  => true,
@@ -50,5 +39,5 @@ return [
     'pdfa'                     => true,
     'pdfaauto'                 => true,
     'use_active_forms'         => false,
-    
+
 ];

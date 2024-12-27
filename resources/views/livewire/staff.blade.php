@@ -1,35 +1,35 @@
 <div class="w-full">
     <div class="flex justify-left items-center space-x-2  mt-10">
         @if (auth()->user()->role_id != 2)
-            <a href="{{ route('staff', ['status' => 1]) }}"
+            <a href="{{ route('staff', ['status' => 1]) }}" wire:navigate
                 class="{{ request()->path() == 'staff/1' ? 'bg-blue-700' : 'bg-green-500' }} text-white hover:bg-blue-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
                 Safe Draft
             </a>
         @endif
 
-        <a href="{{ route('staff', ['status' => 2]) }}"
+        <a href="{{ route('staff', ['status' => 2]) }}" wire:navigate
             class="{{ request()->path() == 'staff/2' ? 'bg-blue-700' : 'bg-green-500' }} text-white hover:bg-blue-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
             Applied {{-- submit  --}}
 
         </a>
 
 
-        <a href="{{ route('staff', ['status' => 3]) }}"
+        <a href="{{ route('staff', ['status' => 3]) }}" wire:navigate
             class="{{ request()->path() == 'staff/3' ? 'bg-blue-700' : 'bg-green-500' }} text-white hover:bg-blue-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
             Reject
         </a>
 
 
 
-        <a href="{{ route('staff', ['status' => 4]) }}"
+        <a href="{{ route('staff', ['status' => 4]) }}" wire:navigate
             class="{{ request()->path() == 'staff/4' ? 'bg-blue-700' : 'bg-green-500' }} text-white hover:bg-blue-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
             Resubmit
         </a>
 
 
-        <a href="{{ route('staff', ['status' => 5]) }}"
+        <a href="{{ route('staff', ['status' => 5]) }}" wire:navigate
             class="{{ request()->path() == 'staff/5' ? 'bg-blue-700' : 'bg-green-500' }} text-white hover:bg-blue-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            Approve 
+            Approve
         </a>
 
 

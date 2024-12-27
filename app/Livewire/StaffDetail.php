@@ -182,8 +182,6 @@ public $has_military_friend_text ;
         'life_insurance_premium' => '',
     ];
 
-
-
     protected $job_info_rules = [
         'is_parents_citizen_when_staff_born' => 'required',
         'current_rank_id' => 'required',
@@ -229,7 +227,6 @@ public $has_military_friend_text ;
         'family_in_politics_text' => '',
     ];
 
-
     protected $detail_personal_info_rules = [
         'last_school_name' => 'nullable|string',
         'last_school_subject' => 'nullable|string',
@@ -267,6 +264,10 @@ public $has_military_friend_text ;
 
     ];
 
+    public function getFileValue($arrayName, $index, $key)
+    {
+        return data_get($this->{$arrayName}, "{$index}.{$key}", null);
+    }
 
     public function validate_rules()
     {
@@ -339,10 +340,12 @@ public $has_military_friend_text ;
 
         foreach ($staff_educations as $edu) {
             $this->educations[] = [
+                'education_id' => $edu->id,
                 'education_group' => $edu->education_group_id,
                 'education_type' => $edu->education_type_id,
                 'education' => $edu->education_id,
-                'country_id' => $edu->country_id
+                'country_id' => $edu->country_id,
+                'degree_certificate' => $edu->degree_certificate,
             ];
         }
 
@@ -424,8 +427,8 @@ public $has_military_friend_text ;
             $this->abroads[] = [
                 'country' => $abroad->countries()->pluck('country_id')->toArray(),
                 'particular' => $abroad->particular,
-                'training_success_fail' => false,
-                // 'training_success_fail' => $abroad->training_success_fail,
+                // 'training_success_fail' => false,
+                'training_success_fail' => $abroad->training_success_fail == 1 ? true : false,
                 'training_success_count' => $abroad->training_success_count,
                 'sponser' => $abroad->sponser,
                 'meet_with' => $abroad->meet_with,
@@ -448,8 +451,6 @@ public $has_military_friend_text ;
         foreach ($socials as $social) {
             $this->socials[] = [
                 'particular' => $social->particular,
-                'from_date' => $social->from_date,
-                'to_date' => $social->to_date,
                 'remark' => $social->remark,
             ];
         }
@@ -623,8 +624,6 @@ public $has_military_friend_text ;
         $this->father_address_township_or_town_id = $staff->father_address_township_or_town_id;
         $this->father_address_region_id = $staff->father_address_region_id;
 
-        
-
         $this->mother_name = $staff->mother_name;
         $this->mother_ethnic_id = $staff->mother_ethnic_id;
         $this->mother_religion_id = $staff->mother_religion_id;
@@ -666,10 +665,12 @@ public $has_military_friend_text ;
     public function add_edu()
     {
         $this->educations[] = [
+            'education_id' => '',
             'education_group' => '',
             'education_type' => '',
             'education' => '',
-            'country_id' => ''
+            'country_id' => '',
+            'degree_certificate' => '',
         ];
     }
 
@@ -782,12 +783,12 @@ public $has_military_friend_text ;
 
     public function add_abroads()
     {
-        $this->abroads[] = ['country' => [], 'particular' => '', 'training_success_fail' => '', 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
+        $this->abroads[] = ['country' => [], 'particular' => '', 'training_success_fail' => false, 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
     }
 
     public function add_socials()
     {
-        $this->socials[] = ['particular' => '', 'from_date' => '', 'to_date' => '', 'remark' => ''];
+        $this->socials[] = ['particular' => '', 'remark' => ''];
     }
 
     public function add_staff_languages()
@@ -797,6 +798,12 @@ public $has_military_friend_text ;
 
     public function removeEdu($index)
     {
+        $draft_education = $this->educations[$index];
+        $education = StaffEducation::find($draft_education['education_id']);
+        if ($education) {
+            Storage::disk('upload')->delete($education->degree_certificate);
+            $education->delete();
+        }
         unset($this->educations[$index]);
         $this->educations = array_values($this->educations); //to re_indexing the array (eg: before remove (1,2,3) - after (1,3) 2 missing) reindex will do like (1,2) back
     }
@@ -1072,14 +1079,12 @@ public $has_military_friend_text ;
             'recommended_by_military_person' => $this->recommended_by_military_person,
         ];
 
-        // dd($detail_personal_info);
         $dataMapping = [
             'job_info' => $job_info,
             'relative' => $relative,
             'detail_personal_info' => $detail_personal_info,
             'default' => $personal_info,
         ];
-
 
         $staff_create = $dataMapping[$this->tab] ?? $dataMapping['default'];
         // before saftdraft  // $staff_create['status_id' ]  =  auth()->user()->AdminHR() ? 1 : ($staff->status_id == 2 ? 4 :  3 ); // 1 approve :   2 ->reject  // 3 pending // 4 resubmit
@@ -1156,7 +1161,7 @@ public $has_military_friend_text ;
             $ab = Abroad::create([
                     'staff_id' => $staffId,
                     'particular' => $abroad['particular'],
-                    'training_success_fail' => false,
+                    'training_success_fail' => $abroad['training_success_fail'],
                     'training_success_count' => $abroad['training_success_count'],
                     'sponser' => $abroad['sponser'],
                     'meet_with' => $abroad['meet_with'],
@@ -1177,8 +1182,6 @@ public $has_military_friend_text ;
             SocialActivity::create([
                 'staff_id' => $staffId,
                 'particular' => $social['particular'],
-                'from_date' => $social['from_date'],
-                'to_date' => $social['to_date'],
                 'remark' => $social['remark'],
             ]);
         }
@@ -1354,7 +1357,6 @@ private function saveSchools($staffId)
         $rules = [
             'trainings.*.training_type' => 'required|numeric',
             'trainings.*.diploma_name' => 'string',
-          
             'trainings.*.from_date' => 'required|date|date_format:Y-m-d',
             'trainings.*.to_date' => 'required|date|after_or_equal:trainings.*.from_date|date_format:Y-m-d',
             'trainings.*.location' => 'nullable|string',
@@ -1394,7 +1396,6 @@ private function saveSchools($staffId)
             'trainings.*.training_location_id.exists' => 'The selected training location is invalid.',
         ];
 
-
         // Perform validation
         $this->validate($rules, $messages);
         Training::where('staff_id', $staffId)->delete();
@@ -1431,14 +1432,20 @@ private function saveSchools($staffId)
 
     private function saveEducations($staffId)
     {
-        StaffEducation::where('staff_id', $staffId)->delete();
+        $degree_path = null;
         foreach ($this->educations as $education) {
-            StaffEducation::create([
+            (str_contains($education['degree_certificate'], sys_get_temp_dir()) && $education['degree_certificate'])
+            ? $degree_path = Storage::disk('upload')->put('staffs', $education['degree_certificate'])
+            : $degree_path = $education['degree_certificate'];
+            StaffEducation::updateOrCreate([
+                'id' => $education['education_id'] == '' ? null : $education['education_id'],
+            ],[
                 'education_group_id' => $education['education_group'],
                 'education_type_id' => $education['education_type'],
                 'education_id' => $education['education'],
                 'staff_id' => $staffId,
-                'country_id' =>  $education['country_id']
+                'country_id' =>  $education['country_id'],
+                'degree_certificate' => $degree_path,
             ]);
         }
     }
@@ -1471,7 +1478,7 @@ private function saveSchools($staffId)
             ]);
         }
     }
-       
+
     private function relativeFields($staffId, $relative)
     {
         $fields = [

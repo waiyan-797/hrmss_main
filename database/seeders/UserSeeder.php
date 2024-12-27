@@ -24,8 +24,6 @@ class UserSeeder extends Seeder
             'password' => bcrypt('123'),
             'division_id' => 11  ,
             'role_id' => 2 ,
-            
-            
         ]);
 
         User::create([
@@ -34,8 +32,6 @@ class UserSeeder extends Seeder
             'password' => bcrypt('123'),
             'division_id' => 11  ,
             'role_id' => 4 ,
-            
-            
         ]);
     }
 }
