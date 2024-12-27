@@ -116,7 +116,7 @@ class PdfStaffReport17 extends Component
         $table->addCell(2000)->addText('၄။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText('အမျိုးသားမှတ်ပုံတင်အမှတ်', null, ['alignment' => 'both']);
         $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code, null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . $staff->nrc_sign->name . $staff->nrc_code, null, ['alignment' => 'both']);
 
         $table->addRow();
         $table->addCell(2000)->addText('၅။', null, ['alignment' => 'center']);
