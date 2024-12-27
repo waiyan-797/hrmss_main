@@ -448,39 +448,39 @@
                         </tbody>
                     </table>
                 </div>
-                
-               
                 <div class="w-full mb-4">
-                    <div class="mb-2 flex justify-start space-x-3">
-                        <label>၁၅။ </label>
-                        <h2 class="font-semibold text-base">ယခင်လုပ်ကိုင်ဖူးသည့် အလုပ်အကိုင်</h2>
+                    <div class="flex justify-start mb-2 space-x-3">
+                        <label for="">၁၅။  </label>
+                        <h1 class="font-semibold text-base">
+                            ယခင်လုပ်ကိုင်ဖူးသည့် အလုပ်အကိုင်
+                        </h1>
                     </div>
-                    <div class="w-full rounded-lg">
-                        <table class="w-full text-center ml-9">
-                            <thead>
-                                <tr class="bg-gray-100">
-                                    <th class="p-2 border border-black">ရာထူး/အဆင့်</th>
-                                    <th class="p-2 border border-black">တပ်/ဌာန</th>
-                                    <th class="p-2 border border-black">နေရာ</th>
-                                    <th class="p-2 border border-black">မှ</th>
-                                    <th class="p-2 border border-black">ထိ</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center h-8 p-2">
-                                @foreach($staff->postings as $posting)
-                                    <tr>
-                                        <td class="border border-black p-2">{{ $posting->rank->name ?? '-' }}</td>
-                                        <td class="border border-black p-2">{{ $posting->department->name ?? '-' }}</td>
-                                        <td class="border border-black p-2">{{ $posting->location ?? '-' }}</td>
-                                        <td class="border border-black p-2">{{ $posting->from_date}}</td>
-                                        <td class="border border-black p-2">{{ $posting->to_date }}</td>
-                                    </tr>
+                    <table class="md:w-full">
+                        <thead>
+                            <tr>
+                                <th class="border border-black text-center p-2">ရာထူး/အဆင့်</th>
+                                <th class="border border-black text-center p-2">တပ်/ဌာန</th>
+                                <th class="border border-black text-center p-2">နေရာ</th>
+                                <th class="border border-black text-center p-2">မှ</th>
+                                <th class="border border-black text-center p-2">ထိ</th>
                                 
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($staff->postings as $posting)
+                            <tr>
+                                <td class="border border-black text-center p-2">{{ $posting->rank->name ?? '-' }}</td>
+                                <td class="border border-black text-center p-2">{{ $posting->department->name ?? '-' }}</td>
+                                <td class="border border-black text-center p-2">{{ $posting->location ?? '-' }}</td>
+                                <td class="border border-black text-center p-2">{{ $posting->from_date}}</td>
+                                <td class="border border-black text-center p-2">{{ $posting->to_date }}</td>
+                            </tr>
+                        
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
+                
                 
                 
                 

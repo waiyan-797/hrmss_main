@@ -45,7 +45,7 @@
                         $join_date = Carbon\Carbon::parse($staff->join_date);
                         $join_date_duration = $join_date->diff(Carbon\Carbon::now());
                     @endphp
-                    <label for="name" class="md:w-3/5">{{formatPeriodMM($join_date_duration->y, $join_date_duration->m, $join_date_duration->d).', '. en2mm(Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</label>
+                    <label for="name" class="md:w-3/5">{{formatDMYmm($join_date_duration->y, $join_date_duration->m, $join_date_duration->d).', '. en2mm(Carbon\Carbon::parse($staff->join_date)->format('d-m-y'))}}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၇။ </label>
@@ -129,14 +129,10 @@
                                     
                                     <td class="border border-black text-center p-2">{{formatDMYmm($abroad->from_date)}}</td>
                                     <td class="border border-black text-center p-2">{{formatDMYmm($abroad->to_date)}}</td>
-                                    
-                                    <td class="border border-black text-center p-2">{{$abroad->country->name}}</td>
+                                    <td class="border border-black text-center p-2">{{$abroad->country?->name}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->particular}}</td>
-                                    
                                     <td class="border border-black text-center p-2">{{$abroad->training_success_count}}</td> 
                                     <td class="border border-black text-center p-2">{{$abroad->sponser}}</td> 
-
-                                 
                                 </tr>
                             @endforeach
                         </tbody>
@@ -206,7 +202,7 @@
                                 <tr>
                                     <td class="border border-black p-2">{{en2mm($index+1)}}</td>
                                     <td class="border border-black p-2">{{ $abroad->particular}}</td>
-                                    <td class="border border-black p-2">{{$abroad->country->name}}</td>
+                                    <td class="border border-black p-2">{{$abroad->country?->name}}</td>
                                     <td class="border border-black p-2">{{formatDMYmm($abroad->from_date)}}</td>
                                     <td class="border border-black p-2">{{formatDMYmm($abroad->to_date)}}</td>
                                     <td class="border border-black p-2">{{formatDMYmm($abroad->actual_abroad_date)}}</td>
@@ -255,7 +251,7 @@
 
                     <div class="flex justify-start space-x-1">
                         <p>ရက်စွဲ - </p>
-                        <p>{{ formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day) }}</p>
+                        <p>{{ mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)) }}</p>
                     </div>
                 </div>
 
@@ -293,7 +289,7 @@
 
                     <div class="flex justify-start space-x-1">
                         <p>ရက်စွဲ - </p>
-                        <p>{{ formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day) }}</p>
+                        <p>{{ mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)) }}</p>
                     </div>
                 </div>
             </div>

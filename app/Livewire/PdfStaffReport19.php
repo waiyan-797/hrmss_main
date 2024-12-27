@@ -237,7 +237,7 @@ class PdfStaffReport19 extends Component
             $table->addCell(2800)->addText('ရက်-လ-နှစ်', ['bold' => true],$pStyle_1);
             $table->addCell(1800)->addText('မှတ်ချက်', ['bold' => true],$pStyle_1);
             if($staff->awardings->isNotEmpty()){
-                foreach ($staff->awardings as $awarding) {
+                foreach ($staff->awardings as $index => $awarding) {
                     $table->addRow();
                     $table->addCell(500)->addText(en2mm($index+1),null, $pStyle_1);
                     $table->addCell(4800)->addText($awarding->award_type->name .'/'. $awarding->award->name,null,$pStyle_7);

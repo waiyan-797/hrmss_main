@@ -298,12 +298,6 @@ class PdfStaffReport18 extends Component
             // $section->addPageBreak();
           
     $section->addText('အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။', ['bold' => true], array('spaceBefore' => 200, 'alignment' => Jc::BOTH));
-    //    $section->addText('လက်မှတ်: -', ['align' => 'center']);
-    //    $section->addText('အမည်: ', ['align' => 'center']);
-    //    $section->addText('ရာထူး: ', ['align' => 'center']);
-    //    $section->addText('ဖုန်းနံပါတ်(ရုံး/လက်ကိုင်ဖုန်း): ', ['align' => 'center']);
-    //    $section->addText('အီး‌မေးလ်: ', ['align' => 'center']);
-    //   
     $tableStyle = [
         'alignment' => JcTable::END // Center the table
     ];

@@ -24,7 +24,17 @@ class PdfStaffReport15 extends Component
         $data = [
             'staff' => $staff,
         ];
-        $pdf = PDF::loadView('pdf_reports.staff_report_15', $data);
+        // $pdf = PDF::loadView('pdf_reports.staff_report_15', $data);
+        $pdf = PDF::loadView('pdf_reports.staff_report_15', $data, [], [
+            // 'default_font_size' => 13,      
+            // 'default_font' => 'Pyidaungsu',     
+            'format' => 'A4',               // Set paper size
+            'orientation' => 'P',           // Portrait orientation
+            'margin_left' => 25.4,          // 1 inch = 25.4 mm
+            'margin_right' => 12.7,         // 0.5 inches = 12.7 mm
+            'margin_top' => 12.7,           // 0.5 inches = 12.7 mm
+            'margin_bottom' => 12.7         // 0.5 inches = 12.7 mm
+        ]);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'staff_pdf_15.pdf');
@@ -33,6 +43,7 @@ class PdfStaffReport15 extends Component
     {
         $staff = Staff::find($staff_id);
         $phpWord = new PhpWord();
+        $phpWord->addFontStyle('pyidaungsu Numbers Font', ['name' => 'Pyidaungsu Numbers', 'size' => 13]);
         $section = $phpWord->addSection([
             'orientation' => 'portrait',
             'marginLeft' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1), // 1 inch
@@ -40,15 +51,34 @@ class PdfStaffReport15 extends Component
             'marginTop' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5), // 0.5 inch
             'marginBottom' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5), // 0.5 inch
         ]);
-        $header = $section->addHeader();
-        $header->addText('လျှို့ဝှက်',null,array('align'=>'center'));
+        $header_page_1 = $section->addHeader();
+        $header_page_1->firstPage();
+        $header_page_1->addText('လျှို့ဝှက်', null, [
+            'align' => 'center',
+            'spaceBefore' => 0, 
+            'spaceAfter' => 0, 
+            'lineHeight' => 1, 
+        ]);
+        $header_subseq = $section->addHeader();
+        $header_subseq->addText('လျှို့ဝှက်', null, [
+            'align' => 'center',
+            'spaceBefore' => 0,
+            'spaceAfter' => 0,
+            'lineHeight' => 1,
+        ]);
+
+        $header_subseq->addPreserveText('{PAGE}', ['name' => 'Pyidaungsu Numbers', 'size' => 13], ['alignment' => 'center', 'spaceBefore' => 0, 'spaceAfter' => 0]);
         $footer = $section->addFooter();
         $footer->addText('လျှို့ဝှက်',null,array('align'=>'center', 'spaceBefore' => 200));
-
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
-        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : 'img/user.png';
+        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
+        if ($imagePath && file_exists($imagePath)) {
         $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+        } else {
+        $defaultImagePath = public_path('img/user.png');
+        $section->addImage($defaultImagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+       }
         $table = $section->addTable();
         $table->addRow();
         $table->addCell(2000)->addText('၁။', null, ['alignment' => 'center']);
@@ -72,7 +102,7 @@ class PdfStaffReport15 extends Component
         $table->addCell(2000)->addText('၄။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText('အမျိုးသားမှတ်ပုံတင်အမှတ်', null, ['alignment' => 'both']);
         $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . '၊' . $staff->nrc_sign->name . '/' . $staff->nrc_code, null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . '၊' . $staff->nrc_sign->name . $staff->nrc_code, null, ['alignment' => 'both']);
 
         $table->addRow();
         $table->addCell(2000)->addText('၅။', null, ['alignment' => 'center']);
@@ -90,9 +120,9 @@ class PdfStaffReport15 extends Component
 
         $table->addRow();
         $table->addCell(2000)->addText('၇။', null, ['alignment' => 'center']);
-        $table->addCell(15000)->addText(' လက်ရှိနေရပ်', null, ['alignment' => 'both']);
+        $table->addCell(15000)->addText(' လက်ရှိနေရပ်လိပ်စာ', null, ['alignment' => 'both']);
         $table->addCell(1000)->addText('-', null, ['align' => 'center']);
-        $table->addCell(16000)->addText($staff->current_address_street . '/' . $staff->current_address_ward . '/' . $staff->current_address_region->name . '/' . $staff->current_address_township_or_town->name, null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->current_address_street . '၊' . $staff->current_address_ward . '၊' .$staff->current_address_township_or_town->name.'၊'. $staff->current_address_region->name, null, ['alignment' => 'both']);
         $table->addRow();
         $table->addCell(2000)->addText('၈။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText('ပညာအရည်အချင်း', null, ['alignment' => 'both']);
@@ -104,7 +134,7 @@ class PdfStaffReport15 extends Component
             $table->addCell(2000)->addText();
             $table->addCell(15000)->addText('', ['alignment' => 'center']);
             $table->addCell(1000)->addText();
-            $table->addCell(16000)->addText($education->education_group->name . ',' . $education->education_type->name . ',' . $education->education->name . '၊', ['alignment' => 'both']);
+            $table->addCell(16000)->addText( $education->education->name . '၊', ['alignment' => 'both']);
         }
         $table->addRow();
         $table->addCell(2000)->addText('၉။', null, ['alignment' => 'center']);
@@ -141,39 +171,40 @@ class PdfStaffReport15 extends Component
         $section->addPageBreak();
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50, ['tblHeader' => true]);
-        $table->addCell(9000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ကာလ', ['bold' => true], $pStyle_1);
-        $textContent_1 = "နောက်ဆုံးသွား\nရောက်ခဲ့သည့်\n(၅)နိုင်ငံ";
-        $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_2);
+        $table->addCell(14000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ကာလ', ['bold' => true], $pStyle_1);
+        $textContent_1 = "နောက်ဆုံး\nသွားရောက်\nခဲ့သည့်\n(၅)နိုင်ငံ";
+        $table->addCell(6000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_2);
 
-        $table->addCell(8000, ['vMerge' => 'restart'])->addText('သွားရောက်သည့်ကိစ္စ', ['bold' => true], $pStyle_3);
+        $table->addCell(6000, ['vMerge' => 'restart'])->addText("သွားရောက်\nသည့်ကိစ္စ", ['bold' => true], $pStyle_3);
 
         $textContent_2 = "သင်တန်းတက်\nခြင်းဖြစ်လျှင် \nအကြိမ်မည်မျှဖြင့်\nအောင်မြင်သည်";
         $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent_2, ['bold' => true], $pStyle_4);
         $textContent_3 = "မည်သည့်အစိုးရ\n အဖွဲ့အစည်း\nအထောက်အပံ့ဖြင့်\nသွားရောက်သည်";
         $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent_3, ['bold' => true], $pStyle_5);
         $table->addRow(50, ['tblHeader' => true]);
-        $table->addCell(4500)->addText('မှ', ['bold' => true], ['alignment' => 'center']);
-        $table->addCell(4500)->addText('ထိ', ['bold' => true], ['alignment' => 'center']);
+        $table->addCell(7000)->addText('မှ', ['bold' => true], ['alignment' => 'center']);
+        $table->addCell(7000)->addText('ထိ', ['bold' => true], ['alignment' => 'center']);
+        $table->addCell(6000, ['vMerge' => 'continue']);
+        $table->addCell(6000, ['vMerge' => 'continue']);
         $table->addCell(8000, ['vMerge' => 'continue']);
         $table->addCell(8000, ['vMerge' => 'continue']);
-        $table->addCell(8000, ['vMerge' => 'continue']);
-        $table->addCell(8000, ['vMerge' => 'continue']);
+        $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
         if ($staff->abroads->isNotEmpty()) {
             foreach ($staff->abroads as $abroad) {
                 $table->addRow();
-                $table->addCell(4500)->addText(formatDMYmm($abroad->from_date));
-                $table->addCell(4500)->addText(formatDMYmm($abroad->to_date));
-                $table->addCell(8000)->addText($abroad->country->name);
-                $table->addCell(8000)->addText($abroad->particular);
-                $table->addCell(8000)->addText($abroad->training_success_count);
-                $table->addCell(8000)->addText($abroad->sponser);
+                $table->addCell(7000)->addText(formatDMYmm($abroad->from_date));
+                $table->addCell(7000)->addText(formatDMYmm($abroad->to_date));
+                $table->addCell(6000)->addText($abroad->country?->name,null,$pStyle_1);
+                $table->addCell(6000)->addText($abroad->particular,null,$pStyle_1);
+                $table->addCell(8000)->addText($abroad->training_success_count,null,$pStyle_1);
+                $table->addCell(8000)->addText($abroad->sponser,null,$pStyle_1);
             }
         } else {
             $table->addRow();
-            $table->addCell(4500)->addText();
-            $table->addCell(4500)->addText();
-            $table->addCell(8000)->addText();
-            $table->addCell(8000)->addText();
+            $table->addCell(7000)->addText();
+            $table->addCell(7000)->addText();
+            $table->addCell(6000)->addText();
+            $table->addCell(6000)->addText();
             $table->addCell(8000)->addText();
             $table->addCell(8000)->addText();
         }
@@ -190,15 +221,14 @@ class PdfStaffReport15 extends Component
         if ($staff->spouses->isNotEmpty()) {
             foreach ($staff->spouses as $spouse) {
                 $table->addRow();
-                $table->addCell(4000)->addText($spouse->name);
-                $table->addCell(6000)->addText($spouse->ethnic->name . '/' . $spouse->religion->name);
-                $table->addCell(5000)->addText($spouse->occupation);
-                $table->addCell(4000)->addText($spouse->address);
+                $table->addCell(8000,['valign' => 'center'])->addText($spouse->name,null,$pStyle_1);
+                $table->addCell(6000,['valign' => 'center'])->addText($spouse->ethnic->name . '/' . $spouse->religion->name,null,$pStyle_1);
+                $table->addCell(5000,['valign' => 'center'])->addText($spouse->occupation,null,$pStyle_1);
+                $table->addCell(4000,['valign' => 'center'])->addText($spouse->address,null,$pStyle_1);
             }
         } else {
             $table->addRow();
-            $table->addCell(2500)->addText();
-            $table->addCell(4000)->addText();
+            $table->addCell(8000)->addText();
             $table->addCell(6000)->addText();
             $table->addCell(5000)->addText();
             $table->addCell(4000)->addText();
@@ -209,8 +239,6 @@ class PdfStaffReport15 extends Component
         ];
 
         $table = $section->addTable($tableStyle);
-
-        // Adding rows and cells
         $table->addRow();
         $table->addCell()->addText('လက်မှတ်', ['alignment' => 'right']);
         $table->addCell(500)->addText('-', ['alignment' => 'right']);
@@ -231,7 +259,8 @@ class PdfStaffReport15 extends Component
         $table->addCell(500)->addText('-', ['alignment' => 'right']);
         $table->addCell(3000)->addText($staff->current_department->name, ['alignment' => 'right']);
 
-        $section->addText('ရက်စွဲ: ' . formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day), ['align' => 'center']);
+        $section->addText('ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
+        
         $fileName = 'staff_report_15_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
         return response()->stream(
