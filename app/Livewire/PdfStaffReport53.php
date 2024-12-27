@@ -104,7 +104,7 @@ class PdfStaffReport53 extends Component
         $table = $section->addTable();
         $table->addRow(50);
         $table->addCell(1300)->addText('၁။', null, $pStyle_5);
-        $table->addCell(13000)->addText('အမည်(ကျား/မ) :',null ,$pStyle_4);
+        $table->addCell(13000)->addText('အမည်(ကျား/မ) ',null ,$pStyle_4);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText($staff->name ,null ,$pStyle_4);
 
