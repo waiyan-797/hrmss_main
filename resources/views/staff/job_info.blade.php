@@ -95,7 +95,14 @@
 
     <div>
         <x-input-label for="လစာဝင်ငွေ" :value="__('လစာဝင်ငွေ')" />
-        <x-searchable-select property="payscale_id" :values="$payscales" placeholder="လစာဝင်ငွေရွေးပါ" id="payscale_id" name="payscale_id" class="block w-full p-2 text-sm border rounded font-arial mt-1" required/>
+        <x-select
+            wire:model="payscale_id"
+            :values="$payscales"
+            placeholder="လစာဝင်ငွေရွေးပါ"
+            name="payscale_id"
+            class="mt-1 block w-full"
+            required
+        />
         <x-input-error class="mt-2" :messages="$errors->get('payscale_id')" />
     </div>
     <div>
@@ -149,7 +156,7 @@
         'column_vals' => $postings,
         'column_types' => [
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'postings',
                 'wire_array_key' => 'rank',
                 'select_values' => $ranks,
@@ -166,13 +173,13 @@
                 'wire_array_key' => 'to_date',
             ],
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'postings',
                 'wire_array_key' => 'department',
                 'select_values' => $departments,
             ],
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'postings',
                 'wire_array_key' => 'division',
                 'select_values' => $divisions,
@@ -184,7 +191,7 @@
             ],
 
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'postings',
                 'wire_array_key' => 'ministry',
                 'select_values' => $ministrys,

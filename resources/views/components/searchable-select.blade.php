@@ -1,8 +1,9 @@
-@props(['values', 'property'])
+@props(['values', 'property', 'placeholder'])
 
 <div x-data="{
         open: false,
         search: '',
+        placeholder: @js($placeholder),
         selectedId: @entangle($property).live,
         options: @js($values),
         dropdownStyles: '',
@@ -28,7 +29,7 @@
     <div class="relative">
         <button x-ref="button" @click="open = !open; open && setDropdownPosition($refs.button)" type="button"
             {!! $attributes->merge(['class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 font-arial cursor-pointer']) !!}>
-            <span class="block truncate" x-text="selectedOption ? selectedOption.name : 'Select...'"></span>
+            <span class="block truncate" x-text="selectedOption ? selectedOption.name : placeholder"></span>
             <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                 <svg class="h-5 w-5 text-gray-800" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" clip-rule="evenodd" />

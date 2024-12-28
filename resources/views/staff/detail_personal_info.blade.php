@@ -20,13 +20,13 @@
                 'select_values' => $education_groups,
             ],
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'education_type',
                 'select_values' => $education_types,
             ],
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'education',
                 'select_values' => $_educations,
@@ -73,14 +73,12 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['သင်တန်းအမည်', 'သင်တန်းအမည်', 'သင်တန်းအမှတ်စဉ်' , 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းအမျိုးအစား','အဆင့်အတန်း'],
+        'column_names' => ['သင်တန်းအမည်', 'အခြားသင်တန်းအမည်', 'သင်တန်းအမှတ်စဉ်' , 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းအမျိုးအစား','အဆင့်အတန်း'],
         'add_event' => 'add_trainings',
         'column_vals' => $trainings,
         'column_types' => [
             [
-
-
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'trainings',
                 'wire_array_key' => 'training_type',
                 'select_values' => $training_types,
@@ -111,7 +109,7 @@
                 'wire_array_key' => 'location',
             ],
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'trainings',
                 'wire_array_key' => 'country',
                 'select_values' => $countries,
@@ -148,13 +146,13 @@
         'column_vals' => $awards,
         'column_types' => [
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'awards',
                 'wire_array_key' => 'award_type',
                 'select_values' => $award_types,
             ],
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'awards',
                 'wire_array_key' => 'award',
                 'select_values' => $_awards,
@@ -223,7 +221,7 @@
         'column_vals' => $past_occupations,
         'column_types' => [
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'past_occupations',
                 'wire_array_key' => 'rank',
                 'select_values' => $ranks,
@@ -378,11 +376,25 @@
                 <x-input-error class="mt-2" :messages="$errors->get('foreigner_friend_occupation')" />
             </div>
             <div class="w-full">
-                <x-select  wire:model="foreigner_friend_nationality_id" :values="$nationalities" placeholder="Select Nationality" id="foreigner_friend_nationality_id" name="foreigner_friend_nationality_id" class="mt-1 block w-full"/>
+                <x-searchable-select
+                    property="foreigner_friend_nationality_id"
+                    :values="$nationalities"
+                    placeholder="Select Nationality"
+                    id="foreigner_friend_nationality_id"
+                    name="foreigner_friend_nationality_id"
+                    class="mt-1 block w-full"
+                />
                 <x-input-error class="mt-2" :messages="$errors->get('foreigner_friend_nationality_id')" />
             </div>
             <div class="w-full">
-                <x-select wire:model="foreigner_friend_country_id" :values="$countries" placeholder="Select Country" id="foreigner_friend_country_id" name="foreigner_friend_country_id" class="mt-1 block w-full"/>
+                <x-searchable-select
+                    property="foreigner_friend_country_id"
+                    :values="$countries"
+                    placeholder="Select Country"
+                    id="foreigner_friend_country_id"
+                    name="foreigner_friend_country_id"
+                    class="mt-1 block w-full"
+                />
                 <x-input-error class="mt-2" :messages="$errors->get('foreigner_friend_country_id')" />
             </div>
         </div>
@@ -484,7 +496,7 @@
         'column_vals' => $staff_languages,
         'column_types' => [
             [
-                'type' => 'select',
+                'type' => 'search_select',
                 'wire_array_name' => 'staff_languages',
                 'wire_array_key' => 'language',
                 'select_values' => $languages,

@@ -26,6 +26,7 @@
                                 />
                             @elseif ($type['type'] == 'search_select')
                                 <x-searchable-select
+                                    placeholder="Select..."
                                     :values="$type['select_values']"
                                     property="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
                                     class="block w-full p-2 text-sm border rounded font-arial"

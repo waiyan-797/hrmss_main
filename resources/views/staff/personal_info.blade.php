@@ -61,12 +61,11 @@
     </div>
     <div>
         <x-input-label for="လူမျိုး" :value="__('လူမျိုး')" />
-        <x-select
-            wire:model="ethnic_id"
-            :values="$ethnics"
+        <x-searchable-select
             placeholder="လူမျိုးရွေးပါ"
-            name="ethnic_id"
-            class="mt-1 block w-full"
+            :values="$ethnics"
+            property="ethnic_id"
+            class="block w-full p-2 mt-1 text-sm border rounded font-arial"
         />
         <x-input-error class="mt-2" :messages="$errors->get('ethnic_id')" />
     </div>
@@ -228,11 +227,23 @@
         <x-input-label :value="__('လက်ရှိနေရပ်လိပ်စာ အပြည့်အစုံ (ပြည်နယ်/တိုင်းဒေသကြီး,ခရိုင်,မြို့/မြို့နယ်,ရပ်ကွက်,လမ်း,အိမ်နံပါတ်)')" />
         <div class="grid grid-cols-5 gap-4">
             <div>
-                <x-select wire:model.live="current_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="current_address_region_id" name="current_address_region_id" class="mt-1 block w-full" required/>
+                <x-searchable-select
+                    required
+                    placeholder="ပြည်နယ်/တိုင်းဒေသကြီး"
+                    :values="$regions"
+                    property="current_address_region_id"
+                    class="mt-1 block w-full p-2 text-sm border rounded font-arial"
+                />
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_region_id')" />
             </div>
             <div>
-                <x-select wire:model.live="current_address_township_or_town_id" :values="$current_address_townships" placeholder="မြို့/မြို့နယ်" id="current_address_township_or_town_id" name="current_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-searchable-select
+                    required
+                    placeholder="မြို့/မြို့နယ်"
+                    :values="$current_address_townships"
+                    property="current_address_township_or_town_id"
+                    class="mt-1 block w-full p-2 text-sm border rounded font-arial"
+                />
                 <x-input-error class="mt-2" :messages="$errors->get('current_address_township_or_town_id')" />
             </div>
             <div>
@@ -253,11 +264,23 @@
         <x-input-label :value="__('အမြဲတမ်းနေရပ်လိပ်စာ အပြည့်အစုံ (ပြည်နယ်/တိုင်းဒေသကြီး,ခရိုင်,မြို့/မြို့နယ်,ရပ်ကွက်,လမ်း,အိမ်နံပါတ်)')" />
         <div class="grid grid-cols-5 gap-4">
             <div>
-                <x-select wire:model.live="permanent_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး" id="permanent_address_region_id" name="permanent_address_region_id" class="mt-1 block w-full" required/>
+                <x-searchable-select
+                    required
+                    placeholder="ပြည်နယ်/တိုင်းဒေသကြီး"
+                    :values="$regions"
+                    property="permanent_address_region_id"
+                    class="mt-1 block w-full p-2 text-sm border rounded font-arial"
+                />
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_region_id')" />
             </div>
             <div>
-                <x-select wire:model.live="permanent_address_township_or_town_id" :values="$permanent_address_townships" placeholder="မြို့/မြို့နယ်" id="permanent_address_township_or_town_id" name="permanent_address_township_or_town_id" class="mt-1 block w-full" required/>
+                <x-searchable-select
+                    required
+                    placeholder="မြို့/မြို့နယ်"
+                    :values="$permanent_address_townships"
+                    property="permanent_address_township_or_town_id"
+                    class="mt-1 block w-full p-2 text-sm border rounded font-arial"
+                />
                 <x-input-error class="mt-2" :messages="$errors->get('permanent_address_township_or_town_id')" />
             </div>
             <div>
