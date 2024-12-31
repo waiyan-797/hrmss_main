@@ -28,16 +28,16 @@ class PdfStaffReport18 extends Component
         ];
          
         // Define margin settings in millimeters
-        $pdf = PDF::loadView('pdf_reports.staff_report_18', $data, [], [
-            'default_font_size' => 13,       // Optional, set default font size
-            'default_font' => 'Pyidaungsu',      // Optional, set default font
-            'format' => 'A4',               // Set paper size
-            'orientation' => 'P',           // Portrait orientation
-            'margin_left' => 25.4,          // 1 inch = 25.4 mm
-            'margin_right' => 12.7,         // 0.5 inches = 12.7 mm
-            'margin_top' => 12.7,           // 0.5 inches = 12.7 mm
-            'margin_bottom' => 12.7         // 0.5 inches = 12.7 mm
-        ]);
+        // $pdf = PDF::loadView('pdf_reports.staff_report_18', $data, [], [
+        //     'default_font_size' => 13,       // Optional, set default font size
+        //     'default_font' => 'Pyidaungsu',      // Optional, set default font
+        //     'format' => 'A4',               // Set paper size
+        //     'orientation' => 'P',           // Portrait orientation
+        //     'margin_left' => 25.4,          // 1 inch = 25.4 mm
+        //     'margin_right' => 12.7,         // 0.5 inches = 12.7 mm
+        //     'margin_top' => 12.7,           // 0.5 inches = 12.7 mm
+        //     'margin_bottom' => 12.7         // 0.5 inches = 12.7 mm
+        // ]);
 
         $pdf = PDF::loadView('pdf_reports.staff_report_18', $data);
         
@@ -92,13 +92,36 @@ class PdfStaffReport18 extends Component
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
         
-        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
+    //     $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
+    //     if ($imagePath && file_exists($imagePath)) {
+    //     $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+    //     } else {
+    //     $defaultImagePath = public_path('img/user.png');
+    //     $section->addImage($defaultImagePath, ['width' => 80, 'height' => 80, 'align' => 'right' ]);
+    //    }
+
+    $textBoxStyle = [
+        'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
+        'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
+        // 'borderColor' => 'FFFFFF', // Set to white for no visible border
+        'borderSize' => 0,    
+        'positioning' => 'relative', // Relative positioning
+        'posHorizontal' => 'right', // Align next to inline content
+        'posHorizontalRel' => 'margin', // Relative to margin (inline context)
+        'marginLeft' => 0, // Small spacing from the left
+        
+    ];
+    $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
         if ($imagePath && file_exists($imagePath)) {
-        $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+            $textBox = $section->addTextBox($textBoxStyle);
+            $textBox->addImage($imagePath, ['width' => 62, 'height' => 69, 'align' => 'right']);
         } else {
         $defaultImagePath = public_path('img/user.png');
-        $section->addImage($defaultImagePath, ['width' => 80, 'height' => 80, 'align' => 'right' ]);
+        $textBox = $section->addTextBox($textBoxStyle);
+
+        $textBox->addImage($defaultImagePath, ['width' =>62, 'height' => 65, 'align' => 'center', 'padding'=>0 ]);
        }
+    
         $table = $section->addTable();
         $table->addRow(50);
         $table->addCell(700)->addText('၁။', null, $pStyle_5);
@@ -217,7 +240,7 @@ class PdfStaffReport18 extends Component
                     $table->addCell(1500);
             }
 
-       $section->addText('၁၅။' . 'ပြည်တွင်းသင်တန်းများ တက်ရောက်မှု', ['bold' => true],array('spaceBefore' => 200));
+       $section->addText('၁၅။ ' . ' ပြည်တွင်းသင်တန်းများ တက်ရောက်မှု', ['bold' => true],array('spaceBefore' => 200));
        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
        $table->addRow(50, array('tblHeader' => true));
        $table->addCell(700,['vMerge' => 'restart'])->addText('စဉ်', ['bold' => true], $pStyle_2);
@@ -250,7 +273,7 @@ class PdfStaffReport18 extends Component
                     $table->addCell(1750);
                     $table->addCell(2000);
             }
-       $section->addText('၁၆။' . 'ပြည်ပသင်တန်းများ တက်ရောက်မှု', ['bold' => true],array('spaceBefore' => 200));
+       $section->addText('၁၆။ ' . ' ပြည်ပသင်တန်းများ တက်ရောက်မှု', ['bold' => true],array('spaceBefore' => 200));
        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
        $table->addRow(50, array('tblHeader' => true));
        $table->addCell(700,['vMerge' => 'restart'])->addText('စဉ်', ['bold' => true], $pStyle_2);
@@ -269,7 +292,7 @@ class PdfStaffReport18 extends Component
             foreach ($staff->trainings->where('training_location_id', 2) as  $training) {
                 $table->addRow(50);
                 $table->addCell(700)->addText('('.myanmarAlphabet($index).')', null, $pStyle_6);
-                $table->addCell(4000)->addText($training->training_type->name, null, $pStyle_3);
+                $table->addCell(4000)->addText($training->diploma_name, null, $pStyle_3);
                 $table->addCell(1750)->addText(formatDMYmm($training->from_date), null, $pStyle_6);
                 $table->addCell(1750)->addText(formatDMYmm($training->to_date), null, $pStyle_6);
                 $table->addCell(2000)->addText($training->location, null, $pStyle_3);
@@ -283,7 +306,7 @@ class PdfStaffReport18 extends Component
                     $table->addCell(1750);
                     $table->addCell(2000);
             }
-       $section->addText('၁၇။' . 'ပြစ်မှုမှတ်တမ်း', ['bold' => true],array('spaceBefore' => 200));
+       $section->addText('၁၇။ ' . ' ပြစ်မှုမှတ်တမ်း', ['bold' => true],array('spaceBefore' => 200));
        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
        $table->addRow(50, array('tblHeader' => true));
     //    $table->addCell(700,['vMerge' => 'restart'])->addText('စဉ်', ['bold' => true]);
@@ -314,7 +337,7 @@ class PdfStaffReport18 extends Component
                 $table->addCell(1750);
                 $table->addCell(1750);
             }
-       $section->addText('၁၈။'.'ချီးမြှင့်ခံရသည့် ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်များ', ['bold' => true], array('spaceBefore' => 200));
+       $section->addText('၁၈။ '.' ချီးမြှင့်ခံရသည့် ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်များ', ['bold' => true], array('spaceBefore' => 200));
        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
        $table->addRow(50, array('tblHeader' => true));
        $table->addCell(1000)->addText('စဉ်', ['bold' => true], $pStyle_1);
@@ -325,8 +348,8 @@ class PdfStaffReport18 extends Component
                 foreach ($staff->awardings as $index=>$awarding) {
                     $table->addRow(50);
                     $table->addCell(1000)->addText('('.myanmarAlphabet($index).')',null, $pStyle_6);
-                    $table->addCell(5700)->addText($awarding->award_type->name .'/'. $awarding->award->name, null ,$pStyle_3);
-                    $table->addCell(3300)->addText($awarding->order_no, null, $pStyle_6);
+                    $table->addCell(5700)->addText( $awarding->award->name, null ,$pStyle_3);
+                    $table->addCell(3300)->addText($awarding->order_no, null, $pStyle_3);
                 }
             }else{
                 $table->addRow(50);
@@ -337,7 +360,7 @@ class PdfStaffReport18 extends Component
        
             // $section->addPageBreak();
           
-    $section->addText('အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။', ['bold' => true], array('spaceBefore' => 200, 'alignment' => Jc::BOTH));
+    $section->addText('အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။', ['bold' => true], array('spaceBefore' => 200, 'alignment' => Jc::START));
     $tableStyle = [
         'alignment' => JcTable::END // Center the table
     ];

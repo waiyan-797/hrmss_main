@@ -88,12 +88,33 @@ class PdfStaffReport19 extends Component
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း',1);
         $section->addTitle('[နည်းဥပဒေ ၃၅ (ဇ) (၄)၊ ၄၇ (စ) (၄)]',1);
         
-        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
+    //     $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
+    //     if ($imagePath && file_exists($imagePath)) {
+    //     $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+    //     } else {
+    //     $defaultImagePath = public_path('img/user.png');
+    //     $section->addImage($defaultImagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+    //    }
+    $textBoxStyle = [
+        'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
+        'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
+        // 'borderColor' => 'FFFFFF', // Set to white for no visible border
+        'borderSize' => 0,    
+        'positioning' => 'relative', // Relative positioning
+        'posHorizontal' => 'right', // Align next to inline content
+        'posHorizontalRel' => 'margin', // Relative to margin (inline context)
+        'marginLeft' => 0, // Small spacing from the left
+        
+    ];
+    $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
         if ($imagePath && file_exists($imagePath)) {
-        $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+            $textBox = $section->addTextBox($textBoxStyle);
+            $textBox->addImage($imagePath, ['width' => 62, 'height' => 69, 'align' => 'right']);
         } else {
         $defaultImagePath = public_path('img/user.png');
-        $section->addImage($defaultImagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+        $textBox = $section->addTextBox($textBoxStyle);
+
+        $textBox->addImage($defaultImagePath, ['width' =>62, 'height' => 65, 'align' => 'center', 'padding'=>0 ]);
        }
 
         $table = $section->addTable();
@@ -276,7 +297,7 @@ class PdfStaffReport19 extends Component
                 foreach ($staff->awardings as $index => $awarding) {
                     $table->addRow();
                     $table->addCell(700)->addText('('.myanmarAlphabet($index).')',null, $pStyle_1);
-                    $table->addCell(4800)->addText($awarding->award_type->name .'/'. $awarding->award->name,null,$pStyle_7);
+                    $table->addCell(4800)->addText( $awarding->award->name,null,$pStyle_7);
                     $table->addCell(2800)->addText(formatDMYmm($awarding->order_date), null, $pStyle_7);
                     $table->addCell(1800)->addText( $awarding->remark, null, $pStyle_7);
                
@@ -348,7 +369,7 @@ class PdfStaffReport19 extends Component
             $table->addCell(300)->addText('၊',  null, $pStyle_5);
             $table->addCell(1000)->addText($staff->current_department?->name,null ,$pStyle_4);
 
-        $section->addText('ရက်စွဲ: '. formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day), ['align' => 'center'],array('spaceBefore' => 300));
+            $section->addText('ရက်စွဲ: '. mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center'],array('spaceBefore' => 300));
 
         $fileName = 'staff_report_19_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');

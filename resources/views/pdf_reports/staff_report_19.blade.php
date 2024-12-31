@@ -170,82 +170,82 @@
                             <table style="border: none; width: 100%; table-layout: auto; border-collapse: collapse;">
                                 <tbody>
                                     <tr>
-                                        <td style="border: none; text-align: center; font-size: 35px">၁။</td>
-                                        <td style="border: none; text-align: left; font-size: 35px;">အမည်</td>
-                                        <td style="border: none; text-align: center; font-size: 35px;">-</td>
-                                        <td style="border: none; text-align: left; font-size: 35px;">{{ $staff->name }}</td>
+                                        <td style="border: none; text-align: center; font-size: 18px">၁။</td>
+                                        <td style="border: none; text-align: left; font-size: 18px;">အမည်</td>
+                                        <td style="border: none; text-align: center; font-size: 18px;">-</td>
+                                        <td style="border: none; text-align: left; font-size: 18px;">{{ $staff->name }}</td>
                                     </tr>
                                 <tr >
-                                    <td style="border: none; text-align:center;  font-size:35px;">၂။</td>
-                                    <td style="border: none; text-align:left; font-size:35px;" >နိုင်ငံသားစိစစ်ရေးအမှတ်</td>
-                                    <td style="border: none; text-align:center; font-size:35px;">-</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">{{ $staff->nrc_region_id->name.$staff->nrc_township_code->name.$staff->nrc_sign->name.$staff->nrc_code }}</td>
+                                    <td style="border: none; text-align:center;  font-size: 18px;">၂။</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;" >နိုင်ငံသားစိစစ်ရေးအမှတ်</td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">-</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">{{ $staff->nrc_region_id->name.$staff->nrc_township_code->name.$staff->nrc_sign->name.$staff->nrc_code }}</td>
                                 </tr>
                                 <tr >
-                                    <td style="border: none; text-align:center; font-size:35px;">၃။</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">လူမျိုး/ ဘာသာ</td>
-                                    <td style="border: none; text-align:center; font-size:35px;">-</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">{{ $staff?->ethnic?->name }}/{{ $staff->religion?->name }}</td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">၃။</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">လူမျိုး/ ဘာသာ</td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">-</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">{{ $staff?->ethnic?->name }}/{{ $staff->religion?->name }}</td>
                                 </tr>
                                 <tr >
-                                    <td style="border: none; text-align:center; font-size:35px;">၄။</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">မွေးဖွားရာအရပ်</td>
-                                    <td style="border: none; text-align:center; font-size:35px;">-</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">{{ $staff->place_of_birth }}</td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">၄။</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">မွေးဖွားရာအရပ်</td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">-</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">{{ $staff->place_of_birth }}</td>
                                 </tr>
 
                                 <tr >
-                                    <td style="border: none; text-align:center; font-size:35px;">၅။</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">အဘအမည်</td>
-                                    <td style="border: none; text-align:center; font-size:35px;">-</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">{{ $staff->father_name }}</td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">၅။</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">အဘအမည်</td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">-</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">{{ $staff->father_name }}</td>
                                 </tr>
                                 <tr >
-                                    <td style="border: none; text-align:center; font-size:35px;">၆။</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">မွေးဖွားသည့် ရက်၊ လ၊ ခုနှစ်</td>
-                                    <td style="border: none; text-align:center; font-size:35px;">-</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">{{ formatDMYmm($staff->dob) }}</td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">၆။</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">မွေးဖွားသည့် ရက်၊ လ၊ ခုနှစ်</td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">-</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">{{ formatDMYmm($staff->dob) }}</td>
                                 </tr>
                                 <tr >
-                                    <td style="border: none; text-align:center; font-size:35px;">၇။</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">ကိုယ်တွင်ထင်ရှားသည့် အမှတ်အသား</td>
-                                    <td style="border: none; text-align:center; font-size:35px;">-</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">{{ $staff->prominent_mark }}</td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">၇။</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">ကိုယ်တွင်ထင်ရှားသည့် အမှတ်အသား</td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">-</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">{{ $staff->prominent_mark }}</td>
                                 </tr>
                                 <tr >
-                                    <td style="border: none; text-align:center; font-size:35px;">၈။</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">လက်ရှိရာထူး
-
-                                    </td>
-                                    <td style="border: none; text-align:center; font-size:35px;">-</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">{{$staff->current_rank->name}}</td>
-                                </tr>
-                                <tr >
-                                    <td style="border: none; text-align:center; font-size:35px;">၉။</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">လက်ရှိနေရပ်လိပ်စာ
+                                    <td style="border: none; text-align:center; font-size: 18px;">၈။</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">လက်ရှိရာထူး
 
                                     </td>
-                                    <td style="border: none; text-align:center; font-size:35px;">-</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">{{ $staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'။' }}</td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">-</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">{{$staff->current_rank->name}}</td>
+                                </tr>
+                                <tr >
+                                    <td style="border: none; text-align:center; font-size: 18px;">၉။</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">လက်ရှိနေရပ်လိပ်စာ
+
+                                    </td>
+                                    <td style="border: none; text-align:center; font-size: 18px;">-</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">{{ $staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'။' }}</td>
                                 </tr>
 
                                 <tr >
-                                    <td style="border: none; text-align:center; font-size:35px;">၁၀။</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">အမြဲတမ်းနေရပ်လိပ်စာ
+                                    <td style="border: none; text-align:center; font-size: 18px;">၁၀။</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">အမြဲတမ်းနေရပ်လိပ်စာ
 
                                     </td>
-                                    <td style="border: none; text-align:center; font-size:35px;">-</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">
+                                    <td style="border: none; text-align:center; font-size: 18px;">-</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">
                                         {{ $staff->permanent_address_street.'၊'.$staff->permanent_address_ward.'၊'.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'။' }}
                                     </td>
                                 </tr>
                                 <tr >
-                                    <td style="border: none; text-align:center; font-size:35px; ">၁၁။</td>
-                                    <td style="border: none; text-align:left; font-size:35px; ">ပညာအရည်အချင်း
+                                    <td style="border: none; text-align:center; font-size: 18px; ">၁၁။</td>
+                                    <td style="border: none; text-align:left; font-size: 18px; ">ပညာအရည်အချင်း
 
                                     </td>
-                                    <td style="border: none; text-align:center; font-size:35px;">-</td>
-                                    <td style="border: none; text-align:left; font-size:35px;">
+                                    <td style="border: none; text-align:center; font-size: 18px;">-</td>
+                                    <td style="border: none; text-align:left; font-size: 18px;">
                                         @foreach ($staff->staff_educations as $education)
                                            {{$education->education?->name.','}}
                                         @endforeach
@@ -253,12 +253,12 @@
                                 </tr>
 
                                 <tr >
-                                    <td style="border: none; text-align:center; margin:0; font-size:35px;">၁၂။</td>
-                                    <td style="border: none; text-align:left; margin:0; font-size:35px;">တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်<br>တတ်ကျွမ်းသည့်အဆင့်
+                                    <td style="border: none; text-align:center; margin:0; font-size: 18px;">၁၂။</td>
+                                    <td style="border: none; text-align:left; margin:0; font-size: 18px;">တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်<br>တတ်ကျွမ်းသည့်အဆင့်
 
                                     </td>
-                                    <td style="border: none; text-align:center; margin:0; font-size:35px;">-</td>
-                                    <td style="border: none; text-align:left; margin:0; font-size:35px;">
+                                    <td style="border: none; text-align:center; margin:0; font-size: 18px;">-</td>
+                                    <td style="border: none; text-align:left; margin:0; font-size: 18px;">
                                         @foreach ($staff->staff_languages as $lang)
                                         <tr>
                                             <td>{{$lang->language}}</td>
