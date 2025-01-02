@@ -144,7 +144,6 @@
                                     <td class="border border-black text-center p-2">{{ $abroad->sponser }}</td>
                                 </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
@@ -162,6 +161,7 @@
                                     <th class="p-2 border border-black">လူမျိုး/နိုင်ငံသား</th>
                                     <th class="p-2 border border-black">အလုပ်အကိုင်နှင့်ဌာန</th>
                                     <th class="p-2 border border-black">နေရပ်</th>
+                                    <th class="p-2 border border-black">မှတ်ချက်</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center h-8 p-2">

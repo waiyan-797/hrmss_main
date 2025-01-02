@@ -5,8 +5,6 @@
             <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
             <div class="md:w-full p-4">
                 <h1 class="text-center font-semibold text-base">ကိုယ်ရေးမှတ်တမ်း</h1>
-               
-                <!-- <img src="{{ $staff->staff_photo }}" alt="" class="w-20 h-20 float-right mr-28"> -->
                 <img src="{{ $staff->staff_photo ? route('file', $staff->staff_photo) : asset('img/user.png') }}" alt="" class="w-20 h-20 float-right mr-28">
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၁။ </label>
@@ -56,7 +54,7 @@
                     <label for="" class="md:w-5">၈။ </label>
                     <label for="name" class="md:w-1/3">အရပ်အမြင့်</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->height_feet }}ပေ {{ $staff->height_inch }} လက်မ</label>
+                    <label for="name" class="md:w-3/5">{{ en2mm($staff->height_feet) }}ပေ {{ en2mm($staff->height_inch) }} လက်မ</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၉။ </label>
@@ -316,7 +314,7 @@
                             <label for="name" class="md:w-96 ml-4">အငြိမ်းစားလစာ</label>
                             <label for="" class="md:w-5 ml-1">-</label>
 
-                            <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_pension }}</label>
+                            <label for="name" class="md:w-3/5 ml-4">{{ en2mm($staff->military_pension) }}</label>
 
                         </div>
                     </div>

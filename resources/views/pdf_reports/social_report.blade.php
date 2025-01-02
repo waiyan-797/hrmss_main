@@ -40,7 +40,7 @@
         }
 
         th, td {
-            border: 1px solid black;
+            border: 1px solid rgb(19, 17, 17);
             padding: 0.25rem; 
             text-align: left;
         }
@@ -76,7 +76,7 @@
                 <tbody>
                     @foreach($staffs as $staff)
                     <tr>
-                        <td class="border border-black text-right p-1">{{ $loop->index+1}}</td>
+                        <td>{{ $loop->index+1}}</td>
                         <td>{{ $staff->name}}</td>
                         <td>{{ $staff->currentRank?->name}}</td>
                         <td>

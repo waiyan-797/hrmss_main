@@ -27,7 +27,6 @@
 
         body {
             font-family: 'tharlon';
-            font-size: 18px;
         }
 
         table {
@@ -39,19 +38,19 @@
         th,
         td {
             border: 1px solid black;
-            font-size:18px;
+          
         }
 
         th,
         td {
             padding: 8px;
             text-align: left;
-            font-size:18px;
+            
         }
 
         th {
             background-color: #f2f2f2;
-            font-size:18px;
+           
         }
 
         .container {
@@ -68,7 +67,6 @@
 
         .header h2 {
             font-weight: 600;
-            font-size: 18px;
         }
 
         .table-wrapper {
@@ -90,7 +88,6 @@
 
         thead {
             background-color: #f3f4f6;
-            font-size:18px;
         }
     </style>
 </head>
@@ -288,9 +285,9 @@
                                 <tbody style="border: none;">
                                     <tr style="border: none;">
                                         <td style="border: none; width: 5%;">၁၄။</td>
-                                        <td style="border: none; width: 45%;">ဇနီး/ခင်ပွန်း</td>
+                                        <td style="border: none; width: 35%;">ဇနီး/ခင်ပွန်း</td>
                                         <td style="border: none; width: 5%;"></td>
-                                        <td style="border: none; width: 45%;"></td>
+                                        <td style="border: none; width: 55%;"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -344,9 +341,9 @@
                                 <tbody style="border: none;">
                                     <tr style="border: none; font-weight: bold;">
                                         <td style="border: none; width: 5%;">၁၅။</td>
-                                        <td style="border: none; width: 45%;">နိုင်ငံခြားသွားရောက်မည့်ကိစ္စ</td>
+                                        <td style="border: none; width: 35%;">နိုင်ငံခြားသွားရောက်မည့်ကိစ္စ</td>
                                         <td style="border: none; width: 5%;"></td>
-                                        <td style="border: none; width: 45%;"></td>
+                                        <td style="border: none; width: 55%;"></td>
                                     </tr>
                                 </tbody>
                             </table>

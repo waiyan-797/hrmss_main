@@ -56,9 +56,6 @@
             text-align: center;
             font-size: 13px;
         }
-
-    
-
     </style>
 </head>
 
@@ -82,8 +79,8 @@
                                 </td>
                             </tr>
                         </table>
-                        <div style="font-size: 40px; line-height: 1.5;">
-                        <table style=" font-size: 40px; width: 100%; border: none;" > 
+                        <div style="font-size: 13px; line-height: 1.5;">
+                        <table style=" font-size: 13px; width: 100%; border: none;" > 
                             <tbody>
                                 <tr>
                                     <td style="border: none;">၁။</td>
@@ -232,7 +229,7 @@
                                     </td>
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">
-                                        {{ $staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code }}
+                                        {{ $staff->nrc_region_id->name . $staff->nrc_township_code->name . $staff->nrc_sign->name . $staff->nrc_code }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -241,7 +238,16 @@
                                     </td>
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">
-                                        {{ $staff->current_address_street . '၊' . $staff->current_address_ward . '၊' . $staff->current_address_township_or_town->name.'၊'. $staff->current_address_region->name . '။'   }}
+                                        {{
+                                            collect([
+                                                $staff->current_address_street,
+                                                $staff->current_address_ward,
+                                                $staff->current_address_township_or_town->name,
+                                                $staff->current_address_region->name
+                                            ])
+                                            ->filter()
+                                            ->implode('၊ ')
+                                        }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -250,7 +256,18 @@
                                     </td>
                                     <td style="border: none;">-</td>
                                     <td style="border: none;">
-                                        {{ $staff->permanent_address_street . '၊' . $staff->permanent_address_ward . '၊' . $staff->permanent_address_township_or_town->name.'၊'.$staff->permanent_address_region->name . '။'}}
+                                       
+                                        {{
+                                            collect([
+                                                $staff->permanent_address_street,
+                                                $staff->permanent_address_ward,
+                                                $staff->permanent_address_township_or_town->name,
+                                                $staff->permanent_address_region->name
+                                            ])
+                                            ->filter()
+                                            ->implode('၊ ')
+                                        }}
+                                    
                                     </td>
                                 </tr>
                                 <tr>
@@ -581,7 +598,18 @@
                                             <td class="col-label">အဘအမည်၊လူမျိုး၊ကိုးကွယ်သည့်ဘာသာ အလုပ်အကိုင်</td>
                                             <td class="col-dash">-</td>
                                             <td class="col-data">
-                                                {{ $staff->father_name . '၊' . $staff->father_ethnic?->name . '၊' . $staff->father_religion?->name . '၊' . $staff->father_place_of_birth . '၊' . $staff->father_occupation }}
+                                                {{
+                                                    collect([
+                                                        $staff->father_name,
+                                                        $staff->father_ethnic?->name,
+                                                        $staff->father_religion?->name,
+                                                        $staff->father_place_of_birth,
+                                                        $staff->father_occupation
+                                                        
+                                                    ])
+                                                    ->filter()
+                                                    ->implode('၊ ')
+                                                }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -591,7 +619,17 @@
                                             <td class="col-label">၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ</td>
                                             <td class="col-dash">-</td>
                                             <td class="col-data">
-                                                {{ $staff->father_address_street . '၊' . $staff->father_address_ward . '၊' . $staff->father_address_township_or_town?->name . '၊' . $staff->father_address_region?->name }}
+                                                {{-- {{ $staff->father_address_street . '၊' . $staff->father_address_ward . '၊' . $staff->father_address_township_or_town?->name . '၊' . $staff->father_address_region?->name }} --}}
+                                                {{
+                                                    collect([
+                                                        $staff->father_address_street,
+                                                        $staff->father_address_ward,
+                                                        $staff->father_address_township_or_town?->name,
+                                                        $staff->father_address_region?->name
+                                                    ])
+                                                    ->filter()
+                                                    ->implode('၊ ')
+                                                }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -601,7 +639,20 @@
                                             <td class="col-label">အမိအမည်၊လူမျိုး၊ကိုးကွယ်သည့်ဘာသာ အလုပ်အကိုင်</td>
                                             <td class="col-dash">-</td>
                                             <td class="col-data">
-                                                {{ $staff->mother_name . '၊' . $staff->mother_ethnic?->name . '၊' . $staff->mother_religion?->name . '၊' . $staff->mother_place_of_birth . '၊' . $staff->mother_occupation }}
+                                                {{-- {{ $staff->mother_name . '၊' . $staff->mother_ethnic?->name . '၊' . $staff->mother_religion?->name . '၊' . $staff->mother_place_of_birth . '၊' . $staff->mother_occupation }} --}}
+
+                                                {{
+                                                    collect([
+                                                        $staff->mother_name,
+                                                        $staff->mother_ethnic?->name,
+                                                        $staff->mother_religion?->name,
+                                                        $staff->mother_place_of_birth,
+                                                        $staff->mother_occupation
+                                                        
+                                                    ])
+                                                    ->filter()
+                                                    ->implode('၊ ')
+                                                }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -611,7 +662,18 @@
                                             <td class="col-label">၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ</td>
                                             <td class="col-dash">-</td>
                                             <td class="col-data">
-                                                {{ $staff->mother_address_street . '၊' . $staff->mother_address_ward . '၊' . $staff->mother_address_township_or_town?->name . '၊' . $staff->mother_address_region?->name }}
+                                                {{-- {{ $staff->mother_address_street . '၊' . $staff->mother_address_ward . '၊' . $staff->mother_address_township_or_town?->name . '၊' . $staff->mother_address_region?->name }} --}}
+
+                                                {{
+                                                    collect([
+                                                        $staff->mother_address_street,
+                                                        $staff->mother_address_ward,
+                                                        $staff->mother_address_township_or_town?->name,
+                                                        $staff->mother_address_region?->name
+                                                    ])
+                                                    ->filter()
+                                                    ->implode('၊ ')
+                                                }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -1065,14 +1127,14 @@
                             <table style="border: none;">
                                 <tbody style="border: none;">
                                     <tr style="border: none;">
-                                        <td style="border: none; width: 10%;">၁၃။</td>
-                                        <td style="border: none; width: 35%;">
+                                        <td style="border: none; width: 5%;">၁၃။</td>
+                                        <td style="border: none; width: 45%;">
                                             မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်းတို့၏မိဘ၊ ညီအကိုမောင်နှမများ၊
                                             သားသမီးများ နိုင်ငံရေးပါတီဝင်ရောက်ဆောင်ရွက်မှု ရှိ/မရှိ (ရှိက
                                             အသေးစိတ်ဖော်ပြရန်)
                                         </td>
                                         <td style="border: none; width: 5%;">-</td>
-                                        <td style="border: none; width: 55%;">
+                                        <td style="border: none; width: 45%;">
                                             {{ $staff->family_in_politics ? 'ရှိ' : 'မရှိ' }}</td>
                                     </tr>
 
@@ -1080,7 +1142,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <h1 class="title">ငယ်စဥ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်</h1>
+                        <h1 class="title">ငယ်စဉ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်</h1>
                         <div style="margin-top: 16px;">
                             <table style="border: none;">
                                 <tbody style="border: none;">
@@ -1158,7 +1220,7 @@
                                         @if ($staff->trainings->isNotEmpty())
                                             @foreach ($staff->trainings as $training)
                                                 <tr>
-                                                    <td>{{ $training->training_type->name }}</td>
+                                                    <td>{{ $training->diploma_name }}</td>
                                                     <td>{{ formatDMYmm($training->from_date) }}</td>
                                                     <td>{{ formatDMYmm($training->to_date) }}</td>
                                                     <td>{{ $training->location }}/{{ $staff->training_location?->name }}
@@ -1208,7 +1270,7 @@
                                         @if ($staff->awardings->isNotEmpty())
                                             @foreach ($staff->awardings as $awarding)
                                                 <tr>
-                                                    <td>{{ $awarding->award_type->name ?? '-' }}</td>
+                                                    <td>{{ $awarding->award->name ?? '-' }}</td>
                                                     <td>{{ $awarding->order_no }}</td>
                                                 </tr>
                                             @endforeach
@@ -1228,33 +1290,33 @@
                                 <tr>
                                     <td style="border: none; width: 5%;">၄။
                                     </td>
-                                    <td style="border: none; width: 35%;">နောက်ဆုံးအောင်မြင်ခဲ့သည့်ကျောင်း/အတန်း၊
+                                    <td style="border: none; width: 45%;">နောက်ဆုံးအောင်မြင်ခဲ့သည့်ကျောင်း/အတန်း၊
                                         ခုံအမှတ်၊ ဘာသာရပ်အတိအကျဖော်ပြရန်
                                     </td>
                                     <td style="border: none; width: 5%;">-</td>
-                                    <td style="border: none; width: 55%;">
+                                    <td style="border: none; width: 45%;">
                                         {{ $staff->last_school_name . '၊' . $staff->last_school_subject . '၊' . $staff->last_school_row_no . '၊' . $staff->last_school_major }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="border: none; width: 5%;">၅။
                                     </td>
-                                    <td style="border: none; width: 35%;">ကျောင်းသားဘဝတွင် နိုင်ငံရေး/မြို့ရေး
+                                    <td style="border: none; width: 45%;">ကျောင်းသားဘဝတွင် နိုင်ငံရေး/မြို့ရေး
                                         ဆောင်ရွက်မှုများနှင့်အဆင့်အတန်း၊ တာဝန်
                                     </td>
                                     <td style="border: none; width: 5%;">-</td>
-                                    <td style="border: none; width: 55%;">{{ $staff->student_life_political_social }}
+                                    <td style="border: none; width: 45%;">{{ $staff->student_life_political_social }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="border: none; width: 5%;">၆။</td>
-                                    <td style="border: none; width: 35%;">ဝါသနာပါပြီး၊
+                                    <td style="border: none; width: 45%;">ဝါသနာပါပြီး၊
                                         လေ့လာလိုက်စားခဲ့သောကျန်းမာရေးကစားခုန်စားမှုများ၊ အနုပညာဆိုင်ရာ အတီးအမှုတ်များ၊
                                         ပညာရေးစက်မှုလက်မှု
 
                                     </td>
                                     <td style="border: none; width: 5%;">-</td>
-                                    <td style="border: none; width: 55%;">{{ $staff->habit }}</td>
+                                    <td style="border: none; width: 45%;">{{ $staff->habit }}</td>
                                 </tr>
 
                             </tbody>
@@ -1264,9 +1326,9 @@
                                 <tbody style="border: none;">
                                     <tr style="border: none;">
                                         <td style="border: none; width: 5%;">၇။</td>
-                                        <td style="border: none; width: 35%;">လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်</td>
+                                        <td style="border: none; width: 45%;">လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်</td>
                                         <td style="border: none; width: 5%;"></td>
-                                        <td style="border: none; width: 55%;"></td>
+                                        <td style="border: none; width: 45%;"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1319,21 +1381,21 @@
                                 <tr>
                                     <td style="border: none; width: 5%;">၈။
                                     </td>
-                                    <td style="border: none; width: 35%;">
+                                    <td style="border: none; width: 45%;">
                                         တောခိုခဲ့ဖူးလျှင်(သို့)သောင်းကျန်းသူများကြီးစိုးသော နယ်မြေတွင်
                                         နေခဲ့ဖူးလျှင်လုပ်ကိုင်ဆောင်ရွက်ချက်များကိုဖော်ပြရန်
                                     </td>
                                     <td style="border: none; width: 5%;">-</td>
-                                    <td style="border: none; width: 55%;">{{ $staff->revolution }}</td>
+                                    <td style="border: none; width: 45%;">{{ $staff->revolution }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none; width: 5%;">၉။
                                     </td>
-                                    <td style="border: none; width: 35%;">အလုပ်အကိုင်
+                                    <td style="border: none; width: 45%;">အလုပ်အကိုင်
                                         ပြောင်းရွှေ့ခဲ့သောအကြောင်းအကျိူးနှင့်လစာ
                                     </td>
                                     <td style="border: none; width: 5%;">-</td>
-                                    <td style="border: none; width: 55%;">{{ $staff->transfer_reason_salary }}</td>
+                                    <td style="border: none; width: 45%;">{{ $staff->transfer_reason_salary }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၁၀။

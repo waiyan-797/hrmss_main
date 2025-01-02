@@ -25,17 +25,15 @@ class PdfStaffReport15 extends Component
         $data = [
             'staff' => $staff,
         ];
-        // $pdf = PDF::loadView('pdf_reports.staff_report_15', $data);
-        $pdf = PDF::loadView('pdf_reports.staff_report_15', $data, [], [
-            // 'default_font_size' => 13,      
-            // 'default_font' => 'Pyidaungsu',     
-            'format' => 'A4',               // Set paper size
-            'orientation' => 'P',           // Portrait orientation
-            'margin_left' => 25.4,          // 1 inch = 25.4 mm
-            'margin_right' => 12.7,         // 0.5 inches = 12.7 mm
-            'margin_top' => 12.7,           // 0.5 inches = 12.7 mm
-            'margin_bottom' => 12.7         // 0.5 inches = 12.7 mm
-        ]);
+        $pdf = PDF::loadView('pdf_reports.staff_report_15', $data);
+        // $pdf = PDF::loadView('pdf_reports.staff_report_15', $data, [], [    
+        //     'format' => 'A4',               // Set paper size
+        //     'orientation' => 'P',           // Portrait orientation
+        //     'margin_left' => 25.4,          // 1 inch = 25.4 mm
+        //     'margin_right' => 12.7,         // 0.5 inches = 12.7 mm
+        //     'margin_top' => 12.7,           // 0.5 inches = 12.7 mm
+        //     'margin_bottom' => 12.7         // 0.5 inches = 12.7 mm
+        // ]);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'staff_pdf_15.pdf');
@@ -73,12 +71,26 @@ class PdfStaffReport15 extends Component
         $footer->addText('လျှို့ဝှက်',null,array('align'=>'center', 'spaceBefore' => 200));
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
-        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
+         $textBoxStyle = [
+        'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
+        'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
+        // 'borderColor' => 'FFFFFF', // Set to white for no visible border
+        'borderSize' => 0,    
+        'positioning' => 'relative', // Relative positioning
+        'posHorizontal' => 'right', // Align next to inline content
+        'posHorizontalRel' => 'margin', // Relative to margin (inline context)
+        'marginLeft' => 0, // Small spacing from the left
+        
+    ];
+    $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
         if ($imagePath && file_exists($imagePath)) {
-        $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+            $textBox = $section->addTextBox($textBoxStyle);
+            $textBox->addImage($imagePath, ['width' => 62, 'height' => 69, 'align' => 'right']);
         } else {
         $defaultImagePath = public_path('img/user.png');
-        $section->addImage($defaultImagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
+        $textBox = $section->addTextBox($textBoxStyle);
+
+        $textBox->addImage($defaultImagePath, ['width' =>62, 'height' => 65, 'align' => 'center', 'padding'=>0 ]);
        }
         $table = $section->addTable();
         $table->addRow();
