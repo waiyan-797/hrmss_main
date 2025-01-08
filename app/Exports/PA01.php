@@ -74,20 +74,67 @@ class PA01 implements FromView ,WithStyles
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
 
-        // $sheet->getPageSetup()->setScale(80);
+        $sheet->getPageSetup()->setScale(80);
 
         // Enable gridlines for unbordered areas
         $sheet->setShowGridlines(true);
         // $sheet->setPrintGridlines(true);
 
         // Dynamically calculate the highest row and column
-        $highestRow = $sheet->getHighestRow(); // e.g. 19
+        $highestRow = $sheet->getHighestRow()-4; // e.g. 19
+
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
+        $row=5;
+
+       
+        // $sheet->getHeaderFooter()->setOddHeader('&C&H&"Pyidaungsu"&11' . "ကန့်သတ်\n၂"); // Centered header text
+        // $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&11' . 'ကန့်သတ်'); // Centered footer text
+       
+       
+        $sheet->getPageMargins()->setTop(1);
+        
+
+        $sheet->getColumnDimension('A')->setWidth(5);
+        $sheet->getColumnDimension('B')->setWidth(20);
+        $sheet->getColumnDimension('C')->setWidth(8);
+        $sheet->getColumnDimension('D')->setWidth(7);
+        $sheet->getColumnDimension('E')->setWidth(8);
+        $sheet->getColumnDimension('F')->setWidth(6);
+        $sheet->getColumnDimension('G')->setWidth(6);
+        $sheet->getColumnDimension('H')->setWidth(6);
+        $sheet->getColumnDimension('I')->setWidth(6);
+        $sheet->getColumnDimension('J')->setWidth(6);
+        $sheet->getColumnDimension('K')->setWidth(9);
+        $sheet->getColumnDimension('L')->setWidth(9);
+        $sheet->getColumnDimension('M')->setWidth(9);
+        $sheet->getColumnDimension('N')->setWidth(8);
+        $sheet->getColumnDimension('O')->setWidth(9);
+        $sheet->getColumnDimension('P')->setWidth(7);
+        $sheet->getColumnDimension('Q')->setWidth(6);
+        $sheet->getColumnDimension('R')->setWidth(9);
+        $sheet->getColumnDimension('S')->setWidth(8);
+        $sheet->getColumnDimension('T')->setWidth(9);
+
+        $sheet->getRowDimension(1)->setRowHeight(24);
+        $sheet->getRowDimension(2)->setRowHeight(24);
+        $sheet->getRowDimension(3)->setRowHeight(24);
+        $sheet->getRowDimension(4)->setRowHeight(24);
+        // $sheet->getRowDimension(23)->setRowHeight(25);
+
+        
+        $sheet->removeRow(3);
+        $sheet->removeRow(5);
+        $sheet->removeRow(22);
+        $sheet->removeRow(24);
+
+        for ($row = 7; $row <= $highestRow-1 ; $row++) {
+            $sheet->getRowDimension($row)->setRowHeight(24);
+        }
 
         $sheet->getStyle('A1:A2')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
-                'size' => 13,
+                'size' => 11,
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
@@ -100,13 +147,45 @@ class PA01 implements FromView ,WithStyles
             ],
         ]);
 
-        $sheet->getRowDimension(1)->setRowHeight(45);
-            $sheet->getRowDimension(2)->setRowHeight(45);
-
-        $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
+        $sheet->getStyle('A3:A4')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
-                'size' => 13,
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'outline' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+                ],
+            ],
+        ]);
+
+        
+
+        $sheet->getStyle('k3:k4')->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'outline' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+                ],
+            ],
+        ]);
+
+        
+        $sheet->getStyle("A$row:$highestColumn$row")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
@@ -119,6 +198,94 @@ class PA01 implements FromView ,WithStyles
                 ],
             ],
         ]);
+
+        $sheet->getStyle("A5:$highestColumn$highestRow")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+
+        $sheet->getStyle("B7:$highestColumn$highestRow")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT, // Custom alignment for A and B
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+        $sheet->getStyle("C6:$highestColumn$highestRow")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+
+        $sheet->getStyle('A22:A23:A24')->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'outline' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+                ],
+            ],
+        ]);
+        
+        
+
+        
+        // Apply styles for columns C and beyond
+        // $sheet->getStyle("C4:$highestColumn$row")->applyFromArray([
+        //     'font' => [
+        //         'name' => 'Pyidaungsu',
+        //         'size' => 13,
+        //     ],
+        //     'alignment' => [
+        //         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Default alignment for others
+        //         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        //     ],
+        //     'borders' => [
+        //         'allBorders' => [
+        //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        //             'color' => ['argb' => 'FF000000'], // Black border
+        //         ],
+        //     ],
+        // ]);
+        
         // // Apply custom borders to the dynamic range
         // $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
         //     'borders' => [
@@ -142,9 +309,9 @@ class PA01 implements FromView ,WithStyles
         // ]);
 
         // Auto-size columns based on dynamic range
-        foreach (range('A', $highestColumn) as $column) {
-            $sheet->getColumnDimension($column)->setAutoSize(true);
-        }
+        // foreach (range('A', $highestColumn) as $column) {
+        //     $sheet->getColumnDimension($column)->setAutoSize(true);
+        // }
 
     return [];
 }

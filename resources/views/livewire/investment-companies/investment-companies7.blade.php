@@ -6,6 +6,7 @@
             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
             <br><br>
             <input type="month" wire:model.live='filterRange'>
+        
 
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">

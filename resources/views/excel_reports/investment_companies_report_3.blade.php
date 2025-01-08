@@ -1,6 +1,6 @@
 
        
-        <style>
+        {{-- <style>
             body {
                 font-family: 'Pyidaungsu', sans-serif !important;
                 font-size: 13px;
@@ -44,23 +44,30 @@
                 top: 0;
                 background: #f3f4f6;
             }
-        </style>
+        </style> --}}
         
         
-    </head>
+    {{-- </head> --}}
     <body>
         
-            <div class="container">
+            <div class="">
                 
                 {{-- <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1> --}}
-                <div class="table-container">
+                <div class="">
 
-                    <table class="tabletitle">
+                    <table class="">
                         <tr>
-                            <th colspan="6" rowspan="2">
-                                <br>
-                                ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>
-                                ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+                            <th colspan="6">  
+                                ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="6">
+                                ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="6">
                                 ၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
                             </th>
                         </tr>
@@ -69,16 +76,17 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>စဥ်</th>
-                                <th>ရာထူးအမည်</th>
-                                <th>လစာနှုန်း (ကျပ်)</th>
-                                <th>ခွင့်ပြုအင်အား</th>
-                                <th>ခန့်ပြီးအင်အား</th>
-                                <th>လစ်လပ်အင်အား</th>
+                                <th rowspan="2">စဥ်</th>
+                                <th rowspan="2">ရာထူးအမည်</th>
+                                <th rowspan="2">လစာနှုန်း (ကျပ်)</th>
+                                <th rowspan="2">ခွင့်ပြု <br> အင်အား</th>
+                                <th rowspan="2">ခန့်ပြီး <br> အင်အား</th>
+                                <th rowspan="2">လစ်လပ် <br> အင်အား</th>
                             </tr>
                         </thead>
                         {{-- sfdfd --}}
                         <tbody>
+                            <tr></tr>
                             @foreach ($first_ranks as $rank)
                             <tr>
                                 <td>{{en2mm(++$count)}}</td>
@@ -86,14 +94,14 @@
                                 <td>{{$rank->payscale->name}}</td>
                                 <td>{{en2mm($rank->allowed_qty)}}</td>
                                 <td>{{en2mm($rank->staffs->count())}}</td>
-                                <td>{{en2mm($rank->allowed_qty - $rank->staffs->count())}}</td>
+                                <td>{{en2mm($rank->staffs->count() - $rank->allowed_qty)}}</td>
                             </tr>
                             @endforeach
                             <tr>
                                 <td colspan="3">{{$first_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
                                 <td>{{ en2mm($first_ranks->sum('allowed_qty')) }}</td>
                                 <td>{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
-                                <td>{{ en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                                <td>{{ en2mm( $first_ranks->sum(fn($rank) => $rank->staffs->count()) - $first_ranks->sum('allowed_qty')) }}</td>
                             </tr>
                             @foreach ($second_ranks as $rank)
                                 <tr>
@@ -102,21 +110,21 @@
                                     <td>{{$rank->payscale->name}}</td>
                                     <td>{{en2mm($rank->allowed_qty)}}</td>
                                     <td>{{en2mm($rank->staffs->count())}}</td>
-                                    <td>{{en2mm($rank->allowed_qty - $rank->staffs->count())}}</td>
+                                    <td>{{en2mm($rank->staffs->count() - $rank->allowed_qty)}}</td>
                                 </tr>
                             @endforeach
                             <tr>
                                 <td colspan="3">{{$second_ranks[0]->staff_type->name}}စုစုပေါင်း</td>
                                 <td>{{ en2mm($second_ranks->sum('allowed_qty')) }}</td>
                                 <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
-                                <td>{{ en2mm($second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                                <td>{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->count()) - $second_ranks->sum('allowed_qty')) }}</td>
                             </tr>
 
                             <tr>
                                 <td class="border border-black p-2 font-semibold" colspan="3">စုစုပေါင်း</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty') + $second_ranks->sum('allowed_qty')) }}</td>
                                 <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->count()) + $second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
-                                <td class="border border-black p-2 font-semibold">{{ en2mm($first_ranks->sum('allowed_qty') - $first_ranks->sum(fn($rank) => $rank->staffs->count()) + $second_ranks->sum('allowed_qty') - $second_ranks->sum(fn($rank) => $rank->staffs->count())) }}</td>
+                                <td class="border border-black p-2 font-semibold">{{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->count()) - $second_ranks->sum('allowed_qty') + $first_ranks->sum(fn($rank) => $rank->staffs->count()) - $first_ranks->sum('allowed_qty')) }}</td>
                             </tr>
                         </tbody>
                     </table>
