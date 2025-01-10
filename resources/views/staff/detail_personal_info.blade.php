@@ -16,6 +16,7 @@
             [
                 'type' => 'select',
                 'wire_array_name' => 'schools',
+                'next_col_update' => null,
                 'wire_array_key' => 'education_group',
                 'select_values' => $education_groups,
             ],
@@ -117,6 +118,7 @@
             [
                 'type' => 'select',
                 'wire_array_name' => 'trainings',
+                'next_col_update' => null,
                 'wire_array_key' => 'training_location',
                 'select_values' => $training_locations,
             ],
@@ -229,12 +231,14 @@
             [
                 'type' => 'select',
                 'wire_array_name' => 'past_occupations',
+                'next_col_update' => null,
                 'wire_array_key' => 'department',
                 'select_values' => $departments,
             ],
             [
                 'type' => 'select',
                 'wire_array_name' => 'past_occupations',
+                'next_col_update' => null,
                 'wire_array_key' => 'section',
                 'select_values' => $sections,
             ],
@@ -429,6 +433,7 @@
             [
                 'type' => 'select',
                 'wire_array_name' => 'punishments',
+                'next_col_update' => null,
                 'wire_array_key' => 'penalty_type',
                 'select_values' => $penalty_types,
             ],

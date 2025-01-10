@@ -160,18 +160,21 @@
                 [
                     'type' => 'search_select',
                     'wire_array_name' => $key,
+                    'next_col_update' => null,
                     'wire_array_key' => 'ethnic',
                     'select_values' => $ethnics,
                 ],
                 [
                     'type' => 'select',
                     'wire_array_name' => $key,
+                    'next_col_update' => null,
                     'wire_array_key' => 'religion',
                     'select_values' => $religions,
                 ],
                 [
                     'type' => 'select',
                     'wire_array_name' => $key,
+                    'next_col_update' => null,
                     'wire_array_key' => 'gender_id',
                     'select_values' => $genders,
                 ],
@@ -193,6 +196,7 @@
                 [
                     'type' => 'select',
                     'wire_array_name' => $key,
+                    'next_col_update' => null,
                     'wire_array_key' => 'relation',
                     'select_values' => $relations,
                 ],
