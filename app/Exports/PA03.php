@@ -55,7 +55,6 @@ class PA03 implements  FromView ,WithStyles
 
         $sheet->removeRow(4);
 
-        
         $sheet->getRowDimension(1)->setRowHeight(25);
         $sheet->getRowDimension(2)->setRowHeight(25);
         $sheet->getRowDimension(3)->setRowHeight(25);
@@ -67,7 +66,7 @@ class PA03 implements  FromView ,WithStyles
         // $sheet->getHeaderFooter()->setOddHeader('&C&H&"Pyidaungsu"&10' . "အတွင်းရေး\n၃"); // Centered header text
         
 
-        // $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&10' . 'အတွင်းရေး'); // Centered footer text
+        $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&10' . 'အတွင်းရေး'); // Centered footer text
 
         $sheet->getPageMargins()->setTop(1);
         $row=5;

@@ -91,11 +91,11 @@ class PA02 implements FromView ,WithStyles
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
         $row=5;
 
-        $sheet->getPageMargins()->setTop(1);
+        
         // $sheet->getHeaderFooter()->setOddHeader('&C&H&"Pyidaungsu"&10' . "ကန့်သတ်\n၂"); // Centered header text
         
 
-        // $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&10' . 'ကန့်သတ်'); 
+        $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&10' . 'ကန့်သတ်'); 
 
 
         $sheet->getColumnDimension('A')->setWidth(5);
@@ -148,6 +148,8 @@ class PA02 implements FromView ,WithStyles
         for ($row = 5; $row <= $highestRow-1 ; $row++) {
             $sheet->getRowDimension($row)->setRowHeight(24);
         }
+
+        $sheet->getPageMargins()->setTop(0.8);
 
         $sheet->getStyle('A1:A2')->applyFromArray([
             'font' => [

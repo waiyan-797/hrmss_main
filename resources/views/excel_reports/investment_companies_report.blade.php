@@ -546,7 +546,7 @@
 
                     
                 </div>
-                <table>
+                {{-- <table>
                     <tr>
                         <th colspan="20" rowspan="4">
                             <br>
@@ -555,7 +555,7 @@
                             <br>
                         </th>
                     </tr>
-                </table>
+                </table> --}}
             </div>
         </div>
    

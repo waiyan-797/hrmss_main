@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Investment Companies Report</title>
 
-    <style type="text/css">
+    {{-- <style type="text/css">
         body {
             font-family: 'pyidaungsu', sans-serif !important;
             font-size: 13px;
@@ -48,21 +48,30 @@
         tbody tr td {
             height: 32px;
         }
-    </style>
+    </style> --}}
 </head>
 <body>
-    <div class="container">
+    <div class="">
         {{-- <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1> --}}
-        <div class="table-container">
+        <div class="">
 
-            <table class="tabletitle">
+            <table class="">
                 <tr>
-                    <th colspan="6" rowspan="2">
-                        ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>
-                        ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
-                        ၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
+                    <th colspan="5">
+                        ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
                     </th>
                 </tr>
+                <tr>
+                    <th colspan="5">
+                        ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="5">
+                      ဝန်ထမ်းအင်အားစာရင်း
+                    </th>
+                </tr>
+
             </table>
             
             <table>
@@ -76,10 +85,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($payscales as $payscale)
+                    <tr>
+                        <td>၁</td>
+                        <td>အမြဲတမ်းအတွင်းဝန်</td>
+                        <td>၀</td>
+                        <td>၀</td>
+                        <td>၀</td>
+                    </tr>
+                    @php
+                    $count=1;
+                    @endphp
+                    @foreach ($payscales as $index=>$payscale)
                         <tr>
                             <td>{{en2mm(++$count)}}</td>
-                            <td>{{$payscale->ranks[0]->name}}နှင့်အဆင့်တူ</td>
+                            <td> 
+                                @if($index == 0 )
+                                {{$payscale->ranks[0]->name}} /<br> ဦးဆောင်ညွှန်ကြားရေးမှူးနှင့်အဆင့်တူ
+                                @else 
+                                {{$payscale->ranks[0]->name}}နှင့်အဆင့်တူ
+                                @endif </td>
                             <td>{{en2mm($payscale->allowed_qty)}}</td>
                             <td>{{en2mm($payscale->staff->count())}}</td>
                             <td>{{en2mm($payscale->allowed_qty - $payscale->staff->count())}}</td>

@@ -853,7 +853,7 @@
                     </tbody>
                 </table>
             </div>
-            <table>
+            {{-- <table>
                 <tr>
                     <th colspan="36" rowspan="4">
                         <br>
@@ -862,6 +862,6 @@
                         <br>
                     </th>
                 </tr>
-            </table>
+            </table> --}}
         </div>
 

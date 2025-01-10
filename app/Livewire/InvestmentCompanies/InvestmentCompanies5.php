@@ -16,7 +16,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class InvestmentCompanies5 extends Component
 {
-    public $count=0;
+    public $count=0, $index=0;
     public function go_pdf(){
         $count=0;
         $data = [

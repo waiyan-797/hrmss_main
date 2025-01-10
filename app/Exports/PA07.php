@@ -188,7 +188,7 @@ $previousMonth,
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
 
-        // $sheet->getPageSetup()->setScale(80);
+        $sheet->getPageSetup()->setScale(80);
 
         // Enable gridlines for unbordered areas
         $sheet->setShowGridlines(true);
@@ -197,6 +197,48 @@ $previousMonth,
         // Dynamically calculate the highest row and column
         $highestRow = $sheet->getHighestRow(); // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
+
+        $sheet->getColumnDimension('A')->setWidth(4);
+        $sheet->getColumnDimension('B')->setWidth(20);
+        $sheet->getColumnDimension('C')->setWidth(7);
+        $sheet->getColumnDimension('D')->setWidth(7);
+        $sheet->getColumnDimension('E')->setWidth(7);
+        $sheet->getColumnDimension('F')->setWidth(4);
+        $sheet->getColumnDimension('G')->setWidth(4);
+        $sheet->getColumnDimension('H')->setWidth(5);
+        $sheet->getColumnDimension('I')->setWidth(5);
+        $sheet->getColumnDimension('J')->setWidth(5);
+        $sheet->getColumnDimension('K')->setWidth(5);
+        $sheet->getColumnDimension('L')->setWidth(4);
+        $sheet->getColumnDimension('M')->setWidth(4);
+        $sheet->getColumnDimension('N')->setWidth(7);
+        $sheet->getColumnDimension('O')->setWidth(7);
+        $sheet->getColumnDimension('P')->setWidth(7);
+        $sheet->getColumnDimension('Q')->setWidth(7);
+        $sheet->getColumnDimension('R')->setWidth(6);
+        $sheet->getColumnDimension('S')->setWidth(6);
+        $sheet->getColumnDimension('T')->setWidth(6);
+        $sheet->getColumnDimension('U')->setWidth(6);
+        $sheet->getColumnDimension('V')->setWidth(6);
+        $sheet->getColumnDimension('W')->setWidth(6);
+        $sheet->getColumnDimension('X')->setWidth(7);
+        $sheet->getColumnDimension('Y')->setWidth(7);
+        $sheet->getColumnDimension('Z')->setWidth(7);
+
+        $sheet->getRowDimension(1)->setRowHeight(24);
+        $sheet->getRowDimension(2)->setRowHeight(24);
+        $sheet->getRowDimension(3)->setRowHeight(24);
+
+        for ($row = 4; $row <= $highestRow-1 ; $row++) {
+            $sheet->getRowDimension($row)->setRowHeight(24);
+        }
+        $sheet->getRowDimension(8)->setRowHeight(120);
+
+
+        $sheet->removeRow(4);
+        $sheet->removeRow(9);
+
+        $row=4;
 
         $sheet->getStyle('A1:A2')->applyFromArray([
             'font' => [
@@ -213,11 +255,7 @@ $previousMonth,
                 ],
             ],
         ]);
-
-        $sheet->getRowDimension(1)->setRowHeight(45);
-            $sheet->getRowDimension(2)->setRowHeight(45);
-
-        $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
+        $sheet->getStyle('A3')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 13,
@@ -227,12 +265,63 @@ $previousMonth,
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
             ],
             'borders' => [
+                'outline' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+                ],
+            ],
+        ]);
+
+        $sheet->getStyle("A4:$highestColumn$highestRow")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 13,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
                 'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     'color' => ['argb' => 'FF000000'], // Black border
                 ],
             ],
         ]);
+
+        $sheet->getStyle("A7:$highestColumn$highestRow")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 13,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+       
+
+        // $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
+        //     'font' => [
+        //         'name' => 'Pyidaungsu',
+        //         'size' => 13,
+        //     ],
+        //     'alignment' => [
+        //         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+        //         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        //     ],
+        //     'borders' => [
+        //         'allBorders' => [
+        //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        //             'color' => ['argb' => 'FF000000'], // Black border
+        //         ],
+        //     ],
+        // ]);
         // // Apply custom borders to the dynamic range
         // $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
         //     'borders' => [
@@ -256,22 +345,22 @@ $previousMonth,
         // ]);
 
         // Auto-size columns based on dynamic range
-        foreach (range('A', $highestColumn) as $column) {
-            $sheet->getColumnDimension($column)->setAutoSize(true);
-        }
+        // foreach (range('A', $highestColumn) as $column) {
+        //     $sheet->getColumnDimension($column)->setAutoSize(true);
+        // }
 
-        // Set row heights manually for dynamic rows
-        foreach (range(3, $highestRow) as $row) {
-            $sheet->getRowDimension($row)->setRowHeight(-1); // Auto-adjust height
-        }
+        // // Set row heights manually for dynamic rows
+        // foreach (range(3, $highestRow) as $row) {
+        //     $sheet->getRowDimension($row)->setRowHeight(-1); // Auto-adjust height
+        // }
 
-        // Define the print area dynamically
-        $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
+        // // Define the print area dynamically
+        // $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
 
-        // Set a margin for better printing output
-        $sheet->getPageMargins()->setTop(0.5);
-        $sheet->getPageMargins()->setRight(0.5);
-        $sheet->getPageMargins()->setLeft(0.5);
-        $sheet->getPageMargins()->setBottom(0.5);
+        // // Set a margin for better printing output
+        // $sheet->getPageMargins()->setTop(0.5);
+        // $sheet->getPageMargins()->setRight(0.5);
+        // $sheet->getPageMargins()->setLeft(0.5);
+        // $sheet->getPageMargins()->setBottom(0.5);
     }
 }

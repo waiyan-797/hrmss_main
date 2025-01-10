@@ -47,8 +47,24 @@ class PA04 implements FromView ,WithStyles
         // $sheet->setPrintGridlines(true);
 
         // Dynamically calculate the highest row and column
-        $highestRow = $sheet->getHighestRow(); // e.g. 19
+        $highestRow = $sheet->getHighestRow()-1; // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
+
+        $sheet->getColumnDimension('A')->setWidth(7);
+        $sheet->getColumnDimension('B')->setWidth(30);
+        $sheet->getColumnDimension('C')->setWidth(20);
+        $sheet->getColumnDimension('D')->setWidth(20);
+        $sheet->getColumnDimension('E')->setWidth(23);
+        
+
+        $sheet->getRowDimension(1)->setRowHeight(35);
+        $sheet->getRowDimension(2)->setRowHeight(35);
+        $sheet->getRowDimension(3)->setRowHeight(35);
+        for ($row = 4; $row <= $highestRow+1 ; $row++) {
+            $sheet->getRowDimension($row)->setRowHeight(35);
+        }
+
+        $sheet->removeRow(4);
 
         $sheet->getStyle('A1:A2')->applyFromArray([
                 'font' => [
@@ -66,10 +82,25 @@ class PA04 implements FromView ,WithStyles
                 ],
             ]);
 
-            $sheet->getRowDimension(1)->setRowHeight(45);
-            $sheet->getRowDimension(2)->setRowHeight(45);
+            $sheet->getStyle('A3')->applyFromArray([
+                'font' => [
+                    'name' => 'Pyidaungsu',
+                    'size' => 13,
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                ],
+                'borders' => [
+                    'outline' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+                    ],
+                ],
+            ]);
 
-        $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
+           
+
+        $sheet->getStyle("A4:$highestColumn$highestRow")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 13,
@@ -85,20 +116,38 @@ class PA04 implements FromView ,WithStyles
                 ],
             ],
         ]);
+        $range = "C5:E$highestRow";
+
+            $sheet->getStyle($range)->applyFromArray([
+                'font' => [
+                    'name' => 'Pyidaungsu',
+                    'size' => 13,
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                ],
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FF000000'], // Black border
+                    ],
+                ],
+            ]);
 
         
-        // Auto-size columns based on dynamic range
-        foreach (range('A', $highestColumn) as $column) {
-            $sheet->getColumnDimension($column)->setAutoSize(true);
-        }
+        // // Auto-size columns based on dynamic range
+        // foreach (range('A', $highestColumn) as $column) {
+        //     $sheet->getColumnDimension($column)->setAutoSize(true);
+        // }
 
-        // Set row heights manually for dynamic rows
-        foreach (range(3, $highestRow) as $row) {
-            $sheet->getRowDimension($row)->setRowHeight(35); // Auto-adjust height
-        }
+        // // Set row heights manually for dynamic rows
+        // foreach (range(3, $highestRow) as $row) {
+        //     $sheet->getRowDimension($row)->setRowHeight(35); // Auto-adjust height
+        // }
 
-        // Define the print area dynamically
-        $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
+        // // Define the print area dynamically
+        // $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
 
         // Set a margin for better printing output
         $sheet->getPageMargins()->setTop(0.5);
