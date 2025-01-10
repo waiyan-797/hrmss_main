@@ -192,7 +192,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/award', Award::class)->name('award');
     Route::get('/award_type', AwardType::class)->name('award_type');
     Route::get('/blood_type', BloodType::class)->name('blood_type');
-    
+
     Route::get('/letter_type', LetterType::class)->name('letter_type');
     Route::get('marital_status',MaritalStatus::class)->name('marital_status');
     Route::get('/post', Post::class)->name('post');
@@ -232,7 +232,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         }
     })->name('file')->where('path', '.*');
     Route::get('/local_training_report', LocalTrainingReport::class)->name('local_training_report');
-    Route::get('/local_training_report_3',  LocalTrainingReport3::class)->name('local_training_report_3'); // new 
+    Route::get('/local_training_report_3',  LocalTrainingReport3::class)->name('local_training_report_3'); // new
     Route::get('/local_training_report2', LocalTrainingReport2::class)->name('local_training_report2');
     // Route::get('/staff_report', ReportName::class)->name('staff_report');
     Route::get('/current-department-arrival-date', StaffReport1::class)->name('staff_report1');
@@ -240,7 +240,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/list-of-retired-employees', StaffReport3::class)->name('staff_report3');
     Route::get('/pension_list', PensionList::class)->name('pension_list');
     Route::get('/pension_family', PensionFamily::class)->name('pension_family');
-    
+
     Route::get('/pdf_staff_report68/{staff_id?}', PdfStaffReport68::class)->name('pdf_staff_report68');
     Route::get('/pdf_staff_report18/{staff_id?}', PdfStaffReport18::class)->name('pdf_staff_report18');
     Route::get('/pdf_staff_report53/{staff_id?}', PdfStaffReport53::class)->name('pdf_staff_report53');
@@ -260,7 +260,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/allow-inservice-free-by-rank', InvestmentCompanies3::class)->name('investment_companies3');
     Route::get('/allow-inservice-free-by-payscale', InvestmentCompanies4::class)->name('investment_companies4');
     Route::get('/allow-inservice-free-by-same-rank', InvestmentCompanies5::class)->name('investment_companies5');
-   
+
 
     Route::get('/action-completed-ongoing', InvestmentCompanies6::class)->name('investment_companies6');
     Route::get('/napata-reach-strength', InvestmentCompanies7::class)->name('investment_companies7');
@@ -343,7 +343,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pensioner', Pensioner::class)->name('pensioner');
     Route::get('/resignation-list', EmpoyeeRecordReport::class)->name('employee_record_report');
     Route::get('/finance_pension_age62', FinancePensionAge62::class)->name('finance_pension_age62');
-   
+
     Route::get('/religion_report', ReligionReport::class)->name('religion_report');
     Route::get('/language_report', LanguageReport::class)->name('language_report');
     Route::get('/social_report', SocialReport::class)->name('social_report');
@@ -354,8 +354,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/punishment_report', PunishmentReport::class)->name('punishment_report');
     Route::get('/list-of-salary-rates-by-position', RankSalaryList::class)->name('rank_salary_list');
     Route::get('/staff_report', StaffReport::class)->name('staff_report');
-    
-   
+
+
 
 Route::get('/labour',Labour::class)->name('labour');
 Route::get('/labour_view/{id?}' , LabourDetails::class )->name('labourDetails');
@@ -364,18 +364,18 @@ Route::get('/leave-calender/{id}' , LeaveCalendar::class)->name('leaveCalendar')
 Route::get('/labour-staff' , LivewireLabourStaff::class )->name('labour-staff');
 Route::get('/leave_summary', LeaveSummary::class)->name('leave_summary');
 
-Route::get('/about_to_increment', AboutToIncrement::class)->name('about_to_increment');  //new 
+Route::get('/about_to_increment', AboutToIncrement::class)->name('about_to_increment');  //new
 
-Route::get('vacancy_over_by_division' , VacancyOverByDivision::class)->name('vacancy_over_by_division');  
-
-
-
-Route::get('/children_report_detials' , ChildrenReportDetails::class)->name('children_report_detials');    
-Route::get('/children_report_summary' , ChildrenReportSummary::class)->name('children_report_summary');    
+Route::get('vacancy_over_by_division' , VacancyOverByDivision::class)->name('vacancy_over_by_division');
 
 
 
-//sortable staff 
+Route::get('/children_report_detials' , ChildrenReportDetails::class)->name('children_report_detials');
+Route::get('/children_report_summary' , ChildrenReportSummary::class)->name('children_report_summary');
+
+
+
+//sortable staff
 
 
 

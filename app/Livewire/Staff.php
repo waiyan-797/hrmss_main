@@ -22,6 +22,9 @@ class Staff extends Component
         public $modal_title;
         public $show_comment;
 
+    public function mount($status){
+        $this->status = $status;
+    }
     //add new
     public function add_new()
     {
@@ -80,7 +83,7 @@ class Staff extends Component
 
     public function go_report($staff_id, $report_id)
     {
-        
+
         $routeName = "pdf_staff_report{$report_id}";
         $this->redirect(route($routeName, [
             'staff_id' => $staff_id,
@@ -91,12 +94,9 @@ class Staff extends Component
     {
         $staffSearch = '%' . $this->staff_search . '%';
         $this->modal_title = 'Choose Report Type';
-        $staffQuery = ModelsStaff::query()->where('status_id' , $this->status)
-        ->when(! auth()->user()->AdminHR() , function($q){
-            $q->where('current_division_id' , auth()->user()->division_id);
-        })
-        
-        ;
+        $staffQuery = ModelsStaff::where('status_id' , $this->status)->when(auth()->user()->role_id != 2, function($q){
+            return $q->where('current_division_id', auth()->user()->division_id);
+        });
         if ($this->staff_search) {
             $this->resetPage();
             $staffQuery->where(function ($q) use ($staffSearch) {
@@ -113,20 +113,6 @@ class Staff extends Component
         ]);
     }
 
-    public function mount($status){
-
-        if(auth()->user()->AdminHR()){
-
-            
-        //    return redirect()->route('staff' , ['status'=>2]);
-        }
-                    $this->status = $status;
-                
-
-                    
-
-            }
-
     public function check($id){
         return Promotion::where('staff_id', $id)->get()->isEmpty()  ;
     }
@@ -138,5 +124,5 @@ class Staff extends Component
     public function closeModal(){
         $this->show_comment = false ;
 }
-    
+
 }

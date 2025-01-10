@@ -16,14 +16,45 @@
                     @foreach ($column_types as $type)
                         <td class="px-4 py-4 min-w-[300px] text-gray-500 dark:text-gray-300">
                             @if ($type['type'] == 'select')
-                                <x-select
-                                    wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
-                                    id="{{$type['wire_array_key']}}"
-                                    name="{{$type['wire_array_key']}}"
-                                    class="block w-full p-2 text-sm border rounded"
-                                    :values="$type['select_values']"
-                                    placeholder="Select..."
-                                />
+                                @if ($type['next_col_update'] && !is_string($type['select_values']))
+                                    <x-select
+                                        wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
+                                        wire:change="handleCustomColumnUpdate('{{$type['wire_array_name']}}', {{ $index }}, '{{ $type['next_col_update'] }}', '{{ $type['ini_array'] }}', $event.target.value)"
+                                        id="{{$type['wire_array_key']}}"
+                                        name="{{$type['wire_array_key']}}"
+                                        class="block w-full p-2 text-sm border rounded"
+                                        :values="$type['select_values']"
+                                        placeholder="Select..."
+                                    />
+                                @elseif ($type['next_col_update'] && is_string($type['select_values']))
+                                    <x-select
+                                        wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
+                                        wire:change="handleCustomColumnUpdate('{{$type['wire_array_name']}}', {{ $index }}, '{{ $type['next_col_update'] }}', '{{ $type['ini_array'] }}', $event.target.value)"
+                                        id="{{$type['wire_array_key']}}"
+                                        name="{{$type['wire_array_key']}}"
+                                        class="block w-full p-2 text-sm border rounded"
+                                        :values="$this->{$type['wire_array_name']}[$index][$type['select_values']]"
+                                        placeholder="Select..."
+                                    />
+                                @elseif (!$type['next_col_update'] && is_string($type['select_values']))
+                                    <x-select
+                                        wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
+                                        id="{{$type['wire_array_key']}}"
+                                        name="{{$type['wire_array_key']}}"
+                                        class="block w-full p-2 text-sm border rounded"
+                                        :values="$this->{$type['wire_array_name']}[$index][$type['select_values']]"
+                                        placeholder="Select..."
+                                    />
+                                @else
+                                    <x-select
+                                        wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
+                                        id="{{$type['wire_array_key']}}"
+                                        name="{{$type['wire_array_key']}}"
+                                        class="block w-full p-2 text-sm border rounded"
+                                        :values="$type['select_values']"
+                                        placeholder="Select..."
+                                    />
+                                @endif
                             @elseif ($type['type'] == 'search_select')
                                 <x-searchable-select
                                     placeholder="Select..."
@@ -45,7 +76,7 @@
                                     id="{{$type['wire_array_key']}}"
                                     name="{{$type['wire_array_key']}}"
                                     type="{{$type['type']}}"
-                                    file="{{$this->getFileValue($type['wire_array_name'], $index, $type['wire_array_key'])}}"
+                                    file="{{$this->getWireValue($type['wire_array_name'], $index, $type['wire_array_key'])}}"
                                     class="block w-full text-sm border mb-1 rounded"
                                     accept=".pdf"
                                 />

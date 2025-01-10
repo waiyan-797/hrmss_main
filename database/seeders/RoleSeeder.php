@@ -19,8 +19,6 @@ class RoleSeeder extends Seeder
             ['name' => 'Finance'],
             ['name' => 'HR User'],
             ['name' => 'Finance User'],
-
-
         ]);
     }
 }

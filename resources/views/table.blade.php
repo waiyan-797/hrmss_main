@@ -33,14 +33,14 @@
                 </div>
                 <input wire:model.live='{{ $search_id }}' type="text" id="{{ $search_id }}" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-64 bg-gray-50 focus:ring-green-500 focus:border-green-500" placeholder="{{$title}} ရှာဖွေရန်">
             </div>
-         
+
             <button wire:click='add_new' type="button" class="text-green-500 bg-white border border-white hover:bg-green-200 hover:text-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
                 <span class="sr-only">Add Icon</span>
             </button>
-            
+
         </div>
     </div>
     <table class="w-full text-sm text-gray-500 dark:text-gray-400">
@@ -67,108 +67,80 @@
                     <tr class="font-arial bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-4 text-gray-500 dark:text-gray-300">{{$index}}</td>
                         @foreach ($column_vals as $val)
-                       
                             <td class="px-6 py-4 text-gray-500 dark:text-gray-300">
-
                                 @if($val == 'status')
-                                {{$value->$val  == 1 ? 'Active' : 'Inactive'}}
-                                @else 
-                                @if (gettype($value->$val) == 'object')
-                                
-                               
-                                    {{ $value->$val->name }}
-                                @elseif (is_string($value->$val) && Str::contains($value->$val, 'staffs/') || Str::contains($value->$val, 'avatars/'))
-                                    <img src="{{ route('file', $value->$val) }}" alt="Image" class="w-20 h-20 mx-auto rounded-full">
+                                    {{$value->$val == 1 ? 'Active' : 'Inactive'}}
                                 @else
-                                    {{ $value->$val ? $value->$val : '-' }}
-                                @endif
-
+                                    @if (gettype($value->$val) == 'object')
+                                        {{ $value->$val->name }}
+                                    @elseif (is_string($value->$val) && Str::contains($value->$val, 'staffs/') || Str::contains($value->$val, 'avatars/'))
+                                        <img src="{{ route('file', $value->$val) }}" alt="Image" class="w-20 h-20 mx-auto rounded-full">
+                                    @else
+                                        {{ $value->$val ? $value->$val : '-' }}
+                                    @endif
                                 @endif
                             </td>
                         @endforeach
                         <td class="px-6 py-4">
                             @if(!(isset($is_crud_modal) && $is_crud_modal == false ))
-                            {{-- @if() --}}
-                            @if($confirm_delete == true && $id === $value->id)
-                                <div>
-                                    <div>Confirm?</div>
-                                    <button wire:click="delete({{$value->id}})" class="text-red-600 dark:text-red-500 hover:underline">Delete</button> |
-                                    <button wire:click="$set('confirm_delete', false)" class="text-green-600 dark:text-green-500 hover:underline">Back</button>
-                                </div>
-                            @else
-                            <button type="button" wire:click='open_report({{$value->id}})' class="font-medium text-yellow-600 dark:text-yellow-500 hover:underline">Reports</button> |
-
-                              
-                                <button type="button" wire:click='edit_modal({{$value->id}})' class=" font-medium text-green-600 dark:text-green-500 hover:underline">Edit</button>
-                                @if(!($disabledMode ?? false) == 'toggle') |
-                                    <button type="button" wire:click="delete_confirm({{ $value->id }})" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</button>
+                                @if($confirm_delete == true && $id === $value->id)
+                                    <div>
+                                        <div>Confirm?</div>
+                                        <button wire:click="delete({{$value->id}})" class="text-red-600 dark:text-red-500 hover:underline">Delete</button> |
+                                        <button wire:click="$set('confirm_delete', false)" class="text-green-600 dark:text-green-500 hover:underline">Back</button>
+                                    </div>
+                                @else
+                                    <button type="button" wire:click='open_report({{$value->id}})' class="font-medium text-yellow-600 dark:text-yellow-500 hover:underline">Reports</button> |
+                                    <button type="button" wire:click='edit_modal({{$value->id}})' class=" font-medium text-green-600 dark:text-green-500 hover:underline">Edit</button>
+                                    @if(!($disabledMode ?? false) == 'toggle') |
+                                        <button type="button" wire:click="delete_confirm({{ $value->id }})" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</button>
+                                    @endif
+                                    @if($is_labour ?? false)
+                                        <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('leaveCalendar',[ $value->id ])}}>
+                                            |  ရုံးတက်ရက်
+                                        </a>
+                                    @endif
                                 @endif
-                                @if($is_labour ?? false)
-
-                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('leaveCalendar',[ $value->id ])}}>
-                                    |  ရုံးတက်ရက်
-                                </a> 
-                                
-                                @endif
-
-                                
-                            @endif
                             @else
-                            <a 
-                            href="
-                            {{
-                                route('staff_detail', ['confirm_add' => 0 , 'confirm_edit' => 1, 'staff_id' => $value->id, 'tab' => 'personal_info'])
-                            }}
-                            "
-                            
-                            
-                             class="font-medium text-yellow-600 dark:text-yellow-500 hover:underline">Show</a> 
-                            
+                                <a href="{{route('staff_detail', ['confirm_add' => 0 , 'confirm_edit' => 1, 'staff_id' => $value->id, 'tab' => 'personal_info'])}}" class="font-medium text-yellow-600 dark:text-yellow-500 hover:underline" wire:navigate>Show</a>
                             @endif
                         </td>
-                            @if($title == 'ဝန်ထမ်း')
-                        <td>
-
+                        @if($title == 'ဝန်ထမ်း')
+                            <td>
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_leave',[ $value->id ])}}>ခွင့်</a> |
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_increment',[ $value->id ])}}>နှစ်တိုး</a> |
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_promotion',[ $value->id ])}}>ရာထူးတိုး</a> |
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_depromotion',[ $value->id ])}}>ရာထူးလျော့</a> |
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_retirement',[ $value->id ])}} >ပြုန်းတီး</a>
-                        </td>
-                            
+                            </td>
+                        @endif
+                        @if($value['comment'] != null && ($value['status_id'] == 3 || $value['status_id'] == 4))
+                            <td class="">
+                                <button type="button"
+                                    class="font-arial text-green-600 dark:text-green-500 hover:underline"
+                                    wire:click ='showComment'
+                                >
+                                    Comment
+                                </button>
+                                @if($show_comment)
+                                    <div class="fixed w-screen h-screen inset-0 flex items-center justify-center bg-gray-600 bg-opacity-75 z-50">
+                                        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+                                            <div class="font-arial text-red-600">
+                                                {{$value['comment']}}
+                                            </div>
+                                            <button wire:click="closeModal" class="ms-auto bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Cancel</button>
+                                        </div>
+                                    </div>
                                 @endif
-                        @if(isset($comment) && $comment == true)
-                        <td class="">
-                            <a 
-                            class="font-arial text-green-600 dark:text-green-500 hover:underline"
-                             wire:click ='showComment'
-                             >
-                            Comment
-                            </a> 
-                            @if($show_comment)
-                            <div class="fixed w-screen h-screen inset-0 flex items-center justify-center bg-gray-600 bg-opacity-75 z-50">
-                                {{-- @dd('d') --}}
-                                <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
-                                    
-                               <div
-                               
-                               class="font-arial text-red-600  hover:underline"
-                               >
-                               {{$value['comment']}}
-                                </div>
-                                    
-                                        <button wire:click="closeModal" class="ms-auto bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Cancel</button> 
-                                        
-
-                                </div>
-                            </div>
-                            
-                            @endif
-
-
-
-                            {{-- {{$value->comment}} --}}
-                        </td>
+                            </td>
+                        @elseif ($value['comment'] == null && ($value['status_id'] == 3 || $value['status_id'] == 4))
+                            <td>
+                                <button type="button"
+                                    class="font-arial text-red-600 dark:text-red-500 hover:underline"
+                                >
+                                No Comment
+                                </button>
+                            </td>
                         @endif
                     </tr>
                 @endforeach

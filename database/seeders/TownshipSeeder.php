@@ -13,7 +13,7 @@ class TownshipSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     */
+    */
     public function run(): void
     {
       Township::find(277)->update([

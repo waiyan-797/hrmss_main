@@ -42,17 +42,11 @@
                 class="inline-block p-4 text-green-600  rounded-none active  min-w-32">
                 {{ __('ငယ်စဉ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်') }}
             </x-nav-link>
-            {{-- <x-nav-link   class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32"  :href="route('staff_leave',[$staff_id])">ခွင့်</x-nav-link>
-            <x-nav-link    class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32" :href="route('staff_increment',[$staff_id])">နှစ်တိုး</x-nav-link>
-            <x-nav-link   class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32"  :href="route('staff_promotion',[$staff_id])">ရာထူးတိုး</x-nav-link>
-            <x-nav-link   class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32"  :href="route('staff_depromotion',[$staff_id])">ရာထူးလျော့</x-nav-link>
-            <x-nav-link    class="inline-block p-4 text-blue-600  rounded-t-lg active dark:bg-gray-800 dark:text-blue-500  min-w-32" :href="route('staff_retirement',[$staff_id])" >ပြုန်းတီး</x-nav-link>  --}}
-            {{-- <h1 class="text-white font-semibold italic font-arial">{{$confirm_add == 1 ? 'Create ' : 'Update '}}Staff</h1> --}}
         </div>
     </div>
     <div class="flex justify-center w-full h-auto overflow-y-auto">
         <div class="w-full mx-auto px-3">
-            <form wire:submit="submit_staff">
+            <form wire:submit="submit_staff()">
                 @if ($message)
                     <div id="alert-border-1"
                         class="flex items-center p-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
@@ -85,66 +79,34 @@
                     @elseif ($tab == 'detail_personal_info')
                         @include('staff.detail_personal_info')
                     @endif
-
                     <div class="pb-5">
-
-
-
-                        @if (!(auth()->user()->role_id == 2 && $staff?->status_id == 3))
-
-
-                            @if (!(auth()->user()->role_id != 2 && ($staff?->status_id == 2 || $staff?->status_id == 4)))
-                                <x-primary-button>{{ $confirm_add == 1
-                                    ? __('Submit')
-                                    : (auth()->user()->role_id != 2
-                                        ? ($staff?->status_id == 3
-                                            ? __('Resubmit SaveDraft')
-                                            : ($staff?->status_id == 1 && isset($staff?->comment)
-                                                ? __('ReSbumit')
-                                                : ($staff?->status_id == 5
-                                                    ? __('Update')
-                                                    : __('Submit'))))
-                                        : ($staff?->status_id == 1
-                                            ? __('Submit')
-                                            : ($staff?->status_id == 5
-                                                ? __('Update')
-                                                : __('Approve')))) }}</x-primary-button>
+                        @if (auth()->user()->role_id == 2)
+                            @if ($staff)
+                                @switch($staff->status_id)
+                                    @case(2)
+                                        <x-primary-button wire:click="setStaffStatus({{$staff->status_id}})"> Save </x-primary-button>
+                                        <x-primary-button wire:click="setStaffStatus(5)"> Approve </x-primary-button>
+                                        <x-primary-button wire:click="setStaffStatus(3)"> Reject </x-primary-button>
+                                        <x-primary-button wire:click="setStaffStatus(4)"> Send Back </x-primary-button>
+                                        @break
+                                @endswitch
+                            @else
+                                <x-primary-button wire:click="setStaffStatus(2)"> Save </x-primary-button>
+                            @endif
+                        @elseif (auth()->user()->role_id != 2)
+                            @if ($staff)
+                                @switch($staff->status_id)
+                                    @case(1)
+                                        <x-primary-button wire:click="setStaffStatus({{$staff->status_id}})"> Save </x-primary-button>
+                                        <x-primary-button wire:click="setStaffStatus(2)"> Submit </x-primary-button>
+                                        @break
+                                @endswitch
+                            @else
+                                <x-primary-button wire:click="setStaffStatus(1)"> Save Draft </x-primary-button>
                             @endif
                         @endif
-
-                        @if (auth()->user()->role_id == 2 && ($staff?->status_id == 2 || $staff?->status_id == 4))
-                            {{-- // pending or resubmit --}}
-                            {{-- <button
-type='button'
-class='inline-flex items-center px-4 py-2 bg-red-700 border-transparent rounded-md font-medium text-sm text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 font-arial'
-wire:click='rejectStaff'> --}}
-
-
-                            @if (auth()->user()->role_id == 2)
-                                <button type='button'
-                                    class='inline-flex items-center px-4 py-2 bg-red-700 border-transparent rounded-md font-medium text-sm text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 font-arial'
-                                    wire:click='rejectStaff'>{{ __('Reject') }}</button>
-                            @endif
-                        @endif
-
-
-
                     </div>
-                    @if($staff?->isInSaveDraft() &&  !( auth()->user()->AdminHR() ))
-                    <x-primary-button
-
-                    class='inline-flex items-center px-4 py-2 !bg-blue-700 border-transparent rounded-md font-medium text-sm text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 font-arial'
-                    wire:click='saveDraft'
-                    >
-                    {{ __('Save Draft ') }}
-
-                </x-primary-button>
-
-                    @endif
                 </div>
-
-
-
             </form>
         </div>
     </div>

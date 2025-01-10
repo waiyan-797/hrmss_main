@@ -70,11 +70,12 @@ class StaffDetail extends Component
 
     public $saveDraftCheck;
 
-public $has_military_friend_text ;
-    public $comment  ,$displayAlertBox ;
+    public $has_military_friend_text ;
+    public $comment, $displayAlertBox ;
 
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
-    public $staff;
+    public $staff, $staff_status_id;
+
     //personal_info
     public $staff_photo, $staff_nrc_front, $staff_nrc_back, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $attendid, $gpms_staff_no, $spouse_name, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $government_staff_started_date, $prominent_mark, $skin_color, $weight, $blood_type_id, $marital_status_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_house_no, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_house_no, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $life_insurance_proposal, $life_insurance_policy_no, $life_insurance_premium, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension, $military_gazetted_no, $veteran_no, $veteran_date, $last_serve_army, $health_condition, $tax_exception;
     public $leave_search, $leave_name, $leave_type_name, $leave_id, $staff_name, $from_date, $to_date, $qty, $order_no, $remark;
@@ -264,7 +265,7 @@ public $has_military_friend_text ;
 
     ];
 
-    public function getFileValue($arrayName, $index, $key)
+    public function getWireValue($arrayName, $index, $key)
     {
         return data_get($this->{$arrayName}, "{$index}.{$key}", null);
     }
@@ -285,7 +286,6 @@ public $has_military_friend_text ;
 
     public function mount()
     {
-
         $this->saveDraftCheck = false;
         if ($this->staff_id) {
             $this->staff = Staff::find($this->staff_id);
@@ -345,6 +345,8 @@ public $has_military_friend_text ;
                 'education_type' => $edu->education_type_id,
                 'education' => $edu->education_id,
                 'country_id' => $edu->country_id,
+                'education_types' => EducationType::where('education_group_id', $edu->education_group_id)->get(),
+                '_educations' => Education::where('education_type_id', $edu->education_type_id)->get(),
                 'degree_certificate' => $edu->degree_certificate,
             ];
         }
@@ -388,7 +390,6 @@ public $has_military_friend_text ;
 
         foreach ($trainings as $tra) {
             $this->trainings[] = [
-
                 'training_type' => $tra->training_type_id,
                 'batch' => $tra->batch,
                 'diploma_name' => $tra->diploma_name,
@@ -516,12 +517,12 @@ public $has_military_friend_text ;
 
     private function loadStaffData($staff_id)
     {
-        $staff = Staff::find($staff_id);
+        $this->staff = Staff::find($staff_id);
 
-        $this->fillPersonalInfo($staff);
-        $this->fillJobInfo($staff);
-        $this->fillRelativeInfo($staff);
-        $this->fillDetailPersonalInfo($staff);
+        $this->fillPersonalInfo($this->staff);
+        $this->fillJobInfo($this->staff);
+        $this->fillRelativeInfo($this->staff);
+        $this->fillDetailPersonalInfo($this->staff);
     }
     private function fillPersonalInfo($staff)
     {
@@ -590,7 +591,6 @@ public $has_military_friend_text ;
 
     private function fillJobInfo($staff)
     {
-
         $this->current_rank_id = $staff->current_rank_id;
         $this->current_rank_date = $staff->current_rank_date;
         $this->current_department_id = $staff->current_department_id;
@@ -598,7 +598,6 @@ public $has_military_friend_text ;
         $this->transfer_remark = $staff->transfer_remark;
         $this->government_staff_started_date = $staff->government_staff_started_date;
         $this->current_division_id =  $staff->current_division_id ??  auth()->user()->division_id;
-
         $this->side_department_id = $staff->side_department_id;
         $this->side_division_id = $staff->side_division_id;
         $this->salary_paid_by = $staff->salary_paid_by;
@@ -670,6 +669,8 @@ public $has_military_friend_text ;
             'education_type' => '',
             'education' => '',
             'country_id' => '',
+            'education_types' => [],
+            '_educations' => [],
             'degree_certificate' => '',
         ];
     }
@@ -918,12 +919,16 @@ public $has_military_friend_text ;
 
     public function submit_staff()
     {
+        $_status = $this->staff_status_id;
+        if ($_status == 3) {
+            return $this->rejectStaff();
+        }
         $rules = $this->validate_rules();
         $this->validate($rules);
 
         $staff = Staff::find($this->staff_id);
-        if ($this->photo) {
 
+        if ($this->photo) {
             $_photo = Storage::disk('upload')->put('staffs', $this->photo);
             if (($staff != null) && ($old = $staff->staff_photo)) {
                 $staff->staff_photo = null;
@@ -1070,7 +1075,6 @@ public $has_military_friend_text ;
             'during_work_political_social' => $this->during_work_political_social,
             'has_military_friend' => $this->has_military_friend,
             'has_military_friend_text' => $this->has_military_friend_text,
-
             'foreigner_friend_name' => $this->foreigner_friend_name,
             'foreigner_friend_occupation' => $this->foreigner_friend_occupation,
             'foreigner_friend_nationality_id' => $this->foreigner_friend_nationality_id,
@@ -1087,30 +1091,10 @@ public $has_military_friend_text ;
         ];
 
         $staff_create = $dataMapping[$this->tab] ?? $dataMapping['default'];
-        // before saftdraft  // $staff_create['status_id' ]  =  auth()->user()->AdminHR() ? 1 : ($staff->status_id == 2 ? 4 :  3 ); // 1 approve :   2 ->reject  // 3 pending // 4 resubmit
-        $staff_create['current_division_id'] = $this->current_division_id ?? auth()->user()->division_id;
-
-
-
-
-        if ($this->saveDraftCheck == true) {
-            $staff_create['status_id'] = 1;
-        } else {
-            // wtih saftdraft
-            $staff_create['status_id'] = $staff?->status_id == 1  ? (isset($staff?->comment) ? 4 :   2)  : 1;
-            if ($staff?->status_id == 2 || $staff?->status_id == 4) {
-
-
-                $staff_create['status_id'] = 5;
-            }
+        if (auth()->user()->role_id != 2) {
+            $staff_create['current_division_id'] = auth()->user()->division_id;
         }
-
-
-        if ($staff_create['status_id'] == 5) {
-            $staff_create['comment'] = null;
-        }
-
-
+        $staff_create['status_id'] = $_status;
         $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
         $this->staff_id = $staff->id;
         $this->staff_photo = $staff->staff_photo;
@@ -1146,14 +1130,37 @@ public $has_military_friend_text ;
         $this->initializeArrays($this->staff_id);
 
         $this->loadStaffData($staff->id);
-
         $this->message = 'Saved Successfully';
-        if ($staff->status_id) {
-
-            redirect()->route('staff', ['status' =>   auth()->user()->AdminHR() &&  $staff->status_id == 1  ? 2   :  $staff->status_id]);
+        if ($_status == 5 || $_status == 3 || $_status == 4 || ($_status == 2 && auth()->user()->role_id != 2)) {
+            $message = match ($_status) {
+                2 => 'Submitted Successfully',
+                5 => 'Approved Successfully',
+                3 => 'Reject Successfully',
+                4 => 'Sent Back Successfully',
+            };
+            session()->flash('message', $message);
+            return redirect()->route('staff', [
+                'status' =>  $_status,
+            ]);
         }
     }
 
+    public function rejectStaff()
+    {
+        $this->displayAlertBox = true;
+    }
+
+    public function submitReject()
+    {
+        $staff = Staff::find($this->staff_id);
+        $staff->update([
+            'status_id' => 3,
+            'comment' => $this->comment,
+        ]);
+        $this->staff = $staff;
+        $this->message = 'Staff has been rejected.';
+        $this->displayAlertBox = false;
+    }
     private function saveAbroads($staffId)
     {
         Abroad::where('staff_id', $staffId)->delete();
@@ -1253,10 +1260,6 @@ private function saveSchools($staffId)
         ]);
     }
 }
-
-
-
-
 
     private function savePastOccupations($staffId)
     {
@@ -1434,9 +1437,9 @@ private function saveSchools($staffId)
     {
         $degree_path = null;
         foreach ($this->educations as $education) {
-            (str_contains($education['degree_certificate'], sys_get_temp_dir()) && $education['degree_certificate'])
-            ? $degree_path = Storage::disk('upload')->put('staffs', $education['degree_certificate'])
-            : $degree_path = $education['degree_certificate'];
+            (str_starts_with($education['degree_certificate'], 'staffs/') && $education['degree_certificate'])
+            ? $degree_path = $education['degree_certificate']
+            : $degree_path = Storage::disk('upload')->put('staffs', $education['degree_certificate']);
             StaffEducation::updateOrCreate([
                 'id' => $education['education_id'] == '' ? null : $education['education_id'],
             ],[
@@ -1549,15 +1552,6 @@ private function saveSchools($staffId)
     {
         $this->permanent_address_township_or_town_id = null;
     }
-    // public function updatedSpouseFatherAddressRegionId()
-    // {
-    //     $this->spouse_father_address_township_or_town_id = null;
-    // }
-    // public function updatedSpouseMotherAddressRegionId()
-    // {
-    //     $this->spouse_mother_address_township_or_town_id = null;
-    // }
-
 
     public function updatedFatherAddressRegionId()
     {
@@ -1572,6 +1566,19 @@ private function saveSchools($staffId)
     public function updatedNrcRegionId()
     {
         $this->nrc_township_code_id = null;
+    }
+
+    public function setStaffStatus($status){
+        $this->staff_status_id = $status;
+    }
+
+    public function handleCustomColumnUpdate($array, $index, $field, $arr_ini, $value)
+    {
+        match ($arr_ini) {
+            'eduTypes' => $this->$array[$index][$field] = EducationType::where('education_group_id', $value)->get(),
+            'edus' => $this->$array[$index][$field] = Education::where('education_type_id', $value)->get(),
+            default => [],
+        };
     }
 
     public function render()
@@ -1619,16 +1626,12 @@ private function saveSchools($staffId)
                 $data['blood_types'] = BloodType::all();
                 $data['marital_statuses'] = MaritalStatus::all();
                 $data['education_groups'] = EducationGroup::all();
-                $data['education_types'] = EducationType::all();
                 $data['_educations'] = Education::all();
                 $data['_countries'] = Country::all();
                 $data['current_address_township_or_towns'] = Township::where('region_id', $this->current_address_region_id)->get();
                 $data['permanent_address_township_or_towns'] = Township::where('region_id', $this->permanent_address_region_id)->get();
                 $data['current_address_townships'] = Township::where('region_id', $this->current_address_region_id)->get();
                 $data['permanent_address_townships'] = Township::where('region_id', $this->permanent_address_region_id)->get();
-
-
-
                 $data['nrc_region_ids'] = NrcRegionId::all();
                 $data['nrc_township_codes'] = NrcTownshipCode::where('nrc_region_id_id', $this->nrc_region_id)->get();
                 $data['nrc_signs'] = NrcSign::all();
@@ -1636,7 +1639,6 @@ private function saveSchools($staffId)
 
             case 'job_info':
                 $data['posts'] = Post::all();
-
                 $data['ranks'] = $this->withoutScopeRanks;
                 $data['ministrys'] = Ministry::all();
                 $data['divisions'] = Division::all();
@@ -1679,13 +1681,8 @@ private function saveSchools($staffId)
                 $data['relations'] = Relation::all();
                 $data['father_township_or_towns'] = Township::where('region_id', $this->father_address_region_id)->get();
                 $data['father_townships'] = Township::where('region_id', $this->father_address_region_id)->get();
-                // $data['spouse_father_townships'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
                 $data['mother_township_or_towns'] = Township::where('region_id', $this->mother_address_region_id)->get();
                 $data['mother_townships'] = Township::where('region_id', $this->mother_address_region_id)->get();
-                // $data['spouse_father_townships_or_towns'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
-                // $data['spouse_father_townships'] = Township::where('region_id', $this->spouse_father_address_region_id)->get();
-                // $data['spouse_mother_townships_or_towns'] = Township::where('region_id', $this->spouse_mother_address_region_id)->get();
-                // $data['spouse_mother_townships'] = Township::where('region_id', $this->spouse_mother_address_region_id)->get();
                 break;
         }
         $leave_modal_open = $this->leave_modal_open;
@@ -1767,35 +1764,6 @@ private function saveSchools($staffId)
     {
         ModelsLeave::find($id)->delete();
         $this->confirm_delete = false;
-    }
-
-    public function rejectStaff()
-    {
-
-        $this->displayAlertBox = true;
-        // $staff = Staff::find($this->staff_id);
-        // $staff->status_id = 3; //reject
-        // // $staff->comment = $this->comment;
-
-        // $staff->update();
-        // $this->message = 'Staff has been rejected.';
-        // $this->displayAlertBox = false ;
-
-        // return redirect()->route('staff',['status' => 3]);
-
-    }
-
-    public function submitReject()
-    {
-        $staff = Staff::find($this->staff_id);
-        $staff->status_id = 3; //reject
-        $staff->comment = $this->comment;
-
-        $staff->update();
-        $this->message = 'Staff has been rejected.';
-        $this->displayAlertBox = false;
-
-        return redirect()->route('staff', ['status' => 3]);
     }
 
     public function closeModal()
