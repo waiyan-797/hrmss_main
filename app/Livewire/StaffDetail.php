@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Models\Abroad;
-use App\Models\AbroadCountry;
 use App\Models\Award;
 use App\Models\Awarding;
 use App\Models\AwardType;
@@ -11,7 +10,6 @@ use App\Models\BloodType;
 use App\Models\Children;
 use App\Models\Country;
 use App\Models\Department;
-use App\Models\District;
 use App\Models\Division;
 use App\Models\Education;
 use App\Models\EducationGroup;
@@ -20,6 +18,10 @@ use App\Models\Ethnic;
 use App\Models\FatherSibling;
 use App\Models\Gender;
 use App\Models\Language;
+use App\Models\Leave as ModelsLeave;
+use App\Models\LeaveType;
+use App\Models\MaritalStatus;
+use App\Models\Ministry;
 use App\Models\MotherSibling;
 use App\Models\Nationality;
 use App\Models\NrcRegionId;
@@ -39,29 +41,22 @@ use App\Models\Religion;
 use App\Models\School;
 use App\Models\Section;
 use App\Models\Sibling;
+use App\Models\SocialActivity;
 use App\Models\Spouse;
 use App\Models\SpouseFatherSibling;
 use App\Models\SpouseMotherSibling;
 use App\Models\SpouseSibling;
 use App\Models\Staff;
 use App\Models\StaffEducation;
+use App\Models\StaffLanguage;
 use App\Models\Township;
 use App\Models\Training;
 use App\Models\TrainingLocation;
 use App\Models\TrainingType;
-use App\Models\Leave as  ModelsLeave;
-use App\Models\Ministry;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Models\LeaveType;
-use App\Models\MaritalStatus;
-use App\Models\SocialActivity;
-use App\Models\StaffLanguage;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 use function Livewire\Volt\rules;
 
@@ -121,6 +116,7 @@ class StaffDetail extends Component
     public $staff_languages = [];
     public $punishments = [];
     public $withoutScopeRanks ;
+
     protected $personal_info_rules = [
         'photo' => '',
         'name' => 'required',
@@ -341,7 +337,7 @@ class StaffDetail extends Component
 
         foreach ($staff_educations as $edu) {
             $this->educations[] = [
-                
+
                 'education_id' => $edu->id,
                 'education_group' => $edu->education_group_id,
                 'education_type' => $edu->education_type_id,
@@ -355,14 +351,14 @@ class StaffDetail extends Component
 
         foreach ($recommendations as $rec) {
             $this->recommendations[] = [
-                'id'=> $rec->id ,
+                'id' => $rec->id,
                 'recommend_by' => $rec->recommend_by,
             ];
         }
 
         foreach ($postings as $post) {
             $this->postings[] = [
-                'id' => $post->id ,
+                'id' => $post->id,
                 'rank' => $post->rank_id,
                 'post' => $post->post_id,
                 'from_date' => $post->from_date,
@@ -377,9 +373,8 @@ class StaffDetail extends Component
 
         foreach ($schools as $sch) {
 
-
             $this->schools[] = [
-                'id' => $sch->id , 
+                'id' => $sch->id,
                 'education_group' => $sch->education_group_id,
                 'education_type' => $sch->education_type_id,
                 'education' => $sch->education_id,
@@ -392,10 +387,9 @@ class StaffDetail extends Component
 
         }
 
-
         foreach ($trainings as $tra) {
             $this->trainings[] = [
-                'id' => $tra->id ,
+                'id' => $tra->id,
                 'training_type' => $tra->training_type_id,
                 'batch' => $tra->batch,
                 'diploma_name' => $tra->diploma_name,
@@ -408,10 +402,9 @@ class StaffDetail extends Component
             ];
         }
 
-
         foreach ($awards as $awa) {
             $this->awards[] = [
-                'id' => $awa->id ,
+                'id' => $awa->id,
                 'award_type' => $awa->award_type_id,
                 'award' => $awa->award_id,
                 'order_no' => $awa->order_no,
@@ -421,7 +414,7 @@ class StaffDetail extends Component
 
         foreach ($past_occupations as $ocu) {
             $this->past_occupations[] = [
-                'id' =>   $ocu->id,
+                'id' => $ocu->id,
                 'rank' => $ocu->rank_id,
                 'department' => $ocu->department_id,
                 'section' => $ocu->section_id,
@@ -434,7 +427,7 @@ class StaffDetail extends Component
 
         foreach ($abroads as $abroad) {
             $this->abroads[] = [
-                'id' => $abroad->id , 
+                'id' => $abroad->id,
                 'country' => $abroad->countries()->pluck('country_id')->toArray(),
                 'particular' => $abroad->particular,
                 // 'training_success_fail' => false,
@@ -450,9 +443,9 @@ class StaffDetail extends Component
         }
 
         foreach ($punishments as $pun) {
-            
+
             $this->punishments[] = [
-                    'id'     => $pun->id , 
+                'id' => $pun->id,
                 'penalty_type' => $pun->penalty_type_id,
                 'reason' => $pun->reason,
                 'from_date' => $pun->from_date,
@@ -462,7 +455,7 @@ class StaffDetail extends Component
 
         foreach ($socials as $social) {
             $this->socials[] = [
-                'id'=> $social->id , 
+                'id' => $social->id,
                 'particular' => $social->particular,
                 'remark' => $social->remark,
             ];
@@ -470,7 +463,7 @@ class StaffDetail extends Component
 
         foreach ($staff_languages as $lang) {
             $this->staff_languages[] = [
-                'id' => $lang->id ,
+                'id' => $lang->id,
                 'language' => $lang->language_id,
                 'rank' => $lang->rank,
                 'writing' => $lang->writing,
@@ -483,7 +476,7 @@ class StaffDetail extends Component
         function relative_array($sib)
         {
             return [
-                'id' => $sib->id ,
+                'id' => $sib->id,
                 'name' => $sib->name,
                 'ethnic' => $sib->ethnic_id,
                 'religion' => $sib->religion_id,
@@ -528,7 +521,6 @@ class StaffDetail extends Component
         }
     }
 
-
     private function loadStaffData($staff_id)
     {
         $this->staff = Staff::find($staff_id);
@@ -538,6 +530,7 @@ class StaffDetail extends Component
         $this->fillRelativeInfo($this->staff);
         $this->fillDetailPersonalInfo($this->staff);
     }
+
     private function fillPersonalInfo($staff)
     {
         $this->staff_photo = $staff->staff_photo;
@@ -602,7 +595,6 @@ class StaffDetail extends Component
         $this->life_insurance_premium = $staff->life_insurance_premium;
     }
 
-
     private function fillJobInfo($staff)
     {
         $this->current_rank_id = $staff->current_rank_id;
@@ -611,7 +603,7 @@ class StaffDetail extends Component
         $this->transfer_department_id = $staff->transfer_department_id;
         $this->transfer_remark = $staff->transfer_remark;
         $this->government_staff_started_date = $staff->government_staff_started_date;
-        $this->current_division_id =  $staff->current_division_id ??  auth()->user()->division_id;
+        $this->current_division_id = $staff->current_division_id ?? auth()->user()->division_id;
         $this->side_department_id = $staff->side_department_id;
         $this->side_division_id = $staff->side_division_id;
         $this->salary_paid_by = $staff->salary_paid_by;
@@ -674,7 +666,6 @@ class StaffDetail extends Component
         $this->recommended_by_military_person = $staff->recommended_by_military_person;
     }
 
-
     public function add_edu()
     {
         $this->educations[] = [
@@ -703,7 +694,6 @@ class StaffDetail extends Component
     {
         $this->siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
-
 
     public function add_father_siblings()
     {
@@ -737,16 +727,14 @@ class StaffDetail extends Component
 
     public function add_spouse_mother_siblings()
     {
-        $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '' , 'gender_id' => ''
-    ];
+        $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => '',
+        ];
     }
 
     public function add_schools()
     {
 
-
         $this->schools[] = [
-            // 'id' => ''
             'education_group' => '',
             'education_type' => '',
             'education' => '',
@@ -770,10 +758,9 @@ class StaffDetail extends Component
             'country' => '',
             'training_location' => '',
             'remark' => '',
-            'diploma_name' => ''
+            'diploma_name' => '',
         ];
     }
-
 
     public function add_awardings()
     {
@@ -781,11 +768,10 @@ class StaffDetail extends Component
             'award_type' => '',
             'award' => '',
             'order_no' => '',
-            'remark' => ''
+            'remark' => '',
 
         ];
     }
-
 
     public function add_past_occupations()
     {
@@ -821,115 +807,116 @@ class StaffDetail extends Component
             $education->delete();
         }
         unset($this->educations[$index]);
-        $this->educations = array_values($this->educations); //to re_indexing the array (eg: before remove (1,2,3) - after (1,3) 2 missing) reindex will do like (1,2) back
+        $this->educations = array_values($this->educations);
+        // to re_indexing the array (eg: before remove (1,2,3) - after (1,3) 2 missing) reindex will do like (1,2) back
     }
+
+
+
+    public function removeModel($propertyName, Model $model, $index): void
+    {
+        $draft_model = $this->$propertyName[$index];
+        $gotModel = optional($model::find(optional($draft_model)['id']));
+        
+        if ($gotModel) {
+            $gotModel->delete();
+        }
+        array_splice($this->$propertyName, $index, 1);
+
+    }
+    
 
     public function removeRecommendation($index)
     {
-        unset($this->recommendations[$index]);
-        $this->recommendations = array_values($this->recommendations);
+        $this->removeModel('recommendations', new Recommendation() , $index);    
     }
 
     public function removePosting($index)
     {
-        unset($this->postings[$index]);
-        $this->postings = array_values($this->postings);
+        $this->removeModel('postings', new Posting() , $index);    
     }
 
     public function remove_siblings($index)
     {
-        unset($this->siblings[$index]);
-        $this->siblings = array_values($this->siblings);
+        $this->removeModel('siblings', new Sibling() , $index);    
+        
     }
 
     public function remove_father_siblings($index)
     {
-        unset($this->father_siblings[$index]);
-        $this->father_siblings = array_values($this->father_siblings);
+        $this->removeModel('father_siblings', new FatherSibling() , $index);    
     }
 
     public function remove_mother_siblings($index)
     {
-        unset($this->mother_siblings[$index]);
-        $this->mother_siblings = array_values($this->mother_siblings);
+        $this->removeModel('mother_siblings', new MotherSibling() , $index);    
     }
 
     public function remove_spouses($index)
     {
-        unset($this->spouses[$index]);
-        $this->spouses = array_values($this->spouses);
+        $this->removeModel('spouses', new Spouse() , $index);    
     }
 
     public function remove_children($index)
     {
-        unset($this->children[$index]);
-        $this->children = array_values($this->children);
+        $this->removeModel('children', new Children() , $index);    
     }
 
     public function remove_spouse_siblings($index)
     {
-        unset($this->spouse_siblings[$index]);
-        $this->spouse_siblings = array_values($this->spouse_siblings);
+        $this->removeModel('spouse_siblings', new SpouseSibling() , $index);    
+
     }
 
     public function remove_spouse_father_siblings($index)
     {
-        unset($this->spouse_father_siblings[$index]);
-        $this->spouse_father_siblings = array_values($this->spouse_father_siblings);
+        $this->removeModel('spouse_father_siblings', new SpouseFatherSibling() , $index);    
     }
 
     public function remove_spouse_mother_siblings($index)
     {
-        unset($this->spouse_mother_siblings[$index]);
-        $this->spouse_mother_siblings = array_values($this->spouse_mother_siblings);
+        $this->removeModel('spouse_mother_siblings', new SpouseMotherSibling() , $index);    
     }
 
     public function remove_schools($index)
     {
-        unset($this->schools[$index]);
-        $this->schools = array_values($this->schools);
+
+        $this->removeModel('schools', new School() , $index);    
     }
 
     public function remove_trainings($index)
     {
-        unset($this->trainings[$index]);
-        $this->trainings = array_values($this->trainings);
+        $this->removeModel('trainings', new Training() , $index);
     }
 
     public function remove_awardings($index)
     {
-        unset($this->awards[$index]);
-        $this->awards = array_values($this->awards);
+        $this->removeModel('awards', new Award() , $index);
     }
 
     public function remove_past_occupations($index)
     {
-        unset($this->past_occupations[$index]);
-        $this->past_occupations = array_values($this->past_occupations);
+        $this->removeModel('past_occupations', new PastOccupation() , $index);
     }
 
     public function remove_abroads($index)
     {
-        unset($this->abroads[$index]);
-        $this->abroads = array_values($this->abroads);
+        $this->removeModel('abroads', new Abroad() , $index);        
     }
 
     public function remove_socials($index)
     {
-        unset($this->socials[$index]);
-        $this->socials = array_values($this->socials);
+        $this->removeModel('socials', new SocialActivity() , $index);        
     }
 
     public function remove_staff_languages($index)
     {
-        unset($this->staff_languages[$index]);
-        $this->staff_languages = array_values($this->staff_languages);
+        $this->removeModel('staff_languages', new StaffLanguage() , $index);                
     }
 
     public function remove_punishments($index)
     {
-        unset($this->punishments[$index]);
-        $this->punishments = array_values($this->punishments);
+        $this->removeModel('punishments', new Punishment() , $index);                
     }
 
     public function submit_staff()
@@ -997,7 +984,7 @@ class StaffDetail extends Component
             'nrc_sign_id' => $this->nrc_sign_id,
             'nrc_code' => $this->nrc_code,
             'nrc_front' => $staff?->nrc_front ?: ($this->nrc_front ? $_nrc_front : null),
-            'nrc_back' =>  $staff?->nrc_back ?: ($this->nrc_back ? $_nrc_back : null),
+            'nrc_back' => $staff?->nrc_back ?: ($this->nrc_back ? $_nrc_back : null),
             'phone' => $this->phone,
             'mobile' => $this->mobile,
             'email' => $this->email,
@@ -1029,7 +1016,7 @@ class StaffDetail extends Component
             'tax_exception' => $this->tax_exception,
             'life_insurance_proposal' => $this->life_insurance_proposal,
             'life_insurance_policy_no' => $this->life_insurance_policy_no,
-            'life_insurance_premium' => $this->life_insurance_premium
+            'life_insurance_premium' => $this->life_insurance_premium,
         ];
 
         $job_info = [
@@ -1154,8 +1141,9 @@ class StaffDetail extends Component
                 4 => 'Sent Back Successfully',
             };
             session()->flash('message', $message);
+
             return redirect()->route('staff', [
-                'status' =>  $_status,
+                'status' => $_status,
             ]);
         }
     }
@@ -1176,42 +1164,31 @@ class StaffDetail extends Component
         $this->message = 'Staff has been rejected.';
         $this->displayAlertBox = false;
     }
+
     private function saveAbroads($staffId)
     {
 
-        
-        $idsToKeep = collect($this->abroads)->pluck('id')->toArray();
-    
-        $filtered = array_filter($idsToKeep, function($value) {
-            return is_int($value);
-        });
-    
-      
-        Abroad::whereNotIn('id', $filtered)->delete();
-        
-        
-    
+
+
         foreach ($this->abroads as $abroad) {
             $ab = Abroad::updateOrCreate([
 
                 [
 
-                'id' => $abroad->id ?? null 
+                    'id' => $abroad->id ?? null,
 
-
-
-                ] , 
-                    'staff_id' => $staffId,
-                    'particular' => $abroad['particular'],
-                    'training_success_fail' => $abroad['training_success_fail'],
-                    'training_success_count' => $abroad['training_success_count'],
-                    'sponser' => $abroad['sponser'],
-                    'meet_with' => $abroad['meet_with'],
-                    'from_date' => $abroad['from_date'],
-                    'to_date' => $abroad['to_date'],
-                    'actual_abroad_date' => '2024-12-09',
-                    'position' => $abroad['position'],
-                ]);
+                ],
+                'staff_id' => $staffId,
+                'particular' => $abroad['particular'],
+                'training_success_fail' => $abroad['training_success_fail'],
+                'training_success_count' => $abroad['training_success_count'],
+                'sponser' => $abroad['sponser'],
+                'meet_with' => $abroad['meet_with'],
+                'from_date' => $abroad['from_date'],
+                'to_date' => $abroad['to_date'],
+                'actual_abroad_date' => '2024-12-09',
+                'position' => $abroad['position'],
+            ]);
 
             $ab->countries()->attach($abroad['country']);
         }
@@ -1219,139 +1196,103 @@ class StaffDetail extends Component
 
     private function saveSocials($staffId)
     {
-      
-        $idsToKeep = collect($this->socials)->pluck('id')->toArray();
-    
-    $filtered = array_filter($idsToKeep, function($value) {
-        return is_int($value);
-    });
-
-    // dd($filtered);
-    SocialActivity::whereNotIn('id', $filtered)->delete();
-    
-    
 
 
         foreach ($this->socials as $social) {
             SocialActivity::updateOrCreate(
 
                 [
-                'id' => $social['id'] == '' ? null : $social['id'],
+                    'id' => $social->id ?? null 
 
-
-
-                ] ,
+                ],
                 [
-                'staff_id' => $staffId,
-                'particular' => $social['particular'],
-                'remark' => $social['remark'],
-            ]);
+                    'staff_id' => $staffId,
+                    'particular' => $social['particular'],
+                    'remark' => $social['remark'],
+                ]);
         }
     }
 
     private function saveStaffLanguages($staffId)
     {
 
-        $idsToKeep = collect($this->staff_languages)->pluck('id')->toArray();
-    
-    $filtered = array_filter($idsToKeep, function($value) {
-        return is_int($value);
-    });
-
-    
-    StaffLanguage::whereNotIn('id', $filtered)->delete();
-    
-    
-
-
- 
         foreach ($this->staff_languages as $lang) {
             StaffLanguage::updateOrCreate(
                 [
-                    
-                    'id' => $lang['id'] == '' ? null : $lang['id'],
 
-                    
-                    ] , 
+                   'id' => $lang->id ?? null 
+
+                ],
                 [
-                'staff_id' => $staffId,
-                'language_id' => $lang['language'],
-                'rank' => $lang['rank'],
-                'writing' => $lang['writing'],
-                'reading' => $lang['reading'],
-                'speaking' => $lang['speaking'],
-                'remark' => $lang['remark'],
-            ]);
+                    'staff_id' => $staffId,
+                    'language_id' => $lang['language'],
+                    'rank' => $lang['rank'],
+                    'writing' => $lang['writing'],
+                    'reading' => $lang['reading'],
+                    'speaking' => $lang['speaking'],
+                    'remark' => $lang['remark'],
+                ]);
         }
     }
-private function saveSchools($staffId)
-{
-    // Validation rules and messages
-    $rules = [
-        'schools.*.education_group' => 'required',
-        'schools.*.education_type' => 'required',
-        'schools.*.education' => 'required',
-        'schools.*.school_name' => 'required|string|max:255',
-        'schools.*.town' => 'required|string|max:255',
-        'schools.*.from_date' => 'required',
-        'schools.*.to_date' => 'required',
-        'schools.*.remark' => 'nullable|string|max:1000',
-    ];
 
-    $messages = [
-        'schools.*.education_group.required' => 'The education group field is required.',
-        'schools.*.education_type.required' => 'The education type field is required.',
-        'schools.*.education.required' => 'The education level field is required.',
-        'schools.*.school_name.required' => 'The school name field is required.',
-        'schools.*.school_name.string' => 'The school name must be a string.',
-        'schools.*.school_name.max' => 'The school name may not exceed 255 characters.',
-        'schools.*.town.required' => 'The town field is required.',
-        'schools.*.town.string' => 'The town must be a string.',
-        'schools.*.town.max' => 'The town may not exceed 255 characters.',
-        'schools.*.from_date.required' => 'The start date is required.',
-        'schools.*.to_date.required' => 'The end date is required.',
-        'schools.*.remark.string' => 'The remark must be a string.',
-        'schools.*.remark.max' => 'The remark may not exceed 1000 characters.',
-    ];
+    private function saveSchools($staffId)
+    {
 
-    // Validate the input
-    $this->validate($rules, $messages);
-    // dd($this->schools);
-    $idsToKeep = collect($this->schools)->pluck('id')->toArray();
-    
-    $filtered = array_filter($idsToKeep, function($value) {
-        return is_int($value);
-    });
+        
+        // Validation rules and messages
+        $rules = [
+            'schools.*.education_group' => 'required',
+            'schools.*.education_type' => 'required',
+            'schools.*.education' => 'required',
+            'schools.*.school_name' => 'required|string|max:255',
+            'schools.*.town' => 'required|string|max:255',
+            'schools.*.from_date' => 'required',
+            'schools.*.to_date' => 'required',
+            'schools.*.remark' => 'nullable|string|max:1000',
+        ];
 
-    // dd($filtered);
-    School::whereNotIn('id', $filtered)->delete();
-    
-    
-   
-    // dd($this->schools);
-    // Save each school record
-    foreach ($this->schools  as $school) {
+        $messages = [
+            'schools.*.education_group.required' => 'The education group field is required.',
+            'schools.*.education_type.required' => 'The education type field is required.',
+            'schools.*.education.required' => 'The education level field is required.',
+            'schools.*.school_name.required' => 'The school name field is required.',
+            'schools.*.school_name.string' => 'The school name must be a string.',
+            'schools.*.school_name.max' => 'The school name may not exceed 255 characters.',
+            'schools.*.town.required' => 'The town field is required.',
+            'schools.*.town.string' => 'The town must be a string.',
+            'schools.*.town.max' => 'The town may not exceed 255 characters.',
+            'schools.*.from_date.required' => 'The start date is required.',
+            'schools.*.to_date.required' => 'The end date is required.',
+            'schools.*.remark.string' => 'The remark must be a string.',
+            'schools.*.remark.max' => 'The remark may not exceed 1000 characters.',
+        ];
 
-        School::updateOrCreate(
-            
-    //  [       'id' => $school['id'] == '' ? null : $school['id']]
-     [  
-              'id' => $school['id'] ?? null 
-              ]
-            ,
-            [
-            'staff_id' => $staffId,
-            'education_group_id' => $school['education_group'],
-            'education_type_id' => $school['education_type'],
-            'education_id' => $school['education'],
-            'school_name' => $school['school_name'],
-            'town' => $school['town'],
-            'from_date' => $school['from_date'],
-            'to_date' => $school['to_date'],
-            'remark' => $school['remark'],
-        ]);
+        // Validate the input
+        $this->validate($rules, $messages);
+
+        foreach ($this->schools as $school) {
+
+            School::updateOrCreate(
+
+                [
+                    'id' => $school['id'] ?? null 
+                
+
+                ],
+                [
+                    'staff_id' => $staffId,
+                    'education_group_id' => $school['education_group'],
+                    'education_type_id' => $school['education_type'],
+                    'education_id' => $school['education'],
+                    'school_name' => $school['school_name'],
+                    'town' => $school['town'],
+                    'from_date' => $school['from_date'],
+                    'to_date' => $school['to_date'],
+                    'remark' => $school['remark'],
+                ]
+            );
+        }
     }
-}
 
     private function savePastOccupations($staffId)
     {
@@ -1373,7 +1314,6 @@ private function saveSchools($staffId)
 
             'past_occupations.*.section.required' => 'The section field is required.',
 
-
             'past_occupations.*.address.required' => 'The address field is required.',
             'past_occupations.*.address.string' => 'The address must be a string.',
 
@@ -1389,38 +1329,21 @@ private function saveSchools($staffId)
             'past_occupations.*.remark.string' => 'The remark must be a string.',
         ];
 
-        $this->validate($rules,$messages);
-
-
-
-        $idsToKeep = collect($this->past_occupations)->pluck('id')->toArray();
-    
-    $filtered = array_filter($idsToKeep, function($value) {
-        return is_int($value);
-    });
-
-    // dd($filtered);
-    PastOccupation::whereNotIn('id', $filtered)->delete();
-    
-    
-
-
+        $this->validate($rules, $messages);
         foreach ($this->past_occupations as $occupation) {
-            PastOccupation::
-            updateOrCreate
-            (
-                
-               [ 'id' => $occupation['id'] == '' ? null : $occupation['id'] ],
+            PastOccupation::updateOrCreate(
+
+                ['id' => $occupation['id'] ?? null ],
                 [
-                'staff_id' => $staffId,
-                'rank_id' => $occupation['rank'],
-                'department_id' => $occupation['department'],
-                'section_id' => $occupation['section'],
-                'address' => $occupation['address'],
-                'from_date' => $occupation['from_date'],
-                'to_date' => $occupation['to_date'],
-                'remark' => $occupation['remark'],
-            ]);
+                    'staff_id' => $staffId,
+                    'rank_id' => $occupation['rank'],
+                    'department_id' => $occupation['department'],
+                    'section_id' => $occupation['section'],
+                    'address' => $occupation['address'],
+                    'from_date' => $occupation['from_date'],
+                    'to_date' => $occupation['to_date'],
+                    'remark' => $occupation['remark'],
+                ]);
         }
     }
 
@@ -1432,7 +1355,7 @@ private function saveSchools($staffId)
             'awards.*.award_type' => 'required',
             'awards.*.award' => 'required',
             'awards.*.order_no' => 'required|string',
-            'awards.*.remark' => ''
+            'awards.*.remark' => '',
         ];
 
         $messages = [
@@ -1446,37 +1369,23 @@ private function saveSchools($staffId)
 
         $this->validate($rules, $messages);
 
-
-        $idsToKeep = collect($this->awards)->pluck('id')->toArray();
-    
-        $filtered = array_filter($idsToKeep, function($value) {
-            return is_int($value);
-        });
-    
-        // dd($filtered);
-        Awarding::whereNotIn('id', $filtered)->delete();
-        
-        
-
-        
         foreach ($this->awards as $award) {
             Awarding::updateOrCreate(
-                [  'id' => $award['id'] == '' ? null : $award['id']] ,
+                ['id' => $award['id'] ?? null ],
                 [
 
-                'staff_id' => $staffId,
-                'award_type_id' => $award['award_type'],
-                'award_id' => $award['award'],
-                'order_no' => $award['order_no'],
-                'remark' => $award['remark'] ? :null,
-            ]);
+                    'staff_id' => $staffId,
+                    'award_type_id' => $award['award_type'],
+                    'award_id' => $award['award'],
+                    'order_no' => $award['order_no'],
+                    'remark' => $award['remark'] ?: null,
+                ]);
         }
     }
 
-    //validation done
+    // validation done
     private function saveTrainings($staffId)
     {
-
 
         $rules = [
             'trainings.*.training_type' => 'required|numeric',
@@ -1523,38 +1432,24 @@ private function saveSchools($staffId)
         // Perform validation
         $this->validate($rules, $messages);
 
-        $idsToKeep = collect($this->trainings)->pluck('id')->toArray();
-    
-        $filtered = array_filter($idsToKeep, function($value) {
-            return is_int($value);
-        });
-    
-        // dd($filtered);
-        Training::whereNotIn('id', $filtered)->delete();
-        
-    
-        
         foreach ($this->trainings as $training) {
             Training::updateOrCreate(
                 [
-                    'id' => $training['id'] == '' ? null : $training['id'],
+                    'id' => $training['id'] ?? null ,
 
-
-
-                    
-                ] ,
+                ],
                 [
-                'staff_id' => $staffId,
-                'training_type_id' => $training['training_type'],
-                'diploma_name' => $training['diploma_name'],
-                'batch' => $training['batch'],
-                'from_date' => $training['from_date'],
-                'to_date' => $training['to_date'],
-                'location' => $training['location'],
-                'country_id' => $training['country'],
-                'training_location_id' => $training['training_location'],
-                'remark' => $training['remark'],
-            ]);
+                    'staff_id' => $staffId,
+                    'training_type_id' => $training['training_type'],
+                    'diploma_name' => $training['diploma_name'],
+                    'batch' => $training['batch'],
+                    'from_date' => $training['from_date'],
+                    'to_date' => $training['to_date'],
+                    'location' => $training['location'],
+                    'country_id' => $training['country'],
+                    'training_location_id' => $training['training_location'],
+                    'remark' => $training['remark'],
+                ]);
         }
     }
 
@@ -1562,35 +1457,20 @@ private function saveSchools($staffId)
     {
 
 
-      
-        $idsToKeep = collect($this->punishments)->pluck('id')->toArray();
-    
-        $filtered = array_filter($idsToKeep, function($value) {
-            return is_int($value);
-        });
-    
-        // dd($filtered);
-        Punishment::whereNotIn('id', $filtered)->delete();
-        
-    
-        
-     
         foreach ($this->punishments as $punishment) {
-            
-            Punishment::updateOrCreate
-            
-            (
-                ['id' =>   $punishment['id'] == '' ? null : $punishment['id']] , 
+
+            Punishment::updateOrCreate(
+                ['id' => $punishment['id'] ?? null ],
                 [
 
-                'staff_id' => $staffId,
-                'penalty_type_id' => $punishment['penalty_type'],
-                'reason' => $punishment['reason'],
-                'from_date' => $punishment['from_date'],
-                'to_date' => $punishment['to_date'],
-            ]);
+                    'staff_id' => $staffId,
+                    'penalty_type_id' => $punishment['penalty_type'],
+                    'reason' => $punishment['reason'],
+                    'from_date' => $punishment['from_date'],
+                    'to_date' => $punishment['to_date'],
+                ]);
         }
-      
+
     }
 
     private function saveEducations($staffId)
@@ -1598,22 +1478,6 @@ private function saveSchools($staffId)
         $_validation = $this->validate_educations();
         $this->validate($_validation['validate'], $_validation['messages']);
         $degree_path = null;
-
-
-
-        $idsToKeep = collect($this->educations)->pluck('id')->toArray();
-    
-    $filtered = array_filter($idsToKeep, function($value) {
-        return is_int($value);
-    });
-
-    // dd($filtered);
-    StaffEducation::whereNotIn('id', $filtered)->delete();
-    
-    
-
-
-
         foreach (
             $this->educations as $education) {
 
@@ -1621,21 +1485,21 @@ private function saveSchools($staffId)
             ? $degree_path = $education['degree_certificate']
             : $degree_path = Storage::disk('upload')->put('staffs', $education['degree_certificate']);
 
-
             StaffEducation::updateOrCreate([
                 'id' => $education['education_id'] == '' ? null : $education['education_id'],
-            ],[
+            ], [
                 'education_group_id' => $education['education_group'],
                 'education_type_id' => $education['education_type'],
                 'education_id' => $education['education'] == '' ? null : $education['education'],
                 'staff_id' => $staffId,
-                'country_id' =>  $education['country_id'] == '' ? null : $education['country_id'],
+                'country_id' => $education['country_id'] == '' ? null : $education['country_id'],
                 'degree_certificate' => $degree_path,
             ]);
         }
     }
 
-    public function validate_educations(){
+    public function validate_educations()
+    {
         $validations = [
             'educations.*.education_group' => 'required',
             'educations.*.education_type' => 'required',
@@ -1655,63 +1519,36 @@ private function saveSchools($staffId)
     private function saveRecommendations($staffId)
     {
 
-        $idsToKeep = collect($this->recommendations)->pluck('id')->toArray();
-    
-    $filtered = array_filter($idsToKeep, function($value) {
-        return is_int($value);
-    });
-
-    // dd($filtered);
-    Recommendation::whereNotIn('id', $filtered)->delete();
-    
-    
-
-
-
         foreach ($this->recommendations as $recommendation) {
             Recommendation::updateOrCreate(
                 [
-                    'id' => $recommendation['id'] == '' ? null : $recommendation['id']
+                    'id' => $recommendation['id'] ?? null ,
                 ],
                 [
-                'recommend_by' => $recommendation['recommend_by'],
-                'staff_id' => $staffId,
-            ]);
+                    'recommend_by' => $recommendation['recommend_by'],
+                    'staff_id' => $staffId,
+                ]);
         }
     }
 
     private function savePostings($staffId)
     {
-
-        $idsToKeep = collect($this->postings)->pluck('id')->toArray();
-    
-    $filtered = array_filter($idsToKeep, function($value) {
-        return is_int($value);
-    });
-
-    // dd($filtered);
-    Posting::whereNotIn('id', $filtered)->delete();
-    
-    
-
-
-        
         foreach ($this->postings as $posting) {
             Posting::updateOrCreate(
                 [
                     'id' => $posting['id'] == '' ? null : $posting['id'],
                 ],
                 [
-                'staff_id' => $staffId,
-                'rank_id' => $posting['rank'],
-                'from_date' => $posting['from_date'],
-                'to_date' => $posting['to_date'],
-                'department_id' => $posting['department'],
-                'division_id' => $posting['division'] ?: null,
-                'location' => $posting['location'],
-                'remark' => $posting['remark'] ?: null,
-                'ministry_id' => $posting['ministry'],
-            ]);
+                    'staff_id' => $staffId,
+                    'rank_id' => $posting['rank'],
+                    'from_date' => $posting['from_date'],
+                    'to_date' => $posting['to_date'],
+                    'department_id' => $posting['department'],
+                    'division_id' => $posting['division'] ?: null,
+                    'location' => $posting['location'],
+                    'remark' => $posting['remark'] ?: null,
+                    'ministry_id' => $posting['ministry'],
+                ]);
         }
     }
 
@@ -1732,102 +1569,85 @@ private function saveSchools($staffId)
         return $fields;
     }
 
+    private function deleteFromModels(array $ids, Model $model)
+    {
 
-    private function deleteFromModels(array $ids , Model $model ) {
-
-        $filteredIds = array_filter($ids, function($value) {
+        $filteredIds = array_filter($ids, function ($value) {
             return is_int($value);
         });
-    
-       
+
         $model::whereNotIn('id', $filteredIds)->delete();
     }
-    
+
     private function saveRelatives($staffId)
     {
-        
-
-    
-   
-        $this->deleteFromModels( $this->siblings , new Sibling) ;
-        $this->deleteFromModels( $this->father_siblings , new FatherSibling) ;
-        $this->deleteFromModels( $this->mother_siblings , new MotherSibling) ;
-        $this->deleteFromModels( $this->spouses , new Spouse) ;
-        $this->deleteFromModels( $this->children , new Children) ;
-        $this->deleteFromModels( $this->spouse_siblings , new SpouseSibling) ;
-        $this->deleteFromModels( $this->spouse_father_siblings , new SpouseFatherSibling) ;
-        $this->deleteFromModels( $this->spouse_mother_siblings , new SpouseMotherSibling) ;
-     
-    
-
-    
         foreach ($this->siblings as $relative) {
             Sibling::updateOrCreate(
                 [
-                    'id' => $relative->id ?? null 
-                ] , 
+                    'id' => $relative['id'] ?? null,
+                ],
                 $this->relativeFields($staffId, $relative));
         }
 
         foreach ($this->father_siblings as $relative) {
             FatherSibling::updateOrCreate(
                 [
-                    'id' => $relative->id ?? null 
-                ] ,
+                    'id' => $relative['id'] ?? null,
+                ],
                 $this->relativeFields($staffId, $relative));
         }
 
         foreach ($this->mother_siblings as $relative) {
             MotherSibling::updateOrCreate(
-                
-                  [
-                    'id' => $relative->id ?? null 
-                ] ,
+
+                [
+                    'id' => $relative['id'] ?? null,
+                ],
                 $this->relativeFields($staffId, $relative));
         }
 
         foreach ($this->spouses as $relative) {
             Spouse::updateOrCreate(
-                
-                  [
-                    'id' => $relative->id ?? null 
-                ] ,
+
+                [
+                    'id' => $relative['id'] ?? null,
+                ],
                 $this->relativeFields($staffId, $relative));
         }
 
         foreach ($this->children as $relative) {
             Children::updateOrCreate(
-                
-                  [
-                    'id' => $relative->id ?? null 
-                ] ,
+
+                [
+                    'id' => $relative['id'] ?? null,
+                ],
                 $this->relativeFields($staffId, $relative));
         }
 
         foreach ($this->spouse_siblings as $relative) {
             SpouseSibling::updateOrCreate(
-                
-                  [
-                    'id' => $relative->id ?? null 
-                ] ,
+
+                [
+                    'id' => $relative['id'] ?? null,
+                ],
                 $this->relativeFields($staffId, $relative));
         }
 
         foreach ($this->spouse_father_siblings as $relative) {
             SpouseFatherSibling::updateOrCreate(
-                
-                  [
-                    'id' => $relative->id ?? null 
-                ] ,
+
+                [
+                    'id' => $relative['id'] ?? null,
+                ],
                 $this->relativeFields($staffId, $relative));
         }
 
         foreach ($this->spouse_mother_siblings as $relative) {
             SpouseMotherSibling::updateOrCreate(
-                
-                  [
-                    'id' => $relative->id ?? null 
-                ] ,
+
+                [
+                    'id' => $relative['id'] ?? null,
+                ],
                 $this->relativeFields($staffId, $relative));
         }
     }
@@ -1857,7 +1677,8 @@ private function saveSchools($staffId)
         $this->nrc_township_code_id = null;
     }
 
-    public function setStaffStatus($status){
+    public function setStaffStatus($status)
+    {
         $this->staff_status_id = $status;
     }
 
@@ -1950,7 +1771,7 @@ private function saveSchools($staffId)
                 $data['sections'] = Section::all();
                 $data['penalty_types'] = PenaltyType::all();
                 $data['languages'] = Language::all();
-                $data['ranks'] =$this->withoutScopeRanks;
+                $data['ranks'] = $this->withoutScopeRanks;
                 $data['departments'] = Department::all();
                 break;
 
@@ -1980,7 +1801,7 @@ private function saveSchools($staffId)
     public function leave_modal()
     {
         $this->modal_title = 'ခွင့်';
-        $this->leave_modal_open = !$this->leave_modal_open;
+        $this->leave_modal_open = ! $this->leave_modal_open;
     }
 
     public function add_new()
@@ -1990,6 +1811,7 @@ private function saveSchools($staffId)
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
+
     public function submitForm()
     {
         if ($this->confirm_add == true) {
@@ -1998,6 +1820,7 @@ private function saveSchools($staffId)
             $this->updatePosition();
         }
     }
+
     public function createPosition()
     {
         $this->validate();
@@ -2025,20 +1848,20 @@ private function saveSchools($staffId)
         $this->leave_type_name = $leave->leave_type_id;
     }
 
-    //update
+    // update
     public function updatePosition()
     {
         $this->validate();
         $leave = ModelsLeave::findOrFail($this->leave_id);
         $leave->update([
             'staff_id' => $this->staff_name,
-            'leave_type_id' => $this->leave_type_name
+            'leave_type_id' => $this->leave_type_name,
         ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();
     }
 
-    //delete confirm
+    // delete confirm
     public function delete_confirm($id)
     {
         $this->leave_id = $id;
