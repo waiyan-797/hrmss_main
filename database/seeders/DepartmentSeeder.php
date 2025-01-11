@@ -16,9 +16,7 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        // Schema::disableForeignKeyConstraints();
-        // Department::truncate();
-        // Schema::enableForeignKeyConstraints();
+        // 
        
         
 }
