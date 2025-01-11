@@ -26,6 +26,7 @@
                                         :values="$type['select_values']"
                                         placeholder="Select..."
                                     />
+                                    <x-input-error class="mt-2" :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])"/>
                                 @elseif ($type['next_col_update'] && is_string($type['select_values']))
                                     <x-select
                                         wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
@@ -36,6 +37,7 @@
                                         :values="$this->{$type['wire_array_name']}[$index][$type['select_values']]"
                                         placeholder="Select..."
                                     />
+                                    <x-input-error class="mt-2" :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])"/>
                                 @elseif (!$type['next_col_update'] && is_string($type['select_values']))
                                     <x-select
                                         wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
@@ -45,6 +47,7 @@
                                         :values="$this->{$type['wire_array_name']}[$index][$type['select_values']]"
                                         placeholder="Select..."
                                     />
+                                    <x-input-error class="mt-2" :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])"/>
                                 @else
                                     <x-select
                                         wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
@@ -54,6 +57,7 @@
                                         :values="$type['select_values']"
                                         placeholder="Select..."
                                     />
+                                    <x-input-error class="mt-2" :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])"/>
                                 @endif
                             @elseif ($type['type'] == 'search_select')
                                 <x-searchable-select
@@ -62,6 +66,7 @@
                                     property="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
                                     class="block w-full p-2 text-sm border rounded font-arial"
                                 />
+                                <x-input-error class="mt-2" :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])"/>
                             @elseif ($type['type'] == 'text' || $type['type'] == 'number' || $type['type'] == 'date')
                                 <x-text-input
                                     wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
@@ -70,6 +75,7 @@
                                     type="{{$type['type']}}"
                                     class="block w-full p-2 text-sm border rounded"
                                 />
+                                <x-input-error class="mt-2" :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])"/>
                             @elseif ($type['type'] == 'file')
                                 <x-input-file
                                     wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
@@ -80,12 +86,14 @@
                                     class="block w-full text-sm border mb-1 rounded"
                                     accept=".pdf"
                                 />
+                                <x-input-error class="mt-2" :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])"/>
                             @elseif ($type['type'] == 'checkbox')
                                 <input
                                     wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
                                     type="checkbox"
                                     class="form-checkbox h-4 w-4 text-indigo-600"
                                 />
+                                <x-input-error class="mt-2" :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])"/>
                             @elseif ($type['type'] == 'multiple-select')
                                 <x-multiple-select
                                     model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
@@ -93,6 +101,7 @@
                                     placeholderValue="Select..."
                                     :options="$type['select_values']"
                                 />
+                                <x-input-error class="mt-2" :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])"/>
                             @endif
                         </td>
                     @endforeach

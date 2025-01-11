@@ -16,7 +16,7 @@
             return this.options.find(option => option.id === this.selectedId);
         },
         selectOption(option) {
-            this.selectedId = option.id;
+            this.selectedId = (option == '') ? option : option.id;
             this.open = false;
         },
         setDropdownPosition(button) {

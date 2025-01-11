@@ -47,20 +47,24 @@
                 <x-input-error class="mt-2" :messages="$errors->get('father_place_of_birth')" />
             </div>
             <div class="w-full">
-                <x-searchable-select
+                <x-select
+                    wire:model.live="father_address_region_id"
                     placeholder="ပြည်နယ်/တိုင်းဒေသကြီးရွေးပါ"
-                    :values="$ethnics"
-                    property="father_address_region_id"
-                    class="block w-full p-2 mt-1 text-sm border rounded font-arial"
+                    :values="$regions"
+                    id="father_address_region_id"
+                    name="father_address_region_id"
+                    class="mt-1 block w-full"
                 />
                 <x-input-error class="mt-2" :messages="$errors->get('father_address_region_id')" />
             </div>
             <div class="w-full">
-                <x-searchable-select
+                <x-select
+                    wire:model="father_address_township_or_town_id"
                     placeholder="မြို့/မြို့နယ်ရွေးပါ"
                     :values="$father_townships"
-                    property="father_address_township_or_town_id"
-                    class="block w-full p-2 mt-1 text-sm border rounded font-arial"
+                    id="father_address_township_or_town_id"
+                    name="father_address_township_or_town_id"
+                    class="mt-1 block w-full"
                 />
                 <x-input-error class="mt-2" :messages="$errors->get('father_address_township_or_town_id')" />
             </div>
@@ -113,11 +117,25 @@
                 <x-input-error class="mt-2" :messages="$errors->get('mother_place_of_birth')" />
             </div>
             <div class="w-full">
-                <x-searchable-select property="mother_address_region_id" :values="$regions" placeholder="ပြည်နယ်/တိုင်းဒေသကြီး‌ရွေးပါ" id="mother_address_region_id" name="mother_address_region_id" class="mt-1 block w-full" />
+                <x-select
+                    wire:model.live="mother_address_region_id"
+                    placeholder="ပြည်နယ်/တိုင်းဒေသကြီးရွေးပါ"
+                    :values="$regions"
+                    id="mother_address_region_id"
+                    name="mother_address_region_id"
+                    class="mt-1 block w-full"
+                />
                 <x-input-error class="mt-2" :messages="$errors->get('mother_address_region_id')" />
             </div>
             <div class="w-full">
-                <x-searchable-select property="mother_address_township_or_town_id" :values="$mother_townships" placeholder="မြို့/မြို့နယ်ရွေးပါ" id="mother_address_township_or_town_id" name="mother_address_township_or_town_id" class="mt-1 block w-full" />
+                <x-select
+                    wire:model.live="mother_address_township_or_town_id"
+                    placeholder="မြို့/မြို့နယ်ရွေးပါ"
+                    :values="$mother_townships"
+                    id="mother_address_township_or_town_id"
+                    name="mother_address_township_or_town_id"
+                    class="mt-1 block w-full"
+                />
                 <x-input-error class="mt-2" :messages="$errors->get('mother_address_township_or_town_id')" />
             </div>
         </div>

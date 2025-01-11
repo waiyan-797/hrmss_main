@@ -1435,6 +1435,8 @@ private function saveSchools($staffId)
 
     private function saveEducations($staffId)
     {
+        $_validation = $this->validate_educations();
+        $this->validate($_validation['validate'], $_validation['messages']);
         $degree_path = null;
         foreach ($this->educations as $education) {
             (str_starts_with($education['degree_certificate'], 'staffs/') && $education['degree_certificate'])
@@ -1445,12 +1447,29 @@ private function saveSchools($staffId)
             ],[
                 'education_group_id' => $education['education_group'],
                 'education_type_id' => $education['education_type'],
-                'education_id' => $education['education'],
+                'education_id' => $education['education'] == '' ? null : $education['education'],
                 'staff_id' => $staffId,
-                'country_id' =>  $education['country_id'],
+                'country_id' =>  $education['country_id'] == '' ? null : $education['country_id'],
                 'degree_certificate' => $degree_path,
             ]);
         }
+    }
+
+    public function validate_educations(){
+        $validations = [
+            'educations.*.education_group' => 'required',
+            'educations.*.education_type' => 'required',
+        ];
+
+        $validation_messages = [
+            'educations.*.education_group.required' => 'Field is required.',
+            'educations.*.education_type.required' => 'Field is required.',
+        ];
+
+        return [
+            'validate' => $validations,
+            'messages' => $validation_messages,
+        ];
     }
 
     private function saveRecommendations($staffId)
@@ -1675,8 +1694,6 @@ private function saveSchools($staffId)
                     'spouse_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည်၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_siblings],
                     'spouse_father_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အဘနှင့် ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_father_siblings],
                     'spouse_mother_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အမိနှင့် ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_mother_siblings],
-
-
                 ];
                 $data['relations'] = Relation::all();
                 $data['father_township_or_towns'] = Township::where('region_id', $this->father_address_region_id)->get();
@@ -1698,8 +1715,6 @@ private function saveSchools($staffId)
 
     public function add_new()
     {
-
-
         $this->resetValidation();
         $this->reset(['staff_name', 'leave_type_name', 'from_date', 'to_date', 'qty', 'order_no', 'remark']);
         $this->confirm_add = true;
