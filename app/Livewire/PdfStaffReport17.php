@@ -156,13 +156,13 @@ class PdfStaffReport17 extends Component
         $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
         $table->addCell(16000)->addText('', null, ['alignment' => 'both']);
 
-        foreach ($staff->staff_educations as $education) {
-            $table->addRow();
-            $table->addCell(2000)->addText('', null, ['alignment' => 'center']);
-            $table->addCell(15000)->addText('', null, ['alignment' => 'both']);
-            $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
-            $table->addCell(16000)->addText($education->education->name . '၊', null, ['alignment' => 'both']);
-        }
+        // foreach ($staff->staff_educations as $education) {
+        //     $table->addRow();
+        //     $table->addCell(2000)->addText('', null, ['alignment' => 'center']);
+        //     $table->addCell(15000)->addText('', null, ['alignment' => 'both']);
+        //     $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
+        //     $table->addCell(16000)->addText($education->education->name . '၊', null, ['alignment' => 'both']);
+        // }
         $table->addRow();
         $table->addCell(2000)->addText('၉။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText('အဘအမည် ', null, ['alignment' => 'both']);

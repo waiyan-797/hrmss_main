@@ -2,7 +2,7 @@
 
 return [
     'mode'                     => 'utf-8',
-    'format'                   => 'A4',
+    // 'format'                   => 'A4',
     // 'default_font_size'        => '30',
     'default_font'             => 'Pyidaungsu',
     // 'margin_left'              => 10,

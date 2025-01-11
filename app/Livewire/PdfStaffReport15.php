@@ -6,11 +6,14 @@ use App\Models\Staff;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
+use Mpdf\Mpdf;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\SimpleType\Jc;
 use PhpOffice\PhpWord\Style\Tab;
-
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use Barryvdh\DomPDF\Facade;
+use Illuminate\Http\Request;
 
 class PdfStaffReport15 extends Component
 {
@@ -26,14 +29,6 @@ class PdfStaffReport15 extends Component
             'staff' => $staff,
         ];
         $pdf = PDF::loadView('pdf_reports.staff_report_15', $data);
-        // $pdf = PDF::loadView('pdf_reports.staff_report_15', $data, [], [    
-        //     'format' => 'A4',               // Set paper size
-        //     'orientation' => 'P',           // Portrait orientation
-        //     'margin_left' => 25.4,          // 1 inch = 25.4 mm
-        //     'margin_right' => 12.7,         // 0.5 inches = 12.7 mm
-        //     'margin_top' => 12.7,           // 0.5 inches = 12.7 mm
-        //     'margin_bottom' => 12.7         // 0.5 inches = 12.7 mm
-        // ]);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'staff_pdf_15.pdf');
@@ -142,13 +137,13 @@ class PdfStaffReport15 extends Component
         $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
         $table->addCell(16000)->addText('', null, ['alignment' => 'both']);
 
-        foreach ($staff->staff_educations as $education) {
-            $table->addRow();
-            $table->addCell(2000)->addText();
-            $table->addCell(15000)->addText('', ['alignment' => 'center']);
-            $table->addCell(1000)->addText();
-            $table->addCell(16000)->addText( $education->education->name . '၊', ['alignment' => 'both']);
-        }
+        // foreach ($staff->staff_educations as $education) {
+        //     $table->addRow();
+        //     $table->addCell(2000)->addText();
+        //     $table->addCell(15000)->addText('', ['alignment' => 'center']);
+        //     $table->addCell(1000)->addText();
+        //     $table->addCell(16000)->addText( $education->education->name . '၊', ['alignment' => 'both']);
+        // }
         $table->addRow();
         $table->addCell(2000)->addText('၉။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText('အဖအမည်', null, ['alignment' => 'both']);
@@ -287,8 +282,32 @@ class PdfStaffReport15 extends Component
             ],
         );
     }
+    // public function go_pdf($staff_id)
+    // {
+    //     // Assuming the Word file is uploaded and available in a public disk or storage location
+    //     // You can handle the file upload inside Livewire component like this:
+    //     $filePath = storage_path('app/your_files/' . $staff_id . '.docx'); // Adjust the file path according to where your file is stored
+        
+    //     if (file_exists($filePath)) {
+    //         $phpWord = IOFactory::load($filePath, 'MsDoc'); // Load Word file
 
+    //         // Create HTML from the Word file
+    //         $htmlWriter = IOFactory::createWriter($phpWord, 'HTML');
+    //         $htmlFilePath = storage_path('app/temp.html');
+    //         $htmlWriter->save($htmlFilePath);
 
+    //         // Load the HTML into PDF
+    //         $pdf = PDF::loadFile($htmlFilePath);
+    //         $pdfFilePath = storage_path('app/converted.pdf');
+    //         $pdf->save($pdfFilePath);
+
+    //         // Return the PDF as a download response
+    //         return response()->download($pdfFilePath)->deleteFileAfterSend(true);
+    //     } else {
+    //         // Handle the case where the file is not found
+    //         return response()->json(['error' => 'File not found.'], 404);
+    //     }
+    // }
 
 
     public function render()

@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
+use function Ramsey\Uuid\v1;
 
 class DepartmentSeeder extends Seeder
 {
@@ -15,11 +16,10 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        Schema::disableForeignKeyConstraints();
-        Department::truncate();
-        Schema::enableForeignKeyConstraints();
-        Department::create([
-            'name' => 'ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန',
-        ]);
-    }
+        // Schema::disableForeignKeyConstraints();
+        // Department::truncate();
+        // Schema::enableForeignKeyConstraints();
+       
+        
+}
 }

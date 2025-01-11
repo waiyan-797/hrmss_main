@@ -184,13 +184,13 @@ class PdfStaffReport19 extends Component
         $table->addCell(700)->addText('-', ['align' => 'center'],$pStyle_5);
         $table->addCell(13000)->addText('', ['align' => 'right'],$pStyle_4);
 
-       foreach ($staff->staff_educations as $education) {
-            $table->addRow(50);
-            $table->addCell(1500);
-            $table->addCell(13000);
-            $table->addCell(700)->addText('-', ['align' => 'center'],$pStyle_5);
-            $table->addCell(13000)->addText($education->education?->name . '၊', ['align' => 'right'],$pStyle_4);
-        }
+    //    foreach ($staff->staff_educations as $education) {
+    //         $table->addRow(50);
+    //         $table->addCell(1500);
+    //         $table->addCell(13000);
+    //         $table->addCell(700)->addText('-', ['align' => 'center'],$pStyle_5);
+    //         $table->addCell(13000)->addText($education->education?->name . '၊', ['align' => 'right'],$pStyle_4);
+    //     }
         
           // $textRun=$table->addCell(8000, ['vMerge' => 'restart'])->addTextRun();
         // $textRun->addText('နောက်ဆုံးသွားရောက်',['bold'=>true]);

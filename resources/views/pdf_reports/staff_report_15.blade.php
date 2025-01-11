@@ -436,55 +436,21 @@
              font-weight: bold;
              font-size: 15px;
          }
-
-
-         .container {
-             width: 100%;
-             margin-bottom: 16px;
-         }
-
-         .custom-table {
-             width: 100%;
-             border-collapse: collapse;
-             font-size: 20px;
-         }
-
-         .custom-table th,
-         .custom-table td {
-             border: 1px solid black;
-             padding: 8px;
-             text-align: center;
-         }
-
-         .header-row th {
-             background-color: #f9f9f9;
-             font-weight: bold;
-         }
-
-         .container {
-             margin-bottom: 20px;
-         }
-
-         .section-title {
-             margin-bottom: 20px;
-         }
-
-         .footer {
-             margin-top: 20px;
-         }
      </style>
  </head>
 
  <body>
-     <table>
-         <tr style="border: none;">
-             <td style="border:none; text-align: right; padding: 0; width: 100%;">
-                 <img src="{{ $staff->staff_photo ? storage_path('app/upload/') . $staff->staff_photo : 'img/user.png' }}"
-                     alt="" style="width: 80px; height: 80px;">
-             </td>
-         </tr>
-     </table>
-     <div style="text-align: center; font-size:13px;">ကိုယ်ရေးမှတ်တမ်း</div>
+    <div style="text-align: center; font-size: 13px; margin-top: 10px;">ကိုယ်ရေးမှတ်တမ်း</div>
+<table>
+    <tr style="border: none;">
+        <td style="border:none; text-align: right; padding: 0; width: 100%; display: flex; align-items: flex-start; justify-content: flex-end;">
+            <img src="{{ $staff->staff_photo ? storage_path('app/upload/') . $staff->staff_photo : 'img/user.png' }}"
+                alt="" style="width: 80px; height: 80px; margin-top: 10px;">
+        </td>
+    </tr>
+</table>
+
+    
      <table>
          <tr>
              <th style="width: 5%;">၁။</th>
@@ -541,7 +507,7 @@
              </td>
              <th style="width: 5%;">-</th>
              <td style="width: 45%;">
-                 {{ collect([$staff->current_address_street, $staff->current_address_ward, $staff->current_address_township_or_town->name, $staff->current_address_region->name])->filter()->implode('၊') }}
+                 {{ implode('၊', [$staff->current_address_street, $staff->current_address_ward, $staff->current_address_township_or_town->name, $staff->current_address_region->name]); }}
              </td>
          </tr>
          <tr>
@@ -593,54 +559,54 @@
          </tr>
      </table>
      <div class="table-container">
-         <div class="flex-container">
-             <h2 class="text-bold"></h2>
-         </div>
-         <div class="rounded">
-             <table class="table-wapper">
-                 <thead>
-                     <tr class="bg-light">
-                         <th class="thead" colspan="2">ကာလ</th>
-                         <th rowspan="2" class="thead">နောက်ဆုံးသွား<br>ရောက်ခဲ့သည့်<br>(၅)နိုင်ငံ</th>
-                         <th rowspan="2" class="thead">သွားရောက်သည့်<br>ကိစ္စ</th>
-                         <th rowspan="2" class="thead">
-                             သင်တန်းတက်<br>ခြင်းဖြစ်လျှင်<br>အကြိမ်မည်မျှဖြင့်<br>အောင်မြင်သည်</th>
-                         <th rowspan="2" class="thead">
-                             မည်သည့်အစိုးရ<br>အဖွဲ့အစည်း<br>အထောက်အပံ့ဖြင့်<br>သွားရောက်သည်</th>
-                     </tr>
-                     <tr>
-                         <th class="thead" style="text-align: center;">မှ</th>
-                         <th class="thead" style="text-align: center; ">ထိ</th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                     @php
-                         $latestAbroads = $staff->abroads ? $staff->abroads->sortByDesc('to_date')->take(5) : [];
-                     @endphp
-
-                     @if ($latestAbroads->isNotEmpty())
-                         @foreach ($latestAbroads as $abroad)
-                             <tr>
-                                 <td class="thead" style="text-align: center;">{{ formatDMYmm($abroad->from_date) }}
-                                 </td>
-                                 <td class="thead" style="text-align: center;">{{ formatDMYmm($abroad->to_date) }}
-                                 </td>
-                                 <td class="thead">{{ $abroad->country?->name }}</td>
-                                 <td class="thead">{{ $abroad->particular }}</td>
-                                 <td class="thead">{{ $abroad->training_success_count }}</td>
-                                 <td class="thead">{{ $abroad->sponser }}</td>
-                             </tr>
-                         @endforeach
-                     @else
-                         <tr>
-                             <td class="thead" colspan="6" style="text-align: center;">မရှိပါ</td>
-                         </tr>
-                     @endif
-
-                 </tbody>
-             </table>
-         </div>
-     </div>
+        <div class="flex-container">
+            <h2 class="font-bold"></h2>
+        </div>
+        <div class="rounded">
+            <table class="table-wrapper">
+                <thead>
+                    <tr class="bg-light">
+                        <th class="thead" colspan="2" style="line-height: 2;">ကာလ</th>
+                        <th rowspan="2" class="thead" style="line-height: 2;">နောက်ဆုံးသွား<br>ရောက်ခဲ့သည့်<br>(၅)နိုင်ငံ</th>
+                        <th rowspan="2" class="thead" style="line-height: 2;">သွားရောက်သည့်<br>ကိစ္စ</th>
+                        <th rowspan="2" class="thead" style="line-height: 2;">
+                            သင်တန်းတက်<br>ခြင်းဖြစ်လျှင်<br>အကြိမ်မည်မျှဖြင့်<br>အောင်မြင်သည်
+                        </th>
+                        <th rowspan="2" class="thead" style="line-height: 2;">
+                            မည်သည့်အစိုးရ<br>အဖွဲ့အစည်း<br>အထောက်အပံ့ဖြင့်<br>သွားရောက်သည်
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="thead" style="text-align: center; line-height:2;">မှ</th>
+                        <th class="thead" style="text-align: center; line-height:2;">ထိ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $latestAbroads = $staff->abroads ? $staff->abroads->sortByDesc('to_date')->take(5) : [];
+                    @endphp
+    
+                    @if ($latestAbroads->isNotEmpty())
+                        @foreach ($latestAbroads as $abroad)
+                            <tr>
+                                <td class="thead" style="text-align: center; line-height: 2;">{{ formatDMYmm($abroad->from_date) }}</td>
+                                <td class="thead" style="text-align: center; line-height: 2;">{{ formatDMYmm($abroad->to_date) }}</td>
+                                <td class="thead" style="line-height: 2;">{{ $abroad->country?->name }}</td>
+                                <td class="thead" style="line-height: 2;">{{ $abroad->particular }}</td>
+                                <td class="thead" style="line-height: 2;">{{ $abroad->training_success_count }}</td>
+                                <td class="thead" style="line-height: 2;">{{ $abroad->sponser }}</td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td class="thead" colspan="6" style="text-align: center; line-height: 2;">မရှိပါ</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
      <div class="table-container">
          <div class="flex-container">
              <h2 class="text-bold">၁၄။ဇနီး/ခင်ပွန်း</h2>
@@ -649,11 +615,11 @@
              <table class="table-wapper">
                  <thead>
                      <tr class="bg-light">
-                         <th class="thead">အမည်(အခြားအမည်များရှိလျှင်လည်း ဖော်ပြရန်)</th>
-                         <th class="thead">လူမျိုး/နိုင်ငံသား</th>
-                         <th class="thead">အလုပ်အကိုင်နှင့်ဌာန</th>
-                         <th class="thead">နေရပ်</th>
-                         <th class="thead">မှတ်ချက်</th>
+                         <th class="thead" style="line-height: 2;">အမည်(အခြားအမည်များရှိလျှင်လည်းဖော်ပြရန်)</th>
+                         <th class="thead" style="line-height: 2;">လူမျိုး/နိုင်ငံသား</th>
+                         <th class="thead" style="line-height: 2;">အလုပ်အကိုင်နှင့်ဌာန</th>
+                         <th class="thead" style="line-height: 2;">နေရပ်</th>
+                         <th class="thead" style="line-height: 2;">မှတ်ချက်</th>
                      </tr>
                  </thead>
                  <tbody>
@@ -661,16 +627,16 @@
                      @if ($staff->spouses->isNotEmpty())
                          @foreach ($staff->spouses as $spouse)
                              <tr>
-                                 <td class="thead">{{ $spouse->name }}</td>
-                                 <td class="thead">{{ $spouse->ethnic->name . '/' . $spouse->religion->name }}</td>
-                                 <td class="thead">{{ $spouse->occupation }}</td>
-                                 <td class="thead">{{ $spouse->address }}</td>
-                                 <td class="thead">{{ $spouse->remark }}</td>
+                                 <td class="thead" style="line-height: 2;">{{ $spouse->name }}</td>
+                                 <td class="thead" style="line-height: 2;">{{ $spouse->ethnic->name . '/' . $spouse->religion->name }}</td>
+                                 <td class="thead" style="line-height: 2;">{{ $spouse->occupation }}</td>
+                                 <td class="thead" style="line-height: 2;">{{ $spouse->address }}</td>
+                                 <td class="thead" style="line-height: 2;">{{ $spouse->remark }}</td>
                              </tr>
                          @endforeach
                      @else
                          <tr>
-                             <td class="thead" colspan="5" style="text-align: center;">မရှိပါ</td>
+                             <td class="thead" colspan="5" style="text-align: center; line-height: 2;">မရှိပါ</td>
                          </tr>
                      @endif
                  </tbody>
@@ -678,174 +644,36 @@
          </div>
      </div>
 
-
-
-     {{-- <div style="margin-bottom: 16px; font-size: 15px;">
-        <table width="100%" style="margin-bottom: 16px; border: none;">
-            <tr style="border: none;">
-                <td style="border: none;">
-                    <p style="margin: 0; font-size: 15px;">
-                        ၁၅။ အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား
-                        မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။
-                    </p>
-                </td>
-            </tr>
-        </table>
-         <div style="display: flex; justify-content: flex-end;">
-            <table style="border: none; border-collapse: collapse; font-size:13px">
-              
-                <tr>
-                    <td style="border: none; width: 5%;"></td>
-                    <td style="border: none; width: 35%;"></td>
-                    <td style="border: none; width: 5%;">လက်မှတ်၊</td>
-                  
-                    <td style="border: none; width: 55%;"></td>
-                </tr>
-                <tr>
-                    <td style="border: none; width: 5%;"></td>
-                    <td style="border: none; width: 35%;"></td>
-                    <td style="border: none; width: 5%;">အမည်၊</td>
-                    <td style="border: none; width: 55%;">{{ $staff->name}}</td>
-                </tr>
-                <tr>
-                    <td style="border: none; width: 5%;"></td>
-                    <td style="border: none; width: 35%;"></td>
-                    <td style="border: none; width: 5%;">အဆင့်၊</td>
-                    <td style="border: none; width: 55%;">{{ $staff->current_rank->name }}</td>
-                </tr>
-                <tr>
-                    <td style="border: none; width: 5%;"></td>
-                    <td style="border: none; width: 35%;"></td>
-                    <td style="border: none; width: 5%;">တပ်/ ဌာန၊</td>
-                    <td style="border: none; width: 55%;">{{ $staff->current_department->name }}</td>
-                </tr>
-            </table>
-        </div>
-         
-        <table width="100%" style="border: none;">
-            <tr>
-                <td style="vertical-align: top; text-align: left; padding-right: 10px; border: none;">
-                    <p style="margin: 0; font-size: 13px;">ရက်စွဲ -
-                        {{ mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)) }}
-                    </p>
-                </td>
-            </tr>
-        </table>
-    </div> --}}
-
-     {{-- <div class="container">
-         <div class="section-title">
-             <p>၁၅။ အထက်ပါ အချက်အလက်များကို မှန်ကန်သည့်အတိုင်းဖြည့်သွင်းရေးသားပါကြောင်း ကိုယ်တိုင် လက်မှန်ရေးထိုးပါသည်။
-             </p>
-         </div> --}}
-
-
-         {{-- <div style="display: flex; justify-content: flex-end;">
-            <table style="border: none; border-collapse: collapse; font-size:10px">
-              
-                <tr>
-                    <td style="border: none; width: 5%;"></td>
-                    <td style="border: none; width: 35%;"></td>
-                    <td style="border: none; width: 5%;">လက်မှတ်၊</td>
-                  
-                    <td style="border: none; width: 55%;"></td>
-                </tr>
-                <tr>
-                    <td style="border: none; width: 5%;"></td>
-                    <td style="border: none; width: 35%;"></td>
-                    <td style="border: none; width: 5%;">အမည်၊</td>
-                    <td style="border: none; width: 55%;">{{ $staff->name}}</td>
-                </tr>
-                <tr>
-                    <td style="border: none; width: 5%;"></td>
-                    <td style="border: none; width: 35%;"></td>
-                    <td style="border: none; width: 5%;">အဆင့်၊</td>
-                    <td style="border: none; width: 55%;">{{ $staff->current_rank->name }}</td>
-                </tr>
-                <tr>
-                    <td style="border: none; width: 5%;"></td>
-                    <td style="border: none; width: 35%;"></td>
-                    <td style="border: none; width: 5%;">တပ်/ ဌာန၊</td>
-                    <td style="border: none; width: 55%;">{{ $staff->current_department->name }}</td>
-                </tr>
-            </table>
-        </div>
-      --}}
-         {{-- <table>
-        <tr>
-            <th style="width: 5%;" ></th>
-            <td style="width: 55%;"></td>
-             <th style="width: 5%;" >လက်မှတ်၊</th> 
-            <td style="width: 35%;"></td>
-        </tr>
-        <tr>
-            <th style="width: 5%;" ></th>
-            <td style="width: 55%;"></td>
-             <th style="width: 5%;" >အမည်၊</th> 
-            <td style="width: 35%;"> {{ $staff->name }}</td>
-        </tr>
-    </table> --}}
-
-         {{-- <div class="container">
-        <table class="details-table">
-            <tr>
-                <td class="label">လက်မှတ်</td>
-                <td class="divider">-</td>
-                <td class="value"></td>
-            </tr>
-            <tr>
-                <td class="label">အမည်</td>
-                <td class="divider">-</td>
-                <td class="value">{{ $staff->name }}</td>
-            </tr>
-            <tr>
-                <td class="label">အဆင့်</td>
-                <td class="divider">-</td>
-                <td class="value">{{ $staff->current_rank->name }}</td>
-            </tr>
-            <tr>
-                <td class="label">တပ်/ ဌာန</td>
-                <td class="divider">-</td>
-                <td class="value">{{ $staff->current_department->name }}</td>
-            </tr>
-        </table>
-    </div> --}}
-         {{-- <div class="footer">
-             <p>ရက်စွဲ -
-                 {{ mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)) }}
-             </p>
-         </div> --}}
-
-         <div style="margin-bottom: 16px; font-size: 13px;">
+         <div style="margin-bottom: 16px; font-size: 14px;">
             <p style=" text-align:justify;  margin: 0; padding: 0;">၁၅။ အထက်ပါ အချက်အလက်များကို မှန်ကန်သည့်အတိုင်းဖြည့်သွင်းရေးသားပါကြောင်း ကိုယ်တိုင် လက်မှန်ရေးထိုးပါသည်။</p>
             <br>
                         <table style=" width: 50%; border-collapse: collapse; margin-left: auto; border:none;">
                             <tr>
-                                <td style="font-size: 13px; border: none;">လက်မှတ် </td>
-                                <td style="font-size: 13px; border: none;">၊</td>
-                                <td style="font-size: 13px; border: none; "></td>
+                                <td style="font-size: 14px; border: none;">လက်မှတ် </td>
+                                <td style="font-size: 14px; border: none;">၊</td>
+                                <td style="font-size: 14px; border: none; "></td>
                             </tr>
                             <tr>
-                                <td style="font-size: 13px; border: none;">အမည်</td>
-                                <td style="font-size: 13px; border: none;">၊</td>
-                                <td style="font-size: 13px; border: none;">{{$staff->name}}</td>
+                                <td style="font-size: 14px; border: none;">အမည်</td>
+                                <td style="font-size: 14px; border: none;">၊</td>
+                                <td style="font-size: 14px; border: none;">{{$staff->name}}</td>
                             </tr>
                             <tr>
-                                <td style="font-size: 13px; border: none;">အဆင့်</td>
-                                <td style="font-size: 13px; border: none;">၊</td>
-                                <td style="font-size: 13px; border: none;">{{$staff->current_rank->name}}</td>
+                                <td style="font-size: 14px; border: none;">အဆင့်</td>
+                                <td style="font-size: 14px; border: none;">၊</td>
+                                <td style="font-size: 14px; border: none;">{{$staff->current_rank->name}}</td>
                             </tr>
                             <tr>
-                                <td style="font-size: 13px; border: none;">တပ်/ ဌာန</td>
-                                <td style="font-size: 13px; border: none;">၊</td>
-                                <td style="font-size: 13px; border: none;">{{ $staff->current_department->name }}</td>
+                                <td style="font-size: 14px; border: none;">တပ်/ ဌာန</td>
+                                <td style="font-size: 14px; border: none;">၊</td>
+                                <td style="font-size: 14px; border: none;">{{ $staff->current_department->name }}</td>
                             </tr>
                       </table>
                     
                     <table style="border:none;">
                     <tr>
                     <td style=" text-align: start;  border: none;">
-                        <p style="margin: 0; font-size: 13px;">ရက်စွဲ - {{  mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)) }}</p>
+                        <p style="margin: 0; font-size: 14px;">ရက်စွဲ - {{  mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)) }}</p>
                     </td>
                 </tr>
             </table>

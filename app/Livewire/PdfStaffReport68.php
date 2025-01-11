@@ -90,6 +90,29 @@ public $staff_id;
     
         //     $textBox->addImage($defaultImagePath, ['width' =>62, 'height' => 65, 'align' => 'center', 'padding'=>0 ]);
         //    }
+
+        $textBoxStyle = [
+            'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
+            'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
+            // 'borderColor' => 'FFFFFF', // Set to white for no visible border
+            'borderSize' => 0,    
+            'positioning' => 'relative', // Relative positioning
+            'posHorizontal' => 'right', // Align next to inline content
+            'posHorizontalRel' => 'margin', // Relative to margin (inline context)
+            'marginLeft' => 0, // Small spacing from the left
+            
+        ];
+        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
+            if ($imagePath && file_exists($imagePath)) {
+                $textBox = $section->addTextBox($textBoxStyle);
+                $textBox->addImage($imagePath, ['width' => 62, 'height' => 69, 'align' => 'right']);
+            } else {
+            $defaultImagePath = public_path('img/user.png');
+            $textBox = $section->addTextBox($textBoxStyle);
+    
+            $textBox->addImage($defaultImagePath, ['width' =>62, 'height' => 65, 'align' => 'center', 'padding'=>0 ]);
+           }
+
         $table = $section->addTable();
         $table->addRow();
         $table->addCell(2000)->addText('၁။',null,['alignment'=>'center']); 

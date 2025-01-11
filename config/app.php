@@ -27,6 +27,7 @@ return [
     |
     */
 
+
     'env' => env('APP_ENV', 'production'),
 
     /*
@@ -124,6 +125,18 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
     'charset' => 'UTF-8',
+
+    
+    // 'providers' => [
+    //     \PhpOffice\PhpWord\PhpWordServiceProvider::class,
+    //     \PhpOffice\PhpSpreadsheet\SpreadsheetServiceProvider::class,
+    //     \Barryvdh\DomPDF\ServiceProvider::class,
+    //   ],
+      
+    //   'aliases' => [
+    //       'PhpWord'=>PhpOffice\PhpWord\Facades\PhpWord::class,
+    //       'PhpSpreadsheet'=>PhpOffice\PhpSpreadsheet\Spreadsheet::class,
+    //   ],
    
 
 ];

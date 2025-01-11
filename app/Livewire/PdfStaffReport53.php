@@ -307,13 +307,13 @@ class PdfStaffReport53 extends Component
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText('', null, $pStyle_8);
 
-        foreach ($staff->staff_educations as $education) {
-            $table->addRow(50);
-            $table->addCell(1300)->addText('', null, $pStyle_5);
-            $table->addCell(13000)->addText('', null, $pStyle_8);
-            $table->addCell(700)->addText('-', null, $pStyle_5);
-            $table->addCell(13000)->addText( $education->education?->name , null, $pStyle_8);
-        }
+        // foreach ($staff->staff_educations as $education) {
+        //     $table->addRow(50);
+        //     $table->addCell(1300)->addText('', null, $pStyle_5);
+        //     $table->addCell(13000)->addText('', null, $pStyle_8);
+        //     $table->addCell(700)->addText('-', null, $pStyle_5);
+        //     $table->addCell(13000)->addText( $education->education?->name , null, $pStyle_8);
+        // }
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၁၉။', null, $pStyle_5);

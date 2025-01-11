@@ -124,19 +124,19 @@ class PdfStaffReport18 extends Component
     
         $table = $section->addTable();
         $table->addRow(50);
-        $table->addCell(700)->addText('၁။', null, $pStyle_5);
+        $table->addCell(2000)->addText('၁။', null, $pStyle_5);
         $table->addCell(10000)->addText('အမည်(ကျား/မ) ',null ,$pStyle_4);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(16000)->addText($staff->name ,null ,$pStyle_4);
 
         $table->addRow();
-        $table->addCell(700)->addText('၂။', null, $pStyle_5);
+        $table->addCell(2000)->addText('၂။', null, $pStyle_5);
         $table->addCell(10000)->addText('ဝန်ထမ်းအမှတ် ',null ,$pStyle_4);
         $table->addCell(700)->addText('-',  null, $pStyle_5);
         $table->addCell(16000)->addText($staff->staff_no,null ,$pStyle_4);
 
         $table->addRow();
-        $table->addCell(700)->addText('၃။', null, $pStyle_5);
+        $table->addCell(2000)->addText('၃။', null, $pStyle_5);
         $table->addCell(10000)->addText('မွေးနေ့ (ရက်၊ လ၊ နှစ်) ',null ,$pStyle_4);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(16000)->addText(en2mm(\Carbon\Carbon::parse($staff->dob)->format('d-m-Y')),null ,$pStyle_4);
@@ -154,56 +154,56 @@ class PdfStaffReport18 extends Component
         $table->addCell(16000)->addText($staff->father_name,null ,$pStyle_4);
         
         $table->addRow();
-        $table->addCell(700)->addText('၆။', null, $pStyle_5);
+        $table->addCell(2000)->addText('၆။', null, $pStyle_5);
         $table->addCell(10000)->addText('အမိအမည် ',null ,$pStyle_4);
         $table->addCell(900)->addText('-', null, $pStyle_5);
         $table->addCell(16000)->addText($staff->mother_name,null ,$pStyle_4);
         
         $table->addRow();
-        $table->addCell(700)->addText('၇။', null, $pStyle_5);
+        $table->addCell(2000)->addText('၇။', null, $pStyle_5);
         $table->addCell(10000)->addText('နိုင်ငံသားစိစစ်ရေးအမှတ် ',null ,$pStyle_4);
         $table->addCell(900)->addText('-', null, $pStyle_5);
         $table->addCell(16000)->addText(($staff->nrc_region_id->name . $staff->nrc_township_code->name) . ($staff->nrc_sign->name . en2mm($staff->nrc_code)),null ,$pStyle_4);
         
         $table->addRow();
-        $table->addCell(700)->addText('၈။', null, $pStyle_5);
+        $table->addCell(2000)->addText('၈။', null, $pStyle_5);
         $table->addCell(10000)->addText('ဇနီး/ခင်ပွန်းအမည် ',null ,$pStyle_4);
         $table->addCell(900)->addText('-', null, $pStyle_5);
         $table->addCell(16000)->addText($staff?->spouses->first()?->name ,null ,$pStyle_4);
         
         $table->addRow();
-        $table->addCell(700)->addText('၉။', null, $pStyle_5);
+        $table->addCell(2000)->addText('၉။', null, $pStyle_5);
         $table->addCell(10000)->addText('သား/သမီးအမည် ',null ,$pStyle_4);
         $table->addCell(900)->addText('-', null, $pStyle_5);
         $table->addCell(16000)->addText($staff->children->first()?->name,null ,$pStyle_4);
         
         $table->addRow();
-        $table->addCell(700)->addText('၁၀။', null, $pStyle_5);
+        $table->addCell(2000)->addText('၁၀။', null, $pStyle_5);
         $table->addCell(10000)->addText('လိပ်စာ ',null ,$pStyle_4);
         $table->addCell(900)->addText('-', null, $pStyle_5);
         $table->addCell(16000)->addText($staff->current_address_street.$staff->current_address_ward.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'။',null ,$pStyle_4);
         
         $table->addRow();
-        $table->addCell(700)->addText('၁၁။', null, $pStyle_5);
+        $table->addCell(2000)->addText('၁၁။', null, $pStyle_5);
         $table->addCell(10000)->addText('ပညာအရည်အချင်း ',null ,$pStyle_4);
-        // $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
-        // $table->addCell(16000)->addText('',null ,['alignment'=>'both']);
-       foreach ($staff->staff_educations as $education) {
-            $table->addRow();
-            $table->addCell(2000);
-            $table->addCell(4000)->addText('', null, ['alignment' => 'center']);
-            $table->addCell(900)->addText('-', null, ['alignment' => 'center']);
-            $table->addCell(5000)->addText($education->education?->name . '၊',null, ['alignment' => 'both']);
-        }
+        $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
+        $table->addCell(16000)->addText('',null ,['alignment'=>'both']);
+    //    foreach ($staff->staff_educations as $education) {
+    //         $table->addRow();
+    //         $table->addCell(2000);
+    //         $table->addCell(4000)->addText('', null, ['alignment' => 'center']);
+    //         $table->addCell(900)->addText('-', null, ['alignment' => 'center']);
+    //         $table->addCell(5000)->addText($education->education?->name . '၊',null, ['alignment' => 'both']);
+    //     }
 
         $table->addRow();
-        $table->addCell(700)->addText('၁၂။', null, $pStyle_5);
+        $table->addCell(2000)->addText('၁၂။', null, $pStyle_5);
         $table->addCell(10000)->addText('လက်ရှိရာထူး/လစာနှုန်း/ဌာန ',null ,$pStyle_4);
         $table->addCell(900)->addText('-', null, $pStyle_5);
         $table->addCell(16000)->addText($staff->current_rank?->name.'၊'.$staff->payscale?->name."\n".$staff?->current_department->name ,null ,$pStyle_4);
         
         $table->addRow();
-        $table->addCell(700)->addText('၁၃။', null, $pStyle_5);
+        $table->addCell(2000)->addText('၁၃။', null, $pStyle_5);
         $table->addCell(10000)->addText('သွေးအုပ်စု ',null ,$pStyle_4);
         $table->addCell(900)->addText('-', null, $pStyle_5);
         $table->addCell(16000)->addText($staff->blood_type->name,null ,$pStyle_4);
