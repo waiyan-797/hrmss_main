@@ -7,8 +7,8 @@
                 'id' => $relation_id,
                 'title' => 'တော်စပ်ပုံ',
                 'search_id' => 'relation_search',
-                'columns' => ['စဉ်', 'တော်စပ်ပုံ', 'လုပ်ဆောင်ချက်'],
-                'column_vals' => ['name'],
+                'columns' => ['စဉ်', 'တော်စပ်ပုံ', 'တော်စပ်ပုံအမျိုးအစား' ,  'လုပ်ဆောင်ချက်'],
+                'column_vals' => ['name' , 'relationShipType'],
             ])
         </div>
     </div>

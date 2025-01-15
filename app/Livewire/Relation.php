@@ -6,6 +6,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\On;
 use App\Models\Relation as ModelsRelation;
+use App\Models\RelationShipType;
+
 
 class Relation extends Component
 {
@@ -18,9 +20,12 @@ class Relation extends Component
     public $relation_search, $relation_name, $relation_id;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
+    public $relationship_type_id ;
+    public $relasionShips;
     //validation
     protected $rules = [
-        'relation_name' => 'required',
+        'relation_name' => 'required', 
+        'relationship_type_id' => 'required'
     ];
 
      //add new
@@ -47,6 +52,7 @@ class Relation extends Component
         $this->validate();
         ModelsRelation::create([
             'name' => $this->relation_name,
+            'relation_ship_type_id' => $this->relationship_type_id
         ]);
         $this->message = 'Created successfully.';
         $this->close_modal();
@@ -68,6 +74,7 @@ class Relation extends Component
         $this->relation_id = $id;
         $relation = ModelsRelation::findOrFail($id);
         $this->relation_name = $relation->name;
+      $this->relationship_type_id  = $relation->relation_ship_type_id;
     }
 
     //update
@@ -76,6 +83,8 @@ class Relation extends Component
         $this->validate();
         ModelsRelation::findOrFail($this->relation_id)->update([
             'name' => $this->relation_name,
+            'relation_ship_type_id' => $this->relationship_type_id
+
         ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();
@@ -98,6 +107,10 @@ class Relation extends Component
         $this->render();
     }
 
+
+    public function mount(){
+        $this->relasionShips = RelationShipType::all();
+    }
     public function render()
     {
         $this->modal_title = $this->confirm_add ? 'တော်စပ်ပုံအသစ်ထည့်ပါ

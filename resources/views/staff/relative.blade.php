@@ -155,6 +155,7 @@
         </div>
     </div>
 </div>
+
 @foreach ($relatives as $key => $relative)
     <div class="w-full h-auto py-5">
         <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
@@ -166,6 +167,8 @@
                 <span class="sr-only">Add Icon</span>
             </button>
         </div>
+        {{-- @dd($relations) --}}
+        
         @include('staff_multiple_table', [
             'column_names' => ['အမည်', 'လူမျိုး', 'ဘာသာ','ကျား/မ', 'ဇာတိ', 'အလုပ်အကိုင်', 'နေရပ်လိပ်စာ', 'တော်စပ်ပုံ'],
             'column_vals' => $relative['data'],
@@ -217,7 +220,7 @@
                     'wire_array_name' => $key,
                     'next_col_update' => null,
                     'wire_array_key' => 'relation',
-                    'select_values' => $relations,
+                    'select_values' => getRelatedRsType($relations , $key),
                 ],
             ],
             'del_method' => 'remove_'.$key,

@@ -11,4 +11,9 @@ class Relation extends Model
 
     protected $fillable = ['name'];
 
+
+    public function relationShipType(){
+        return $this->belongsTo(RelationShipType::class);
+    }
+
 }

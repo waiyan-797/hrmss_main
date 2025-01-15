@@ -154,6 +154,7 @@ use App\Livewire\NptBySamePayScale;
 use App\Livewire\NPTThreee;
 use App\Livewire\PersonnelAccount;
 use App\Livewire\Promotion as LivewirePromotion;
+use App\Livewire\RelationShipType;
 use App\Livewire\Report;
 use App\Livewire\Retirement;
 use App\Livewire\Salary;
@@ -177,6 +178,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('profile', 'profile')->name('profile');
     Route::get('/training_type', TrainingType::class)->name('training_type');
     Route::get('/relation', Relation::class)->name('relation');
+    Route::get('/relation-type', RelationShipType::class)->name('relation_type');    
     Route::get('/division', Division::class)->name('division');
     Route::get('/department', Department::class)->name('department');
     Route::get('/region', Region::class)->name('region');
@@ -372,6 +374,7 @@ Route::get('vacancy_over_by_division' , VacancyOverByDivision::class)->name('vac
 
 Route::get('/children_report_detials' , ChildrenReportDetails::class)->name('children_report_detials');
 Route::get('/children_report_summary' , ChildrenReportSummary::class)->name('children_report_summary');
+// Route::get('/children_report_summary' , ChildrenReportSummary::class)->name('children_report_summary');
 
 
 

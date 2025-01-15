@@ -53,6 +53,7 @@
                         ['route_name' => 'salary', 'name' => 'လစာ'],
                         ['route_name' => 'difficulty_level', 'name' => 'အခက်အခဲအဆင့်'],
                         ['route_name' => 'marital_status', 'name' => 'အိမ်ထောင်သည်'],
+                        ['route_name' => 'relation_type', 'name' => 'တော်စပ်ပုံအမျိုးအစား'],
 
                     ]"
                 />

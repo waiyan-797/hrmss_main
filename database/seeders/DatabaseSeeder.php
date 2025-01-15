@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             PayscaleSeeder::class,
             PenaltyTypeSeeder::class,
             PensionTypeSeeder::class,
+            RelationShipTypeSeeder::class,
             RelationSeeder::class,
             NationalitySeeder::class,
             RankSeeder::class,

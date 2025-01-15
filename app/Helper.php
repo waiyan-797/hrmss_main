@@ -443,4 +443,36 @@ if (!function_exists('getAddress')) {
 
 
 
+if (!function_exists(function: 'endsWithSiblings')) {
 
+    function endsWithSiblings($string) {
+        return substr($string, -8) === 'siblings' ;
+    }
+
+    
+}
+
+// endsWithSiblings($key) ? $relations->where('relation_ship_type_id' , 1 ) : $relations
+if (!function_exists(function: 'getRelatedRsType')) {
+
+    function getRelatedRsType($relations , $key) {
+        if(endsWithSiblings($key)){
+            return $relations->where('relation_ship_type_id' , 1 ) ;
+        }
+        elseif($key == 'spouses'){
+            return $relations->where('relation_ship_type_id' , 3 ) ;
+
+        }
+        elseif($key=='children'){
+            return $relations->where('relation_ship_type_id' , 5 ) ;
+
+        }
+        else{
+            return $relations ;
+        }
+
+        
+    }
+
+    
+}
