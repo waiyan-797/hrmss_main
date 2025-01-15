@@ -108,6 +108,17 @@
                     </div>
                 </div>
             </form>
+            @switch($add_model)
+                @case('edu_group')
+                    @include('modals/education_group_modal')
+                @break
+                @case('edu_type')
+                    @include('modals/education_type_modal')
+                @break
+                @case('edu')
+                    @include('modals/education_modal')
+                @break
+            @endswitch
         </div>
     </div>
 </div>

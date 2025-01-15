@@ -11,7 +11,7 @@
     </div>
     @include('staff_multiple_table', [
         'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သောဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့','မှ','ထိ','မှတ်ချက်'],
-        'data_master_add_stats' => [null, null, null, null, null, null, null, null],
+        'data_master_add_stats' => ['edu_group', 'edu_type', 'edu', null, null, null, null, null],
         'column_vals' => $schools,
         'column_types' => [
             [

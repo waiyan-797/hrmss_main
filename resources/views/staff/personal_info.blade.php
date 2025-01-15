@@ -398,6 +398,19 @@
         <x-text-input wire:model="life_insurance_premium" id="life_insurance_premium" name="life_insurance_premium" type="text" class="mt-1 block w-full" />
         <x-input-error class="mt-2" :messages="$errors->get('life_insurance_premium')" />
     </div>
+
+    <div>
+        <x-input-label for="ပြည်သူ့စစ်မှုထမ်းတာ၀န်ထမ်းဆောင်မှုအ‌ခြေအနေ" :value="__('ပြည်သူ့စစ်မှုထမ်းတာ၀န်ထမ်းဆောင်မှုအ‌ခြေအနေ')" />
+        <x-select
+            wire:model="military_service_id"
+            :values="$military_services"
+            placeholder="အ‌ခြေအနေရွေးပါ"
+            id="military_service_id"
+            name="military_service_id"
+            class="mt-1 block w-full"
+        />
+        <x-input-error class="mt-2" :messages="$errors->get('military_service_id')" />
+    </div>
 </div>
 <div class="w-full h-auto py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
@@ -458,15 +471,4 @@
         ],
         'del_method' => 'removeEdu',
     ])
-    @switch($add_model)
-        @case('edu_group')
-            @include('modals/education_group_modal')
-        @break
-        @case('edu_type')
-            @include('modals/education_type_modal')
-        @break
-        @case('edu')
-            @include('modals/education_modal')
-        @break
-    @endswitch
 </div>

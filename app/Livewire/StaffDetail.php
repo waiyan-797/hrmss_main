@@ -21,6 +21,7 @@ use App\Models\Language;
 use App\Models\Leave as ModelsLeave;
 use App\Models\LeaveType;
 use App\Models\MaritalStatus;
+use App\Models\MilitaryService;
 use App\Models\Ministry;
 use App\Models\MotherSibling;
 use App\Models\Nationality;
@@ -75,7 +76,7 @@ class StaffDetail extends Component
     public $staff, $staff_status_id;
 
     //personal_info
-    public $staff_photo, $staff_nrc_front, $staff_nrc_back, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $attendid, $gpms_staff_no, $spouse_name, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $government_staff_started_date, $prominent_mark, $skin_color, $weight, $blood_type_id, $marital_status_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_house_no, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_house_no, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $life_insurance_proposal, $life_insurance_policy_no, $life_insurance_premium, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension, $military_gazetted_no, $veteran_no, $veteran_date, $last_serve_army, $health_condition, $tax_exception;
+    public $staff_photo, $staff_nrc_front, $staff_nrc_back, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $attendid, $gpms_staff_no, $spouse_name, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $government_staff_started_date, $prominent_mark, $skin_color, $weight, $blood_type_id, $marital_status_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_house_no, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_house_no, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $life_insurance_proposal, $life_insurance_policy_no, $life_insurance_premium, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension, $military_gazetted_no, $veteran_no, $veteran_date, $last_serve_army, $health_condition, $tax_exception, $military_service_id;
     public $leave_search, $leave_name, $leave_type_name, $leave_id, $staff_name, $from_date, $to_date, $qty, $order_no, $remark;
     public $cancel_action, $submit_form, $leave_types;
 
@@ -124,6 +125,7 @@ class StaffDetail extends Component
         'photo' => '',
         'name' => 'required',
         'nick_name' => '',
+        'military_service_id' => '',
         'other_name' => '',
         'staff_no' => '',
         'dob' => 'required',
@@ -287,6 +289,7 @@ class StaffDetail extends Component
     public function mount()
     {
         $this->saveDraftCheck = false;
+        $this->cancel_action = 'close_master_modal';
         $this->submit_button_text = 'သိမ်းရန်';
         $this->add_model = null;
         if ($this->staff_id) {
@@ -558,6 +561,7 @@ class StaffDetail extends Component
         $this->prominent_mark = $staff->prominent_mark;
         $this->skin_color = $staff->skin_color;
         $this->weight = $staff->weight;
+        $this->military_service_id = $staff->military_service_id;
         $this->blood_type_id = $staff->blood_type_id;
         $this->marital_status_id = $staff->marital_status_id;
         $this->place_of_birth = $staff->place_of_birth;
@@ -980,6 +984,7 @@ class StaffDetail extends Component
             'skin_color' => $this->skin_color,
             'weight' => $this->weight,
             'blood_type_id' => $this->blood_type_id,
+            'military_service_id' => $this->military_service_id,
             'marital_status_id' => $this->marital_status_id,
             'place_of_birth' => $this->place_of_birth,
             'nrc_region_id_id' => $this->nrc_region_id,
@@ -1630,6 +1635,7 @@ class StaffDetail extends Component
             'religions' => Religion::all(),
             'regions' => Region::all(),
             'genders' => Gender::all(),
+            'military_services' => null,
             'blood_types' => null,
             'marital_statuses' => null,
             'education_groups' => null,
@@ -1665,6 +1671,7 @@ class StaffDetail extends Component
         switch ($this->tab) {
             case 'personal_info':
                 $data['genders'] = Gender::all();
+                $data['military_services'] = MilitaryService::all();
                 $data['blood_types'] = BloodType::all();
                 $data['marital_statuses'] = MaritalStatus::all();
                 $data['education_groups'] = EducationGroup::all();
@@ -1827,6 +1834,7 @@ class StaffDetail extends Component
         EducationGroup::create([
             'name' => $this->education_group_name,
         ]);
+        $this->reset('education_group_name');
         $this->message = 'Education Group Created Successfully.';
         $this->add_model = null;
     }
@@ -1836,6 +1844,7 @@ class StaffDetail extends Component
             'name' => $this->education_type_name,
             'education_group_id' => $this->education_group_name
         ]);
+        $this->reset(['education_type_name', 'education_group_name']);
         $this->message = 'Education Type Created successfully.';
         $this->add_model = null;
     }
@@ -1845,7 +1854,12 @@ class StaffDetail extends Component
             'name' => $this->education_name,
             'education_type_id' => $this->education_type_name
         ]);
+        $this->reset(['education_name', 'education_type_name']);
         $this->message = 'Education Created successfully.';
+        $this->add_model = null;
+    }
+
+    public function close_master_modal(){
         $this->add_model = null;
     }
 }
