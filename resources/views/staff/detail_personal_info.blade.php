@@ -11,26 +11,32 @@
     </div>
     @include('staff_multiple_table', [
         'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သောဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့','မှ','ထိ','မှတ်ချက်'],
+        'data_master_add_stats' => [null, null, null, null, null, null, null, null],
         'column_vals' => $schools,
         'column_types' => [
             [
                 'type' => 'select',
                 'wire_array_name' => 'schools',
-                'next_col_update' => null,
                 'wire_array_key' => 'education_group',
                 'select_values' => $education_groups,
+                'next_col_update' => 'education_types',
+                'ini_array' => 'eduTypes',
             ],
             [
-                'type' => 'search_select',
+                'type' => 'select',
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'education_type',
-                'select_values' => $education_types,
+                'select_values' => 'education_types',
+                'next_col_update' => '_educations',
+                'ini_array' => 'edus',
             ],
             [
-                'type' => 'search_select',
+                'type' => 'select',
                 'wire_array_name' => 'schools',
+                'next_col_update' => null,
                 'wire_array_key' => 'education',
-                'select_values' => $_educations,
+                'select_values' => '_educations',
+                'ini_array' => null,
             ],
             [
                 'type' => 'text',
@@ -75,6 +81,7 @@
     </div>
     @include('staff_multiple_table', [
         'column_names' => ['သင်တန်းအမည်', 'အခြားသင်တန်းအမည်', 'သင်တန်းအမှတ်စဉ်' , 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းအမျိုးအစား','အဆင့်အတန်း'],
+        'data_master_add_stats' => [null, null, null, null, null, null, null, null, null],
         'add_event' => 'add_trainings',
         'column_vals' => $trainings,
         'column_types' => [
@@ -145,6 +152,7 @@
     </div>
     @include('staff_multiple_table', [
         'column_names' => ['ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အမည်', 'ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်', 'အမိန့်အမှတ်/ခုနှစ်','မှတ်ချက်'],
+        'data_master_add_stats' => [null, null, null, null, null],
         'column_vals' => $awards,
         'column_types' => [
             [
@@ -219,7 +227,8 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['ရာထူး', 'ဌာန', 'ဌာနခွဲ','လိပ်စာ' ,'မှ', 'ထိ', 'မှတ်ချက်'],
+        'column_names' => ['ရာထူး', '၀န်ကြီးဌာန', 'ဦးစီးဌာန', '‌နေရာ', 'မှ', 'ထိ', 'မှတ်ချက်'],
+        'data_master_add_stats' => [null, null, null, null, null, null, null],
         'column_vals' => $past_occupations,
         'column_types' => [
             [
@@ -309,7 +318,19 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['သွားရောက်ခဲ့သည့်နိုင်ငံ', 'သွားရောက်ခဲ့သည့်အကြောင်း','သင်တန်းတက်ခြင်းဖြစ်လျှင် အောင်/မအောင်','သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်','ထောက်ပံ့သည့်အဖွဲ့အစည်း', 'တွေ့ဆုံခဲ့သည့် ကုမ္ပဏီ၊ လူပုဂ္ဂိုလ်၊ ဌာန', 'သွားသည့်နေ့ (လ၊ ရက်၊ နှစ်)', 'ပြန်သည့်နေ့ (လ၊ ရက်၊ နှစ်)', 'နိုင်ငံခြားသို့သွားရောက်မည်ံနေ့ (လ၊ ရက်၊ နှစ်)','ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး'],
+        'column_names' => [
+            'သွားရောက်ခဲ့သည့်နိုင်ငံ',
+            'သွားရောက်ခဲ့သည့်အကြောင်း',
+            'သင်တန်းတက်ခြင်းဖြစ်လျှင် အောင်/မအောင်',
+            'သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်',
+            'ထောက်ပံ့သည့်အဖွဲ့အစည်း',
+            'တွေ့ဆုံခဲ့သည့် ကုမ္ပဏီ၊ လူပုဂ္ဂိုလ်၊ ဌာန',
+            'သွားသည့်နေ့ (လ၊ ရက်၊ နှစ်)',
+            'ပြန်သည့်နေ့ (လ၊ ရက်၊ နှစ်)',
+            'နိုင်ငံခြားသို့သွားရောက်မည်ံနေ့ (လ၊ ရက်၊ နှစ်)',
+            'ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး'
+        ],
+        'data_master_add_stats' => [null, null, null, null, null, null, null, null, null, null],
         'column_vals' => $abroads,
         'column_types' => [
             [
@@ -428,6 +449,7 @@
     </div>
     @include('staff_multiple_table', [
         'column_names' => ['ပြစ်ဒဏ်အမျိုးအစား', 'ပြစ်ဒဏ်ချမှတ်ခံရသည့် အကြောင်းအရင်း', 'မှ', 'ထိ'],
+        'data_master_add_stats' => [null, null, null, null],
         'column_vals' => $punishments,
         'column_types' => [
             [
@@ -469,6 +491,7 @@
     </div>
     @include('staff_multiple_table', [
         'column_names' => ['အကြောင်းအရာ', 'မှတ်ချက်'],
+        'data_master_add_stats' => [null, null],
         'column_vals' => $socials,
         'column_types' => [
             [
@@ -498,6 +521,7 @@
     </div>
     @include('staff_multiple_table', [
         'column_names' => ['ဘာသာစကား', 'အဆင့်', 'အရေး', 'အဖတ်', 'အပြော', 'မှတ်ချက်'],
+        'data_master_add_stats' => [null, null, null, null, null, null],
         'column_vals' => $staff_languages,
         'column_types' => [
             [

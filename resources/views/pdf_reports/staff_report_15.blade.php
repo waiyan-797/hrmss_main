@@ -30,7 +30,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-           
+
         }
 
         table,
@@ -118,7 +118,7 @@
                                     <td style="border: none; width: 45%;">လက်ရှိနေရပ်လိပ်စာ</td>
                                     <td style="border: none; width: 5%;">-</td>
                                     <td style="border: none; width: 45%;">
-                                         {{ collect([$staff->current_address_street ?? null, $staff->current_address_ward ?? null, $staff->current_address_township_or_town->name ?? null, $staff->current_address_region->name ?? null])->filter()->implode('၊') }} 
+                                         {{ collect([$staff->current_address_street ?? null, $staff->current_address_ward ?? null, $staff->current_address_township_or_town->name ?? null, $staff->current_address_region->name ?? null])->filter()->implode('၊') }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -159,7 +159,7 @@
                                     <td style="border: none; width: 45%; ">နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်)</td>
                                     <td style="border: none; width: 5%; ">-</td>
                                     <td style="border: none; width: 45%; ">{{ en2mm($staff->abroads->count()) }}</td>
-                                </tr> 
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -186,7 +186,7 @@
                                         <th rowspan="2" style="text-align: center;">သွားရောက်သည့်ကိစ္စ</th>
                                         <th rowspan="2" style="text-align: center;">သင်တန်းတက်<br>ခြင်းဖြစ်လျှင် <br>အကြိမ်မည်မျှဖြင့်<br>အောင်မြင်သည်</th>
                                         <th rowspan="2" style="text-align: center;">မည်သည့်အစိုးရ<br>အဖွဲ့အစည်း<br>အထောက်အပံ့ဖြင့်<br>သွားရောက်သည်</th>
-                                       
+
                                     </tr>
                                     <tr>
                                         <th style="text-align: center;">မှ</th>
@@ -281,12 +281,12 @@
                         </table>
                          <div style="display: flex; justify-content: flex-end;">
                             <table style="border: none; border-collapse: collapse; font-size:13px">
-                              
+
                                 <tr>
                                     <td style="border: none; width: 5%;"></td>
                                     <td style="border: none; width: 35%;"></td>
                                     <td style="border: none; width: 5%;">လက်မှတ်၊</td>
-                                  
+
                                     <td style="border: none; width: 55%;"></td>
                                 </tr>
                                 <tr>
@@ -309,7 +309,7 @@
                                 </tr>
                             </table>
                         </div>
-                        
+
 
                         <table width="100%" style="border: none;">
                             <tr>
@@ -327,10 +327,10 @@
             </div>
         </div>
         </div>
-    </page> 
+    </page>
 
- 
-    
+
+
 </body>
 </html>   --}}
 
@@ -450,7 +450,7 @@
     </tr>
 </table>
 
-    
+
      <table>
          <tr>
              <th style="width: 5%;">၁။</th>
@@ -507,7 +507,7 @@
              </td>
              <th style="width: 5%;">-</th>
              <td style="width: 45%;">
-                 {{ implode('၊', [$staff->current_address_street, $staff->current_address_ward, $staff->current_address_township_or_town->name, $staff->current_address_region->name]); }}
+                 {{ implode('၊', [$staff->current_address_street, $staff->current_address_ward, $staff->current_address_township_or_town->name, $staff->current_address_region->name]) }}
              </td>
          </tr>
          <tr>
@@ -585,7 +585,7 @@
                     @php
                         $latestAbroads = $staff->abroads ? $staff->abroads->sortByDesc('to_date')->take(5) : [];
                     @endphp
-    
+
                     @if ($latestAbroads->isNotEmpty())
                         @foreach ($latestAbroads as $abroad)
                             <tr>
@@ -606,7 +606,7 @@
             </table>
         </div>
     </div>
-    
+
      <div class="table-container">
          <div class="flex-container">
              <h2 class="text-bold">၁၄။ဇနီး/ခင်ပွန်း</h2>
@@ -669,7 +669,7 @@
                                 <td style="font-size: 14px; border: none;">{{ $staff->current_department->name }}</td>
                             </tr>
                       </table>
-                    
+
                     <table style="border:none;">
                     <tr>
                     <td style=" text-align: start;  border: none;">

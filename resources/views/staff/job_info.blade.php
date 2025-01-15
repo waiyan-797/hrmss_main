@@ -128,6 +128,7 @@
     </div>
     @include('staff_multiple_table', [
         'column_names' => ['ထောက်ခံသူ'],
+        'data_master_add_stats' => [null],
         'column_vals' => $recommendations,
         'column_types' => [
             [
@@ -151,7 +152,8 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['ရာထူး/အဆင့်', 'မှ', 'ထိ', 'ဌာန', 'ဌာနခွဲ', 'နေရာ','ဝန်ကြီးဌာန','မှတ်ချက်'],
+        'column_names' => ['ရာထူး/အဆင့်', 'မှ', 'ထိ', 'ဝန်ကြီးဌာန', 'ဦးစီးဌာန', 'ဌာနခွဲ', 'နေရာ', 'မှတ်ချက်'],
+        'data_master_add_stats' => [null, null, null, null, null, null, null, null],
         'add_event' => 'add_posting',
         'column_vals' => $postings,
         'column_types' => [
@@ -161,7 +163,6 @@
                 'wire_array_key' => 'rank',
                 'select_values' => $ranks,
             ],
-
             [
                 'type' => 'date',
                 'wire_array_name' => 'postings',
@@ -185,16 +186,15 @@
                 'select_values' => $divisions,
             ],
             [
-                'type' => 'text',
-                'wire_array_name' => 'postings',
-                'wire_array_key' => 'location',
-            ],
-
-            [
                 'type' => 'search_select',
                 'wire_array_name' => 'postings',
                 'wire_array_key' => 'ministry',
                 'select_values' => $ministrys,
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'postings',
+                'wire_array_key' => 'location',
             ],
             [
                 'type' => 'text',

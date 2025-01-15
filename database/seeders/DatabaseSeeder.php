@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            
+
             StaffTypeSeeder::class,
             TrainingLocationSeeder::class,
             CountrySeeder::class,
@@ -32,7 +32,6 @@ class DatabaseSeeder extends Seeder
             PenaltyTypeSeeder::class,
             PensionTypeSeeder::class,
             RelationSeeder::class,
-            DepartmentSeeder::class,
             NationalitySeeder::class,
             RankSeeder::class,
             AwardTypeSeeder::class,
@@ -49,12 +48,13 @@ class DatabaseSeeder extends Seeder
             PostSeeder::class,
             MaritalStatusSeeder::class,
             MaritalStatusTypeSeeder::class,
-            MinistrySeeder::class,
             RoleSeeder::class ,
             StatusSeeder::class,
             UserSeeder::class ,
             LanguageSeeder::class ,
             RetireTypeSeeder::class,
+            MinistrySeeder::class,
+            DepartmentSeeder::class,
         ]);
     }
 }

@@ -3,7 +3,7 @@
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-96 p-4">
         <!-- Modal Content -->
         <h2 class="text-lg font-semibold mb-4 text-gray-500 dark:text-white font-arial uppercase">{{ $modal_title }}</h2>
-        <form wire:submit.prevent="{{$submit_form}}">
+        <form>
             <div class="mb-4">
                 <label for="name" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ပညာအရည်အချင်း အမျိုးအစား
                 </label>
@@ -24,7 +24,7 @@
                     </select>
                 </div>
             </div>
-            <button type="submit" class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded font-arial">{{ $submit_button_text }}</button>
+            <button type="button" wire:click="{{ $submit_form }}" class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded font-arial">{{ $submit_button_text }}</button>
             <button type="button" wire:click="{{ $cancel_action }}" class="font-arial bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">ထွက်ရန်</button>
         </form>
     </div>

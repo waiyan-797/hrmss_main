@@ -169,6 +169,7 @@
         @include('staff_multiple_table', [
             'column_names' => ['အမည်', 'လူမျိုး', 'ဘာသာ','ကျား/မ', 'ဇာတိ', 'အလုပ်အကိုင်', 'နေရပ်လိပ်စာ', 'တော်စပ်ပုံ'],
             'column_vals' => $relative['data'],
+            'data_master_add_stats' => [null, null, null, null, null, null, null, null],
             'column_types' => [
                 [
                     'type' => 'text',

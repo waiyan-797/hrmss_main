@@ -23,7 +23,6 @@
         </div>
     @endif
 
-
     <div class="font-arial text-md uppercase text-white bg-green-700 py-3 px-6 font-semibold flex flex-row justify-between items-center">
         {{ $title }}
         <div class="flex flex-row gap-3">
@@ -72,7 +71,7 @@
                                     {{$value->$val == 1 ? 'Active' : 'Inactive'}}
                                 @else
                                     @if (gettype($value->$val) == 'object')
-                                        {{ $value->$val->name }}
+                                        {{ $val == 'education_type' ? $value->$val->name.' - '.$value->$val->education_group->name : $value->$val->name }} {{-- exclusive for only edu --}}
                                     @elseif (is_string($value->$val) && Str::contains($value->$val, 'staffs/') || Str::contains($value->$val, 'avatars/'))
                                         <img src="{{ route('file', $value->$val) }}" alt="Image" class="w-20 h-20 mx-auto rounded-full">
                                     @else

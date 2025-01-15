@@ -411,6 +411,7 @@
     </div>
     @include('staff_multiple_table', [
         'column_names' => ['ပညာအရည်အချင်း အုပ်စု', 'ပညာအရည်အချင်း အမျိုးအစား', 'ပညာအရည်အချင်း' , 'ပေးအပ်သည့်နိုင်ငံ', 'ဘွဲ့လက်မှတ်'],
+        'data_master_add_stats' => ['edu_group', 'edu_type', 'edu', null, null],
         'column_vals' => $educations,
         'column_types' => [
             [
@@ -419,6 +420,8 @@
                 'wire_array_key' => 'education_group',
                 'select_values' => $education_groups,
                 'next_col_update' => 'education_types',
+                'next_col_model' => 'education_type',
+                'next_col_model_related' => 'education',
                 'ini_array' => 'eduTypes',
             ],
             [
@@ -427,14 +430,19 @@
                 'wire_array_key' => 'education_type',
                 'select_values' => 'education_types',
                 'next_col_update' => '_educations',
+                'next_col_model' => 'education',
+                'next_col_model_related' => null,
                 'ini_array' => 'edus',
             ],
             [
                 'type' => 'select',
                 'wire_array_name' => 'educations',
-                'next_col_update' => null,
                 'wire_array_key' => 'education',
                 'select_values' => '_educations',
+                'next_col_update' => null,
+                'next_col_model' => null,
+                'next_col_model_related' => null,
+                'ini_array' => null,
             ],
             [
                 'type' => 'search_select',
@@ -450,4 +458,15 @@
         ],
         'del_method' => 'removeEdu',
     ])
+    @switch($add_model)
+        @case('edu_group')
+            @include('modals/education_group_modal')
+        @break
+        @case('edu_type')
+            @include('modals/education_type_modal')
+        @break
+        @case('edu')
+            @include('modals/education_modal')
+        @break
+    @endswitch
 </div>
