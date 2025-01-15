@@ -365,12 +365,13 @@ class StaffDetail extends Component
                 'id' => $post->id,
                 'rank' => $post->rank_id,
                 'post' => $post->post_id,
+                'ministry' => $post->ministry_id,
+                'department' => $post->department_id,
+                'departments' => Department::where('ministry_id', $post->ministry_id)->get(),
+                'sub_department' => $post->sub_department,
                 'from_date' => $post->from_date,
                 'to_date' => $post->to_date,
-                'department' => $post->department_id,
-                'division' => $post->division_id,
                 'location' => $post->location,
-                'ministry' => $post->ministry_id,
                 'remark' => $post->remark,
             ];
         }
@@ -420,8 +421,9 @@ class StaffDetail extends Component
             $this->past_occupations[] = [
                 'id' => $ocu->id,
                 'rank' => $ocu->rank_id,
+                'ministry' => $ocu->ministry_id,
                 'department' => $ocu->department_id,
-                'section' => $ocu->section_id,
+                'departments' => Department::where('ministry_id', $ocu->ministry_id)->get(),
                 'address' => $ocu->address,
                 'from_date' => $ocu->from_date,
                 'to_date' => $ocu->to_date,
@@ -691,53 +693,54 @@ class StaffDetail extends Component
 
     public function add_posting()
     {
-        $this->postings[] = ['rank' => '', 'post' => '', 'from_date' => '', 'to_date' => '', 'department' => '', 'division' => '', 'location' => '', 'remark' => '', 'ministry' => ''];
+        $this->postings[] = ['id' => '', 'rank' => '', 'post' => '', 'from_date' => '', 'to_date' => '', 'department' => '', 'departments' => [], 'sub_department' => '', 'location' => '', 'remark' => '', 'ministry' => ''];
     }
 
     public function add_siblings()
     {
-        $this->siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->siblings[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
     public function add_father_siblings()
     {
-        $this->father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->father_siblings[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
     public function add_mother_siblings()
     {
-        $this->mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->mother_siblings[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
     public function add_spouses()
     {
-        $this->spouses[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->spouses[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
     public function add_children()
     {
-        $this->children[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->children[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
     public function add_spouse_siblings()
     {
-        $this->spouse_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->spouse_siblings[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
     }
 
     public function add_spouse_father_siblings()
     {
-        $this->spouse_father_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ' '];
+        $this->spouse_father_siblings[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ' '];
     }
 
     public function add_spouse_mother_siblings()
     {
-        $this->spouse_mother_siblings[] = ['name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => '',
+        $this->spouse_mother_siblings[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => '',
         ];
     }
 
     public function add_schools()
     {
         $this->schools[] = [
+            'id' => '',
             'education_group' => '',
             'education_type' => '',
             'education' => '',
@@ -775,13 +778,12 @@ class StaffDetail extends Component
             'award' => '',
             'order_no' => '',
             'remark' => '',
-
         ];
     }
 
     public function add_past_occupations()
     {
-        $this->past_occupations[] = ['id' => '', 'rank' => '', 'department' => '', 'section' => '', 'from_date' => '', 'to_date' => '', 'remark' => ''];
+        $this->past_occupations[] = ['id' => '', 'rank' => '', 'department' => '', 'departments' => [], 'ministry' => '', 'from_date' => '', 'to_date' => '', 'remark' => ''];
     }
 
     public function add_punishments()
@@ -1191,7 +1193,7 @@ class StaffDetail extends Component
     {
         foreach ($this->socials as $social) {
             SocialActivity::updateOrCreate([
-                'id' => $social['id'] ? null : $social['id'],
+                'id' => $social['id'] == '' ? null : $social['id'],
             ],[
                 'staff_id' => $staffId,
                 'particular' => $social['particular'],
@@ -1266,39 +1268,39 @@ class StaffDetail extends Component
 
     private function savePastOccupations($staffId)
     {
-        $rules = [
-            'past_occupations.*.rank' => 'required',
-            'past_occupations.*.department' => 'required',
-            'past_occupations.*.section' => 'required|nullable',
-            'past_occupations.*.address' => 'required|string',
-            'past_occupations.*.from_date' => 'required|date|date_format:Y-m-d',
-            'past_occupations.*.to_date' => 'required|date|after_or_equal:occupations.*.from_date|date_format:Y-m-d',
-            'past_occupations.*.remark' => 'nullable|string',
-        ];
+        // $rules = [
+        //     'past_occupations.*.rank' => 'required',
+        //     'past_occupations.*.department' => 'required',
+        //     'past_occupations.*.section' => 'required|nullable',
+        //     'past_occupations.*.address' => 'required|string',
+        //     'past_occupations.*.from_date' => 'required|date|date_format:Y-m-d',
+        //     'past_occupations.*.to_date' => 'required|date|after_or_equal:occupations.*.from_date|date_format:Y-m-d',
+        //     'past_occupations.*.remark' => 'nullable|string',
+        // ];
 
-        $messages = [
-            'past_occupations.*.rank.required' => 'The rank field is required.',
+        // $messages = [
+        //     'past_occupations.*.rank.required' => 'The rank field is required.',
 
-            'past_occupations.*.department.required' => 'The department field is required.',
+        //     'past_occupations.*.department.required' => 'The department field is required.',
 
-            'past_occupations.*.section.required' => 'The section field is required.',
+        //     'past_occupations.*.section.required' => 'The section field is required.',
 
-            'past_occupations.*.address.required' => 'The address field is required.',
-            'past_occupations.*.address.string' => 'The address must be a string.',
+        //     'past_occupations.*.address.required' => 'The address field is required.',
+        //     'past_occupations.*.address.string' => 'The address must be a string.',
 
-            'past_occupations.*.from_date.required' => 'The from date is required.',
-            'past_occupations.*.from_date.date' => 'The from date must be a valid date.',
-            'past_occupations.*.from_date.date_format' => 'The from date must be in the format YYYY-MM-DD.',
+        //     'past_occupations.*.from_date.required' => 'The from date is required.',
+        //     'past_occupations.*.from_date.date' => 'The from date must be a valid date.',
+        //     'past_occupations.*.from_date.date_format' => 'The from date must be in the format YYYY-MM-DD.',
 
-            'past_occupations.*.to_date.required' => 'The from to date is required.',
-            'past_occupations.*.to_date.date' => 'The to date must be a valid date.',
-            'past_occupations.*.to_date.after_or_equal' => 'The to date must be after or equal to the from date.',
-            'past_occupations.*.to_date.date_format' => 'The to date must be in the format YYYY-MM-DD.',
+        //     'past_occupations.*.to_date.required' => 'The from to date is required.',
+        //     'past_occupations.*.to_date.date' => 'The to date must be a valid date.',
+        //     'past_occupations.*.to_date.after_or_equal' => 'The to date must be after or equal to the from date.',
+        //     'past_occupations.*.to_date.date_format' => 'The to date must be in the format YYYY-MM-DD.',
 
-            'past_occupations.*.remark.string' => 'The remark must be a string.',
-        ];
+        //     'past_occupations.*.remark.string' => 'The remark must be a string.',
+        // ];
 
-        $this->validate($rules,$messages);
+        // $this->validate($rules,$messages);
 
         foreach ($this->past_occupations as $occupation) {
             PastOccupation::updateOrCreate([
@@ -1306,8 +1308,8 @@ class StaffDetail extends Component
             ],[
                 'staff_id' => $staffId,
                 'rank_id' => $occupation['rank'],
+                'ministry_id' => $occupation['ministry'],
                 'department_id' => $occupation['department'],
-                'section_id' => $occupation['section'],
                 'address' => $occupation['address'],
                 'from_date' => $occupation['from_date'],
                 'to_date' => $occupation['to_date'],
@@ -1337,7 +1339,7 @@ class StaffDetail extends Component
         $this->validate($rules, $messages);
         foreach ($this->awards as $award) {
             Awarding::updateOrCreate([
-                'id' => $award['id'] ? null : $award['id']
+                'id' => $award['id'] == '' ? null : $award['id']
             ],[
                 'staff_id' => $staffId,
                 'award_type_id' => $award['award_type'],
@@ -1491,7 +1493,7 @@ class StaffDetail extends Component
                 'from_date' => $posting['from_date'],
                 'to_date' => $posting['to_date'],
                 'department_id' => $posting['department'],
-                'division_id' => $posting['division'] ?: null,
+                'sub_department' => $posting['sub_department'] ?: null,
                 'location' => $posting['location'],
                 'remark' => $posting['remark'] ?: null,
                 'ministry_id' => $posting['ministry'],
@@ -1616,6 +1618,7 @@ class StaffDetail extends Component
         match ($arr_ini) {
             'eduTypes' => $this->$array[$index][$field] = EducationType::where('education_group_id', $value)->get(),
             'edus' => $this->$array[$index][$field] = Education::where('education_type_id', $value)->get(),
+            'departments' => $this->$array[$index][$field] = Department::where('ministry_id', $value)->get(),
             default => [],
         };
     }
@@ -1681,8 +1684,8 @@ class StaffDetail extends Component
                 $data['posts'] = Post::all();
                 $data['ranks'] = $this->withoutScopeRanks;
                 $data['ministrys'] = Ministry::all();
-                $data['divisions'] = Division::all();
                 $data['departments'] = Department::all();
+                $data['divisions'] = Division::all();
                 $data['payscales'] = Payscale::all();
                 break;
 
@@ -1702,6 +1705,7 @@ class StaffDetail extends Component
                 $data['penalty_types'] = PenaltyType::all();
                 $data['languages'] = Language::all();
                 $data['ranks'] = $this->withoutScopeRanks;
+                $data['ministrys'] = Ministry::all();
                 $data['departments'] = Department::all();
                 break;
 
