@@ -484,8 +484,11 @@ if (!function_exists(function: 'getRelatedRsType')) {
 
     function getRelatedRsType($relations , $key) {
         
-        if($key == 'spouse_father_siblings' || $key == 'spouse_mother_siblings'){
-            return $relations->whereIn('relation_ship_type_id' , [1,3]) ;
+        if($key == 'spouse_father_siblings'){
+            return $relations->whereIn('relation_ship_type_id' , [1,2])->where('id' ,'!=' , 5  ) ;
+        }
+        elseif( $key == 'spouse_mother_siblings'){
+                        return $relations->whereIn('relation_ship_type_id' , [1,2])->where('id','!=' , 6) ;
 
         }
         
