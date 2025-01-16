@@ -9,9 +9,6 @@
                 သား/သမီးများ၏အရေအတွက် စာရင်း
 
             </h1>
-
-
-
             <h1 class=" text-right ">
                 ရက်စွဲ - {{ getTdyDateInMyanmarYearMonthDay(2) }}
             </h1>

@@ -44,7 +44,7 @@
 
             @foreach ($divisionTypes as $index => $divisionType)
                 <tr>
-                    <td>{{ $index + 1 }}</td>
+                    <td>{{ en2mm($index + 1) }}</td>
                     <td>{{ $divisionType->name }}</td>
                     <td>{{ en2mm($divisionType->staffCount()) }}</td>
                     <td>{{ en2mm($divisionType->leaveCount("$year-$month")) }}</td>

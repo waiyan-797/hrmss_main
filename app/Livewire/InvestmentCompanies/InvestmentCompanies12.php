@@ -162,12 +162,9 @@ class InvestmentCompanies12 extends Component
 
     return response()->download($temp_file, $fileName)->deleteFileAfterSend(true);
 }
-
-
     public function render()
     {
         $date_limit = $this->filterRange;
-
         $date_limit_query = Staff::where('join_date', '<=', $date_limit);
         $high_staff_query = Staff::whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1));
         $low_staff_query = Staff::whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]));

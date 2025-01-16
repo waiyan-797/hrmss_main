@@ -286,44 +286,6 @@ class PA02 implements FromView ,WithStyles
                 ],
             ],
         ]);
-
-    //     $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
-    //         'font' => [
-    //             'name' => 'Pyidaungsu',
-    //             'size' => 13,
-    //         ],
-    //         'alignment' => [
-    //             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-    //             'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-    //         ],
-    //         'borders' => [
-    //             'allBorders' => [
-    //                 'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-    //                 'color' => ['argb' => 'FF000000'], // Black border
-    //             ],
-    //         ],
-    //     ]);
-        
-
-    //     // Auto-size columns based on dynamic range
-    //     foreach (range('A', $highestColumn) as $column) {
-    //         $sheet->getColumnDimension($column)->setAutoSize(true);
-    //     }
-
-    //     // Set row heights manually for dynamic rows
-    //     foreach (range(3, $highestRow) as $row) {
-    //         $sheet->getRowDimension($row)->setRowHeight(-1); // Auto-adjust height
-    //     }
-
-    //     // Define the print area dynamically
-    //     $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
-
-    //     // Set a margin for better printing output
-    //     $sheet->getPageMargins()->setTop(0.5);
-    //     $sheet->getPageMargins()->setRight(0.5);
-    //     $sheet->getPageMargins()->setLeft(0.5);
-    //     $sheet->getPageMargins()->setBottom(0.5);
-    // }
     return [];
 }
 }

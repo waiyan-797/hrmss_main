@@ -1,4 +1,4 @@
-@props(['values', 'property', 'placeholder'])
+@props(['values', 'property', 'placeholder'=>null])
 
 <div x-data="{
         open: false,

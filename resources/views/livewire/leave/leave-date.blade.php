@@ -1,6 +1,8 @@
 <div class="container mx-5 my-3">
     <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-    <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+    {{-- <x-primary-button type="button" wire:click="go_word()">Word</x-primary-button> --}}
+    <x-primary-button type="button" wire:click="go_excel({{ $staff->id }})">Excel</x-primary-button>
+
     <h1 class="text-left text-lg font-semibold font-arial my-4">{{ $staff->name }}</h1>
     <table class="md:w-full font-arial">
         <thead>
@@ -10,6 +12,10 @@
                 <th class="border border-black p-2" colspan="2">စုစုပေါင်းခံစားခွင့်ရှိသည့်လုပ်သက်ခွင့်စာတိုင် <br> (၃)+(၇)</th>
                 <th class="border border-black p-2" colspan="3">လုပ်သက်ခွင့်ခံစားသည့်ကာလ </th>
                 <th class="border border-black p-2" colspan="2">လုပ်သက်ခွင့်လက်ကျန်စာတိုင် <br>(၄)-(၆)</th>
+                <th class="border border-black p-2" colspan="3">ဆေးလက်မှတ်ခွင့် ခံစားသည့်ကာလ </th>
+                <th class="border border-black p-2" colspan="3">ခံစားပြီးသည့်<br>စုစုပေါင်း<br>ဆေးလက်မှတ်ခွင့်<br>ကာလ</th>
+                <th class="border border-black p-2" colspan="3">လစာမဲ့ခွင့် ခံစားသည့်ကာလ</th>
+                <th class="border border-black p-2">မှတ်ချက်</th>
             </tr>
             <tr>
                 <th class="border border-black p-2">မှ---ထိ</th>
@@ -25,6 +31,18 @@
                 <th class="border border-black p-2">ရက်</th>
                 <th class="border border-black p-2">လ</th>
                 <th class="border border-black p-2">ရက်</th>
+                <th class="border border-black p-2">မှ---ထိ</th>
+                <th class="border border-black p-2">လ</th>
+                <th class="border border-black p-2">ရက်</th>
+                <th class="border border-black p-2">နှစ်</th>
+                <th class="border border-black p-2">လ</th>
+                <th class="border border-black p-2">ရက်</th>
+                <th class="border border-black p-2">မှ---ထိ</th>
+                <th class="border border-black p-2">လ</th>
+                <th class="border border-black p-2">ရက်</th>
+                <th class="border border-black p-2"></th>
+              
+
 
             </tr>
             <tr>
@@ -37,6 +55,12 @@
                 <th class="border border-black p-2" >(၅)</th>
                 <th class="border border-black p-2" colspan="2">(၆)</th>
                 <th class="border border-black p-2" colspan="2">(၇)</th>
+                <th class="border border-black p-2">(၈)</th>
+                <th class="border border-black p-2" colspan="2">(၉)</th>
+                <th class="border border-black p-2" colspan="3">(၁၀)</th>
+                <th class="border border-black p-2">(၁၁)</th>
+                <th class="border border-black p-2" colspan="2">(၁၂)</th>
+                 <th class="border border-black p-2">(၁၃)</th> 
             </tr>
         </thead>
         <tbody>
@@ -104,6 +128,29 @@
                     <td class="border border-black p-2">
                         {{ $diff_leave_days > 0 ? en2mm($diff_leave_days  - 1 ) . ' ရက်' : '-' }}
                     </td>
+
+
+                    <td class="border border-black p-2">
+                    </td>
+                    <td class="border border-black p-2">
+                    </td>
+                    <td class="border border-black p-2">
+                    </td>
+                    <td class="border border-black p-2">
+                    </td>
+                    <td class="border border-black p-2">
+                    </td>
+                    <td class="border border-black p-2">
+                    </td>
+                    <td class="border border-black p-2">
+                    </td>
+                    <td class="border border-black p-2">
+                    </td>
+                    <td class="border border-black p-2">
+                    </td>
+                    <td class="border border-black p-2">
+                    </td>
+
                 </tr>
                 @php
                     $workStartDate = Carbon\Carbon::parse($leave->to_date)->addDay()->toDateString();

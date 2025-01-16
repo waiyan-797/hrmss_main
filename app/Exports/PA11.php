@@ -103,10 +103,6 @@ class PA11 implements FromView ,WithStyles
 
         $high_dlimit2_staffs2 = $_date_limit_query->where('join_date', '>', $ten_years_ago)->whereHas('currentRank', fn($q) => $q->where('staff_type_id', 1))->count();
         $low_dlimit2_staffs2 = $_date_limit_query->where('join_date', '>', $ten_years_ago)->whereHas('currentRank', fn($q) => $q->whereIn('staff_type_id', [2, 3]))->count();
-
-
-
-
         $data = [
             'high_dlimit_staffs' => $high_dlimit_staffs,
             'low_dlimit_staffs' => $low_dlimit_staffs,

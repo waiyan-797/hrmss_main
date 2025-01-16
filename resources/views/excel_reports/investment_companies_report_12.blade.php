@@ -60,43 +60,58 @@
 
 
     </style>
+     <table>
+         <tr>
+            <th colspan="22">
+                ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+            </th> 
+        </tr>
+        <tr>
+            <th colspan="22">
+                ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၏ ဝန်ထမ်းအင်အားပြုန်းတီးမှုအခြေအနေနှင့်  ဝန်ထမ်းအင်အားစာရင်းချုပ်
+            </th>
+        </tr> 
+        
+    </table> 
+     {{-- <h1>ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+    <h1>ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၏ ဝန်ထမ်းအင်အားပြုန်းတီးမှုအခြေအနေနှင့်  ဝန်ထမ်းအင်အားစာရင်းချုပ်</h1>  --}}
 
         <table>
             <thead>
                 <tr>
-                    <th rowspan="2" class="center">စဥ်</th>
-                    <th colspan="3" class="center">မူလအင်အား</th>
-                    <th colspan="2" class="center">အသစ်ခန့်အပ်</th>
-                    <th colspan="2" class="center">အခြားဌာနမှ<br>ရောက်ရှိ</th>
-                    <th colspan="2" class="center">အခြားဌာနသို့<br>ပြေင်းရွေ့ခြင်း</th>
-                    <th colspan="2" class="center">ပင်စင်ခံစားခြင်း</th>
-                    <th colspan="2" class="center">နုတ်ထွက်ခြင်း</th>
-                    <th colspan="2" class="center">ထုတ်ပယ်ခြင်း/<br>ထုတ်ပစ်ခြင်း</th>
-                    <th colspan="2" class="center">ကွယ်လွန်ခြင်း</th>
-                    <th colspan="3" class="center">{{$year.'-'.$month.'-'.$date}} အင်အားစုစုပေါင်း</th>
-                    <th rowspan="2" class="center">မှတ်ချက်</th>
+                    <th rowspan="2" class="center" style="font-weight:bold">စဥ်</th>
+                    <th colspan="3" class="center" style="font-weight:bold">မူလအင်အား</th>
+                    <th colspan="2" class="center" style="font-weight:bold">အသစ်ခန့်အပ်</th>
+                    <th colspan="2" class="center" style="font-weight:bold">အခြားဌာနမှ<br>ရောက်ရှိ</th>
+                    <th colspan="2" class="center" style="font-weight:bold">အခြားဌာနသို့<br>ပြေင်းရွေ့ခြင်း</th>
+                    <th colspan="2" class="center" style="font-weight:bold">ပင်စင်ခံစားခြင်း</th>
+                    <th colspan="2" class="center" style="font-weight:bold">နုတ်ထွက်ခြင်း</th>
+                    <th colspan="2" class="center" style="font-weight:bold">ထုတ်ပယ်ခြင်း/<br>ထုတ်ပစ်ခြင်း</th>
+                    <th colspan="2" class="center" style="font-weight:bold">ကွယ်လွန်ခြင်း</th>
+                    <th colspan="3" class="center" style="font-weight:bold">{{$year.'-'.$month.'-'.$date}} အင်အားစုစုပေါင်း</th>
+                    <th rowspan="2" class="center" style="font-weight:bold">မှတ်ချက်</th>
                 </tr>
                 <tr>
-                    <th class="center">ရာ</th>
-                    <th class="center">မှု</th>
-                    <th class="center">ပေါင်း</th>
-                    <th class="center">ရာ</th>
-                    <th class="center">မှု</th>
-                    <th class="center">ရာ</th>
-                    <th class="center">မှု</th>
-                    <th class="center">ရာ</th>
-                    <th class="center">မှု</th>
-                    <th class="center">ရာ</th>
-                    <th class="center">မှု</th>
-                    <th class="center">ရာ</th>
-                    <th class="center">မှု</th>
-                    <th class="center">ရာ</th>
-                    <th class="center">မှု</th>
-                    <th class="center">ရာ</th>
-                    <th class="center">မှု</th>
-                    <th class="center">ရာ</th>
-                    <th class="center">မှု</th>
-                    <th class="center">ပေါင်း</th>
+                    <th class="center"  style="font-weight:bold">ရာ</th>
+                    <th class="center"  style="font-weight:bold">မှု</th>
+                    <th class="center"  style="font-weight:bold">ပေါင်း</th>
+                    <th class="center"  style="font-weight:bold">ရာ</th>
+                    <th class="center"  style="font-weight:bold">မှု</th>
+                    <th class="center"  style="font-weight:bold">ရာ</th>
+                    <th class="center"  style="font-weight:bold">မှု</th>
+                    <th class="center"  style="font-weight:bold">ရာ</th>
+                    <th class="center"  style="font-weight:bold">မှု</th>
+                    <th class="center"  style="font-weight:bold">ရာ</th>
+                    <th class="center"  style="font-weight:bold">မှု</th>
+                    <th class="center"  style="font-weight:bold">ရာ</th>
+                    <th class="center"  style="font-weight:bold">မှု</th>
+                    <th class="center"  style="font-weight:bold">ရာ</th>
+                    <th class="center"  style="font-weight:bold">မှု</th>
+                    <th class="center"  style="font-weight:bold">ရာ</th>
+                    <th class="center"  style="font-weight:bold">မှု</th>
+                    <th class="center"  style="font-weight:bold">ရာ</th>
+                    <th class="center"  style="font-weight:bold">မှု</th>
+                    <th class="center"  style="font-weight:bold">ပေါင်း</th>
                 </tr>
             </thead>
             <tbody>

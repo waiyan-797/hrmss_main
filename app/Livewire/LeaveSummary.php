@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Exports\L03;
 use App\Models\Division;
 use App\Models\DivisionType;
 use App\Models\Leave;
@@ -9,6 +10,7 @@ use App\Models\LeaveType;
 use App\Models\Staff;
 use Carbon\Carbon;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class LeaveSummary extends Component
@@ -30,6 +32,19 @@ $this->divisionTypes = DivisionType::all();
         
     }
 
+    public function go_excel() 
+    {
+        return Excel::download(new L03($this->year ,
+        $this->month, 
+    
+    $this->leave_types , $this->HeadOfficeLeaves , $this->DivisionLeaves , $this->divisionTypes , $this->dateRange
+    ), 'L03.xlsx');
+    }
+
+    
+
+  
+
     public function go_pdf()
     {
         [$this->year, $this->month] = explode('-', $this->dateRange);
@@ -46,6 +61,8 @@ $this->divisionTypes = DivisionType::all();
             echo $pdf->output();
         }, 'leave_summary_report.pdf');
     }
+   
+
    
   
     public function render()
