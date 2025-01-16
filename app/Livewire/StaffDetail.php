@@ -1260,7 +1260,7 @@ class StaffDetail extends Component
                 'staff_id' => $staffId,
                 'education_group_id' => $school['education_group'],
                 'education_type_id' => $school['education_type'],
-                'education_id' => $school['education'],
+                'education_id' => $school['education'] == '' ? null : $school['education'],
                 'school_name' => $school['school_name'],
                 'town' => $school['town'],
                 'from_date' => $school['from_date'],
