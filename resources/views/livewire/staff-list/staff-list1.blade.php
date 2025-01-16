@@ -31,7 +31,7 @@
             <table class="md:w-full">
                 <thead>
                     <tr>
-                        <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
+                        <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
                         <th rowspan="2" class="border border-black text-center p-2">
                             ဌာနအမည်
                         </th>
@@ -40,6 +40,7 @@
                         <th class="border border-black text-center p-2">အမှုထမ်း</th>
                         <th class="border border-black text-center p-2">စုစုပေါင်း</th>
                         <th class="border border-black text-center p-2">နေ့စား</th>
+                        <th class="border border-black text-center p-2">မှတ်ချက်</th>
                     </tr>
                    
                 </thead>
@@ -64,6 +65,7 @@
                                 {{ en2mm($division->staffs->filter(fn($staff) => $staff->currentRank && $staff->currentRank->staff_type_id == 3)->count()) }}
 
                             </td>
+                            <td class="border border-black text-center p-2"></td>
 
                         </tr>
                     @endforeach
@@ -78,6 +80,7 @@
                         <td class="border border-black text-center p-2">
                             {{$selsectedDivisionTypeId  == 1 ? ' ရုံးချုပ်စုစုပေါင်း' : 'နယ်ရုံးခွဲ' }} 
                         </td>
+                        
                     
                         
                     
@@ -128,6 +131,10 @@
         <td class="border border-black text-center p-2">
             {{ en2mm($labour )}}
         </td>
+        <td class="border border-black text-center p-2">
+            
+        </td>
+
 
 
 

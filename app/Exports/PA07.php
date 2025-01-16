@@ -25,8 +25,8 @@ class PA07 implements FromView ,WithStyles
 
     public function __construct($year , $month,
     $filterRange ,
-$previousMonthDate,
-$previousMonth,
+    $previousMonthDate,
+    $previousMonth,
 
     )
     {
@@ -199,7 +199,7 @@ $previousMonth,
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
         $sheet->getColumnDimension('A')->setWidth(4);
-        $sheet->getColumnDimension('B')->setWidth(20);
+        $sheet->getColumnDimension('B')->setWidth(19);
         $sheet->getColumnDimension('C')->setWidth(7);
         $sheet->getColumnDimension('D')->setWidth(7);
         $sheet->getColumnDimension('E')->setWidth(7);
@@ -225,37 +225,22 @@ $previousMonth,
         $sheet->getColumnDimension('Y')->setWidth(7);
         $sheet->getColumnDimension('Z')->setWidth(7);
 
-        $sheet->getRowDimension(1)->setRowHeight(24);
-        $sheet->getRowDimension(2)->setRowHeight(24);
-        $sheet->getRowDimension(3)->setRowHeight(24);
+        $sheet->getRowDimension(1)->setRowHeight(28);
+        $sheet->getRowDimension(2)->setRowHeight(28);
+        $sheet->getRowDimension(3)->setRowHeight(28);
 
         for ($row = 4; $row <= $highestRow-1 ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(24);
+            $sheet->getRowDimension($row)->setRowHeight(28);
         }
-        $sheet->getRowDimension(8)->setRowHeight(120);
+        $sheet->getRowDimension(8)->setRowHeight(180);
 
 
         $sheet->removeRow(4);
-        $sheet->removeRow(9);
+        
 
         $row=4;
 
-        $sheet->getStyle('A1:A2')->applyFromArray([
-            'font' => [
-                'name' => 'Pyidaungsu',
-                'size' => 13,
-            ],
-            'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-            ],
-            'borders' => [
-                'outline' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
-                ],
-            ],
-        ]);
-        $sheet->getStyle('A3')->applyFromArray([
+        $sheet->getStyle('A1:A3')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 13,
@@ -304,6 +289,7 @@ $previousMonth,
                 ],
             ],
         ]);
+        $sheet->removeRow(9);
        
 
         // $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([

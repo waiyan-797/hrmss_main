@@ -111,7 +111,7 @@ class OctoberSalaryList extends Component
        
         $dayPaidSalaryAfterIncrement = Carbon::parse($incrementedDate)
             ->diffInDays(Carbon::parse($this->monthSelect)->endOfMonth(), false);
-        $newSalaryAfterIncrement = $this->staff?->currentRank->payscale->min_salary;
+        $newSalaryAfterIncrement = $this->staff?->currentRank?->payscale->min_salary;
         $totalPaidAfterIncrement = ($newSalaryAfterIncrement /  Carbon::now()->daysInMonth())  * ($dayPaidSalaryAfterIncrement - $totalLeaveDaysAfterSpecificDate);
         $staffs = Staff::get();
         $data = [
@@ -228,7 +228,7 @@ class OctoberSalaryList extends Component
        
         $dayPaidSalaryAfterIncrement = Carbon::parse($incrementedDate)
             ->diffInDays(Carbon::parse($this->monthSelect)->endOfMonth(), false);
-        $newSalaryAfterIncrement = $this->staff?->currentRank->payscale->min_salary;
+        $newSalaryAfterIncrement = $this->staff?->currentRank?->payscale->min_salary;
         $totalPaidAfterIncrement = ($newSalaryAfterIncrement /  Carbon::now()->daysInMonth())  * ($dayPaidSalaryAfterIncrement - $totalLeaveDaysAfterSpecificDate);
         $staffs = Staff::get();
         $phpWord = new PhpWord();
@@ -420,7 +420,7 @@ class OctoberSalaryList extends Component
         //after increment 
         $dayPaidSalaryAfterIncrement = Carbon::parse($incrementedDate)
             ->diffInDays(Carbon::parse($this->monthSelect)->endOfMonth(), false);
-        $newSalaryAfterIncrement = $this->staff?->currentRank->payscale->min_salary;
+        $newSalaryAfterIncrement = $this->staff?->currentRank?->payscale->min_salary;
         $totalPaidAfterIncrement = ($newSalaryAfterIncrement /  Carbon::now()->daysInMonth())  * ($dayPaidSalaryAfterIncrement - $totalLeaveDaysAfterSpecificDate);
 
 

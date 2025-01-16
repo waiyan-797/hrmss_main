@@ -29,21 +29,38 @@ class PlanningAccounting extends Component
 {
     $staffs = Staff::get();
     $phpWord = new PhpWord();
-    $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
-    $section->addTitle('စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲဝန်ထမ်းအင်အားစာရင်း', 1);
+    $phpWord = new PhpWord();
+        $section = $phpWord->addSection([
+            'orientation' => 'portrait',
+            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),     // 1 inch
+            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+        ]);
+
+        
+        $phpWord->addTitleStyle(2, ['bold' => false, 'size' => 13], ['alignment' => 'left']);
+        
+        // $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
+        
+        // dd($divisionTitle );
+        $division = getDivisionBy($this->selectedDivisionId);
+        $section->addTitle(($division ? $division->name : 'Unknown Division') , 2);
+
     $table = $section->addTable([
-        'borderSize' => 6,
+        'borderSize' => 6, 
         'borderColor' => '000000',
-        'cellMargin' => 80,
+        'cellMargin' => 5
     ]);
+       
     $table->addRow();
-    $table->addCell(2000)->addText('စဥ်');
-    $table->addCell(4000)->addText('အမည်');
-    $table->addCell(4000)->addText('ရာထူး');
-    $table->addCell(4000)->addText('မှတ်ချက်');
+    $table->addCell(2000)->addText('စဥ်',['bold'=>true],['alignment'=>'center']);
+    $table->addCell(4000)->addText('အမည်',['bold'=>true],['alignment'=>'center']);
+    $table->addCell(4000)->addText('ရာထူး',['bold'=>true],['alignment'=>'center']);
+    $table->addCell(4000)->addText('မှတ်ချက်',['bold'=>true],['alignment'=>'center']);
     foreach ($staffs as $index=> $staff) {
         $table->addRow();
-        $table->addCell(2000)->addText($index + 1);
+        $table->addCell(2000)->addText(en2mm($index + 1),null,['alignment'=>'center']);
         $table->addCell(4000)->addText($staff?->name);
         $table->addCell(4000)->addText($staff->current_rank?->name);
         $table->addCell(4000)->addText(''); 

@@ -94,7 +94,7 @@ class InvestmentCompanies14 extends Component
     }
     public function go_word()
 {
-    $ranks = Rank::get();
+    $ranks = Rank::whereNot('staff_type_id', 3)->get();
    $phpWord = new PhpWord();
 
 $section = $phpWord->addSection([
@@ -370,7 +370,7 @@ foreach ($divisions as $divisionName => $divisionId) {
             return $query->whereIn('current_division_id', [1, 2, 3, 4, 11, 8, 7, 5, 6, 9, 10]);
         });
 
-        $ranks = Rank::get();
+        $ranks = Rank::whereIn('staff_type_id',[1,2])->get();
 
         return view('livewire.investment-companies.investment-companies14',[
             'ranks' => $ranks,

@@ -133,6 +133,33 @@ if (! function_exists('dateDiffYMDWithoutDays')) {  //ရက်မပါ နှ�
 
 
 
+//for changing from 01 to ၁ in calendar month
+if (!function_exists('mmMonth')) {
+    function mmMonth($month)
+    {
+        // Array of Myanmar month names
+        $monthsInMyanmar = [
+            01 => '၁',
+            02 => '၂',
+            03 => '၃',
+            04 => '၄',
+            5 => '၅',
+            6 => '၆',
+            7 => '၇',
+            8 => '၈',
+            9 => '၉',
+            10 => '၁၀',
+            11 => '၁၁',
+            12 => '၁၂',
+        ];
+
+        return $monthsInMyanmar[(int) $month] ?? null;
+    }
+}
+
+
+       
+
 
 if (!function_exists('mmDateFormat')) {
     function mmDateFormat($year, $month)

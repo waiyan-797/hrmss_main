@@ -56,12 +56,20 @@
             
         <div class="table-container">
 
-            <table>
+            <table class="">
                 <tr>
-                    <th colspan="29" rowspan="2">
-                        ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>
-                        ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
-                        {{-- ၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း --}}
+                    <th colspan="26" style="font-weight:bold;">
+                        ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                    </th> 
+                </tr>
+                <tr>
+                    <th colspan="26" style="font-weight:bold;">
+                        ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="26" style="font-weight:bold;">
+                        {{mmDateFormat($year,$month)}}
                     </th>
                 </tr>
             </table>
@@ -69,19 +77,19 @@
         <table>
             <thead>
                 <tr>
-                    <th rowspan="2">စဥ်</th>
-                    <th rowspan="2">ဦစီးဌာန</th>
-                    <th colspan="3">အမြဲတမ်းအတွင်းဝန်/<br>ညွှန်ကြားရေးမှူးချုပ်</th>
-                    <th colspan="3">ဒုတိယအမြဲတမ်းအတွင်းဝန်/<br>ဒုတိယညွှန်ကြားရေးမှူးချုပ်</th>
-                    <th colspan="3">လက်ထောက်အတွင်းဝန်/<br>ညွှန်ကြားရေးမှူး</th>
-                    <th colspan="3">ဒုတိယညွှန်ကြားရေးမှူး</th>
-                    <th colspan="3">လက်ထောက်<br>ညွှန်ကြားရေးမှူး</th>
-                    <th colspan="3">ဦးစီးအရာရှိ</th>
-                    <th colspan="3">အရာရှိပေါင်း</th>
-                    <th colspan="3">အမှုထမ်းပေါင်း</th>
-                    <th colspan="3">စုစုပေါင်း</th>
+                    <th rowspan="3" style="font-weight:bold;">စဥ်</th>
+                    <th rowspan="3" style="font-weight:bold;">ဦစီးဌာန</th>
+                    <th rowspan="2" colspan="3" style="font-weight:bold;">အမြဲတမ်းအတွင်းဝန်/<br>ညွှန်ကြားရေးမှူးချုပ်</th>
+                    <th rowspan="2" colspan="3" style="font-weight:bold;">ဒုတိယအမြဲတမ်းအတွင်းဝန်/<br>ဒုတိယညွှန်ကြားရေးမှူးချုပ်</th>
+                    <th rowspan="2" colspan="3" style="font-weight:bold;">လက်ထောက်အတွင်းဝန်/<br>ညွှန်ကြားရေးမှူး</th>
+                    <th rowspan="2" colspan="3" style="font-weight:bold;">ဒုတိယညွှန်ကြားရေးမှူး</th>
+                    <th rowspan="2" colspan="3" style="font-weight:bold;">လက်ထောက်<br>ညွှန်ကြားရေးမှူး</th>
+                    <th rowspan="2" colspan="3" style="font-weight:bold;">ဦးစီးအရာရှိ</th>
+                    <th rowspan="2" colspan="3" style="font-weight:bold;">အရာရှိပေါင်း</th>
+                    <th rowspan="2" colspan="3" style="font-weight:bold;">အမှုထမ်းပေါင်း</th>
+                    <th rowspan="2" colspan="3" style="font-weight:bold;">စုစုပေါင်း</th>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <th>ခွင့်ပြု</th>
                     <th>ခန့်အပ်</th>
                     <th>ပို/လို</th>
@@ -109,9 +117,39 @@
                     <th>ခွင့်ပြု</th>
                     <th>ခန့်အပ်</th>
                     <th>ပို/လို</th>
-                </tr>
+                </tr> --}}
             </thead>
             <tbody>
+                <tr></tr>
+                <tr>
+                    <th style="font-weight:bold;">ခွင့်ပြု</th>
+                    <th style="font-weight:bold;">ခန့်အပ်</th>
+                    <th style="font-weight:bold;">ပို/လို</th>
+                    <th style="font-weight:bold;">ခွင့်ပြု</th>
+                    <th style="font-weight:bold;">ခန့်အပ်</th>
+                    <th style="font-weight:bold;">ပို/လို</th>
+                    <th style="font-weight:bold;">ခွင့်ပြု</th>
+                    <th style="font-weight:bold;">ခန့်အပ်</th>
+                    <th style="font-weight:bold;">ပို/လို</th>
+                    <th style="font-weight:bold;">ခွင့်ပြု</th>
+                    <th style="font-weight:bold;">ခန့်အပ်</th>
+                    <th style="font-weight:bold;">ပို/လို</th>
+                    <th style="font-weight:bold;">ခွင့်ပြု</th>
+                    <th style="font-weight:bold;">ခန့်အပ်</th>
+                    <th style="font-weight:bold;">ပို/လို</th>
+                    <th style="font-weight:bold;">ခွင့်ပြု</th>
+                    <th style="font-weight:bold;">ခန့်အပ်</th>
+                    <th style="font-weight:bold;">ပို/လို</th>
+                    <th style="font-weight:bold;">ခွင့်ပြု</th>
+                    <th style="font-weight:bold;">ခန့်အပ်</th>
+                    <th style="font-weight:bold;">ပို/လို</th>
+                    <th style="font-weight:bold;">ခွင့်ပြု</th>
+                    <th style="font-weight:bold;">ခန့်အပ်</th>
+                    <th style="font-weight:bold;">ပို/လို</th>
+                    <th style="font-weight:bold;">ခွင့်ပြု</th>
+                    <th style="font-weight:bold;">ခန့်အပ်</th>
+                    <th style="font-weight:bold;">ပို/လို</th>
+                </tr>
                 <tr>
                     <td>၁</td>
                     <td>ရင်းနှီးမြှပ်နှံမှုနှင့်<br>ကုမ္ပဏီများ<br>ညွှန်ကြားမှုဦးစီးဌာန</td>

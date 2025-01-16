@@ -77,50 +77,57 @@
             
             <div class="table-container">
 
-                <table>
+                <table class="">
                     <tr>
-                        <th colspan="16" rowspan="2">
-                            ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>
-                            ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
-                            {{-- ၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း --}}
+                        <th colspan="16" style="font-weight:bold;">
+                            ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                        </th> 
+                    </tr>
+                    <tr>
+                        <th colspan="16" style="font-weight:bold;">
+                            ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="16" style="font-weight:bold;">
+                            {{mmDateFormat($year,$month)}}
                         </th>
                     </tr>
                 </table>
-
                 <table>
                     <thead>
                         <tr>
-                            <th rowspan="3">စဥ်</th>
-                            <th rowspan="3">ဌာန</th>
-                            <th colspan="8">အိမ်ထောင်သည်</th>
-                            <th colspan="2">အရာရှိ</th>
-                            <th rowspan="3">အမှုထမ်း<br>အိမ်ထောင်သည်များ</th>
-                            <th colspan="2">အမှုထမ်း</th>
-                            <th rowspan="3">စုစုပေါင်း</th>
+                            <th rowspan="3" style="font-weight:bold;">စဥ်</th>
+                            <th rowspan="3" style="font-weight:bold;">ဌာန</th>
+                            <th colspan="8" style="font-weight:bold;">အိမ်ထောင်သည်</th>
+                            <th colspan="2" style="font-weight:bold;">အရာရှိ</th>
+                            <th rowspan="3" style="font-weight:bold;">အမှုထမ်း<br>အိမ်ထောင်သည်များ</th>
+                            <th colspan="2" style="font-weight:bold;">အမှုထမ်း</th>
+                            <th rowspan="3" style="font-weight:bold;">စုစုပေါင်း</th>
                         </tr>
                         <tr>
-                            <th rowspan="2">ဝန်ကြီး</th>
-                            <th rowspan="2">ဒု-ဝန်ကြီး</th>
-                            <th rowspan="2">ညွှန်ချုပ်</th>
-                            <th rowspan="2">ဒု-ညွှန်ချုပ်</th>
-                            <th rowspan="2">ညွှန်မှူး</th>
-                            <th rowspan="2">ဒု-ညွှန်မှူး</th>
-                            <th rowspan="2">လ/ထ ညွှန်မှူး</th>
-                            <th rowspan="2">ဦးစီးအရာရှိ</th>
-                            <th colspan="2">ပျို</th>
-                            <th colspan="2">ပျို</th>
+                            <th rowspan="2" style="font-weight:bold;">ဝန်ကြီး</th>
+                            <th rowspan="2" style="font-weight:bold;">ဒု-ဝန်ကြီး</th>
+                            <th rowspan="2" style="font-weight:bold;">ညွှန်ချုပ်</th>
+                            <th rowspan="2" style="font-weight:bold;">ဒု-ညွှန်ချုပ်</th>
+                            <th rowspan="2" style="font-weight:bold;">ညွှန်မှူး</th>
+                            <th rowspan="2" style="font-weight:bold;">ဒု-ညွှန်မှူး</th>
+                            <th rowspan="2" style="font-weight:bold;">လ/ထ<br> ညွှန်မှူး</th>
+                            <th rowspan="2" style="font-weight:bold;">ဦးစီး<br>အရာရှိ</th>
+                            <th colspan="2" style="font-weight:bold;">ပျို</th>
+                            <th colspan="2" style="font-weight:bold;">ပျို</th>
                         </tr>
                         <tr>
-                            <th>ကျား</th>
-                            <th>မ</th>
-                            <th>ကျား</th>
-                            <th>မ</th>
+                            <th style="font-weight:bold;">ကျား</th>
+                            <th style="font-weight:bold;">မ</th>
+                            <th style="font-weight:bold;">ကျား</th>
+                            <th style="font-weight:bold;">မ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>၁</td>
-                            <td>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>
+                            <td>ရင်းနှီးမြှပ်နှံမှုနှင့်<br>ကုမ္ပဏီများညွှန်ကြားမှု<br>ဦးစီးဌာန</td>
                             <td></td>
                             <td></td>
                             <td>{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>

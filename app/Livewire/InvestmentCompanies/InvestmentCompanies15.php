@@ -16,67 +16,67 @@ class InvestmentCompanies15 extends Component
     public function go_pdf(){
         $yangon = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 23);
-        });
+        })->with('ranks');
 
         $nay_pyi_thaw = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 26);
-        });
+        })->with('ranks');
 
         $mandalay = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 20);
-        });
+        })->with('ranks');
 
         $shan = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 24);
-        });
+        })->with('ranks');
 
         $mon = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 21);
-        });
+        })->with('ranks');
 
         $aya = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 25);
-        });
+        })->with('ranks');
 
         $sagaing = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 16);
-        });
+        })->with('ranks');
 
         $tanindaryi = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 17);
-        });
+        })->with('ranks');
 
         $kayin = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 14);
-        });
+        })->with('ranks');
 
         $bago = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 18);
-        });
+        })->with('ranks');
 
         $magway = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 19);
-        });
+        })->with('ranks');
 
         $kayah = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 13);
-        });
+        })->with('ranks');
 
         $kachin = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 12);
-        });
+        })->with('ranks');
 
         $rakhine = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 22);
-        });
+        })->with('ranks');
 
         $chin = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 15);
-        });
+        })->with('ranks');
 
         $total = Rank::whereHas('staffs', function($query){
             return $query->whereIn('current_division_id', [23, 26, 20, 24, 21, 25, 16, 17, 14, 18, 19, 13, 12, 22, 15]);
-        });
+        })->with('ranks');
 
         $ranks = Rank::get();
         $data = [
@@ -384,13 +384,9 @@ class InvestmentCompanies15 extends Component
 
     public function render()
     {
-
-
-
-
         $yangon = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 23);
-        });
+        })->get();
 
         $nay_pyi_thaw = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 26);
@@ -454,7 +450,7 @@ class InvestmentCompanies15 extends Component
 
 
 
-        $ranks = Rank::get();
+        $ranks = Rank::whereNot('staff_type_id',3)->get();
         
 
         return view('livewire.investment-companies.investment-companies15',[

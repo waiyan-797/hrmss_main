@@ -86,7 +86,7 @@ class PA02 implements FromView ,WithStyles
         // $sheet->setPrintGridlines(true);
 
         // Dynamically calculate the highest row and column
-        $highestRow = $sheet->getHighestRow()-4; // e.g. 19
+        $highestRow = $sheet->getHighestRow()-2; // e.g. 19
         
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
         $row=5;

@@ -38,7 +38,7 @@
                             <td class="border border-black p-2">{{en2mm($loop->iteration)}}</td>
                             <td class="border border-black p-2">
                                 @foreach($payscale->ranks as $rank)
-                                {{ $rank->name }}<br>
+                                {{ $rank->name1 ? $rank->name1.'/'.$rank->name2 : $rank->name }}<br>
                             @endforeach
                             
                             </td>
@@ -111,7 +111,7 @@
                             <td class="border border-black p-2">{{en2mm($loop->iteration)}}</td>
                             <td class="border border-black p-2">
                                 @foreach($payscale->ranks as $rank)
-                                {{ $rank->name }}<br>
+                                {{ $rank->name }} <br>
                             @endforeach
                             </td>
                             <td class="border border-black p-2">{{en2mm($payscale->staff->where("current_division_id", 26)

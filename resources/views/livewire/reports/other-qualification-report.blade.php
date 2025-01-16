@@ -23,7 +23,7 @@
                         <td      class="border border-black text-left p-1">
                         @foreach ($staff->staff_educations as $education)
                           <h1>
-                            {{$loop->iteration}} {{$education->education->name}} <br>
+                            {{$loop->iteration}} {{$education->education?->name}} <br>
                           </h1>
                             @endforeach
                         </td>

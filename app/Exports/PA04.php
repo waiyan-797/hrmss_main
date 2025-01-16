@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Payscale;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -18,14 +19,49 @@ class PA04 implements FromView ,WithStyles
     // {
     //     return PA04::all();
     // }
+    public $count=0;
+    public $year, $month, $filterRange;
+    public $previousYear, $previousMonthDate, $previousMonth;
+
+    public function __construct($year , $month,
+    $filterRange ,
+    $previousMonthDate,
+    $previousMonth,
+
+    )
+    {
+        $this->filterRange = $filterRange ;
+        
+        $this->year  =  $year;
+         $this->month  =  $month;
+         $this->previousMonthDate  =  $previousMonthDate;
+         $this->previousMonth  =  $previousMonth;
+       
+
+
+    }
     public function view(): View
     {
+        [$year, $month] = explode('-', $this->filterRange);
+      
+        
+       
+    
+        $this->year = $year;
+        $this->month = $month;
+       
+        $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
+
+        $this->previousYear = $previousMonthDate->year;
+        $this->previousMonth = $previousMonthDate->month;
+        
         $count=0;
         $data = [
             'count'=>$count,
             'first_payscales' => Payscale::where('staff_type_id', 1)->get(),
             'second_payscales' => Payscale::where('staff_type_id', 2)->get(),
-            
+            'year' => $this->year,
+            'month' => $this->month,
           
         ];
         return view('excel_reports.investment_companies_report_4', $data);

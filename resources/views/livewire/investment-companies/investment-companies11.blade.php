@@ -27,9 +27,9 @@
             <table class="w-full">
                 <thead>
                     <tr>
-                        <th rowspan="2" class="border border-black p-2 text-center">စဥ်</th>
+                        <th rowspan="2" class="border border-black p-2 text-center">စဉ်</th>
                         <th rowspan="2" class="border border-black p-2 text-center">အကြောင်းအရာ</th>
-                        <th colspan="3" class="border border-black p-2 text-center">{{$day}}-{{$month}}-{{$year}}ထိ<br>အင်အား</th>
+                        <th colspan="3" class="border border-black p-2 text-center">{{en2mm($day)}}-{{mmMonth($month)}}-{{en2mm($year)}}ထိ<br>အင်အား</th>
                         <th colspan="2" class="border border-black p-2 text-center">အသစ်ခန့်အပ်</th>
                         <th colspan="2" class="border border-black p-2 text-center">အခြားဌာနမှ<br>ရောက်ရှိ</th>
                         <th colspan="2" class="border border-black p-2 text-center">အခြားဌာနသို့<br>ပြောင်းရွေ့ခြင်း
@@ -39,7 +39,7 @@
                         <th colspan="2" class="border border-black p-2 text-center">ထုတ်ပယ်ခြင်း/<br>ထုတ်ပစ်ခြင်း
                         </th>
                         <th colspan="2" class="border border-black p-2 text-center">ကွယ်လွန်ခြင်း</th>
-                        <th colspan="3" class="border border-black p-2 text-center">{{$toDay}}-{{$Tomonth}}-{{$Toyear}}ထိအင်အားစုစုပေါင်း</th>
+                        <th colspan="3" class="border border-black p-2 text-center">{{en2mm($toDay)}}-{{mmMonth($Tomonth)}}-{{en2mm($Toyear)}}ထိအင်အားစုစုပေါင်း</th>
                         <th rowspan="2" class="border border-black p-2 text-center">မှတ်ချက်</th>
                     </tr>
                     <tr>
@@ -66,6 +66,31 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td class="p-2 border border-black text-center">၁</td>
+                        <td class="p-2 border border-black text-center">၂</td>
+                        <td class="p-2 border border-black text-center">၃</td>
+                        <td class="p-2 border border-black text-center">၄</td>
+                        <td class="p-2 border border-black text-center">၅</td>
+                        <td class="p-2 border border-black text-center">၆</td>
+                        <td class="p-2 border border-black text-center">၇</td>
+                        <td class="p-2 border border-black text-center">၈</td>
+                        <td class="p-2 border border-black text-center">၉</td>
+                        <td class="p-2 border border-black text-center">၁၀</td>
+                        <td class="p-2 border border-black text-center">၁၁</td>
+                        <td class="p-2 border border-black text-center">၁၂</td>
+                        <td class="p-2 border border-black text-center">၁၃</td>
+                        <td class="p-2 border border-black text-center">၁၄</td>
+                        <td class="p-2 border border-black text-center">၁၅</td>
+                        <td class="p-2 border border-black text-center">၁၆</td>
+                        <td class="p-2 border border-black text-center">၁၇</td>
+                        <td class="p-2 border border-black text-center">၁၈</td>
+                        <td class="p-2 border border-black text-center">၁၉</td>
+                        <td class="p-2 border border-black text-center">၂၀</td>
+                        <td class="p-2 border border-black text-center">၂၁</td>
+                        <td class="p-2 border border-black text-center">၂၂</td>
+                        <td class="p-2 border border-black text-center">၂၃</td>
+                    </tr>
                     <tr>
                         <td rowspan="2" class="border border-black text-center p-2">၁</td>
                         <td class="border border-black text-center p-2">လုပ်သက်၁၀နှစ်အထက်</td>

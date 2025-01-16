@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
 class PA11 implements FromView ,WithStyles
 { 
@@ -20,11 +21,11 @@ class PA11 implements FromView ,WithStyles
 
     public function __construct($filterRange , $filterRangeTo ,
     $year ,
-$month,
-$day,
-$toDay,
-$Tomonth,
-$Toyear
+    $month,
+    $day,
+    $toDay,
+    $Tomonth,
+    $Toyear
     )
     {
         $this->filterRange = $filterRange ;
@@ -158,27 +159,192 @@ $Toyear
     // }
     public function styles(Worksheet $sheet)
     {
-        // Apply global font style
-        $sheet->getStyle('A1:Z1000')->applyFromArray([
+        // Set paper size and orientation
+        $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4); // Set paper size to A4
+        $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
+
+        // Fit to page width
+        $sheet->getPageSetup()->setFitToWidth(1);
+        $sheet->getPageSetup()->setFitToHeight(0);
+
+        $sheet->getPageSetup()->setScale(70);
+
+        // Enable gridlines for unbordered areas
+        $sheet->setShowGridlines(true);
+        // $sheet->setPrintGridlines(true);
+
+        // Dynamically calculate the highest row and column
+        $highestRow = $sheet->getHighestRow()-1; // e.g. 19
+
+        $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
+        $row=7;
+
+        $sheet->getPageMargins()->setTop(0.8);
+        
+
+        $sheet->getColumnDimension('A')->setWidth(5);
+        $sheet->getColumnDimension('B')->setWidth(23);
+        $sheet->getColumnDimension('C')->setWidth(5);
+        $sheet->getColumnDimension('D')->setWidth(5);
+        $sheet->getColumnDimension('E')->setWidth(7);
+        $sheet->getColumnDimension('F')->setWidth(4);
+        $sheet->getColumnDimension('G')->setWidth(8);
+        $sheet->getColumnDimension('H')->setWidth(4);
+        $sheet->getColumnDimension('I')->setWidth(8);
+        $sheet->getColumnDimension('J')->setWidth(4);
+        $sheet->getColumnDimension('K')->setWidth(8);
+        $sheet->getColumnDimension('L')->setWidth(8);
+        $sheet->getColumnDimension('M')->setWidth(8);
+        $sheet->getColumnDimension('N')->setWidth(5);
+        $sheet->getColumnDimension('O')->setWidth(5);
+        $sheet->getColumnDimension('P')->setWidth(5);
+        $sheet->getColumnDimension('Q')->setWidth(8);
+        $sheet->getColumnDimension('R')->setWidth(5);
+        $sheet->getColumnDimension('S')->setWidth(5);
+        $sheet->getColumnDimension('T')->setWidth(25);
+        $sheet->getColumnDimension('U')->setWidth(25);
+        $sheet->getColumnDimension('V')->setWidth(9);
+        $sheet->getColumnDimension('W')->setWidth(9);
+
+        $sheet->getRowDimension(1)->setRowHeight(28);
+        $sheet->getRowDimension(2)->setRowHeight(28);
+        $sheet->getRowDimension(3)->setRowHeight(0);
+        $sheet->getRowDimension(4)->setRowHeight(40);
+        $sheet->getRowDimension(5)->setRowHeight(40);
+        $sheet->getRowDimension(6)->setRowHeight(50);
+        $sheet->getRowDimension(7)->setRowHeight(40);
+        $sheet->getRowDimension(8)->setRowHeight(60);
+        $sheet->getRowDimension(9)->setRowHeight(80);
+        $sheet->getRowDimension(10)->setRowHeight(60);
+       
+        
+        // for ($row = 3; $row <= $highestRow ; $row++) {
+        //     $sheet->getRowDimension($row)->setRowHeight(26);
+        // }
+
+        $sheet->removeRow(3);
+
+        $sheet->getStyle('A1:A2')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
-                'size' => 13,
+                'size' => 12,
             ],
-        ]);
-        $sheet->getStyle('A1:W100')->applyFromArray([
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
             'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                    'color' => ['argb' => '000000'], // Black border
+                'outline' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
                 ],
             ],
         ]);
+        
+        $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+
+        $sheet->getStyle("A3:W3")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+        $sheet->getStyle("A4:W4")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+
+        $sheet->getStyle("A6:W6")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 10,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+
+        $sheet->getStyle("B7:B8")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 10,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT, // Custom alignment for A and B
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+
+        // Apply global font style
+        // $sheet->getStyle('A1:Z1000')->applyFromArray([
+        //     'font' => [
+        //         'name' => 'Pyidaungsu',
+        //         'size' => 13,
+        //     ],
+        // ]);
+        // $sheet->getStyle('A1:W100')->applyFromArray([
+        //     'borders' => [
+        //         'allBorders' => [
+        //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        //             'color' => ['argb' => '000000'], // Black border
+        //         ],
+        //     ],
+        // ]);
     
-        // Auto-size columns for the table
-        foreach (range('A', 'W') as $column) {
-            $sheet->getColumnDimension($column)->setAutoSize(true);
-        }
+        // // Auto-size columns for the table
+        // foreach (range('A', 'W') as $column) {
+        //     $sheet->getColumnDimension($column)->setAutoSize(true);
+        // }
     
-        return [];
+        // return [];
     }
 }

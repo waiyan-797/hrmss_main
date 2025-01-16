@@ -18,31 +18,33 @@
                 </thead>
                 <tbody>
                     @foreach($staffs as $staff)
-                    <tr>
-                        <td class="border border-black text-right p-1 align-top" rowspan="{{ max(1, $staff->abroads->count()) }}">
-                            {{ $startIndex++ }}
-                        </td>
-                        <td class="border border-black text-left p-1 align-top" rowspan="{{ max(1, $staff->abroads->count()) }}">
-                            {{ $staff->name }}
-                        </td>
+                        <tr>
+                            <td class="border border-black text-right p-1 align-top"
+                                rowspan="{{ max(1, $staff->abroads->count()) }}">
+                                {{ $startIndex++ }}
+                            </td>
+                            <td class="border border-black text-left p-1 align-top"
+                                rowspan="{{ max(1, $staff->abroads->count()) }}">
+                                {{ $staff->name }}
+                            </td>
 
-                        @if($staff->abroads->isNotEmpty())
-                        
-                        <td class="border border-black text-left p-1">{{ $staff->abroads[0]->country->name }}</td>
-                        <td class="border border-black text-left p-1">{{ $staff->abroads[0]->from_date }}</td>
-                    </tr>
-                    
-                    @foreach($staff->abroads->skip(1) as $abroad)
-                    <tr>
-                        <td class="border border-black text-left p-1">{{ $abroad->country->name }}</td>
-                        <td class="border border-black text-left p-1">{{ $abroad->from_date }}</td>
-                    </tr>
-                    @endforeach
-                    @else
-                    <!-- No abroads case -->
-                    <td class="border border-black text-left p-1" colspan="2">no </td>
-                    </tr>
-                    @endif
+                            @if($staff->abroads->isNotEmpty())
+
+                                    <td class="border border-black text-left p-1">{{ $staff->abroads[0]->country?->name }}</td>
+                                    <td class="border border-black text-left p-1">{{ $staff->abroads[0]->from_date }}</td>
+                                </tr>
+
+                                @foreach($staff->abroads->skip(1) as $abroad)
+                                    <tr>
+                                        <td class="border border-black text-left p-1">{{ $abroad->country?->name }}</td>
+                                        <td class="border border-black text-left p-1">{{ $abroad->from_date }}</td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <!-- No abroads case -->
+                                <td class="border border-black text-left p-1" colspan="2">no </td>
+                                </tr>
+                            @endif
 
                     @endforeach
                 </tbody>

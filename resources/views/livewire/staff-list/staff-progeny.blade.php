@@ -30,7 +30,7 @@
                             <td class="border border-black text-left p-2">{{ $staff->name }}
                                 <br>
 
-                                {{ $staff->currentRank->name }}
+                                {{ $staff->currentRank?->name }}
 
                             </td>
 

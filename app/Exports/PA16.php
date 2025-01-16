@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\PensionYear;
 use App\Models\Staff;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -23,27 +24,49 @@ class PA16 implements FromView ,WithStyles
     // }
     public $nameSearch, $deptId, $filterDate;
     public $staffs;
-    public $year , $month ;
-    public function __construct($nameSearch , $staffs ,
-    $year ,
-$month
+    public $year, $month, $filterRange;
+    public $previousYear, $previousMonthDate, $previousMonth;
+
+    public function __construct($year , $month,
+    $filterRange ,
+    $previousMonthDate,
+    $previousMonth,
 
     )
     {
-        $this->nameSearch = $nameSearch ;
-        $this->staffs=$staffs;
+        $this->filterRange = $filterRange ;
+        
         $this->year  =  $year;
          $this->month  =  $month;
+         $this->previousMonthDate  =  $previousMonthDate;
+         $this->previousMonth  =  $previousMonth;
+       
 
     }
+
     public function view(): View
     {
+        [$year, $month] = explode('-', $this->filterRange);
+      
+        
+       
+    
+        $this->year = $year;
+        $this->month = $month;
+       
+        $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
+
+        $this->previousYear = $previousMonthDate->year;
+        $this->previousMonth = $previousMonthDate->month;
+
         $staffs = Staff::get();
         $pension_year = PensionYear::first();
        
         $data = [
             'staffs' => $staffs,
             'pension_year'=>$pension_year,
+            'year' => $this->year,
+            'month' => $this->month,
         ];
         return view('excel_reports.staff_report_1', $data);
     }

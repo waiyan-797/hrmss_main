@@ -6,7 +6,7 @@ use App\Exports\PA16;
 use App\Models\Department;
 use App\Models\PensionYear;
 use App\Models\Staff;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
@@ -16,9 +16,10 @@ use PhpOffice\PhpWord\PhpWord;
 class StaffReport1 extends Component
 {
 
-    public $nameSearch, $deptId, $filterDate;
+    public $nameSearch='', $deptId, $filterDate;
     public $staffs;
-    // public $year , $month ;
+    public $year, $month, $filterRange;
+    public $previousYear, $previousMonthDate, $previousMonth;
 
     public function go_pdf()
     {
@@ -36,10 +37,8 @@ class StaffReport1 extends Component
    
     public function go_excel() 
     {
-        return Excel::download(new PA16($this->nameSearch ,
-        $this->deptId ,$this->staffs,
-    
-    $this->year , $this->month), 'PA16.xlsx');
+        return Excel::download(new PA16($this->year,$this->month,$this->filterRange,$this->previousMonthDate,$this->previousMonth,
+    ), 'PA16.xlsx');
     }
 
     public function go_word()
@@ -94,12 +93,19 @@ class StaffReport1 extends Component
 
     public function mount()
     {
-        $this->filterDate = Carbon::now()->format('Y-m-d');
+        $this->filterRange = Carbon::now()->format('Y-m'); // Format: 'YYYY-MM'
     }
     public function render()
     {
-        $year = explode('-', $this->filterDate)[0];
-        $month = explode('-', $this->filterDate)[1];
+        [$year, $month] = explode('-', $this->filterRange);
+        $this->year = $year;
+        $this->month = $month;
+        $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
+        $this->previousYear = $previousMonthDate->year;
+        $this->previousMonth = $previousMonthDate->month;
+        // $year = explode('-', $this->filterDate)[0];
+        // $month = explode('-', $this->filterDate)[1];
+        
         
         $staffQuery = Staff::query();
         $staffQuery->withWhereHas('postings', function ($query) use ($year, $month) {
@@ -111,8 +117,13 @@ class StaffReport1 extends Component
             }
         });
         if ($this->nameSearch) {
-            $staffQuery->where('name', 'like', '%' . $this->nameSearch . '%');
+            $staffQuery->whereHas('currentRank', function ($query) {
+                $query->where('name', 'like', '%' . $this->nameSearch . '%');
+            });
         }
+        // if ($this->nameSearch) {
+        //     $staffQuery->where('name', 'like', '%' . $this->nameSearch . '%');
+        // }
         $this->staffs = $staffQuery->get();
 
         $staffs = Staff::get();

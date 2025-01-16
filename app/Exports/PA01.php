@@ -252,7 +252,26 @@ class PA01 implements FromView ,WithStyles
                 ],
             ],
         ]);
+        
+
         $sheet->getStyle("C6:$highestColumn$highestRow")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+
+        $sheet->getStyle("C7:$highestColumn$highestRow")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 11,

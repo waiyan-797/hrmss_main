@@ -5,11 +5,20 @@
             {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
             <br><br>
+            <input type="month" wire:model.live='filterRange'>
+            
+            <div class="w-full mb-4">
+                <h1 class="font-semibold text-base mb-2 text-center">
+                    ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>
+                    ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                </h1>
+                    <h3 class="font-semibold text-base mb-2 text-center">{{ mmDateFormat($year, $month) }} </h3>
+            {{-- <br><br>
             
             <h1 class="font-semibold text-base mb-2 text-center">
                 ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
             <h1 class="font-semibold text-base mb-2 text-center">
-                ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+                ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1> --}}
 
             <table>
                 <thead>

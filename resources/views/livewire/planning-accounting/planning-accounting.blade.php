@@ -7,39 +7,40 @@
 
 
 
-            <select  class="  " wire:model.live='selectedDivisionId' id="">
+            <select class="  " wire:model.live='selectedDivisionId' id="">
                 @foreach ($divisions as $division)
-                    <option value="{{$division->id}}">
-                    {{
-                        $division->name
-                    }}
-                    </option>
+                            <option value="{{$division->id}}">
+                                {{
+                    $division->name
+                                }}
+                            </option>
                 @endforeach
             </select>
-        
+
             <div class="w-full mb-4">
                 <h2 class="font-semibold text-base">
-                    {{getDivisionBy($selectedDivisionId)->name}} 
-                    ဝန်ထမ်းအင်အားစာရင်း</h2>
+                    {{getDivisionBy($selectedDivisionId)->name}}
+                    ဝန်ထမ်းအင်အားစာရင်း
+                </h2>
                 <table class="w-full text-center">
                     <thead>
                         <tr class="bg-gray-100">
-                            <th class="p-2 border border-black">စဥ်</th>
+                            <th class="p-2 border border-black">စဉ်</th>
                             <th class="p-2 border border-black">အမည်</th>
                             <th class="p-2 border border-black">ရာထူး</th>
                             <th class="p-2 border border-black">မှတ်ချက်</th>
                         </tr>
                     </thead>
                     <tbody class="text-center h-8 p-2">
-                       @foreach($staffs as $staff)
-                        <tr>
-                            <td class="border border-black p-2">{{ $start++}}</td>
-                            <td class="border border-black p-2">{{ $staff->name}}</td>
-                            <td class="border border-black p-2">{{ $staff->currentRank?->name}}</td>
-                            <td class="border border-black p-2"></td>
-                        </tr>
+                        @foreach($staffs as $staff)
+                            <tr>
+                                <td class="border border-black p-2">{{ $start++}}</td>
+                                <td class="border border-black p-2">{{ $staff->name}}</td>
+                                <td class="border border-black p-2">{{ $staff->currentRank?->name}}</td>
+                                <td class="border border-black p-2"></td>
+                            </tr>
                         @endforeach
-                       
+
                     </tbody>
                 </table>
                 <div class="mt-4">

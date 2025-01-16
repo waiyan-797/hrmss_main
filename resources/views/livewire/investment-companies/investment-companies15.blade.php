@@ -85,6 +85,7 @@
                 <tbody>
                     @php
                         $total_allowed_qty = 0;
+                        $_total_allowed_qty = 0;
                         $total_yangon = 0;
                         $total_nay_pyi_thaw = 0;
                         $total_mandalay = 0;
@@ -101,6 +102,7 @@
                         $total_rakhine = 0;
                         $total_chin = 0;
                         $total_all = 0;
+                        $total_allowed_quantity_by_rank = 0;
                     @endphp
                     @foreach ($ranks as $rank)
                         @php
@@ -121,60 +123,64 @@
                             $count_chin = $chin->where('id', $rank->id)->count();
                             $count_total = $total->where('id', $rank->id)->count();
                         @endphp
+                        @php
+                            $total_allowed_quantity_by_rank = $rank->allowed_qty * 15;
+                        @endphp
                          <tr>
                             <td class="border border-black text-center p-2">{{ en2mm($loop->index + 1) }}</td>
                             <td class="border border-black text-center p-2">{{ $rank->name }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 23)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_yangon) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_yangon) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_yangon - $rank->allowed_qty ) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 26)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_nay_pyi_thaw) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_nay_pyi_thaw) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_nay_pyi_thaw - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 20)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_mandalay) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_mandalay) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_mandalay - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 24)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_shan) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_shan) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_shan - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 21)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_mon) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_mon) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_mon - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 25)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_aya) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_aya) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_aya - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 16)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_sagaing) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_sagaing) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_sagaing - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 17)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_tanindaryi) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_tanindaryi) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($total_kayin) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $total_kayin) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_tanindaryi - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 14)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_kayin) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_kayin - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 18)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_bago) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_bago) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_bago - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 19)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_magway) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_magway) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_magway - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 13)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_kayah) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_kayah) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_kayah - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 12)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_kachin) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_kachin) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_kachin - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 22)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_rakhine) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_rakhine) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_rakhine - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($rank->ranks ? $rank->ranks->where('division_id', 15)->first()?->allowed_qty ?? $rank->allowed_qty : $rank->allowed_qty) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_chin) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_chin) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_chin - $rank->allowed_qty) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($total_allowed_quantity_by_rank) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($count_total) }}</td>
-                            <td class="border border-black text-center p-2">{{ en2mm($rank->allowed_qty - $count_total) }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($count_total - $total_allowed_quantity_by_rank) }}</td>
                         </tr>
                         @php
                             $total_allowed_qty += $rank->allowed_qty;
+                            $_total_allowed_qty += $total_allowed_quantity_by_rank;
                             $total_yangon += $count_yangon;
                             $total_nay_pyi_thaw += $count_nay_pyi_thaw;
                             $total_mandalay += $count_mandalay;
@@ -198,52 +204,52 @@
                         <td class="border border-black text-center p-2">စုစုပေါင်း</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_yangon) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_yangon) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_yangon - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_nay_pyi_thaw) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_nay_pyi_thaw) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_nay_pyi_thaw - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_mandalay) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_mandalay) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_mandalay - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_shan) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_shan) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_shan - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_mon) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_mon) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_mon - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_aya) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_aya) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_aya - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_sagaing) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_sagaing) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_sagaing - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_tanindaryi) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_tanindaryi) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_tanindaryi - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_kayin) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_kayin) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_kayin - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_bago) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_bago) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_bago - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_magway) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_magway) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_magway - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_kayah) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_kayah) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_kayah - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_kachin) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_kachin) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_kachin - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_rakhine) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_rakhine) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_rakhine - $total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_chin) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_chin) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_chin - $total_allowed_qty) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($_total_allowed_qty) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_all) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($total_allowed_qty - $total_all) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($total_all - $_total_allowed_qty) }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -68,18 +68,18 @@
 
                 <table class="tabletitle">
                     <tr>
-                        <th colspan="5" >
+                        <th colspan="5" style="font-weight:bold">
                             ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
                         </th>
                     </tr>
                     <tr>
-                        <th colspan="5" >
+                        <th colspan="5" style="font-weight:bold">
                             ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
                         </th>
                     </tr>
                     <tr>
                         <th colspan="5" >
-                            ၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
+                            {{mmDateFormat($year,$month)}}ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
                         </th>
                     </tr>
                 </table>

@@ -100,5 +100,9 @@ public function isDicaAll(){
     return $this->where('is_dica' , 1 )->get();
 }
 
+    public function ranks(){
+        return $this->hasMany(DivisionRank::class);
+    }
+
 
 }

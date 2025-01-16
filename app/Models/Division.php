@@ -70,6 +70,10 @@ class Division extends Model
 {
     return $this->hasMany(Leave::class, 'current_division_id');
 }
+    
+    public function divisions(){
+        return $this->hasMany(DivisionRank::class);
+    }
 
 
     

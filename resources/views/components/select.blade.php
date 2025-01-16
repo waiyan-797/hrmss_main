@@ -12,6 +12,3 @@
         <option value="{{ $value['id'] }}">{{ $value['name'] }}</option>
     @endforeach
 </select>
-
-
-

@@ -5,6 +5,7 @@ namespace App\Livewire\InvestmentCompanies;
 use App\Exports\PA04;
 use App\Models\Payscale;
 use App\Models\Staff;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
@@ -12,6 +13,8 @@ use PhpOffice\PhpWord\PhpWord;
 
 class InvestmentCompanies4 extends Component
 {
+    public $year, $month, $filterRange;
+    public $previousYear, $previousMonthDate, $previousMonth;
     public $count=0;
     public function go_pdf(){
         $count=0;
@@ -19,6 +22,8 @@ class InvestmentCompanies4 extends Component
             'count'=>$count,
             'first_payscales' => Payscale::where('staff_type_id', 1)->get(),
             'second_payscales' => Payscale::where('staff_type_id', 2)->get(),
+            'year' => $this->year,
+            'month' => $this->month,
         ];
         $pdf = PDF::loadView('pdf_reports.investment_companies_report_4', $data);
         return response()->streamDownload(function() use ($pdf) {
@@ -27,7 +32,7 @@ class InvestmentCompanies4 extends Component
     }
     public function go_excel() 
     {
-        return Excel::download(new PA04(
+        return Excel::download(new PA04($this->year,$this->month,$this->filterRange,$this->previousMonthDate,$this->previousMonth
     ), 'PA04.xlsx');
     }
     public function go_word()
@@ -91,8 +96,19 @@ class InvestmentCompanies4 extends Component
     return response()->download($tempFile)->deleteFileAfterSend(true);
 }
 
+    public function mount()
+    {
+        $this->filterRange = Carbon::now()->format('Y-m'); // Format: 'YYYY-MM'
+    }
     public function render()
     {
+        [$year, $month] = explode('-', $this->filterRange);
+        $this->year = $year;
+        $this->month = $month;
+        $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
+        $this->previousYear = $previousMonthDate->year;
+        $this->previousMonth = $previousMonthDate->month;
+        
         $first_payscales = Payscale::where('staff_type_id', 1)->get();
         $second_payscales = Payscale::where('staff_type_id', 2)->get();
         return view('livewire.investment-companies.investment-companies4',[

@@ -5,6 +5,7 @@ namespace App\Livewire\InvestmentCompanies;
 use App\Exports\PA03;
 use App\Models\Rank;
 use App\Models\Staff;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
@@ -17,14 +18,17 @@ class InvestmentCompanies3 extends Component
 
     // public $selected
 
-        public $year; 
-        public $count=0;
+    public $year, $month, $filterRange;
+    public $previousYear, $previousMonthDate, $previousMonth;
+     public $count=0;
     public function go_pdf(){
         $count=0;
         $data = [
             'count'=>$count,
             'first_ranks' => Rank::where('staff_type_id', 1)->get(),
             'second_ranks' => Rank::where('staff_type_id', 2)->get(),
+            'year' => $this->year,
+            'month' => $this->month,
         ];
         $pdf = PDF::loadView('pdf_reports.investment_companies_report_3', $data);
         return response()->streamDownload(function() use ($pdf) {
@@ -33,8 +37,8 @@ class InvestmentCompanies3 extends Component
     }
     public function go_excel() 
     {
-        return Excel::download(new PA03(
-    ), 'PA03.xlsx');
+        return Excel::download(new PA03($this->year,$this->month,$this->filterRange,$this->previousMonthDate,$this->previousMonth
+    ),'PA03.xlsx');
     }
   
     public function go_word()
@@ -90,8 +94,20 @@ class InvestmentCompanies3 extends Component
     $phpWord->save($tempFile, 'Word2007');
     return response()->download($tempFile, 'investment_companies_report.docx')->deleteFileAfterSend(true);
 }
+
+    public function mount()
+    {
+        $this->filterRange = Carbon::now()->format('Y-m'); // Format: 'YYYY-MM'
+    }
     public function render()
     {
+        [$year, $month] = explode('-', $this->filterRange);
+        $this->year = $year;
+        $this->month = $month;
+        $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
+        $this->previousYear = $previousMonthDate->year;
+        $this->previousMonth = $previousMonthDate->month;
+
         $first_ranks = Rank::where('staff_type_id', 1)->get();
         $second_ranks = Rank::where('staff_type_id', 2)->get();
         

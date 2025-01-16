@@ -15,7 +15,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($staffs as $index=> $staff)
+                    @foreach ($staffs as $index => $staff)
                         <tr>
                             {{-- <td class="border border-black text-right p-1">{{ $loop->index + 1 }}</td> --}}
                             <td class="border border-black text-left p-1">{{ $startIndex++ }}</td>
@@ -24,9 +24,9 @@
                             <td class="border border-black text-left p-1">
                                 @foreach ($staff->staff_educations as $edu)
                                     <div>
-                                        <span>{{ $edu->education_group->name }}</span>
-                                        <span>{{ $edu->education_type->name }}</span>
-                                        <span>{{ $edu->education->name }}</span>
+                                        {{-- <span>{{ $edu->education_group?->name }}</span> --}}
+                                        {{-- <span>{{ $edu->education_type?->name }}</span> --}}
+                                        <span>{{ $edu->education?->name }}</span>
                                     </div>
                                 @endforeach
                             </td>
@@ -37,9 +37,9 @@
             <div class="mt-4">
                 {{ $staffs->links('pagination') }}
             </div>
-            
+
 
         </div>
     </div>
-    
+
 </div>

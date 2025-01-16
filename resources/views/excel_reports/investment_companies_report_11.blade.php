@@ -1,5 +1,5 @@
 
-    <style type="text/css">
+    {{-- <style type="text/css">
         
 
         body {
@@ -61,49 +61,91 @@
 
 
 
-    </style>
+    </style> --}}
 
 
+<div class="container">
+        
+    <div class="table-container">
+
+        <table class="">
+            <tr>
+                <th colspan="23" style="font-weight:bold;">
+                    ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                </th> 
+            </tr>
+            <tr>
+                <th colspan="23" style="font-weight:bold;">
+                    ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၏ ဝန်ထမ်းအင်အားပြုန်းတီးမှုအခြေအနေနှင့် ဝန်ထမ်းအင်အားစာရင်းချုပ်
+                </th>
+            </tr>
+        </table>
         <table class="border-collapse">
             <thead>
                 <tr>
-                    <th rowspan="2">စဉ်</th>
-                    <th rowspan="2">အကြောင်းအရာ</th>
-                    <th colspan="3">၃၁-၁၂-၂၀၂၃ထိ<br>အင်အား</th>
-                    <th colspan="2">အသစ်ခန့်အပ်</th>
-                    <th colspan="2">အခြားဌာနမှ<br>ရောက်ရှိ</th>
-                    <th colspan="2">အခြားဌာနသို့<br>ပြောင်းရွေ့ခြင်း</th>
-                    <th colspan="2">ပင်စင်ခံစားခြင်း</th>
-                    <th colspan="2">နုတ်ထွက်ခြင်း</th>
-                    <th colspan="2">ထုတ်ပယ်ခြင်း/<br>ထုတ်ပစ်ခြင်း</th>
-                    <th colspan="2">ကွယ်လွန်ခြင်း</th>
-                    <th colspan="3">၃၁-၃-၂၀၂၄ထိအင်အားစုစုပေါင်း</th>
-                    <th rowspan="2">မှတ်ချက်</th>
+                    <th rowspan="3" style="font-weight:bold;">စဉ်</th>
+                    <th rowspan="3" style="font-weight:bold;">အကြောင်းအရာ</th>
+                    <th rowspan="2" colspan="3" style="font-weight:bold;">{{en2mm($day)}}-{{mmMonth($month)}}-{{en2mm($year)}}ထိ<br>အင်အား</th>
+                    <th rowspan="2" colspan="2" style="font-weight:bold;">အသစ်ခန့်အပ်</th>
+                    <th rowspan="2" colspan="2" style="font-weight:bold;">အခြားဌာနမှ<br>ရောက်ရှိ</th>
+                    <th rowspan="2" colspan="2" style="font-weight:bold;">အခြားဌာနသို့<br>ပြောင်းရွေ့ခြင်း</th>
+                    <th rowspan="2" colspan="2" style="font-weight:bold;">ပင်စင်ခံစားခြင်း</th>
+                    <th rowspan="2" colspan="2" style="font-weight:bold;">နုတ်ထွက်ခြင်း</th>
+                    <th rowspan="2" colspan="2" style="font-weight:bold;">ထုတ်ပယ်ခြင်း/<br>ထုတ်ပစ်ခြင်း</th>
+                    <th rowspan="2" colspan="2" style="font-weight:bold;">ကွယ်လွန်ခြင်း</th>
+                    <th rowspan="2" colspan="3" style="font-weight:bold;">{{en2mm($toDay)}}-{{mmMonth($Tomonth)}}-{{en2mm($Toyear)}}ထိအင်အားစုစုပေါင်း</th>
+                    <th rowspan="3" style="font-weight:bold;">မှတ်ချက်</th>
                 </tr>
+                <tr></tr>
                 <tr>
-                    <th>ရာ</th>
-                    <th>မှု</th>
-                    <th>ပေါင်း</th>
-                    <th>ရာ</th>
-                    <th>မှု</th>
-                    <th>ရာ</th>
-                    <th>မှု</th>
-                    <th>ရာ</th>
-                    <th>မှု</th>
-                    <th>ရာ</th>
-                    <th>မှု</th>
-                    <th>ရာ</th>
-                    <th>မှု</th>
-                    <th>ရာ</th>
-                    <th>မှု</th>
-                    <th>ရာ</th>
-                    <th>မှု</th>
-                    <th>ရာ</th>
-                    <th>မှု</th>
-                    <th>ပေါင်း</th>
+                    <th style="font-weight:bold;">ရာ</th>
+                    <th style="font-weight:bold;">မှု</th>
+                    <th style="font-weight:bold;">ပေါင်း</th>
+                    <th style="font-weight:bold;">ရာ</th>
+                    <th style="font-weight:bold;">မှု</th>
+                    <th style="font-weight:bold;">ရာ</th>
+                    <th style="font-weight:bold;">မှု</th>
+                    <th style="font-weight:bold;">ရာ</th>
+                    <th style="font-weight:bold;">မှု</th>
+                    <th style="font-weight:bold;">ရာ</th>
+                    <th style="font-weight:bold;">မှု</th>
+                    <th style="font-weight:bold;">ရာ</th>
+                    <th style="font-weight:bold;">မှု</th>
+                    <th style="font-weight:bold;">ရာ</th>
+                    <th style="font-weight:bold;">မှု</th>
+                    <th style="font-weight:bold;">ရာ</th>
+                    <th style="font-weight:bold;">မှု</th>
+                    <th style="font-weight:bold;">ရာ</th>
+                    <th style="font-weight:bold;">မှု</th>
+                    <th style="font-weight:bold;">ပေါင်း</th>
                 </tr>
             </thead>
             <tbody>
+                <tr class="">
+                    <td class="p-2 border border-black">၁</td>
+                    <td class="p-2 border border-black">၂</td>
+                    <td class="p-2 border border-black text-right">၃</td>
+                    <td class="p-2 border border-black text-right">၄</td>
+                    <td class="p-2 border border-black text-right">၅(၃+၄)</td>
+                    <td class="p-2 border border-black text-right">၆</td>
+                    <td class="p-2 border border-black text-right">၇</td>
+                    <td class="p-2 border border-black text-right">၈</td>
+                    <td class="p-2 border border-black text-right">၉</td>
+                    <td class="p-2 border border-black text-right">၁၀</td>
+                    <td class="p-2 border border-black text-right">၁၁</td>
+                    <td class="p-2 border border-black text-right">၁၂</td>
+                    <td class="p-2 border border-black text-right">၁၃</td>
+                    <td class="p-2 border border-black text-right">၁၄</td>
+                    <td class="p-2 border border-black text-right">၁၅</td>
+                    <td class="p-2 border border-black text-right">၁၆</td>
+                    <td class="p-2 border border-black text-right">၁၇</td>
+                    <td class="p-2 border border-black text-right">၁၈</td>
+                    <td class="p-2 border border-black text-right">၁၉</td>
+                    <td class="p-2 border border-black text-right">၂၀<br>(၃+၆+၈)-(၁၀+၁၂+၁၄+၁၆+၁၈)</td>
+                    <td class="p-2 border border-black text-right">၂၁<br>(၄+၇+၉)-(၁၁+၁၃+၁၅+၁၇+၁၉)</td>
+                    <td class="p-2 border border-black text-right">၂၂<br>(၂၀+၂၁)</td>
+                    <td class="p-2 border border-black text-right">၂၃</td>
+                </tr>
                 <tr>
                     <td rowspan="2">၁</td>
                     <td>လုပ်သက်၁၀နှစ်အထက်</td>

@@ -5,7 +5,7 @@ namespace App\Livewire\InvestmentCompanies;
 use App\Exports\PA08;
 use App\Models\Rank;
 use App\Models\Staff;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
@@ -14,6 +14,9 @@ use PhpOffice\PhpWord\PhpWord;
 
 class InvestmentCompanies8 extends Component
 {
+    public $year, $month, $filterRange;
+    public $previousYear, $previousMonthDate, $previousMonth;
+     public $count=0;
 
     public function go_pdf()
     {
@@ -59,8 +62,10 @@ class InvestmentCompanies8 extends Component
     }
     public function go_excel() 
     {
-        return Excel::download(new PA08(
+        
+        return Excel::download(new PA08($this->year,$this->month,$this->filterRange,$this->previousMonthDate,$this->previousMonth
     ), 'PA08.xlsx');
+    
     }
     public function go_word()
     {
@@ -190,8 +195,18 @@ class InvestmentCompanies8 extends Component
 
         return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
     }
+    public function mount()
+    {
+        $this->filterRange = Carbon::now()->format('Y-m'); // Format: 'YYYY-MM'
+    }
     public function render()
     {
+        [$year, $month] = explode('-', $this->filterRange);
+        $this->year = $year;
+        $this->month = $month;
+        $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
+        $this->previousYear = $previousMonthDate->year;
+        $this->previousMonth = $previousMonthDate->month;
         $first_ranks = Rank::where('staff_type_id', 1)
             ->withCount(['staffs' => function ($query) {
                 $query->where('current_division_id', '26');

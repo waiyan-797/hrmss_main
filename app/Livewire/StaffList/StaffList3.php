@@ -43,23 +43,39 @@ class StaffList3 extends Component
     ), 'SSL02.xlsx');
     }
     public function go_word()
-    {
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();
-        $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
-        $section->addTitle('Staff List Report', 1);
+    { 
+        $count=0;
+        $phpWord = new PhpWord();
+        $section = $phpWord->addSection([
+            'orientation' => 'portrait',
+            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),     // 1 inch
+            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+        ]);
+
+        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center','spaceBefore' => 200]);
+        $phpWord->addTitleStyle(2, ['bold' => false, 'size' => 13], ['alignment' => 'center']);
+        $phpWord->addTitleStyle(3, ['bold' => false, 'font'=>'Pyidaungsu Number', 'size' => 13], ['alignment' => 'right']);
+        // $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
+        $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုးဦးစီးဌာန', 1);
+        $section->addTitle('ရုံးချုပ် ဌာနခွဲများ၏အရာထမ်း၊ အမှုထမ်းများစာရင်း', 2);
+        $section->addTitle(formatDMYmm(Carbon::now()), 3);
+
+        
         $table = $section->addTable([
             'borderSize' => 6, 
             'borderColor' => '000000',
-            'cellMargin' => 80
+            'cellMargin' => 1
         ]);
     
         // Table header
         $table->addRow();
-        $table->addCell(2000)->addText('စဥ်');
-        $table->addCell(4000)->addText('ရာထူးအမည်');
-        $table->addCell(2000)->addText('ကျား');
-        $table->addCell(2000)->addText('မ');
-        $table->addCell(2000)->addText('စုစုပေါင်း');
+        $table->addCell(700)->addText('စဥ်',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
+        $table->addCell(5000)->addText('ရာထူးအမည်',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
+        $table->addCell(2000)->addText('ကျား',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
+        $table->addCell(2000)->addText('မ',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
+        $table->addCell(2000)->addText('စုစုပေါင်း',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
     
       
         $first_ranks = Rank::where('staff_type_id', 1)->withCount('staffs')->get();
@@ -71,54 +87,54 @@ class StaffList3 extends Component
         
         foreach ($first_ranks as $index => $rank) {
             $table->addRow();
-            $table->addCell(2000)->addText(en2mm($index + 1));
-            $table->addCell(4000)->addText($rank->name);
-            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count()));
-            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 2)->count()));
-            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count()));
+            $table->addCell(700)->addText(en2mm(++$count),null,['alignment'=>'center','spaceBefore'=>50]);
+            $table->addCell(5000)->addText($rank->name,null,['alignment'=>'left','spaceBefore'=>50, 'indentation' => ['left' => 100]]);
+            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count()),null,['alignment'=>'center','spaceBefore'=>50, ]);
+            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=>50, ]);
+            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=>50, 'indentation' => ['left' => 100]]);
         }
     
       
         $table->addRow();
-        $table->addCell(2000)->addText('');
-        $table->addCell(3000)->addText('စုစုပေါင်း အရာထမ်း', ['alignment' => 'right']);
-        $table->addCell(2000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())), ['bold' => true]);
-        $table->addCell(2000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())), ['bold' => true]);
-        $table->addCell(2000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())), ['bold' => true]);
+        $table->addCell(700)->addText('');
+        $table->addCell(5000)->addText('အရာထမ်းပေါင်း', ['bold'=>true],['alignment' => 'left','spaceBefore'=>50, ]);
+        $table->addCell(2000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50,]);
+        $table->addCell(2000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50,]);
+        $table->addCell(2000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50,]);
     
        
         foreach ($second_ranks as $index => $rank) {
             $table->addRow();
-            $table->addCell(2000)->addText(en2mm($index + 1));
-            $table->addCell(4000)->addText($rank->name);
-            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count()));
-            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 2)->count()));
-            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count()));
+            $table->addCell(700)->addText(en2mm(++$count),null,['alignment'=>'center','spaceBefore'=>50]);
+            $table->addCell(5000)->addText($rank->name,null,['alignment'=>'left','spaceBefore'=>50, 'indentation' => ['left' => 100]]);
+            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count()),null,['alignment'=>'center','spaceBefore'=>50, ]);
+            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=>50, ]);
+            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=>50, ]);
         }
         $table->addRow();
-        $table->addCell(2000)->addText('');
-        $table->addCell(2000)->addText('စုစုပေါင်း အမှုထမ်း', ['bold' => true]);
-        $table->addCell(2000)->addText(en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())), ['bold' => true]);
-        $table->addCell(2000)->addText(en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())), ['bold' => true]);
-        $table->addCell(2000)->addText(en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())), ['bold' => true]);
+        $table->addCell(700)->addText('');
+        $table->addCell(5000)->addText('အမှုထမ်းပေါင်း', ['bold' => true],['alignment'=>'left','spaceBefore'=>50, 'indentation' => ['left' => 100]]);
+        $table->addCell(2000)->addText(en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50, ]);
+        $table->addCell(2000)->addText(en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50, ]);
+        $table->addCell(2000)->addText(en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50, ]);
         $table->addRow();
-        $table->addCell(2000)->addText('');
-        $table->addCell(3000)->addText('စုစုပေါင်း အရာထမ်း အမှုထမ်း', ['bold' => true]);
-        $table->addCell(2000)->addText(en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())), ['bold' => true]);
-        $table->addCell(2000)->addText(en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())), ['bold' => true]);
-        $table->addCell(2000)->addText(en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())), ['bold' => true]);
+        $table->addCell(700)->addText('');
+        $table->addCell(5000)->addText('ပေါင်း', ['bold' => true],['alignment'=>'left','spaceBefore'=>50, 'indentation' => ['left' => 100]]);
+        $table->addCell(2000)->addText(en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50, ]);
+        $table->addCell(2000)->addText(en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50, ]);
+        $table->addCell(2000)->addText(en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50, ]);
         $table->addRow();
-        $table->addCell(2000)->addText('1');
-        $table->addCell(4000)->addText('နေ့စား');
-        $table->addCell(2000)->addText(en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())));
-        $table->addCell(2000)->addText(en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())));
-        $table->addCell(2000)->addText(en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())));
-        $table->addRow();
-        $table->addCell(2000)->addText('');
-        $table->addCell(3000)->addText('စုစုပေါင်း ဝန်ထမ်းဦးရေ', ['bold' => true]);
-        $table->addCell(2000)->addText(en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())), ['bold' => true]);
-        $table->addCell(2000)->addText(en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())), ['bold' => true]);
-        $table->addCell(2000)->addText(en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())), ['bold' => true]);
+        $table->addCell(700)->addText('');
+        $table->addCell(5000)->addText('နေ့စား',['bold' => true],['alignment'=>'left','spaceBefore'=>50, 'indentation' => ['left' => 100]]);
+        $table->addCell(2000)->addText(en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50, ]);
+        $table->addCell(2000)->addText(en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50, ]);
+        $table->addCell(2000)->addText(en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50, ]);
+        // $table->addRow();
+        // $table->addCell(700)->addText('');
+        // $table->addCell(5000)->addText('စုစုပေါင်း ဝန်ထမ်းဦးရေ', ['bold' => true]);
+        // $table->addCell(2000)->addText(en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())), ['bold' => true]);
+        // $table->addCell(2000)->addText(en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())), ['bold' => true]);
+        // $table->addCell(2000)->addText(en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())), ['bold' => true]);
         $fileName = 'staff_list3_report.docx';
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
     
