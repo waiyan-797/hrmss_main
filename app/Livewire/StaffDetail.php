@@ -1229,7 +1229,7 @@ class StaffDetail extends Component
         $rules = [
             'schools.*.education_group' => 'required',
             'schools.*.education_type' => 'required',
-            'schools.*.education' => 'required',
+            'schools.*.education' => '',
             'schools.*.school_name' => 'required|string|max:255',
             'schools.*.town' => 'required|string|max:255',
             'schools.*.from_date' => 'required',
@@ -1240,7 +1240,6 @@ class StaffDetail extends Component
         $messages = [
             'schools.*.education_group.required' => 'The education group field is required.',
             'schools.*.education_type.required' => 'The education type field is required.',
-            'schools.*.education.required' => 'The education level field is required.',
             'schools.*.school_name.required' => 'The school name field is required.',
             'schools.*.school_name.string' => 'The school name must be a string.',
             'schools.*.school_name.max' => 'The school name may not exceed 255 characters.',
