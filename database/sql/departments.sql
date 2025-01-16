@@ -4,11 +4,11 @@
 --
 -- https://tableplus.com/
 --
--- Database: hrms
+-- Database: hrmsNew
 -- Generation Time: 2025-01-11 11:25:37.174417
 -- -------------------------------------------------------------
 
-DROP TABLE `hrms`.`departments`;
+DROP TABLE `hrmsNew`.`departments`;
 
 
 CREATE TABLE `departments` (
@@ -20,7 +20,7 @@ CREATE TABLE `departments` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (1, 'ရုံးအဖွဲ့', 1, NULL, NULL),
 (2, 'သမ္မတဦးစီးရုံး', 1, NULL, NULL),
 (3, 'ဒုတိယသမ္မတ (၁) ဦးစီးရုံး', 1, NULL, NULL),
@@ -522,7 +522,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (499, 'မြန်မာနိုင်ငံရဲတပ်ဖွဲ့၊ တိုင်းဒေသကြီး/ပြည်နယ်/လုံခြုံရေးရဲတပ်ဖွဲ့ခွဲ/ တပ်ဖွဲ့များ', 11, NULL, NULL),
 (500, 'မြန်မာနိုင်ငံရဲတပ်ဖွဲ့၊ မူးယစ်ဆေးဝါးတားဆီးနှိမ်နှင်းရေးရဲတပ်ဖွဲ့', 11, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (501, 'အထွေထွေအုပ်ချုပ်ရေးဦးစီးဌာန၊ စီမံရေးရာဌာန', 11, NULL, NULL),
 (502, 'အထွေထွေအုပ်ချုပ်ရေးဦးစီးဌာန၊ ဘဏ္ဍာရေးနှင့်ငွေစာရင်းဌာန', 11, NULL, NULL),
 (503, 'အထွေထွေအုပ်ချုပ်ရေးဦးစီးဌာန၊ မြေယာဌာန', 11, NULL, NULL),
@@ -1024,7 +1024,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (999, 'ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၊ ဧရာဝတီတိုင်းဒေသကြီး ညွှန်ကြားရေးမှူးရုံး', 15, NULL, NULL),
 (1000, 'ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၊ စစ်ကိုင်းတိုင်းဒေသကြီးညွှန်ကြားရေးမှူးရုံး', 15, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (1001, 'ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၊ တနင်္သာရီတိုင်းဒေသကြီးညွှန်ကြားရေးမှူးရုံး', 15, NULL, NULL),
 (1002, 'ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၊ ကရင်ပြည်နယ်ညွှန်ကြားရေးမှူးရုံး', 15, NULL, NULL),
 (1003, 'ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၊ ပဲခူးတိုင်းဒေသကြီးညွှန်ကြားရေးမှူးရုံး', 15, NULL, NULL),
@@ -1526,7 +1526,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (1499, 'စက်မှုလယ်ယာဦးစီးဌာန၊ စက်မှုလယ်ယာစခန်းများ၊ အမှတ်(၇၅)စက်မှုလယ်ယာစခန်း၊ ကျိုက်လတ်မြို့', 20, NULL, NULL),
 (1500, 'စက်မှုလယ်ယာဦးစီးဌာန၊ စက်မှုလယ်ယာစခန်းများ၊ အမှတ်(၁၉)စက်မှုလယ်ယာစခန်း၊ မအူပင်မြို့', 20, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (1501, 'စက်မှုလယ်ယာဦးစီးဌာန၊ စက်မှုလယ်ယာစခန်းများ၊ အမှတ်(၃၃)စက်မှုလယ်ယာစခန်း၊ ဓနုဖြူမြို့', 20, NULL, NULL),
 (1502, 'စက်မှုလယ်ယာဦးစီးဌာန၊ စက်မှုလယ်ယာစခန်းများ၊ အမှတ်(၅၇)စက်မှုလယ်ယာစခန်း၊ ပန်းတနော်မြို့', 20, NULL, NULL),
 (1503, 'စက်မှုလယ်ယာဦးစီးဌာန၊ စက်မှုလယ်ယာစခန်းများ၊ အမှတ်(၅၂)စက်မှုလယ်ယာစခန်း၊ ညောင်တုန်းမြို့', 20, NULL, NULL),
@@ -2028,7 +2028,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (1999, 'အမှတ်(၂)သတ္တုတွင်းလုပ်ငန်း၊ နေပြည်တော်၊ ရွှေဖက်စပ်ဌာနခွဲ', 22, NULL, NULL),
 (2000, 'အမှတ်(၂)သတ္တုတွင်းလုပ်ငန်း၊ နေပြည်တော်၊ ခဲမဖြူအဖြိုက်နက်ဖက်စပ်ဌာနခွဲ', 22, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (2001, 'အမှတ်(၂)သတ္တုတွင်းလုပ်ငန်း၊ နေပြည်တော်၊ အင်ဂျင်နီယာဌာနခွဲ', 22, NULL, NULL),
 (2002, 'အမှတ်(၂)သတ္တုတွင်းလုပ်ငန်း၊ နေပြည်တော်၊ ဝယ်ယူရောင်းချရေးဌာနခွဲ', 22, NULL, NULL),
 (2003, 'အမှတ်(၂)သတ္တုတွင်းလုပ်ငန်း၊ ကချင်ပြည်နယ်၊ ကချင်ပြည်နယ်သတ္တုတွင်းစီမံကိန်းရုံး(မြစ်ကြီးနား)', 22, NULL, NULL),
@@ -2530,7 +2530,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (2499, 'စက်မှုကြီးကြပ်ရေးနှင့်စစ်ဆေးရေးဦးစီးဌာန၊ မူဝါဒနှင့်ပြည်ပရေးရာဌာန', 25, NULL, NULL),
 (2500, 'စက်မှုကြီးကြပ်ရေးနှင့်စစ်ဆေးရေးဦးစီးဌာန၊ နည်းပညာနှင့်ဈေးကွက်မြှင့်တင်ရေးဌာန', 25, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (2501, 'စက်မှုကြီးကြပ်ရေးနှင့်စစ်ဆေးရေးဦးစီးဌာန၊ ရင်းနှီးမြှုပ်နှံမှုနှင့်လုပ်ငန်းညှိနှိုင်းရေးဌာန', 25, NULL, NULL),
 (2502, 'စက်မှုကြီးကြပ်ရေးနှင့်စစ်ဆေးရေးဦးစီးဌာန၊ ကချင်ပြည်နယ်စက်မှုကြီးကြပ်ရေးနှင့်စစ်ဆေးရေးဦးစီးဌာန', 25, NULL, NULL),
 (2503, 'စက်မှုကြီးကြပ်ရေးနှင့်စစ်ဆေးရေးဦးစီးဌာန၊ ကယားပြည်နယ်စက်မှုကြီးကြပ်ရေးနှင့်စစ်ဆေးရေးဦးစီးဌာန', 25, NULL, NULL),
@@ -3032,7 +3032,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (2999, 'ဆရာအတတ်ပညာဦးစီးဌာန၊ မကွေးပညာရေးဒီဂရီကောလိပ်၊ သင်ကြားရေးဌာန၊ သင်ကြားရေးဌာနခွဲ၊ မြန်မာစာ', 29, NULL, NULL),
 (3000, 'ဆရာအတတ်ပညာဦးစီးဌာန၊ မကွေးပညာရေးဒီဂရီကောလိပ်၊ သင်ကြားရေးဌာန၊ သင်ကြားရေးဌာနခွဲ၊ အင်္ဂလိပ်စာ', 29, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (3001, 'ဆရာအတတ်ပညာဦးစီးဌာန၊ မကွေးပညာရေးဒီဂရီကောလိပ်၊ သင်ကြားရေးဌာန၊ သင်ကြားရေးဌာနခွဲ၊ သင်္ချာ', 29, NULL, NULL),
 (3002, 'ဆရာအတတ်ပညာဦးစီးဌာန၊ မကွေးပညာရေးဒီဂရီကောလိပ်၊ သင်ကြားရေးဌာန၊ သင်ကြားရေးဌာနခွဲ၊ သိပ္ပံဘာသာရပ်များဌာန', 29, NULL, NULL),
 (3003, 'ဆရာအတတ်ပညာဦးစီးဌာန၊ မကွေးပညာရေးဒီဂရီကောလိပ်၊ သင်ကြားရေးဌာန၊ သင်ကြားရေးဌာနခွဲ၊ လူမှုရေးဘာသာရပ်များဌာန', 29, NULL, NULL),
@@ -3534,7 +3534,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (3499, 'နည်းပညာ၊ သက်မွေးပညာနှင့် လေ့ကျင့်ရေးဦးစီးဌာန၊ ကောလိပ်/သိပ္ပံ/ကျောင်းများ၊ အစိုးရနည်းပညာအထက်တန်းကျောင်း(လားရှိုး)', 30, NULL, NULL),
 (3500, 'နည်းပညာ၊ သက်မွေးပညာနှင့် လေ့ကျင့်ရေးဦးစီးဌာန၊ ကောလိပ်/သိပ္ပံ/ကျောင်းများ၊ အစိုးရနည်းပညာအထက်တန်းကျောင်း(လွိုင်ကော်)', 30, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (3501, 'နည်းပညာ၊ သက်မွေးပညာနှင့် လေ့ကျင့်ရေးဦးစီးဌာန၊ ကောလိပ်/သိပ္ပံ/ကျောင်းများ၊ အစိုးရနည်းပညာအထက်တန်းကျောင်း(ဟင်္သာတ)', 30, NULL, NULL),
 (3502, 'နည်းပညာ၊ သက်မွေးပညာနှင့် လေ့ကျင့်ရေးဦးစီးဌာန၊ ကောလိပ်/သိပ္ပံ/ကျောင်းများ၊ ကိုရီးယား-မြန်မာ နည်းပညာ၊ သက်မွေးပညာနှင့်လေ့ကျင့်ရေးဆိုင်ရာဆရာ အတတ်သင်သိပ္ပံ(KMTTTI)', 30, NULL, NULL),
 (3503, 'နည်းပညာ၊ သက်မွေးပညာနှင့် လေ့ကျင့်ရေးဦးစီးဌာန၊ ကောလိပ်/သိပ္ပံ/ကျောင်းများ၊ စက်မှုနည်းပညာလေ့ကျင့်သင်ကြားရေသင်တန်းကျောင်း(SITE)', 30, NULL, NULL),
@@ -4036,7 +4036,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (3999, 'ကုသရေးဦးစီးဌာန၊ မြို့နယ်ကုသရေးဦးစီးဌာန၊ ကျိုင်းတုံမြို့', 31, NULL, NULL),
 (4000, 'ကုသရေးဦးစီးဌာန၊ မြို့နယ်ကုသရေးဦးစီးဌာန၊ မိုင်းခတ်မြို့', 31, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (4001, 'ကုသရေးဦးစီးဌာန၊ မြို့နယ်ကုသရေးဦးစီးဌာန၊ မိုင်းယန်းမြို့', 31, NULL, NULL),
 (4002, 'ကုသရေးဦးစီးဌာန၊ မြို့နယ်ကုသရေးဦးစီးဌာန၊ မိုင်းလားမြို့', 31, NULL, NULL),
 (4003, 'ကုသရေးဦးစီးဌာန၊ မြို့နယ်ကုသရေးဦးစီးဌာန၊ မိုင်းပျဉ်းမြို့', 31, NULL, NULL),
@@ -4538,7 +4538,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (4499, 'ကုသရေးဦးစီးဌာန၊ ညောင်လေးပင်မြို့နယ်ဆေးရုံ', 31, NULL, NULL),
 (4500, 'ကုသရေးဦးစီးဌာန၊ မဒေါက်တိုက်နယ်ဆေးရုံ', 31, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (4501, 'ကုသရေးဦးစီးဌာန၊ ပြွန်တံဆာတိုက်နယ်ဆေးရုံ', 31, NULL, NULL),
 (4502, 'ကုသရေးဦးစီးဌာန၊ ပိန်းဇလုပ်တိုက်နယ်ဆေးရုံ', 31, NULL, NULL),
 (4503, 'ကုသရေးဦးစီးဌာန၊ ဖောင်တော်သီတိုက်နယ်ဆေးရုံ', 31, NULL, NULL),
@@ -5040,7 +5040,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (4999, 'ကုသရေးဦးစီးဌာန၊ ပြည်နယ်အထွေထွေရောဂါကုဆေးရုံ', 31, NULL, NULL),
 (5000, 'ကုသရေးဦးစီးဌာန၊ စံလောင်းတိုက်နယ်ဆေးရုံ', 31, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (5001, 'ကုသရေးဦးစီးဌာန၊ နမ့်စလပ်တိုက်နယ်ဆေးရုံ', 31, NULL, NULL),
 (5002, 'ကုသရေးဦးစီးဌာန၊ သိန္နီမြို့နယ်ဆေးရုံ', 31, NULL, NULL),
 (5003, 'ကုသရေးဦးစီးဌာန၊ မိုင်းပန်မြို့နယ်ဆေးရုံ', 31, NULL, NULL),
@@ -5542,7 +5542,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (5499, 'ကျန်းမာရေးလူ့စွမ်းအားအရင်းအမြစ်ဦးစီးဌာန၊ သွားဘက်ဆိုင်ရာဆေးတက္ကသိုလ်(မန္တလေး)၊ ဓာတုဗေဒဌာန', 31, NULL, NULL),
 (5500, 'ကျန်းမာရေးလူ့စွမ်းအားအရင်းအမြစ်ဦးစီးဌာန၊ သွားဘက်ဆိုင်ရာဆေးတက္ကသိုလ်(မန္တလေး)၊ ရူပဗေဒဌာန', 31, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (5501, 'ကျန်းမာရေးလူ့စွမ်းအားအရင်းအမြစ်ဦးစီးဌာန၊ သွားဘက်ဆိုင်ရာဆေးတက္ကသိုလ်(မန္တလေး)၊ သတ္တဗေဒဌာန', 31, NULL, NULL),
 (5502, 'ကျန်းမာရေးလူ့စွမ်းအားအရင်းအမြစ်ဦးစီးဌာန၊ သွားဘက်ဆိုင်ရာဆေးတက္ကသိုလ်(မန္တလေး)၊ သင်္ချာဌာန', 31, NULL, NULL),
 (5503, 'ကျန်းမာရေးလူ့စွမ်းအားအရင်းအမြစ်ဦးစီးဌာန၊ သွားဘက်ဆိုင်ရာဆေးတက္ကသိုလ်(မန္တလေး)၊ ရုက္ခဗေဒဌာန', 31, NULL, NULL),
@@ -6044,7 +6044,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (5999, 'တိုင်းရင်းဆေးပညာဦးစီးဌာန၊ ဧရာဝတီတိုင်းဒေသကြီးဦးစီးဌာနမှူးရုံး၊ မြို့နယ်တိုင်းရင်းဆေးကုဌာနများ၊ ဒေးဒရဲမြို့နယ်', 31, NULL, NULL),
 (6000, 'တိုင်းရင်းဆေးပညာဦးစီးဌာန၊ နေပြည်တော်တိုင်းဒေသကြီးဦးစီးဌာနမှူးရုံး၊ ခရိုင်တိုင်းရင်းဆေးကုဌာနများ၊ ဒက္ခိဏခရိုင်', 31, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (6001, 'တိုင်းရင်းဆေးပညာဦးစီးဌာန၊ နေပြည်တော်တိုင်းဒေသကြီးဦးစီးဌာနမှူးရုံး၊ ခရိုင်တိုင်းရင်းဆေးကုဌာနများ၊ ဥတ္တရခရိုင်', 31, NULL, NULL),
 (6002, 'တိုင်းရင်းဆေးပညာဦးစီးဌာန၊ နေပြည်တော်တိုင်းဒေသကြီးဦးစီးဌာနမှူးရုံး၊ မြို့နယ်တိုင်းရင်းဆေးကုဌာနများ၊ တပ်ကုန်းမြို့နယ်', 31, NULL, NULL),
 (6003, 'တိုင်းရင်းဆေးပညာဦးစီးဌာန၊ နေပြည်တော်တိုင်းဒေသကြီးဦးစီးဌာနမှူးရုံး၊ မြို့နယ်တိုင်းရင်းဆေးကုဌာနများ၊ လယ်ဝေးမြို့နယ်', 31, NULL, NULL),
@@ -6566,7 +6566,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (6499, 'တိုင်းဒေသကြီးစည်ပင်သာယာရေးအဖွဲ့၊ မြို့နယ်/မြို့စည်ပင်သာယာရေးအဖွဲ့၊ အခွန်ဌာနစု၊ အခွန်ဌာနစိတ်', 44, NULL, NULL),
 (6500, 'တိုင်းဒေသကြီးစည်ပင်သာယာရေးအဖွဲ့၊ မြို့နယ်/မြို့စည်ပင်သာယာရေးအဖွဲ့၊ အင်ဂျင်နီယာဌာနစု၊ အဆောက်အဦးဌာနစိတ်', 44, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (6501, 'တိုင်းဒေသကြီးစည်ပင်သာယာရေးအဖွဲ့၊ မြို့နယ်/မြို့စည်ပင်သာယာရေးအဖွဲ့၊ အင်ဂျင်နီယာဌာနစု၊ လမ်း/တံတားဌာနစိတ်', 44, NULL, NULL),
 (6502, 'တိုင်းဒေသကြီးစည်ပင်သာယာရေးအဖွဲ့၊ မြို့နယ်/မြို့စည်ပင်သာယာရေးအဖွဲ့၊ အင်ဂျင်နီယာဌာနစု၊ မီး၊ ရေ၊ ပန်းဥယျာဉ်၊ သာယာလှပရေးဌာနစိတ်', 44, NULL, NULL),
 (6503, 'တိုင်းဒေသကြီးစည်ပင်သာယာရေးအဖွဲ့၊ မြို့နယ်/မြို့စည်ပင်သာယာရေးအဖွဲ့၊ အင်ဂျင်နီယာဌာနစု၊ ပြုပြင်ထိန်းသိမ်းရေးဌာနစိတ်', 44, NULL, NULL),
@@ -7068,7 +7068,7 @@ INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `up
 (6999, 'မွန်ပြည်နယ်စည်ပင်သာယာရေးအဖွဲ့၊ (ဃ)အဆင့်မြို့နယ်စည်ပင်သာယာရေးအဖွဲ့(ဘီးလင်း)၊ စီမံခန့်ခွဲမှုဌာနခွဲ၊ သန့်ရှင်းရေးဌာနစိတ်', 49, NULL, NULL),
 (7000, 'မွန်ပြည်နယ်စည်ပင်သာယာရေးအဖွဲ့၊ (ဃ)အဆင့်မြို့နယ်စည်ပင်သာယာရေးအဖွဲ့(ဘီးလင်း)၊ စီမံခန့်ခွဲမှုဌာနခွဲ၊ အခွန်ဌာနစိတ်', 49, NULL, NULL);
 
-INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES 
+INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (7001, 'မွန်ပြည်နယ်စည်ပင်သာယာရေးအဖွဲ့၊ (ဃ)အဆင့်မြို့နယ်စည်ပင်သာယာရေးအဖွဲ့(ဘီးလင်း)၊ အင်ဂျင်နီယာဌာနခွဲ၊ မြို့ပြ/ကျေးလက်ဌာနစိတ်', 49, NULL, NULL),
 (7002, 'မွန်ပြည်နယ်စည်ပင်သာယာရေးအဖွဲ့၊ (ဃ)အဆင့်မြို့နယ်စည်ပင်သာယာရေးအဖွဲ့(ဘီးလင်း)၊ အင်ဂျင်နီယာဌာနခွဲ၊ မီးရေနှင့်ပန်းဥယျာဉ်ဌာနစိတ်', 49, NULL, NULL),
 (7003, 'မွန်ပြည်နယ်စည်ပင်သာယာရေးအဖွဲ့၊ (ဃ)အဆင့်မြို့နယ်စည်ပင်သာယာရေးအဖွဲ့(ဘီးလင်း)၊ အင်ဂျင်နီယာဌာနခွဲ၊ ပြုပြင်ထိန်းသိမ်းရေးဌာနစိတ်', 49, NULL, NULL),

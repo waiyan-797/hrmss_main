@@ -12,7 +12,7 @@ class DepartmentSeeder extends Seeder
     public function run(): void
     {
         Schema::disableForeignKeyConstraints();
-        $departmentPath = database_path('sql\departments.sql');
+        $departmentPath = database_path('sql/departments.sql');
 
         if (!File::exists($departmentPath)) {
             $this->command->error("file not found: $departmentPath");
