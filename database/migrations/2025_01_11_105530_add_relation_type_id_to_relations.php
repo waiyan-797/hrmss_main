@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('relations', function (Blueprint $table) {
-            $table->foreignIdFor(RelationShipType::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(RelationShipType::class)->nullable()->constrained()->nullOnDelete();
         });
     }
 
@@ -23,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('relations', function (Blueprint $table) {
-            //
+            $table->dropForeign(['relation_ship_type_id']);
+            $table->dropColumn('relation_ship_type_id');
         });
     }
 };
