@@ -199,7 +199,7 @@ class StaffDetail extends Component
         'salary_paid_by' => '',
         'join_date' => 'required|date',
         'is_newly_appointed' => 'required',
-        'is_direct_appointed' => 'required',
+        'is_direct_appointed' => '',
         'payscale_id' => 'required',
         'current_salary' => 'required|integer',
         'current_increment_time' => 'required|integer',
@@ -1575,7 +1575,7 @@ class StaffDetail extends Component
 
         foreach ($this->spouse_mother_siblings as $relative) {
             SpouseMotherSibling::updateOrCreate([
-                $relative['id'] == '' ? null : $relative['id'],
+                'id' => $relative['id'] == '' ? null : $relative['id'],
             ],
             $this->relativeFields($staffId, $relative));
         }
