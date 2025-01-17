@@ -1,4 +1,4 @@
-<div class="w-full overflow-x-auto">
+    <div class="w-full overflow-x-auto">
     <table class="table-auto w-full text-sm rounded-lg">
         <thead class="font-arial text-xs text-center text-gray-900 uppercase bg-gray-50 font-semibold">
             <tr>

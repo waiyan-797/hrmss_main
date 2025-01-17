@@ -39,6 +39,7 @@ use App\Models\Recommendation;
 use App\Models\Region;
 use App\Models\Relation;
 use App\Models\Religion;
+use App\Models\Reward;
 use App\Models\School;
 use App\Models\Section;
 use App\Models\Sibling;
@@ -118,6 +119,7 @@ class StaffDetail extends Component
     public $abroads = [];
     public $socials = [];
     public $staff_languages = [];
+    public $staff_rewards = [];
     public $punishments = [];
     public $withoutScopeRanks ;
 
@@ -292,7 +294,9 @@ class StaffDetail extends Component
         $this->cancel_action = 'close_master_modal';
         $this->submit_button_text = 'သိမ်းရန်';
         $this->add_model = null;
+
         if ($this->staff_id) {
+            
             $this->staff = Staff::find($this->staff_id);
             $this->initializeArrays($this->staff_id);
             $this->loadStaffData($this->staff_id);
@@ -303,6 +307,8 @@ class StaffDetail extends Component
 
     private function initializeArrays($staff_id)
     {
+
+
         $staff_educations = StaffEducation::where('staff_id', $staff_id)->get();
         $recommendations = Recommendation::where('staff_id', $staff_id)->get();
         $postings = Posting::where('staff_id', $staff_id)->get();
@@ -322,7 +328,8 @@ class StaffDetail extends Component
         $spouse_mother_siblings = SpouseMotherSibling::where('staff_id', $staff_id)->get();
         $socials = SocialActivity::where('staff_id', $staff_id)->get();
         $staff_languages = StaffLanguage::where('staff_id', $staff_id)->get();
-
+        $staff_rewards = Reward::where('staff_id',$staff_id)->get();
+        
         $this->educations = [];
         $this->recommendations = [];
         $this->postings = [];
@@ -342,6 +349,7 @@ class StaffDetail extends Component
         $this->spouse_mother_siblings = [];
         $this->socials = [];
         $this->staff_languages = [];
+        $this->staff_rewards = [];
 
         foreach ($staff_educations as $edu) {
             $this->educations[] = [
@@ -479,6 +487,16 @@ class StaffDetail extends Component
                 'reading' => $lang->reading,
                 'speaking' => $lang->speaking,
                 'remark' => $lang->remark,
+            ];
+        }
+
+        foreach ($staff_rewards as $reward) {
+            $this->staff_rewards[] = [
+                'id' => $reward->id,
+                'name' => $reward->name,
+                'type' => $reward->type,
+                'year' => $reward->year,
+                'remark' => $reward->remark,
             ];
         }
 
@@ -810,6 +828,13 @@ class StaffDetail extends Component
         $this->staff_languages[] = ['id' => '', 'language' => '', 'rank' => '', 'writing' => '', 'reading' => '', 'speaking' => '', 'remark' => ''];
     }
 
+
+    public function add_staff_rewards()
+    {
+        $this->staff_rewards[] = ['id' => '', 'name' => '', 'type' => '', 'year' => '', 'remark' => ''];
+    }
+
+  
     public function removeModel($propertyName, $model, $index, $attaches): void
     {
         $draft_model = $this->$propertyName[$index];
@@ -919,6 +944,10 @@ class StaffDetail extends Component
     public function remove_staff_languages($index)
     {
         $this->removeModel('staff_languages',  StaffLanguage::class , $index, []);
+    }
+    public function remove_staff_rewards($index)
+    {
+        $this->removeModel('staff_rewards',  Reward::class , $index, []);
     }
 
     public function remove_punishments($index)
@@ -1128,6 +1157,7 @@ class StaffDetail extends Component
                 $this->saveAbroads($staff->id);
                 $this->saveSocials($staff->id);
                 $this->saveStaffLanguages($staff->id);
+                $this->saveStaffRewards($staff->id);
                 $this->saveSchools($staff->id);
                 $this->savePastOccupations($staff->id);
                 $this->saveAwards($staff->id);
@@ -1222,6 +1252,45 @@ class StaffDetail extends Component
                 'remark' => $lang['remark'],
             ]);
         }
+    }
+
+    private function saveStaffRewards($staffId)
+    {
+        $_validation = $this->validate_rewards();
+        $this->validate($_validation['validate'], $_validation['messages']);
+
+        foreach ($this->staff_rewards as $reward) {
+            Reward::updateOrCreate([
+                'id' => $reward['id'] == '' ? null : $reward['id'],
+            ],[
+                'staff_id' => $staffId,
+                'name' => $reward['name'],
+                'type' => $reward['type'],
+                'year' => $reward['year'],
+                'remark' => $reward['remark'],
+            ]);
+        }
+    }
+
+    public function validate_rewards()
+    {
+        $validations = [
+            'staff_rewards.*.name' => 'required',
+            'staff_rewards.*.type' => 'required',
+            'staff_rewards.*.year' => 'required',
+
+        ];
+
+        $validation_messages = [
+            'staff_rewards.*.name.required' => 'Field is required.',
+            'staff_rewards.*.type.required' => 'Field is required.',
+            'staff_rewards.*.year.required' => 'Field is required.',
+        ];
+
+        return [
+            'validate' => $validations,
+            'messages' => $validation_messages,
+        ];
     }
 
     private function saveSchools($staffId)
@@ -1656,6 +1725,7 @@ class StaffDetail extends Component
             'sections' => null,
             'penalty_types' => null,
             'languages' => null,
+            'rewards'=> null,
             'relatives' => null,
             'relations' => null,
             'father_townships' => null,
@@ -1710,6 +1780,7 @@ class StaffDetail extends Component
                 $data['sections'] = Section::all();
                 $data['penalty_types'] = PenaltyType::all();
                 $data['languages'] = Language::all();
+         
                 $data['ranks'] = $this->withoutScopeRanks;
                 $data['ministrys'] = Ministry::all();
                 $data['departments'] = Department::all();

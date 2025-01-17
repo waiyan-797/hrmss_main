@@ -242,6 +242,10 @@ class Staff extends Model
         return $this->hasMany(Award::class);
     }
 
+    public function rewards()
+    {
+        return $this->hasMany(Reward::class);
+    }
 
     public function abroads()
     {
