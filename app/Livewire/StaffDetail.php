@@ -295,7 +295,6 @@ class StaffDetail extends Component
         $this->add_model = null;
 
         if ($this->staff_id) {
-            
             $this->staff = Staff::find($this->staff_id);
             $this->initializeArrays($this->staff_id);
             $this->loadStaffData($this->staff_id);
@@ -327,7 +326,7 @@ class StaffDetail extends Component
         $socials = SocialActivity::where('staff_id', $staff_id)->get();
         $staff_languages = StaffLanguage::where('staff_id', $staff_id)->get();
         $staff_rewards = Reward::where('staff_id',$staff_id)->get();
-        
+
         $this->educations = [];
         $this->recommendations = [];
         $this->postings = [];
@@ -812,7 +811,6 @@ class StaffDetail extends Component
         $this->staff_rewards[] = ['id' => '', 'name' => '', 'type' => '', 'year' => '', 'remark' => ''];
     }
 
-  
     public function removeModel($propertyName, $model, $index, $attaches): void
     {
         $draft_model = $this->$propertyName[$index];
@@ -1633,6 +1631,7 @@ class StaffDetail extends Component
             'ranks' => null,
             'divisions' => null,
             'departments' => null,
+            'dica_departments' => null,
             'payscales' => null,
             'posts' => null,
             'nationalities' => null,
@@ -1680,6 +1679,7 @@ class StaffDetail extends Component
                 $data['ranks'] = $this->withoutScopeRanks;
                 $data['ministrys'] = Ministry::all();
                 $data['departments'] = Department::all();
+                $data['dica_departments'] = Department::whereIn('id', [983, 984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998, 999, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008])->get();
                 $data['divisions'] = Division::all();
                 $data['payscales'] = Payscale::all();
                 break;
@@ -1699,7 +1699,7 @@ class StaffDetail extends Component
                 $data['sections'] = Section::all();
                 $data['penalty_types'] = PenaltyType::all();
                 $data['languages'] = Language::all();
-         
+
                 $data['ranks'] = $this->withoutScopeRanks;
                 $data['ministrys'] = Ministry::all();
                 $data['departments'] = Department::all();
@@ -1824,6 +1824,7 @@ class StaffDetail extends Component
             'name' => $this->education_group_name,
         ]);
         $this->reset('education_group_name');
+        $this->render();
         $this->message = 'Education Group Created Successfully.';
         $this->add_model = null;
     }
@@ -1834,6 +1835,15 @@ class StaffDetail extends Component
             'education_group_id' => $this->education_group_name
         ]);
         $this->reset(['education_type_name', 'education_group_name']);
+
+        foreach ($this->educations as $index => $edu) {
+            $this->educations[$index]['education_group'] = '';
+            $this->educations[$index]['education_type'] = '';
+            $this->educations[$index]['education'] = '';
+            $this->educations[$index]['education_types'] = [];
+            $this->educations[$index]['_educations'] = [];
+        }
+
         $this->message = 'Education Type Created successfully.';
         $this->add_model = null;
     }
@@ -1843,6 +1853,13 @@ class StaffDetail extends Component
             'name' => $this->education_name,
             'education_type_id' => $this->education_type_name
         ]);
+
+        foreach ($this->educations as $index => $edu) {
+            $this->educations[$index]['education_type'] = '';
+            $this->educations[$index]['education'] = '';
+            $this->educations[$index]['_educations'] = [];
+        }
+
         $this->reset(['education_name', 'education_type_name']);
         $this->message = 'Education Created successfully.';
         $this->add_model = null;
