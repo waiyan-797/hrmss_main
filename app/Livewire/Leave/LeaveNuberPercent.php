@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Leave;
 
+use App\Exports\L01;
 use App\Models\Division;
 use App\Models\Leave;
 use App\Models\LeaveType;
 use App\Models\Staff;
 use Carbon\Carbon;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -19,6 +21,9 @@ class LeaveNuberPercent extends Component
     public $dep_category;
     public $divisions;
     public $dateRange;
+    public  $filterRange;
+    public $previousYear, $previousMonthDate, $previousMonth;
+     public $count=0;
     public function mount()
     {
 
@@ -77,6 +82,12 @@ class LeaveNuberPercent extends Component
             echo $pdf->output();
         }, 'leave_nuber_precent_report_pdf.pdf');
     }
+    public function go_excel() 
+    {
+        
+        return Excel::download(new L01($this->month,$this->month, $this->dateRange), 'L01.xlsx');
+    }
+  
     public function go_word()
 {
     $leave_types = LeaveType::all();
@@ -205,6 +216,7 @@ class LeaveNuberPercent extends Component
 
         return $totalCount;
     }
+    
     public function render()
     {
         $leave_types = LeaveType::all();
@@ -239,6 +251,7 @@ class LeaveNuberPercent extends Component
             'totalStaffCount' => $totalStaffCount,
             'totalLeaveCount' => $totalLeaveCount,
             'totalLeaveTypeCounts' => $totalLeaveTypeCounts,
+            
         ]);
     }
 }
