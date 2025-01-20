@@ -160,11 +160,11 @@
                 <x-input-error class="mt-2" :messages="$errors->get('nrc_region_id')" />
             </div>
             <div class="w-full">
-                <x-select wire:model.live="nrc_township_code_id" :values="$nrc_township_codes" placeholder="Select Township Code" id="nrc_township_code_id" name="nrc_township_code_id" class="mt-1 block w-full" required/>
+                <x-select wire:model="nrc_township_code_id" :values="$nrc_township_codes" placeholder="Select Township Code" id="nrc_township_code_id" name="nrc_township_code_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('nrc_township_code_id')" />
             </div>
             <div class="w-full">
-                <x-select wire:model.live="nrc_sign_id" :values="$nrc_signs" placeholder="Select Sign" id="nrc_sign_id" name="nrc_sign_id" class="mt-1 block w-full" required/>
+                <x-select wire:model="nrc_sign_id" :values="$nrc_signs" placeholder="Select Sign" id="nrc_sign_id" name="nrc_sign_id" class="mt-1 block w-full" required/>
                 <x-input-error class="mt-2" :messages="$errors->get('nrc_sign_id')" />
             </div>
             <div class="w-full">

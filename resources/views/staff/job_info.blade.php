@@ -50,8 +50,25 @@
         <x-input-error class="mt-2" :messages="$errors->get('government_staff_started_date')" />
     </div>
     <div>
+        <x-input-label for="ပြောင်းရွေ့သည့်၀န်ကြီးဌာန" :value="__('ပြောင်းရွေ့သည့်၀န်ကြီးဌာန')" />
+        <x-select
+            wire:model.live="transfer_ministry_id"
+            :values="$ministrys"
+            placeholder="ပြောင်းရွေ့သည့်၀န်ကြီးဌာနရွေးပါ"
+            name="transfer_ministry_id"
+            class="mt-1 block w-full"
+        />
+        <x-input-error class="mt-2" :messages="$errors->get('transfer_ministry_id')" />
+    </div>
+    <div>
         <x-input-label for="ပြောင်းရွေ့သည့်ဌာန" :value="__('ပြောင်းရွေ့သည့်ဌာန')" />
-        <x-searchable-select property="transfer_department_id" :values="[]" placeholder="ပြောင်းရွေ့သည့်ဌာနရွေးပါ" id="transfer_department_id" name="transfer_department_id" class="block w-full p-2 text-sm border rounded font-arial mt-1" />
+        <x-select
+            wire:model="transfer_department_id"
+            :values="$transfer_departments"
+            placeholder="ပြောင်းရွေ့သည့်ဌာနရွေးပါ"
+            name="transfer_department_id"
+            class="mt-1 block w-full"
+        />
         <x-input-error class="mt-2" :messages="$errors->get('transfer_department_id')" />
     </div>
     <div>
@@ -60,8 +77,25 @@
         <x-input-error class="mt-2" :messages="$errors->get('transfer_remark')" />
     </div>
     <div>
+        <x-input-label for="တွဲဖက်အင်အားဖြစ်လျှင် ၀န်ကြီးဌာန" :value="__('တွဲဖက်အင်အားဖြစ်လျှင် ၀န်ကြီးဌာန')" />
+        <x-select
+            wire:model.live="side_ministry_id"
+            :values="$ministrys"
+            placeholder="တွဲဖက်အင်အားဖြစ်လျှင် ၀န်ကြီးဌာနရွေးပါ"
+            name="side_ministry_id"
+            class="mt-1 block w-full"
+        />
+        <x-input-error class="mt-2" :messages="$errors->get('side_ministry_id')" />
+    </div>
+    <div>
         <x-input-label for="တွဲဖက်အင်အားဖြစ်လျှင် ဌာန" :value="__('တွဲဖက်အင်အားဖြစ်လျှင် ဌာန')" />
-        <x-searchable-select property="side_department_id" :values="[]" placeholder="တွဲဖက်အင်အားဖြစ်လျှင် ဌာနရွေးပါ" id="side_department_id" name="side_department_id" class="block w-full p-2 text-sm border rounded font-arial mt-1" />
+        <x-select
+            wire:model="side_department_id"
+            :values="$side_departments"
+            placeholder="တွဲဖက်အင်အားဖြစ်လျှင် ဌာနရွေးပါ"
+            name="side_department_id"
+            class="mt-1 block w-full"
+        />
         <x-input-error class="mt-2" :messages="$errors->get('side_department_id')" />
     </div>
     <div>
@@ -78,7 +112,14 @@
     </div>
     <div>
         <x-input-label for="လစာနှင့်စရိတ် ကုန်ကျခံမည့်ဌာန" :value="__('လစာနှင့်စရိတ် ကုန်ကျခံမည့်ဌာန')" />
-        <x-searchable-select property="salary_paid_by" :values="[]" placeholder="လစာနှင့်စရိတ် ကုန်ကျခံမည့်ဌာနရွေးပါ" id="salary_paid_by" name="salary_paid_by" class="block w-full p-2 text-sm border rounded font-arial mt-1" />
+        <x-select
+            wire:model="salary_paid_by"
+            :values="$dica_departments"
+            placeholder="လစာနှင့်စရိတ် ကုန်ကျခံမည့်ဌာနရွေးပါ"
+            name="salary_paid_by"
+            class="mt-1 block w-full"
+            required
+        />
         <x-input-error class="mt-2" :messages="$errors->get('salary_paid_by')" />
     </div>
     <div>

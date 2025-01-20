@@ -11,7 +11,7 @@
                     ဘဏ္ဍာရေးနှစ်အတွက် လစာငွေထုတ်ယူမည့် စာရင်း
                 @endif
             </h2>
-            
+
             <input type="number" min="2005" step="1" wire:model.live="endYr" />
             <table class="md:w-full mt-5 ">
                 <thead>
@@ -52,7 +52,7 @@
 
 
 
-                                    {{ en2mm(getSalary($month, $year)) }}
+                                    {{ en2mm(_getSalary($month, $year)) }}
                                 </td>
 
                                 <td class="border border-black text-center p-2">
@@ -92,4 +92,4 @@
             </table>
         </div>
     </div>
-</div> 
+</div>

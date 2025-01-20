@@ -16,7 +16,7 @@ class FinanceSalaryList extends Component
 
     public function mount()
     {
-        $this->startYr = 2023; 
+        $this->startYr = 2023;
         $this->endYr = now()->year;
     }
 
@@ -38,11 +38,11 @@ class FinanceSalaryList extends Component
             echo $pdf->output();
         }, 'finance_salary_list_report_pdf.pdf');
     }
-    
+
 
 public function go_word()
 {
-    
+
     $staffs = Staff::get();
     $phpWord = new PhpWord();
     $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
@@ -70,7 +70,7 @@ public function go_word()
             $table->addRow();
             $table->addCell(2000, ['vMerge' => 'continue'])->addText(en2mm(++$count));
             $table->addCell(2000, ['vMerge' => 'continue'])->addText(en2mm($month) . '/' . en2mm($year));
-            $table->addCell(2000, ['vMerge' => 'continue'])->addText(en2mm(getSalary($month, $year)));
+            $table->addCell(2000, ['vMerge' => 'continue'])->addText(en2mm(_getSalary($month, $year)));
             $table->addCell(2000, ['vMerge' => 'continue'])->addText(en2mm(getAddition($month, $year)));
             $table->addCell(2000, ['vMerge' => 'continue'])->addText(en2mm(getDeductionInsurance($month, $year)));
             $table->addCell(2000)->addText(en2mm(getLeveTypeone($month, $year)), ['alignment' => 'center']);
@@ -78,7 +78,7 @@ public function go_word()
             $table->addCell(2000, ['vMerge' => 'continue'])->addText(en2mm(getDeductionTax($month, $year)));
             $table->addCell(2000, ['vMerge' => 'continue'])->addText(en2mm(get2monthDeduction($month, $year)));
             $table->addCell(2000, ['vMerge' => 'continue'])->addText(en2mm(getNetActualSalary($month, $year)));
-            $table->addCell(2000, ['vMerge' => 'continue']); 
+            $table->addCell(2000, ['vMerge' => 'continue']);
         }
     }
     $fileName = 'finance_salary_list.docx';

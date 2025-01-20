@@ -129,7 +129,7 @@
             </div>
             <div class="w-full">
                 <x-select
-                    wire:model.live="mother_address_township_or_town_id"
+                    wire:model="mother_address_township_or_town_id"
                     placeholder="မြို့/မြို့နယ်ရွေးပါ"
                     :values="$mother_townships"
                     id="mother_address_township_or_town_id"
@@ -167,8 +167,7 @@
                 <span class="sr-only">Add Icon</span>
             </button>
         </div>
-        {{-- @dd($relations) --}}
-        
+
         @include('staff_multiple_table', [
             'column_names' => ['အမည်', 'လူမျိုး', 'ဘာသာ','ကျား/မ', 'ဇာတိ', 'အလုပ်အကိုင်', 'နေရပ်လိပ်စာ', 'တော်စပ်ပုံ'],
             'column_vals' => $relative['data'],

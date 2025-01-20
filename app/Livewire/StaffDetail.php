@@ -61,6 +61,7 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
+use function Illuminate\Log\log;
 use function Livewire\Volt\rules;
 
 class StaffDetail extends Component
@@ -77,6 +78,9 @@ class StaffDetail extends Component
     public $staff, $staff_status_id;
 
     //personal_info
+    public $nrc_township_codes = [];
+    public $current_address_townships = [];
+    public $permanent_address_townships = [];
     public $staff_photo, $staff_nrc_front, $staff_nrc_back, $photo, $name, $nick_name, $other_name, $staff_no, $dob, $attendid, $gpms_staff_no, $spouse_name, $gender_id, $ethnic_id, $religion_id, $height_feet, $height_inch, $hair_color, $eye_color, $government_staff_started_date, $prominent_mark, $skin_color, $weight, $blood_type_id, $marital_status_id, $place_of_birth, $nrc_region_id, $nrc_township_code_id, $nrc_sign_id, $nrc_code, $nrc_front, $nrc_back, $phone, $mobile, $email, $current_address_street, $current_address_ward, $current_address_house_no, $current_address_region_id,  $current_address_township_or_town_id, $permanent_address_street, $permanent_address_ward, $permanent_address_house_no, $permanent_address_region_id, $permanent_address_township_or_town_id, $previous_addresses, $life_insurance_proposal, $life_insurance_policy_no, $life_insurance_premium, $military_solider_no, $military_join_date, $military_dsa_no, $military_gazetted_date, $military_leave_date, $military_leave_reason, $military_served_army, $military_brief_history_or_penalty, $military_pension, $military_gazetted_no, $veteran_no, $veteran_date, $last_serve_army, $health_condition, $tax_exception, $military_service_id;
     public $leave_search, $leave_name, $leave_type_name, $leave_id, $staff_name, $from_date, $to_date, $qty, $order_no, $remark;
     public $cancel_action, $submit_form, $leave_types;
@@ -92,12 +96,16 @@ class StaffDetail extends Component
 
     public $educations = [];
     //job_info
-    public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_department_id, $side_division_id, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
+    public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_ministry_id, $side_department_id, $side_division_id, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
     public $recommendations = [];
     public $postings = [];
+    public $side_departments = [];
+    public $transfer_departments = [];
 
     //relative
-    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street,$father_address_house_no, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_department_id, $is_newly_appointed = false,
+    public $father_townships = [];
+    public $mother_townships = [];
+    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street,$father_address_house_no, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_ministry_id, $transfer_department_id, $is_newly_appointed = false,
         $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street,$mother_address_house_no, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id,
         $family_in_politics = false , $family_in_politics_text ;
 
@@ -120,7 +128,44 @@ class StaffDetail extends Component
     public $staff_languages = [];
     public $staff_rewards = [];
     public $punishments = [];
-    public $withoutScopeRanks ;
+    public $withoutScopeRanks;
+
+    //master_tables
+    public
+        $ethnics,
+        $religions,
+        $regions,
+        $genders,
+        $military_services,
+        $blood_types,
+        $marital_statuses,
+        $education_groups,
+        $education_types,
+        $_educations,
+        $ranks,
+        $divisions,
+        $departments,
+        $dica_departments,
+        $payscales,
+        $posts,
+        $nationalities,
+        $countries,
+        $training_types,
+        $training_locations,
+        $award_types,
+        $_awards,
+        $sections,
+        $penalty_types,
+        $languages,
+        $rewards,
+        $relatives,
+        $relations,
+        $spouse_father_townships,
+        $spouse_mother_townships,
+        $nrc_region_ids,
+        $ministrys,
+        $_countries,
+        $nrc_signs;
 
     protected $personal_info_rules = [
         'photo' => '',
@@ -191,10 +236,12 @@ class StaffDetail extends Component
         'current_rank_id' => 'required',
         'current_rank_date' => 'required|date',
         'current_department_id' => 'required',
+        'transfer_ministry_id' => '',
         'transfer_department_id' => '',
         'transfer_remark' => '',
         'government_staff_started_date' => '',
         'current_division_id' => '',
+        'side_ministry_id' => '',
         'side_department_id' => '',
         'side_division_id' => '',
         'salary_paid_by' => '',
@@ -293,20 +340,69 @@ class StaffDetail extends Component
         $this->cancel_action = 'close_master_modal';
         $this->submit_button_text = 'သိမ်းရန်';
         $this->add_model = null;
+        $this->ethnics= Ethnic::get();
+        $this->religions= Religion::get();
+        $this->regions= Region::get();
+        $this->genders= Gender::get();
+        $this->leave_types = LeaveType::all();
+        $this->withoutScopeRanks = Rank::withoutGlobalScopes()->get();
+
+        switch ($this->tab) {
+            case 'personal_info':
+                $this->military_services = MilitaryService::all();
+                $this->blood_types = BloodType::all();
+                $this->marital_statuses = MaritalStatus::all();
+                $this->education_groups = EducationGroup::all();
+                $this->education_types = EducationType::all();
+                $this->_educations = Education::all();
+                $this->_countries = Country::all();
+                $this->nrc_region_ids = NrcRegionId::all();
+                $this->nrc_signs = NrcSign::all();
+                break;
+
+            case 'job_info':
+                $this->posts = Post::all();
+                $this->ranks = $this->withoutScopeRanks;
+                $this->ministrys = Ministry::all();
+                $this->departments = Department::all();
+                $this->dica_departments = Department::whereIn('id', [983, 984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998, 999, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008])->get();
+                $this->divisions = Division::all();
+                $this->payscales = Payscale::all();
+                break;
+
+            case 'detail_personal_info':
+                $this->education_groups = EducationGroup::all();
+                $this->education_types = EducationType::all();
+                $this->_educations = Education::all();
+                $this->_countries = Country::all();
+                $this->nationalities = Nationality::all();
+                $this->countries = Country::all();
+                $this->training_types = TrainingType::all();
+                $this->training_locations = TrainingLocation::all();
+                $this->award_types = AwardType::all();
+                $this->_awards = Award::all();
+                $this->sections = Section::all();
+                $this->penalty_types = PenaltyType::all();
+                $this->languages = Language::all();
+                $this->ranks = $this->withoutScopeRanks;
+                $this->ministrys = Ministry::all();
+                $this->departments = Department::all();
+                break;
+
+            case 'relative':
+                $this->relations = Relation::all();
+                break;
+        }
 
         if ($this->staff_id) {
             $this->staff = Staff::find($this->staff_id);
             $this->initializeArrays($this->staff_id);
             $this->loadStaffData($this->staff_id);
         }
-        $this->leave_types = LeaveType::all();
-        $this->withoutScopeRanks = Rank::withoutGlobalScopes()->get();
     }
 
     private function initializeArrays($staff_id)
     {
-
-
         $staff_educations = StaffEducation::where('staff_id', $staff_id)->get();
         $recommendations = Recommendation::where('staff_id', $staff_id)->get();
         $postings = Posting::where('staff_id', $staff_id)->get();
@@ -610,10 +706,12 @@ class StaffDetail extends Component
         $this->current_rank_id = $staff->current_rank_id;
         $this->current_rank_date = $staff->current_rank_date;
         $this->current_department_id = $staff->current_department_id;
+        $this->transfer_ministry_id = $staff->transfer_ministry_id;
         $this->transfer_department_id = $staff->transfer_department_id;
         $this->transfer_remark = $staff->transfer_remark;
         $this->government_staff_started_date = $staff->government_staff_started_date;
         $this->current_division_id = $staff->current_division_id ?? Auth::user()->division_id;
+        $this->side_ministry_id = $staff->side_ministry_id;
         $this->side_department_id = $staff->side_department_id;
         $this->side_division_id = $staff->side_division_id;
         $this->salary_paid_by = $staff->salary_paid_by;
@@ -692,7 +790,7 @@ class StaffDetail extends Component
 
     public function add_recommendation()
     {
-        $this->recommendations[] = ['recommend_by' => ''];
+        $this->recommendations[] = ['id' => '', 'recommend_by' => ''];
     }
 
     public function add_posting()
@@ -1032,10 +1130,12 @@ class StaffDetail extends Component
             'current_rank_id' => $this->current_rank_id,
             'current_rank_date' => $this->current_rank_date,
             'current_department_id' => $this->current_department_id,
+            'transfer_ministry_id' => $this->transfer_ministry_id,
             'transfer_department_id' => $this->transfer_department_id,
             'transfer_remark' => $this->transfer_remark,
             'government_staff_started_date' => $this->government_staff_started_date,
             'current_division_id' => $this->current_division_id ?? Auth::user()->division_id,
+            'side_ministry_id' => $this->side_ministry_id,
             'side_department_id' => $this->side_department_id,
             'side_division_id' => $this->side_division_id,
             'salary_paid_by' => $this->salary_paid_by,
@@ -1567,29 +1667,24 @@ class StaffDetail extends Component
         }
     }
 
-    public function updatedCurrentAddressRegionId()
+    public function updatedCurrentAddressRegionId($value)
     {
-        $this->current_address_township_or_town_id = null;
+        $this->current_address_townships = Township::where('region_id', $value)->get();
     }
 
-    public function updatedPermanentAddressRegionId()
+    public function updatedPermanentAddressRegionId($value)
     {
-        $this->permanent_address_township_or_town_id = null;
+        $this->permanent_address_townships = Township::where('region_id', $value)->get();
     }
 
-    public function updatedFatherAddressRegionId()
+    public function updatedFatherAddressRegionId($value)
     {
-        $this->father_address_township_or_town_id = null;
+        $this->father_townships = Township::where('region_id', $value)->get();
     }
 
-    public function updatedMotherAddressRegionId()
+    public function updatedMotherAddressRegionId($value)
     {
-        $this->mother_address_township_or_town_id = null;
-    }
-
-    public function updatedNrcRegionId()
-    {
-        $this->nrc_township_code_id = null;
+        $this->mother_townships = Township::where('region_id', $value)->get();
     }
 
     public function setStaffStatus($status)
@@ -1613,119 +1708,33 @@ class StaffDetail extends Component
         };
     }
 
+    public function updatedNrcRegionId($value){
+        $this->nrc_township_codes = NrcTownshipCode::where('nrc_region_id_id', $value)->get();
+    }
+
+    public function updatedTransferMinistryId($value){
+        $this->transfer_departments = Department::where('ministry_id', $value)->get();
+    }
+
+    public function updatedSideMinistryId($value){
+        $this->side_departments = Department::where('ministry_id', $value)->get();
+    }
+
     public function render()
     {
-        $data = [
-            'ethnics' => Ethnic::all(),
-            'religions' => Religion::all(),
-            'regions' => Region::all(),
-            'genders' => Gender::all(),
-            'military_services' => null,
-            'blood_types' => null,
-            'marital_statuses' => null,
-            'education_groups' => null,
-            'education_types' => null,
-            '_educations' => null,
-            'current_address_townships' => null,
-            'permanent_address_townships' => null,
-            'ranks' => null,
-            'divisions' => null,
-            'departments' => null,
-            'dica_departments' => null,
-            'payscales' => null,
-            'posts' => null,
-            'nationalities' => null,
-            'countries' => null,
-            'training_types' => null,
-            'training_locations' => null,
-            'award_types' => null,
-            '_awards' => null,
-            'sections' => null,
-            'penalty_types' => null,
-            'languages' => null,
-            'rewards'=> null,
-            'relatives' => null,
-            'relations' => null,
-            'father_townships' => null,
-            'spouse_father_townships' => null,
-            'mother_townships' => null,
-            'spouse_mother_townships' => null,
-            'nrc_region_ids' => null,
-            'nrc_township_codes' => null,
-            'nrc_signs' => null,
-        ];
-
-        switch ($this->tab) {
-            case 'personal_info':
-                $data['genders'] = Gender::all();
-                $data['military_services'] = MilitaryService::all();
-                $data['blood_types'] = BloodType::all();
-                $data['marital_statuses'] = MaritalStatus::all();
-                $data['education_groups'] = EducationGroup::all();
-                $data['education_types'] = EducationType::all();
-                $data['_educations'] = Education::all();
-                $data['_countries'] = Country::all();
-                $data['current_address_township_or_towns'] = Township::where('region_id', $this->current_address_region_id)->get();
-                $data['permanent_address_township_or_towns'] = Township::where('region_id', $this->permanent_address_region_id)->get();
-                $data['current_address_townships'] = Township::where('region_id', $this->current_address_region_id)->get();
-                $data['permanent_address_townships'] = Township::where('region_id', $this->permanent_address_region_id)->get();
-                $data['nrc_region_ids'] = NrcRegionId::all();
-                $data['nrc_township_codes'] = NrcTownshipCode::where('nrc_region_id_id', $this->nrc_region_id)->get();
-                $data['nrc_signs'] = NrcSign::all();
-                break;
-
-            case 'job_info':
-                $data['posts'] = Post::all();
-                $data['ranks'] = $this->withoutScopeRanks;
-                $data['ministrys'] = Ministry::all();
-                $data['departments'] = Department::all();
-                $data['dica_departments'] = Department::whereIn('id', [983, 984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998, 999, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008])->get();
-                $data['divisions'] = Division::all();
-                $data['payscales'] = Payscale::all();
-                break;
-
-            case 'detail_personal_info':
-                $data['education_groups'] = EducationGroup::all();
-                $data['education_types'] = EducationType::all();
-                $data['_educations'] = Education::all();
-                $data['_countries'] = Country::all();
-
-                $data['nationalities'] = Nationality::all();
-                $data['countries'] = Country::all();
-                $data['training_types'] = TrainingType::all();
-                $data['training_locations'] = TrainingLocation::all();
-                $data['award_types'] = AwardType::all();
-                $data['_awards'] = Award::all();
-                $data['sections'] = Section::all();
-                $data['penalty_types'] = PenaltyType::all();
-                $data['languages'] = Language::all();
-
-                $data['ranks'] = $this->withoutScopeRanks;
-                $data['ministrys'] = Ministry::all();
-                $data['departments'] = Department::all();
-                break;
-
-            case 'relative':
-                $data['relatives'] = [
-                    'siblings' => ['label' => 'ညီကိုမောင်နှမ', 'data' => $this->siblings],
-                    'father_siblings' => ['label' => 'အဘ၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->father_siblings],
-                    'mother_siblings' => ['label' => 'အမိ၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->mother_siblings],
-                    'spouses' => ['label' => 'ခင်ပွန်း/ဇနီးသည်', 'data' => $this->spouses],
-                    'children' => ['label' => 'သားသမီးများ', 'data' => $this->children],
-                    'spouse_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည်၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_siblings],
-                    'spouse_father_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အဘနှင့် ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_father_siblings],
-                    'spouse_mother_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အမိနှင့် ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_mother_siblings],
-                ];
-                $data['relations'] = Relation::all();
-                $data['father_township_or_towns'] = Township::where('region_id', $this->father_address_region_id)->get();
-                $data['father_townships'] = Township::where('region_id', $this->father_address_region_id)->get();
-                $data['mother_township_or_towns'] = Township::where('region_id', $this->mother_address_region_id)->get();
-                $data['mother_townships'] = Township::where('region_id', $this->mother_address_region_id)->get();
-                break;
+        if ($this->tab == 'relative') {
+            $this->relatives = [
+                'siblings' => ['label' => 'ညီကိုမောင်နှမ', 'data' => $this->siblings],
+                'father_siblings' => ['label' => 'အဘ၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->father_siblings],
+                'mother_siblings' => ['label' => 'အမိ၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->mother_siblings],
+                'spouses' => ['label' => 'ခင်ပွန်း/ဇနီးသည်', 'data' => $this->spouses],
+                'children' => ['label' => 'သားသမီးများ', 'data' => $this->children],
+                'spouse_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည်၏ ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_siblings],
+                'spouse_father_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အဘနှင့် ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_father_siblings],
+                'spouse_mother_siblings' => ['label' => 'ခင်ပွန်း/ဇနီးသည် အမိနှင့် ညီအစ်ကို မောင်နှမများ', 'data' => $this->spouse_mother_siblings],
+            ];
         }
-        $leave_modal_open = $this->leave_modal_open;
-
-        return view('livewire.staff-detail', $data);
+        return view('livewire.staff-detail');
     }
 
     public function leave_modal()

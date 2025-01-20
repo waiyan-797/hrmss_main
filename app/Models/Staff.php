@@ -13,7 +13,7 @@ use App\Scopes\StaffOrder;
 
 class Staff extends Model
 {
-    use HasFactory; 
+    use HasFactory;
 
     protected static function booted()
     {
@@ -36,7 +36,7 @@ class Staff extends Model
 
 
 
-    
+
     public function staff_educations()
     {
         return $this->hasMany(StaffEducation::class);
@@ -216,13 +216,6 @@ class Staff extends Model
         return $this->belongsTo(Department::class);
     }
 
-    public function past_occupations()
-    {
-        return $this->hasMany(Posting::class);
-
-        return $this->hasMany(PastOccupation::class);
-    }
-
     public function trainings()
     {
         return $this->hasMany(Training::class);
@@ -263,9 +256,22 @@ class Staff extends Model
         return $this->hasMany(StaffLanguage::class);
     }
 
+    public function side_ministry(){
+        return $this->belongsTo(Ministry::class, 'side_ministry_id', 'id');
+    }
+
     public function side_department()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class, 'side_department_id', 'id');
+    }
+
+    public function transfer_ministry(){
+        return $this->belongsTo(Ministry::class, 'transfer_ministry_id', 'id');
+    }
+
+    public function transfer_department()
+    {
+        return $this->belongsTo(Department::class, 'transfer_department_id', 'id');
     }
 
     public function current_division()
@@ -311,7 +317,7 @@ class Staff extends Model
         $totalSalary = $this->current_salary;
         $OverAllTotalSalary = 0;
         $staffLastIncrement = Increment::where('staff_id', $this->id)
-            ->orderBy('id', 'desc') 
+            ->orderBy('id', 'desc')
             ->first();
         $ActualsalaryForBeforePromotion = 0;
 
@@ -340,7 +346,7 @@ class Staff extends Model
         return $this->hasMany(Salary::class);
     }
 
-    
+
 
     public function isPromotionThisMonth($date)
     {
@@ -361,33 +367,33 @@ class Staff extends Model
     // Parse the given date
     $filterDate = Carbon::parse($date)->format('Y-m-d');
     $endOfCurrentMonth = Carbon::parse($date)->endOfMonth();
-    
+
     // Get the last increment for the current staff
     $staffLastIncrement = Increment::where('staff_id', $this->id)->orderBy('increment_date', 'desc')->first();
-    
+
     // Check the number of years passed since the last increment date
     $yearsPassed = $staffLastIncrement ? $endOfCurrentMonth->diffInYears($staffLastIncrement->increment_date) : 0;
 
     // Check if the increment occurred in the same month as the current date
     $isSameMonth = $staffLastIncrement && Carbon::parse($staffLastIncrement->increment_date)->month == Carbon::parse($filterDate)->month;
-    
+
     // Placeholder for promotion date; this variable should be passed or defined somewhere
     $promotionDate = Carbon::parse('2024-10-15'); // Example promotion date, adjust as needed
-    
+
     // Calculate days before and after the promotion within the current month
     $daysBeforePromotion = $promotionDate->day - 1;
     $daysAfterPromotion = $endOfCurrentMonth->day - $promotionDate->day;
-    
+
     // Get the staff's last recorded salary
     $lastActualSalary = $this->salaries->last()?->actual_salary ?? 0;
-    
+
     // Get the latest increment value for the staff
     $latestIncrement = Increment::where('staff_id', $this->id)->max('increments') ?? 0;
     $comingIncrement = $latestIncrement + 1;
-    
+
     // Initialize total salary variable
     $overallTotalSalary = 0;
-    
+
     // Apply increment logic if the increment value is within the specified range
     if ($comingIncrement > 0 && $comingIncrement <= 5) {
         // Calculate salary before promotion
@@ -399,7 +405,7 @@ class Staff extends Model
         $actualSalaryAfterPromotion = ($daysAfterPromotion / 30) * ($this->payscale->min_salary + $this->payscale->increment);
         $overallTotalSalary += $actualSalaryAfterPromotion;
     }
-    
+
     // Return the total calculated salary
     return $overallTotalSalary;
 }
@@ -407,11 +413,11 @@ class Staff extends Model
 public function staffSalaryYear($year)
 {
     $year = Carbon::parse($year);
-    
+
     // Fetch salaries for the specified year
     $list = Salary::whereYear('created_at', $year->year)
                   ->get();
-    
+
     return $list;
 }
 
@@ -446,7 +452,7 @@ public function getAttDate($year, $month){
 if ($attendance) {
     // Decode the 'att_date' field, which contains an array of day numbers
     $attDates = json_decode($attendance->att_date, true);
-    
+
     // Count the days (in 'att_date') for the specific month and year
     return $attDates;
 }
@@ -456,25 +462,25 @@ if ($attendance) {
 public function labourAtt($year, $month)
 {
     $count = 0;
-    
-    
-    
+
+
+
     $attendance = $this->labourAttdence()
         ->where('year', $year)
         ->where('month', $month)
         ->first();
 
     if ($attendance) {
-        
+
         $attDates = json_decode($attendance->att_date, true);
-        
-        
+
+
         if ($attDates) {
-            
+
             $count = count($attDates);
         }
     }
-    
+
     return $count;
 }
 
@@ -483,29 +489,22 @@ public function labourAtt($year, $month)
         return $this->status_id == 1 ;
     }
 
-
-
-    public function getSalaryDuringThisDept(){
-        // return $this->postings()->where('')
-    }
-
-
     public function howOldAmI(){
         $now = Carbon::now();
         $dob = $this->dob;
         $age = $now->diff($dob);
 
-        
+
         $years = $age->y;
         $months = $age->m;
         $days = $age->d;
-    
+
         return  en2mm($years) ."နှစ်". en2mm($months)."လ"
         // .en2mm($days)."ရက်"
         ;
     }
 
-    
+
     public static  function FromNPt(){
         return Staff::where("current_division_id", 26);
     }
@@ -515,9 +514,9 @@ public function labourAtt($year, $month)
     return $query->where('current_division_id', 26);
 }
 
-    
+
     public function isInRs(){
-   
+
         return $this->marital_statuses?->marital_status_type->id == 2;
     }
 }

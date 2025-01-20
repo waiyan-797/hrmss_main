@@ -79,7 +79,7 @@
 </head>
 <body>
     <page size="A4">
-       
+
         <div class="container">
             <div class="content">
                 <h2 class="title">{{ $startYr }} - {{ $endYr }} ဘဏ္ဍာရေးနှစ်အတွက် လစာငွေထုတ်ယူမည့် စာရင်း</h2>
@@ -110,7 +110,7 @@
                                 <tr>
                                     <td>{{ en2mm(++$count) }}</td>
                                     <td>{{ en2mm($month) . '/' . en2mm($year) }}</td>
-                                    <td>{{ en2mm(getSalary($month, $year)) }}</td>
+                                    <td>{{ en2mm(_getSalary($month, $year)) }}</td>
                                     <td>{{ en2mm(getAddition($month, $year)) }}</td>
                                     <td>{{ en2mm(getDeductionInsurance($month, $year)) }}</td>
                                     <td>{{ en2mm(getLeveTypeone($month, $year)) }}</td>
@@ -126,7 +126,7 @@
                 </table>
             </div>
         </div>
-    
+
     </page>
 </body>
 </html>
