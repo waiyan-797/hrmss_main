@@ -310,6 +310,8 @@ if (!function_exists('financeYear')) {
     }
 }
 
+if (!function_exists('getSalary')) {
+
 function getSalary($month, $year)
 {
 
@@ -318,7 +320,8 @@ function getSalary($month, $year)
 
         ->sum('current_salary');
 }
-
+}
+if (!function_exists('getAddition')) {
 
 function getAddition($month, $year)
 {
@@ -328,7 +331,8 @@ function getAddition($month, $year)
 
         ->sum('addition');
 }
-
+}
+if (!function_exists('getDeductionInsurance')) {
 
 function getDeductionInsurance($month, $year)
 {
@@ -339,7 +343,8 @@ function getDeductionInsurance($month, $year)
         ->sum('deduction_insurance');
 }
 
-
+}
+if (!function_exists('getLeveTypeOne')) {
 
 function getLeveTypeOne($month, $year)
 {
@@ -349,7 +354,8 @@ function getLeveTypeOne($month, $year)
         ->where('leave_type_id', 1)
         ->count();
 }
-
+}
+if (!function_exists('getLeveTypeTwo')) {
 
 function getLeveTypeTwo($month, $year)
 {
@@ -360,6 +366,8 @@ function getLeveTypeTwo($month, $year)
         ->count();
 }
 
+}
+if (!function_exists('getDeductionTax')) {
 
 function getDeductionTax($month, $year)
 {
@@ -369,8 +377,10 @@ function getDeductionTax($month, $year)
 
         ->sum('deduction_tax');
 }
+}
 
 
+if (!function_exists('getNetActualSalary')) {
 
 function getNetActualSalary($month, $year)
 {
@@ -380,10 +390,12 @@ function getNetActualSalary($month, $year)
 
         ->sum('actual_salary');
 }
+}
 
 
 
-function get2monthDeduction($month, $year)
+if (!function_exists('get2monthDeduction')) {
+    function get2monthDeduction($month, $year)
 {
 
     return    Salary::whereYear('salary_month', $year)
@@ -391,18 +403,24 @@ function get2monthDeduction($month, $year)
 
         ->sum('deduction');
 }
-
-
-function getStartOfMonth($date){
-    return Carbon::parse($date)->startOfMonth()->format('d-m-Y');
 }
 
 
+if (!function_exists(function: 'getStartOfMonth')) {
+    function getStartOfMonth($date){
+    return Carbon::parse($date)->startOfMonth()->format('d-m-Y');
+}
+}
+
+
+if (!function_exists(function: 'getNextDay')) {
 
 function getNextDay($date){
     return Carbon::parse($date)->addDay()->format('d-m-Y');
 }
+}
 
+if (!function_exists(function: 'toMMText')) {
 
 function toMMText($integer) {
     $name = ['', 'ဆယ်', 'ရာ', 'ထောင်', 'သောင်း', 'သိန်း', 'သန်း'];
@@ -418,6 +436,7 @@ function toMMText($integer) {
         }
     }
     return $strr.'ကျပ်';
+}
 }
 
 if (! function_exists('en2mmText')) {
