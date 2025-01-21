@@ -1,12 +1,8 @@
 <div class="w-full">
     <div class="flex justify-center w-full   h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
-            <br><br>
-
-
-
+          
+            <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
             <select  class="  " wire:model.live='selectedDivisionTypeId' id="">
                 <option value="3">
                     All
@@ -31,7 +27,6 @@
                             <th class="p-2 border border-black">စဥ်</th>
                             <th class="p-2 border border-black">အမည်</th>
                             <th class="p-2 border border-black">တာဝန်ထမ်းဆောင်သည့်ဌာန</th>
-                            
                             <th class="p-2 border border-black">မှတ်ချက်</th>
                         </tr>
                     </thead>

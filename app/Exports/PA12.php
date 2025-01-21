@@ -85,82 +85,128 @@ class PA12 implements FromView ,WithStyles
     }
 
     public function styles(Worksheet $sheet)
-    {
-       
-        $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_LEGAL);
-        $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
-        $sheet->getPageSetup()->setFitToWidth(1);
-        $sheet->getPageSetup()->setFitToHeight(0);
-        $sheet->getPageSetup()->setScale(70);
+{
+    $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_LEGAL);
+    $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+    $sheet->getPageSetup()->setFitToWidth(1);
+    $sheet->getPageSetup()->setFitToHeight(0);
+    $sheet->getPageSetup()->setScale(70);
+
+   
+    // $sheet->getColumnDimension('A')->setWidth(7);
+    // $sheet->getColumnDimension('B')->setWidth(30);
+    // $sheet->getColumnDimension('C')->setWidth(15);
+    // $sheet->getColumnDimension('D')->setWidth(15);
+    // $sheet->getColumnDimension('E')->setWidth(16);
+    // $sheet->getColumnDimension('F')->setWidth(16);
+    // $sheet->getColumnDimension('G')->setWidth(15);
+    // $sheet->getColumnDimension('H')->setWidth(15);
+    // $sheet->getColumnDimension('I')->setWidth(15);
+    // $sheet->getColumnDimension('J')->setWidth(16);
+    // $sheet->getColumnDimension('K')->setWidth(16);
+    // $sheet->getColumnDimension('L')->setWidth(17);
+
+
+
+
+
+    $sheet->getRowDimension(1)->setRowHeight(40); 
+    $sheet->getRowDimension(2)->setRowHeight(40);
+    $sheet->getRowDimension(3)->setRowHeight(130);
+    $sheet->getRowDimension(4)->setRowHeight(50);
+    $sheet->getRowDimension(5)->setRowHeight(50);
+    $sheet->getRowDimension(6)->setRowHeight(50);
+
+
+    // Merge and Style Main Title
+    $sheet->mergeCells('A1:V1');
+    $sheet->setCellValue('A1', 'ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန');
+    $sheet->getStyle('A1:V1')->applyFromArray([
+        'font' => [
+            'name' => 'Pyidaungsu',
+            'size' => 13,
+            'bold' => true,
+        ],
+        'alignment' => [
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        ],
+    ]);
+    $sheet->mergeCells('A2:V2');
+    $sheet->setCellValue('A2', 'ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၏ ဝန်ထမ်းအင်အားပြုန်းတီးမှုအခြေအနေနှင့်  ဝန်ထမ်းအင်အားစာရင်းချုပ်');
+    $sheet->getStyle('A2:V2')->applyFromArray([
+        'font' => [
+            'name' => 'Pyidaungsu',
+            'size' => 13,
+            'bold' => true,
+        ],
+        'alignment' => [
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        ],
+    ]);
+
+    // Set Column Widths
+    $sheet->getColumnDimension('A')->setWidth(15);
+    $sheet->getColumnDimension('B')->setWidth(7);
+    $sheet->getColumnDimension('C')->setWidth(7);
+    $sheet->getColumnDimension('D')->setWidth(7);
+    $sheet->getColumnDimension('E')->setWidth(7);
+
+    // Additional Style for Rows 3 to 5
+    $sheet->getStyle('A3:A6')->applyFromArray([
+        'font' => [
+            'name' => 'Pyidaungsu',
+            'size' => 13,
+            'bold' => true,
+        ],
+        'alignment' => [
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            'wrapText' => true,
+        ],
+        'borders' => [
+            'allBorders' => [
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                'color' => ['argb' => 'FF000000'], // Black border
+            ],
+        ],
+    ]);
+
+    // Apply General Styling
+    $highestRow = $sheet->getHighestRow();
+    $highestColumn = $sheet->getHighestColumn();
+
+    $sheet->getStyle("A2:$highestColumn$highestRow")->applyFromArray([
+        'font' => [
+            'name' => 'Pyidaungsu',
+            'size' => 13,
+        ],
+        'alignment' => [
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        ],
+        'borders' => [
+            'allBorders' => [
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                'color' => ['argb' => 'FF000000'], 
+            ],
+        ],
+    ]);
+}
+
     
-        // Set Row Heights
-        $sheet->getRowDimension(1)->setRowHeight(40); 
-        $sheet->getRowDimension(2)->setRowHeight(130);
-        $sheet->getRowDimension(3)->setRowHeight(30);
-        $sheet->getRowDimension(4)->setRowHeight(25);
-    
-        // Merge and Style Main Title
-        $sheet->mergeCells('A1:V1');
-        $sheet->getStyle('A1:V1')->applyFromArray([
-            'font' => [
-                'name' => 'Pyidaungsu',
-                'size' => 13,
-                'bold' => true,
-            ],
-            'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-            ],
-        ]);
-    
-      
-        $sheet->getColumnDimension('A')->setWidth(15);
-        $sheet->getColumnDimension('B')->setWidth(7);
-        $sheet->getColumnDimension('C')->setWidth(7);
-        $sheet->getColumnDimension('D')->setWidth(7);
-        $sheet->getColumnDimension('E')->setWidth(7);
-        
-        $sheet->getStyle('A3:A5')->applyFromArray([
-            'font' => [
-                'name' => 'Pyidaungsu',
-                'size' => 13,
-                'bold' => true,
-            ],
-            'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-                'wrapText' => true,
-            ],
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                    'color' => ['argb' => 'FF000000'], // Black border
-                ],
-            ],
-        ]);
-    
-        
-        $highestRow = $sheet->getHighestRow();
-        $highestColumn = $sheet->getHighestColumn();
-    
-        $sheet->getStyle("A2:$highestColumn$highestRow")->applyFromArray([
-            'font' => [
-                'name' => 'Pyidaungsu',
-                'size' => 13,
-            ],
-            'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-            ],
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                    'color' => ['argb' => 'FF000000'], 
-                ],
-            ],
-        ]);
-    }
-    
+
+
+
+
+
+
+
+
+
+
+
 // public function styles(Worksheet $sheet)
 // {
 

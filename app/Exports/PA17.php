@@ -21,7 +21,6 @@ class PA17 implements FromView ,WithStyles
     // }
     public function view(): View
     {
-       
         $staffs = Staff::get();
         $data = [
             'staffs' => $staffs,  

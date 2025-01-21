@@ -237,26 +237,80 @@ if (!function_exists('mmDateFormat')) {
 
     }
 
-    if (!function_exists('getTdyDateInMyanmarYearMonthDay')) { // ယနေ့ရက်စွဲရန်
+    // if (!function_exists('getTdyDateInMyanmarYearMonthDay')) { // ယနေ့ရက်စွဲရန်
+    //     function getTdyDateInMyanmarYearMonthDay($type)
+    //     {
+
+    //         // $type 1 // ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ  3ရက်
+    //         // $type 2 // ၂၀၂၄-၁၂-၃ 
+
+    //         $now  = explode('-' ,Carbon::now()->format('Y-m-d'));
+    //       if($type == 1 ) {
+    //         return mmDateFormatYearMonthDay($now[0], $now[1] , $now[2]);
+
+    //       }
+    //       if(
+    //         $type == 2 
+    //       ){
+    //         return formatDMYmm(Carbon::now());
+
+    //       }
+    //     }
+    // }
+
+    if (!function_exists('getTdyDateInMyanmarYearMonthDay')) { 
         function getTdyDateInMyanmarYearMonthDay($type)
         {
-
-            // $type 1 // ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ  3ရက်
-            // $type 2 // ၂၀၂၄-၁၂-၃ 
-
-            $now  = explode('-' ,Carbon::now()->format('Y-m-d'));
-          if($type == 1 ) {
-            return mmDateFormatYearMonthDay($now[0], $now[1] , $now[2]);
-
-          }
-          if(
-            $type == 2 
-          ){
-            return formatDMYmm(Carbon::now());
-
-          }
+            // Get the current date in Y-m-d format
+            $now = Carbon::now();
+            $year = $now->year;
+            $month = $now->month;
+            $day = $now->day;
+    
+            // Myanmar month names
+            $myanmarMonths = [
+                1 => 'ဇန်နဝါရီလ',
+                2 => 'ဖေဖော်ဝါရီလ',
+                3 => 'မတ်လ',
+                4 => 'ဧပြီလ',
+                5 => 'မေလ',
+                6 => ' ဇွန်လ',
+                7 => 'ဇူလိုင်လ',
+                8 => 'ဩဂုတ်လ',
+                9 => 'စက်တင်ဘာလ',
+                10 => 'အောက်တိုဘာလ',
+                11 => 'နိုဝင်ဘာလ',
+                12 => 'ဒီဇင်ဘာလ',
+            ];
+    
+            // Myanmar year formatting (e.g., ၂၀၂၄)
+            $myanmarYear = convertNumberToMyanmar($year);
+    
+            // Format the date depending on the type
+            if ($type == 1) {
+                // Format: ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ ၃ ရက်
+                return $myanmarYear . ' ခုနှစ် ' . $myanmarMonths[$month] . ' ' . convertNumberToMyanmar($day) . ' ရက်';
+            } 
+            
+            if ($type == 2) {
+                // Format: 2024-12-03 (standard format)
+                return $now->format('Y-m-d');
+            }
         }
     }
+    
+    // Helper function to convert numbers to Myanmar format
+    if (!function_exists('convertNumberToMyanmar')) {
+        function convertNumberToMyanmar($number)
+        {
+            $myanmarNumbers = [
+                '0' => '၀', '1' => '၁', '2' => '၂', '3' => '၃', '4' => '၄',
+                '5' => '၅', '6' => '၆', '7' => '၇', '8' => '၈', '9' => '၉'
+            ];
+            return strtr($number, $myanmarNumbers);
+        }
+    }
+    
     
     if (!function_exists('getCountryNameById')) {
         function getCountryNameById($id)
@@ -272,18 +326,12 @@ if (!function_exists('mmDateFormat')) {
             return Division::findOrFail($id);
         }
     }
-
-
-
     if (!function_exists('getRankById')) {
         function getRankById($id)
         {
             return Rank::findOrFail($id);
         }
     }
-
-    
-
 if (!function_exists('financeYear')) {
 
     function financeYear()

@@ -133,6 +133,8 @@ class LocalTrainingReport2 extends Component
         $this->staffs = $staffQuery->get();
         $letter_types=LetterType::all();
 
+        
+
         return view('livewire.local-training-report.local-training-report2', [
             'staffs' => $this->staffs,
             'letter_types'=>$letter_types,

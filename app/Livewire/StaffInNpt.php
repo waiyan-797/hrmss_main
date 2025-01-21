@@ -5,6 +5,8 @@ namespace App\Livewire;
 use App\Models\LetterType;
 use App\Models\Staff;
 use Livewire\Component;
+use App\Exports\PA18;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class StaffInNpt extends Component
@@ -21,14 +23,15 @@ class StaffInNpt extends Component
         $data = [
             'staffs' => $staffs,
         ];
-        
-      
-       
-
         $pdf = PDF::loadView('pdf_reports.staff_in_npt', $data);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'staff_in_npt.pdf');
+    }
+    public function go_excel() 
+    {
+        return Excel::download(new PA18(
+    ), 'PA18.xlsx');
     }
 
     public function  mount(){

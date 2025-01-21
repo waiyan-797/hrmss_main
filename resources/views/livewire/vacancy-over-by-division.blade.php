@@ -14,24 +14,17 @@
                 </div>
 
 
-                <h1 class="font-bold text-center text-base">
+                 <h1 class="font-bold text-center text-base">
                  
                     {{ is_null($selectedDivisionId) ? '' :  getDivisionBy($selectedDivisionId)->name 
-       
-
-                     }}
-
-                   
-                    
-                </h1>
+                 }}
+                </h1> 
                 <h1 class="font-bold text-center text-base">
 
                   {{  is_null($selectedDivisionId) ? '' : '  ဖွဲ့စည်းပုံ ၊ ခွင့်ပြု ၊ လစ်လပ်အင်အားစာရင်း'}}
                                
                     
                 </h1>
-               
-               
                 <x-select wire:model.live="selectedDivisionId" :values="$divisions" 
                 placeholder='All'
     
@@ -39,10 +32,6 @@
     <h1 class=" text-end ">
         ရက်စွဲ - {{getTdyDateInMyanmarYearMonthDay(2)}}
     </h1>
-
-
-    
-
             </div>
             <div class="overflow-x-auto mt-6">
                 <table class="min-w-full border border-black">

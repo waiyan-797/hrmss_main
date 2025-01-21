@@ -127,7 +127,7 @@ class L03 implements FromView ,WithStyles
         ],
         'borders' => [
             'outline' => [
-                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, 
             ],
         ],
     ]);

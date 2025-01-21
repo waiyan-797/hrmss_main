@@ -4,6 +4,7 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br> --}}
+            <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
 
             <div>
 
@@ -42,7 +43,7 @@
                             <th class="border border-black text-center p-2">အမည် /ရာထူး /ဌာန</th>
                             <th class="border border-black text-center p-2">အိမ်ထောင်ရှိ /မရှိ </th>
                             
-                            <th class="border border-black text-center p-2">နေပြည်တောင်တွင်နေထိုင်သည့်နေရပ်လိပ်စာ</th>
+                            <th class="border border-black text-center p-2">နေပြည်တော် တွင်နေထိုင်သည့်နေရပ်လိပ်စာ</th>
                             <th class="border border-black text-center p-2">မှတ်ချက်</th>
                         </tr>
                     </thead>

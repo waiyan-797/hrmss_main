@@ -47,8 +47,6 @@
                     {{ $staffs->links('pagination') }}
                 </div>
             </div>
-
-            {{$staffs->links()}}
         </div>
 
     </div>

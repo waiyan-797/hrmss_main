@@ -85,8 +85,6 @@
                             </td>
 
                             <td class="border border-black text-center p-2">
-                                {{-- {{ $latestPosting->department->name ?? '' }} --}}
-
                                 {{ $latestPosting->division?->nick_name ?? '' }}
 
                                 <br>
