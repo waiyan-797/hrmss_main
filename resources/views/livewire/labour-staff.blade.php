@@ -33,7 +33,7 @@
                     <tbody class="text-center h-8 p-2">
                        @foreach($staffs as  $key => $staff)
                         <tr>
-                            <td class="border border-black p-2">{{ $key + 1  }}</td>
+                            <td class="border border-black p-2">{{ en2mm($key + 1)  }}</td>
                             <td class="border border-black p-2">{{ $staff->name}}</td>
                             <td class="border border-black p-2">{{ $staff->current_division->name}}</td>
                             <td class="border border-black p-2">{{ $staff->currentRank?->name}}</td>

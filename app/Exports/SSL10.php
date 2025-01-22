@@ -45,7 +45,7 @@ class SSL10 implements FromView ,WithStyles
     //     return view('excel_reports.labour_staff_report',compact('staffs' ));
     // }
 
-    public $staff_type_id;
+    public $staff_type_id=3;
     public $divisionTypes;
     public $selectedDivisionTypeId = 3;
     public $title = 'ရုံးချုပ်'; // Default title
