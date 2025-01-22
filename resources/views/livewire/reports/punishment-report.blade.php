@@ -6,7 +6,14 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <h1 class="font-bold text-center text-base mb-1">Punishment Report</h1>
-            <input type="text" wire:model="search" placeholder="Search by Name" class="p-2 border border-gray-300 rounded mb-4">
+            {{-- <input type="text" wire:model="search" placeholder="Search by Name" class="p-2 border border-gray-300 rounded mb-4">
+             --}}
+             <div   class=" w-44">
+                <x-text-input 
+                    wire:model.live='search'  placeholder="Search by Name"
+                />
+            </div>
+            <br>
 
 
 
@@ -14,7 +21,7 @@
             <table class="md:w-full">
                 <thead>
                     <tr>
-                        <th class="border border-black text-left p-1">ဦးစီး</th>
+                        <th class="border border-black text-left p-1">စဉ်</th>
                         <th class="border border-black text-left p-1">အမည်</th>
                         <th class="border border-black text-left p-1">ရာထူး</th>
                         <th class="border border-black text-left p-1">txtpenalty</th>
@@ -25,7 +32,7 @@
 
                     @foreach($staffs as $index=> $staff)
                     <tr>
-                        <td class="border border-black text-left p-1">{{ $startIndex++ }}</td>
+                        <td class="border border-black text-left p-1">{{ en2mm($startIndex++) }}</td>
 
                         <td class="border border-black text-left p-1">{{ $staff->name}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->currentRank?->name}}</td>

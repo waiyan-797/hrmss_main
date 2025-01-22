@@ -29,7 +29,7 @@ class StaffReport2 extends Component
     }
     public function go_excel() 
     {
-        return Excel::download(new PA17($this->searchName,$this->staffs), 'PA17.xlsx');
+        return Excel::download(new PA17($this->searchName), 'PA17.xlsx');
     }
     public function go_word()
     {
@@ -84,9 +84,13 @@ class StaffReport2 extends Component
         $staffQuery = Staff::query();
 
         if ($this->searchName) {
-            $staffQuery->where('name', 'like', '%' . $this->searchName . '%');
+            // $staffQuery->where('name', 'like', '%' . $this->searchName . '%');
+            $staffQuery->whereHas('currentRank', function ($query) {
+                $query->where('name', 'like', '%' . $this->searchName. '%');
+            });
         }
         $this->staffs = $staffQuery->get();
+        $staffs = Staff::get();
 
 
 

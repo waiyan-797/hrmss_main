@@ -12,15 +12,15 @@
             <table class="md:w-full mt-6">
                 <thead>
                     <tr>
-                        <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
+                        <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
                         <th rowspan="2" class="border border-black text-center p-2">အမည်</th>
                         <th rowspan="2" class="border border-black text-center p-2">ရာထူး</th>
                         <th colspan="2" class="border border-black text-center p-2">သွားရောက်သည့်ကာလ</th>
                         <th rowspan="2" class="border border-black text-center p-2">သွားရောက်သည့်နိုင်ငံ</th>
                         <th rowspan="2" class="border border-black text-center p-2">ပြည်ပသို့သွားရောက်ခဲ့သောအကြောင်းအရာ
                         </th>
-                        <th rowspan="2" class="border border-black text-center p-2">နောက်ဆုံးသွားရောက်ခဲ့သည့်နိုင်ငံ
-                        </th>
+                        {{--<th rowspan="2" class="border border-black text-center p-2">နောက်ဆုံးသွားရောက်ခဲ့သည့်နိုင်ငံ
+                        </th> --}}
                         <th rowspan="2" class="border border-black text-center p-2">သွားရောက်ခဲ့သည့်အကြိမ်အရေအတွက်</th>
                         <th rowspan="2" class="border border-black text-center p-2">ထောက်ပံ့သည့်အဖွဲ့အစည်း</th>
                         <th rowspan="2" class="border border-black text-center p-2">မှတ်ချက်</th>
@@ -32,37 +32,35 @@
                 </thead>
                 <tbody>
                     @php 
-                        $serialNumber = 1;  // Initialize serial number counter
+                        $serialNumber = 1; // Initialize serial number counter
                     @endphp
 
                     @foreach($staffs as $staff)
                         @if($staff->abroads->isNotEmpty())
                             @php 
                                 $abroadCount = $staff->abroads->count();
+                                $travel_count = 1;
                             @endphp
 
                             @foreach ($staff->abroads as $index => $abroad)
                                 <tr>
-                                    @if($index == 0)
-                                        <td class="border border-black text-center p-2" rowspan="{{ $abroadCount }}">
-                                            {{ $serialNumber++ }}</td> <!-- Use and increment serialNumber -->
-                                        <td class="border border-black text-center p-2" rowspan="{{ $abroadCount }}">{{ $staff->name }}
-                                        </td>
-                                        <td class="border border-black text-center p-2" rowspan="{{ $abroadCount }}">
-                                            {{ $staff->current_rank->name }}</td>
-                                    @endif
+                                    <td class="border border-black {{$loop->last ? '' : 'border-b-0'}} border-t-0 text-center p-2">
+                                        {{ $index == 0 ? $serialNumber++ : null }}
+                                    </td> <!-- Use and increment serialNumber -->
+                                    <td class="border border-black {{$loop->last ? '' : 'border-b-0'}} border-t-0 text-center p-2">
+                                        {{ $index == 0 ? $staff->name : null }}
+                                    </td>
+                                    <td class="border border-black {{$loop->last ? '' : 'border-b-0'}} border-t-0 text-center p-2">
+                                        {{ $index == 0 ? $staff->current_rank->name : null }}
+                                    </td>
 
-                                    <td class="border border-black text-center p-2">{{ $abroad->from_date }}</td>
-                                    <td class="border border-black text-center p-2">{{ $abroad->to_date }}</td>
+                                    <td class="border border-black text-center p-2">{{ formatDMYmm($abroad->from_date) }}</td>
+                                    <td class="border border-black text-center p-2">{{ formatDMYmm($abroad->to_date) }}</td>
                                     <td class="border border-black text-center p-2">{{ $abroad->country?->name }}</td>
                                     <td class="border border-black text-center p-2">{{ $abroad->particular }}</td>
-                                    <td class="border border-black text-center p-2">{{ $abroad->particular }}</td>
-                                    @if($index == 0)
-                                        <td class="border border-black text-center p-2" rowspan="{{ $abroadCount }}"></td>
-                                    @endif
-                                    <td class="border border-black text-center p-2">{{ $abroad->sponser }}</td>
-
-
+                                    <td class="border border-black text-center p-2">{{ en2mm($travel_count++) }}</td>
+                                    <td class="border border-black text-center p-2"></td>
+                                    <td class="border border-black text-center p-2"></td>
                                 </tr>
                             @endforeach
                         @endif

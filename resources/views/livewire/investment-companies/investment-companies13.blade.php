@@ -3,34 +3,48 @@
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
-            <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button> --}}
             <br><br>
+            <h2 class="font-semibold text-base text-center">ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h2>
+            <h2 class="font-semibold text-base text-center">ဘွဲ့ရရှိသူများစာရင်း</h2>
+            <br>
             <table class="md:w-full">
                 <thead>
                     <tr>
-                        <th class="border border-black p-2 text-center">စဥ်</th>
-                        <th class="border border-black p-2 text-left">အမည်/ရာထူး/ဌာန</th>
-                        <th class="border border-black p-2 text-left">ရရှိခဲ့သည့်ဘွဲ့နှင့် အထူးပြုဘာသာရပ်</th>
-                        <th class="border border-black p-2 text-left">တက္ကသိုလ်/ကျောင်း</th>
-                        <th class="border border-black p-2 text-left">နိုင်ငံ</th>
-                        <th class="border border-black p-2 text-left">ဘွဲ့ရရှိခဲ့သည့်နှစ်</th>
-                        <th class="border border-black p-2 text-left">မှတ်ချက်</th>
+                        <th class="border border-black p-2 text-center">စဉ်</th>
+                        <th class="border border-black p-2 text-center">အမည်</th>
+                        <th class="border border-black p-2 text-center">ရာထူး</th>
+                        <th class="border border-black p-2 text-center">ပညာအရည်အချင်း</th>
+                        <th class="border border-black p-2 text-center">နိုင်ငံ</th>
+                        <th class="border border-black p-2 text-center">မှတ်ချက်</th>
                     </tr>
                 </thead>
                 <tbody>
-                  @foreach($staffs as $staff)
-    @foreach($staff->schools as $school)
-    <tr>
-        <td class="border border-black p-2 text-center">{{ en2mm($loop->index + 1) }}</td>
-        <td class="border border-black p-2 text-center">{{ $staff->name }} / {{ $staff->current_rank?->name }} / {{ $staff->side_department?->name }}</td>
-        <td class="border border-black p-2 text-center">{{ $school->education?->name }}၊ {{ $school->major }}</td>
-        <td class="border border-black p-2 text-center">{{ $school->name }}</td>
-        <td class="border border-black p-2 text-center">{{ $school->country?->name }}</td>
-        <td class="border border-black p-2 text-center">{{ en2mm($school->year) }}</td>
-        <td class="border border-black p-2 text-center">{{ $school->remark }}</td>
-    </tr>
-@endforeach
-@endforeach
+                    @php 
+                        $serialNumber = 1; // Initialize serial number counter
+                    @endphp
+                    @foreach($staffs as  $staff)
+                        <tr>
+                            <td class="border border-black p-2 text-center">{{en2mm($serialNumber++)}}</td>
+                            <td class="border border-black p-2 text-center">{{ $staff->name }}</td>
+                            <td class="border border-black p-2 text-center">{{ $staff->current_rank ? $staff->current_rank->name : null }}</td>
+                            <td class="border border-black p-2 text-center">
+                                {{ 
+                                    $staff->staff_educations->isNotEmpty() 
+                                    ? $staff->staff_educations->pluck('education.name')->filter()->implode(', ') 
+                                    : null 
+                                }}
+                            </td>
+                            <td class="border border-black p-2 text-center">
+                                {{ 
+                                    $staff->staff_educations->isNotEmpty() 
+                                    ? $staff->staff_educations->pluck('country.name')->filter()->implode('၊ ') 
+                                    : null 
+                                }}
+                            </td>
+                            <td class="border border-black p-2 text-center"></td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

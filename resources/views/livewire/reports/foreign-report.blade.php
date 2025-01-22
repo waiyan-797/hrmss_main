@@ -13,7 +13,8 @@
                         <th class="border border-black text-left p-1">စဥ်</th>
                         <th class="border border-black text-left p-1">အမည်</th>
                         <th class="border border-black text-left p-1">သွားရောက်သည့်နိုင်ငံများ</th>
-                        <th class="border border-black text-left p-1">သွားရောက်သည့်ရက်များ</th>
+                        <th class="border border-black text-left p-1">သွားရောက်သည့်နေ့</th>
+                        <th class="border border-black text-left p-1">ပြန်ရောက်သည့်နေ့</th>
                     </tr>
                 </thead>
                 <tbody>

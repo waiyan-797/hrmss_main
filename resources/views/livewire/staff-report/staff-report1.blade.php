@@ -69,29 +69,30 @@
                                     {{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-Y')) }}
                                 </td> --}}
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
-                                    {{ en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-Y')) }}
+                                    {{ formatDMYmm($staff->join_date) }}
                                     <br>
                                     {{dateDiffYMDWithoutDays($staff->join_date, now())}}
                                 </td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
-                                    {{ en2mm(\Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-Y')) }}
+                                    {{formatDMYmm($staff->current_rank_date) }}
                                     <br>
                                     {{dateDiffYMDWithoutDays($staff->current_rank_date, now())}}
                                 </td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
-                                    {{ en2mm(\Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-Y')) }}
+                                    {{ formatDMYmm($staff->current_rank_date) }}
                                     <br>
                                     {{dateDiffYMDWithoutDays($staff->current_rank_date, now())}}
 
                                 </td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
-                                    {{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-Y'))}}
+                                    {{formatDMYmm($staff->postings->sortByDesc('from_date')->first()?->from_date)}}
                                     <br>
                                     {{dateDiffYMDWithoutDays($staff->postings->sortByDesc('from_date')->first()?->from_date, now())}}
 
                                 </td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
-                                    {{ $staff->side_department?->name }}
+                                    {{-- {{ $staff->side_department?->name }} --}}
+                                    {{ $staff->current_division?->name }}
                                 </td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
                                     @foreach ($staff->staff_educations as $edu)

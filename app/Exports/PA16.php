@@ -26,49 +26,69 @@ class PA16 implements FromView ,WithStyles
     public $staffs;
     public $year, $month, $filterRange;
     public $previousYear, $previousMonthDate, $previousMonth;
-
+   
     public function __construct($year , $month,
     $filterRange ,
     $previousMonthDate,
     $previousMonth,
+    $nameSearch
 
     )
     {
+        // dd($year, $month, $filterRange, $previousMonthDate, $previousMonth,$nameSearch);
         $this->filterRange = $filterRange ;
         
         $this->year  =  $year;
          $this->month  =  $month;
          $this->previousMonthDate  =  $previousMonthDate;
          $this->previousMonth  =  $previousMonth;
+         $this->nameSearch=$nameSearch;
        
 
     }
 
     public function view(): View
     {
-        [$year, $month] = explode('-', $this->filterRange);
-      
         
-       
-    
-        $this->year = $year;
-        $this->month = $month;
-       
-        $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
+         // Parse year and month from the filter range
+    [$year, $month] = explode('-', $this->filterRange);
+    $this->year = $year;
+    $this->month = $month;
 
-        $this->previousYear = $previousMonthDate->year;
-        $this->previousMonth = $previousMonthDate->month;
+    // Get previous month and year
+    $previousMonthDate = Carbon::createFromDate($year, $month)->subMonth();
+    $this->previousYear = $previousMonthDate->year;
+    $this->previousMonth = $previousMonthDate->month;
 
-        $staffs = Staff::get();
-        $pension_year = PensionYear::first();
-       
-        $data = [
-            'staffs' => $staffs,
-            'pension_year'=>$pension_year,
-            'year' => $this->year,
-            'month' => $this->month,
-        ];
-        return view('excel_reports.staff_report_1', $data);
+    // Build the staff query with conditions
+    $staffQuery = Staff::query()->withWhereHas('postings', function ($query) use ($year, $month) {
+        $query->whereYear('from_date', '<=', $year)
+              ->whereMonth('from_date', '<=', $month);
+
+        if ($this->deptId) {
+            $query->where('department_id', $this->deptId);
+        }
+    });
+   
+    // dd($this->nameSearch);
+    if ($this->nameSearch) {
+        $staffQuery->whereHas('currentRank', function ($query) {
+            $query->where('name', 'like', '%' . $this->nameSearch . '%');
+        });
+    }
+
+    $this->staffs = $staffQuery->get();
+    $staffs = Staff::get();
+    // Fetch additional data for the report
+    $pensionYear = PensionYear::first();
+
+    // Prepare data for the view
+    return view('excel_reports.staff_report_1', [
+        'staffs' => $this->staffs,
+        'pension_year' => $pensionYear,
+        'year' => $this->year,
+        'month' => $this->month,
+    ]);
     }
     public function styles(Worksheet $sheet)
     {
@@ -80,15 +100,36 @@ class PA16 implements FromView ,WithStyles
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
 
-        // $sheet->getPageSetup()->setScale(80);
+        $sheet->getPageSetup()->setScale(70);
 
         // Enable gridlines for unbordered areas
         $sheet->setShowGridlines(true);
         // $sheet->setPrintGridlines(true);
 
         // Dynamically calculate the highest row and column
-        $highestRow = $sheet->getHighestRow(); // e.g. 19
+        $highestRow = $sheet->getHighestRow()-1; // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
+
+        $sheet->getColumnDimension('A')->setWidth(4);
+        $sheet->getColumnDimension('B')->setWidth(19);
+        $sheet->getColumnDimension('C')->setWidth(19);
+        $sheet->getColumnDimension('D')->setWidth(15);
+        $sheet->getColumnDimension('E')->setWidth(8);
+        $sheet->getColumnDimension('F')->setWidth(8);
+        $sheet->getColumnDimension('G')->setWidth(8);
+        $sheet->getColumnDimension('H')->setWidth(8);
+        $sheet->getColumnDimension('I')->setWidth(15);
+        $sheet->getColumnDimension('J')->setWidth(10);
+
+        $sheet->getRowDimension(1)->setRowHeight(25);
+        $sheet->getRowDimension(2)->setRowHeight(25);
+        $sheet->getRowDimension(3)->setRowHeight(25);
+
+        $sheet->removeRow(4);
+
+        for ($row = 4; $row <= $highestRow-1 ; $row++) {
+            $sheet->getRowDimension($row)->setRowHeight(28);
+        }
 
         $sheet->getStyle('A1:A2')->applyFromArray([
             'font' => [
@@ -106,10 +147,25 @@ class PA16 implements FromView ,WithStyles
             ],
         ]);
 
-        $sheet->getRowDimension(1)->setRowHeight(45);
-            $sheet->getRowDimension(2)->setRowHeight(45);
+        $sheet->getStyle('A3')->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 13,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'outline' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+                ],
+            ],
+        ]);
 
-        $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
+       
+
+        $sheet->getStyle("A4:$highestColumn$highestRow")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 13,

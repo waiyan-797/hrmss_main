@@ -17,4 +17,13 @@ class Training extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function training_location(){
+        return $this->belongsTo(TrainingLocation::class);
+    }
+
+    public function staff_educations()
+    {
+        return $this->hasMany(StaffEducation::class);
+    }
 }

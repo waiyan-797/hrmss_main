@@ -25,36 +25,41 @@ class PunishmentReport extends Component
     }
     public function go_word()
     {
-        $staffs = Staff::get();
+        // $staffs = Staff::get();
+        $staffs = Staff::where('name', 'like', '%' . $this->search . '%')->get();
 
         
         $phpWord = new PhpWord();
-        $section = $phpWord->addSection(['orientation'=>'landscape','margin'=>600]);
-        
-        $section->addTitle('Punishment Report', 1);
-
-       
-        $table = $section->addTable([
-            'borderSize' => 6, 
-            'borderColor' => '000000',
-            'cellMargin' => 80
+        $section = $phpWord->addSection([
+            'orientation' => 'landscape',
+            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),     // 1 inch
+            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
         ]);
-        
+
+        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center','spaceBefore' => 200]);
+        $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+        // $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
+        $section->addTitle('Punishment Report', 1);
+        // $section->addTitle(mmDateFormat($this->year, $this->month). 'အတွင်း တာဝန်ပျက်ကွက်သူဝန်ထမ်းများအား အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း', 2);
+
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
 
        
         $table->addRow();
-        $table->addCell(2000)->addText('စဥ်');
-        $table->addCell(4000)->addText('အမည်');
-        $table->addCell(4000)->addText('ရာထူး');
-        $table->addCell(4000)->addText('txtpenalty');
+        $table->addCell(1000)->addText('စဥ်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
+        $table->addCell(4000)->addText('အမည်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
+        $table->addCell(4000)->addText('ရာထူး',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
+        $table->addCell(5000)->addText('txtpenalty',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
 
         // Add table data
         foreach ($staffs as $index => $staff) {
             $table->addRow();
-            $table->addCell(2000)->addText($index + 1);
-            $table->addCell(4000)->addText($staff->name);
-            $table->addCell(4000)->addText($staff->current_rank->name);
-            $table->addCell(4000)->addText(implode(', ', $staff->punishments->pluck('penalty_type.name')->toArray()));
+            $table->addCell(1000)->addText(en2mm($index + 1),null,['alignment'=>'center','spaceBefore'=>100]);
+            $table->addCell(4000)->addText($staff->name,null,['indentation' => ['left' => 100],'spaceBefore'=>100]);
+            $table->addCell(4000)->addText($staff->current_rank?->name,null,['indentation' => ['left' => 100],'spaceBefore'=>100]);
+            $table->addCell(5000)->addText(implode(', ', $staff->punishments->pluck('penalty_type.name')->toArray()),null,['indentation' => ['left' => 100],'spaceBefore'=>100]);
         }
 
         // Save the file

@@ -78,7 +78,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th colspan="5" >
+                        <th colspan="5" style="font-weight:bold;">
                             {{mmDateFormat($year,$month)}}ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
                         </th>
                     </tr>
@@ -87,11 +87,11 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>စဥ်</th>
-                            <th>လစာနှုန်း (ကျပ်)</th>
-                            <th>ခွင့်ပြုအင်အား</th>
-                            <th>ခန့်ပြီးအင်အား</th>
-                            <th>လစ်လပ်အင်အား</th>
+                            <th style="font-weight:bold;">စဥ်</th>
+                            <th style="font-weight:bold;">လစာနှုန်း (ကျပ်)</th>
+                            <th style="font-weight:bold;">ခွင့်ပြုအင်အား</th>
+                            <th style="font-weight:bold;">ခန့်ပြီးအင်အား</th>
+                            <th style="font-weight:bold;">လစ်လပ်အင်အား</th>
                         </tr>
                     </thead>
                     <tbody class="text-center h-8 p-2">
@@ -105,10 +105,10 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td class="border border-black p-2 font-semibold" colspan="2">{{$first_payscales[0]->staff_type->name}}ပေါင်း</td>
-                            <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
-                            <td class="border border-black p-2 font-semibold">{{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
-                            <td class="border border-black p-2 font-semibold">{{ en2mm((
+                            <td class="border border-black p-2 " style="font-weight:bold;" colspan="2">{{$first_payscales[0]->staff_type->name}}ပေါင်း</td>
+                            <td class="border border-black p-2 " style="font-weight:bold;">{{ en2mm($first_payscales->sum('allowed_qty')) }}</td>
+                            <td class="border border-black p-2 " style="font-weight:bold;">{{ en2mm($first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                            <td class="border border-black p-2 " style="font-weight:bold;">{{ en2mm((
                                 
                            $first_payscales->sum(fn($scale) => $scale->staff->count())  - $first_payscales->sum('allowed_qty')
                             )) }}</td>
@@ -127,19 +127,19 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td class="border border-black p-2 font-semibold" colspan="2">{{$second_payscales[0]->staff_type->name}}ပေါင်း</td>
-                            <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
-                            <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
-                            <td class="border border-black p-2 font-semibold">{{ en2mm(
+                            <td class="border border-black p-2" colspan="2" style="font-weight:bold;">{{$second_payscales[0]->staff_type->name}}ပေါင်း</td>
+                            <td class="border border-black p-2" style="font-weight:bold;">{{ en2mm($second_payscales->sum('allowed_qty')) }}</td>
+                            <td class="border border-black p-2" style="font-weight:bold;">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                            <td class="border border-black p-2" style="font-weight:bold;">{{ en2mm(
                                  $second_payscales->sum(fn($scale) => $scale->staff->count() ) - $second_payscales->sum('allowed_qty')
                                 ) }}</td>
                         </tr>
 
                         <tr>
-                            <td class="border border-black p-2 font-semibold" colspan="2">ပေါင်း</td>
-                            <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum('allowed_qty') + $first_payscales->sum('allowed_qty')) }}</td>
-                            <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count()) + $first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
-                            <td class="border border-black p-2 font-semibold">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count() ) - $second_payscales->sum('allowed_qty') + $first_payscales->sum(fn($scale) => $scale->staff->count() ) - $first_payscales->sum('allowed_qty')) }}</td>
+                            <td class="border border-black p-2" colspan="2" style="font-weight:bold;">ပေါင်း</td>
+                            <td class="border border-black p-2" style="font-weight:bold;">{{ en2mm($second_payscales->sum('allowed_qty') + $first_payscales->sum('allowed_qty')) }}</td>
+                            <td class="border border-black p-2" style="font-weight:bold;">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count()) + $first_payscales->sum(fn($scale) => $scale->staff->count())) }}</td>
+                            <td class="border border-black p-2" style="font-weight:bold;">{{ en2mm($second_payscales->sum(fn($scale) => $scale->staff->count() ) - $second_payscales->sum('allowed_qty') + $first_payscales->sum(fn($scale) => $scale->staff->count() ) - $first_payscales->sum('allowed_qty')) }}</td>
                         </tr>
 
 

@@ -12,9 +12,10 @@ use PhpOffice\PhpWord\PhpWord;
 
 class LocalTrainingReport2 extends Component
 {
-    public $trainingLocation = null;
+    public $trainingLocation =3 ;
 
     public $nameSearch, $staffs;
+    public $count=0;
     public function go_pdf()
     {
         $staffs = Staff::get();
@@ -31,88 +32,160 @@ class LocalTrainingReport2 extends Component
 
     public function go_word()
     {
-        $staffs = Staff::with(['current_rank', 'abroads', 'trainings', 'staff_educations.education_group'])->get();
+        $staffs = Staff::where('name', 'like', '%' . $this->nameSearch . '%')
+        ->whereHas('trainings', function ($query) {
+            if ($this->trainingLocation == 3) {
+                // Include training locations 1 and 2 when $trainingLocation is 3
+                $query->whereIn('training_location_id', [1, 2]);
+            } elseif ($this->trainingLocation) {
+                // Filter by the specific training location
+                $query->where('training_location_id', $this->trainingLocation);
+            }
+        })
+        ->with(['trainings' => function ($query) {
+            if ($this->trainingLocation == 3) {
+                $query->whereIn('training_location_id', [1, 2]);
+            } elseif ($this->trainingLocation) {
+                $query->where('training_location_id', $this->trainingLocation);
+            }
+        }])
+        ->get();
+
+        // $staffs = Staff::with(['current_rank', 'abroads', 'trainings', 'staff_educations.education_group'])->get();
         $phpWord = new PhpWord();
-        $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
-        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 16], ['alignment' => 'center']);
-        $section->addTitle('Local Training Report2', 1);
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
+        $section = $phpWord->addSection([
+            'orientation' => 'landscape',
+            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),     // 1 inch
+            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+        ]);
+
+        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center','spaceBefore' => 200]);
+        $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+        // $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
+        $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
+        $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
+        
+        $section->addTitle($this->trainingLocation==1? 'Local Training Report' : 'Local Online Training Report', 2);
+
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
 
 
         $table->addRow();
-        $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်');
-        $table->addCell(4000, ['vMerge' => 'restart'])->addText('အမည်');
-        $table->addCell(4000, ['vMerge' => 'restart'])->addText('ရာထူး');
-        $table->addCell(6000, ['gridSpan' => 2, 'valign' => 'center'])->addText('သွားရောက်သည့်ကာလ');
-        $table->addCell(4000, ['vMerge' => 'restart'])->addText('ပြည်တွင်းသင်တန်း/ဆွေးနွေးပွဲတတ်ရောက်ခဲ့သည့်နေရာ');
-        $table->addCell(4000, ['vMerge' => 'restart'])->addText('တတ်ရောက်ခဲ့သည့်အကြောင်းအရာ');
-        $table->addCell(4000, ['vMerge' => 'restart'])->addText('ပညာအရည်အချင်း');
+        $table->addCell(1000, ['vMerge' => 'restart'])->addText('စဥ်',['bold'=>true],['alignment'=>'center','spaceBefore'=>600]);
+        $table->addCell(5000, ['vMerge' => 'restart'])->addText('အမည်/ရာထူး',['bold'=>true],['alignment'=>'center','spaceBefore'=>600]);
+        $table->addCell(4000, ['vMerge' => 'restart'])->addText('ပညာအရည်အချင်း',['bold'=>true],['alignment'=>'center','spaceBefore'=>600]);
+        $table->addCell(5000, ['vMerge' => 'restart'])->addText('သင်တန်းအမည်',['bold'=>true],['alignment'=>'center','spaceBefore'=>600]);
+        $table->addCell(2500, ['vMerge' => 'restart'])->addText('သင်တန်းကာလ(မှ)',['bold'=>true],['alignment'=>'center','spaceBefore'=>600]);
+        $table->addCell(2500, ['vMerge' => 'restart'])->addText('သင်တန်းကာလ(ထိ)',['bold'=>true],['alignment'=>'center','spaceBefore'=>600]);
+        $table->addCell(3000, ['vMerge' => 'restart'])->addText('သင်တန်းနေရာ/ဒေသ',['bold'=>true],['alignment'=>'center','spaceBefore'=>600]);
+        $table->addCell(2000, ['vMerge' => 'restart'])->addText('ရရှိခဲ့   သည့် အဆင့်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
 
-        $table->addRow();
-        $table->addCell(2000, ['vMerge' => 'continue']);
-        $table->addCell(4000, ['vMerge' => 'continue']);
-        $table->addCell(4000, ['vMerge' => 'continue']);
-        $table->addCell(3000)->addText('မှ', ['alignment' => 'center']);
-        $table->addCell(3000)->addText('ထိ', ['alignment' => 'center']);
-        $table->addCell(4000, ['vMerge' => 'continue']);
-        $table->addCell(4000, ['vMerge' => 'continue']);
-        $table->addCell(4000, ['vMerge' => 'continue']);
+        foreach ($staffs as $index => $staff) {
+            $isFirstTraining = true; // Flag to check the first training
+        
+            foreach ($staff->trainings as $trainingIndex => $training) {
+                $table->addRow();
+        
+                // Show these cells only for the first training of the staff
+                if ($isFirstTraining) {
+                    $table->addCell(700, ['vMerge' => 'restart'])->addText(en2mm($index + 1), null, ['indentation' => ['left' => 100]]);
+                    $textRun = $table->addCell(3500, ['vMerge' => 'restart'])->addTextRun(['indentation' => ['left' => 100]]);
+                    $textRun->addText($staff->name);
+                    $textRun->addTextBreak();
+                    $textRun->addText($staff->current_rank->name);
+                    $cell = $table->addCell(3500, ['vMerge' => 'restart']);
+                    $textRun = $cell->addTextRun(['indentation' => ['left' => 100]]);
+                    
+                    foreach ($staff->staff_educations as $edu) {
+                        $textRun->addText($edu->education?->name ?? '');
+                        $textRun->addTextBreak();
+                    }
+                    $isFirstTraining = false; // Set the flag to false after the first iteration
+                } else {
+                    // Add merged cells for subsequent rows to align properly
+                    $table->addCell(700, ['vMerge' => 'continue']);
+                    $table->addCell(3500, ['vMerge' => 'continue']);
+                    $table->addCell(3500, ['vMerge' => 'continue']);
+                }
+        
+                // Add the training-specific cells
+                $table->addCell(4000)->addText($training->training_type->name == 'အခြား' ? $training->diploma_name : $training->training_type->name , null, ['indentation' => ['left' => 100]]);
+                $table->addCell(2500)->addText(formatDMYmm($training->from_date), null, ['indentation' => ['left' => 100]]);
+                $table->addCell(2500)->addText(formatDMYmm($training->to_date), null, ['indentation' => ['left' => 100]]);
+                $table->addCell(3000)->addText($training->location, null, ['indentation' => ['left' => 100]]);
+                $table->addCell(2000)->addText($training->remark, null, ['indentation' => ['left' => 100]]);
+          
+                }
+              
+            }
+
+        // $table->addRow();
+        // $table->addCell(2000, ['vMerge' => 'continue']);
+        // $table->addCell(4000, ['vMerge' => 'continue']);
+        // $table->addCell(4000, ['vMerge' => 'continue']);
+        // $table->addCell(3000)->addText('မှ', ['alignment' => 'center']);
+        // $table->addCell(3000)->addText('ထိ', ['alignment' => 'center']);
+        // $table->addCell(4000, ['vMerge' => 'continue']);
+        // $table->addCell(4000, ['vMerge' => 'continue']);
+        // $table->addCell(4000, ['vMerge' => 'continue']);
 
 
       
 
-        foreach ($staffs as $index => $staff) {
+        // foreach ($staffs as $index => $staff) {
 
-            $abroadCount = count($staff->abroads);
-            $trainingCount = count($staff->trainings);
-
-
-            $maxRows = max($abroadCount, $trainingCount);
-
-            for ($rowIndex = 0; $rowIndex < $maxRows; $rowIndex++) {
-                $table->addRow();
+        //     $abroadCount = count($staff->abroads);
+        //     $trainingCount = count($staff->trainings);
 
 
-                $table->addCell(2000)->addText($index + 1);
-                $table->addCell(4000)->addText($staff->name);
-                $table->addCell(4000)->addText($staff->current_rank->name ?? '');
+        //     $maxRows = max($abroadCount, $trainingCount);
+
+        //     for ($rowIndex = 0; $rowIndex < $maxRows; $rowIndex++) {
+        //         $table->addRow();
 
 
-                if (isset($staff->abroads[$rowIndex])) {
-                    $table->addCell(2000)->addText($staff->abroads[$rowIndex]->from_date ?? '');
-                    $table->addCell(2000)->addText($staff->abroads[$rowIndex]->to_date ?? '');
-                } else {
-                    $table->addCell(2000)->addText('');
-                    $table->addCell(2000)->addText('');
-                }
+        //         $table->addCell(2000)->addText($index + 1);
+        //         $table->addCell(4000)->addText($staff->name);
+        //         $table->addCell(4000)->addText($staff->current_rank->name ?? '');
 
 
-                if (isset($staff->trainings[$rowIndex])) {
-                    $table->addCell(4000)->addText($staff->trainings[$rowIndex]->location ?? '');
-                    $table->addCell(4000)->addText($staff->trainings[$rowIndex]->remark ?? '');
-                } else {
-                    $table->addCell(4000)->addText('');
-                    $table->addCell(4000)->addText('');
-                }
+        //         if (isset($staff->abroads[$rowIndex])) {
+        //             $table->addCell(2000)->addText($staff->abroads[$rowIndex]->from_date ?? '');
+        //             $table->addCell(2000)->addText($staff->abroads[$rowIndex]->to_date ?? '');
+        //         } else {
+        //             $table->addCell(2000)->addText('');
+        //             $table->addCell(2000)->addText('');
+        //         }
 
 
-                if ($rowIndex === 0) {
-                    $educationGroups = $staff->staff_educations->pluck('education_group.name')->toArray();
-                    $table->addCell(4000)->addText(implode(", ", $educationGroups));
-                } else {
-                    $table->addCell(4000)->addText('');
-                }
-                $table->addRow();
-                $table->addCell(1000, ['vMerge' => 'continue']);
-                $table->addCell(2000, ['vMerge' => 'continue']);
-                $table->addCell(2000, ['vMerge' => 'continue']);
-                $table->addCell(2000)->addText($staff->abroads[$rowIndex]->from_date ?? '');
-                $table->addCell(2000)->addText($staff->abroads[$rowIndex]->to_date ?? '');
-                $table->addCell(2000,['vMerge' => 'continue'])->addText();
-                $table->addCell(2000,['vMerge' => 'continue'])->addText();
-                $table->addCell(2000, ['vMerge' => 'continue'])->addText();
-            }
-        }
+        //         if (isset($staff->trainings[$rowIndex])) {
+        //             $table->addCell(4000)->addText($staff->trainings[$rowIndex]->location ?? '');
+        //             $table->addCell(4000)->addText($staff->trainings[$rowIndex]->remark ?? '');
+        //         } else {
+        //             $table->addCell(4000)->addText('');
+        //             $table->addCell(4000)->addText('');
+        //         }
+
+
+        //         if ($rowIndex === 0) {
+        //             $educationGroups = $staff->staff_educations->pluck('education_group.name')->toArray();
+        //             $table->addCell(4000)->addText(implode(", ", $educationGroups));
+        //         } else {
+        //             $table->addCell(4000)->addText('');
+        //         }
+        //         $table->addRow();
+        //         $table->addCell(1000, ['vMerge' => 'continue']);
+        //         $table->addCell(2000, ['vMerge' => 'continue']);
+        //         $table->addCell(2000, ['vMerge' => 'continue']);
+        //         $table->addCell(2000)->addText($staff->abroads[$rowIndex]->from_date ?? '');
+        //         $table->addCell(2000)->addText($staff->abroads[$rowIndex]->to_date ?? '');
+        //         $table->addCell(2000,['vMerge' => 'continue'])->addText();
+        //         $table->addCell(2000,['vMerge' => 'continue'])->addText();
+        //         $table->addCell(2000, ['vMerge' => 'continue'])->addText();
+        //     }
+        // }
 
 
         $fileName = 'local_training_report2.docx';
@@ -125,6 +198,7 @@ class LocalTrainingReport2 extends Component
     }
     public function render()
     {
+        
         $staffQuery  = Staff::query();
 
         if ($this->nameSearch) {
@@ -138,6 +212,8 @@ class LocalTrainingReport2 extends Component
         return view('livewire.local-training-report.local-training-report2', [
             'staffs' => $this->staffs,
             'letter_types'=>$letter_types,
+            'count'=>$this->count,
+            'trainingLocation'=>$this->trainingLocation,
         ]);
     }
     

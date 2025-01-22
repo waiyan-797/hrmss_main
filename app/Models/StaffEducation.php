@@ -34,6 +34,9 @@ class StaffEducation extends Model
         return $this->belongsTo(EducationType::class);
     }
 
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
    
 
 }

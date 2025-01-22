@@ -95,11 +95,6 @@ class Staff extends Model
         return $this->belongsTo(BloodType::class);
     }
 
-    public function rank()
-    {
-        return $this->belongsTo(Rank::class);
-    }
-
     public function promotion()
     {
         return $this->hasMany(Promotion::class);
@@ -208,7 +203,7 @@ class Staff extends Model
 
     public function current_rank()
     {
-        return $this->belongsTo(Rank::class);
+        return $this->belongsTo(Rank::class, 'current_rank_id', 'id');
     }
 
     public function current_department()

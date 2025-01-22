@@ -16,7 +16,7 @@ use PhpOffice\PhpWord\PhpWord;
 class StaffReport1 extends Component
 {
 
-    public $nameSearch='', $deptId, $filterDate;
+    public $nameSearch, $deptId, $filterDate;
     public $staffs;
     public $year, $month, $filterRange;
     public $previousYear, $previousMonthDate, $previousMonth;
@@ -37,7 +37,7 @@ class StaffReport1 extends Component
    
     public function go_excel() 
     {
-        return Excel::download(new PA16($this->year,$this->month,$this->filterRange,$this->previousMonthDate,$this->previousMonth,
+        return Excel::download(new PA16($this->year,$this->month,$this->filterRange,$this->previousMonthDate,$this->previousMonth,$this->nameSearch
     ), 'PA16.xlsx');
     }
 
@@ -137,7 +137,8 @@ class StaffReport1 extends Component
             'pension_year' => $pension_year,
             'depts' => Department::all() ,
             'year' => $year ,
-            'month' => $month
+            'month' => $month,
+            'nameSearch'=>$this->nameSearch,
         ]);
     }
 }

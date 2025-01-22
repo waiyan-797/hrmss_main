@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +41,8 @@
             background-color: #f3f4f6;
         }
 
-        th, td {
+        th,
+        td {
             padding: 8px;
             border: 1px solid black;
         }
@@ -50,6 +52,7 @@
         }
     </style> --}}
 </head>
+
 <body>
     <div class="">
         {{-- <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1> --}}
@@ -57,31 +60,31 @@
 
             <table class="">
                 <tr>
-                    <th colspan="5">
+                    <th colspan="5" style="font-weight:bold;">
                         ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
                     </th>
                 </tr>
                 <tr>
-                    <th colspan="5">
+                    <th colspan="5" style="font-weight:bold;">
                         ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
                     </th>
                 </tr>
                 <tr>
-                    <th colspan="5">
-                      ဝန်ထမ်းအင်အားစာရင်း
+                    <th colspan="5" style="font-weight:bold;">
+                        ဝန်ထမ်းအင်အားစာရင်း
                     </th>
                 </tr>
 
             </table>
-            
+
             <table>
                 <thead>
                     <tr>
-                        <th>စဥ်</th>
-                        <th>ရာထူး</th>
-                        <th>ခွင့်ပြုအင်အား</th>
-                        <th>ခန့်ပြီးအင်အား</th>
-                        <th>လစ်လပ်အင်အား</th>
+                        <th style="font-weight:bold;">စဥ်</th>
+                        <th style="font-weight:bold;">ရာထူး</th>
+                        <th style="font-weight:bold;">ခွင့်ပြုအင်အား</th>
+                        <th style="font-weight:bold;">ခန့်ပြီးအင်အား</th>
+                        <th style="font-weight:bold;">လစ်လပ်အင်အား</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,17 +96,18 @@
                         <td>၀</td>
                     </tr>
                     @php
-                    $count=1;
+                        $count = 1;
                     @endphp
-                    @foreach ($payscales as $index=>$payscale)
+                    @foreach ($payscales as $index => $payscale)
                         <tr>
                             <td>{{en2mm(++$count)}}</td>
-                            <td> 
-                                @if($index == 0 )
-                                {{$payscale->ranks[0]->name}} /<br> ဦးဆောင်ညွှန်ကြားရေးမှူးနှင့်အဆင့်တူ
-                                @else 
-                                {{$payscale->ranks[0]->name}}နှင့်အဆင့်တူ
-                                @endif </td>
+                            <td>
+                                @if($index == 0)
+                                    {{$payscale->ranks[0]->name}} /<br> ဦးဆောင်ညွှန်ကြားရေးမှူးနှင့်အဆင့်တူ
+                                @else
+                                    {{$payscale->ranks[0]->name}}နှင့်အဆင့်တူ
+                                @endif
+                            </td>
                             <td>{{en2mm($payscale->allowed_qty)}}</td>
                             <td>{{en2mm($payscale->staff->count())}}</td>
                             <td>{{en2mm($payscale->allowed_qty - $payscale->staff->count())}}</td>
@@ -111,13 +115,17 @@
                     @endforeach
                     <tr>
                         <td colspan="2" style="font-weight: bold;">စုစုပေါင်း</td>
-                        <td>{{en2mm($payscales->sum('allowed_qty'))}}</td>
-                        <td>{{en2mm($payscales->sum(fn($payscale) => $payscale->staff->count()))}}</td>
-                        <td>{{en2mm($payscales->sum(fn($payscale) => $payscale->staff->count()) - $payscales->sum('allowed_qty'))}}</td>
+                        <td style="font-weight:bold;">{{en2mm($payscales->sum('allowed_qty'))}}</td>
+                        <td style="font-weight:bold;">
+                            {{en2mm($payscales->sum(fn($payscale) => $payscale->staff->count()))}}</td>
+                        <td style="font-weight:bold;">
+                            {{en2mm($payscales->sum(fn($payscale) => $payscale->staff->count()) - $payscales->sum('allowed_qty'))}}
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </body>
+
 </html>

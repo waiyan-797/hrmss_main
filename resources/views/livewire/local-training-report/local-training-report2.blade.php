@@ -11,6 +11,7 @@
                 <x-text-input wire:model.live='nameSearch' />
 
             </div>
+<<<<<<< Updated upstream
           <div
             class=" mt-9"
           >            <x-select 
@@ -41,29 +42,133 @@
             
             <x-input-error class="mt-2" :messages="$errors->get('letter_type_id')" />
         </div>
+=======
+            <div class=" mt-9"> <x-select : wire:model.live='trainingLocation' :values="[
+
+        ['id' => 3, 'name' => 'အားလုံး'],
+
+        ['id' => 1, 'name' => 'ပြည်တွင်း'],
+
+        ['id' => 2, 'name' => 'ပြည်ပ']
+
+    ]" />
+            </div>
+            <div class="w-1/3">
+                <x-select wire:model="letter_type_id" :values="$letter_types" placeholder="စာအဆင့်အတန်းရွေးပါ"
+                    id="letter_type_id" name="letter_type_id" class="mt-11 block w-full" required />
+
+                <x-input-error class="mt-2" :messages="$errors->get('letter_type_id')" />
+            </div>
+            <br>
+            <h1 class="text-center text-sm font-bold">ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
+            <h1 class="text-center text-sm font-bold">ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+>>>>>>> Stashed changes
             <h1 class="text-center text-sm font-bold">Local Training Report2</h1>
+
 
             <table class="md:w-full mt-9">
                 <thead>
                     <tr>
-                        <th rowspan="2" class="border border-black text-center p-2">စဥ်</th>
-                        <th rowspan="2" class="border border-black text-center p-2">အမည်</th>
-                        <th rowspan="2" class="border border-black text-center p-2">ရာထူး</th>
-                        <th rowspan="2" class="border border-black text-center p-2">ပညာအရည်အချင်း</th>
+                        <th  class="border border-black text-center p-2">စဉ်</th>
+                        <th  class="border border-black text-center p-2">အမည်/ရာထူး</th>
+                        
+                        <th  class="border border-black text-center p-2">ပညာအရည်အချင်း</th>
 
-                        <th colspan="2" class="border border-black text-center p-2">သွားရောက်သည့်ကာလ</th>
-                        <th rowspan="2" class="border border-black text-center p-2">
-                            ပြည်တွင်းသင်တန်း/ဆွေးနွေးပွဲတတ်ရောက်ခဲ့သည့်နေရာ</th>
-                        <th rowspan="2" class="border border-black text-center p-2">တတ်ရောက်ခဲ့သည့်အကြောင်းအရာ</th>
-                        <th rowspan="2" class="border border-black text-center p-2">သင်တန်းအမျိုးအစား</th>
-
-                    </tr>
-                    <tr>
-                        <th class="border border-black text-center p-2">မှ</th>
-                        <th class="border border-black text-center p-2">ထိ</th>
+                        <th  class="border border-black text-center p-2">သင်တန်းအမည်</th>
+                        <th  class="border border-black text-center p-2">သင်တန်းကာလ(မှ)</th>
+                        <th  class="border border-black text-center p-2">သင်တန်းကာလ(ထိ)</th>
+                        <th  class="border border-black text-center p-2">သင်တန်းနေရာ/ဒေသ</th>
+                        <th  class="border border-black text-center p-2">ရရှိသည့်အဆင့်</th>
 
                     </tr>
+                    
                 </thead>
+
+                <tbody>
+
+                    
+                    @foreach ($staffs as $staff)
+                    @php 
+                            $firstTraining = $staff?->trainings->whereIn(
+                            'training_location_id',
+                            $trainingLocation == 3 ? [1, 2] : $trainingLocation
+
+                        )->first();
+
+                    @endphp
+                    @if($firstTraining)
+                    
+                        <tr>
+                            <td class="border border-black border-b-0 text-center p-1">
+                                {{-- {{ en2mm($loop->index + 1) }} --}}
+                                {{ en2mm(++$count) }}
+                            </td>
+                            <td class="border border-black border-b-0 text-left p-1">
+                                {{ $staff->name }}<br>{{$staff->currentRank->name}}
+                            </td>
+                            {{-- <td class="border border-black border-b-0 text-left p-1">
+                                {{  }}
+                            </td>  --}}
+
+                            <!-- First training record -->
+                            
+                                    <td class="border border-black border-b-0 text-center p-2">
+                                        @foreach ($staff->staff_educations as $edu)
+                                        {{-- <span>{{ $edu->education_group?->name }}</span> --}}
+                                        {{-- <span>{{ $edu->education_type?->name }}</span> --}}
+                                        {{ $edu->education?->name }}<br>
+                                        @endforeach
+                                    </td>
+                                
+                            {{-- <td class="border border-black text-center p-2">{{ $firstTraining->education?->name }}
+                            </td> --}}
+                            <td class="border border-black text-center p-2">{{ $firstTraining->training_type->name == 'အခြား' ?$firstTraining->diploma_name : $firstTraining->training_type->name }}
+                            </td>
+                            <td class="border border-black text-center p-2">{{formatDMYmm($firstTraining->from_date) }}
+                            </td>
+                            <td class="border border-black text-center p-2">{{ formatDMYmm($firstTraining->to_date)}}
+                            </td>
+                            <td class="border border-black text-center p-2">{{ $firstTraining->location }}</td>
+                            <td class="border border-black text-center p-2">{{ $firstTraining->remark }}
+                            </td>
+
+                            {{-- <td class="border border-black text-center p-2">
+                                {{ $firstTraining->remark }}
+                            </td> --}}
+                        </tr>
+
+                        <!-- For remaining trainings, create new rows -->
+                        @foreach($staff->trainings->whereIn('training_location_id', $trainingLocation == 3 ? [1, 2] : $trainingLocation
+                            )->skip(1) as $training)
+                            <tr>
+                                <td class="border border-black border-b-0 border-t-0 text-center p-1">
+                                    
+                                </td>
+                                <td class="border border-black border-b-0 border-t-0 text-left p-1">
+                                   
+                                </td>
+                                <td class="border border-black border-b-0 border-t-0 text-left p-1">
+                                   
+                                </td>
+                                
+                                
+                                <td class="border border-black text-center p-2">{{ $training->training_type->name == 'အခြား' ? $training->diploma_name : $training->training_type->name }}</td>
+                                <td class="border border-black text-center p-2">{{formatDMYmm($training->from_date) }}</td>
+                                <td class="border border-black text-center p-2">{{formatDMYmm($training->to_date)}}</td>
+                                <td class="border border-black text-center p-2">{{ $training->location }}</td>
+                                <td class="border border-black text-center p-2">{{ $training->remark }}</td>
+                                {{-- <td class="border border-black text-center p-2">
+                                    {{ $training->remark }}
+                                </td> --}}
+                            </tr>
+                        @endforeach
+                    @endif
+                @endforeach
+
+
+
+                </tbody>
+
                 {{-- <tbody>
                     @foreach($staffs as $staff)
                     <tr>
@@ -97,6 +202,7 @@
                     </tr>
                     @endforeach
                 </tbody> --}}
+<<<<<<< Updated upstream
                 <tbody>
                     @foreach($staffs as $staff)
                         @php 
@@ -148,6 +254,9 @@
                                         @endfor
                     @endforeach
                 </tbody>
+=======
+                
+>>>>>>> Stashed changes
 
 
             </table>

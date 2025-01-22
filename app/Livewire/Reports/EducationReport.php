@@ -26,30 +26,45 @@ class EducationReport extends Component
     {
         $staffs = Staff::get();
         $phpWord = new PhpWord();
-        $section = $phpWord->addSection(['orientation'=>'landscape','margin'=>600]);
+        $section = $phpWord->addSection([
+            'orientation' => 'portrait',
+            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),     // 1 inch
+            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+        ]);
+        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center','spaceBefore' => 200]);
+        // $section = $phpWord->addSection(['orientation'=>'landscape','margin'=>600]);
         // Add title
         $section->addTitle('Education Report', 1);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         
         
         $table->addRow();
-        $table->addCell(2000)->addText('စဥ်', ['bold' => true]);
-        $table->addCell(2000)->addText('အမည်', ['bold' => true]);
-        $table->addCell(2000)->addText('ရာထူး', ['bold' => true]);
-        $table->addCell(2000)->addText('ပညာအရည်အချင်း', ['bold' => true]);
+        $table->addCell(700)->addText('စဥ်', ['bold' => true]);
+        $table->addCell(2200)->addText('အမည်', ['bold' => true]);
+        $table->addCell(3500)->addText('ရာထူး', ['bold' => true]);
+        $table->addCell(2800)->addText('ပညာအရည်အချင်း', ['bold' => true]);
 
         foreach ($staffs as $index=> $staff) {
             $table->addRow();
-            $table->addCell(2000)->addText($index + 1);
-            $table->addCell(2000)->addText($staff->name);
-            $table->addCell(2000)->addText($staff->current_rank->name);
+            $table->addCell(700)->addText(en2mm($index + 1));
+            $table->addCell(2200)->addText($staff->name);
+            $table->addCell(3000)->addText($staff->current_rank?->name);
 
+            $educationCell = $table->addCell(2800);
+            $educationTextRun = $educationCell->addTextRun();
             // Prepare education details
             $educationDetails = '';
             foreach ($staff->staff_educations as $edu) {
-                $educationDetails .= $edu->education_group->name . ' ' . $edu->education_type->name . ' ' . $edu->education->name . "\n";
+                // $educationDetails .= 
+                // // $edu->education_group?->name . ' ' . 
+                // // $edu->education_type?->name . ' ' . 
+                // $edu->education?->name . "\n";
+                $educationTextRun->addText($educationDetails .= $edu->education?->name);
+                $educationTextRun->addTextBreak(); // Add line break
             }
-            $table->addCell(2000)->addText($educationDetails);
+            // $table->addCell(3500)->addText($educationDetails);
         }
 
         // Save the file to a temporary location

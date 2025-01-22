@@ -27,8 +27,7 @@ class InvestmentCompanies3 extends Component
             'count'=>$count,
             'first_ranks' => Rank::where('staff_type_id', 1)->get(),
             'second_ranks' => Rank::where('staff_type_id', 2)->get(),
-            'year' => $this->year,
-            'month' => $this->month,
+           
         ];
         $pdf = PDF::loadView('pdf_reports.investment_companies_report_3', $data);
         return response()->streamDownload(function() use ($pdf) {

@@ -12,16 +12,18 @@
                             <option value="{{$division->id}}">
                                 {{
                     $division->name
-                                }}
+                                                                                            }}
                             </option>
                 @endforeach
             </select>
 
             <div class="w-full mb-4">
-                <h2 class="font-semibold text-base">
+                <br>
+                <h2 class="font-bold text-center text-base ">
+                    ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
                     {{getDivisionBy($selectedDivisionId)->name}}
                     ဝန်ထမ်းအင်အားစာရင်း
-                </h2>
+                </h2><br>
                 <table class="w-full text-center">
                     <thead>
                         <tr class="bg-gray-100">

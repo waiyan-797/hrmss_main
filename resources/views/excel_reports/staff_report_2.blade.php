@@ -1,5 +1,5 @@
 
-    <style type="text/css">
+    {{-- <style type="text/css">
         page{
             background: white;
         }
@@ -64,7 +64,7 @@
     color: #666;
 }
 
-    </style>
+    </style> --}}
 
         {{-- <h1 class="heading">
             ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
@@ -74,12 +74,17 @@
 
             <table>
                 <tr>
-                    <th colspan="11" rowspan="2">
-                        
-                    ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
-                    {{-- {{mmDateFormat($year , $month )}}  --}}ရက်နေ့ 
-                    ညွှန်ကြားရေးမှူးများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း
-
+                    <th colspan="11" style="font-weight:bold;">
+                        ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="11" style="font-weight:bold;">
+                        @php
+                        use Carbon\Carbon;
+                        @endphp
+                        {{formatDMYmm(Carbon::now())}} ရက်နေ့၏ ဝန်ထမ်းများစာရင်း  
+                        {{-- {{ mmDateFormat($year, $month) }} --}}
                     </th>
                 </tr>
             </table>
@@ -90,13 +95,13 @@
                         <th>စဉ်</th>
                         <th>အမည်</th>
                         <th>ရာထူး</th>
-                        <th>နိုင်ငံသားစိစစ်ရေးအမှတ်</th>
+                        <th>နိုင်ငံသားစိစစ်ရေး<br>အမှတ်</th>
                         <th>မွေးသက္ကရာဇ်</th>
-                        <th>အလုပ်စတင်ဝင်ရောက်သည့်ရက်စွဲ</th>
-                        <th>လက်ရှိရာထူးရရက်စွဲ ရက်၊လ၊နှစ်</th>
+                        <th>အလုပ်စတင်<br>ဝင်ရောက်သည့်<br>ရက်စွဲ</th>
+                        <th>လက်ရှိ<br>အဆင့်ရ<br>ရက်စွဲ</th>
                         <th>ဌာနခွဲ</th>
                         <th>ပညာအရည်အချင်း</th>
-                        <th>ပင်စင်ပြည့်သည့်နေ့စွဲ</th>
+                        <th>ပင်စင်ပြည့်<br>သည့်နေ့စွဲ</th>
                         <th>မှတ်ချက်</th>
                     </tr>
                 </thead>
@@ -117,16 +122,20 @@
                         </td>
                         
                         <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                            {{en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-Y'))}}
+                            {{formatDMYmm($staff->dob)}}
                         </td>
                         <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                            {{en2mm(Carbon\Carbon::parse($staff->join_date)->format('d-m-Y'))}}
+                            {{formatDMYmm($staff->join_date)}}
+                            <br>
+                            {{dateDiffYMDWithoutDays($staff->join_date , now())}}
                         </td>
                         {{-- <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
                             {{en2mm(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('d-m-y'))}}
                         </td> --}}
                         <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
-                            {{en2mm(Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-Y'))}}
+                            {{formatDMYmm($staff->current_rank_date)}}
+                            <br>
+                            {{dateDiffYMDWithoutDays($staff->current_rank_date , now())}}
                         </td>
                         <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
                             {{$staff->current_department?->name}}
@@ -134,9 +143,9 @@
                         <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #4b5563;">
                             @foreach ($staff->staff_educations as $edu)
                                 <div style="margin-bottom: 8px;">
-                                    <span style="font-weight: 600;">{{ $edu->education_group->name }}</span> -
-                                    <span>{{ $edu->education_type?->name }}</span>,
-                                    <span>{{ $edu->education->name }}</span>
+                                    {{-- <span style="font-weight: 600;">{{ $edu->education_group->name }}</span> - --}}
+                                    {{-- <span>{{ $edu->education_type?->name }}</span>, --}}
+                                    <span>{{ $edu->education?->name }}</span>
                                 </div>
                             @endforeach
                         </td>

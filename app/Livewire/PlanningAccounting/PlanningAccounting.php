@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
+use Carbon\Carbon;
 
 class PlanningAccounting extends Component
 {
@@ -39,13 +40,15 @@ class PlanningAccounting extends Component
         ]);
 
         
-        $phpWord->addTitleStyle(2, ['bold' => false, 'size' => 13], ['alignment' => 'left']);
+        $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'left','lineHeight' => 1]);
+        $phpWord->addTitleStyle(3, ['bold' => false, 'font'=>'Pyidaungsu Number', 'size' => 13], ['alignment' => 'right', 'lineHeight' => 1]);
         
         // $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
         
         // dd($divisionTitle );
         $division = getDivisionBy($this->selectedDivisionId);
-        $section->addTitle(($division ? $division->name : 'Unknown Division') , 2);
+        $section->addTitle(($division ? $division->name : 'Unknown Division').'ဝန်ထမ်းအင်အားစာရင်း' , 2);
+        $section->addTitle(formatDMYmm(Carbon::now()), 3);
 
     $table = $section->addTable([
         'borderSize' => 6, 
@@ -54,16 +57,16 @@ class PlanningAccounting extends Component
     ]);
        
     $table->addRow();
-    $table->addCell(2000)->addText('စဥ်',['bold'=>true],['alignment'=>'center']);
-    $table->addCell(4000)->addText('အမည်',['bold'=>true],['alignment'=>'center']);
-    $table->addCell(4000)->addText('ရာထူး',['bold'=>true],['alignment'=>'center']);
-    $table->addCell(4000)->addText('မှတ်ချက်',['bold'=>true],['alignment'=>'center']);
+    $table->addCell(700)->addText('စဥ်',['bold'=>true],['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
+    $table->addCell(4500)->addText('အမည်',['bold'=>true],['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
+    $table->addCell(4500)->addText('ရာထူး',['bold'=>true],['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
+    $table->addCell(3000)->addText('မှတ်ချက်',['bold'=>true],['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
     foreach ($staffs as $index=> $staff) {
         $table->addRow();
-        $table->addCell(2000)->addText(en2mm($index + 1),null,['alignment'=>'center']);
-        $table->addCell(4000)->addText($staff?->name);
-        $table->addCell(4000)->addText($staff->current_rank?->name);
-        $table->addCell(4000)->addText(''); 
+        $table->addCell(700)->addText(en2mm($index + 1),null,['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
+        $table->addCell(4500)->addText($staff?->name,null,['indentation' => ['left' => 100],'alignment'=>'left','spaceBefore'=>50,'lineHeight' => 1]);
+        $table->addCell(4500)->addText($staff->current_rank?->name,null,['alignment'=>'center','spaceBefore'=>50,'lineHeight'=>1]);
+        $table->addCell(3000)->addText(''); 
     }
     $fileName = 'planning_accounting_report.docx';
     $filePath = public_path($fileName);

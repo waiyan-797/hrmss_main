@@ -19,11 +19,37 @@ class PA17 implements FromView ,WithStyles
     // {
     //     return PA17::all();
     // }
+    public $searchName,$staffs;
+
+    public function __construct($searchName)
+    {
+        // dd($year, $month, $filterRange, $previousMonthDate, $previousMonth,$nameSearch);
+         $this->searchName=$searchName;
+        //  $this->staffs=$staffs;
+       
+
+    }
     public function view(): View
     {
+<<<<<<< Updated upstream
+=======
+        $staffQuery = Staff::query();
+
+        
+        if ($this->searchName) {
+            // $staffQuery->where('name', 'like', '%' . $this->searchName . '%');
+            $staffQuery->whereHas('currentRank', function ($query) {
+                $query->where('name', 'like', '%' . $this->searchName. '%');
+            });
+        }
+
+        $this->staffs = $staffQuery->get();
+
+>>>>>>> Stashed changes
         $staffs = Staff::get();
         $data = [
-            'staffs' => $staffs,  
+            'staffs' => $this->staffs , 
+            
         ];
         return view('excel_reports.staff_report_2', $data);
     }
@@ -44,8 +70,25 @@ class PA17 implements FromView ,WithStyles
         // $sheet->setPrintGridlines(true);
 
         // Dynamically calculate the highest row and column
-        $highestRow = $sheet->getHighestRow(); // e.g. 19
+        $highestRow = $sheet->getHighestRow()-1; // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
+
+        $sheet->getColumnDimension('A')->setWidth(6);
+        $sheet->getColumnDimension('B')->setWidth(19);
+        $sheet->getColumnDimension('C')->setWidth(19);
+        $sheet->getColumnDimension('D')->setWidth(19);
+        $sheet->getColumnDimension('E')->setWidth(15);
+        $sheet->getColumnDimension('F')->setWidth(15);
+        $sheet->getColumnDimension('G')->setWidth(15);
+        $sheet->getColumnDimension('H')->setWidth(15);
+        $sheet->getColumnDimension('I')->setWidth(35);
+        $sheet->getColumnDimension('J')->setWidth(15);
+        $sheet->getColumnDimension('K')->setWidth(10);
+
+        $sheet->getRowDimension(1)->setRowHeight(25);
+        $sheet->getRowDimension(2)->setRowHeight(25);
+
+        $sheet->removeRow(3);
 
         $sheet->getStyle('A1:A2')->applyFromArray([
             'font' => [
@@ -63,8 +106,7 @@ class PA17 implements FromView ,WithStyles
             ],
         ]);
 
-        $sheet->getRowDimension(1)->setRowHeight(45);
-            $sheet->getRowDimension(2)->setRowHeight(45);
+        
 
         $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
             'font' => [
@@ -84,23 +126,6 @@ class PA17 implements FromView ,WithStyles
         ]);
         
 
-        // Auto-size columns based on dynamic range
-        foreach (range('A', $highestColumn) as $column) {
-            $sheet->getColumnDimension($column)->setAutoSize(true);
-        }
-
-        // Set row heights manually for dynamic rows
-        foreach (range(3, $highestRow) as $row) {
-            $sheet->getRowDimension($row)->setRowHeight(-1); // Auto-adjust height
-        }
-
-        // Define the print area dynamically
-        $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
-
-        // Set a margin for better printing output
-        $sheet->getPageMargins()->setTop(0.5);
-        $sheet->getPageMargins()->setRight(0.5);
-        $sheet->getPageMargins()->setLeft(0.5);
-        $sheet->getPageMargins()->setBottom(0.5);
+        
     }
 }

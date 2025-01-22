@@ -12,6 +12,7 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 class NPTThreee extends Component
 {
     public $payscales  ,$letter_types;
+    public $count=0;
     public function go_pdf()
     {
         $first_payscales = ModelsPayscale::where('staff_type_id', 1)->get();
