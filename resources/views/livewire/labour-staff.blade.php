@@ -3,7 +3,7 @@
         <div class="w-full mx-auto px-3 py-4">
           
             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
-            <select  class="  " wire:model.live='selectedDivisionTypeId' id="">
+            <select wire:model.live='selectedDivisionTypeId' id="">
                 <option value="3">
                     All
                 </option>

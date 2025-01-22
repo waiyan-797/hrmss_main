@@ -52,13 +52,13 @@ class PA18 implements FromView ,WithStyles
     $sheet->getRowDimension(4)->setRowHeight(50);
     $sheet->getRowDimension(5)->setRowHeight(50);
     $sheet->getRowDimension(6)->setRowHeight(50);
-        $sheet->getStyle('A1:E100')->applyFromArray([
+        $sheet->getStyle('A1:E6')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 13,
             ],
         ]);
-        $sheet->getStyle('A1:E100')->applyFromArray([
+        $sheet->getStyle('A1:E6')->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,

@@ -77,10 +77,6 @@ class StaffInNpt extends Component
 
     //     return view('livewire.staff-in-npt');
     // }
-
-
-
-    
     public $staffs;
     public $letter_type_id, $letter_types;
 
@@ -115,7 +111,6 @@ class StaffInNpt extends Component
 
     public function render()
     {
-        // Update query to fetch data with current_address_region_id = 1
         $this->staffs = Staff::where('current_address_region_id', 1)->get();
 
         return view('livewire.staff-in-npt', [

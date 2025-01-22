@@ -31,8 +31,6 @@
             background-color: #f3f4f6;
         }
     </style>
-
-
 </head>
 <body>
     <div class="table-container">
@@ -54,20 +52,20 @@
                     </th>
                 </tr>
                 <tr>
-                    <th>စဥ်</th>
-                    <th>အမည်/ရာထူး/ဌာန</th>
-                    <th>အိမ်ထောင်ရှိ /မရှိ</th>
-                    <th>နေပြည်တောင်တွင်နေထိုင်သည့်နေရပ်လိပ်စာ</th>
-                    <th>မှတ်ချက်</th>
+                    <th style="align:center">စဥ်</th>
+                    <th style="align:center">အမည်/ရာထူး/ဌာန</th>
+                    <th style="align:center">အိမ်ထောင်<br>ရှိ /မရှိ</th>
+                    <th style="align:center">နေပြည်တောင်တွင်နေထိုင်သည့်နေရပ်လိပ်စာ</th>
+                    <th style="align:center">မှတ်ချက်</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($staffs as $staff)
                 <tr>
-                    <td>{{ en2mm($loop->index + 1) }}</td>
-                    <td>{{ $staff->name }}/{{ $staff->currentRank?->name }}/{{ $staff->current_department?->name }}</td>
-                    <td>{{ $staff->marital_statuses?->name ? 'ရှိ' : 'မရှိ' }}</td>
-                    <td>
+                    <td style="align:center">{{ en2mm($loop->index + 1) }}</td>
+                    <td style="align:center">{{ $staff->name }}/{{ $staff->currentRank?->name }}/{{ $staff->current_department?->name }}</td>
+                    <td style="align:center">{{ $staff->marital_statuses?->name ? 'ရှိ' : 'မရှိ' }}</td>
+                    <td style="align:center">
                         {{ implode(', ', array_filter([
                             $staff->current_address_street,
                             $staff->current_address_ward,
