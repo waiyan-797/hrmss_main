@@ -11,7 +11,6 @@ class DepartmentSeeder extends Seeder
 {
     public function run(): void
     {
-<<<<<<< HEAD
         Schema::disableForeignKeyConstraints();
         $departmentPath = database_path('sql/departments.sql');
 
@@ -26,8 +25,4 @@ class DepartmentSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
         $this->command->info('Departments seeded successfully!');
     }
-=======
-        //     
-}
->>>>>>> fd82a9e (Leave Excel)
 }

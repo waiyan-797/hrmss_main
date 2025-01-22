@@ -147,28 +147,5 @@ class L03 implements FromView ,WithStyles
             ],
         ],
     ]);
-
-       
-        // $sheet->getStyle('A1:Z1000')->applyFromArray([
-        //     'font' => [
-        //         'name' => 'Pyidaungsu',
-        //         'size' => 13,
-        //     ],
-        // ]);
-        // $sheet->getStyle('A1:L100')->applyFromArray([
-        //     'borders' => [
-        //         'allBorders' => [
-        //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-        //             'color' => ['argb' => '000000'], // Black border
-        //         ],
-        //     ],
-        // ]);
-    
-        // // Auto-size columns for the table
-        // foreach (range('A', 'W') as $column) {
-        //     $sheet->getColumnDimension($column)->setAutoSize(true);
-        // }
-    
-        // return [];
     }
 }

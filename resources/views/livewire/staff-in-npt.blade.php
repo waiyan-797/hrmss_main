@@ -49,7 +49,7 @@
                     </thead>
                    
                     <tbody>
-                        @foreach($staffs as $staff)
+                        {{-- @foreach($staffs as $staff)
                         <tr>
                             <td 
                             class="border border-black text-right p-1">{{ $loop->index + 1 }}</td>
@@ -65,7 +65,26 @@
                         </tr>
 
                         
-                        @endforeach
+                        @endforeach --}}
+                            @foreach($staffs as $staff)
+                                <tr>
+                                    <td class="border border-black text-right p-1">{{ $loop->index + 1 }}</td>
+                                    <td class="border border-black text-right p-1">{{ $staff->name }}/{{ $staff->currentRank?->name}}/{{$staff->current_department?->name}}</td>
+                                    <td class="border border-black text-right p-1">{{ $staff->marital_statuses?->name ? 'ရှိ' : 'မရှိ' }}</td>
+                                    <td class="border border-black text-right p-1">
+                                         {{ implode(', ', array_filter([
+                                            $staff->current_address_street,
+                                            $staff->current_address_ward,
+                                            $staff->current_address_township_or_town?->name,
+                                            $staff->current_address_region?->name
+                                        ])) }} 
+                                    </td>
+                                </tr>
+                            @endforeach
+                        
+                        
+
+
 
                        
                                     

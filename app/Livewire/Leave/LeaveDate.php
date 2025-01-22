@@ -33,20 +33,10 @@ class LeaveDate extends Component
             echo $pdf->output();
         }, 'leave_date_report_pdf.pdf');
     }
-    // public function go_excel() 
-    // {
-    //     return Excel::download(new L4(
-    // ), 'L4.xlsx');
-    // }
     public function go_excel($staff_id)
 {
     return Excel::download(new L4($staff_id), 'L4.xlsx');
 }
-
-  
-  
-   
-
     public function go_word()
     {
         $staff = Staff::where('id', $this->staff_id)->first();

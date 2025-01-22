@@ -3,12 +3,12 @@
 namespace App\Exports;
 
 use App\Models\Staff;
-use Illuminate\Contracts\View\View as ViewView;
-use Illuminate\Support\Facades\View;
+use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
 class PA18 implements FromView ,WithStyles
 {
@@ -19,9 +19,12 @@ class PA18 implements FromView ,WithStyles
     // {
     //     return PA18::all();
     // }
-    public function view(): ViewView
+    public function view(): View
     {
-        $staffs=Staff::FromNPt()->get();
+        // $staffs = Staff::where('current_address_region_id', 1)->get();
+        $staffs = Staff::with(['currentRank', 'current_department', 'marital_statuses', 'current_address_township_or_town', 'current_address_region'])
+        ->where('current_address_region_id', 1)
+        ->get();
         $data = [
             'staffs' => $staffs,
         ];
@@ -29,13 +32,33 @@ class PA18 implements FromView ,WithStyles
     }
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:Z1000')->applyFromArray([
+
+           $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4); // Set paper size to A4
+    $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set 
+
+    $sheet->getPageSetup()->setFitToWidth(1);
+    $sheet->getPageSetup()->setFitToHeight(0);
+    $sheet->getColumnDimension('A')->setWidth(7);
+    $sheet->getColumnDimension('B')->setWidth(20);
+    $sheet->getColumnDimension('C')->setWidth(25);
+    $sheet->getColumnDimension('D')->setWidth(30);
+    $sheet->getColumnDimension('E')->setWidth(16);
+    $sheet->getColumnDimension('F')->setWidth(16);
+
+
+    $sheet->getRowDimension(1)->setRowHeight(24);
+    $sheet->getRowDimension(2)->setRowHeight(24);
+    $sheet->getRowDimension(3)->setRowHeight(24);
+    $sheet->getRowDimension(4)->setRowHeight(50);
+    $sheet->getRowDimension(5)->setRowHeight(50);
+    $sheet->getRowDimension(6)->setRowHeight(50);
+        $sheet->getStyle('A1:E100')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 13,
             ],
         ]);
-        $sheet->getStyle('A1:T100')->applyFromArray([
+        $sheet->getStyle('A1:E100')->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -44,11 +67,12 @@ class PA18 implements FromView ,WithStyles
             ],
         ]);
 
-        foreach (range('A', 'F') as $column) {
+        foreach (range('A', 'E') as $column) {
             $sheet->getColumnDimension($column)->setAutoSize(true);
         }
 
         return [];
     }
+    
 
 }
