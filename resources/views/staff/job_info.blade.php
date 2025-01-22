@@ -106,7 +106,6 @@
             placeholder="တွဲဖက်အင်အားဖြစ်လျှင် ဌာနခွဲရွေးပါ"
             name="side_division_id"
             class="mt-1 block w-full"
-            required
         />
         <x-input-error class="mt-2" :messages="$errors->get('side_division_id')" />
     </div>
@@ -164,7 +163,7 @@
     </div>
     <div>
         <x-input-label for="လက်ရှိရာထူးတွင်နှစ်တိုးအကြိမ်" :value="__('လက်ရှိရာထူးတွင်နှစ်တိုးအကြိမ်')" />
-        <x-text-input wire:model="current_increment_time" id="current_increment_time" name="current_increment_time" type="number" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="current_increment_time" id="current_increment_time" name="current_increment_time" type="number" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('current_increment_time')" />
     </div>
 </div>

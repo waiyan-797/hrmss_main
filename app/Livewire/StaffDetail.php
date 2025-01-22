@@ -249,7 +249,7 @@ class StaffDetail extends Component
         'is_direct_appointed' => '',
         'payscale_id' => 'required',
         'current_salary' => 'required|integer',
-        'current_increment_time' => 'required|integer',
+        'current_increment_time' => 'integer',
     ];
 
     protected $relative_info_rules = [
