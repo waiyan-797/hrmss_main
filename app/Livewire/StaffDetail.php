@@ -1581,7 +1581,7 @@ class StaffDetail extends Component
                 'rank_id' => $posting['rank'],
                 'from_date' => $posting['from_date'],
                 'to_date' => $posting['to_date'],
-                'department_id' => $posting['department'],
+                'department_id' => $posting['department'] != '' ? $posting['department'] : null,
                 'sub_department' => $posting['sub_department'] ?: null,
                 'location' => $posting['location'],
                 'remark' => $posting['remark'] ?: null,
