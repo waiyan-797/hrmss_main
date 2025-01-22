@@ -11,7 +11,7 @@
     </div>
     @include('staff_multiple_table', [
         'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သောဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့','မှ','ထိ','မှတ်ချက်'],
-        'data_master_add_stats' => ['edu_group', 'edu_type', 'edu', null, null, null, null, null],
+        'data_master_add_stats' => ['edu_group', 'edu_type', null, null, null, null, null, null],
         'column_vals' => $schools,
         'column_types' => [
             [
@@ -21,7 +21,7 @@
                 'select_values' => $education_groups,
                 'next_col_update' => 'education_types',
                 'next_col_model' => 'education_type',
-                'next_col_model_related' => 'education',
+                'next_col_model_related' => null,
                 'ini_array' => 'eduTypes',
             ],
             [
@@ -29,20 +29,15 @@
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'education_type',
                 'select_values' => 'education_types',
-                'next_col_update' => '_educations',
-                'next_col_model' => 'education',
-                'next_col_model_related' => null,
-                'ini_array' => 'edus',
-            ],
-            [
-                'type' => 'select',
-                'wire_array_name' => 'schools',
-                'wire_array_key' => 'education',
-                'select_values' => '_educations',
                 'next_col_update' => null,
                 'next_col_model' => null,
                 'next_col_model_related' => null,
                 'ini_array' => null,
+            ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'schools',
+                'wire_array_key' => 'education',
             ],
             [
                 'type' => 'text',

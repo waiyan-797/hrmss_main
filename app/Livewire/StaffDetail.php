@@ -54,6 +54,7 @@ use App\Models\Township;
 use App\Models\Training;
 use App\Models\TrainingLocation;
 use App\Models\TrainingType;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -99,12 +100,11 @@ class StaffDetail extends Component
     public $recommendations = [];
     public $postings = [];
     public $side_departments = [];
-    public $transfer_departments = [];
 
     //relative
     public $father_townships = [];
     public $mother_townships = [];
-    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street,$father_address_house_no, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_ministry_id, $transfer_department_id, $is_newly_appointed = false,
+    public $father_name, $father_ethnic_id, $father_religion_id, $father_place_of_birth, $father_occupation, $father_address_street,$father_address_house_no, $father_address_ward, $father_address_township_or_town_id, $father_address_region_id, $transfer_remark, $transfer_division_id, $is_newly_appointed = false,
         $mother_name, $mother_ethnic_id, $mother_religion_id, $mother_place_of_birth, $mother_occupation, $mother_address_street,$mother_address_house_no, $mother_address_ward, $mother_address_township_or_town_id, $mother_address_region_id,
         $family_in_politics = false , $family_in_politics_text ;
 
@@ -235,8 +235,7 @@ class StaffDetail extends Component
         'current_rank_id' => 'required',
         'current_rank_date' => 'required|date',
         'current_department_id' => 'required',
-        'transfer_ministry_id' => '',
-        'transfer_department_id' => '',
+        'transfer_division_id' => '',
         'transfer_remark' => '',
         'government_staff_started_date' => '',
         'current_division_id' => '',
@@ -364,7 +363,7 @@ class StaffDetail extends Component
                 $this->ranks = $this->withoutScopeRanks;
                 $this->ministrys = Ministry::all();
                 $this->departments = Department::all();
-                $this->dica_departments = Department::whereIn('id', [983, 984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998, 999, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008])->get();
+                $this->dica_departments = Department::where('id', 129)->get();
                 $this->divisions = Division::all();
                 $this->payscales = Payscale::all();
                 break;
@@ -462,6 +461,9 @@ class StaffDetail extends Component
             ];
         }
 
+        $totalPostings = count($postings);
+        $currentIndex = 0;
+
         foreach ($postings as $post) {
             $this->postings[] = [
                 'id' => $post->id,
@@ -472,7 +474,7 @@ class StaffDetail extends Component
                 'departments' => Department::where('ministry_id', $post->ministry_id)->get(),
                 'sub_department' => $post->sub_department,
                 'from_date' => $post->from_date,
-                'to_date' => $post->to_date,
+                'to_date' => ++$currentIndex === $totalPostings ? null : $post->to_date,
                 'location' => $post->location,
                 'remark' => $post->remark,
             ];
@@ -483,7 +485,7 @@ class StaffDetail extends Component
                 'id' => $sch->id,
                 'education_group' => $sch->education_group_id,
                 'education_type' => $sch->education_type_id,
-                'education' => $sch->education_id,
+                'education' => $sch->education,
                 'school_name' => $sch->school_name,
                 'town' => $sch->town,
                 'from_date' => $sch->from_date,
@@ -661,6 +663,7 @@ class StaffDetail extends Component
         $this->marital_status_id = $staff->marital_status_id;
         $this->place_of_birth = $staff->place_of_birth;
         $this->nrc_region_id = $staff->nrc_region_id_id;
+        $this->nrc_township_codes = NrcTownshipCode::where('nrc_region_id_id', $staff->nrc_region_id_id)->get();
         $this->nrc_township_code_id = $staff->nrc_township_code_id;
         $this->nrc_sign_id = $staff->nrc_sign_id;
         $this->nrc_code = $staff->nrc_code;
@@ -673,11 +676,13 @@ class StaffDetail extends Component
         $this->current_address_ward = $staff->current_address_ward;
         $this->current_address_house_no = $staff->current_address_house_no;
         $this->current_address_region_id = $staff->current_address_region_id;
+        $this->current_address_townships = Township::where('region_id', $staff->current_address_region_id)->get();
         $this->current_address_township_or_town_id = $staff->current_address_township_or_town_id;
         $this->permanent_address_street = $staff->permanent_address_street;
         $this->permanent_address_ward = $staff->permanent_address_ward;
         $this->permanent_address_house_no = $staff->permanent_address_house_no;
         $this->permanent_address_region_id = $staff->permanent_address_region_id;
+        $this->permanent_address_townships = Township::where('region_id', $staff->permanent_address_region_id)->get();
         $this->permanent_address_township_or_town_id = $staff->permanent_address_township_or_town_id;
         $this->previous_addresses = $staff->previous_addresses;
         $this->military_solider_no = $staff->military_solider_no;
@@ -705,12 +710,12 @@ class StaffDetail extends Component
         $this->current_rank_id = $staff->current_rank_id;
         $this->current_rank_date = $staff->current_rank_date;
         $this->current_department_id = $staff->current_department_id;
-        $this->transfer_ministry_id = $staff->transfer_ministry_id;
-        $this->transfer_department_id = $staff->transfer_department_id;
+        $this->transfer_division_id = $staff->transfer_division_id;
         $this->transfer_remark = $staff->transfer_remark;
         $this->government_staff_started_date = $staff->government_staff_started_date;
         $this->current_division_id = $staff->current_division_id ?? Auth::user()->division_id;
         $this->side_ministry_id = $staff->side_ministry_id;
+        $this->side_departments = Department::where('ministry_id', $staff->side_ministry_id)->get();
         $this->side_department_id = $staff->side_department_id;
         $this->side_division_id = $staff->side_division_id;
         $this->salary_paid_by = $staff->salary_paid_by;
@@ -733,8 +738,9 @@ class StaffDetail extends Component
         $this->father_address_house_no = $staff->father_address_house_no;
         $this->father_address_street = $staff->father_address_street;
         $this->father_address_ward = $staff->father_address_ward;
-        $this->father_address_township_or_town_id = $staff->father_address_township_or_town_id;
         $this->father_address_region_id = $staff->father_address_region_id;
+        $this->father_townships = Township::where('region_id', $staff->father_address_region_id)->get();
+        $this->father_address_township_or_town_id = $staff->father_address_township_or_town_id;
 
         $this->mother_name = $staff->mother_name;
         $this->mother_ethnic_id = $staff->mother_ethnic_id;
@@ -744,8 +750,9 @@ class StaffDetail extends Component
         $this->mother_address_house_no = $staff->mother_address_house_no;
         $this->mother_address_street = $staff->mother_address_street;
         $this->mother_address_ward = $staff->mother_address_ward;
-        $this->mother_address_township_or_town_id = $staff->mother_address_township_or_town_id;
         $this->mother_address_region_id = $staff->mother_address_region_id;
+        $this->mother_townships = Township::where('region_id', $staff->mother_address_region_id)->get();
+        $this->mother_address_township_or_town_id = $staff->mother_address_township_or_town_id;
 
         $this->family_in_politics = $staff->family_in_politics;
         $this->family_in_politics_text = $staff->family_in_politics_text;
@@ -794,7 +801,7 @@ class StaffDetail extends Component
 
     public function add_posting()
     {
-        $this->postings[] = ['id' => '', 'rank' => '', 'post' => '', 'from_date' => '', 'to_date' => '', 'department' => '', 'departments' => [], 'sub_department' => '', 'location' => '', 'remark' => '', 'ministry' => ''];
+        $this->postings[] = ['id' => '', 'rank' => '', 'post' => '', 'from_date' => '', 'to_date' => null, 'department' => '', 'departments' => [], 'sub_department' => '', 'location' => '', 'remark' => '', 'ministry' => ''];
     }
 
     public function add_siblings()
@@ -1129,8 +1136,7 @@ class StaffDetail extends Component
             'current_rank_id' => $this->current_rank_id,
             'current_rank_date' => $this->current_rank_date,
             'current_department_id' => $this->current_department_id,
-            'transfer_ministry_id' => $this->transfer_ministry_id,
-            'transfer_department_id' => $this->transfer_department_id,
+            'transfer_division_id' => $this->transfer_division_id,
             'transfer_remark' => $this->transfer_remark,
             'government_staff_started_date' => $this->government_staff_started_date,
             'current_division_id' => $this->current_division_id ?? Auth::user()->division_id,
@@ -1398,7 +1404,7 @@ class StaffDetail extends Component
                 'staff_id' => $staffId,
                 'education_group_id' => $school['education_group'],
                 'education_type_id' => $school['education_type'],
-                'education_id' => $school['education'] == '' ? null : $school['education'],
+                'education' => $school['education'],
                 'school_name' => $school['school_name'],
                 'town' => $school['town'],
                 'from_date' => $school['from_date'],
@@ -1709,10 +1715,6 @@ class StaffDetail extends Component
 
     public function updatedNrcRegionId($value){
         $this->nrc_township_codes = NrcTownshipCode::where('nrc_region_id_id', $value)->get();
-    }
-
-    public function updatedTransferMinistryId($value){
-        $this->transfer_departments = Department::where('ministry_id', $value)->get();
     }
 
     public function updatedSideMinistryId($value){

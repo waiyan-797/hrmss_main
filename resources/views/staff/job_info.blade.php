@@ -50,26 +50,15 @@
         <x-input-error class="mt-2" :messages="$errors->get('government_staff_started_date')" />
     </div>
     <div>
-        <x-input-label for="ပြောင်းရွေ့သည့်၀န်ကြီးဌာန" :value="__('ပြောင်းရွေ့သည့်၀န်ကြီးဌာန')" />
+        <x-input-label for="ပြောင်းရွေ့သည့်ဌာနခွဲ" :value="__('ပြောင်းရွေ့သည့်ဌာနခွဲ')" />
         <x-select
-            wire:model.live="transfer_ministry_id"
-            :values="$ministrys"
-            placeholder="ပြောင်းရွေ့သည့်၀န်ကြီးဌာနရွေးပါ"
-            name="transfer_ministry_id"
+            wire:model="transfer_division_id"
+            :values="$divisions"
+            placeholder="ပြောင်းရွေ့သည့်ဌာနခွဲရွေးပါ"
+            name="transfer_divison_id"
             class="mt-1 block w-full"
         />
-        <x-input-error class="mt-2" :messages="$errors->get('transfer_ministry_id')" />
-    </div>
-    <div>
-        <x-input-label for="ပြောင်းရွေ့သည့်ဌာန" :value="__('ပြောင်းရွေ့သည့်ဌာန')" />
-        <x-select
-            wire:model="transfer_department_id"
-            :values="$transfer_departments"
-            placeholder="ပြောင်းရွေ့သည့်ဌာနရွေးပါ"
-            name="transfer_department_id"
-            class="mt-1 block w-full"
-        />
-        <x-input-error class="mt-2" :messages="$errors->get('transfer_department_id')" />
+        <x-input-error class="mt-2" :messages="$errors->get('transfer_division_id')" />
     </div>
     <div>
         <x-input-label for="ပြောင်းရွေ့သည့်မှတ်ချက်" :value="__('ပြောင်းရွေ့သည့်မှတ်ချက်')" />
@@ -113,7 +102,7 @@
         <x-input-label for="လစာနှင့်စရိတ် ကုန်ကျခံမည့်ဌာန" :value="__('လစာနှင့်စရိတ် ကုန်ကျခံမည့်ဌာန')" />
         <x-select
             wire:model="salary_paid_by"
-            :values="$dica_departments"
+            :values="$departments"
             placeholder="လစာနှင့်စရိတ် ကုန်ကျခံမည့်ဌာနရွေးပါ"
             name="salary_paid_by"
             class="mt-1 block w-full"
