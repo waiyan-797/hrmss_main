@@ -117,7 +117,6 @@
             placeholder="လစာနှင့်စရိတ် ကုန်ကျခံမည့်ဌာနရွေးပါ"
             name="salary_paid_by"
             class="mt-1 block w-full"
-            required
         />
         <x-input-error class="mt-2" :messages="$errors->get('salary_paid_by')" />
     </div>
