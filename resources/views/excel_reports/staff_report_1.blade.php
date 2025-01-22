@@ -74,17 +74,17 @@
 <div class="table-container">
     <table class="">
         <tr>
-            <th colspan="10" style="font-weight:bold;">
+            <th colspan="11" style="font-weight:bold;">
                 ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
             </th>
         </tr>
         <tr>
-            <th colspan="10" style="font-weight:bold;">
+            <th colspan="11" style="font-weight:bold;">
                 {{ mmDateFormat($year, $month) }}ရက်နေ့၏ အရာထမ်းများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း
             </th>
         </tr>
         <tr>
-            <th colspan="10">
+            <th colspan="11">
                 @php
                 use Carbon\Carbon;
                 @endphp
@@ -117,14 +117,14 @@
                 <th>အမည်</th>
                 <th>ရာထူး</th>
                 <th>နိုင်ငံသားစိစစ်ရေး<br>အမှတ်</th>
-                {{-- <th>မွေးနေ့သက္ကရာဇ်</th> --}}
+                <th>မွေးနေ့သက္ကရာဇ်</th>
                 <th>အလုပ်စတင်<br>ဝင်ရောက်သည့်<br>ရက်စွဲ</th>
                 <th>လက်ရှိ<br>အဆင့်ရ<br>ရက်စွဲ</th>
                 <th>လက်ရှိဌာန<br>ရောက်ရှိ<br>ရက်စွဲ</th>
-                <th>နိုင်ငံ့ဝန်ထမ်း<br>နည်းဥပဒေ<br>၃၃အရ<br>သတ်မှတ်ချက်</th>
+                {{-- <th>နိုင်ငံ့ဝန်ထမ်း<br>နည်းဥပဒေ<br>၃၃အရ<br>သတ်မှတ်ချက်</th> --}}
                 <th>ဌာနခွဲ</th>
                 <th>ပညာအရည်အချင်း</th>
-                {{-- <th>ပင်စင်ပြည့်သည့်နေ့စွဲ</th> --}}
+                <th>ပင်စင်ပြည့်သည့်နေ့စွဲ</th>
             </tr>
         </thead>
         <tbody>
@@ -137,8 +137,8 @@
                     <td>{{ $staff->current_rank?->name }}</td>
                     <td>{{ $staff->nrc_region_id?->name . $staff->nrc_township_code?->name . '/' . $staff->nrc_sign?->name . '/' . $staff->nrc_code }}
                     </td>
-                    {{-- <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}
-                    </td> --}}
+                    <td>{{ en2mm(Illuminate\Support\Carbon::parse($staff->dob)->format('d-m-y')) }}
+                    </td>
                     <td>{{ formatDMYmm($staff->join_date) }}
                         <br>
                         {{dateDiffYMDWithoutDays($staff->join_date, now())}}
@@ -151,10 +151,10 @@
                         <br>
                         {{dateDiffYMDWithoutDays($staff->current_rank_date, now())}}
                     </td>
-                    <td> {{formatDMYmm($staff->postings->sortByDesc('from_date')->first()?->from_date)}}
+                    {{-- <td> {{formatDMYmm($staff->postings->sortByDesc('from_date')->first()?->from_date)}}
                         <br>
                         {{dateDiffYMDWithoutDays($staff->postings->sortByDesc('from_date')->first()?->from_date, now())}}
-                    </td>
+                    </td> --}}
                     <td>
                         {{ $staff->current_division?->name }}
                     </td>
@@ -164,6 +164,8 @@
                         @endforeach
                     </td>
                     {{-- <td>{{ en2mm(Carbon\Carbon::parse($staff->dob)->year + $pension_year->year) }}</td> --}}
+                    {{ formatDMYmm(Illuminate\Support\Carbon::parse($staff->dob)->addYears($pension)->format('d-m-Y')) }}</td>
+                    <td>
                 </tr>
             @endforeach
         </tbody>

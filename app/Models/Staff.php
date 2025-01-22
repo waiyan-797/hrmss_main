@@ -341,6 +341,10 @@ class Staff extends Model
         return $this->hasMany(Salary::class);
     }
 
+    public function pension()
+    {
+        return $this->belongsTo(PensionYear::class);
+    }
 
 
     public function isPromotionThisMonth($date)

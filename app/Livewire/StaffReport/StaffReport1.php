@@ -20,6 +20,7 @@ class StaffReport1 extends Component
     public $staffs;
     public $year, $month, $filterRange;
     public $previousYear, $previousMonthDate, $previousMonth;
+    public  $pension_year;
 
     public function go_pdf()
     {
@@ -121,20 +122,23 @@ class StaffReport1 extends Component
                 $query->where('name', 'like', '%' . $this->nameSearch . '%');
             });
         }
+
+        $pension_year = PensionYear::where('id', 1)->value('year');
         // if ($this->nameSearch) {
         //     $staffQuery->where('name', 'like', '%' . $this->nameSearch . '%');
         // }
         $this->staffs = $staffQuery->get();
 
         $staffs = Staff::get();
-        $pension_year = PensionYear::first();
+        // $pension_year = PensionYear::first();
+        $this->pension_year=$pension_year;
         
         
 
 
         return view('livewire.staff-report.staff-report1', [
             'staffs' => $this->staffs,
-            'pension_year' => $pension_year,
+            'pension'=>$this->pension_year,
             'depts' => Department::all() ,
             'year' => $year ,
             'month' => $month,

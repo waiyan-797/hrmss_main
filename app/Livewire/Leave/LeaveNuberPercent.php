@@ -85,7 +85,7 @@ class LeaveNuberPercent extends Component
     public function go_excel() 
     {
         
-        return Excel::download(new L01($this->month,$this->month, $this->dateRange), 'L01.xlsx');
+        return Excel::download(new L01($this->month,$this->month, $this->dateRange, $this->dep_category), 'L01.xlsx');
     }
   
     public function go_word()

@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Staff;
+use App\Models\PensionYear;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -20,6 +21,7 @@ class PA17 implements FromView ,WithStyles
     //     return PA17::all();
     // }
     public $searchName,$staffs;
+    public $pension_year;
 
     public function __construct($searchName)
     {
@@ -31,8 +33,6 @@ class PA17 implements FromView ,WithStyles
     }
     public function view(): View
     {
-<<<<<<< Updated upstream
-=======
         $staffQuery = Staff::query();
 
         
@@ -42,13 +42,15 @@ class PA17 implements FromView ,WithStyles
                 $query->where('name', 'like', '%' . $this->searchName. '%');
             });
         }
+        $pension_year = PensionYear::where('id', 1)->value('year');
 
         $this->staffs = $staffQuery->get();
+        $this->pension_year=$pension_year;
 
->>>>>>> Stashed changes
         $staffs = Staff::get();
         $data = [
-            'staffs' => $this->staffs , 
+            'staffs' => $this->staffs ,
+            'pension'=>$this->pension_year, 
             
         ];
         return view('excel_reports.staff_report_2', $data);
@@ -84,6 +86,7 @@ class PA17 implements FromView ,WithStyles
         $sheet->getColumnDimension('I')->setWidth(35);
         $sheet->getColumnDimension('J')->setWidth(15);
         $sheet->getColumnDimension('K')->setWidth(10);
+        $sheet->getColumnDimension('L')->setWidth(10);
 
         $sheet->getRowDimension(1)->setRowHeight(25);
         $sheet->getRowDimension(2)->setRowHeight(25);

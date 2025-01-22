@@ -32,25 +32,14 @@ class L01 implements FromView ,WithStyles
     public $dateRange;
     public  $filterRange;
     public $previousYear, $previousMonthDate, $previousMonth;
-     public $count=0;
-     public function mount()
+    public $count=0;
+
+    public function __construct($year , $month, $dateRange, $dep_category)
     {
-
-        // $this->dateRange = Carbon::now()->format('Y-m');
-
-        $this->dep_category = 1;
-    }
-
-    public function __construct($year , $month, $dateRange)
-    {
-       
-        
         $this->year  =  $year;
-         $this->month  =  $month;
-         $this->dateRange = $dateRange;
-
-
-
+        $this->month  =  $month;
+        $this->dateRange = $dateRange;
+        $this->dep_category = $dep_category;
     }
    
 
@@ -58,12 +47,12 @@ class L01 implements FromView ,WithStyles
     {
         $leave_types = LeaveType::all();
        
-    if (!($this->dep_category == 3)) {
-        $divisions = Division::where('division_type_id', $this->dep_category)->get();
-    }
-    $totalStaffCount = 0;
-    $totalLeaveCount = 0;
-    $totalLeaveTypeCounts = [];
+        if (!($this->dep_category == 3)) {
+            $divisions = Division::where('division_type_id', $this->dep_category)->get();
+        }
+        $totalStaffCount = 0;
+        $totalLeaveCount = 0;
+        $totalLeaveTypeCounts = [];
         $divisions = Division::get();
         [$year, $month] = explode('-', $this->dateRange);
         $this->year = $year;
@@ -75,9 +64,6 @@ class L01 implements FromView ,WithStyles
         $totalStaffCount = 0;
         $totalLeaveCount = 0;
         $totalLeaveTypeCounts = [];
-
-
-        FacadesLog::info('Divisions Retrieved:', $divisions->toArray());
 
         foreach ($divisions as $division) {
             $division->staffCount = $this->staffCount($division->id);
@@ -180,7 +166,7 @@ class L01 implements FromView ,WithStyles
 
        
         $sheet->getColumnDimension('A')->setWidth(5);
-        $sheet->getColumnDimension('B')->setWidth(18);
+        $sheet->getColumnDimension('B')->setWidth(35);
         $sheet->getColumnDimension('C')->setWidth(9);
         $sheet->getColumnDimension('D')->setWidth(12);
         $sheet->getColumnDimension('E')->setWidth(15);
@@ -250,6 +236,20 @@ class L01 implements FromView ,WithStyles
             'font' => ['name' => 'Pyidaungsu', 'size' => 13],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'],
+                ],
+            ],
+        ]);
+
+        $sheet->getStyle("B7:$highestColumn$highestRow")->applyFromArray([
+            'font' => ['name' => 'Pyidaungsu', 'size' => 13],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
             ],
             'borders' => [

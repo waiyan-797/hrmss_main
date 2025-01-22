@@ -3,6 +3,7 @@
 namespace App\Livewire\StaffReport;
 
 use App\Exports\PA17;
+use App\Models\PensionYear;
 use App\Models\Staff;
 
 use Livewire\Component;
@@ -15,6 +16,8 @@ class StaffReport2 extends Component
 
     public $searchName;
     public $staffs;
+    public  $pension_year;
+    
     public function go_pdf()
     {
         $staffs = Staff::get();
@@ -82,6 +85,7 @@ class StaffReport2 extends Component
     public function render()
     {
         $staffQuery = Staff::query();
+        // $pension_year=PensionYear::query();
 
         if ($this->searchName) {
             // $staffQuery->where('name', 'like', '%' . $this->searchName . '%');
@@ -89,14 +93,15 @@ class StaffReport2 extends Component
                 $query->where('name', 'like', '%' . $this->searchName. '%');
             });
         }
+        $pension_year = PensionYear::where('id', 1)->value('year');
         $this->staffs = $staffQuery->get();
         $staffs = Staff::get();
-
-
-
+        $this->pension_year=$pension_year;
+        
 
         return view('livewire.staff-report.staff-report2', [
             'staffs' => $this->staffs,
+            'pension'=>$this->pension_year,
         ]);
     }
 }

@@ -26,6 +26,7 @@ class PA16 implements FromView ,WithStyles
     public $staffs;
     public $year, $month, $filterRange;
     public $previousYear, $previousMonthDate, $previousMonth;
+    public $pension_year;
    
     public function __construct($year , $month,
     $filterRange ,
@@ -76,16 +77,18 @@ class PA16 implements FromView ,WithStyles
             $query->where('name', 'like', '%' . $this->nameSearch . '%');
         });
     }
+    $pension_year = PensionYear::where('id', 1)->value('year');
 
     $this->staffs = $staffQuery->get();
     $staffs = Staff::get();
     // Fetch additional data for the report
-    $pensionYear = PensionYear::first();
+    // $pensionYear = PensionYear::first();
+    $this->pension_year=$pension_year;
 
     // Prepare data for the view
     return view('excel_reports.staff_report_1', [
         'staffs' => $this->staffs,
-        'pension_year' => $pensionYear,
+        'pension'=>$this->pension_year,
         'year' => $this->year,
         'month' => $this->month,
     ]);
