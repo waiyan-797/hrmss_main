@@ -1,4 +1,4 @@
-<div class="w-full">
+<div class="w-full {{isset($header) ? 'h-[83vh]' : 'h-[90vh]'}} overflow-y-auto">
     <div class="flex justify-left items-center space-x-1 px-3 mt-10">
         <a href="{{ route('staff', ['status' => 1]) }}" wire:navigate
             class="{{ request()->path() == 'staff/1' ? 'bg-yellow-400' : 'bg-green-500' }} text-white hover:bg-yellow-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
@@ -46,7 +46,7 @@
             </button>
         </div>
     @endif
-    <div class="flex justify-center w-full overflow-y-auto">
+    <div class="flex justify-center w-full">
         <div class="w-full mx-auto px-3 py-4">
             @include('table', [
                 'data_values' => $staffs,
