@@ -103,6 +103,10 @@
                                         <x-primary-button wire:click="setStaffStatus({{$staff->status_id}})"> Save </x-primary-button>
                                         <x-primary-button wire:click="setStaffStatus(2)"> Submit </x-primary-button>
                                         @break
+                                    @case(4)
+                                        <x-primary-button wire:click="setStaffStatus(null)"> Save </x-primary-button>
+                                        <x-primary-button wire:click="setStaffStatus(2)"> Submit </x-primary-button>
+                                    @break
                                 @endswitch
                             @else
                                 <x-primary-button wire:click="setStaffStatus(1)"> Save Draft </x-primary-button>

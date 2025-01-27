@@ -1033,8 +1033,8 @@ class StaffDetail extends Component
     public function submit_staff()
     {
         $_status = $this->staff_status_id;
-        if ($_status == 3) {
-            return $this->rejectStaff();
+        if ($_status == 3 || $_status == 4) {
+            return $this->commentStaff();
         }
         $rules = $this->validate_rules();
         $this->validate($rules);
@@ -1265,20 +1265,20 @@ class StaffDetail extends Component
         }
     }
 
-    public function rejectStaff()
+    public function commentStaff()
     {
         $this->displayAlertBox = true;
     }
 
-    public function submitReject()
+    public function submitCondition($status)
     {
         $staff = Staff::find($this->staff_id);
         $staff->update([
-            'status_id' => 3,
+            'status_id' => $status,
             'comment' => $this->comment,
         ]);
         $this->staff = $staff;
-        $this->message = 'Staff has been rejected.';
+        $this->message = $status == 3 ? 'Staff has been rejected.' : 'Staff has been sent back';
         $this->displayAlertBox = false;
     }
 

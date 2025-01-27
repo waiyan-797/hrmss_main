@@ -7,7 +7,7 @@
         </textarea>
         <div class="flex justify-end space-x-4">
             <button wire:click="closeModal" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Cancel</button>
-            <button wire:click="submitReject" class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
+            <button wire:click="submitCondition({{$staff_status_id}})" class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
         </div>
     </div>
 </div>
