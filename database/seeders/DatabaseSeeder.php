@@ -56,6 +56,7 @@ class DatabaseSeeder extends Seeder
             RetireTypeSeeder::class,
             MinistrySeeder::class,
             DepartmentSeeder::class,
+            MilitaryServiceSeeder::class,
         ]);
     }
 }

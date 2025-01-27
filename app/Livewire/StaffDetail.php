@@ -1209,7 +1209,9 @@ class StaffDetail extends Component
         if (Auth::user()->role_id != 2) {
             $staff_create['current_division_id'] = Auth::user()->division_id;
         }
-        $staff_create['status_id'] = $_status;
+        if ($_status != null) {
+            $staff_create['status_id'] = $_status;
+        }
         $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
         $this->staff_id = $staff->id;
         $this->staff_photo = $staff->staff_photo;
@@ -1246,18 +1248,20 @@ class StaffDetail extends Component
 
         $this->loadStaffData($staff->id);
         $this->message = 'Saved Successfully';
-        if ($_status == 5 || $_status == 3 || $_status == 4 || ($_status == 2 && Auth::user()->role_id != 2)) {
-            $message = match ($_status) {
-                2 => 'Submitted Successfully',
-                5 => 'Approved Successfully',
-                3 => 'Reject Successfully',
-                4 => 'Sent Back Successfully',
-            };
-            session()->flash('message', $message);
+        if ($_status != null) {
+            if ($_status == 5 || $_status == 3 || $_status == 4 || ($_status == 2 && Auth::user()->role_id != 2)) {
+                $message = match ($_status) {
+                    2 => 'Submitted Successfully',
+                    5 => 'Approved Successfully',
+                    3 => 'Reject Successfully',
+                    4 => 'Sent Back Successfully',
+                };
+                session()->flash('message', $message);
 
-            return redirect()->route('staff', [
-                'status' => $_status,
-            ]);
+                return redirect()->route('staff', [
+                    'status' => $_status,
+                ]);
+            }
         }
     }
 

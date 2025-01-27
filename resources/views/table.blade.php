@@ -123,8 +123,11 @@
                                 </button>
                                 @if($show_comment)
                                     <div class="fixed w-screen h-screen inset-0 flex items-center justify-center bg-gray-600 bg-opacity-75 z-50">
-                                        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
-                                            <div class="font-arial text-red-600">
+                                        <div class="flex flex-col gap-2 items-center justify-center bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+                                            <h1 class="text-red-600 font-semibold font-arial text-lg">
+                                                Comment
+                                            </h1>
+                                            <div class="font-arial text-gray-600 text-sm">
                                                 {{$value['comment']}}
                                             </div>
                                             <button wire:click="closeModal" class="ms-auto bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Cancel</button>

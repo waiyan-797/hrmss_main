@@ -88,7 +88,10 @@
                                         <x-primary-button wire:click="setStaffStatus(5)"> Approve </x-primary-button>
                                         <x-primary-button wire:click="setStaffStatus(3)"> Reject </x-primary-button>
                                         <x-primary-button wire:click="setStaffStatus(4)"> Send Back </x-primary-button>
-                                        @break
+                                    @break
+                                    @case(5)
+                                        <x-primary-button wire:click="setStaffStatus(null)"> Save </x-primary-button>
+                                    @break
                                 @endswitch
                             @else
                                 <x-primary-button wire:click="setStaffStatus(2)"> Save </x-primary-button>
