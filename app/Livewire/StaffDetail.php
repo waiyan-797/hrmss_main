@@ -1003,7 +1003,7 @@ class StaffDetail extends Component
 
     public function remove_awardings($index)
     {
-        $this->removeModel('awards',  Award::class , $index, []);
+        $this->removeModel('awards',  Awarding::class , $index, []);
     }
 
     public function remove_abroads($index)
@@ -1438,7 +1438,7 @@ class StaffDetail extends Component
         $this->validate($rules, $messages);
         foreach ($this->awards as $award) {
             Awarding::updateOrCreate([
-                'id' => $award['id'] == '' ? null : $award['id']
+                'id' => $award['id'] == '' ? null : $award['id'],
             ],[
                 'staff_id' => $staffId,
                 'award_type_id' => $award['award_type'],
