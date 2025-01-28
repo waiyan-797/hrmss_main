@@ -146,7 +146,7 @@ public $staff_id;
         $table->addCell(2000)->addText('၆။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText('လူမျိုး ',null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->ethnic->name,null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->ethnic?->name,null, ['alignment' => 'both']);
 
         $table->addRow();
         $table->addCell(2000)->addText('၇။',null,['alignment'=>'center']); 
@@ -776,7 +776,7 @@ foreach ($staff->staff_educations as $education) {
         if ($staff->schools->isNotEmpty()) {
         foreach ($staff->schools as $school) {
             $table->addRow();
-            $table->addCell(4000)->addText($school->education?->name,null,$pStyle_1);
+            $table->addCell(4000)->addText($school->education,null,$pStyle_1);
             $table->addCell(4000)->addText( $school->school_name,null,$pStyle_1 );
             $table->addCell(4000)->addText($school->town,null,$pStyle_1);
             $table->addCell(4000)->addText(en2mm($school->from_date).'-'.en2mm($school->to_date),null,$pStyle_1);

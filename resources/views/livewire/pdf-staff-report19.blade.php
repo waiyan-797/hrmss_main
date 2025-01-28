@@ -80,9 +80,9 @@
                     <label for="" class="md:w-5">၁၁။ </label>
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">@foreach ($staff->staff_educations as $education)
-                            <td class="border border-black text-center p-2">{{$education->education?->name.','}}</td>
-                    @endforeach</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->staff_educations->map(function ($education) {
+                        return $education->education?->name;
+                    })->filter()->join(', ') }}</label>
                 </div>
                 {{-- <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">
@@ -181,7 +181,7 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                @if ($staff->past_occupations->isNotEmpty())
+                                @if ($staff->past_occupations &&$staff->past_occupations->isNotEmpty())
                                 @foreach ($staff->past_occupations as $occupation)
                                     <tr>
                                         <td class="border border-black p-2">{{$occupation->rank->name}}</td>
@@ -222,7 +222,7 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                @if ($staff->past_occupations->isNotEmpty())
+                                @if ($staff->past_occupations &&$staff->past_occupations->isNotEmpty())
                                 @foreach ($staff->past_occupations as $index=>$occupation)
                                     <tr>
                                         <td class="border border-black p-2">{{'('.myanmarAlphabet($loop->index).')'}}</td>

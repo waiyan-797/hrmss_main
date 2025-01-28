@@ -22,7 +22,7 @@
                     <label for="" class="md:w-5">၃။ </label>
                     <label for="name" class="md:w-1/3">လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ collect([$staff->ethnic->name,$staff->religion?->name,])->filter()->implode('၊')}}</label>
+                    <label for="name" class="md:w-3/5">{{ collect([$staff->ethnic?->name,$staff->religion?->name,])->filter()->implode('၊')}}</label>
                 </div>
                                
                 <div class="flex justify-between w-full mb-4">
@@ -61,11 +61,9 @@
                     <label for="" class="md:w-5">၈။ </label>
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">@foreach ($staff->staff_educations as $education)
-                        {{$education->education_group->name}}၊
-                        {{ $education->education_type->name}}၊
-                        {{$education->education->name}}
-                    @endforeach</label>
+                    <label for="name" class="md:w-3/5">  {{ $staff->staff_educations->map(function ($education) {
+                        return $education->education?->name;
+                    })->filter()->join(', ') }}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၉။ </label>
@@ -129,7 +127,7 @@
                                     
                                     <td class="border border-black text-center p-2">{{formatDMYmm($abroad->from_date)}}</td>
                                     <td class="border border-black text-center p-2">{{formatDMYmm($abroad->to_date)}}</td>
-                                    <td class="border border-black text-center p-2">{{$abroad->country?->name}}</td>
+                                    <td class="border border-black text-center p-2"> {{$abroad->countries->pluck('name')->join(', ')}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->particular}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->training_success_count}}</td> 
                                     <td class="border border-black text-center p-2">{{$abroad->sponser}}</td> 
@@ -202,7 +200,7 @@
                                 <tr>
                                     <td class="border border-black p-2">{{en2mm($index+1)}}</td>
                                     <td class="border border-black p-2">{{ $abroad->particular}}</td>
-                                    <td class="border border-black p-2">{{$abroad->country?->name}}</td>
+                                    <td class="border border-black p-2">{{$abroad->countries->pluck('name')->join(', ')}}</td>
                                     <td class="border border-black p-2">{{formatDMYmm($abroad->from_date)}}</td>
                                     <td class="border border-black p-2">{{formatDMYmm($abroad->to_date)}}</td>
                                     <td class="border border-black p-2">{{formatDMYmm($abroad->actual_abroad_date)}}</td>

@@ -52,7 +52,7 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name"
-                            class="md:w-3/5">{{collect([$staff->ethnic->name,$staff->religion?->name,])->filter()->implode('၊')}}</label>
+                            class="md:w-3/5">{{collect([$staff->ethnic?->name,$staff->religion?->name,])->filter()->implode('၊')}}</label>
                                     </div>
                                    
                 <div class="flex justify-between w-full mb-4">
@@ -137,9 +137,7 @@
 
                         <label for="name"
                             class="md:w-3/5">{{$staff->permanent_address_street.'၊'.$staff->permanent_address_ward.'၊'.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'။'}}</label>
-                                    </div>
-                                   
-
+                            </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၆။ </label>
                     <label for="name"
@@ -232,15 +230,14 @@
                     <label for="" class="md:w-5 ml-10">-</label>
                   
                         <label for="name" class="md:w-3/5">
-                            @foreach ($staff->staff_educations as $education)
+                            {{-- @foreach ($staff->staff_educations as $education)
                             {{$education->education?->name}}
-                            @endforeach
+                            @endforeach --}}
+                            {{ $staff->staff_educations->map(function ($education) {
+                                return $education->education?->name;
+                            })->filter()->join(', ') }}
                         </label>
-                  
                                             </div>
-
-                                   
-
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၉။ </label>
                     <label for="name" class="md:w-1/3">အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့်
@@ -290,7 +287,7 @@
                             ])->filter()->implode('၊') }}
                             
                         </label>
-                                    </div>
+                    </div>
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၂၂။ </label>

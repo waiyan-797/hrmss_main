@@ -182,38 +182,18 @@ class PdfStaffReport19 extends Component
         $table->addCell(1500)->addText('၁၁။',null,$pStyle_5);
         $table->addCell(13000)->addText('ပညာအရည်အချင်း',null, $pStyle_4);
         $table->addCell(700)->addText('-', ['align' => 'center'],$pStyle_5);
-        $table->addCell(13000)->addText('', ['align' => 'right'],$pStyle_4);
-
-    //    foreach ($staff->staff_educations as $education) {
-    //         $table->addRow(50);
-    //         $table->addCell(1500);
-    //         $table->addCell(13000);
-    //         $table->addCell(700)->addText('-', ['align' => 'center'],$pStyle_5);
-    //         $table->addCell(13000)->addText($education->education?->name . '၊', ['align' => 'right'],$pStyle_4);
-    //     }
-        
-          // $textRun=$table->addCell(8000, ['vMerge' => 'restart'])->addTextRun();
-        // $textRun->addText('နောက်ဆုံးသွားရောက်',['bold'=>true]);
-        // $textRun->addTextBreak();
-        // $textRun->addText('ခဲ့သည့်(၅)နှိင်ငံ',['bold'=>true])
-
+        $table->addCell(13000)->addText($staff->staff_educations->map(function ($education) {
+            return $education->education->name;
+        })->join(', '), ['align' => 'right'],$pStyle_4);
         $table->addRow(50);
-        $table->addCell(1500)->addText('၁၂။ ',null,$pStyle_5);
-        $textRun=$table->addCell(13000)->addTextRun($pStyle_4);
-        $textRun->addText('တတ်မြောက်သည့်အခြားဘာသာ');
-        $textRun->addTextBreak();
-        $textRun->addText('စကားနှင့်တတ်ကျွမ်းသည့်အဆင့်');
+        $table->addCell(1500)->addText('၁၂။',null,$pStyle_5);
+        $table->addCell(13000)->addText("တတ်မြောက်သည့်အခြားဘာသာ\nစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်",null,$pStyle_4);
         $table->addCell(700)->addText('-', ['align' => 'center'],$pStyle_5);
-        $table->addCell(13000)->addText('', ['align' => 'right'],$pStyle_4);
-
-       foreach ($staff->staff_languages as $lang) {
-            $table->addRow(50);
-            $table->addCell(1500);
-            $table->addCell(13000);
-            $table->addCell(700)->addText('-', ['align' => 'center'],$pStyle_5);
-            $table->addCell(13000)->addText($lang->language.'၊'.$lang->rank , ['align' => 'right'],$pStyle_4);
-        }
+        $languagesData = $staff->staff_languages->map(function ($language) {
+            return $language->language->name . ' (' . $language->rank . ')';
+        })->join(', ');
         
+        $table->addCell(13000)->addText($languagesData,null,$pStyle_4);
         $section->addText('၁၃။ '.'တက်ရောက်ခဲ့သည့်သင်တန်းများ', null,array('spaceBefore' => 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader'=>true));
@@ -244,7 +224,7 @@ class PdfStaffReport19 extends Component
         $table->addCell(1600)->addText('နေ့ရက်မှ', ['bold' => true],$pStyle_1);
         $table->addCell(1600)->addText('နေ့ရက်ထိ', ['bold' => true],$pStyle_1);
         $table->addCell(500)->addText('မှတ်ချက်', ['bold' => true],$pStyle_1);
-        if($staff->past_occupations->isNotEmpty()){
+        if($staff->past_occupations && $staff->past_occupations->isNotEmpty()){
             foreach ($staff->past_occupations as $occupation) {
                 $table->addRow(50);
                 $table->addCell(1500)->addText($occupation->rank->name,null,$pStyle_7);
@@ -269,7 +249,7 @@ class PdfStaffReport19 extends Component
         $table->addCell(4800)->addText('အဖွဲ့အစည်း', ['bold' => true],$pStyle_1);
         $table->addCell(2800)->addText('တာဝန်', ['bold' => true],$pStyle_1);
         $table->addCell(1800)->addText('မှတ်ချက်', ['bold' => true],$pStyle_1);
-        if($staff->past_occupations->isNotEmpty()){
+        if($staff->past_occupations && $staff->past_occupations->isNotEmpty()){
             foreach ($staff->past_occupations as $index=> $occupation) {
                 $table->addRow();
                 $table->addCell(500)->addText('('.myanmarAlphabet($index).')',null, $pStyle_1);
@@ -289,54 +269,39 @@ class PdfStaffReport19 extends Component
             $section->addText('၁၆။ '.'ချီးမြှင့်ခံရသည့်ဘွဲ့ထူး/ဂုဏ်ထူးတံဆိပ်လက်မှတ်များ',null,array('spaceBefore' => 200));
             $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
             $table->addRow();
-            $table->addCell(500)->addText('စဥ်', ['bold' => true],$pStyle_1);
-            $table->addCell(4800)->addText('ဆုတံဆိပ်အမျိုးအစား', ['bold' => true],$pStyle_1);
-            $table->addCell(2800)->addText('ရက်-လ-နှစ်', ['bold' => true],$pStyle_1);
-            $table->addCell(1800)->addText('မှတ်ချက်', ['bold' => true],$pStyle_1);
+            $table->addCell(1000)->addText('စဥ်', ['bold' => true],$pStyle_1);
+            $table->addCell(5000)->addText('ဆုတံဆိပ်အမျိုးအစား', ['bold' => true],$pStyle_1);
+            $table->addCell(3000)->addText('ရက်-လ-နှစ်', ['bold' => true],$pStyle_1);
+            $table->addCell(3000)->addText('မှတ်ချက်', ['bold' => true],$pStyle_1);
             if($staff->awardings->isNotEmpty()){
                 foreach ($staff->awardings as $index => $awarding) {
                     $table->addRow();
-                    $table->addCell(700)->addText('('.myanmarAlphabet($index).')',null, $pStyle_1);
-                    $table->addCell(4800)->addText( $awarding->award->name,null,$pStyle_7);
-                    $table->addCell(2800)->addText(formatDMYmm($awarding->order_date), null, $pStyle_7);
-                    $table->addCell(1800)->addText( $awarding->remark, null, $pStyle_7);
+                    $table->addCell(1000)->addText('('.myanmarAlphabet($index).')',null, $pStyle_1);
+                    $table->addCell(5000)->addText( $awarding->award->name,null,$pStyle_7);
+                    $table->addCell(3000)->addText(formatDMYmm($awarding->order_date), null, $pStyle_7);
+                    $table->addCell(3000)->addText( $awarding->remark, null, $pStyle_7);
                
                 }
             }else{
                 $table->addRow();
-                $table->addCell(500);
-                $table->addCell(4800);
-                $table->addCell(2800);
-                $table->addCell(1800);
+                $table->addCell(1000);
+                $table->addCell(5000);
+                $table->addCell(3000);
+                $table->addCell(3000);
                 }
-
-        
-                // $section->addText('', null, ['spaceBefore' => 200]);
-
-        $section->addText('၁၇။အပြစ်ပေးခံရခြင်းများ', null,['spaceBefore' => 200]);
-        // $section->addTex( '', null,['spaceBefore' => 200]);
-
-        foreach ($staff->punishments as $punishment) {
-            // Create a formatted string for each punishment
-                $punishmentText = '-' .   
-                $punishment->penalty_type->name . '၊ ' .
-                $punishment->reason . '၊ ' .
-                $punishment->from_date . ' မှ ' .
-                $punishment->to_date;
-                $section->addText($punishmentText, null, ['spaceBefore' => 200]);
-    }
-        
-      
-    //    $section->addText('၁၇။' . 'အပြစ်ပေးခံရခြင်းများ', ['bold' => true]);
-    
-      
-
-        $section->addText('၁၈။'.'အခြားတင်ပြလိုသည့်အချက်များ '. str_repeat(' ', 5));
-        $section->addText(''); 
-        $section->addText(''); 
-        $section->addText('');  
-        $section->addText('');  
-        $section->addText(''); 
+       $table = $section->addTable();
+        $table->addRow();
+        $table->addCell(1000)->addText('၁၇။',null, $pStyle_5);
+        $table->addCell(5000)->addText('အပြစ်ပေးခံရခြင်းများ',null,$pStyle_4);
+        $table->addCell(500)->addText('-', ['align' => 'center'],$pStyle_5);
+        $table->addCell(5000)->addText($staff->punishments->map(function ($punishment) {
+            return $punishment->penalty_type->name;
+        })->join(', '), null, $pStyle_4);
+        $table->addRow();
+        $table->addCell(1000)->addText('၁၈။',null, $pStyle_5);
+        $table->addCell(5000)->addText('အခြားတင်ပြလိုသည့်အချက်များ',null,$pStyle_4);
+        $table->addCell(500)->addText('-', ['align' => 'center'],$pStyle_5);
+        $table->addCell(5000)->addText('', null, $pStyle_4);
 
         $section->addText('('.'ဝန်ထမ်း၏ထိုးမြဲလက်မှတ်'.')',null,['alignment' => Jc::END]);
         $textStyle=[

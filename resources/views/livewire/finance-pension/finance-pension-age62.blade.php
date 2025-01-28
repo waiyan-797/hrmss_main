@@ -36,8 +36,8 @@
                     <tr>
                         <td class="border border-black text-center p-2">{{ $loop->index+1}}</td>
                         <td class="border border-black text-left p-2">{{ $staff->name}}/{{ $staff->currentRank?->name}}</td>
-                        <td class="border border-black text-center p-2">{{ $staff->dob}}</td>
-                        <td class="border border-black text-center p-2">{{ $staff->join_date}}</td>
+                        <td class="border border-black text-center p-2">{{ formatDMYmm($staff->dob)}}</td>
+                        <td class="border border-black text-center p-2">{{ formatDMYmm($staff->join_date)}}</td>
                         <td class="border border-black text-center p-2">            {{
                       en2mm(   \Carbon\Carbon::parse($staff->dob)->addYears(62)->subMonths(4)->format('d-m-y')) }} မှ  {{ 
                       en2mm(\Carbon\Carbon::parse($staff->dob)->addYears(62)->subDay()->format('Y-m-d')) }}ထိ 

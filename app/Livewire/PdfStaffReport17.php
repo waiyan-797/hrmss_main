@@ -137,7 +137,7 @@ class PdfStaffReport17 extends Component
         $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
         $table->addCell(16000)->addText($staff->current_rank->name . '/' . $staff->current_department->name, null, ['alignment' => 'both']);
 
-        $joinDate = \Carbon\Carbon::parse(en2mm($staff->join_date));
+        $joinDate = \Carbon\Carbon::parse(($staff->join_date));
         $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());
         $table->addRow();
         $table->addCell(2000)->addText('၆။', null, ['alignment' => 'center']);
@@ -149,20 +149,15 @@ class PdfStaffReport17 extends Component
         $table->addCell(2000)->addText('၇။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText('လက်ရှိနေရပ်လိပ်စာ', null, ['alignment' => 'both']);
         $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->current_address_street . '၊' . $staff->current_address_ward . '၊' . $staff->current_address_township_or_town->name . '၊' . $staff->current_address_region->name, null, ['alignment' => 'center']);
+        $table->addCell(16000)->addText($staff->current_address_street . '၊' . $staff->current_address_ward . '၊' . $staff->current_address_township_or_town->name.'မြို့နယ်' . '၊' . $staff->current_address_region->name.'။', null, ['alignment' => 'center']);
         $table->addRow();
         $table->addCell(2000)->addText('၈။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText('ပညာအရည်အချင်း', null, ['alignment' => 'both']);
         $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText('', null, ['alignment' => 'both']);
-
-        // foreach ($staff->staff_educations as $education) {
-        //     $table->addRow();
-        //     $table->addCell(2000)->addText('', null, ['alignment' => 'center']);
-        //     $table->addCell(15000)->addText('', null, ['alignment' => 'both']);
-        //     $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
-        //     $table->addCell(16000)->addText($education->education->name . '၊', null, ['alignment' => 'both']);
-        // }
+        // $table->addCell(16000)->addText('', null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->staff_educations->map(function ($education) {
+            return $education->education->name;
+        })->join(', '), null, ['alignment' => 'both']);
         $table->addRow();
         $table->addCell(2000)->addText('၉။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText('အဘအမည် ', null, ['alignment' => 'both']);
@@ -187,7 +182,7 @@ class PdfStaffReport17 extends Component
         $table->addCell(2000)->addText('၁၃။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText('နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်)', null, ['alignment' => 'both']);
         $table->addCell(2000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText(en2mm($staff->abroads->count() ? 'ရှိ' : 'မရှိ'), null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText(en2mm($staff->abroads->count().'ကြိမ်'), null, ['alignment' => 'both']);
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100];
         $pStyle_2 = ['align' => 'center', 'spaceAfter' => 30, 'spaceBefore' => 30];
         $pStyle_3 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
@@ -212,13 +207,16 @@ class PdfStaffReport17 extends Component
         $table->addCell(6000, ['vMerge' => 'continue']);
         $table->addCell(8000, ['vMerge' => 'continue']);
         $table->addCell(8000, ['vMerge' => 'continue']);
-        $latestAbroads = $staff->abroads->sortByDesc('to_date')->take(5);
-        if ($latestAbroads->isNotEmpty()) {
+        // $latestAbroads = $staff->abroads->sortByDesc('to_date')->take(5);
+        if ($staff->abroads->isNotEmpty()) {
+            $latestAbroads = $staff->abroads
+            ? $staff->abroads->sortByDesc('to_date')->take(5)
+            : collect();
             foreach ($latestAbroads as $abroad) {
                 $table->addRow();
                 $table->addCell(6000)->addText(formatDMYmm($abroad?->from_date), null, $pStyle_2);
                 $table->addCell(6000)->addText(formatDMYmm($abroad?->to_date), null, $pStyle_2);
-                $table->addCell(8000)->addText($abroad->country?->name, null, $pStyle_3);
+                $table->addCell(8000)->addText($abroad->countries->pluck('name')->join(', '), null, $pStyle_3);
                 $table->addCell(6000)->addText($abroad->particular, null, $pStyle_4);
                 $table->addCell(8000)->addText($abroad->training_success_count, null, $pStyle_4);
                 $table->addCell(8000)->addText($abroad->position, null, $pStyle_1);
@@ -296,7 +294,7 @@ class PdfStaffReport17 extends Component
         foreach ($staff->abroads as $abroad) {
             $table->addRow();
             $table->addCell(6000)->addText($abroad->particular, null, $pStyle_1);
-            $table->addCell(6000)->addText($abroad->country?->name, null, $pStyle_3);
+            $table->addCell(6000)->addText($abroad->countries->pluck('name')->join(', '), null, $pStyle_3);
             $table->addCell(6000)->addText(formatDMYmm($abroad?->from_date), null, $pStyle_3);
             $table->addCell(6000)->addText(formatDMYmm($abroad?->to_date), null, $pStyle_3);
             $table->addCell(6000)->addText(formatDMYmm($abroad->actual_abroad_date), null, $pStyle_3);

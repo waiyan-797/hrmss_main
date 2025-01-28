@@ -23,12 +23,10 @@ class LeaveNuberPercent extends Component
     public $dateRange;
     public  $filterRange;
     public $previousYear, $previousMonthDate, $previousMonth;
-     public $count=0;
+    public $count=0;
     public function mount()
     {
-
         $this->dateRange = Carbon::now()->format('Y-m');
-
         $this->dep_category = 1;
     }
     public function go_pdf()

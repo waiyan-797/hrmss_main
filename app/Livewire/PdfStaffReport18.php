@@ -91,15 +91,6 @@ class PdfStaffReport18 extends Component
         // $section = $phpWord->addSection(); 
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
-        
-    //     $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
-    //     if ($imagePath && file_exists($imagePath)) {
-    //     $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
-    //     } else {
-    //     $defaultImagePath = public_path('img/user.png');
-    //     $section->addImage($defaultImagePath, ['width' => 80, 'height' => 80, 'align' => 'right' ]);
-    //    }
-
     $textBoxStyle = [
         'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
         'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
@@ -187,15 +178,9 @@ class PdfStaffReport18 extends Component
         $table->addCell(2000)->addText('၁၁။', null, $pStyle_5);
         $table->addCell(10000)->addText('ပညာအရည်အချင်း ',null ,$pStyle_4);
         $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText('',null ,['alignment'=>'both']);
-    //    foreach ($staff->staff_educations as $education) {
-    //         $table->addRow();
-    //         $table->addCell(2000);
-    //         $table->addCell(4000)->addText('', null, ['alignment' => 'center']);
-    //         $table->addCell(900)->addText('-', null, ['alignment' => 'center']);
-    //         $table->addCell(5000)->addText($education->education?->name . '၊',null, ['alignment' => 'both']);
-    //     }
-
+        $table->addCell(16000)->addText($staff->staff_educations->map(function ($education) {
+            return $education->education->name;
+        })->join(', '),null ,['alignment'=>'both']);
         $table->addRow();
         $table->addCell(2000)->addText('၁၂။', null, $pStyle_5);
         $table->addCell(10000)->addText('လက်ရှိရာထူး/လစာနှုန်း/ဌာန ',null ,$pStyle_4);
@@ -222,7 +207,7 @@ class PdfStaffReport18 extends Component
        $table->addCell(1750)->addText('မှ', ['alignment' => 'center'], $pStyle_1);
        $table->addCell(1750)->addText('ထိ', ['alignment' => 'center'], $pStyle_1);
        $table->addCell(2000, ['vMerge' => 'continue']);
-       if($staff->past_occupations->isNotEmpty()){
+       if($staff->past_occupations && $staff->past_occupations->isNotEmpty()){
             foreach ($staff->past_occupations as $index=> $occupation) {
                 $table->addRow(50);
                 $table->addCell(700)->addText( '('.myanmarAlphabet($index).')', null, $pStyle_6);
@@ -273,6 +258,7 @@ class PdfStaffReport18 extends Component
                     $table->addCell(1750);
                     $table->addCell(2000);
             }
+            $section->addTextBreak();
        $section->addText('၁၆။ ' . ' ပြည်ပသင်တန်းများ တက်ရောက်မှု', ['bold' => true],array('spaceBefore' => 200));
        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
        $table->addRow(50, array('tblHeader' => true));
@@ -312,7 +298,7 @@ class PdfStaffReport18 extends Component
     //    $table->addCell(700,['vMerge' => 'restart'])->addText('စဉ်', ['bold' => true]);
        $table->addCell(2000,['vMerge' => 'restart'])->addText('ပြစ်ဒဏ်', ['bold' => true], $pStyle_2);
        $table->addCell(4700,['vMerge' => 'restart'])->addText('ပြစ်ဒဏ်ချမှတ်ခံရသည့် အကြောင်းအရာ', ['bold' => true],$pStyle_2);
-       $table->addCell(3000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ပြစ်ဒဏ်ချမှတ်သည့်ကာလ', ['bold' => true], $pStyle_1);
+       $table->addCell(3000, ['gridSpan' => 2, 'valign' => 'center'])->addText("ပြစ်ဒဏ်ချမှတ်သည့်\nကာလ", ['bold' => true], $pStyle_1);
       
        $table->addRow(50, array('tblHeader' => true));
     //    $table->addCell(700, ['vMerge' => 'continue']);

@@ -305,7 +305,9 @@ class PdfStaffReport53 extends Component
         $table->addCell(1300)->addText('၁၈။', null, $pStyle_5);
         $table->addCell(13000)->addText('ပညာအရည်အချင်း', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText('', null, $pStyle_8);
+        $table->addCell(13000)->addText($staff->staff_educations->map(function ($education) {
+            return $education->education->name;
+        })->join(', '), null, $pStyle_8);
 
         // foreach ($staff->staff_educations as $education) {
         //     $table->addRow(50);
@@ -391,13 +393,13 @@ class PdfStaffReport53 extends Component
         $table->addCell(1300)->addText('၂၆။', null, $pStyle_5);
         $table->addCell(13000)->addText('လက်ရှိအလုပ်အကိုင်ရလာပုံ', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText($staff->form_of_appointment, null, $pStyle_8);
+        $table->addCell(13000)->addText($staff->is_direct_appointed, null, $pStyle_8);
 
         $table->addRow();
         $table->addCell(1300)->addText('၂၇။', null, $pStyle_5);
         $table->addCell(13000)->addText('ပြိုင်အ‌‌ရွေးခံ(သို့)တိုက်ရိုက်ခန့်', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText($staff->is_direct_appointed ? 'ဟုတ်' : 'မဟုတ်', null, $pStyle_8);
+        $table->addCell(13000)->addText($staff->is_direct_appointed, null, $pStyle_8);
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၂၈။', null, $pStyle_5);
@@ -411,34 +413,42 @@ class PdfStaffReport53 extends Component
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၊ရန်ကုန်မြို့။', null, $pStyle_8);
 
-        $section->addText('၃၀။ ' . ' အလုပ်အကိုင်အတွက် ထောက်ခံသူများ',null,array('spaceBefore'=> 200));
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        $table->addRow();
-        $table->addCell(500)->addText('စဉ်', ['bold' => true]);
-        $table->addCell(2000)->addText('ထောက်ခံသူ', ['bold' => true]);
-        $table->addCell(2000)->addText('ဝန်ကြီးဌာန', ['bold' => true]);
-        $table->addCell(2000)->addText('ဦးစီးဌာန', ['bold' => true]);
-        $table->addCell(2000)->addText('ရာထူး', ['bold' => true]);
-        $table->addCell(2000)->addText('အကြောင်းအရာ', ['bold' => true]);
-        if($staff->recommendations->isNotEmpty()){
-        foreach ($staff->recommendations as $index => $recommendation) {
-            $table->addRow();
-            $table->addCell(500)->addText(en2mm($index + 1));
-            $table->addCell(2000)->addText($recommendation->recommend_by);
-            $table->addCell(2000)->addText($recommendation->ministry);
-            $table->addCell(2000)->addText($recommendation->department);
-            $table->addCell(2000)->addText($recommendation->rank);
-            $table->addCell(2000)->addText($recommendation->remark);
-            }
-        }else{
-            $table->addRow();
-            $table->addCell(500);
-            $table->addCell(2000);
-            $table->addCell(2000);
-            $table->addCell(2000);
-            $table->addCell(2000);
-            $table->addCell(2000);
-        }
+        // $section->addText('၃၀။ ' . ' အလုပ်အကိုင်အတွက် ထောက်ခံသူများ',null,array('spaceBefore'=> 200));
+        // $table = $section->addTable();
+        // $table->addRow();
+        // $table->addCell(500)->addText('စဉ်', ['bold' => true]);
+        // $table->addCell(2000)->addText('ထောက်ခံသူ', ['bold' => true]);
+        // $table->addCell(2000)->addText('ဝန်ကြီးဌာန', ['bold' => true]);
+        // $table->addCell(2000)->addText('ဦးစီးဌာန', ['bold' => true]);
+        // $table->addCell(2000)->addText('ရာထူး', ['bold' => true]);
+        // $table->addCell(2000)->addText('အကြောင်းအရာ', ['bold' => true]);
+        // if($staff->recommendations->isNotEmpty()){
+        // foreach ($staff->recommendations as $index => $recommendation) {
+        //     $table->addRow();
+        //     $table->addCell(500)->addText(en2mm($index + 1));
+        //     $table->addCell(2000)->addText($recommendation->recommend_by);
+        //     $table->addCell(2000)->addText($recommendation->ministry);
+        //     $table->addCell(2000)->addText($recommendation->department);
+        //     $table->addCell(2000)->addText($recommendation->rank);
+        //     $table->addCell(2000)->addText($recommendation->remark);
+        //     }
+        // }else{
+        //     $table->addRow();
+        //     $table->addCell(500);
+        //     $table->addCell(2000);
+        //     $table->addCell(2000);
+        //     $table->addCell(2000);
+        //     $table->addCell(2000);
+        //     $table->addCell(2000);
+        // }
+        $table->addRow(50);
+        $table->addCell(1300)->addText('၃၀။', null, $pStyle_5);
+        $table->addCell(13000)->addText('အလုပ်အကိုင်အတွက် ထောက်ခံသူများ', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText($staff->recommendations->map(function ($recommendation) {
+            return $recommendation->recommend_by;
+        })->join(', '), null, $pStyle_8);
+
         $section->addText('၃၁။ ' . ' ယခင်လုပ်ကိုင်ဖူးသည့် အလုပ်အကိုင်',null, array('spaceBefore'=> 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
@@ -459,16 +469,16 @@ class PdfStaffReport53 extends Component
             foreach ($staff->postings as $index => $posting) {
                 $table->addRow(50);
                 $table->addCell(700)->addText('('.myanmarAlphabet($index).')',null,$pStyle_6);
-                $table->addCell(2000)->addText($posting->rank->name ?? '',null,$pStyle_3);
+                $table->addCell(3000)->addText($posting->rank->name ?? '',null,$pStyle_3);
                 $table->addCell(1500)->addText(formatDMYmm($posting->from_date),null, $pStyle_6);
                 $table->addCell(1500)->addText(formatDMYmm($posting->to_date),null, $pStyle_6);
-                $table->addCell(2500)->addText($posting->division->name   . "၊\n" . $posting->department->name  ."၊\n".$posting->location,null, $pStyle_6);
+                $table->addCell(2500)->addText($posting->division?->name   . "၊\n" . $posting->department?->name  ."၊\n".$posting->location,null, $pStyle_6);
                 $table->addCell(1500)->addText($posting->remark,null, $pStyle_6);
             }
         }else{
                 $table->addRow(50);
                 $table->addCell(700);
-                $table->addCell(2000);
+                $table->addCell(3000);
                 $table->addCell(1500);
                 $table->addCell(1500);
                 $table->addCell(2500);
@@ -796,7 +806,6 @@ class PdfStaffReport53 extends Component
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၄။', null, $pStyle_5);
-        // $table->addCell(13000)->addText("ဝါသနာပါပြီး၊လေ့လာလိုက်စားခဲ့သောကျန်းမာရေးကစားခုန်စားမှုများ၊အနုပညာဆိုင်ရာအတီးအမှုတ်များ၊ပညာရေးစက်မှုလက်မှု", null, $pStyle_4);
         $cell = $table->addCell(11000);
         $textRun = $cell->addTextRun($pStyle_8);
         $textRun->addText("ဝါသနာပါပြီး၊လေ့လာလိုက်စားခဲ့");
@@ -887,8 +896,8 @@ class PdfStaffReport53 extends Component
         if($staff->abroads->isNotEmpty()){
             foreach ($staff->abroads as $index => $abroad) {
                     $table->addRow(50);
-                    $table->addCell(700)->addText('('.en2mm($index + 1).')',null,$pStyle_6);
-                    $table->addCell(1800)->addText($abroad->country?->name,null,$pStyle_3);
+                    $table->addCell(700)->addText('('.myanmarAlphabet($index).')',null,$pStyle_6);
+                    $table->addCell(1800)->addText($abroad->countries->pluck('name')->join(', '),null,$pStyle_3);
                     $table->addCell(4000)->addText($abroad->particular,null,$pStyle_6);
                     $table->addCell(2000)->addText($abroad->meet_with,null,$pStyle_6);
                     $table->addCell(1700)->addText(formatDMYmm($abroad->from_date) . '      '.formatDMYmm($abroad->to_date),null,array('align' => 'both', 'spaceAfter' => 30, 'spaceBefore' => 70 ,'indentation' => ['left' => 100]));// <' '>it means many space

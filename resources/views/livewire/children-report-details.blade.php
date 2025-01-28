@@ -7,14 +7,19 @@
             ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
             </h1>
             <h1 class="font-bold text-center text-base mb-4">
-                ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာနရှိ သား/သမီးများ၏အရေအတွက်စာရင်း
-                
+                ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
+                {{ $dep_category == 1 ? 'ရုံးချုပ်' : 'တိုင်းဒေသကြီး/ပြည်နယ်' }}
+                ဌာနခွဲများရှိ သား/သမီးများ၏ အရေအတွက်စာရင်း
             </h1>
-
-
  <h1 class=" text-right ">
      ရက်စွဲ - {{getTdyDateInMyanmarYearMonthDay(2)}}
  </h1>
+ <div>
+    <select wire:model.live='dep_category' id="">
+      <option value="1">ရုံးချုပ်</option>
+      <option value="2">တိုင်းဒေသကြီး/ပြည်နယ်</option>
+    </select>
+  </div> <br>
 
             <table class="md:w-full">
                 <thead>

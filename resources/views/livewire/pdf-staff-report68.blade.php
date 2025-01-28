@@ -41,7 +41,7 @@
                     <label for="name" class="md:w-1/3">လူမျိုး</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name"
-                        class="md:w-3/5">{{ $staff->ethnic->name }}</label>
+                        class="md:w-3/5">{{ $staff->ethnic?->name }}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၇။ </label>
@@ -868,7 +868,7 @@
                         <tbody class="text-center h-8 p-2">
                             @foreach ($staff->schools as $school)
                                 <tr>
-                                    <td class="p-2 border border-black">{{ $school->education?->name }}</td>
+                                     <td class="p-2 border border-black">{{ $school->education }}</td> 
                                     <td class="p-2 border border-black">{{ $school->school_name }}</td>
                                     <td class="p-2 border border-black">{{ $school->town }}</td>
                                     <td class="p-2 border border-black">{{ $school->year }}</td>

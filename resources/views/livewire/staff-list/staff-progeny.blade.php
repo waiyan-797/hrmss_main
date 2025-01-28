@@ -7,7 +7,6 @@
                 ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>
                 ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဝန်ထမ်းများ၏ သားသမီးများ စာရင်း
             </h1>
-
             <table class="md:w-full">
                 <thead>
                     <tr>
@@ -26,7 +25,7 @@
                 <tbody>
                     @foreach ($staffs as $staff)
                         <tr>
-                            <td class="border border-black text-center p-2">{{ $start++ }}</td>
+                            <td class="border border-black text-center p-2">{{ en2mm($start++) }}</td>
                             <td class="border border-black text-left p-2">{{ $staff->name }}
                                 <br>
 

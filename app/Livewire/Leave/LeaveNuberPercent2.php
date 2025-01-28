@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Leave;
 
+use App\Exports\L02;
 use App\Models\Division;
 use App\Models\Leave;
 use App\Models\Staff;
 use Carbon\Carbon;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -27,6 +29,7 @@ class LeaveNuberPercent2 extends Component
         $this->fromDateRange = Carbon::now()->subMonth(9)->format('Y-m'); // 9 months ago
         $this->toDateRange = Carbon::now()->format('Y-m'); // current month
         $this->dep_category = 1;
+       
     }
     
     public function go_pdf($staff_id)
@@ -48,6 +51,77 @@ class LeaveNuberPercent2 extends Component
             echo $pdf->output();
         }, 'leave_nuber_precent_report_pdf_2.pdf');
     }
+    // public function go_excel() 
+    // {
+        
+    //     return Excel::download(new L02(), 'L02.xlsx');
+    // }
+
+    // public $startYr, $startMonth, $endYr, $endMonth;
+    // public $staff_id;
+    // public $fromDateRange, $toDateRange;
+    // public $dep_category;
+    // public $months;
+    // public $divisions;
+    // public $monthly_leaves;
+    // public $divisonMontlyLeavesCollection;
+
+    // public function go_excel() 
+    // {
+    //     return Excel::download(new L02($this->startYr ,
+    //     $this->startMonth  , 
+    
+    // $this->endYr , $this->endMonth , $this->fromDateRange , $this->toDateRange , $this->dep_category , $this->months,$this->divisions,$this->monthly_leaves,$this->divisionMonthlyLeavesCollection
+    // ), 'L02.xlsx');
+    // }
+
+  
+    public function go_excel()
+    {
+        if ($this->divisionMonthlyLeavesCollection->isEmpty()) {
+            session()->flash('error', 'No data to export.');
+            return;
+        }
+
+        return Excel::download(new L02(
+            $this->startYr,
+            $this->startMonth,
+            $this->endYr,
+            $this->endMonth,
+            $this->fromDateRange,
+            $this->toDateRange,
+            $this->dep_category,
+            $this->months,
+            $this->divisions,
+            $this->monthly_leaves,
+            $this->divisionMonthlyLeavesCollection
+        ), 'L02.xlsx');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // public function go_excel($staff_id)
+    // {
+    //     return Excel::download(new L02($staff_id), 'L02.xlsx');
+    // }
+  
     public function go_word()
     {
         $phpWord = new PhpWord();

@@ -18,8 +18,8 @@ class EmployeeInformation extends Component
             ['id' => 5, 'name' => 'ဆုတံဆိပ်'],
             ['id' => 6, 'name' => 'သွားရောက်ခဲ့သည့်နိုင်ငံ'],
             ['id' => 7, 'name' => 'ပညာရေး (ရရှိသောဒီပလိုမာ/ဘွဲ့)'],
-            ['id' => 8, 'name' => 'ရရှိသောဒီပလိုမာ/ဘွဲ့'],
-            ['id' => 9, 'name' => 'ပြစ်ဒဏ်'],
+            // ['id' => 8, 'name' => 'ရရှိသောဒီပလိုမာ/ဘွဲ့'],
+            ['id' => 8, 'name' => 'ပြစ်ဒဏ်'],
            
         ];
     }
@@ -33,8 +33,8 @@ class EmployeeInformation extends Component
             5 => route('award_report'),
             6 => route('foreign_report'),
             7 => route('education_report'),
-            8 =>route('other_qualification_report'),
-            9 =>route('punishment_report'),
+            // 8 =>route('other_qualification_report'),
+            8 =>route('punishment_report'),
             
         ];
         if (array_key_exists($id, $routes)) {

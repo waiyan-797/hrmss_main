@@ -11,13 +11,15 @@ use PhpOffice\PhpWord\SimpleType\Jc;
 
 class ChildrenReportDetails extends Component
 {
+    public $selsectedDivisionTypeId = null  ;    
+    public $divisionTypes ;
+    public $dep_category;
+    public function mount()
+    {
+        $this->dep_category = 1;
+    }
 
 
-public $selsectedDivisionTypeId = null  ;    
-public $divisionTypes ;
-public function mount(){
-    $this->divisionTypes = DivisionType::all();
-}
 public function go_pdf(){
     $divisions =
     Division::query();
@@ -39,55 +41,64 @@ public function go_pdf(){
 // skdfjkd
 public function go_word()
 {
-    $divisions = Division::query();
+    // $divisions = Division::query();
 
-    if ($this->selsectedDivisionTypeId) {
-        $divisions->where('division_type_id', $this->selsectedDivisionTypeId);
-    }
-
-    $divisions = $divisions->get();
-
-    // Create a new PhpWord instance
+    // if ($this->selsectedDivisionTypeId) {
+    //     $divisions->where('division_type_id', $this->selsectedDivisionTypeId);
+    // }
+    // $divisions = $divisions->get();
+    $divisions = Division::where('division_type_id', $this->dep_category)->get();
     $phpWord = new PhpWord();
-
-    // Add a section
-    $section = $phpWord->addSection();
-
-    // Add title
+    $section = $phpWord->addSection([
+        'orientation' => 'portrait', // Portrait orientation
+        'pageSizeW' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(8.27), // Width of A4 in inches
+        'pageSizeH' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(11.69), // Height of A4 in inches
+        'marginTop' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1.0),  // Top margin 1 inch
+        'marginBottom' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1.0), // Bottom margin 1 inch
+        'marginLeft' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1.0), // Left margin 1 inch
+        'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.58), // Right margin 0.58 inch
+    ]);
+    $phpWord->setDefaultFontSize(12); 
     $section->addText(
-        "ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန\nဝန်ထမ်းများ၏ သားသမီးအရေအတွက် စာရင်း",
-        ['bold' => true, 'size' => 14],
+        "ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန",
+        ['bold' => true, 'size' => 12],
         ['alignment' => Jc::CENTER, 'spaceAfter' => 240]
     );
-
-    // Define table style
+    $section->addText(
+        "ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန " . 
+        ($this->dep_category == 1 ? 'ရုံးချုပ်' : 'တိုင်းဒေသကြီး/ပြည်နယ်')."ဌာနခွဲများရှိ သား/သမီးများ၏ အရေအတွက်စာရင်း",
+        ['bold' => true, 'size' => 12],
+        ['alignment' => Jc::CENTER, 'spaceAfter' => 240]
+    );
+        $pStyle_1=array('align' => 'center', 'spaceAfter' => 0, 'spaceBefore' => 0);
+        $pStyle_2=array('align' => 'center', 'spaceAfter' => 0, 'spaceBefore' => 200);
+        $pStyle_3=array('align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100);
+        $pStyle_6=array('align' => 'center', 'spaceAfter' => 30, 'spaceBefore' => 70);
+    // $section->addTextBreak();
     $tableStyle = [
         'borderSize' => 6,
         'borderColor' => '000000',
         'cellMargin' => 80,
     ];
     $phpWord->addTableStyle('staffTable', $tableStyle);
-
     // Add table
     $table = $section->addTable('staffTable');
-    $table->addRow();
-        $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်');
-        $table->addCell(4000, ['vMerge' => 'restart'])->addText('ရုံး/ဌာန');
-        $table->addCell(3000, ['gridSpan' => 2, 'valign' => 'center'])->addText('သား/သမီးအရေအတွက်');
-        $table->addCell(4000, ['vMerge' => 'restart'])->addText('စုစုပေါင်း');
-        $table->addCell(4000, ['vMerge' => 'restart'])->addText('မှတ်ချက်');
+    // $table->addRow();
+    $table->addRow(50, ['tblHeader' => true]);
+        $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်',['bold' => true],$pStyle_2);
+        $table->addCell(8000, ['vMerge' => 'restart'])->addText('ရုံး/ဌာန',['bold' => true],$pStyle_2);
+        $table->addCell(3000, ['gridSpan' => 2, 'valign' => 'center'])->addText("သား/သမီး\nအရေအတွက်",['bold' => true],$pStyle_2);
+        $table->addCell(2000, ['vMerge' => 'restart'])->addText('စုစုပေါင်း',['bold' => true],$pStyle_2);
+        $table->addCell(2000, ['vMerge' => 'restart'])->addText('မှတ်ချက်',['bold' => true],$pStyle_2);
        
 
         $table->addRow();
         $table->addCell(2000, ['vMerge' => 'continue']);
-        $table->addCell(4000, ['vMerge' => 'continue']);
-        $table->addCell(1500)->addText('ကျား', ['alignment' => 'center']);
-        $table->addCell(1500)->addText('မ', ['alignment' => 'center']);
-        $table->addCell(4000, ['vMerge' => 'continue']);
-        $table->addCell(4000, ['vMerge' => 'continue']);
-       
-
-
+        $table->addCell(8000, ['vMerge' => 'continue']);
+        $table->addCell(1500)->addText('ကျား',['bold'=>true], ['alignment' => 'center']);
+        $table->addCell(1500)->addText('မ',['bold'=>true], ['alignment' => 'center']);
+        $table->addCell(2000, ['vMerge' => 'continue']);
+        $table->addCell(2000, ['vMerge' => 'continue']);
     // Initialize total counters
     $totalMale = 0;
     $totalFemale = 0;
@@ -102,41 +113,47 @@ public function go_word()
         $totalMale += $maleCount;
         $totalFemale += $femaleCount;
         $totalChildren += $totalCount;
-
         $table->addRow();
-        $table->addCell(2000)->addText(en2mm($key + 1));
-        $table->addCell(4000)->addText($division->name);
-        $table->addCell(1500)->addText(en2mm($maleCount));
-        $table->addCell(1500)->addText(en2mm($femaleCount));
-        $table->addCell(4000)->addText(en2mm($totalCount));
-        $table->addCell(4000)->addText('');
+        $table->addCell(2000)->addText(en2mm($key + 1), null, $pStyle_6);
+        $table->addCell(8000)->addText($division->name, null, $pStyle_6);
+        $table->addCell(1500)->addText(en2mm($maleCount), null, $pStyle_6);
+        $table->addCell(1500)->addText(en2mm($femaleCount), null, $pStyle_6);
+        $table->addCell(2000)->addText(en2mm($totalCount), null, $pStyle_6);
+        $table->addCell(2000)->addText('');
     }
 
     // Add total row
     $table->addRow();
     $table->addCell(2000)->addText('');
-    $table->addCell(4000)->addText('ပေါင်း', ['bold' => true]);
-    $table->addCell(1500)->addText(en2mm($totalMale), ['bold' => true]);
-    $table->addCell(1500)->addText(en2mm($totalFemale), ['bold' => true]);
-    $table->addCell(4000)->addText(en2mm($totalChildren), ['bold' => true]);
-    $table->addCell(4000)->addText('');
+    $table->addCell(8000)->addText('ပေါင်း',['bold' => true],['alignment' => 'center']);
+    $table->addCell(1500)->addText(en2mm($totalMale), ['bold' => true], ['alignment' => 'center']);
+    $table->addCell(1500)->addText(en2mm($totalFemale), ['bold' => true], ['alignment' => 'center']);
+    $table->addCell(2000)->addText(en2mm($totalChildren), ['bold' => true], ['alignment' => 'center']);
+    $table->addCell(2000)->addText('');
 
-    $fileName = 'children_report_detail.docx';
+    $fileName = 'SSL12.docx';
     $tempFile = tempnam(sys_get_temp_dir(), $fileName);
     $phpWord->save($tempFile, 'Word2007');
     return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
 }
     public function render()
     {
-        $divisions =
-         Division::query();
+        // $divisions =
+        //  Division::query();
 
-         if($this->selsectedDivisionTypeId){
-            $divisions->where('division_type_id', $this->selsectedDivisionTypeId
+        //  if($this->selsectedDivisionTypeId){
+        //     $divisions->where('division_type_id', $this->selsectedDivisionTypeId
          
-         );
-         }
-              $divisions =     $divisions->get();
+        //  );
+        //  }
+        //       $divisions =     $divisions->get();
+
+        // $divisions = Division::when($this->dep_category, function ($query) {
+        //     $query->where('id', $this->dep_category);
+        // })->get();
+        $divisions = Division::where('division_type_id', $this->dep_category)->get();
+
+
         return view('livewire.children-report-details'
              , [
                 'divisions' => $divisions

@@ -130,20 +130,15 @@ class PdfStaffReport15 extends Component
         $table->addCell(2000)->addText('၇။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText(' လက်ရှိနေရပ်လိပ်စာ', null, ['alignment' => 'both']);
         $table->addCell(1000)->addText('-', null, ['align' => 'center']);
-        $table->addCell(16000)->addText($staff->current_address_street . '၊' . $staff->current_address_ward . '၊' .$staff->current_address_township_or_town->name.'၊'. $staff->current_address_region->name, null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->current_address_street . '၊' . $staff->current_address_ward . '၊' .$staff->current_address_township_or_town->name.'မြို့နယ်'.'၊'. $staff->current_address_region->name.'။', null, ['alignment' => 'both']);
         $table->addRow();
         $table->addCell(2000)->addText('၈။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText('ပညာအရည်အချင်း', null, ['alignment' => 'both']);
         $table->addCell(1000)->addText('-', null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText('', null, ['alignment' => 'both']);
-
-        // foreach ($staff->staff_educations as $education) {
-        //     $table->addRow();
-        //     $table->addCell(2000)->addText();
-        //     $table->addCell(15000)->addText('', ['alignment' => 'center']);
-        //     $table->addCell(1000)->addText();
-        //     $table->addCell(16000)->addText( $education->education->name . '၊', ['alignment' => 'both']);
-        // }
+        $table->addCell(16000)->addText(
+        $staff->staff_educations->map(function ($education) {
+            return $education->education->name;
+        })->join(', '), null, ['alignment' => 'both']);
         $table->addRow();
         $table->addCell(2000)->addText('၉။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText('အဖအမည်', null, ['alignment' => 'both']);
@@ -169,14 +164,14 @@ class PdfStaffReport15 extends Component
         $table->addCell(2000)->addText('၁၃။', null, ['alignment' => 'center']);
         $table->addCell(15000)->addText('နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်)', null, ['alignment' => 'both']);
         $table->addCell(1000)->addText('-', null, ['align' => 'center']);
-        $table->addCell(16000)->addText(en2mm($staff->abroads->count()), null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText(en2mm($staff->abroads->count().'ကြိမ်'), null, ['alignment' => 'both']);
        
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 30, 'spaceBefore' => 30];
         $pStyle_2 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 500];
         $pStyle_3 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 500];
         $pStyle_4 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
         $pStyle_5 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100];
-        $section->addPageBreak();
+        $section->addTextBreak();
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50, ['tblHeader' => true]);
         $table->addCell(14000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ကာလ', ['bold' => true], $pStyle_1);
@@ -198,11 +193,14 @@ class PdfStaffReport15 extends Component
         $table->addCell(8000, ['vMerge' => 'continue']);
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
         if ($staff->abroads->isNotEmpty()) {
-            foreach ($staff->abroads as $abroad) {
+            $latestAbroads = $staff->abroads
+            ? $staff->abroads->sortByDesc('to_date')->take(5)
+            : collect();
+            foreach ($latestAbroads as $abroad) {
                 $table->addRow();
                 $table->addCell(7000)->addText(formatDMYmm($abroad->from_date));
                 $table->addCell(7000)->addText(formatDMYmm($abroad->to_date));
-                $table->addCell(6000)->addText($abroad->country?->name,null,$pStyle_1);
+                $table->addCell(6000)->addText($abroad->countries->pluck('name')->join(', '),null,$pStyle_1);
                 $table->addCell(6000)->addText($abroad->particular,null,$pStyle_1);
                 $table->addCell(8000)->addText($abroad->training_success_count,null,$pStyle_1);
                 $table->addCell(8000)->addText($abroad->sponser,null,$pStyle_1);
@@ -216,10 +214,12 @@ class PdfStaffReport15 extends Component
             $table->addCell(8000)->addText();
             $table->addCell(8000)->addText();
         }
+        $section->addTextBreak();
         $section->addText('၁၄။' . 'ဇနီး/ခင်ပွန်း');
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
-        $table->addRow();
+        // $table->addRow();
+        $table->addRow(50, ['tblHeader' => true]);
         $textContent_1= "အမည်\n(အခြားအမည်များ\nရှိလျှင်လည်း\nဖော်ပြရန်)";
         $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent_3, ['bold' => true], $pStyle_1);
         $table->addCell(6000)->addText('လူမျိုး/နိုင်ငံသား', ['bold' => true], $pStyle_1);
@@ -228,7 +228,7 @@ class PdfStaffReport15 extends Component
 
         if ($staff->spouses->isNotEmpty()) {
             foreach ($staff->spouses as $spouse) {
-                $table->addRow();
+                $table->addRow(50);
                 $table->addCell(8000,['valign' => 'center'])->addText($spouse->name,null,$pStyle_1);
                 $table->addCell(6000,['valign' => 'center'])->addText($spouse->ethnic->name . '/' . $spouse->religion->name,null,$pStyle_1);
                 $table->addCell(5000,['valign' => 'center'])->addText($spouse->occupation,null,$pStyle_1);
@@ -282,34 +282,6 @@ class PdfStaffReport15 extends Component
             ],
         );
     }
-    // public function go_pdf($staff_id)
-    // {
-    //     // Assuming the Word file is uploaded and available in a public disk or storage location
-    //     // You can handle the file upload inside Livewire component like this:
-    //     $filePath = storage_path('app/your_files/' . $staff_id . '.docx'); // Adjust the file path according to where your file is stored
-        
-    //     if (file_exists($filePath)) {
-    //         $phpWord = IOFactory::load($filePath, 'MsDoc'); // Load Word file
-
-    //         // Create HTML from the Word file
-    //         $htmlWriter = IOFactory::createWriter($phpWord, 'HTML');
-    //         $htmlFilePath = storage_path('app/temp.html');
-    //         $htmlWriter->save($htmlFilePath);
-
-    //         // Load the HTML into PDF
-    //         $pdf = PDF::loadFile($htmlFilePath);
-    //         $pdfFilePath = storage_path('app/converted.pdf');
-    //         $pdf->save($pdfFilePath);
-
-    //         // Return the PDF as a download response
-    //         return response()->download($pdfFilePath)->deleteFileAfterSend(true);
-    //     } else {
-    //         // Handle the case where the file is not found
-    //         return response()->json(['error' => 'File not found.'], 404);
-    //     }
-    // }
-
-
     public function render()
     {
         $staff = Staff::where('id', $this->staff_id)->first();
