@@ -783,11 +783,11 @@ class StaffDetail extends Component
     public function add_edu()
     {
         $this->educations[] = [
-            'id' => '',
-            'education_group' => '',
-            'education_type' => '',
-            'education' => '',
-            'country_id' => '',
+            'id' => null,
+            'education_group' => null,
+            'education_type' => null,
+            'education' => null,
+            'country_id' => null,
             'education_types' => [],
             '_educations' => [],
             'degree_certificate' => '',
@@ -796,62 +796,61 @@ class StaffDetail extends Component
 
     public function add_recommendation()
     {
-        $this->recommendations[] = ['id' => '', 'recommend_by' => ''];
+        $this->recommendations[] = ['id' => null, 'recommend_by' => ''];
     }
 
     public function add_posting()
     {
-        $this->postings[] = ['id' => '', 'rank' => '', 'post' => '', 'from_date' => '', 'to_date' => null, 'department' => '', 'departments' => [], 'sub_department' => '', 'location' => '', 'remark' => '', 'ministry' => ''];
+        $this->postings[] = ['id' => null, 'rank' => null, 'post' => '', 'from_date' => null, 'to_date' => null, 'department' => null, 'departments' => [], 'sub_department' => null, 'location' => '', 'remark' => null, 'ministry' => null];
     }
 
     public function add_siblings()
     {
-        $this->siblings[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->siblings[] = ['id' => null, 'name' => '', 'ethnic' => null, 'religion' => null, 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => null, 'gender_id' => null];
     }
 
     public function add_father_siblings()
     {
-        $this->father_siblings[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->father_siblings[] = ['id' => null, 'name' => '', 'ethnic' => null, 'religion' => null, 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => null, 'gender_id' => null];
     }
 
     public function add_mother_siblings()
     {
-        $this->mother_siblings[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->mother_siblings[] = ['id' => null, 'name' => '', 'ethnic' => null, 'religion' => null, 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => null, 'gender_id' => null];
     }
 
     public function add_spouses()
     {
-        $this->spouses[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->spouses[] = ['id' => null, 'name' => '', 'ethnic' => null, 'religion' => null, 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => null, 'gender_id' => null];
     }
 
     public function add_children()
     {
-        $this->children[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->children[] = ['id' => null, 'name' => '', 'ethnic' => null, 'religion' => null, 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => null, 'gender_id' => null];
     }
 
     public function add_spouse_siblings()
     {
-        $this->spouse_siblings[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ''];
+        $this->spouse_siblings[] = ['id' => null, 'name' => '', 'ethnic' => null, 'religion' => null, 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => null, 'gender_id' => null];
     }
 
     public function add_spouse_father_siblings()
     {
-        $this->spouse_father_siblings[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => ' '];
+        $this->spouse_father_siblings[] = ['id' => null, 'name' => '', 'ethnic' => null, 'religion' => null, 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => null, 'gender_id' => null];;
     }
 
     public function add_spouse_mother_siblings()
     {
-        $this->spouse_mother_siblings[] = ['id' => '', 'name' => '', 'ethnic' => '', 'religion' => '', 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => '', 'gender_id' => '',
-        ];
+        $this->spouse_mother_siblings[] = ['id' => null, 'name' => '', 'ethnic' => null, 'religion' => null, 'place_of_birth' => '', 'occupation' => '', 'address' => '', 'relation' => null, 'gender_id' => null];
     }
 
     public function add_schools()
     {
         $this->schools[] = [
-            'id' => '',
-            'education_group' => '',
-            'education_type' => '',
-            'education' => '',
+            'id' => null,
+            'education_group' => null,
+            'education_type' => null,
+            'education' => null,
             'school_name' => '',
             'town' => '',
             'remark' => '',
@@ -865,13 +864,13 @@ class StaffDetail extends Component
     public function add_trainings()
     {
         $this->trainings[] = [
-            'id' => '',
+            'id' => null,
             'batch' => '',
-            'training_type' => '',
+            'training_type' => null,
             'from_date' => '',
             'to_date' => '',
             'location' => '',
-            'country' => '',
+            'country' => null,
             'training_location' => '',
             'remark' => '',
             'diploma_name' => '',
@@ -881,9 +880,9 @@ class StaffDetail extends Component
     public function add_awardings()
     {
         $this->awards[] = [
-            'id' => '',
-            'award_type' => '',
-            'award' => '',
+            'id' => null,
+            'award_type' => null,
+            'award' => null,
             'order_no' => '',
             'remark' => '',
         ];
@@ -891,28 +890,28 @@ class StaffDetail extends Component
 
     public function add_punishments()
     {
-        $this->punishments[] = ['id' => '', 'penalty_type' => '', 'reason' => '', 'from_date' => '', 'to_date' => ''];
+        $this->punishments[] = ['id' => null, 'penalty_type' => null, 'reason' => '', 'from_date' => '', 'to_date' => ''];
     }
 
     public function add_abroads()
     {
-        $this->abroads[] = ['id' => '', 'country' => [], 'particular' => '', 'training_success_fail' => false, 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
+        $this->abroads[] = ['id' => null, 'country' => [], 'particular' => '', 'training_success_fail' => false, 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
     }
 
     public function add_socials()
     {
-        $this->socials[] = ['id' => '', 'particular' => '', 'remark' => ''];
+        $this->socials[] = ['id' => null, 'particular' => '', 'remark' => ''];
     }
 
     public function add_staff_languages()
     {
-        $this->staff_languages[] = ['id' => '', 'language' => '', 'rank' => '', 'writing' => '', 'reading' => '', 'speaking' => '', 'remark' => ''];
+        $this->staff_languages[] = ['id' => null, 'language' => null, 'rank' => '', 'writing' => '', 'reading' => '', 'speaking' => '', 'remark' => ''];
     }
 
 
     public function add_staff_rewards()
     {
-        $this->staff_rewards[] = ['id' => '', 'name' => '', 'type' => '', 'year' => '', 'remark' => ''];
+        $this->staff_rewards[] = ['id' => null, 'name' => '', 'type' => null, 'year' => '', 'remark' => ''];
     }
 
     public function removeModel($propertyName, $model, $index, $attaches): void
@@ -1284,9 +1283,11 @@ class StaffDetail extends Component
 
     private function saveAbroads($staffId)
     {
+        $_validation = $this->validate_abroads();
+        $this->validate($_validation['validate'], $_validation['messages']);
         foreach ($this->abroads as $abroad) {
             $ab = Abroad::updateOrCreate([
-                'id' => $abroad['id'] == '' ? null : $abroad['id'],
+                'id' => $abroad['id'],
             ],[
                 'staff_id' => $staffId,
                 'particular' => $abroad['particular'],
@@ -1294,8 +1295,8 @@ class StaffDetail extends Component
                 'training_success_count' => $abroad['training_success_count'],
                 'sponser' => $abroad['sponser'],
                 'meet_with' => $abroad['meet_with'],
-                'from_date' => $abroad['from_date'],
-                'to_date' => $abroad['to_date'],
+                'from_date' => $abroad['from_date'] == '' ? null : $abroad['from_date'],
+                'to_date' => $abroad['to_date'] == '' ? null : $abroad['to_date'],
                 'actual_abroad_date' => '2024-12-09',
                 'position' => $abroad['position'],
             ]);
@@ -1303,11 +1304,35 @@ class StaffDetail extends Component
         }
     }
 
+    public function validate_abroads()
+    {
+        $validations = [
+            'abroads.*.country' => 'required',
+            'abroads.*.particular' => 'required',
+            'abroads.*.from_date' => 'required',
+            'abroads.*.to_date' => 'required',
+        ];
+
+        $validation_messages = [
+            'abroads.*.country.required' => 'Field is required.',
+            'abroads.*.particular.required' => 'Field is required.',
+            'abroads.*.from_date.required' => 'Field is required.',
+            'abroads.*.to_date.required' => 'Field is required.',
+        ];
+
+        return [
+            'validate' => $validations,
+            'messages' => $validation_messages,
+        ];
+    }
+
     private function saveSocials($staffId)
     {
+        $_validation = $this->validate_socials();
+        $this->validate($_validation['validate'], $_validation['messages']);
         foreach ($this->socials as $social) {
             SocialActivity::updateOrCreate([
-                'id' => $social['id'] == '' ? null : $social['id'],
+                'id' => $social['id'],
             ],[
                 'staff_id' => $staffId,
                 'particular' => $social['particular'],
@@ -1316,14 +1341,32 @@ class StaffDetail extends Component
         }
     }
 
+    public function validate_socials()
+    {
+        $validations = [
+            'socials.*.particular' => 'required',
+        ];
+
+        $validation_messages = [
+            'socials.*.particular.required' => 'Field is required.',
+        ];
+
+        return [
+            'validate' => $validations,
+            'messages' => $validation_messages,
+        ];
+    }
+
     private function saveStaffLanguages($staffId)
     {
+        $_validation = $this->validate_staff_languages();
+        $this->validate($_validation['validate'], $_validation['messages']);
         foreach ($this->staff_languages as $lang) {
             StaffLanguage::updateOrCreate([
-                'id' => $lang['id'] == '' ? null : $lang['id'],
+                'id' => $lang['id'],
             ],[
                 'staff_id' => $staffId,
-                'language_id' => $lang['language'],
+                'language_id' => $lang['language'] == '' ? null : $lang['language'],
                 'rank' => $lang['rank'],
                 'writing' => $lang['writing'],
                 'reading' => $lang['reading'],
@@ -1333,6 +1376,22 @@ class StaffDetail extends Component
         }
     }
 
+    public function validate_staff_languages()
+    {
+        $validations = [
+            'staff_languages.*.language' => 'required',
+        ];
+
+        $validation_messages = [
+            'staff_languages.*.language.required' => 'Field is required.',
+        ];
+
+        return [
+            'validate' => $validations,
+            'messages' => $validation_messages,
+        ];
+    }
+
     private function saveStaffRewards($staffId)
     {
         $_validation = $this->validate_rewards();
@@ -1340,11 +1399,11 @@ class StaffDetail extends Component
 
         foreach ($this->staff_rewards as $reward) {
             Reward::updateOrCreate([
-                'id' => $reward['id'] == '' ? null : $reward['id'],
+                'id' => $reward['id'],
             ],[
                 'staff_id' => $staffId,
                 'name' => $reward['name'],
-                'type' => $reward['type'],
+                'type' => $reward['type'] == '' ? null : $reward['type'],
                 'year' => $reward['year'],
                 'remark' => $reward['remark'],
             ]);
@@ -1374,157 +1433,160 @@ class StaffDetail extends Component
 
     private function saveSchools($staffId)
     {
-        $rules = [
-            'schools.*.education_group' => 'required',
-            'schools.*.education_type' => 'required',
-            'schools.*.education' => '',
-            'schools.*.school_name' => 'required|string|max:255',
-            'schools.*.town' => 'required|string|max:255',
-            'schools.*.from_date' => 'required',
-            'schools.*.to_date' => 'required',
-            'schools.*.remark' => 'nullable|string|max:1000',
-        ];
-
-        $messages = [
-            'schools.*.education_group.required' => 'The education group field is required.',
-            'schools.*.education_type.required' => 'The education type field is required.',
-            'schools.*.school_name.required' => 'The school name field is required.',
-            'schools.*.school_name.string' => 'The school name must be a string.',
-            'schools.*.school_name.max' => 'The school name may not exceed 255 characters.',
-            'schools.*.town.required' => 'The town field is required.',
-            'schools.*.town.string' => 'The town must be a string.',
-            'schools.*.town.max' => 'The town may not exceed 255 characters.',
-            'schools.*.from_date.required' => 'The start date is required.',
-            'schools.*.to_date.required' => 'The end date is required.',
-            'schools.*.remark.string' => 'The remark must be a string.',
-            'schools.*.remark.max' => 'The remark may not exceed 1000 characters.',
-        ];
-
-        $this->validate($rules, $messages);
+        $_validation = $this->validate_schools();
+        $this->validate($_validation['validate'], $_validation['messages']);
         foreach ($this->schools  as $school) {
             School::updateOrCreate([
-              'id' => $school['id'] == '' ? null : $school['id'],
+              'id' => $school['id'],
             ],[
                 'staff_id' => $staffId,
-                'education_group_id' => $school['education_group'],
-                'education_type_id' => $school['education_type'],
-                'education' => $school['education'],
+                'education_group_id' => $school['education_group'] == '' ? null : $school['education_group'],
+                'education_type_id' => $school['education_type'] == '' ? null : $school['education_type'],
+                'education' => $school['education'] == '' ? null : $school['education'],
                 'school_name' => $school['school_name'],
                 'town' => $school['town'],
-                'from_date' => $school['from_date'],
-                'to_date' => $school['to_date'],
+                'from_date' => $school['from_date'] == '' ? null : $school['from_date'],
+                'to_date' => $school['to_date'] == '' ? null : $school['to_date'],
                 'remark' => $school['remark'],
             ]);
         }
     }
+
+    public function validate_schools()
+    {
+        $validations = [
+            'schools.*.education_group' => 'required',
+            'schools.*.education_type' => 'required',
+            'schools.*.school_name' => 'required',
+            'schools.*.from_date' => 'required',
+            'schools.*.to_date' => 'required',
+        ];
+
+        $validation_messages = [
+            'schools.*.education_group.required' => 'This field is required.',
+            'schools.*.education_type.required' => 'This field is required.',
+            'schools.*.school_name.required' => 'This field is required.',
+            'schools.*.from_date.required' => 'This field is required.',
+            'schools.*.to_date.required' => 'This field is required.',
+        ];
+
+        return [
+            'validate' => $validations,
+            'messages' => $validation_messages,
+        ];
+    }
+
     private function saveAwards($staffId)
     {
-        $rules = [
-            'awards.*.award_type' => 'required',
-            'awards.*.award' => 'required',
-            'awards.*.order_no' => 'required|string',
-            'awards.*.remark' => '',
-        ];
-
-        $messages = [
-            'awards.*.award_type.required' => 'The award type is required.',
-
-            'awards.*.award.required' => 'The award is required.',
-
-            'awards.*.order_no.string' => 'The order number must be a string.',
-            'awards.*.order_no.required' => 'The order no is required.',
-        ];
-
-        $this->validate($rules, $messages);
+        $_validation = $this->validate_awards();
+        $this->validate($_validation['validate'], $_validation['messages']);
         foreach ($this->awards as $award) {
             Awarding::updateOrCreate([
-                'id' => $award['id'] == '' ? null : $award['id'],
+                'id' => $award['id'],
             ],[
                 'staff_id' => $staffId,
-                'award_type_id' => $award['award_type'],
-                'award_id' => $award['award'],
+                'award_type_id' => $award['award_type'] == '' ? null : $award['award_type'],
+                'award_id' => $award['award'] == '' ? null : $award['award'],
                 'order_no' => $award['order_no'],
                 'remark' => $award['remark'] ?: null,
             ]);
         }
     }
 
+    public function validate_awards()
+    {
+        $validations = [
+            'awards.*.award_type' => 'required',
+            'awards.*.award' => 'required',
+        ];
+
+        $validation_messages = [
+            'awards.*.award_type.required' => 'This field is required.',
+            'awards.*.award.required' => 'This field is required.',
+        ];
+
+        return [
+            'validate' => $validations,
+            'messages' => $validation_messages,
+        ];
+    }
+
     // validation done
     private function saveTrainings($staffId)
     {
-        $rules = [
-            'trainings.*.training_type' => 'required|numeric',
-            'trainings.*.diploma_name' => 'string',
-            'trainings.*.from_date' => 'required|date|date_format:Y-m-d',
-            'trainings.*.to_date' => 'required|date|after_or_equal:trainings.*.from_date|date_format:Y-m-d',
-            'trainings.*.location' => 'nullable|string',
-            'trainings.*.country_id' => 'nullable|numeric',
-            'trainings.*.remark' => 'nullable|string',
-            'trainings.*.training_location_id' => 'nullable|numeric',
-        ];
-
-        $messages = [
-            'trainings.*.training_type.required' => 'The training type is required.',
-            'trainings.*.training_type.numeric' => 'The training type must be a valid number.',
-            'trainings.*.training_type.exists' => 'The selected training type is invalid.',
-
-            'trainings.*.diploma_name.required' => 'The diploma name is required.',
-            'trainings.*.diploma_name.string' => 'The diploma name must be a string.',
-            'trainings.*.diploma_name.max' => 'The diploma name may not exceed 255 characters.',
-
-            'trainings.*.from_date.required' => 'The start date is required.',
-            'trainings.*.from_date.date' => 'The start date must be a valid date.',
-            'trainings.*.from_date.date_format' => 'The start date must be in the format YYYY-MM-DD.',
-
-            'trainings.*.to_date.required' => 'The end date is required.',
-            'trainings.*.to_date.date' => 'The end date must be a valid date.',
-            'trainings.*.to_date.after_or_equal' => 'The end date must be after or equal to the start date.',
-            'trainings.*.to_date.date_format' => 'The end date must be in the format YYYY-MM-DD.',
-
-            'trainings.*.location.string' => 'The location must be a string.',
-            'trainings.*.location.max' => 'The location may not exceed 255 characters.',
-
-            'trainings.*.country_id.numeric' => 'The country must be a valid number.',
-            'trainings.*.country_id.exists' => 'The selected country is invalid.',
-
-            'trainings.*.remark.string' => 'The remark must be a string.',
-            'trainings.*.remark.max' => 'The remark may not exceed 1000 characters.',
-
-            'trainings.*.training_location_id.numeric' => 'The training location must be a valid number.',
-            'trainings.*.training_location_id.exists' => 'The selected training location is invalid.',
-        ];
-        $this->validate($rules, $messages);
+        $_validation = $this->validate_trainings();
+        $this->validate($_validation['validate'], $_validation['messages']);
         foreach ($this->trainings as $training) {
             Training::updateOrCreate([
-                'id' => $training['id'] == '' ? null : $training['id'],
+                'id' => $training['id'],
             ],[
                 'staff_id' => $staffId,
-                'training_type_id' => $training['training_type'],
+                'training_type_id' => $training['training_type'] == '' ? null : $training['training_type'],
                 'diploma_name' => $training['diploma_name'],
                 'batch' => $training['batch'],
-                'from_date' => $training['from_date'],
-                'to_date' => $training['to_date'],
+                'from_date' => $training['from_date'] == '' ? null : $training['from_date'],
+                'to_date' => $training['to_date'] == '' ? null : $training['to_date'],
                 'location' => $training['location'],
-                'country_id' => $training['country'],
-                'training_location_id' => $training['training_location'],
+                'country_id' => $training['country'] == '' ? null : $training['country'],
+                'training_location_id' => $training['training_location'] == '' ? null : $training['training_location'],
                 'remark' => $training['remark'],
             ]);
         }
     }
 
+    public function validate_trainings(){
+        $validations = [
+            'trainings.*.training_type' => 'required',
+            'trainings.*.from_date' => 'required',
+            'trainings.*.to_date' => 'required',
+        ];
+
+        $validation_messages = [
+            'trainings.*.training_type.required' => 'This Field is required.',
+            'trainings.*.from_date.required' => 'This Field is required.',
+            'trainings.*.to_date.required' => 'This Field is required.',
+        ];
+
+        return [
+            'validate' => $validations,
+            'messages' => $validation_messages,
+        ];
+    }
+
     private function savePunishments($staffId)
     {
+        $_validation = $this->validate_punishments();
+        $this->validate($_validation['validate'], $_validation['messages']);
         foreach ($this->punishments as $punishment) {
             Punishment::updateOrCreate([
-                'id' =>   $punishment['id'] == '' ? null : $punishment['id']
+                'id' => $punishment['id'],
             ],[
                 'staff_id' => $staffId,
-                'penalty_type_id' => $punishment['penalty_type'],
+                'penalty_type_id' => $punishment['penalty_type'] == '' ? null : $punishment['penalty_type'],
                 'reason' => $punishment['reason'],
-                'from_date' => $punishment['from_date'],
-                'to_date' => $punishment['to_date'],
+                'from_date' => $punishment['from_date'] == '' ? null : $punishment['from_date'],
+                'to_date' => $punishment['to_date'] == '' ? null : $punishment['to_date'],
             ]);
         }
+    }
+
+    public function validate_punishments(){
+        $validations = [
+            'punishments.*.training_type' => 'required',
+            'punishments.*.from_date' => 'required',
+            'punishments.*.to_date' => 'required',
+        ];
+
+        $validation_messages = [
+            'punishments.*.training_type.required' => 'This Field is required.',
+            'punishments.*.from_date.required' => 'This Field is required.',
+            'punishments.*.to_date.required' => 'This Field is required.',
+        ];
+
+        return [
+            'validate' => $validations,
+            'messages' => $validation_messages,
+        ];
     }
 
     private function saveEducations($staffId)
@@ -1539,10 +1601,10 @@ class StaffDetail extends Component
             : $degree_path = Storage::disk('upload')->put('staffs', $education['degree_certificate']);
 
             StaffEducation::updateOrCreate([
-                'id' => $education['id'] == '' ? null : $education['id'],
+                'id' => $education['id'],
             ], [
-                'education_group_id' => $education['education_group'],
-                'education_type_id' => $education['education_type'],
+                'education_group_id' => $education['education_group'] == '' ? null : $education['education_group'],
+                'education_type_id' => $education['education_type'] == '' ? null : $education['education_type'],
                 'education_id' => $education['education'] == '' ? null : $education['education'],
                 'staff_id' => $staffId,
                 'country_id' => $education['country_id'] == '' ? null : $education['country_id'],
@@ -1571,9 +1633,11 @@ class StaffDetail extends Component
 
     private function saveRecommendations($staffId)
     {
+        $_validation = $this->validate_recommendations();
+        $this->validate($_validation['validate'], $_validation['messages']);
         foreach ($this->recommendations as $recommendation) {
             Recommendation::updateOrCreate([
-                'id' => $recommendation['id'] == '' ? null : $recommendation['id'],
+                'id' => $recommendation['id'],
             ],[
                 'recommend_by' => $recommendation['recommend_by'],
                 'staff_id' => $staffId,
@@ -1581,23 +1645,61 @@ class StaffDetail extends Component
         }
     }
 
+    public function validate_recommendations()
+    {
+        $validations = [
+            'recommendations.*.recommend_by' => 'required',
+        ];
+
+        $validation_messages = [
+            'recommendations.*.recommend_by.required' => 'Field is required.',
+        ];
+
+        return [
+            'validate' => $validations,
+            'messages' => $validation_messages,
+        ];
+    }
+
     private function savePostings($staffId)
     {
+        $_validation = $this->validate_postings();
+        $this->validate($_validation['validate'], $_validation['messages']);
         foreach ($this->postings as $posting) {
             Posting::updateOrCreate([
-                'id' => $posting['id'] == '' ? null : $posting['id'],
+                'id' => $posting['id'],
             ],[
                 'staff_id' => $staffId,
-                'rank_id' => $posting['rank'],
-                'from_date' => $posting['from_date'],
-                'to_date' => $posting['to_date'],
+                'rank_id' => $posting['rank'] == '' ? null : $posting['rank'],
+                'from_date' => $posting['from_date'] == '' ? null : $posting['from_date'],
+                'to_date' => $posting['to_date'] == '' ? null : $posting['to_date'],
                 'department_id' => $posting['department'] != '' ? $posting['department'] : null,
-                'sub_department' => $posting['sub_department'] ?: null,
+                'sub_department' => $posting['sub_department'] == '' ? null : $posting['sub_department'],
                 'location' => $posting['location'],
-                'remark' => $posting['remark'] ?: null,
-                'ministry_id' => $posting['ministry'],
+                'remark' => $posting['remark'],
+                'ministry_id' => $posting['ministry'] == '' ? null : $posting['ministry'],
             ]);
         }
+    }
+
+    public function validate_postings()
+    {
+        $validations = [
+            'postings.*.rank' => 'required',
+            'postings.*.from_date' => 'required',
+            'postings.*.ministry' => 'required',
+        ];
+
+        $validation_messages = [
+            'postings.*.rank.required' => 'Field is required.',
+            'postings.*.from_date.required' => 'Field is required.',
+            'postings.*.ministry.required' => 'Field is required.',
+        ];
+
+        return [
+            'validate' => $validations,
+            'messages' => $validation_messages,
+        ];
     }
 
     private function relativeFields($staffId, $relative)
@@ -1605,13 +1707,13 @@ class StaffDetail extends Component
         $fields = [
             'staff_id' => $staffId,
             'name' => $relative['name'],
-            'ethnic_id' => $relative['ethnic'],
-            'religion_id' => $relative['religion'],
-            'place_of_birth' => $relative['place_of_birth'],
-            'gender_id' => $relative['gender_id'],
+            'ethnic_id' => $relative['ethnic'] == '' ? null : $relative['ethnic'],
+            'religion_id' => $relative['religion'] == '' ? null : $relative['religion'] ,
+            'place_of_birth' => $relative['place_of_birth'] == '' ? null : $relative['place_of_birth'] ,
+            'gender_id' => $relative['gender_id'] == '' ? null : $relative['gender_id'] ,
             'occupation' => $relative['occupation'],
             'address' => $relative['address'],
-            'relation_id' => $relative['relation'],
+            'relation_id' => $relative['relation'] == '' ? null : $relative['relation'] ,
         ];
 
         return $fields;
@@ -1620,6 +1722,8 @@ class StaffDetail extends Component
     private function saveRelatives($staffId)
     {
         foreach ($this->siblings as $relative) {
+            $_validation = $this->validate_relatives('siblings');
+            $this->validate($_validation['validate'], $_validation['messages']);
             Sibling::updateOrCreate([
                 'id' => $relative['id'] == '' ? null : $relative['id'],
             ],
@@ -1627,6 +1731,8 @@ class StaffDetail extends Component
         }
 
         foreach ($this->father_siblings as $relative) {
+            $_validation = $this->validate_relatives('father_siblings');
+            $this->validate($_validation['validate'], $_validation['messages']);
             FatherSibling::updateOrCreate([
                 'id' => $relative['id'] == '' ? null : $relative['id'],
             ],
@@ -1634,6 +1740,8 @@ class StaffDetail extends Component
         }
 
         foreach ($this->mother_siblings as $relative) {
+            $_validation = $this->validate_relatives('mother_siblings');
+            $this->validate($_validation['validate'], $_validation['messages']);
             MotherSibling::updateOrCreate([
                 'id' => $relative['id'] == '' ? null : $relative['id'],
             ],
@@ -1641,6 +1749,8 @@ class StaffDetail extends Component
         }
 
         foreach ($this->spouses as $relative) {
+            $_validation = $this->validate_relatives('spouses');
+            $this->validate($_validation['validate'], $_validation['messages']);
             Spouse::updateOrCreate([
                 'id' => $relative['id'] == '' ? null : $relative['id'],
             ],
@@ -1648,6 +1758,8 @@ class StaffDetail extends Component
         }
 
         foreach ($this->children as $relative) {
+            $_validation = $this->validate_relatives('children');
+            $this->validate($_validation['validate'], $_validation['messages']);
             Children::updateOrCreate([
                 'id' => $relative['id'] == '' ? null : $relative['id'],
             ],
@@ -1655,6 +1767,8 @@ class StaffDetail extends Component
         }
 
         foreach ($this->spouse_siblings as $relative) {
+            $_validation = $this->validate_relatives('spouse_siblings');
+            $this->validate($_validation['validate'], $_validation['messages']);
             SpouseSibling::updateOrCreate([
                 'id' => $relative['id'] == '' ? null : $relative['id'],
             ],
@@ -1662,6 +1776,8 @@ class StaffDetail extends Component
         }
 
         foreach ($this->spouse_father_siblings as $relative) {
+            $_validation = $this->validate_relatives('spouse_father_siblings');
+            $this->validate($_validation['validate'], $_validation['messages']);
             SpouseFatherSibling::updateOrCreate([
                 'id' => $relative['id'] == '' ? null : $relative['id'],
             ],
@@ -1669,11 +1785,41 @@ class StaffDetail extends Component
         }
 
         foreach ($this->spouse_mother_siblings as $relative) {
+            $_validation = $this->validate_relatives('spouse_mother_siblings');
+            $this->validate($_validation['validate'], $_validation['messages']);
             SpouseMotherSibling::updateOrCreate([
                 'id' => $relative['id'] == '' ? null : $relative['id'],
             ],
             $this->relativeFields($staffId, $relative));
         }
+    }
+
+    public function validate_relatives($relative)
+    {
+        $validations = [
+            "{$relative}.*.name" => 'required',
+            "{$relative}.*.ethnic" => 'required',
+            "{$relative}.*.religion" => 'required',
+            "{$relative}.*.place_of_birth" => 'required',
+            "{$relative}.*.gender_id" => 'required',
+            "{$relative}.*.address" => 'required',
+            "{$relative}.*.relation" => 'required',
+        ];
+
+        $validation_messages = [
+            "{$relative}.*.name.required" => 'Field is required',
+            "{$relative}.*.ethnic.required" => 'Field is required',
+            "{$relative}.*.religion.required" => 'Field is required',
+            "{$relative}.*.place_of_birth.required" => 'Field is required',
+            "{$relative}.*.gender_id.required" => 'Field is required',
+            "{$relative}.*.address.required" => 'Field is required',
+            "{$relative}.*.relation.required" => 'Field is required',
+        ];
+
+        return [
+            'validate' => $validations,
+            'messages' => $validation_messages,
+        ];
     }
 
     public function updatedCurrentAddressRegionId($value)
