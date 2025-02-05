@@ -33,16 +33,20 @@
                     <tbody>
                        @foreach($staffs as $staff)
                             <tr>
-                                <td class="border border-black text-right p-1">{{ $loop->index+1}}</td>
+                                <td class="border border-black text-right p-1">{{ en2mm($loop->index+1)}}</td>
                                 <td class="border border-black text-right p-1">{{ $staff->name}}</td>
                                 
-                                <td class="border border-black text-right p-1">@foreach($staff->postings as $posting)
-                                    {{ $posting->rank?->name}}
-                                    @endforeach
+                                <td class="border border-black text-right p-1">
+                                    {{$staff->postings->map(function ($posting) {
+                                        return $posting->rank?->name;
+                                    })->join(', ')}}
                                 </td>
-                                <td class="border border-black text-right p-1">@foreach($staff->postings as $posting)
-                                    {{ $posting->division?->name}}
-                                    @endforeach</td>
+                                <td class="border border-black text-right p-1">
+                                   
+                                    {{$staff->postings->map(function ($posting) {
+                                        return $posting->division?->name;
+                                    })->join(', ')}}
+                                </td>
                                 <td class="border border-black text-right p-1">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
                                 <td class="border border-black text-right p-1"> @php
                                     $currentDate = Carbon\Carbon::now();

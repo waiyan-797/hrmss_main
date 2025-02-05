@@ -66,7 +66,7 @@ class LocalTrainingReport extends Component
         $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
         $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
         
-        $section->addTitle($this->trainingLocation==1? 'Local Training Report' : 'Local Online Training Report', 2);
+        $section->addTitle($this->trainingLocation==1? 'Local Training Report' : 'Foreign  Training Report', 2);
 
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
             $table->addRow();
@@ -104,72 +104,9 @@ class LocalTrainingReport extends Component
                     $table->addCell(2500)->addText(formatDMYmm($training->to_date), null, ['indentation' => ['left' => 100]]);
                     $table->addCell(3000)->addText($training->location, null, ['indentation' => ['left' => 100]]);
                     $table->addCell(2000)->addText($training->training_location?->name, null, ['indentation' => ['left' => 100]]);
-              
-                        // $table->addRow();
-                        // $table->addCell(1000, ['vMerge' => 'continue']);
-                        // $table->addCell(2000, ['vMerge' => 'continue']);
-                        // $table->addCell(2000, ['vMerge' => 'continue']);
-                        // $table->addCell(2000)->addText($training->training_type->name);
-                        // $table->addCell(2000,['vMerge' => 'continue'])->addText();
-                        // $table->addCell(2000,['vMerge' => 'continue'])->addText();
-                        // $table->addCell(2000, ['vMerge' => 'continue'])->addText();
-                        // $table->addCell(2000, ['vMerge' => 'continue'])->addText();
                     }
                   
                 }
-               
-
-        // if($this->trainingLocation==2)
-        // {
-        //     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        //     $table->addRow();
-        //     $table->addCell(1000)->addText('စဥ်');
-        //     $table->addCell(2000)->addText('အမည်/ရာထူး');
-        //     $table->addCell(2000)->addText('သင်တန်းကာလ(မှ)');
-        //     $table->addCell(2000)->addText('သင်တန်းကာလ(အထိ)');
-        //     $table->addCell(2000)->addText('သွားရောက်သည့်နိုင်ငံ');
-        //     $table->addCell(2000)->addText('ပြည်ပသင်တန်းသွားရောက်ခဲ့သော အကြောင်းအရာ');
-        //     $table->addCell(2000)->addText('ထောက်ပံ့သည့်အဖွဲ့အစည်း');
-        // }
-        // else
-        // {
-        //     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        //     $table->addRow();
-        //     $table->addCell(700)->addText('စဥ်',['bold'=>true],['alignment'=>'center','spaceBefore'=>50]);
-        //     $table->addCell(3500)->addText('အမည်',['bold'=>true],['alignment'=>'center','spaceBefore'=>50]);
-        //     $table->addCell(3500)->addText('ရာထူး',['bold'=>true],['alignment'=>'center','spaceBefore'=>50]);
-        //     $table->addCell(4000)->addText('သင်တန်းအမည်',['bold'=>true],['alignment'=>'center','spaceBefore'=>50]);
-        //     $table->addCell(2500)->addText('သင်တန်း   ကာလ(မှ)',['bold'=>true],['alignment'=>'center','spaceBefore'=>50]);
-        //     $table->addCell(2500)->addText('သင်တန်း    ကာလ(အထိ)',['bold'=>true],['alignment'=>'center','spaceBefore'=>50]);
-        //     $table->addCell(3000)->addText('သင်တန်းနေရာ/    ဒေသ',['bold'=>true],['alignment'=>'center','spaceBefore'=>50]);
-        //     $table->addCell(2000)->addText('သင်တန်း   အမျိုးအစား',['bold'=>true],['alignment'=>'center','spaceBefore'=>50]);
-        // }
-
-
-        // foreach ($staffs as $index => $staff) {
-        //     foreach ($staff->trainings as $index=> $training) {
-
-        //         $table->addRow();
-        //         $table->addCell(1000,['vMerge' => 'restart'])->addText($index + 1);
-        //         $table->addCell(2000,['vMerge' => 'restart'])->addText($staff->name);
-        //         $table->addCell(2000,['vMerge' => 'restart'])->addText($staff->current_rank->name);
-        //         $table->addCell(2000,['vMerge' => 'restart'])->addText($training->training_type->name);
-        //         $table->addCell(2000,['vMerge' => 'restart'])->addText($training->from_date);
-        //         $table->addCell(2000,['vMerge' => 'restart'])->addText($training->to_date);
-        //         $table->addCell(2000,['vMerge' => 'restart'])->addText($training->location);
-        //         $table->addCell(2000,['vMerge' => 'restart'])->addText($training->training_location?->name);
-        //         $table->addRow();
-        //         $table->addCell(1000, ['vMerge' => 'continue']);
-        //         $table->addCell(2000, ['vMerge' => 'continue']);
-        //         $table->addCell(2000, ['vMerge' => 'continue']);
-        //         $table->addCell(2000)->addText($training->training_type->name);
-        //         $table->addCell(2000,['vMerge' => 'continue'])->addText();
-        //         $table->addCell(2000,['vMerge' => 'continue'])->addText();
-        //         $table->addCell(2000, ['vMerge' => 'continue'])->addText();
-        //         $table->addCell(2000, ['vMerge' => 'continue'])->addText();
-        //     }
-          
-        // }
        
         $fileName = 'local_training_report.docx';
         $tempFile = tempnam(sys_get_temp_dir(), $fileName);

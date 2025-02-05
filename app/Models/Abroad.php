@@ -13,4 +13,6 @@ class Abroad extends Model
     {
         return $this->belongsToMany(Country::class, 'abroad_countries');
     }
+  
+
 }

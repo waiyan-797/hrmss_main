@@ -62,35 +62,6 @@ public $staff_id;
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
        
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
-        // $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
-        // if ($imagePath && file_exists($imagePath)) {
-        // $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
-        // } else {
-        // $defaultImagePath = public_path('img/user.png');
-        // $section->addImage($defaultImagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
-        // }
-        // $textBoxStyle = [
-        //     'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
-        //     'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
-        //     // 'borderColor' => 'FFFFFF', // Set to white for no visible border
-        //     'borderSize' => 0,    
-        //     'positioning' => 'relative', // Relative positioning
-        //     'posHorizontal' => 'right', // Align next to inline content
-        //     'posHorizontalRel' => 'margin', // Relative to margin (inline context)
-        //     'marginLeft' => 0, // Small spacing from the left
-            
-        // ];
-        // $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
-        //     if ($imagePath && file_exists($imagePath)) {
-        //         $textBox = $section->addTextBox($textBoxStyle);
-        //         $textBox->addImage($imagePath, ['width' => 62, 'height' => 69, 'align' => 'right']);
-        //     } else {
-        //     $defaultImagePath = public_path('img/user.png');
-        //     $textBox = $section->addTextBox($textBoxStyle);
-    
-        //     $textBox->addImage($defaultImagePath, ['width' =>62, 'height' => 65, 'align' => 'center', 'padding'=>0 ]);
-        //    }
-
         $textBoxStyle = [
             'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
             'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
@@ -118,7 +89,7 @@ public $staff_id;
         $table->addCell(2000)->addText('၁။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText('ဝန်ထမ်းအမှတ်',null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['align' => 'center']);
-        $table->addCell(16000)->addText($staff->staff_no,null, ['align' => 'right']); 
+        $table->addCell(16000)->addText($staff->staff_no ? $staff->staff_no :'မရှိပါ',null, ['align' => 'both']); 
         $table->addRow();
         $table->addCell(2000)->addText('၂။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText('အမည်',null,['alignment'=>'both']); 
@@ -129,13 +100,13 @@ public $staff_id;
         $table->addCell(2000)->addText('၃။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText('ငယ်အမည်',null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->nick_name,null, ['alignment' => 'both']); 
+        $table->addCell(16000)->addText($staff->nick_name ? $staff->nick_name :'မရှိပါ',null, ['alignment' => 'both']); 
 
         $table->addRow();
         $table->addCell(2000)->addText('၄။',null,['alignment'=>'center']);
         $table->addCell(15000)->addText('အခြားအမည်',null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->other_name,null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->other_name ? $staff->other_name :'မရှိပါ',null, ['alignment' => 'both']);
         
         $table->addRow();
         $table->addCell(2000)->addText('၅။',null,['alignment'=>'center']); 
@@ -242,7 +213,7 @@ public $staff_id;
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
         $table->addCell(16000)->addText( ($staff->current_address_street?? '') . 
         ($staff->current_address_ward ?'၊'. $staff->current_address_ward :'') .
-        ( $staff->current_address_township_or_town?->name ? '၊'. $staff->current_address_township_or_town?->name : '') . 
+        ( $staff->current_address_township_or_town?->name ? '၊'. $staff->current_address_township_or_town?->name.'မြို့နယ်' : '') . 
         ($staff->current_address_region?->name ? '၊'. $staff->current_address_region?->name : ''  ),null, ['alignment' => 'both']);
         $table->addRow();
         $table->addCell(2000)->addText('၂၃။',null,['alignment'=>'center']); 
@@ -250,27 +221,21 @@ public $staff_id;
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
         $table->addCell(16000)->addText( ($staff->permanent_address_street?? '') . 
         ($staff->permanent_address_ward ?'၊'. $staff->permanent_address_ward :'') .
-        ( $staff->permanent_address_township_or_town?->name ? '၊'. $staff->permanent_address_township_or_town?->name : '') . 
+        ( $staff->permanent_address_township_or_town?->name ? '၊'. $staff->permanent_address_township_or_town?->name.'မြို့နယ်' : '') . 
         ($staff->permanent_address_region?->name ? '၊'. $staff->permanent_address_region?->name : ''  ),null, ['alignment' => 'both']);
         $table->addRow();
         $table->addCell(2000)->addText('၂၄။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText('ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာဖော်ပြရန်မလို)',null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->previous_addresses,null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->previous_addresses ? $staff->previous_addresses :'မရှိပါ',null, ['alignment' => 'both']);
         
     $table->addRow();
     $table->addCell(2000)->addText('၂၅။',null,['alignment'=>'center']);
     $table->addCell(15000)->addText('ပညာအရည်အချင်း',null,['alignment'=>'both']);
     $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-    $table->addCell(16000)->addText('',null, ['alignment' => 'both']);
-
-foreach ($staff->staff_educations as $education) {
-    $table->addRow();
-    $table->addCell(2000)->addText('',null, ['alignment' => 'center']);
-    $table->addCell(15000)->addText('',null, ['alignment' => 'both']);
-    $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-    $table->addCell(16000)->addText($education->education->name . '၊',null, ['alignment' => 'both']);
-}
+    $table->addCell(16000)->addText($staff->staff_educations->map(function ($education) {
+        return $education->education->name;
+    })->join(', '),null, ['alignment' => 'both']);
         $section->addText('အလုပ်အကိုင်', ['bold' => true],['alignment'=>'center']);
         $table->addRow();
         $table->addCell(2000)->addText('၁။',null,['alignment'=>'center']);
@@ -282,24 +247,18 @@ foreach ($staff->staff_educations as $education) {
         $table->addCell(2000)->addText('(က)',null,['alignment'=>'center']);
         $table->addCell(15000)->addText('ကိုယ်ပိုင်အမှတ်',null,['alignment'=>'both']);
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->military_solider_no,null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->military_solider_no ? $staff->military_solider_no :'မရှိပါ',null, ['alignment' => 'both']);
         
         $table->addRow();
         $table->addCell(2000)->addText('(ခ)',null,['alignment'=>'center']);
         $table->addCell(15000)->addText('တပ်သို့ဝင်သည့်နေ့',null,['alignment'=>'both']);
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
         $table->addCell(16000)->addText(formatDMYmm($staff->military_join_date),null, ['alignment' => 'both']);
-        
-        // $table->addRow();
-        // $table->addCell(2000)->addText('(ဂ)',null,['alignment'=>'center']);
-        // $table->addCell(15000)->addText(' ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်',null,['alignment'=>'both']);
-        // $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        // $table->addCell(16000)->addText($staff->military_dsa_no,null, ['alignment' => 'both']);
         $table->addRow();
         $table->addCell(2000)->addText('(ဂ)', null, ['alignment' => 'left']);
         $table->addCell(15000)->addText('ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်', null, ['alignment' => 'left']);
         $table->addCell(1000)->addText('-', null, ['alignment' => 'left']);
-        $table->addCell(16000)->addText($staff->military_dsa_no, null, ['alignment' => 'left']);
+        $table->addCell(16000)->addText($staff->military_dsa_no ? $staff->military_dsa_no :'မရှိပါ', null, ['alignment' => 'left']);
 
         
         $table->addRow();
@@ -318,25 +277,18 @@ foreach ($staff->staff_educations as $education) {
         $table->addCell(2000)->addText('(စ)',null,['alignment'=>'center']);
         $table->addCell(15000)->addText('ထွက်သည့်အကြောင်း',null,['alignment'=>'both']);
         $table->addCell(2000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->military_leave_reason,null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->military_leave_reason ? $staff->military_leave_reason :'မရှိပါ',null, ['alignment' => 'both']);
         
         $table->addRow();
-        $table->addCell(2000)->addText('(ဆ)',null,['alignment'=>'left']);
-        $table->addCell(15000)->addText('အမှုထမ်းဆောင်ခဲ့သောတပ်များ',null,['alignment'=>'left']);
-        $table->addCell(1000)->addText('-',null, ['alignment' => 'left']);
-        $table->addCell(16000)->addText($staff->military_served_army,null, ['alignment' => 'left']);
-
-        // $table->addRow();
-        // $table->addCell(2000)->addText('(ဂ)', null, ['alignment' => 'left']);
-        // $table->addCell(15000)->addText('ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်', null, ['alignment' => 'left']);
-        // $table->addCell(1000)->addText('-', null, ['alignment' => 'left']);
-        // $table->addCell(16000)->addText($staff->military_dsa_no, null, ['alignment' => 'left']);
-        
+        $table->addCell(2000)->addText('(ဆ)',null,['alignment'=>'center']);
+        $table->addCell(15000)->addText('အမှုထမ်းဆောင်ခဲ့သောတပ်များ',null,['alignment'=>'both']);
+        $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
+        $table->addCell(16000)->addText($staff->military_served_army ? $staff->military_served_army :'မရှိပါ',null, ['alignment' => 'both']); 
         $table->addRow();
         $table->addCell(2000)->addText('(ဇ)',null,['alignment'=>'center']);
         $table->addCell(15000)->addText('တပ်တွင်းရာဇဝင်အကျဥ်း/ပြစ်မှု',null,['alignment'=>'both']);
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->military_brief_history_or_penalty,null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->military_brief_history_or_penalty ? $staff->military_brief_history_or_penalty : 'မရှိပါ',null, ['alignment' => 'both']);
         
         $table->addRow();
         $table->addCell(2000)->addText('(ဈ)',null,['alignment'=>'center']);
@@ -389,7 +341,7 @@ foreach ($staff->staff_educations as $education) {
         $table->addCell(2000)->addText('၉။',null,['alignment'=>'center']);
         $table->addCell(15000)->addText('ပြောင်းရွေ့သည့်မှတ်ချက်',null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->transfer_remark,null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->transfer_remark ? $staff->transfer_remark :'မရှိပါ',null, ['alignment' => 'both']);
         $table->addRow();
         $table->addCell(2000)->addText('၁၀။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText('တွဲဖက်အင်အား ဖြစ်လျှင်',null,['alignment'=>'both']); 
@@ -404,66 +356,76 @@ foreach ($staff->staff_educations as $education) {
         $table->addCell(2000)->addText('၁၂။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText('လက်ရှိအလုပ်အကိုင်ရလာပုံ',null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->is_newly_appointed ?'ဟုတ်':'မဟုတ်',null, ['alignment' => 'both']);
+        $table->addCell(16000)->addText($staff->is_direct_appointed,null, ['alignment' => 'both']);
         $table->addRow();
         $table->addCell(2000)->addText('၁၃။',null,['alignment'=>'center']);
         $table->addCell(15000)->addText('ပြိုင်အ‌‌ရွေးခံ(သို့)တိုက်ရိုက်ခန့်',null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
         $table->addCell(16000)->addText($staff->is_direct_appointed,null, ['alignment' => 'both']);
        
-        $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
-       $section->addText('၁၄။'.'အလုပ်အကိုင်အတွက် ထောက်ခံသူများ', ['bold' => true]);
-       $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-       $table->addRow(50, ['tblHeader' => true]);
-       $table->addCell(4000)->addText('ထောက်ခံသူ', ['bold' => true],$pStyle_1);
-       $table->addCell(4000)->addText('ဝန်ကြီးဌာန', ['bold' => true],$pStyle_1);
-       $table->addCell(4000)->addText('ဦးစီးဌာန', ['bold' => true],$pStyle_1);
-       $table->addCell(4000)->addText('ရာထူး', ['bold' => true],$pStyle_1);
-       $table->addCell(4000)->addText('အကြောင်းအရာ', ['bold' => true],$pStyle_1);
-     if ($staff->recommendations->isNotEmpty()) {
-       foreach ($staff->recommendations as  $recommendation) {
+//         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
+//        $section->addText('၁၄။'.'အလုပ်အကိုင်အတွက် ထောက်ခံသူများ', ['bold' => true]);
+//        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+//        $table->addRow(50, ['tblHeader' => true]);
+//        $table->addCell(4000)->addText('ထောက်ခံသူ', ['bold' => true],$pStyle_1);
+//        $table->addCell(4000)->addText('ဝန်ကြီးဌာန', ['bold' => true],$pStyle_1);
+//        $table->addCell(4000)->addText('ဦးစီးဌာန', ['bold' => true],$pStyle_1);
+//        $table->addCell(4000)->addText('ရာထူး', ['bold' => true],$pStyle_1);
+//        $table->addCell(4000)->addText('အကြောင်းအရာ', ['bold' => true],$pStyle_1);
+//      if ($staff->recommendations->isNotEmpty()) {
+//        foreach ($staff->recommendations as  $recommendation) {
+//         $table->addRow();
+//         $table->addCell(4000)->addText($recommendation->recommend_by,null,$pStyle_1);
+//         $table->addCell(4000)->addText($recommendation->ministry,null,$pStyle_1);
+//         $table->addCell(4000)->addText($recommendation->department,null,$pStyle_1);
+//         $table->addCell(4000)->addText($recommendation->rank,null,$pStyle_1);
+//         $table->addCell(4000)->addText($recommendation->remark,null,$pStyle_1);
+//     }
+// }
+//     else{
+//             $table->addRow();
+//             $table->addCell(4000)->addText();
+//             $table->addCell(4000)->addText();
+//             $table->addCell(4000)->addText();
+//             $table->addCell(4000)->addText();
+//             $table->addCell(4000)->addText();
+//     }
         $table->addRow();
-        $table->addCell(4000)->addText($recommendation->recommend_by,null,$pStyle_1);
-        $table->addCell(4000)->addText($recommendation->ministry,null,$pStyle_1);
-        $table->addCell(4000)->addText($recommendation->department,null,$pStyle_1);
-        $table->addCell(4000)->addText($recommendation->rank,null,$pStyle_1);
-        $table->addCell(4000)->addText($recommendation->remark,null,$pStyle_1);
-    }
-}
-    else{
-            $table->addRow();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-    }
+        $table->addCell(2000)->addText('၁၄။',null,['alignment'=>'center']);
+        $table->addCell(15000)->addText('အလုပ်အကိုင်အတွက် ထောက်ခံသူများ',null,['alignment'=>'both']); 
+        $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
+        $table->addCell(16000)->addText($staff->recommendations->map(function ($recommendation) {
+            return $recommendation->recommend_by;
+        })->join(', '),null, ['alignment' => 'both']);
     $section->addTextBreak();
     $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
        $section->addText('၁၅။'.'ယခင်လုပ်ကိုင်ဖူးသည့် အလုပ်အကိုင်', ['bold' => true]);
        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
        $table->addRow(50, ['tblHeader' => true]);
-       $table->addCell(4000)->addText('ရာထူး/အဆင့်', ['bold' => true],$pStyle_1);
+       $table->addCell(5000)->addText('ရာထူး/အဆင့်', ['bold' => true],$pStyle_1);
        $table->addCell(4000)->addText('တပ်/ဌာန', ['bold' => true],$pStyle_1);
        $table->addCell(4000)->addText('နေရာ', ['bold' => true],$pStyle_1);
-       $table->addCell(4000)->addText('မှ', ['bold' => true],$pStyle_1);
-       $table->addCell(4000)->addText('ထိ', ['bold' => true],$pStyle_1);
+       $table->addCell(3000)->addText('မှ', ['bold' => true],$pStyle_1);
+       $table->addCell(3000)->addText('ထိ', ['bold' => true],$pStyle_1);
        if ($staff->postings->isNotEmpty()) {
        foreach ($staff->postings as $posting) {
         $table->addRow();
-        $table->addCell(4000)->addText($posting->rank->name ?? '-' ,null,$pStyle_1);
+        $table->addCell(5000)->addText($posting->rank->name ?? '-' ,null,$pStyle_1);
         $table->addCell(4000)->addText($posting->department->name ?? '-',null,$pStyle_1);
         $table->addCell(4000)->addText($posting->location ?? '-',null,$pStyle_1);
-        $table->addCell(4000)->addText(formatDMYmm($posting->from_date),$pStyle_1);
-        $table->addCell(4000)->addText(formatDMYmm($posting->to_date),$pStyle_1);
+        $table->addCell(3000)->addText(formatDMYmm($posting->from_date),$pStyle_1);
+        $table->addCell(3000)->addText(formatDMYmm($posting->to_date),$pStyle_1);
     }
 }else{
+    // $table->addRow();
+    // $table->addCell(5000)->addText();
+    // $table->addCell(4000)->addText();
+    // $table->addCell(4000)->addText();
+    // $table->addCell(3000)->addText();
+    // $table->addCell(3000)->addText();
     $table->addRow();
-    $table->addCell(4000)->addText();
-    $table->addCell(4000)->addText();
-    $table->addCell(4000)->addText();
-    $table->addCell(4000)->addText();
-    $table->addCell(4000)->addText();
+    $cell = $table->addCell(19000, ['gridSpan' => 5]); 
+        $cell->addText('မရှိပါ',null,['alignment' => 'center']);
 }
     $section->addTextBreak(); 
     $section->addText('မိဘဆွေမျိုးများ', ['bold' => true],['alignment'=>'center']);
@@ -484,7 +446,7 @@ foreach ($staff->staff_educations as $education) {
     $table->addCell(1000)->addText('-',null, ['alignment' => 'center'],$pStyle_1);
     $table->addCell(16000)->addText(($staff->father_address_street?? '') . 
     ($staff->father_address_ward ?'၊'. $staff->father_address_ward :'') .
-    ( $staff->father_address_township_or_town?->name ? '၊'. $staff->father_address_township_or_town?->name : '') . 
+    ( $staff->father_address_township_or_town?->name  ? '၊'. $staff->father_address_township_or_town?->name : '') . 
     ($staff->father_address_region?->name ? '၊'. $staff->father_address_region?->name : ''  ),null, ['alignment' => 'both'],$pStyle_1);
 
     // $staff->father_address_street.'၊'.$staff->father_address_ward.'၊'.$staff->father_address_township_or_town?->name.'၊'.$staff->father_address_region?->name
@@ -503,7 +465,7 @@ foreach ($staff->staff_educations as $education) {
     $table->addCell(1000)->addText('-',null, ['alignment' => 'center'],$pStyle_1);
     $table->addCell(16000)->addText(($staff->mother_address_street?? '') . 
     ($staff->mother_address_ward ?'၊'. $staff->mother_address_ward :'') .
-    ( $staff->mother_address_township_or_town?->name ? '၊'. $staff->mother_address_township_or_town?->name : '') . 
+    ( $staff->mother_address_township_or_town?->name  ? '၊'. $staff->mother_address_township_or_town?->name : '') . 
     ($staff->mother_address_region?->name ? '၊'. $staff->mother_address_region?->name : ''  ),null, ['alignment' => 'both'],$pStyle_1);
     $section->addTextBreak(); 
        $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
@@ -529,13 +491,16 @@ foreach ($staff->staff_educations as $education) {
            
         }
     }else{
+        // $table->addRow();
+        // $table->addCell(4000)->addText();
+        // $table->addCell(4000)->addText();
+        // $table->addCell(4000)->addText();
+        // $table->addCell(4000)->addText();
+        // $table->addCell(4000)->addText();
+        // $table->addCell(4000)->addText();
         $table->addRow();
-        $table->addCell(4000)->addText();
-        $table->addCell(4000)->addText();
-        $table->addCell(4000)->addText();
-        $table->addCell(4000)->addText();
-        $table->addCell(4000)->addText();
-        $table->addCell(4000)->addText();
+        $cell = $table->addCell(24000, ['gridSpan' => 6]); 
+        $cell->addText('မရှိပါ',null,['alignment' => 'center']);
 
     }
     $section->addTextBreak();
@@ -560,13 +525,16 @@ foreach ($staff->staff_educations as $education) {
             $table->addCell(4000)->addText($sibling->relation?->name,null,$pStyle_1);
         }
     }else{
+        // $table->addRow();
+        // $table->addCell(4000)->addText();
+        // $table->addCell(4000)->addText();
+        // $table->addCell(4000)->addText();
+        // $table->addCell(4000)->addText();
+        // $table->addCell(4000)->addText();
+        // $table->addCell(4000)->addText();
         $table->addRow();
-        $table->addCell(4000)->addText();
-        $table->addCell(4000)->addText();
-        $table->addCell(4000)->addText();
-        $table->addCell(4000)->addText();
-        $table->addCell(4000)->addText();
-        $table->addCell(4000)->addText();
+        $cell = $table->addCell(24000, ['gridSpan' => 6]); 
+        $cell->addText('မရှိပါ',null,['alignment' => 'center']);
 
     }
     $section->addTextBreak();
@@ -591,13 +559,16 @@ foreach ($staff->staff_educations as $education) {
             $table->addCell(4000)->addText($sibling->relation->name ?? '',null,$pStyle_1 );
         }
     }else{
+            // $table->addRow();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
             $table->addRow();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
+            $cell = $table->addCell(24000, ['gridSpan' => 6]); 
+            $cell->addText('မရှိပါ',null,['alignment' => 'center']);
 
     }
     $section->addTextBreak();
@@ -622,13 +593,16 @@ foreach ($staff->staff_educations as $education) {
             $table->addCell(4000)->addText($spouse->relation?->name,null,$pStyle_1);
         }
     }else{
+            // $table->addRow();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
             $table->addRow();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
+            $cell = $table->addCell(24000, ['gridSpan' => 6]); 
+            $cell->addText('မရှိပါ',null,['alignment' => 'center']);
 
     }
     $section->addTextBreak();
@@ -653,13 +627,16 @@ foreach ($staff->staff_educations as $education) {
             $table->addCell(4000)->addText($child->relation?->name,null,$pStyle_1);
         }
     }else{
+            // $table->addRow();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
             $table->addRow();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
+            $cell = $table->addCell(24000, ['gridSpan' => 6]); 
+            $cell->addText('မရှိပါ',null,['alignment' => 'center']);
 
     }
     $section->addTextBreak();
@@ -684,13 +661,16 @@ foreach ($staff->staff_educations as $education) {
             $table->addCell(4000)->addText($sibling->relation?->name,null,$pStyle_1);
         }
     }else{
-         $table->addRow();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
+            // $table->addRow();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            $table->addRow();
+            $cell = $table->addCell(24000, ['gridSpan' => 6]); 
+            $cell->addText('မရှိပါ',null,['alignment' => 'center']);
 
     }
     $section->addTextBreak();
@@ -716,13 +696,16 @@ foreach ($staff->staff_educations as $education) {
             $table->addCell(4000)->addText($sibling->relation?->name,null,$pStyle_1);
         }
     }else{
-        $table->addRow();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
+            // $table->addRow();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            $table->addRow();
+            $cell = $table->addCell(24000, ['gridSpan' => 6]); 
+            $cell->addText('မရှိပါ',null,['alignment' => 'center']);
 
     }
         $section->addTextBreak();
@@ -747,13 +730,16 @@ foreach ($staff->staff_educations as $education) {
             $table->addCell(6000)->addText($sibling->relation?->name,null,$pStyle_1);
         }
     }else{
-        $table->addRow();
-            $table->addCell(6000)->addText();
-            $table->addCell(6000)->addText();
-            $table->addCell(6000)->addText();
-            $table->addCell(6000)->addText();
-            $table->addCell(6000)->addText();
-            $table->addCell(6000)->addText();
+            // $table->addRow();
+            // $table->addCell(6000)->addText();
+            // $table->addCell(6000)->addText();
+            // $table->addCell(6000)->addText();
+            // $table->addCell(6000)->addText();
+            // $table->addCell(6000)->addText();
+            // $table->addCell(6000)->addText();
+            $table->addRow();
+            $cell = $table->addCell(24000, ['gridSpan' => 6]); 
+            $cell->addText('မရှိပါ',null,['alignment' => 'center']);
 
     }
    
@@ -762,7 +748,13 @@ foreach ($staff->staff_educations as $education) {
         $table->addCell(2000)->addText('၁၃။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText("မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်းတို့၏မိဘ၊ညီအကိုမောင်နှမများ၊သားသမီးများ\nသည်နိုင်ငံရေးပါတီဝင်များတွင်ဝင်ရောက်ဆောင်ရွက်မှုရှိ/မရှိ(ရှိကအသေးစိတ်ဖော်ပြရန်)",null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->family_in_politics ? 'ရှိ':'မရှိ',null, ['alignment' => 'both']); 
+        // $table->addCell(16000)->addText(,null, ['alignment' => 'both']); 
+        $table->addCell(16000)->addText(
+            $staff->family_in_politics 
+                ? 'ရှိ' . ($staff->family_in_politics_text ?? '') 
+                : 'မရှိ', 
+            null, ['alignment'=>'both']
+        );
         $section->addText('ငယ်စဥ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်', ['bold' => true],['alignment'=>'center']);
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
        
@@ -783,11 +775,14 @@ foreach ($staff->staff_educations as $education) {
           
         }
     }else{
+            // $table->addRow();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText();
             $table->addRow();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText();
+            $cell = $table->addCell(16000, ['gridSpan' => 4]); 
+            $cell->addText('မရှိပါ',null,['alignment' => 'center']);
 
     }
     $section->addTextBreak();
@@ -813,11 +808,14 @@ foreach ($staff->staff_educations as $education) {
           
         }
     }else{
+            // $table->addRow();
+            // $table->addCell(6000)->addText();
+            // $table->addCell(6000)->addText();
+            // $table->addCell(6000)->addText();
+            // $table->addCell(6000)->addText();
             $table->addRow();
-            $table->addCell(6000)->addText();
-            $table->addCell(6000)->addText();
-            $table->addCell(6000)->addText();
-            $table->addCell(6000)->addText();
+            $cell = $table->addCell(24000, ['gridSpan' => 4]); 
+            $cell->addText('မရှိပါ',null,['alignment' => 'center']);
     }
         $section->addTextBreak();
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 30, 'spaceBefore' => 30];
@@ -833,9 +831,12 @@ foreach ($staff->staff_educations as $education) {
             $table->addCell(16000)->addText($awarding->order_no,null,$pStyle_1); 
         }
     }else{
-        $table->addRow();
-        $table->addCell(16000)->addText();
-        $table->addCell(16000)->addText(); 
+        // $table->addRow();
+        // $table->addCell(16000)->addText();
+        // $table->addCell(16000)->addText(); 
+            $table->addRow();
+            $cell = $table->addCell(32000, ['gridSpan' => 2]); 
+            $cell->addText('မရှိပါ',null,['alignment' => 'center']);
 
     }
         $table = $section->addTable();
@@ -849,16 +850,14 @@ foreach ($staff->staff_educations as $education) {
         $table->addCell(2000)->addText('၅။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText("ကျောင်းသားဘဝတွင်နိုင်ငံရေး/မြို့ရေး ဆောင်ရွက်မှုများနှင့်အဆင့်အတန်း၊တာဝန်",null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->student_life_political_social,null, ['alignment' => 'both']); 
-
+        $table->addCell(16000)->addText($staff->student_life_political_social ? $staff->student_life_political_social : 'မရှိပါ',null, ['alignment' => 'both']); 
         $table->addRow();
         $table->addCell(2000)->addText('၆။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText("ဝါသနာပါပြီး၊လေ့လာလိုက်စားခဲ့သော\nကျန်းမာရေးကစားခုန်စားမှုများ၊\nအနုပညာဆိုင်ရာအတီးအမှုတ်များ၊ ပညာရေးစက်မှုလက်မှု",null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->habit,null, ['alignment' => 'both']); 
+        $table->addCell(16000)->addText($staff->habit ? $staff->habit : 'မရှိပါ',null, ['alignment' => 'both']); 
 
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
-       
         $section->addText('၇။'.'လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်', ['bold' => true]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
         $table->addRow();
@@ -880,42 +879,41 @@ foreach ($staff->staff_educations as $education) {
             $table->addCell(6000)->addText($posting->remark,null,$pStyle_1); 
         }
     }else{
-        $table->addRow();
-            $table->addCell(6000)->addText();
-            $table->addCell(6000)->addText(); 
-            $table->addCell(6000)->addText(); 
-            $table->addCell(6000)->addText();
-            $table->addCell(6000)->addText(); 
-            $table->addCell(6000)->addText();
-
+            // $table->addRow();
+            // $table->addCell(6000)->addText();
+            // $table->addCell(6000)->addText(); 
+            // $table->addCell(6000)->addText(); 
+            // $table->addCell(6000)->addText();
+            // $table->addCell(6000)->addText(); 
+            // $table->addCell(6000)->addText();
+            $table->addRow();
+            $cell = $table->addCell(36000, ['gridSpan' => 6]); 
+            $cell->addText('မရှိပါ',null,['alignment' => 'center']);
     }
-
-
-    
         $table = $section->addTable();
         $table->addRow();
         $table->addCell(2000)->addText('၈။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText("တောခိုခဲ့ဖူးလျှင်(သို့)သောင်းကျန်းသူများ\nကြီးစိုးသောနယ်မြေတွင်နေခဲ့ဖူးလျှင်\nလုပ်ကိုင်ဆောင်ရွက်ချက်များကိုဖော်ပြရန်",null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->revolution,null, ['alignment' => 'both']); 
+        $table->addCell(16000)->addText($staff->revolution ? $staff->revolution :'မရှိပါ' ,null, ['alignment' => 'both']); 
 
         $table->addRow();
         $table->addCell(2000)->addText('၉။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText("အလုပ်အကိုင်ပြောင်းရွှေ့ခဲ့သော\nအကြောင်းအကျိုးနှင့်လစာ",null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->transfer_reason_salary,null, ['alignment' => 'both']); 
+        $table->addCell(16000)->addText($staff->transfer_reason_salary ? $staff->transfer_reason_salary : 'မရှိပါ',null, ['alignment' => 'both']); 
         $table->addRow();
         $table->addCell(2000)->addText('၁၀။',null,['alignment'=>'center']); 
         $table->addCell(15000)->addText
         ("အမှုထမ်းနေစဥ်(သို့)ကိုယ်ပိုင်အလုပ်အကိုင်\nဆောင်ရွက်နေစဥ်နိုင်ငံရေး၊မြို့ရွာရေးဆောင်ရွက်မှုများ၊ဆောင်ရွက်နေစဥ်\nအသင်းအဆင့်အတန်းနှင့်တာဝန်",null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->during_work_political_social,null, ['alignment' => 'both']); 
+        $table->addCell(16000)->addText($staff->during_work_political_social ? $staff->during_work_political_social :'မရှိပါ',null, ['alignment' => 'both']); 
 
         $table->addRow();
         $table->addCell(2000)->addText('၁၁။',null,['alignment']); 
         $table->addCell(15000)->addText("စစ်ဘက်နယ်ဘက်ရဲဘက်နှင့်\nနိုင်ငံရေးဘက်တွင်ခင်မင်ရင်းနှီးသော\nမိတ်ဆွေများရှိ/မရှိ",null,['alignment'=>'both']); 
         $table->addCell(1000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(16000)->addText($staff->has_military_friend?'ရှိ':'မရှိ',null, ['alignment' => 'both']); 
+        $table->addCell(16000)->addText($staff->has_military_friend? 'ရှိ':'မရှိ',null, ['alignment' => 'both']); 
 
 
     $pStyle_1=array('align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100);
@@ -935,7 +933,7 @@ foreach ($staff->staff_educations as $education) {
             if ($staff->abroads->isNotEmpty()) {
         foreach ($staff->abroads as $abroad) {
             $table->addRow();
-            $table->addCell(6000)->addText($abroad->country->name ?? '-',null,$pStyle_1);
+            $table->addCell(6000)->addText($abroad->countries->pluck('name')->join(', '),null,$pStyle_1);
             $table->addCell(6000)->addText($abroad->particular,null,$pStyle_3); 
             $table->addCell(6000)->addText($abroad->meet_with,null,$pStyle_3); 
             // $table->addCell(6000)->addText(formatDMYmm($abroad->from_date).formatDMYmm($abroad->to_date ));  
@@ -946,11 +944,14 @@ foreach ($staff->staff_educations as $education) {
             
         }
     }else{
-        $table->addRow();
-            $table->addCell(6000)->addText();
-            $table->addCell(6000)->addText(); 
-            $table->addCell(6000)->addText(); 
-            $table->addCell(6000)->addText(); 
+            // $table->addRow();
+            // $table->addCell(6000)->addText();
+            // $table->addCell(6000)->addText(); 
+            // $table->addCell(6000)->addText(); 
+            // $table->addCell(6000)->addText(); 
+            $table->addRow();
+            $cell = $table->addCell(24000, ['gridSpan' => 4]); 
+            $cell->addText('မရှိပါ',null,['alignment' => 'center']);
 
     }
         $section->addText('');
@@ -968,7 +969,7 @@ foreach ($staff->staff_educations as $education) {
         $table->addCell(4000)->addText('၁၄။',null,['alignment'=>'center']); 
         $table->addCell(4000)->addText("မိမိအားထောက်ခံသည့်ပုဂ္ဂိုလ်(စစ်ဘက်/နယ်ဘက်အရာရှိ/မြို့နယ်/ကျေးရွာ/ရပ်ကွက်အုပ်ချုပ်ရေးမှူး)",null,['alignment'=>'both']); 
         $table->addCell(2000)->addText('-',null, ['alignment' => 'center']);
-        $table->addCell(5000)->addText($staff->recommended_by_military_person,null, ['alignment' => 'both']); 
+        $table->addCell(5000)->addText($staff->recommended_by_military_person ? $staff->recommended_by_military_person :'မရှိပါ',null, ['alignment' => 'both']); 
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
         $section->addText('၁၅။'.'ရာဇဝတ်ပြစ်မှုခံရခြင်း ရှိ/မရှိ');
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
@@ -986,11 +987,14 @@ foreach ($staff->staff_educations as $education) {
             $table->addCell(4000)->addText(formatDMYmm($punishment->to_date ),null,$pStyle_1); 
         }
     }else{
-        $table->addRow();
-            $table->addCell(4000)->addText();
-            $table->addCell(4000)->addText(); 
-            $table->addCell(4000)->addText(); 
-            $table->addCell(4000)->addText(); 
+            // $table->addRow();
+            // $table->addCell(4000)->addText();
+            // $table->addCell(4000)->addText(); 
+            // $table->addCell(4000)->addText(); 
+            // $table->addCell(4000)->addText(); 
+            $table->addRow();
+            $cell = $table->addCell(16000, ['gridSpan' => 4]); 
+            $cell->addText('မရှိပါ',null,['alignment' => 'center']);
     }
     $section->addText('အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။',['bold'=>true]);
         $tableStyle = [
@@ -1033,7 +1037,7 @@ foreach ($staff->staff_educations as $education) {
         $section->addText('ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
     
 
-        $fileName = 'staff_report_' . $staff->id . '.docx';
+        $fileName = 'staff_report_68_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
     
         return response()->stream(function() use ($objWriter) {

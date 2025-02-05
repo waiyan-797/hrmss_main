@@ -78,7 +78,7 @@
 
 
         <tr>
-          <td class="border border-black text-center p-2">{{ $loop->index + 1 }}</td>
+          <td class="border border-black text-center p-2">{{ en2mm($loop->index + 1) }}</td>
           <td class="border border-black text-center p-2">{{ $division->name }}</td>
           <td class="border border-black text-center p-2">{{ en2mm($division->staffs->count()) }}</td>
           <td class="border border-black text-center p-2">{{ en2mm($division->leaveCount($division ,  $YearMonth)) }}</td>

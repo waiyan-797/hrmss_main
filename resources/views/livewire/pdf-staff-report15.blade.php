@@ -40,7 +40,7 @@
                     <label for="name" class="md:w-1/3">အလုပ်အကိုင်နှင့် ဌာန</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name"
-                        class="md:w-3/5">{{ collect([$staff->current_rank?->name, $staff->current_department?->name])->filter()->implode('၊') }}</label>
+                        class="md:w-3/5">{{ collect([$staff->current_rank?->name, $staff->current_department?->name])->filter()->implode('၊').'၊'.'ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန' }}</label>
                 </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -102,7 +102,7 @@
                         class="md:w-1/3">နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်)</label>
                     <label for="" class="md:w-5">-</label>
                     <label for=""
-                        class="md:w-3/5">{{ $staff->abroads->count() > 0 ? en2mm($staff->abroads->count()) : 'မရှိပါ' }}</label>
+                        class="md:w-3/5">{{ $staff->abroads->count() > 0 ? en2mm($staff->abroads->count().'ကြိမ်') : 'မရှိပါ' }}</label>
                 </div>
                 <div class="md:w-full mb-4">
                     <table class="w-full">

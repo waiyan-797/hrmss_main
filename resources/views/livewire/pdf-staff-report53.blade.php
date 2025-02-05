@@ -303,7 +303,6 @@
                                 $staff->mother_address_district?->name,
                                 $staff->mother_address_region?->name,
                             ])->filter()->implode('၊') }}
-                            
                         </label>
                                     </div>
 
@@ -342,7 +341,7 @@
                     <label for="name" class="md:w-1/3">လက်ရှိအလုပ်အကိုင်ရလာပုံ</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ $staff->is_newly_appointed?'ဟုတ်':'မဟုတ်' }}</label>
+                        <label for="name" class="md:w-3/5">{{ $staff->is_direct_appointed }}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -350,7 +349,7 @@
                     <label for="name" class="md:w-1/3">ပြိုင်အ‌‌ရွေးခံ(သို့)တိုက်ရိုက်ခန့်</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ $staff->is_direct_appointed?'ဟုတ်':'မဟုတ်' }}</label>
+                        <label for="name" class="md:w-3/5">{{ $staff->is_direct_appointed }}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -368,48 +367,14 @@
                     <label for="name" class="md:w-3/5">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၊
                         ရန်ကုန်မြို့။</label>
                 </div>
-
-                
-                                    <div class="w-full mb-4">
-                                        <div class="flex justify-start mb-2 space-x-3">
-                                            <label for="">၃၀။ </label>
-                                            <p class="font-semibold text-base">
-                                            အလုပ်အကိုင်အတွက် ထောက်ခံသူများ   
-                                            ဉီးဝင်းကျော်နိုင် ( ညွန်ကြားရေးမှုး)
-
-                                            </p>
-                                        </div>
-                                        <h1>
-
-                                        </h1>
-                                        <h1>
-
-                                        </h1>
-                                        {{-- <table class="md:w-full">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border border-black text-center p-2">စဉ်</th>
-                                                    <th class="border border-black text-center p-2">ထောက်ခံသူ</th>
-                                                    <th class="border border-black text-center p-2">ဝန်ကြီးဌာန</th>
-                                                    <th class="border border-black text-center p-2">ဦးစီးဌာန</th>
-                                                    <th class="border border-black text-center p-2">ရာထူး</th>
-                                                    <th class="border border-black text-center p-2">အကြောင်းအရာ</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($staff->recommendations as $index => $recommendation)
-                                                    <tr>
-                                                        <td class="border border-black text-center p-2">{{ $index + 1 }}</td>
-                                                        <td class="border border-black text-center p-2">{{ $recommendation->recommend_by }}</td>
-                                                        <td class="border border-black text-center p-2">{{ $recommendation->ministry}}</td>
-                                                        <td class="border border-black text-center p-2">{{ $recommendation->department}}</td>
-                                                        <td class="border border-black text-center p-2">{{ $recommendation->rank}}</td>
-                                                        <td class="border border-black text-center p-2">{{ $recommendation->remark }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table> --}}
-                                    </div>
+                <div class="flex justify-between w-full mb-4">
+                    <label for="" class="md:w-5">၃၀။</label>
+                    <label for="name" class="md:w-1/3"> အလုပ်အကိုင်အတွက် ထောက်ခံသူများ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->recommendations->map(function ($recommendation) {
+                        return $recommendation->recommend_by;
+                    })->join(', ') }}</label>
+                </div>
             </div>
 
             <div class="ml-4">
@@ -877,7 +842,9 @@
                         အသေးစိတ်ဖော်ပြရန်)</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ $staff->family_in_politics }}</label>
+                        <label for="name" class="md:w-3/5"> {{$staff->family_in_politics 
+                            ? 'ရှိ၊' . ($staff->family_in_politics_text ?? '') 
+                            : 'မရှိ'}}</label>
                                     </div>
             </div>
 

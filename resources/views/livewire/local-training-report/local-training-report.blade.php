@@ -25,7 +25,7 @@
     </div> 
  
 <div class="flex justify-start space-x-6">
-    <div class="w-1/3">
+    {{-- <div class="w-1/3">
         <x-select
             class="mt-11"
             wire:model.live="trainingLocation"
@@ -34,8 +34,8 @@
                 ['id' => 2, 'name' => 'ပြည်ပ'],
             ]"
         />
-    </div>
-    <div class="w-1/3">
+    </div> --}}
+    {{-- <div class="w-1/3">
         <x-select
             wire:model="letter_type_id"
             :values="$letter_types"
@@ -46,47 +46,19 @@
             
         />
         <x-input-error class="mt-2" :messages="$errors->get('letter_type_id')" />
-    </div>
+    </div> --}}
 </div>
-    <x-select   class=" mt-11"
+    <x-select class="mt-11"
     wire:model.live='trainingLocation'
     :values="[
         ['id' => 3, 'name' => 'အားလုံး'] ,
 
-<<<<<<< Updated upstream
         ['id' => 1, 'name' => 'ပြည်တွင်း'] ,
 
         ['id' => 2, 'name' => 'ပြည်ပ'] ,
         
     ]"
 />
-=======
-                {{-- <div class="flex justify-start space-x-6">
-                    <div class="w-1/3">
-                        <x-select class="mt-11" wire:model.live="trainingLocation" :values="[
-                            ['id' => 1, 'name' => 'ပြည်တွင်း'],
-                            ['id' => 2, 'name' => 'ပြည်ပ'],
-                        ]" />
-                    </div>
-                    <div class="w-1/3">
-                        {{-- <x-select wire:model="letter_type_id" :values="$letter_types"
-                            placeholder="စာအဆင့်အတန်းရွေးပါ" id="letter_type_id" name="letter_type_id"
-                            class="mt-11 block w-full" />
-                        <x-input-error class="mt-2" :messages="$errors->get('letter_type_id')" />
-                    </div>
-                </div> --}}
-                <x-select class=" mt-11" wire:model.live='trainingLocation' :values="[
-                    ['id' => 3, 'name' => 'အားလုံး'],
-
-                    ['id' => 1, 'name' => 'ပြည်တွင်း'],
-
-                    ['id' => 2, 'name' => 'ပြည်ပ'],
-
-                ]" />
-                </div>
->>>>>>> Stashed changes
-
-
             </div>
             <div class="overflow-x-auto mt-6">
                 <table class="min-w-full border border-black">
@@ -108,20 +80,6 @@
 
                         @foreach ($staffs as $staff)
                         @php 
-<<<<<<< Updated upstream
-                        $firstTraining = $staff?->trainings->whereIn('training_location_id', 
-                        $trainingLocation == 3 ? [1,2] : $trainingLocation
-                        
-                         )->first();
-                         
-                          @endphp
-                        @if($firstTraining)
-                            <tr>
-                                <!-- First staff details row with first training -->
-                                <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $loop->index + 1 }}</td>
-                                <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->name }}</td>
-                                <td class="border border-black text-right p-1" rowspan="{{ $staff->trainings->whereIn('training_location_id', $trainingLocation ?? [1, 2])->count() }}">{{ $staff->currentRank?->name }}</td>
-=======
                                 $firstTraining = $staff?->trainings->whereIn(
                                 'training_location_id',
                                 $trainingLocation == 3 ? [1, 2] : $trainingLocation
@@ -145,7 +103,7 @@
                                     {{ $staff->currentRank->name }}
                                 </td> --}}
                                 <td class="border border-black border-b-0 text-center p-1">
-                                    {{ $loop->index + 1 }}
+                                    {{ en2mm($loop->index + 1) }}
                                 </td>
                                 <td class="border border-black border-b-0 text-left p-1">
                                     {{ $staff->name }}
@@ -153,8 +111,6 @@
                                 <td class="border border-black border-b-0 text-left p-1">
                                     {{ $staff->currentRank->name }}
                                 </td> 
->>>>>>> Stashed changes
-
                                 <!-- First training record -->
                                 <td class="border border-black text-center p-2">{{ $firstTraining->diploma_name }}
                                 </td>

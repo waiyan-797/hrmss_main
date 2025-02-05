@@ -16,58 +16,25 @@ class L02 implements FromView ,WithStyles
     /**
     * @return \Illuminate\Support\Collection
     */
-    // public function collection()
-    // {
-    //     return L02::all();
-    // }
-    public $startYr, $startMonth, $endYr, $endMonth;
-    public $staff_id;
-    public $fromDateRange, $toDateRange;
-    public $dep_category;
-    public $months;
-    public $divisions;
-    public $monthly_leaves;
-   
-    public function mount($staff_id = 0)
+
+    protected $startYr, $startMonth, $endYr, $endMonth, $fromDateRange, $toDateRange, $dep_category, $months,$divisions, $monthly_leaves;
+
+    public function __construct($startYr, $startMonth, $endYr, $endMonth, $fromDateRange, $toDateRange, $dep_category, $months,$divisions, $monthly_leaves)
     {
-        $this->staff_id = $staff_id;
-        $this->fromDateRange =\Carbon\Carbon::now()->subMonth(9)->format('Y-m'); // 9 months ago
-        $this->toDateRange = \Carbon\Carbon::now()->format('Y-m'); // current month
-        $this->dep_category = 1;
-    }
-    public function __construct($startYr , $startMonth ,
-    $endYr ,
-    $endMonth,
-    $fromDateRange,
-    $toDateRange,
-    $dep_category,
-    $months,
-    $divisions,
-    $monthly_leaves,
-    
-    )
-    {
-        $this->startYr = $startYr ;
+        $this->startYr = $startYr;
         $this->startMonth = $startMonth;
-        $this->endYr  =  $endYr;
-         $this->endMonth  =  $endMonth;
-         $this->fromDateRange  =  $fromDateRange;
-         $this->toDateRange  =  $toDateRange;
-         $this->dep_category  =  $dep_category;
-         $this->months=$months;
-         $this->divisions=$divisions;
-         $this->monthly_leaves = $monthly_leaves;
-        
-
+        $this->endYr = $endYr;
+        $this->endMonth = $endMonth;
+        $this->fromDateRange = $fromDateRange;
+        $this->toDateRange = $toDateRange;
+        $this->dep_category = $dep_category;
+        $this->months = $months;
+        $this->divisions =$divisions;
+        $this->monthly_leaves = $monthly_leaves;
     }
-
-
-    
     public function view(): View
     {
-        $staff = Staff::find($this->staff_id);
-        $data = [
-           'staff' => $staff,
+        return view('excel_reports.leave_nuber_percent_report2', [
             'startYr' => $this->startYr,
             'startMonth' => $this->startMonth,
             'endYr' => $this->endYr,
@@ -75,9 +42,7 @@ class L02 implements FromView ,WithStyles
             'months' => $this->months,
             'divisions' => $this->divisions,
             'monthly_leaves' => $this->monthly_leaves
-        ];
-
-        return view('excel_reports.leave_nuber_percent_report2',$data);
+        ]);
     }
     public function styles(Worksheet $sheet)
     {
@@ -90,7 +55,7 @@ class L02 implements FromView ,WithStyles
     $sheet->getPageSetup()->setFitToWidth(1);
     $sheet->getPageSetup()->setFitToHeight(0);
 
-    $sheet->getPageSetup()->setScale(80);
+    $sheet->getPageSetup()->setScale(85);
 
     // Enable gridlines for unbordered areas
     $sheet->setShowGridlines(true);
@@ -101,27 +66,33 @@ class L02 implements FromView ,WithStyles
     $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
     $sheet->getColumnDimension('A')->setWidth(7);
-    $sheet->getColumnDimension('B')->setWidth(30);
-    $sheet->getColumnDimension('C')->setWidth(15);
-    $sheet->getColumnDimension('D')->setWidth(15);
-    $sheet->getColumnDimension('E')->setWidth(16);
-    $sheet->getColumnDimension('F')->setWidth(16);
-    $sheet->getColumnDimension('G')->setWidth(15);
-    $sheet->getColumnDimension('H')->setWidth(15);
-    $sheet->getColumnDimension('I')->setWidth(15);
-    $sheet->getColumnDimension('J')->setWidth(16);
-    $sheet->getColumnDimension('K')->setWidth(16);
-    $sheet->getColumnDimension('L')->setWidth(17);
+    $sheet->getColumnDimension('B')->setWidth(50);
+    $sheet->getColumnDimension('C')->setWidth(10);
+    $sheet->getColumnDimension('D')->setWidth(10);
+    $sheet->getColumnDimension('E')->setWidth(10);
+    $sheet->getColumnDimension('F')->setWidth(10);
+    $sheet->getColumnDimension('G')->setWidth(10);
+    $sheet->getColumnDimension('H')->setWidth(10);
+    $sheet->getColumnDimension('I')->setWidth(10);
+    $sheet->getColumnDimension('J')->setWidth(10);
+    $sheet->getColumnDimension('K')->setWidth(10);
+    $sheet->getColumnDimension('L')->setWidth(10);
     
 
-    $sheet->getRowDimension(1)->setRowHeight(24);
-    $sheet->getRowDimension(2)->setRowHeight(24);
-    $sheet->getRowDimension(3)->setRowHeight(24);
-    $sheet->getRowDimension(5)->setRowHeight(100);
+    $sheet->getRowDimension(1)->setRowHeight(40);
+    // $sheet->getRowDimension(2)->setRowHeight(24);
+    $sheet->getRowDimension(3)->setRowHeight(100);
+    $sheet->getRowDimension(5)->setRowHeight(30);
     $sheet->getRowDimension(6)->setRowHeight(30);
-    $sheet->getRowDimension(7)->setRowHeight(25);
+    $sheet->getRowDimension(7)->setRowHeight(30);
     $sheet->getRowDimension(8)->setRowHeight(30);
-    // $sheet->getRowDimension(8)->setRowHeight(120);
+    $sheet->getRowDimension(9)->setRowHeight(30);
+    $sheet->getRowDimension(10)->setRowHeight(30);
+    $sheet->getRowDimension(11)->setRowHeight(30);
+    $sheet->getRowDimension(12)->setRowHeight(30);
+    $sheet->getRowDimension(13)->setRowHeight(30);
+    $sheet->getRowDimension(14)->setRowHeight(30);
+    // $sheet->getRowDimension(8)->setRowHeight(110);
 
 
     $sheet->removeRow(4);
@@ -129,7 +100,7 @@ class L02 implements FromView ,WithStyles
 
     $row=4;
 
-    $sheet->getStyle('A1:A2')->applyFromArray([
+    $sheet->getStyle('A1:L2')->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
             'size' => 13,
@@ -159,7 +130,7 @@ class L02 implements FromView ,WithStyles
             ],
         ],
     ]);
-    $sheet->getStyle("A4:$highestColumn$highestRow")->applyFromArray([
+    $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
             'size' => 13,

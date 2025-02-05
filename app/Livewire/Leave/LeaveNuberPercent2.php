@@ -23,6 +23,36 @@ class LeaveNuberPercent2 extends Component
     public $divisions;
     public $monthly_leaves;
     public $divisonMontlyLeavesCollection;
+
+    public function getMonthlyLeaves()
+{
+    $monthlyLeaves = [];
+
+    foreach ($this->months as $month) {
+        foreach ($this->divisions as $division) {
+            $monthlyLeaves[$division->id][$month] = $this->leaveCount($division->id, $month);
+        }
+    }
+
+    return $monthlyLeaves;
+}
+public function go_excel() 
+{
+    $this->monthly_leaves = $this->getMonthlyLeaves(); // Generate leave data
+
+    return Excel::download(new L02(
+        $this->startYr,
+        $this->startMonth,  
+        $this->endYr, 
+        $this->endMonth,
+        $this->fromDateRange,
+        $this->toDateRange,
+        $this->dep_category,
+        $this->months,
+        $this->divisions,
+        $this->monthly_leaves
+    ), 'L02.xlsx');
+}
     public function mount($staff_id = 0)
     {
         $this->staff_id = $staff_id;
@@ -31,7 +61,6 @@ class LeaveNuberPercent2 extends Component
         $this->dep_category = 1;
        
     }
-    
     public function go_pdf($staff_id)
     {
         $staff = Staff::find($staff_id);
@@ -51,77 +80,6 @@ class LeaveNuberPercent2 extends Component
             echo $pdf->output();
         }, 'leave_nuber_precent_report_pdf_2.pdf');
     }
-    // public function go_excel() 
-    // {
-        
-    //     return Excel::download(new L02(), 'L02.xlsx');
-    // }
-
-    // public $startYr, $startMonth, $endYr, $endMonth;
-    // public $staff_id;
-    // public $fromDateRange, $toDateRange;
-    // public $dep_category;
-    // public $months;
-    // public $divisions;
-    // public $monthly_leaves;
-    // public $divisonMontlyLeavesCollection;
-
-    // public function go_excel() 
-    // {
-    //     return Excel::download(new L02($this->startYr ,
-    //     $this->startMonth  , 
-    
-    // $this->endYr , $this->endMonth , $this->fromDateRange , $this->toDateRange , $this->dep_category , $this->months,$this->divisions,$this->monthly_leaves,$this->divisionMonthlyLeavesCollection
-    // ), 'L02.xlsx');
-    // }
-
-  
-    public function go_excel()
-    {
-        if ($this->divisionMonthlyLeavesCollection->isEmpty()) {
-            session()->flash('error', 'No data to export.');
-            return;
-        }
-
-        return Excel::download(new L02(
-            $this->startYr,
-            $this->startMonth,
-            $this->endYr,
-            $this->endMonth,
-            $this->fromDateRange,
-            $this->toDateRange,
-            $this->dep_category,
-            $this->months,
-            $this->divisions,
-            $this->monthly_leaves,
-            $this->divisionMonthlyLeavesCollection
-        ), 'L02.xlsx');
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // public function go_excel($staff_id)
-    // {
-    //     return Excel::download(new L02($staff_id), 'L02.xlsx');
-    // }
-  
     public function go_word()
     {
         $phpWord = new PhpWord();
@@ -144,7 +102,7 @@ class LeaveNuberPercent2 extends Component
         // Add data rows
         foreach ($this->divisions as $division) {
             $table->addRow();
-            $table->addCell(2000)->addText($division->id);
+            $table->addCell(2000)->addText(en2mm($division->id));
             $table->addCell(4000)->addText($division->name);
 
             $totalLeaveCount = 0;
@@ -164,7 +122,6 @@ class LeaveNuberPercent2 extends Component
 
         return response()->download($filePath)->deleteFileAfterSend(true);
     }
-
     public function render()
     {
         $staff = Staff::get()->first();

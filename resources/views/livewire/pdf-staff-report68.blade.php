@@ -34,7 +34,7 @@
                     <label for="" class="md:w-5">၅။ </label>
                     <label for="name" class="md:w-1/3">မွေးသက္ကရာဇ်</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</label>
+                    <label for="name" class="md:w-3/5">{{ formatDMYmm($staff->dob) }}</label>
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၆။ </label>
@@ -163,7 +163,7 @@
                         {{ collect([
                             $staff->current_address_street,
                             $staff->current_address_ward,
-                            $staff->current_address_township_or_town->name,
+                            $staff->current_address_township_or_town->name.'မြို့နယ်',
                             $staff->current_address_region->name ,
                         ])->filter()->implode('၊') }}
                     </label>
@@ -179,7 +179,7 @@
                         class="md:w-3/5">{{ collect([
                             $staff->permanent_address_street,
                             $staff->permanent_address_ward,
-                            $staff->permanent_address_township_or_town->name,
+                            $staff->permanent_address_township_or_town->name.'မြို့နယ်',
                             $staff->permanent_address_region->name ,
                         ])->filter()->implode('၊') }}</label>
 
@@ -201,9 +201,9 @@
                         class="md:w-1/3">ပညာအရည်အချင်း(ရရှိထားသောတက္ကသိုလ်/ဘွဲ့/ဒီပလိုမာ)</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">@foreach ($staff->staff_educations as $education)
-                           {{$education->education->name.','}}
-                    @endforeach</label>
+                    <label for="name" class="md:w-3/5"> {{ $staff->staff_educations->map(function ($education) {
+                        return $education->education?->name;
+                    })->filter()->join(', ') }}</label>
 
                 </div>
                 
@@ -250,7 +250,7 @@
                             <label for="name" class="md:w-96 ml-4">ကိုယ်ပိုင်အမှတ်</label>
                             <label for="" class="md:w-5 ml-1">-</label>
 
-                            <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_solider_no }}</label>
+                            <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_solider_no ? $staff->military_solider_no :'မရှိပါ'  }}</label>
 
                         </div>
                         <div class="flex justify-start w-full mb-2">
@@ -258,15 +258,14 @@
                             <label for="name" class="md:w-96 ml-4">တပ်သို့ဝင်သည့်နေ့</label>
                             <label for="" class="md:w-5 ml-1">-</label>
 
-                            <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_join_date }}</label>
+                            <label for="name" class="md:w-3/5 ml-4">{{ formatDMYmm($staff->military_join_date) }}</label>
 
                         </div>
                         <div class="flex justify-start w-full mb-2">
                             <label for="" class="md:w-5">(ဂ) </label>
                             <label for="name" class="md:w-96 ml-4">ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်</label>
                             <label for="" class="md:w-5 ml-1">-</label>
-
-                            <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_dsa_no }}</label>
+                            <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_dsa_no ? $staff->military_dsa_no :'မရှိပါ'}}</label>
 
                         </div>
                         <div class="flex justify-start w-full mb-2">
@@ -274,7 +273,7 @@
                             <label for="name" class="md:w-96 ml-4">ပြန်တမ်းဝင်ဖြစ်သည့်နေ့</label>
                             <label for="" class="md:w-5 ml-1">-</label>
 
-                            <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_gazetted_date }}</label>
+                            <label for="name" class="md:w-3/5 ml-4">{{ formatDMYmm($staff->military_gazetted_date) }}</label>
 
                         </div>
                         <div class="flex justify-start w-full mb-2">
@@ -282,14 +281,14 @@
                             <label for="name" class="md:w-96 ml-4">တပ်ထွက်သည့်နေ့</label>
                             <label for="" class="md:w-5 ml-1">-</label>
 
-                            <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_leave_date }}</label>
+                            <label for="name" class="md:w-3/5 ml-4">{{ formatDMYmm($staff->military_leave_date )}}</label>
 
                         </div>
                         <div class="flex justify-start w-full mb-2">
                             <label for="" class="md:w-5">(စ) </label>
                             <label for="name" class="md:w-96 ml-4">ထွက်သည့်အကြောင်း</label>
                             <label for="" class="md:w-5 ml-1">-</label>
-                            <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_leave_reason }}</label>
+                            <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_leave_reason ? $staff->military_leave_reason :'မရှိပါ'  }}</label>
 
                         </div>
                         <div class="flex justify-start w-full mb-2">
@@ -297,7 +296,7 @@
                             <label for="name" class="md:w-96 ml-4">အမှုထမ်းဆောင်ခဲ့သောတပ်များ</label>
                             <label for="" class="md:w-5 ml-1">-</label>
 
-                            <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_served_army }}</label>
+                            <label for="name" class="md:w-3/5 ml-4">{{ $staff->military_served_army ? $staff->military_served_army :'မရှိပါ' }}</label>
 
                         </div>
                         <div class="flex justify-start w-full mb-2">
@@ -306,7 +305,7 @@
                             <label for="" class="md:w-5 ml-1">-</label>
 
                             <label for="name"
-                                class="md:w-3/5 ml-4">{{ $staff->military_brief_history_or_penalty }}</label>
+                                class="md:w-3/5 ml-4">{{ $staff->military_brief_history_or_penalty ? $staff->military_brief_history_or_penalty :'မရှိပါ' }}</label>
 
                         </div>
                         <div class="flex justify-start w-full">
@@ -325,7 +324,7 @@
                         class="md:w-1/3">ကာယကံရှင်မွေးဖွားချိန်၌မိဘနှစ်ပါးသည်နိုင်ငံသားဟုတ်/မဟုတ်</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->is_parents_citizen_when_staff_born }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->is_parents_citizen_when_staff_born ? 'ဟုတ်':'မဟုတ်'}}</label>
 
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -333,7 +332,7 @@
                     <label for="name" class="md:w-1/3">ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်နေ့</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->join_date }}</label>
+                    <label for="name" class="md:w-3/5">{{ formatDMYmm($staff->join_date) }}</label>
 
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -355,16 +354,14 @@
                     <label for="" class="md:w-5">၆။ </label>
                     <label for="name" class="md:w-1/3">လစာဝင်ငွေ</label>
                     <label for="" class="md:w-5">-</label>
-
                     <label for="name" class="md:w-3/5">{{ $staff->payscale?->name }}</label>
-
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၇။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိအလုပ်အကိုင်</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->current_rank->name }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->currentRank->name }}</label>
 
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -372,7 +369,7 @@
                     <label for="name" class="md:w-1/3">လက်ရှိရာထူးရသည့်နေ့</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->current_rank_date }}</label>
+                    <label for="name" class="md:w-3/5">{{ formatDMYmm($staff->current_rank_date) }}</label>
 
                 </div>
                 <div class="flex justify-between w-full mb-2">
@@ -402,7 +399,7 @@
                     <label for="name" class="md:w-1/3">လက်ရှိ အလုပ်အကိုင်ရလာပုံ</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->is_newly_appointed}}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->is_direct_appointed }}</label>
 
                 </div>
                 <div class="flex justify-between w-full mb-4">
@@ -413,8 +410,18 @@
                     <label for="name" class="md:w-3/5">{{ $staff->is_direct_appointed }}</label>
 
                 </div>
+
+
+                <div class="flex justify-between w-full mb-4">
+                    <label for="" class="md:w-5">၁၄။ </label>
+                    <label for="name" class="md:w-1/3">အလုပ်အကိုင်အတွက် ထောက်ခံသူများ</label>
+                    <label for="" class="md:w-5">-</label>
+
+                    <label for="name" class="md:w-3/5"></label>
+
+                </div>
                
-                <div class="w-full mb-4">
+                {{-- <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">
                         <label for="">၁၄။  </label>
                         <h1 class="font-semibold text-base">
@@ -445,7 +452,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                </div> --}}
                 <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">
                         <label for="">၁၅။  </label>
@@ -470,8 +477,8 @@
                                 <td class="border border-black text-center p-2">{{ $posting->rank->name ?? '-' }}</td>
                                 <td class="border border-black text-center p-2">{{ $posting->department->name ?? '-' }}</td>
                                 <td class="border border-black text-center p-2">{{ $posting->location ?? '-' }}</td>
-                                <td class="border border-black text-center p-2">{{ $posting->from_date}}</td>
-                                <td class="border border-black text-center p-2">{{ $posting->to_date }}</td>
+                                <td class="border border-black text-center p-2">{{ formatDMYmm($posting->from_date)}}</td>
+                                <td class="border border-black text-center p-2">{{ formatDMYmm($posting->to_date) }}</td>
                             </tr>
                         
                         @endforeach
@@ -844,7 +851,9 @@
                         ညီအကိုမောင်နှမများ၊
                         သားသမီးများ နိုင်ငံရေးပါတီဝင်ရောက်ဆောင်ရွက်မှု ရှိ/မရှိ (ရှိက အသေးစိတ်ဖော်ပြရန်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->family_in_politics}}</label>
+                    <label for="name" class="md:w-3/5">{{$staff->family_in_politics 
+                        ? 'ရှိ၊' . ($staff->family_in_politics_text ?? '') 
+                        : 'မရှိ'}}</label>
                 </div>
             </div>
 
@@ -1006,8 +1015,8 @@
                                         <td class="p-2 border border-black">{{ $posting->staff->name ?? '' }}</td>
                                         <td class="p-2 border border-black">{{ $posting->department->name ?? '' }}</td>
                                         <td class="p-2 border border-black">{{ $posting->ministry->name ?? '' }}</td>
-                                        <td class="p-2 border border-black">{{ $posting->from_date }}</td>
-                                        <td class="p-2 border border-black">{{ $posting->to_date}}</td>
+                                        <td class="p-2 border border-black">{{ formatDMYmm($posting->from_date) }}</td>
+                                        <td class="p-2 border border-black">{{ formatDMYmm($posting->to_date)}}</td>
                                         <td class="p-2 border border-black">{{ $posting->remark }}</td>
                                     </tr>
                                 @endforeach
@@ -1056,7 +1065,7 @@
                         မိတ်ဆွေများရှိ/ မရှိ</label>
                     <label for="" class="md:w-5">-</label>
 
-                    <label for="name" class="md:w-3/5">{{ $staff->has_military_friend }}</label>
+                    <label for="name" class="md:w-3/5">{{ $staff->has_military_friend ? 'ရှိ':'မရှိပါ' }}</label>
 
                 </div>
 
@@ -1079,7 +1088,7 @@
                             <tbody class="text-center h-8 p-2">
                                 @foreach($staff->abroads as $abroad)
                                     <tr>
-                                        <td class="p-2 border border-black">{{ $abroad->country->name ?? 'N/A' }}</td>
+                                        <td class="p-2 border border-black">{{$abroad->countries->pluck('name')->join(', ')}}</td>
                                         <td class="p-2 border border-black">{{ $abroad->particular }}</td>
                                         <td class="p-2 border border-black">{{ $abroad->meet_with }}</td>
                                         <td class="p-2 border border-black">
@@ -1147,8 +1156,8 @@
                                     <tr>
                                         <td class="p-2 border border-black">{{ $punishment->penalty_type->name ?? 'N/A' }}</td>
                                         <td class="p-2 border border-black">{{ $punishment->reason }}</td>
-                                        <td class="p-2 border border-black">{{ $punishment->from_date }}</td>
-                                        <td class="p-2 border border-black">{{ $punishment->to_date }}</td>
+                                        <td class="p-2 border border-black">{{ formatDMYmm($punishment->from_date) }}</td>
+                                        <td class="p-2 border border-black">{{ formatDMYmm($punishment->to_date) }}</td>
                                     </tr>
                                 
                                 @endforeach

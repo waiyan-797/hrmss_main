@@ -95,9 +95,8 @@
                     <label for="name"
                         class="md:w-1/3">နိုင်ငံခြားသွားရောက်ခဲ့ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="" class="md:w-3/5">{{en2mm($staff->abroads->count())}}</label>
+                    <label for="" class="md:w-3/5">{{ $staff->abroads->count() > 0 ? en2mm($staff->abroads->count().'ကြိမ်') : 'မရှိပါ' }}</label>
                 </div>
-
                 <div class="md:w-full mb-4">
                     <table class="w-full">
                         <thead>

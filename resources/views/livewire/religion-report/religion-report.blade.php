@@ -4,8 +4,17 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
+            <h1 class="font-bold text-center text-base mb-1">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <h1 class="font-bold text-center text-base mb-1">Religion Report</h1>
-
+        
+            <div class="mb-4 flex space-x-4">
+                <select wire:model.live="selectedReligion" class="border p-2">
+                    <option value="">All</option>
+                    @foreach($religions as $religion)
+                        <option value="{{ $religion['id'] }}">{{ $religion['name'] }}</option>
+                    @endforeach
+                </select>
+            </div>
             <table class="md:w-full">
                 <thead>
                     <tr>
@@ -38,9 +47,9 @@
                     @foreach($staffs as $index=> $staff)
                     <tr>
                         {{-- <td class="border border-black text-right p-1">{{ $loop->index+1}}</td> --}}
-                        <td class="border border-black text-left p-1">{{ $start++ }}</td>
+                        <td class="border border-black text-left p-1">{{ en2mm($start++) }}</td>
                         <td class="border border-black text-left p-1">{{ $staff->name}}</td>
-                        <td class="border border-black text-left p-1">{{ $staff->current_rank?->name}}</td>
+                        <td class="border border-black text-left p-1">{{ $staff->currentRank?->name}}</td>
 
                         {{-- Buddhist --}}
                         <td class="border border-black text-left p-1">

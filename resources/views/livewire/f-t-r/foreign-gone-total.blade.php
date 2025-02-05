@@ -34,26 +34,23 @@
                                     အကြောင်းအရာ 
                                     ကာလ (မှ-ထိ)
                                     </th>
-                        {{-- <th class="border border-black text-center p-2">သွားရောက်သည့်နိုင်ငံ</th>
-                        <th class="border border-black text-center p-2">သင်တန်း</th>
-                        <th class="border border-black text-center p-2">အခြား</th> --}}
                         <th class="border border-black text-center p-2">အကြိမ်ရေ</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($staffs as $staff)
+                    {{-- @foreach($staffs as $staff)
         @php
-            // Get unique countries from both trainings and abroads
+           
             $allCountries = $staff->abroads->pluck('country_id')
                 ->merge($staff->trainings->pluck('country_id'))
                 ->unique();
 
-            // Calculate total counts
+          
             $totalTrainings = $staff->trainings->count();
             $totalAbroads = $staff->abroads->count();
             $totalOverall = $totalTrainings + $totalAbroads;
 
-            // Fetch the most recent abroad and training details
+            
             $lastAbroad = $staff->abroads->sortByDesc('to_date')->first();
             $lastTraining = $staff->trainings->sortByDesc('to_date')->first();
         @endphp
@@ -61,9 +58,9 @@
         @foreach($allCountries as $index => $countryId)
             <tr>
                 @if($index == 0)
-                    <!-- Merge the first columns for each staff -->
+                    
                     <td class="border border-black text-center p-2" rowspan="{{ $allCountries->count() }}">
-                        {{ $loop->parent->iteration }}
+                        {{ en2mm($loop->parent->iteration )}}
                     </td>
                     <td class="border border-black text-left p-2" rowspan="{{ $allCountries->count() }}">
                         {{ $staff->name }} / {{ $staff->currentRank?->name }}
@@ -83,7 +80,7 @@
                 @endif
 
                 <td class="border border-black text-center p-2">
-                    {{ $lastAbroad?->country?->name ?? ($lastTraining?->country?->name ?? 'N/A') }}
+                    {{ $lastAbroad?->country?->name ?? ($lastTraining?->country?->name ?? '') }}
                 </td>
                 <td class="border border-black text-center p-2">
                     @if($lastAbroad)
@@ -91,10 +88,8 @@
                     @elseif($lastTraining)
                         {{ formatDMYmm($lastTraining->from_date) }} - {{ formatDMYmm($lastTraining->to_date) }}
                     @else
-                        N/A
                     @endif
                 </td>
-
                 @if($index == 0)
                     <td class="border border-black text-center p-2" rowspan="{{ $allCountries->count() }}">
                         {{ en2mm($totalOverall) }}
@@ -102,7 +97,60 @@
                 @endif
             </tr>
         @endforeach
+    @endforeach --}}
+    @foreach($staffs as $staff)
+    @php
+        $allCountries = $staff->abroads->pluck('country_id')
+            ->merge($staff->trainings->pluck('country_id'))
+            ->unique();
+
+        $totalTrainings = $staff->trainings->count();
+        $totalAbroads = $staff->abroads->count();
+        $totalOverall = $totalTrainings + $totalAbroads;
+        $lastAbroad = $staff->abroads->sortByDesc('to_date')->first();
+        $lastTraining = $staff->trainings->sortByDesc('to_date')->first();
+    @endphp
+
+    @foreach($allCountries as $index => $countryId)
+        <tr>
+            @if($index == 0)
+                <td class="border border-black text-center p-2" rowspan="{{ $allCountries->count() }}">
+                    {{ en2mm($loop->parent->iteration) }}
+                </td>
+                <td class="border border-black text-left p-2" rowspan="{{ $allCountries->count() }}">
+                    {{ $staff->name }} / {{ $staff->currentRank?->name }}
+                </td>
+                <td class="border border-black text-left p-2" rowspan="{{ $allCountries->count() }}">
+                    {{ $staff->current_division?->name }}
+                </td>
+                <td class="border border-black text-left p-2" rowspan="{{ $allCountries->count() }}">
+                    {{ formatDMYmm($staff->dob) }}
+                </td>
+                <td class="border border-black text-center p-2" rowspan="{{ $allCountries->count() }}">
+                    {{ formatDMYmm($staff->join_date) }}
+                </td>
+                <td class="border border-black text-center p-2" rowspan="{{ $allCountries->count() }}">
+                    {{ formatDMYmm($staff->current_rank_date) }}
+                </td>
+                
+                <td class="border border-black text-center p-2" rowspan="{{ $allCountries->count() }}">
+                    {{ $lastAbroad?->country?->name ?? ($lastTraining?->country?->name ?? '') }}
+                </td>
+                <td class="border border-black text-center p-2" rowspan="{{ $allCountries->count() }}">
+                    @if($lastAbroad)
+                        {{ formatDMYmm($lastAbroad->from_date) }} မှ {{ formatDMYmm($lastAbroad->to_date) }}ထိ 
+                    @elseif($lastTraining)
+                        {{ formatDMYmm($lastTraining->from_date) }} - {{ formatDMYmm($lastTraining->to_date) }}
+                    @endif
+                </td>
+                <td class="border border-black text-center p-2" rowspan="{{ $allCountries->count() }}">
+                    {{ en2mm($totalOverall) }}
+                </td>
+            @endif
+        </tr>
     @endforeach
+@endforeach
+
 
                 </tbody>
 

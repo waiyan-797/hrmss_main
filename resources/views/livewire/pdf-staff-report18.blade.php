@@ -161,20 +161,19 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            @if ($staff->past_occupations && $staff->past_occupations->isNotEmpty())
-                                @foreach ($staff->past_occupations as $index => $occupation)
+                            @if ($staff->postings->isNotEmpty())
+                                @foreach ($staff->postings as $index => $posting)
                                     <tr>
                                         <td class="border border-black text-center p-2">
                                             {{ '(' . myanmarAlphabet($loop->index) . ')' }}</td>
                                         <td class="border border-black text-center p-2">
-                                            {{ $occupation->rank->name ?? '-' }}</td>
+                                            {{ $posting->rank->name ?? '-' }}</td>
                                         <td class="border border-black text-center p-2">
-                                            {{ formatDMYmm($occupation->from_date) ?? '-' }}</td>
+                                            {{ formatDMYmm($posting->from_date) ?? '' }}</td>
                                         <td class="border border-black text-center p-2">
-                                            {{ formatDMYmm($occupation->to_date) ?? '-' }}</td>
+                                            {{ formatDMYmm($posting->to_date) ?? '' }}</td>
                                         <td class="border border-black text-center p-2">
-                                            {{ $occupation->address ?? '-' }}</td>
+                                            {{ $posting->location ?? '-' }}</td>
                                     </tr>
                                 @endforeach
                             @else

@@ -209,10 +209,17 @@ class PdfStaffReport19 extends Component
            
             }
         }else{
+                // $table->addRow(50);
+                //     $table->addCell(6500)->addText(null,null,$pStyle_1);
+                //     $table->addCell(2000)->addText(null,null,$pStyle_1);
+                //     $table->addCell(2000)->addText(null,null,$pStyle_1);
                 $table->addRow(50);
-                    $table->addCell(6500)->addText(null,null,$pStyle_1);
-                    $table->addCell(2000)->addText(null,null,$pStyle_1);
-                    $table->addCell(2000)->addText(null,null,$pStyle_1);
+                $cell = $table->addCell(10500, ['gridSpan' => 3]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
 
             }
 
@@ -223,24 +230,25 @@ class PdfStaffReport19 extends Component
         $table->addCell(3000)->addText('ရုံး/ ဌာန/ အဖွဲ့အစည်း', ['bold' => true],$pStyle_1);
         $table->addCell(1600)->addText('နေ့ရက်မှ', ['bold' => true],$pStyle_1);
         $table->addCell(1600)->addText('နေ့ရက်ထိ', ['bold' => true],$pStyle_1);
-        $table->addCell(500)->addText('မှတ်ချက်', ['bold' => true],$pStyle_1);
-        if($staff->past_occupations && $staff->past_occupations->isNotEmpty()){
-            foreach ($staff->past_occupations as $occupation) {
+        $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true],$pStyle_1);
+        if( $staff->postings->isNotEmpty()){
+            foreach ($staff->postings as $posting) {
                 $table->addRow(50);
-                $table->addCell(1500)->addText($occupation->rank->name,null,$pStyle_7);
-                $table->addCell(3000)->addText($occupation->department->name,null,$pStyle_7);
-                $table->addCell(1600)->addText(formatDMYmm($occupation->from_date),null,$pStyle_1);
-                $table->addCell(1600)->addText(formatDMYmm($occupation->to_date), null, $pStyle_1);
-                $table->addCell(500)->addText($occupation->remark,null, $pStyle_1);
+                $table->addCell(1500)->addText($posting->rank->name,null,$pStyle_7);
+                $table->addCell(3000)->addText($posting->department->name,null,$pStyle_7);
+                $table->addCell(1600)->addText(formatDMYmm($posting->from_date),null,$pStyle_1);
+                $table->addCell(1600)->addText(formatDMYmm($posting->to_date), null, $pStyle_1);
+                $table->addCell(2000)->addText($posting->remark,null, $pStyle_1);
            
             }
         }else{
                 $table->addRow(50);
-                $table->addCell(1000)->addText(null,null,$pStyle_7);
-                $table->addCell(1000)->addText(null,null,$pStyle_7);
-                $table->addCell(2000)->addText(null,null,$pStyle_1);
-                $table->addCell(2000)->addText(null, null, $pStyle_1);
-                $table->addCell(1500)->addText(null,null, $pStyle_1);
+                $cell = $table->addCell(9700, ['gridSpan' => 5]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
         }
         $section->addText('၁၅။ '.'ပါဝင်ဆောင်ရွက်ဆဲနှင့် ဆောင်ရွက်ခဲ့သည် လူမှုရေးနှင့် အစိုးရမဟုတ်သော အဖွဲ့အစည်းများ၏ '.'အမည်နှင့်တာဝန်များ',null,array('spaceBefore' => 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
@@ -249,21 +257,28 @@ class PdfStaffReport19 extends Component
         $table->addCell(4800)->addText('အဖွဲ့အစည်း', ['bold' => true],$pStyle_1);
         $table->addCell(2800)->addText('တာဝန်', ['bold' => true],$pStyle_1);
         $table->addCell(1800)->addText('မှတ်ချက်', ['bold' => true],$pStyle_1);
-        if($staff->past_occupations && $staff->past_occupations->isNotEmpty()){
-            foreach ($staff->past_occupations as $index=> $occupation) {
+        if($staff->postings->isNotEmpty()){
+            foreach ($staff->postings as $index=> $posting) {
                 $table->addRow();
                 $table->addCell(500)->addText('('.myanmarAlphabet($index).')',null, $pStyle_1);
-                $table->addCell(4800)->addText($occupation->department->name,null,$pStyle_7);
-                $table->addCell(2800)->addText($occupation->remark, null, $pStyle_7);
-                $table->addCell(1800)->addText($occupation->remark, null, $pStyle_7);
+                $table->addCell(4800)->addText($posting->department->name,null,$pStyle_7);
+                $table->addCell(2800)->addText($posting->remark, null, $pStyle_7);
+                $table->addCell(1800)->addText($posting->remark, null, $pStyle_7);
            
             }
         }else{
+            // $table->addRow();
+            // $table->addCell(500);
+            // $table->addCell(4800);
+            // $table->addCell(2800);
+            // $table->addCell(1800);
             $table->addRow();
-            $table->addCell(500);
-            $table->addCell(4800);
-            $table->addCell(2800);
-            $table->addCell(1800);
+                $cell = $table->addCell(9900, ['gridSpan' => 4]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
             }
 
             $section->addText('၁၆။ '.'ချီးမြှင့်ခံရသည့်ဘွဲ့ထူး/ဂုဏ်ထူးတံဆိပ်လက်မှတ်များ',null,array('spaceBefore' => 200));
@@ -283,11 +298,18 @@ class PdfStaffReport19 extends Component
                
                 }
             }else{
+                // $table->addRow();
+                // $table->addCell(1000);
+                // $table->addCell(5000);
+                // $table->addCell(3000);
+                // $table->addCell(3000);
                 $table->addRow();
-                $table->addCell(1000);
-                $table->addCell(5000);
-                $table->addCell(3000);
-                $table->addCell(3000);
+                $cell = $table->addCell(12000, ['gridSpan' => 4]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
                 }
        $table = $section->addTable();
         $table->addRow();

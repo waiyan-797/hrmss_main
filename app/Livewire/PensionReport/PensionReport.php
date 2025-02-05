@@ -2,8 +2,10 @@
 
 namespace App\Livewire\PensionReport;
 
+use App\Exports\P06;
 use App\Models\Staff;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
@@ -26,6 +28,12 @@ class PensionReport extends Component
             echo $pdf->output();
         }, 'pension_report_pdf.pdf');
     }
+    public function go_excel() 
+    {
+        return Excel::download(new P06(
+    ), 'P06.xlsx');
+    }
+  
     public function go_word()
 {
     $staffs = Staff::whereHas('pension_type')
@@ -78,7 +86,7 @@ class PensionReport extends Component
     }
     
     // Save the document in memory
-    $fileName = 'pension_report.docx';
+    $fileName = 'P06.docx';
     $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
     
     // Output the Word file
@@ -89,8 +97,6 @@ class PensionReport extends Component
         'Content-Disposition' => 'attachment; filename="pension_report.docx"',
     ]);
 }
-
-    
       public function render()
      {
       $staffs = Staff::whereHas('pension_type')

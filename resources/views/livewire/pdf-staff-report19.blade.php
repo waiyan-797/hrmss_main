@@ -122,9 +122,7 @@
                         <br>
                     </p>
                 @endforeach
-
                     </div>
-                    
                 </div>
 
                 <div class="w-full mb-4">
@@ -181,14 +179,14 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                @if ($staff->past_occupations &&$staff->past_occupations->isNotEmpty())
-                                @foreach ($staff->past_occupations as $occupation)
+                                @if ($staff->postings->isNotEmpty())
+                                @foreach ($staff->postings as $posting)
                                     <tr>
-                                        <td class="border border-black p-2">{{$occupation->rank->name}}</td>
-                                        <td class="border border-black p-2">{{$occupation->department->name}}</td>
-                                        <td class="border border-black p-2">{{formatDMYmm($occupation->from_date)}}</td>
-                                        <td class="border border-black p-2">{{formatDMYmm($occupation->to_date)}}</td>
-                                        <td class="border border-black p-2">{{$occupation->remark}}</td>
+                                        <td class="border border-black p-2">{{$posting->rank->name}}</td>
+                                        <td class="border border-black p-2">{{$posting->department->name}}</td>
+                                        <td class="border border-black p-2">{{formatDMYmm($posting->from_date)}}</td>
+                                        <td class="border border-black p-2">{{formatDMYmm($posting->to_date)}}</td>
+                                        <td class="border border-black p-2">{{$posting->remark}}</td>
                                     </tr>
                                 @endforeach
                                 @else
@@ -222,13 +220,13 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                @if ($staff->past_occupations &&$staff->past_occupations->isNotEmpty())
-                                @foreach ($staff->past_occupations as $index=>$occupation)
+                                @if ($staff->postings->isNotEmpty())
+                                @foreach ($staff->postings as $index=>$posting)
                                     <tr>
                                         <td class="border border-black p-2">{{'('.myanmarAlphabet($loop->index).')'}}</td>
-                                        <td class="border border-black p-2">{{$occupation->department->name}}</td>
-                                        <td class="border border-black p-2">{{$occupation->remark}}</td>
-                                        <td class="border border-black p-2">{{$occupation->remark}}</td>
+                                        <td class="border border-black p-2">{{$posting->department->name}}</td>
+                                        <td class="border border-black p-2">{{$posting->remark}}</td>
+                                        <td class="border border-black p-2">{{$posting->remark}}</td>
                                     </tr>
                                 @endforeach
                                 @else
@@ -281,50 +279,16 @@
                         </table>
                     </div>
                 </div>
-                <div class="w-full mb-4">
-                    <div class="flex justify-start mb-2 space-x-3">
-                        <label for="">၁၇။ အပြစ်ပေးခံရခြင်းများ</label>
-                        <label for="">
-                            @foreach ($staff->punishments as $punishment)
-                            <tr>
-                                <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
-                                <td class="border border-black text-center p-2">{{$punishment->penalty_type->name}}</td>
-                                <td class="border border-black text-center p-2">{{$punishment->reason}}</td>
-                                <td class="border border-black text-center p-2">{{$punishment->from_date}}</td>
-                                <td class="border border-black text-center p-2">{{$punishment->to_date}}</td>
-                          </tr>
-                        @endforeach
-                        </label>
-                        {{-- <h1 class="">အပြစ်ပေးခံရခြင်းများ</h1> --}}
-                    </div>
-                    {{-- <table class="md:w-full">
-                        <thead>
-                            <tr>
-                                <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
-                                <th rowspan="2" class="border border-black text-center p-2">ပြစ်ဒဏ်</th>
-                                <th rowspan="2" class="border border-black text-center p-2">ပြစ်ဒဏ်ချမှတ်ခံရသည့်
-                                    အကြောင်းအရာ</th>
-                                <th colspan="2" class="border border-black text-center p-2">ပြစ်ဒဏ်ချမှတ်သည့်ကာလ
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="border border-black text-center p-2">မှ</th>
-                                <th class="border border-black text-center p-2">ထိ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($staff->punishments as $punishment)
-                                <tr>
-                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
-                                    <td class="border border-black text-center p-2">{{$punishment->penalty_type->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$punishment->reason}}</td>
-                                    <td class="border border-black text-center p-2">{{$punishment->from_date}}</td>
-                                    <td class="border border-black text-center p-2">{{$punishment->to_date}}</td>
-                              </tr>
-                            @endforeach
-                        </tbody>
-                    </table> --}}
+
+                <div class="flex justify-between w-full mb-4">
+                    <label for="" class="md:w-5">၁၉။ </label>
+                    <label for="name" class="md:w-1/3">အပြစ်ပေးခံရခြင်းများ</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5"> {{$staff->punishments->map(function ($punishment) {
+                        return $punishment->penalty_type->name;
+                    })->join(', ')}}</label>
                 </div>
+               
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၈။ </label>
                     <label for="name" class="md:w-1/3">အခြားတင်ပြလိုသည့်အချက်များ</label>
@@ -375,13 +339,7 @@
                     <p>{{  mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)) }}</p>
                 </div>
             </div>
-
-
-
-            
         </div>
-
-
     </div>
 </div>
 </div>

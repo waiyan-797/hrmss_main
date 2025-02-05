@@ -32,26 +32,32 @@ class LocalTrainingReport2 extends Component
 
     public function go_word()
     {
-        $staffs = Staff::where('name', 'like', '%' . $this->nameSearch . '%')
-        ->whereHas('trainings', function ($query) {
-            if ($this->trainingLocation == 3) {
-                // Include training locations 1 and 2 when $trainingLocation is 3
-                $query->whereIn('training_location_id', [1, 2]);
-            } elseif ($this->trainingLocation) {
-                // Filter by the specific training location
-                $query->where('training_location_id', $this->trainingLocation);
-            }
-        })
-        ->with(['trainings' => function ($query) {
-            if ($this->trainingLocation == 3) {
-                $query->whereIn('training_location_id', [1, 2]);
-            } elseif ($this->trainingLocation) {
-                $query->where('training_location_id', $this->trainingLocation);
-            }
-        }])
-        ->get();
+        // $staffs = Staff::where('name', 'like', '%' . $this->nameSearch . '%')
+        // ->whereHas('trainings', function ($query) {
+        //     if ($this->trainingLocation == 3) {
+        //         // Include training locations 1 and 2 when $trainingLocation is 3
+        //         $query->whereIn('training_location_id', [1, 2]);
+        //     } elseif ($this->trainingLocation) {
+        //         // Filter by the specific training location
+        //         $query->where('training_location_id', $this->trainingLocation);
+        //     }
+        // })
+        // ->with(['trainings' => function ($query) {
+        //     if ($this->trainingLocation == 3) {
+        //         $query->whereIn('training_location_id', [1, 2]);
+        //     } elseif ($this->trainingLocation) {
+        //         $query->where('training_location_id', $this->trainingLocation);
+        //     }
+        // }])
+        // ->get();
 
-        // $staffs = Staff::with(['current_rank', 'abroads', 'trainings', 'staff_educations.education_group'])->get();
+        $staffs = Staff::where('name', 'like', '%' . $this->nameSearch . '%')->whereHas('trainings', function ($query) {
+        if ($this->trainingLocation == 3) {
+            $query->whereIn('training_location_id', [1, 2]);
+        } elseif (!empty($this->trainingLocation)) {
+            $query->where('training_location_id', $this->trainingLocation);
+        }
+       })->with('trainings') ->get();
         $phpWord = new PhpWord();
         $section = $phpWord->addSection([
             'orientation' => 'landscape',
@@ -66,12 +72,8 @@ class LocalTrainingReport2 extends Component
         // $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
         $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
         $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
-        
-        $section->addTitle($this->trainingLocation==1? 'Local Training Report' : 'Local Online Training Report', 2);
-
+        $section->addTitle($this->trainingLocation==1? 'Local Training Report' : 'Foreign  Training Report', 2);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-
-
         $table->addRow();
         $table->addCell(1000, ['vMerge' => 'restart'])->addText('စဥ်',['bold'=>true],['alignment'=>'center','spaceBefore'=>600]);
         $table->addCell(5000, ['vMerge' => 'restart'])->addText('အမည်/ရာထူး',['bold'=>true],['alignment'=>'center','spaceBefore'=>600]);
@@ -80,7 +82,7 @@ class LocalTrainingReport2 extends Component
         $table->addCell(2500, ['vMerge' => 'restart'])->addText('သင်တန်းကာလ(မှ)',['bold'=>true],['alignment'=>'center','spaceBefore'=>600]);
         $table->addCell(2500, ['vMerge' => 'restart'])->addText('သင်တန်းကာလ(ထိ)',['bold'=>true],['alignment'=>'center','spaceBefore'=>600]);
         $table->addCell(3000, ['vMerge' => 'restart'])->addText('သင်တန်းနေရာ/ဒေသ',['bold'=>true],['alignment'=>'center','spaceBefore'=>600]);
-        $table->addCell(2000, ['vMerge' => 'restart'])->addText('ရရှိခဲ့   သည့် အဆင့်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
+        $table->addCell(2000, ['vMerge' => 'restart'])->addText('ရရှိခဲ့သည့်အဆင့်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
 
         foreach ($staffs as $index => $staff) {
             $isFirstTraining = true; // Flag to check the first training
@@ -109,7 +111,6 @@ class LocalTrainingReport2 extends Component
                     $table->addCell(3500, ['vMerge' => 'continue']);
                     $table->addCell(3500, ['vMerge' => 'continue']);
                 }
-        
                 // Add the training-specific cells
                 $table->addCell(4000)->addText($training->training_type->name == 'အခြား' ? $training->diploma_name : $training->training_type->name , null, ['indentation' => ['left' => 100]]);
                 $table->addCell(2500)->addText(formatDMYmm($training->from_date), null, ['indentation' => ['left' => 100]]);
@@ -120,80 +121,10 @@ class LocalTrainingReport2 extends Component
                 }
               
             }
-
-        // $table->addRow();
-        // $table->addCell(2000, ['vMerge' => 'continue']);
-        // $table->addCell(4000, ['vMerge' => 'continue']);
-        // $table->addCell(4000, ['vMerge' => 'continue']);
-        // $table->addCell(3000)->addText('မှ', ['alignment' => 'center']);
-        // $table->addCell(3000)->addText('ထိ', ['alignment' => 'center']);
-        // $table->addCell(4000, ['vMerge' => 'continue']);
-        // $table->addCell(4000, ['vMerge' => 'continue']);
-        // $table->addCell(4000, ['vMerge' => 'continue']);
-
-
-      
-
-        // foreach ($staffs as $index => $staff) {
-
-        //     $abroadCount = count($staff->abroads);
-        //     $trainingCount = count($staff->trainings);
-
-
-        //     $maxRows = max($abroadCount, $trainingCount);
-
-        //     for ($rowIndex = 0; $rowIndex < $maxRows; $rowIndex++) {
-        //         $table->addRow();
-
-
-        //         $table->addCell(2000)->addText($index + 1);
-        //         $table->addCell(4000)->addText($staff->name);
-        //         $table->addCell(4000)->addText($staff->current_rank->name ?? '');
-
-
-        //         if (isset($staff->abroads[$rowIndex])) {
-        //             $table->addCell(2000)->addText($staff->abroads[$rowIndex]->from_date ?? '');
-        //             $table->addCell(2000)->addText($staff->abroads[$rowIndex]->to_date ?? '');
-        //         } else {
-        //             $table->addCell(2000)->addText('');
-        //             $table->addCell(2000)->addText('');
-        //         }
-
-
-        //         if (isset($staff->trainings[$rowIndex])) {
-        //             $table->addCell(4000)->addText($staff->trainings[$rowIndex]->location ?? '');
-        //             $table->addCell(4000)->addText($staff->trainings[$rowIndex]->remark ?? '');
-        //         } else {
-        //             $table->addCell(4000)->addText('');
-        //             $table->addCell(4000)->addText('');
-        //         }
-
-
-        //         if ($rowIndex === 0) {
-        //             $educationGroups = $staff->staff_educations->pluck('education_group.name')->toArray();
-        //             $table->addCell(4000)->addText(implode(", ", $educationGroups));
-        //         } else {
-        //             $table->addCell(4000)->addText('');
-        //         }
-        //         $table->addRow();
-        //         $table->addCell(1000, ['vMerge' => 'continue']);
-        //         $table->addCell(2000, ['vMerge' => 'continue']);
-        //         $table->addCell(2000, ['vMerge' => 'continue']);
-        //         $table->addCell(2000)->addText($staff->abroads[$rowIndex]->from_date ?? '');
-        //         $table->addCell(2000)->addText($staff->abroads[$rowIndex]->to_date ?? '');
-        //         $table->addCell(2000,['vMerge' => 'continue'])->addText();
-        //         $table->addCell(2000,['vMerge' => 'continue'])->addText();
-        //         $table->addCell(2000, ['vMerge' => 'continue'])->addText();
-        //     }
-        // }
-
-
         $fileName = 'local_training_report2.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);
         $objWriter->save($temp_file);
-
-
         return response()->download($temp_file, $fileName)->deleteFileAfterSend(true);
     }
     public function render()
