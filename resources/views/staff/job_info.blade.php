@@ -70,7 +70,7 @@
         <x-select
             wire:model.live="side_ministry_id"
             :values="$ministrys"
-            placeholder="တွဲဖက်အင်အားဖြစ်လျှင် ၀န်ကြီးဌာနရွေးပါ"
+            placeholder="မရှိပါ"
             name="side_ministry_id"
             class="mt-1 block w-full"
         />
@@ -81,7 +81,7 @@
         <x-select
             wire:model="side_department_id"
             :values="$side_departments"
-            placeholder="တွဲဖက်အင်အားဖြစ်လျှင် ဌာနရွေးပါ"
+            placeholder="မရှိပါ"
             name="side_department_id"
             class="mt-1 block w-full"
         />
@@ -92,7 +92,7 @@
         <x-select
             wire:model="side_division_id"
             :values="$divisions"
-            placeholder="တွဲဖက်အင်အားဖြစ်လျှင် ဌာနခွဲရွေးပါ"
+            placeholder="မရှိပါ"
             name="side_division_id"
             class="mt-1 block w-full"
         />

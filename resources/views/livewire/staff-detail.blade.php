@@ -100,7 +100,7 @@
                             @if ($staff)
                                 @switch($staff->status_id)
                                     @case(1)
-                                        <x-primary-button wire:click="setStaffStatus({{$staff->status_id}})"> Save </x-primary-button>
+                                        <x-primary-button wire:click="setStaffStatus({{$staff->status_id}})" wire:loading.attr="disabled"> Save </x-primary-button>
                                         <x-primary-button wire:click="setStaffStatus(2)"> Submit </x-primary-button>
                                         @break
                                     @case(4)

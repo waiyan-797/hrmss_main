@@ -106,11 +106,11 @@
                         </td>
                         @if($title == 'ဝန်ထမ်း')
                             <td>
-                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_leave',[ $value->id ])}}>ခွင့်</a> |
-                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_increment',[ $value->id ])}}>နှစ်တိုး</a> |
-                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_promotion',[ $value->id ])}}>ရာထူးတိုး</a> |
-                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_depromotion',[ $value->id ])}}>ရာထူးလျော့</a> |
-                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_retirement',[ $value->id ])}} >ပြုန်းတီး</a>
+                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_leave',[ $value->id ])}} wire:navigate>ခွင့်</a> |
+                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_increment',[ $value->id ])}} wire:navigate>နှစ်တိုး</a> |
+                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_promotion',[ $value->id ])}} wire:navigate>ရာထူးတိုး</a> |
+                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_depromotion',[ $value->id ])}} wire:navigate>ရာထူးလျော့</a> |
+                                <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_retirement',[ $value->id ])}} wire:navigate>ပြုန်းတီး</a>
                             </td>
                         @endif
                         @if($value['comment'] != null && ($value['status_id'] == 3 || $value['status_id'] == 4))

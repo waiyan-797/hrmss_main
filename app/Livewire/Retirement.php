@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\PensionType;
 use App\Models\Relation;
 use App\Models\RetireType;
 use App\Models\Staff;
@@ -10,18 +11,19 @@ use Livewire\Component;
 class Retirement extends Component
 {
     public $staff;
+    public $staff_id;
     public $confirm_delete = false;
     public $confirm_edit = false;
     public $confirm_add = false;
     public $retirementTypes = null;
-
-    public $retire_date;
+    public $pensionTypes = null;
 
     public $message = null;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
     public
         $retire_type_id,
+        $pension_type_id,
         $lost_contact_from_date,
         $retire_remark,
         $pension_salary,
@@ -32,60 +34,28 @@ class Retirement extends Component
         $family_pension_inheritor,
         $family_pension_date,
         $family_pension_inheritor_relation_id,
+        $retire_date,
 
         $relations;
     public function mount($staff_id)
     {
         $this->submit_form = 'submitForm';
         $this->cancel_action = 'close_modal';
-
-        $this->staff = Staff::find($staff_id);
+        $this->staff = Staff::whereNotNull('retire_type_id')->find($staff_id);
+        $this->staff_id = $staff_id;
         $this->retirementTypes = RetireType::all();
         $this->submit_button_text = 'သွင်းရန်';
         $this->relations = Relation::all();
     }
-    public function render()
-    {
-        return view('livewire.retirement');
-    }
-
-
 
     public function add_new()
     {
-
-
-        $this->resetValidation();
-
-
-        $this->staff->retire_date  = $this->retire_date;
-        $this->staff->retire_type_id = $this->retire_type_id;
-        $this->staff->lost_contact_from_date = $this->lost_contact_from_date;
-        $this->staff->retire_remark = $this->retire_remark;
-        $this->staff->pension_salary = $this->pension_salary;
-        $this->staff->gratuity = $this->gratuity;
-        $this->staff->pension_bank = $this->pension_bank;
-        $this->staff->pension_office_order = $this->pension_office_order;
-        $this->staff->date_of_death = $this->date_of_death;
-        $this->staff->family_pension_inheritor = $this->family_pension_inheritor;
-        $this->staff->family_pension_date = $this->family_pension_date;
-
-
-
-
-
-
-        $this->staff->update();
-
-
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
 
     public function submitForm()
     {
-
-
         if ($this->confirm_add) {
             $this->createRetire();
         } else {
@@ -95,37 +65,54 @@ class Retirement extends Component
 
     public function createRetire()
     {
-        $this->staff->retire_date  = $this->retire_date;
-        $this->staff->retire_type_id = $this->retire_type_id;
-        $this->staff->lost_contact_from_date = $this->lost_contact_from_date;
-        $this->staff->retire_remark = $this->retire_remark;
-        $this->staff->pension_salary = $this->pension_salary;
-        $this->staff->gratuity = $this->gratuity;
-        $this->staff->pension_bank = $this->pension_bank;
-        $this->staff->pension_office_order = $this->pension_office_order;
-        $this->staff->date_of_death = $this->date_of_death;
-        $this->staff->family_pension_inheritor = $this->family_pension_inheritor;
-        $this->staff->family_pension_date = $this->family_pension_date;
-        $this->staff->is_active = false;
-        $this->staff->status_changed_at = now();
-
-        $this->staff->update();
+        $this->staff = Staff::find($this->staff_id);
+        $this->staff->update([
+            'retire_date' => $this->retire_date,
+            'retire_type_id' => $this->retire_type_id,
+            'pension_type_id' => $this->pension_type_id,
+            'lost_contact_from_date' => $this->lost_contact_from_date,
+            'retire_remark' => $this->retire_remark,
+            'pension_salary' => $this->pension_salary,
+            'gratuity' => $this->gratuity,
+            'pension_bank' => $this->pension_bank,
+            'pension_office_order' => $this->pension_office_order,
+            'date_of_death' => $this->date_of_death,
+            'family_pension_inheritor' => $this->family_pension_inheritor,
+            'family_pension_date' => $this->family_pension_date,
+            'is_active' => false,
+            'status_changed_at' => now(),
+        ]);
         $this->message = 'Created successfully.';
         $this->close_modal();
     }
+
     public function close_modal()
     {
-        $this->resetValidation();
-        $this->reset([]);
+        $this->reset( [
+            'retire_type_id',
+            'pension_type_id',
+            'lost_contact_from_date',
+            'retire_remark',
+            'pension_salary',
+            'gratuity',
+            'pension_bank',
+            'pension_office_order',
+            'date_of_death',
+            'family_pension_inheritor',
+            'family_pension_date',
+            'family_pension_inheritor_relation_id',
+            'retire_date'
+        ]);
+        $this->staff = Staff::whereNotNull('retire_type_id')->find($this->staff_id);
         $this->confirm_edit = false;
         $this->confirm_add = false;
     }
 
     public function edit_modal($id)
     {
-        $this->resetValidation();
-        $this->retire_date = $this->staff->retire_date;
         $this->retire_type_id = $this->staff->retire_type_id;
+        $this->pension_type_id = $this->staff->pension_type_id;
+        $this->retire_date = $this->staff->retire_date;
         $this->lost_contact_from_date = $this->staff->lost_contact_from_date;
         $this->retire_remark = $this->staff->retire_remark;
         $this->pension_salary = $this->staff->pension_salary;
@@ -135,59 +122,83 @@ class Retirement extends Component
         $this->date_of_death = $this->staff->date_of_death;
         $this->family_pension_inheritor = $this->staff->family_pension_inheritor;
         $this->family_pension_date = $this->staff->family_pension_date;
-
-
-
         $this->confirm_add = false;
         $this->confirm_edit = true;
     }
 
     public function updateReitre()
     {
-        // $this->validate();
-
-        $this->staff->retire_date  = $this->retire_date;
-        $this->staff->retire_type_id = $this->retire_type_id;
-        $this->staff->lost_contact_from_date = $this->lost_contact_from_date;
-        $this->staff->retire_remark = $this->retire_remark;
-        $this->staff->pension_salary = $this->pension_salary;
-        $this->staff->gratuity = $this->gratuity;
-        $this->staff->pension_bank = $this->pension_bank;
-        $this->staff->pension_office_order = $this->pension_office_order;
-        $this->staff->date_of_death = $this->date_of_death;
-        $this->staff->family_pension_inheritor = $this->family_pension_inheritor;
-        $this->staff->family_pension_date = $this->family_pension_date;
-        $this->staff->is_active = false;
-        $this->staff->status_changed_at = now();
-
-        $this->staff->update();
+        $this->staff = Staff::find($this->staff_id);
+        $this->staff->update([
+            'retire_date' => $this->retire_date,
+            'retire_type_id' => $this->retire_type_id,
+            'pension_type_id' => $this->pension_type_id,
+            'lost_contact_from_date' => $this->lost_contact_from_date,
+            'retire_remark' => $this->retire_remark,
+            'pension_salary' => $this->pension_salary,
+            'gratuity' => $this->gratuity,
+            'pension_bank' => $this->pension_bank,
+            'pension_office_order' => $this->pension_office_order,
+            'date_of_death' => $this->date_of_death,
+            'family_pension_inheritor' => $this->family_pension_inheritor,
+            'family_pension_date' => $this->family_pension_date,
+            'is_active' => false,
+            'status_changed_at' => now(),
+        ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();
     }
 
     public function delete_confirm($id)
     {
-
         $this->confirm_delete = true;
     }
 
     public function delete($id)
     {
+        $this->staff = Staff::whereNotNull('retire_type_id')->find($this->staff_id);
+        $this->staff->update([
+            'retire_date' => null,
+            'retire_type_id' => null,
+            'pension_type_id' => null,
+            'lost_contact_from_date' => null,
+            'retire_remark' => null,
+            'pension_salary' => null,
+            'gratuity' => null,
+            'pension_bank' => null,
+            'pension_office_order' => null,
+            'date_of_death' => null,
+            'family_pension_inheritor' => null,
+            'family_pension_date' => null,
+            'status_changed_at' => now(),
+            'previous_active_status' => 0,
+        ]);
 
-        $this->staff->retire_date = null;
-        $this->staff->retire_type_id = null;
-        $this->staff->lost_contact_from_date = null;
-        $this->staff->retire_remark = null;
-        $this->staff->pension_salary = null;
-        $this->staff->gratuity = null;
-        $this->staff->pension_bank = null;
-        $this->staff->pension_office_order = null;
-        $this->staff->date_of_death = null;
-        $this->staff->family_pension_inheritor = null;
-        $this->staff->family_pension_date = null;
-        $this->staff->status_changed_at = now();
-        $this->staff->previous_active_status = 0;
+        $this->reset( [
+            'retire_type_id',
+            'pension_type_id',
+            'lost_contact_from_date',
+            'retire_remark',
+            'pension_salary',
+            'gratuity',
+            'pension_bank',
+            'pension_office_order',
+            'date_of_death',
+            'family_pension_inheritor',
+            'family_pension_date',
+            'family_pension_inheritor_relation_id',
+            'retire_date'
+        ]);
+        $this->staff = Staff::whereNotNull('retire_type_id')->find($this->staff_id);
         $this->confirm_delete = false;
-        $this->staff->update();
+    }
+
+    public function updatedRetireTypeId($value){
+        $this->pensionTypes = PensionType::where('retire_type_id', $value)->get();
+    }
+
+    public function render()
+    {
+        return view('livewire.retirement');
     }
 }

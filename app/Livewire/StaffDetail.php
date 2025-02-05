@@ -96,7 +96,7 @@ class StaffDetail extends Component
 
     public $educations = [];
     //job_info
-    public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_ministry_id, $side_department_id, $side_division_id, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
+    public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_ministry_id = null, $side_department_id = null, $side_division_id = null, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
     public $recommendations = [];
     public $postings = [];
     public $side_departments = [];
@@ -541,7 +541,7 @@ class StaffDetail extends Component
         foreach ($punishments as $pun) {
 
             $this->punishments[] = [
-                    'id'     => $pun->id ,
+                'id' => $pun->id ,
                 'penalty_type' => $pun->penalty_type_id,
                 'reason' => $pun->reason,
                 'from_date' => $pun->from_date,
@@ -1139,9 +1139,9 @@ class StaffDetail extends Component
             'transfer_remark' => $this->transfer_remark,
             'government_staff_started_date' => $this->government_staff_started_date,
             'current_division_id' => $this->current_division_id ?? Auth::user()->division_id,
-            'side_ministry_id' => $this->side_ministry_id,
-            'side_department_id' => $this->side_department_id,
-            'side_division_id' => $this->side_division_id,
+            'side_ministry_id' => $this->side_ministry_id == '' ? null : $this->side_ministry_id,
+            'side_department_id' => $this->side_department_id == '' ? null : $this->side_department_id,
+            'side_division_id' => $this->side_division_id == '' ? null : $this->side_division_id,
             'salary_paid_by' => $this->salary_paid_by,
             'join_date' => $this->join_date,
             'is_newly_appointed' => $this->is_newly_appointed,
@@ -1572,13 +1572,13 @@ class StaffDetail extends Component
 
     public function validate_punishments(){
         $validations = [
-            'punishments.*.training_type' => 'required',
+            'punishments.*.penalty_type' => 'required',
             'punishments.*.from_date' => 'required',
             'punishments.*.to_date' => 'required',
         ];
 
         $validation_messages = [
-            'punishments.*.training_type.required' => 'This Field is required.',
+            'punishments.*.penalty_type.required' => 'This Field is required.',
             'punishments.*.from_date.required' => 'This Field is required.',
             'punishments.*.to_date.required' => 'This Field is required.',
         ];

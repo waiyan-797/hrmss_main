@@ -10,7 +10,7 @@
             <div class="mb-4">
                 <label for="previous_rank_name" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ယခင်လုပ်ကိုင်ခဲ့ဖူးသည့်ရာထူး</label>
                 <div class="relative">
-                    
+
                     <select
                         wire:model="previous_rank_name"
                         class="text-sm font-arial block w-full mb-4 p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
@@ -36,10 +36,9 @@
             </div>
 
             <div class="mb-4">
-                <label for="promotion_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ရာထူးတိုးသည့်နေ့</label>
-                <x-date-picker wire:model="promotion_date" id="promotion_date"  class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"/>
+                <label for="promotion_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ရာထူးတိုးသည့်နေ့ (လ ၊ ရက် ၊ နှစ်)</label>
+                <x-text-input wire:model="promotion_date" id="promotion_date" name="promotion_date" type="date" class="mt-1 block w-full"/>
 
-               
                 @error('promotion_date') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
             </div>
             <div class="mb-4">

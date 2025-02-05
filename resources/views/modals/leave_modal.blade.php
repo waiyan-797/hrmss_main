@@ -34,20 +34,15 @@
                 </div>
             </div>
             <div class="mb-4">
-                <label for="from_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">မှ
+                <label for="from_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">မှ (လ ၊ ရက် ၊ နှစ်)
                 </label>
-                <x-date-picker wire:model="from_date" id="from_date"  
-                class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"/>
-
-                
+                <x-text-input wire:model="from_date" id="from_date" name="from_date" type="date" class="mt-1 block w-full"/>
                 @error('from_date') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
             </div>
             <div class="mb-4">
-                <label for="to_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ထိ
+                <label for="to_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ထိ (လ ၊ ရက် ၊ နှစ်)
                 </label>
-                <x-date-picker wire:model="to_date" id="to_date" class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"/>
-
-                
+                <x-text-input wire:model="to_date" id="to_date" name="to_date" type="date" class="mt-1 block w-full"/>
                 @error('to_date') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
             </div>
             <div class="mb-4">

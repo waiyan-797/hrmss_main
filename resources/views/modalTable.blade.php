@@ -14,17 +14,15 @@
     @endif
     <div class="font-arial text-md uppercase text-white bg-green-700 py-3 px-6 font-semibold flex flex-row justify-between items-center">
         {{ $title }}
-        @if(is_null($data_values?->retire_type_id))
-
-        <div class="flex flex-row gap-3">
-
-            <button wire:click='add_new' type="button" class="text-green-500 bg-white border border-white hover:bg-green-200 hover:text-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                <span class="sr-only">Add Icon</span>
-            </button>
-        </div>
+        @if($data_values?->retire_type_id == null)
+            <div class="flex flex-row gap-3">
+                <button wire:click='add_new' type="button" class="text-green-500 bg-white border border-white hover:bg-green-200 hover:text-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    <span class="sr-only">Add Icon</span>
+                </button>
+            </div>
         @endif
     </div>
     <table class="w-full text-sm text-gray-500 dark:text-gray-400">
