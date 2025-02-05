@@ -286,6 +286,34 @@ class Staff extends Model
         return $this->belongsTo(Ethnic::class);
     }
 
+    public function mother_religion(){
+        return $this->belongsTo(Religion::class);
+    }
+
+    public function mother_address_township_or_town(){
+        return $this->belongsTo(Township::class);
+    }
+
+    public function mother_address_region(){
+        return $this->belongsTo(Region::class);
+    }
+
+    public function father_ethnic(){
+        return $this->belongsTo(Ethnic::class);
+    }
+
+    public function father_religion(){
+        return $this->belongsTo(Religion::class);
+    }
+
+    public function father_address_township_or_town(){
+        return $this->belongsTo(Township::class);
+    }
+
+    public function father_address_region(){
+        return $this->belongsTo(Region::class);
+    }
+
     // Retire
     public function retire()
     {
@@ -517,5 +545,9 @@ public function labourAtt($year, $month)
     public function isInRs(){
 
         return $this->marital_statuses?->marital_status_type->id == 2;
+    }
+
+    public function salary_paid_by_department(){
+        return $this->belongsTo(Department::class, 'salary_paid_by', 'id');
     }
 }
