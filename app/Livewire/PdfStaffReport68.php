@@ -935,7 +935,7 @@ public $staff_id;
             if ($staff->abroads->isNotEmpty()) {
         foreach ($staff->abroads as $abroad) {
             $table->addRow();
-            $table->addCell(6000)->addText($abroad->countries->pluck('name')->join(', '),null,$pStyle_1);
+            $table->addCell(6000)->addText($abroad->countries->pluck('name')->unique()->join(', '),null,$pStyle_1);
             $table->addCell(6000)->addText($abroad->particular,null,$pStyle_3);
             $table->addCell(6000)->addText($abroad->meet_with,null,$pStyle_3);
             // $table->addCell(6000)->addText(formatDMYmm($abroad->from_date).formatDMYmm($abroad->to_date ));
