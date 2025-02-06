@@ -37,15 +37,18 @@
                                 <td class="border border-black text-right p-1">{{ $staff->name}}</td>
                                 
                                 <td class="border border-black text-right p-1">
-                                    {{$staff->postings->map(function ($posting) {
+                                    {{-- {{$staff->postings->map(function ($posting) {
                                         return $posting->rank?->name;
-                                    })->join(', ')}}
+                                    })->join(', ')}} --}}
+                                    {{$staff->postings->sortByDesc('to_date')->first()?->rank?->name}}
+
                                 </td>
                                 <td class="border border-black text-right p-1">
                                    
-                                    {{$staff->postings->map(function ($posting) {
+                                    {{-- {{$staff->postings->map(function ($posting) {
                                         return $posting->division?->name;
-                                    })->join(', ')}}
+                                    })->join(', ')}} --}}
+                                    {{$staff->postings->sortByDesc('to_date')->first()?->division?->name}}
                                 </td>
                                 <td class="border border-black text-right p-1">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</td>
                                 <td class="border border-black text-right p-1"> @php
@@ -55,9 +58,9 @@
                                 @endphp
                                 {{ $diff->y == 0 ? '' : en2mm($diff->y) .' နှစ်'}} {{ $diff->m == 0 ? '' : en2mm($diff->m) .' လ' }} {{ $diff->d == 0 ? '' : en2mm($diff->d) .' ရက်' }}</td>
                                 <td class="border border-black text-right p-1">  {{ $staff->pension_type?->name}}</td>
-                                <td class="border border-black text-right p-1">{{ $staff->retire_date}}</td>
-                                <td class="border border-black text-right p-1">{{ $staff->pension_salary}}</td>
-                                <td class="border border-black text-right p-1">{{ $staff->gratuity}}</td>
+                                <td class="border border-black text-right p-1">{{ formatDMYmm($staff->retire_date)}}</td>
+                                <td class="border border-black text-right p-1">{{ en2mm($staff->pension_salary)}}</td>
+                                <td class="border border-black text-right p-1">{{ en2mm($staff->gratuity)}}</td>
                                 <td class="border border-black text-right p-1">{{ $staff->pension_bank}}</td>
                                 <td class="border border-black text-right p-1">{{ $staff->pension_office_order }}</td>
                                 <td class="border border-black text-right p-1">{{ $staff->permanent_address_ward.'၊'.$staff->permanent_address_street.'၊'.$staff->permanent_address_township_or_town?->name.'၊'.$staff->permanent_address_region?->name }}၊{{ $staff->phone}}</td>

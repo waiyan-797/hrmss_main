@@ -70,12 +70,8 @@ class PensionList extends Component
             $table->addRow();
             $table->addCell(1000)->addText(en2mm($index + 1),null,$pStyle_1);
             $table->addCell(2000)->addText($staff->name,null,$pStyle_1);
-            $table->addCell(3000)->addText($staff->postings->map(function ($posting) {
-                                    return $posting->rank?->name;
-                                })->join(', '),null,$pStyle_2);
-            $table->addCell(4000)->addText($staff->postings->map(function ($posting) {
-                                    return $posting->division?->name;
-                                })->join(', '),null,$pStyle_2);
+            $table->addCell(3000)->addText($staff->postings->sortByDesc('to_date')->first()?->rank?->name,null,$pStyle_2);
+            $table->addCell(4000)->addText($staff->postings->sortByDesc('to_date')->first()?->division?->name,null,$pStyle_2);
 
             $table->addCell(3000)->addText(en2mm(formatDMYmm($staff->dob)),null,$pStyle_2);
 
@@ -89,8 +85,8 @@ class PensionList extends Component
 
             $table->addCell(3000)->addText($staff->pension_type->name ?? '',null,$pStyle_1);
             $table->addCell(3000)->addText(formatDMYmm($staff->retire_date),null,$pStyle_2);
-            $table->addCell(2000)->addText($staff->pension_salary,null,$pStyle_2);
-            $table->addCell(2000)->addText($staff->gratuity,null,$pStyle_2);
+            $table->addCell(2000)->addText(en2mm($staff->pension_salary),null,$pStyle_2);
+            $table->addCell(2000)->addText(en2mm($staff->gratuity),null,$pStyle_2);
             $table->addCell(3000)->addText($staff->pension_bank,null,$pStyle_2);
             $table->addCell(3000)->addText($staff->pension_office_order,null,$pStyle_2);
             $table->addCell(3000)->addText($staff->permanent_address_ward . '၊' .

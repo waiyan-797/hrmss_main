@@ -39,9 +39,10 @@
                                 <td class="border border-black text-right p-1">{{ en2mm($loop->index+1)}}</td>
                                 <td class="border border-black text-right p-1">{{ $staff->name}}</td>
                                 <td class="border border-black text-right p-1">
-                                    {{$staff->postings->map(function ($posting) {
+                                    {{-- {{$staff->postings->map(function ($posting) {
                                         return $posting->rank?->name;
-                                    })->join(', ')}}
+                                    })->join(', ')}} --}}
+                                    {{$staff->postings->sortByDesc('to_date')->first()?->rank?->name}}
                                 </td>
                                 <td class="border border-black text-right p-1">{{ formatDMYmm($staff->join_date) }}</td>
                                 <td class="border border-black text-right p-1">{{formatDMYmm($staff->retire_date) }}</td>

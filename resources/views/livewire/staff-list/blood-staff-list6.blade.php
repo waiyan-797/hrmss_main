@@ -16,9 +16,8 @@
                         {{$bloodType->name}}
                     </option>
                     @endforeach
-                  
                 </select>
-            </div>
+            </div><br>
             <table class="md:w-full">
                 <thead>
                     <tr>
@@ -74,7 +73,7 @@
                             {{ en2mm($second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count())) }}
                         </td>
                     </tr>
-                    <tr class="font-bold">
+                    {{-- <tr class="font-bold">
                         <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2">စုစုပေါင်း အရာထမ်း အမှုထမ်း</td>
                         <td class="border border-black text-center p-2">
@@ -86,7 +85,7 @@
                         <td class="border border-black text-center p-2">
                             {{ en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', $selectedBlood_type)->where('gender_id', 2)->count())) }}
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <td class="border border-black text-center p-2">၁</td>
                         <td class="border border-black text-center p-2">နေ့စား</td>

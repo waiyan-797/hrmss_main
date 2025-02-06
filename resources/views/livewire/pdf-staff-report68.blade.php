@@ -206,35 +206,6 @@
                     })->filter()->join(', ') }}</label>
 
                 </div>
-                
-                {{-- <div class="w-full mb-4">
-                    <div class="flex justify-start mb-2 space-x-3">
-                        <label for="">၂၅။ </label>
-                        <h1 class="font-semibold text-base">ပညာအရည်အချင်း(ရရှိထားသောတက္ကသိုလ်/ဘွဲ့/ဒီပလိုမာ)
-                        </h1>
-                    </div>
-                    <table class="md:w-full">
-                        <thead>
-                            <tr>
-                                <th class="border border-black text-center p-2">စဉ်</th>
-                                <th class="border border-black text-center p-2">Education Group</th>
-                                <th class="border border-black text-center p-2">Education Type</th>
-                                <th class="border border-black text-center p-2">Education</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($staff->staff_educations as $education)
-                                <tr>
-                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
-                                    <td class="border border-black text-center p-2">{{$education->education_group->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$education->education_type->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$education->education->name}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div> --}}
-
             </div>
 
             <div class="md:w-full p-4">
@@ -908,9 +879,9 @@
                             <tbody class="text-center h-8 p-2">
                                 @foreach($staff->trainings as $training)
                                 <tr>
-                                    <td class="p-2 border border-black">{{ $training->training_type->name }}</td>
-                                    <td class="p-2 border border-black">{{ $training->from_date }}</td>
-                                    <td class="p-2 border border-black">{{ $training->to_date }}</td>
+                                    <td class="p-2 border border-black">{{ $training->diploma_name }}</td>
+                                    <td class="p-2 border border-black">{{ formatDMYmm($training->from_date) }}</td>
+                                    <td class="p-2 border border-black">{{ formatDMYmm($training->to_date) }}</td>
                                     <td class="p-2 border border-black">{{ $training->location }}/{{ $staff->training_location?->name}}</td>
                                 </tr>
                                 @endforeach
@@ -1012,7 +983,7 @@
                             <tbody class="text-center h-8 p-2">
                                 @foreach ($staff->postings as $posting)
                                     <tr>
-                                        <td class="p-2 border border-black">{{ $posting->staff->name ?? '' }}</td>
+                                        <td class="p-2 border border-black">{{ $posting->rank->name ?? '' }}</td>
                                         <td class="p-2 border border-black">{{ $posting->department->name ?? '' }}</td>
                                         <td class="p-2 border border-black">{{ $posting->ministry->name ?? '' }}</td>
                                         <td class="p-2 border border-black">{{ formatDMYmm($posting->from_date) }}</td>
@@ -1088,12 +1059,12 @@
                             <tbody class="text-center h-8 p-2">
                                 @foreach($staff->abroads as $abroad)
                                     <tr>
-                                        <td class="p-2 border border-black">{{$abroad->countries->pluck('name')->join(', ')}}</td>
+                                        <td class="p-2 border border-black">{{$abroad->countries->pluck('name')->unique()->join(', ')}}</td>
                                         <td class="p-2 border border-black">{{ $abroad->particular }}</td>
                                         <td class="p-2 border border-black">{{ $abroad->meet_with }}</td>
                                         <td class="p-2 border border-black">
-                                            {{ $abroad->from_date  }} -
-                                            {{ $abroad->to_date  }}
+                                            {{ formatDMYmm($abroad->from_date)  }} -
+                                            {{ formatDMYmm($abroad->to_date) }}
                                         </td>
                                     </tr>
                                 

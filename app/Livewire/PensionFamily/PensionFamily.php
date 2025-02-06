@@ -85,9 +85,7 @@ class PensionFamily extends Component
             $table->addRow();
             $table->addCell(2000)->addText(en2mm($index + 1),null,$pStyle_1);
             $table->addCell(2000)->addText($staff->name,null,$pStyle_1);
-            $table->addCell(3000)->addText($staff->postings->map(function ($posting) {
-                                    return $posting->rank?->name;
-                                })->join(', '),null,$pStyle_2);
+            $table->addCell(3000)->addText($staff->postings->sortByDesc('to_date')->first()?->rank?->name,null,$pStyle_2);
             $table->addCell(3000)->addText(formatDMYmm($staff->join_date),null,$pStyle_2);
             $table->addCell(3000)->addText(formatDMYmm($staff->retire_date),null,$pStyle_2);
             $table->addCell(2000)->addText($this->calculateExperience($staff),null,$pStyle_2); 

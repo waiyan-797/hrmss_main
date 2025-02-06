@@ -226,7 +226,7 @@ class PdfStaffReport17 extends Component
                 $table->addRow();
                 $table->addCell(6000)->addText(formatDMYmm($abroad?->from_date), null, $pStyle_2);
                 $table->addCell(6000)->addText(formatDMYmm($abroad?->to_date), null, $pStyle_2);
-                $table->addCell(8000)->addText($abroad->countries->pluck('name')->join(', '), null, $pStyle_3);
+                $table->addCell(8000)->addText($abroad->countries->pluck('name')->unique()->join(', '), null, $pStyle_3);
                 $table->addCell(6000)->addText($abroad->particular, null, $pStyle_4);
                 $table->addCell(8000)->addText($abroad->training_success_count, null, $pStyle_4);
                 $table->addCell(8000)->addText($abroad->position, null, $pStyle_1);
@@ -332,7 +332,8 @@ class PdfStaffReport17 extends Component
         foreach ($staff->abroads as $abroad) {
             $table->addRow();
             $table->addCell(6000)->addText($abroad->particular, null, $pStyle_1);
-            $table->addCell(6000)->addText($abroad->countries->pluck('name')->join(', '), null, $pStyle_3);
+            // $table->addCell(6000)->addText($abroad->countries->pluck('name')->join(', '), null, $pStyle_3);
+            $table->addCell(6000)->addText($abroad->countries->pluck('name')->unique()->join(', '), null, $pStyle_3);
             $table->addCell(6000)->addText(formatDMYmm($abroad?->from_date), null, $pStyle_3);
             $table->addCell(6000)->addText(formatDMYmm($abroad?->to_date), null, $pStyle_3);
             $table->addCell(6000)->addText(formatDMYmm($abroad->actual_abroad_date), null, $pStyle_3);

@@ -94,15 +94,6 @@ class PdfStaffReport53 extends Component
         $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
 
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
-        
-    //     $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
-    //     if ($imagePath && file_exists($imagePath)) {
-    //     $section->addImage($imagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
-    //     } else {
-    //     $defaultImagePath = public_path('img/user.png');
-    //     $section->addImage($defaultImagePath, ['width' => 80, 'height' => 80, 'align' => 'right']);
-    //    }
-
     $textBoxStyle = [
         'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
         'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
@@ -228,10 +219,10 @@ class PdfStaffReport53 extends Component
         $table->addCell(13000)->addText('အမြဲတမ်းနေရပ်လိပ်စာ', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText(
-            ($staff->permanent_address_street ?? '' ). 
-            ($staff->permanent_address_ward ? '၊' . $staff->permanent_address_ward : '' ). 
-            ($staff->permanent_address_township_or_town->name ? '၊' . $staff->permanent_address_township_or_town->name.'မြို့နယ်၊' : ''). 
-            ($staff->permanent_address_region->name ? '၊' . $staff->permanent_address_region->name . '။':''),
+           ($staff->permanent_address_street ?? '' ).
+            ($staff->permanent_address_ward ? '၊'.$staff->permanent_address_ward:'').
+            ($staff->permanent_address_township_or_town->name ? '၊'.$staff->permanent_address_township_or_town->name.'မြို့နယ်':''). 
+            ($staff->permanent_address_region->name ? '၊'.$staff->permanent_address_region->name.'။':''),
             null,
             $pStyle_8 );
 
@@ -945,7 +936,7 @@ class PdfStaffReport53 extends Component
             foreach ($staff->abroads as $index => $abroad) {
                     $table->addRow(50);
                     $table->addCell(700)->addText('('.myanmarAlphabet($index).')',null,$pStyle_6);
-                    $table->addCell(1800)->addText($abroad->countries->pluck('name')->join(', '),null,$pStyle_3);
+                    $table->addCell(1800)->addText($abroad->countries->pluck('name')->unique()->join(', '),null,$pStyle_3);
                     $table->addCell(4000)->addText($abroad->particular,null,$pStyle_6);
                     $table->addCell(2000)->addText($abroad->meet_with,null,$pStyle_6);
                     $table->addCell(1700)->addText(formatDMYmm($abroad->from_date) . '      '.formatDMYmm($abroad->to_date),null,array('align' => 'both', 'spaceAfter' => 30, 'spaceBefore' => 70 ,'indentation' => ['left' => 100]));// <' '>it means many space

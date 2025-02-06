@@ -126,7 +126,7 @@
                                     
                                     <td class="border border-black text-center p-2">{{formatDMYmm($abroad->from_date)}}</td>
                                     <td class="border border-black text-center p-2">{{formatDMYmm($abroad->to_date)}}</td>
-                                    <td class="border border-black text-center p-2"> {{$abroad->countries->pluck('name')->join(', ')}}</td>
+                                    <td class="border border-black text-center p-2"> {{$abroad->countries->pluck('name')->unique()->join(', ')}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->particular}}</td>
                                     <td class="border border-black text-center p-2">{{$abroad->training_success_count}}</td> 
                                     <td class="border border-black text-center p-2">{{$abroad->sponser}}</td> 
@@ -199,7 +199,7 @@
                                 <tr>
                                     <td class="border border-black p-2">{{en2mm($index+1)}}</td>
                                     <td class="border border-black p-2">{{ $abroad->particular}}</td>
-                                    <td class="border border-black p-2">{{$abroad->countries->pluck('name')->join(', ')}}</td>
+                                    <td class="border border-black p-2">{{$abroad->countries->pluck('name')->unique()->join(', ')}}</td>
                                     <td class="border border-black p-2">{{formatDMYmm($abroad->from_date)}}</td>
                                     <td class="border border-black p-2">{{formatDMYmm($abroad->to_date)}}</td>
                                     <td class="border border-black p-2">{{formatDMYmm($abroad->actual_abroad_date)}}</td>

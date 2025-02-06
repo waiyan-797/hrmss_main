@@ -969,7 +969,7 @@
                                 @foreach($staff->abroads as $index => $abroad)
                                     <tr>
                                         <td class="p-2 border border-black">{{ '('.en2mm($index + 1) .')'}}</td>
-                                        <td class="p-2 border border-black">{{ $abroad->country->name ?? 'မရှိပါ' }}</td>
+                                        <td class="p-2 border border-black">{{ $abroad->countries->pluck('name')->unique()->join(', ') }}</td>
                                         <td class="p-2 border border-black">{{ $abroad->particular }}</td>
                                         <td class="p-2 border border-black">{{ $abroad->meet_with }}</td>
                                         <td class="p-2 border border-black">{{ formatDMYmm($abroad->from_date) }} - {{ formatDMYmm($abroad->to_date) }}</td>
