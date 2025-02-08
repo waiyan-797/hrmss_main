@@ -1,12 +1,10 @@
 <?php
 
-use App\Models\education_group;
-use App\Models\Education_type;
-use App\Models\EducationGroup;
-use App\Models\EducationType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\EducationGroup;
+
 
 return new class extends Migration
 {
@@ -15,10 +13,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('education_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('education', function (Blueprint $table) {
+            $table->foreignIdFor(EducationGroup::class)->nullable()->constrained()->nullOnDelete();
         });
     }
 
@@ -27,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('education_types');
+        Schema::table('education', function (Blueprint $table) {
+            //
+        });
     }
 };

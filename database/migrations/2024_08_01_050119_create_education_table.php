@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignIdFor(EducationType::class)->nullable()->constrained()->nullOnDelete();
+            //
             $table->timestamps();
         });
     }
