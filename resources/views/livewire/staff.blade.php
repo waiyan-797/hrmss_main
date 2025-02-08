@@ -1,26 +1,26 @@
 <div class="w-full {{isset($header) ? 'h-[83vh]' : 'h-[90vh]'}} overflow-y-auto">
     <div class="flex justify-left items-center space-x-1 px-3 mt-10">
-        <a href="{{ route('staff', ['status' => 1]) }}" wire:navigate
+        <a href="{{ route('staff', ['status' => 1]) }}" wire:navigate wire:ignore
             class="{{ request()->path() == 'staff/1' ? 'bg-yellow-400' : 'bg-green-500' }} text-white hover:bg-yellow-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
             အချက်အလက်အကြမ်းစာရင်း {{-- Save Draft --}}
         </a>
 
-        <a href="{{ route('staff', ['status' => 2]) }}" wire:navigate
+        <a href="{{ route('staff', ['status' => 2]) }}" wire:navigate wire:ignore
             class="{{ request()->path() == 'staff/2' ? 'bg-yellow-400' : 'bg-green-500' }} text-white hover:bg-yellow-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
             တင်ပြထားသည့်စာရင်း{{-- Submit --}}
         </a>
 
-        <a href="{{ route('staff', ['status' => 3]) }}" wire:navigate
+        <a href="{{ route('staff', ['status' => 3]) }}" wire:navigate wire:ignore
             class="{{ request()->path() == 'staff/3' ? 'bg-yellow-400' : 'bg-green-500' }} text-white hover:bg-yellow-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
             ငြင်းပယ်စာရင်း{{-- Reject --}}
         </a>
 
-        <a href="{{ route('staff', ['status' => 4]) }}" wire:navigate
+        <a href="{{ route('staff', ['status' => 4]) }}" wire:navigate wire:ignore
             class="{{ request()->path() == 'staff/4' ? 'bg-yellow-400' : 'bg-green-500' }} text-white hover:bg-yellow-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
             ပြန်လည်တင်ပြစာရင်း{{-- Resubmit --}}
         </a>
 
-        <a href="{{ route('staff', ['status' => 5]) }}" wire:navigate
+        <a href="{{ route('staff', ['status' => 5]) }}" wire:navigate wire:ignore
             class="{{ request()->path() == 'staff/5' ? 'bg-yellow-400' : 'bg-green-500' }} text-white hover:bg-yellow-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
             အတည်ပြုဝန်ထမ်းစာရင်း{{-- Approve --}}
         </a>
