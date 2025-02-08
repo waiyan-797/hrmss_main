@@ -1,5 +1,4 @@
 <div class="fixed w-screen h-screen inset-0 flex items-center justify-center bg-gray-600 bg-opacity-75 z-50">
-    {{-- @dd('d') --}}
     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
         <h2 class="text-lg font-semibold mb-4">Please enter your input:</h2>
         <textarea

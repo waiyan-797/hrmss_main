@@ -113,29 +113,34 @@
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_retirement',[ $value->id ])}} wire:navigate>ပြုန်းတီး</a>
                             </td>
                         @endif
-                        @if($value['comment'] != null && ($value['status_id'] == 3 || $value['status_id'] == 4))
+                        @if($value['comment'] != null && ($value['status_id'] == 3 || $value['status_id'] == 4 || $value['status_id'] == 5))
                             <td class="">
                                 <button type="button"
                                     class="font-arial text-green-600 dark:text-green-500 hover:underline"
-                                    wire:click ='showComment'
+                                    wire:click = "showComment('{{$value['comment']}}')"
                                 >
-                                    Comment
+                                    {{ $value['status_id'] == 5 ? 'Request Comment' : 'Comment' }}
                                 </button>
-                                @if($show_comment)
+                                @if($selectedComment != null)
                                     <div class="fixed w-screen h-screen inset-0 flex items-center justify-center bg-gray-600 bg-opacity-75 z-50">
                                         <div class="flex flex-col gap-2 items-center justify-center bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
                                             <h1 class="text-red-600 font-semibold font-arial text-lg">
                                                 Comment
                                             </h1>
                                             <div class="font-arial text-gray-600 text-sm">
-                                                {{$value['comment']}}
+                                                {{ $selectedComment }}
                                             </div>
-                                            <button wire:click="closeModal" class="ms-auto bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Cancel</button>
+                                            <div class="flex flex-row items-center gap-2 justify-center">
+                                                <button wire:click="closeModal" class="ms-auto bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Cancel</button>
+                                                @if ($value['status_id'] == 5 && auth()->user()->role_id == 2)
+                                                    <button wire:click="request_approve({{$value['id']}})" class="ms-auto bg-green-300 text-green-700 px-4 py-2 rounded-md">Request Approve</button>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 @endif
                             </td>
-                        @elseif ($value['comment'] == null && ($value['status_id'] == 3 || $value['status_id'] == 4))
+                        @elseif ($value['comment'] == null && ($value['status_id'] == 3 || $value['status_id'] == 4 || $value['status_id'] == 5))
                             <td>
                                 <button type="button"
                                     class="font-arial text-red-600 dark:text-red-500 hover:underline"

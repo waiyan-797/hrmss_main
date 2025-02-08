@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Promotion;
 use App\Models\Staff as ModelsStaff;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -20,7 +21,7 @@ class Staff extends Component
         public $message = null;
         public $staff_search, $staff_name, $staff_id = 0;
         public $modal_title;
-        public $show_comment;
+        public $selectedComment = null;
 
     public function mount($status){
         $this->status = $status;
@@ -83,7 +84,6 @@ class Staff extends Component
 
     public function go_report($staff_id, $report_id)
     {
-
         $routeName = "pdf_staff_report{$report_id}";
         $this->redirect(route($routeName, [
             'staff_id' => $staff_id,
@@ -94,8 +94,8 @@ class Staff extends Component
     {
         $staffSearch = '%' . $this->staff_search . '%';
         $this->modal_title = 'Choose Report Type';
-        $staffQuery = ModelsStaff::where('status_id' , $this->status)->when(auth()->user()->role_id != 2, function($q){
-            return $q->where('current_division_id', auth()->user()->division_id);
+        $staffQuery = ModelsStaff::where('status_id' , $this->status)->when(Auth::user()->role_id != 2, function($q){
+            return $q->where('current_division_id', Auth::user()->division_id);
         });
         if ($this->staff_search) {
             $this->resetPage();
@@ -117,12 +117,23 @@ class Staff extends Component
         return Promotion::where('staff_id', $id)->get()->isEmpty()  ;
     }
 
-    public function showComment(){
-            $this->show_comment = true ;
+    public function showComment($comment = null)
+    {
+        $this->selectedComment = $comment;
     }
 
-    public function closeModal(){
-        $this->show_comment = false ;
-}
+    public function closeModal()
+    {
+        $this->selectedComment = null;
+    }
+
+    public function request_approve($staff_id){
+        ModelsStaff::where('id', $staff_id)->update([
+            'status_id' => 4, //sent back to user resubmit status
+        ]);
+
+        $this->selectedComment = null;
+        $this->message = 'Request Approved Successfully!';
+    }
 
 }

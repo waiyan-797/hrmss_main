@@ -52,11 +52,11 @@
                 'data_values' => $staffs,
                 'modal' => '',
                 'is_crud_modal' =>  $status == 5 ,
-                'comment' => $status == 4 || $status == 3,
+                'comment' => $status == 4 || $status == 3 || $status == 5,
                 'id' => $staff_id,
                 'title' => $status == 5 ? 'ဝန်ထမ်း' : '',
                 'search_id' => 'staff_search',
-                'columns' => ['No', 'Photo', 'Name', 'Staff No', 'Action', $status   == 5 ?  'Type' : ($status == 3 || $status == 4 ? 'Comment' : null)],
+                'columns' => ['No', 'Photo', 'Name', 'Staff No', 'Action', $status == 5 ?  'Type' : ($status == 3 || $status == 4 ? 'Comment' : null), $status == 5 ? 'Request' : null],
                 'column_vals' => ['staff_photo', 'name', 'staff_no'],
             ])
 

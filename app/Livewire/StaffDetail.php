@@ -1209,6 +1209,9 @@ class StaffDetail extends Component
             $staff_create['current_division_id'] = Auth::user()->division_id;
         }
         if ($_status != null) {
+            if ($_status == 5 || $_status == 2) {
+                $staff_create['comment'] = null;
+            }
             $staff_create['status_id'] = $_status;
         }
         $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
@@ -1264,20 +1267,33 @@ class StaffDetail extends Component
         }
     }
 
-    public function commentStaff()
+    public function commentStaff($rq = false)
     {
+        if ($rq == true) {
+            $this->staff_status_id = 5;
+        }
         $this->displayAlertBox = true;
     }
 
-    public function submitCondition($status)
+    public function submitCondition($status = null)
     {
-        $staff = Staff::find($this->staff_id);
-        $staff->update([
+        if (!$this->staff_id) {
+            return;
+        }
+
+        Staff::where('id', $this->staff_id)->update([
             'status_id' => $status,
             'comment' => $this->comment,
         ]);
-        $this->staff = $staff;
-        $this->message = $status == 3 ? 'Staff has been rejected.' : 'Staff has been sent back';
+
+        $this->staff = Staff::find($this->staff_id);
+
+        $this->message = match ($status) {
+            3 => 'Staff has been rejected.',
+            5 => 'Staff has been requested.',
+            default => 'Staff has been sent back.',
+        };
+
         $this->displayAlertBox = false;
     }
 
