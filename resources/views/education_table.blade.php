@@ -31,7 +31,8 @@
                             @if ($type['type'] == 'select')
                                 @if ($type['next_col_update'] && !is_string($type['select_values']))
 
-                                    <x-filter_search_select
+                                <x-select
+
 
 :disabled="$type['disabled']"
                                         wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
