@@ -8,7 +8,7 @@
 -- Generation Time: 2025-01-11 11:25:37.174417
 -- -------------------------------------------------------------
 
-DROP TABLE `hrmsNew`.`departments`;
+DROP TABLE `hrms`.`departments`;
 
 
 CREATE TABLE `departments` (
@@ -20,7 +20,7 @@ CREATE TABLE `departments` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `hrmsNew`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `hrms`.`departments` (`id`, `name`, `ministry_id`, `created_at`, `updated_at`) VALUES
 (1,'ရုံးအဖွဲ့',1, NULL, NULL),
 (2,'သမ္မတဦးစီးရုံး',1, NULL, NULL),
 (3,'ဒုတိယသမ္မတ (၁) ဦးစီးရုံး',1, NULL, NULL),

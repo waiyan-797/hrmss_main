@@ -18,4 +18,12 @@ class EducationGroup extends Model
         return $this->hasMany(StaffEducation::class);
     }
 
+    public function education()
+    {
+        return $this->hasMany(Education::class);
+    }
+
+
+
+
 }

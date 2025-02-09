@@ -442,10 +442,11 @@ class StaffDetail extends Component
         $this->staff_rewards = [];
 
         foreach ($staff_educations as $edu) {
+            $education = Education::find($edu->id);
             $this->educations[] = [
                 'id' => $edu->id,
-                'education_group' => $edu->education_group_id,
-                'education_type' => $edu->education_type_id,
+                'education_group' => $education->education_group_id,
+                'education_type' => $education->education_type_id,
                 'education' => $edu->education_id,
                 'country_id' => $edu->country_id,
                 'education_types' => EducationType::where('education_group_id', $edu->education_group_id)->get(),
@@ -1619,8 +1620,8 @@ class StaffDetail extends Component
             StaffEducation::updateOrCreate([
                 'id' => $education['id'],
             ], [
-                'education_group_id' => $education['education_group'] == '' ? null : $education['education_group'],
-                'education_type_id' => $education['education_type'] == '' ? null : $education['education_type'],
+                // 'education_group_id' => $education['education_group'] == '' ? null : $education['education_group'],
+                // 'education_type_id' => $education['education_type'] == '' ? null : $education['education_type'],
                 'education_id' => $education['education'] == '' ? null : $education['education'],
                 'staff_id' => $staffId,
                 'country_id' => $education['country_id'] == '' ? null : $education['country_id'],
@@ -1863,8 +1864,11 @@ class StaffDetail extends Component
         $this->staff_status_id = $status;
     }
 
+
     public function handleCustomColumnUpdate($array, $index, $field, $arr_ini, $value, $model, $model_related)
     {
+    // 'educations', 0, 'education_type', 'eduTypes', $event.target.value, 'education_type', 'education_groups'
+
         $this->$array[$index][$model] = '';
 
         if ($model_related) {
@@ -1873,11 +1877,26 @@ class StaffDetail extends Component
 
         match ($arr_ini) {
             'eduTypes' => $this->$array[$index][$field] = EducationType::where('education_group_id', $value)->get(),
+            'eduTypesAndGroups' => $this->handleEduTypesAndGroups($array, $index, $field, $value),
             'edus' => $this->$array[$index][$field] = Education::where('education_type_id', $value)->get(),
             'departments' => $this->$array[$index][$field] = Department::where('ministry_id', $value)->get(),
             default => [],
         };
     }
+
+    private function handleEduTypesAndGroups($array, $index, $field, $value)
+{
+        $this->$array[$index][$field] = EducationType::whereHas('education', function ($query) use ($value) {
+        $query->where('id', $value);
+    })->first()->id;
+    $this->$array[$index]['education_group'] =
+    EducationGroup::whereHas('education', function ($query) use ($value) {
+        $query->where('id', $value);
+    })->first()->id ;
+}
+
+
+
 
     public function updatedNrcRegionId($value){
         $this->nrc_township_codes = NrcTownshipCode::where('nrc_region_id_id', $value)->get();
@@ -2044,4 +2063,18 @@ class StaffDetail extends Component
     public function close_master_modal(){
         $this->add_model = null;
     }
+
+
+    public function updatedSearch($value  , $component , $model , $name)
+    {
+        if (strlen($value) >= 3) {
+            $this->$component = $model::where($name , 'like', '%' . $value . '%')
+                                      ->limit(10) // Limit results for performance
+                                      ->get();
+        } else {
+            $this->$component = [];
+        }
+    }
+
+
 }
