@@ -79,6 +79,7 @@ class StaffDetail extends Component
 
     public $message, $confirm_add, $confirm_edit, $staff_id, $tab;
     public $staff, $staff_status_id;
+    public $request_attach;
 
     //personal_info
     public $nrc_township_codes = [];
@@ -1217,8 +1218,12 @@ class StaffDetail extends Component
             $staff_create['current_division_id'] = Auth::user()->division_id;
         }
         if ($_status != null) {
-            if ($_status == 5 || $_status == 2) {
+            if ($_status == 5) {
                 $staff_create['comment'] = null;
+                $staff_create['request_attach'] = null;
+                if ($staff?->request_attach) {
+                    Storage::disk('upload')->delete($staff->request_attach);
+                }
             }
             $staff_create['status_id'] = $_status;
         }
@@ -1289,12 +1294,21 @@ class StaffDetail extends Component
             return;
         }
 
-        Staff::where('id', $this->staff_id)->update([
+        $staff = Staff::find($this->staff_id);
+
+        $newAttachment = $this->request_attach
+            ? Storage::disk('upload')->put('staffs', $this->request_attach)
+            : $staff?->request_attach;
+
+        if ($newAttachment && $staff?->request_attach) {
+            Storage::disk('upload')->delete($staff->request_attach);
+        }
+
+        $staff?->update([
             'status_id' => $status,
             'comment' => $this->comment,
+            'request_attach' => $newAttachment,
         ]);
-
-        $this->staff = Staff::find($this->staff_id);
 
         $this->message = match ($status) {
             3 => 'Staff has been rejected.',
@@ -1302,6 +1316,7 @@ class StaffDetail extends Component
             default => 'Staff has been sent back.',
         };
 
+        $this->reset('request_attach');
         $this->displayAlertBox = false;
     }
 

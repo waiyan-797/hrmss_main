@@ -56,7 +56,11 @@
                 'id' => $staff_id,
                 'title' => $status == 5 ? 'ဝန်ထမ်း' : '',
                 'search_id' => 'staff_search',
-                'columns' => ['No', 'Photo', 'Name', 'Staff No', 'Action', $status == 5 ?  'Type' : ($status == 3 || $status == 4 ? 'Comment' : null), $status == 5 ? 'Request' : null],
+                'columns' => array_filter([
+                        'No', 'Photo', 'Name', 'Staff No', 'Action',
+                        $status == 5 ? 'Type' : ($status == 3 || $status == 4 ? 'Comment' : null),
+                        ($status == 5 || $status == 2) ? 'Request' : null
+                    ]),
                 'column_vals' => ['staff_photo', 'name', 'staff_no'],
             ])
 

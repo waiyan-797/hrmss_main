@@ -113,13 +113,13 @@
                                 <a class="font-arial text-green-600 dark:text-green-500 hover:underline" href={{route('staff_retirement',[ $value->id ])}} wire:navigate>ပြုန်းတီး</a>
                             </td>
                         @endif
-                        @if($value['comment'] != null && ($value['status_id'] == 3 || $value['status_id'] == 4 || $value['status_id'] == 5))
+                        @if($value['comment'] != null && ($value['status_id'] == 3 || $value['status_id'] == 4 || $value['status_id'] == 5 || $value['status_id'] == 2))
                             <td class="">
                                 <button type="button"
                                     class="font-arial text-green-600 dark:text-green-500 hover:underline"
                                     wire:click = "showComment('{{$value['comment']}}')"
                                 >
-                                    {{ $value['status_id'] == 5 ? 'Request Comment' : 'Comment' }}
+                                    {{ ($value['request_attach'] != null) ? 'Request Comment' : 'Comment' }}
                                 </button>
                                 @if($selectedComment != null)
                                     <div class="fixed w-screen h-screen inset-0 flex items-center justify-center bg-gray-600 bg-opacity-75 z-50">
@@ -130,6 +130,16 @@
                                             <div class="font-arial text-gray-600 text-sm">
                                                 {{ $selectedComment }}
                                             </div>
+                                            @if ($value['request_attach'])
+                                                <div class="flex flex-row items-center justify-center gap-2">
+                                                    <h2 class="font-arial text-sm">Attachment: </h2>
+                                                    <a href="{{route('file', $value['request_attach'])}}" target="_blank" class="p-3 rounded-full text-white bg-yellow-400">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            @endif
                                             <div class="flex flex-row items-center gap-2 justify-center">
                                                 <button wire:click="closeModal" class="ms-auto bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Cancel</button>
                                                 @if ($value['status_id'] == 5 && auth()->user()->role_id == 2)
