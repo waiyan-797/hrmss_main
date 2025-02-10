@@ -13,8 +13,5 @@ class EducationType extends Model
         return $this->hasMany(Education::class);
     }
 
-    public function education_group()
-    {
-        return $this->belongsTo(EducationGroup::class);
-    }
+
 }

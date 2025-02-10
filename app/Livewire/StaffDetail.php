@@ -70,7 +70,7 @@ use function Livewire\Volt\rules;
 class StaffDetail extends Component
 {
     use WithFileUploads;
-
+    public $educations_all;
     public $saveDraftCheck;
     public $add_model, $submit_button_text;
 
@@ -321,6 +321,7 @@ class StaffDetail extends Component
         return data_get($this->{$arrayName}, "{$index}.{$key}", null);
     }
 
+
     public function validate_rules()
     {
         switch ($this->tab) {
@@ -337,6 +338,7 @@ class StaffDetail extends Component
 
     public function mount()
     {
+        $this->educations_all = Education::all()->toArray();
         $this->saveDraftCheck = false;
         $this->cancel_action = 'close_master_modal';
         $this->submit_button_text = 'သိမ်းရန်';
@@ -450,10 +452,12 @@ class StaffDetail extends Component
                 'id' => $edu->id,
                 'education_group' => $education->education_group_id,
                 'education_type' => $education->education_type_id,
-                'education' => $edu->education_id,
+                'education' => $education->id,
                 'country_id' => $edu->country_id,
-                'education_types' => EducationType::where('education_group_id', $edu->education_group_id)->get(),
-                '_educations' => Education::where('education_type_id', $edu->education_type_id)->get(),
+                // 'education_types' => EducationType::where('education_group_id', $edu->education_group_id)->get(),
+                // '_educations' => Education::where('education_type_id', $edu->education_type_id)->get(),
+                'education_types' => EducationType::all(),
+                '_educations' => Education::all(),
                 'degree_certificate' => $edu->degree_certificate,
             ];
         }
@@ -2014,10 +2018,16 @@ class StaffDetail extends Component
     }
 
     public function add_master($type){
+
         $this->add_model = $type;
         $this->submit_form = "save_{$type}";
     }
 
+
+    public function getEdu($id){
+        return Education::where('id',$id)->get();
+
+    }
     public function save_edu_group(){
         EducationGroup::create([
             'name' => $this->education_group_name,

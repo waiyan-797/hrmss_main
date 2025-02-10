@@ -7,6 +7,7 @@
                         <span class="flex flex-row items-center gap-1">
                             <span>{{ $name }}</span>
                             <span>
+
                                 @if ($data_master_add_stats[$index] != null && auth()->user()->role_id == 2)
                                     <button wire:click='add_master("{{$data_master_add_stats[$index]}}")' type="button" class="inline-flex items-center p-1 text-sm font-medium text-center text-green-500 bg-transparent border border-gray-300 rounded-full hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3 h-3">
@@ -30,20 +31,21 @@
                         <td class="px-4 py-4 min-w-[300px] text-gray-500 dark:text-gray-300">
                             @if ($type['type'] == 'select')
                                 @if ($type['next_col_update'] && !is_string($type['select_values']))
+
                                 <div x-data="{
                                     open: false,
                                     searchQuery: '',
                                     selectedOption: @entangle($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key']),
                                     filteredOptions: [],
+                                    {{-- filteredOptions: this.selectedOption ?   [] :  @js($type['all_edu']) , --}}
+
+                                    dropdownStyles: '',
 
                                     triggerSearch() {
+
                                         if (this.searchQuery.length >= 3) {
                                             $wire.call('searchOptions', this.searchQuery, '{{ $type['wire_array_key'] }}').then(result => {
-
-                                                console.log('triggerSearch result', result); // Debug log
                                                 this.filteredOptions = result || [];
-
-
                                             });
                                         } else {
                                             this.filteredOptions = [];
@@ -64,6 +66,13 @@
                                         }
                                     },
 
+                                    setDropdownPosition(button) {
+                                        const rect = button.getBoundingClientRect();
+                                        this.dropdownStyles = `top: ${rect.bottom}px; left: ${rect.left}px; width: ${rect.width}px;`;
+                                    },
+                                    isNumber(value) {
+                                        return !isNaN(Number(value)) && value !== null && value !== '';
+                                    },
                                     init() {
                                         this.$watch('searchQuery', () => this.triggerSearch());
                                         this.$watch('selectedOption', (value) => {
@@ -71,30 +80,44 @@
                                                 this.fetchDependentData();
                                             }
                                         });
+                                        this.$nextTick(() => {
+                                            // Check if selectedOption is a valid number
+                                            if (this.isNumber(this.selectedOption)) {
+                                                let id = this.selectedOption;
+                                                // Use Livewire to call the PHP function and pass the id
+                                                $wire.call('getEdu', id).then(result => {
+                                                    this.filteredOptions = result || [];
+                                                });
+                                            } else {
+                                                this.filteredOptions = []; // Edit mode, don't load options
+                                            }
+
+                                        });
 
                                         window.addEventListener('searchResultsUpdated', event => {
-                                            console.log('dfdsfsdffdfdf');
-                                            if(event.detail.field === '{{ $type['wire_array_key'] }}') {
-                                                console.log('Received searchResultsUpdated event', event.detail.results); // Debug log
+                                            if (event.detail.field === '{{ $type['wire_array_key'] }}') {
                                                 this.filteredOptions = event.detail.results || [];
-                                                console.log('Updated filteredOptions', this.filteredOptions); // Debug log
-
                                                 setTimeout(() => {
                                                     this.filteredOptions = Array.from(event.detail.results) || [];
-                                                    console.log('Updated filteredOptions:', this.filteredOptions);
                                                 }, 100);
                                             }
                                         });
                                     }
-                                }" class="relative">
-                                    <input type="hidden" wire:model.defer="{{ $type['wire_array_name'] }}.{{ $index }}.{{ $type['wire_array_key'] }}" x-model="selectedOption" />
-                                    <button @click="open = !open" type="button" class="w-full py-2 pl-3 pr-10 text-left bg-white border rounded-md">
+                                }" class="relative w-full">
+
+                                <input type="hidden" wire:model.defer="{{ $type['wire_array_name'] }}.{{ $index }}.{{ $type['wire_array_key'] }}" x-model="selectedOption" />
+
+                                <div class="relative w-full">
+                                    <button x-ref="button" @click="open = !open; open && setDropdownPosition($refs.button)" type="button" class="w-full py-2 pl-3 pr-10 text-left bg-white border rounded-md">
                                         <span x-text="filteredOptions.find(opt => opt.id == selectedOption)?.name || 'Select...'"></span>
-                                        <span class="absolute right-0 pr-2">▼</span>
+                                        <span class="absolute right-2">▼</span>
                                     </button>
-                                    <div x-show="open" class="absolute w-full bg-white border rounded-md">
+
+                                    <!-- Absolute Positioned Dropdown -->
+                                    <div x-show="open" x-ref="dropdown" class="fixed z-50 overflow-auto bg-white border rounded-md shadow-lg max-h-56" :style="dropdownStyles" @click.away="open = false">
                                         <input type="text" x-model="searchQuery" placeholder="Search..." class="w-full p-2 border-b" />
-                                        <ul class="overflow-auto max-h-56">
+
+                                        <ul>
                                             <template x-for="option in filteredOptions" :key="option.id">
                                                 <li @click="selectedOption = option.id; open = false; fetchDependentData();" class="p-2 cursor-pointer hover:bg-gray-200">
                                                     <span x-text="option.name"></span>
@@ -104,6 +127,8 @@
                                         </ul>
                                     </div>
                                 </div>
+                            </div>
+
 
 
 

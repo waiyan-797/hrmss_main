@@ -1,15 +1,15 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
-        <div class="w-full mx-auto px-3 py-4">
+        <div class="w-full px-3 py-4 mx-auto">
             @include('table', [
                 'data_values' => $education_types,
                 'modal' => 'modals/education_type_modal',
                 'id' => $education_type_id,
                 'title' => 'ပညာအရည်အချင်း အမျိုးအစား',
                 'search_id' => 'education_type_search',
-                'columns' => ['No', 'Name', 'Education Group', 'Action'],
-                'columns' => ['စဉ်','ပညာအရည်အချင်း အမျိုးအစား','ပညာအရည်အချင်း အုပ်စု', 'လုပ်ဆောင်ချက်'],
-                'column_vals' => ['name', 'education_group'],
+                'columns' => ['No', 'Name',  'Action'],
+                'columns' => ['စဉ်','ပညာအရည်အချင်း အမျိုးအစား',  'လုပ်ဆောင်ချက်'],
+                'column_vals' => ['name'],
             ])
         </div>
     </div>

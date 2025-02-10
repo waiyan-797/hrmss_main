@@ -3,6 +3,7 @@
 namespace App\Livewire\Education;
 
 use App\Models\Education as ModelsEducation;
+use App\Models\EducationGroup;
 use App\Models\EducationType;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -15,18 +16,19 @@ class Education extends Component
     public $confirm_edit = false;
     public $confirm_add = false;
     public $message = null;
-    public $education_search, $education_name, $education_type_name, $education_id;
+    public $education_search, $education_name, $education_type_name, $education_id , $education_group_name;
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
     //Validation
     protected $rules = [
         'education_name' => 'required|string|max:255',
         'education_type_name' => 'required',
+        'education_group_name' => 'required',
     ];
     //Add New
     public function add_new(){
         $this->resetValidation();
-        $this->reset(['education_name', 'education_type_name']);
+        $this->reset(['education_name', 'education_type_name','education_group_name']);
         $this->confirm_add = true;
         $this->confirm_edit = false;
     }
@@ -45,6 +47,8 @@ class Education extends Component
         ModelsEducation::create([
             'name' => $this->education_name,
             'education_type_id' => $this->education_type_name,
+            'education_group_id' => $this->education_group_name,
+
         ]);
         $this->message = 'Created successfully.';
         $this->close_modal();
@@ -52,7 +56,7 @@ class Education extends Component
     //close modal
     public function close_modal(){
         $this->resetValidation();
-        $this->reset(['education_name', 'education_type_name']);
+        $this->reset(['education_name', 'education_type_name' , 'education_group_name']);
         $this->confirm_edit = false;
         $this->confirm_add = false;
     }
@@ -65,6 +69,8 @@ class Education extends Component
         $education = ModelsEducation::findOrFail($id);
         $this->education_name = $education->name;
         $this->education_type_name = $education->education_type_id;
+        $this->education_group_name = $education->education_group_id;
+
     }
 
     //update
@@ -74,7 +80,10 @@ class Education extends Component
         $education = ModelsEducation::findOrFail($this->education_id);
         $education->update([
             'name' => $this->education_name,
-            'education_type_id' => $this->education_type_name
+            'education_type_id' => $this->education_type_name  ,
+            'education_group_id' => $this->education_group_name
+
+
         ]);
         $this->message = 'Updated successfully.';
         $this->close_modal();
@@ -99,6 +108,8 @@ class Education extends Component
     public function render()
     {
         $education_types = EducationType::get();
+        $education_groups = EducationGroup::get();
+
         $this->modal_title = $this->confirm_add ? 'ပညာအရည်အချင်းအသစ်ထည့်ရန်
 ' : 'ပညာအရည်အချင်းပြင်ရန်
 ';
@@ -110,15 +121,19 @@ class Education extends Component
         $educationQuery = ModelsEducation::query();
         if ($this->education_search) {
             $this->resetPage();
-            $educationQuery->where(fn($q) => $q->where('name', 'LIKE', $educationSearch)->orWhereHas('education_type', fn($query) => $query->where('name', 'LIKE', $educationSearch)));
-            $educations = $educationQuery->with('education_type')->paginate($educationQuery->count() > 10 ? $educationQuery->count() : 10);
-        } else {
-            $educations = $educationQuery->with('education_type')->paginate(10);
-        }
+            $educationQuery->where(fn($q) => $q->where('name', 'LIKE', $educationSearch)->
+            orWhereHas('education_type', fn($query) => $query->where('name', 'LIKE', $educationSearch)))
+            ->orWhereHas('education_group', fn($query) => $query->where('name', 'LIKE', $educationSearch))
 
+            ;
+            $educations = $educationQuery->with('education_type' , 'education_group')->paginate($educationQuery->count() > 10 ? $educationQuery->count() : 10);
+        } else {
+            $educations = $educationQuery->with('education_type','education_group')->paginate(10);
+        }
         return view('livewire.education.education', [
             'educations' => $educations,
             'education_types' => $education_types,
+            'education_groups' => $education_groups,
         ]);
     }
 }
