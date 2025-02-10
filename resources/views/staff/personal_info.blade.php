@@ -422,6 +422,7 @@
             <span class="sr-only">Add Icon</span>
         </button>
     </div>
+
     @include('education_table', [
         'column_names' => ['ပညာအရည်အချင်း' , 'ပညာအရည်အချင်း အုပ်စု', 'ပညာအရည်အချင်း အမျိုးအစား', 'ပေးအပ်သည့်နိုင်ငံ', 'ဘွဲ့လက်မှတ်'],
         'data_master_add_stats' => ['edu', 'edu_group', 'edu_type',  null, null],
@@ -432,7 +433,7 @@
                 'type' => 'select',
                 'wire_array_name' => 'educations',
                 'wire_array_key' => 'education',
-                'select_values' => $_educations,
+                'select_values' => is_array($_educations) ? $_educations : collect($_educations)->toArray(),
                 'next_col_update' => 'education_type',
                 'next_col_model' => 'education_type',
                 'next_col_model_related' => 'education_group',

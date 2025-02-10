@@ -30,28 +30,90 @@
                         <td class="px-4 py-4 min-w-[300px] text-gray-500 dark:text-gray-300">
                             @if ($type['type'] == 'select')
                                 @if ($type['next_col_update'] && !is_string($type['select_values']))
+                                <div x-data="{
+                                    open: false,
+                                    searchQuery: '',
+                                    selectedOption: @entangle($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key']),
+                                    filteredOptions: [],
 
-                                <x-select
+                                    triggerSearch() {
+                                        if (this.searchQuery.length >= 3) {
+                                            $wire.call('searchOptions', this.searchQuery, '{{ $type['wire_array_key'] }}').then(result => {
+
+                                                console.log('triggerSearch result', result); // Debug log
+                                                this.filteredOptions = result || [];
 
 
-:disabled="$type['disabled']"
-                                        wire:model="{{$type['wire_array_name']}}.{{ $index }}.{{$type['wire_array_key']}}"
-                                        wire:change="handleCustomColumnUpdate(
-                                            '{{$type['wire_array_name']}}',
-                                            {{ $index }},
-                                            '{{ $type['next_col_update'] }}',
-                                            '{{ $type['ini_array'] }}',
-                                            $event.target.value,
-                                            '{{$type['next_col_model']}}',
-                                            '{{$type['next_col_model_related']}}'
-                                        )"
-                                        id="{{$type['wire_array_key']}}"
-                                        name="{{$type['wire_array_key']}}"
-                                        class="block w-full p-2 text-sm border rounded"
-                                        :values="$type['select_values']"
-                                        placeholder="Select..."
-                                    />
-                                    <x-input-error class="mt-2" :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])"/>
+                                            });
+                                        } else {
+                                            this.filteredOptions = [];
+                                        }
+                                    },
+
+                                    fetchDependentData() {
+                                        if ('{{ $type['next_col_update'] }}' && this.selectedOption) {
+                                            $wire.call('handleCustomColumnUpdate',
+                                                '{{ $type['wire_array_name'] }}',
+                                                {{ $index }},
+                                                '{{ $type['next_col_update'] }}',
+                                                '{{ $type['ini_array'] }}',
+                                                this.selectedOption,
+                                                '{{ $type['next_col_model'] }}',
+                                                '{{ $type['next_col_model_related'] }}'
+                                            );
+                                        }
+                                    },
+
+                                    init() {
+                                        this.$watch('searchQuery', () => this.triggerSearch());
+                                        this.$watch('selectedOption', (value) => {
+                                            if (value) {
+                                                this.fetchDependentData();
+                                            }
+                                        });
+
+                                        window.addEventListener('searchResultsUpdated', event => {
+                                            console.log('dfdsfsdffdfdf');
+                                            if(event.detail.field === '{{ $type['wire_array_key'] }}') {
+                                                console.log('Received searchResultsUpdated event', event.detail.results); // Debug log
+                                                this.filteredOptions = event.detail.results || [];
+                                                console.log('Updated filteredOptions', this.filteredOptions); // Debug log
+
+                                                setTimeout(() => {
+                                                    this.filteredOptions = Array.from(event.detail.results) || [];
+                                                    console.log('Updated filteredOptions:', this.filteredOptions);
+                                                }, 100);
+                                            }
+                                        });
+                                    }
+                                }" class="relative">
+                                    <input type="hidden" wire:model.defer="{{ $type['wire_array_name'] }}.{{ $index }}.{{ $type['wire_array_key'] }}" x-model="selectedOption" />
+                                    <button @click="open = !open" type="button" class="w-full py-2 pl-3 pr-10 text-left bg-white border rounded-md">
+                                        <span x-text="filteredOptions.find(opt => opt.id == selectedOption)?.name || 'Select...'"></span>
+                                        <span class="absolute right-0 pr-2">▼</span>
+                                    </button>
+                                    <div x-show="open" class="absolute w-full bg-white border rounded-md">
+                                        <input type="text" x-model="searchQuery" placeholder="Search..." class="w-full p-2 border-b" />
+                                        <ul class="overflow-auto max-h-56">
+                                            <template x-for="option in filteredOptions" :key="option.id">
+                                                <li @click="selectedOption = option.id; open = false; fetchDependentData();" class="p-2 cursor-pointer hover:bg-gray-200">
+                                                    <span x-text="option.name"></span>
+                                                </li>
+                                            </template>
+                                            <li x-show="filteredOptions.length === 0 && searchQuery.length >= 3" class="p-2">No results found.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+<x-input-error class="mt-2" :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])"/>
                                 @elseif ($type['next_col_update'] && is_string($type['select_values']))
                                     <x-select
 :disabled="$type['disabled']"

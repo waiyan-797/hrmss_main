@@ -7,6 +7,9 @@ use App\Models\Awarding;
 use App\Models\AwardType;
 use App\Models\BloodType;
 use App\Models\Children;
+
+use Livewire\Attributes\On;
+use Livewire\Attributes\Reactive;
 use App\Models\Country;
 use App\Models\Department;
 use App\Models\Division;
@@ -1867,6 +1870,7 @@ class StaffDetail extends Component
 
     public function handleCustomColumnUpdate($array, $index, $field, $arr_ini, $value, $model, $model_related)
     {
+
     // 'educations', 0, 'education_type', 'eduTypes', $event.target.value, 'education_type', 'education_groups'
 
         $this->$array[$index][$model] = '';
@@ -2064,17 +2068,41 @@ class StaffDetail extends Component
         $this->add_model = null;
     }
 
-
-    public function updatedSearch($value  , $component , $model , $name)
+    public $results;
+    public $selectedValue;
+    public $search ;
+    public function updatedSearch($value)
     {
         if (strlen($value) >= 3) {
-            $this->$component = $model::where($name , 'like', '%' . $value . '%')
+            $this->results = Education::where('name', 'like', '%' . $value . '%')
                                       ->limit(10) // Limit results for performance
                                       ->get();
         } else {
-            $this->$component = [];
+            $this->results = [];
         }
     }
+      public function selectValue($value)
+    {
+        $this->selectedValue = $value;
+        $this->search = ''; // Clear search input after selection
+        $this->results = []; // Clear results
+    }
+    #[Reactive]
+    public string $searchQuery = '';
+
+    public array $searchResults = [];
+
+    #[On('searchInputUpdated')]
+    public function searchOptions($query, $field)
+    {
+        $this->searchResults = Education::where('name', 'like', "%$query%")->get()->toArray();
+        if ($this->searchResults) {
+            logger('Dispatching searchResultsUpdated', ['field' => $field, 'results' => $this->searchResults]); // Debug log
+            $this->dispatch('searchResultsUpdated', field: $field, results: $this->searchResults);
+        }
+    }
+
+
 
 
 }
