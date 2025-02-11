@@ -14,7 +14,7 @@ use Livewire\WithFileUploads;
 
 class LabourDetails extends Component
 {
-    
+
     use WithFileUploads;
 
     public $staff;
@@ -35,16 +35,16 @@ class LabourDetails extends Component
 
     public function render()
     {
-        
-        $this->nrc_township_codes = $this->nrc_region_id 
+
+        $this->nrc_township_codes = $this->nrc_region_id
             ? NrcTownshipCode::where('nrc_region_id_id', $this->nrc_region_id)->get()
             : collect();
 
-        $this->current_address_townships = $this->current_address_region_id 
+        $this->current_address_townships = $this->current_address_region_id
             ? Township::where('region_id', $this->current_address_region_id)->get()
             : collect();
 
-        $this->permanent_address_townships = $this->permanent_address_region_id 
+        $this->permanent_address_townships = $this->permanent_address_region_id
             ? Township::where('region_id', $this->permanent_address_region_id)->get()
             : collect();
 
@@ -68,10 +68,11 @@ class LabourDetails extends Component
             }
         }
 
-       
+
         Staff::updateOrCreate(
             ['id' => $this->staff?->id],
             [
+
                 'name' => $this->name,
                 'dob' => $this->dob,
                 'nrc_region_id_id' => $this->nrc_region_id,
@@ -82,6 +83,7 @@ class LabourDetails extends Component
                 'nrc_back' => $this->nrc_back,
                 'payscale_id' => 13,
                 'current_rank_id' => 23,
+                'current_division_id' => $this->staff?->current_division_id ?? auth()->user()->division_id,
                 'phone' => $this->phone,
                 'current_address_street' => $this->current_address_street,
                 'current_address_ward' => $this->current_address_ward,
