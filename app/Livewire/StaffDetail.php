@@ -500,7 +500,8 @@ class StaffDetail extends Component
                 'from_date' => $sch->from_date,
                 'to_date' => $sch->to_date,
                 'remark' => $sch->remark,
-                'education_types' => EducationType::where('education_group_id', $sch->education_group_id)->get(),
+                // 'education_types' => EducationType::where('education_group_id', $sch->education_group_id)->get(),
+                'education_types' => EducationType::all(),
                 '_educations' => Education::where('education_type_id', $sch->education_type_id)->get(),
             ];
         }
@@ -1899,7 +1900,7 @@ class StaffDetail extends Component
         }
 
         match ($arr_ini) {
-            'eduTypes' => $this->$array[$index][$field] = EducationType::where('education_group_id', $value)->get(),
+            // 'eduTypes' => $this->$array[$index][$field] = EducationType::where('education_group_id', $value)->get(),
             'eduTypesAndGroups' => $this->handleEduTypesAndGroups($array, $index, $field, $value),
             'edus' => $this->$array[$index][$field] = Education::where('education_type_id', $value)->get(),
             'departments' => $this->$array[$index][$field] = Department::where('ministry_id', $value)->get(),

@@ -1,4 +1,3 @@
-
 <div class="w-full h-auto py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ် ဖော်ပြရန်)')" class="font-semibold"/>
@@ -19,8 +18,8 @@
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'education_group',
                 'select_values' => $education_groups,
-                'next_col_update' => 'education_types',
-                'next_col_model' => 'education_type',
+                'next_col_update' => null,
+                'next_col_model' => null,
                 'next_col_model_related' => null,
                 'ini_array' => 'eduTypes',
             ],
@@ -28,7 +27,7 @@
                 'type' => 'select',
                 'wire_array_name' => 'schools',
                 'wire_array_key' => 'education_type',
-                'select_values' => 'education_types',
+                'select_values' =>  $education_types,
                 'next_col_update' => null,
                 'next_col_model' => null,
                 'next_col_model_related' => null,
@@ -501,6 +500,9 @@
     ])
 </div>
 
+
+{{-- start waiyan --}}
+
 <div class="w-full h-auto py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('ဆုတံဆိပ်များ')" class="font-semibold"/>
@@ -512,7 +514,7 @@
         </button>
     </div>
     @include('staff_multiple_table', [
-        'column_names' => ['အမျိုးအစား', 'ပြည်တွင်း/နိုင်ငံခြား', 'ခုနှစ်','မှတ်ချက်'],
+        'column_names' => ['အမျိုးအစား', 'ပြည်တွင်း/နိုင်းငံခြား', 'ခုနှစ်','မှတ်ချက်'],
         'data_master_add_stats' => [null, null, null, null],
         'column_vals' => $staff_rewards,
         'column_types' => [
@@ -523,17 +525,9 @@
                 'select_values' => $rewards,
             ],
             [
-                'type' => 'select',
+                'type' => 'text',
                 'wire_array_name' => 'staff_rewards',
                 'wire_array_key' => 'type',
-                'select_values' => [
-                    ['id' => 'ပြည်တွင်း', 'name' => 'ပြည်တွင်း'],
-                    ['id' => 'နိုင်ငံခြား', 'name' => 'နိုင်ငံခြား'],
-                ],
-                'next_col_update' => null,
-                'next_col_model' => null,
-                'next_col_model_related' => null,
-                'ini_array' => null,
             ],
             [
                 'type' => 'text',

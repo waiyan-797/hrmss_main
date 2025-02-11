@@ -47,8 +47,8 @@ class EducationTypeSeeder extends Seeder
             [25, 'ပြည်ပဒေါက်တာဘွဲ့(Ph.D)'],
         ];
 
-        // foreach($items as $item){
-        //     EducationType::create(array_combine($columns,$item));
-        // }
+        foreach($items as $item){
+            EducationType::create(array_combine($columns,$item));
+        }
     }
 }

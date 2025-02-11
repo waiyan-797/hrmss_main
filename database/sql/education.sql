@@ -8,7 +8,7 @@
 -- Generation Time: 2025-02-08 15:32:12.124455
 -- -------------------------------------------------------------
 
-DROP TABLE `hrms`.`education`;
+DROP TABLE `hrmsNew`.`education`;
 
 
 CREATE TABLE `education` (
@@ -25,7 +25,7 @@ CREATE TABLE `education` (
   CONSTRAINT `education_education_type_id_foreign` FOREIGN KEY (`education_type_id`) REFERENCES `education_types` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `hrms`.`education` (`id`, `name`, `education_type_id`, `created_at`, `updated_at`, `education_group_id`) VALUES 
+INSERT INTO `hrmsNew`.`education` (`id`, `name`, `education_type_id`, `created_at`, `updated_at`, `education_group_id`) VALUES 
 (1, 'M.A(Eng)', 1, '2025-02-08 08:34:21', '2025-02-08 09:01:41', 4),
 (2, 'M.A(T.E.F.L)', 1, '2025-02-08 08:34:21', '2025-02-08 09:01:41', 4),
 (3, 'B.A(Hist)', 9, '2025-02-08 08:34:21', '2025-02-08 09:01:41', 2),
