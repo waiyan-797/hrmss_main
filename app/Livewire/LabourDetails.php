@@ -83,7 +83,7 @@ class LabourDetails extends Component
                 'nrc_back' => $this->nrc_back,
                 'payscale_id' => 13,
                 'current_rank_id' => 23,
-                'current_division_id' => $this->staff?->current_division_id ?? auth()->user()->division_id,
+                'current_division_id' => $this->staff?->current_division_id ??  auth()->user()->division_id,
                 'phone' => $this->phone,
                 'current_address_street' => $this->current_address_street,
                 'current_address_ward' => $this->current_address_ward,

@@ -43,7 +43,16 @@ class Labour extends Component
     }
     public function render()
     {
-        $staffs = (new Staff())->Labour()->paginate(5);
+        $getLabour  = (new Staff())->Labour();
+
+        if(auth()->user()->role_id != 2 ){
+            $staffs = $getLabour->where('current_division_id' , auth()->user()->division_id)->paginate(10);
+        }
+        else{
+        $staffs =  $getLabour->paginate(10);
+
+        }
+
 
         return view('livewire.labour', compact('staffs'));
     }
