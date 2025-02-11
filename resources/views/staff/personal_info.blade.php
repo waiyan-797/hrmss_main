@@ -439,7 +439,7 @@
                 'next_col_model_related' => 'education_group',
                 'ini_array' => 'eduTypesAndGroups',
                 'disabled' => false ,
-
+                // 'all_edu' => $educations_all
             ],
             [
                 'type' => 'select',
