@@ -448,7 +448,8 @@ class StaffDetail extends Component
         $this->staff_rewards = [];
 
         foreach ($staff_educations as $edu) {
-            $education = Education::find($edu->id);
+            $education = Education::find($edu->education_id);
+
             $this->educations[] = [
                 'id' => $edu->id,
                 'education_group' => $education->education_group_id,
