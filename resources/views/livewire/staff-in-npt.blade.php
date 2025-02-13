@@ -19,7 +19,7 @@
 
     </div>  --}}
  
-    <div class="w-1/3">
+    {{-- <div class="w-1/3">
         <x-select
             wire:model="letter_type_id"
             :values="$letter_types"
@@ -30,7 +30,7 @@
             
         />
         <x-input-error class="mt-2" :messages="$errors->get('letter_type_id')" />
-    </div>
+    </div> --}}
 
 
 
@@ -68,7 +68,7 @@
                         @endforeach --}}
                             @foreach($staffs as $staff)
                                 <tr>
-                                    <td class="border border-black text-right p-1">{{ $loop->index + 1 }}</td>
+                                    <td class="border border-black text-right p-1">{{ en2mm($loop->index + 1) }}</td>
                                     <td class="border border-black text-right p-1">{{ $staff->name }}/{{ $staff->currentRank?->name}}/{{$staff->current_department?->name}}</td>
                                     <td class="border border-black text-right p-1">{{ $staff->marital_statuses?->name ? 'ရှိ' : 'မရှိ' }}</td>
                                     <td class="border border-black text-right p-1">

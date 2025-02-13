@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Exports;
-
 use App\Models\PensionYear;
 use App\Models\Staff;
 use Carbon\Carbon;
@@ -11,8 +10,6 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
-
-
 class PA16 implements FromView ,WithStyles
 {
     /**
@@ -36,10 +33,8 @@ class PA16 implements FromView ,WithStyles
 
     )
     {
-        // dd($year, $month, $filterRange, $previousMonthDate, $previousMonth,$nameSearch);
-        $this->filterRange = $filterRange ;
-        
-        $this->year  =  $year;
+         $this->filterRange = $filterRange ;
+         $this->year  =  $year;
          $this->month  =  $month;
          $this->previousMonthDate  =  $previousMonthDate;
          $this->previousMonth  =  $previousMonth;
@@ -47,11 +42,9 @@ class PA16 implements FromView ,WithStyles
        
 
     }
-
     public function view(): View
     {
         
-         // Parse year and month from the filter range
     [$year, $month] = explode('-', $this->filterRange);
     $this->year = $year;
     $this->month = $month;
@@ -114,8 +107,8 @@ class PA16 implements FromView ,WithStyles
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
         $sheet->getColumnDimension('A')->setWidth(4);
-        $sheet->getColumnDimension('B')->setWidth(19);
-        $sheet->getColumnDimension('C')->setWidth(19);
+        $sheet->getColumnDimension('B')->setWidth(15);
+        $sheet->getColumnDimension('C')->setWidth(15);
         $sheet->getColumnDimension('D')->setWidth(15);
         $sheet->getColumnDimension('E')->setWidth(8);
         $sheet->getColumnDimension('F')->setWidth(8);
@@ -123,6 +116,7 @@ class PA16 implements FromView ,WithStyles
         $sheet->getColumnDimension('H')->setWidth(8);
         $sheet->getColumnDimension('I')->setWidth(15);
         $sheet->getColumnDimension('J')->setWidth(10);
+        $sheet->getColumnDimension('K')->setWidth(10);
 
         $sheet->getRowDimension(1)->setRowHeight(25);
         $sheet->getRowDimension(2)->setRowHeight(25);

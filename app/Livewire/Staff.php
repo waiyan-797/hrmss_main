@@ -22,10 +22,11 @@ class Staff extends Component
         public $staff_search, $staff_name, $staff_id = 0;
         public $modal_title;
         public $selectedComment = null;
-
-    public function mount($status){
+        public function mount($status){
         $this->status = $status;
+
     }
+   
     //add new
     public function add_new()
     {
@@ -90,28 +91,54 @@ class Staff extends Component
         ]), navigate: true);
     }
 
+    // public function render()
+    // {
+    //     $staffSearch = '%' . $this->staff_search . '%';
+    //     $this->modal_title = 'Choose Report Type';
+    //     $staffQuery = ModelsStaff::where('status_id' , $this->status)->when(Auth::user()->role_id != 2, function($q){
+    //         return $q->where('current_division_id', Auth::user()->division_id);
+    //     });
+    //     if ($this->staff_search) {
+    //         $this->resetPage();
+    //         $staffQuery->where(function ($q) use ($staffSearch) {
+    //             $q->where('name', 'LIKE', $staffSearch)->orWhere('staff_no', 'LIKE', $staffSearch);
+    //         });
+    //         $staffs = $staffQuery->paginate($staffQuery->count() > 1 ? $staffQuery->count() : 1);
+    //     } else {
+    //         $staffs = $staffQuery->paginate(10);
+    //     }
+
+
+    //     return view('livewire.staff', [
+    //         'staffs' => $staffs,
+    //     ]);
+    // }
     public function render()
-    {
-        $staffSearch = '%' . $this->staff_search . '%';
-        $this->modal_title = 'Choose Report Type';
-        $staffQuery = ModelsStaff::where('status_id' , $this->status)->when(Auth::user()->role_id != 2, function($q){
+{
+    $staffSearch = '%' . $this->staff_search . '%';
+    $this->modal_title = 'Choose Report Type';
+
+    $staffQuery = ModelsStaff::with(['currentRank', 'current_department', 'current_division'])
+        ->where('status_id', $this->status)
+        ->when(Auth::user()->role_id != 2, function ($q) {
             return $q->where('current_division_id', Auth::user()->division_id);
         });
-        if ($this->staff_search) {
-            $this->resetPage();
-            $staffQuery->where(function ($q) use ($staffSearch) {
-                $q->where('name', 'LIKE', $staffSearch)->orWhere('staff_no', 'LIKE', $staffSearch);
-            });
-            $staffs = $staffQuery->paginate($staffQuery->count() > 1 ? $staffQuery->count() : 1);
-        } else {
-            $staffs = $staffQuery->paginate(10);
-        }
 
-
-        return view('livewire.staff', [
-            'staffs' => $staffs,
-        ]);
+    if ($this->staff_search) {
+        $this->resetPage();
+        $staffQuery->where(function ($q) use ($staffSearch) {
+            $q->where('name', 'LIKE', $staffSearch)->orWhere('staff_no', 'LIKE', $staffSearch);
+        });
+        $staffs = $staffQuery->paginate($staffQuery->count() > 1 ? $staffQuery->count() : 1);
+    } else {
+        $staffs = $staffQuery->paginate(10);
     }
+
+    return view('livewire.staff', [
+        'staffs' => $staffs,
+    ]);
+}
+
 
     public function check($id){
         return Promotion::where('staff_id', $id)->get()->isEmpty()  ;

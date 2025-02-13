@@ -13,9 +13,7 @@ use PhpOffice\PhpWord\PhpWord;
 
 class BloodStaffList6 extends Component
 {
-
     public $bloodTypes, $selectedBlood_type;
-
     public function go_pdf()
     {
         $first_ranks = Rank::where('staff_type_id', 1)->withCount('staffs')->get();
@@ -43,6 +41,7 @@ class BloodStaffList6 extends Component
     }
     public function go_word()
     {
+        $index=1;
         $first_ranks = Rank::where('staff_type_id', 1)->withCount('staffs')->get();
         $second_ranks = Rank::where('staff_type_id', 2)->withCount('staffs')->get();
         $first_second_ranks = Rank::whereIn('staff_type_id', [1, 2])->withCount('staffs')->get();
@@ -61,15 +60,9 @@ class BloodStaffList6 extends Component
             'marginLeft' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.8),
             'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.7),
         ]);
-        
-
-        // Add titles
-        // $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
-        // $section->addTitle('သွေးအုပ်စု A ရှိသောဝန်ထမ်းစာရင်း', 2);
         $phpWord->setDefaultFontSize(13); 
         $section->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 13], ['align' => 'center']);
         $section->addText('သွေးအုပ်စု A ရှိသောဝန်ထမ်းစာရင်း', ['bold' => true, 'size' => 13], ['align' => 'center']);
-
         // Add a table
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 350, 'spaceBefore' => 350];
@@ -77,7 +70,8 @@ class BloodStaffList6 extends Component
         $pStyle_3 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100];
 
         // Add table header
-        $table->addRow();
+        // $table->addRow();
+        $table->addRow(50, ['tblHeader' => true]);
         $table->addCell(700)->addText('စဥ်', ['bold' => true],$pStyle_3);
         $table->addCell(6000)->addText('ရာထူးအမည်', ['bold' => true],$pStyle_3);
         $table->addCell(4000)->addText('ကျား', ['bold' => true],$pStyle_3);
@@ -85,9 +79,9 @@ class BloodStaffList6 extends Component
         $table->addCell(4000)->addText('စုစုပေါင်း', ['bold' => true],$pStyle_3);
 
         // Add rows for first ranks
-        foreach ($first_ranks as $index => $rank) {
+        foreach ($first_ranks as  $rank) {
             $table->addRow();
-            $table->addCell(700)->addText(en2mm($index + 1),null,$pStyle_3);
+            $table->addCell(700)->addText(en2mm($index++),null,$pStyle_3);
             $table->addCell(6000)->addText($rank->name,null,$pStyle_3);
             $table->addCell(4000)->addText(en2mm($rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count()),null,$pStyle_3);
             $table->addCell(4000)->addText(en2mm($rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count()),null,$pStyle_3);
@@ -102,9 +96,9 @@ class BloodStaffList6 extends Component
         $table->addCell(4000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())),null,$pStyle_3);
         $table->addCell(4000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())),null,$pStyle_3);
 
-        foreach ($second_ranks as $index => $rank) {
+        foreach ($second_ranks as  $rank) {
             $table->addRow();
-            $table->addCell(700)->addText(en2mm($index + 1),null,$pStyle_3);
+            $table->addCell(700)->addText(en2mm($index++),null,$pStyle_3);
             $table->addCell(6000)->addText($rank->name,null,$pStyle_3);
             $table->addCell(4000)->addText(en2mm($rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count()),null,$pStyle_3);
             $table->addCell(4000)->addText(en2mm($rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count()),null,$pStyle_3);
@@ -125,7 +119,7 @@ class BloodStaffList6 extends Component
         // $table->addCell(2000)->addText(en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())));
         // $table->addCell(2000)->addText(en2mm($first_second_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count() + $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())));
         $table->addRow();
-        $table->addCell(700)->addText('၁',null,$pStyle_3);
+        $table->addCell(700)->addText('၂၃',null,$pStyle_3);
         $table->addCell(4000)->addText('နေ့စား',null,$pStyle_3);
         $table->addCell(4000)->addText(en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 1)->count())),null,$pStyle_3);
         $table->addCell(4000)->addText(en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('blood_type_id', 1)->where('gender_id', 2)->count())),null,$pStyle_3);

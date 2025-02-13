@@ -115,7 +115,7 @@
                         </tbody>
                     </table>
                 </div> --}}
-                <div class="flex justify-between w-full mb-2">
+                {{-- <div class="flex justify-between w-full mb-2">
                     <label for="name" class="md:w-5">၁၁။ </label>
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                     <label for="name" class="md:w-5">-</label>
@@ -124,7 +124,16 @@
                             return $education->education?->name;
                         })->filter()->join(', ') }}
                     </label>
-                </div>
+                </div> --}}
+                @php
+                $educationNames = $staff->staff_educations->map(fn($edu) => $edu->education?->name)->implode(', ');
+                @endphp
+                 <div class="flex justify-between w-full mb-4">
+                    <label for="" class="md:w-5">၁၁။  </label>
+                    <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $educationNames }}</label>
+                </div> 
                 <div class="flex justify-between w-full mb-2">
                     <label for="name" class="md:w-5">၁၂။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိရာထူး/လစာနှုန်း/ဌာန</label>
@@ -215,7 +224,7 @@
                                         <td class="border border-black text-center p-2">
                                             {{ '(' . myanmarAlphabet($loop->index) . ')' }}</td>
                                         <td class="border border-black text-center p-2">
-                                            {{ $training->training_type->name }}</td>
+                                            {{$trainingName = ($training->training_type_id == 32) ? $training->diploma_name : $training->training_type?->name}}</td>
                                         <td class="border border-black text-center p-2">
                                             {{ formatDMYmm($training->from_date) }}</td>
                                         <td class="border border-black text-center p-2">
@@ -261,7 +270,7 @@
                                         <td class="border border-black text-center p-2">
                                             {{ '(' . myanmarAlphabet($loop->index) . ')' }}</td>
                                         <td class="border border-black text-center p-2">
-                                            {{ $training->training_type->name }}</td>
+                                            {{$trainingName = ($training->training_type_id == 32) ? $training->diploma_name : $training->training_type?->name}}</td>
                                         <td class="border border-black text-center p-2">
                                             {{ formatDMYmm($training->from_date) }}</td>
                                         <td class="border border-black text-center p-2">
@@ -319,6 +328,7 @@
                                 @endforeach
                             @else
                                 <tr>
+                                    <td class="border border-black text-center p-4"></td>
                                     <td class="border border-black text-center p-4"></td>
                                     <td class="border border-black text-center p-4"></td>
                                     <td class="border border-black text-center p-4"></td>

@@ -52,7 +52,7 @@ class RankSeeder extends Seeder
 
         $all = getcsv(__DIR__.'/rank.csv');
         foreach ($all as [$result]) {
-            Rank::firstOrCreate(['name' => $result]);
+            Rank::create(['name' => $result]);
         }
     }
 }

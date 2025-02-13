@@ -43,7 +43,7 @@
                             @if(isset($staff->abroads[$i]))
                             <td class="border border-black text-center p-2">{{ formatDMYmm($staff->abroads[$i]->from_date )}}</td>
                             <td class="border border-black text-center p-2">{{ formatDMYmm($staff->abroads[$i]->to_date) }}</td>  
-                            <td class="border border-black text-center p-2">{{ $staff->abroads[$i]->countries->pluck('name')->join(', ')}}</td>
+                             <td class="border border-black text-center p-2">{{ $staff->abroads[$i]->countries->pluck('name')->unique()->join(', ')}}</td>
                             <td class="border border-black text-center p-2">{{ $staff->abroads[$i]->particular }}</td>
                             <td class="border border-black text-center p-2">{{ $staff->abroads[$i]->sponser }}</td> 
                             @else

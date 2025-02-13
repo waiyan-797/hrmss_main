@@ -55,23 +55,30 @@
                     <label for="name" class="md:w-1/3">လက်ရှိနေရပ်</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">
-                        {{ collect([$staff->current_address_street, $staff->current_address_ward, $staff->current_address_township_or_town->name, $staff->current_address_region->name])->filter()->implode('၊') }}
+                        {{ collect([$staff->current_address_house_no,$staff->current_address_street, $staff->current_address_ward, $staff->current_address_township_or_town->name.'မြို့နယ်', $staff->current_address_region->name.'ဒေသကြီး၊၊'])->filter()->implode('၊') }}
                     </label>
                 </div>
-
-
-
+                {{-- @php
+                 $educationNames = $staff->staff_educations->filter(fn($edu)$edu->education)->map(fn($edu) => $edu->education->name)->implode(', ') ?: '-';
+                @endphp
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၈။ </label>
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">
-                        {{ $staff->staff_educations->map(function ($education) {
-                            return $education->education?->name;
-                        })->filter()->join(', ') }}
+                       {{ $educationNames }}
                     </label>
-                    
-                </div>
+                </div> --}}
+                @php
+                $educationNames = $staff->staff_educations->map(fn($edu) => $edu->education?->name)->implode(', ');
+                @endphp
+                 <div class="flex justify-between w-full mb-4">
+                    <label for="" class="md:w-5">၈။ </label>
+                    <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
+                    <label for="" class="md:w-5">-</label>
+                    <label for="name" class="md:w-3/5">{{ $educationNames }}</label>
+                </div> 
+
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၉။ </label>
                     <label for="name" class="md:w-1/3">အဖအမည်</label>
@@ -140,7 +147,7 @@
                                     <td class="border border-black text-center p-2">
                                         {{ formatDMYmm($abroad->to_date) }}</td>
                                     <td class="border border-black text-center p-2">
-                                        {{ $abroad->countries->pluck('name')->join(', ') }}
+                                        {{$abroad->countries->pluck('name')->unique()->join(', ')}}
                                     </td>
                                     <td class="border border-black text-center p-2">{{ $abroad->particular }}</td>
                                     <td class="border border-black text-center p-2">

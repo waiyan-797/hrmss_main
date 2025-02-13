@@ -9,7 +9,6 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 use PHPUnit\Framework\Constraint\Count;
-
 class ForeignGoneTotal extends Component
 {
     public function go_pdf()
@@ -84,16 +83,21 @@ class ForeignGoneTotal extends Component
         $totalOverall = $totalTrainings + $totalAbroads;
         $lastAbroad = $staff->abroads->sortByDesc('to_date')->first();
         $lastTraining = $staff->trainings->sortByDesc('to_date')->first();
-
         $table->addRow();
         $table->addCell(1500)->addText(en2mm($index + 1),null,$pStyle_1);
         $table->addCell(4000)->addText($staff->name . "\n" . ($staff->currentRank->name ?? ''),null,$pStyle_1);
         $table->addCell(4000)->addText($staff->current_division?->name ?? '',null,$pStyle_1);
-        $table->addCell(3000)->addText(formatDMYmm($staff->dob),null,$pStyle_1);
+        $dob = \Carbon\Carbon::parse($staff->dob);
+        $diff = $dob->diff(\Carbon\Carbon::now());
+        $age = '('.$diff->y . ' )နှစ် ' .'('. $diff->m . ' )လ';
+        $table->addCell(3000)->addText(
+             '('.formatDMYmm($dob->format('d-m-Y')) .' )'."\n".en2mm($age)   ,
+            null,$pStyle_1
+        );
         $table->addCell(3000)->addText(formatDMYmm($staff->join_date),null,$pStyle_2);
         $table->addCell(3000)->addText(formatDMYmm($staff->current_rank_date),null,$pStyle_2);
         $table->addCell(3000)->addText($lastAbroad?->country?->name ?? ($lastTraining?->country?->name ?? ''),null,$pStyle_2);
-        $table->addCell(6000)->addText(($lastAbroad->particular)."\n".
+        $table->addCell(6000)->addText(($lastAbroad?->particular)."\n".
             ($lastAbroad ? formatDMYmm($lastAbroad->from_date) . ' မှ ' . formatDMYmm($lastAbroad->to_date) . ' ထိ' :
                 ($lastTraining ? formatDMYmm($lastTraining->from_date) . ' - ' . formatDMYmm($lastTraining->to_date) : '')),null,$pStyle_2
         );

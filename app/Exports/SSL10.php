@@ -21,32 +21,6 @@ class SSL10 implements FromView ,WithStyles
     // {
     //     return SSL10::all();
     // }
-
-
-    // public  $staff_type_id ;
-    // public $divisionTypes ; 
-    // public $selectedDivisionTypeId  = 3 ;
-    // public $title ; 
-    // public function view(): View
-    // {
-    //     if($this->selectedDivisionTypeId != 3 ){
-    //         $this->title = DivisionType::find($this->selectedDivisionTypeId)->id == 2 ? 'တိုင်းဒေသကြီး၊ ပြည်နယ်ဦးစီးမှုးရုံး' : 'ရုံးချုပ်';
-
-    //     }
-
-    //     $staffs = Staff::Labour() 
-        
-    //     ->whereHas('current_division', function ($query) {
-    //         $query->whereHas('divisionType', 
-    //     function($subQuery){
-    //         $subQuery->where('id' , $this->selectedDivisionTypeId == 3 ? [ 1, 2 ]  : $this->selectedDivisionTypeId );
-    //     }
-    //     ); 
-        
-    //     });
-    //     return view('excel_reports.labour_staff_report',compact('staffs' ));
-    // }
-
     public $staff_type_id=3;
     public $divisionTypes;
     public $selectedDivisionTypeId = 3;
@@ -59,7 +33,6 @@ class SSL10 implements FromView ,WithStyles
         $this->selectedDivisionTypeId = $selectedDivisionTypeId;
         $this->setTitle();
     }
-
     private function setTitle()
     {
         if ($this->selectedDivisionTypeId != 3) {
@@ -69,7 +42,6 @@ class SSL10 implements FromView ,WithStyles
                 : 'ရုံးချုပ်';
         }
     }
-
     public function view(): View
     {
         $staffs = Staff::Labour()
@@ -77,8 +49,7 @@ class SSL10 implements FromView ,WithStyles
                 $query->whereHas('divisionType', function ($subQuery) {
                     $subQuery->whereIn('id', $this->selectedDivisionTypeId == 3 ? [1, 2] : [$this->selectedDivisionTypeId]);
                 });
-            })
-            ->get();
+            })->get();
 
         return view('excel_reports.labour_staff_report', [
             'staffs' => $staffs,

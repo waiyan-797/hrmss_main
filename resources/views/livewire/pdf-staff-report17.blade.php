@@ -16,7 +16,7 @@
                     <label for="" class="md:w-5">၂။ </label>
                     <label for="name" class="md:w-1/3">အသက်(မွေးသက္ကရာဇ်)</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ en2mm(Carbon\Carbon::parse($staff->dob)->format('d-m-y')) }}</label>
+                    <label for="name" class="md:w-3/5">{{ formatDMYmm($staff->dob) }}</label>
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၃။ </label>
@@ -51,20 +51,21 @@
                     <label for="" class="md:w-5">၇။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိ နေရပ်လိပ်စာ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{collect([$staff->current_address_street,$staff->current_address_ward,$staff->current_address_township_or_town->name,$staff->current_address_region->name])->filter()->implode('၊')}}
+                    <label for="name" class="md:w-3/5">{{collect([$staff->current_address_house_no,$staff->current_address_street,$staff->current_address_ward,$staff->current_address_township_or_town->name.'မြို့နယ်',$staff->current_address_region->name.'‌ဒေသကြီး၊၊'])->filter()->implode('၊')}}
                         
                     </label>
                     
                 </div>
-             
-                <div class="flex justify-between w-full mb-4">
+                @php
+                $educationNames = $staff->staff_educations->map(fn($edu) => $edu->education?->name)->implode(', ');
+                @endphp
+                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၈။ </label>
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">  {{ $staff->staff_educations->map(function ($education) {
-                        return $education->education?->name;
-                    })->filter()->join(', ') }}</label>
-                </div>
+                    <label for="name" class="md:w-3/5">{{ $educationNames }}</label>
+                </div> 
+               
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၉။ </label>
                     <label for="name" class="md:w-1/3">အဘအမည်</label>
@@ -182,12 +183,12 @@
                         <thead>
                             <tr>
                                 <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
-                                <th rowspan="2" class="border border-black text-center p-2">သွားရောက်သည့်ကိစ္စ</th>
-                                <th rowspan="2" class="border border-black text-center p-2">စေလွှတ်သည့်နှိင်ငံ</th>
+                                <th rowspan="2" class="border border-black text-center p-2">သွားရောက်မည့်ကိစ္စ</th>
+                                <th rowspan="2" class="border border-black text-center p-2">စေလွှတ်သည့်နိုင်ငံ</th>
                                 <th colspan="2" class="border border-black text-center p-2">အချိန်ကာလ</th>
                                 <th rowspan="2" class="border border-black text-center p-2">နိုင်ငံခြားသို့သွားရောက်မည့်နေ့</th>
                                 <th rowspan="2" class="border border-black text-center p-2">ထောက်ပံ့သည့်အဖွဲ့အစည်း</th>
-                                <th rowspan="2" class="border border-black text-center p-2">ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး</th>
+                                <th rowspan="2" class="border border-black text-center p-2">ပြန်ရောက်လျှင်အမှုထမ်းမည့်ဌာန/ရာထူး</th>
                             </tr>
                             <tr>
                                 <th class="border border-black text-center p-2">မှ</th>
@@ -195,19 +196,16 @@
                             </tr>
                         </thead>
                         <tbody class="text-center h-8 p-2">
-                            @foreach ($staff->abroads as $index=> $abroad)
                                 <tr>
-                                    <td class="border border-black p-2">{{en2mm($index+1)}}</td>
-                                    <td class="border border-black p-2">{{ $abroad->particular}}</td>
-                                    <td class="border border-black p-2">{{$abroad->countries->pluck('name')->unique()->join(', ')}}</td>
-                                    <td class="border border-black p-2">{{formatDMYmm($abroad->from_date)}}</td>
-                                    <td class="border border-black p-2">{{formatDMYmm($abroad->to_date)}}</td>
-                                    <td class="border border-black p-2">{{formatDMYmm($abroad->actual_abroad_date)}}</td>
-                                    <td class="border border-black p-2">{{$abroad->sponser}}</td>
-                                    
-                                    <td class="border border-black p-2">{{$abroad->position}}</td>
+                                    <td class="border border-black p-2"></td>
+                                    <td class="border border-black p-2"></td>
+                                    <td class="border border-black p-2"></td>
+                                    <td class="border border-black p-2"></td>
+                                    <td class="border border-black p-2"></td>
+                                    <td class="border border-black p-2"></td>
+                                    <td class="border border-black p-2"></td>
+                                    <td class="border border-black p-2"></td>
                                 </tr>
-                            @endforeach
                         </tbody>
                       
                     </table>

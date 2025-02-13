@@ -160,11 +160,11 @@
                     <label for="name" class="md:w-5">-</label>
 
                     <label for="name" class="md:w-3/5">
-                        {{ collect([
+                        {{ collect([$staff->current_address_house_no,
                             $staff->current_address_street,
                             $staff->current_address_ward,
                             $staff->current_address_township_or_town->name.'မြို့နယ်',
-                            $staff->current_address_region->name ,
+                            $staff->current_address_region->name.'ဒေသကြီး' ,
                         ])->filter()->implode('၊') }}
                     </label>
 
@@ -176,11 +176,11 @@
                     <label for="name" class="md:w-5">-</label>
 
                     <label for="name"
-                        class="md:w-3/5">{{ collect([
+                        class="md:w-3/5">{{ collect([$staff->permanent_address_house_no,
                             $staff->permanent_address_street,
                             $staff->permanent_address_ward,
                             $staff->permanent_address_township_or_town->name.'မြို့နယ်',
-                            $staff->permanent_address_region->name ,
+                            $staff->permanent_address_region->name.'ဒေသကြီး၊၊' ,
                         ])->filter()->implode('၊') }}</label>
 
                 </div>
@@ -195,7 +195,7 @@
                     <label for="name" class="md:w-3/5">{{ $staff->previous_addresses }}</label>
 
                 </div>
-                <div class="flex justify-between w-full mb-2">
+                {{-- <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၂၅။ </label>
                     <label for="name"
                         class="md:w-1/3">ပညာအရည်အချင်း(ရရှိထားသောတက္ကသိုလ်/ဘွဲ့/ဒီပလိုမာ)</label>
@@ -205,8 +205,18 @@
                         return $education->education?->name;
                     })->filter()->join(', ') }}</label>
 
-                </div>
-            </div>
+                </div> --}}
+
+                                           @php
+                                            $educationNames = $staff->staff_educations->map(fn($edu) => $edu->education?->name)->implode(', ');
+                                            @endphp
+                                             <div class="flex justify-between w-full mb-4">
+                                                <label for="" class="md:w-5">၈။</label>
+                                                <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
+                                                <label for="" class="md:w-5">-</label>
+                                                <label for="name" class="md:w-3/5">{{ $educationNames }}</label>
+                                            </div> 
+                                        </div>
 
             <div class="md:w-full p-4">
                 <h1 class="text-center font-semibold text-base mb-4">အလုပ်အကိုင်</h1>

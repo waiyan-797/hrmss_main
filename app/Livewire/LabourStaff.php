@@ -11,18 +11,16 @@ use Maatwebsite\Excel\Facades\Excel;
 class LabourStaff extends Component
 {
 
-    public  $staff_type_id=3 ;
+    public $staff_type_id=3 ;
     public $divisionTypes ; 
     public $selectedDivisionTypeId  = 3 ;
     public $title ; 
     public function mount(){
         $this->divisionTypes =DivisionType::all();
     }
-
-    public function go_excel() 
+    public function go_excel()
     {
-        return Excel::download(new SSL10(
-    ), 'SSL10.xlsx');
+        return Excel::download(new SSL10($this->selectedDivisionTypeId), 'SSL10.xlsx');
     }
   
     public function render()
@@ -30,7 +28,6 @@ class LabourStaff extends Component
 
         if($this->selectedDivisionTypeId != 3 ){
             $this->title = DivisionType::find($this->selectedDivisionTypeId)->id == 2 ? 'တိုင်းဒေသကြီး၊ ပြည်နယ်ဦးစီးမှုးရုံး' : 'ရုံးချုပ်';
-
         }
         $staffs = Staff::Labour() 
         ->whereHas('current_division', function ($query) {
@@ -39,7 +36,6 @@ class LabourStaff extends Component
             $subQuery->where('id' , $this->selectedDivisionTypeId == 3 ? [ 1, 2 ]  : $this->selectedDivisionTypeId );
         }
         ); 
-        
         })
         ->paginate(20);
 

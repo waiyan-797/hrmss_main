@@ -50,10 +50,7 @@ class StaffReport1 extends Component
         $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
         $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
         $section->addText('(၂၄-၇-၂၀၂၄)ရက်နေ့ ညွှန်ကြားရေးမှူးများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း', ['bold' => true]);
-
-
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-
         $table->addRow();
         $headerTitles = ['စဥ်', 'အမည်', 'ရာထူး', 'နိုင်ငံသားစိစစ်ရေးအမှတ်', 'မွေးနေ့သက္ကရာဇ်', 'အလုပ်စတင်ဝင်ရောက်သည့်ရက်စွဲ', 'လက်ရှိအဆင့်ရရက်စွဲ', 'လက်ရှိဌာနရောက်ရှိရက်စွဲ', 'ဌာနခွဲ', 'ပညာအရည်အချင်း', 'ပင်စင်ပြည့်သည့်နေ့စွဲ'];
 
@@ -132,10 +129,6 @@ class StaffReport1 extends Component
         $staffs = Staff::get();
         // $pension_year = PensionYear::first();
         $this->pension_year=$pension_year;
-        
-        
-
-
         return view('livewire.staff-report.staff-report1', [
             'staffs' => $this->staffs,
             'pension'=>$this->pension_year,

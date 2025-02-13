@@ -82,12 +82,6 @@
                                     {{dateDiffYMDWithoutDays($staff->current_rank_date, now())}}
 
                                 </td>
-                                {{-- <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
-                                    {{formatDMYmm($staff->postings->sortByDesc('from_date')->first()?->from_date)}}
-                                    <br>
-                                    {{dateDiffYMDWithoutDays($staff->postings->sortByDesc('from_date')->first()?->from_date, now())}}
-
-                                </td> --}}
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
                                     {{-- {{ $staff->side_department?->name }} --}}
                                     {{ $staff->current_division?->name }}

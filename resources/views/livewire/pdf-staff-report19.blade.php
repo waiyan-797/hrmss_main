@@ -64,7 +64,7 @@
                     <label for="name" class="md:w-1/3">လက်ရှိနေရပ်လိပ်စာ</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">
-                        {{$staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'။'}}
+                        {{$staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'ဒေသကြီး။'}}
                        
                     </label>
                 </div>
@@ -73,44 +73,17 @@
                     <label for="" class="md:w-5">၁၀။ </label>
                     <label for="name" class="md:w-1/3">အမြဲတမ်းနေရပ်လိပ်စာ</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{$staff->permanent_address_street.'၊'.$staff->permanent_address_ward.'၊'.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'။'}}</label>
+                    <label for="name" class="md:w-3/5">{{$staff->permanent_address_house_no.$staff->permanent_address_street.'၊'.$staff->permanent_address_ward.'၊'.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'ဒေသကြီး။'}}</label>
                 </div>
-                
-                <div class="flex justify-between w-full mb-4">
-                    <label for="" class="md:w-5">၁၁။ </label>
+                @php
+                $educationNames = $staff->staff_educations->map(fn($edu) => $edu->education?->name)->implode(', ');
+                @endphp
+                 <div class="flex justify-between w-full mb-4">
+                    <label for="" class="md:w-5">၁၁။  </label>
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                     <label for="" class="md:w-5">-</label>
-                    <label for="name" class="md:w-3/5">{{ $staff->staff_educations->map(function ($education) {
-                        return $education->education?->name;
-                    })->filter()->join(', ') }}</label>
-                </div>
-                {{-- <div class="w-full mb-4">
-                    <div class="flex justify-start mb-2 space-x-3">
-                        <label for="">၁၁။ </label>
-                        <h1 class="font-semibold text-base">ပညာအရည်အချင်း
-                        </h1>
-                    </div>
-                    <table class="md:w-full">
-                        <thead>
-                            <tr>
-                                <th class="border border-black text-center p-2">စဉ်</th>
-                                <th class="border border-black text-center p-2">Education Group</th>
-                                <th class="border border-black text-center p-2">Education Type</th>
-                                <th class="border border-black text-center p-2">Education</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($staff->staff_educations as $education)
-                                <tr>
-                                    <td class="border border-black text-center p-2">{{$loop->index + 1}}</td>
-                                    <td class="border border-black text-center p-2">{{$education->education_group->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$education->education_type->name}}</td>
-                                    <td class="border border-black text-center p-2">{{$education->education->name}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div> --}}
+                    <label for="name" class="md:w-3/5">{{ $educationNames }}</label>
+                </div> 
                 <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">
                         <label for="">၁၂။ </label>
@@ -182,8 +155,9 @@
                                 @if ($staff->postings->isNotEmpty())
                                 @foreach ($staff->postings as $posting)
                                     <tr>
-                                        <td class="border border-black p-2">{{$posting->rank->name}}</td>
-                                        <td class="border border-black p-2">{{$posting->department->name}}</td>
+                                         <td class="border border-black p-2"> {{ $posting->rank->name ?? '-' }}</td> 
+                                       
+                                        <td class="border border-black p-2">{{$posting->department->name ?? '-'}}</td>
                                         <td class="border border-black p-2">{{formatDMYmm($posting->from_date)}}</td>
                                         <td class="border border-black p-2">{{formatDMYmm($posting->to_date)}}</td>
                                         <td class="border border-black p-2">{{$posting->remark}}</td>
@@ -224,7 +198,7 @@
                                 @foreach ($staff->postings as $index=>$posting)
                                     <tr>
                                         <td class="border border-black p-2">{{'('.myanmarAlphabet($loop->index).')'}}</td>
-                                        <td class="border border-black p-2">{{$posting->department->name}}</td>
+                                        <td class="border border-black p-2">{{$posting->department?->name}}</td>
                                         <td class="border border-black p-2">{{$posting->remark}}</td>
                                         <td class="border border-black p-2">{{$posting->remark}}</td>
                                     </tr>

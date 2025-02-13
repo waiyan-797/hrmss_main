@@ -33,10 +33,6 @@ class Staff extends Model
     protected $casts = [
         'increment_date' => 'date',  // Or 'datetime' if you need time as well
     ];
-
-
-
-
     public function staff_educations()
     {
         return $this->hasMany(StaffEducation::class);
@@ -325,10 +321,10 @@ class Staff extends Model
         return $this->belongsTo(Relation::class, 'family_pension_inheritor_relation_id');
     }
 
-    public function currentDeptJoinDAate()
-    {
-        return $this->postings->sortByDesc('from_date')->first()?->from_date;
-    }
+    // public function currentDeptJoinDate()
+    // {
+    //     return $this->postings->sortByDesc('from_date')->first()?->from_date;
+    // }
 
     public function pension_type()
     {

@@ -7,21 +7,21 @@
         </h2>
         <div class="mb-4 flex flex-col gap-2">
             <button type="button" class="font-arial bg-blue-500 hover:bg-blue-600 text-white w-full h-auto py-2 rounded"
-                wire:click="go_report({{ $staff_id }}, 15)">Report 15</button>
+                wire:click="go_report({{ $staff_id }}, 15)">ကိုယ်ရေးမှတ်တမ်း(၁၅)ချက်</button>
             <button type="button" class="font-arial bg-blue-500 hover:bg-blue-600 text-white w-full h-auto py-2 rounded"
-                wire:click="go_report({{ $staff_id }}, 17)">Report 17</button>
+                wire:click="go_report({{ $staff_id }}, 17)">ကိုယ်ရေးမှတ်တမ်း(၁၇)ချက်</button>
             <button type="button"
                 class="font-arial bg-blue-500 hover:bg-blue-600 text-white w-full h-auto py-2 rounded"
-                wire:click="go_report({{ $staff_id }}, 18)">Report 18</button>
+                wire:click="go_report({{ $staff_id }}, 18)">ကိုယ်ရေးမှတ်တမ်း(၁၈)ချက်</button>
             <button type="button"
                 class="font-arial bg-blue-500 hover:bg-blue-600 text-white w-full h-auto py-2 rounded"
-                wire:click="go_report({{ $staff_id }}, 19)">Report 19</button>
+                wire:click="go_report({{ $staff_id }}, 19)">ကိုယ်ရေးမှတ်တမ်း(၁၉)ချက်</button>
             <button type="button"
                 class="font-arial bg-blue-500 hover:bg-blue-600 text-white w-full h-auto py-2 rounded"
-                wire:click="go_report({{ $staff_id }}, 53)">Report 53</button>
+                wire:click="go_report({{ $staff_id }}, 53)">ကိုယ်‌ရေးမှတ်တမ်း(၅၃)ချက်</button>
             <button type="button"
                 class="font-arial bg-blue-500 hover:bg-blue-600 text-white w-full h-auto py-2 rounded"
-                wire:click="go_report({{ $staff_id }}, 68)">Report 68</button>
+                wire:click="go_report({{ $staff_id }}, 68)">ကိုယ်ရေးမှတ်တမ်း(၆၈)ချက်</button>
             <button type="button"
                 class="font-arial bg-blue-500 hover:bg-blue-600 text-white w-full h-auto py-2 rounded"
                 wire:click="go_report({{ $staff_id }}, '_leave_3')">Leave 3</button>

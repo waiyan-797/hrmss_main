@@ -57,11 +57,11 @@
                 'title' => $status == 5 ? 'ဝန်ထမ်း' : '',
                 'search_id' => 'staff_search',
                 'columns' => array_filter([
-                        'No', 'Photo', 'Name', 'Staff No', 'Action',
-                        $status == 5 ? 'Type' : ($status == 3 || $status == 4 ? 'Comment' : null),
-                        ($status == 5 || $status == 2) ? 'Request' : null
+                        'စဉ်', 'အမည်', 'ရာထူး','ဌာန','ဌာနခွဲ','လုပ်ဆောင်ချက်',
+                        $status == 5 ? 'ဆောင်ရွက်ချက်' : ($status == 3 || $status == 4 ? 'Comment' : null),
+                        ($status == 5 || $status == 2) ? 'မှတ်ချက်' : null
                     ]),
-                'column_vals' => ['staff_photo', 'name', 'staff_no'],
+                'column_vals' => [ 'name','currentRank','current_department','current_division'],
             ])
 
             @if ($open_staff_report)

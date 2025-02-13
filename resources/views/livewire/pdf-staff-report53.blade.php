@@ -13,7 +13,6 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name" class="md:w-3/5">{{ $staff->name }}</label>
-
                 </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -59,7 +58,6 @@
                     <label for="" class="md:w-5">၆။ </label>
                     <label for="name" class="md:w-1/3">အရပ်အမြင့်</label>
                     <label for="" class="md:w-5">-</label>
-
                         <label for="name"
                             class="md:w-3/5">{{ en2mm($staff->height_feet) }}ပေ {{ en2mm($staff->height_inch) }}လက်မ</label>
                                     </div>
@@ -125,7 +123,7 @@
                     <label for="" class="md:w-5">-</label>
 
                     <label for="name" class="md:w-3/5">
-                        {{$staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'။'}}
+                        {{$staff->current_address_house_no.$staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'ဒေသကြီး။'}}
                     </label>
                                     </div>
                                    
@@ -136,7 +134,7 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name"
-                            class="md:w-3/5">{{$staff->permanent_address_street.'၊'.$staff->permanent_address_ward.'၊'.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'။'}}</label>
+                            class="md:w-3/5">{{$staff->permanent_address_house_no.$staff->permanent_address_street.'၊'.$staff->permanent_address_ward.'၊'.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'ဒေသကြီး။'}}</label>
                             </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၆။ </label>
@@ -224,20 +222,27 @@
                     </div>
                 </div>
 
-                <div class="flex justify-start w-full mb-4 ml-1">
+                {{-- <div class="flex justify-start w-full mb-4 ml-1">
                     <label for="" class="md:w-5">၈။ </label>
                     <label for="name" class="md:w-80 ml-3">ပညာအရည်အချင်း</label>
                     <label for="" class="md:w-5 ml-10">-</label>
                   
                         <label for="name" class="md:w-3/5">
-                            {{-- @foreach ($staff->staff_educations as $education)
-                            {{$education->education?->name}}
-                            @endforeach --}}
                             {{ $staff->staff_educations->map(function ($education) {
                                 return $education->education?->name;
                             })->filter()->join(', ') }}
                         </label>
-                                            </div>
+                                            </div> --}}
+
+                                            @php
+                                            $educationNames = $staff->staff_educations->map(fn($edu) => $edu->education?->name)->implode(', ');
+                                            @endphp
+                                             <div class="flex justify-between w-full mb-4">
+                                                <label for="" class="md:w-5">၈။</label>
+                                                <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
+                                                <label for="" class="md:w-5">-</label>
+                                                <label for="name" class="md:w-3/5">{{ $educationNames }}</label>
+                                            </div> 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၉။ </label>
                     <label for="name" class="md:w-1/3">အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့်
@@ -263,9 +268,8 @@
                             {{ collect([
                                 $staff->father_address_street,
                                 $staff->father_address_ward,
-                                $staff->father_address_township_or_town?->name,
-                                $staff->father_address_district?->name,
-                                $staff->father_address_region?->name,
+                                $staff->father_address_township_or_town?->name.'မြို့နယ်',
+                                $staff->father_address_region?->name.'ဒေသကြီး',
                             ])->filter()->implode('၊') }}
                             
                             </label>
@@ -299,9 +303,8 @@
                             {{ collect([
                                 $staff->mother_address_street,
                                 $staff->mother_address_ward,
-                                $staff->mother_address_township_or_town?->name,
-                                $staff->mother_address_district?->name,
-                                $staff->mother_address_region?->name,
+                                $staff->mother_address_township_or_town?->name.'မြို့နယ်',
+                                $staff->mother_address_region?->name.'ဒေသကြီး',
                             ])->filter()->implode('၊') }}
                         </label>
                                     </div>
@@ -313,7 +316,7 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name"
-                            class="md:w-3/5">{{ $staff->is_parents_citizen_when_staff_born?'ဟုတ်':'မဟုတ်' }}</label>
+                            class="md:w-3/5">{{ $staff->is_parents_citizen_when_staff_born?'ဟုတ်ပါသည်':'မဟုတ်' }}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">

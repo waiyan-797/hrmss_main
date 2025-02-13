@@ -118,9 +118,6 @@ class LocalTrainingReport extends Component
 
         return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
     }
-
-
-   
     public function render()
     {
         $this->staffsAll = Staff::
@@ -130,12 +127,6 @@ class LocalTrainingReport extends Component
         return view('livewire.local-training-report.local-training-report', [
             'staffs' => $this->staffsAll,
             'letter_types'=>$letter_types,
-
-        
-        
-        
-        
-        
         ]);
     }
 
