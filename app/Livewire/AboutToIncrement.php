@@ -122,38 +122,73 @@ class AboutToIncrement extends Component
 
                 $staffs = Staff::all();
                 $this->staffs = Staff::all()->filter(function ($staff) use ($startDate, $endDate) {
-
                     $totalLeaveDays = $staff->leaves->where('leve_type','5')->reduce(function ($carry, $leave) {
                         $fromDate = Carbon::parse($leave->from_date);
                         $toDate = Carbon::parse($leave->to_date);
                         return $carry + $fromDate->diffInDays($toDate);
                     }, 0);
+                    $promotionDate = null ;
 
+                    if($staff->current_increment_time < 5  && $staff->current_increment_time != 0   ){
 
-                    if ($staff->increments->isNotEmpty()) {
-                        // Get the last increment date
-                        $lastIncrementDate = $staff->increments->last()->increment_date;
+                        $lastIncrementDate = $staff->last_increment_date;
 
-                        // Adjust the last increment date by adding leave days
                         $adjustedIncrementDate = Carbon::parse($lastIncrementDate)
-                        ->addDays($totalLeaveDays)
-                        ;
+                                ->addDays($totalLeaveDays)
+                                ;
 
-                        // Calculate the 2-year mark based on the adjusted increment date
-                        $promotionDate = $adjustedIncrementDate->addYears(2);
-                        $staff->promotionDate =  $promotionDate;
-                    } else {
+                                // Calculate the 2-year mark based on the adjusted increment date
+                                $promotionDate = $adjustedIncrementDate->addYears(2);
+                                // $staff->promotionDate =  $promotionDate;
+                    }
+
+
+                    elseif($staff->current_increment_time  == 0 && $staff->increments->isEmpty() ){
 
                         $adjustedJoinDate = Carbon::parse($staff->current_rank_date)->addDays($totalLeaveDays);
 
                         $promotionDate = $adjustedJoinDate->addYears(2);
-                        $staff->promotionDate =  $promotionDate;
-
                     }
 
-                    // Check if the promotion date falls between startDate and endDate
+
+                    // if ($staff->increments->isNotEmpty()) {
+                    //     // Get the last increment date
+
+                    //     $lastIncrment  = $staff->current_increment_time;
+                    //     if($lastIncrment < 5 ){
+                    //         $lastIncrementDate = $staff->last_increment_date;
+
+                    //         // Adjust the last increment date by adding leave days
+                    //         $adjustedIncrementDate = Carbon::parse($lastIncrementDate)
+                    //         ->addDays($totalLeaveDays)
+                    //         ;
+
+                    //         // Calculate the 2-year mark based on the adjusted increment date
+                    //         $promotionDate = $adjustedIncrementDate->addYears(2);
+                    //         $staff->promotionDate =  $promotionDate;
+
+
+                    //     }
+
+                    // }
+                    // // elseif(){
+
+                    // //     $staff->promotionDate =  $promotionDate;
+
+                    // // }
+                    // else {
+
+                    //     $adjustedJoinDate = Carbon::parse($staff->current_rank_date)->addDays($totalLeaveDays);
+
+                    //     $promotionDate = $adjustedJoinDate->addYears(2);
+                    //     $staff->promotionDate =  $promotionDate;
+
+                    // }
+
+
                     return $promotionDate->between($startDate, $endDate);
                 });
+
 
 
         return view('livewire.about-to-increment', [
