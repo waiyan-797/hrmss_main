@@ -144,6 +144,7 @@ $staffs  =  DB::table(function ($query) {
                   WHEN s.current_increment_time > 0 AND s.current_increment_time < 5 THEN s.last_increment_date ELSE s.current_rank_date END as last_increment_date')
     ])
     ->from('staff as s')
+    ->where('current_rank_id' , '!=' , 23 )
     ->leftJoin('ranks as r', 's.current_rank_id', '=', 'r.id')
     ->leftJoin('divisions as d', 's.current_division_id', '=', 'd.id')
     ->leftJoin(DB::raw('(SELECT * FROM increments WHERE id IN (SELECT MAX(i.id) FROM increments i WHERE increment_time < 5 GROUP BY i.staff_id)) as inc'), 's.id', '=', 'inc.staff_id')
@@ -161,10 +162,10 @@ $staffs  =  DB::table(function ($query) {
 ])
 ->get();
 
-// dd($staffs);
+
+
+
 $this->arr= $staffs->whereBetween('coming_increment_date' ,[$this->startDate->format('Y-m-d'),$this->endDate->format('Y-m-d')]) ;
-// dd($staffs);
-// return $staffs->whereBetween('coming_increment_date' ,['2021-07-23','2021-10-24']);
 
 
 
@@ -191,7 +192,7 @@ $this->arr= $staffs->whereBetween('coming_increment_date' ,[$this->startDate->fo
             Increment::create([
                 'staff_id' => $staffModle->id,
                 'increment_rank_id' => $staffModle->current_rank_id,
-                'min_salary' => $staffModle->current_salary + 2000,
+                'min_salary' => $staffModle->payscale->min_salary,
                 'increment' => 2000,
                 'max_salary' => $staffModle->payscale->max_salary,
                 'increment_date' => $element->coming_increment_date,
