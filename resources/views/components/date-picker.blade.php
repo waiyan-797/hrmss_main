@@ -16,7 +16,7 @@
             field: $refs.input,
             format: 'DD-MM-YYYY',
             yearRange: [1800, 3000],
-            maxDate : new Date(),
+            {{-- maxDate : new Date(), --}}
             onSelect: function(date) {
                 const formattedDate = date.toLocaleDateString('en-GB'); // UI format
                 const livewireDate = date.getFullYear() + '-'
