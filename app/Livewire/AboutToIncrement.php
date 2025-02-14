@@ -145,6 +145,7 @@ $staffs  =  DB::table(function ($query) {
     ])
     ->from('staff as s')
     ->where('current_rank_id' , '!=' , 23 )
+    ->where('current_rank_id' , '!=' , 1 )
     ->leftJoin('ranks as r', 's.current_rank_id', '=', 'r.id')
     ->leftJoin('divisions as d', 's.current_division_id', '=', 'd.id')
     ->leftJoin(DB::raw('(SELECT * FROM increments WHERE id IN (SELECT MAX(i.id) FROM increments i WHERE increment_time < 5 GROUP BY i.staff_id)) as inc'), 's.id', '=', 'inc.staff_id')
