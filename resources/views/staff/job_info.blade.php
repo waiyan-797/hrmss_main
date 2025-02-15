@@ -154,6 +154,11 @@
         <x-text-input wire:model="current_increment_time" id="current_increment_time" name="current_increment_time" type="number" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('current_increment_time')" />
     </div>
+    <div>
+        <x-input-label for="နောက်ဆုံးနှစ်တိုးတိုးသည့်နေ့" :value="__('နောက်ဆုံးနှစ်တိုးတိုးသည့်နေ့(လ ၊ ရက် ၊ နှစ်)')" />
+        <x-text-input wire:model="last_increment_date" id="last_increment_date" type="date" class="mt-1 block w-full" required/>
+        <x-input-error class="mt-2" :messages="$errors->get('last_increment_date')" />
+    </div>
 </div>
 <div class="w-full h-auto py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">

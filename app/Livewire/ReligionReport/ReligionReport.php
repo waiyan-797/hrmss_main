@@ -61,7 +61,8 @@ class ReligionReport extends Component
         $pStyle_3 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100];
         $phpWord->addTableStyle('Staff Table', $tableStyle);
         $table = $section->addTable('Staff Table');
-        $table->addRow();
+        // $table->addRow();
+        $table->addRow(50, ['tblHeader' => true]);
         $table->addCell(1500, ['vMerge' => 'restart'])->addText('စဥ်',['bold' => true], $pStyle_1);
         $table->addCell(3000, ['vMerge' => 'restart'])->addText('အမည်',['bold' => true], $pStyle_1);
         $table->addCell(5000, ['vMerge' => 'restart'])->addText('ရာထူး',['bold' => true], $pStyle_1);
@@ -71,7 +72,8 @@ class ReligionReport extends Component
         $table->addCell(4000, ['gridSpan' => 2])->addText("အစ္စလာမ်\nဘာသာ",['bold'=>true],$pStyle_2);
         $table->addCell(4000, ['gridSpan' => 2])->addText('အခြား',['bold'=>true],$pStyle_1);
         $table->addCell(3000, ['vMerge' => 'restart'])->addText('မှတ်ချက်',['bold'=>true],$pStyle_1);
-        $table->addRow();
+        // $table->addRow();
+        $table->addRow(50, ['tblHeader' => true]);
         $table->addCell(3000, ['vMerge' => 'continue']);
         $table->addCell(3000, ['vMerge' => 'continue']);
         $table->addCell(5000, ['vMerge' => 'continue']);

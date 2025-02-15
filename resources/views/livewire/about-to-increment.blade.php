@@ -1,6 +1,7 @@
 <div class="w-full min-h-screen p-6 bg-gray-100">
-    {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-    <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
+     {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
+    {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>  --}}
+     <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>  
     <br><br>
     <div  class="flex items-end gap-x-5" >
         <div class="w-40 ">
@@ -96,35 +97,21 @@
 
                             <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
 
-                                {{$staff->increment_time}}
+                                {{en2mm($staff->increment_time)}}
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
 
-                                {{$staff->last_increment_date}}
+                                {{formatDMYmm($staff->last_increment_date)}}
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
 
-                                {{$staff->leave_days}}
+                                {{en2mm($staff->leave_days)}}
 
                             </td>
-
-
                             <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
 
-                                {{$staff->coming_increment_date}}
+                                {{formatDMYmm($staff->coming_increment_date)}}
                             </td>
-
-
-
-
-
-
-
-                            {{-- <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{ route('staff_increment', $staff->id) }}" class="font-medium text-indigo-600 hover:text-indigo-900">
-                                    Increment
-                                </a>
-                            </td> --}}
                         </tr>
                     @endforeach
                 @else

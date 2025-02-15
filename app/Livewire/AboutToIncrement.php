@@ -2,12 +2,14 @@
 
 namespace App\Livewire;
 
+use App\Exports\PA20;
 use App\Models\Increment;
 use App\Models\Staff;
 use Carbon\Carbon;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -24,7 +26,8 @@ class AboutToIncrement extends Component
         $endDate = $this->endDate ;
 
                 $staffs = Staff::all();
-                $this->staffs = Staff::all()->filter(function ($staff) use ($startDate, $endDate) {
+                $this-> $this->arr
+                = Staff::all()->filter(function ($staff) use ($startDate, $endDate) {
 
                     $totalLeaveDays = $staff->leaves->where('leve_type','5')->  reduce(function ($carry, $leave) {
                         $fromDate = Carbon::parse($leave->from_date);
@@ -69,6 +72,12 @@ class AboutToIncrement extends Component
             echo $pdf->output();
         }, 'about_increment_report.pdf');
     }
+    public function go_excel() 
+    {
+        return Excel::download(new PA20($this->arr), 'PA20.xlsx');
+    }
+    
+  
     public function go_word()
 {
     $startDate = Carbon::parse($this->startDate);
@@ -160,17 +169,10 @@ $staffs  =  DB::table(function ($query) {
     'x.last_increment_date',
     'x.leave_days',
     DB::raw('DATE_ADD(DATE_ADD(x.last_increment_date, INTERVAL x.leave_days DAY), INTERVAL 2 YEAR) as coming_increment_date')
-])
-->get();
-
-
+])->get();
 
 
 $this->arr= $staffs->whereBetween('coming_increment_date' ,[$this->startDate->format('Y-m-d'),$this->endDate->format('Y-m-d')]) ;
-
-
-
-
     }
     public function mount()
     {

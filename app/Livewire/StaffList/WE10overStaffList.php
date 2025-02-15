@@ -116,10 +116,6 @@ class WE10overStaffList extends Component
             'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
         ]);
     }
-
-
-
-
     public function render()
     {
         $first_ranks = Rank::where('staff_type_id', 1)->get();

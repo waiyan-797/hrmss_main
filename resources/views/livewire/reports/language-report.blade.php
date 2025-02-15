@@ -4,6 +4,7 @@
             <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
+            <h1 class="font-bold text-center text-base mb-1">ရင်းနှီးမြှုပ်နှံ့မှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <h1 class="font-bold text-center text-base mb-1">Language Report</h1>
             <table class="md:w-full">
                 <thead>
@@ -11,7 +12,8 @@
                         <th class="border border-black text-left p-1">စဥ်</th>
                         <th class="border border-black text-left p-1">အမည်</th>
                         <th class="border border-black text-left p-1">ရာထူး</th>
-                        <th class="border border-black text-left p-1">ဘာသာစကား</th>
+                        <th class="border border-black text-left p-1">တတ်ကျွမ်းသည့်ဘာသာစကား</th>
+                        <th class="border border-black text-left p-1">မှတ်ချက်</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,8 +22,7 @@
                     @endphp
                     @foreach($staffs as $index=> $staff)
                     <tr>
-                        {{-- <td class="border border-black text-right p-1">{{ $loop->index+1}}</td> --}}
-                        <td class="border border-black text-left p-1">{{ $start++ }}</td>
+                        <td class="border border-black text-left p-1">{{ en2mm($start++) }}</td>
                         <td class="border border-black text-left p-1">{{ $staff->name}}</td>
                         <td class="border border-black text-left p-1">{{ $staff->currentRank?->name}}</td>
                        
@@ -32,6 +33,7 @@
                             @endif {{ $language->language?->name}}
                             @endforeach
                         </td>
+                        <td class="border border-black text-left p-1"></td>
                     </tr>
                     @endforeach
                 </tbody>

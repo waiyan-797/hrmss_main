@@ -33,9 +33,9 @@
                     <tbody>
                         @foreach ($staffs as $staff)
                             <tr>
-                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $loop->index + 1 }}
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ en2mm($loop->index + 1) }}
                                 </td>
-                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->name }}</td>
+                                <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff?->name }}</td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
                                     {{ $staff->current_rank?->name }}</td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
@@ -52,8 +52,8 @@
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
                                     @foreach ($staff->staff_educations as $edu)
                                         <div class="mb-2">
-                                            <span class="font-semibold">{{ $edu->education_group?->name }}</span> -
-                                            <span>{{ $edu->education_type?->name }}</span>,
+                                            <span class="font-semibold"></span> -
+                                            <span></span>,
                                             <span>{{ $edu->education?->name }}</span>
                                         </div>
                                     @endforeach

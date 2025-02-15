@@ -72,7 +72,7 @@ class StaffReport3 extends Component
         // Add table data
         foreach ($staffs as $index => $staff) {
             $table->addRow();
-            $table->addCell(2000)->addText($index + 1);
+            $table->addCell(2000)->addText(en2mm($index + 1));
             $table->addCell(2000)->addText($staff->name);
             $table->addCell(2000)->addText($staff->currentRank?->name);
             $table->addCell(2000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code);
@@ -113,7 +113,7 @@ class StaffReport3 extends Component
     {
         $educationStrings = [];
         foreach ($staff->staff_educations as $edu) {
-            $educationStrings[] = $edu->education_group->name . ' - ' . $edu->education_type->name . ', ' . $edu->education->name;
+          $edu->education->name;
         }
         return implode("\n", $educationStrings);
     }

@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Livewire\FTR;
-
 use App\Models\Country;
+use App\Models\Rank;
 use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 use PHPUnit\Framework\Constraint\Count;
+use Carbon\Carbon;
 class ForeignGoneTotal extends Component
 {
+    public $age, $ageTwo, $signID, $selectedRankId, $staffs, $ranks;
     public function go_pdf()
     {
         $staffs = Staff::get();
@@ -22,11 +24,55 @@ class ForeignGoneTotal extends Component
             echo $pdf->output();
         }, 'foreign_gone_total_report_pdf.pdf');
     }
-    public function go_word()
+    public function mount()
+    {
+        $this->ranks = (new Rank() )->isDicaAll();
+    }
+private function getSignName($signID)
 {
-    $staffs = Staff::whereRaw('TIMESTAMPDIFF(YEAR, dob, CURDATE()) < ?', [45])
-        ->where('current_rank_id', 3)
-        ->get();
+    return match ($signID) {
+        'all' => 'အားလုံး',
+        'between' => 'နှစ်ကြား',
+        '>' => 'နှစ်အထက်',
+        '=' => 'နှစ်',
+        '<' => 'နှစ်အောက်',
+        default => '',
+    };
+}
+
+    public function go_word($age = null, $ageTwo = null, $signID = null, $selectedRankId = null, $selectedRankName = null)
+{
+    $now = Carbon::now();
+    $query = Staff::query();
+
+    if (!empty($this->age) && is_numeric($this->age)) {
+        $birthDate = $now->copy()->subYears($this->age);
+        if ($this->signID === '>') {
+            $query->where('dob', '<=', $birthDate);
+        } elseif ($this->signID === '<') {
+            $query->where('dob', '>', $birthDate);
+        } elseif ($this->signID === '=') {
+            $query->whereYear('dob', '=', $birthDate->year);
+        } elseif ($this->signID === 'between' && !empty($this->ageTwo) && is_numeric($this->ageTwo)) {
+            $birthDateFrom = $now->copy()->subYears($this->age);
+            $birthDateTo = $now->copy()->subYears($this->ageTwo);
+            $query->whereBetween('dob', [$birthDateTo, $birthDateFrom]);
+        }
+    }
+
+    if (!empty($this->selectedRankId)) {
+        $query->where('current_rank_id', $this->selectedRankId);
+    }
+
+    $this->staffs = $query->with('currentRank')->get();
+  
+
+    $selectedRankName = Rank::find($this->selectedRankId)?->name ?? '';
+    $signText = $this->getSignName($this->signID);
+    $ageText = en2mm($this->age ?? '');
+    $fullText = "အသက် {$ageText} {$signText} {$selectedRankName} များ၏အမည်စာရင်း";
+
+
     $phpWord = new PhpWord();
     $section = $phpWord->addSection([
         'orientation' => 'landscape',
@@ -49,11 +95,12 @@ class ForeignGoneTotal extends Component
         ['bold' => true, 'size' => 11],
         ['align' => 'center']
     );
-    $section->addText(
-        "အသက် ၄၅ နှစ်အောက် ညွှန်ကြားရေးမှူးများ၏အမည်စာရင်း",
-        ['bold' => true, 'size' => 11],
-        ['align' => 'center']
-    );
+$selectedRankText = $selectedRankName ?? 'ရာထူးအားလုံး';
+$section->addText(
+   $fullText,
+    ['bold' => true, 'size' => 11],
+    ['align' => 'center']
+);
     $section->addText(
         'ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), 
         [], 
@@ -64,59 +111,93 @@ class ForeignGoneTotal extends Component
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 350, 'spaceBefore' => 350];
         $pStyle_2 = ['align' => 'center', 'spaceAfter' => 300, 'spaceBefore' => 300];
         $pStyle_3 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100];
-        $table->addRow();
+        $table->addRow(50, ['tblHeader' => true]);
         $table->addCell(1500)->addText("စဥ်", ['bold' => true],$pStyle_1);
         $table->addCell(4000)->addText("အမည်/ရာထူး", ['bold' => true],$pStyle_1);
         $table->addCell(4000)->addText("ဌာနခွဲ", ['bold' => true],$pStyle_1);
-        $table->addCell(3000)->addText("မွေးသက္ကရာဇ်", ['bold' => true],$pStyle_1);
+        $table->addCell(4000)->addText("မွေးသက္ကရာဇ်", ['bold' => true],$pStyle_1);
         $table->addCell(3000)->addText("အလုပ်စတင်\nဝင်ရောက်သည့်\nရက်စွဲ", ['bold' => true],$pStyle_2);
         $table->addCell(3000)->addText("လက်ရှိ\nအဆင့်ရ\nရက်စွဲ", ['bold' => true],$pStyle_2);
         $table->addCell(3000)->addText("နောက်ဆုံး\nသွားရောက်ခဲ့\nသည့်နိုင်ငံ/မြို့", ['bold' => true],$pStyle_2);
         $table->addCell(6000)->addText("နောက်ဆုံးသွား\nရောက်ခဲ့သည့်\nအကြောင်းအရာ\nကာလ (မှ-ထိ)", ['bold' => true],$pStyle_2);
         $table->addCell(2000)->addText("အကြိမ်ရေ", ['bold' => true],$pStyle_1);
-      foreach ($staffs as $index => $staff) {
-        $allCountries = $staff->abroads->pluck('country_id')
-            ->merge($staff->trainings->pluck('country_id'))
-            ->unique();
-        $totalTrainings = $staff->trainings->count();
-        $totalAbroads = $staff->abroads->count();
-        $totalOverall = $totalTrainings + $totalAbroads;
-        $lastAbroad = $staff->abroads->sortByDesc('to_date')->first();
-        $lastTraining = $staff->trainings->sortByDesc('to_date')->first();
+        $index = 1;
+    foreach ($this->staffs as $staff) {
+    $allCountries = $staff->abroads->pluck('country_id')->unique();
+    $totalAbroads = $staff->abroads->count();
+    $lastAbroad = $staff->abroads->sortByDesc('to_date')->first();
+    $dob = \Carbon\Carbon::parse($staff->dob);
+    $diff = $dob->diff(\Carbon\Carbon::now());
+    $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+    
+    foreach ($allCountries as $countryId) {
         $table->addRow();
-        $table->addCell(1500)->addText(en2mm($index + 1),null,$pStyle_1);
+        $table->addCell(1500)->addText(en2mm($index++),null,$pStyle_1);
         $table->addCell(4000)->addText($staff->name . "\n" . ($staff->currentRank->name ?? ''),null,$pStyle_1);
-        $table->addCell(4000)->addText($staff->current_division?->name ?? '',null,$pStyle_1);
-        $dob = \Carbon\Carbon::parse($staff->dob);
-        $diff = $dob->diff(\Carbon\Carbon::now());
-        $age = '('.$diff->y . ' )နှစ် ' .'('. $diff->m . ' )လ';
-        $table->addCell(3000)->addText(
-             '('.formatDMYmm($dob->format('d-m-Y')) .' )'."\n".en2mm($age)   ,
-            null,$pStyle_1
-        );
-        $table->addCell(3000)->addText(formatDMYmm($staff->join_date),null,$pStyle_2);
+        $table->addCell(4000)->addText($staff->current_division->name ?? '',null,$pStyle_1);
+      
+        $table->addCell(4000)->addText( ' (' . en2mm($dob->format('d-m-Y')) . ')' . en2mm($age),null,$pStyle_1);
+        $table->addCell(3000)->addText( formatDMYmm($staff->join_date),null,$pStyle_2 );
         $table->addCell(3000)->addText(formatDMYmm($staff->current_rank_date),null,$pStyle_2);
-        $table->addCell(3000)->addText($lastAbroad?->country?->name ?? ($lastTraining?->country?->name ?? ''),null,$pStyle_2);
-        $table->addCell(6000)->addText(($lastAbroad?->particular)."\n".
-            ($lastAbroad ? formatDMYmm($lastAbroad->from_date) . ' မှ ' . formatDMYmm($lastAbroad->to_date) . ' ထိ' :
-                ($lastTraining ? formatDMYmm($lastTraining->from_date) . ' - ' . formatDMYmm($lastTraining->to_date) : '')),null,$pStyle_2
-        );
-        $table->addCell(2000)->addText(en2mm($totalOverall),null,$pStyle_1);
+        $table->addCell(3000)->addText($lastAbroad?->countries->pluck('name')->unique()->join(', ') ?? '',null,$pStyle_2);
+        if ($lastAbroad) {
+            $table->addCell(3000)->addText($lastAbroad->particular.formatDMYmm($lastAbroad->from_date) . ' မှ ' . formatDMYmm($lastAbroad->to_date).'ထိ',null,$pStyle_2);
+        }
+        $table->addCell(3000)->addText(en2mm($totalAbroads).'ကြိမ်',null,$pStyle_1);
     }
-    $fileName = 'foreign_gone_total_report_word.docx';
+}
+    $fileName = 'A06.docx';
     $tempFile = tempnam(sys_get_temp_dir(), $fileName);
     $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
     $objWriter->save($tempFile);
     return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
 }
-    public function render()
-    {
-        // $staffs = Staff::get();
-        $staffs = Staff::whereRaw('TIMESTAMPDIFF(YEAR, dob, CURDATE()) < ?', [45])
-               ->where('current_rank_id', 3)
-               ->get();
-        return view('livewire.f-t-r.foreign-gone-total', [
-            'staffs' => $staffs,
-        ]);
+public function render()
+{
+    $now = Carbon::now();
+    $query = Staff::query();
+    if (!empty($this->age) && is_numeric($this->age)) {
+        $birthDate = $now->copy()->subYears($this->age);
+        if ($this->signID === '>') {
+            $query->where('dob', '<=', $birthDate);
+        } elseif ($this->signID === '<') {
+            $query->where('dob', '>', $birthDate);
+        } elseif ($this->signID === '=') {
+            $query->whereYear('dob', '=', $birthDate->year);
+        } elseif ($this->signID === 'between' && !empty($this->ageTwo) && is_numeric($this->ageTwo)) {
+            $birthDateFrom = $now->copy()->subYears($this->age);
+            $birthDateTo = $now->copy()->subYears($this->ageTwo);
+            $query->whereBetween('dob', [$birthDateTo, $birthDateFrom]);
+        }
     }
+    if (!empty($this->selectedRankId)) {
+        $query->where('current_rank_id', $this->selectedRankId);
+    }
+    $this->staffs = $query->with('currentRank')->get();
+    $selectedRankName = null;
+    if (!empty($this->selectedRankId)) {
+        $selectedRankName = Rank::find($this->selectedRankId)?->name ?? 'ရာထူးအားလုံး';
+    }
+
+    if (!function_exists('getSignName')) {
+        function getSignName($signID)
+        {
+            return match ($signID) {
+                'all' => 'အားလုံး',
+                'between' => 'နှစ်ကြား',
+                '>' => 'နှစ်အထက်',
+                '=' => 'နှစ်',
+                '<' => 'နှစ်အောက်',
+                default => '',
+            };
+        }
+    }
+    return view('livewire.f-t-r.foreign-gone-total', [
+        'staffs' => $this->staffs,
+        'ranks' => $this->ranks,
+        'age' => $this->age,
+        'signID' => $this->signID,
+        'selectedRankName' => $selectedRankName, 
+    ]);
+}    
 }

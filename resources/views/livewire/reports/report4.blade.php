@@ -30,7 +30,7 @@
                 <tbody>
                      @foreach($staffs as $staff)
                         @php
-                            $maxRows = max($staff->trainings->count(), $staff->abroads->count());
+                            $maxRows = $staff->abroads->count();
                         @endphp
                 
                         @for($i = 0; $i < $maxRows; $i++)
