@@ -6,10 +6,13 @@ use App\Models\PensionType;
 use App\Models\Relation;
 use App\Models\RetireType;
 use App\Models\Staff;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Retirement extends Component
 {
+    use WithFileUploads;
     public $staff;
     public $staff_id;
     public $confirm_delete = false;
@@ -22,15 +25,14 @@ class Retirement extends Component
     public $modal_title, $submit_button_text, $cancel_action, $submit_form;
 
     public
+        $retire_remark_attach,
         $retire_type_id,
         $pension_type_id,
-        $lost_contact_from_date,
         $retire_remark,
         $pension_salary,
         $gratuity,
         $pension_bank,
         $pension_office_order,
-        $date_of_death,
         $family_pension_inheritor,
         $family_pension_date,
         $family_pension_inheritor_relation_id,
@@ -66,17 +68,24 @@ class Retirement extends Component
     public function createRetire()
     {
         $this->staff = Staff::find($this->staff_id);
+        $newAttachment = $this->retire_remark_attach
+            ? Storage::disk('upload')->put('staffs', $this->retire_remark_attach)
+            : $this->staff->retire_remark_attach;
+        dd($newAttachment);
+
+        if ($newAttachment && $this->staff->retire_remark_attach) {
+            Storage::disk('upload')->delete($this->staff->retire_remark_attach);
+        }
         $this->staff->update([
             'retire_date' => $this->retire_date,
             'retire_type_id' => $this->retire_type_id,
             'pension_type_id' => $this->pension_type_id,
-            'lost_contact_from_date' => $this->lost_contact_from_date,
             'retire_remark' => $this->retire_remark,
+            'retire_remark_attach' => $newAttachment,
             'pension_salary' => $this->pension_salary,
             'gratuity' => $this->gratuity,
             'pension_bank' => $this->pension_bank,
             'pension_office_order' => $this->pension_office_order,
-            'date_of_death' => $this->date_of_death,
             'family_pension_inheritor' => $this->family_pension_inheritor,
             'family_pension_date' => $this->family_pension_date,
             'is_active' => false,
@@ -91,13 +100,12 @@ class Retirement extends Component
         $this->reset( [
             'retire_type_id',
             'pension_type_id',
-            'lost_contact_from_date',
             'retire_remark',
+            'retire_remark_attach',
             'pension_salary',
             'gratuity',
             'pension_bank',
             'pension_office_order',
-            'date_of_death',
             'family_pension_inheritor',
             'family_pension_date',
             'family_pension_inheritor_relation_id',
@@ -113,15 +121,14 @@ class Retirement extends Component
         $this->retire_type_id = $this->staff->retire_type_id;
         $this->pension_type_id = $this->staff->pension_type_id;
         $this->retire_date = $this->staff->retire_date;
-        $this->lost_contact_from_date = $this->staff->lost_contact_from_date;
         $this->retire_remark = $this->staff->retire_remark;
         $this->pension_salary = $this->staff->pension_salary;
         $this->gratuity = $this->staff->gratuity;
         $this->pension_bank = $this->staff->pension_bank;
         $this->pension_office_order = $this->staff->pension_office_order;
-        $this->date_of_death = $this->staff->date_of_death;
         $this->family_pension_inheritor = $this->staff->family_pension_inheritor;
         $this->family_pension_date = $this->staff->family_pension_date;
+        $this->retire_remark_attach = $this->staff->retire_remark_attach;
         $this->confirm_add = false;
         $this->confirm_edit = true;
     }
@@ -129,17 +136,25 @@ class Retirement extends Component
     public function updateReitre()
     {
         $this->staff = Staff::find($this->staff_id);
+
+        $newAttachment = $this->retire_remark_attach
+            ? Storage::disk('upload')->put('staffs', $this->retire_remark_attach)
+            : $this->staff->retire_remark_attach;
+
+        if ($newAttachment && $this->staff->retire_remark_attach) {
+            Storage::disk('upload')->delete($this->staff->retire_remark_attach);
+        }
+
         $this->staff->update([
             'retire_date' => $this->retire_date,
             'retire_type_id' => $this->retire_type_id,
             'pension_type_id' => $this->pension_type_id,
-            'lost_contact_from_date' => $this->lost_contact_from_date,
             'retire_remark' => $this->retire_remark,
+            'retire_remark_attach' => $newAttachment,
             'pension_salary' => $this->pension_salary,
             'gratuity' => $this->gratuity,
             'pension_bank' => $this->pension_bank,
             'pension_office_order' => $this->pension_office_order,
-            'date_of_death' => $this->date_of_death,
             'family_pension_inheritor' => $this->family_pension_inheritor,
             'family_pension_date' => $this->family_pension_date,
             'is_active' => false,
@@ -157,17 +172,19 @@ class Retirement extends Component
     public function delete($id)
     {
         $this->staff = Staff::whereNotNull('retire_type_id')->find($this->staff_id);
+        if ($this->staff->retire_remark_attach) {
+            Storage::disk('upload')->delete($this->staff->retire_remark_attach);
+        }
         $this->staff->update([
             'retire_date' => null,
             'retire_type_id' => null,
             'pension_type_id' => null,
-            'lost_contact_from_date' => null,
             'retire_remark' => null,
+            'retire_remark_attach' => null,
             'pension_salary' => null,
             'gratuity' => null,
             'pension_bank' => null,
             'pension_office_order' => null,
-            'date_of_death' => null,
             'family_pension_inheritor' => null,
             'family_pension_date' => null,
             'status_changed_at' => now(),
@@ -177,13 +194,12 @@ class Retirement extends Component
         $this->reset( [
             'retire_type_id',
             'pension_type_id',
-            'lost_contact_from_date',
             'retire_remark',
+            'retire_remark_attach',
             'pension_salary',
             'gratuity',
             'pension_bank',
             'pension_office_order',
-            'date_of_death',
             'family_pension_inheritor',
             'family_pension_date',
             'family_pension_inheritor_relation_id',
