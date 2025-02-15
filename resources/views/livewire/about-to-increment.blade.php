@@ -80,7 +80,7 @@
                             </td>
 
                             <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
-                                {{ $index }}
+                                {{en2mm($loop->iteration)}}
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
                                 {{ $staff->staff_name }}
