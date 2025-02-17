@@ -7,7 +7,6 @@ use App\Models\Awarding;
 use App\Models\AwardType;
 use App\Models\BloodType;
 use App\Models\Children;
-
 use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
 use App\Models\Country;
@@ -100,7 +99,9 @@ class StaffDetail extends Component
 
     public $educations = [];
     //job_info
-    public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_ministry_id = null, $side_department_id = null, $side_division_id = null, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $is_parents_citizen_when_staff_born = false;
+
+    // $table->date('last_increment_date')->nullable();
+    public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_ministry_id = null, $side_department_id = null, $side_division_id = null, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time,$last_increment_date, $is_parents_citizen_when_staff_born = false;
     public $recommendations = [];
     public $postings = [];
     public $side_departments = [];
@@ -253,6 +254,7 @@ class StaffDetail extends Component
         'payscale_id' => 'required',
         'current_salary' => 'required|integer',
         'current_increment_time' => 'integer',
+        'last_increment_date'=>'',
     ];
 
     protected $relative_info_rules = [
@@ -736,6 +738,7 @@ class StaffDetail extends Component
         $this->payscale_id = $staff->payscale_id;
         $this->current_salary = $staff->current_salary;
         $this->current_increment_time = $staff->current_increment_time;
+        $this->last_increment_date=$staff->last_increment_date;
         $this->is_parents_citizen_when_staff_born = $staff->is_parents_citizen_when_staff_born;
     }
 
@@ -1160,6 +1163,7 @@ class StaffDetail extends Component
             'payscale_id' => $this->payscale_id == '' ? null : $this->payscale_id,
             'current_salary' => $this->current_salary == '' ? null : $this->current_salary,
             'current_increment_time' => $this->current_increment_time == '' ? null : $this->current_increment_time,
+            'last_increment_date' =>$this->last_increment_date == '' ? null : $this->last_increment_date,
         ];
 
         $relative = [

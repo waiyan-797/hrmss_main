@@ -25,45 +25,41 @@ class PunishmentReport extends Component
     }
     public function go_word()
     {
-        // $staffs = Staff::get();
-        $staffs = Staff::where('name', 'like', '%' . $this->search . '%')->get();
-
-        
+        $staffs = Staff::with(['punishments.penalty_type', 'currentRank'])
+        ->where('name', 'like', '%' . $this->search . '%')
+        ->whereHas('punishments')
+        ->get();
         $phpWord = new PhpWord();
         $section = $phpWord->addSection([
-            'orientation' => 'landscape',
-            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),     // 1 inch
-            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
-            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
-            'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'orientation' => 'portrait',
+            'pageSizeW'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(8.5), // Letter width
+            'pageSizeH'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(11),  // Letter height
+            'marginTop'    => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),   // 1 inch
+            'marginBottom' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),   // 1 inch
+            'marginLeft'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.9), // 0.9 inch
+            'marginRight'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.9), // 0.9 inch
         ]);
-
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center','spaceBefore' => 200]);
         $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
-        // $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
+        $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
         $section->addTitle('Punishment Report', 1);
-        // $section->addTitle(mmDateFormat($this->year, $this->month). 'အတွင်း တာဝန်ပျက်ကွက်သူဝန်ထမ်းများအား အရေးယူဆောင်ရွက်ပြီးစီးမှုနှင့် ဆောင်ရွက်ဆဲစာရင်း', 2);
-
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-
-       
-        $table->addRow();
+        $table->addRow(50, array('tblHeader' => true));
         $table->addCell(1000)->addText('စဥ်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
         $table->addCell(4000)->addText('အမည်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
         $table->addCell(4000)->addText('ရာထူး',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
-        $table->addCell(5000)->addText('txtpenalty',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
-
-        // Add table data
-        foreach ($staffs as $index => $staff) {
+        $table->addCell(5000)->addText('ပြစ်ဒဏ်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
+        $table->addCell(2000)->addText('မှတ်ချက်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
+        foreach ($staffs as  $staff) {
+            $index = 1;
             $table->addRow();
-            $table->addCell(1000)->addText(en2mm($index + 1),null,['alignment'=>'center','spaceBefore'=>100]);
-            $table->addCell(4000)->addText($staff->name,null,['indentation' => ['left' => 100],'spaceBefore'=>100]);
-            $table->addCell(4000)->addText($staff->current_rank?->name,null,['indentation' => ['left' => 100],'spaceBefore'=>100]);
-            $table->addCell(5000)->addText(implode(', ', $staff->punishments->pluck('penalty_type.name')->toArray()),null,['indentation' => ['left' => 100],'spaceBefore'=>100]);
+            $table->addCell(1000)->addText(en2mm($index++), null, ['alignment' => 'center', 'spaceBefore' => 100]);
+            $table->addCell(4000)->addText($staff->name ?? '',null,['indentation' => ['left' => 100],'spaceBefore'=>100]);
+            $table->addCell(4000)->addText($staff->currentRank?->name ?? '',null,['indentation' => ['left' => 100],'spaceBefore'=>100]);
+            $table->addCell(5000)->addText(  $staff->punishments->pluck('penalty_type.name')->join(', ') ?? '',null,['indentation' => ['left' => 100],'spaceBefore'=>100]);
+            $table->addCell(2000)->addText('',null,['indentation' => ['left' => 100],'spaceBefore'=>100]);
         }
-
-        // Save the file
-        $filePath = 'punishment_report.docx';
+        $filePath = 'E08.docx';
         $phpWord->save($filePath, 'Word2007');
 
         // Return the file as a download response
@@ -72,8 +68,7 @@ class PunishmentReport extends Component
 
 public function render()
 {
-    $staffs = Staff::where('name', 'like', '%' . $this->search . '%')->paginate(20);
-
+    $staffs = Staff::with(['punishments.penalty_type'])->where('name', 'like', '%' . $this->search . '%')->whereHas('punishments')->paginate(20);
         $currentPage = $staffs->currentPage();
         $perPage = $staffs->perPage();
         $startIndex = ($currentPage - 1) * $perPage + 1;
@@ -84,7 +79,4 @@ public function render()
         'startIndex' => $startIndex,
     ]);
 }
-    
-   
-
 }

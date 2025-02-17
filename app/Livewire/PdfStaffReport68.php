@@ -405,7 +405,7 @@ class PdfStaffReport68 extends Component
         if($staff->recommendations->isNotEmpty()){
         foreach ($staff->recommendations as $recommendation) {
             $table->addRow();
-            $table->addCell(2000)->addText($recommendation->pluck('recommend_by')->unique()->join(', '));
+            $table->addCell(2000)->addText($recommendation->pluck('recommend_by')->unique()->join(', '),null,$pStyle_1);
             $table->addCell(2000)->addText($recommendation->ministry);
             $table->addCell(2000)->addText($recommendation->department);
             $table->addCell(2000)->addText($recommendation->rank);
@@ -593,8 +593,6 @@ class PdfStaffReport68 extends Component
                     ['alignment' => 'center']
                 );
             }
-
-        // $section->addText('၈။ ' . ' ခင်ပွန်း၊ ဇနီးသည်', null,array('spaceBefore'=> 200));
         $section->addTextBreak();
         $section->addText(' ၈။ '.  ' ခင်ပွန်း၊ ဇနီးသည်', ['bold'=>true],null, ['spaceBefore' => 200]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
@@ -794,7 +792,6 @@ class PdfStaffReport68 extends Component
         $section->addText('၂။ ' . ' တက်ရောက်ခဲ့သောသင်တန်းများ', ['bold' => true],array('spaceBefore' => 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50, array('tblHeader' => true));
-        // $table->addCell(700,['vMerge' => 'restart'])->addText('စဉ်', ['bold' => true], $pStyle_2);
         $table->addCell(4000)->addText('သင်တန်းအမည်', ['bold' => true],$pStyle_2);
         $table->addCell(2000)->addText("သင်တန်းကာလ\n(မှ)",['bold'=>true], $pStyle_1);
         $table->addCell(2000)->addText("သင်တန်းကာလ\n(အထိ)",['bold'=>true], $pStyle_1);
@@ -802,11 +799,9 @@ class PdfStaffReport68 extends Component
         if($staff->trainings->isNotEmpty()){
              $index=0;
              foreach ($staff->trainings->where('training_location_id', 1) as  $training) {
-                 $table->addRow(50);
-                //  $table->addCell(700)->addText('('.myanmarAlphabet($index).')', null, $pStyle_6);
-                //  $table->addCell(4000)->addText($training->training_type?->name, null, $pStyle_3);
-                $trainingName = ($training->training_type_id == 32) ? $training->diploma_name : $training->training_type?->name;
-                $table->addCell(4000)->addText($trainingName, null, $pStyle_3);
+                $table->addRow(50);
+                $trainingName = ($training->training_type_id == 32) ?       $training->diploma_name : $training->training_type?->name;
+                 $table->addCell(4000)->addText($trainingName, null, $pStyle_3);
                  $table->addCell(2000)->addText(formatDMYmm($training->from_date), null, $pStyle_6);
                  $table->addCell(2000)->addText(formatDMYmm($training->to_date), null, $pStyle_6);
                  $table->addCell(3000)->addText($training->location, null, $pStyle_3);

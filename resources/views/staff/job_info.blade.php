@@ -156,7 +156,7 @@
     </div>
     <div>
         <x-input-label for="နောက်ဆုံးနှစ်တိုးတိုးသည့်နေ့" :value="__('နောက်ဆုံးနှစ်တိုးတိုးသည့်နေ့(လ ၊ ရက် ၊ နှစ်)')" />
-        <x-text-input wire:model="last_increment_date" id="last_increment_date" type="date" class="mt-1 block w-full" required/>
+        <x-text-input wire:model="last_increment_date" id="last_increment_date" type="date" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('last_increment_date')" />
     </div>
 </div>

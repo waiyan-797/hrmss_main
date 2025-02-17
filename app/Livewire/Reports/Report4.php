@@ -50,7 +50,7 @@ class Report4 extends Component
         $pStyle_2 = ['align' => 'center', 'spaceAfter' => 300, 'spaceBefore' => 300];
         $pStyle_3 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100];
          $table->addRow(50, ['tblHeader' => true]);
-        $table->addCell(1000,['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true],$pStyle_1);
+        $table->addCell(700,['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true],$pStyle_1);
         $table->addCell(3000,['vMerge' => 'restart'])->addText('အမည်', ['bold' => true],$pStyle_1);
         $table->addCell(3000,['vMerge' => 'restart'])->addText('ရာထူး', ['bold' => true],$pStyle_1);
         $table->addCell(4000, ['gridSpan' => 2, 'valign' => 'center'])->addText('သွားရောက်သည့်ကာလ',['bold'=>true],$pStyle_3);
@@ -58,8 +58,7 @@ class Report4 extends Component
         $table->addCell(4000,['vMerge' => 'restart'])->addText("ပြည်ပသို့\nသွားရောက်ခဲ့သော\nအကြောင်းအရာ", ['bold' => true],$pStyle_2);
         $table->addCell(3000,['vMerge' => 'restart'])->addText("ထောက်ပံ့သည့်\nအဖွဲ့အစည်း", ['bold' => true],$pStyle_2);
         $table->addRow();
-        //  $table->addRow(50, ['tblHeader' => true]);
-        $table->addCell(1000, ['vMerge' => 'continue']);
+        $table->addCell(700, ['vMerge' => 'continue']);
         $table->addCell(3000, ['vMerge' => 'continue']);
         $table->addCell(3000, ['vMerge' => 'continue']);
         $table->addCell(2000)->addText('မှ',['bold'=>true], ['alignment' => 'center']);
@@ -71,7 +70,6 @@ class Report4 extends Component
 
         foreach($staffs as $index => $staff) {
             $maxRows = $staff->abroads->count();
-        
             for($i = 0; $i < $maxRows; $i++) {
                 $table->addRow();
                 if($i == 0) {
@@ -79,18 +77,21 @@ class Report4 extends Component
                     $table->addCell(3000, ['vMerge' => 'restart'])->addText($staff->name);
                     $table->addCell(3000, ['vMerge' => 'restart'])->addText($staff->currentRank?->name);
                 } else {
+                    $table->addRow();
                     $table->addCell(700, ['vMerge' => 'continue']);
                     $table->addCell(3000, ['vMerge' => 'continue']);
                     $table->addCell(3000, ['vMerge' => 'continue']);
                 }
         
                 if(isset($staff->abroads[$i])) {
+                    $table->addRow();
                     $table->addCell(2000)->addText(formatDMYmm($staff->abroads[$i]->from_date ), null, ['alignment' => 'center']);
                     $table->addCell(2000)->addText( formatDMYmm($staff->abroads[$i]->to_date), null, ['alignment' => 'center']);
                     $table->addCell(3000)->addText($staff->abroads[$i]->countries->pluck('name')->unique()->join(', '), null, ['alignment' => 'center']);
                     $table->addCell(4000)->addText($staff->abroads[$i]->particular, null, ['alignment' => 'center']);
                     $table->addCell(3000)->addText($staff->abroads[$i]->sponser, null, ['alignment' => 'center']);
                 } else {
+                    $table->addRow();
                     $table->addCell(2000)->addText('', null, ['alignment' => 'center']);
                     $table->addCell(2000)->addText('', null, ['alignment' => 'center']);
                     $table->addCell(3000)->addText('', null, ['alignment' => 'center']);
