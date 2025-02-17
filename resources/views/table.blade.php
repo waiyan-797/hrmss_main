@@ -71,7 +71,7 @@
                                     {{$value->$val == 1 ? 'Active' : 'Inactive'}}
                                 @else
                                     @if (gettype($value->$val) == 'object')
-                                        {{ $val == 'education_type' ? $value->$val->name.' - '.$value->$val->education_group->name : $value->$val->name }} {{-- exclusive for only edu --}}
+                                        {{ $val == 'education_type' ? $value?->$val?->name : $value?->$val?->name }} {{-- exclusive for only edu --}}
                                     @elseif (is_string($value->$val) && Str::contains($value->$val, 'staffs/') || Str::contains($value->$val, 'avatars/'))
                                         <img src="{{ route('file', $value->$val) }}" alt="Image" class="w-20 h-20 mx-auto rounded-full">
                                     @else
