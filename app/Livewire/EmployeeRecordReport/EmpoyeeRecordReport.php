@@ -90,7 +90,8 @@ $this->selectedRetireType_id = $this->selectedRetireType_id_listen ;
 
     public function render()
     {
-        $staffs = Staff::where('current_rank_id', '!=', 23)
+        $staffs = Staff::
+        where('current_rank_id', '!=', 23)
         ->whereNotNull('retire_type_id')
         ->when($this->selectedRetireType_id , fn($q)=> $q->where('retire_type_id' , $this->selectedRetireType_id) )
         ->whereBetween('retire_date', [$this->startDate, $this->endDate])

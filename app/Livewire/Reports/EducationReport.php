@@ -2,6 +2,9 @@
 
 namespace App\Livewire\Reports;
 
+use App\Models\Education;
+use App\Models\EducationGroup;
+use App\Models\EducationType;
 use App\Models\Staff;
 use App\Models\StaffEducation;
 use Livewire\Component;
@@ -38,8 +41,8 @@ class EducationReport extends Component
         // Add title
         $section->addTitle('Education Report', 1);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
-        
-        
+
+
         $table->addRow();
         $table->addCell(700)->addText('စဥ်', ['bold' => true]);
         $table->addCell(2200)->addText('အမည်', ['bold' => true]);
@@ -57,9 +60,9 @@ class EducationReport extends Component
             // Prepare education details
             $educationDetails = '';
             foreach ($staff->staff_educations as $edu) {
-                // $educationDetails .= 
-                // // $edu->education_group?->name . ' ' . 
-                // // $edu->education_type?->name . ' ' . 
+                // $educationDetails .=
+                // // $edu->education_group?->name . ' ' .
+                // // $edu->education_type?->name . ' ' .
                 // $edu->education?->name . "\n";
                 $educationTextRun->addText($educationDetails .= $edu->education?->name);
                 $educationTextRun->addTextBreak(); // Add line break
@@ -75,14 +78,59 @@ class EducationReport extends Component
         return response()->download($fileName)->deleteFileAfterSend(true);
     }
 
+public $education_id , $education_type_id , $education_group_id ;
+public $education_types , $education_groups , $educations;
+
+public function mount(){
+    $this->education_types = EducationType::all();
+    $this->education_groups = EducationGroup::all();
+    $this->educations = Education::all();
+}
 
 public function render()
 {
-    $staffs = Staff::paginate(20);
+
+    $staffs = Staff::where('current_rank_id', '!=', 23)
+    ->whereNull('retire_type_id')
+    ->whereNull('retire_date')
+
+    // Main filters
+    ->when($this->education_group_id, fn($query) =>
+        $query->whereHas('staff_educations.education', fn($q) =>
+            $q->where('education_group_id', $this->education_group_id)
+        )
+    )
+    ->when($this->education_type_id, fn($query) =>
+        $query->whereHas('staff_educations.education', fn($q) =>
+            $q->where('education_type_id', $this->education_type_id)
+        )
+    )
+    ->when($this->education_id, fn($query) =>
+        $query->whereHas('staff_educations', fn($q) =>
+            $q->where('education_id', $this->education_id)
+        )
+    )
+
+    // Eager load filtered staff_educations
+    ->with(['staff_educations' => function ($q) {
+        $q->with(['education' => function ($query) {
+            if ($this->education_group_id) {
+                $query->where('education_group_id', $this->education_group_id);
+            }
+            if ($this->education_type_id) {
+                $query->where('education_type_id', $this->education_type_id);
+            }
+        }]);
+    }])
+
+    ->distinct()
+    ->paginate(20);
+
+
     $currentPage = $staffs->currentPage();
     $perPage = $staffs->perPage();
     $startIndex = ($currentPage - 1) * $perPage + 1;
-    return view('livewire.reports.education-report',[ 
+    return view('livewire.reports.education-report',[
         'staffs' => $staffs,
         'startIndex'=>$startIndex,
     ]);
