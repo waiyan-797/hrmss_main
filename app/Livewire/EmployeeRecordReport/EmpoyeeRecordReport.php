@@ -2,17 +2,21 @@
 
 namespace App\Livewire\EmployeeRecordReport;
 
+use App\Models\RetireType;
 use App\Models\Staff;
+use Carbon\Carbon;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 use Livewire\WithPagination;
 
+use function Laravel\Prompts\search;
+
 class EmpoyeeRecordReport extends Component
 {
 
     use WithPagination;
-
+    public $retireTypes ;
     public function go_pdf()
     {
         $staffs = Staff::get();
@@ -28,7 +32,7 @@ class EmpoyeeRecordReport extends Component
     // Method to generate Word document
     public function go_word()
     {
-        $staffs = Staff::get(); 
+        $staffs = Staff::get();
 
         $phpWord = new PhpWord();
         $section = $phpWord->addSection(['orientation'=>'landscape','margin'=>600]);
@@ -61,15 +65,42 @@ class EmpoyeeRecordReport extends Component
         return response()->download($temp_file, $fileName)->deleteFileAfterSend(true);
     }
 
-   
+    public $startDate , $endDate ;
+    public $startDateListen , $endDateListen ;
+    public $selectedRetireType_id ;
+    public $selectedRetireType_id_listen ;
+    public function mount(){
+
+    $this->retireTypes =  RetireType::all();
+
+    }
+
+
+
+
+
+    public function search(){
+
+$this->startDate = $this->startDateListen;
+$this->endDate = $this->endDateListen;
+$this->selectedRetireType_id = $this->selectedRetireType_id_listen ;
+
+    }
+
+
     public function render()
     {
-        $staffs = Staff::paginate(20);
-        $currentPage = $staffs->currentPage();
-        $perPage = $staffs->perPage();
+        $staffs = Staff::where('current_rank_id', '!=', 23)
+        ->whereNotNull('retire_type_id')
+        ->when($this->selectedRetireType_id , fn($q)=> $q->where('retire_type_id' , $this->selectedRetireType_id) )
+        ->whereBetween('retire_date', [$this->startDate, $this->endDate])
+        ->paginate(20);
+        $currentPage = $staffs?->currentPage();
+        $perPage = $staffs?->perPage();
         $start = ($currentPage - 1) * $perPage + 1;
+
         return view('livewire.employee-record-report.empoyee-record-report', [
-            'staffs' => $staffs,
+            'staffs' => $staffs ,
             'start' => $start,
         ]);
     }

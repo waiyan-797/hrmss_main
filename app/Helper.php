@@ -57,32 +57,32 @@ if (! function_exists('formatPeriodMM')) {
 if (! function_exists('formatDMY')) {
     function formatDMY($date)
     {
-        
+
         if($date){
             $formatted_date = \Carbon\Carbon::parse($date)->format('d-m-y');
-        
+
             return $formatted_date;
         }
         else{
             return '';
         }
-   
+
     }
 }
 
 if (! function_exists('formatDMYmm')) {
     function formatDMYmm($date)
     {
-        
+
         if($date){
             $formatted_date = \Carbon\Carbon::parse($date)->format('j-n-Y');
-        
+
             return en2mm($formatted_date);
         }
         else{
             return '';
         }
-   
+
     }
 }
 
@@ -107,7 +107,7 @@ if (! function_exists('dateDiff')) {
 if (! function_exists('dateDiffYMD')) {
     function dateDiffYMD($from_date, $to_date)
     {
-        
+
         $diff = \Carbon\Carbon::parse($from_date)->diff(\Carbon\Carbon::parse($to_date));
         $diff_year = $diff->y ? en2mm($diff->y).' နှစ် ' : '';
         $diff_month = $diff->m ? en2mm($diff->m).' လ ' : '';
@@ -121,7 +121,7 @@ if (! function_exists('dateDiffYMD')) {
 if (! function_exists('dateDiffYMDWithoutDays')) {  //ရက်မပါ နှစ်နှင့်လပါပဲ
     function dateDiffYMDWithoutDays($from_date, $to_date)
     {
-        
+
         $diff = \Carbon\Carbon::parse($from_date)->diff(\Carbon\Carbon::parse($to_date));
         $diff_year = $diff->y ? en2mm($diff->y).' နှစ် ' : '';
         $diff_month = $diff->m ? en2mm($diff->m).' လ ' : '';
@@ -158,14 +158,14 @@ if (!function_exists('mmMonth')) {
 }
 
 
-       
+
 
 
 if (!function_exists('mmDateFormat')) {
     function mmDateFormat($year, $month)
     {
         // Array of Myanmar month names
-        
+
         $monthsInMyanmar = [
             1 => 'ဇန်နဝါရီ',
             2 => 'ဖေဖော်ဝါရီ',
@@ -182,7 +182,7 @@ if (!function_exists('mmDateFormat')) {
             12 => 'ဒီဇင်ဘာ',
         ];
 
-        
+
 
         $month = intval($month);
         if ($month < 1 || $month > 12) {
@@ -195,7 +195,7 @@ if (!function_exists('mmDateFormat')) {
         // Return formatted date
 
         $year = en2mm($year);
-        return "$year ခုနှစ် $myanmarMonth လ "; // ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ 
+        return "$year ခုနှစ် $myanmarMonth လ "; // ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ
     }
 
 }
@@ -204,7 +204,7 @@ if (!function_exists('mmDateFormat')) {
         function mmDateFormatYearMonthDay($year, $month , $day )
         {
             // Array of Myanmar month names
-            
+
             $monthsInMyanmar = [
                 1 => 'ဇန်နဝါရီလ',
                 2 => 'ဖေဖော်ဝါရီလ',
@@ -220,19 +220,19 @@ if (!function_exists('mmDateFormat')) {
                 11 => 'နိုဝင်ဘာလ',
                 12 => 'ဒီဇင်ဘာလ',
             ];
-    
+
             $month = intval($month);
             if ($month < 1 || $month > 12) {
                 return 'Invalid month. Please provide a month between 1 and 12.';
             }
-    
+
             // Get the Myanmar month name
             $myanmarMonth = $monthsInMyanmar[$month];
-    
+
             // Return formatted date
-    
+
             $year = en2mm($year);
-            return "$year ခုနှစ်၊ $myanmarMonth $day ရက်"; // ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ 
+            return "$year ခုနှစ်၊ $myanmarMonth $day ရက်"; // ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ
         }
 
     }
@@ -242,7 +242,7 @@ if (!function_exists('mmDateFormat')) {
     //     {
 
     //         // $type 1 // ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ  3ရက်
-    //         // $type 2 // ၂၀၂၄-၁၂-၃ 
+    //         // $type 2 // ၂၀၂၄-၁၂-၃
 
     //         $now  = explode('-' ,Carbon::now()->format('Y-m-d'));
     //       if($type == 1 ) {
@@ -250,16 +250,16 @@ if (!function_exists('mmDateFormat')) {
 
     //       }
     //       if(
-    //         $type == 2 
+    //         $type == 2
     //       ){
     //         return formatDMYmm(Carbon::now());
 
     //       }
     //     }
     // }
-    
 
-    if (!function_exists('getTdyDateInMyanmarYearMonthDay')) { 
+
+    if (!function_exists('getTdyDateInMyanmarYearMonthDay')) {
         function getTdyDateInMyanmarYearMonthDay($type)
         {
             // Get the current date in Y-m-d format
@@ -267,7 +267,7 @@ if (!function_exists('mmDateFormat')) {
             $year = $now->year;
             $month = $now->month;
             $day = $now->day;
-    
+
             // Myanmar month names
             $myanmarMonths = [
                 1 => 'ဇန်နဝါရီလ',
@@ -283,23 +283,23 @@ if (!function_exists('mmDateFormat')) {
                 11 => 'နိုဝင်ဘာလ',
                 12 => 'ဒီဇင်ဘာလ',
             ];
-    
+
             // Myanmar year formatting (e.g., ၂၀၂၄)
             $myanmarYear = convertNumberToMyanmar($year);
-    
+
             // Format the date depending on the type
             if ($type == 1) {
                 // Format: ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ ၃ ရက်
                 return $myanmarYear . ' ခုနှစ် ' . $myanmarMonths[$month] . ' ' . convertNumberToMyanmar($day) . ' ရက်';
-            } 
-            
+            }
+
             if ($type == 2) {
                 // Format: 2024-12-03 (standard format)
                 return $now->format('Y-m-d');
             }
         }
     }
-    
+
     // Helper function to convert numbers to Myanmar format
     if (!function_exists('convertNumberToMyanmar')) {
         function convertNumberToMyanmar($number)
@@ -311,8 +311,8 @@ if (!function_exists('mmDateFormat')) {
             return strtr($number, $myanmarNumbers);
         }
     }
-    
-    
+
+
     if (!function_exists('getCountryNameById')) {
         function getCountryNameById($id)
         {
@@ -474,14 +474,14 @@ if (!function_exists(function: 'toMMText')) {
 function toMMText($integer) {
     $name = ['', 'ဆယ်', 'ရာ', 'ထောင်', 'သောင်း', 'သိန်း', 'သန်း'];
 
-    $integerArray = array_reverse(array_map('intval', str_split((string)$integer))); 
+    $integerArray = array_reverse(array_map('intval', str_split((string)$integer)));
 
     $strr = '';
     foreach ($integerArray as $index => $value) {
 
-        if ($value > 0) { 
+        if ($value > 0) {
             $mmSay =  $index  > 6 ?  ''   :    $name[$index];
-            $strr = en2mmText($value) . $mmSay . $strr; 
+            $strr = en2mmText($value) . $mmSay . $strr;
         }
     }
     return $strr.'ကျပ်';
@@ -512,7 +512,7 @@ if (!function_exists('getFirstOf')) {
             return (new $class)->first();
         }
 
-    
+
         throw new Exception("Model {$modelName} does not exist.");
     }
 }
@@ -529,9 +529,9 @@ if (!function_exists('getAddress')) {
 
 
 
-      
 
-    
+
+
         return $street . '၊' . $ward  . '၊' . $townshipName . '၊' . $regionName ;
     }
 }
@@ -544,14 +544,14 @@ if (!function_exists(function: 'endsWithSiblings')) {
         return substr($string, -8) === 'siblings' ;
     }
 
-    
+
 }
 
 // endsWithSiblings($key) ? $relations->where('relation_ship_type_id' , 1 ) : $relations
 if (!function_exists(function: 'getRelatedRsType')) {
 
     function getRelatedRsType($relations , $key) {
-        
+
         if($key == 'spouse_father_siblings'){
             return $relations->whereIn('relation_ship_type_id' , [1,2])->where('id' ,'!=' , 5  ) ;
         }
@@ -559,7 +559,7 @@ if (!function_exists(function: 'getRelatedRsType')) {
                         return $relations->whereIn('relation_ship_type_id' , [1,2])->where('id','!=' , 6) ;
 
         }
-        
+
         elseif(endsWithSiblings($key)){
             return $relations->where('relation_ship_type_id' , 1 ) ;
         }
@@ -576,8 +576,8 @@ if (!function_exists(function: 'getRelatedRsType')) {
             return $relations ;
         }
 
-        
+
     }
 
-    
+
 }

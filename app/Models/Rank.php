@@ -13,7 +13,7 @@ class Rank extends Model
 
     protected static function booted()
     {
-        static::addGlobalScope(new SortNoScope());
+        // static::addGlobalScope( new SortNoScope());
     }
     public function removeGroupScope()
     {
@@ -67,24 +67,24 @@ public function promotions(){
 public function StaffCountInRankByYear($selectedYear = null) {
     $year = $selectedYear ? $selectedYear : Carbon::now()->year;
 $staffs = Staff::query();
-    
+
     $currentInThatYear = $this->staffs()
     ->where(function ($query) use ($year) {
- 
+
         $query->whereHas('promotion', function ($subQuery) use ($year) {
             $subQuery->whereYear('promotion_date', $year)
                 ->orWhere(function ($subSubQuery) use ($year) {
-                    $subSubQuery->where('promotion_date', '<', Carbon::create($year, 1, 1)->endOfYear()) 
-                        ->where('rank_id', $this->id); 
+                    $subSubQuery->where('promotion_date', '<', Carbon::create($year, 1, 1)->endOfYear())
+                        ->where('rank_id', $this->id);
                 });
         });
 
         $query->orWhere(function ($q) use ($year) {
             $q->doesntHave('promotion')
                 ->where('current_rank_date', '<=', Carbon::create($year, 12, 31))
-                ->where('current_rank_id', $this->id); 
+                ->where('current_rank_id', $this->id);
         })
-        
+
         ;
     })
     ->count();
@@ -93,7 +93,7 @@ $staffs = Staff::query();
 
 
         return $currentInThatYear;
-  
+
 }
 
 public function isDicaAll(){

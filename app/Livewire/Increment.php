@@ -189,11 +189,11 @@ class Increment extends Component
                 $q->where('order_no', 'LIKE', $incrementSearch)->orWhereHas('staff', function ($query) use ($incrementSearch) {
                     $query->where('name', 'LIKE', $incrementSearch);
                 })
-                
+
                 ;
             })
-            
-           
+
+
             ;
         }
 
