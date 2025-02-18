@@ -20,24 +20,17 @@
 
        <div>
 <button wire:confirm='ရွေးချယ်ထားသည့်သူများအား နှစ်တိုးတိုးမည်' wire:click='doIncrementBulkAction'
-        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-green-700 border-transparent rounded-md hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 font-arial"
->
+        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-green-700 border-transparent rounded-md hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 font-arial">
     နှစ်တိုးတိုးမည်
 </button>
-
            </div>
-
-
     </div>
-
     <div class="mt-5 overflow-hidden bg-white rounded-lg shadow">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        {{-- စဉ် --}}
                     </th>
-
                     <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                         စဉ်
                     </th>
@@ -47,12 +40,10 @@
                     <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                         ရာထူး
                   </th>
-
                   <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   ဌာနခွဲ
               </th>
-
-    <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   နောက်ဆုံးနှစ်တိုးတိုးသည့်အကြိမ်
               </th>
               <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -62,20 +53,14 @@
                 လစာမဲ့ခွင့်ရက်
             </th>
             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                နှစ်တိုးတိုးမည့်နေ့
+                နောက်တစ်ကြိမ်နှစ်တိုးတိုးမည့်နေ့
             </th>
-            {{-- <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                Action
-            </th> --}}
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 @if($staffs)
-
                     @foreach ($staffs as $index=> $staff)
                         <tr>
-
-
                             <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
                                 <input type="checkbox" wire:model.live='staff_to_increment' value="{{$index}}">
                             </td>

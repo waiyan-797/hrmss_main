@@ -60,14 +60,9 @@ class EducationReport extends Component
             // Prepare education details
             $educationDetails = '';
             foreach ($staff->staff_educations as $edu) {
-                // $educationDetails .=
-                // // $edu->education_group?->name . ' ' .
-                // // $edu->education_type?->name . ' ' .
-                // $edu->education?->name . "\n";
                 $educationTextRun->addText($educationDetails .= $edu->education?->name);
                 $educationTextRun->addTextBreak(); // Add line break
             }
-            // $table->addCell(3500)->addText($educationDetails);
         }
 
         // Save the file to a temporary location
@@ -93,6 +88,7 @@ public function render()
     $staffs = Staff::where('current_rank_id', '!=', 23)
     ->whereNull('retire_type_id')
     ->whereNull('retire_date')
+    ->whereHas('staff_educations')
 
     // Main filters
     ->when($this->education_group_id, fn($query) =>
@@ -109,10 +105,7 @@ public function render()
         $query->whereHas('staff_educations', fn($q) =>
             $q->where('education_id', $this->education_id)
         )
-    )
-
-    // Eager load filtered staff_educations
-    ->with(['staff_educations' => function ($q) {
+    )->with(['staff_educations' => function ($q) {
         $q->with(['education' => function ($query) {
             if ($this->education_group_id) {
                 $query->where('education_group_id', $this->education_group_id);
@@ -120,13 +113,14 @@ public function render()
             if ($this->education_type_id) {
                 $query->where('education_type_id', $this->education_type_id);
             }
+            if ($this->education_id) {
+                $query->where('id', $this->education_id);
+            }
+
         }]);
     }])
-
     ->distinct()
     ->paginate(20);
-
-
     $currentPage = $staffs->currentPage();
     $perPage = $staffs->perPage();
     $startIndex = ($currentPage - 1) * $perPage + 1;

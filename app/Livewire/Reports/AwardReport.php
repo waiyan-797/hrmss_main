@@ -37,26 +37,26 @@ class AwardReport extends Component
         ]);
         $pStyle_1=array('align' => 'center', 'spaceAfter' => 0, 'spaceBefore' => 0);
         $pStyle_2=array('align' => 'center', 'spaceAfter' => 0, 'spaceBefore' => 200);
-        
+        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
         $section->addTitle('Award Report', 1);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow();
         $table->addRow(50, ['tblHeader' => true]);
         $table->addCell(1000)->addText('စဥ်', ['bold' => true],$pStyle_2);
         $table->addCell(3500)->addText('အမည်', ['bold' => true],$pStyle_2);
         $table->addCell(5000)->addText('ရာထူး', ['bold' => true],$pStyle_2);
         $table->addCell(5000)->addText('ဆုတံဆိပ်အမျိုးအစား', ['bold' => true],$pStyle_2);
         $table->addCell(2000)->addText("အမိန့်ကြော်ငြာစာ/\nရရှိသည့်ခုနှစ်", ['bold' => true],$pStyle_2);
-        foreach ($staffs as $index => $staff) {
+        $index=1;
+        foreach ($staffs as  $staff) {
             $isFirstAwardings= true; 
             foreach ($staff->awardings as $awardingIndex => $awarding) {
                 $table->addRow();
                 if ($isFirstAwardings) {
-                    $table->addCell(1000, ['vMerge' => 'restart'])->addText(en2mm($awardingIndex + 1), null, ['indentation' => ['left' => 100]]);
+                    $table->addCell(1000, ['vMerge' => 'restart'])->addText(en2mm($index++), null, ['indentation' => ['left' => 100]]);
                     $table->addCell(3500, ['vMerge' => 'restart'])->addText($staff->name, null, ['indentation' => ['left' => 100]]);
                     $table->addCell(5000, ['vMerge' => 'restart'])->addText($staff->current_rank->name, null, ['indentation' => ['left' => 100]]);
-                    $isFirstAwardings = false; // Set the flag to false after the first iteration
+                    $isFirstAwardings = false; 
                 } else {
                     $table->addCell(1000, ['vMerge' => 'continue']);
                     $table->addCell(3500, ['vMerge' => 'continue']);

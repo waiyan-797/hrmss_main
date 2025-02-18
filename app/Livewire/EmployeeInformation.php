@@ -34,7 +34,7 @@ class EmployeeInformation extends Component
             6 => route('foreign_report'),
             7 => route('education_report'),
             // 8 =>route('other_qualification_report'),
-            8 =>route('punishment_report'),
+            8=>route('punishment_report'),
             
         ];
         if (array_key_exists($id, $routes)) {

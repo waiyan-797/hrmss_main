@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Exports;
+
+use App\Models\Staff;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -8,74 +10,74 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
-class PA20 implements FromView ,WithStyles
+class A04 implements FromView ,WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-    public $staffs;
-
-    public function __construct($staffs)
-    {
-        $this->staffs = $staffs;
-    }
-
+    // public function collection()
+    // {
+    //     return A04::all();
+    // }
     public function view(): View
     {
-        return view('excel_reports.about_to_increment', [
-            'staffs' => $this->staffs,
-        ]);
+        $staffs = Staff::get();
+        $data = [
+            'staffs' => $staffs,
+        ];
+
+
+        return view('excel_reports.report_2', $data);
     }
     public function styles(Worksheet $sheet)
     {
 
-    // Set paper size and orientation
-    $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4); // Set paper size to A4
-    $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
+    $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_LEGAL);
+    $sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+    
 
     // Fit to page width
     $sheet->getPageSetup()->setFitToWidth(1);
     $sheet->getPageSetup()->setFitToHeight(0);
 
-    $sheet->getPageSetup()->setScale(80);
+    $sheet->getPageSetup()->setScale(85);
 
     // Enable gridlines for unbordered areas
     $sheet->setShowGridlines(true);
-    // $sheet->setPrintGridlines(true);
-
-    // Dynamically calculate the highest row and column
     $highestRow = $sheet->getHighestRow(); // e.g. 19
     $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
     $sheet->getColumnDimension('A')->setWidth(7);
-    $sheet->getColumnDimension('B')->setWidth(20);
-    $sheet->getColumnDimension('C')->setWidth(30);
-    $sheet->getColumnDimension('D')->setWidth(50);
-    $sheet->getColumnDimension('E')->setWidth(30);
-    $sheet->getColumnDimension('F')->setWidth(20);
-    $sheet->getColumnDimension('G')->setWidth(25);
+    $sheet->getColumnDimension('B')->setWidth(25);
+    $sheet->getColumnDimension('C')->setWidth(25);
+    $sheet->getColumnDimension('D')->setWidth(20);
+    $sheet->getColumnDimension('E')->setWidth(20);
+    $sheet->getColumnDimension('F')->setWidth(10);
+    $sheet->getColumnDimension('G')->setWidth(15);
     $sheet->getColumnDimension('H')->setWidth(25);
-   
+    $sheet->getColumnDimension('I')->setWidth(25);
+    $sheet->getColumnDimension('J')->setWidth(15);
+    $sheet->getColumnDimension('K')->setWidth(7);
+    $sheet->getColumnDimension('L')->setWidth(7);
+    $sheet->getColumnDimension('M')->setWidth(20);
   
    
 
-    $sheet->getRowDimension(1)->setRowHeight(30);
-    // $sheet->getRowDimension(2)->setRowHeight(60);
-    $sheet->getRowDimension(3)->setRowHeight(50);
-    $sheet->getRowDimension(4)->setRowHeight(50);
+    $sheet->getRowDimension(1)->setRowHeight(20);
+    $sheet->getRowDimension(2)->setRowHeight(20);
+    $sheet->getRowDimension(3)->setRowHeight(20);
+    $sheet->getRowDimension(4)->setRowHeight(40);
     $sheet->getRowDimension(5)->setRowHeight(40);
+    $sheet->getRowDimension(6)->setRowHeight(40);
     $sheet->getRowDimension(7)->setRowHeight(40);
     $sheet->getRowDimension(8)->setRowHeight(40);
     $sheet->getRowDimension(9)->setRowHeight(40);
     $sheet->getRowDimension(10)->setRowHeight(40);
-
-
-    $sheet->removeRow(2);
-    // $sheet->removeRow(9);
-
-    $row=4;
-
-    $sheet->getStyle('A1:H1')->applyFromArray([
+    $sheet->getRowDimension(11)->setRowHeight(40);
+    $sheet->getRowDimension(12)->setRowHeight(40);
+    $sheet->getRowDimension(13)->setRowHeight(40);
+   
+    $sheet->getStyle('A1:M4')->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
             'size' => 13,
@@ -90,7 +92,7 @@ class PA20 implements FromView ,WithStyles
             ],
         ],
     ]);
-    $sheet->getStyle('A2')->applyFromArray([
+    $sheet->getStyle('A4')->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
             'size' => 13,
@@ -105,7 +107,7 @@ class PA20 implements FromView ,WithStyles
             ],
         ],
     ]);
-    $sheet->getStyle("A2:$highestColumn$highestRow")->applyFromArray([
+    $sheet->getStyle("A4:$highestColumn$highestRow")->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
             'size' => 13,
@@ -122,4 +124,6 @@ class PA20 implements FromView ,WithStyles
         ],
     ]);
     }
+
+
 }

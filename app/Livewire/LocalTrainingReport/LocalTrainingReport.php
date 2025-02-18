@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Livewire\LocalTrainingReport;
-
 use App\Models\LetterType;
 use App\Models\Staff;
 use App\Models\Training;

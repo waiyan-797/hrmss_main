@@ -28,8 +28,8 @@ class Report4 extends Component
         $staffs = Staff::with('abroads')->get();
         $phpWord = new PhpWord();
         $section = $phpWord->addSection([
-            'pageSizeW' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(29.7), // A4 width in cm (Landscape)
-            'pageSizeH' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(21.0), // A4 height in cm (Landscape)
+            'pageSizeW' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(29.7),
+            'pageSizeH' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(21.0),
             'orientation' => 'landscape',
             'marginTop' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(0.3),
             'marginBottom' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(0.7),
@@ -40,7 +40,6 @@ class Report4 extends Component
         $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
         $section->addTitle('ပြည်ပသို့ သွားရောက်ခဲ့မှုမှတ်တမ်း', 1);
-        //  $section->addTextBreak();
         $table = $section->addTable([
             'borderSize' => 6,
             'borderColor' => '000000',
@@ -66,40 +65,30 @@ class Report4 extends Component
         $table->addCell(3000, ['vMerge' => 'continue']);
         $table->addCell(4000, ['vMerge' => 'continue']);
         $table->addCell(3000, ['vMerge' => 'continue']);
-
-
-        foreach($staffs as $index => $staff) {
-            $maxRows = $staff->abroads->count();
-            for($i = 0; $i < $maxRows; $i++) {
+        $index=1;
+        foreach ($staffs as  $staff) {
+            $isFirstAbroad = true; 
+            foreach ($staff->abroads as $abroad) {
                 $table->addRow();
-                if($i == 0) {
-                    $table->addCell(700, ['vMerge' => 'restart'])->addText(en2mm($index + 1));
-                    $table->addCell(3000, ['vMerge' => 'restart'])->addText($staff->name);
-                    $table->addCell(3000, ['vMerge' => 'restart'])->addText($staff->currentRank?->name);
+                if ($isFirstAbroad) {
+                    $table->addCell(700, ['vMerge' => 'restart'])->addText(en2mm($index++), null, ['indentation' => ['left' => 100]]);
+                    $table->addCell(3000, ['vMerge' => 'restart'])->addText($staff->name, null, ['indentation' => ['left' => 100]]);
+                    $table->addCell(3000, ['vMerge' => 'restart'])->addText($staff->current_rank->name, null, ['indentation' => ['left' => 100]]);
+                    $isFirstAbroad = false;
                 } else {
-                    $table->addRow();
                     $table->addCell(700, ['vMerge' => 'continue']);
                     $table->addCell(3000, ['vMerge' => 'continue']);
                     $table->addCell(3000, ['vMerge' => 'continue']);
                 }
-        
-                if(isset($staff->abroads[$i])) {
-                    $table->addRow();
-                    $table->addCell(2000)->addText(formatDMYmm($staff->abroads[$i]->from_date ), null, ['alignment' => 'center']);
-                    $table->addCell(2000)->addText( formatDMYmm($staff->abroads[$i]->to_date), null, ['alignment' => 'center']);
-                    $table->addCell(3000)->addText($staff->abroads[$i]->countries->pluck('name')->unique()->join(', '), null, ['alignment' => 'center']);
-                    $table->addCell(4000)->addText($staff->abroads[$i]->particular, null, ['alignment' => 'center']);
-                    $table->addCell(3000)->addText($staff->abroads[$i]->sponser, null, ['alignment' => 'center']);
-                } else {
-                    $table->addRow();
-                    $table->addCell(2000)->addText('', null, ['alignment' => 'center']);
-                    $table->addCell(2000)->addText('', null, ['alignment' => 'center']);
-                    $table->addCell(3000)->addText('', null, ['alignment' => 'center']);
-                    $table->addCell(4000)->addText('', null, ['alignment' => 'center']);
-                    $table->addCell(3000)->addText('', null, ['alignment' => 'center']);
+                $table->addCell(2000)->addText($abroad->from_date, null, ['indentation' => ['left' => 100]]);
+                $table->addCell(2000)->addText(formatDMYmm($abroad->to_date), null, ['indentation' => ['left' => 100]]);
+                $countryNames = $abroad->countries ? $abroad->countries->pluck('name')->join(', ') : ' ';
+                $table->addCell(3000)->addText($countryNames, null, ['alignment' => 'center']);
+                $table->addCell(4000)->addText($abroad->particular ?? '-', null, ['indentation' => ['left' => 100]]);
+                $table->addCell(3000)->addText($abroad->sponser ?? '-', null, ['indentation' => ['left' => 100]]);
                 }
+              
             }
-        }
         $fileName = 'A06.docx';
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);
         $phpWord->save($temp_file, 'Word2007');
@@ -107,8 +96,8 @@ class Report4 extends Component
     }
      public function render()
      {
-        // $staffs = Staff::get();
-        $staffs = Staff::with('abroads')->get(); 
+        $staffs = Staff::get();
+        // $staffs = Staff::with('abroads')->get(); 
         return view('livewire.reports.report4',[ 
             'staffs' => $staffs,
         ]);

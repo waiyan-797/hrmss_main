@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Reports;
 
+use App\Exports\A04;
 use App\Models\Staff;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -20,6 +22,12 @@ class Report2 extends Component
             echo $pdf->output();
         }, 'report_2.pdf');
     }
+    public function go_excel() 
+    {
+        return Excel::download(new A04(
+    ), 'A04.xlsx');
+    }
+  
     public function go_word()
     {
         $staffs = Staff::get();

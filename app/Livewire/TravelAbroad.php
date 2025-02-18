@@ -20,7 +20,7 @@ class TravelAbroad extends Component
             ['id' => 4, 'name' => 'report2'],
             ['id' => 5, 'name' => 'report3'],
             ['id' => 6, 'name' => 'report4'],
-            ['id' => 7, 'name' => 'een'],
+            // ['id' => 7, 'name' => 'een'],
            
 
         ];
@@ -35,8 +35,7 @@ class TravelAbroad extends Component
             4 => route('report2'),
             5 => route('report3'),
             6 => route('report4'),
-            7 => route('een'),
-            
+            // 7 => route('een'),
         ];
         if (array_key_exists($id, $routes)) {
             return redirect()->to($routes[$id]);

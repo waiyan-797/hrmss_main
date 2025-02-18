@@ -1,7 +1,6 @@
 <?php
 
 namespace Database\Seeders;
-
 use App\Models\Education;
 use App\Models\EducationType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -265,7 +264,7 @@ class EducationSeeder extends Seeder
 
         DB::unprepared($content);
         Schema::enableForeignKeyConstraints();
-        $this->command->info('Departments seeded successfully!');
+        $this->command->info('Educations seeded successfully!');
     }
 
 

@@ -13,7 +13,7 @@ class AttendTraining extends Component
         $this->reports = [
             ['id' => 1, 'name' => 'တက်‌ရောက်ခဲ့သည့်သင်တန်း(၁)'],
             ['id' => 2, 'name' => 'တက်‌ရောက်ခဲ့သည့်သင်တန်း(၂)'],
-            ['id' => 3, 'name' => 'တက်‌ရောက်ခဲ့သည့်သင်တန်း(၃)'],
+            // ['id' => 3, 'name' => 'တက်‌ရောက်ခဲ့သည့်သင်တန်း(၃)'],
         ];
     }
     public function showReport($id)
@@ -23,7 +23,7 @@ class AttendTraining extends Component
 
             1 =>route('local_training_report'),
             2 =>route('local_training_report2'),
-            3 =>route('local_training_report_3'),
+            // 3 =>route('local_training_report_3'),
            
 
         ];
