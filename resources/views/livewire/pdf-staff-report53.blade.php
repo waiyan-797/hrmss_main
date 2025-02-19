@@ -119,7 +119,7 @@
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၄။ </label>
-                    <label for="name" class="md:w-1/3">ယခုနေရပ်လိပ်စာအပြည့်အစုံ</label>
+                    <label for="name" class="md:w-1/3">လက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ</label>
                     <label for="" class="md:w-5">-</label>
 
                     <label for="name" class="md:w-3/5">
@@ -846,7 +846,7 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name" class="md:w-3/5"> {{$staff->family_in_politics 
-                            ? 'ရှိ၊' . ($staff->family_in_politics_text ?? '') 
+                            ?  ($staff->family_in_politics_text ?? '') 
                             : 'မရှိ'}}</label>
                                     </div>
             </div>
@@ -908,7 +908,7 @@
                     <label for="name" class="md:w-1/3">လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5"></label>
+                        <label for="name" class="md:w-3/5">{{ $staff->past_occupation}}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">
@@ -947,7 +947,7 @@
                         မိတ်ဆွေများရှိ/ မရှိ</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5">{{ en2mm($staff->has_military_friend)?'ရှိ':'မရှိ'}}</label>
+                        <label for="name" class="md:w-3/5">{{ en2mm($staff->has_military_friend)? $staff->has_military_friend_text:'မရှိ'}}</label>
                                     </div>
 
                

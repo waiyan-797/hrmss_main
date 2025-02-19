@@ -1,19 +1,17 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> 
              {{-- <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>  --}}
             <br><br>
 
             <div>
-                <div class="w-1/3">
+                {{-- <div class="w-1/3">
                     <x-select wire:model="letter_type_id" :values="$letter_types" placeholder="စာအဆင့်အတန်းရွေးပါ"
                         id="letter_type_id" name="letter_type_id" class="mt-11 block w-full" />
                     <x-input-error class="mt-2" :messages="$errors->get('letter_type_id')" />
-                </div>
-
-
+                </div> --}}
                  <h1 class="font-bold text-center text-base">
                  
                     {{ is_null($selectedDivisionId) ? '' :  getDivisionBy($selectedDivisionId)->name 

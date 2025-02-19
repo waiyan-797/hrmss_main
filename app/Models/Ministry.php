@@ -12,5 +12,10 @@ class Ministry extends Model
     {
         return $this->hasMany(Department::class);
     }
+    public function postings()
+{
+    return $this->hasMany(Posting::class);
+}
+
 
 }

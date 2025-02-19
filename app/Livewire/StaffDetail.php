@@ -123,7 +123,7 @@ class StaffDetail extends Component
     public $spouse_mother_siblings = [];
 
     //detail_personal_info
-    public $last_school_name, $last_school_subject, $last_school_row_no, $last_school_major, $student_life_political_social, $habit, $revolution, $transfer_reason_salary, $during_work_political_social, $has_military_friend = false, $foreigner_friend_name, $foreigner_friend_occupation, $foreigner_friend_nationality_id, $foreigner_friend_country_id, $foreigner_friend_how_to_know, $recommended_by_military_person;
+    public $last_school_name, $last_school_subject, $last_school_row_no, $last_school_major, $student_life_political_social, $habit,$past_occupation, $revolution, $transfer_reason_salary, $during_work_political_social, $has_military_friend = false, $foreigner_friend_name, $foreigner_friend_occupation, $foreigner_friend_nationality_id, $foreigner_friend_country_id, $foreigner_friend_how_to_know, $recommended_by_military_person;
     public $schools = [];
     public $trainings = [];
     public $awards = [];
@@ -289,6 +289,7 @@ class StaffDetail extends Component
         'last_school_major' => 'nullable|string',
         'student_life_political_social' => 'nullable|string',
         'habit' => 'nullable|string',
+        'past_occupation' => 'nullable|string',
         'revolution' => 'nullable|string',
         'transfer_reason_salary' => 'nullable|string',
         'during_work_political_social' => 'nullable|string',
@@ -306,6 +307,7 @@ class StaffDetail extends Component
         'last_school_major.max' => 'The major may not exceed 255 characters.',
         'student_life_political_social.max' => 'The student life political or social field may not exceed 1000 characters.',
         'habit.max' => 'The habit field may not exceed 500 characters.',
+        'past_occupation.max' =>'past occupation may not exceed 1000 characters.',
         'revolution.max' => 'The revolution field may not exceed 1000 characters.',
         'transfer_reason_salary.max' => 'The transfer reason or salary field may not exceed 1000 characters.',
         'during_work_political_social.max' => 'The during work political or social field may not exceed 1000 characters.',
@@ -780,6 +782,7 @@ class StaffDetail extends Component
         $this->last_school_major = $staff->last_school_major;
         $this->student_life_political_social = $staff->student_life_political_social;
         $this->habit = $staff->habit;
+        $this->past_occupation =$staff->past_occupation;
         $this->revolution = $staff->revolution;
         $this->transfer_reason_salary = $staff->transfer_reason_salary;
         $this->during_work_political_social = $staff->during_work_political_social;
@@ -1199,6 +1202,7 @@ class StaffDetail extends Component
             'last_school_major' => $this->last_school_major == '' ? null : $this->last_school_major,
             'student_life_political_social' => $this->student_life_political_social == '' ? null : $this->student_life_political_social,
             'habit' => $this->habit == '' ? null : $this->habit,
+            'past_occupation' => $this->past_occupation == ''? null: $this->past_occupation,
             'revolution' => $this->revolution == '' ? null : $this->revolution,
             'transfer_reason_salary' => $this->transfer_reason_salary == '' ? null : $this->transfer_reason_salary,
             'during_work_political_social' => $this->during_work_political_social == '' ? null : $this->during_work_political_social,

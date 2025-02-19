@@ -3,7 +3,7 @@
         <div class="w-full mx-auto px-4 py-6">
             <!-- Buttons for PDF and Word export -->
             <div class="flex justify-center gap-x-4 mb-4">
-                <x-primary-button type="button" wire:click="go_pdf()" class="w-32">PDF</x-primary-button>
+                {{-- <x-primary-button type="button" wire:click="go_pdf()" class="w-32">PDF</x-primary-button> --}}
                 <x-primary-button type="button" wire:click="go_word()" class="w-32">WORD</x-primary-button>
             </div>
 

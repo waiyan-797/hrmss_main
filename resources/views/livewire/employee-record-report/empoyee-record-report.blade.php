@@ -1,7 +1,7 @@
  <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full px-3 py-4 mx-auto">
-            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
 

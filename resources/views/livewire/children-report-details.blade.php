@@ -1,7 +1,7 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <h1 class="font-bold text-center text-base mb-4">
             ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန

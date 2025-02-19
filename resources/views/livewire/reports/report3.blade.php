@@ -3,7 +3,16 @@
         <div class="w-full mx-auto px-3 py-4">
             {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
+            <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button> 
+            <h1 class="text-center font-bold text-sm">ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
+            <h1 class="text-center font-bold text-sm">ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <h1 class="text-center font-bold text-sm">Report - 3</h1>
+            @php
+            use Carbon\Carbon;
+        @endphp        
+            <div class="flex justify-end">
+                {{ formatDMYmm(Carbon::now()) }}
+            </div>
             <table class="md:w-full">
                 <thead>
                     <tr>
@@ -74,7 +83,6 @@
                             <td class="border border-black text-center p-2">{{$staff->current_address_house_no.'၊'. $staff->permanent_address_street.'၊'.$staff->permanent_address_ward.'၊'.$staff->permanent_address_region?->name.'၊'.$staff->permanent_address_township_or_town?->name }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($staff->children->where('gender_id', 1)->count()) }}</td>
                             <td class="border border-black text-center p-2">{{ en2mm($staff->children->where('gender_id', 2)->count()) }}</td>
-                            {{-- <td class="border border-black text-center p-2">{{ $staff->spouse_name != null ? 'ရှိ' : 'မရှိ'}}</td> --}}
                             <td class="border border-black text-center p-2">
                                 {{ $staff->spouse_name ? 'ရှိ' : '' }}
                             </td>

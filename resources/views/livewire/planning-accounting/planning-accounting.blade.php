@@ -1,12 +1,9 @@
 <div class="w-full">
     <div class="flex justify-center w-full   h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
-
-
-
             <select class="  " wire:model.live='selectedDivisionId' id="">
                 @foreach ($divisions as $division)
                             <option value="{{$division->id}}">

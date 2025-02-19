@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::table('staff_education', function (Blueprint $table) {
 
-            $table->dropForeign('staff_education_education_group_id_foreign');
+            // $table->dropForeign('staff_education_education_group_id_foreign');
 
             // Drop foreign key for education_type_id
-            $table->dropForeign('staff_education_education_type_id_foreign');
+            // $table->dropForeign('staff_education_education_type_id_foreign');
 
             // Drop columns
             $table->dropColumn('education_group_id');

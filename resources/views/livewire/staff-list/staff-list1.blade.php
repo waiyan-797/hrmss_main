@@ -1,11 +1,9 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
-           
-
             <h2 class="font-semibold text-center">ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h2>
 
             <h2 class="font-semibold text-center">

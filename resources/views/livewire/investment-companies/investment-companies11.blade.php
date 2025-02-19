@@ -1,17 +1,10 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
             <br><br>
-            
-            {{-- <input type="date"  wire:model.live='filterRange'>    --}}
-            {{-- StartDate
-            <x-date-picker wire:model.live='filterRange' />
-            EndDate
-            <x-date-picker wire:model.live='filterRangeTo'/>
-            <br><br> --}}
             <div class="flex items-center space-x-4">
                 <div class="flex items-center space-x-2">
                     <label for="startDate" class="font-semibold">Start Date</label>

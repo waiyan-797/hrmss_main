@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Reports;
 
+use App\Exports\A05;
 use App\Models\Staff;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
 
@@ -19,6 +21,11 @@ class Report3 extends Component
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'report_2.pdf');
+    }
+    public function go_excel() 
+    {
+        return Excel::download(new A05(
+    ), 'A05.xlsx');
     }
 
     public function go_word()
@@ -115,7 +122,6 @@ class Report3 extends Component
             }
             $table->addCell(1500)->addText(rtrim($languages, ', '), null, ['alignment' => 'center']);
         }
-
         // Save the file
         $fileName = 'report_3.docx';
         $tempFile = tempnam(sys_get_temp_dir(), $fileName);
@@ -123,8 +129,6 @@ class Report3 extends Component
 
         return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
     }
-
-
     public function render()
     {
         $staffs = Staff::get();

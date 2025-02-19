@@ -1,7 +1,7 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full px-3 py-4 mx-auto">
-            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
             <h1 class="mb-1 text-base font-bold text-center">Education Report</h1>
@@ -16,10 +16,6 @@
                     class="block w-full mt-1"
                     property="education_group_id" :values="$education_groups"
                        />
-
-
-
-
                 </div>
 
                 <div class="w-96">

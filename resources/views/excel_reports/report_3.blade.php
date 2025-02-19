@@ -1,58 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Report 3</title>
-    <style type="text/css">
-        page{
-            background: white;
-        }
-
-        page[size="A4"] {
-            width: 210mm;
-            height: 297mm;
-        }
-
-        @media print {
-            body, page {
-                margin: 0;
-                box-shadow: 0;
-            }
-        }
-
-        body {
-           font-family: 'pyidaungsu', sans-serif !important;
-            font-size: 13px;
-        }
-        h1 {
-            text-align: center;
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
+    <style>
         table {
             width: 100%;
             border-collapse: collapse;
         }
         th, td {
             border: 1px solid black;
-            text-align: center;
             padding: 8px;
-        }
-        th[colspan="2"] {
             text-align: center;
         }
-        th[rowspan="2"] {
-            vertical-align: middle;
+        th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
-    <page size="A4">
-        <h1>Report - 3</h1>
+    @php
+    use Carbon\Carbon;
+@endphp
 
+    <tr>
+        <th colspan="22" style="text-align: center">
+            ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+        </th>
+    </tr>
+    <tr>
+        <th colspan="22" style="text-align: center">
+            ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+        </th>
+    </tr>
+    <tr>
+        <th colspan="22" style="text-align: center">
+            Report - 3
+        </th>
+    </tr>
+    <tr>
+        <th colspan="22" class="date-container">
+            {{ formatDMYmm(Carbon::now()) }}
+        </th>
+    </tr> 
     <table>
         <thead>
             <tr>
@@ -61,67 +52,80 @@
                 <th rowspan="2">ဝန်ထမ်းအမှတ်</th>
                 <th rowspan="2">ရာထူး</th>
                 <th rowspan="2">အသက်</th>
-                <th rowspan="2">လက်ရှိရာထူးရသောလုပ်သက်</th>
+                <th rowspan="2">လက်ရှိရာထူး<br>ရသော<br>လုပ်သက်</th>
                 <th rowspan="2">လုပ်သက်</th>
-                <th rowspan="2">ပညာအရည်အချင်း</th>
+                <th rowspan="2">ပညာ<br>အရည်အချင်း</th>
                 <th rowspan="2">ကျား/မ</th>
                 <th rowspan="2">လူမျိုး</th>
-                <th rowspan="2">ကိုးကွယ်သည့်ဘာသာ</th>
-                <th rowspan="2">ယခုနေထိုင်သည့်နေရပ်လိပ်စာ</th>
-                <th rowspan="2">အမြဲတမ်းဆက်သွယ်နိုင်သောနေရပ်လိပ်စာ</th>
-                <th colspan="2">သားသမီးအရေအတွက်</th>
-                <th rowspan="2">အိမ်ထောင်</th>
-                <th rowspan="2">ကျန်းမာရေးအခြေအနေ</th>
+                <th rowspan="2">ကိုးကွယ်<br>သည့်<br>ဘာသာ</th>
+                <th rowspan="2">ယခုနေထိုင်သည့်<br>နေရပ်လိပ်စာ</th>
+                <th rowspan="2">အမြဲတမ်း<br>ဆက်သွယ်နိုင်သော<br>နေရပ်လိပ်စာ</th>
+                <th colspan="2">သားသမီး<br>အရေအတွက်</th>
+                <th colspan="2">အိမ်ထောင်</th>
+                <th rowspan="2">ကျန်းမာရေး<br>အခြေအနေ</th>
                 <th rowspan="2">သွေးအုပ်စု</th>
-                <th rowspan="2">အရပ်အမြင့်</th>
-                <th rowspan="2">ဝါသနာပါသောအားကစား</th>
-                <th rowspan="2">သီးခြားတတ်ကျွမ်းသောဘာသာ</th>
+                <th rowspan="2">အရပ်<br>အမြင့်</th>
+                <th rowspan="2">ဝါသနာ<br>ပါသော<br>အားကစား</th>
+                <th rowspan="2">သီးခြား<br>တတ်ကျွမ်းသော<br>ဘာသာ</th>
             </tr>
             <tr>
                 <th>ကျား</th>
                 <th>မ</th>
+                <th>ရှိ</th>
+                <th>မရှိ</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($staffs as $staff)
                 <tr>
-                    <td>{{ $loop->index + 1 }}</td>
+                    <td>{{ en2mm($loop->index + 1) }}</td>
                     <td>{{ $staff->name }}</td>
                     <td>{{ $staff->staff_no }}</td>
-                    <td>{{ $staff->current_rank->name }}</td>
-                    <td>{{ Carbon\Carbon::parse($staff->dob)->age }} years</td>
-                    <td>{{ en2mm(Carbon\Carbon::parse($staff->current_rank_date)->format('d-m-y')) }}</td>
-                    <td>{{ Carbon\Carbon::parse($staff->current_rank_date)->age }} years</td>
+                    <td>{{ $staff->current_rank?->name }}</td>
+                    @php
+            $dob = \Carbon\Carbon::parse($staff->dob);
+            $diff = $dob->diff(\Carbon\Carbon::now());
+            $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+            @endphp
+                    <td>{{ ' (' . en2mm($dob->format('d-m-Y')) . ')'.en2mm($age) }}</td>
+                    @php
+            $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);
+            $diff = $current_rank_date->diff(\Carbon\Carbon::now());
+            $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+            @endphp
+                    <td>{{  ' (' . en2mm($current_rank_date->format('d-m-Y')) . ')'.en2mm($age)  }}</td>
+                    @php
+                    $join_date = \Carbon\Carbon::parse($staff->join_date);
+                    $diff = $join_date->diff(\Carbon\Carbon::now());
+                    $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+                    @endphp
+                    <td>{{  ' (' . en2mm($join_date->format('d-m-Y')) . ')'.en2mm($age)  }}</td>
                     <td>
-                        @foreach ($staff->staff_educations as $edu)
-                            <div class="mb-2">
-                                <span>{{ $edu->education->name }}</span>
-                            </div>
+                        @foreach ($staff->staff_educations as $education)
+                            <div>{{ $education->education?->name }}</div>
                         @endforeach
                     </td>
-                    <td>{{ $staff->gender->name }}</td>
-                    <td>{{ $staff->ethnic->name }}</td>
-                    <td>{{ $staff->religion->name }}</td>
-                    <td>{{ $staff->current_address_street.'/'.$staff->current_address_ward.'/'.$staff->current_address_region->name.'/'.$staff->current_address_district->name.'/'.$staff->current_address_township_or_town->name }}</td>
-                    <td>{{ $staff->permanent_address_street.'/'.$staff->permanent_address_ward.'/'.$staff->permanent_address_region->name.'/'.$staff->permanent_address_district->name.'/'.$staff->permanent_address_township_or_town->name }}</td>
-                    <td>{{ $staff->children->where('gender_id', 1)->count() }}</td>
-                    <td>{{ $staff->children->where('gender_id', 2)->count() }}</td>
-                    <td>{{ $staff->spouse_name != null ? 'ရှိ' : 'မရှိ'}}</td>
+                    <td>{{ $staff->gender?->name }}</td>
+                    <td>{{ $staff->ethnic?->name }}</td>
+                    <td>{{ $staff->religion?->name }}</td>
+                    <td>{{ $staff->current_address }}</td>
+                    <td>{{ $staff->permanent_address }}</td>
+                    <td>{{ en2mm($staff->children->where('gender_id', 1)->count()) }}</td>
+                    <td>{{ en2mm($staff->children->where('gender_id', 2)->count()) }}</td>
+                    <td>{{ $staff->spouse_name ? 'ရှိ' : '' }}</td>
+                    <td>{{ $staff->spouse_name ? '' : 'မရှိ' }}</td>
                     <td>{{ $staff->health_condition }}</td>
-                    <td>{{ $staff->blood_type->name }}</td>
-                    <td>{{ $staff->height_feet.'/'.$staff->height_inch  }}</td>
+                    <td>{{ $staff->blood_type?->name }}</td>
+                    <td>{{ $staff->height_feet }}' {{ $staff->height_inch }}"</td>
                     <td>{{ $staff->habit }}</td>
                     <td>
                         @foreach ($staff->staff_languages as $lang)
-                            <div class="mb-2">
-                                <span class="font-semibold">{{ $lang->language->name }}</span>
-                            </div>
+                            <div>{{ $lang?->language?->name }}</div>
                         @endforeach
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    </page>
 </body>
 </html>

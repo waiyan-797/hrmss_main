@@ -10,14 +10,14 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
-class A04 implements FromView ,WithStyles
+class A05 implements FromView ,WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     // public function collection()
     // {
-    //     return A04::all();
+    //     return A05::all();
     // }
     public function view(): View
     {
@@ -25,7 +25,7 @@ class A04 implements FromView ,WithStyles
         $data = [
             'staffs' => $staffs,
         ];
-        return view('excel_reports.report_2', $data);
+        return view('excel_reports.report_3', $data);
     }
     public function styles(Worksheet $sheet)
     {
@@ -46,25 +46,25 @@ class A04 implements FromView ,WithStyles
     $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
     $sheet->getColumnDimension('A')->setWidth(7);
-    $sheet->getColumnDimension('B')->setWidth(25);
-    $sheet->getColumnDimension('C')->setWidth(25);
-    $sheet->getColumnDimension('D')->setWidth(20);
-    $sheet->getColumnDimension('E')->setWidth(20);
-    $sheet->getColumnDimension('F')->setWidth(10);
-    $sheet->getColumnDimension('G')->setWidth(15);
-    $sheet->getColumnDimension('H')->setWidth(25);
-    $sheet->getColumnDimension('I')->setWidth(25);
-    $sheet->getColumnDimension('J')->setWidth(15);
-    $sheet->getColumnDimension('K')->setWidth(7);
-    $sheet->getColumnDimension('L')->setWidth(7);
-    $sheet->getColumnDimension('M')->setWidth(20);
+    $sheet->getColumnDimension('B')->setWidth(20);
+    $sheet->getColumnDimension('C')->setWidth(20);
+    $sheet->getColumnDimension('D')->setWidth(25);
+    $sheet->getColumnDimension('E')->setWidth(30);
+    $sheet->getColumnDimension('F')->setWidth(30);
+    $sheet->getColumnDimension('G')->setWidth(30);
+    $sheet->getColumnDimension('H')->setWidth(30);
+    $sheet->getColumnDimension('I')->setWidth(30);
+    $sheet->getColumnDimension('J')->setWidth(30);
+    $sheet->getColumnDimension('K')->setWidth(30);
+    $sheet->getColumnDimension('L')->setWidth(30);
+    $sheet->getColumnDimension('M')->setWidth(30);
   
    
 
-    $sheet->getRowDimension(1)->setRowHeight(20);
-    $sheet->getRowDimension(2)->setRowHeight(20);
-    $sheet->getRowDimension(3)->setRowHeight(20);
-    $sheet->getRowDimension(4)->setRowHeight(20);
+    $sheet->getRowDimension(1)->setRowHeight(30);
+    $sheet->getRowDimension(2)->setRowHeight(30);
+    $sheet->getRowDimension(3)->setRowHeight(30);
+    $sheet->getRowDimension(4)->setRowHeight(30);
     $sheet->getRowDimension(5)->setRowHeight(40);
     $sheet->getRowDimension(6)->setRowHeight(40);
     $sheet->getRowDimension(7)->setRowHeight(40);
@@ -76,10 +76,10 @@ class A04 implements FromView ,WithStyles
     $sheet->getRowDimension(13)->setRowHeight(40);
     $sheet->getRowDimension(14)->setRowHeight(40);
    
-    $sheet->getStyle('A1:M4')->applyFromArray([
+    $sheet->getStyle('A1:V5')->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
-            'size' => 13,
+            'size' => 11,
         ],
         'alignment' => [
             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
@@ -94,7 +94,7 @@ class A04 implements FromView ,WithStyles
     $sheet->getStyle('A5')->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
-            'size' => 13,
+            'size' => 11,
         ],
         'alignment' => [
             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
@@ -109,7 +109,7 @@ class A04 implements FromView ,WithStyles
     $sheet->getStyle("A5:$highestColumn$highestRow")->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
-            'size' => 13,
+            'size' => 11,
         ],
         'alignment' => [
             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
@@ -123,6 +123,5 @@ class A04 implements FromView ,WithStyles
         ],
     ]);
     }
-
 
 }

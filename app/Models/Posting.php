@@ -24,5 +24,10 @@ class Posting extends Model
     {
         return $this->belongsTo(Division::class);
     }
+    public function ministry()
+{
+    return $this->belongsTo(Ministry::class);
+}
+
 
 }

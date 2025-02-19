@@ -20,10 +20,22 @@
             padding: 8px;
             text-align: center;
         }
+        .date-container {
+            display: flex;
+            justify-content: flex-end;
+            /* width: 100%; */
+        }
+
     </style>
     
 </head>
 <body>
+    
+    @php
+    use Carbon\Carbon;
+@endphp
+
+
     <tr>
         <th colspan="13" style="text-align: center">
             ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
@@ -39,6 +51,11 @@
             Report - 2
         </th>
     </tr>
+    <tr>
+        <th colspan="13" class="date-container">
+            {{ formatDMYmm(Carbon::now()) }}
+        </th>
+    </tr> 
 <table>
     <thead>
         <tr>

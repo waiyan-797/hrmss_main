@@ -7,6 +7,12 @@
              <h1 class="text-center font-bold text-sm"> ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
              <h1 class="text-center font-bold text-sm"> ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <h1 class="text-center font-bold text-sm">Report - 2</h1>
+         
+            <div class="flex justify-end">
+                {{ mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)) }}
+            </div>
+            
+      
             <table class="md:w-full">
                 <thead>
                     <tr>

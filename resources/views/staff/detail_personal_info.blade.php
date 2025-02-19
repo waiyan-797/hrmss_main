@@ -215,6 +215,11 @@
         <x-text-input :NoneedValidate=true wire:model="habit" id="habit" name="habit" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('habit')" />
     </div>
+    <div>
+        <x-input-label for="လုပ်ကိုင်ခဲ့သောဌာန၊မြို့နယ်များ" :value="__('လုပ်ကိုင်ခဲ့သောဌာန၊မြို့နယ်များ')" />
+        <x-textarea-input wire:model="past_occupation" id="past_occupation" name="past_occupation" class="mt-1 block w-full"/>
+        <x-input-error class="mt-2" :messages="$errors->get('past_occupation')" />
+    </div>
 </div>
 <div class="grid grid-cols-3 gap-4 py-5">
     <div>
@@ -224,7 +229,7 @@
     </div>
     <div>
         <x-input-label for="အလုပ်အကိုင်ပြောင်းရွှေ့ခဲ့သော အကြောင်းအကျိုးနှင့် လစာ" :value="__('အလုပ်အကိုင်ပြောင်းရွှေ့ခဲ့သော အကြောင်းအကျိုးနှင့် လစာ')" />
-        <x-text-input  :NoneedValidate=true   wire:model="transfer_reason_salary" id="transfer_reason_salary" name="transfer_reason_salary" type="text" class="mt-1 block w-full"/>
+        <x-textarea-input wire:model="transfer_reason_salary" id="transfer_reason_salary" name="transfer_reason_salary" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('transfer_reason_salary')" />
     </div>
     <div>

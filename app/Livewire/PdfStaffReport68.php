@@ -389,39 +389,44 @@ class PdfStaffReport68 extends Component
         $table->addCell(13000)->addText('ပြိုင်အ‌‌ရွေးခံ(သို့)တိုက်ရိုက်ခန့်', null,$pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
         $table->addCell(13000)->addText($staff->is_direct_appointed, null,$pStyle_8);
-        $section->addTextBreak();
+        $table->addRow();
+        $table->addCell(1300)->addText('၁၄။', null,  $pStyle_5);
+        $table->addCell(13000)->addText('အလုပ်အကိုင်အတွက် ထောက်ခံသူများ', null,$pStyle_8);
+        $table->addCell(700)->addText('-', null,  $pStyle_5);
+        $table->addCell(13000)->addText($staff->recommendations->pluck('recommend_by')->unique()->join(', '), null,$pStyle_8);
+      
 
-       $section->addText(' ၁၄။ '. '   '. ' အလုပ်အကိုင်အတွက် ထောက်ခံသူများ', ['bold'=>true],null, ['spaceBefore' => 200],);
-        $table = $section->addTable([
-            'borderSize' => 6,
-            'cellMargin' => 4,
-        ]);
-        $table->addRow(50,array('tblHeader' => true));
-        $table->addCell(2000)->addText('ထောက်ခံသူ', ['bold' => true],$pStyle_1);
-        $table->addCell(2000)->addText('ဝန်ကြီးဌာန', ['bold' => true],$pStyle_1);
-        $table->addCell(2000)->addText('ဦးစီးဌာန', ['bold' => true],$pStyle_1);
-        $table->addCell(2000)->addText('ရာထူး', ['bold' => true],$pStyle_1);
-        $table->addCell(2000)->addText('အကြောင်းအရာ', ['bold' => true],$pStyle_1);
-        if($staff->recommendations->isNotEmpty()){
-        foreach ($staff->recommendations as $recommendation) {
-            $table->addRow();
-            $table->addCell(2000)->addText($recommendation->pluck('recommend_by')->unique()->join(', '),null,$pStyle_1);
-            $table->addCell(2000)->addText($recommendation->ministry);
-            $table->addCell(2000)->addText($recommendation->department);
-            $table->addCell(2000)->addText($recommendation->rank);
-            $table->addCell(2000)->addText($recommendation->remark);
-            }
-        }else{
-            $table->addRow(50);
-                $cell = $table->addCell(100000, ['gridSpan' => 5]); 
-                $cell->addText(
-                    'မရှိပါ',
-                   null,
-                    ['alignment' => 'center']
-                );
-        }
+    //    $section->addText(' ၁၄။ '. '   '. ' အလုပ်အကိုင်အတွက် ထောက်ခံသူများ', ['bold'=>true],null, ['spaceBefore' => 200],);
+    //     $table = $section->addTable([
+    //         'borderSize' => 6,
+    //         'cellMargin' => 4,
+    //     ]);
+        // $table->addRow(50,array('tblHeader' => true));
+        // $table->addCell(2000)->addText('ထောက်ခံသူ', ['bold' => true],$pStyle_1);
+        // $table->addCell(2000)->addText('ဝန်ကြီးဌာန', ['bold' => true],$pStyle_1);
+        // $table->addCell(2000)->addText('ဦးစီးဌာန', ['bold' => true],$pStyle_1);
+        // $table->addCell(2000)->addText('ရာထူး', ['bold' => true],$pStyle_1);
+        // $table->addCell(2000)->addText('အကြောင်းအရာ', ['bold' => true],$pStyle_1);
+        // if($staff->recommendations->isNotEmpty()){
+        // foreach ($staff->recommendations as $recommendation) {
+        //     $table->addRow();
+        //     $table->addCell(2000)->addText($recommendation->pluck('recommend_by')->unique()->join(', '),null,$pStyle_1);
+        //     $table->addCell(2000)->addText($recommendation->ministry);
+        //     $table->addCell(2000)->addText($recommendation->department);
+        //     $table->addCell(2000)->addText($recommendation->rank);
+        //     $table->addCell(2000)->addText($recommendation->remark);
+        //     }
+        // }else{
+        //     $table->addRow(50);
+        //         $cell = $table->addCell(100000, ['gridSpan' => 5]); 
+        //         $cell->addText(
+        //             'မရှိပါ',
+        //            null,
+        //             ['alignment' => 'center']
+        //         );
+        // }
         $section->addTextBreak();
-        $section->addText('၁၅။ '.  ' ယခင်လုပ်ကိုင်ဖူးသည့် အလုပ်အကိုင်', ['bold'=>true],null, ['spaceBefore' => 200]);
+        $section->addText('၁၅။ '.    ' ယခင်လုပ်ကိုင်ဖူးသည့် အလုပ်အကိုင်', ['bold'=>true],null, ['spaceBefore' => 200]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(4000)->addText('ရာထူး/အဆင့်', ['bold' => true], $pStyle_1);
@@ -717,8 +722,6 @@ class PdfStaffReport68 extends Component
                     ['alignment' => 'center']
                 );
             }
-
-        // $section->addText('၁၂။ ' . ' ခင်ပွန်း/ဇနီးသည် အမိနှင့်ညီအကိုမောင်နှမများ', null,array('spaceBefore'=> 200));
         $section->addTextBreak();
         $section->addText(' ၁၂။ '.  " ခင်ပွန်း/ဇနီးသည်အမိနှင့်ညီအကိုမောင်နှမများ၏ အမည်၊ လူမျိုး၊ဘာသာ၊ဇာတိ၊\n      အလုပ်အကိုင်နှင့်နေရပ်လိပ်စာ", ['bold'=>true],null, ['spaceBefore' => 200]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
@@ -751,11 +754,11 @@ class PdfStaffReport68 extends Component
             $section->addText('');
         $table = $section->addTable();
         $table->addRow();
-        $table->addCell(1300)->addText('၁၃။', null, ['alignment' => 'center']);
-        $table->addCell(13000)->addText("မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်းတို့၏မိဘ၊ညီအကိုမောင်နှမများ၊သားသမီးများ\nသည်နိုင်ငံရေးပါတီဝင်များတွင်ဝင်ရောက်ဆောင်ရွက်မှုရှိ/မရှိ(ရှိကအသေးစိတ်ဖော်ပြရန်)", null, ['alignment' => 'both']);
+        $table->addCell(1300)->addText('၁၃။', null, $pStyle_5);
+        $table->addCell(13000)->addText("မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်းတို့၏မိဘ၊ညီအကိုမောင်နှမများ၊သားသမီးများသည်\nနိုင်ငံရေးပါတီဝင်များတွင်ဝင်ရောက်ဆောင်ရွက်မှုရှိ/မရှိ(ရှိကအသေးစိတ်ဖော်ပြရန်)", null, ['alignment' => 'both']);
         $table->addCell(700)->addText('-', null, ['alignment' => 'center']);
         // $table->addCell(13000)->addText(,null, ['alignment' => 'both']);
-        $table->addCell(13000)->addText($staff->family_in_politics ?  ($staff->family_in_politics_text ?? '') : 'မရှိပါ', null, ['alignment' => 'both']);
+        $table->addCell(13000)->addText($staff->family_in_politics ?  ($staff->family_in_politics_text ?? '') : 'မရှိပါ', null,$pStyle_8);
         $section->addText('ငယ်စဥ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်', ['bold' => true], ['alignment' => 'center']);
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
 
@@ -874,7 +877,7 @@ class PdfStaffReport68 extends Component
                 $table->addRow();
                 $table->addCell(6000)->addText($posting->rank->name ?? '', null, $pStyle_1);
                 $table->addCell(6000)->addText($posting->department->name ?? '', null, $pStyle_1);
-                $table->addCell(6000)->addText('ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', null, $pStyle_1);
+                $table->addCell(6000)->addText($posting->ministry->name ?? '', null, $pStyle_1);
                 $table->addCell(6000)->addText(formatDMYmm($posting->from_date), null, $pStyle_1);
                 $table->addCell(6000)->addText(formatDMYmm($posting->to_date), null, $pStyle_1);
                 $table->addCell(6000)->addText($posting->remark, null, $pStyle_1);
@@ -907,7 +910,7 @@ class PdfStaffReport68 extends Component
         $table->addCell(1300)->addText('၁၁။', null, $pStyle_5);
         $table->addCell(13000)->addText("စစ်ဘက်နယ်ဘက်ရဲဘက်နှင့်\nနိုင်ငံရေးဘက်တွင်ခင်မင်ရင်းနှီးသော\nမိတ်ဆွေများရှိ/မရှိ", null,$pStyle_8);
         $table->addCell(700)->addText('-', null,$pStyle_5);
-        $table->addCell(13000)->addText($staff->has_military_friend ? 'ရှိ' : 'မရှိ', null,$pStyle_8);
+        $table->addCell(13000)->addText($staff->has_military_friend ? $staff->has_military_friend_text : 'မရှိ', null,$pStyle_8);
 
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100];
         $pStyle_3 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];

@@ -1,7 +1,7 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
             <h1 class="text-center text-sm font-bold mb-2">Foreign Training Report2</h1>
@@ -19,8 +19,6 @@
                         <th rowspan="2" class="border border-black text-center p-2">သွားရောက်သည့်နိုင်ငံ</th>
                         <th rowspan="2" class="border border-black text-center p-2">ပြည်ပသို့သွားရောက်ခဲ့သောအကြောင်းအရာ
                         </th>
-                        {{--<th rowspan="2" class="border border-black text-center p-2">နောက်ဆုံးသွားရောက်ခဲ့သည့်နိုင်ငံ
-                        </th> --}}
                         <th rowspan="2" class="border border-black text-center p-2">သွားရောက်ခဲ့သည့်အကြိမ်အရေအတွက်</th>
                         <th rowspan="2" class="border border-black text-center p-2">ထောက်ပံ့သည့်အဖွဲ့အစည်း</th>
                         <th rowspan="2" class="border border-black text-center p-2">မှတ်ချက်</th>
