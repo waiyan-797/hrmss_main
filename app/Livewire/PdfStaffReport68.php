@@ -204,7 +204,7 @@ class PdfStaffReport68 extends Component
         $table->addCell(1300)->addText('၁၈။', null,  $pStyle_5);
         $table->addCell(13000)->addText('ရုံး', null,$pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText('ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', null,$pStyle_8);
+        $table->addCell(13000)->addText("ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီး\nဌာန", null,$pStyle_8);
 
         $table->addRow();
         $table->addCell(1300)->addText('၁၉။', null,  $pStyle_5);
@@ -432,22 +432,22 @@ class PdfStaffReport68 extends Component
         $table->addCell(4000)->addText('ရာထူး/အဆင့်', ['bold' => true], $pStyle_1);
         $table->addCell(4000)->addText('တပ်/ဌာန', ['bold' => true], $pStyle_1);
         $table->addCell(2500)->addText('နေရာ', ['bold' => true], $pStyle_1);
-        $table->addCell(2000)->addText('မှ', ['bold' => true], $pStyle_1);
-        $table->addCell(2000)->addText('ထိ', ['bold' => true], $pStyle_1);
+        $table->addCell(2500)->addText('မှ', ['bold' => true], $pStyle_1);
+        $table->addCell(2500)->addText('ထိ', ['bold' => true], $pStyle_1);
 
        
         if($staff->postings->isNotEmpty()){
             foreach ($staff->postings as $index => $posting) {
                 $table->addRow(50);
                 $table->addCell(4000)->addText($posting->rank->name ?? '',null,$pStyle_3);
-                $table->addCell(4000)->addText($posting->department->name ?? '-',null, $pStyle_6);
+                $table->addCell(4000)->addText($posting->ministry->name ?? ''.$posting->department->name ?? '-',null, $pStyle_6);
                 $table->addCell(2500)->addText($posting->location,null, $pStyle_6);
-                $table->addCell(2000)->addText(formatDMYmm($posting->from_date),null, $pStyle_6);
-                $table->addCell(2000)->addText(formatDMYmm($posting->to_date),null, $pStyle_6);
+                $table->addCell(2500)->addText(formatDMYmm($posting->from_date),null, $pStyle_6);
+                $table->addCell(2500)->addText(formatDMYmm($posting->to_date),null, $pStyle_6);
             }
         }else{
                 $table->addRow(50);
-                $cell = $table->addCell(14500, ['gridSpan' => 5]); 
+                $cell = $table->addCell(15500, ['gridSpan' => 5]); 
                 $cell->addText(
                     'မရှိပါ',
                    null,
@@ -779,7 +779,7 @@ class PdfStaffReport68 extends Component
                  $table->addCell(4000)->addText($school->education, null, $pStyle_3);
                  $table->addCell(4000)->addText($school->school_name, null, $pStyle_6);
                  $table->addCell(4000)->addText($school->town, null, $pStyle_6);
-                 $table->addCell(4000)->addText($school->from_date . "\n" . ($school->to_date), null, $pStyle_3);
+                 $table->addCell(4000)->addText($school->from_date . '-' . ($school->to_date), null, $pStyle_3);
                  $index++;
              }
          }else{

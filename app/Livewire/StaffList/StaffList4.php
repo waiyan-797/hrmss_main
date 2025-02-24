@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Livewire\StaffList;
-
 use App\Exports\SSL03;
 use App\Models\Rank;
 use App\Models\Staff;
