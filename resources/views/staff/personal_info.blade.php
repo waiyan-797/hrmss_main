@@ -52,32 +52,32 @@
         <x-input-label for="ကျား/မ" :value="__('ကျား/မ')" />
         <x-select
             wire:model="gender_id"
-            :values="$genders"
-            placeholder="ကျား/မရွေးပါ"
-            name="gender_id"
-            class="block w-full mt-1"
-        />
+:values="$genders"
+placeholder="ကျား/မရွေးပါ"
+name="gender_id"
+class="block w-full mt-1"
+/>
         <x-input-error class="mt-2" :messages="$errors->get('gender_id')" />
     </div>
     <div>
         <x-input-label for="လူမျိုး" :value="__('လူမျိုး')" />
         <x-searchable-select
-            placeholder="လူမျိုးရွေးပါ"
+placeholder="လူမျိုးရွေးပါ"
             :values="$ethnics"
             property="ethnic_id"
-            class="block w-full p-2 mt-1 text-sm border rounded font-arial"
-        />
+class="block w-full p-2 mt-1 text-sm border rounded font-arial"
+/>
         <x-input-error class="mt-2" :messages="$errors->get('ethnic_id')" />
     </div>
     <div>
         <x-input-label for="ဘာသာ" :value="__('ဘာသာ')" />
         <x-select
             wire:model="religion_id"
-            :values="$religions"
-            placeholder="ဘာသာရွေးပါ"
-            name="religion_id"
-            class="block w-full mt-1"
-        />
+:values="$religions"
+placeholder="ဘာသာရွေးပါ"
+name="religion_id"
+class="block w-full mt-1"
+/>
         <x-input-error class="mt-2" :messages="$errors->get('religion_id')" />
     </div>
     <div>
