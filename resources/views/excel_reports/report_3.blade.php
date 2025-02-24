@@ -22,8 +22,7 @@
 <body>
     @php
     use Carbon\Carbon;
-@endphp
-
+    @endphp
     <tr>
         <th colspan="22" style="text-align: center">
             ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
@@ -83,23 +82,25 @@
                     <td>{{ $staff->staff_no }}</td>
                     <td>{{ $staff->current_rank?->name }}</td>
                     @php
-            $dob = \Carbon\Carbon::parse($staff->dob);
-            $diff = $dob->diff(\Carbon\Carbon::now());
-            $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
-            @endphp
-                    <td>{{ ' (' . en2mm($dob->format('d-m-Y')) . ')'.en2mm($age) }}</td>
-                    @php
-            $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);
-            $diff = $current_rank_date->diff(\Carbon\Carbon::now());
-            $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
-            @endphp
-                    <td>{{  ' (' . en2mm($current_rank_date->format('d-m-Y')) . ')'.en2mm($age)  }}</td>
+                    $dob = \Carbon\Carbon::parse($staff->dob);
+                    $diff = $dob->diff(\Carbon\Carbon::now());
+                    $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+                    @endphp
+                    <td>{{ ' (' . en2mm($dob->format('d-m-Y')) . ')'}}<br>
+                        {{ en2mm($age) }}
+                    </td>
+                     @php
+                    $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);
+                    $diff = $current_rank_date->diff(\Carbon\Carbon::now());
+                    $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+                    @endphp
+                    <td>{{  ' (' . en2mm($current_rank_date->format('d-m-Y')) . ')' }}<br>{{ en2mm($age)  }}</td>
                     @php
                     $join_date = \Carbon\Carbon::parse($staff->join_date);
                     $diff = $join_date->diff(\Carbon\Carbon::now());
                     $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
                     @endphp
-                    <td>{{  ' (' . en2mm($join_date->format('d-m-Y')) . ')'.en2mm($age)  }}</td>
+                    <td>{{  ' (' . en2mm($join_date->format('d-m-Y')) . ')'  }}<br>{{ en2mm($age)  }}</td>
                     <td>
                         @foreach ($staff->staff_educations as $education)
                             <div>{{ $education->education?->name }}</div>

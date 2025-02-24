@@ -41,12 +41,6 @@ public function go_pdf(){
 // skdfjkd
 public function go_word()
 {
-    // $divisions = Division::query();
-
-    // if ($this->selsectedDivisionTypeId) {
-    //     $divisions->where('division_type_id', $this->selsectedDivisionTypeId);
-    // }
-    // $divisions = $divisions->get();
     $divisions = Division::where('division_type_id', $this->dep_category)->get();
     $phpWord = new PhpWord();
     $section = $phpWord->addSection([

@@ -1,12 +1,13 @@
 <div class="overflow-x-auto  h-[83vh] overflow-y-auto">
-    <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
-    <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
-    <br><br>
+    <br>
+    {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
+    {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
+      <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button> 
+   <br>
     <table class="w-full border-collapse border border-black mt-4">
         <thead class="bg-white">
             <tr>
                 <th class="border border-black p-2" rowspan="2">Indicator(s)</th>
-           
                 <th class="border border-black p-2" colspan="12">1.4.A Women holding senior positions in the Civil Service (Director Level or equivalent and Above Posts)as (a) A Percentage of Total Senior Civil Servants and ,(b) Increase in Percentage points from previous year</th>
             </tr>
             <tr>
@@ -44,7 +45,7 @@
         <tbody>
             @foreach ($payscales as $payscale)
                 <tr>
-                    <td class="border border-black p-2">{{ $loop->index + 1 }}</td>
+                    <td class="border border-black p-2">{{ en2mm($loop->index + 1) }}</td>
                     <td class="border border-black p-2">{{ $payscale->ranks[0]->name }}နှင့်အဆင့်တူ</td>
                     <td class="border border-black p-2">{{ en2mm($payscale->staff->count()) }}</td>
                     <td class="border border-black p-2">{{ en2mm($payscale->staff->where('gender_id', 1)->count()) }}</td>

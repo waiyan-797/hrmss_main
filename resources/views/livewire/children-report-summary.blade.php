@@ -1,8 +1,11 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
-            <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
+            <h1 class="font-bold text-center text-base mb-4">
+                ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+            </h1>
             <h1 class="font-bold text-center text-base mb-4">
                 ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
                 ရှိ
@@ -12,7 +15,6 @@
             <h1 class=" text-right ">
                 ရက်စွဲ - {{ getTdyDateInMyanmarYearMonthDay(2) }}
             </h1>
-
             <table class="md:w-full">
                 <thead>
                     <tr>
@@ -38,18 +40,11 @@
                         <tr>
                             <td class="border border-black text-center p-2">{{ en2mm($key + 1) }}</td>
                             <td class="border border-black text-left p-2">{{ $divisionType->name }}
-
                                 @if ($key == 1)
                                     ညွှန်ကြားရေးမှုးရုံးများတွင်
                                 @endif
-
                                 တွင်တာဝန်ထမ်းဆောင်နေသည့်မိသားစုဝင်သား/သမီးများ
-
                             </td>
-
-
-
-
                             <td class="border border-black text-center p-2">
                                 {{ en2mm(
                                     $divisionType->divisions->sum(function ($division) {
@@ -104,7 +99,6 @@
                             {{ en2mm($children->where('gender_id', 1)->count()) }}
                         </td>
                         <td class="border border-black text-center p-2">
-
                             {{ en2mm($children->count()) }}
                         </td>
                         <td class="border border-black text-center p-2">

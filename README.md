@@ -33,3 +33,7 @@ check box  | senior no | name | rank | diision  | last_increment_time | last_inc
 increment- -row ရှိမရှိ -- ရှိ / last_record ယူ , increment_date+ leaveY-tyep_5 , times , times-5 ထက်ငယ်ရင်ပါမည်
 no_record  - staff_last_increment_time and last_increment_date ->   0 x <  < 5  ဆိုူရင် last incremnet date ကိုယူ
 0 ဆို်ရင် current_rank_date ကိုယူမည်
+
+SET FOREIGN_KEY_CHECKS =  0 ; //start line of file 
+   SET FOREIGN_KEY_CHECKS =  1 ; //end line of file 
+   

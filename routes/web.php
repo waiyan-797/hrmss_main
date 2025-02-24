@@ -10,6 +10,7 @@ use App\Livewire\BloodType\BloodType;
 use App\Livewire\ChildrenReportDetails;
 use App\Livewire\ChildrenReportSummary;
 use App\Livewire\Country\Country;
+use App\Livewire\CurrentPosition;
 use App\Livewire\Department;
 use App\Livewire\Depromotion;
 use App\Livewire\DifficultyLevel;
@@ -158,6 +159,7 @@ use App\Livewire\Report;
 use App\Livewire\Retirement;
 use App\Livewire\Salary;
 use App\Livewire\SortableStaff;
+use App\Livewire\StaffByAge;
 use App\Livewire\StaffInNpt;
 use App\Livewire\StaffStrengthList;
 use App\Livewire\TravelAbroad;
@@ -184,9 +186,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/district', District::class)->name('district');
     Route::get('/township', Township::class)->name('township');
     Route::get('/pension_year', PensionYear::class)->name('pension_year');
-    Route::get('/staff/{status}', Staff::class)->name('staff')
-    // ->defaults('status',   1)
-    ;
+    Route::get('/staff/{status}', Staff::class)->name('staff');
     Route::get('/payscale', Payscale::class)->name('payscale');
     Route::get('/rank', Rank::class)->name('rank');
     Route::get('/staff_type', StaffType::class)->name('staff_type');
@@ -217,8 +217,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/gender', Gender::class)->name('gender');
     Route::get('/salary', Salary::class)->name('salary');
     Route::get('/promotion', LivewirePromotion::class)->name('promotion'); //no longer use
-    Route::get('/promotion/{staff_id}', LivewirePromotion::class)->name('staff_promotion'); //no longer use
-    // Route::get('/increment', Increment::class)->name('increment'); //no longer use
+    Route::get('/promotion/{staff_id}', LivewirePromotion::class)->name('staff_promotion'); 
     Route::get('/retirement/{staff_id}', Retirement::class)->name('staff_retirement'); //no longer use
     Route::get('/depromotion',Depromotion::class)->name('depromotion');
     Route::get('/depromotion/{staff_id}',Depromotion::class)->name('staff_depromotion');
@@ -371,14 +370,9 @@ Route::get('vacancy_over_by_division' , VacancyOverByDivision::class)->name('vac
 
 Route::get('/children_report_detials' , ChildrenReportDetails::class)->name('children_report_detials');
 Route::get('/children_report_summary' , ChildrenReportSummary::class)->name('children_report_summary');
-// Route::get('/children_report_summary' , ChildrenReportSummary::class)->name('children_report_summary');
 
-
-
-//sortable staff
-
-
-
+Route::get('/current-position', CurrentPosition::class)->name('current-position');
+Route::get('/staff-by-age',StaffByAge::class)->name('staff-by-age');
 Route::get('/sortable' , SortableStaff::class)->name('sortable');
 
     Route::get(
@@ -388,6 +382,3 @@ Route::get('/sortable' , SortableStaff::class)->name('sortable');
 });
 
 require __DIR__ . '/auth.php';
-
-
-//test//test

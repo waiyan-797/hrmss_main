@@ -38,10 +38,6 @@ public function go_word()
         'marginRight'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.9),
     ]);
     $pStyle_1=array('align' => 'center', 'spaceAfter' => 0, 'spaceBefore' => 0);
-
-    // // Report Titles
-    // $section->addTitle('ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
-    // $section->addTitle('Language Report', 1);
     $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
     $section->addTitle('ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
     $section->addTitle('Language Report', 1);

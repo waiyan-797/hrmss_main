@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Livewire\Reports;
-
+use App\Exports\A06;
 use App\Models\Staff;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -22,9 +23,14 @@ class Report4 extends Component
             echo $pdf->output();
         }, 'report_4.pdf');
     }
+    public function go_excel() 
+    {
+        return Excel::download(new A06(
+    ), 'A06.xlsx');
+    }
+  
     public function go_word()
     {
-        // $staffs = Staff::get();
         $staffs = Staff::with('abroads')->get();
         $phpWord = new PhpWord();
         $section = $phpWord->addSection([
@@ -87,7 +93,6 @@ class Report4 extends Component
                 $table->addCell(4000)->addText($abroad->particular ?? '-', null, ['indentation' => ['left' => 100]]);
                 $table->addCell(3000)->addText($abroad->sponser ?? '-', null, ['indentation' => ['left' => 100]]);
                 }
-              
             }
         $fileName = 'A06.docx';
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);

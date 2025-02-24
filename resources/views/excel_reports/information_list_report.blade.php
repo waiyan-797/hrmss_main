@@ -6,22 +6,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Information List</title>
     <style type="text/css">
-        page{
-            background: white;
-        }
-
-        page[size="A4"] {
-            width: 210mm;
-            height: 297mm;
-        }
-
-        @media print {
-            body, page {
-                margin: 0;
-                box-shadow: 0;
-            }
-        }
-
         body {
            font-family: 'pyidaungsu', sans-serif !important;
             font-size: 13px;
@@ -45,15 +29,27 @@
     </style>
 </head>
 <body>
-    <page size="A4">
+    @php
+    use Carbon\Carbon;
+    @endphp
+    <tr>
+        <th colspan="12" style="text-align: right">
+           ပူးတွဲ
+        </th>
+    </tr>
+    <tr>
+        <th colspan="12" style="text-align: right">
+                    {{ formatDMYmm(Carbon::now()) }}
+        </th>
+    </tr>
         <table class="table">
             <thead>
                 <tr>
                     <th rowspan="2">Indicator(s)</th>
-                    <th colspan="12">1.4.A Women holding senior positions in the Civil Service (Director Level or equivalent and Above Posts) as (a) A Percentage of Total Senior Civil Servants and, (b) Increase in Percentage points from previous year</th>
+                    <th colspan="12">1.4.A Women holding senior positions in the Civil Service (Director Level or equivalent and Above Posts)<br> as (a) A Percentage of Total Senior Civil Servants and, (b) Increase in Percentage points from previous year</th>
                 </tr>
                 <tr>
-                    <th colspan="12">1.4.B Proportion of Positions by (a) Sex, (b) Age, (c) Persons with disabilities, in public institutions compared to national distribution</th>
+                    <th colspan="12">1.4.B Proportion of Positions by (a) Sex, (b) Age, (c)Persons with disabilities, in public institutions<br>compared to national distribution</th>
                 </tr>
             </thead>
             <thead>
@@ -66,7 +62,7 @@
                 <tr>
                     <th rowspan="2" >Sr No.</th>
                     <th rowspan="2">Level of Position and Same Level</th>
-                    <th rowspan="2">Total Number</th>
+                    <th rowspan="2">Total<br>Number</th>
                     <th colspan="2">Gender</th>
                     <th colspan="5">Age Group</th>
                     <th colspan="2">Person with disabilities</th>
@@ -86,8 +82,8 @@
             <tbody>
                 @foreach ($payscales as $payscale)
                     <tr>
-                        <td>{{ $loop->index + 1 }}</td>
-                        <td>{{ $payscale->ranks[0]->name }} နှင့်အဆင့်တူ</td>
+                        <td>{{ en2mm($loop->index + 1) }}</td>
+                        <td>{{ $payscale->ranks[0]->name }}နှင့်အဆင့်တူ</td>
                         <td>{{ en2mm($payscale->staff->count()) }}</td>
                         <td>{{ en2mm($payscale->staff->where('gender_id', 1)->count()) }}</td>
                         <td>{{ en2mm($payscale->staff->where('gender_id', 2)->count()) }}</td>
@@ -173,7 +169,6 @@
                 </tr>
             </tbody>
         </table>
-    </page>
 </body>
 </html>
 

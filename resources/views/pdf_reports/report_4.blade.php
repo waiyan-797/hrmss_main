@@ -85,7 +85,7 @@
         <tbody>
             @foreach($staffs as $staff)
                 @php
-                    // Get the max number of rows needed (either from trainings or abroads)
+
                     $maxRows = max($staff->trainings->count(), $staff->abroads->count());
                 @endphp
         

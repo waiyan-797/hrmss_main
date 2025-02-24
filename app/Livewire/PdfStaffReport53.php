@@ -650,14 +650,6 @@ class PdfStaffReport53 extends Component
                 $table->addCell(1200)->addText($sibling->relation?->name,null, $pStyle_6);
             }
         }else{
-                // $table->addRow(50);
-                // $table->addCell(700);
-                // $table->addCell(2800);
-                // $table->addCell(1300);
-                // $table->addCell(1300);
-                // $table->addCell(1800);
-                // $table->addCell(2300);
-                // $table->addCell(1200);
                 $table->addRow(50);
                 $cell = $table->addCell(11400, ['gridSpan' => 7]); 
                 $cell->addText(
@@ -689,14 +681,6 @@ class PdfStaffReport53 extends Component
                 $table->addCell(1200)->addText($sibling->relation?->name,null, $pStyle_6);
             }
         }else{
-                // $table->addRow(50);
-                // $table->addCell(700);
-                // $table->addCell(2800);
-                // $table->addCell(1300);
-                // $table->addCell(1300);
-                // $table->addCell(1800);
-                // $table->addCell(2300);
-                // $table->addCell(1200);
                 $table->addRow(50);
                 $cell = $table->addCell(11400, ['gridSpan' => 7]); 
                 $cell->addText(
@@ -728,14 +712,6 @@ class PdfStaffReport53 extends Component
                 $table->addCell(1200)->addText($sibling->relation?->name,null, $pStyle_6);
             }
         }else{
-                // $table->addRow(50);
-                // $table->addCell(700);
-                // $table->addCell(2800);
-                // $table->addCell(1300);
-                // $table->addCell(1300);
-                // $table->addCell(1800);
-                // $table->addCell(2300);
-                // $table->addCell(1500);
                 $table->addRow(50);
                 $cell = $table->addCell(11400, ['gridSpan' => 7]); 
                 $cell->addText(
@@ -833,7 +809,7 @@ class PdfStaffReport53 extends Component
         $textRun->addTextBreak(); // Adds a line break
         $textRun->addText("များနှင့် ဌာန/မြို့နယ်");
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(15000)->addText($staff->past_occupation, null, $pStyle_8);
+        $table->addCell(15000)->addText($staff->past_occupation ?? '', null, $pStyle_8);
         $table->addRow(50);
         $table->addCell(1300)->addText('၆။', null, $pStyle_5);
         $cell = $table->addCell(11000);
@@ -988,8 +964,6 @@ class PdfStaffReport53 extends Component
             $table->addCell(2100)->addText('တပ်/ဌာန',null ,$pStyle_4);
             $table->addCell(300)->addText('၊',  null, $pStyle_5);
             $table->addCell(2100)->addText($staff->current_department->name,null ,$pStyle_4);
-    
-        // $section->addText('ရက်စွဲ '. formatPeriodMM(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, \Carbon\Carbon::now()->day), ['align' => 'center']);
         $section->addText('ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
 
         $fileName = 'staff_report_53_' . $staff->id . '.docx';

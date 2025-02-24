@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Livewire\InvestmentCompanies;
-
+use App\Exports\F17;
 use App\Models\Payscale;
 use App\Models\Staff;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -24,6 +25,12 @@ class InformationList extends Component
             echo $pdf->output();
         }, 'information_list_report_pdf.pdf');
     }
+    public function go_excel() 
+    {
+        return Excel::download(new F17(
+    ), 'F17.xlsx');
+    }
+  
     public function go_word()
     {
         $payscales = Payscale::with('ranks', 'staff')->get();
@@ -59,9 +66,6 @@ class InformationList extends Component
 
         // Sub-headers for gender, age, and disability
         $table->addRow();
-        // $table->addCell(500)->addText();
-        // $table->addCell(2000)->addText();
-        // $table->addCell(1000)->addText();
         $table->addCell(null, ['vMerge' => 'continue']);
         $table->addCell(null, ['vMerge' => 'continue']);
         $table->addCell(null, ['vMerge' => 'continue']);

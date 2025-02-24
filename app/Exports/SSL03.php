@@ -24,12 +24,6 @@ class SSL03 implements FromView ,WithStyles
     public function view(): View
     {
         $staffs = Staff::with('postings', 'currentRank')->get();
-        // $staffs = Staff::when(
-
-        //     $this->selectedRankId  , function($q){
-        //         return $q->where('current_rank_id' , $this->selectedRankId) ;
-        //     }
-        // );
         $data = [
           'staffs' => $staffs,
         ];

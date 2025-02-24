@@ -9,16 +9,12 @@
                 ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
             </h1>
             <h1 class="mb-2 text-base font-bold text-center font-arial">
-
                 {{formatDMYmm($startDateListen)}}
-
                 မှ
                 {{formatDMYmm($endDateListen)}}
 
                 အထိ နုတ်ထွက်သွားသော ဝန်ထမ်းစာရင်း
             </h1>
-
-
             <div  class="flex items-end justify-around my-5 " >
                 <div class="w-40 ">
                     <label class="block mb-2 text-sm font-medium text-gray-700">Start Date</label>
@@ -33,17 +29,10 @@
                     <x-select wire:model="selectedRetireType_id_listen" :values="$retireTypes" placeholder="ပြုန်းတီးမှုအမျိုးအစားအားလုံး"
                         class="!w-48 !border-2 rounded-md" />
                 </div>
-
-
-
                <div>
             <x-primary-button type="button" wire:click="search()">Search</x-primary-button>
-
                </div>
                </div>
-
-
-
             <table class="md:w-full font-arial">
                 <thead>
                     <tr>
@@ -60,15 +49,12 @@
                     @endphp
                     @foreach($staffs ?? [] as $index=> $staff)
                     <tr>
-                        {{-- <td class="p-1 text-center border border-black">{{ $loop->index+1}}</td> --}}
-                        <td class="p-1 text-left border border-black">{{ $start++ }}</td>
+                        <td class="p-1 text-left border border-black">{{ en2mm($start++) }}</td>
                         <td class="p-1 text-left border border-black">{{ $staff->name}}</td>
                         <td class="p-1 text-left border border-black">{{ $staff->currentRank ? $staff->currentRank?->name : '-'}}</td>
                         <td class="p-1 text-left border border-black">{{ $staff->current_division->name}}</td>
                         <td class="p-1 text-center border border-black">
-                {{formatDMYmm($staff->retire_date)}}
-
-
+                        {{formatDMYmm($staff->retire_date)}}
                         </td>
                     </tr>
                     @endforeach

@@ -1,24 +1,24 @@
 <div class="container mx-5 my-3">
-    <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button>
+    {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
     {{-- <x-primary-button type="button" wire:click="go_word()">Word</x-primary-button> --}}
     <x-primary-button type="button" wire:click="go_excel({{ $staff->id }})">Excel</x-primary-button>
-
     <h1 class="text-left text-lg font-semibold font-arial my-4">{{ $staff->name }}</h1>
     <table class="md:w-full font-arial">
         <thead>
             <tr>
-                <th class="border border-black p-2" colspan="4">တာဝန်ချိန် ကာလ</th>
+                <th class="border border-black p-2" colspan="5">တာဝန်ချိန် ကာလ</th>
                 <th class="border border-black p-2" colspan="2">စာတိုင်(၂)အရ ခံစားခွင့်ရှိသည့်လုပ်သက်ခွင့်</th>
                 <th class="border border-black p-2" colspan="2">စုစုပေါင်းခံစားခွင့်ရှိသည့်လုပ်သက်ခွင့်စာတိုင် <br> (၃)+(၇)</th>
-                <th class="border border-black p-2" colspan="3">လုပ်သက်ခွင့်ခံစားသည့်ကာလ </th>
+                <th class="border border-black p-2" colspan="4">လုပ်သက်ခွင့်ခံစားသည့်ကာလ </th>
                 <th class="border border-black p-2" colspan="2">လုပ်သက်ခွင့်လက်ကျန်စာတိုင် <br>(၄)-(၆)</th>
-                <th class="border border-black p-2" colspan="3">ဆေးလက်မှတ်ခွင့် ခံစားသည့်ကာလ </th>
+                <th class="border border-black p-2" colspan="4">ဆေးလက်မှတ်ခွင့် ခံစားသည့်ကာလ </th>
                 <th class="border border-black p-2" colspan="3">ခံစားပြီးသည့်<br>စုစုပေါင်း<br>ဆေးလက်မှတ်ခွင့်<br>ကာလ</th>
-                <th class="border border-black p-2" colspan="3">လစာမဲ့ခွင့် ခံစားသည့်ကာလ</th>
+                <th class="border border-black p-2" colspan="4">လစာမဲ့ခွင့် ခံစားသည့်ကာလ</th>
                 <th class="border border-black p-2">မှတ်ချက်</th>
             </tr>
             <tr>
-                <th class="border border-black p-2">မှ---ထိ</th>
+                <th class="border border-black p-2">မှ</th>
+                <th class="border border-black p-2">ထိ</th>
                 <th class="border border-black p-2">နှစ်</th>
                 <th class="border border-black p-2">လ</th>
                 <th class="border border-black p-2">ရက်</th>
@@ -26,39 +26,37 @@
                 <th class="border border-black p-2">ရက်</th>
                 <th class="border border-black p-2">လ</th>
                 <th class="border border-black p-2">ရက်</th>
-                <th class="border border-black p-2">မှ---ထိ</th>
+                <th class="border border-black p-2">မှ</th>
+                <th class="border border-black p-2">ထိ</th>
                 <th class="border border-black p-2">လ</th>
                 <th class="border border-black p-2">ရက်</th>
                 <th class="border border-black p-2">လ</th>
                 <th class="border border-black p-2">ရက်</th>
-                <th class="border border-black p-2">မှ---ထိ</th>
+                <th class="border border-black p-2">မှ</th>
+                <th class="border border-black p-2">ထိ</th>
                 <th class="border border-black p-2">လ</th>
                 <th class="border border-black p-2">ရက်</th>
                 <th class="border border-black p-2">နှစ်</th>
                 <th class="border border-black p-2">လ</th>
                 <th class="border border-black p-2">ရက်</th>
-                <th class="border border-black p-2">မှ---ထိ</th>
+                <th class="border border-black p-2">မှ</th>
+                <th class="border border-black p-2">ထိ</th>
                 <th class="border border-black p-2">လ</th>
                 <th class="border border-black p-2">ရက်</th>
                 <th class="border border-black p-2"></th>
-              
-
-
             </tr>
             <tr>
-                <th class="border border-black p-2">(၁)</th>
-                <th class="border-none p-2" ></th>
-                <th class="border-black p-2" rowspan="1">(၂)</th>
-                <th class=" p-2" ></th>
+                <th class="border border-black p-2" colspan="2">(၁)</th>
+                <th class="border border-black p-2" colspan="3">(၂)</th>
                 <th class="border border-black p-2" colspan="2">(၃)</th>
                 <th class="border border-black p-2" colspan="2">(၄)</th>
-                <th class="border border-black p-2" >(၅)</th>
+                <th class="border border-black p-2" colspan="2">(၅)</th>
                 <th class="border border-black p-2" colspan="2">(၆)</th>
                 <th class="border border-black p-2" colspan="2">(၇)</th>
-                <th class="border border-black p-2">(၈)</th>
+                <th class="border border-black p-2" colspan="2">(၈)</th>
                 <th class="border border-black p-2" colspan="2">(၉)</th>
                 <th class="border border-black p-2" colspan="3">(၁၀)</th>
-                <th class="border border-black p-2">(၁၁)</th>
+                <th class="border border-black p-2" colspan="2">(၁၁)</th>
                 <th class="border border-black p-2" colspan="2">(၁၂)</th>
                  <th class="border border-black p-2">(၁၃)</th> 
             </tr>
@@ -76,7 +74,8 @@
                         $work_diff = dateDiff($workStartDate, $workEndDate);
                     @endphp
 
-                    <td class="border border-black p-2">{{ en2mm(formatDMY($workStartDate)) }} မှ {{ en2mm(formatDMY($workEndDate)) }} ထိ</td>
+                    <td class="border border-black p-2">{{ formatDMYmm($workStartDate) }}</td>
+                        <td class="border border-black p-2"> {{ formatDMYmm($workEndDate) }}</td>
                     <td class="border border-black p-2">
                         {{ $work_diff->y > 0 ? en2mm($work_diff->y) . ' နှစ် ' : '-' }}
                     </td>
@@ -115,7 +114,8 @@
                     <td class="border border-black p-2">
                         {{ $total_leave_days > 0 ? en2mm($total_leave_days) . ' ရက် ' : '-' }}
                     </td>
-                    <td class="border border-black p-2">{{formatDMYmm($leave->from_date).' မှ'.formatDMYmm($leave->to_date).' ထိ '}}</td>
+                    <td class="border border-black p-2">{{formatDMYmm($leave->from_date)}}</td>
+                    <td class="border border-black p-2">{{formatDMYmm($leave->to_date)}}</td>
                     <td class="border border-black p-2">
                         {{ $leave_diff->m > 0 ? en2mm($leave_diff->m) . ' လ ' : '-' }}
                     </td>
@@ -150,7 +150,10 @@
                     </td>
                     <td class="border border-black p-2">
                     </td>
-
+                    <td class="border border-black p-2">
+                    </td>
+                    <td class="border border-black p-2">
+                    </td>
                 </tr>
                 @php
                     $workStartDate = Carbon\Carbon::parse($leave->to_date)->addDay()->toDateString();

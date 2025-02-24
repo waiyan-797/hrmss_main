@@ -24,8 +24,8 @@
             </div>
         </div>
     </div> --}}
-    <div class="flex justify-center items-center mb-4">
-        <h2 class="text-xl font-bold text-gray-700">Reports</h2>
+    <div class="flex justify-center items-center mb-4"><br>
+        <h2 class="text-xl font-bold text-gray-700">ဝန်ထမ်းရေးရာ Reports</h2>
        
     </div>
 
@@ -52,7 +52,7 @@
                 @foreach ($reports as $index => $report)
                     <tr class="{{ $loop->odd ? 'bg-gray-50' : 'bg-white' }}">
                         <td class="px-4 py-2 border border-gray-200 text-sm text-gray-700">
-                            {{ $index + 1 }}
+                            {{ en2mm($index + 1) }}
                         </td>
                         <td class="px-4 py-2 border border-gray-200 text-sm text-gray-700">
                           {{ 'PA' . str_pad($report['id'], 2, '0', STR_PAD_LEFT) }}

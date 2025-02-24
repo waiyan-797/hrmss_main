@@ -1,6 +1,5 @@
 <?php
 namespace App\Livewire\Leave;
-
 use App\Exports\L4;
 use App\Models\Leave;
 use App\Models\Staff;
@@ -8,7 +7,6 @@ use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
-
 class LeaveDate extends Component
 {
     public $staff_id;
@@ -22,7 +20,6 @@ class LeaveDate extends Component
         $leaves = Leave::where('staff_id', $this->staff_id)
             ->where('leave_type_id', 2)
             ->get();
-
         $data = [
             'staff' => $staff,
             'leaves' => $leaves,
@@ -41,8 +38,7 @@ class LeaveDate extends Component
     {
         $staff = Staff::where('id', $this->staff_id)->first();
         $leaves = Leave::where('staff_id', $this->staff_id)
-            ->where('leave_type_id', 2)
-            ->get();
+            ->where('leave_type_id', 2)->get();
         $phpWord = new PhpWord();
         $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
@@ -69,24 +65,18 @@ class LeaveDate extends Component
     $workStartDate = $staff->join_date;
     $previous_total_leave_months = 0;
     $previous_total_leave_days = 0;
-
     foreach ($leaves as $leave) {
-        // Calculate working period and free leave
         $workEndDate = \Carbon\Carbon::parse($leave->from_date)->subDay()->toDateString();
         $work_diff = dateDiff($workStartDate, $workEndDate);
         $total_days_worked = \Carbon\Carbon::parse($workStartDate)->diffInDays(\Carbon\Carbon::parse($workEndDate));
         $free_leave_days = floor($total_days_worked / 11);
         $free_leave_months = floor($free_leave_days / 30);
         $remaining_free_leave_days = $free_leave_days % 30;
-
-
-        // Calculate leave taken period and remaining leave
         $leave_diff = dateDiff($leave->from_date, $leave->to_date);
         $total_leave_months = $previous_total_leave_months + $free_leave_months;
         $total_leave_days = $previous_total_leave_days + $remaining_free_leave_days;
         $diff_leave_months = $total_leave_months - $leave_diff->m;
         $diff_leave_days = $total_leave_days - $leave_diff->d;
-        // Add a new row for each leave entry
         $table->addRow();
         $table->addCell(2000)->addText(en2mm(formatDMY($workStartDate)).'မှ'.en2mm(formatDMY($workEndDate)));
         $table->addCell(2000)->addText( $work_diff->y > 0 ? en2mm($work_diff->y) . ' နှစ် ' : '-');
@@ -101,8 +91,6 @@ class LeaveDate extends Component
         $table->addCell(2000)->addText( $leave_diff->d > 0 ? en2mm($leave_diff->d + 1    ) . ' ရက် ' : '-');
         $table->addCell(2000)->addText($diff_leave_months > 0 ? en2mm($diff_leave_months) . ' လ' : '-');
         $table->addCell(2000)->addText($diff_leave_days > 0 ? en2mm($diff_leave_days  - 1 ) . ' ရက်' : '-');
-
-        // Update start date for the next period
         $workStartDate = \Carbon\Carbon::parse($leave->to_date)->addDay()->toDateString();
         $previous_total_leave_months = $diff_leave_months;
         $previous_total_leave_days = $diff_leave_days;
@@ -115,9 +103,7 @@ class LeaveDate extends Component
     public function render()
     {
         $staff = Staff::where('id', $this->staff_id)->first();
-        $leaves = Leave::where('staff_id', $this->staff_id)
-            ->where('leave_type_id', 2)
-            ->get();
+        $leaves = Leave::where('staff_id', $this->staff_id)->whereIn('leave_type_id', [2, 4, 5])->get();
         return view('livewire.leave.leave-date', [
             'staff' => $staff,
             'leaves' => $leaves,

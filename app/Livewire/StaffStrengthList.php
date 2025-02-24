@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Livewire;
-
 use Livewire\Component;
-
 class StaffStrengthList extends Component
 {
     public $reports = [];
@@ -24,6 +22,8 @@ class StaffStrengthList extends Component
             ['id' => 11, 'name' => 'ဖွဲ့ခန်ပိုလို(division အလိုက်)'],
             ['id' => 12, 'name' => 'ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာနရှိ သား/သမီးများ၏အရေအတွက်စာရင်း'],
             ['id' => 13, 'name' => 'ဝန်ထမ်းများ၏ မိသားစုဝင် သား/သမီးများစာရင်း'],
+            ['id' => 14, 'name' => 'လက်ရှိရာထူး၏ လုပ်သက်အလိုက်ဝန်ထမ်းများစာရင်း  '],
+            ['id' => 15, 'name' => 'အသက်အလိုက် ဝန်ထမ်းများစာရင်း'],
         ];
     }
     public function showReport($id)
@@ -42,6 +42,8 @@ class StaffStrengthList extends Component
             11 =>route('vacancy_over_by_division'),
             12 =>route('children_report_detials'),
             13 =>route('children_report_summary'),
+            14 =>route('current-position'),
+            15 =>route('staff-by-age'),
             
         ];
         if (array_key_exists($id, $routes)) {

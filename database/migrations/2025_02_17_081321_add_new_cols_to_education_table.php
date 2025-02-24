@@ -14,8 +14,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('education', function (Blueprint $table) {
-            $table->foreignIdFor(EducationType::class)->nullable()->constrained()->nullOnDelete();
-            $table->foreignIdFor(EducationGroup::class)->nullable()->constrained()->nullOnDelete();
+            // $table->foreignIdFor(EducationType::class)->nullable()->constrained()->nullOnDelete();
+            // $table->foreignIdFor(EducationGroup::class)->nullable()->constrained()->nullOnDelete();
         });
     }
 
