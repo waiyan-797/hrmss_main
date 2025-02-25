@@ -2127,15 +2127,29 @@ class StaffDetail extends Component
 
     public array $searchResults = [];
 
+    // #[On('searchInputUpdated')]
+    // public function searchOptions($query, $field)
+    // {
+    //     $this->searchResults = Education::where('name', 'like', "%$query%")->get()->toArray();
+    //     if ($this->searchResults) {
+    //         logger('Dispatching searchResultsUpdated', ['field' => $field, 'results' => $this->searchResults]); // Debug log
+    //         $this->dispatch('searchResultsUpdated', field: $field, results: $this->searchResults);
+    //     }
+    // }
+
+
+
     #[On('searchInputUpdated')]
-    public function searchOptions($query, $field)
-    {
-        $this->searchResults = Education::where('name', 'like', "%$query%")->get()->toArray();
-        if ($this->searchResults) {
-            logger('Dispatching searchResultsUpdated', ['field' => $field, 'results' => $this->searchResults]); // Debug log
-            $this->dispatch('searchResultsUpdated', field: $field, results: $this->searchResults);
-        }
+public function searchOptions($query, $field, $index)
+{
+    $this->searchResults[$index] = Education::where('name', 'like', "%$query%")->get()->toArray();
+    if ($this->searchResults[$index]) {
+        logger('Dispatching searchResultsUpdated', ['field' => $field, 'index' => $index, 'results' => $this->searchResults[$index]]);
+        $this->dispatch('searchResultsUpdated', field: $field, index: $index, results: $this->searchResults[$index]);
     }
+}
+
+
 
 
 

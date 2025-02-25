@@ -44,7 +44,7 @@
                                     triggerSearch() {
 
                                         if (this.searchQuery.length >= 3) {
-                                            $wire.call('searchOptions', this.searchQuery, '{{ $type['wire_array_key'] }}').then(result => {
+                                            $wire.call('searchOptions', this.searchQuery, '{{ $type['wire_array_key']}}' , {{ $index }}).then(result => {
                                                 this.filteredOptions = result || [];
                                             });
                                         } else {
@@ -95,7 +95,7 @@
                                         });
 
                                         window.addEventListener('searchResultsUpdated', event => {
-                                            if (event.detail.field === '{{ $type['wire_array_key'] }}') {
+                                            if (event.detail.field === '{{ $type['wire_array_key'] }}'  && event.detail.index === {{ $index }}) {
                                                 this.filteredOptions = event.detail.results || [];
                                                 setTimeout(() => {
                                                     this.filteredOptions = Array.from(event.detail.results) || [];
@@ -128,17 +128,10 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
-
-
 <x-input-error class="mt-2" :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])"/>
+
+
+
                                 @elseif ($type['next_col_update'] && is_string($type['select_values']))
                                     <x-select
 :disabled="$type['disabled']"
