@@ -36,7 +36,7 @@ class SortableStaff extends Component
         $query  = Staff::query()
 
         ->orderBy('current_rank_date')
-        ->orderBy('join_date')
+        // ->orderBy('join_date')
 
         ;
         if($this->selectedRankId){
