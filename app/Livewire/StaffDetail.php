@@ -1416,6 +1416,7 @@ class StaffDetail extends Component
     {
         $_validation = $this->validate_abroads();
         $this->validate($_validation['validate'], $_validation['messages']);
+        // dd('');
         foreach ($this->abroads as $abroad) {
             $ab = Abroad::updateOrCreate([
                 'id' => $abroad['id'],
@@ -1431,7 +1432,7 @@ class StaffDetail extends Component
                 'actual_abroad_date' => '2024-12-09',
                 'position' => $abroad['position'],
             ]);
-            $ab->countries()->attach($abroad['country']);
+            $ab->countries()->sync($abroad['country']);
         }
     }
 
