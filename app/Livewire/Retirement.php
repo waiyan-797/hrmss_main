@@ -71,7 +71,7 @@ class Retirement extends Component
         $newAttachment = $this->retire_remark_attach
             ? Storage::disk('upload')->put('staffs', $this->retire_remark_attach)
             : $this->staff->retire_remark_attach;
-        dd($newAttachment);
+
 
         if ($newAttachment && $this->staff->retire_remark_attach) {
             Storage::disk('upload')->delete($this->staff->retire_remark_attach);
@@ -118,6 +118,8 @@ class Retirement extends Component
 
     public function edit_modal($id)
     {
+        $this->pensionTypes = PensionType::where('retire_type_id', 5)->get();
+
         $this->retire_type_id = $this->staff->retire_type_id;
         $this->pension_type_id = $this->staff->pension_type_id;
         $this->retire_date = $this->staff->retire_date;
@@ -210,6 +212,7 @@ class Retirement extends Component
     }
 
     public function updatedRetireTypeId($value){
+
         $this->pensionTypes = PensionType::where('retire_type_id', $value)->get();
     }
 
