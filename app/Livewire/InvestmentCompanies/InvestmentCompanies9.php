@@ -37,12 +37,18 @@ class InvestmentCompanies9 extends Component
     ]);
    
     $section->addText('၂၀၂၄-၂၀၂၅ ဘဏ္ဍာရေးနှစ်အတွင်း ဝန်ထမ်းအဖြစ်မှ ထုတ်ပစ်ခံရသော ဝန်ထမ်းများစာရင်း', ['bold' => true, 'size' => 13], ['alignment' => 'center']);
-    $section->addText('ဝန်ထမ်းအဖွဲ့အစည်းအမည်၊ရင်းနှီးမြှုပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 13]);
+    $section->addText('ဝန်ထမ်းအဖွဲ့အစည်းအမည်၊ ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 13]);
+    // $section->addText(
+    //       mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), 
+    //     [], 
+    //     ['alignment' => 'right']
+    // );
     $section->addText(
-        'ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), 
-        [], 
+        mmDateFormat(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month),
+        [],
         ['alignment' => 'right']
     );
+    
     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
 
     $table->addRow();
@@ -52,9 +58,9 @@ class InvestmentCompanies9 extends Component
     $table->addCell(4500)->addText('(က)ရာထူး        (ခ)လစာနှုန်း   (ဂ)နောက်ဆုံးထုတ်လစာ' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'left', 'spaceBefore'=>500]);
     $table->addCell(2000)->addText('စတင် အမှုထမ်း သည့်နေ့' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center','spaceBefore'=>500]);
     $table->addCell(2000)->addText('စတင် ကင်းကွာ/ ပျက်ကွက် သည့်နေ့' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center','spaceBefore'=>500]);
-    $table->addCell(3000)->addText('ဝန်ထမ်းအဖြစ်မှ ထုတ်ပစ်/ရာထူးမှ ထုတ်ပယ်သည့် နေ့အမိန့်စာ  ရက်စွဲ' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center', 'spaceBefore'=>100]);
+    $table->addCell(3200)->addText('ဝန်ထမ်းအဖြစ်မှ ထုတ်ပစ်/ရာထူးမှ ထုတ်ပယ်သည့်နေ့ အမိန့်စာရက်စွဲ' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center', 'spaceBefore'=>100]);
     $table->addCell(2000)->addText('လုပ်သက်' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center', 'spaceBefore'=>1000]);
-    $table->addCell(4000)->addText('ဝန်ထမ်းအဖြစ်မှ ထုတ်ပစ်/ရာထူးမှထုတ် ပယ်ခံရသည့် အကြောင်းအရင်း' ,['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center', 'spaceBefore'=>500]);
+    $table->addCell(3800)->addText('ဝန်ထမ်းအဖြစ်မှ ထုတ်ပစ်/ရာထူးမှ ထုတ်ပယ်ခံရသည့် အကြောင်းအရင်း' ,['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center', 'spaceBefore'=>500]);
     $table->addCell(1000)->addText('မှတ် ချက်' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center', 'spaceBefore'=>800]);
     
     $table->addRow();
@@ -64,9 +70,9 @@ class InvestmentCompanies9 extends Component
     $table->addCell(4500)->addText('(ဃ)', ['bold'=>false , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center']);
     $table->addCell(2000)->addText('(င)', ['bold'=>false , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center']);
     $table->addCell(2000)->addText('(စ)', ['bold'=>false , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center']);
-    $table->addCell(3000)->addText('(ဆ)', ['bold'=>false , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center']);
+    $table->addCell(3200)->addText('(ဆ)', ['bold'=>false , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center']);
     $table->addCell(2000)->addText('(ဇ)', ['bold'=>false , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center']);
-    $table->addCell(4000)->addText('(ဈ)', ['bold'=>false , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center']);
+    $table->addCell(3800)->addText('(ဈ)', ['bold'=>false , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center']);
     $table->addCell(1000)->addText('(ည)', ['bold'=>false , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center']);
     foreach ($staffs as $index => $staff) {
         $table->addRow();
@@ -76,12 +82,12 @@ class InvestmentCompanies9 extends Component
         $table->addCell(4500)->addText($staff->current_rank?->name . '၊ ' . $staff->payscale?->name . '၊ ' . $staff->current_salary);
         $table->addCell(2000)->addText(en2mm(\Carbon\Carbon::parse($staff->join_date)->format('d-m-Y')));
         $table->addCell(2000)->addText(en2mm($staff->lost_contact_from_date));
-        $table->addCell(3000)->addText(en2mm($staff->retire_date));
+        $table->addCell(3200)->addText(en2mm($staff->retire_date));
         $join_date = \Carbon\Carbon::parse($staff->join_date);
         $join_date_duration = $join_date->diff(\Carbon\Carbon::now());
         $duration = "{$join_date_duration->y} နှစ် {$join_date_duration->m} လ {$join_date_duration->d} ရက်";
         $table->addCell(2000)->addText($duration);
-        $table->addCell(4000)->addText($staff->retire_remark);
+        $table->addCell(3800)->addText($staff->retire_remark);
         $table->addCell(1000)->addText('');
     }
 
