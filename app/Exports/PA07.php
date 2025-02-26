@@ -192,29 +192,29 @@ class PA07 implements FromView ,WithStyles
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
         
         
-        $sheet->getColumnDimension('A')->setWidth(4);
-        $sheet->getColumnDimension('B')->setWidth(19);
+        $sheet->getColumnDimension('A')->setWidth(3.71);
+        $sheet->getColumnDimension('B')->setWidth(17.29);
         $sheet->getColumnDimension('C')->setWidth(7);
         $sheet->getColumnDimension('D')->setWidth(7);
         $sheet->getColumnDimension('E')->setWidth(7);
-        $sheet->getColumnDimension('F')->setWidth(4);
-        $sheet->getColumnDimension('G')->setWidth(4);
+        $sheet->getColumnDimension('F')->setWidth(5);
+        $sheet->getColumnDimension('G')->setWidth(5);
         $sheet->getColumnDimension('H')->setWidth(5);
         $sheet->getColumnDimension('I')->setWidth(5);
         $sheet->getColumnDimension('J')->setWidth(5);
         $sheet->getColumnDimension('K')->setWidth(5);
-        $sheet->getColumnDimension('L')->setWidth(4);
-        $sheet->getColumnDimension('M')->setWidth(4);
+        $sheet->getColumnDimension('L')->setWidth(5);
+        $sheet->getColumnDimension('M')->setWidth(5);
         $sheet->getColumnDimension('N')->setWidth(7);
         $sheet->getColumnDimension('O')->setWidth(7);
         $sheet->getColumnDimension('P')->setWidth(7);
         $sheet->getColumnDimension('Q')->setWidth(7);
-        $sheet->getColumnDimension('R')->setWidth(6);
-        $sheet->getColumnDimension('S')->setWidth(6);
-        $sheet->getColumnDimension('T')->setWidth(6);
-        $sheet->getColumnDimension('U')->setWidth(6);
-        $sheet->getColumnDimension('V')->setWidth(6);
-        $sheet->getColumnDimension('W')->setWidth(6);
+        $sheet->getColumnDimension('R')->setWidth(5);
+        $sheet->getColumnDimension('S')->setWidth(5);
+        $sheet->getColumnDimension('T')->setWidth(5);
+        $sheet->getColumnDimension('U')->setWidth(5);
+        $sheet->getColumnDimension('V')->setWidth(5);
+        $sheet->getColumnDimension('W')->setWidth(5);
         $sheet->getColumnDimension('X')->setWidth(7);
         $sheet->getColumnDimension('Y')->setWidth(7);
         $sheet->getColumnDimension('Z')->setWidth(7);
@@ -224,7 +224,7 @@ class PA07 implements FromView ,WithStyles
         $sheet->getRowDimension(3)->setRowHeight(28);
 
         for ($row = 4; $row <= $highestRow-1 ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(28);
+            $sheet->getRowDimension($row)->setRowHeight(33);
         }
         $sheet->getRowDimension(8)->setRowHeight(180);
 

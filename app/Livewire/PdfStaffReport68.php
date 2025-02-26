@@ -845,18 +845,18 @@ class PdfStaffReport68 extends Component
         $table = $section->addTable();
         $table->addRow();
         $table->addCell(1300)->addText('၄။', null,  $pStyle_5);
-        $table->addCell(13000)->addText("နောက်ဆုံးအောင်မြင်ခဲ့သည့်ကျောင်း၊.' '.အတန်း၊.' '.ခုံအမှတ်၊.'  '.ဘာသာရပ်အတိအကျဖော်ပြရန်", null, $pStyle_8);
+        $table->addCell(13000)->addText("နောက်ဆုံးအောင်မြင်ခဲ့သည့်ကျောင်း၊ အတန်း၊  ခုံအမှတ်၊ ဘာသာရပ်အတိအကျဖော်ပြရန်", null, $pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
         $table->addCell(13000)->addText($staff->last_school_name . '၊' . $staff->last_school_subject . '၊' . $staff->last_school_row_no . '၊' . $staff->last_school_major, null, $pStyle_8);
 
         $table->addRow();
         $table->addCell(1300)->addText('၅။', null,  $pStyle_5);
-        $table->addCell(13000)->addText("ကျောင်းသားဘဝတွင်နိုင်ငံရေး/မြို့ရေး ဆောင်ရွက်မှုများနှင့်အဆင့်အတန်း၊.'  '.တာဝန်", null, $pStyle_8);
+        $table->addCell(13000)->addText("ကျောင်းသားဘဝတွင်နိုင်ငံရေး/မြို့ရေး ဆောင်ရွက်မှုများနှင့်အဆင့်အတန်း၊ တာဝန်", null, $pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
         $table->addCell(13000)->addText($staff->student_life_political_social ? $staff->student_life_political_social : 'မရှိပါ', null, $pStyle_8);
         $table->addRow();
         $table->addCell(1300)->addText('၆။', null,  $pStyle_5);
-        $table->addCell(13000)->addText("ဝါသနာပါပြီး၊လေ့လာလိုက်စားခဲ့သော\nကျန်းမာရေးကစားခုန်စားမှုများ၊.'  '.အနုပညာဆိုင်ရာအတီးအမှုတ်များ၊ ပညာရေးစက်မှုလက်မှု", null, $pStyle_8);
+        $table->addCell(13000)->addText("ဝါသနာပါပြီး၊လေ့လာလိုက်စားခဲ့သော\nကျန်းမာရေးကစားခုန်စားမှုများ၊ အနုပညာဆိုင်ရာအတီးအမှုတ်များ၊ ပညာရေးစက်မှုလက်မှု", null, $pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
         $table->addCell(13000)->addText($staff->habit ? $staff->habit : 'မရှိပါ', null, $pStyle_8);
 
