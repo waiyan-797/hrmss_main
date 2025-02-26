@@ -14,7 +14,7 @@ class SortableStaff extends Component
     public $staff_id ;
     public $staff ;
     public $ranks ,  $selectedRankId ;
-    public $divisions , $selectDivisionId;
+    // public $divisions , $selectDivisionId;
 
 
 
@@ -23,10 +23,10 @@ class SortableStaff extends Component
     public function mount()
     {
         $this->ranks = Rank::where('is_dica',true)->get();
-        $this->divisions = Division::all();
+        // $this->divisions = Division::all();
 
         $this->selectedRankId =  $this->ranks->first()->id;
-        $this->selectDivisionId =  $this->divisions->first()->id;
+        // $this->selectDivisionId =  $this->divisions->first()->id;
     }
 
 
@@ -43,9 +43,9 @@ class SortableStaff extends Component
             $query->where('current_rank_id' , $this->selectedRankId);
         }
 
-        if($this->selectDivisionId){
-            $query->where('current_division_id' , $this->selectDivisionId);
-        }
+        // if($this->selectDivisionId){
+        //     $query->where('current_division_id' , $this->selectDivisionId);
+        // }
 
 
         $this->staffs  = $query->get();

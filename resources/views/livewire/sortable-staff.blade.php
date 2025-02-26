@@ -14,7 +14,7 @@
 />
 
 
-
+{{--
 <x-select
 wire:model.live="selectDivisionId"
 
@@ -22,7 +22,7 @@ wire:model.live="selectDivisionId"
 class="block w-full p-2 text-sm border rounded"
 :values="$divisions"
 placeholder="Select..."
-/>
+/> --}}
    </div>
 
 
