@@ -10,9 +10,6 @@ use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
-
-
-
 class InvestmentCompanies3 extends Component
 {
 

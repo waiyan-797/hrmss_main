@@ -94,14 +94,21 @@ class PA08 implements FromView ,WithStyles
 
         return view('excel_reports.investment_companies_report_8', $data);
     }
-
-
     public function styles(Worksheet $sheet)
     {
         // Set paper size and orientation
         $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4); // Set paper size to A4
         $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
+        
+        $sheet->getPageMargins()->setTop(0.75);
+        $sheet->getPageMargins()->setHeader(0.3);
+        $sheet->getPageMargins()->setLeft(0.15);
+        $sheet->getPageMargins()->setRight(0.15);
+        $sheet->getPageMargins()->setBottom(0.5);
+        $sheet->getPageMargins()->setFooter(0.3);
 
+    // Center on page horizontally
+    $sheet->getPageSetup()->setHorizontalCentered(true);
         // Fit to page width
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
@@ -136,14 +143,16 @@ class PA08 implements FromView ,WithStyles
         $sheet->getRowDimension(1)->setRowHeight(28);
         $sheet->getRowDimension(2)->setRowHeight(28);
         $sheet->getRowDimension(3)->setRowHeight(28);
+        $sheet->getRowDimension(4)->setRowHeight(28);
+      
 
-        $sheet->removeRow(4);
-        for ($row = 4; $row <= $highestRow ; $row++) {
+        // $sheet->removeRow(5);
+        for ($row = 5; $row <= $highestRow ; $row++) {
             $sheet->getRowDimension($row)->setRowHeight(28);
         }
         $sheet->getRowDimension(7)->setRowHeight(150);
 
-        $sheet->getStyle('A1:A3')->applyFromArray([
+        $sheet->getStyle('A1:A4')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 13,
@@ -178,6 +187,7 @@ class PA08 implements FromView ,WithStyles
             ],
         ]);
 
+
         $sheet->getStyle("A7:$highestColumn$highestRow")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
@@ -185,7 +195,7 @@ class PA08 implements FromView ,WithStyles
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
             ],
             'borders' => [
                 'allBorders' => [
@@ -194,42 +204,24 @@ class PA08 implements FromView ,WithStyles
                 ],
             ],
         ]);
-        $sheet->removeRow(9);
-        // $sheet->getStyle('A8:A9')->applyFromArray([
+
+        // $sheet->getStyle("A7:$highestColumn$highestRow")->applyFromArray([
         //     'font' => [
         //         'name' => 'Pyidaungsu',
         //         'size' => 13,
-        //         'bold' => true,
         //     ],
         //     'alignment' => [
-        //         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
-        //         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        //         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
+        //         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
         //     ],
         //     'borders' => [
-        //         'outline' => [
-        //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+        //         'allBorders' => [
+        //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        //             'color' => ['argb' => 'FF000000'], // Black border
         //         ],
         //     ],
         // ]);
-        
-        // // Auto-size columns based on dynamic range
-        // foreach (range('A', $highestColumn) as $column) {
-        //     $sheet->getColumnDimension($column)->setAutoSize(true);
-        // }
-
-        // // Set row heights manually for dynamic rows
-        // foreach (range(3, $highestRow) as $row) {
-        //     $sheet->getRowDimension($row)->setRowHeight(-1); // Auto-adjust height
-        // }
-
-        // // Define the print area dynamically
-        // $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
-
-        // // Set a margin for better printing output
-        // $sheet->getPageMargins()->setTop(0.5);
-        // $sheet->getPageMargins()->setRight(0.5);
-        // $sheet->getPageMargins()->setLeft(0.5);
-        // $sheet->getPageMargins()->setBottom(0.5);
+        $sheet->removeRow(9); 
     }
     
 }

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Livewire\InvestmentCompanies;
-
 use App\Exports\PA04;
 use App\Models\Payscale;
 use App\Models\Staff;
@@ -10,10 +9,9 @@ use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
-
 class InvestmentCompanies4 extends Component
 {
-    public $year, $month, $filterRange;
+    public $year, $month, $filterRange,$myanmarDate;
     public $previousYear, $previousMonthDate, $previousMonth;
     public $count=0;
     public function go_pdf(){
@@ -41,11 +39,6 @@ class InvestmentCompanies4 extends Component
     $second_payscales = Payscale::where('staff_type_id', 2)->get();
     $phpWord = new PhpWord();
     $section = $phpWord->addSection(); 
-    // $section->addText(
-    //     'ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 
-    //     ['bold' => true, 'size' => 14],
-    //     ['align' => 'center']
-    // );
     $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
         $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
@@ -98,7 +91,8 @@ class InvestmentCompanies4 extends Component
 
     public function mount()
     {
-        $this->filterRange = Carbon::now()->format('Y-m'); // Format: 'YYYY-MM'
+        $this->filterRange = Carbon::now()->format('Y-m');
+      
     }
     public function render()
     {

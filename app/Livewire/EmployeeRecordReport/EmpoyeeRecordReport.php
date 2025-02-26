@@ -43,15 +43,17 @@ class EmpoyeeRecordReport extends Component
             ->whereBetween('retire_date', [$this->startDate, $this->endDate])
             ->get();
         $phpWord = new PhpWord();
+       
         $section = $phpWord->addSection([
             'orientation' => 'portrait',
-            'pageSizeW' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(8.5), // Letter width
-            'pageSizeH' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(11),  // Letter height
-            'marginTop'    => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),
-            'marginBottom' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),
-            'marginLeft'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.9),
-            'marginRight'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.9),
+            'pageSizeW'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(8.5), // Letter width
+            'pageSizeH'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(11),  // Letter height
+            'marginTop'    => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.44),
+            'marginBottom' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.63),
+            'marginLeft'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.31),
+            'marginRight'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),
         ]);
+        
         $pStyle_1=array('align' => 'center', 'spaceAfter' => 0, 'spaceBefore' => 0);
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);

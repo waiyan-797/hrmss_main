@@ -89,35 +89,6 @@
                     <th rowspan="2" colspan="3" style="font-weight:bold;">အမှုထမ်းပေါင်း</th>
                     <th rowspan="2" colspan="3" style="font-weight:bold;">စုစုပေါင်း</th>
                 </tr>
-                {{-- <tr>
-                    <th>ခွင့်ပြု</th>
-                    <th>ခန့်အပ်</th>
-                    <th>ပို/လို</th>
-                    <th>ခွင့်ပြု</th>
-                    <th>ခန့်အပ်</th>
-                    <th>ပို/လို</th>
-                    <th>ခွင့်ပြု</th>
-                    <th>ခန့်အပ်</th>
-                    <th>ပို/လို</th>
-                    <th>ခွင့်ပြု</th>
-                    <th>ခန့်အပ်</th>
-                    <th>ပို/လို</th>
-                    <th>ခွင့်ပြု</th>
-                    <th>ခန့်အပ်</th>
-                    <th>ပို/လို</th>
-                    <th>ခွင့်ပြု</th>
-                    <th>ခန့်အပ်</th>
-                    <th>ပို/လို</th>
-                    <th>ခွင့်ပြု</th>
-                    <th>ခန့်အပ်</th>
-                    <th>ပို/လို</th>
-                    <th>ခွင့်ပြု</th>
-                    <th>ခန့်အပ်</th>
-                    <th>ပို/လို</th>
-                    <th>ခွင့်ပြု</th>
-                    <th>ခန့်အပ်</th>
-                    <th>ပို/လို</th>
-                </tr> --}}
             </thead>
             <tbody>
                 <tr></tr>

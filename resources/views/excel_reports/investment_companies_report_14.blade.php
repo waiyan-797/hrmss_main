@@ -1,52 +1,4 @@
-{{-- <style type="text/css">
-    page {
-        background: white;
-    }
 
-    page[size="A4"] {
-        width: 210mm;
-        height: 297mm;
-    }
-
-    @media print {
-
-        body,
-        page {
-            margin: 0;
-            box-shadow: 0;
-        }
-    }
-
-    body {
-        font-family: 'pyidaungsu', sans-serif !important;
-        font-size: 13px;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th,
-    td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: center;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    td {
-        vertical-align: middle;
-    }
-
-    .bold-row {
-        font-weight: bold;
-    }
-</style>
-</head> --}}
 
 <body>
     <div class="container">
@@ -55,12 +7,12 @@
             <table class="">
                 <tr>
                     <th style="font-weight:bold;" colspan="38">
-                        ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                        ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
                     </th>
                 </tr>
                 <tr>
                     <th style="font-weight:bold;" colspan="38">
-                        ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာနရှိ(ရုံးချုပ်)၏ ဖွဲ့စည်းပုံ၊ ခန့်အပ်၊
+                        ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာနရှိ(ရုံးချုပ်)၏ ဖွဲ့စည်းပုံ၊ ခန့်အပ်၊
                         ပို/လို အင်အားစာရင်း
                     </th>
                 </tr>
@@ -73,17 +25,6 @@
                     </th>
                 </tr>
             </table>
-
-            {{-- <table>
-                <tr>
-                    <th colspan="38" rowspan="2">
-                        ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန<br>
-                        ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
-
-                    </th>
-                </tr>
-            </table> --}}
-
             <table>
                 <thead>
                     <tr>
@@ -230,7 +171,7 @@
                     @endforeach
                     <tr class="font-bold">
                         <td></td>
-                        <td>စုစုပေါင်း</td>
+                        <td style="font-weight: bold;">စုစုပေါင်း</td>
                         <td>{{ en2mm($total_allowed_qty) }}</td>
                         <td>{{ en2mm($total_si_man) }}</td>
                         <td>{{ en2mm($total_si_man - $total_allowed_qty) }}</td>

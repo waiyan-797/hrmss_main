@@ -36,6 +36,7 @@ class Report extends Component
             ['id' => 20, 'name' => 'နှစ်တိုးရတော့မည်သူများ'],
             ['id' => 21, 'name' => 'နပတ၃'],
             ['id' => 22, 'name' => 'လူများကို senior စဉ်ဖြင့်စီမည်'],
+            ['id' => 23, 'name' => 'အဆင့်တူ ကျားမ အသက်အုပ်စု'],
 
         ];
     }
@@ -64,6 +65,7 @@ class Report extends Component
             20 =>route('about_to_increment'),
             21 =>route('npt_three'),
             22 =>route('sortable'), // report သီးသန့်လိုပါသလား???? 
+            23 =>route('information_list'), 
             
 
         ];

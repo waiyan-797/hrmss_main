@@ -1,5 +1,5 @@
 <div class="container mx-5 my-3">
-    {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
+     <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> 
     {{-- <x-primary-button type="button" wire:click="go_word()">Word</x-primary-button> --}}
     <x-primary-button type="button" wire:click="go_excel({{ $staff->id }})">Excel</x-primary-button>
     <h1 class="text-left text-lg font-semibold font-arial my-4">{{ $staff->name }}</h1>

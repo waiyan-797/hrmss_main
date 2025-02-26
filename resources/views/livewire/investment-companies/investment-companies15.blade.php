@@ -6,7 +6,7 @@
             {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
             <br><br>
             <h1 class="font-semibold text-base mb-2 text-center">ရင်နှီးမြှုပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-            <h1 class="font-semibold text-base mb-2 text-center">တိုင်းဒေသကြီး/ပြည်နယ်ဦးစီးမှူးရုံးများ၏ ဖွဲ့ခန့်ပိုလို အင်အားစာရင်း</h1>
+            <h1 class="font-semibold text-base mb-2 text-center">တိုင်းဒေသကြီး/ပြည်နယ် ညွှန်ကြားရေးမှူးရုံးများ၏ ဖွဲ့ခန့်ပိုလို အင်အားစာရင်း</h1>
            
             <table class="md:w-full">
                 <thead>

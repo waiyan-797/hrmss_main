@@ -95,19 +95,6 @@
                             {{ en2mm($third_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())) }}
                         </td>
                     </tr>
-                    {{-- <tr class="font-bold">
-                        <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">စုစုပေါင်း ဝန်ထမ်းဦးရေ</td>
-                        <td class="border border-black text-center p-2">
-                            {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())) }}
-                        </td>
-                        <td class="border border-black text-center p-2">
-                            {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())) }}
-                        </td>
-                        <td class="border border-black text-center p-2">
-                            {{ en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())) }}
-                        </td>
-                    </tr> --}}
                 </tbody>
               </table>
         </div>

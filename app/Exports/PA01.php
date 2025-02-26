@@ -96,7 +96,7 @@ class PA01 implements FromView ,WithStyles
 
         $sheet->getColumnDimension('A')->setWidth(5);
         $sheet->getColumnDimension('B')->setWidth(23);
-        $sheet->getColumnDimension('C')->setWidth(8);
+        $sheet->getColumnDimension('C')->setWidth(10);
         $sheet->getColumnDimension('D')->setWidth(7);
         $sheet->getColumnDimension('E')->setWidth(7);
         $sheet->getColumnDimension('F')->setWidth(6);
@@ -200,25 +200,6 @@ class PA01 implements FromView ,WithStyles
                 ],
             ],
         ]);
-
-    //     $sheet->getStyle('A22:B22')->applyFromArray([
-            
-    //         'borders' => [
-    //     'top' => [
-    //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE,
-    //     ],
-    //     'bottom' => [
-    //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE,
-    //     ],
-    //     'left' => [
-    //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE,
-    //     ],
-    //     'right' => [
-    //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE,
-    //     ],
-    // ],
-    //     ]);
-
         $sheet->getStyle("A5:$highestColumn$highestRow")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',

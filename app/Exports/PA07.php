@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
 class PA07 implements FromView ,WithStyles
@@ -16,20 +17,13 @@ class PA07 implements FromView ,WithStyles
     /**
     * @return \Illuminate\Support\Collection
     */
-    // public function collection()
-    // {
-    //     return PA07::all();
-    // }
     public $year, $month, $filterRange;
     public $previousYear, $previousMonthDate, $previousMonth;
 
     public function __construct($year , $month,
     $filterRange ,
     $previousMonthDate,
-    $previousMonth,
-
-    )
-    {
+    $previousMonth,){
         $this->filterRange = $filterRange ;
         
         $this->year  =  $year;
@@ -42,14 +36,7 @@ class PA07 implements FromView ,WithStyles
 
     public function view(): View
     {
-       
-    
-    
         [$year, $month] = explode('-', $this->filterRange);
-      
-        
-       
-    
         $this->year = $year;
         $this->month = $month;
        
@@ -183,7 +170,13 @@ class PA07 implements FromView ,WithStyles
         // Set paper size and orientation
         $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4); // Set paper size to A4
         $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
-
+        $sheet->getPageMargins()->setTop(0.75);
+        $sheet->getPageMargins()->setHeader(0.3);
+        $sheet->getPageMargins()->setLeft(0.15);
+        $sheet->getPageMargins()->setRight(0.15);
+        $sheet->getPageMargins()->setBottom(0.5);
+        $sheet->getPageMargins()->setFooter(0.3);
+        $sheet->getPageSetup()->setHorizontalCentered(true);
         // Fit to page width
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
@@ -197,7 +190,8 @@ class PA07 implements FromView ,WithStyles
         // Dynamically calculate the highest row and column
         $highestRow = $sheet->getHighestRow(); // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
-
+        
+        
         $sheet->getColumnDimension('A')->setWidth(4);
         $sheet->getColumnDimension('B')->setWidth(19);
         $sheet->getColumnDimension('C')->setWidth(7);
@@ -290,63 +284,5 @@ class PA07 implements FromView ,WithStyles
             ],
         ]);
         $sheet->removeRow(9);
-       
-
-        // $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
-        //     'font' => [
-        //         'name' => 'Pyidaungsu',
-        //         'size' => 13,
-        //     ],
-        //     'alignment' => [
-        //         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-        //         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-        //     ],
-        //     'borders' => [
-        //         'allBorders' => [
-        //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-        //             'color' => ['argb' => 'FF000000'], // Black border
-        //         ],
-        //     ],
-        // ]);
-        // // Apply custom borders to the dynamic range
-        // $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
-        //     'borders' => [
-        //         'allBorders' => [
-        //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-        //             'color' => ['argb' => 'FF000000'], // Black border
-        //         ],
-        //     ],
-        // ]);
-
-        // // Center-align text and set font
-        // $sheet->getStyle("A1:$highestColumn$highestRow")->applyFromArray([
-        //     'font' => [
-        //         'name' => 'Pyidaungsu',
-        //         'size' => 11,
-        //     ],
-        //     'alignment' => [
-        //         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-        //         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-        //     ],
-        // ]);
-
-        // Auto-size columns based on dynamic range
-        // foreach (range('A', $highestColumn) as $column) {
-        //     $sheet->getColumnDimension($column)->setAutoSize(true);
-        // }
-
-        // // Set row heights manually for dynamic rows
-        // foreach (range(3, $highestRow) as $row) {
-        //     $sheet->getRowDimension($row)->setRowHeight(-1); // Auto-adjust height
-        // }
-
-        // // Define the print area dynamically
-        // $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
-
-        // // Set a margin for better printing output
-        // $sheet->getPageMargins()->setTop(0.5);
-        // $sheet->getPageMargins()->setRight(0.5);
-        // $sheet->getPageMargins()->setLeft(0.5);
-        // $sheet->getPageMargins()->setBottom(0.5);
     }
 }

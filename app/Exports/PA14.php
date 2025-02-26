@@ -92,7 +92,13 @@ class PA14 implements FromView ,WithStyles
         // Set paper size and orientation
         $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_LEGAL); // Set paper size to A4
         $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
-
+        $sheet->getPageMargins()->setTop(0.5);
+        $sheet->getPageMargins()->setHeader(0.45);
+        $sheet->getPageMargins()->setLeft(0.2);
+        $sheet->getPageMargins()->setRight(0.2);
+        $sheet->getPageMargins()->setBottom(0.45);
+        $sheet->getPageMargins()->setFooter(0.5);
+        $sheet->getPageSetup()->setHorizontalCentered(true);
         // Fit to page width
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
@@ -109,49 +115,49 @@ class PA14 implements FromView ,WithStyles
 
         $sheet->getColumnDimension('A')->setWidth(4);
         $sheet->getColumnDimension('B')->setWidth(30);
-        $sheet->getColumnDimension('C')->setWidth(6);
-        $sheet->getColumnDimension('D')->setWidth(6);
-        $sheet->getColumnDimension('E')->setWidth(6);
-        $sheet->getColumnDimension('F')->setWidth(6);
-        $sheet->getColumnDimension('G')->setWidth(6);
-        $sheet->getColumnDimension('H')->setWidth(6);
-        $sheet->getColumnDimension('I')->setWidth(6);
-        $sheet->getColumnDimension('J')->setWidth(6);
-        $sheet->getColumnDimension('K')->setWidth(6);
-        $sheet->getColumnDimension('L')->setWidth(6);
-        $sheet->getColumnDimension('M')->setWidth(6);
-        $sheet->getColumnDimension('N')->setWidth(6);
-        $sheet->getColumnDimension('O')->setWidth(6);
-        $sheet->getColumnDimension('P')->setWidth(6);
-        $sheet->getColumnDimension('Q')->setWidth(6);
-        $sheet->getColumnDimension('R')->setWidth(6);
-        $sheet->getColumnDimension('S')->setWidth(6);
-        $sheet->getColumnDimension('T')->setWidth(6);
-        $sheet->getColumnDimension('U')->setWidth(6);
-        $sheet->getColumnDimension('V')->setWidth(6);
-        $sheet->getColumnDimension('W')->setWidth(6);
-        $sheet->getColumnDimension('X')->setWidth(6);
-        $sheet->getColumnDimension('Y')->setWidth(6);
-        $sheet->getColumnDimension('Z')->setWidth(6);
-        $sheet->getColumnDimension('AA')->setWidth(6);
-        $sheet->getColumnDimension('AB')->setWidth(6);
-        $sheet->getColumnDimension('AC')->setWidth(6);
-        $sheet->getColumnDimension('AD')->setWidth(6);
-        $sheet->getColumnDimension('AE')->setWidth(6);
-        $sheet->getColumnDimension('AF')->setWidth(6);
-        $sheet->getColumnDimension('AG')->setWidth(6);
-        $sheet->getColumnDimension('AH')->setWidth(6);
-        $sheet->getColumnDimension('AI')->setWidth(6);
-        $sheet->getColumnDimension('AJ')->setWidth(6);
-        $sheet->getColumnDimension('AK')->setWidth(6);
-        $sheet->getColumnDimension('AL')->setWidth(6);
+        $sheet->getColumnDimension('C')->setWidth(7);
+        $sheet->getColumnDimension('D')->setWidth(7);
+        $sheet->getColumnDimension('E')->setWidth(7);
+        $sheet->getColumnDimension('F')->setWidth(7);
+        $sheet->getColumnDimension('G')->setWidth(7);
+        $sheet->getColumnDimension('H')->setWidth(7);
+        $sheet->getColumnDimension('I')->setWidth(7);
+        $sheet->getColumnDimension('J')->setWidth(7);
+        $sheet->getColumnDimension('K')->setWidth(7);
+        $sheet->getColumnDimension('L')->setWidth(7);
+        $sheet->getColumnDimension('M')->setWidth(7);
+        $sheet->getColumnDimension('N')->setWidth(7);
+        $sheet->getColumnDimension('O')->setWidth(7);
+        $sheet->getColumnDimension('P')->setWidth(7);
+        $sheet->getColumnDimension('Q')->setWidth(7);
+        $sheet->getColumnDimension('R')->setWidth(7);
+        $sheet->getColumnDimension('S')->setWidth(7);
+        $sheet->getColumnDimension('T')->setWidth(7);
+        $sheet->getColumnDimension('U')->setWidth(7);
+        $sheet->getColumnDimension('V')->setWidth(7);
+        $sheet->getColumnDimension('W')->setWidth(7);
+        $sheet->getColumnDimension('X')->setWidth(7);
+        $sheet->getColumnDimension('Y')->setWidth(7);
+        $sheet->getColumnDimension('Z')->setWidth(7);
+        $sheet->getColumnDimension('AA')->setWidth(7);
+        $sheet->getColumnDimension('AB')->setWidth(7);
+        $sheet->getColumnDimension('AC')->setWidth(7);
+        $sheet->getColumnDimension('AD')->setWidth(7);
+        $sheet->getColumnDimension('AE')->setWidth(7);
+        $sheet->getColumnDimension('AF')->setWidth(7);
+        $sheet->getColumnDimension('AG')->setWidth(7);
+        $sheet->getColumnDimension('AH')->setWidth(7);
+        $sheet->getColumnDimension('AI')->setWidth(7);
+        $sheet->getColumnDimension('AJ')->setWidth(7);
+        $sheet->getColumnDimension('AK')->setWidth(7);
+        $sheet->getColumnDimension('AL')->setWidth(7);
 
         $sheet->getRowDimension(1)->setRowHeight(28);
         $sheet->getRowDimension(2)->setRowHeight(28);
         $sheet->getRowDimension(3)->setRowHeight(28);
 
         for ($row = 4; $row <= $highestRow ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(28);
+            $sheet->getRowDimension($row)->setRowHeight(30);
         }
 
         $sheet->removeRow(4);
@@ -241,24 +247,5 @@ class PA14 implements FromView ,WithStyles
                 ],
             ],
         ]);
-        
-        // // Auto-size columns based on dynamic range
-        // foreach (range('A', $highestColumn) as $column) {
-        //     $sheet->getColumnDimension($column)->setAutoSize(true);
-        // }
-
-        // // Set row heights manually for dynamic rows
-        // foreach (range(3, $highestRow) as $row) {
-        //     $sheet->getRowDimension($row)->setRowHeight(-1); // Auto-adjust height
-        // }
-
-        // // Define the print area dynamically
-        // $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
-
-        // // Set a margin for better printing output
-        // $sheet->getPageMargins()->setTop(0.5);
-        // $sheet->getPageMargins()->setRight(0.5);
-        // $sheet->getPageMargins()->setLeft(0.5);
-        // $sheet->getPageMargins()->setBottom(0.5);
     }
 }

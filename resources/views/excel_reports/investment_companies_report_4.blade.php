@@ -69,17 +69,19 @@
                 <table class="tabletitle">
                     <tr>
                         <th colspan="5" style="font-weight:bold">
-                            ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                            ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
                         </th>
                     </tr>
                     <tr>
                         <th colspan="5" style="font-weight:bold">
-                            ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                            ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
                         </th>
                     </tr>
                     <tr>
                         <th colspan="5" style="font-weight:bold;">
-                            {{mmDateFormat($year,$month)}}ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
+                            {{-- {{mmDateFormat($year,$month)}}ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း --}}
+                          {{mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day))}}ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
+   
                         </th>
                     </tr>
                 </table>

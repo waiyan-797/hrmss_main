@@ -70,22 +70,21 @@
     </style>
 </head>
 <body>
-   
         <div class="container">
-            {{-- <h1 class="heading">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဌာနအလိုက်နေပြည်တော်သို့ပြောင်းရွေ့ရောက်ရှိအင်အားစာရင်း</h1>
-            <h2 class="sub-heading">၂၀၂၄ ခုနှစ်၊ ဇွန်လ</h2> --}}
-            
             <div class="table-container">
-
-                <table class="">
+                    {{-- <tr>
+                        <th colspan="16" style="font-weight:bold;">
+                           ၃
+                        </th> 
+                    </tr> --}}
                     <tr>
                         <th colspan="16" style="font-weight:bold;">
-                            ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                            ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
                         </th> 
                     </tr>
                     <tr>
                         <th colspan="16" style="font-weight:bold;">
-                            ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                            ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
                         </th>
                     </tr>
                     <tr>
@@ -93,7 +92,7 @@
                             {{mmDateFormat($year,$month)}}
                         </th>
                     </tr>
-                </table>
+               
                 <table>
                     <thead>
                         <tr>
@@ -127,7 +126,7 @@
                     <tbody>
                         <tr>
                             <td>၁</td>
-                            <td>ရင်းနှီးမြှပ်နှံမှုနှင့်<br>ကုမ္ပဏီများညွှန်ကြားမှု<br>ဦးစီးဌာန</td>
+                            <td>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများ<br>ညွှန်ကြားမှုဦးစီးဌာန</td>
                             <td></td>
                             <td></td>
                             <td>{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
@@ -180,14 +179,20 @@
                     </tbody>
                 </table>
 
-                <table>
+                {{-- <table>
                     <tr>
                         <th colspan="16" rowspan="2">
                             မှတ်ချက်။ &nbsp; လစဥ်လဆန်း(၂)ရက်နေ့အရောက်ဝန်ကြီးရုံးသို့ပေးပို့ရန်။
                         </th>
                     </tr>
-                </table>
+                </table> --}}
 
-                
+                <table>
+                    <tr>
+                        <th colspan="16" rowspan="2" style="font-size: 12px;">
+                            မှတ်ချက်။ &nbsp; လစဥ်လဆန်း(၂)ရက်နေ့အရောက်ဝန်ကြီးရုံးသို့ပေးပို့ရန်။
+                        </th>
+                    </tr>
+                </table>
             </div>
         </div>

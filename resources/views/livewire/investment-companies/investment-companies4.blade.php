@@ -9,8 +9,8 @@
 
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
-                <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
-                <h2 class="font-semibold text-base mb-2 text-center">{{ mmDateFormat($year, $month) }}ရက်နေ့ရှိဝန်ထမ်းအင်အားစာရင်း</h2>
+                <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+                <h2 class="font-semibold text-base mb-2 text-center">{{ mmDateFormat($year, $month) }}{{ $myanmarDate }} ရှိဝန်ထမ်းအင်အားစာရင်း</h2>
                 <div class="w-full rounded-lg">
                     <table class="w-full text-center">
                         <thead>

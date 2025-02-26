@@ -90,7 +90,7 @@ class PA04 implements FromView ,WithStyles
         $sheet->getColumnDimension('B')->setWidth(30);
         $sheet->getColumnDimension('C')->setWidth(20);
         $sheet->getColumnDimension('D')->setWidth(20);
-        $sheet->getColumnDimension('E')->setWidth(23);
+        $sheet->getColumnDimension('E')->setWidth(20);
         
 
         $sheet->getRowDimension(1)->setRowHeight(35);

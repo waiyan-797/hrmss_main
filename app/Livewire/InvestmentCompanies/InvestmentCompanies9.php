@@ -38,13 +38,17 @@ class InvestmentCompanies9 extends Component
    
     $section->addText('၂၀၂၄-၂၀၂၅ ဘဏ္ဍာရေးနှစ်အတွင်း ဝန်ထမ်းအဖြစ်မှ ထုတ်ပစ်ခံရသော ဝန်ထမ်းများစာရင်း', ['bold' => true, 'size' => 13], ['alignment' => 'center']);
     $section->addText('ဝန်ထမ်းအဖွဲ့အစည်းအမည်၊ရင်းနှီးမြှုပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 13]);
-
+    $section->addText(
+        'ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), 
+        [], 
+        ['alignment' => 'right']
+    );
     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
 
     $table->addRow();
     $table->addCell(1000)->addText('စဥ်', ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center', 'spaceBefore'=>1000]);
     $table->addCell(4500)->addText('အမည်နှင့်  အမျိုးသားမှတ်ပုံတင်   အမှတ်' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center', 'spaceBefore'=>500]);
-    $table->addCell(2000)->addText('မွေးနေ့ သက္ကရာဇာ်' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center', 'spaceBefore'=>1000]);
+    $table->addCell(2000)->addText('မွေးနေ့ သက္ကရာဇ်' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center', 'spaceBefore'=>1000]);
     $table->addCell(4500)->addText('(က)ရာထူး        (ခ)လစာနှုန်း   (ဂ)နောက်ဆုံးထုတ်လစာ' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'left', 'spaceBefore'=>500]);
     $table->addCell(2000)->addText('စတင် အမှုထမ်း သည့်နေ့' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center','spaceBefore'=>500]);
     $table->addCell(2000)->addText('စတင် ကင်းကွာ/ ပျက်ကွက် သည့်နေ့' , ['bold'=>true , 'font'=>'Pyidaungsy', 'size'=>12],['align'=>'center','spaceBefore'=>500]);

@@ -9,10 +9,10 @@
             
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">
-                    ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဌာနအလိုက်
+                    ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>ဌာနအလို က် 
                     နေပြည်တော်သို့ပြောင်းရွေ့ရောက်ရှိအင်အားစာရင်း</h1>
                     <h3 class="font-semibold text-base mb-2 text-center">{{ mmDateFormat($year, $month) }} </h3>
-                {{-- <h2 class="font-semibold text-base mb-2 text-center">၂၀၂၄ ခုနှစ်၊ ဇွန်လ</h2> --}}
+              
                 <div class="w-full rounded-lg">                  
                     <table class="md:w-full">
                         <thead>

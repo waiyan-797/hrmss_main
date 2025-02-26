@@ -27,8 +27,8 @@ class Finance extends Component
             ['id' => 14, 'name' => 'ဘဏ္ဍာရေးနှစ်အတွက် လစာငွေထုတ်ယူမည့် စာရင်း'],
             ['id' => 15, 'name' => 'ရန်ကုန် ရန်ကုန်ရုံးချုပ်ရှိဝန်ထမ်းများ၏ဧပြီလစာရင်း'],
             ['id' => 16, 'name' => 'ဘဏ္ဍာရေးနှစ်လစာ'],
-            ['id' => 17, 'name' => 'အဆင့်တူ ကျားမ အသက်အုပ်စု'],
-            ['id' => 18, 'name' => 'ဝန်ထမ်းများ၏ လစာငွေတောင်းခံလွှာ'],
+            // ['id' => 17, 'name' => 'အဆင့်တူ ကျားမ အသက်အုပ်စု'],
+            ['id' => 17, 'name' => 'ဝန်ထမ်းများ၏ လစာငွေတောင်းခံလွှာ'],
 
         ];
     }
@@ -51,8 +51,8 @@ class Finance extends Component
             14 =>route('finance_salary_list'),
             15 =>route('yangon_staff_april_salary_list'),
             16 =>route('finance_year_salary_list'),
-            17 =>route('information_list'),
-            18 =>route('detail_staff_salary'),
+            // 17 =>route('information_list'),
+            17 =>route('detail_staff_salary'),
         ];
         if (array_key_exists($id, $routes)) {
             return redirect()->to($routes[$id]);

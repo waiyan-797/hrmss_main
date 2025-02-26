@@ -49,30 +49,22 @@
         
     {{-- </head> --}}
     <body>
-        
-            <div class="">
-                
-                {{-- <h1 class="header-title">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1> --}}
                 <div class="">
-
                     <table class="">
                         <tr>
                             <th colspan="6" style="font-weight:bold">  
-                                ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                                ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
                             </th>
                         </tr>
                         <tr>
                             <th colspan="6" style="font-weight:bold">
-                                ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                                ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
                             </th>
                         </tr>
                         <tr>
                             <th colspan="6" style="font-weight:bold;">
-                                {{mmDateFormat($year,$month)}}ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
+                                {{mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day))}}ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
                             </th>
-                            {{-- <th colspan="6">
-                                ၂၀၂၄ခုနှစ်၊နိုဝင်ဘာလ ၃၀ ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း
-                            </th> --}}
                         </tr>
                     </table>
 
@@ -87,7 +79,6 @@
                                 <th rowspan="2" style="font-weight:bold;">လစ်လပ် <br> အင်အား</th>
                             </tr>
                         </thead>
-                        {{-- sfdfd --}}
                         <tbody>
                             <tr></tr>
                             @foreach ($first_ranks as $rank)
@@ -132,5 +123,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+    </body>
+           
         

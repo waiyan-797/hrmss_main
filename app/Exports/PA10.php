@@ -75,12 +75,20 @@ class PA10 implements FromView ,WithStyles
         // Set paper size and orientation
         $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_LEGAL); // Set paper size to A4
         $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
-
+        $sheet->getPageMargins()->setTop(0.75);
+        $sheet->getPageMargins()->setHeader(0.3);
+        $sheet->getPageMargins()->setLeft(0.75);
+        $sheet->getPageMargins()->setRight(0.15);
+        $sheet->getPageMargins()->setBottom(0.5);
+        $sheet->getPageMargins()->setFooter(0.5);
+    
+        // Center content horizontally on page
+        $sheet->getPageSetup()->setHorizontalCentered(true);
         // Fit to page width
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
 
-        $sheet->getPageSetup()->setScale(90);
+        $sheet->getPageSetup()->setScale(85);
 
         // Enable gridlines for unbordered areas
         $sheet->setShowGridlines(true);
@@ -91,39 +99,39 @@ class PA10 implements FromView ,WithStyles
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
         $sheet->getColumnDimension('A')->setWidth(4);
-        $sheet->getColumnDimension('B')->setWidth(19);
-        $sheet->getColumnDimension('C')->setWidth(7);
-        $sheet->getColumnDimension('D')->setWidth(7);
-        $sheet->getColumnDimension('E')->setWidth(7);
-        $sheet->getColumnDimension('F')->setWidth(7);
-        $sheet->getColumnDimension('G')->setWidth(7);
-        $sheet->getColumnDimension('H')->setWidth(7);
-        $sheet->getColumnDimension('I')->setWidth(7);
-        $sheet->getColumnDimension('J')->setWidth(7);
-        $sheet->getColumnDimension('K')->setWidth(7);
-        $sheet->getColumnDimension('L')->setWidth(7);
-        $sheet->getColumnDimension('M')->setWidth(7);
-        $sheet->getColumnDimension('N')->setWidth(7);
-        $sheet->getColumnDimension('O')->setWidth(7);
-        $sheet->getColumnDimension('P')->setWidth(7);
-        $sheet->getColumnDimension('Q')->setWidth(7);
-        $sheet->getColumnDimension('R')->setWidth(7);
-        $sheet->getColumnDimension('S')->setWidth(7);
-        $sheet->getColumnDimension('T')->setWidth(7);
-        $sheet->getColumnDimension('U')->setWidth(7);
-        $sheet->getColumnDimension('V')->setWidth(7);
-        $sheet->getColumnDimension('W')->setWidth(7);
-        $sheet->getColumnDimension('X')->setWidth(7);
-        $sheet->getColumnDimension('Y')->setWidth(7);
-        $sheet->getColumnDimension('Z')->setWidth(7);
-        $sheet->getColumnDimension('AA')->setWidth(7);
-        $sheet->getColumnDimension('AB')->setWidth(7);
-        $sheet->getColumnDimension('AC')->setWidth(7);
+        $sheet->getColumnDimension('B')->setWidth(16);
+        $sheet->getColumnDimension('C')->setWidth(5);
+        $sheet->getColumnDimension('D')->setWidth(5);
+        $sheet->getColumnDimension('E')->setWidth(5);
+        $sheet->getColumnDimension('F')->setWidth(6);
+        $sheet->getColumnDimension('G')->setWidth(6);
+        $sheet->getColumnDimension('H')->setWidth(6);
+        $sheet->getColumnDimension('I')->setWidth(5);
+        $sheet->getColumnDimension('J')->setWidth(5);
+        $sheet->getColumnDimension('K')->setWidth(5);
+        $sheet->getColumnDimension('L')->setWidth(5);
+        $sheet->getColumnDimension('M')->setWidth(5);
+        $sheet->getColumnDimension('N')->setWidth(5);
+        $sheet->getColumnDimension('O')->setWidth(5);
+        $sheet->getColumnDimension('P')->setWidth(5);
+        $sheet->getColumnDimension('Q')->setWidth(5);
+        $sheet->getColumnDimension('R')->setWidth(5);
+        $sheet->getColumnDimension('S')->setWidth(5);
+        $sheet->getColumnDimension('T')->setWidth(5);
+        $sheet->getColumnDimension('U')->setWidth(5);
+        $sheet->getColumnDimension('V')->setWidth(5);
+        $sheet->getColumnDimension('W')->setWidth(5);
+        $sheet->getColumnDimension('X')->setWidth(5);
+        $sheet->getColumnDimension('Y')->setWidth(5);
+        $sheet->getColumnDimension('Z')->setWidth(5);
+        $sheet->getColumnDimension('AA')->setWidth(5);
+        $sheet->getColumnDimension('AB')->setWidth(5);
+        $sheet->getColumnDimension('AC')->setWidth(5);
 
         $sheet->getRowDimension(1)->setRowHeight(22);
         $sheet->getRowDimension(2)->setRowHeight(22);
         $sheet->getRowDimension(3)->setRowHeight(22);
-        $sheet->getRowDimension(4)->setRowHeight(50);
+        $sheet->getRowDimension(4)->setRowHeight(22);
 
         $sheet->removeRow(4);
 

@@ -8,9 +8,9 @@
             <input type="month" wire:model.live='filterRange'>
             
             <h1 class="font-semibold text-base mb-2 text-center">ရင်နှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
-            <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+            <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <h1 class="font-semibold text-base mb-2 text-center">
-                {{ mmDateFormat($year, $month) }}ရက်နေ့ရှိ ဝန်ထမ်းအင်အားစာရင်း</h1>
+                {{ mmDateFormat($year, $month) }}ရှိ ဝန်ထမ်းအင်အားစာရင်း</h1>
             <br><br>
             <div class="w-full mb-4">
               

@@ -195,7 +195,7 @@ if (!function_exists('mmDateFormat')) {
         // Return formatted date
 
         $year = en2mm($year);
-        return "$year ခုနှစ် $myanmarMonth လ "; // ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ
+        return "$year ခုနှစ် ၊ $myanmarMonth လ "; // ၂၀၂၄ ခုနှစ် ဒီဇင်ဘာလ
     }
 
 }

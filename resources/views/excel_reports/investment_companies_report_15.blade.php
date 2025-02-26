@@ -1,34 +1,4 @@
-{{-- <style type="text/css">
-    body {
-        font-family: 'pyidaungsu', sans-serif !important;
-        font-size: 13px;
-    }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th,
-    td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: center;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    .text-left {
-        text-align: left;
-    }
-
-    .font-bold {
-        font-weight: bold;
-    }
-</style>
-</head> --}}
 
 <body>
     <div class="container">
@@ -37,12 +7,12 @@
             <table class="">
                 <tr>
                     <th style="font-weight:bold;" colspan="50">
-                        ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                        ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
                     </th>
                 </tr>
                 <tr>
                     <th style="font-weight:bold;" colspan="50">
-                        တိုင်းဒေသကြီး/ပြည်နယ်ဦးစီးမှူးရုံးများ၏ ဖွဲ့စည်းပုံ၊ ခန့်အပ်၊ ပို/လို အင်အားစာရင်း
+                        တိုင်းဒေသကြီး/ပြည်နယ်ညွှန်ကြားရေးမှူးရုံးများ၏ ဖွဲ့စည်းပုံ၊ ခန့်အပ်၊ ပို/လို အင်အားစာရင်း
                     </th>
                 </tr>
                 <tr>

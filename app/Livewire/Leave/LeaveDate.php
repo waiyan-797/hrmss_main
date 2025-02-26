@@ -17,9 +17,11 @@ class LeaveDate extends Component
     public function go_pdf()
     {
         $staff = Staff::find($this->staff_id);
-        $leaves = Leave::where('staff_id', $this->staff_id)
-            ->where('leave_type_id', 2)
-            ->get();
+        // $leaves = Leave::where('staff_id', $this->staff_id)
+        //     ->where('leave_type_id', 2)
+        //     ->get();
+        $staff = Staff::where('id', $this->staff_id)->first();
+        $leaves = Leave::where('staff_id', $this->staff_id)->whereIn('leave_type_id', [2, 4, 5])->get();
         $data = [
             'staff' => $staff,
             'leaves' => $leaves,

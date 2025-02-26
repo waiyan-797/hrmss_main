@@ -33,8 +33,8 @@ public $divisionTypes ;
         $phpWord = new PhpWord();
         $section = $phpWord->addSection([
             'orientation' => 'portrait',
-            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),     // 1 inch
-            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),     // 1 inch
+            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.3),   // 0.5 inch
             'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
             'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
         ]);
@@ -105,7 +105,7 @@ public $divisionTypes ;
         } 
         $table->addRow();
         $table->addCell(900)->addText('');
-        $table->addCell(7000)->addText("{$divisionTitle}", null, ['alignment' => 'center', 'spaceBefore'=> 50]);
+        $table->addCell(7000)->addText("{$divisionTitle}",['bold'=>true],['alignment'=>'center']);
 
         $divisionStaffCount = $divisions->sum(function($division) {
                             

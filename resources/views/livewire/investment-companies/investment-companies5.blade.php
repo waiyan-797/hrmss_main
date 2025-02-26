@@ -7,8 +7,8 @@
            
 
             <div class="w-full mb-4">
-                <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
-                <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
+                <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
+                <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
                 <h2 class="font-semibold text-base mb-2 text-center">ဝန်ထမ်းအင်အားစာရင်း</h2>
                 <div class="w-full rounded-lg">
                     <table class="w-full text-center">
@@ -26,6 +26,7 @@
                                 <tr>
                                     <td class="border border-black p-2">{{en2mm($loop->index + 1)}}</td>
                                     <td class="border border-black p-2">
+                                       
                                         @if($index == 0 )
                                         {{$payscale->ranks[0]->name}} / ဦးဆောင်ညွှန်ကြားရေးမှူးနှင့်အဆင့်တူ
 

@@ -113,12 +113,17 @@ class PA15 implements FromView ,WithStyles
         // Set paper size and orientation
         $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_LEGAL); // Set paper size to A4
         $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
-
-        // Fit to page width
+        $sheet->getPageMargins()->setTop(0.5);
+        $sheet->getPageMargins()->setHeader(0.35);
+        $sheet->getPageMargins()->setLeft(0.2);
+        $sheet->getPageMargins()->setRight(0.2);
+        $sheet->getPageMargins()->setBottom(0.35);
+        $sheet->getPageMargins()->setFooter(0.5);
+        $sheet->getPageSetup()->setHorizontalCentered(true);
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
 
-        $sheet->getPageSetup()->setScale(51);
+        $sheet->getPageSetup()->setScale(55);
 
         // Enable gridlines for unbordered areas
         $sheet->setShowGridlines(true);
@@ -221,10 +226,6 @@ class PA15 implements FromView ,WithStyles
                 ],
             ],
         ]);
-
-        
-
-
         $sheet->getStyle("A4:$highestColumn$highestRow")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
@@ -310,29 +311,5 @@ class PA15 implements FromView ,WithStyles
                 ],
             ],
         ]);
-        // // Apply global font style
-        // $sheet->getStyle('A1:Z1000')->applyFromArray([
-        //     'font' => [
-        //         'name' => 'Pyidaungsu',
-        //         'size' => 13,
-        //     ],
-        // ]);
-
-        // // Apply borders to all cells with black border
-        // $sheet->getStyle('A1:AL100')->applyFromArray([
-        //     'borders' => [
-        //         'allBorders' => [
-        //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-        //             'color' => ['argb' => '000000'], // Black border
-        //         ],
-        //     ],
-        // ]);
-
-        // // Auto-size columns for the table
-        // foreach (range('A', 'AL') as $column) {
-        //     $sheet->getColumnDimension($column)->setAutoSize(true);
-        // }
-
-        // return [];
     }
     }

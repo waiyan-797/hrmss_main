@@ -17,7 +17,7 @@
                             <tr class="bg-gray-100">
                                 <th class="p-2 border border-black">စဉ်</th>
                                 <th class="p-2 border border-black">အမည်နှင့်အမျိုးသားမှတ်ပုံတင်အမှတ်</th>
-                                <th class="p-2 border border-black">မွေးနေ့သက္ကရာဇာ်</th>
+                                <th class="p-2 border border-black">မွေးနေ့သက္ကရာဇ်</th>
                                 <th class="p-2 border border-black text-left">(က)ရာထူး<br>(ခ)
                                     လစာနှုန်း<br>(ဂ)နောက်ဆုံးထုတ်လစာ</th>
                                 <th class="p-2 border border-black">စတင်အမှုထမ်းသည့်နေ့</th>

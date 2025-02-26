@@ -63,7 +63,7 @@
                 @foreach ($staffs as $staff)
                 <tr>
                     <td>{{ en2mm($loop->index + 1) }}</td>
-                    <td>{{ $staff->name }}၊{{ $staff->currentRank?->name }}၊{{ $staff->current_department?->name }}</td>
+                    <td>{{ $staff->name }}<br>{{ $staff->currentRank?->name }}<br>{{ $staff->current_department?->name }}</td>
                     <td>{{ $staff->marital_statuses?->name ? 'ရှိ' : 'မရှိ' }}</td>
                     <td>
                         {{ implode(', ', array_filter([
