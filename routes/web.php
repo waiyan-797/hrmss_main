@@ -102,6 +102,7 @@ use App\Livewire\LabourDetails;
 use App\Livewire\LabourStaff as LivewireLabourStaff;
 use App\Livewire\Language as LivewireLanguage;
 use App\Livewire\Leave;
+use App\Livewire\AllRetire;
 use App\Livewire\Leave\LeaveNuberPercent;
 use App\Livewire\Leave\LeaveNuberPercent4;
 use App\Livewire\Leave\LeaveNuberPercent5;
@@ -179,7 +180,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('profile', 'profile')->name('profile');
     Route::get('/training_type', TrainingType::class)->name('training_type');
     Route::get('/relation', Relation::class)->name('relation');
-    Route::get('/relation-type', RelationShipType::class)->name('relation_type');    
+    Route::get('/relation-type', RelationShipType::class)->name('relation_type');
     Route::get('/division', Division::class)->name('division');
     Route::get('/department', Department::class)->name('department');
     Route::get('/region', Region::class)->name('region');
@@ -217,7 +218,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/gender', Gender::class)->name('gender');
     Route::get('/salary', Salary::class)->name('salary');
     Route::get('/promotion', LivewirePromotion::class)->name('promotion'); //no longer use
-    Route::get('/promotion/{staff_id}', LivewirePromotion::class)->name('staff_promotion'); 
+    Route::get('/promotion/{staff_id}', LivewirePromotion::class)->name('staff_promotion');
     Route::get('/retirement/{staff_id}', Retirement::class)->name('staff_retirement'); //no longer use
     Route::get('/depromotion',Depromotion::class)->name('depromotion');
     Route::get('/depromotion/{staff_id}',Depromotion::class)->name('staff_depromotion');
@@ -374,6 +375,9 @@ Route::get('/children_report_summary' , ChildrenReportSummary::class)->name('chi
 Route::get('/current-position', CurrentPosition::class)->name('current-position');
 Route::get('/staff-by-age',StaffByAge::class)->name('staff-by-age');
 Route::get('/sortable' , SortableStaff::class)->name('sortable');
+
+
+Route::get('/all_retire_report' , AllRetire::class)->name('all_retire_report');
 
     Route::get(
         'user_create',

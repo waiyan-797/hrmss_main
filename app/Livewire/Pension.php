@@ -17,6 +17,7 @@ class Pension extends Component
             ['id' => 4, 'name' => 'မိသားစုပင်စင်ခံစားခဲ့သူများစာရင်း'],
             ['id' => 5, 'name' => 'အသက်(၆၂)ပြည့်ပင်စင်ခံစားမည့်စာရင်း'],
             ['id' => 6, 'name' => 'ပင်စင်ယူသည့်ရက်စွဲ'],
+            ['id' => 7, 'name' => 'ပြုန်းတီး'],
         ];
     }
     public function showReport($id)
@@ -28,6 +29,7 @@ class Pension extends Component
             4 =>route('pension_family'),
             5 =>route('finance_pension_age62'),
             6 =>route('pension_report'),
+            7 =>route('all_retire_report'),
         ];
         if (array_key_exists($id, $routes)) {
             return redirect()->to($routes[$id]);

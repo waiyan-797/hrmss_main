@@ -91,7 +91,7 @@
                     :lists="[
                         ['route_name' => 'report', 'name' => 'ဝန်ထမ်းရေးရာ'],
                         ['route_name' => 'attend_training', 'name' => 'သင်တန်းတတ်ရောက်'],
-                        ['route_name' => 'pension', 'name' => 'ပင်စင်ကိစ္စ'],
+                        ['route_name' => 'pension', 'name' => 'ပြုန်းတီးစာရင်း'],
                         ['route_name' => 'travel_abroad', 'name' => 'နိုင်ငံခြားသွားရောက်မှုများ'],
                         ['route_name' => 'employee_taking_leave', 'name' => 'ခွင့်ယူသည့်ဝန်ထမ်းစာရင်း'],
                         ['route_name' => 'staff_strength_list', 'name' => 'ဝန်ထမ်းအင်အားစာရင်း'],
