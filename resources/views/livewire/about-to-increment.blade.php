@@ -1,7 +1,7 @@
 <div class="w-full min-h-screen p-6 bg-gray-100">
      {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
     {{-- <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>  --}}
-     <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>  
+     <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
     <br><br>
     <div  class="flex items-end gap-x-5" >
         <div class="w-40 ">
@@ -30,6 +30,7 @@
             <thead class="bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        <input type="checkbox"  wire:click='select_all'>
                     </th>
                     <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                         စဉ်

@@ -72,12 +72,12 @@ class AboutToIncrement extends Component
             echo $pdf->output();
         }, 'about_increment_report.pdf');
     }
-    public function go_excel() 
+    public function go_excel()
     {
         return Excel::download(new PA20($this->arr), 'PA20.xlsx');
     }
-    
-  
+
+
     public function go_word()
 {
     $startDate = Carbon::parse($this->startDate);
@@ -174,6 +174,14 @@ $staffs  =  DB::table(function ($query) {
 
 $this->arr= $staffs->whereBetween('coming_increment_date' ,[$this->startDate->format('Y-m-d'),$this->endDate->format('Y-m-d')]) ;
     }
+
+
+    public function select_all(){
+        // $this->staff_to_increment =
+        foreach ($this->arr as $key => $value) {
+            $this->staff_to_increment[] = $key;
+        }
+    }
     public function mount()
     {
         $this->startDate = Carbon::now();
@@ -210,6 +218,8 @@ $this->arr= $staffs->whereBetween('coming_increment_date' ,[$this->startDate->fo
 
             $staffModle->update();
         }
+
+        $this->staff_to_increment = [];
     }
 
 
