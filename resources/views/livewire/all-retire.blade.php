@@ -55,7 +55,11 @@ placeholder="ပင်စင်အမျိုးအစား"
              <div class="flex-1 px-2 border-r">ရာထူး</div>
              <div class="flex-1 px-2 border-r">ဌာန</div>
              <div class="flex-1 px-2 border-r">ပြုန်းတီးအမျိုးအစား</div>
+             @if($selectedRetireId ==  5)
              <div class="flex-1 px-2 border-r">ပင်စင်အမျိုးအစား</div>
+                @endif
+
+
              <div class="flex-1 px-2">ပြန်းတီးရက်စွဲ</div>
          </div>
 
@@ -72,8 +76,10 @@ placeholder="ပင်စင်အမျိုးအစား"
                      <div class="flex-1 px-2 border-r">{{ $member->current_rank->name }}</div>
                      <div class="flex-1 px-2 border-r">{{ $member->current_department?->name }}</div>
                      <div class="flex-1 px-2 border-r">{{ $member->retire?->name }}</div>
-                     <div class="flex-1 px-2 border-r">{{ $member->pension_type?->name }}</div>
+                     @if($selectedRetireId ==  5)
 
+                     <div class="flex-1 px-2 border-r">{{ $member->pension_type?->name }}</div>
+@endif
 
                      <div class="flex-1 px-2">{{
                     formatDMYmm(  $member->retire_date)
