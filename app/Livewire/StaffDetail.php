@@ -354,6 +354,25 @@ class StaffDetail extends Component
         $this->genders= Gender::get();
         $this->leave_types = LeaveType::all();
         $this->withoutScopeRanks = Rank::withoutGlobalScopes()->get();
+        $this->educations = [];
+        $this->recommendations = [];
+        $this->postings = [];
+        $this->schools = [];
+        $this->trainings = [];
+        $this->awards = [];
+        $this->abroads = [];
+        $this->punishments = [];
+        $this->siblings = [];
+        $this->father_siblings = [];
+        $this->mother_siblings = [];
+        $this->spouses = [];
+        $this->children = [];
+        $this->spouse_siblings = [];
+        $this->spouse_father_siblings = [];
+        $this->spouse_mother_siblings = [];
+        $this->socials = [];
+        $this->staff_languages = [];
+        $this->staff_rewards = [];
 
         switch ($this->tab) {
             case 'personal_info':
@@ -414,73 +433,10 @@ class StaffDetail extends Component
 
 
         switch ($this->tab) {
-            case 'personal_info':
+                  case 'personal_info':
 
                 $staff_educations = StaffEducation::where('staff_id', $staff_id)->get();
 
-                case 'job_info':
-                    $recommendations = Recommendation::where('staff_id', $staff_id)->get();
-                    $postings = Posting::where('staff_id', $staff_id)->get();
-
-                case 'relative':
-
-                $siblings = Sibling::where('staff_id', $staff_id)->get();
-                $father_siblings = FatherSibling::where('staff_id', $staff_id)->get();
-                $mother_siblings = MotherSibling::where('staff_id', $staff_id)->get();
-        $spouses = Spouse::where('staff_id', $staff_id)->get();
-        $children = Children::where('staff_id', $staff_id)->get();
-        $spouse_siblings = SpouseSibling::where('staff_id', $staff_id)->get();
-        $spouse_father_siblings = SpouseFatherSibling::where('staff_id', $staff_id)->get();
-        $spouse_mother_siblings = SpouseMotherSibling::where('staff_id', $staff_id)->get();
-
-
-
-        case 'detail_personal_info':
-
-
-                    $schools = School::where('staff_id', $staff_id)->get();
-                    $trainings = Training::where('staff_id', $staff_id)->get();
-                    $awards = Awarding::where('staff_id', $staff_id)->get();
-                    $abroads = Abroad::where('staff_id', $staff_id)->get();
-                    $punishments = Punishment::where('staff_id', $staff_id)->get();
-
-
-                    $socials = SocialActivity::where('staff_id', $staff_id)->get();
-                    $staff_languages = StaffLanguage::where('staff_id', $staff_id)->get();
-                    $staff_rewards = Reward::where('staff_id',$staff_id)->get();
-
-
-                break;
-            }
-
-
-        $this->educations = [];
-        $this->recommendations = [];
-        $this->postings = [];
-        $this->schools = [];
-        $this->trainings = [];
-        $this->awards = [];
-        $this->abroads = [];
-        $this->punishments = [];
-        $this->siblings = [];
-        $this->father_siblings = [];
-        $this->mother_siblings = [];
-        $this->spouses = [];
-        $this->children = [];
-        $this->spouse_siblings = [];
-        $this->spouse_father_siblings = [];
-        $this->spouse_mother_siblings = [];
-        $this->socials = [];
-        $this->staff_languages = [];
-        $this->staff_rewards = [];
-
-
-
-
-        switch ($this->tab) {
-            case 'personal_info':
-
-                // $staff_educations = StaffEducation::where('staff_id', $staff_id)->get();
                 foreach ($staff_educations as $edu) {
                     $education = Education::find($edu->education_id);
 
@@ -500,10 +456,14 @@ class StaffDetail extends Component
 
 
 
-                case 'job_info':
-                    // $recommendations = Recommendation::where('staff_id', $staff_id)->get();
 
-                    // $postings = Posting::where('staff_id', $staff_id)->get();
+                break;
+
+                case 'job_info':
+                    $recommendations = Recommendation::where('staff_id', $staff_id)->get();
+                    $postings = Posting::where('staff_id', $staff_id)->get();
+
+
 
                     foreach ($recommendations as $rec) {
                         $this->recommendations[] = [
@@ -536,18 +496,20 @@ class StaffDetail extends Component
 
 
 
-        case 'relative':
 
 
-        //         $siblings = Sibling::where('staff_id', $staff_id)->get();
-        //         $father_siblings = FatherSibling::where('staff_id', $staff_id)->get();
-        //         $mother_siblings = MotherSibling::where('staff_id', $staff_id)->get();
-        // $spouses = Spouse::where('staff_id', $staff_id)->get();
-        // $children = Children::where('staff_id', $staff_id)->get();
-        // $spouse_siblings = SpouseSibling::where('staff_id', $staff_id)->get();
-        // $spouse_father_siblings = SpouseFatherSibling::where('staff_id', $staff_id)->get();
-        // $spouse_mother_siblings = SpouseMotherSibling::where('staff_id', $staff_id)->get();
+                    break;
 
+                case 'relative':
+
+                $siblings = Sibling::where('staff_id', $staff_id)->get();
+                $father_siblings = FatherSibling::where('staff_id', $staff_id)->get();
+                $mother_siblings = MotherSibling::where('staff_id', $staff_id)->get();
+        $spouses = Spouse::where('staff_id', $staff_id)->get();
+        $children = Children::where('staff_id', $staff_id)->get();
+        $spouse_siblings = SpouseSibling::where('staff_id', $staff_id)->get();
+        $spouse_father_siblings = SpouseFatherSibling::where('staff_id', $staff_id)->get();
+        $spouse_mother_siblings = SpouseMotherSibling::where('staff_id', $staff_id)->get();
 
 
         function relative_array($sib)
@@ -599,133 +561,134 @@ class StaffDetail extends Component
 
 
 
+
+        break;
+
+
         case 'detail_personal_info':
 
 
+                    $schools = School::where('staff_id', $staff_id)->get();
+                    $trainings = Training::where('staff_id', $staff_id)->get();
+                    $awards = Awarding::where('staff_id', $staff_id)->get();
+                    $abroads = Abroad::where('staff_id', $staff_id)->get();
+                    $punishments = Punishment::where('staff_id', $staff_id)->get();
 
 
+                    $socials = SocialActivity::where('staff_id', $staff_id)->get();
+                    $staff_languages = StaffLanguage::where('staff_id', $staff_id)->get();
+                    $staff_rewards = Reward::where('staff_id',$staff_id)->get();
+                    foreach ($schools as $sch) {
+                        $this->schools[] = [
+                            'id' => $sch->id,
+                            'education_group' => $sch->education_group_id,
+                            'education_type' => $sch->education_type_id,
+                            'education' => $sch->education,
+                            'school_name' => $sch->school_name,
+                            'town' => $sch->town,
+                            'from_date' => $sch->from_date,
+                            'to_date' => $sch->to_date,
+                            'remark' => $sch->remark,
+                            // 'education_types' => EducationType::where('education_group_id', $sch->education_group_id)->get(),
+                            'education_types' => EducationType::all(),
+                            '_educations' => Education::where('education_type_id', $sch->education_type_id)->get(),
+                        ];
+                    }
 
-                    // $schools = School::where('staff_id', $staff_id)->get();
-                    // $trainings = Training::where('staff_id', $staff_id)->get();
-                    // $awards = Awarding::where('staff_id', $staff_id)->get();
-                    // $abroads = Abroad::where('staff_id', $staff_id)->get();
-                    // $punishments = Punishment::where('staff_id', $staff_id)->get();
+                    foreach ($trainings as $tra) {
+                        $this->trainings[] = [
+                            'id' => $tra->id,
+                            'training_type' => $tra->training_type_id,
+                            'batch' => $tra->batch,
+                            'diploma_name' => $tra->diploma_name,
+                            'from_date' => $tra->from_date,
+                            'to_date' => $tra->to_date,
+                            'location' => $tra->location,
+                            'country' => $tra->country_id,
+                            'training_location' => $tra->training_location_id,
+                            'remark' => $tra->remark,
+                        ];
+                    }
 
+                    foreach ($awards as $awa) {
+                        $this->awards[] = [
+                            'id' => $awa->id,
+                            'award_type' => $awa->award_type_id,
+                            'award' => $awa->award_id,
+                            'order_no' => $awa->order_no,
+                            'remark' => $awa->remark,
+                        ];
+                    }
 
-                    // $socials = SocialActivity::where('staff_id', $staff_id)->get();
-                    // $staff_languages = StaffLanguage::where('staff_id', $staff_id)->get();
-                    // $staff_rewards = Reward::where('staff_id',$staff_id)->get();
+                    foreach ($abroads as $abroad) {
+                        $this->abroads[] = [
+                            'id' => $abroad->id ,
+                            'country' => $abroad->countries()->pluck('country_id')->toArray(),
+                            'particular' => $abroad->particular,
+                            // 'training_success_fail' => false,
+                            'training_success_fail' => $abroad->training_success_fail == 1 ? true : false,
+                            'training_success_count' => $abroad->training_success_count,
+                            'sponser' => $abroad->sponser,
+                            'meet_with' => $abroad->meet_with,
+                            'from_date' => $abroad->from_date,
+                            'to_date' => $abroad->to_date,
+                            'actual_abroad_date' => $abroad->actual_abroad_date,
+                            'position' => $abroad->position,
+                        ];
+                    }
 
+                    foreach ($punishments as $pun) {
 
+                        $this->punishments[] = [
+                            'id' => $pun->id ,
+                            'penalty_type' => $pun->penalty_type_id,
+                            'reason' => $pun->reason,
+                            'from_date' => $pun->from_date,
+                            'to_date' => $pun->to_date,
+                        ];
+                    }
 
-        foreach ($schools as $sch) {
-            $this->schools[] = [
-                'id' => $sch->id,
-                'education_group' => $sch->education_group_id,
-                'education_type' => $sch->education_type_id,
-                'education' => $sch->education,
-                'school_name' => $sch->school_name,
-                'town' => $sch->town,
-                'from_date' => $sch->from_date,
-                'to_date' => $sch->to_date,
-                'remark' => $sch->remark,
-                // 'education_types' => EducationType::where('education_group_id', $sch->education_group_id)->get(),
-                'education_types' => EducationType::all(),
-                '_educations' => Education::where('education_type_id', $sch->education_type_id)->get(),
-            ];
-        }
+                    foreach ($socials as $social) {
+                        $this->socials[] = [
+                            'id'=> $social->id ,
+                            'particular' => $social->particular,
+                            'remark' => $social->remark,
+                        ];
+                    }
 
-        foreach ($trainings as $tra) {
-            $this->trainings[] = [
-                'id' => $tra->id,
-                'training_type' => $tra->training_type_id,
-                'batch' => $tra->batch,
-                'diploma_name' => $tra->diploma_name,
-                'from_date' => $tra->from_date,
-                'to_date' => $tra->to_date,
-                'location' => $tra->location,
-                'country' => $tra->country_id,
-                'training_location' => $tra->training_location_id,
-                'remark' => $tra->remark,
-            ];
-        }
+                    foreach ($staff_languages as $lang) {
+                        $this->staff_languages[] = [
+                            'id' => $lang->id,
+                            'language' => $lang->language_id,
+                            'rank' => $lang->rank,
+                            'writing' => $lang->writing,
+                            'reading' => $lang->reading,
+                            'speaking' => $lang->speaking,
+                            'remark' => $lang->remark,
+                        ];
+                    }
 
-        foreach ($awards as $awa) {
-            $this->awards[] = [
-                'id' => $awa->id,
-                'award_type' => $awa->award_type_id,
-                'award' => $awa->award_id,
-                'order_no' => $awa->order_no,
-                'remark' => $awa->remark,
-            ];
-        }
-
-        foreach ($abroads as $abroad) {
-            $this->abroads[] = [
-                'id' => $abroad->id ,
-                'country' => $abroad->countries()->pluck('country_id')->toArray(),
-                'particular' => $abroad->particular,
-                // 'training_success_fail' => false,
-                'training_success_fail' => $abroad->training_success_fail == 1 ? true : false,
-                'training_success_count' => $abroad->training_success_count,
-                'sponser' => $abroad->sponser,
-                'meet_with' => $abroad->meet_with,
-                'from_date' => $abroad->from_date,
-                'to_date' => $abroad->to_date,
-                'actual_abroad_date' => $abroad->actual_abroad_date,
-                'position' => $abroad->position,
-            ];
-        }
-
-        foreach ($punishments as $pun) {
-
-            $this->punishments[] = [
-                'id' => $pun->id ,
-                'penalty_type' => $pun->penalty_type_id,
-                'reason' => $pun->reason,
-                'from_date' => $pun->from_date,
-                'to_date' => $pun->to_date,
-            ];
-        }
-
-        foreach ($socials as $social) {
-            $this->socials[] = [
-                'id'=> $social->id ,
-                'particular' => $social->particular,
-                'remark' => $social->remark,
-            ];
-        }
-
-        foreach ($staff_languages as $lang) {
-            $this->staff_languages[] = [
-                'id' => $lang->id,
-                'language' => $lang->language_id,
-                'rank' => $lang->rank,
-                'writing' => $lang->writing,
-                'reading' => $lang->reading,
-                'speaking' => $lang->speaking,
-                'remark' => $lang->remark,
-            ];
-        }
-
-        foreach ($staff_rewards as $reward) {
-            $this->staff_rewards[] = [
-                'id' => $reward->id,
-                'name' => $reward->name,
-                'type' => $reward->type,
-                'year' => $reward->year,
-                'remark' => $reward->remark,
-            ];
-        }
-
-
-
+                    foreach ($staff_rewards as $reward) {
+                        $this->staff_rewards[] = [
+                            'id' => $reward->id,
+                            'name' => $reward->name,
+                            'type' => $reward->type,
+                            'year' => $reward->year,
+                            'remark' => $reward->remark,
+                        ];
+                    }
 
 
 
 
                 break;
             }
+
+
+
+
+
+
 
 
 
