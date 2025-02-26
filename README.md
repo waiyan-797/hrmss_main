@@ -39,3 +39,12 @@ SET FOREIGN_KEY_CHECKS =  0 ; //start line of file
    
 
    name , rank  , dept , current_rank_date
+
+
+
+9 23
+
+1 27
+7  26
+
+9  23

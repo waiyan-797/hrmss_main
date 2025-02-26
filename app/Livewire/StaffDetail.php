@@ -411,25 +411,48 @@ class StaffDetail extends Component
 
     private function initializeArrays($staff_id)
     {
-        $staff_educations = StaffEducation::where('staff_id', $staff_id)->get();
-        $recommendations = Recommendation::where('staff_id', $staff_id)->get();
-        $postings = Posting::where('staff_id', $staff_id)->get();
-        $schools = School::where('staff_id', $staff_id)->get();
-        $trainings = Training::where('staff_id', $staff_id)->get();
-        $awards = Awarding::where('staff_id', $staff_id)->get();
-        $abroads = Abroad::where('staff_id', $staff_id)->get();
-        $punishments = Punishment::where('staff_id', $staff_id)->get();
-        $siblings = Sibling::where('staff_id', $staff_id)->get();
-        $father_siblings = FatherSibling::where('staff_id', $staff_id)->get();
-        $mother_siblings = MotherSibling::where('staff_id', $staff_id)->get();
+
+
+        switch ($this->tab) {
+            case 'personal_info':
+
+                $staff_educations = StaffEducation::where('staff_id', $staff_id)->get();
+
+                case 'job_info':
+                    $recommendations = Recommendation::where('staff_id', $staff_id)->get();
+                    $postings = Posting::where('staff_id', $staff_id)->get();
+
+                case 'relative':
+
+                $siblings = Sibling::where('staff_id', $staff_id)->get();
+                $father_siblings = FatherSibling::where('staff_id', $staff_id)->get();
+                $mother_siblings = MotherSibling::where('staff_id', $staff_id)->get();
         $spouses = Spouse::where('staff_id', $staff_id)->get();
         $children = Children::where('staff_id', $staff_id)->get();
         $spouse_siblings = SpouseSibling::where('staff_id', $staff_id)->get();
         $spouse_father_siblings = SpouseFatherSibling::where('staff_id', $staff_id)->get();
         $spouse_mother_siblings = SpouseMotherSibling::where('staff_id', $staff_id)->get();
-        $socials = SocialActivity::where('staff_id', $staff_id)->get();
-        $staff_languages = StaffLanguage::where('staff_id', $staff_id)->get();
-        $staff_rewards = Reward::where('staff_id',$staff_id)->get();
+
+
+
+        case 'detail_personal_info':
+
+
+                    $schools = School::where('staff_id', $staff_id)->get();
+                    $trainings = Training::where('staff_id', $staff_id)->get();
+                    $awards = Awarding::where('staff_id', $staff_id)->get();
+                    $abroads = Abroad::where('staff_id', $staff_id)->get();
+                    $punishments = Punishment::where('staff_id', $staff_id)->get();
+
+
+                    $socials = SocialActivity::where('staff_id', $staff_id)->get();
+                    $staff_languages = StaffLanguage::where('staff_id', $staff_id)->get();
+                    $staff_rewards = Reward::where('staff_id',$staff_id)->get();
+
+
+                break;
+            }
+
 
         $this->educations = [];
         $this->recommendations = [];
@@ -451,29 +474,45 @@ class StaffDetail extends Component
         $this->staff_languages = [];
         $this->staff_rewards = [];
 
-        foreach ($staff_educations as $edu) {
-            $education = Education::find($edu->education_id);
 
-            $this->educations[] = [
-                'id' => $edu->id,
-                'education_group' => $education->education_group_id,
-                'education_type' => $education->education_type_id,
-                'education' => $education->id,
-                'country_id' => $edu->country_id,
-                // 'education_types' => EducationType::where('education_group_id', $edu->education_group_id)->get(),
-                // '_educations' => Education::where('education_type_id', $edu->education_type_id)->get(),
-                'education_types' => EducationType::all(),
-                '_educations' => Education::all(),
-                'degree_certificate' => $edu->degree_certificate,
-            ];
-        }
 
-        foreach ($recommendations as $rec) {
-            $this->recommendations[] = [
-                'id' => $rec->id,
-                'recommend_by' => $rec->recommend_by,
-            ];
-        }
+
+        switch ($this->tab) {
+            case 'personal_info':
+
+                // $staff_educations = StaffEducation::where('staff_id', $staff_id)->get();
+                foreach ($staff_educations as $edu) {
+                    $education = Education::find($edu->education_id);
+
+                    $this->educations[] = [
+                        'id' => $edu->id,
+                        'education_group' => $education->education_group_id,
+                        'education_type' => $education->education_type_id,
+                        'education' => $education->id,
+                        'country_id' => $edu->country_id,
+                        // 'education_types' => EducationType::where('education_group_id', $edu->education_group_id)->get(),
+                        // '_educations' => Education::where('education_type_id', $edu->education_type_id)->get(),
+                        'education_types' => EducationType::all(),
+                        '_educations' => Education::all(),
+                        'degree_certificate' => $edu->degree_certificate,
+                    ];
+                }
+
+
+
+                case 'job_info':
+                    // $recommendations = Recommendation::where('staff_id', $staff_id)->get();
+
+                    // $postings = Posting::where('staff_id', $staff_id)->get();
+
+                    foreach ($recommendations as $rec) {
+                        $this->recommendations[] = [
+                            'id' => $rec->id,
+                            'recommend_by' => $rec->recommend_by,
+                        ];
+                    }
+
+
 
         $totalPostings = count($postings);
         $currentIndex = 0;
@@ -493,6 +532,91 @@ class StaffDetail extends Component
                 'remark' => $post->remark,
             ];
         }
+
+
+
+
+        case 'relative':
+
+
+        //         $siblings = Sibling::where('staff_id', $staff_id)->get();
+        //         $father_siblings = FatherSibling::where('staff_id', $staff_id)->get();
+        //         $mother_siblings = MotherSibling::where('staff_id', $staff_id)->get();
+        // $spouses = Spouse::where('staff_id', $staff_id)->get();
+        // $children = Children::where('staff_id', $staff_id)->get();
+        // $spouse_siblings = SpouseSibling::where('staff_id', $staff_id)->get();
+        // $spouse_father_siblings = SpouseFatherSibling::where('staff_id', $staff_id)->get();
+        // $spouse_mother_siblings = SpouseMotherSibling::where('staff_id', $staff_id)->get();
+
+
+
+        function relative_array($sib)
+        {
+            return [
+                'id' => $sib->id,
+                'name' => $sib->name,
+                'ethnic' => $sib->ethnic_id,
+                'religion' => $sib->religion_id,
+                'gender_id' => $sib->gender_id,
+                'place_of_birth' => $sib->place_of_birth,
+                'occupation' => $sib->occupation,
+                'address' => $sib->address,
+                'relation' => $sib->relation_id,
+            ];
+        }
+
+        foreach ($siblings as $sib) {
+            $this->siblings[] = relative_array($sib);
+        }
+
+        foreach ($father_siblings as $sib) {
+            $this->father_siblings[] = relative_array($sib);
+        }
+
+        foreach ($mother_siblings as $sib) {
+            $this->mother_siblings[] = relative_array($sib);
+        }
+
+        foreach ($spouses as $sib) {
+            $this->spouses[] = relative_array($sib);
+        }
+
+        foreach ($children as $sib) {
+            $this->children[] = relative_array($sib);
+        }
+
+        foreach ($spouse_siblings as $sib) {
+            $this->spouse_siblings[] = relative_array($sib);
+        }
+
+        foreach ($spouse_father_siblings as $sib) {
+            $this->spouse_father_siblings[] = relative_array($sib);
+        }
+
+        foreach ($spouse_mother_siblings as $sib) {
+            $this->spouse_mother_siblings[] = relative_array($sib);
+        }
+
+
+
+        case 'detail_personal_info':
+
+
+
+
+
+                    // $schools = School::where('staff_id', $staff_id)->get();
+                    // $trainings = Training::where('staff_id', $staff_id)->get();
+                    // $awards = Awarding::where('staff_id', $staff_id)->get();
+                    // $abroads = Abroad::where('staff_id', $staff_id)->get();
+                    // $punishments = Punishment::where('staff_id', $staff_id)->get();
+
+
+                    // $socials = SocialActivity::where('staff_id', $staff_id)->get();
+                    // $staff_languages = StaffLanguage::where('staff_id', $staff_id)->get();
+                    // $staff_rewards = Reward::where('staff_id',$staff_id)->get();
+
+
 
         foreach ($schools as $sch) {
             $this->schools[] = [
@@ -594,52 +718,22 @@ class StaffDetail extends Component
             ];
         }
 
-        function relative_array($sib)
-        {
-            return [
-                'id' => $sib->id,
-                'name' => $sib->name,
-                'ethnic' => $sib->ethnic_id,
-                'religion' => $sib->religion_id,
-                'gender_id' => $sib->gender_id,
-                'place_of_birth' => $sib->place_of_birth,
-                'occupation' => $sib->occupation,
-                'address' => $sib->address,
-                'relation' => $sib->relation_id,
-            ];
-        }
 
-        foreach ($siblings as $sib) {
-            $this->siblings[] = relative_array($sib);
-        }
 
-        foreach ($father_siblings as $sib) {
-            $this->father_siblings[] = relative_array($sib);
-        }
 
-        foreach ($mother_siblings as $sib) {
-            $this->mother_siblings[] = relative_array($sib);
-        }
 
-        foreach ($spouses as $sib) {
-            $this->spouses[] = relative_array($sib);
-        }
 
-        foreach ($children as $sib) {
-            $this->children[] = relative_array($sib);
-        }
 
-        foreach ($spouse_siblings as $sib) {
-            $this->spouse_siblings[] = relative_array($sib);
-        }
+                break;
+            }
 
-        foreach ($spouse_father_siblings as $sib) {
-            $this->spouse_father_siblings[] = relative_array($sib);
-        }
 
-        foreach ($spouse_mother_siblings as $sib) {
-            $this->spouse_mother_siblings[] = relative_array($sib);
-        }
+
+
+
+
+
+
     }
 
     private function loadStaffData($staff_id)
