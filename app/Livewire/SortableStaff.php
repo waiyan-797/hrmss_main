@@ -1,69 +1,87 @@
 <?php
-
 namespace App\Livewire;
 
-use App\Models\Division;
 use App\Models\Rank;
 use App\Models\Staff;
 use Livewire\Component;
 
 class SortableStaff extends Component
 {
-
-    public $staffs ;
-    public $staff_id ;
-    public $staff ;
-    public $ranks ,  $selectedRankId ;
-    // public $divisions , $selectDivisionId;
-
-
-
-
+    public $staffs;
+    public $ranks, $selectedRankId;
+    public $sortedStaffs = [];
+    public $selectedStaffId = null;
 
     public function mount()
     {
-        $this->ranks = Rank::where('is_dica',true)->get();
-        // $this->divisions = Division::all();
-
-        $this->selectedRankId =  $this->ranks->first()->id;
-        // $this->selectDivisionId =  $this->divisions->first()->id;
+        $this->ranks = Rank::where('is_dica', true)->get();
+        $this->selectedRankId = $this->ranks->first()->id;
+        $this->loadStaffs();
     }
 
+    public function updatedSelectedRankId(){
+$this->loadStaffs();
+    }
+
+    public function loadStaffs()
+    {
+        $query  = Staff::query()
+        ->orderBy('sort_no')
+
+
+        ->orderBy('current_rank_date');
+
+        if ($this->selectedRankId) {
+            $query->where('current_rank_id', $this->selectedRankId);
+        }
+
+        $this->staffs = $query->get();
+        $this->sortedStaffs = $this->staffs->pluck('id')->toArray();
+    }
+
+    public function selectRow($staffId)
+    {
+        $this->selectedStaffId = $staffId;
+    }
+
+    public function moveUp()
+    {
+        if (!$this->selectedStaffId) return;
+
+        $index = array_search($this->selectedStaffId, $this->sortedStaffs);
+
+        if ($index > 0) {
+            [$this->sortedStaffs[$index - 1], $this->sortedStaffs[$index]] =
+                [$this->sortedStaffs[$index], $this->sortedStaffs[$index - 1]];
+        }
+    }
+
+    public function moveDown()
+    {
+        if (!$this->selectedStaffId) return;
+
+        $index = array_search($this->selectedStaffId, $this->sortedStaffs);
+
+        if ($index < count($this->sortedStaffs) - 1) {
+            [$this->sortedStaffs[$index + 1], $this->sortedStaffs[$index]] =
+                [$this->sortedStaffs[$index], $this->sortedStaffs[$index + 1]];
+        }
+    }
+
+    public function saveOrder()
+    {
+        foreach ($this->sortedStaffs as $index => $staffId) {
+            Staff::where('id', $staffId)->update(['sort_no' => $index + 1]);
+        }
+        session()->flash('message', 'Order saved successfully!');
+        $this->loadStaffs();
+    }
 
     public function render()
     {
-
-        $query  = Staff::query()
-
-        ->orderBy('current_rank_date')
-        // ->orderBy('join_date')
-
-        ;
-        if($this->selectedRankId){
-            $query->where('current_rank_id' , $this->selectedRankId);
-        }
-
-        // if($this->selectDivisionId){
-        //     $query->where('current_division_id' , $this->selectDivisionId);
-        // }
-
-
-        $this->staffs  = $query->get();
-        return view('livewire.sortable-staff' , ['staffs' => $this->staffs ]);
-    }
-    public function updateOrder($order)
-    {
-        foreach ($order as $index => $id) {
-
-            // Find the staff record by ID
-
-            $currentStaff = Staff::find($id['value']);
-
-            if ($currentStaff) {
-                $currentStaff->update(['sort_no' => $id['order']]);
-            }
-        }
-
-        $this->staffs = Staff::all();
+        return view('livewire.sortable-staff', [
+            'staffs' => $this->staffs,
+            'selectedStaffId' => $this->selectedStaffId
+        ]);
     }
 }

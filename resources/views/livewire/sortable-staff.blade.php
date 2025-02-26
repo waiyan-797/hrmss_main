@@ -30,49 +30,19 @@ placeholder="Select..."
 
 
    </div>
-{{--
-
-    <div class=" mt-5 flex justify-center items-center    ">
-        <ul wire:sortable="updateOrder" class="  w-screen" wire:sortable.options="{ animation: 100 }" >
-            @foreach($staffs as  $key=> $member)
-                <li wire:sortable.item="{{ $member->id}}" wire:key="staff-{{ $member->id }}" class="p-2 border mb-1">
-                    <div wire:sortable.handle >
-                    <span class=" text-lg  ">
-
-                         {{$key + 1  }}
-                    </span>
-                    <span class=" text-lg">
-                        {{ $member->name }}
-
-                    </span>
-
-                    <span class=" text-lg">
-                        {{ $member->current_rank->name }}
-
-                    </span>
-
-                    <span class=" text-lg">
-                        {{ $member->current_department?->name }}
-
-                    </span>
-
-                    <span class=" text-lg">
-                        {{ $member->current_rank_date }}
-
-                    </span>
-
-
-
-                    </div>
-                </li>
-            @endforeach
-        </ul>
-    </div>
-
-</div> --}}
 
 <div class="mt-5 flex justify-center items-center">
     <div class="w-screen border border-gray-300">
+
+        <!-- Move Up / Down & Save Buttons -->
+        <div class="flex justify-start gap-x-4 items-center p-2 bg-gray-100">
+            <div>
+                <button wire:click="moveUp" class="bg-blue-500 text-white px-4 py-2 rounded mr-2">Move Up</button>
+                <button wire:click="moveDown" class="bg-blue-500 text-white px-4 py-2 rounded">Move Down</button>
+            </div>
+            <button wire:click="saveOrder" class="bg-green-500 text-white px-4 py-2 rounded">Save Order</button>
+        </div>
+
         <!-- Table Header -->
         <div class="flex bg-gray-200 p-2 font-semibold">
             <div class="w-12 text-center border-r">စဉ်</div>
@@ -83,27 +53,30 @@ placeholder="Select..."
         </div>
 
         <!-- Table Body -->
-        <ul wire:sortable="updateOrder" wire:sortable.options="{ animation: 100 }">
-            @foreach($staffs as $key => $member)
-                <li wire:sortable.item="{{ $member->id }}" wire:key="staff-{{ $member->id }}"
-                    class="flex border-b p-2 items-center">
-
-                    <div wire:sortable.handle class="w-12 text-center border-r cursor-move">
-                        {{en2mm( $key + 1) }}
-                    </div>
+        <ul>
+            @foreach($sortedStaffs as $index => $staffId)
+                @php
+                    $member = $staffs->where('id', $staffId)->first();
+                @endphp
+                <li wire:click="selectRow({{ $staffId }})"
+                    class="flex border-b p-2 items-center cursor-pointer
+                           {{ $selectedStaffId === $staffId ? 'bg-green-200' : 'hover:bg-gray-100' }}">
+                    <div class="w-12 text-center border-r">{{ $index + 1 }}</div>
+                    {{-- <div class="w-12 text-center border-r">{{ $member->sort_no }}</div> --}}
                     <div class="flex-1 px-2 border-r">{{ $member->name }}</div>
                     <div class="flex-1 px-2 border-r">{{ $member->current_rank->name }}</div>
                     <div class="flex-1 px-2 border-r">{{ $member->current_department?->name }}</div>
-                    <div class="flex-1 px-2">{{
-                   formatDMYmm(  $member->current_rank_date)
-
-                     }}</div>
+                    <div class="flex-1 px-2">{{ formatDMYmm($member->current_rank_date) }}</div>
                 </li>
             @endforeach
         </ul>
+
+        <!-- Flash Message -->
+        @if (session()->has('message'))
+            <div class="text-green-600 p-2">
+                {{ session('message') }}
+            </div>
+        @endif
     </div>
 </div>
-
-
-
 
