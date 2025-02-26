@@ -432,6 +432,27 @@ class StaffDetail extends Component
     {
 
 
+
+        $this->educations = [];
+        $this->recommendations = [];
+        $this->postings = [];
+        $this->schools = [];
+        $this->trainings = [];
+        $this->awards = [];
+        $this->abroads = [];
+        $this->punishments = [];
+        $this->siblings = [];
+        $this->father_siblings = [];
+        $this->mother_siblings = [];
+        $this->spouses = [];
+        $this->children = [];
+        $this->spouse_siblings = [];
+        $this->spouse_father_siblings = [];
+        $this->spouse_mother_siblings = [];
+        $this->socials = [];
+        $this->staff_languages = [];
+        $this->staff_rewards = [];
+
         switch ($this->tab) {
                   case 'personal_info':
 
@@ -991,6 +1012,7 @@ class StaffDetail extends Component
     public function removeModel($propertyName, $model, $index, $attaches): void
     {
         $draft_model = $this->$propertyName[$index];
+
         $gotModel = $model::find($draft_model['id']);
         if ($gotModel) {
             foreach ($attaches as $attach) {
@@ -998,6 +1020,8 @@ class StaffDetail extends Component
                     Storage::disk('upload')->delete($gotModel->$attach);
                 }
             }
+
+
             $gotModel->delete();
         }
 
@@ -1081,6 +1105,7 @@ class StaffDetail extends Component
 
     public function remove_abroads($index)
     {
+        // dd($index);
         $this->removeModel('abroads',  Abroad::class , $index, []);
     }
 
