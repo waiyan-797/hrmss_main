@@ -422,370 +422,370 @@ class PdfStaffReport68 extends Component
         //             ['alignment' => 'center']
         //         );
         //     }
-        // $section->addTextBreak();
-        // $section->addText('မိဘဆွေမျိုးများ', ['bold' => true], ['alignment' => 'center']);
-        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow(50);
-        // $table->addCell(1400)->addText('(က)', null, $pStyle_5);
-        // $table->addCell(13000)->addText('အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်', null, $pStyle_8);
-        // $table->addCell(700)->addText('-', null, $pStyle_5);
-        // $table->addCell(13000)->addText(
-        //     ($staff->father_name ?? '') .'  '. 
-        //     ($staff->father_ethnic?->name ? '၊' . $staff->father_ethnic?->name:'') .'  '.
-        //     ($staff->father_religion?->name ? '၊'. $staff->father_religion?->name : '' ).' '.
-        //     ($staff->father_place_of_birth ? '၊'. $staff->father_place_of_birth : '' ). 
-        //     ($staff->father_occupation ? '၊'. $staff->father_occupation.'။':''),
-        //     null, 
-        //     $pStyle_8
-        // );
+        $section->addTextBreak();
+        $section->addText('မိဘဆွေမျိုးများ', ['bold' => true], ['alignment' => 'center']);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50);
+        $table->addCell(1400)->addText('(က)', null, $pStyle_5);
+        $table->addCell(13000)->addText('အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText(
+            ($staff->father_name ?? '') .'  '. 
+            ($staff->father_ethnic?->name ? '၊' . $staff->father_ethnic?->name:'') .'  '.
+            ($staff->father_religion?->name ? '၊'. $staff->father_religion?->name : '' ).' '.
+            ($staff->father_place_of_birth ? '၊'. $staff->father_place_of_birth : '' ). 
+            ($staff->father_occupation ? '၊'. $staff->father_occupation.'။':''),
+            null, 
+            $pStyle_8
+        );
 
-        // $table->addRow(50);
-        // $table->addCell(1400)->addText('(ခ)', null, $pStyle_5);
-        // $table->addCell(13000)->addText('၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ', null, $pStyle_8);
-        // $table->addCell(700)->addText('-', null, $pStyle_5);
-        // $table->addCell(13000)->addText(
-        //     ($staff->father_address_street ?? '' ).
-        //     ( $staff->father_address_ward ? '၊' . $staff->father_address_ward :'') . 
-        //     ($staff->father_address_township_or_town?->name ? '၊'. $staff->father_address_township_or_town?->name.'မြို့နယ်' :'' ). 
-        //     ($staff->father_address_region?->name ? '၊' . $staff->father_address_region?->name .'ဒေသကြီး။':''), 
-        //     null, 
-        //     $pStyle_8
-        // );
+        $table->addRow(50);
+        $table->addCell(1400)->addText('(ခ)', null, $pStyle_5);
+        $table->addCell(13000)->addText('၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText(
+            ($staff->father_address_street ?? '' ).
+            ( $staff->father_address_ward ? '၊' . $staff->father_address_ward :'') . 
+            ($staff->father_address_township_or_town?->name ? '၊'. $staff->father_address_township_or_town?->name.'မြို့နယ်' :'' ). 
+            ($staff->father_address_region?->name ? '၊' . $staff->father_address_region?->name .'ဒေသကြီး။':''), 
+            null, 
+            $pStyle_8
+        );
 
-        // $table->addRow(50);
-        // $table->addCell(1400)->addText('(ဂ)', null, $pStyle_5);
-        // $table->addCell(13000)->addText('အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်', null, $pStyle_8);
-        // $table->addCell(700)->addText('-', null, $pStyle_5);
-        // $table->addCell(13000)->addText(
-        //     ($staff->mother_name?? '') .'  '.
-        //     ($staff->mother_ethnic?->name ?'၊'. $staff->mother_ethnic?->name :'') .'  '.
-        //     ( $staff->mother_religion?->name ? '၊'. $staff->mother_religion?->name : '') .'  '. 
-        //     ($staff->mother_place_of_birth ? '၊'. $staff->mother_place_of_birth : ''  ).
-        //     ( $staff->mother_occupation ? '၊'. $staff->mother_occupation.'။':'') ,
-        //     null,
-        //     $pStyle_8
-        // );
+        $table->addRow(50);
+        $table->addCell(1400)->addText('(ဂ)', null, $pStyle_5);
+        $table->addCell(13000)->addText('အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText(
+            ($staff->mother_name?? '') .'  '.
+            ($staff->mother_ethnic?->name ?'၊'. $staff->mother_ethnic?->name :'') .'  '.
+            ( $staff->mother_religion?->name ? '၊'. $staff->mother_religion?->name : '') .'  '. 
+            ($staff->mother_place_of_birth ? '၊'. $staff->mother_place_of_birth : ''  ).
+            ( $staff->mother_occupation ? '၊'. $staff->mother_occupation.'။':'') ,
+            null,
+            $pStyle_8
+        );
 
-        // $table->addRow(50);
-        // $table->addCell(1400)->addText('(ဃ)', null, $pStyle_5);
-        // $table->addCell(13000)->addText('၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ', null, $pStyle_8);
-        // $table->addCell(700)->addText('-', null, $pStyle_5);
-        // $table->addCell(13000)->addText(
-        //     ($staff->mother_address_street ?? '') . 
-        //     ($staff->mother_address_ward ? '၊' . $staff->mother_address_ward : '') . 
-        //     ($staff->mother_address_township_or_town?->name ? '၊' . $staff->mother_address_township_or_town->name.'မြို့နယ်' : '') . 
-        //     ($staff->mother_address_region?->name ? '၊' . $staff->mother_address_region->name .'ဒေသကြီး။': '') ,
-        //     null,
-        //     $pStyle_8
-        // );
-        // $section->addTextBreak();
-        // $section->addText('၅။ '.  ' ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
-        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow(50,array('tblHeader' => true));
-        // $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
-        // $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
-        // $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
-        // $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
-        // if($staff->siblings->isNotEmpty()){
-        //     foreach ($staff->siblings as $index=>$sibling) {
-        //         $table->addRow(50);
-        //         $table->addCell(2800)->addText($sibling->name,null,$pStyle_3);
-        //         $table->addCell(1300)->addText($sibling->ethnic?->name . "/\n" . $sibling->religion?->name,null, $pStyle_6);
-        //         $table->addCell(1300)->addText($sibling->place_of_birth,null, $pStyle_6);
-        //         $table->addCell(1800)->addText($sibling->occupation,null, $pStyle_6);
-        //         $table->addCell(2300)->addText($sibling->address,null, $pStyle_6);
-        //         $table->addCell(1200)->addText($sibling->relation->name ?? '',null, $pStyle_6);
-        //     }
-        // }else{
-        //         $table->addRow(50);
-        //         $cell = $table->addCell(10700, ['gridSpan' => 6]); 
-        //         $cell->addText(
-        //             'မရှိပါ',
-        //            null,
-        //             ['alignment' => 'center']
-        //         );
-        //     }
-        // $section->addTextBreak();
-        // $section->addText('၆။ '.  ' အဘ၏ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
-        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow(50,array('tblHeader' => true));
-        // $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
-        // $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
-        // $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
-        // $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
-        // if($staff->fatherSiblings->isNotEmpty()){
-        //     foreach ($staff->fatherSiblings as $index => $sibling) {
-        //         $table->addRow();
-        //         $table->addCell(2800)->addText($sibling->name,null, $pStyle_3);
-        //         $table->addCell(1300)->addText($sibling->ethnic?->name . "/\n" . $staff->religion?->name,null, $pStyle_6);
-        //         $table->addCell(1300)->addText($sibling->place_of_birth,null, $pStyle_6);
-        //         $table->addCell(1800)->addText($sibling->occupation,null, $pStyle_6);
-        //         $table->addCell(2300)->addText($sibling->address,null, $pStyle_6);
-        //         $table->addCell(1200)->addText($sibling->relation?->name,null, $pStyle_6);
-        //     }
-        // }else{
-        //         $table->addRow(50);
-        //         $cell = $table->addCell(10700, ['gridSpan' => 6]); 
-        //         $cell->addText(
-        //             'မရှိပါ',
-        //            null,
-        //             ['alignment' => 'center']
-        //         );
-        //     }
-        // $section->addTextBreak();
-        // $section->addText('၇။ '.  ' အမိ၏ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
-        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow(50,array('tblHeader' => true));
-        // $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
-        // $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
-        // $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
-        // $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
-        // if($staff->motherSiblings->isNotEmpty()){
-        //     foreach ($staff->motherSiblings as $index => $sibling) {
-        //         $table->addRow(50);
+        $table->addRow(50);
+        $table->addCell(1400)->addText('(ဃ)', null, $pStyle_5);
+        $table->addCell(13000)->addText('၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText(
+            ($staff->mother_address_street ?? '') . 
+            ($staff->mother_address_ward ? '၊' . $staff->mother_address_ward : '') . 
+            ($staff->mother_address_township_or_town?->name ? '၊' . $staff->mother_address_township_or_town->name.'မြို့နယ်' : '') . 
+            ($staff->mother_address_region?->name ? '၊' . $staff->mother_address_region->name .'ဒေသကြီး။': '') ,
+            null,
+            $pStyle_8
+        );
+        $section->addTextBreak();
+        $section->addText('၅။ '.  ' ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50,array('tblHeader' => true));
+        $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
+        $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
+        $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
+        $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
+        $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
+        $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
+        if($staff->siblings->isNotEmpty()){
+            foreach ($staff->siblings as $index=>$sibling) {
+                $table->addRow(50);
+                $table->addCell(2800)->addText($sibling->name,null,$pStyle_3);
+                $table->addCell(1300)->addText($sibling->ethnic?->name . "/\n" . $sibling->religion?->name,null, $pStyle_6);
+                $table->addCell(1300)->addText($sibling->place_of_birth,null, $pStyle_6);
+                $table->addCell(1800)->addText($sibling->occupation,null, $pStyle_6);
+                $table->addCell(2300)->addText($sibling->address,null, $pStyle_6);
+                $table->addCell(1200)->addText($sibling->relation->name ?? '',null, $pStyle_6);
+            }
+        }else{
+                $table->addRow(50);
+                $cell = $table->addCell(10700, ['gridSpan' => 6]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
+            }
+        $section->addTextBreak();
+        $section->addText('၆။ '.  ' အဘ၏ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50,array('tblHeader' => true));
+        $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
+        $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
+        $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
+        $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
+        $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
+        $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
+        if($staff->fatherSiblings->isNotEmpty()){
+            foreach ($staff->fatherSiblings as $index => $sibling) {
+                $table->addRow();
+                $table->addCell(2800)->addText($sibling->name,null, $pStyle_3);
+                $table->addCell(1300)->addText($sibling->ethnic?->name . "/\n" . $staff->religion?->name,null, $pStyle_6);
+                $table->addCell(1300)->addText($sibling->place_of_birth,null, $pStyle_6);
+                $table->addCell(1800)->addText($sibling->occupation,null, $pStyle_6);
+                $table->addCell(2300)->addText($sibling->address,null, $pStyle_6);
+                $table->addCell(1200)->addText($sibling->relation?->name,null, $pStyle_6);
+            }
+        }else{
+                $table->addRow(50);
+                $cell = $table->addCell(10700, ['gridSpan' => 6]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
+            }
+        $section->addTextBreak();
+        $section->addText('၇။ '.  ' အမိ၏ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50,array('tblHeader' => true));
+        $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
+        $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
+        $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
+        $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
+        $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
+        $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
+        if($staff->motherSiblings->isNotEmpty()){
+            foreach ($staff->motherSiblings as $index => $sibling) {
+                $table->addRow(50);
               
-        //         $table->addCell(2800)->addText($sibling->name,null, $pStyle_3);
-        //         $table->addCell(1300)->addText($sibling->ethnic?->name  . "/\n" . $sibling->religion?->name ,null, $pStyle_6);
-        //         $table->addCell(1300)->addText($sibling->place_of_birth,null, $pStyle_6);
-        //         $table->addCell(1800)->addText($sibling->occupation,null, $pStyle_6);
-        //         $table->addCell(2300)->addText($sibling->address,null, $pStyle_6);
-        //         $table->addCell(1200)->addText($sibling->relation->name ,null, $pStyle_6);
-        //     }
-        // }else{
-        //         $table->addRow(50);
-        //         $cell = $table->addCell(10700, ['gridSpan' => 6]); 
-        //         $cell->addText(
-        //             'မရှိပါ',
-        //            null,
-        //             ['alignment' => 'center']
-        //         );
-        //     }
-        // $section->addTextBreak();
-        // $section->addText(' ၈။ '.  ' ခင်ပွန်း၊ ဇနီးသည်', ['bold'=>true],null, ['spaceBefore' => 200]);
-        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow(50,array('tblHeader' => true));
-        // $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
-        // $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
-        // $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
-        // $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
-        // if($staff->spouses->isNotEmpty()){
-        //     foreach ($staff->spouses as $index => $spouse) {
-        //         $table->addRow();
-        //         $table->addCell(2800)->addText($spouse->name,null, $pStyle_3);
-        //         $table->addCell(1300)->addText($spouse->ethnic->name  . "\n" . $spouse->religion->name ,null, $pStyle_6);
-        //         $table->addCell(1300)->addText($spouse->place_of_birth,null, $pStyle_6);
-        //         $table->addCell(1800)->addText($spouse->occupation,null, $pStyle_3);
-        //         $table->addCell(2300)->addText($spouse->address,null, $pStyle_3);
-        //         $table->addCell(1200)->addText($spouse->relation?->name,null, $pStyle_6);
-        //     }
-        // }else{
+                $table->addCell(2800)->addText($sibling->name,null, $pStyle_3);
+                $table->addCell(1300)->addText($sibling->ethnic?->name  . "/\n" . $sibling->religion?->name ,null, $pStyle_6);
+                $table->addCell(1300)->addText($sibling->place_of_birth,null, $pStyle_6);
+                $table->addCell(1800)->addText($sibling->occupation,null, $pStyle_6);
+                $table->addCell(2300)->addText($sibling->address,null, $pStyle_6);
+                $table->addCell(1200)->addText($sibling->relation->name ,null, $pStyle_6);
+            }
+        }else{
+                $table->addRow(50);
+                $cell = $table->addCell(10700, ['gridSpan' => 6]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
+            }
+        $section->addTextBreak();
+        $section->addText(' ၈။ '.  ' ခင်ပွန်း၊ ဇနီးသည်', ['bold'=>true],null, ['spaceBefore' => 200]);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50,array('tblHeader' => true));
+        $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
+        $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
+        $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
+        $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
+        $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
+        $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
+        if($staff->spouses->isNotEmpty()){
+            foreach ($staff->spouses as $index => $spouse) {
+                $table->addRow();
+                $table->addCell(2800)->addText($spouse->name,null, $pStyle_3);
+                $table->addCell(1300)->addText($spouse->ethnic->name  . "\n" . $spouse->religion->name ,null, $pStyle_6);
+                $table->addCell(1300)->addText($spouse->place_of_birth,null, $pStyle_6);
+                $table->addCell(1800)->addText($spouse->occupation,null, $pStyle_3);
+                $table->addCell(2300)->addText($spouse->address,null, $pStyle_3);
+                $table->addCell(1200)->addText($spouse->relation?->name,null, $pStyle_6);
+            }
+        }else{
                
-        //         $table->addRow(50);
-        //         $cell = $table->addCell(10700, ['gridSpan' => 6]); 
-        //         $cell->addText(
-        //             'မရှိပါ',
-        //            null,
-        //             ['alignment' => 'center']
-        //         );
-        //     }
+                $table->addRow(50);
+                $cell = $table->addCell(10700, ['gridSpan' => 6]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
+            }
 
        
-        // $section->addTextBreak();
-        // $section->addText(' ၉။ '.  ' သားသမီးများ', ['bold'=>true],null, ['spaceBefore' => 200]);
-        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow(50,array('tblHeader' => true));
-        // $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
-        // $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
-        // $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
-        // $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
-        // if($staff->children->isNotEmpty()){
-        //     foreach ($staff->children as $index => $child) {
-        //         $table->addRow();
-        //         $table->addCell(2800)->addText($child->name,null, $pStyle_3);
-        //         $table->addCell(1300)->addText($child->ethnic?->name  . "/\n" . $child->religion?->name ?? '',null, $pStyle_6);
-        //         $table->addCell(1300)->addText($child->place_of_birth,null, $pStyle_6);
-        //         $table->addCell(1800)->addText($child->occupation,null, $pStyle_3);
-        //         $table->addCell(2300)->addText($child->address,null, $pStyle_3);
-        //         $table->addCell(1200)->addText($child->relation?->name,null, $pStyle_6);
-        //     }
-        // }else{
-        //         $table->addRow(50);
-        //         $cell = $table->addCell(10700, ['gridSpan' => 6]); 
-        //         $cell->addText(
-        //             'မရှိပါ',
-        //            null,
-        //             ['alignment' => 'center']
-        //         );
-        //     }
+        $section->addTextBreak();
+        $section->addText(' ၉။ '.  ' သားသမီးများ', ['bold'=>true],null, ['spaceBefore' => 200]);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50,array('tblHeader' => true));
+        $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
+        $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
+        $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
+        $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
+        $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
+        $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
+        if($staff->children->isNotEmpty()){
+            foreach ($staff->children as $index => $child) {
+                $table->addRow();
+                $table->addCell(2800)->addText($child->name,null, $pStyle_3);
+                $table->addCell(1300)->addText($child->ethnic?->name  . "/\n" . $child->religion?->name ?? '',null, $pStyle_6);
+                $table->addCell(1300)->addText($child->place_of_birth,null, $pStyle_6);
+                $table->addCell(1800)->addText($child->occupation,null, $pStyle_3);
+                $table->addCell(2300)->addText($child->address,null, $pStyle_3);
+                $table->addCell(1200)->addText($child->relation?->name,null, $pStyle_6);
+            }
+        }else{
+                $table->addRow(50);
+                $cell = $table->addCell(10700, ['gridSpan' => 6]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
+            }
 
         
-        // $section->addTextBreak();
-        // $section->addText(' ၁၀။ '.  ' ခင်ပွန်း/ဇနီးသည်၏ ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
-        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow(50,array('tblHeader' => true));
-        // $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
-        // $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
-        // $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
-        // $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
-        // if($staff->spouseSiblings->isNotEmpty()){
-        //     foreach ($staff->spouseSiblings as $index => $sibling) {
-        //         $table->addRow();
+        $section->addTextBreak();
+        $section->addText(' ၁၀။ '.  ' ခင်ပွန်း/ဇနီးသည်၏ ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50,array('tblHeader' => true));
+        $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
+        $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
+        $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
+        $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
+        $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
+        $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
+        if($staff->spouseSiblings->isNotEmpty()){
+            foreach ($staff->spouseSiblings as $index => $sibling) {
+                $table->addRow();
                
-        //         $table->addCell(2800)->addText($sibling->name,null, $pStyle_3);
-        //         $table->addCell(1300)->addText($sibling->ethnic?->name  . '/'."\n" . $sibling->religion?->name ,null, $pStyle_6);
-        //         $table->addCell(1300)->addText($sibling->place_of_birth,null, $pStyle_6);
-        //         $table->addCell(1800)->addText($sibling->occupation,null, $pStyle_3);
-        //         $table->addCell(2300)->addText($sibling->address,null, $pStyle_3);
-        //         $table->addCell(1200)->addText($sibling->relation?->name,null, $pStyle_6);
-        //     }
-        // }else{
-        //         $table->addRow(50);
-        //         $cell = $table->addCell(10700, ['gridSpan' => 6]); 
-        //         $cell->addText(
-        //             'မရှိပါ',
-        //            null,
-        //             ['alignment' => 'center']
-        //         );
-        //     }
+                $table->addCell(2800)->addText($sibling->name,null, $pStyle_3);
+                $table->addCell(1300)->addText($sibling->ethnic?->name  . '/'."\n" . $sibling->religion?->name ,null, $pStyle_6);
+                $table->addCell(1300)->addText($sibling->place_of_birth,null, $pStyle_6);
+                $table->addCell(1800)->addText($sibling->occupation,null, $pStyle_3);
+                $table->addCell(2300)->addText($sibling->address,null, $pStyle_3);
+                $table->addCell(1200)->addText($sibling->relation?->name,null, $pStyle_6);
+            }
+        }else{
+                $table->addRow(50);
+                $cell = $table->addCell(10700, ['gridSpan' => 6]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
+            }
 
      
-        // $section->addTextBreak();
-        // $section->addText(' ၁၁။ '.  " ခင်ပွန်း/ဇနီးသည်အဘနှင့်ညီအကိုမောင်နှမများ၏ အမည်၊ လူမျိုး၊ ဘာသာ၊ ဇာတိ၊\n     အလုပ်အကိုင်နှင့်နေရပ်လိပ်စာ", ['bold'=>true],null, ['spaceBefore' => 200]);
-        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow(50,array('tblHeader' => true));
-        // $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
-        // $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
-        // $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
-        // $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
-        // if($staff->spouseFatherSiblings->isNotEmpty()){
-        //     foreach ($staff->spouseFatherSiblings as $index => $sibling) {
-        //         $table->addRow();
-        //         $table->addCell(2800)->addText($sibling->name,null, $pStyle_3);
-        //         $table->addCell(1300)->addText($sibling->ethnic?->name  . "/\n" . $sibling->religion?->name ,null, $pStyle_6);
-        //         $table->addCell(1300)->addText($sibling->place_of_birth,null, $pStyle_6);
-        //         $table->addCell(1800)->addText($sibling->occupation,null, $pStyle_3);
-        //         $table->addCell(2300)->addText($sibling->address,null, $pStyle_3);
-        //         $table->addCell(1200)->addText($sibling->relation?->name,null, $pStyle_6);
-        //     }
-        // }else{
-        //         $table->addRow(50);
-        //         $cell = $table->addCell(10700, ['gridSpan' => 6]); 
-        //         $cell->addText(
-        //             'မရှိပါ',
-        //            null,
-        //             ['alignment' => 'center']
-        //         );
-        //     }
-        // $section->addTextBreak();
-        // $section->addText(' ၁၂။ '.  " ခင်ပွန်း/ဇနီးသည်အမိနှင့်ညီအကိုမောင်နှမများ၏ အမည်၊ လူမျိုး၊ဘာသာ၊ဇာတိ၊\n      အလုပ်အကိုင်နှင့်နေရပ်လိပ်စာ", ['bold'=>true],null, ['spaceBefore' => 200]);
-        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow(50,array('tblHeader' => true));
-        // $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
-        // $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
-        // $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
-        // $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
-        // $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
-        // if($staff->spouseMotherSiblings->isNotEmpty()){
-        //     foreach ($staff->spouseMotherSiblings as $index => $sibling) {
-        //         $table->addRow();
-        //         $table->addCell(2800)->addText($sibling->name,null, $pStyle_3);
-        //         $table->addCell(1300)->addText($sibling->ethnic?->name . "/\n" . $sibling->religion?->name,null, $pStyle_6);
-        //         $table->addCell(1300)->addText($sibling->place_of_birth,null, $pStyle_6);
-        //         $table->addCell(1800)->addText($sibling->occupation,null, $pStyle_3);
-        //         $table->addCell(2300)->addText($sibling->address,null, $pStyle_3);
-        //         $table->addCell(1200)->addText($sibling->relation?->name,null, $pStyle_6);
-        //     }
-        // }else{
-        //         $table->addRow(50);
-        //         $cell = $table->addCell(10700, ['gridSpan' => 6]); 
-        //         $cell->addText(
-        //             'မရှိပါ',
-        //            null,
-        //             ['alignment' => 'center']
-        //         );
-        //     }
-        //     $section->addText('');
-        // $table = $section->addTable();
-        // $table->addRow();
-        // $table->addCell(1300)->addText('၁၃။', null, $pStyle_5);
-        // $table->addCell(13000)->addText("မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်းတို့၏မိဘ၊ညီအကိုမောင်နှမများ၊သားသမီးများသည်\nနိုင်ငံရေးပါတီဝင်များတွင်ဝင်ရောက်ဆောင်ရွက်မှုရှိ/မရှိ(ရှိကအသေးစိတ်ဖော်ပြရန်)", null, $pStyle_8);
-        // $table->addCell(700)->addText('-', null,$pStyle_5);
-        // $table->addCell(13000)->addText($staff->family_in_politics ?  ($staff->family_in_politics_text ?? '') : 'မရှိပါ', null,$pStyle_8);
-        // $section->addText('ငယ်စဥ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်', ['bold' => true], ['alignment' => 'center']);
-        // $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
+        $section->addTextBreak();
+        $section->addText(' ၁၁။ '.  " ခင်ပွန်း/ဇနီးသည်အဘနှင့်ညီအကိုမောင်နှမများ၏ အမည်၊ လူမျိုး၊ ဘာသာ၊ ဇာတိ၊\n     အလုပ်အကိုင်နှင့်နေရပ်လိပ်စာ", ['bold'=>true],null, ['spaceBefore' => 200]);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50,array('tblHeader' => true));
+        $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
+        $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
+        $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
+        $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
+        $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
+        $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
+        if($staff->spouseFatherSiblings->isNotEmpty()){
+            foreach ($staff->spouseFatherSiblings as $index => $sibling) {
+                $table->addRow();
+                $table->addCell(2800)->addText($sibling->name,null, $pStyle_3);
+                $table->addCell(1300)->addText($sibling->ethnic?->name  . "/\n" . $sibling->religion?->name ,null, $pStyle_6);
+                $table->addCell(1300)->addText($sibling->place_of_birth,null, $pStyle_6);
+                $table->addCell(1800)->addText($sibling->occupation,null, $pStyle_3);
+                $table->addCell(2300)->addText($sibling->address,null, $pStyle_3);
+                $table->addCell(1200)->addText($sibling->relation?->name,null, $pStyle_6);
+            }
+        }else{
+                $table->addRow(50);
+                $cell = $table->addCell(10700, ['gridSpan' => 6]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
+            }
+        $section->addTextBreak();
+        $section->addText(' ၁၂။ '.  " ခင်ပွန်း/ဇနီးသည်အမိနှင့်ညီအကိုမောင်နှမများ၏ အမည်၊ လူမျိုး၊ဘာသာ၊ဇာတိ၊\n      အလုပ်အကိုင်နှင့်နေရပ်လိပ်စာ", ['bold'=>true],null, ['spaceBefore' => 200]);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50,array('tblHeader' => true));
+        $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
+        $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
+        $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
+        $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
+        $table->addCell(2300)->addText('နေရပ်လိပ်စာ', ['bold' => true],$pStyle_7);
+        $table->addCell(1200)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
+        if($staff->spouseMotherSiblings->isNotEmpty()){
+            foreach ($staff->spouseMotherSiblings as $index => $sibling) {
+                $table->addRow();
+                $table->addCell(2800)->addText($sibling->name,null, $pStyle_3);
+                $table->addCell(1300)->addText($sibling->ethnic?->name . "/\n" . $sibling->religion?->name,null, $pStyle_6);
+                $table->addCell(1300)->addText($sibling->place_of_birth,null, $pStyle_6);
+                $table->addCell(1800)->addText($sibling->occupation,null, $pStyle_3);
+                $table->addCell(2300)->addText($sibling->address,null, $pStyle_3);
+                $table->addCell(1200)->addText($sibling->relation?->name,null, $pStyle_6);
+            }
+        }else{
+                $table->addRow(50);
+                $cell = $table->addCell(10700, ['gridSpan' => 6]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
+            }
+            $section->addText('');
+        $table = $section->addTable();
+        $table->addRow();
+        $table->addCell(1300)->addText('၁၃။', null, $pStyle_5);
+        $table->addCell(13000)->addText("မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်းတို့၏မိဘ၊ညီအကိုမောင်နှမများ၊သားသမီးများသည်\nနိုင်ငံရေးပါတီဝင်များတွင်ဝင်ရောက်ဆောင်ရွက်မှုရှိ/မရှိ(ရှိကအသေးစိတ်ဖော်ပြရန်)", null, $pStyle_8);
+        $table->addCell(700)->addText('-', null,$pStyle_5);
+        $table->addCell(13000)->addText($staff->family_in_politics ?  ($staff->family_in_politics_text ?? '') : 'မရှိပါ', null,$pStyle_8);
+        $section->addText('ငယ်စဥ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်', ['bold' => true], ['alignment' => 'center']);
+        $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
 
 
-        // $section->addTextBreak();
-        // $section->addText('၁။ ' . ' နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ်ဖော်ပြရန်)', ['bold' => true],array('spaceBefore' => 200));
-        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow(50, array('tblHeader' => true));
-        // // $table->addCell(700,['vMerge' => 'restart'])->addText('စဉ်', ['bold' => true], $pStyle_2);
-        // $table->addCell(4000)->addText('ရရှိခဲ့သော ဘွဲ့အမည်', ['bold' => true],$pStyle_2);
-        // $table->addCell(4000)->addText("ကျောင်းအမည်",['bold'=>true], $pStyle_1);
-        // $table->addCell(4000)->addText("မြို့",['bold'=>true], $pStyle_1);
-        // $table->addCell(4000)->addText('ခုနှစ်', ['bold' => true],$pStyle_2);
-        // if($staff->schools->isNotEmpty()){
-        //      $index=0;
-        //      foreach ($staff->schools as $school) {
-        //          $table->addRow(50);
-        //          $table->addCell(4000)->addText($school->education, null, $pStyle_3);
-        //          $table->addCell(4000)->addText($school->school_name, null, $pStyle_6);
-        //          $table->addCell(4000)->addText($school->town, null, $pStyle_6);
-        //          $table->addCell(4000)->addText($school->from_date . '-' . ($school->to_date), null, $pStyle_6);
-        //          $index++;
-        //      }
-        //  }else{
-        //          $table->addRow(50);
-        //          $cell = $table->addCell(10000, ['gridSpan' => 4]); 
-        //          $cell->addText(
-        //              'မရှိပါ',
-        //             null,
-        //              ['alignment' => 'center']
-        //          );
-        //      }
-        //       $section->addTextBreak();
-        // $section->addText('၂။ ' . ' တက်ရောက်ခဲ့သောသင်တန်းများ', ['bold' => true],array('spaceBefore' => 200));
-        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow(50, array('tblHeader' => true));
-        // $table->addCell(4000)->addText('သင်တန်းအမည်', ['bold' => true],$pStyle_2);
-        // $table->addCell(2000)->addText("သင်တန်းကာလ\n(မှ)",['bold'=>true], $pStyle_1);
-        // $table->addCell(2000)->addText("သင်တန်းကာလ\n(အထိ)",['bold'=>true], $pStyle_1);
-        // $table->addCell(3000)->addText('သင်တန်းနေရာ/ဒေသ', ['bold' => true],$pStyle_2);
-        // if($staff->trainings->isNotEmpty()){
-        //      $index=0;
-        //      foreach ($staff->trainings->where('training_location_id', 1) as  $training) {
-        //         $table->addRow(50);
-        //         $trainingName = ($training->training_type_id == 32) ?       $training->diploma_name : $training->training_type?->name;
-        //          $table->addCell(4000)->addText($trainingName.$training->batch, null, $pStyle_3);
-        //          $table->addCell(2000)->addText(formatDMYmm($training->from_date), null, $pStyle_6);
-        //          $table->addCell(2000)->addText(formatDMYmm($training->to_date), null, $pStyle_6);
-        //          $table->addCell(3000)->addText($training->location, null, $pStyle_6);
-        //          $index++;
-        //      }
-        //  }else{
-        //          $table->addRow(50);
-        //          $cell = $table->addCell(11000, ['gridSpan' => 4]); 
-        //          $cell->addText(
-        //              'မရှိပါ',
-        //             null,
-        //              ['alignment' => 'center']
-        //          );
-        //      }
+        $section->addTextBreak();
+        $section->addText('၁။ ' . ' နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ်ဖော်ပြရန်)', ['bold' => true],array('spaceBefore' => 200));
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50, array('tblHeader' => true));
+        // $table->addCell(700,['vMerge' => 'restart'])->addText('စဉ်', ['bold' => true], $pStyle_2);
+        $table->addCell(4000)->addText('ရရှိခဲ့သော ဘွဲ့အမည်', ['bold' => true],$pStyle_2);
+        $table->addCell(4000)->addText("ကျောင်းအမည်",['bold'=>true], $pStyle_1);
+        $table->addCell(4000)->addText("မြို့",['bold'=>true], $pStyle_1);
+        $table->addCell(4000)->addText('ခုနှစ်', ['bold' => true],$pStyle_2);
+        if($staff->schools->isNotEmpty()){
+             $index=0;
+             foreach ($staff->schools as $school) {
+                 $table->addRow(50);
+                 $table->addCell(4000)->addText($school->education, null, $pStyle_3);
+                 $table->addCell(4000)->addText($school->school_name, null, $pStyle_6);
+                 $table->addCell(4000)->addText($school->town, null, $pStyle_6);
+                 $table->addCell(4000)->addText($school->from_date . '-' . ($school->to_date), null, $pStyle_6);
+                 $index++;
+             }
+         }else{
+                 $table->addRow(50);
+                 $cell = $table->addCell(10000, ['gridSpan' => 4]); 
+                 $cell->addText(
+                     'မရှိပါ',
+                    null,
+                     ['alignment' => 'center']
+                 );
+             }
+              $section->addTextBreak();
+        $section->addText('၂။ ' . ' တက်ရောက်ခဲ့သောသင်တန်းများ', ['bold' => true],array('spaceBefore' => 200));
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50, array('tblHeader' => true));
+        $table->addCell(4000)->addText('သင်တန်းအမည်', ['bold' => true],$pStyle_2);
+        $table->addCell(2000)->addText("သင်တန်းကာလ\n(မှ)",['bold'=>true], $pStyle_1);
+        $table->addCell(2000)->addText("သင်တန်းကာလ\n(အထိ)",['bold'=>true], $pStyle_1);
+        $table->addCell(3000)->addText('သင်တန်းနေရာ/ဒေသ', ['bold' => true],$pStyle_2);
+        if($staff->trainings->isNotEmpty()){
+             $index=0;
+             foreach ($staff->trainings->where('training_location_id', 1) as  $training) {
+                $table->addRow(50);
+                $trainingName = ($training->training_type_id == 32) ?       $training->diploma_name : $training->training_type?->name;
+                 $table->addCell(4000)->addText($trainingName.$training->batch, null, $pStyle_3);
+                 $table->addCell(2000)->addText(formatDMYmm($training->from_date), null, $pStyle_6);
+                 $table->addCell(2000)->addText(formatDMYmm($training->to_date), null, $pStyle_6);
+                 $table->addCell(3000)->addText($training->location, null, $pStyle_6);
+                 $index++;
+             }
+         }else{
+                 $table->addRow(50);
+                 $cell = $table->addCell(11000, ['gridSpan' => 4]); 
+                 $cell->addText(
+                     'မရှိပါ',
+                    null,
+                     ['alignment' => 'center']
+                 );
+             }
         $section->addText('၃။ '.' ချီးမြှင့်ခံရသည့် ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်များ', ['bold' => true], array('spaceBefore' => 200));
        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
        $table->addRow(50, array('tblHeader' => true));
