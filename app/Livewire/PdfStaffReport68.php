@@ -393,35 +393,37 @@ class PdfStaffReport68 extends Component
       
 
    
-        // $section->addTextBreak();
-        // $section->addText('၁၅။ '.    ' ယခင်လုပ်ကိုင်ဖူးသည့် အလုပ်အကိုင်', ['bold'=>true],null, ['spaceBefore' => 200]);
-        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow(50,array('tblHeader' => true));
-        // $table->addCell(4000)->addText('ရာထူး/အဆင့်', ['bold' => true], $pStyle_1);
-        // $table->addCell(4000)->addText('တပ်/ဌာန', ['bold' => true], $pStyle_1);
-        // $table->addCell(2500)->addText('နေရာ', ['bold' => true], $pStyle_1);
-        // $table->addCell(2500)->addText('မှ', ['bold' => true], $pStyle_1);
-        // $table->addCell(2500)->addText('ထိ', ['bold' => true], $pStyle_1);
+        $section->addTextBreak();
+        $section->addText('၁၅။ '.    ' ယခင်လုပ်ကိုင်ဖူးသည့် အလုပ်အကိုင်', ['bold'=>true],null, ['spaceBefore' => 200]);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50,array('tblHeader' => true));
+        $table->addCell(4000)->addText('ရာထူး/အဆင့်', ['bold' => true], $pStyle_1);
+        $table->addCell(4000)->addText('တပ်/ဌာန', ['bold' => true], $pStyle_1);
+        $table->addCell(2500)->addText('နေရာ', ['bold' => true], $pStyle_1);
+        $table->addCell(2500)->addText('မှ', ['bold' => true], $pStyle_1);
+        $table->addCell(2500)->addText('ထိ', ['bold' => true], $pStyle_1);
 
        
-        // if($staff->postings->isNotEmpty()){
-        //     foreach ($staff->postings as $index => $posting) {
-        //         $table->addRow(50);
-        //         $table->addCell(4000)->addText($posting->rank->name ?? '',null,$pStyle_3);
-        //         $table->addCell(4000)->addText($posting->ministry->name ?? ''."\n".$posting->department->name ?? '-',null, $pStyle_6);
-        //         $table->addCell(2500)->addText($posting->location,null, $pStyle_6);
-        //         $table->addCell(2500)->addText(formatDMYmm($posting->from_date),null, $pStyle_6);
-        //         $table->addCell(2500)->addText(formatDMYmm($posting->to_date),null, $pStyle_6);
-        //     }
-        // }else{
-        //         $table->addRow(50);
-        //         $cell = $table->addCell(15500, ['gridSpan' => 5]); 
-        //         $cell->addText(
-        //             'မရှိပါ',
-        //            null,
-        //             ['alignment' => 'center']
-        //         );
-        //     }
+        if($staff->postings->isNotEmpty()){
+            foreach ($staff->postings as $index => $posting) {
+                $table->addRow(50);
+                $table->addCell(4000)->addText($posting->rank->name ?? '',null,$pStyle_3);
+                $table->addCell(4000)->addText($posting->ministry->name ?? ''."\n".$posting->department->name ?? '-',null, $pStyle_6);
+                $table->addCell(2500)->addText($posting->location,null, $pStyle_6);
+                $table->addCell(2500)->addText(formatDMYmm($posting->from_date),null, $pStyle_6);
+                // $table->addCell(2500)->addText(formatDMYmm($posting->to_date) ?? '',null, $pStyle_6);
+                $table->addCell(2500)->addText(formatDMYmm($posting->to_date) ?? '', null, $pStyle_6);
+
+            }
+        }else{
+                $table->addRow(50);
+                $cell = $table->addCell(15500, ['gridSpan' => 5]); 
+                $cell->addText(
+                    'မရှိပါ',
+                   null,
+                    ['alignment' => 'center']
+                );
+            }
         $section->addTextBreak();
         $section->addText('မိဘဆွေမျိုးများ', ['bold' => true], ['alignment' => 'center']);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
@@ -734,7 +736,7 @@ class PdfStaffReport68 extends Component
         $section->addText('၁။ ' . ' နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ်ဖော်ပြရန်)', ['bold' => true],array('spaceBefore' => 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50, array('tblHeader' => true));
-        // $table->addCell(700,['vMerge' => 'restart'])->addText('စဉ်', ['bold' => true], $pStyle_2);
+      
         $table->addCell(4000)->addText('ရရှိခဲ့သော ဘွဲ့အမည်', ['bold' => true],$pStyle_2);
         $table->addCell(4000)->addText("ကျောင်းအမည်",['bold'=>true], $pStyle_1);
         $table->addCell(4000)->addText("မြို့",['bold'=>true], $pStyle_1);

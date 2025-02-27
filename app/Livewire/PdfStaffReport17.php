@@ -189,7 +189,7 @@ class PdfStaffReport17 extends Component
         $table->addCell(13000)->addText($staff->mother_occupation, null,$pStyle_8);
         $table->addRow(50);
         $table->addCell(1300)->addText('၁၃။', null, $pStyle_5);
-        $table->addCell(13000)->addText('နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်)', null,$pStyle_8);
+        $table->addCell(13000)->addText("နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ \n(အကြိမ်အရေအတွက်)", null,$pStyle_8);
         $table->addCell(1300)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText(
             $staff->abroads->count() > 0 ? en2mm($staff->abroads->count().'ကြိမ်') : 'မရှိပါ',
