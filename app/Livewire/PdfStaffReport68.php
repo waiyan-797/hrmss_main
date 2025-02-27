@@ -407,7 +407,8 @@ class PdfStaffReport68 extends Component
         if($staff->postings->isNotEmpty()){
             foreach ($staff->postings as $index => $posting) {
                 $table->addRow(50);
-                $table->addCell(4000)->addText($posting->rank->name ?? '',null,$pStyle_3);
+                $table->addCell(4000)->addText($posting->ministry?->name.'၊'.$posting->department?->name,null,$pStyle_3);
+                
                 $table->addCell(4000)->addText($posting->ministry?->name."\n".$posting->department?->name,null, $pStyle_6);
                 $table->addCell(2500)->addText($posting->location,null, $pStyle_6);
                 $table->addCell(2500)->addText(formatDMYmm($posting->from_date),null, $pStyle_6);
