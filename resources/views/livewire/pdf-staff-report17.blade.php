@@ -3,6 +3,7 @@
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf({{$staff->id}})">PDF</x-primary-button>
             <x-primary-button type="button" wire:click="go_word({{$staff->id}})">WORD</x-primary-button>
+            {{-- dsfjd --}}
             <div class="md:w-full p-4">
                 <h1 class="text-center text-black font-semibold text-base">ကိုယ်ရေးမှတ်တမ်း</h1>
                 <img src="{{ $staff->staff_photo ? route('file', $staff->staff_photo) : asset('img/user.png') }}" alt="" class="w-20 h-20 float-right mr-28">
