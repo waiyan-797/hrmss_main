@@ -370,7 +370,8 @@ foreach ($divisions as $divisionName => $divisionId) {
             return $query->whereIn('current_division_id', [1, 2, 3, 4, 11, 8, 7, 5, 6, 9, 10]);
         });
 
-        $ranks = Rank::whereIn('staff_type_id',[1,2])->get();
+        // $ranks = Rank::whereIn('staff_type_id',[1,2])->get();
+        $ranks = Rank::whereIn('staff_type_id', [1, 2, 3])->get();
 
         return view('livewire.investment-companies.investment-companies14',[
             'ranks' => $ranks,

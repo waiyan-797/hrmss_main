@@ -6,11 +6,9 @@
             <br><br>
             <select class="  " wire:model.live='selectedDivisionId' id="">
                 @foreach ($divisions as $division)
-                            <option value="{{$division->id}}">
-                                {{
-                    $division->name
-                                                                                            }}
-                            </option>
+                    <option value="{{ $division->id }}">
+                        {{ $division->name }}
+                    </option>
                 @endforeach
             </select>
 
@@ -18,7 +16,7 @@
                 <br>
                 <h2 class="font-bold text-center text-base ">
                     ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
-                    {{getDivisionBy($selectedDivisionId)->name}}
+                    {{ getDivisionBy($selectedDivisionId)->name }}
                     ဝန်ထမ်းအင်အားစာရင်း
                 </h2><br>
                 <table class="w-full text-center">
@@ -31,15 +29,30 @@
                         </tr>
                     </thead>
                     <tbody class="text-center h-8 p-2">
-                        @foreach($staffs as $staff)
-                            <tr>
-                                <td class="border border-black p-2">{{ $start++}}</td>
-                                <td class="border border-black p-2">{{ $staff->name}}</td>
-                                <td class="border border-black p-2">{{ $staff->currentRank?->name}}</td>
-                                <td class="border border-black p-2"></td>
-                            </tr>
-                        @endforeach
 
+                        @php
+                            use App\Models\Rank;
+                        @endphp
+                        @foreach ($staffs as $staff)
+                            @php
+                                $includeStaff = false;
+
+                                if ($selectedDivisionId == 1) {
+                                    $includeStaff = true;
+                                } elseif (!in_array($staff->current_rank_id, [1, 2])) {
+                                    $includeStaff = true;
+                                }
+                            @endphp
+
+                            @if ($includeStaff)
+                                <tr>
+                                    <td class="border border-black p-2">{{ $loop->iteration }}</td>
+                                    <td class="border border-black p-2">{{ $staff->name }}</td>
+                                    <td class="border border-black p-2">{{ $staff->currentRank?->name }}</td>
+                                    <td class="border border-black p-2"></td>
+                                </tr>
+                            @endif
+                        @endforeach
                     </tbody>
                 </table>
                 <div class="mt-4">

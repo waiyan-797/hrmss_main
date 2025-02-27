@@ -42,7 +42,15 @@ public function styles(Worksheet $sheet)
      // Set paper size and orientation
      $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
      $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_PORTRAIT);
-
+     $sheet->getPageMargins()->setTop(0.5);
+     $sheet->getPageMargins()->setHeader(0.3);
+     $sheet->getPageMargins()->setLeft(1);
+     $sheet->getPageMargins()->setRight(0.5);
+     $sheet->getPageMargins()->setBottom(0.5);
+     $sheet->getPageMargins()->setFooter(0.3);
+ 
+     // Center on page horizontally
+     $sheet->getPageSetup()->setHorizontalCentered(true);
      // Fit to page width
      $sheet->getPageSetup()->setFitToWidth(1);
      $sheet->getPageSetup()->setFitToHeight(0);
@@ -59,13 +67,13 @@ public function styles(Worksheet $sheet)
 
      $sheet->removeRow(5);
 
-     $sheet->getRowDimension(1)->setRowHeight(25);
-     $sheet->getRowDimension(2)->setRowHeight(25);
-     $sheet->getRowDimension(3)->setRowHeight(25);
-     $sheet->getRowDimension(4)->setRowHeight(25);
+     $sheet->getRowDimension(1)->setRowHeight(24);
+     $sheet->getRowDimension(2)->setRowHeight(24);
+     $sheet->getRowDimension(3)->setRowHeight(24);
+     $sheet->getRowDimension(4)->setRowHeight(24);
 
      for ($row = 5; $row <= $highestRow ; $row++) {
-         $sheet->getRowDimension($row)->setRowHeight(50);
+         $sheet->getRowDimension($row)->setRowHeight(39.8);
      }
 
      // $sheet->getHeaderFooter()->setOddHeader('&C&H&"Pyidaungsu"&10' . "အတွင်းရေး\n၃"); // Centered header text

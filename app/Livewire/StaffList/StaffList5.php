@@ -52,23 +52,13 @@ class StaffList5 extends Component
         ]);
 
         
-        $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'left', 'lineHeight' => 1 ]);
+        $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'center', 'lineHeight' => 1 ]);
         $phpWord->addTitleStyle(3, ['bold' => false, 'font'=>'Pyidaungsu Number', 'size' => 13], ['alignment' => 'right', 'lineHeight' => 1]);
-        
-        // $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 10], ['alignment' => 'center']);
-        
-        // dd($divisionTitle );
         $division = getDivisionBy($this->selectedDivisionId);
-        $section->addTitle(($division ? $division->name : 'Unknown Division').'ကျားမအင်အားစာရင်း', 2);
+        // $section->addTitle(($division ? $division->name : 'Unknown Division')."\n".'ကျားမအင်အားစာရင်း', 2);
+        $section->addTitle(($division ? $division->name : 'Unknown Division'), 2);
+        $section->addTitle('ကျားမအင်အားစာရင်း', 2);
         $section->addTitle(formatDMYmm(Carbon::now()), 3);
-
-        // $section = $phpWord->addSection();
-
-       
-        // $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
-        // $section->addText('ဌာန အလိုက်ဝန်ထမ်းအင်အားစာရင်း', ['bold' => true]);
-        // $section->addText('၁။ စီမံရေးနှင့်ငွေစာရင်းဌာနခွဲ', ['bold' => true]);
-
        
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 5]);
 

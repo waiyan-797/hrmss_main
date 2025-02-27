@@ -59,12 +59,12 @@
             <table class="">
                 <tr>
                     <th colspan="26" style="font-weight:bold;">
-                        ရင်းနှီးမြှပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
+                        ရင်းနှီးမြှုပ်နှံမှုနှင့် နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
                     </th> 
                 </tr>
                 <tr>
                     <th colspan="26" style="font-weight:bold;">
-                        ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
+                        ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
                     </th>
                 </tr>
                 <tr>
@@ -154,7 +154,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>စုစုပေါင်း</td>
+                    <td style="font-weight: bold">စုစုပေါင်း</td>
                     <td>{{ en2mm(($first_ranks->where('id', 1)->first())->allowed_qty) }}</td>
                     <td>{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->count()) }}</td>
                     <td>{{ en2mm(($first_ranks->where('id', 1)->first())->allowed_qty - ($first_ranks->where('id', 1)->first())->staffs->count()) }}</td>

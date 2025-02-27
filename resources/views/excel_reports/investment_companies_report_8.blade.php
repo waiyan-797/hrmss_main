@@ -126,7 +126,7 @@
                     <tbody>
                         <tr>
                             <td>၁</td>
-                            <td>ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများ<br>ညွှန်ကြားမှုဦးစီးဌာန</td>
+                            <td>ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများ<br>ညွှန်ကြားမှုဦးစီးဌာန</td>
                             <td></td>
                             <td></td>
                             <td>{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
@@ -189,7 +189,7 @@
 
                 <table>
                     <tr>
-                        <th colspan="16" rowspan="2" style="font-size: 12px;">
+                        <th colspan="16" rowspan="2" style="font-size: 14px;">
                             မှတ်ချက်။ &nbsp; လစဥ်လဆန်း(၂)ရက်နေ့အရောက်ဝန်ကြီးရုံးသို့ပေးပို့ရန်။
                         </th>
                     </tr>

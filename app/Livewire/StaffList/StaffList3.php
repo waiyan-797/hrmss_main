@@ -11,7 +11,6 @@ use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 class StaffList3 extends Component
 {
-
     public $count  = 0 ;
     public $printedDate;
     public function go_pdf(){
@@ -131,8 +130,6 @@ class StaffList3 extends Component
             'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
         ]);
     }
-    
-
     public function mount(){
         
         $this->printedDate =   explode('-',Carbon::now()->format('Y-m-d'));

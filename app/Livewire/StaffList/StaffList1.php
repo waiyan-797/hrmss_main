@@ -76,17 +76,7 @@ public $divisionTypes ;
         $table->addCell(1800)->addText('စုစုပေါင်း', ['bold' => true, 'size' => 13],['alignment' => 'center', 'spaceBefore'=> 50]);
         $table->addCell(1800)->addText('နေ့စား', ['bold' => true, 'size' => 13],['alignment' => 'center', 'spaceBefore'=> 50]);
         $table->addCell(1900)->addText('မှတ်ချက်', ['bold' => true, 'size' => 13],['alignment' => 'center', 'spaceBefore'=> 50]);
-       
-        
-        // $table->addRow();
-        // $table->addCell(2000, ['vMerge' => 'continue']);
-        // $table->addCell(4000, ['vMerge' => 'continue']);
-        // $table->addCell(3000)->addText('အရာထမ်း', ['alignment' => 'center']);
-        // $table->addCell(3000)->addText('အမှုထမ်း', ['alignment' => 'center']);
-        // $table->addCell(3000)->addText('စုစုပေါင်း', ['alignment' => 'center']);, 'spaceBefore'=> 50
-        
-
-       
+    
         foreach ($divisions as $index => $division) {
             $table->addRow();
             $table->addCell(900)->addText(en2mm($index + 1),null, ['alignment' => 'center', 'spaceBefore'=> 50]);

@@ -216,7 +216,7 @@
         <x-input-error class="mt-2" :messages="$errors->get('habit')" />
     </div>
     <div>
-        <x-input-label for="လုပ်ကိုင်ခဲ့သောဌာန၊မြို့နယ်များ" :value="__('လုပ်ကိုင်ခဲ့သောဌာန၊မြို့နယ်များ')" />
+        <x-input-label for="လုပ်ကိုင်ခဲ့သော အလုပ်အကိုင်များနှင့်ဌာန၊မြို့နယ်များ" :value="__('လုပ်ကိုင်ခဲ့သောဌာန၊မြို့နယ်များ')" />
         <x-textarea-input wire:model="past_occupation" id="past_occupation" name="past_occupation" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('past_occupation')" />
     </div>

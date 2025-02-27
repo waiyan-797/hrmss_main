@@ -80,7 +80,7 @@ class PA10 implements FromView ,WithStyles
         $sheet->getPageMargins()->setLeft(0.75);
         $sheet->getPageMargins()->setRight(0.15);
         $sheet->getPageMargins()->setBottom(0.5);
-        $sheet->getPageMargins()->setFooter(0.5);
+        $sheet->getPageMargins()->setFooter(0.3);
     
         // Center content horizontally on page
         $sheet->getPageSetup()->setHorizontalCentered(true);
@@ -128,17 +128,17 @@ class PA10 implements FromView ,WithStyles
         $sheet->getColumnDimension('AB')->setWidth(5);
         $sheet->getColumnDimension('AC')->setWidth(5);
 
-        $sheet->getRowDimension(1)->setRowHeight(22);
-        $sheet->getRowDimension(2)->setRowHeight(22);
-        $sheet->getRowDimension(3)->setRowHeight(22);
-        $sheet->getRowDimension(4)->setRowHeight(22);
+        $sheet->getRowDimension(1)->setRowHeight(18.8);
+        $sheet->getRowDimension(2)->setRowHeight(18.8);
+        $sheet->getRowDimension(3)->setRowHeight(18.8);
+        $sheet->getRowDimension(4)->setRowHeight(32.3);
 
         $sheet->removeRow(4);
 
         for ($row = 4; $row <= $highestRow-1 ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(28);
+            $sheet->getRowDimension($row)->setRowHeight(33);
         }
-        $sheet->getRowDimension(7)->setRowHeight(100);
+        $sheet->getRowDimension(7)->setRowHeight(84.8);
 
         $sheet->getStyle('A1:A3')->applyFromArray([
             'font' => [

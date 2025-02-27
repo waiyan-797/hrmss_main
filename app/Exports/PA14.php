@@ -16,10 +16,6 @@ class PA14 implements FromView ,WithStyles
     /**
     * @return \Illuminate\Support\Collection
     */
-    // public function collection()
-    // {
-    //     return PA14::all();
-    // }
     public function view(): View
     {
         $yinn_1 = Rank::whereHas('staffs', function($query){
@@ -152,12 +148,12 @@ class PA14 implements FromView ,WithStyles
         $sheet->getColumnDimension('AK')->setWidth(7);
         $sheet->getColumnDimension('AL')->setWidth(7);
 
-        $sheet->getRowDimension(1)->setRowHeight(28);
-        $sheet->getRowDimension(2)->setRowHeight(28);
-        $sheet->getRowDimension(3)->setRowHeight(28);
+        $sheet->getRowDimension(1)->setRowHeight(27);
+        $sheet->getRowDimension(2)->setRowHeight(27);
+        $sheet->getRowDimension(3)->setRowHeight(21);
 
         for ($row = 4; $row <= $highestRow ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(30);
+            $sheet->getRowDimension($row)->setRowHeight(25.5);
         }
 
         $sheet->removeRow(4);
@@ -165,7 +161,7 @@ class PA14 implements FromView ,WithStyles
         $sheet->getStyle('A1:A2')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
-                'size' => 11,
+                'size' => 13,
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
@@ -181,7 +177,7 @@ class PA14 implements FromView ,WithStyles
         $sheet->getStyle('A3')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
-                'size' => 11,
+                'size' => 13,
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
@@ -200,7 +196,7 @@ class PA14 implements FromView ,WithStyles
         $sheet->getStyle("A4:$highestColumn$highestRow")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
-                'size' => 11,
+                'size' => 13,
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
@@ -217,7 +213,7 @@ class PA14 implements FromView ,WithStyles
         $sheet->getStyle("B6:$highestColumn$highestRow")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
-                'size' => 11,
+                'size' => 13,
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
@@ -234,7 +230,7 @@ class PA14 implements FromView ,WithStyles
         $sheet->getStyle("C6:$highestColumn$highestRow")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
-                'size' => 11,
+                'size' => 13,
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,

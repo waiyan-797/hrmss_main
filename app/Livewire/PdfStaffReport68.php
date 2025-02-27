@@ -265,63 +265,123 @@ class PdfStaffReport68 extends Component
         $table->addCell(700)->addText('', null,  $pStyle_5);
         $table->addCell(13000)->addText('', null,$pStyle_7);
         
-        $table->addRow();
-        $table->addCell(1300)->addText('၁။', null,  $pStyle_5);
-        $table->addCell(13000)->addText('တပ်မတော်သို့ ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်', null,$pStyle_8);
-        $table->addCell(700)->addText('', null,  $pStyle_5);
-        $table->addCell(13000)->addText('', null,$pStyle_8);
+        // $table->addRow();
+        // $table->addCell(1300)->addText('၁။', null,  $pStyle_5);
+        // $table->addCell(13000)->addText('တပ်မတော်သို့ ဝင်ခဲ့ဖူးလျှင်/တပ်မတော်သားဖြစ်လျှင်', null,$pStyle_8);
+        // $table->addCell(700)->addText('', null,  $pStyle_5);
+        // $table->addCell(13000)->addText('', null,$pStyle_8);
 
-        $table->addRow();
-        $table->addCell(1300)->addText('(က)', null,  $pStyle_5);
-        $table->addCell(13000)->addText('ကိုယ်ပိုင်အမှတ်', null,$pStyle_8);
-        $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText($staff->military_solider_no ? $staff->military_solider_no : 'မရှိပါ', null,$pStyle_8);
+        // $table->addRow();
+        // $table->addCell(1300)->addText('(က)', null,  $pStyle_5);
+        // $table->addCell(13000)->addText('ကိုယ်ပိုင်အမှတ်', null,$pStyle_8);
+        // $table->addCell(700)->addText('-', null,  $pStyle_5);
+        // $table->addCell(13000)->addText($staff->military_solider_no ? $staff->military_solider_no : 'မရှိပါ', null,$pStyle_8);
 
-        $table->addRow();
-        $table->addCell(1300)->addText('(ခ)', null,  $pStyle_5);
-        $table->addCell(13000)->addText('တပ်သို့ဝင်သည့်နေ့', null,$pStyle_8);
-        $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText(formatDMYmm($staff->military_join_date), null,$pStyle_8);
-        $table->addRow();
-        $table->addCell(1300)->addText('(ဂ)', null, $pStyle_5);
-        $table->addCell(13000)->addText('ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်', null, $pStyle_8);
+        // $table->addRow();
+        // $table->addCell(1300)->addText('(ခ)', null,  $pStyle_5);
+        // $table->addCell(13000)->addText('တပ်သို့ဝင်သည့်နေ့', null,$pStyle_8);
+        // $table->addCell(700)->addText('-', null,  $pStyle_5);
+        // $table->addCell(13000)->addText(formatDMYmm($staff->military_join_date), null,$pStyle_8);
+        // $table->addRow();
+        // $table->addCell(1300)->addText('(ဂ)', null, $pStyle_5);
+        // $table->addCell(13000)->addText('ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်', null, $pStyle_8);
+        // $table->addCell(700)->addText('-', null, $pStyle_5);
+        // $table->addCell(13000)->addText($staff->military_dsa_no ? $staff->military_dsa_no : 'မရှိပါ', null, $pStyle_8);
+
+        // $table->addRow();
+        // $table->addCell(1300)->addText('(ဃ)', null,  $pStyle_5);
+        // $table->addCell(13000)->addText('ပြန်တမ်းဝင်ဖြစ်သည့်နေ့', null,$pStyle_8);
+        // $table->addCell(700)->addText('-', null,  $pStyle_5);
+        // $table->addCell(13000)->addText(formatDMYmm($staff->military_gazetted_date), null,$pStyle_8);
+
+        // $table->addRow();
+        // $table->addCell(1300)->addText('(င)', null,  $pStyle_5);
+        // $table->addCell(13000)->addText('တပ်ထွက်သည့်နေ့', null,$pStyle_8);
+        // $table->addCell(700)->addText('-', null,  $pStyle_5);
+        // $table->addCell(13000)->addText(formatDMYmm($staff->military_leave_date), null,$pStyle_8);
+
+        // $table->addRow();
+        // $table->addCell(1300)->addText('(စ)', null,  $pStyle_5);
+        // $table->addCell(13000)->addText('ထွက်သည့်အကြောင်း', null,$pStyle_8);
+        // $table->addCell(700)->addText('-', null,  $pStyle_5);
+        // $table->addCell(13000)->addText($staff->military_leave_reason ? $staff->military_leave_reason : 'မရှိပါ', null,$pStyle_8);
+
+        // $table->addRow();
+        // $table->addCell(1300)->addText('(ဆ)', null,  $pStyle_5);
+        // $table->addCell(13000)->addText('အမှုထမ်းဆောင်ခဲ့သောတပ်များ', null,$pStyle_8);
+        // $table->addCell(700)->addText('-', null,  $pStyle_5);
+        // $table->addCell(13000)->addText($staff->military_served_army ? $staff->military_served_army : 'မရှိပါ', null,$pStyle_8);
+        // $table->addRow();
+        // $table->addCell(1300)->addText('(ဇ)', null,  $pStyle_5);
+        // $table->addCell(13000)->addText('တပ်တွင်းရာဇဝင်အကျဥ်း/ပြစ်မှု', null,$pStyle_8);
+        // $table->addCell(700)->addText('-', null,  $pStyle_5);
+        // $table->addCell(13000)->addText($staff->military_brief_history_or_penalty ? $staff->military_brief_history_or_penalty : 'မရှိပါ', null,$pStyle_8);
+
+        // $table->addRow();
+        // $table->addCell(1300)->addText('(ဈ)', null,  $pStyle_5);
+        // $table->addCell(13000)->addText('အငြိမ်းစားလစာ', null,$pStyle_8);
+        // $table->addCell(700)->addText('-', null,  $pStyle_5);
+        // $table->addCell(13000)->addText(en2mm($staff->military_pension), null,$pStyle_8);
+
+        $table->addRow(50);
+        $table->addCell(1300)->addText('၁။', null, $pStyle_5);
+        $table->addCell(13000)->addText("တပ်မတော်သို့ ဝင်ခဲ့ဖူးလျှင်/\nတပ်မတော်သားဖြစ်လျှင်", null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText($staff->military_dsa_no ? $staff->military_dsa_no : 'မရှိပါ', null, $pStyle_8);
+        $table->addCell(13000)->addText('', null, $pStyle_8);
 
-        $table->addRow();
-        $table->addCell(1300)->addText('(ဃ)', null,  $pStyle_5);
-        $table->addCell(13000)->addText('ပြန်တမ်းဝင်ဖြစ်သည့်နေ့', null,$pStyle_8);
-        $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText(formatDMYmm($staff->military_gazetted_date), null,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(1300)->addText('', null, $pStyle_5);
+        $table->addCell(13000)->addText('(က) ကိုယ်ပိုင်အမှတ်', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText($staff->military_solider_no ? $staff->military_solider_no :'မရှိပါ', null, $pStyle_8);
 
-        $table->addRow();
-        $table->addCell(1300)->addText('(င)', null,  $pStyle_5);
-        $table->addCell(13000)->addText('တပ်ထွက်သည့်နေ့', null,$pStyle_8);
-        $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText(formatDMYmm($staff->military_leave_date), null,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(1300)->addText('', null, $pStyle_5);
+        $table->addCell(13000)->addText('(ခ) တပ်သို့ဝင်သည့်နေ့', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText(formatDMYmm($staff->military_join_date), null, $pStyle_8);
 
-        $table->addRow();
-        $table->addCell(1300)->addText('(စ)', null,  $pStyle_5);
-        $table->addCell(13000)->addText('ထွက်သည့်အကြောင်း', null,$pStyle_8);
-        $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText($staff->military_leave_reason ? $staff->military_leave_reason : 'မရှိပါ', null,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(1300)->addText('', null, $pStyle_5);
+        $table->addCell(13000)->addText('(ဂ) ဗိုလ်လောင်းသင်တန်းအမှတ်စဥ်', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText($staff->military_dsa_no ? $staff->military_dsa_no :'မရှိပါ', null, $pStyle_8);
 
-        $table->addRow();
-        $table->addCell(1300)->addText('(ဆ)', null,  $pStyle_5);
-        $table->addCell(13000)->addText('အမှုထမ်းဆောင်ခဲ့သောတပ်များ', null,$pStyle_8);
-        $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText($staff->military_served_army ? $staff->military_served_army : 'မရှိပါ', null,$pStyle_8);
-        $table->addRow();
-        $table->addCell(1300)->addText('(ဇ)', null,  $pStyle_5);
-        $table->addCell(13000)->addText('တပ်တွင်းရာဇဝင်အကျဥ်း/ပြစ်မှု', null,$pStyle_8);
-        $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText($staff->military_brief_history_or_penalty ? $staff->military_brief_history_or_penalty : 'မရှိပါ', null,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(1300)->addText('', null, $pStyle_5);
+        $table->addCell(13000)->addText('(ဃ) ပြန်တမ်းဝင်ဖြစ်သည့်နေ့', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText( formatDMYmm($staff->military_gazetted_date), null, $pStyle_8);
 
-        $table->addRow();
-        $table->addCell(1300)->addText('(ဈ)', null,  $pStyle_5);
-        $table->addCell(13000)->addText('အငြိမ်းစားလစာ', null,$pStyle_8);
-        $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText(en2mm($staff->military_pension), null,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(1300)->addText('', null, $pStyle_5);
+        $table->addCell(13000)->addText('(င) တပ်ထွက်သည့်နေ့', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText(formatDMYmm($staff->military_leave_date), null, $pStyle_8);
+
+        $table->addRow(50);
+        $table->addCell(1300)->addText('', null, $pStyle_5);
+        $table->addCell(13000)->addText('(စ) ထွက်သည့်အကြောင်း', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText($staff->military_leave_reason ? $staff->military_leave_reason : 'မရှိပါ', null, $pStyle_8);
+
+        $table->addRow(50);
+        $table->addCell(1300)->addText('', null, $pStyle_5);
+        $table->addCell(13000)->addText('(ဆ) အမှုထမ်းဆောင်ခဲ့သောတပ်များ', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText($staff->military_served_army ? $staff->military_served_army :'မရှိပါ',  null, $pStyle_8);
+
+        $table->addRow(50);
+        $table->addCell(1300)->addText('', null, $pStyle_5);
+        $table->addCell(13000)->addText('(ဇ) တပ်တွင်းရာဇဝင်အကျဥ်း/ပြစ်မှု', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText($staff->military_brief_history_or_penalty ? $staff->military_brief_history_or_penalty :'မရှိပါ', null, $pStyle_8);
+
+        $table->addRow(50);
+        $table->addCell(1300)->addText('', null, $pStyle_5);
+        $table->addCell(13000)->addText('(ဈ) အငြိမ်းစားလစာ', null, $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText(en2mm($staff->military_pension), null, $pStyle_8);
 
         $table->addRow();
         $table->addCell(1300)->addText('၂။', null,  $pStyle_5);
@@ -866,20 +926,20 @@ class PdfStaffReport68 extends Component
         // $table->addRow();
         $table->addRow(50, ['tblHeader' => true]);
         $table->addCell(7000)->addText('အမည်', ['bold' => true], $pStyle_1);
-        $table->addCell(7000)->addText('ဦးစီးဌာန', ['bold' => true], $pStyle_1);
-        $table->addCell(7000)->addText('ဝန်ကြီးဌာန', ['bold' => true], $pStyle_1);
-        $table->addCell(4000)->addText('မှ', ['bold' => true], $pStyle_1);
-        $table->addCell(4000)->addText('ထိ', ['bold' => true], $pStyle_1);
+        $table->addCell(6000)->addText('ဦးစီးဌာန', ['bold' => true], $pStyle_1);
+        $table->addCell(6000)->addText('ဝန်ကြီးဌာန', ['bold' => true], $pStyle_1);
+        $table->addCell(5000)->addText('မှ', ['bold' => true], $pStyle_1);
+        $table->addCell(5000)->addText('ထိ', ['bold' => true], $pStyle_1);
         $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true], $pStyle_1);
 
         if ($staff->postings->isNotEmpty()) {
             foreach ($staff->postings as $posting) {
                 $table->addRow();
                 $table->addCell(7000)->addText($posting->rank->name ?? '', null, $pStyle_1);
-                $table->addCell(7000)->addText($posting->department->name ?? '', null, $pStyle_1);
-                $table->addCell(7000)->addText($posting->ministry->name ?? '', null, $pStyle_1);
-                $table->addCell(4000)->addText(formatDMYmm($posting->from_date), null, $pStyle_1);
-                $table->addCell(4000)->addText(formatDMYmm($posting->to_date), null, $pStyle_1);
+                $table->addCell(6000)->addText($posting->department->name ?? '', null, $pStyle_1);
+                $table->addCell(6000)->addText($posting->ministry->name ?? '', null, $pStyle_1);
+                $table->addCell(5000)->addText(formatDMYmm($posting->from_date), null, $pStyle_1);
+                $table->addCell(5000)->addText(formatDMYmm($posting->to_date), null, $pStyle_1);
                 $table->addCell(2000)->addText($posting->remark, null, $pStyle_1);
             }
         } else {

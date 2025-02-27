@@ -105,9 +105,6 @@ class PdfStaffReport15 extends Component
         ]);
 
         $header_subseq->addPreserveText('{PAGE}', ['name' => 'Pyidaungsu Numbers', 'size' => 13], ['alignment' => 'center', 'spaceBefore' => 0, 'spaceAfter' => 0]);
-        // $footer = $section->addFooter();
-        // $footer->addText('လျှို့ဝှက်',null,array('align'=>'center', 'spaceBefore' => 200));
-        // $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $footerFirstPage = $section->addFooter();
         $footerFirstPage->firstPage();
         $footerFirstPage->addText('လျှို့ဝှက်', null, ['alignment' => 'center', 'spaceBefore' => 200]);
@@ -171,7 +168,7 @@ class PdfStaffReport15 extends Component
         $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());
         $table->addRow();
         $table->addCell(1300)->addText('၆။', null,$pStyle_5);
-        $table->addCell(13000)->addText('အမှုထမ်းလုပ်သက်၊ဝင်ရောက်သည့်ရက်စွဲ', null, $pStyle_8);
+        $table->addCell(13000)->addText('အမှုထမ်းလုပ်သက်(ဝင်ရောက်သည့်နေ့စွဲ)', null, $pStyle_8);
         $table->addCell(700)->addText('-', null,$pStyle_5);
         $table->addCell(13000)->addText(formatPeriodMM($joinDateDuration->y, $joinDateDuration->m) . ', ' . formatDMYmm($joinDate), null, $pStyle_8);
 
@@ -209,7 +206,7 @@ class PdfStaffReport15 extends Component
         $table->addCell(13000)->addText($staff->mother_occupation, null, $pStyle_8);
         $table->addRow();
         $table->addCell(1300)->addText('၁၃။', null,$pStyle_5);
-        $table->addCell(13000)->addText('နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ(အကြိမ်အရေအတွက်)', null, $pStyle_8);
+        $table->addCell(13000)->addText("နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ\n(အကြိမ်အရေအတွက်)", null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText(
             $staff->abroads->count() > 0 ? en2mm($staff->abroads->count().'ကြိမ်') : 'မရှိပါ',
@@ -265,7 +262,8 @@ class PdfStaffReport15 extends Component
             );
         }
         $section->addTextBreak();
-        $section->addText('၁၄။' . 'ဇနီး/ခင်ပွန်း');
+        // $section->addText('၁၄။' . 'ဇနီး/ခင်ပွန်း');
+        $section->addText('၁၄။ '.' ဇနီး/ခင်ပွန်း', ['bold' => true], array('spaceBefore' => 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
         $table->addRow(50, ['tblHeader' => true]);
@@ -274,6 +272,7 @@ class PdfStaffReport15 extends Component
         $table->addCell(5000)->addText('လူမျိုး/နိုင်ငံသား', ['bold' => true], $pStyle_3);
         $table->addCell(5000)->addText('အလုပ်အကိုင်နှင့်ဌာန', ['bold' => true], $pStyle_3);
         $table->addCell(4000)->addText('နေရပ်', ['bold' => true], $pStyle_3);
+        $table->addCell(2500)->addText('မှတ်ချက်', ['bold' => true], $pStyle_3);
 
         if ($staff->spouses->isNotEmpty()) {
             foreach ($staff->spouses as $spouse) {
@@ -282,10 +281,11 @@ class PdfStaffReport15 extends Component
                 $table->addCell(5000,['valign' => 'center'])->addText($spouse->ethnic->name . '/' . $spouse->religion->name,null,$pStyle_1);
                 $table->addCell(5000,['valign' => 'center'])->addText($spouse->occupation,null,$pStyle_1);
                 $table->addCell(4000,['valign' => 'center'])->addText($spouse->address,null,$pStyle_1);
+                $table->addCell(2500,['valign' => 'center'])->addText('',null,$pStyle_1);
             }
         } else {
             $table->addRow();
-            $cell = $table->addCell(20000, ['gridSpan' => 4]); 
+            $cell = $table->addCell(22500, ['gridSpan' => 4]); 
             $cell->addText(
                 'မရှိပါ',
                null,
@@ -296,30 +296,24 @@ class PdfStaffReport15 extends Component
         $tableStyle = [
             'alignment' => Jc::END,
         ];
-
         $table = $section->addTable($tableStyle);
-        $table->addRow();
-        $table->addCell()->addText('လက်မှတ်', ['alignment' => 'right']);
-        $table->addCell(500)->addText('-', ['alignment' => 'right']);
-        $table->addCell(3000)->addText('', ['alignment' => 'right']);
-
-        $table->addRow();
-        $table->addCell()->addText('အမည်', ['alignment' => 'right']);
-        $table->addCell(500)->addText('-', ['alignment' => 'right']);
-        $table->addCell(3000)->addText($staff->name, ['alignment' => 'right']);
-
-        $table->addRow();
-        $table->addCell()->addText('အဆင့်', ['alignment' => 'right']);
-        $table->addCell(500)->addText('-', ['alignment' => 'right']);
-        $table->addCell(3000)->addText($staff->currentRank->name, ['alignment' => 'right']);
-
-        $table->addRow();
-        $table->addCell()->addText('တပ်/ဌာန', ['alignment' => 'right']);
-        $table->addCell(500)->addText('-', ['alignment' => 'right']);
-        $table->addCell(3000)->addText($staff->current_department->name, ['alignment' => 'right']);
-
+        $table->addRow(50);
+        $table->addCell(2100)->addText('လက်မှတ်', ['alignment' => 'right']);
+        $table->addCell(300)->addText('-', ['alignment' => 'right']);
+        $table->addCell(2100)->addText('', ['alignment' => 'right']);
+        $table->addRow(50);
+        $table->addCell(2100)->addText('အမည်', ['alignment' => 'right']);
+        $table->addCell(300)->addText('-', ['alignment' => 'right']);
+        $table->addCell(2100)->addText($staff->name, ['alignment' => 'right']);
+        $table->addRow(50);
+        $table->addCell(2100)->addText('အဆင့်', ['alignment' => 'right']);
+        $table->addCell(300)->addText('-', ['alignment' => 'right']);
+        $table->addCell(2100)->addText($staff->currentRank->name, ['alignment' => 'right']);
+        $table->addRow(50);
+        $table->addCell(2100)->addText('တပ်/ဌာန', ['alignment' => 'right']);
+        $table->addCell(300)->addText('-', ['alignment' => 'right']);
+        $table->addCell(2100)->addText($staff->current_department->name, ['alignment' => 'right']);
         $section->addText('ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
-        
         $fileName = 'staff_report_15_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
         return response()->stream(
