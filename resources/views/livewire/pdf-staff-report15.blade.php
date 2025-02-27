@@ -2,6 +2,7 @@
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <x-primary-button type="button" wire:click="go_pdf({{ $staff->id }})">PDF</x-primary-button>
+            {{-- sdhfdj --}}
             <x-primary-button type="button" wire:click="go_word({{ $staff->id }})">WORD</x-primary-button>
             <div class="md:w-full p-4">
                 <h1 class="text-center text-black font-semibold text-base">ကိုယ်ရေးမှတ်တမ်း</h1>
