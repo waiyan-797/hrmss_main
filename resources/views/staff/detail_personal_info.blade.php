@@ -79,7 +79,7 @@
             <span class="sr-only">Add Icon</span>
         </button>
     </div>
-    @include('staff_multiple_table', [
+    @include('table_for_trainings', [
         'column_names' => ['သင်တန်းအမည်', 'အခြားသင်တန်းအမည်', 'သင်တန်းအမှတ်စဉ်' , 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းအမျိုးအစား','အဆင့်အတန်း'],
         'data_master_add_stats' => [null, null, null, null, null, null, null, null, null],
         'add_event' => 'add_trainings',
@@ -268,6 +268,7 @@
             'သွားရောက်ခဲ့သည့်နိုင်ငံ',
             'မြို့',
             'သွားရောက်ခဲ့သည့်အကြောင်း',
+            'သင်တန်းဟုတ်/မဟုတ်',
             'သင်တန်းတက်ခြင်းဖြစ်လျှင် အောင်/မအောင်',
             'သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်',
             'ထောက်ပံ့သည့်အဖွဲ့အစည်း',
@@ -277,7 +278,7 @@
             'နိုင်ငံခြားသို့သွားရောက်မည်ံနေ့ (လ၊ ရက်၊ နှစ်)',
             'ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး'
         ],
-        'data_master_add_stats' => [null,null, null, null, null, null, null, null, null, null, null],
+        'data_master_add_stats' => [null,null, null,  null, null, null, null, null, null, null, null, null],
         'column_vals' => $abroads,
         'column_types' => [
             [
@@ -298,6 +299,13 @@
                 'wire_array_name' => 'abroads',
                 'wire_array_key' => 'particular',
             ],
+
+            [
+                'type' => 'checkbox',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'is_training',
+            ],
+
             [
                 'type' => 'checkbox',
                 'wire_array_name' => 'abroads',

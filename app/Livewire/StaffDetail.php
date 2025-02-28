@@ -656,6 +656,7 @@ class StaffDetail extends Component
                             'actual_abroad_date' => $abroad->actual_abroad_date,
                             'position' => $abroad->position,
                             'towns' => $abroad->towns,
+                            'is_training' => $abroad->is_training,
                         ];
                     }
 
@@ -991,7 +992,7 @@ class StaffDetail extends Component
 
     public function add_abroads()
     {
-        $this->abroads[] = ['id' => null, 'country' => [],'towns' =>'' ,'particular' => '', 'training_success_fail' => false, 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
+        $this->abroads[] = ['id' => null, 'country' => [],'towns' =>'' ,'is_training' => false  ,'particular' => '', 'training_success_fail' => false, 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
     }
 
     public function add_socials()
@@ -1433,6 +1434,7 @@ class StaffDetail extends Component
                 'actual_abroad_date' => '2024-12-09',
                 'position' => $abroad['position'],
                 'towns' => $abroad['towns'],
+                'is_training' => $abroad['is_training'],
             ]);
             $ab->countries()->sync($abroad['country']);
         }
@@ -1445,6 +1447,7 @@ class StaffDetail extends Component
             'abroads.*.particular' => 'required',
             'abroads.*.from_date' => 'required',
             'abroads.*.to_date' => 'required',
+            'abroads.*.is_training' => 'required',
         ];
 
         $validation_messages = [
@@ -1452,6 +1455,7 @@ class StaffDetail extends Component
             'abroads.*.particular.required' => 'Field is required.',
             'abroads.*.from_date.required' => 'Field is required.',
             'abroads.*.to_date.required' => 'Field is required.',
+            'abroads.*.is_training.required' => 'Field is required.',
         ];
 
         return [
