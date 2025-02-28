@@ -655,6 +655,7 @@ class StaffDetail extends Component
                             'to_date' => $abroad->to_date,
                             'actual_abroad_date' => $abroad->actual_abroad_date,
                             'position' => $abroad->position,
+                            'towns' => $abroad->towns,
                         ];
                     }
 
@@ -990,7 +991,7 @@ class StaffDetail extends Component
 
     public function add_abroads()
     {
-        $this->abroads[] = ['id' => null, 'country' => [], 'particular' => '', 'training_success_fail' => false, 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
+        $this->abroads[] = ['id' => null, 'country' => [],'towns' =>'' ,'particular' => '', 'training_success_fail' => false, 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
     }
 
     public function add_socials()
@@ -1431,6 +1432,7 @@ class StaffDetail extends Component
                 'to_date' => $abroad['to_date'] == '' ? null : $abroad['to_date'],
                 'actual_abroad_date' => '2024-12-09',
                 'position' => $abroad['position'],
+                'towns' => $abroad['towns'],
             ]);
             $ab->countries()->sync($abroad['country']);
         }

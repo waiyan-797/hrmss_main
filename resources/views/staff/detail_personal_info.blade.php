@@ -262,9 +262,11 @@
             <span class="sr-only">Add Icon</span>
         </button>
     </div>
+    {{-- @dd($abroads) --}}
     @include('staff_multiple_table', [
         'column_names' => [
             'သွားရောက်ခဲ့သည့်နိုင်ငံ',
+            'မြို့',
             'သွားရောက်ခဲ့သည့်အကြောင်း',
             'သင်တန်းတက်ခြင်းဖြစ်လျှင် အောင်/မအောင်',
             'သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်',
@@ -275,7 +277,7 @@
             'နိုင်ငံခြားသို့သွားရောက်မည်ံနေ့ (လ၊ ရက်၊ နှစ်)',
             'ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး'
         ],
-        'data_master_add_stats' => [null, null, null, null, null, null, null, null, null, null],
+        'data_master_add_stats' => [null,null, null, null, null, null, null, null, null, null, null],
         'column_vals' => $abroads,
         'column_types' => [
             [
@@ -284,6 +286,13 @@
                 'wire_array_key' => 'country',
                 'select_values' => $countries,
             ],
+            [
+                'type' => 'text',
+                'wire_array_name' => 'abroads',
+                'wire_array_key' => 'towns',
+            ],
+
+
             [
                 'type' => 'text',
                 'wire_array_name' => 'abroads',
