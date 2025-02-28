@@ -1652,6 +1652,7 @@ class StaffDetail extends Component
     // validation done
     private function saveTrainings($staffId)
     {
+
         $_validation = $this->validate_trainings();
         $this->validate($_validation['validate'], $_validation['messages']);
         foreach ($this->trainings as $training) {

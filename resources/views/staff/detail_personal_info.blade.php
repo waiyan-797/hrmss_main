@@ -80,7 +80,9 @@
         </button>
     </div>
     @include('table_for_trainings', [
-        'column_names' => ['သင်တန်းအမည်', 'အခြားသင်တန်းအမည်', 'သင်တန်းအမှတ်စဉ်' , 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းအမျိုးအစား','အဆင့်အတန်း'],
+        'column_names' => ['သင်တန်းအမည်',
+        //  '',
+          'သင်တန်းအမှတ်စဉ်' , 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းအမျိုးအစား','အဆင့်အတန်း'],
         'data_master_add_stats' => [null, null, null, null, null, null, null, null, null],
         'add_event' => 'add_trainings',
         'column_vals' => $trainings,
@@ -91,11 +93,11 @@
                 'wire_array_key' => 'training_type',
                 'select_values' => $training_types,
             ],
-            [
-                'type' => 'text',
-                'wire_array_name' => 'trainings',
-                'wire_array_key' => 'diploma_name',
-            ],
+            // [
+            //     'type' => 'text',
+            //     'wire_array_name' => 'trainings',
+            //     'wire_array_key' => 'diploma_name',
+            // ],
             [
                 'type' => 'text',
                 'wire_array_name' => 'trainings',

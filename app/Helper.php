@@ -8,6 +8,7 @@ use App\Models\Region;
 use App\Models\Salary;
 use App\Models\Staff;
 use App\Models\Township;
+use App\Models\TrainingType;
 use Carbon\Carbon;
 use League\Flysystem\UrlGeneration\PublicUrlGenerator;
 
@@ -94,6 +95,24 @@ if (! function_exists('myanmarAlphabet')) {
         return isset($alphabets[$id]) ? $alphabets[$id] : '';
     }
 }
+
+
+
+
+
+if (! function_exists('getOthersInTrainingType')) {
+    function getOthersInTrainingType()
+    {
+
+
+        return TrainingType::where('name','အခြား')->first()?->id;
+    }
+}
+
+
+
+
+
 
 
 if (! function_exists('dateDiff')) {
