@@ -86,7 +86,7 @@ class PA16 implements FromView ,WithStyles
         'month' => $this->month,
     ]);
     }
-    public function styles(Worksheet $sheet)
+  public function styles(Worksheet $sheet)
     {
         // Set paper size and orientation
         $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_LEGAL); // Set paper size to A4
@@ -106,8 +106,8 @@ class PA16 implements FromView ,WithStyles
         $highestRow = $sheet->getHighestRow()-1; // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
-        $sheet->getColumnDimension('A')->setWidth(4);
-        $sheet->getColumnDimension('B')->setWidth(15);
+        $sheet->getColumnDimension('A')->setWidth(100);
+        $sheet->getColumnDimension('B')->setWidth(27);
         $sheet->getColumnDimension('C')->setWidth(15);
         $sheet->getColumnDimension('D')->setWidth(15);
         $sheet->getColumnDimension('E')->setWidth(8);
@@ -198,5 +198,5 @@ class PA16 implements FromView ,WithStyles
         $sheet->getPageMargins()->setRight(0.5);
         $sheet->getPageMargins()->setLeft(0.5);
         $sheet->getPageMargins()->setBottom(0.5);
-    }
+    }  
 }

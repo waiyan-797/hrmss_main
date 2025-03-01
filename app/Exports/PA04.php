@@ -86,16 +86,16 @@ class PA04 implements FromView ,WithStyles
         $highestRow = $sheet->getHighestRow()-1; // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
-        $sheet->getColumnDimension('A')->setWidth(7);
-        $sheet->getColumnDimension('B')->setWidth(30);
-        $sheet->getColumnDimension('C')->setWidth(20);
-        $sheet->getColumnDimension('D')->setWidth(20);
-        $sheet->getColumnDimension('E')->setWidth(20);
+        $sheet->getColumnDimension('A')->setWidth(6.71);
+        $sheet->getColumnDimension('B')->setWidth(30.71);
+        $sheet->getColumnDimension('C')->setWidth(19.14);
+        $sheet->getColumnDimension('D')->setWidth(21.28);
+        $sheet->getColumnDimension('E')->setWidth(23.28);
         
 
-        $sheet->getRowDimension(1)->setRowHeight(35);
-        $sheet->getRowDimension(2)->setRowHeight(35);
-        $sheet->getRowDimension(3)->setRowHeight(35);
+        $sheet->getRowDimension(1)->setRowHeight(30);
+        $sheet->getRowDimension(2)->setRowHeight(30);
+        $sheet->getRowDimension(3)->setRowHeight(30);
         for ($row = 4; $row <= $highestRow+1 ; $row++) {
             $sheet->getRowDimension($row)->setRowHeight(35);
         }
@@ -186,9 +186,9 @@ class PA04 implements FromView ,WithStyles
         // $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
 
         // Set a margin for better printing output
-        $sheet->getPageMargins()->setTop(0.5);
-        $sheet->getPageMargins()->setRight(0.5);
-        $sheet->getPageMargins()->setLeft(0.5);
-        $sheet->getPageMargins()->setBottom(0.5);
+        $sheet->getPageMargins()->setTop(0.748031496062992);
+        $sheet->getPageMargins()->setRight(right: 0.590551181102362);
+        $sheet->getPageMargins()->setLeft(1.10236220472441);
+        $sheet->getPageMargins()->setBottom(0.748031496062992);
     }
 }

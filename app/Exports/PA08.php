@@ -123,10 +123,10 @@ class PA08 implements FromView ,WithStyles
         $highestRow = $sheet->getHighestRow()-2; // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
-        $sheet->getColumnDimension('A')->setWidth(4);
-        $sheet->getColumnDimension('B')->setWidth(25);
-        $sheet->getColumnDimension('C')->setWidth(10);
-        $sheet->getColumnDimension('D')->setWidth(12);
+        $sheet->getColumnDimension('A')->setWidth(4.85);
+        $sheet->getColumnDimension('B')->setWidth(22.28);
+        $sheet->getColumnDimension('C')->setWidth(8.48);
+        $sheet->getColumnDimension('D')->setWidth(11.14);
         $sheet->getColumnDimension('E')->setWidth(12);
         $sheet->getColumnDimension('F')->setWidth(12);
         $sheet->getColumnDimension('G')->setWidth(12);

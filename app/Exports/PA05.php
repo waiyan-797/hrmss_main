@@ -38,6 +38,14 @@ class PA05 implements FromView ,WithStyles
         $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
         $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_PORTRAIT);
 
+        //define margin 
+        $sheet->getPageMargins()->setTop(0.748031496062992);
+        $sheet->getPageMargins()->setRight(right: 0.590551181102362);
+        $sheet->getPageMargins()->setLeft(1.10236220472441);
+        $sheet->getPageMargins()->setBottom(0.748031496062992);
+        $sheet->getPageMargins()->setHeader(0.31496062992126);
+        $sheet->getPageMargins()->setFooter(0.31496062992126);
+
         // Fit to page width
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
@@ -54,18 +62,19 @@ class PA05 implements FromView ,WithStyles
 
        
 
-        $sheet->getColumnDimension('A')->setWidth(7);
-        $sheet->getColumnDimension('B')->setWidth(37);
-        $sheet->getColumnDimension('C')->setWidth(20);
-        $sheet->getColumnDimension('D')->setWidth(20);
-        $sheet->getColumnDimension('E')->setWidth(20);
+        $sheet->getColumnDimension('A')->setWidth(5.42);
+        $sheet->getColumnDimension('B')->setWidth(43.57);
+        $sheet->getColumnDimension('C')->setWidth(15.71);
+        $sheet->getColumnDimension('D')->setWidth(16.14);
+        $sheet->getColumnDimension('E')->setWidth(17.14);
 
-        $sheet->getRowDimension(1)->setRowHeight(40);
-        $sheet->getRowDimension(2)->setRowHeight(40);
-        $sheet->getRowDimension(3)->setRowHeight(40);
+        $sheet->getRowDimension(1)->setRowHeight(23.25);
+        $sheet->getRowDimension(2)->setRowHeight(23.25);
+        $sheet->getRowDimension(3)->setRowHeight(23.25);
+        $sheet->getRowDimension(4)->setRowHeight(30);
 
-        for ($row = 4; $row <= $highestRow ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(40);
+        for ($row = 5; $row <= $highestRow ; $row++) {
+            $sheet->getRowDimension($row)->setRowHeight(48.75);
         }
         
         // Set scaling to 80%

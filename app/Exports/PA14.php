@@ -16,6 +16,10 @@ class PA14 implements FromView ,WithStyles
     /**
     * @return \Illuminate\Support\Collection
     */
+    public function mount()
+    {
+        $this->ranks = (new Rank() )->isDicaAll();
+    }
     public function view(): View
     {
         $yinn_1 = Rank::whereHas('staffs', function($query){
@@ -88,13 +92,15 @@ class PA14 implements FromView ,WithStyles
         // Set paper size and orientation
         $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_LEGAL); // Set paper size to A4
         $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
-        $sheet->getPageMargins()->setTop(0.5);
-        $sheet->getPageMargins()->setHeader(0.45);
-        $sheet->getPageMargins()->setLeft(0.2);
-        $sheet->getPageMargins()->setRight(0.2);
-        $sheet->getPageMargins()->setBottom(0.45);
-        $sheet->getPageMargins()->setFooter(0.5);
+        $sheet->getPageMargins()->setTop(0.75);
+        $sheet->getPageMargins()->setHeader(0.3);
+        $sheet->getPageMargins()->setLeft(0.7);
+        $sheet->getPageMargins()->setRight(0.7);
+        $sheet->getPageMargins()->setBottom(0.75);
+        $sheet->getPageMargins()->setFooter(0.3);
         $sheet->getPageSetup()->setHorizontalCentered(true);
+
+
         // Fit to page width
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
@@ -109,52 +115,38 @@ class PA14 implements FromView ,WithStyles
         $highestRow = $sheet->getHighestRow()-1; // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
-        $sheet->getColumnDimension('A')->setWidth(4);
-        $sheet->getColumnDimension('B')->setWidth(30);
-        $sheet->getColumnDimension('C')->setWidth(7);
-        $sheet->getColumnDimension('D')->setWidth(7);
-        $sheet->getColumnDimension('E')->setWidth(7);
-        $sheet->getColumnDimension('F')->setWidth(7);
-        $sheet->getColumnDimension('G')->setWidth(7);
-        $sheet->getColumnDimension('H')->setWidth(7);
-        $sheet->getColumnDimension('I')->setWidth(7);
-        $sheet->getColumnDimension('J')->setWidth(7);
-        $sheet->getColumnDimension('K')->setWidth(7);
-        $sheet->getColumnDimension('L')->setWidth(7);
-        $sheet->getColumnDimension('M')->setWidth(7);
-        $sheet->getColumnDimension('N')->setWidth(7);
-        $sheet->getColumnDimension('O')->setWidth(7);
-        $sheet->getColumnDimension('P')->setWidth(7);
-        $sheet->getColumnDimension('Q')->setWidth(7);
-        $sheet->getColumnDimension('R')->setWidth(7);
-        $sheet->getColumnDimension('S')->setWidth(7);
-        $sheet->getColumnDimension('T')->setWidth(7);
-        $sheet->getColumnDimension('U')->setWidth(7);
-        $sheet->getColumnDimension('V')->setWidth(7);
-        $sheet->getColumnDimension('W')->setWidth(7);
-        $sheet->getColumnDimension('X')->setWidth(7);
-        $sheet->getColumnDimension('Y')->setWidth(7);
-        $sheet->getColumnDimension('Z')->setWidth(7);
-        $sheet->getColumnDimension('AA')->setWidth(7);
-        $sheet->getColumnDimension('AB')->setWidth(7);
-        $sheet->getColumnDimension('AC')->setWidth(7);
-        $sheet->getColumnDimension('AD')->setWidth(7);
-        $sheet->getColumnDimension('AE')->setWidth(7);
-        $sheet->getColumnDimension('AF')->setWidth(7);
-        $sheet->getColumnDimension('AG')->setWidth(7);
-        $sheet->getColumnDimension('AH')->setWidth(7);
-        $sheet->getColumnDimension('AI')->setWidth(7);
-        $sheet->getColumnDimension('AJ')->setWidth(7);
-        $sheet->getColumnDimension('AK')->setWidth(7);
-        $sheet->getColumnDimension('AL')->setWidth(7);
+        $sheet->getColumnDimension('A')->setWidth(6.28);
+        $sheet->getColumnDimension('B')->setWidth(28);
+        $sheet->getColumnDimension('C')->setWidth(6.14);
+        $sheet->getColumnDimension('D')->setWidth(6.14);
+        $sheet->getColumnDimension('E')->setWidth(6.71);
+        $sheet->getColumnDimension('F')->setWidth(6.57);
+        $sheet->getColumnDimension('G')->setWidth(6.57);
+        $sheet->getColumnDimension('H')->setWidth(6.57);
+        $sheet->getColumnDimension('I')->setWidth(6.57);
+        $sheet->getColumnDimension('J')->setWidth(6.57);
+        $sheet->getColumnDimension('K')->setWidth(6.57);
+
 
         $sheet->getRowDimension(1)->setRowHeight(27);
         $sheet->getRowDimension(2)->setRowHeight(27);
-        $sheet->getRowDimension(3)->setRowHeight(21);
+        $sheet->getRowDimension(3)->setRowHeight(24.75);
+        $sheet->getRowDimension(4)->setRowHeight(21.75);
+        $sheet->getRowDimension(5)->setRowHeight(21.75);
+        $sheet->getRowDimension(6)->setRowHeight(21.75);
 
-        for ($row = 4; $row <= $highestRow ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(25.5);
+        for ($row = 7; $row <= $highestRow+1; $row++) {
+
+            //in ဒုတိယညွှန်ကြားရေးမှူးချုပ်
+            if($row == 8){
+                $sheet->getRowDimension($row)->setRowHeight(26.25);
+            }else{
+                //other
+                $sheet->getRowDimension($row)->setRowHeight(25.5);
+            }
+            
         }
+
 
         $sheet->removeRow(4);
 

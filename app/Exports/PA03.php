@@ -97,8 +97,8 @@ class PA03 implements  FromView ,WithStyles
         $sheet->getPageMargins()->setRight(0.2);
        
         $row=5;
-        $sheet->getColumnDimension('A')->setWidth(5);
-        $sheet->getColumnDimension('B')->setWidth(30);
+        $sheet->getColumnDimension('A')->setWidth(3);
+        $sheet->getColumnDimension('B')->setWidth(100);
         $sheet->getColumnDimension('C')->setWidth(27);
         $sheet->getColumnDimension('D')->setWidth(12);
         $sheet->getColumnDimension('E')->setWidth(12);

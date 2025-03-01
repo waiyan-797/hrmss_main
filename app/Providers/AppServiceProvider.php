@@ -22,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Settings::setDefaultFontName('Pyidaungsu'); 
+        Settings::setOutputEscapingEnabled(outputEscapingEnabled: true);
         Settings::setDefaultFontSize(13);
         ini_set('memory_limit','2048M');
 
