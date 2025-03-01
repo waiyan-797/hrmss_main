@@ -113,12 +113,12 @@ class PA15 implements FromView ,WithStyles
         // Set paper size and orientation
         $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_LEGAL); // Set paper size to A4
         $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
-        $sheet->getPageMargins()->setTop(0.5);
-        $sheet->getPageMargins()->setHeader(0.35);
-        $sheet->getPageMargins()->setLeft(0.2);
-        $sheet->getPageMargins()->setRight(0.2);
-        $sheet->getPageMargins()->setBottom(0.35);
-        $sheet->getPageMargins()->setFooter(0.5);
+        $sheet->getPageMargins()->setTop(0.75);
+        $sheet->getPageMargins()->setHeader(0.3);
+        $sheet->getPageMargins()->setLeft(0.7);
+        $sheet->getPageMargins()->setRight(0.7);
+        $sheet->getPageMargins()->setBottom(0.75);
+        $sheet->getPageMargins()->setFooter(0.3);
         $sheet->getPageSetup()->setHorizontalCentered(true);
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
@@ -133,67 +133,73 @@ class PA15 implements FromView ,WithStyles
         $highestRow = $sheet->getHighestRow()-1; // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
-        $sheet->getColumnDimension('A')->setWidth(4);
-        $sheet->getColumnDimension('B')->setWidth(30);
-        $sheet->getColumnDimension('C')->setWidth(5);
-        $sheet->getColumnDimension('D')->setWidth(6);
-        $sheet->getColumnDimension('E')->setWidth(6);
-        $sheet->getColumnDimension('F')->setWidth(5);
-        $sheet->getColumnDimension('G')->setWidth(6);
-        $sheet->getColumnDimension('H')->setWidth(6);
-        $sheet->getColumnDimension('I')->setWidth(5);
-        $sheet->getColumnDimension('J')->setWidth(6);
-        $sheet->getColumnDimension('K')->setWidth(6);
-        $sheet->getColumnDimension('L')->setWidth(5);
-        $sheet->getColumnDimension('M')->setWidth(6);
-        $sheet->getColumnDimension('N')->setWidth(6);
-        $sheet->getColumnDimension('O')->setWidth(5);
-        $sheet->getColumnDimension('P')->setWidth(6);
-        $sheet->getColumnDimension('Q')->setWidth(6);
-        $sheet->getColumnDimension('R')->setWidth(5);
-        $sheet->getColumnDimension('S')->setWidth(6);
-        $sheet->getColumnDimension('T')->setWidth(6);
-        $sheet->getColumnDimension('U')->setWidth(5);
-        $sheet->getColumnDimension('V')->setWidth(6);
-        $sheet->getColumnDimension('W')->setWidth(6);
-        $sheet->getColumnDimension('X')->setWidth(5);
-        $sheet->getColumnDimension('Y')->setWidth(6);
-        $sheet->getColumnDimension('Z')->setWidth(6);
-        $sheet->getColumnDimension('AA')->setWidth(5);
-        $sheet->getColumnDimension('AB')->setWidth(6);
-        $sheet->getColumnDimension('AC')->setWidth(6);
-        $sheet->getColumnDimension('AD')->setWidth(5);
-        $sheet->getColumnDimension('AE')->setWidth(6);
-        $sheet->getColumnDimension('AF')->setWidth(6);
-        $sheet->getColumnDimension('AG')->setWidth(5);
-        $sheet->getColumnDimension('AH')->setWidth(6);
-        $sheet->getColumnDimension('AI')->setWidth(6);
-        $sheet->getColumnDimension('AJ')->setWidth(5);
-        $sheet->getColumnDimension('AK')->setWidth(6);
-        $sheet->getColumnDimension('AL')->setWidth(6);
-        $sheet->getColumnDimension('AM')->setWidth(5);
-        $sheet->getColumnDimension('AN')->setWidth(6);
-        $sheet->getColumnDimension('AO')->setWidth(6);
-        $sheet->getColumnDimension('AP')->setWidth(5);
-        $sheet->getColumnDimension('AQ')->setWidth(6);
-        $sheet->getColumnDimension('AR')->setWidth(6);
-        $sheet->getColumnDimension('AS')->setWidth(5);
-        $sheet->getColumnDimension('AT')->setWidth(6);
-        $sheet->getColumnDimension('AU')->setWidth(6);
-        $sheet->getColumnDimension('AV')->setWidth(5);
-        $sheet->getColumnDimension('AW')->setWidth(6);
-        $sheet->getColumnDimension('AX')->setWidth(6);
+        $sheet->getColumnDimension('A')->setWidth(6.34);
+        $sheet->getColumnDimension('B')->setWidth(24.11);
+        $sheet->getColumnDimension('C')->setWidth(5.45);
+        $sheet->getColumnDimension('D')->setWidth(5.45);
+        $sheet->getColumnDimension('E')->setWidth(6.45);
+        $sheet->getColumnDimension('F')->setWidth(5.45);
+        $sheet->getColumnDimension('G')->setWidth(5.45);
+        $sheet->getColumnDimension('H')->setWidth(6.67);
+        $sheet->getColumnDimension('I')->setWidth(6.11);
+        $sheet->getColumnDimension('J')->setWidth(5.45);
+        $sheet->getColumnDimension('K')->setWidth(6.45);
+        $sheet->getColumnDimension('L')->setWidth(6.45);
+        $sheet->getColumnDimension('M')->setWidth(5.45);
+        $sheet->getColumnDimension('N')->setWidth(6.56);
+        $sheet->getColumnDimension('O')->setWidth(5.45);
+        $sheet->getColumnDimension('P')->setWidth(5.45);
+        $sheet->getColumnDimension('Q')->setWidth(6.56);
+        $sheet->getColumnDimension('R')->setWidth(5.45);
+        $sheet->getColumnDimension('S')->setWidth(5.45);
+        $sheet->getColumnDimension('T')->setWidth(6.89);
+        $sheet->getColumnDimension('U')->setWidth(5.45);
+        $sheet->getColumnDimension('V')->setWidth(5.45);
+        $sheet->getColumnDimension('W')->setWidth(6.56);
+        $sheet->getColumnDimension('X')->setWidth(5.45);
+        $sheet->getColumnDimension('Y')->setWidth(5.45);
+        $sheet->getColumnDimension('Z')->setWidth(6.89);
+        $sheet->getColumnDimension('AA')->setWidth(5.45);
+        $sheet->getColumnDimension('AB')->setWidth(5.45);
+        $sheet->getColumnDimension('AC')->setWidth(6.56);
+        $sheet->getColumnDimension('AD')->setWidth(5.45);
+        $sheet->getColumnDimension('AE')->setWidth(5.45);
+        $sheet->getColumnDimension('AF')->setWidth(7.11);
+        $sheet->getColumnDimension('AG')->setWidth(5.45);
+        $sheet->getColumnDimension('AH')->setWidth(5.45);
+        $sheet->getColumnDimension('AI')->setWidth(7);
+        $sheet->getColumnDimension('AJ')->setWidth(5.45);
+        $sheet->getColumnDimension('AK')->setWidth(5.45);
+        $sheet->getColumnDimension('AL')->setWidth(6.11);
+        $sheet->getColumnDimension('AM')->setWidth(5.45);
+        $sheet->getColumnDimension('AN')->setWidth(5.45);
+        $sheet->getColumnDimension('AO')->setWidth(5.45);
+        $sheet->getColumnDimension('AP')->setWidth(5.45);
+        $sheet->getColumnDimension('AQ')->setWidth(5.45);
+        $sheet->getColumnDimension('AR')->setWidth(6.11);
+        $sheet->getColumnDimension('AS')->setWidth(5.56);
+        $sheet->getColumnDimension('AT')->setWidth(5.89);
+        $sheet->getColumnDimension('AU')->setWidth(6.56);
+        $sheet->getColumnDimension('AV')->setWidth(6.11);
+        $sheet->getColumnDimension('AW')->setWidth(6.34);
+        $sheet->getColumnDimension('AX')->setWidth(8.11);
 
-        $sheet->getRowDimension(1)->setRowHeight(28);
-        $sheet->getRowDimension(2)->setRowHeight(28);
-        $sheet->getRowDimension(3)->setRowHeight(28);
-        $sheet->getRowDimension(29)->setRowHeight(28);
+        $sheet->getRowDimension(1)->setRowHeight(28.5);
+        $sheet->getRowDimension(2)->setRowHeight(21.6);
+        $sheet->getRowDimension(3)->setRowHeight(21.6);
+        $sheet->getRowDimension(4)->setRowHeight(21.6);
+        $sheet->getRowDimension(5)->setRowHeight(21.6);
+        $sheet->getRowDimension(6)->setRowHeight(30);
+        $sheet->getRowDimension(7)->setRowHeight(30);
+        $sheet->getRowDimension(8)->setRowHeight(30);
+        $sheet->getRowDimension(9)->setRowHeight(30);
+        $sheet->getRowDimension(10)->setRowHeight(27.8);
 
-        for ($row = 4; $row <= $highestRow ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(28);
+        for ($row = 11; $row <= $highestRow ; $row++) {
+            $sheet->getRowDimension($row)->setRowHeight(30);
         }
 
-        $sheet->removeRow(4);
+        $sheet->removeRow(11);
 
         $sheet->getStyle('A1:A2')->applyFromArray([
             'font' => [
@@ -217,7 +223,7 @@ class PA15 implements FromView ,WithStyles
                 'size' => 11,
             ],
             'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
             ],
             'borders' => [
@@ -249,7 +255,7 @@ class PA15 implements FromView ,WithStyles
                 'size' => 11,
             ],
             'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
             ],
             'borders' => [
@@ -266,7 +272,7 @@ class PA15 implements FromView ,WithStyles
                 'size' => 11,
             ],
             'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
             ],
             'borders' => [
@@ -301,7 +307,7 @@ class PA15 implements FromView ,WithStyles
                 'bold' => true,
             ],
             'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
             ],
             'borders' => [
@@ -311,5 +317,22 @@ class PA15 implements FromView ,WithStyles
                 ],
             ],
         ]);
+        $sheet->getStyle('A38')->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'outline' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+                ],
+            ],
+        ]);
     }
+    
     }

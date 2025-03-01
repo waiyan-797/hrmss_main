@@ -19,8 +19,8 @@ return new class extends Migration
             // $table->dropForeign('staff_education_education_type_id_foreign');
 
             // Drop columns
-            $table->dropColumn('education_group_id');
-            $table->dropColumn('education_type_id');
+            // $table->dropColumn('education_group_id');
+            // $table->dropColumn('education_type_id');
         });
     }
 
