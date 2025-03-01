@@ -566,6 +566,50 @@ if (!function_exists(function: 'endsWithSiblings')) {
 
 }
 
+if (!function_exists(function: 'isAdmins')) {
+
+
+    function isAdmins() {
+        return  in_array(auth()->user()->role_id, [1,2,3]) ;
+    }
+
+
+}
+
+
+if (!function_exists(function: 'isHRAdmin')) {
+
+    function isHRAdmin() {
+
+        return auth()->user()->role_id ==  2  ;
+    }
+
+
+}
+
+if (!function_exists(function: 'isFinanceAdmin')) {
+
+    function isFinanceAdmin() {
+        return auth()->user()->role_id ==  3  ;
+    }
+
+
+}
+
+if (!function_exists(function: 'isSuperAdmin')) {
+
+    function isSuperAdmin() {
+        return auth()->user()->role_id ==  1  ;
+    }
+
+
+}
+
+
+
+
+
+
 // endsWithSiblings($key) ? $relations->where('relation_ship_type_id' , 1 ) : $relations
 if (!function_exists(function: 'getRelatedRsType')) {
 

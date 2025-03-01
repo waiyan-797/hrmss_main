@@ -5,6 +5,7 @@
         <!-- Modal Content -->
         <h2 class="mb-4 text-lg font-semibold text-gray-500 uppercase dark:text-white font-arial">{{ $modal_title }}
         </h2>
+
         <div class="flex flex-col gap-2 mb-4">
             <button type="button" class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
                 wire:click="go_report({{ $staff_id }}, 15)">ကိုယ်ရေးမှတ်တမ်း(၁၅)ချက်</button>
@@ -26,7 +27,10 @@
             <button type="button"
                 class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
                 wire:click="go_report({{ $staff_id }}, 68)">ကိုယ်ရေးမှတ်တမ်း(၆၈)ချက်</button>
-            <button type="button"
+
+            @if(isHRAdmin() || isSuperAdmin())
+
+                <button type="button"
                 class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
                 wire:click="go_report({{ $staff_id }}, '_leave_3')">Leave 3</button>
             <button type="button"
@@ -52,6 +56,10 @@
                     wire:click="go_report({{ $staff_id }}, '_staff_list_2')">ဝန်ထမ်းလုပ်သက်အတွက်အမှတ်ပေးခြင်း</button>
 
             {{-- @endif --}}
+
+
+@endif
+
 
 
 

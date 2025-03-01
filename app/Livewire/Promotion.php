@@ -152,8 +152,9 @@ class Promotion extends Component
     {
 
         $staffs = Staff::all();
-        $ranks = Rank::where('payscale_id' , '<' , $this->staff->current_rank->payscale_id)->get();
-        $allRanks = Rank::all();
+        // $ranks = Rank::where('payscale_id' , '<' , $this->staff->current_rank->payscale_id)->get();
+        $ranks = Rank::where('is_dica', true)->get();
+        $allRanks = Rank::where('is_dica', true)->get();
         $this->modal_title = $this->confirm_add ? 'ရာထူးတိုးသိမ်းရန်' : 'ရာထူးတိုးပြင်ရန်';
         $this->submit_button_text = $this->confirm_add ? 'သိမ်းရန်' : 'ပြင်ရန်';
         $this->cancel_action = 'close_modal';
