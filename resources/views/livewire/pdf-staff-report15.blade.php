@@ -213,13 +213,13 @@
                     <div class="flex justify-center items-center mb-2 ml-96">
                         <p class="w-24 md:w-20 mr-6">အဆင့်</p>
                         <p class="w-8">-</p>
-                        <p class="w-full">{{ $staff->current_rank->name }}</p>
+                        <p class="w-full">{{ $staff?->current_rank?->name }}</p>
                     </div>
 
                     <div class="flex justify-center items-center mb-4 ml-96">
                         <p class="w-24 md:w-20 mr-6">တပ်/ ဌာန</p>
                         <p class="w-8">-</p>
-                        <p class="w-full">{{ $staff->current_department->name }}</p>
+                        <p class="w-full">{{ $staff->current_department?->name }}</p>
                     </div>
 
                     <div class="flex justify-start space-x-1">
