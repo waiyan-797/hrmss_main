@@ -111,13 +111,14 @@ $section->addText(
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 350, 'spaceBefore' => 350];
         $pStyle_2 = ['align' => 'center', 'spaceAfter' => 300, 'spaceBefore' => 300];
         $pStyle_3 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100];
+        $pStyle_4 = ['align' => 'left', 'spaceAfter' => 300, 'spaceBefore' => 300];
         $table->addRow(50, ['tblHeader' => true]);
         $table->addCell(1500)->addText("စဥ်", ['bold' => true],$pStyle_1);
         $table->addCell(4000)->addText("အမည်/ရာထူး", ['bold' => true],$pStyle_1);
         $table->addCell(4000)->addText("ဌာနခွဲ", ['bold' => true],$pStyle_1);
-        $table->addCell(4000)->addText("မွေးသက္ကရာဇ်", ['bold' => true],$pStyle_1);
-        $table->addCell(3000)->addText("အလုပ်စတင်\nဝင်ရောက်သည့်\nရက်စွဲ", ['bold' => true],$pStyle_2);
-        $table->addCell(3000)->addText("လက်ရှိ\nအဆင့်ရ\nရက်စွဲ", ['bold' => true],$pStyle_2);
+        $table->addCell(2800)->addText("မွေးသက္ကရာဇ်", ['bold' => true],$pStyle_1);
+        $table->addCell(2500)->addText("အလုပ်စတင်\nဝင်ရောက်သည့်\nရက်စွဲ", ['bold' => true],$pStyle_2);
+        $table->addCell(2500)->addText("လက်ရှိ\nအဆင့်ရ\nရက်စွဲ", ['bold' => true],$pStyle_2);
         $table->addCell(3000)->addText("နောက်ဆုံး\nသွားရောက်ခဲ့\nသည့်နိုင်ငံ/မြို့", ['bold' => true],$pStyle_2);
         $table->addCell(6000)->addText("နောက်ဆုံးသွား\nရောက်ခဲ့သည့်\nအကြောင်းအရာ\nကာလ (မှ-ထိ)", ['bold' => true],$pStyle_2);
         $table->addCell(2000)->addText("အကြိမ်ရေ", ['bold' => true],$pStyle_1);
@@ -128,7 +129,14 @@ $section->addText(
     $lastAbroad = $staff->abroads->sortByDesc('to_date')->first();
     $dob = \Carbon\Carbon::parse($staff->dob);
     $diff = $dob->diff(\Carbon\Carbon::now());
-    $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+    $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+
+    $join_date = \Carbon\Carbon::parse($staff->join_date);
+    $diff = $join_date->diff(\Carbon\Carbon::now());
+    $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+    $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);
+    $diff = $current_rank_date->diff(\Carbon\Carbon::now());
+    $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
     
     foreach ($allCountries as $countryId) {
         $table->addRow();
@@ -136,9 +144,9 @@ $section->addText(
         $table->addCell(4000)->addText($staff->name . "\n" . ($staff->currentRank->name ?? ''),null,$pStyle_1);
         $table->addCell(4000)->addText($staff->current_division->name ?? '',null,$pStyle_1);
       
-        $table->addCell(4000)->addText( ' (' . en2mm($dob->format('d-m-Y')) . ')' . en2mm($age),null,$pStyle_1);
-        $table->addCell(3000)->addText( formatDMYmm($staff->join_date),null,$pStyle_2 );
-        $table->addCell(3000)->addText(formatDMYmm($staff->current_rank_date),null,$pStyle_2);
+        $table->addCell(2800)->addText(  en2mm($dob->format('d-m-Y')) . "\n" . en2mm($age),null,$pStyle_1);
+        $table->addCell(2500)->addText( formatDMYmm($staff->join_date)."\n".en2mm($age),null,$pStyle_4 );
+        $table->addCell(2500)->addText(formatDMYmm($staff->current_rank_date)."\n".en2mm($age),null,$pStyle_4);
         $table->addCell(3000)->addText($lastAbroad?->countries->pluck('name')->unique()->join(', ') ?? '',null,$pStyle_2);
         if ($lastAbroad) {
             $table->addCell(3000)->addText($lastAbroad->particular.formatDMYmm($lastAbroad->from_date) . ' မှ ' . formatDMYmm($lastAbroad->to_date).'ထိ',null,$pStyle_2);

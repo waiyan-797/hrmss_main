@@ -5,6 +5,9 @@
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
             <br><br>
+            <h1 class="font-semibold text-base mb-2 text-center"> <h1 class="font-semibold text-base mb-2 text-center">ရင်နှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1></h1>
+            <h1 class="font-semibold text-base mb-2 text-center"> <h1 class="font-semibold text-base mb-2 text-center">ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန၏ ဝန်ထမ်းအင်အားပြုန်းတီးမှုအခြေအနေနှင့်  ဝန်ထမ်းအင်အားစာရင်းချုပ်																					
+            </h1></h1>
             {{-- <input type="date" wire:model.live='filterRange'> --}}
             Date
             <x-date-picker wire:model.live='filterRange' />
@@ -49,7 +52,7 @@
                         <th colspan="2" class="border border-black text-center p-2">ကွယ်လွန်ခြင်း</th>
 
                         <th colspan="3" class="border border-black text-center p-2">
-                            {{ $year . '-' . $month . '-' . $date }}
+                            {{ formatDMYmm($date . '-' . $month . '-' . $year) }}
                             ထိအင်အားစုစုပေါင်း </th>
 
                         <th rowspan="2" class="border border-black text-center p-2">မှတ်ချက်</th>

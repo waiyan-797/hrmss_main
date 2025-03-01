@@ -3,6 +3,9 @@
 namespace App\Livewire\InvestmentCompanies;
 
 use App\Exports\PA13;
+use App\Models\Education;
+use App\Models\EducationGroup;
+use App\Models\EducationType;
 use App\Models\Staff;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
@@ -12,6 +15,13 @@ use PhpOffice\PhpWord\PhpWord;
 
 class InvestmentCompanies13 extends Component
 {
+    public $education_id , $education_type_id , $education_group_id ;
+    public $education_types , $education_groups , $educations;
+    public function mount(){
+    $this->education_types = EducationType::all();
+    $this->education_groups = EducationGroup::all();
+    $this->educations = Education::all();
+    }
 
     public function go_pdf(){
         $staffs = Staff::get();
@@ -30,15 +40,47 @@ class InvestmentCompanies13 extends Component
     }
     public function go_word()
 {
-    $staffs = Staff::get();
+    // $staffs = Staff::get();
+    $staffs = Staff::where('current_rank_id', '!=', 23)->whereNull('retire_type_id')
+->whereNull('retire_date')
+->whereHas('staff_educations')
+
+// Main filters
+->when($this->education_group_id, fn($query) =>
+    $query->whereHas('staff_educations.education', fn($q) =>
+        $q->where('education_group_id', $this->education_group_id)
+    )
+)
+->when($this->education_type_id, fn($query) =>
+    $query->whereHas('staff_educations.education', fn($q) =>
+        $q->where('education_type_id', $this->education_type_id)
+    )
+)
+->when($this->education_id, fn($query) =>
+    $query->whereHas('staff_educations', fn($q) =>
+        $q->where('education_id', $this->education_id)
+    )
+)->with(['staff_educations' => function ($q) {
+    $q->with(['education' => function ($query) {
+        if ($this->education_group_id) {
+            $query->where('education_group_id', $this->education_group_id);
+        }
+        if ($this->education_type_id) {
+            $query->where('education_type_id', $this->education_type_id);
+        }
+        if ($this->education_id) {
+            $query->where('id', $this->education_id);
+        }
+    }]);
+}])->distinct()->get();
     $phpWord = new PhpWord();
     // 
     $section = $phpWord->addSection([
         'orientation' => 'portrait',
         'pageSizeW'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(8.5), // Legal width in inches
         'pageSizeH'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(14),  // Legal height in inches
-        'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),     // 1 inch
-        'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+        'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.3),     // 1 inch
+        'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.3),   // 0.5 inch
         'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
         'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
     ]);
@@ -46,18 +88,13 @@ class InvestmentCompanies13 extends Component
     $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
     $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
     $section->addTitle('ဘွဲ့ရရှိသူများစာရင်း', 2);
-    // $phpWord->addTableStyle('StaffTable', $tableStyle);
-    $table = $section->addTable(['borderSize' => 10, 'borderColor' => '000000', 'cellMargin' => 60]);
+    $table = $section->addTable(['borderSize' => 8, 'cellMargin' => 60]);
     $table->addRow();
     $table->addCell(700)->addText('စဥ်', ['bold' => true],['alignment'=>'center','spaceBefore'=>100]);
-    // $table->addCell(2000)->addText('အမည်/ရာထူး/ဌာန', ['bold' => true], $cellStyle);
     $table->addCell(3500)->addText('အမည်', ['bold' => true],['alignment'=>'center','spaceBefore'=>100]);
     $table->addCell(3500)->addText('ရာထူး', ['bold' => true],['alignment'=>'center','spaceBefore'=>100]);
-    // $table->addCell(2000)->addText('ရရှိခဲ့သည့်ဘွဲ့နှင့် အထူးပြုဘာသာရပ်', ['bold' => true], $cellStyle);
     $table->addCell(2800)->addText('ပညာအရည်အချင်း', ['bold' => true],['alignment'=>'center','spaceBefore'=>100]);
-    // $table->addCell(2000)->addText('တက္ကသိုလ်/ကျောင်း', ['bold' => true], $cellStyle);
     $table->addCell(2000)->addText('နိုင်ငံ', ['bold' => true],['alignment'=>'center','spaceBefore'=>100]);
-    // $table->addCell(1500)->addText('ဘွဲ့ရရှိခဲ့သည့်နှစ်', ['bold' => true], $cellStyle);
     $table->addCell(1500)->addText('မှတ်ချက်', ['bold' => true],['alignment'=>'center','spaceBefore'=>100]);
     $serialNumber = 1; // Initialize serial number
 
@@ -83,41 +120,55 @@ class InvestmentCompanies13 extends Component
         $table->addCell(2000)->addText($staff->staff_educations->isNotEmpty() 
         ? $staff->staff_educations->pluck('country.name')->filter()->implode('၊ ') 
         : null );
-
-        // Add Year
-        // $table->addCell(1500)->addText(
-        //     en2mm($school?->year),
-        //     null,
-            
-        // );
-
-        // Add Remark
         $table->addCell(1500)->addText('');
     }
-
-
-
-    //   $table->addRow();
-    //         $table->addCell(500)->addText((en2mm($index + 1)), null, $cellStyle);
-     
-
-    //         $table->addCell(2000)->addText($staff?->name . ' / ' . $staff->current_rank?->name . ' / ' . $staff->side_department?->name, null, $cellStyle);
-    //         $table->addCell(2000)->addText($school?->education?->name . '၊ ' . $school?->major, null, $cellStyle);
-    //         $table->addCell(2000)->addText($school?->name, null, $cellStyle);
-    //         $table->addCell(1500)->addText($school?->country?->name, null, $cellStyle);
-    //         $table->addCell(1500)->addText(en2mm($school?->year), null, $cellStyle);
-    //         $table->addCell(1500)->addText($school?->remark, null, $cellStyle);
     $writer = IOFactory::createWriter($phpWord, 'Word2007');
     return response()->streamDownload(function() use ($writer) {
         $writer->save('php://output');
     }, 'investment_companies_report_13.docx');
 }
+    public function render()
+{
+    $staffs = Staff::where('current_rank_id', '!=', 23)
+    ->whereNull('retire_type_id')
+    ->whereNull('retire_date')
+    ->whereHas('staff_educations')
 
-     public function render()
-     {
-        $staffs = Staff::get();
-        return view('livewire.investment-companies.investment-companies13',[ 
-            'staffs' => $staffs,
-        ]);
-    }
+    // Main filters
+    ->when($this->education_group_id, fn($query) =>
+        $query->whereHas('staff_educations.education', fn($q) =>
+            $q->where('education_group_id', $this->education_group_id)
+        )
+    )
+    ->when($this->education_type_id, fn($query) =>
+        $query->whereHas('staff_educations.education', fn($q) =>
+            $q->where('education_type_id', $this->education_type_id)
+        )
+    )
+    ->when($this->education_id, fn($query) =>
+        $query->whereHas('staff_educations', fn($q) =>
+            $q->where('education_id', $this->education_id)
+        )
+    )->with(['staff_educations' => function ($q) {
+        $q->with(['education' => function ($query) {
+            if ($this->education_group_id) {
+                $query->where('education_group_id', $this->education_group_id);
+            }
+            if ($this->education_type_id) {
+                $query->where('education_type_id', $this->education_type_id);
+            }
+            if ($this->education_id) {
+                $query->where('id', $this->education_id);
+            }
+
+        }]);
+    }])->distinct()->paginate(20);
+    $currentPage = $staffs->currentPage();
+    $perPage = $staffs->perPage();
+    $startIndex = ($currentPage - 1) * $perPage + 1;
+    return view('livewire.reports.education-report',[
+        'staffs' => $staffs,
+        'startIndex'=>$startIndex,
+    ]);
+}
 }

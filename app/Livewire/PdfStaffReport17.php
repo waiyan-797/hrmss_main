@@ -129,7 +129,7 @@ class PdfStaffReport17 extends Component
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၂။', null, $pStyle_5);
-        $table->addCell(13000)->addText('အသက်(မွေးနေ့သက္ကရာဇ်)', null,$pStyle_8);
+        $table->addCell(13000)->addText('အသက်(မွေးသက္ကရာဇ်)', null,$pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText(formatDMYmm($staff->dob), null,$pStyle_8);
         $table->addRow(50);
@@ -140,7 +140,7 @@ class PdfStaffReport17 extends Component
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၄။', null, $pStyle_5);
-        $table->addCell(13000)->addText('အမျိုးသားမှတ်ပုံတင်အမှတ်', null,$pStyle_8);
+        $table->addCell(13000)->addText('နိုင်ငံသားစိစစ်ရေးအမှတ်', null,$pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . $staff->nrc_sign->name . $staff->nrc_code, null,$pStyle_8);
 
@@ -153,7 +153,7 @@ class PdfStaffReport17 extends Component
         $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());
         $table->addRow(50);
         $table->addCell(1300)->addText('၆။', null, $pStyle_5);
-        $table->addCell(13000)->addText('အမှုထမ်းလုပ်သက်၊ဝင်ရောက်သည့်ရက်စွဲ', null,$pStyle_8);
+        $table->addCell(13000)->addText('အမှုထမ်းသက်(ဝင်ရောက်သည့်ရက်စွဲ)', null,$pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText(formatPeriodMM($joinDateDuration->y, $joinDateDuration->m) . ', ' . formatDMYmm($joinDate), null,$pStyle_8);
         $table->addRow(50);
@@ -202,10 +202,10 @@ class PdfStaffReport17 extends Component
         $table->addCell(12000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ကာလ', ['bold' => true], $pStyle_2);
         $textContent = "နောက်ဆုံးသွား\nရောက်ခဲ့သည့်\n(၅)နိုင်ငံ";
         $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent, ['bold' => true], $pStyle_3);
-        $table->addCell(6000, ['vMerge' => 'restart'])->addText("သွားရောက်\nသည့်ကိစ္စ", ['bold' => true], $pStyle_4);
-        $textContent = "သင်တန်းတတ်\nခြင်းဖြစ်လျှင်\nအောင်မအောင်နှင့် \nအကြိမ်မည်မျှဖြင့်\nအောင်မြင်သည်";
+        $table->addCell(8000, ['vMerge' => 'restart'])->addText("သွားရောက်\nသည့်ကိစ္စ", ['bold' => true], $pStyle_4);
+        $textContent = "သင်တန်းတတ်\nခြင်းဖြစ်လျှင်\nအောင်မအောင်";
         $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent, ['bold' => true], $pStyle_1);
-        $textContent = "မည်သည့်\nအစိုးရ\nအဖွဲ့အစည်း\nအထောက်အပံ့ဖြင့်\nသွားရောက်သည်";
+        $textContent = "မည်သည့်\nအစိုးရ\nအဖွဲ့အစည်း\nအထောက်အပံ့";
         $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent, ['bold' => true], $pStyle_1);
         $table->addRow(50, ['tblHeader' => true]);
         $table->addCell(6000)->addText('မှ', ['bold' => true], ['alignment' => 'center']);
@@ -223,13 +223,13 @@ class PdfStaffReport17 extends Component
                 $table->addCell(6000)->addText(formatDMYmm($abroad?->from_date), null, $pStyle_2);
                 $table->addCell(6000)->addText(formatDMYmm($abroad?->to_date), null, $pStyle_2);
                 $table->addCell(8000)->addText($abroad->countries->pluck('name')->unique()->join(', '), null, $pStyle_2);
-                $table->addCell(6000)->addText($abroad->particular, null, $pStyle_4);
+                $table->addCell(8000)->addText($abroad->particular, null, $pStyle_4);
                 $table->addCell(8000)->addText($abroad->training_success_count, null, $pStyle_4);
                 $table->addCell(8000)->addText($abroad->position, null, $pStyle_1);
             }
         } else {
             $table->addRow();
-            $cell = $table->addCell(42000, ['gridSpan' => 6]); 
+            $cell = $table->addCell(44000, ['gridSpan' => 6]); 
             $cell->addText(
                 'မရှိပါ',
                null,
@@ -308,7 +308,7 @@ class PdfStaffReport17 extends Component
         $table->addCell(8000);
         $table->addCell(8000);
         $section->addText('');
-        $section->addText('၁၆။' . 'အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။', ['bold' => false]);
+        $section->addText('၁၆။ ' . ' အထက်ပါအချက်အလက်များကို မှန်ကန်သည့်အတိုင်း ဖြည့်သွင်းရေးသားထားပါကြောင်း ကိုယ်တိုင်လက်မှတ်ရေးထိုးပါသည်', null,array('spaceBefore'=> 200));
         $tableStyle = [
             'alignment' => Jc::END,
         ];
@@ -334,7 +334,11 @@ class PdfStaffReport17 extends Component
         $table->addCell(3000)->addText($staff->current_department->name, ['alignment' => 'right']);
 
         $section->addText('ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
-        $section->addText('၁၇။' . 'နိုင်ငံခြားသို့ သွားရောက်မည့်ပုဂ္ဂိုလ်၏လုပ်ရည်ကိုင်ရည်နှင့် အကျင့်စာရိတ္တ ကောင်းမွန်ကြောင်းထပ်ဆင့် လက်မှတ်ရေးထိုးပါသည်။', ['bold' => false]);
+       
+        $section->addText
+        ('၁၇။ ' . "နိုင်ငံခြားသို့သွားရောက်မည့်ပုဂ္ဂိုလ်၏လုပ်ရည်ကိုင်ရည်နှင့်အကျင့်စာရိတ္တကောင်းမွန်ကြောင်း\nထပ်ဆင့် လက်မှတ်ရေးထိုးပါသည်။", null,array('spaceBefore'=> 200));
+
+        
         $tableStyle = [
             'alignment' => Jc::END,
         ];

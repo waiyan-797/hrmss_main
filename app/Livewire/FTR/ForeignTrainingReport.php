@@ -2,6 +2,7 @@
 
 namespace App\Livewire\FTR;
 
+use App\Models\Rank;
 use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
@@ -10,7 +11,7 @@ use PhpOffice\PhpWord\PhpWord;
 class ForeignTrainingReport extends Component
 {
     public $staffs, $nameSearch;
-
+    public  $ranks;
     public function go_pdf()
     {
 
@@ -86,15 +87,29 @@ class ForeignTrainingReport extends Component
     }
     public function render()
     {
-        $staffQuery  = Staff::query();
-        if ($this->nameSearch) {
-            $staffQuery->where('name', 'like', '%' . $this->nameSearch . '%');
+        // $staffQuery  = Staff::query();
+        // if ($this->nameSearch) {
+        //     $staffQuery->where('name', 'like', '%' . $this->nameSearch . '%');
+        // }
+        // $this->staffs = $staffQuery->get();
+        $query = Staff::query();
+        if (!empty($this->selectedRankId)) {
+            $query->where('current_rank_id', $this->selectedRankId);
         }
-        $this->staffs = $staffQuery->get();
+        $this->staffs = $query->with('currentRank')->get();
+        $selectedRankName = null;
+        if (!empty($this->selectedRankId)) {
+            $selectedRankName = Rank::find($this->selectedRankId)?->name ?? 'ရာထူးအားလုံး';
+        }
 
-
+// 'ranks' => $this->ranks,
+//         'age' => $this->age,
+//         'signID' => $this->signID,
+//         'selectedRankName' => $selectedRankName, 
         return view('livewire.f-t-r.foreign-training-report', [
             'staffs' => $this->staffs,
+            'ranks'=>$this->ranks,
+            'selectedRankName'=>$selectedRankName,
         ]);
     }
 }

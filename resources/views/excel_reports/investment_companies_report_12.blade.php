@@ -82,13 +82,13 @@
                     <th rowspan="2" class="center" style="font-weight:bold">စဥ်</th>
                     <th colspan="3" class="center" style="font-weight:bold">မူလအင်အား</th>
                     <th colspan="2" class="center" style="font-weight:bold">အသစ်ခန့်အပ်</th>
-                    <th colspan="2" class="center" style="font-weight:bold">အခြားဌာနမှ<br>ရောက်ရှိ</th>
-                    <th colspan="2" class="center" style="font-weight:bold">အခြားဌာနသို့<br>ပြေင်းရွေ့ခြင်း</th>
+                    <th colspan="2" class="center" style="font-weight:bold">အခြားဌာန<br>မှရောက်ရှိ</th>
+                    <th colspan="2" class="center" style="font-weight:bold">အခြားဌာနသို့<br>ပြောင်းရွေ့ခြင်း</th>
                     <th colspan="2" class="center" style="font-weight:bold">ပင်စင်ခံစားခြင်း</th>
                     <th colspan="2" class="center" style="font-weight:bold">နုတ်ထွက်ခြင်း</th>
                     <th colspan="2" class="center" style="font-weight:bold">ထုတ်ပယ်ခြင်း/<br>ထုတ်ပစ်ခြင်း</th>
                     <th colspan="2" class="center" style="font-weight:bold">ကွယ်လွန်ခြင်း</th>
-                    <th colspan="3" class="center" style="font-weight:bold">{{en2mm($year.'-'.$month.'-'.$date)}}<br> အင်အားစုစုပေါင်း</th>
+                    <th colspan="3" class="center" style="font-weight:bold">{{formatDMYmm($date . '-' . $month . '-' . $year)}}<br> အင်အားစုစုပေါင်း</th>
                     <th rowspan="2" class="center" style="font-weight:bold">မှတ်ချက်</th>
                 </tr>
                 <tr>
@@ -189,7 +189,7 @@
             </tr>
 
             <tr>
-                <td class="border border-black text-center p-2 font-bold">စုစုပေါင်း</td>
+                <td style="font-weight: bold">စုစုပေါင်း</td>
                 <td>{{ en2mm($totalHighStaff) }}</td>
                 <td>{{ en2mm($totalLowStaff) }}</td>
                 <td>{{ en2mm($totalAllStaff) }}</td>

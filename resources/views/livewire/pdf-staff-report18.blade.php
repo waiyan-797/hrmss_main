@@ -256,7 +256,7 @@
                                 <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
                                 <th rowspan="2" class="border border-black text-center p-2">သင်တန်းအမည်</th>
                                 <th colspan="2" class="border border-black text-center p-2">တက်ရောက်သည့်ကာလ</th>
-                                <th rowspan="2" class="border border-black text-center p-2">နေရာ/ဒေသ</th>
+                                <th rowspan="2" class="border border-black text-center p-2">နေရာ/နိုင်ငံ</th>
                             </tr>
                             <tr>
                                 <th class="border border-black text-center p-2">မှ</th>

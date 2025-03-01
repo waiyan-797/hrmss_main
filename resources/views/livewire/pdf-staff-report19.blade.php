@@ -194,23 +194,14 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                @if ($staff->postings->isNotEmpty())
-                                @foreach ($staff->postings as $index=>$posting)
+                              
                                     <tr>
-                                        <td class="border border-black p-2">{{'('.myanmarAlphabet($loop->index).')'}}</td>
-                                        <td class="border border-black p-2">{{$posting->department?->name}}</td>
-                                        <td class="border border-black p-2">{{$posting->remark}}</td>
-                                        <td class="border border-black p-2">{{$posting->remark}}</td>
+                                        <td class="border border-black p-2">(က)</td>
+                                        <td class="border border-black p-2"></td>
+                                        <td class="border border-black p-2"></td>
+                                        <td class="border border-black p-2"></td>
                                     </tr>
-                                @endforeach
-                                @else
-                                <tr>
-                                    <td class="border border-black p-4"></td>
-                                    <td class="border border-black p-4"></td>
-                                    <td class="border border-black p-4"></td>
-                                    <td class="border border-black p-4"></td>
-                                </tr>
-                                @endif
+                               
                             </tbody>
                         </table>
                     </div>
@@ -279,7 +270,6 @@
 
             <div class="mb-4">
                 <div class="flex justify-between w-full mb-4 ml-4">
-                    {{-- <p class="">၁၉။ </p> --}}
                     <p>၁၉။ အထက်ဖော်ပြပါ ဝန်ထမ်း၏ ကိုယ်ရေးမှတ်တမ်းနှင့်ပတ်သတ်၍ မှန်ကန်စွာဖြည့်သွင်းရေးသားထားပါကြောင်းစိစစ်အတည်ပြုပါသည်။</p>
                 </div>
 

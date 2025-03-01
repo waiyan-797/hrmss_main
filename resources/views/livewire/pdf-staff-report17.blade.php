@@ -28,7 +28,7 @@
                                
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၄။ </label>
-                    <label for="name" class="md:w-1/3">အမျိုးသားမှတ်ပုံတင်အမှတ်</label>
+                    <label for="name" class="md:w-1/3">နိုင်ငံသားစိစစ်ရေးအမှတ်</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">{{ collect([$staff->nrc_region_id->name,$staff->nrc_township_code->name,$staff->nrc_sign->name,en2mm( $staff->nrc_code )])->filter()->implode('၊') }}</label>
                 </div>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၆။ </label>
-                    <label for="name" class="md:w-1/3">အမှုထမ်းလုပ်သက်၊ ဝင်ရောက်သည့်ရက်စွဲ</label>
+                    <label for="name" class="md:w-1/3">အမှုထမ်းသက်(ဝင်ရောက်သည့်ရက်စွဲ)</label>
                     <label for="" class="md:w-5">-</label>
                     @php
                         $join_date = Carbon\Carbon::parse($staff->join_date);
@@ -108,9 +108,9 @@
                                     နောက်ဆုံးသွားရောက်ခဲ့သည့်(၅)နှိင်ငံ</th>
                                 <th rowspan="2" class="border border-black text-center p-2">သွားရောက်သည့်ကိစ္စ</th>
                                 <th rowspan="2" class="border border-black text-center p-2">
-                                    သင်တန်းတတ်ခြင်းဖြစ်လျှင် အောင်/မအောင်နှင့် အကြိမ်မည်မျှဖြင့် အောင်မြင်သည်</th>
+                                    သင်တန်းတတ်ခြင်းဖြစ်လျှင် အောင်/မအောင်</th>
                                     <th rowspan="2" class="border border-black text-center p-2">
-                                        မည်သည့်အစိုးရ အဖွဲ့အစည်းအထောက်အပံ့ဖြင့်သွားရောက်သည်
+                                        မည်သည့်အစိုးရ အဖွဲ့အစည်းအထောက်အပံ့
                                         </th>
                             </tr>
                             <tr>
@@ -217,8 +217,7 @@
                 <div class="mb-4">
                     <div class="flex justify-start mb-8">
                         <p class="w-12 md:w-8">၁၆။ </p>
-                        <p>အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း
-                            တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။</p>
+                        <p>အထက်ပါအချက်အလက်များကို မှန်ကန်သည့်အတိုင်း ဖြည့်သွင်းရေးသားထားပါကြောင်း ကိုယ်တိုင် လက်မှတ်ရေးထိုးပါသည်။</p>
                     </div>
 
                     <div class="flex justify-center items-center mb-2 ml-96">

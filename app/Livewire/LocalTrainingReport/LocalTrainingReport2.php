@@ -32,24 +32,7 @@ class LocalTrainingReport2 extends Component
 
     public function go_word()
     {
-        // $staffs = Staff::where('name', 'like', '%' . $this->nameSearch . '%')
-        // ->whereHas('trainings', function ($query) {
-        //     if ($this->trainingLocation == 3) {
-        //         // Include training locations 1 and 2 when $trainingLocation is 3
-        //         $query->whereIn('training_location_id', [1, 2]);
-        //     } elseif ($this->trainingLocation) {
-        //         // Filter by the specific training location
-        //         $query->where('training_location_id', $this->trainingLocation);
-        //     }
-        // })
-        // ->with(['trainings' => function ($query) {
-        //     if ($this->trainingLocation == 3) {
-        //         $query->whereIn('training_location_id', [1, 2]);
-        //     } elseif ($this->trainingLocation) {
-        //         $query->where('training_location_id', $this->trainingLocation);
-        //     }
-        // }])
-        // ->get();
+      
 
         $staffs = Staff::where('name', 'like', '%' . $this->nameSearch . '%')->whereHas('trainings', function ($query) {
         if ($this->trainingLocation == 3) {

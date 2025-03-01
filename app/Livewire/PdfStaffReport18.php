@@ -275,7 +275,7 @@ class PdfStaffReport18 extends Component
        $table->addCell(700,['vMerge' => 'restart'])->addText('စဉ်', ['bold' => true], $pStyle_2);
        $table->addCell(4000,['vMerge' => 'restart'])->addText('သင်တန်းအမည်', ['bold' => true], $pStyle_2);
        $table->addCell(3500, ['gridSpan' => 2, 'valign' => 'center'])->addText('တက်ရောက်သည့်ကာလ', ['bold'=>true], $pStyle_1);
-       $table->addCell(2000,['vMerge' => 'restart'])->addText('နေရာ/ဒေသ', ['bold' => true],$pStyle_2);
+       $table->addCell(2000,['vMerge' => 'restart'])->addText('နေရာ/နိုင်ငံ', ['bold' => true],$pStyle_2);
        $table->addRow(50, array('tblHeader' => true));
        $table->addCell(700, ['vMerge' => 'continue']);
        $table->addCell(4000, ['vMerge' => 'continue']);
@@ -352,10 +352,6 @@ class PdfStaffReport18 extends Component
                     $table->addCell(3300)->addText($awarding->order_no, null, $pStyle_3);
                 }
             }else{
-                // $table->addRow(50);
-                // $table->addCell(700);
-                // $table->addCell(5700);
-                // $table->addCell(3300);
                 $table->addRow(50);
                 $cell = $table->addCell(00, ['gridSpan' => 3]); 
                 $cell->addText(
@@ -364,10 +360,7 @@ class PdfStaffReport18 extends Component
                     ['alignment' => 'center']
                 );
             }
-       
-            // $section->addPageBreak();
-          
-    $section->addText('အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။', ['bold' => true], array('spaceBefore' => 200, 'alignment' => Jc::START));
+    $section->addText('အထက်ပါဖြည့်စွက်ချက်များ မှန်ကန်ကြောင်း လက်မှတ်ရေးထိုးပါသည်', ['bold' => true],array('spaceBefore' => 200));
     $tableStyle = [
         'alignment' => JcTable::END // Center the table
     ];
