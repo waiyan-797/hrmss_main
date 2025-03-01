@@ -1,0 +1,16 @@
+<div class="w-full">
+    <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
+        <div class="w-full mx-auto px-3 py-4">
+            @include('table', [
+                'data_values' => $training_locations,
+                'modal' => 'modals/training_location_modal',
+                'id' => $training_location_id,
+                'title' => 'သင်တန်းတည်နေရာ',
+                'search_id' => 'training_location_search',
+                'columns' => ['စဉ်', 'သင်တန်းတည်နေရာ', 'လုပ်ဆောင်ချက်'],
+                'column_vals' => ['name'],
+            ])
+        </div>
+    </div>
+</div>
+

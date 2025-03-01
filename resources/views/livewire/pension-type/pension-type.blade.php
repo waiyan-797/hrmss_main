@@ -1,0 +1,16 @@
+<div class="w-full">
+    <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
+        <div class="w-full mx-auto px-3 py-4">
+            @include('table', [
+                'data_values' => $pension_types,
+                'modal' => 'modals/pension_type_modal',
+                'id' => $pension_type_id,
+                'title' => 'ပင်စင်အမျိူးအစား',
+                'search_id' => 'pension_type_search',
+                'columns' => ['စဉ်', 'ပင်စင်အမျိူးအစား', 'လုပ်ဆောင်ချက်'],
+                'column_vals' => ['name'],
+            ])
+        </div>
+    </div>
+</div>
+
