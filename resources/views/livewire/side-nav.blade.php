@@ -90,8 +90,8 @@
                 $lists = [
                 ];
 
-                if (isHRAdmin() || isSuperAdmin()) {
-                    $lists = array_merge($lists, [
+                if (isHRAdmin() ) {
+                    $lists =  [
                         ['route_name' => 'report', 'name' => 'ဝန်ထမ်းရေးရာ'],
                         ['route_name' => 'attend_training', 'name' => 'သင်တန်းတတ်ရောက်'],
                         ['route_name' => 'pension', 'name' => 'ပြုန်းတီးစာရင်း'],
@@ -101,11 +101,11 @@
                         ['route_name' => 'employee_information', 'name' => 'ဝန်ထမ်းအချက်အလက်များ'],
                     ['route_name' => 'personnel_account', 'name' => 'ဝန်ထမ်းရေးရာ+ငွေစာရင်း'],
 
-                    ]);
+                ];
                 }
 
-                if (isFinanceAdmin() || isSuperAdmin()) {
-                    $lists = array_merge($lists,
+                if (isFinanceAdmin()) {
+                    $lists =
                     [['route_name' => 'personnel_account', 'name' => 'ဝန်ထမ်းရေးရာ+ငွေစာရင်း'],
 
                      [
@@ -115,12 +115,29 @@
                 ['route_name' => 'employee_taking_leave', 'name' => 'ခွင့်ယူသည့်ဝန်ထမ်းစာရင်း'],
 
 
-                    ]
-                    )
-
-                    ;
+                    ];
 
                 }
+
+
+                if (isSuperAdmin()) {
+                    $lists =  [
+                        ['route_name' => 'report', 'name' => 'ဝန်ထမ်းရေးရာ'],
+                        ['route_name' => 'attend_training', 'name' => 'သင်တန်းတတ်ရောက်'],
+                        ['route_name' => 'pension', 'name' => 'ပြုန်းတီးစာရင်း'],
+                        ['route_name' => 'travel_abroad', 'name' => 'နိုင်ငံခြားသွားရောက်မှုများ'],
+                        ['route_name' => 'employee_taking_leave', 'name' => 'ခွင့်ယူသည့်ဝန်ထမ်းစာရင်း'],
+                        ['route_name' => 'staff_strength_list', 'name' => 'ဝန်ထမ်းအင်အားစာရင်း'],
+                        ['route_name' => 'employee_information', 'name' => 'ဝန်ထမ်းအချက်အလက်များ'],
+                    ['route_name' => 'personnel_account', 'name' => 'ဝန်ထမ်းရေးရာ+ငွေစာရင်း'],
+                     ['route_name' => 'finance', 'name' => 'ငွေစာရင်း'],
+                ['route_name' => 'employee_taking_leave', 'name' => 'ခွင့်ယူသည့်ဝန်ထမ်းစာရင်း'],
+
+                ];
+                }
+
+
+
                 @endphp
 
                 <livewire:side-nav-drop-down label="အစီရင်ခံစာများ"
