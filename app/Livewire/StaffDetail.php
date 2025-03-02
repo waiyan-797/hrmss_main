@@ -1129,9 +1129,15 @@ class StaffDetail extends Component
         $this->removeModel('punishments',  Punishment::class , $index, []);
     }
 
+
+    public function loadAdnSubmit(){
+
+$this->submit_staff();
+    }
     public function submit_staff()
     {
-        $this->dispatch('ok_window');
+
+
         $_status = $this->staff_status_id;
         if ($_status == 3 || $_status == 4) {
             return $this->commentStaff();
@@ -1322,6 +1328,7 @@ class StaffDetail extends Component
             $staff_create['status_id'] = $_status;
         }
         $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
+
         $this->staff_id = $staff->id;
         $this->staff_photo = $staff->staff_photo;
         $this->staff_nrc_front = $staff->nrc_front;
@@ -1373,7 +1380,21 @@ class StaffDetail extends Component
                 ]);
             }
         }
-        $this->dispatch('ok_window');
+
+     
+
+        if ($this->confirm_add) {
+
+            $this->dispatch('showAlert', ['message' => 'Successfully Created ! ']);
+
+
+        } else {
+            $this->dispatch('showAlert', ['message' => 'Successfully Updated ! ']);
+
+        }
+
+
+
 
 
     }
@@ -1988,6 +2009,7 @@ class StaffDetail extends Component
     public function setStaffStatus($status)
     {
         $this->staff_status_id = $status;
+
     }
 
 

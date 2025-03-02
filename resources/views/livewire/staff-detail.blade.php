@@ -1,5 +1,5 @@
 
-<div class="w-[80%]    ">
+<div class="w-[80%]    " >
 
 
 
@@ -50,8 +50,16 @@
     </div>
     <div class="flex justify-center w-full h-auto overflow-y-auto">
         <div class="w-full mx-auto px-3">
-            <form wire:submit="submit_staff()">
-                @if ($message)
+            <form wire:submit="submit_staff()" >
+
+                <div class="spinner-container !hidden" wire:loading.class.remove="!hidden" wire:loading.class="!opacity-50 !flex">
+                    <div class="spinner"></div>
+                </div>
+
+
+
+
+                {{-- @if ($message)
                     <div id="alert-border-1"
                         class="flex items-center p-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
                         role="alert">
@@ -71,7 +79,7 @@
                             </svg>
                         </button>
                     </div>
-                @endif
+                @endif --}}
 
                 <div class="w-full h-[75vh] overflow-y-auto">
                     @if ($tab == 'personal_info')
@@ -136,11 +144,51 @@
         </div>
     </div>
 </div>
-<script>
-    // Hide loading screen when the document is fully loaded
-    // window.addEventListener("load", function () {
-    //     document.getElementById("loading-screen").style.display = "none";
-    // });
+@script
+    <script type='defer' >
+        // Show Alert
+        Livewire.on('showAlert', data => {
+
+console.log('show alert');
+
+            Swal.hideLoading(); // Close the previous Swal instance (if it's still open)
+            setTimeout(() => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: data[0].message,
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    showConfirmButton: true,
+                });
+            }, 0);
+        });
+
+        // Show Loader
+        Livewire.on('showLoader', data => {
+            console.log('lading');
+            Swal.fire({
+                title: 'Please wait...',
+                text: 'We are processing your request',
+                icon: 'info',
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading(); // Show the loading spinner
+                }
+            });
+        });
+
+        // Stop Loader
+        Livewire.on('stopLoader', data => {
+            Swal.close(); // Close the loader after the process is complete
+        });
+
+
+
+
+
+
+
 </script>
+@endscript
 
 </div>
