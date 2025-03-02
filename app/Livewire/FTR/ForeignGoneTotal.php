@@ -65,7 +65,7 @@ private function getSignName($signID)
     }
 
     $this->staffs = $query->with('currentRank')->get();
-  
+
 
     $selectedRankName = Rank::find($this->selectedRankId)?->name ?? '';
     $signText = $this->getSignName($this->signID);
@@ -76,15 +76,15 @@ private function getSignName($signID)
     $phpWord = new PhpWord();
     $section = $phpWord->addSection([
         'orientation' => 'landscape',
-        'pageSizeW'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(11.69), 
+        'pageSizeW'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(11.69),
         'pageSizeH'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(8.27),
         'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),
         'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),
         'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),
         'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),
     ]);
-    
-    $phpWord->setDefaultFontSize(11); 
+
+    $phpWord->setDefaultFontSize(11);
     $section->addText(
         "ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန",
         ['bold' => true, 'size' => 11],
@@ -102,11 +102,11 @@ $section->addText(
     ['align' => 'center']
 );
     $section->addText(
-        'ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), 
-        [], 
+        'ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)),
+        [],
         ['alignment' => 'right']
     );
-    
+
     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 8]);
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 350, 'spaceBefore' => 350];
         $pStyle_2 = ['align' => 'center', 'spaceAfter' => 300, 'spaceBefore' => 300];
@@ -115,9 +115,9 @@ $section->addText(
         $table->addCell(1500)->addText("စဥ်", ['bold' => true],$pStyle_1);
         $table->addCell(4000)->addText("အမည်/ရာထူး", ['bold' => true],$pStyle_1);
         $table->addCell(4000)->addText("ဌာနခွဲ", ['bold' => true],$pStyle_1);
-        $table->addCell(4000)->addText("မွေးသက္ကရာဇ်", ['bold' => true],$pStyle_1);
-        $table->addCell(3000)->addText("အလုပ်စတင်\nဝင်ရောက်သည့်\nရက်စွဲ", ['bold' => true],$pStyle_2);
-        $table->addCell(3000)->addText("လက်ရှိ\nအဆင့်ရ\nရက်စွဲ", ['bold' => true],$pStyle_2);
+        $table->addCell(2800)->addText("မွေးသက္ကရာဇ်", ['bold' => true],$pStyle_1);
+        $table->addCell(2500)->addText("အလုပ်စတင်\nဝင်ရောက်သည့်\nရက်စွဲ", ['bold' => true],$pStyle_2);
+        $table->addCell(2500)->addText("လက်ရှိ\nအဆင့်ရ\nရက်စွဲ", ['bold' => true],$pStyle_2);
         $table->addCell(3000)->addText("နောက်ဆုံး\nသွားရောက်ခဲ့\nသည့်နိုင်ငံ/မြို့", ['bold' => true],$pStyle_2);
         $table->addCell(6000)->addText("နောက်ဆုံးသွား\nရောက်ခဲ့သည့်\nအကြောင်းအရာ\nကာလ (မှ-ထိ)", ['bold' => true],$pStyle_2);
         $table->addCell(2000)->addText("အကြိမ်ရေ", ['bold' => true],$pStyle_1);
@@ -128,17 +128,24 @@ $section->addText(
     $lastAbroad = $staff->abroads->sortByDesc('to_date')->first();
     $dob = \Carbon\Carbon::parse($staff->dob);
     $diff = $dob->diff(\Carbon\Carbon::now());
-    $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
-    
+    $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+
+    $join_date = \Carbon\Carbon::parse($staff->join_date);
+    $diff = $join_date->diff(\Carbon\Carbon::now());
+    $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+    $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);
+    $diff = $current_rank_date->diff(\Carbon\Carbon::now());
+    $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+
     foreach ($allCountries as $countryId) {
         $table->addRow();
         $table->addCell(1500)->addText(en2mm($index++),null,$pStyle_1);
         $table->addCell(4000)->addText($staff->name . "\n" . ($staff->currentRank->name ?? ''),null,$pStyle_1);
         $table->addCell(4000)->addText($staff->current_division->name ?? '',null,$pStyle_1);
-      
-        $table->addCell(4000)->addText( ' (' . en2mm($dob->format('d-m-Y')) . ')' . en2mm($age),null,$pStyle_1);
-        $table->addCell(3000)->addText( formatDMYmm($staff->join_date),null,$pStyle_2 );
-        $table->addCell(3000)->addText(formatDMYmm($staff->current_rank_date),null,$pStyle_2);
+
+        $table->addCell(2800)->addText(  en2mm($dob->format('d-m-Y')) . "\n" . en2mm($age),null,$pStyle_1);
+        $table->addCell(2500)->addText( formatDMYmm($staff->join_date)."\n".en2mm($age),null,$pStyle_4 );
+        $table->addCell(2500)->addText(formatDMYmm($staff->current_rank_date)."\n".en2mm($age),null,$pStyle_4);
         $table->addCell(3000)->addText($lastAbroad?->countries->pluck('name')->unique()->join(', ') ?? '',null,$pStyle_2);
         if ($lastAbroad) {
             $table->addCell(3000)->addText($lastAbroad->particular.formatDMYmm($lastAbroad->from_date) . ' မှ ' . formatDMYmm($lastAbroad->to_date).'ထိ',null,$pStyle_2);
@@ -197,7 +204,7 @@ public function render()
         'ranks' => $this->ranks,
         'age' => $this->age,
         'signID' => $this->signID,
-        'selectedRankName' => $selectedRankName, 
+        'selectedRankName' => $selectedRankName,
     ]);
-}    
+}
 }

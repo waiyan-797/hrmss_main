@@ -144,7 +144,7 @@ class PA14 implements FromView ,WithStyles
                 //other
                 $sheet->getRowDimension($row)->setRowHeight(25.5);
             }
-            
+
         }
 
 
@@ -182,7 +182,7 @@ class PA14 implements FromView ,WithStyles
             ],
         ]);
 
-        
+
 
 
         $sheet->getStyle("A4:$highestColumn$highestRow")->applyFromArray([

@@ -19,14 +19,14 @@
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">{{collect([$staff->nrc_region_id->name.$staff->nrc_township_code->name.$staff->nrc_sign->name. en2mm( $staff->nrc_code )])->filter()->implode('၊')}}</label>
                 </div>
-              
+
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၃။ </label>
                     <label for="name" class="md:w-1/3">လူမျိုး/ ဘာသာ</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">{{collect([$staff?->ethnic?->name,$staff->religion?->name,])->filter()->implode('၊')}}</label>
                 </div>
-               
+
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၄။ </label>
                     <label for="name" class="md:w-1/3">မွေးဖွားရာအရပ်</label>
@@ -65,10 +65,10 @@
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">
                         {{$staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'ဒေသကြီး။'}}
-                       
+
                     </label>
                 </div>
-               
+
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၀။ </label>
                     <label for="name" class="md:w-1/3">အမြဲတမ်းနေရပ်လိပ်စာ</label>
@@ -83,14 +83,14 @@
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">{{ $educationNames }}</label>
-                </div> 
+                </div>
                 <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">
                         <label for="">၁၂။ </label>
                         <h1 class="">တတ်မြောက်သည့်အခြားဘာသာစကားနှင့်တတ်ကျွမ်းသည့်အဆင့်</h1>
                         @foreach ($staff->staff_languages as $lang)
                     <p>
-                        <span class="">{{$lang->language->name}}</span> , 
+                        <span class="">{{$lang->language->name}}</span> ,
                         <span class="">{{$lang->rank}}</span>
                         <br>
                     </p>
@@ -111,7 +111,7 @@
 
                                     <th class="p-2 border border-black">မှ</th>
                                     <th class="p-2 border border-black">ထိ</th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody class="text-center">
@@ -155,8 +155,8 @@
                                 @if ($staff->postings->isNotEmpty())
                                 @foreach ($staff->postings as $posting)
                                     <tr>
-                                         <td class="border border-black p-2"> {{ $posting->rank->name ?? '-' }}</td> 
-                                       
+                                         <td class="border border-black p-2"> {{ $posting->rank->name ?? '-' }}</td>
+
                                         <td class="border border-black p-2">{{$posting->department->name ?? '-'}}</td>
                                         <td class="border border-black p-2">{{formatDMYmm($posting->from_date)}}</td>
                                         <td class="border border-black p-2">{{formatDMYmm($posting->to_date)}}</td>
@@ -194,23 +194,14 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                @if ($staff->postings->isNotEmpty())
-                                @foreach ($staff->postings as $index=>$posting)
+
                                     <tr>
-                                        <td class="border border-black p-2">{{'('.myanmarAlphabet($loop->index).')'}}</td>
-                                        <td class="border border-black p-2">{{$posting->department?->name}}</td>
-                                        <td class="border border-black p-2">{{$posting->remark}}</td>
-                                        <td class="border border-black p-2">{{$posting->remark}}</td>
+                                        <td class="border border-black p-2">(က)</td>
+                                        <td class="border border-black p-2"></td>
+                                        <td class="border border-black p-2"></td>
+                                        <td class="border border-black p-2"></td>
                                     </tr>
-                                @endforeach
-                                @else
-                                <tr>
-                                    <td class="border border-black p-4"></td>
-                                    <td class="border border-black p-4"></td>
-                                    <td class="border border-black p-4"></td>
-                                    <td class="border border-black p-4"></td>
-                                </tr>
-                                @endif
+
                             </tbody>
                         </table>
                     </div>
@@ -262,7 +253,7 @@
                         return $punishment->penalty_type->name;
                     })->join(', ')}}</label>
                 </div>
-               
+
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၈။ </label>
                     <label for="name" class="md:w-1/3">အခြားတင်ပြလိုသည့်အချက်များ</label>
@@ -271,15 +262,14 @@
                 </div>
 
                 <div class="flex justify-end w-full mb-4 pt-5">
-                  
+
                     <label for="name" class="">(ဝန်ထမ်း၏ထိုးမြဲလက်မှတ်)</label>
-                   
+
                 </div>
             </div>
 
             <div class="mb-4">
                 <div class="flex justify-between w-full mb-4 ml-4">
-                    {{-- <p class="">၁၉။ </p> --}}
                     <p>၁၉။ အထက်ဖော်ပြပါ ဝန်ထမ်း၏ ကိုယ်ရေးမှတ်တမ်းနှင့်ပတ်သတ်၍ မှန်ကန်စွာဖြည့်သွင်းရေးသားထားပါကြောင်းစိစစ်အတည်ပြုပါသည်။</p>
                 </div>
 
@@ -288,19 +278,19 @@
                         <p class="md:w-5">၊</p>
                         <p class="md:w-1/2"></p>
                     </div>
-                    
+
                     <div class="flex justify-end mb-2 ml-80">
                         <p class="md:w-1/4">အမည်</p>
                         <p class="md:w-5">၊</p>
                         <p class="md:w-1/2">{{$staff->name}}</p>
                     </div>
-                    
+
                     <div class="flex justify-end mb-2 ml-80">
                         <p class="md:w-1/4">အဆင့်/ ရာထူး</p>
                         <p class="md:w-5">၊</p>
                         <p class="md:w-1/2">{{$staff->current_rank->name}}</p>
                     </div>
-                    
+
                     <div class="flex justify-end mb-2 ml-80">
                         <p class="md:w-1/4">ရုံး/ ဌာန</p>
                         <p class="md:w-5">၊</p>

@@ -1,3 +1,4 @@
+
 <div class="w-full h-auto py-5   "  >
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ် ဖော်ပြရန်)')" class="font-semibold"/>

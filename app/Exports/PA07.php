@@ -25,12 +25,12 @@ class PA07 implements FromView ,WithStyles
     $previousMonthDate,
     $previousMonth,){
         $this->filterRange = $filterRange ;
-        
+
         $this->year  =  $year;
          $this->month  =  $month;
          $this->previousMonthDate  =  $previousMonthDate;
          $this->previousMonth  =  $previousMonth;
-       
+
 
     }
 
@@ -39,7 +39,7 @@ class PA07 implements FromView ,WithStyles
         [$year, $month] = explode('-', $this->filterRange);
         $this->year = $year;
         $this->month = $month;
-       
+
         $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
 
         $this->previousYear = $previousMonthDate->year;
@@ -136,8 +136,8 @@ class PA07 implements FromView ,WithStyles
         $high_left_staffs = $high_staffs + $high_new_staffs + $high_transfer_staffs - ($high_leave_staffs + $high_reduced_total);
         $low_left_staffs = $low_staffs + $low_new_staffs + $low_transfer_staffs - ($low_leave_staffs + $low_reduced_total);
         $total_left_staffs = $high_left_staffs + $low_left_staffs;
-        
-     
+
+
 
         $data = [
             'high_staffs' => $high_staffs,
@@ -190,8 +190,8 @@ class PA07 implements FromView ,WithStyles
         // Dynamically calculate the highest row and column
         $highestRow = $sheet->getHighestRow(); // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
-        
-        
+
+
         $sheet->getColumnDimension('A')->setWidth(4.45);
         $sheet->getColumnDimension('B')->setWidth(18);
         $sheet->getColumnDimension('C')->setWidth(7.67);
@@ -235,7 +235,7 @@ class PA07 implements FromView ,WithStyles
 
 
         $sheet->removeRow(4);
-        
+
 
         $row=4;
 

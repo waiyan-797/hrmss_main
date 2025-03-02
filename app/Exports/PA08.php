@@ -31,30 +31,30 @@ class PA08 implements FromView ,WithStyles
     )
     {
         $this->filterRange = $filterRange ;
-        
+
         $this->year  =  $year;
          $this->month  =  $month;
          $this->previousMonthDate  =  $previousMonthDate;
          $this->previousMonth  =  $previousMonth;
-       
+
 
     }
     public function view(): View
     {
         [$year, $month] = explode('-', $this->filterRange);
-      
-        
-       
-    
+
+
+
+
         $this->year = $year;
         $this->month = $month;
-       
+
         $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
 
         $this->previousYear = $previousMonthDate->year;
         $this->previousMonth = $previousMonthDate->month;
 
-        
+
         $first_ranks = Rank::where('staff_type_id', 1)
         ->withCount(['staffs' => function ($query) {
             $query->where('current_division_id', '26');
@@ -99,7 +99,7 @@ class PA08 implements FromView ,WithStyles
         // Set paper size and orientation
         $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4); // Set paper size to A4
         $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
-        
+
         $sheet->getPageMargins()->setTop(0.75);
         $sheet->getPageMargins()->setHeader(0.3);
         $sheet->getPageMargins()->setLeft(0.15);
@@ -144,7 +144,7 @@ class PA08 implements FromView ,WithStyles
         $sheet->getRowDimension(2)->setRowHeight(28);
         $sheet->getRowDimension(3)->setRowHeight(28);
         $sheet->getRowDimension(4)->setRowHeight(28);
-      
+
 
         // $sheet->removeRow(5);
         for ($row = 5; $row <= $highestRow ; $row++) {
@@ -168,7 +168,7 @@ class PA08 implements FromView ,WithStyles
             ],
         ]);
 
-       
+
 
         $sheet->getStyle("A4:$highestColumn$highestRow")->applyFromArray([
             'font' => [
@@ -221,7 +221,7 @@ class PA08 implements FromView ,WithStyles
         //         ],
         //     ],
         // ]);
-        $sheet->removeRow(9); 
+        $sheet->removeRow(9);
     }
-    
+
 }

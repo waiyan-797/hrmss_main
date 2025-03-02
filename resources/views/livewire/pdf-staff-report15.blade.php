@@ -78,7 +78,7 @@
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">{{ $educationNames }}</label>
-                </div> 
+                </div>
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၉။ </label>
@@ -132,14 +132,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                             @php
                                 $latestAbroads = $staff->abroads
                                     ? $staff->abroads->sortByDesc('to_date')->take(5)
                                     : collect();
                                     // dd($staff->abroads->sortByDesc('to_date')->take(5));
                             @endphp
-                            
+
 
                             @foreach ($latestAbroads as $abroad)
                                 <tr>

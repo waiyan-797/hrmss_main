@@ -22,7 +22,7 @@ class PdfStaffReport19 extends Component
             'staff' => $staff,
         ];
 
-         
+
         // // Define margin settings in millimeters
         // $pdf = PDF::loadView('pdf_reports.staff_report_19', $data, [], [
         //     'default_font_size' => 13,       // Optional, set default font size
@@ -51,15 +51,15 @@ class PdfStaffReport19 extends Component
             'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
             'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
         ]);
-        // $section = $phpWord->addSection(); 
-        
+        // $section = $phpWord->addSection();
+
         $header_page_1 = $section->addHeader();
         $header_page_1->firstPage();
         $header_page_1->addText('လျှို့ဝှက်', null, [
             'align' => 'center',
-            'spaceBefore' => 0, 
-            'spaceAfter' => 0, 
-            'lineHeight' => 1, 
+            'spaceBefore' => 0,
+            'spaceAfter' => 0,
+            'lineHeight' => 1,
         ]);
         $header_subseq = $section->addHeader();
         $header_subseq->addText('လျှို့ဝှက်', null, [
@@ -90,12 +90,12 @@ class PdfStaffReport19 extends Component
         $textBoxStyle = [
         'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
         'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
-        'borderSize' => 0,    
+        'borderSize' => 0,
         'positioning' => 'relative', // Relative positioning
         'posHorizontal' => 'right', // Align next to inline content
         'posHorizontalRel' => 'margin', // Relative to margin (inline context)
         'marginLeft' => 0, // Small spacing from the left
-        
+
     ];
     $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
         if ($imagePath && file_exists($imagePath)) {
@@ -111,13 +111,13 @@ class PdfStaffReport19 extends Component
         $table = $section->addTable();
         $table->addRow(50);
         $table->addCell(1500)->addText('၁။',null, $pStyle_5);
-        $table->addCell(13000)->addText('အမည်(ကျား/မ)',null,$pStyle_4);
+        $table->addCell(13000)->addText('အမည်',null,$pStyle_4);
         $table->addCell(700)->addText('-', ['align' => 'center'],$pStyle_5);
         $table->addCell(13000)->addText($staff->name, null, $pStyle_4);
 
         $table->addRow(50);
         $table->addCell(1500)->addText('၂။',null,$pStyle_5);
-        $table->addCell(13000)->addText('နိုင်ငံသားစီစစ်ရေးကတ်ပြားအမှတ်', null, $pStyle_4);
+        $table->addCell(13000)->addText('နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်', null, $pStyle_4);
         $table->addCell(700)->addText('-', ['align' => 'center'],$pStyle_5);
         $table->addCell(13000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . $staff->nrc_sign->name  .en2mm( $staff->nrc_code), null, $pStyle_4);
 
@@ -181,7 +181,7 @@ class PdfStaffReport19 extends Component
         $languagesData = $staff->staff_languages->map(function ($language) {
             return $language->language->name . ' (' . $language->rank . ')';
         })->join(', ');
-        
+
         $table->addCell(13000)->addText($languagesData,null,$pStyle_4);
         $section->addText('၁၃။ '.'တက်ရောက်ခဲ့သည့်သင်တန်းများ', null,array('spaceBefore' => 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
@@ -198,7 +198,7 @@ class PdfStaffReport19 extends Component
             }
         }else{
                 $table->addRow(50);
-                $cell = $table->addCell(10500, ['gridSpan' => 3]); 
+                $cell = $table->addCell(10500, ['gridSpan' => 3]);
                 $cell->addText(
                     'မရှိပါ',
                    null,
@@ -226,7 +226,7 @@ class PdfStaffReport19 extends Component
             }
         } else {
             $table->addRow(50);
-            $cell = $table->addCell(9700, ['gridSpan' => 5]); 
+            $cell = $table->addCell(9700, ['gridSpan' => 5]);
             $cell->addText(
                 'မရှိပါ',
                 null,
@@ -235,30 +235,19 @@ class PdfStaffReport19 extends Component
         }
         $section->addText('၁၅။ '.'ပါဝင်ဆောင်ရွက်ဆဲနှင့် ဆောင်ရွက်ခဲ့သည် လူမှုရေးနှင့် အစိုးရမဟုတ်သော အဖွဲ့အစည်းများ၏ '.'အမည်နှင့်တာဝန်များ',null,array('spaceBefore' => 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        // $table->addRow();
         $table->addRow(50,array('tblHeader'=>true));
         $table->addCell(500)->addText('စဥ်', ['bold' => true],$pStyle_1);
         $table->addCell(4800)->addText('အဖွဲ့အစည်း', ['bold' => true],$pStyle_1);
         $table->addCell(2800)->addText('တာဝန်', ['bold' => true],$pStyle_1);
         $table->addCell(1800)->addText('မှတ်ချက်', ['bold' => true],$pStyle_1);
-        if($staff->postings->isNotEmpty()){
-            foreach ($staff->postings as $index=> $posting) {
-                $table->addRow();
-                $table->addCell(500)->addText('('.myanmarAlphabet($index).')',null, $pStyle_1);
-                $table->addCell(4800)->addText($posting->department?->name,null,$pStyle_7);
-                $table->addCell(2800)->addText($posting->remark, null, $pStyle_7);
-                $table->addCell(1800)->addText($posting->remark, null, $pStyle_7);
-           
-            }
-        }else{
-            $table->addRow(50);
-                $cell = $table->addCell(9900, ['gridSpan' => 4]); 
-                $cell->addText(
-                    'မရှိပါ',
-                   null,
-                    ['alignment' => 'center']
-                );
-            }
+
+        $table->addRow();
+        $table->addCell(500)->addText('(က)',null, $pStyle_1);
+        $table->addCell(4800)->addText('',null,$pStyle_7);
+        $table->addCell(2800)->addText('', null, $pStyle_7);
+        $table->addCell(1800)->addText('', null, $pStyle_7);
+
+
 
             $section->addText('၁၆။ '.'ချီးမြှင့်ခံရသည့်ဘွဲ့ထူး/ဂုဏ်ထူးတံဆိပ်လက်မှတ်များ',null,array('spaceBefore' => 200));
             $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
@@ -275,11 +264,11 @@ class PdfStaffReport19 extends Component
                     $table->addCell(5000)->addText( $awarding->award->name,null,$pStyle_7);
                     $table->addCell(3000)->addText(formatDMYmm($awarding->order_date), null, $pStyle_7);
                     $table->addCell(3000)->addText( $awarding->remark, null, $pStyle_7);
-               
+
                 }
             }else{
                 $table->addRow(50);
-                $cell = $table->addCell(12000, ['gridSpan' => 4]); 
+                $cell = $table->addCell(12000, ['gridSpan' => 4]);
                 $cell->addText(
                     'မရှိပါ',
                    null,
@@ -302,10 +291,10 @@ class PdfStaffReport19 extends Component
 
         $section->addText('('.'ဝန်ထမ်း၏ထိုးမြဲလက်မှတ်'.')',null,['alignment' => Jc::END]);
         $textStyle=[
-            'alignment' => Jc::BOTH 
+            'alignment' => Jc::BOTH
         ];
-        $section->addText('၁၉။အထက်ဖော်ပြပါဝန်ထမ်း၏ကိုယ်ရေးမှတ်တမ်းနှင့်ပတ်သတ်၍မှန်ကန်စွာဖြည့်သွင်းရေးသားထားပါကြောင်းစိစစ်အတည်ပြုပါသည်။',null,$textStyle);
-        $section->addText(''); 
+        $section->addText('၁၉။အထက်ဖော်ပြပါဝန်ထမ်း၏ကိုယ်ရေးမှတ်တမ်းနှင့်ပတ်သက်၍မှန်ကန်စွာဖြည့်သွင်းရေးသားထားပါကြောင်းစိစစ်အတည်ပြုပါသည်။',null,$textStyle);
+        $section->addText('');
 
         $tableStyle = [
             'alignment' => Jc::END // Center the table
@@ -335,7 +324,7 @@ class PdfStaffReport19 extends Component
 
         $fileName = 'staff_report_19_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
-    
+
         return response()->stream(function() use ($objWriter) {
             $objWriter->save('php://output');
         }, 200, [

@@ -38,7 +38,7 @@ class PA05 implements FromView ,WithStyles
         $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
         $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_PORTRAIT);
 
-        //define margin 
+        //define margin
         $sheet->getPageMargins()->setTop(0.748031496062992);
         $sheet->getPageMargins()->setRight(right: 0.590551181102362);
         $sheet->getPageMargins()->setLeft(1.10236220472441);
@@ -60,7 +60,7 @@ class PA05 implements FromView ,WithStyles
 
         $sheet->removeRow(4);
 
-       
+
 
         $sheet->getColumnDimension('A')->setWidth(5.42);
         $sheet->getColumnDimension('B')->setWidth(43.57);
@@ -76,7 +76,7 @@ class PA05 implements FromView ,WithStyles
         for ($row = 5; $row <= $highestRow ; $row++) {
             $sheet->getRowDimension($row)->setRowHeight(48.75);
         }
-        
+
         // Set scaling to 80%
         // $sheet->getPageSetup()->setScale(80);
 

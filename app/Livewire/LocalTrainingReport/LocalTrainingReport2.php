@@ -19,8 +19,8 @@ class LocalTrainingReport2 extends Component
     public function go_pdf()
     {
         $staffs = Staff::get();
-      
-           
+
+
         $data = [
             'staffs' => $staffs,
         ];
@@ -32,24 +32,7 @@ class LocalTrainingReport2 extends Component
 
     public function go_word()
     {
-        // $staffs = Staff::where('name', 'like', '%' . $this->nameSearch . '%')
-        // ->whereHas('trainings', function ($query) {
-        //     if ($this->trainingLocation == 3) {
-        //         // Include training locations 1 and 2 when $trainingLocation is 3
-        //         $query->whereIn('training_location_id', [1, 2]);
-        //     } elseif ($this->trainingLocation) {
-        //         // Filter by the specific training location
-        //         $query->where('training_location_id', $this->trainingLocation);
-        //     }
-        // })
-        // ->with(['trainings' => function ($query) {
-        //     if ($this->trainingLocation == 3) {
-        //         $query->whereIn('training_location_id', [1, 2]);
-        //     } elseif ($this->trainingLocation) {
-        //         $query->where('training_location_id', $this->trainingLocation);
-        //     }
-        // }])
-        // ->get();
+
 
         $staffs = Staff::where('name', 'like', '%' . $this->nameSearch . '%')->whereHas('trainings', function ($query) {
         if ($this->trainingLocation == 3) {
@@ -86,10 +69,10 @@ class LocalTrainingReport2 extends Component
 
         foreach ($staffs as $index => $staff) {
             $isFirstTraining = true; // Flag to check the first training
-        
+
             foreach ($staff->trainings as $trainingIndex => $training) {
                 $table->addRow();
-        
+
                 // Show these cells only for the first training of the staff
                 if ($isFirstTraining) {
                     $table->addCell(700, ['vMerge' => 'restart'])->addText(en2mm($index + 1), null, ['indentation' => ['left' => 100]]);
@@ -99,7 +82,7 @@ class LocalTrainingReport2 extends Component
                     $textRun->addText($staff->current_rank->name);
                     $cell = $table->addCell(3500, ['vMerge' => 'restart']);
                     $textRun = $cell->addTextRun(['indentation' => ['left' => 100]]);
-                    
+
                     foreach ($staff->staff_educations as $edu) {
                         $textRun->addText($edu->education?->name ?? '');
                         $textRun->addTextBreak();
@@ -117,9 +100,9 @@ class LocalTrainingReport2 extends Component
                 $table->addCell(2500)->addText(formatDMYmm($training->to_date), null, ['indentation' => ['left' => 100]]);
                 $table->addCell(3000)->addText($training->location, null, ['indentation' => ['left' => 100]]);
                 $table->addCell(2000)->addText($training->remark, null, ['indentation' => ['left' => 100]]);
-          
+
                 }
-              
+
             }
         $fileName = 'local_training_report2.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
@@ -129,7 +112,7 @@ class LocalTrainingReport2 extends Component
     }
     public function render()
     {
-        
+
         $staffQuery  = Staff::query();
 
         if ($this->nameSearch) {
@@ -138,7 +121,7 @@ class LocalTrainingReport2 extends Component
         $this->staffs = $staffQuery->get();
         $letter_types=LetterType::all();
 
-        
+
 
         return view('livewire.local-training-report.local-training-report2', [
             'staffs' => $this->staffs,
@@ -147,5 +130,5 @@ class LocalTrainingReport2 extends Component
             'trainingLocation'=>$this->trainingLocation,
         ]);
     }
-    
+
 }

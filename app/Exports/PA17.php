@@ -28,14 +28,14 @@ class PA17 implements FromView ,WithStyles
         // dd($year, $month, $filterRange, $previousMonthDate, $previousMonth,$nameSearch);
          $this->searchName=$searchName;
         //  $this->staffs=$staffs;
-       
+
 
     }
     public function view(): View
     {
         $staffQuery = Staff::query();
 
-        
+
         if ($this->searchName) {
             // $staffQuery->where('name', 'like', '%' . $this->searchName . '%');
             $staffQuery->whereHas('currentRank', function ($query) {
@@ -50,8 +50,8 @@ class PA17 implements FromView ,WithStyles
         $staffs = Staff::get();
         $data = [
             'staffs' => $this->staffs ,
-            'pension'=>$this->pension_year, 
-            
+            'pension'=>$this->pension_year,
+
         ];
         return view('excel_reports.staff_report_2', $data);
     }
@@ -284,7 +284,7 @@ class PA17 implements FromView ,WithStyles
         $sheet->getRowDimension(188)->setRowHeight(53.3);
         $sheet->getRowDimension(189)->setRowHeight(46.5);
         $sheet->getRowDimension(190)->setRowHeight(46.5);
-        $sheet->getRowDimension(191)->setRowHeight(46.5);    
+        $sheet->getRowDimension(191)->setRowHeight(46.5);
         $sheet->getRowDimension(192)->setRowHeight(77.3);
         $sheet->getRowDimension(193)->setRowHeight(46.5);
         $sheet->getRowDimension(194)->setRowHeight(69.8);
@@ -300,7 +300,7 @@ class PA17 implements FromView ,WithStyles
         $sheet->getRowDimension(204)->setRowHeight(46.5);
         $sheet->getRowDimension(205)->setRowHeight(46.5);
         $sheet->getRowDimension(206)->setRowHeight(46.5);
-        $sheet->getRowDimension(207)->setRowHeight(46.5);        
+        $sheet->getRowDimension(207)->setRowHeight(46.5);
         $sheet->getRowDimension(208)->setRowHeight(46.5);
         $sheet->getRowDimension(209)->setRowHeight(46.5);
         $sheet->getRowDimension(210)->setRowHeight(46.5);
@@ -371,7 +371,7 @@ class PA17 implements FromView ,WithStyles
         $sheet->getRowDimension(275)->setRowHeight(45.8);
         $sheet->getRowDimension(276)->setRowHeight(45.8);
         $sheet->getRowDimension(277)->setRowHeight(45.8);
-        $sheet->getRowDimension(278)->setRowHeight(45.8);        
+        $sheet->getRowDimension(278)->setRowHeight(45.8);
         $sheet->getRowDimension(279)->setRowHeight(45.8);
         $sheet->getRowDimension(280)->setRowHeight(45.8);
         $sheet->getRowDimension(281)->setRowHeight(45.8);
@@ -402,9 +402,9 @@ class PA17 implements FromView ,WithStyles
         $sheet->getRowDimension(306)->setRowHeight(75.8);
         $sheet->getRowDimension(307)->setRowHeight(45.8);
         $sheet->getRowDimension(308)->setRowHeight(45.8);
-        $sheet->getRowDimension(309)->setRowHeight(45.8);        
-        $sheet->getRowDimension(310)->setRowHeight(45.8);        
-        $sheet->getRowDimension(311)->setRowHeight(45.8);        
+        $sheet->getRowDimension(309)->setRowHeight(45.8);
+        $sheet->getRowDimension(310)->setRowHeight(45.8);
+        $sheet->getRowDimension(311)->setRowHeight(45.8);
         $sheet->getRowDimension(312)->setRowHeight(45.8);
         $sheet->getRowDimension(313)->setRowHeight(45.8);
         $sheet->getRowDimension(314)->setRowHeight(45.8);
@@ -413,9 +413,9 @@ class PA17 implements FromView ,WithStyles
         $sheet->getRowDimension(317)->setRowHeight(48.8);
         $sheet->getRowDimension(318)->setRowHeight(45.8);
         $sheet->getRowDimension(319)->setRowHeight(46.5);
-        $sheet->getRowDimension(320)->setRowHeight(45.8);        
-        $sheet->getRowDimension(321)->setRowHeight(45.8);        
-        $sheet->getRowDimension(322)->setRowHeight(45.8);        
+        $sheet->getRowDimension(320)->setRowHeight(45.8);
+        $sheet->getRowDimension(321)->setRowHeight(45.8);
+        $sheet->getRowDimension(322)->setRowHeight(45.8);
         $sheet->getRowDimension(323)->setRowHeight(45.8);
         $sheet->getRowDimension(324)->setRowHeight(48);
         $sheet->getRowDimension(325)->setRowHeight(48);
@@ -463,37 +463,37 @@ class PA17 implements FromView ,WithStyles
         $sheet->getRowDimension(367)->setRowHeight(47.3);
         $sheet->getRowDimension(368)->setRowHeight(47.3);
         $sheet->getRowDimension(369)->setRowHeight(47.3);
-        $sheet->getRowDimension(370)->setRowHeight(47.3);        
-        $sheet->getRowDimension(371)->setRowHeight(47.3);        
-        $sheet->getRowDimension(372)->setRowHeight(47.3);        
-        $sheet->getRowDimension(373)->setRowHeight(47.3);        
-        $sheet->getRowDimension(374)->setRowHeight(47.3);        
-        $sheet->getRowDimension(375)->setRowHeight(47.3);        
-        $sheet->getRowDimension(376)->setRowHeight(47.3);        
-        $sheet->getRowDimension(377)->setRowHeight(47.3);        
-        $sheet->getRowDimension(378)->setRowHeight(47.3);        
-        $sheet->getRowDimension(379)->setRowHeight(47.3);        
-        $sheet->getRowDimension(380)->setRowHeight(47.3);        
-        $sheet->getRowDimension(381)->setRowHeight(47.3);        
-        $sheet->getRowDimension(382)->setRowHeight(47.3);        
-        $sheet->getRowDimension(383)->setRowHeight(47.3);        
-        $sheet->getRowDimension(384)->setRowHeight(47.3);        
-        $sheet->getRowDimension(385)->setRowHeight(47.3);        
-        $sheet->getRowDimension(386)->setRowHeight(47.3);        
-        $sheet->getRowDimension(387)->setRowHeight(47.3);        
-        $sheet->getRowDimension(388)->setRowHeight(47.3);        
-        $sheet->getRowDimension(389)->setRowHeight(47.3);        
-        $sheet->getRowDimension(390)->setRowHeight(48);        
-        $sheet->getRowDimension(391)->setRowHeight(47.3);        
-        $sheet->getRowDimension(392)->setRowHeight(47.3);        
-        $sheet->getRowDimension(393)->setRowHeight(47.3);        
-        $sheet->getRowDimension(394)->setRowHeight(50.3);        
-        $sheet->getRowDimension(395)->setRowHeight(47.2);        
-        $sheet->getRowDimension(396)->setRowHeight(47.2);        
-        $sheet->getRowDimension(397)->setRowHeight(47.2);        
-        $sheet->getRowDimension(398)->setRowHeight(47.2);        
-        $sheet->getRowDimension(399)->setRowHeight(47.2);        
-        $sheet->getRowDimension(400)->setRowHeight(51.8);        
+        $sheet->getRowDimension(370)->setRowHeight(47.3);
+        $sheet->getRowDimension(371)->setRowHeight(47.3);
+        $sheet->getRowDimension(372)->setRowHeight(47.3);
+        $sheet->getRowDimension(373)->setRowHeight(47.3);
+        $sheet->getRowDimension(374)->setRowHeight(47.3);
+        $sheet->getRowDimension(375)->setRowHeight(47.3);
+        $sheet->getRowDimension(376)->setRowHeight(47.3);
+        $sheet->getRowDimension(377)->setRowHeight(47.3);
+        $sheet->getRowDimension(378)->setRowHeight(47.3);
+        $sheet->getRowDimension(379)->setRowHeight(47.3);
+        $sheet->getRowDimension(380)->setRowHeight(47.3);
+        $sheet->getRowDimension(381)->setRowHeight(47.3);
+        $sheet->getRowDimension(382)->setRowHeight(47.3);
+        $sheet->getRowDimension(383)->setRowHeight(47.3);
+        $sheet->getRowDimension(384)->setRowHeight(47.3);
+        $sheet->getRowDimension(385)->setRowHeight(47.3);
+        $sheet->getRowDimension(386)->setRowHeight(47.3);
+        $sheet->getRowDimension(387)->setRowHeight(47.3);
+        $sheet->getRowDimension(388)->setRowHeight(47.3);
+        $sheet->getRowDimension(389)->setRowHeight(47.3);
+        $sheet->getRowDimension(390)->setRowHeight(48);
+        $sheet->getRowDimension(391)->setRowHeight(47.3);
+        $sheet->getRowDimension(392)->setRowHeight(47.3);
+        $sheet->getRowDimension(393)->setRowHeight(47.3);
+        $sheet->getRowDimension(394)->setRowHeight(50.3);
+        $sheet->getRowDimension(395)->setRowHeight(47.2);
+        $sheet->getRowDimension(396)->setRowHeight(47.2);
+        $sheet->getRowDimension(397)->setRowHeight(47.2);
+        $sheet->getRowDimension(398)->setRowHeight(47.2);
+        $sheet->getRowDimension(399)->setRowHeight(47.2);
+        $sheet->getRowDimension(400)->setRowHeight(51.8);
         $sheet->getRowDimension(401)->setRowHeight(81);
         $sheet->getRowDimension(402)->setRowHeight(48.8);
         $sheet->getRowDimension(403)->setRowHeight(48.8);
@@ -529,16 +529,16 @@ class PA17 implements FromView ,WithStyles
         $sheet->getRowDimension(433)->setRowHeight(51.8);
         $sheet->getRowDimension(434)->setRowHeight(51.8);
         $sheet->getRowDimension(435)->setRowHeight(51.8);
-        $sheet->getRowDimension(436)->setRowHeight(51.8);        
-        $sheet->getRowDimension(437)->setRowHeight(48);        
-        $sheet->getRowDimension(438)->setRowHeight(51.8);        
-        $sheet->getRowDimension(439)->setRowHeight(54.8);        
-        $sheet->getRowDimension(440)->setRowHeight(51.8);        
-        $sheet->getRowDimension(441)->setRowHeight(51.8);        
-        $sheet->getRowDimension(442)->setRowHeight(51.8);        
+        $sheet->getRowDimension(436)->setRowHeight(51.8);
+        $sheet->getRowDimension(437)->setRowHeight(48);
+        $sheet->getRowDimension(438)->setRowHeight(51.8);
+        $sheet->getRowDimension(439)->setRowHeight(54.8);
+        $sheet->getRowDimension(440)->setRowHeight(51.8);
+        $sheet->getRowDimension(441)->setRowHeight(51.8);
+        $sheet->getRowDimension(442)->setRowHeight(51.8);
         $sheet->getRowDimension(443)->setRowHeight(51.8);
         $sheet->getRowDimension(444)->setRowHeight(51.8);
-        
+
 
 
 
@@ -561,7 +561,7 @@ class PA17 implements FromView ,WithStyles
             ],
         ]);
 
-        
+
 
         $sheet->getStyle("A3:$highestColumn$highestRow")->applyFromArray([
             'font' => [

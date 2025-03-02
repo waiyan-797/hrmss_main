@@ -24,7 +24,7 @@ class PA16 implements FromView ,WithStyles
     public $year, $month, $filterRange;
     public $previousYear, $previousMonthDate, $previousMonth;
     public $pension_year;
-   
+
     public function __construct($year , $month,
     $filterRange ,
     $previousMonthDate,
@@ -39,12 +39,12 @@ class PA16 implements FromView ,WithStyles
          $this->previousMonthDate  =  $previousMonthDate;
          $this->previousMonth  =  $previousMonth;
          $this->nameSearch=$nameSearch;
-       
+
 
     }
     public function view(): View
     {
-        
+
     [$year, $month] = explode('-', $this->filterRange);
     $this->year = $year;
     $this->month = $month;
@@ -63,7 +63,7 @@ class PA16 implements FromView ,WithStyles
             $query->where('department_id', $this->deptId);
         }
     });
-   
+
     // dd($this->nameSearch);
     if ($this->nameSearch) {
         $staffQuery->whereHas('currentRank', function ($query) {
@@ -160,7 +160,7 @@ class PA16 implements FromView ,WithStyles
             ],
         ]);
 
-       
+
 
         $sheet->getStyle("A4:$highestColumn$highestRow")->applyFromArray([
             'font' => [
@@ -178,7 +178,7 @@ class PA16 implements FromView ,WithStyles
                 ],
             ],
         ]);
-        
+
 
         // Auto-size columns based on dynamic range
         foreach (range('A', $highestColumn) as $column) {
@@ -198,5 +198,5 @@ class PA16 implements FromView ,WithStyles
         $sheet->getPageMargins()->setRight(0.5);
         $sheet->getPageMargins()->setLeft(0.5);
         $sheet->getPageMargins()->setBottom(0.5);
-    }  
+    }
 }

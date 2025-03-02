@@ -133,7 +133,7 @@
                     <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">{{ $educationNames }}</label>
-                </div> 
+                </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="name" class="md:w-5">၁၂။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိရာထူး/လစာနှုန်း/ဌာန</label>
@@ -256,7 +256,7 @@
                                 <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
                                 <th rowspan="2" class="border border-black text-center p-2">သင်တန်းအမည်</th>
                                 <th colspan="2" class="border border-black text-center p-2">တက်ရောက်သည့်ကာလ</th>
-                                <th rowspan="2" class="border border-black text-center p-2">နေရာ/ဒေသ</th>
+                                <th rowspan="2" class="border border-black text-center p-2">နေရာ/နိုင်ငံ</th>
                             </tr>
                             <tr>
                                 <th class="border border-black text-center p-2">မှ</th>
@@ -299,7 +299,7 @@
                     <table class="md:w-full">
                         <thead>
                             <tr>
-                                <th rowspan="2" class="border border-black text-center p-2">စဉ်</th> 
+                                <th rowspan="2" class="border border-black text-center p-2">စဉ်</th>
                                 <th rowspan="2" class="border border-black text-center p-2">ပြစ်ဒဏ်</th>
                                 <th rowspan="2" class="border border-black text-center p-2">ပြစ်ဒဏ်ချမှတ်ခံရသည့်
                                     အကြောင်းအရာ</th>
@@ -316,7 +316,7 @@
                                 @foreach ($staff->punishments as $punishment)
                                     <tr>
                                          <td class="border border-black text-center p-2">
-                                            {{ '(' . myanmarAlphabet($loop->index) . ')' }}</td> 
+                                            {{ '(' . myanmarAlphabet($loop->index) . ')' }}</td>
                                         <td class="border border-black text-center p-2">
                                             {{ $punishment->penalty_type->name }}</td>
                                         <td class="border border-black text-center p-2">{{ $punishment->reason }}</td>

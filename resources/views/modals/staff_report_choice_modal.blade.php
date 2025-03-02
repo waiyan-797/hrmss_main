@@ -13,16 +13,23 @@
             <button type="button"
                 class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
                 wire:click="go_report({{ $staff_id }}, 18)">ကိုယ်ရေးမှတ်တမ်း(၁၈)ချက်</button>
+                {{-- Route::get('/staff-report19/{staff_id?}',StaffReport19::class)->name('staff_report19'); --}}
+                <button type="button"
+                class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
+                wire:click="go_report({{ $staff_id }}, 20)">ကိုယ်ရေးမှတ်တမ်း(၁၉)ချက်(၁)</button>
             <button type="button"
                 class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
-                wire:click="go_report({{ $staff_id }}, 19)">ကိုယ်ရေးမှတ်တမ်း(၁၉)ချက်</button>
+                wire:click="go_report({{ $staff_id }}, 19)">ကိုယ်ရေးမှတ်တမ်း(၁၉)ချက်(၂)</button>
             <button type="button"
                 class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
                 wire:click="go_report({{ $staff_id }}, 53)">ကိုယ်‌ရေးမှတ်တမ်း(၅၃)ချက်</button>
             <button type="button"
                 class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
                 wire:click="go_report({{ $staff_id }}, 68)">ကိုယ်ရေးမှတ်တမ်း(၆၈)ချက်</button>
-            <button type="button"
+
+            @if(isHRAdmin() || isSuperAdmin())
+
+                <button type="button"
                 class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
                 wire:click="go_report({{ $staff_id }}, '_leave_3')">Leave 3</button>
             <button type="button"
@@ -48,6 +55,10 @@
                     wire:click="go_report({{ $staff_id }}, '_staff_list_2')">ဝန်ထမ်းလုပ်သက်အတွက်အမှတ်ပေးခြင်း</button>
 
             {{-- @endif --}}
+
+
+@endif
+
 
 
 

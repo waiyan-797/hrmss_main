@@ -1,16 +1,11 @@
+
 <div class="w-[80%]    ">
+
+
+
     @if ($displayAlertBox)
         @include('livewire.alert')
     @endif
-
-
-    <div id="loading-screen" class="loading-overlay !hidden" id="loader">
-        <div class="loader-container">
-            <div class="loader"></div>
-            <p class="loading-text">Loading...</p>
-        </div>
-    </div>
-
 
     <div class="shadow flex items-center h-[6vh] mt-6 mb-3">
 
@@ -143,9 +138,9 @@
 </div>
 <script>
     // Hide loading screen when the document is fully loaded
-    window.addEventListener("load", function () {
-        document.getElementById("loading-screen").style.display = "none";
-    });
+    // window.addEventListener("load", function () {
+    //     document.getElementById("loading-screen").style.display = "none";
+    // });
 </script>
 
 </div>

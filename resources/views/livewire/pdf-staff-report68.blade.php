@@ -212,7 +212,7 @@
                                             @endphp
                                              <div class="flex justify-between w-full mb-4">
                                                 <label for="" class="md:w-5">၈။</label>
-                                                <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
+                                                <label for="name" class="md:w-1/3">ပညာအရည်အချင်း(ရရှိထားသောတက္ကသိုလ်၊ ဘွဲ့၊ ဒီပလိုမာ)</label>
                                                 <label for="" class="md:w-5">-</label>
                                                 <label for="name" class="md:w-3/5">{{ $educationNames }}</label>
                                             </div>
@@ -355,7 +355,7 @@
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="" class="md:w-5">၉။ </label>
-                    <label for="name" class="md:w-1/3">ပြောင်းရွေ့သည့်မှတ်ချက်</label>
+                    <label for="name" class="md:w-1/3">ပြောင်းရွှေ့သည့်မှတ်ချက်</label>
                     <label for="" class="md:w-5">-</label>
                     <label for="name" class="md:w-3/5">{{ $staff->transfer_remark}}</label>
                 </div>

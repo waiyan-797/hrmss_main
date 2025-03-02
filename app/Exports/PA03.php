@@ -35,7 +35,7 @@ class PA03 implements  FromView ,WithStyles
         [$year, $month] = explode('-', $this->filterRange);
         $this->year = $year;
         $this->month = $month;
-       
+
         $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
 
         $this->previousYear = $previousMonthDate->year;
@@ -88,14 +88,14 @@ class PA03 implements  FromView ,WithStyles
         }
 
         // $sheet->getHeaderFooter()->setOddHeader('&C&H&"Pyidaungsu"&10' . "အတွင်းရေး\n၃"); // Centered header text
-        
+
 
         // $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&10' . 'အတွင်းရေး'); // Centered footer text
 
         $sheet->getPageMargins()->setTop(1);
         $sheet->getPageMargins()->setLeft(0.5);
         $sheet->getPageMargins()->setRight(0.2);
-       
+
         $row=5;
         $sheet->getColumnDimension('A')->setWidth(3);
         $sheet->getColumnDimension('B')->setWidth(100);
@@ -135,7 +135,7 @@ class PA03 implements  FromView ,WithStyles
                 ],
             ]);
 
-            
+
 
             $sheet->getStyle("A4:$highestColumn$highestRow")->applyFromArray([
                 'font' => [
