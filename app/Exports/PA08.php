@@ -124,33 +124,37 @@ class PA08 implements FromView ,WithStyles
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
         $sheet->getColumnDimension('A')->setWidth(4.85);
-        $sheet->getColumnDimension('B')->setWidth(22.28);
-        $sheet->getColumnDimension('C')->setWidth(8.48);
-        $sheet->getColumnDimension('D')->setWidth(11.14);
-        $sheet->getColumnDimension('E')->setWidth(12);
-        $sheet->getColumnDimension('F')->setWidth(12);
-        $sheet->getColumnDimension('G')->setWidth(12);
-        $sheet->getColumnDimension('H')->setWidth(12);
-        $sheet->getColumnDimension('I')->setWidth(12);
-        $sheet->getColumnDimension('J')->setWidth(10);
-        $sheet->getColumnDimension('K')->setWidth(7);
-        $sheet->getColumnDimension('L')->setWidth(6);
-        $sheet->getColumnDimension('M')->setWidth(12);
-        $sheet->getColumnDimension('N')->setWidth(7);
-        $sheet->getColumnDimension('O')->setWidth(6);
-        $sheet->getColumnDimension('P')->setWidth(12);
+        $sheet->getColumnDimension('B')->setWidth(22.29);
+        $sheet->getColumnDimension('C')->setWidth(8.4);
+        $sheet->getColumnDimension('D')->setWidth(10.84);
+        $sheet->getColumnDimension('E')->setWidth(9.29);
+        $sheet->getColumnDimension('F')->setWidth(11.95);
+        $sheet->getColumnDimension('G')->setWidth(10.29);
+        $sheet->getColumnDimension('H')->setWidth(11.06);
+        $sheet->getColumnDimension('I')->setWidth(9.95);
+        $sheet->getColumnDimension('J')->setWidth(8.84);
+        $sheet->getColumnDimension('K')->setWidth(5.84);
+        $sheet->getColumnDimension('L')->setWidth(5.29);
+        $sheet->getColumnDimension('M')->setWidth(12.62);
+        $sheet->getColumnDimension('N')->setWidth(6.51);
+        $sheet->getColumnDimension('O')->setWidth(6.4);
+        $sheet->getColumnDimension('P')->setWidth(10.62);
 
-        $sheet->getRowDimension(1)->setRowHeight(28);
-        $sheet->getRowDimension(2)->setRowHeight(28);
-        $sheet->getRowDimension(3)->setRowHeight(28);
-        $sheet->getRowDimension(4)->setRowHeight(28);
-
+        $sheet->getRowDimension(1)->setRowHeight(27);
+        $sheet->getRowDimension(2)->setRowHeight(24.8);
+        $sheet->getRowDimension(3)->setRowHeight(27);
+        $sheet->getRowDimension(4)->setRowHeight(23.3);
+        $sheet->getRowDimension(5)->setRowHeight(23.3);
+        $sheet->getRowDimension(6)->setRowHeight(23.3);
 
         // $sheet->removeRow(5);
-        for ($row = 5; $row <= $highestRow ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(28);
-        }
-        $sheet->getRowDimension(7)->setRowHeight(150);
+        // for ($row = 5; $row <= $highestRow ; $row++) {
+        //     $sheet->getRowDimension($row)->setRowHeight(28);
+        // }
+        $sheet->getRowDimension(7)->setRowHeight(152.3);
+        $sheet->getRowDimension(8)->setRowHeight(32.3);
+        $sheet->getRowDimension(9)->setRowHeight(21.6);
+        $sheet->getRowDimension(10)->setRowHeight(21.6);
 
         $sheet->getStyle('A1:A4')->applyFromArray([
             'font' => [

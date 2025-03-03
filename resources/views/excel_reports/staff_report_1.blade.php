@@ -68,14 +68,14 @@
                     {{ mmDateFormat($year, $month) }}ရက်နေ့၏ အရာထမ်းများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း
                 </th>
             </tr>
-            <tr>
+            {{-- <tr>
                 <th colspan="11">
                     @php
                     use Carbon\Carbon;
                     @endphp
                     {{formatDMYmm(Carbon::now())}}
                 </th>
-            </tr>
+            </tr> --}}
         </table>
     
         <table>
@@ -91,7 +91,7 @@
                     <th>လက်ရှိဌာန<br>ရောက်ရှိ<br>ရက်စွဲ</th>
                     <th>ဌာနခွဲ</th>
                     <th>ပညာအရည်အချင်း</th>
-                    <th>ပင်စင်ပြည့်သည့်နေ့စွဲ</th>
+                    <th>ပင်စင်ပြည့်<br>သည့်နေ့စွဲ</th>
                 </tr>
             </thead>
             <tbody>

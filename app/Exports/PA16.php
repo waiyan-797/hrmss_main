@@ -106,27 +106,54 @@ class PA16 implements FromView ,WithStyles
         $highestRow = $sheet->getHighestRow()-1; // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
-        $sheet->getColumnDimension('A')->setWidth(100);
-        $sheet->getColumnDimension('B')->setWidth(27);
-        $sheet->getColumnDimension('C')->setWidth(15);
-        $sheet->getColumnDimension('D')->setWidth(15);
-        $sheet->getColumnDimension('E')->setWidth(8);
-        $sheet->getColumnDimension('F')->setWidth(8);
-        $sheet->getColumnDimension('G')->setWidth(8);
-        $sheet->getColumnDimension('H')->setWidth(8);
-        $sheet->getColumnDimension('I')->setWidth(15);
-        $sheet->getColumnDimension('J')->setWidth(10);
-        $sheet->getColumnDimension('K')->setWidth(10);
+        $sheet->getColumnDimension('A')->setWidth(6.45);
+        $sheet->getColumnDimension('B')->setWidth(27.67);
+        $sheet->getColumnDimension('C')->setWidth(21.45);
+        $sheet->getColumnDimension('D')->setWidth(28.11);
+        $sheet->getColumnDimension('E')->setWidth(16.56);
+        $sheet->getColumnDimension('F')->setWidth(16.67);
+        $sheet->getColumnDimension('G')->setWidth(15.34);
+        $sheet->getColumnDimension('H')->setWidth(17.45);
+        $sheet->getColumnDimension('I')->setWidth(31.67);
+        $sheet->getColumnDimension('J')->setWidth(37.67);
+        $sheet->getColumnDimension('K')->setWidth(17.45);
 
-        $sheet->getRowDimension(1)->setRowHeight(25);
-        $sheet->getRowDimension(2)->setRowHeight(25);
-        $sheet->getRowDimension(3)->setRowHeight(25);
+        $sheet->getRowDimension(1)->setRowHeight(27);
+        $sheet->getRowDimension(2)->setRowHeight(27);
+        $sheet->getRowDimension(3)->setRowHeight(75);
+        $sheet->getRowDimension(4)->setRowHeight(75);
+        $sheet->getRowDimension(5)->setRowHeight(52.5);
+        $sheet->getRowDimension(6)->setRowHeight(51.8);
+        $sheet->getRowDimension(7)->setRowHeight(54.8);
+        $sheet->getRowDimension(8)->setRowHeight(59.3);
+        $sheet->getRowDimension(9)->setRowHeight(80.3);
+        $sheet->getRowDimension(10)->setRowHeight(78.8);
+        $sheet->getRowDimension(11)->setRowHeight(48.8);
+        $sheet->getRowDimension(12)->setRowHeight(48.8);
+        $sheet->getRowDimension(13)->setRowHeight(49.5);
+        $sheet->getRowDimension(14)->setRowHeight(54.8);
+        $sheet->getRowDimension(15)->setRowHeight(57);
+        $sheet->getRowDimension(16)->setRowHeight(49.5);
+        $sheet->getRowDimension(17)->setRowHeight(75.8);
+        $sheet->getRowDimension(18)->setRowHeight(81);
+        $sheet->getRowDimension(19)->setRowHeight(61.5);
+        $sheet->getRowDimension(20)->setRowHeight(102);
+        $sheet->getRowDimension(21)->setRowHeight(48.8);
+        $sheet->getRowDimension(22)->setRowHeight(48.8);
+        $sheet->getRowDimension(23)->setRowHeight(48.8);
+        $sheet->getRowDimension(24)->setRowHeight(79.5);
+        $sheet->getRowDimension(25)->setRowHeight(97.5);
+        $sheet->getRowDimension(26)->setRowHeight(54.8);
+        $sheet->getRowDimension(27)->setRowHeight(70.5);
+        $sheet->getRowDimension(28)->setRowHeight(48.8);
+        $sheet->getRowDimension(29)->setRowHeight(72);
 
-        $sheet->removeRow(4);
 
-        for ($row = 4; $row <= $highestRow-1 ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(28);
-        }
+        $sheet->removeRow(3);
+
+        // for ($row = 4; $row <= $highestRow-1 ; $row++) {
+        //     $sheet->getRowDimension($row)->setRowHeight(28);
+        // }
 
         $sheet->getStyle('A1:A2')->applyFromArray([
             'font' => [
@@ -144,18 +171,20 @@ class PA16 implements FromView ,WithStyles
             ],
         ]);
 
-        $sheet->getStyle('A3')->applyFromArray([
+        $sheet->getStyle("A3:{$highestColumn}3")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 13,
+                'bold' => true,
             ],
             'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
             ],
             'borders' => [
-                'outline' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN, // Default gridline
+                    'color' => ['argb' => 'FF000000'], 
                 ],
             ],
         ]);
@@ -179,24 +208,28 @@ class PA16 implements FromView ,WithStyles
             ],
         ]);
 
+       
+
 
         // Auto-size columns based on dynamic range
-        foreach (range('A', $highestColumn) as $column) {
-            $sheet->getColumnDimension($column)->setAutoSize(true);
-        }
+        // foreach (range('A', $highestColumn) as $column) {
+        //     $sheet->getColumnDimension($column)->setAutoSize(true);
+        // }
 
         // Set row heights manually for dynamic rows
-        foreach (range(3, $highestRow) as $row) {
-            $sheet->getRowDimension($row)->setRowHeight(-1); // Auto-adjust height
-        }
+        // foreach (range(3, $highestRow) as $row) {
+        //     $sheet->getRowDimension($row)->setRowHeight(-1); // Auto-adjust height
+        // }
 
         // Define the print area dynamically
         $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
 
         // Set a margin for better printing output
-        $sheet->getPageMargins()->setTop(0.5);
-        $sheet->getPageMargins()->setRight(0.5);
-        $sheet->getPageMargins()->setLeft(0.5);
-        $sheet->getPageMargins()->setBottom(0.5);
+        $sheet->getPageMargins()->setTop(0.748031496062992);
+        $sheet->getPageMargins()->setRight(0.1968);
+        $sheet->getPageMargins()->setLeft(0.7086);
+        $sheet->getPageMargins()->setBottom(0.6692);
+        $sheet->getPageMargins()->setHeader(0.3149);       
+        $sheet->getPageMargins()->setFooter(0.6692);
     }
 }

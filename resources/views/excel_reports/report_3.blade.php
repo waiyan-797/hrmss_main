@@ -16,6 +16,7 @@
         }
         th {
             background-color: #f2f2f2;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -48,7 +49,7 @@
             <tr>
                 <th rowspan="2">စဥ်</th>
                 <th rowspan="2">အမည်</th>
-                <th rowspan="2">ဝန်ထမ်းအမှတ်</th>
+                <th rowspan="2">ဝန်ထမ်း<br>အမှတ်</th>
                 <th rowspan="2">ရာထူး</th>
                 <th rowspan="2">အသက်</th>
                 <th rowspan="2">လက်ရှိရာထူး<br>ရသော<br>လုပ်သက်</th>

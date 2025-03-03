@@ -37,6 +37,12 @@ class PA18 implements FromView ,WithStyles
     $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4); // Set paper size to A4
     $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
 
+    $sheet->getPageMargins()->setTop(0.75);
+    $sheet->getPageMargins()->setHeader(0.3);
+    $sheet->getPageMargins()->setLeft(1);
+    $sheet->getPageMargins()->setRight(0.5);
+    $sheet->getPageMargins()->setBottom(0.75);
+    $sheet->getPageMargins()->setFooter(0.3);
 
     // Fit to page width
     $sheet->getPageSetup()->setFitToWidth(1);
@@ -52,24 +58,31 @@ class PA18 implements FromView ,WithStyles
     $highestRow = $sheet->getHighestRow(); // e.g. 19
     $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
-    $sheet->getColumnDimension('A')->setWidth(7);
-    $sheet->getColumnDimension('B')->setWidth(25);
-    $sheet->getColumnDimension('C')->setWidth(25);
-    $sheet->getColumnDimension('D')->setWidth(80);
-    $sheet->getColumnDimension('E')->setWidth(30);
+    $sheet->getColumnDimension('A')->setWidth(5.56);
+    $sheet->getColumnDimension('B')->setWidth(30.11);
+    $sheet->getColumnDimension('C')->setWidth(14.45);
+    $sheet->getColumnDimension('D')->setWidth(58.11);
+    $sheet->getColumnDimension('E')->setWidth(29.56);
    
   
    
 
-    $sheet->getRowDimension(1)->setRowHeight(25);
-    $sheet->getRowDimension(2)->setRowHeight(25);
-    $sheet->getRowDimension(3)->setRowHeight(25);
-    $sheet->getRowDimension(4)->setRowHeight(60);
-    $sheet->getRowDimension(5)->setRowHeight(60);
-    $sheet->getRowDimension(6)->setRowHeight(60);
-    $sheet->getRowDimension(7)->setRowHeight(60);
+    $sheet->getRowDimension(1)->setRowHeight(21.6);
+    $sheet->getRowDimension(2)->setRowHeight(21.6);
+    $sheet->getRowDimension(3)->setRowHeight(21.6);
+    $sheet->getRowDimension(4)->setRowHeight(43.2);
     // $sheet->removeRow(5);
     // $sheet->removeRow(9);
+     for ($row = 5; $row <= 16 ; $row++) {
+             $sheet->getRowDimension($row)->setRowHeight(43.2);
+       }
+
+    $sheet->getRowDimension(17)->setRowHeight(49.5);
+    $sheet->getRowDimension(18)->setRowHeight(49.5);
+    $sheet->getRowDimension(19)->setRowHeight(53.3);
+    $sheet->getRowDimension(20)->setRowHeight(43.2);
+    $sheet->getRowDimension(21)->setRowHeight(43.2);
+    $sheet->getRowDimension(22)->setRowHeight(43.2);
 
     // $row=4;
 

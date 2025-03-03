@@ -34,6 +34,7 @@
 
         th[colspan="2"] {
             text-align: center;
+            font-weight: bold;
         }
 
         th, td {
@@ -76,7 +77,7 @@
                 <th colspan="2">သွားရောက်သည့်ကာလ</th>
                 <th rowspan="2">သွားရောက်သည့်နိုင်ငံ</th>
                 <th rowspan="2">ပြည်ပသို့သွားရောက်ခဲ့သောအကြောင်းအရာ</th>
-                <th rowspan="2">ထောက်ပံ့သည့်အဖွဲ့အစည်း
+                <th rowspan="2">ထောက်ပံ့<br>သည့်<br>အဖွဲ့အစည်း
                     </th>
             </tr>
             <tr>

@@ -43,10 +43,10 @@ class StaffList3 extends Component
         $phpWord = new PhpWord();
         $section = $phpWord->addSection([
             'orientation' => 'portrait',
-            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),     // 1 inch
-            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
-            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
-            'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),    
+            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.46),   
+            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.31),  
+            'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.3),
         ]);
 
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center','spaceBefore' => 200]);
@@ -77,20 +77,20 @@ class StaffList3 extends Component
         $all_ranks = Rank::withCount('staffs')->get();
         foreach ($first_ranks as $index => $rank) {
             $table->addRow();
-            $table->addCell(700)->addText(en2mm(++$count),null,['alignment'=>'center','spaceBefore'=>50,'lineHeight'=>0.6]);
-            $table->addCell(5000)->addText($rank->name,null,['alignment'=>'left','spaceBefore'=>50, 'indentation' => ['left' => 100],'lineHeight'=>0.6]);
-            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count()),null,['alignment'=>'center','spaceBefore'=>50, 'lineHeight'=>0.6]);
-            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=>50,'lineHeight'=>0.6 ]);
+            $table->addCell(700)->addText(en2mm(++$count),null,['alignment'=>'center','spaceBefore'=> 70]);
+            $table->addCell(5000)->addText($rank->name,null,['alignment'=>'left','spaceBefore'=> 70]);
+            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count()),null,['alignment'=>'center','spaceBefore'=> 70]);
+            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=> 70]);
             $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=>50, 'indentation' => ['left' => 100],'lineHeight'=>0.6 ]);
         }
     
       
         $table->addRow();
         $table->addCell(700)->addText('',['bold' => true],['alignment'=>'left','spaceBefore'=>50, 'indentation' => ['left' => 100],'lineHeight'=>0.6 ]);
-        $table->addCell(5000)->addText('အရာထမ်းပေါင်း', ['bold'=>true],['alignment' => 'left','spaceBefore'=>50,'lineHeight'=>0.6 ]);
-        $table->addCell(2000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50,'lineHeight'=>0.6]);
-        $table->addCell(2000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50,'lineHeight'=>0.6]);
-        $table->addCell(2000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=>50,'lineHeight'=>0.6]);
+        $table->addCell(5000)->addText('အရာထမ်းပေါင်း', ['bold'=>true],['alignment'=>'left','spaceBefore'=> 70]);
+        $table->addCell(2000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=> 70]);
+        $table->addCell(2000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=> 70]);
+        $table->addCell(2000)->addText(en2mm($first_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count())), ['bold' => true],['alignment'=>'center','spaceBefore'=> 70]);
     
        
         foreach ($second_ranks as $index => $rank) {
