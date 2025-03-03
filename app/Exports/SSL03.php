@@ -51,6 +51,7 @@ public function styles(Worksheet $sheet)
     foreach (range('A', 'F') as $column) {
         $sheet->getColumnDimension($column)->setAutoSize(true);
     }
+    
 
     return [];
 }

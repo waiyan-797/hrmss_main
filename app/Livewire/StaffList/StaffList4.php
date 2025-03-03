@@ -57,13 +57,13 @@ class StaffList4 extends Component
             'marginBottom' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5), // 0.5 inch
         ]);
 
-        $section->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 14], ['align' => 'center']);
+        $section->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 12], ['align' => 'center']);
         if (!is_null($this->selectedRankId)) {
             $rankName = getRankById($this->selectedRankId)->name;
            
-            $section->addText($rankName, ['bold' => true, 'size' => 14], ['align' => 'center']);
+            $section->addText($rankName, ['bold' => true, 'size' => 12], ['align' => 'center']);
         } else {
-            $section->addText('ဝန်ထမ်းများစာရင်း', ['bold' => true, 'size' => 14], ['align' => 'center']);
+            $section->addText('ဝန်ထမ်းများစာရင်း', ['bold' => true, 'size' => 12], ['align' => 'center']);
         }
         $pStyle_right = ['align' => 'right'];
         $tableStyle = [
@@ -74,7 +74,7 @@ class StaffList4 extends Component
         $table->addCell(14000)->addText('', $pStyle_right);
         $table->addCell(6000)->addText('ရက်စွဲ-' . getTdyDateInMyanmarYearMonthDay(1), $pStyle_right);
 
-        $section->addTextBreak();
+        
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50, ['tblHeader' => true]); // Set
         $table->addCell(1000)->addText('စဥ်', ['bold' => true], ['align' => 'center']);
@@ -88,7 +88,7 @@ class StaffList4 extends Component
         foreach ($staffs as $index => $staff) {
             $table->addRow();
             $table->addCell(1000)->addText(en2mm($index + 1), null, $pStyle_2);
-            $table->addCell(4000)->addText($staff->name . " \n " . ($staff->currentRank?->name ?? ''), null, $pStyle_2);
+            $table->addCell(4000)->addText($staff->name . " \n " . ($staff->currentRank?->name ?? ''), null, ['align' => 'left', 'indent' => 0.2]);
             $table->addCell(3000)->addText(($staff->postings->first()?->department->name ?? '') . ($staff->postings->first()?->division?->nick_name ?? ''), null, $pStyle_2);
             $table->addCell(3000)->addText(en2mm($staff->postings->first()?->from_date ? \Carbon\Carbon::parse($staff->postings->first()->from_date)->format('d-m-Y') : ''), null, $pStyle_1);
             $table->addCell(4000)->addText(($staff->postings->last()?->department->name ?? '') . ($staff->postings->last()?->division?->nick_name ?? ''), null, $pStyle_2);
