@@ -303,11 +303,22 @@
                 'wire_array_key' => 'particular',
             ],
 
+            // [
+            //     'type' => 'checkbox',
+            //     'wire_array_name' => 'abroads',
+            //     'wire_array_key' => 'is_training',
+            // ],
+
             [
-                'type' => 'checkbox',
+                'type' => 'select',
                 'wire_array_name' => 'abroads',
-                'wire_array_key' => 'is_training',
+                'wire_array_key' => 'abroad_type_id',
+                'select_values' => $abroads_types,
+                'next_col_update' => null , 
             ],
+
+
+
 
             [
                 'type' => 'checkbox',
