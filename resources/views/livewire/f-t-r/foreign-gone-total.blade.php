@@ -102,24 +102,29 @@
                                         rowspan="{{ $allCountries->count() }}">
                                         {{ $staff->current_division?->name }}
                                     </td>
-                                    @php
+                                    {{-- @php
                                         $dob = \Carbon\Carbon::parse($staff->dob);
                                         $diff = $dob->diff(\Carbon\Carbon::now());
                                         $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
-                                    @endphp
+                                    @endphp --}}
+                                    @php
+                                    $dob = \Carbon\Carbon::parse($staff->dob);
+                                    $diff = $dob->diff(\Carbon\Carbon::now());
+                                    $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+                                @endphp
                                     <td class="border border-black text-left p-2"
                                         rowspan="{{ $allCountries->count() }}">
                                         {{  en2mm($dob->format('d-m-Y')) }}<br>
                                         {{  en2mm($age) }}
                                     </td>
                                     @php
-                                        $join_date = \Carbon\Carbon::parse($staff->join_date);
-                                        $diff = $join_date->diff(\Carbon\Carbon::now());
+                                        $government_staff_started_date = \Carbon\Carbon::parse($staff->government_staff_started_date);
+                                        $diff = $government_staff_started_date->diff(\Carbon\Carbon::now());
                                         $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
                                     @endphp
                                     <td class="border border-black text-center p-2"
                                         rowspan="{{ $allCountries->count() }}">
-                                        {{ formatDMYmm($staff->join_date) }}<br>{{en2mm($age)}}
+                                        {{ formatDMYmm($staff->government_staff_started_date) }}<br>{{en2mm($age)}}
                                     </td>
                                     @php
                                     $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);

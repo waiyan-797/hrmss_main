@@ -130,9 +130,10 @@ $section->addText(
     $diff = $dob->diff(\Carbon\Carbon::now());
     $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
 
-    $join_date = \Carbon\Carbon::parse($staff->join_date);
-    $diff = $join_date->diff(\Carbon\Carbon::now());
+    $government_staff_started_date = \Carbon\Carbon::parse($staff->government_staff_started_date);
+    $diff = $government_staff_started_date->diff(\Carbon\Carbon::now());
     $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+
     $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);
     $diff = $current_rank_date->diff(\Carbon\Carbon::now());
     $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
@@ -144,8 +145,8 @@ $section->addText(
         $table->addCell(4000)->addText($staff->current_division->name ?? '',null,$pStyle_1);
 
         $table->addCell(2800)->addText(  en2mm($dob->format('d-m-Y')) . "\n" . en2mm($age),null,$pStyle_1);
-        $table->addCell(2500)->addText( formatDMYmm($staff->join_date)."\n".en2mm($age),null,$pStyle_4 );
-        $table->addCell(2500)->addText(formatDMYmm($staff->current_rank_date)."\n".en2mm($age),null,$pStyle_4);
+        $table->addCell(2500)->addText( formatDMYmm($staff->government_staff_started_date)."\n".en2mm($age),null,$pStyle_1 );
+        $table->addCell(2500)->addText(formatDMYmm($staff->current_rank_date)."\n".en2mm($age),null,$pStyle_1);
         $table->addCell(3000)->addText($lastAbroad?->countries->pluck('name')->unique()->join(', ') ?? '',null,$pStyle_2);
         if ($lastAbroad) {
             $table->addCell(3000)->addText($lastAbroad->particular.formatDMYmm($lastAbroad->from_date) . ' မှ ' . formatDMYmm($lastAbroad->to_date).'ထိ',null,$pStyle_2);
