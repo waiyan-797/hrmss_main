@@ -197,3 +197,6 @@ SET FOREIGN_KEY_CHECKS =  0 ; //start line of file
 615,92
 616,92
 SELECT abroad_id , country_id from abroad_countries GROUP BY abroad_id , country_id;
+
+
+ပုဒ်ကလေး ပုဒ်မ / dica   မှထည့်မည် 

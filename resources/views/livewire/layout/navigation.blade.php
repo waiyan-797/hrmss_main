@@ -22,10 +22,16 @@ $logout = function (Logout $logout) {
         </div>
 
         <!-- Settings Dropdown -->
+         <div>
+            <span class='font-bold'>
+            {{auth()?->user()?->name}}
+            </span>
+         </div>
         <div class="flex flex-col items-center ms-6 justify-center">
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
-                    <button class="w-auto h-[7vh] flex flex-row items-center justify-center text-sm leading-4 font-medium rounded-md text-white hover:text-white/90 focus:outline-none transition ease-in-out duration-150">
+                    
+                <button class="w-auto h-[7vh] flex flex-row items-center justify-center text-sm leading-4 font-medium rounded-md text-white hover:text-white/90 focus:outline-none transition ease-in-out duration-150">
                         <img id="avatar" src="{{auth()->user()->avatar ? route('file', auth()->user()->avatar) : asset('img/user.png')}}" class="w-[7vh] h-[7vh] border-2 border-green-300 rounded-full" alt="avatar">
                         <div class="ms-1">
                             <svg class="fill-current text-black h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

@@ -333,7 +333,8 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name" class="md:w-3/5">
-                            <span>{{ formatDMYmm($staff->join_date)}} </span><br>
+                            <!-- <span>{{ formatDMYmm($staff->join_date)}} </span><br> 3.3.25 , someone says join_date related is dica and use gov_staff_st_date -->
+                            <span>{{ formatDMYmm($staff->government_staff_started_date)}} </span><br>
                              <span>{{formatDMYmm($staff->current_rank_date)}}</span>
                         </label>
 

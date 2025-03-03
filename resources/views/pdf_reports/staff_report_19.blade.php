@@ -539,7 +539,7 @@
 
                     <div style="margin-bottom: 16px; font-size: 13px;">
                                     <p style="text-align:justify;  margin: 0; padding: 0;">
-                                        ၁၉။အထက်ဖော်ပြပါဝန်ထမ်း၏ကိုယ်ရေးမှတ်တမ်းနှင့်ပတ်သတ်၍မှန်ကန်စွာဖြည့်သွင်းရေးသားထားပါကြောင်းစိစစ်အတည် ပြုပါသည်။
+                                        ၁၉။အထက်ဖော်ပြပါဝန်ထမ်း၏ကိုယ်ရေးမှတ်တမ်းနှင့်ပတ်သက်၍မှန်ကန်စွာဖြည့်သွင်းရေးသားထားပါကြောင်းစိစစ်အတည် ပြုပါသည်။
                                     </p>
                                 
                         <table style="width: 50%; border-collapse: collapse; margin-left: auto; border:none;">
