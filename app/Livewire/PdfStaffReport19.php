@@ -123,7 +123,7 @@ class PdfStaffReport19 extends Component
 
         $table->addRow(50);
         $table->addCell(1500)->addText('၃။',null, $pStyle_5);
-        $table->addCell(13000)->addText('လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ', null,$pStyle_4);
+        $table->addCell(13000)->addText('လူမျိုး/ဘာသာ', null,$pStyle_4);
         $table->addCell(700)->addText('-', ['align' => 'center'],$pStyle_5);
         $table->addCell(13000)->addText(($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : '-'),null, $pStyle_4);
 

@@ -195,7 +195,7 @@ class PdfStaffReport68 extends Component
         $table->addCell(13000)->addText($staff->blood_type->name, null,$pStyle_8);
 
         $table->addRow();
-        $table->addCell(2000)->addText('၁၇။', null,  $pStyle_5);
+        $table->addCell(1300)->addText('၁၇။', null,  $pStyle_5);
         $table->addCell(13000)->addText('ဖုန်းနံပါတ် ', null,$pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
         $table->addCell(13000)->addText($staff->phone,$pStyle_8);
@@ -403,8 +403,8 @@ class PdfStaffReport68 extends Component
         $table->addCell(4000)->addText('တပ်/ဌာန', ['bold' => true], $pStyle_1);
         $table->addCell(2500)->addText('နေရာ', ['bold' => true], $pStyle_1);
 
-        $table->addCell(4000)->addText('မှ', ['bold' => true], $pStyle_1);
-        $table->addCell(4000)->addText('ထိ', ['bold' => true], $pStyle_1);
+        $table->addCell(2500)->addText('မှ', ['bold' => true], $pStyle_1);
+        $table->addCell(2500)->addText('ထိ', ['bold' => true], $pStyle_1);
 
 
 
@@ -423,7 +423,7 @@ class PdfStaffReport68 extends Component
         }else{
                 $table->addRow(50);
 
-                $cell = $table->addCell(18500, ['gridSpan' => 5]);
+                $cell = $table->addCell(15500, ['gridSpan' => 5]);
 
                 $cell->addText(
                     'မရှိပါ',
@@ -927,11 +927,11 @@ class PdfStaffReport68 extends Component
                 $table->addCell(6000)->addText($abroad->particular, null, $pStyle_3);
                 $table->addCell(6000)->addText($abroad->meet_with, null, $pStyle_3);
 
-                $table->addCell(4000)->addText(formatDMYmm($abroad->from_date) . "\n" . formatDMYmm($abroad->to_date),null,$pStyle_8);
+                $table->addCell(2500)->addText(formatDMYmm($abroad->from_date) . "\n" . formatDMYmm($abroad->to_date),null,$pStyle_8);
             }
         } else {
             $table->addRow();
-            $cell = $table->addCell(22000, ['gridSpan' => 4]);
+            $cell = $table->addCell(20500, ['gridSpan' => 4]);
 
             $cell->addText('မရှိပါ', null, ['alignment' => 'center']);
         }
