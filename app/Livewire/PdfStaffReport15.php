@@ -142,7 +142,7 @@ class PdfStaffReport15 extends Component
 
         $table->addRow();
         $table->addCell(1300)->addText('၂။', null,$pStyle_5);
-        $table->addCell(13000)->addText('အသက်(မွေးနေ့သက္ကရာဇ်)', null, $pStyle_8);
+        $table->addCell(13000)->addText('အသက်(မွေးသက္ကရာဇ်)', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText(formatDMYmm($staff->dob), null, $pStyle_8);
 
@@ -154,7 +154,7 @@ class PdfStaffReport15 extends Component
 
         $table->addRow();
         $table->addCell(1300)->addText('၄။', null,$pStyle_5);
-        $table->addCell(13000)->addText('အမျိုးသားမှတ်ပုံတင်အမှတ်', null, $pStyle_8);
+        $table->addCell(13000)->addText('နိုင်ငံသားစိစစ်ရေးအမှတ်', null, $pStyle_8);
         $table->addCell(700)->addText('-', null,$pStyle_5);
         $table->addCell(13000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . $staff->nrc_sign->name . $staff->nrc_code, null, $pStyle_8);
 

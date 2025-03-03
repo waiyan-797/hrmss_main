@@ -32,7 +32,7 @@
                             <tr>
                                 <td class="border border-black p-2">{{en2mm(++$count)}}</td>
                                 <td class="border border-black p-2">{{$rank->name}}</td>
-                                <td class="border border-black p-2">{{$rank->payscale->name}}</td>
+                                <td class="border border-black p-2">{{$rank->payscale?->name}}</td>
                                 <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
                                 <td class="border border-black p-2">{{en2mm($rank->StaffCountInRankByYear($year))}}</td>
                                 <td class="border border-black p-2">{{en2mm(- $rank->allowed_qty + $rank->StaffCountInRankByYear($year))}}</td>
@@ -48,7 +48,7 @@
                                 <tr>
                                     <td class="border border-black p-2">{{en2mm(++$count)}}</td>
                                     <td class="border border-black p-2">{{$rank->name}}</td>
-                                    <td class="border border-black p-2">{{$rank->payscale->name}}</td>
+                                    <td class="border border-black p-2">{{$rank->payscale?->name}}</td>
                                     <td class="border border-black p-2">{{en2mm($rank->allowed_qty)}}</td>
                                     <td class="border border-black p-2">{{en2mm($rank->StaffCountInRankByYear($year))}}</td>
                                     <td class="border border-black p-2">{{en2mm( - $rank->allowed_qty + $rank->StaffCountInRankByYear($year))}}</td>
