@@ -43,6 +43,8 @@ use App\Models\Religion;
 use App\Models\Reward;
 use App\Models\School;
 use App\Models\Section;
+use App\Models\AbroadsTypes;
+
 use App\Models\Sibling;
 use App\Models\SocialActivity;
 use App\Models\Spouse;
@@ -588,7 +590,7 @@ class StaffDetail extends Component
 
         case 'detail_personal_info':
 
-
+                    $this->abroads_types = AbroadsTypes::all();
                     $schools = School::where('staff_id', $staff_id)->get();
                     $trainings = Training::where('staff_id', $staff_id)->get();
                     $awards = Awarding::where('staff_id', $staff_id)->get();
@@ -656,7 +658,9 @@ class StaffDetail extends Component
                             'actual_abroad_date' => $abroad->actual_abroad_date,
                             'position' => $abroad->position,
                             'towns' => $abroad->towns,
-                            'is_training' => $abroad->is_training,
+                            // 'is_training' => $abroad->is_training,
+                            'abroad_type_id' => $abroad->abroad_type_id
+
                         ];
                     }
 
@@ -991,7 +995,7 @@ class StaffDetail extends Component
 
     public function add_abroads()
     {
-        $this->abroads[] = ['id' => null, 'country' => [],'towns' =>'' ,'is_training' => false  ,'particular' => '', 'training_success_fail' => false, 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
+        $this->abroads[] = ['id' => null, 'abroad_type_id' => null , 'country' => [],'towns' =>'' ,'is_training' => false  ,'particular' => '', 'training_success_fail' => false, 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
     }
 
     public function add_socials()
@@ -1381,7 +1385,7 @@ $this->submit_staff();
             }
         }
 
-     
+
 
         if ($this->confirm_add) {
 
@@ -1459,7 +1463,7 @@ $this->submit_staff();
                 'actual_abroad_date' => '2024-12-09',
                 'position' => $abroad['position'],
                 'towns' => $abroad['towns'],
-                'is_training' => $abroad['is_training'],
+                'abroad_type_id' => $abroad['abroad_type_id']
             ]);
             $ab->countries()->sync($abroad['country']);
         }
@@ -1519,7 +1523,7 @@ $this->submit_staff();
             'messages' => $validation_messages,
         ];
     }
-
+public $abroads_types;
     private function saveStaffLanguages($staffId)
     {
         $_validation = $this->validate_staff_languages();
