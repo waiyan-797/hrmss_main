@@ -99,46 +99,51 @@ class PA10 implements FromView ,WithStyles
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
         $sheet->getColumnDimension('A')->setWidth(4);
-        $sheet->getColumnDimension('B')->setWidth(16);
-        $sheet->getColumnDimension('C')->setWidth(5);
-        $sheet->getColumnDimension('D')->setWidth(5);
-        $sheet->getColumnDimension('E')->setWidth(5);
-        $sheet->getColumnDimension('F')->setWidth(6);
-        $sheet->getColumnDimension('G')->setWidth(6);
-        $sheet->getColumnDimension('H')->setWidth(6);
-        $sheet->getColumnDimension('I')->setWidth(5);
-        $sheet->getColumnDimension('J')->setWidth(5);
-        $sheet->getColumnDimension('K')->setWidth(5);
-        $sheet->getColumnDimension('L')->setWidth(5);
-        $sheet->getColumnDimension('M')->setWidth(5);
-        $sheet->getColumnDimension('N')->setWidth(5);
-        $sheet->getColumnDimension('O')->setWidth(5);
-        $sheet->getColumnDimension('P')->setWidth(5);
-        $sheet->getColumnDimension('Q')->setWidth(5);
-        $sheet->getColumnDimension('R')->setWidth(5);
-        $sheet->getColumnDimension('S')->setWidth(5);
-        $sheet->getColumnDimension('T')->setWidth(5);
-        $sheet->getColumnDimension('U')->setWidth(5);
-        $sheet->getColumnDimension('V')->setWidth(5);
-        $sheet->getColumnDimension('W')->setWidth(5);
-        $sheet->getColumnDimension('X')->setWidth(5);
-        $sheet->getColumnDimension('Y')->setWidth(5);
-        $sheet->getColumnDimension('Z')->setWidth(5);
-        $sheet->getColumnDimension('AA')->setWidth(5);
-        $sheet->getColumnDimension('AB')->setWidth(5);
-        $sheet->getColumnDimension('AC')->setWidth(5);
+        $sheet->getColumnDimension('B')->setWidth(13.57);
+        $sheet->getColumnDimension('C')->setWidth(6.71);
+        $sheet->getColumnDimension('D')->setWidth(6.71);
+        $sheet->getColumnDimension('E')->setWidth(6.71);
+        $sheet->getColumnDimension('F')->setWidth(6.71);
+        $sheet->getColumnDimension('G')->setWidth(6.71);
+        $sheet->getColumnDimension('H')->setWidth(6.71);
+        $sheet->getColumnDimension('I')->setWidth(6.71);
+        $sheet->getColumnDimension('J')->setWidth(6.71);
+        $sheet->getColumnDimension('K')->setWidth(6.71);
+        $sheet->getColumnDimension('L')->setWidth(5.71);
+        $sheet->getColumnDimension('M')->setWidth(5.71);
+        $sheet->getColumnDimension('N')->setWidth(5.71);
+        $sheet->getColumnDimension('O')->setWidth(5.71);
+        $sheet->getColumnDimension('P')->setWidth(5.71);
+        $sheet->getColumnDimension('Q')->setWidth(5.71);
+        $sheet->getColumnDimension('R')->setWidth(5.71);
+        $sheet->getColumnDimension('S')->setWidth(5.71);
+        $sheet->getColumnDimension('T')->setWidth(5.71);
+        $sheet->getColumnDimension('U')->setWidth(5.71);
+        $sheet->getColumnDimension('V')->setWidth(5.71);
+        $sheet->getColumnDimension('W')->setWidth(5.71);
+        $sheet->getColumnDimension('X')->setWidth(5.71);
+        $sheet->getColumnDimension('Y')->setWidth(5.71);
+        $sheet->getColumnDimension('Z')->setWidth(5.71);
+        $sheet->getColumnDimension('AA')->setWidth(5.71);
+        $sheet->getColumnDimension('AB')->setWidth(5.71);
+        $sheet->getColumnDimension('AC')->setWidth(5.71);
 
         $sheet->getRowDimension(1)->setRowHeight(18.8);
         $sheet->getRowDimension(2)->setRowHeight(18.8);
         $sheet->getRowDimension(3)->setRowHeight(18.8);
-        $sheet->getRowDimension(4)->setRowHeight(32.3);
+        $sheet->getRowDimension(4)->setRowHeight(31.55);
+        $sheet->getRowDimension(5)->setRowHeight(16.1);
+        $sheet->getRowDimension(6)->setRowHeight(16.1);
+        $sheet->getRowDimension(7)->setRowHeight(21);
 
         $sheet->removeRow(4);
 
-        for ($row = 4; $row <= $highestRow-1 ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(33);
-        }
+        // for ($row = 7; $row <= $highestRow-1 ; $row++) {
+        //     $sheet->getRowDimension($row)->setRowHeight(33);
+        // }
         $sheet->getRowDimension(7)->setRowHeight(84.8);
+        $sheet->getRowDimension(8)->setRowHeight(33);
+
 
         $sheet->getStyle('A1:A3')->applyFromArray([
             'font' => [
@@ -240,10 +245,10 @@ class PA10 implements FromView ,WithStyles
         // // Define the print area dynamically
         // $sheet->getPageSetup()->setPrintArea("A1:$highestColumn$highestRow");
 
-        // // Set a margin for better printing output
-        // $sheet->getPageMargins()->setTop(0.5);
-        // $sheet->getPageMargins()->setRight(0.5);
-        // $sheet->getPageMargins()->setLeft(0.5);
-        // $sheet->getPageMargins()->setBottom(0.5);
+        // Set a margin for better printing output
+        $sheet->getPageMargins()->setTop(0.75);
+        $sheet->getPageMargins()->setRight(0.15);
+        $sheet->getPageMargins()->setLeft(0.75);
+        $sheet->getPageMargins()->setBottom(0.5);
     }
 }

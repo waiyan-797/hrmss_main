@@ -41,9 +41,11 @@
                                                     <td class="border border-black p-2 text-center">{{en2mm(++$count)}}</td>
                                                     <td class="border border-black p-2 text-start">
                                                         @foreach($payscale->ranks as $rank)
-                                                            {{ $rank->name1 ? $rank->name1 . '/' . $rank->name2 : $rank->name }}<br>
+                                                            {{ $rank->name1 ? $rank->name1 . '/' . $rank->name2 : $rank->name }}
+                                                            @if (!$loop->last)
+                                                                {{ "/" }}
+                                                            @endif
                                                         @endforeach
-
                                                     </td>
                                                     <td class="border border-black p-2 text-center">{{en2mm(
                                 $payscale->staff->where("current_division_id", 26)
@@ -114,7 +116,10 @@
                                                     <td class="border border-black p-2 text-center">{{en2mm(++$count)}}</td>
                                                     <td class="border border-black p-2">
                                                         @foreach($payscale->ranks as $rank)
-                                                            {{ $rank->name }} <br>
+                                                            {{ $rank->name }} 
+                                                            @if (!$loop->last)
+                                                                {{ "/" }}
+                                                            @endif
                                                         @endforeach
                                                     </td>
                                                     <td class="border border-black p-2 text-center">{{en2mm(

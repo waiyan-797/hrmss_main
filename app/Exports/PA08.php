@@ -42,10 +42,15 @@ class PA08 implements FromView ,WithStyles
     public function view(): View
     {
         [$year, $month] = explode('-', $this->filterRange);
+<<<<<<< Updated upstream
 
 
 
 
+=======
+      
+    
+>>>>>>> Stashed changes
         $this->year = $year;
         $this->month = $month;
 

@@ -36,33 +36,31 @@ class A04 implements FromView ,WithStyles
     $highestRow = $sheet->getHighestRow(); // e.g. 19
     $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
-    $sheet->getColumnDimension('A')->setWidth(7);
-    $sheet->getColumnDimension('B')->setWidth(25);
-    $sheet->getColumnDimension('C')->setWidth(25);
-    $sheet->getColumnDimension('D')->setWidth(20);
-    $sheet->getColumnDimension('E')->setWidth(20);
-    $sheet->getColumnDimension('F')->setWidth(10);
-    $sheet->getColumnDimension('G')->setWidth(15);
-    $sheet->getColumnDimension('H')->setWidth(25);
-    $sheet->getColumnDimension('I')->setWidth(25);
-    $sheet->getColumnDimension('J')->setWidth(15);
-    $sheet->getColumnDimension('K')->setWidth(7);
-    $sheet->getColumnDimension('L')->setWidth(7);
-    $sheet->getColumnDimension('M')->setWidth(20);
+    $sheet->getColumnDimension('A')->setWidth(6.57);
+    $sheet->getColumnDimension('B')->setWidth(22);
+    $sheet->getColumnDimension('C')->setWidth(26);
+    $sheet->getColumnDimension('D')->setWidth(16.6);
+    $sheet->getColumnDimension('E')->setWidth(18.42);
+    $sheet->getColumnDimension('F')->setWidth(11.14);
+    $sheet->getColumnDimension('G')->setWidth(16.57);
+    $sheet->getColumnDimension('H')->setWidth(24.85);
+    $sheet->getColumnDimension('I')->setWidth(24.85);
+    $sheet->getColumnDimension('J')->setWidth(9.14);
+    $sheet->getColumnDimension('K')->setWidth(9.42);
+    $sheet->getColumnDimension('L')->setWidth(8);
+    $sheet->getColumnDimension('M')->setWidth(13.85);
+
+
     $sheet->getRowDimension(1)->setRowHeight(20);
     $sheet->getRowDimension(2)->setRowHeight(20);
     $sheet->getRowDimension(3)->setRowHeight(20);
     $sheet->getRowDimension(4)->setRowHeight(20);
-    $sheet->getRowDimension(5)->setRowHeight(40);
-    $sheet->getRowDimension(6)->setRowHeight(40);
-    $sheet->getRowDimension(7)->setRowHeight(40);
-    $sheet->getRowDimension(8)->setRowHeight(40);
-    $sheet->getRowDimension(9)->setRowHeight(40);
-    $sheet->getRowDimension(10)->setRowHeight(40);
-    $sheet->getRowDimension(11)->setRowHeight(40);
-    $sheet->getRowDimension(12)->setRowHeight(40);
-    $sheet->getRowDimension(13)->setRowHeight(40);
-    $sheet->getRowDimension(14)->setRowHeight(40);
+    $sheet->getRowDimension(5)->setRowHeight(38.25);
+    $sheet->getRowDimension(6)->setRowHeight(38.25);
+    $sheet->getRowDimension(7)->setRowHeight(74.25);
+    $sheet->getRowDimension(8)->setRowHeight(123.75);
+    $sheet->getRowDimension(9)->setRowHeight(123.75);
+    $sheet->getRowDimension(10)->setRowHeight(74.25);
     $sheet->getStyle('A1:M3')->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
@@ -114,7 +112,15 @@ class A04 implements FromView ,WithStyles
             ],
         ],
     ]);
-    $sheet->getStyle("A5:$highestColumn$highestRow")->applyFromArray([
+
+    //defining margin
+    $sheet->getPageMargins()->setTop(0.5);
+    $sheet->getPageMargins()->setRight(right: 0.5);
+    $sheet->getPageMargins()->setLeft(0.5);
+    $sheet->getPageMargins()->setBottom(0.5);
+
+    $sheet->getStyle("A5:$highestColumn$highestRow")
+    ->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
             'size' => 13,

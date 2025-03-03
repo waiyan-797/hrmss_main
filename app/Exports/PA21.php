@@ -73,24 +73,30 @@ public function styles(Worksheet $sheet)
      $sheet->getRowDimension(4)->setRowHeight(24);
 
      for ($row = 5; $row <= $highestRow ; $row++) {
-         $sheet->getRowDimension($row)->setRowHeight(39.8);
+        if($row == $highestRow-1 || $row == $highestRow){
+         $sheet->getRowDimension($row)->setRowHeight(33.75);
+     } else {
+        $sheet->getRowDimension($row)->setRowHeight(48);
      }
-
+    }
      // $sheet->getHeaderFooter()->setOddHeader('&C&H&"Pyidaungsu"&10' . "အတွင်းရေး\n၃"); // Centered header text
      
 
     //  $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&10' . 'အတွင်းရေး'); // Centered footer text
 
-     $sheet->getPageMargins()->setTop(1);
+     $sheet->getPageMargins()->setTop(0.5);
+     $sheet->getPageMargins()->setBottom(0.5);
+     $sheet->getPageMargins()->setLeft(1);
+     $sheet->getPageMargins()->setRight(0.5);
     //  $row=5;
      
 
-     $sheet->getColumnDimension('A')->setWidth(5);
-     $sheet->getColumnDimension('B')->setWidth(40);
-     $sheet->getColumnDimension('C')->setWidth(18);
-     $sheet->getColumnDimension('D')->setWidth(11);
-     $sheet->getColumnDimension('E')->setWidth(11);
-     $sheet->getColumnDimension('F')->setWidth(11);
+     $sheet->getColumnDimension('A')->setWidth(5.42);
+     $sheet->getColumnDimension('B')->setWidth(47.28);
+     $sheet->getColumnDimension('C')->setWidth(17.42);
+     $sheet->getColumnDimension('D')->setWidth(9);
+     $sheet->getColumnDimension('E')->setWidth(9);
+     $sheet->getColumnDimension('F')->setWidth(12.28);
 
      $sheet->getStyle('A1:A3')->applyFromArray([
         'font' => [

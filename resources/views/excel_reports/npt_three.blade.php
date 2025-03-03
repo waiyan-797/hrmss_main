@@ -39,9 +39,12 @@
                 @foreach ($first_payscales as $payscale)
                                 <tr>
                                     <td>{{en2mm(++$count)}}</td>
-                                    <td>
+                                    <td style="white-space: normal; word-wrap: break-word;">
                                         @foreach($payscale->ranks as $rank)
-                                            {{ $rank->name1 ? $rank->name1 . '/' . $rank->name2 : $rank->name }}<br>
+                                            {{ $rank->name1 ? $rank->name1 . '/' . $rank->name2 : $rank->name }} 
+                                            @if (!$loop->last)
+                                                {{ "/" }}
+                                            @endif
                                         @endforeach
                                     </td>
                                     <td>{{en2mm(
@@ -99,9 +102,12 @@
                 @foreach ($second_payscales as $payscale)
                                 <tr>
                                     <td>{{en2mm(++$count)}}</td>
-                                    <td>
+                                    <td style="white-space: normal; word-wrap: break-word;">
                                         @foreach($payscale->ranks as $rank)
-                                            {{ $rank->name  }}
+                                            {{ $rank->name  }} 
+                                            @if (!$loop->last)
+                                                {{ "/" }}
+                                            @endif
                                         @endforeach
                                     </td>
                                     <td>{{en2mm(
