@@ -56,7 +56,7 @@ class PlanningAccounting extends Component
         'cellMargin' => 5
     ]);
        
-    $table->addRow();
+    $table->addRow(50,['tblHeader' => true]);
     $table->addCell(700)->addText('စဥ်',['bold'=>true],['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
     $table->addCell(4500)->addText('အမည်',['bold'=>true],['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
     $table->addCell(4500)->addText('ရာထူး',['bold'=>true],['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
