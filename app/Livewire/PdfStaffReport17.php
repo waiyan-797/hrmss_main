@@ -153,7 +153,7 @@ class PdfStaffReport17 extends Component
         $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());
         $table->addRow(50);
         $table->addCell(1300)->addText('၆။', null, $pStyle_5);
-        $table->addCell(13000)->addText('အမှုထမ်းသက်(ဝင်ရောက်သည့်ရက်စွဲ)', null,$pStyle_8);
+        $table->addCell(13000)->addText('အမှုထမ်းသက်၊ဝင်ရောက်သည့်ရက်စွဲ', null,$pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText(formatPeriodMM($joinDateDuration->y, $joinDateDuration->m) . ', ' . formatDMYmm($joinDate), null,$pStyle_8);
         $table->addRow(50);
@@ -363,7 +363,7 @@ class PdfStaffReport17 extends Component
         $table->addCell()->addText('ဌာန', ['alignment' => 'right']);
         $table->addCell(500)->addText('-', ['alignment' => 'right']);
         $table->addCell(3000)->addText('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['alignment' => 'right']);
-        $section->addText('ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
+        $section->addText('ရက်စွဲ၊ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
 
         $fileName = 'staff_report_17_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');

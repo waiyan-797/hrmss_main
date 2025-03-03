@@ -191,14 +191,12 @@ class PdfStaffReport20 extends Component
         $table->addCell(700)->addText('(င)', null,$pStyle_1);
         $table->addCell(4000)->addText('နောက်ဆက်တွဲဒီပလိုမာ/ဘွဲ့များ',null,$pStyle_3);
         $table->addCell(4000)->addText($staff->last_school_subject,null,$pStyle_3);
-        foreach($staff->training as $training){
-        $trainingNames =$training->training_type->pluck('name')->unique()->join(', ');
-        }
+        
         $table->addRow(50);
         $table->addCell(700);
         $table->addCell(700)->addText('(စ)', null,$pStyle_1);
         $table->addCell(4000)->addText('အခြားဆည်းပူးခဲ့သော ဘာသာရပ်များ။*ပြည်တွင်း/ပြည်ပ**',null,$pStyle_3);
-        $table->addCell(4000)->addText($trainingNames,null,$pStyle_3);
+        $table->addCell(4000)->addText('',null,$pStyle_3);
     
         $table->addRow(50);
         $table->addCell(700);
