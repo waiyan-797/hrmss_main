@@ -360,7 +360,7 @@ class PdfStaffReport53 extends Component
         $table->addCell(1300)->addText('၂၅။', null, $pStyle_5);
         $table->addCell(13000)->addText("အလုပ်စတင်ဝင်ရောက်သည့်နေ့နှင့်\nလက်ရှိရာထူးရသည့်နေ့", null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText(formatDMYmm($staff->join_date)." ၊\n ".formatDMYmm($staff->current_rank_date), null, $pStyle_8);
+        $table->addCell(13000)->addText(formatDMYmm($staff->government_staff_started_date)." ၊\n ".formatDMYmm($staff->current_rank_date), null, $pStyle_8);
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၂၆။', null, $pStyle_5);

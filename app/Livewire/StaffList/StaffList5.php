@@ -45,9 +45,9 @@ class StaffList5 extends Component
         $phpWord = new PhpWord();
         $section = $phpWord->addSection([
             'orientation' => 'portrait',
-            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),     // 1 inch
+            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.23),     // 1 inch
             'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
-            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.51),   // 0.5 inch
             'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
         ]);
 
@@ -64,20 +64,20 @@ class StaffList5 extends Component
 
         // Table headers
         $table->addRow();
-        $table->addCell(700)->addText('စဥ်', ['bold' => true],['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
-        $table->addCell(3000)->addText('ရာထူးအမည်', ['bold' => true],['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
-        $table->addCell(2000)->addText('ကျား', ['bold' => true],['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
-        $table->addCell(2000)->addText('မ', ['bold' => true],['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
-        $table->addCell(2000)->addText('စုစုပေါင်း', ['bold' => true],['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
+        $table->addCell(700, ['valign' => 'top'])->addText('စဥ်',['bold' => true],['alignment' => 'center', 'spaceBefore' => 0, 'lineHeight' => 1]);
+        $table->addCell(3000,['valign' => 'top'])->addText('ရာထူးအမည်', ['bold' => true],['alignment'=>'center','spaceBefore'=>0,'lineHeight' => 1]);
+        $table->addCell(2000,['valign' => 'top'])->addText('ကျား', ['bold' => true],['alignment'=>'center','spaceBefore'=>0,'lineHeight' => 1]);
+        $table->addCell(2000,['valign' => 'top'])->addText('မ', ['bold' => true],['alignment'=>'center','spaceBefore'=>0,'lineHeight' => 1]);
+        $table->addCell(2000,['valign' => 'top'])->addText('စုစုပေါင်း', ['bold' => true],['alignment'=>'center','spaceBefore'=>0,'lineHeight' => 1]);
 
         // Add first rank data
         foreach ($first_ranks as $index=> $rank) {
             $table->addRow();
-            $table->addCell(700)->addText(en2mm($index + 1),null,['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
-            $table->addCell(3000)->addText($rank->name,null,['indentation' => ['left' => 100],'alignment'=>'left','spaceBefore'=>50,'lineHeight' => 1]);
-            $table->addCell(2000)->addText(en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count()),null,['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
-            $table->addCell(2000)->addText(en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
-            $table->addCell(2000)->addText(en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=>50,'lineHeight' => 1]);
+            $table->addCell(700, ['valign' => 'top'])->addText(en2mm($index + 1),null,['alignment'=>'center','spaceBefore'=>0,'lineHeight' => 1]);
+            $table->addCell(3000, ['valign' => 'top'])->addText($rank->name,null,['indentation' => ['left' => 100],'alignment'=>'left','spaceBefore'=>0,'lineHeight' => 1]);
+            $table->addCell(2000, ['valign' => 'top'])->addText(en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count()),null,['alignment'=>'center','spaceBefore'=>0,'lineHeight' => 1]);
+            $table->addCell(2000, ['valign' => 'top'])->addText(en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=>0,'lineHeight' => 1]);
+            $table->addCell(2000, ['valign' => 'top'])->addText(en2mm($rank->staffs->where('current_division_id', 11)->where('gender_id', 1)->count() + $rank->staffs->where('current_division_id', 11)->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=>0,'lineHeight' => 1]);
         }
 
         

@@ -1472,7 +1472,7 @@ $this->submit_staff();
             'abroads.*.particular' => 'required',
             'abroads.*.from_date' => 'required',
             'abroads.*.to_date' => 'required',
-            'abroads.*.is_training' => 'required',
+            // 'abroads.*.is_training' => 'required',
         ];
 
         $validation_messages = [
@@ -1480,7 +1480,7 @@ $this->submit_staff();
             'abroads.*.particular.required' => 'Field is required.',
             'abroads.*.from_date.required' => 'Field is required.',
             'abroads.*.to_date.required' => 'Field is required.',
-            'abroads.*.is_training.required' => 'Field is required.',
+            // 'abroads.*.is_training.required' => 'Field is required.',
         ];
 
         return [

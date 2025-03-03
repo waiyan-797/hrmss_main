@@ -411,7 +411,7 @@
                                     <td style="border: none;">လက်ရှိဌာနအလုပ်ဝင်ရက်စွဲနှင့်လက်ရှိရာထူးရသည့်နေ့
                                     </td>
                                     <td style="border: none;">-</td>
-                                    <td style="border: none;">{{ formatDMYmm($staff->join_date) }}/{{ formatDMYmm($staff->current_rank_date)}}</td>
+                                    <td style="border: none;">{{ formatDMYmm($staff->government_staff_started_date) }}/{{ formatDMYmm($staff->current_rank_date)}}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: none;">၂၆။

@@ -24,6 +24,9 @@ class TrainingLocationSeeder extends Seeder
             'name' =>'ပြည်တွင်း',
         ]);
         DB::table('training_locations')->insert([
+            'name' =>'ပြည်တွင်း (Online)',
+        ]);
+        DB::table('training_locations')->insert([
             'name' =>'ပြည်ပ (Online)',
         ]);
 

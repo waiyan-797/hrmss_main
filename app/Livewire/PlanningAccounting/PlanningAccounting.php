@@ -34,9 +34,9 @@ class PlanningAccounting extends Component
         $section = $phpWord->addSection([
             'orientation' => 'portrait',
             'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),     // 1 inch
-            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
-            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
-            'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),   // 0.5 inch
+            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.56),   // 0.5 inch
+            'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),   // 0.5 inch
         ]);
 
         
@@ -48,7 +48,7 @@ class PlanningAccounting extends Component
         // dd($divisionTitle );
         $division = getDivisionBy($this->selectedDivisionId);
         $section->addTitle(($division ? $division->name : 'Unknown Division').'ဝန်ထမ်းအင်အားစာရင်း' , 2);
-        $section->addTitle(formatDMYmm(Carbon::now()), 3);
+        // $section->addTitle(formatDMYmm(Carbon::now()), 3);
 
     $table = $section->addTable([
         'borderSize' => 6, 

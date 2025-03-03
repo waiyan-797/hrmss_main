@@ -1,31 +1,58 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
+        <div class="w-full mx-auto px-3 py-4">
         <x-primary-button type="button" wire:click="go_word({{ $staff->id }})">WORD</x-primary-button>
         <div class="w-full mx-auto px-3 py-4">
             <div class="w-full mb-4">
                 <h1 class="font-semibold text-base mb-2 text-center">
-                    ရင်းနှီးမြှပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
+                    ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
                 <h2 class="font-semibold text-base mb-2 text-center">
-                    ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h2>
+                    ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h2>
                 <h2 class="font-semibold text-base mb-2 text-center">
-                    ဒုတိယညွှန်ကြားရေးမှူး အဆင့်ရာထူးအတွက် အကဲဖြတ်မှတ်တမ်း</h2>
+                    {{ $staff->current_rank->name}} အဆင့်ရာထူးအတွက် အကဲဖြတ်မှတ်တမ်း</h2>
                 <h2 class="font-semibold text-base mb-2 text-center">
-                    ၁-၃-၂၀၂၂ နေ့မှစ၍ ၃၀-၄-၂၀၂၃ နေ့အထိ ---------{{$staff->name}}------၏ အကဲဖြတ်မှတ်တမ်း</h2>
+                    {{ formatDMYmm($startDate)}} နေ့မှစ၍ {{ formatDMYmm($endDate)}} နေ့အထိ {{$staff->name}} ၏ အကဲဖြတ်မှတ်တမ်း</h2>
+
+                    {{-- <div  class="flex items-end justify-around my-5 " >
+                        <div class="w-40 ">
+                            <label class="block mb-2 text-sm font-medium text-gray-700">Start Date</label>
+                            <x-date-picker wire:model.live="startDate" class="border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+                        </div>
+        
+                        <div class="w-40">
+                            <label class="block mb-2 text-sm font-medium text-gray-700">End Date</label>
+                            <x-date-picker wire:model.live="endDate" class="border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+                        </div>
+                       </div> --}}
+                       <div class="flex items-end justify-start gap-4 my-5">
+                        <div class="w-40">
+                            <label class="block mb-2 text-sm font-medium text-gray-700">Start Date</label>
+                            <x-date-picker wire:model.live="startDate" class="border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+                        </div>
+                    
+                        <div class="w-40">
+                            <label class="block mb-2 text-sm font-medium text-gray-700">End Date</label>
+                            <x-date-picker wire:model.live="endDate" class="border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+                        </div>
+                    </div>
+                    
+                       
 
                 <div class="w-full overflow-x-auto">
                     <table class="w-full border-collapse border border-black">
                         <thead>
                             <tr>
-                                <th rowspan="2" class="border border-black text-center p-4 w-1/6">၁။</th>
+                                <th rowspan="2" class="border border-black text-center p-4">၁။</th>
                                 <th colspan="3" class="border border-black text-center p-4">ကိုယ်ရေးအချက်အလက်</th>
-                            </tr>
-                            <tr>
-                                <th class="border border-black text-center p-4 w-1/4">(က)</th>
-                                <th class="border border-black  p-4 w-1/4">အမည်</th>
-                                <th class="border border-black  p-4 w-1/4">{{$staff->name}}</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <th class="border border-black text-center p-4"></th>
+                                <th class="border border-black text-center p-4">(က)</th>
+                                <th class="border border-black p-4">အမည်</th>
+                                <th class="border border-black p-4">{{$staff->name}}</th>
+                            </tr>
                             <tr>
                                 <td class="border border-black text-center p-4"></td>
                                 <td class="border border-black text-center p-4">(ခ)</td>
@@ -134,14 +161,14 @@
                     <table class="w-full border-collapse border border-black">
                         <thead>
                             <tr>
-                                <th rowspan="2" class="border border-black text-center p-4 w-1/12">၂။</th>
+                                <th rowspan="2" class="border border-black text-center p-4">၂။</th>
                                 <th colspan="3" class="border border-black text-center p-4">
                                     ပညာဆည်းပူးသင်ယူလေ့လာခဲ့မှုအခြေအနေ</th>
                             </tr>
                             <tr>
-                                <th class="border border-black text-center p-4 w-1/4">(က)</th>
-                                <th class="border border-black  p-4 w-1/4">မူလတန်းမှ အလယ်တန်း</th>
-                                <th class="border border-black  p-4 w-1/4"></th>
+                                <th class="border border-black text-center p-4">(က)</th>
+                                <th class="border border-black  p-4">မူလတန်းမှ အလယ်တန်း</th>
+                                <th class="border border-black  p-4"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -161,9 +188,9 @@
                                 <td class="border border-black text-center p-4"></td>
                                 <td class="border border-black text-center p-4">(ဃ)</td>
                                 <td class="border border-black  p-4">တက္ကသိုလ်/ကောလိပ်</td>
-                                <td class="border border-black  p-4"> @foreach($staff->schools as $school)
-                                    {{ $school->school_name}}
-                                    @endforeach</td>
+                                <td class="border border-black  p-4">
+                                    {{$staff->schools->map(fn($school) => $school->school_name)->join(', ')}}
+                                </td>
                             </tr>
                              <tr>
                                 <td class="border border-black text-center p-4"></td>
@@ -215,16 +242,10 @@
                                 <td class="border border-black  p-4">ဌာနဆိုင်ရာစာမေးပွဲများ/သင်တန်းများ။
                                 </td>
                                 <td class="border border-black  p-4">
-                                     @foreach ($staff->trainings->where('training_location_id', 1) as $index => $training)
+                                     {{-- @foreach ($staff->trainings->where('training_location_id', 1) as $index => $training)
                                     {{$trainingName = ($training->training_type_id == 32) ? $training->diploma_name : $training->training_type?->name}}
-                                    @endforeach 
+                                    @endforeach  --}}
                                 </td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black text-center p-4"></td>
-                                <td class="border border-black text-center p-4"></td>
-                                <td class="border border-black text-center p-4"></td>
-                                <td class="border border-black text-center p-4"></td>
                             </tr>
                             <tr>
                                 <td class="border border-black text-center p-4"></td>
@@ -287,10 +308,6 @@
                             <td class="border border-black p-2 font-semibold">
                             </td>
                         </tr>
-
-
-
-
                         <tr>
 
                             <td class="border border-black text-center p-2">၄</td>
@@ -298,10 +315,7 @@
                             <td class="border border-black p-2"></td>
                             <td class="border border-black p-2"></td>
                             <td class="border border-black p-2"></td>
-
                         </tr>
-
-
                         <tr>
 
                             <td class="border border-black text-center p-2">၅
@@ -436,12 +450,7 @@
                             <label for="" class="md:w-5">-</label>
                             <label for="name" class="md:w-3/5"></label>
                         </div>
-
-
-                        
                             <p>အကဲဖြတ်မှတ်တမ်းရေးသူ၏ စိစစ်အကဲဖြတ်ခြင်းအတွက်ကျိုးကြောင်းဖော်ပြချက်(အချက်တစ် ချက်ချင်းစီ အတွက် သာမန်အောက် ၇ မှတ်နှင့်အောက် သို့မဟုတ် ထူးချွန်အဆင့်အတွက် ၁၆ မှတ်နှင့် အထက်ဖြစ်ပါက အကဲဖြတ်သူက ကျိုးကြောင်းဖော်ပြချက် ရေးသားရန်ဖြစ်ပါသည်။)</p>
-                            
-                      
                         <h1 class="font-semibold text-base mb-2 text-left">
                             [နိုင်ငံဝန်ထမ်းနည်းဉပဒေများ၊ နည်းဉဒေ ၄၇၊ နည်းဉပဒေခွဲ(စ)(၃)]</h1>
                             <div class="flex justify-between w-full mb-2">
@@ -501,10 +510,14 @@
                                     </div>
                                 <div class="flex justify-start space-x-1 pb-4 pt-2">
                                     <p>ရက်စွဲ ၊ </p>
-                                    <p></p>
+                                    <p>{{mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day))}}</p>
                                 </div>
                             </div>
             </div>
         </div>
+        </div>
+
+
+
     </div>
 </div>

@@ -164,8 +164,8 @@
                         @if ($trainings[$index]['training_type'] == getOthersInTrainingType() )
 
 
-                        <span wire:transition  class="flex flex-row gap-1 items-center my-3">
-                            အခြားသင်တန်းအမည်
+                        <span wire:transition  class="flex flex-row gap-1 items-center mb-3 mt-1">
+                            <!-- အခြားသင်တန်းအမည် -->
                         </span>
                         <x-text-input
                         wire:model="trainings.{{ $index }}.diploma_name"

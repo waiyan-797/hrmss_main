@@ -71,10 +71,10 @@ public function go_word()
     // ]);
     $section = $phpWord->addSection([
         'orientation' => 'portrait',
-        'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),     // 1 inch
-        'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.3),   // 0.5 inch
+        'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(1),     // 1 inch
+        'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.65),   // 0.5 inch
         'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
-        'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+        'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.7),   // 0.5 inch
     ]);
     
     if (!is_null($this->selectedDivisionId)) {
@@ -94,7 +94,7 @@ public function go_word()
     $table = $section->addTable(['borderSize' => 6, 'borderColor' => '000000']);
     // $table->addRow();
     $table->addRow(50, ['tblHeader' => true]);
-    $table->addCell(700)->addText('စဉ်',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
+    $table->addCell(2000, ['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true], ['alignment'=>'center','spaceBefore'=> 70]);
     $table->addCell(5000)->addText('ရာထူးအမည်',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
     $table->addCell(3000)->addText('ဖွဲ့စည်းပုံ', ['bold' => true] ,['align' => 'center']);
     $table->addCell(4000)->addText('ခန့်ထားအင်အား',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);

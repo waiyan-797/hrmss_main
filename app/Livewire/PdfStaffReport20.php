@@ -3,22 +3,32 @@
 namespace App\Livewire;
 
 use App\Models\Staff;
+use Carbon\Carbon;
 use Livewire\Component;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpWord\IOFactory as PhpWordIOFactory;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\SimpleType\Jc;
-
 class PdfStaffReport20 extends Component
 {
     public $staff_id;
+    public $filterRange; 
+    public $startDate;
+    public $endDate;
 
-    public function mount($staff_id = 0)
+    public function mount($staff_id)
     {
         $this->staff_id = $staff_id;
+        $this->startDate = Carbon::today()->toDateString(); // Default to today
+        $this->endDate = Carbon::today()->toDateString();
     }
 
-
+    public function updatedFilterRange($value)
+    {
+        if ($value) {
+            [$this->startDate, $this->endDate] = explode(' - ', $value);
+        }
+    }
     public function go_word($staff_id)
     {
         $staff = Staff::find($staff_id);
@@ -63,192 +73,367 @@ class PdfStaffReport20 extends Component
         $footer = $section->addFooter();
         $footer->addText('လျှို့ဝှက်', null, ['align' => 'center', 'spaceBefore' => 200]);
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+        $phpWord->addTitleStyle(2, [ 'size' => 13], ['alignment' => 'left']);
         $section->addTitle('ရင်နှီးမြှုပ်နှံ့မှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
         $section->addTitle('ရင်နှီးမြှုပ်နှံ့မှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
         $section->addTitle('ဒုတိယညွှန်ကြားရေးမှူး အဆင့်အတွက် အကဲဖြတ်မှတ်တမ်း', 1);
-        $section->addTitle('၁-၃-၂၀၂၂ နေ့မှစ၍ ၃၀-၄-၂၀၂၃ နေ့အထိ -------------၏ အကဲဖြတ်မှတ်တမ်း', 1);
+        $section->addTitle(formatDMYmm($this->startDate) . 'နေ့မှစ၍ ' . formatDMYmm($this->endDate) . 'နေ့အထိ ' . $staff->name . ' ၏ အကဲဖြတ်မှတ်တမ်း', 1);
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50);
+        $table->addCell(700)->addText('၁။',null,$pStyle_2);
+        $table->addCell(8700, ['gridSpan' => 3, 'valign' => 'center'])->addText('ကိုယ်ရေးအချက်အလက်', ['bold'=>true],$pStyle_1);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(က)',null,$pStyle_1);
+        $table->addCell(4000)->addText('အမည်',null,$pStyle_3);
+        $table->addCell(4000)->addText($staff->name,null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ခ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('လူမျိုးနှင့် ကိုးကွယ်သည့်ဘာသာ',null,$pStyle_3);
+        $table->addCell(4000)->addText(($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : ''),null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဂ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('မွေးဖွားရာဇာတိ',null,$pStyle_3);
+        $table->addCell(4000)->addText($staff->place_of_birth,null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဃ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('အဘအမည်',null,$pStyle_3);
+        $table->addCell(4000)->addText($staff->father_name,null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(င)', null,$pStyle_1);
+        $table->addCell(4000)->addText('အသက်(မွေးသက္ကရာဇ်)',null,$pStyle_3);
+        $table->addCell(4000)->addText(formatDMYmm($staff->dob),null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(စ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်',null,$pStyle_3);
+        $table->addCell(4000)->addText(collect([$staff->ethnic_id ? $staff->ethnic->name : '-', $staff->religion_id ? $staff->religion->name : '-'])->filter()->implode('၊'),null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဆ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('ထင်ရှားသည့်အမှတ်အသား	',null,$pStyle_3);
+        $table->addCell(4000)->addText($staff->prominent_mark,null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဇ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('လက်ရှိရာထူး',null,$pStyle_3);
+        $table->addCell(4000)->addText($staff->current_rank?->name,null,$pStyle_3);
+        $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);
+        $diff = $current_rank_date->diff(\Carbon\Carbon::now());
+        $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဈ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('လက်ရှိရာထူးရရှိသည့်နေ့နှင့်ရာထူးသက်',null,$pStyle_3);
+        $table->addCell(4000)->addText(formatDMYmm($staff->current_rank_date)."\n".en2mm($age),null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ည)', null,$pStyle_1);
+        $table->addCell(4000)->addText('လက်ရှိအလုပ်အကိုင်ရလာပုံ',null,$pStyle_3);
+        $table->addCell(4000)->addText($staff->is_direct_appointed,null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဋ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('ပြိုင်အရွေးခံ(သို့)တိုက်ရိုက်ခန့်	',null,$pStyle_3);
+        $table->addCell(4000)->addText($staff->is_direct_appointed,null,$pStyle_3);
+        $join_date = \Carbon\Carbon::parse($staff->join_date);
+        $diff = $join_date->diff(\Carbon\Carbon::now());
+        $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဌ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('စတင်တာဝန်ထမ်းဆောင်သည့်နေ့နှင့် စုစုပေါင်း အမှုထမ်းလုပ်သက်',null,$pStyle_3);
+        $table->addCell(4000)->addText(formatDMYmm($staff->join_date)."\n".en2mm($age),null,$pStyle_3);
+        $military_gazetted_date = \Carbon\Carbon::parse($staff->military_gazetted_date);
+        $diff = $military_gazetted_date->diff(\Carbon\Carbon::now());
+        $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဍ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('ပြန်တမ်းဝင်အရာရှိလုပ်သက်',null,$pStyle_3);
+        $table->addCell(4000)->addText(formatDMYmm($staff->military_gazetted_date)."\n".en2mm($age),null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဎ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('ဌာန/ဌာနခွဲ/ဌာနစိတ်',null,$pStyle_3);
+        $table->addCell(4000)->addText(($staff->current_department->name)."\n".($staff->current_division->name),null,$pStyle_3);
+        $section->addPageBreak();
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50);
+        $table->addCell(700)->addText('၂။',null,$pStyle_2);
+        $table->addCell(8700, ['gridSpan' => 3, 'valign' => 'center'])->addText('ပညာဆည်းပူးသင်ယူလေ့လာခဲ့မှုအခြေအနေ', ['bold'=>true],$pStyle_1);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(က)',null,$pStyle_1);
+        $table->addCell(4000)->addText('မူလတန်းမှ အလယ်တန်း',null,$pStyle_3);
+        $table->addCell(4000)->addText('',null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ခ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('အလယ်တန်း',null,$pStyle_3);
+        $table->addCell(4000)->addText('',null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဂ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('အထက်တန်း',null,$pStyle_3);
+        $table->addCell(4000)->addText('',null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဃ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('တက္ကသိုလ်/ကောလိပ်',null,$pStyle_3);
+        $table->addCell(4000)->addText($staff->schools->map(fn($school) => $school->school_name)->join(', '),null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(င)', null,$pStyle_1);
+        $table->addCell(4000)->addText('နောက်ဆက်တွဲဒီပလိုမာ/ဘွဲ့များ',null,$pStyle_3);
+        $table->addCell(4000)->addText($staff->last_school_subject,null,$pStyle_3);
+        foreach($staff->training as $training){
+        $trainingNames =$training->training_type->pluck('name')->unique()->join(', ');
+        }
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(စ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('အခြားဆည်းပူးခဲ့သော ဘာသာရပ်များ။*ပြည်တွင်း/ပြည်ပ**',null,$pStyle_3);
+        $table->addCell(4000)->addText($trainingNames,null,$pStyle_3);
     
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဆ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('ဌာနဆိုင်ရာစာမေးပွဲများ/သင်တန်းများ။',null,$pStyle_3);
+        $table->addCell(4000)->addText('',null,$pStyle_3);
+        $table->addRow(50);
+        $table->addCell(700);
+        $table->addCell(700)->addText('(ဇ)', null,$pStyle_1);
+        $table->addCell(4000)->addText('ဝါသနာထုံမှု',null,$pStyle_3);
+        $table->addCell(4000)->addText($staff->habit,null,$pStyle_3);
+        $section->addTextBreak();
+        $section->addTitle('*ဘာသာရပ်ဆိုင်ရာ၌ တက္ကသိုလ်ဘာသာရပ်များကို ဆိုလိုသည်',2);
+        $section->addTitle('မသက်ဆိုင်သော စကားလုံးကိုဖျက်ပါ။',2);
+        
+        $section->addText('၃။ ' . ' အကဲဖြတ်အကဲဖြတ်၍ အမှတ်ပေးရမည့် အချက်များ',null, array('spaceBefore'=> 200));
+        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
+        $table->addRow(50);
+        $table->addCell(1500, ['vMerge' => 'restart'])->addText('အမှတ်စဥ်', ['bold' => true],$pStyle_2);
+        $table->addCell(4000, ['vMerge' => 'restart'])->addText('အကြောင်းအရာ', ['bold' => true], $pStyle_2);
+        $table->addCell(6000, ['gridSpan' => 3, 'valign' => 'center'])->addText('အကဲဖြတ် အမှတ်(အမှတ်ပြည့် ၂၀မှတ်စီ)', ['bold'=>true],$pStyle_1);
+        $table->addRow(50);
+        $table->addCell(1500, ['vMerge' => 'continue']);
+        $table->addCell(4000, ['vMerge' => 'continue']);
+        $table->addCell(2000)->addText('ကနဦး', ['bold'=>true],$pStyle_1);
+        $table->addCell(2000)->addText('ထပ်ဆင့်', ['bold' => true],$pStyle_1);
+        $table->addCell(2000)->addText('ထပ်ဆင့်', ['bold' => true],$pStyle_1);
+        $table->addRow(50);
+        $table->addCell(1000)->addText('၁',null,$pStyle_6);
+        $table->addCell(4000)->addText('ခေါင်းဆောင်မှုပေးနိုင်ခြင်း	',null,$pStyle_3);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addRow(50);
+        $table->addCell(1000)->addText('၂',null,$pStyle_6);
+        $table->addCell(4000)->addText('ယုံကြည်စိတ်ချရခြင်း',null,$pStyle_3);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addRow(50);
+        $table->addCell(1000)->addText('၃',null,$pStyle_6);
+        $table->addCell(4000)->addText('လုပ်ငန်းကျွမ်းကျင်မှုရှိခြင်း',null,$pStyle_3);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addRow(50);
+        $table->addCell(1000)->addText('၄',null,$pStyle_6);
+        $table->addCell(4000)->addText('တာဝန်ကိုလိုလားစွာထမ်းဆောင်ခြင်း',null,$pStyle_3);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addRow(50);
+        $table->addCell(1000)->addText('၅',null,$pStyle_6);
+        $table->addCell(4000)->addText('ဆက်ဆံရေးပြေပြစ်ခြင်း',null,$pStyle_3);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addRow(50);
+        $table->addCell(1000)->addText('',null,$pStyle_6);
+        $table->addCell(4000)->addText('အမှတ်ပေါင်း',null,$pStyle_3);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $table->addCell(2000)->addText('',null, $pStyle_6);
+        $section->addTextBreak();
+        $section->addTitle('(နိုင်ငံဝန်ထမ်း နည်းဉပဒေ ၄၇)',2);
         $table = $section->addTable();
-        $table->addRow();
-        $table->addCell(1300)->addText('၁။', null,$pStyle_5);
-        $table->addCell(13000)->addText('အမည်', null, $pStyle_8);
-        $table->addCell(700)->addText('-',$pStyle_5);
-        $table->addCell(13000)->addText($staff->name, null, $pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('ကနဦးမှတ်တမ်းရေးသူ၏', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('လက်မှတ်', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('အမည်', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('ရာထူး', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('ဌာန', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('နေ့စွဲ', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
 
-        $table->addRow();
-        $table->addCell(1300)->addText('၂။', null,$pStyle_5);
-        $table->addCell(13000)->addText('အသက်(မွေးနေ့သက္ကရာဇ်)', null, $pStyle_8);
+        $section->addTitle('ထပ်ဆင့်မှတ်တမ်းရေးသူ',2);
+        $table = $section->addTable();
+        $table->addRow(50);
+        $table->addCell(8000)->addText('(ဝန်ထမ်း အဖွဲ့အစည်းအကြီးအမှူး)၏', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('လက်မှတ်', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('အမည်', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('ရာထူး', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('ဌာန', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('နေ့စွဲ', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        
+        $section->addTitle('ထပ်ဆင့်မှတ်တမ်းရေးသူ',2);
+        $table = $section->addTable();
+        $table->addRow(50);
+        $table->addCell(8000)->addText('(ဝန်ကြီးဌာနနှင့်အဖွဲ့အစည်းကြီးအမှူး)၏ အမည်', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('လက်မှတ်', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('အမည်', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('ရာထူး', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('ဌာန', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('နေ့စွဲ', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+         
+        $section->addTitle('ထပ်ဆင့်မှတ်တမ်းရေးသူ',2);
+        $table = $section->addTable();
+        $table->addRow(50);
+        $table->addCell(8000)->addText('(ဝန်ကြီးဌာနနှင့်အဖွဲ့အစည်းကြီးအမှူး)၏အမည်', null, $pStyle_7);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('ရာထူး', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('ဌာန', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(8000)->addText('', null, $pStyle_7);
+        $table->addCell(1000)->addText('',null ,$pStyle_8);
+        $table->addCell(8000)->addText('နေ့စွဲ', null, $pStyle_7);
+        $table->addCell(5000)->addText('' ,null ,$pStyle_8);
+        $section->addTitle('[နိုင်ငံဝန်ထမ်းနည်းဉပဒေများ၊ နည်းဉဒေ ၄၆၊ နည်းဉပဒေခွဲ(ဂ)(ဃ)(င)]', 1);
+        $section->addText('၄။ ' . ' အကဲဖြတ် အမှတ်ပေးခြင်းနှင့် စပ်လျဉ်း၍ အကျိုးအကြောင်း ဖော်ပြချက်',null, array('spaceBefore'=> 200));
+
+        $table = $section->addTable();
+        $table->addRow(50);
+        $table->addCell(1300)->addText('', null, $pStyle_5);
+        $table->addCell(13000)->addText('အကဲဖြတ်ခံရသူအမည်',null ,$pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText(formatDMYmm($staff->dob), null, $pStyle_8);
-
-        $table->addRow();
-        $table->addCell(1300)->addText('၃။', null, $pStyle_5);
-        $table->addCell(13000)->addText('လူမျိုး/ ကိုးကွယ်သည့်ဘာသာ', null, $pStyle_8);
+        $table->addCell(13000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(1300)->addText('', null, $pStyle_5);
+        $table->addCell(13000)->addText('ရာထူး',null ,$pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText(($staff->ethnic_id ? $staff->ethnic->name : '-') . '၊' . ($staff->religion_id ? $staff->religion->name : '-'), null, $pStyle_8);
+        $table->addCell(13000)->addText('' ,null ,$pStyle_8);
 
-        $table->addRow();
-        $table->addCell(1300)->addText('၄။', null,$pStyle_5);
-        $table->addCell(13000)->addText('အမျိုးသားမှတ်ပုံတင်အမှတ်', null, $pStyle_8);
-        $table->addCell(700)->addText('-', null,$pStyle_5);
-        $table->addCell(13000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . $staff->nrc_sign->name . $staff->nrc_code, null, $pStyle_8);
-
-        $table->addRow();
-        $table->addCell(1300)->addText('၅။', null,$pStyle_5);
-        $table->addCell(13000)->addText('အလုပ်အကိုင်နှင့် ဌာန', null, $pStyle_8);
-        $table->addCell(700)->addText('-', null,$pStyle_5);
-        $table->addCell(13000)->addText($staff->current_rank->name . "\n" . $staff->current_department->name.'၊'.'ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', null, $pStyle_8);
-
-        $joinDate = \Carbon\Carbon::parse($staff->join_date);
-        $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());
-        $table->addRow();
-        $table->addCell(1300)->addText('၆။', null,$pStyle_5);
-        $table->addCell(13000)->addText('အမှုထမ်းလုပ်သက်(ဝင်ရောက်သည့်နေ့စွဲ)', null, $pStyle_8);
-        $table->addCell(700)->addText('-', null,$pStyle_5);
-        $table->addCell(13000)->addText(formatPeriodMM($joinDateDuration->y, $joinDateDuration->m) . ', ' . formatDMYmm($joinDate), null, $pStyle_8);
-
-        $table->addRow();
-        $table->addCell(1300)->addText('၇။', null,$pStyle_5);
-        $table->addCell(13000)->addText(' လက်ရှိနေရပ်လိပ်စာ', null, $pStyle_8);
+        $section->addText('အကဲဖြတ်မှတ်တမ်းရေးသူ၏ စိစစ်အကဲဖြတ်ခြင်းအတွက်ကျိုးကြောင်းဖော်ပြချက်(အချက်တစ် ချက်ချင်းစီ အတွက် သာမန်အောက် ၇ မှတ်နှင့်အောက် သို့မဟုတ် ထူးချွန်အဆင့်အတွက် ၁၆ မှတ်နှင့် အထက်ဖြစ်ပါက အကဲဖြတ်သူက ကျိုးကြောင်းဖော်ပြချက် ရေးသားရန်ဖြစ်ပါသည်။)', null, array('spaceBefore' => 200, 'alignment' => Jc::BOTH));
+        $section->addTitle('[နိုင်ငံဝန်ထမ်းနည်းဉပဒေများ၊ နည်းဉဒေ ၄၇၊ နည်းဉပဒေခွဲ(စ)(၃)]', 1);
+        $table = $section->addTable();
+        $table->addRow(50);
+        $table->addCell(1300)->addText('(၁)', null, $pStyle_5);
+        $table->addCell(13000)->addText('ခေါင်း‌ဆောင်မှုပေးနိုင်ခြင်း',null ,$pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText($staff->current_address_house_no.$staff->current_address_street . '၊' . $staff->current_address_ward . '၊' .$staff->current_address_township_or_town->name.'မြို့နယ်'.'၊'. $staff->current_address_region->name.'ဒေသကြီး။', null, $pStyle_8);
-        $table->addRow();
-        $table->addCell(1300)->addText('၈။', null,$pStyle_5);
-        $table->addCell(13000)->addText('ပညာအရည်အချင်း', null, $pStyle_8);
-        $table->addCell(700)->addText('-', null,$pStyle_5);
-        $educationNames = $staff->staff_educations->map(fn($edu) => $edu->education?->name)->implode(', ');
-        $table->addCell(13000)->addText($educationNames, null,$pStyle_8);
-        $table->addRow();
-        $table->addCell(1300)->addText('၉။', null,$pStyle_5);
-        $table->addCell(13000)->addText('အဖအမည်', null, $pStyle_8);
-        $table->addCell(700)->addText('-', null,$pStyle_5);
-        $table->addCell(13000)->addText($staff->father_name, null, $pStyle_8);
-
-        $table->addRow();
-        $table->addCell(1300)->addText('၁၀။', null,$pStyle_5);
-        $table->addCell(13000)->addText('အလုပ်အကိုင်', null, $pStyle_8);
-        $table->addCell(700)->addText('-', null,$pStyle_5);
-        $table->addCell(13000)->addText($staff->father_occupation, null, $pStyle_8);
-        $table->addRow();
-        $table->addCell(1300)->addText('၁၁။', null,$pStyle_5);
-        $table->addCell(13000)->addText('အမိအမည်', null, $pStyle_8);
-        $table->addCell(700)->addText('-', null,$pStyle_5);
-        $table->addCell(13000)->addText($staff->mother_name, null, $pStyle_8);
-        $table->addRow();
-        $table->addCell(1300)->addText('၁၂။', null,$pStyle_5);
-        $table->addCell(13000)->addText('အလုပ်အကိုင်', null, $pStyle_8);
-        $table->addCell(700)->addText('-', null,$pStyle_5);
-        $table->addCell(13000)->addText($staff->mother_occupation, null, $pStyle_8);
-        $table->addRow();
-        $table->addCell(1300)->addText('၁၃။', null,$pStyle_5);
-        $table->addCell(13000)->addText("နိုင်ငံခြားသွားရောက်ဖူးခြင်းရှိ/မရှိ\n(အကြိမ်အရေအတွက်)", null, $pStyle_8);
+        $table->addCell(13000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(1300)->addText('(၂)', null, $pStyle_5);
+        $table->addCell(13000)->addText('ယုံကြည်စိတ်ချရခြင်း',null ,$pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText(
-            $staff->abroads->count() > 0 ? en2mm($staff->abroads->count().'ကြိမ်') : 'မရှိပါ',
-            null,
-            $pStyle_8
-        );
-        $pStyle_1 = ['align' => 'center', 'spaceAfter' => 30, 'spaceBefore' => 30];
-        $pStyle_2 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 500];
-        $pStyle_3 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 500];
-        $pStyle_4 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
-        $pStyle_5 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100];
-        $section->addTextBreak();
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        $table->addRow(50, ['tblHeader' => true]);
-        $table->addCell(14000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ကာလ', ['bold' => true], $pStyle_3);
-        $textContent_1 = "နောက်ဆုံး\nသွားရောက်\nခဲ့သည့်\n(၅)နိုင်ငံ";
-        $table->addCell(6000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_2);
+        $table->addCell(13000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(1300)->addText('(၃)', null, $pStyle_5);
+        $table->addCell(13000)->addText('လုပ်ငန်းကျွမ်းကျင်မှုရှိခြင်း',null ,$pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(1300)->addText('(၄)', null, $pStyle_5);
+        $table->addCell(13000)->addText('တာဝန်ကို လိုလားစွာ ထမ်းဆောင်ခြင်း',null ,
+        $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText('' ,null ,$pStyle_8);
+        $table->addRow(50);
+        $table->addCell(1300)->addText('(၅)', null, $pStyle_5);
+        $table->addCell(13000)->addText('ဆက်ဆံရေးပြေပြစ်ခြင်း',null ,
+        $pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText('' ,null ,$pStyle_8);
 
-        $table->addCell(6000, ['vMerge' => 'restart'])->addText("သွားရောက်\nသည့်ကိစ္စ", ['bold' => true], $pStyle_3);
-
-        $textContent_2 = "သင်တန်းတက်\nခြင်းဖြစ်လျှင် \nအကြိမ်မည်မျှဖြင့်\nအောင်မြင်သည်";
-        $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent_2, ['bold' => true], $pStyle_4);
-        $textContent_3 = "မည်သည့်အစိုးရ\n အဖွဲ့အစည်း\nအထောက်အပံ့ဖြင့်\nသွားရောက်သည်";
-        $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent_3, ['bold' => true], $pStyle_5);
-        $table->addRow(50, ['tblHeader' => true]);
-        $table->addCell(7000)->addText('မှ', ['bold' => true], ['alignment' => 'center']);
-        $table->addCell(7000)->addText('ထိ', ['bold' => true], ['alignment' => 'center']);
-        $table->addCell(6000, ['vMerge' => 'continue']);
-        $table->addCell(6000, ['vMerge' => 'continue']);
-        $table->addCell(8000, ['vMerge' => 'continue']);
-        $table->addCell(8000, ['vMerge' => 'continue']);
-        $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
-        if ($staff->abroads->isNotEmpty()) {
-            $latestAbroads = $staff->abroads
-            ? $staff->abroads->sortByDesc('to_date')->take(5)
-            : collect();
-            foreach ($latestAbroads as $abroad) {
-                $table->addRow();
-                $table->addCell(7000)->addText(formatDMYmm($abroad->from_date),null,$pStyle_1);
-                $table->addCell(7000)->addText(formatDMYmm($abroad->to_date),null,$pStyle_1);
-                $table->addCell(6000)->addText($abroad->countries->pluck('name')->unique()->join(', '),null,$pStyle_1);
-                $table->addCell(6000)->addText($abroad->particular,null,$pStyle_1);
-                $table->addCell(8000)->addText($abroad->training_success_count,null,$pStyle_1);
-                $table->addCell(8000)->addText($abroad->sponser,null,$pStyle_1);
-            }
-        } else {
-            $table->addRow();
-            $cell = $table->addCell(42000, ['gridSpan' => 6]); 
-            $cell->addText(
-                'မရှိပါ',
-               null,
-                ['alignment' => 'center']
-            );
-        }
-        $section->addTextBreak();
-        $section->addText('၁၄။ '.' ဇနီး/ခင်ပွန်း', ['bold' => true], array('spaceBefore' => 200));
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        $pStyle_1 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
-        $table->addRow(50, ['tblHeader' => true]);
-        $textContent_1 = "အမည်\n(အခြားအမည်များ\nရှိလျှင်လည်း\nဖော်ပြရန်)";
-        $table->addCell(6000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_3);
-        $table->addCell(5000)->addText('လူမျိုး/နိုင်ငံသား', ['bold' => true], $pStyle_3);
-        $table->addCell(5000)->addText('အလုပ်အကိုင်နှင့်ဌာန', ['bold' => true], $pStyle_3);
-        $table->addCell(4000)->addText('နေရပ်', ['bold' => true], $pStyle_3);
-        $table->addCell(2500)->addText('မှတ်ချက်', ['bold' => true], $pStyle_3);
-
-        if ($staff->spouses->isNotEmpty()) {
-            foreach ($staff->spouses as $spouse) {
-                $table->addRow();
-                $table->addCell(6000,['valign' => 'center'])->addText($spouse->name,null,$pStyle_1);
-                $table->addCell(5000,['valign' => 'center'])->addText($spouse->ethnic->name . '/' . $spouse->religion->name,null,$pStyle_1);
-                $table->addCell(5000,['valign' => 'center'])->addText($spouse->occupation,null,$pStyle_1);
-                $table->addCell(4000,['valign' => 'center'])->addText($spouse->address,null,$pStyle_1);
-                $table->addCell(2500,['valign' => 'center'])->addText('',null,$pStyle_1);
-            }
-        } else {
-            $table->addRow();
-            $cell = $table->addCell(22500, ['gridSpan' => 4]); 
-            $cell->addText(
-                'မရှိပါ',
-               null,
-                ['alignment' => 'center']
-            );
-        }
-        $section->addText('၁၅။ အထက်ပါဇယားကွက်များတွင် ဖြည့်စွက်ရေးသွင်းထားသော အကြောင်းအရာများအား မှန်ကန်ကြောင်း တာဝန်ခံလက်မှတ်ရေးထိုးပါသည်။');
         $tableStyle = [
-            'alignment' => Jc::END,
+            'alignment' => Jc::END 
         ];
         $table = $section->addTable($tableStyle);
-        $table->addRow(50);
-        $table->addCell(2100)->addText('လက်မှတ်', ['alignment' => 'right']);
-        $table->addCell(300)->addText('-', ['alignment' => 'right']);
-        $table->addCell(2100)->addText('', ['alignment' => 'right']);
-        $table->addRow(50);
-        $table->addCell(2100)->addText('အမည်', ['alignment' => 'right']);
-        $table->addCell(300)->addText('-', ['alignment' => 'right']);
-        $table->addCell(2100)->addText($staff->name, ['alignment' => 'right']);
-        $table->addRow(50);
-        $table->addCell(2100)->addText('အဆင့်', ['alignment' => 'right']);
-        $table->addCell(300)->addText('-', ['alignment' => 'right']);
-        $table->addCell(2100)->addText($staff->currentRank->name, ['alignment' => 'right']);
-        $table->addRow(50);
-        $table->addCell(2100)->addText('တပ်/ဌာန', ['alignment' => 'right']);
-        $table->addCell(300)->addText('-', ['alignment' => 'right']);
-        $table->addCell(2100)->addText($staff->current_department->name, ['alignment' => 'right']);
+            $table->addRow(50);
+            $table->addCell(2100)->addText('အကဲဖြတ်သူလက်မှတ် ',null ,$pStyle_8);
+            $table->addCell(300)->addText('', null, $pStyle_5);
+            $table->addCell(2100);
+            $table->addRow(50);
+            $table->addCell(2100)->addText('အမည်',null ,$pStyle_4);
+            $table->addCell(300)->addText('-',  null, $pStyle_5);
+            $table->addCell(2100)->addText($staff->name,null ,$pStyle_4);
+    
+            $table->addRow(50);
+            $table->addCell(2100)->addText('ရာထူး',null ,$pStyle_4);
+            $table->addCell(300)->addText('',  null, $pStyle_5);
+            $table->addCell(2100)->addText('',null ,$pStyle_4);
+            $table->addRow(50);
+            $table->addCell(2100)->addText('ဌာန',null ,$pStyle_4);
+            $table->addCell(300)->addText('-',  null, $pStyle_5);
+            $table->addCell(2100)->addText($staff->current_department->name,null ,$pStyle_4);
         $section->addText('ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
-        $fileName = 'staff_report_15_' . $staff->id . '.docx';
+        $fileName = 'staff_report_19_1_' . $staff->id . '.docx';
         $objWriter = PhpWordIOFactory::createWriter($phpWord, 'Word2007');
         return response()->stream(
             function () use ($objWriter) {
@@ -265,7 +450,6 @@ class PdfStaffReport20 extends Component
     public function render()
     {
         $staff = Staff::where('id', $this->staff_id)->first();
-
         return view('livewire.pdf-staff-report20', [
             'staff' => $staff,
         ]);
