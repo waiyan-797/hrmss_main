@@ -599,7 +599,7 @@ if (!function_exists(function: 'isFinanceAdmin')) {
 if (!function_exists(function: 'isSuperAdmin')) {
 
     function isSuperAdmin() {
-        return auth()->user()->role_id ==  1  ;
+        return auth()->user()->role_id ==  1  || auth()->user()->role_id ==  2  ;
     }
 
 

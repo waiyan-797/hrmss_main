@@ -14,6 +14,14 @@
         <x-text-input wire:model="current_rank_date" id="current_rank_date" type="date" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('current_rank_date')" />
     </div>
+
+    <div>
+        <x-input-label for="ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်‌နေ့" :value="__('ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်‌နေ့  (လ ၊ ရက် ၊ နှစ်)')" />
+        <x-text-input wire:model="government_staff_started_date" id="government_staff_started_date" type="date" class="mt-1 block w-full"/>
+        <x-input-error class="mt-2" :messages="$errors->get('government_staff_started_date')" />
+    </div>
+
+
     <div>
         <x-input-label for="လက်ရှိဌာန" :value="__('လက်ရှိဌာန')" />
         <x-select
@@ -26,7 +34,17 @@
         />
         <x-input-error class="mt-2" :messages="$errors->get('current_department_id')" />
     </div>
+
     <div>
+        <x-input-label for="လက်ရှိဌာန(DICA)ရောက်ရှိရက်စွဲ" :value="__('လက်ရှိဌာန(DICA)ရောက်ရှိရက်စွဲ (လ ၊ ရက် ၊ နှစ်)')" />
+        <x-text-input wire:model="join_date" id="join_date" class="mt-1 block w-full" type="date" required/>
+        <x-input-error class="mt-2" :messages="$errors->get('join_date')" />
+    </div>
+
+
+    <div>
+
+
         <x-input-label for="current_division_id" :value="__('လက်ရှိဌာနခွဲ')" />
         <x-select
             disabled="{{!auth()->user()->AdminHR()}}"
@@ -40,16 +58,15 @@
         <x-input-error class="mt-2" :messages="$errors->get('current_division_id')" />
     </div>
     <div>
-        <x-input-label for="လက်ရှိဌာနအလုပ်ဝင်ရက်စွဲ" :value="__('လက်ရှိဌာနအလုပ်ဝင်ရက်စွဲ (လ ၊ ရက် ၊ နှစ်)')" />
-        <x-text-input wire:model="join_date" id="join_date" class="mt-1 block w-full" type="date" required/>
-        <x-input-error class="mt-2" :messages="$errors->get('join_date')" />
+        <x-input-label for="လက်ရှိဌာနခွဲရောက်ရှိရက်စွဲ" :value="__('လက်ရှိဌာနခွဲရောက်ရှိရက်စွဲ(လ ၊ ရက် ၊ နှစ်)')" />
+        <x-text-input wire:model="current_division_join_date" id="current_division_join_date" class="mt-1 block w-full" type="date" />
+        <x-input-error class="mt-2" :messages="$errors->get('current_division_join_date')" />
     </div>
-    <div>
-        <x-input-label for="ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်‌နေ့" :value="__('ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်‌နေ့  (လ ၊ ရက် ၊ နှစ်)')" />
-        <x-text-input wire:model="government_staff_started_date" id="government_staff_started_date" type="date" class="mt-1 block w-full"/>
-        <x-input-error class="mt-2" :messages="$errors->get('government_staff_started_date')" />
-    </div>
-    <div>
+
+
+
+
+    {{-- <div>
         <x-input-label for="ပြောင်းရွေ့သည့်ဌာနခွဲ" :value="__('ပြောင်းရွေ့သည့်ဌာနခွဲ')" />
         <x-select
             wire:model="transfer_division_id"
@@ -59,12 +76,12 @@
             class="mt-1 block w-full"
         />
         <x-input-error class="mt-2" :messages="$errors->get('transfer_division_id')" />
-    </div>
-    <div>
+    </div> --}}
+    {{-- <div>
         <x-input-label for="ပြောင်းရွေ့သည့်မှတ်ချက်" :value="__('ပြောင်းရွေ့သည့်မှတ်ချက်')" />
         <x-text-input wire:model="transfer_remark" id="transfer_remark" name="transfer_remark" type="text" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('transfer_remark')" />
-    </div>
+    </div> --}}
     <div>
         <x-input-label for="တွဲဖက်အင်အားဖြစ်လျှင် ၀န်ကြီးဌာန" :value="__('တွဲဖက်အင်အားဖြစ်လျှင် ၀န်ကြီးဌာန')" />
         <x-select
