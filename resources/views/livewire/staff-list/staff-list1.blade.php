@@ -4,13 +4,13 @@
             {{-- <x-primary-button type="button" wire:click="go_pdf()">PDF</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_word()">WORD</x-primary-button>
             <br><br>
-            <h2 class="font-semibold text-center">ရင်းနှီးမြှပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h2>
+            <h2 class="font-semibold text-center">ရင်းနှီးမြှုပ်နှံမှုကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h2>
 
             <h2 class="font-semibold text-center">
       
-               {{$selsectedDivisionTypeId  == 1 ? ' ရုံးချုပ် ဌာနခွဲ' : ($selsectedDivisionTypeId  == 2 ? 'တိုင်းဒေသကြီး/ပြည်နယ်ဦးစီးမှုးရုံး' :  'ရုံးချုပ် ဌာနခွဲ နှင့် တိုင်းဒေသကြီး/ပြည်နယ်ဦးစီးမှုးရုံး')  }} 
+               {{$selsectedDivisionTypeId  == 1 ? ' ရုံးချုပ် ဌာနခွဲ' : ($selsectedDivisionTypeId  == 2 ? 'တိုင်းဒေသကြီး/ပြည်နယ်ညွှန်ကြားရေးမှူးရုံး' :  'ရုံးချုပ် ဌာနခွဲ နှင့် တိုင်းဒေသကြီး/ပြည်နယ်ညွှန်ကြား‌ရေးမှူးရုံး')  }} 
                 
-                များ၏ အရာထမ်း၊အမှုထမ်းများစာရင်း
+                များ၏ အရာထမ်း၊ အမှုထမ်းများစာရင်း
             
             </h2>
 
