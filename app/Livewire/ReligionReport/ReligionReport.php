@@ -64,7 +64,7 @@ class ReligionReport extends Component
         // $table->addRow();
         $table->addRow(50, ['tblHeader' => true]);
         $table->addCell(1500, ['vMerge' => 'restart'])->addText('စဥ်',['bold' => true], $pStyle_1);
-        $table->addCell(3000, ['vMerge' => 'restart'])->addText('အမည်',['bold' => true], $pStyle_1);
+        $table->addCell(5000, ['vMerge' => 'restart'])->addText('အမည်',['bold' => true], $pStyle_1);
         $table->addCell(5000, ['vMerge' => 'restart'])->addText('ရာထူး',['bold' => true], $pStyle_1);
         $table->addCell(4000, ['gridSpan' => 2])->addText('ဗုဒ္ဓဘာသာ',['bold'=>true],$pStyle_2);
         $table->addCell(4000, ['gridSpan' => 2])->addText("ခရစ်ယာန်\nဘာသာ",['bold'=>true],$pStyle_2);

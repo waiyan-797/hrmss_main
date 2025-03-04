@@ -45,11 +45,11 @@ class PunishmentReport extends Component
         $section->addTitle('Punishment Report', 1);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50, array('tblHeader' => true));
-        $table->addCell(1000)->addText('စဥ်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
-        $table->addCell(4000)->addText('အမည်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
-        $table->addCell(4000)->addText('ရာထူး',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
-        $table->addCell(5000)->addText('ပြစ်ဒဏ်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
-        $table->addCell(2000)->addText('မှတ်ချက်',['bold'=>true],['alignment'=>'center','spaceBefore'=>150]);
+        $table->addCell(1000,['vMerge' => 'restart'])->addText('စဥ်', ['bold' => true, 'size' => 13],['alignment' => 'center', 'spaceBefore'=> 50]);
+        $table->addCell(4000,['vMerge' => 'restart'])->addText('အမည်',['bold'=>true,'size' => 13],['alignment'=>'center','spaceBefore'=>50]);
+        $table->addCell(4000, ['vMerge' => 'restart'])->addText('ရာထူး',['bold'=>true,'size' => 13],['alignment'=>'center','spaceBefore'=>50]);
+        $table->addCell(5000, ['vMerge' => 'restart'])->addText('ပြစ်ဒဏ်',['bold'=>true,'size' => 13],['alignment'=>'center','spaceBefore'=>50]);
+        $table->addCell(2000, ['vMerge' => 'restart'])->addText('မှတ်ချက်',['bold'=>true,'size' => 13],['alignment'=>'center','spaceBefore'=>50]);
         foreach ($staffs as  $staff) {
             $index = 1;
             $table->addRow();
