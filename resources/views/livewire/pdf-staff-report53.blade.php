@@ -53,7 +53,7 @@
                         <label for="name"
                             class="md:w-3/5">{{collect([$staff->ethnic?->name,$staff->religion?->name,])->filter()->implode('၊')}}</label>
                                     </div>
-                                   
+
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၆။ </label>
                     <label for="name" class="md:w-1/3">အရပ်အမြင့်</label>
@@ -113,7 +113,7 @@
                     <label for="" class="md:w-5">၁၃။ </label>
                     <label for="name" class="md:w-1/3">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</label>
                     <label for="" class="md:w-5">-</label>
-                  
+
                     <label for="name" class="md:w-3/5">{{$staff->nrc_region_id->name.$staff->nrc_township_code->name.$staff->nrc_sign->name.en2mm( $staff->nrc_code )}}</label>
                                     </div>
 
@@ -126,7 +126,7 @@
                         {{$staff->current_address_house_no.$staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'ဒေသကြီး။'}}
                     </label>
                                     </div>
-                                   
+
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၅။ </label>
@@ -226,7 +226,7 @@
                     <label for="" class="md:w-5">၈။ </label>
                     <label for="name" class="md:w-80 ml-3">ပညာအရည်အချင်း</label>
                     <label for="" class="md:w-5 ml-10">-</label>
-                  
+
                         <label for="name" class="md:w-3/5">
                             {{ $staff->staff_educations->map(function ($education) {
                                 return $education->education?->name;
@@ -242,7 +242,7 @@
                                                 <label for="name" class="md:w-1/3">ပညာအရည်အချင်း</label>
                                                 <label for="" class="md:w-5">-</label>
                                                 <label for="name" class="md:w-3/5">{{ $educationNames }}</label>
-                                            </div> 
+                                            </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၉။ </label>
                     <label for="name" class="md:w-1/3">အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့်
@@ -255,7 +255,7 @@
                             $staff->father_place_of_birth,
                             $staff->father_occupation,
                         ])->filter()->implode('၊') }}
-                        
+
                            </label>
                                     </div>
 
@@ -271,7 +271,7 @@
                                 $staff->father_address_township_or_town?->name.'မြို့နယ်',
                                 $staff->father_address_region?->name.'ဒေသကြီး',
                             ])->filter()->implode('၊') }}
-                            
+
                             </label>
                                     </div>
 
@@ -280,7 +280,7 @@
                     <label for="name" class="md:w-1/3">အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့်
                         အလုပ်အကိုင်</label>
                     <label for="" class="md:w-5">-</label>
-                   
+
                         <label for="name" class="md:w-3/5">
                             {{ collect([
                                 $staff->mother_name,
@@ -289,7 +289,7 @@
                                 $staff->mother_place_of_birth,
                                 $staff->mother_occupation,
                             ])->filter()->implode('၊') }}
-                            
+
                         </label>
                     </div>
 
@@ -323,7 +323,7 @@
                     <label for="" class="md:w-5">၂၄။ </label>
                     <label for="name" class="md:w-1/3">လက်ရှိအလုပ်အကိုင်နှင့်အဆင့်</label>
                     <label for="" class="md:w-5">-</label>
-                   
+
                         <label for="name" class="md:w-3/5">{{ $staff->current_rank->name }}</label>
                                     </div>
 
@@ -333,7 +333,7 @@
                     <label for="" class="md:w-5">-</label>
 
                         <label for="name" class="md:w-3/5">
-                            <!-- <span>{{ formatDMYmm($staff->join_date)}} </span><br> 3.3.25 , someone says join_date related is dica and use gov_staff_st_date -->
+                            <!-- <span>{{ formatDMYmm($staff->join_date)}} </span><br> 3.3.25 , someone says join_date related is dica and use gov_staff_st_date     -->
                             <span>{{ formatDMYmm($staff->government_staff_started_date)}} </span><br>
                              <span>{{formatDMYmm($staff->current_rank_date)}}</span>
                         </label>
@@ -360,7 +360,7 @@
                     <label for="" class="md:w-5">၂၈။ </label>
                     <label for="name" class="md:w-1/3">လစာဝင်ငွေ</label>
                     <label for="" class="md:w-5">-</label>
-                   
+
                         <label for="name" class="md:w-3/5">{{ $staff->payscale?->name }}</label>
                                     </div>
 
@@ -382,7 +382,7 @@
             </div>
 
             <div class="ml-4">
-               
+
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၁။ </label>
@@ -431,9 +431,9 @@
                         </table>
                     </div>
                 </div>
-                
 
-                
+
+
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၂။ </label>
@@ -480,9 +480,9 @@
                         </table>
                     </div>
                 </div>
-                
 
-                
+
+
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၃။ </label>
@@ -531,9 +531,9 @@
                         </table>
                     </div>
                 </div>
-                
 
-                
+
+
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၄။ </label>
@@ -582,9 +582,9 @@
                         </table>
                     </div>
                 </div>
-                
 
-                
+
+
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၅။ </label>
@@ -633,9 +633,9 @@
                         </table>
                     </div>
                 </div>
-                
 
-                
+
+
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၆။ </label>
@@ -684,9 +684,9 @@
                         </table>
                     </div>
                 </div>
-                
 
-                
+
+
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၇။ </label>
@@ -735,10 +735,10 @@
                         </table>
                     </div>
                 </div>
-                
 
-                
-                
+
+
+
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၈။ </label>
@@ -787,9 +787,9 @@
                         </table>
                     </div>
                 </div>
-                
 
-               
+
+
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၃၉။ </label>
@@ -836,7 +836,7 @@
                         </table>
                     </div>
                 </div>
-                
+
 
                 <div class="flex justify-around w-full">
                     <label for="" class="md:w-5">၄၀။ </label>
@@ -846,8 +846,8 @@
                         အသေးစိတ်ဖော်ပြရန်)</label>
                     <label for="" class="md:w-5">-</label>
 
-                        <label for="name" class="md:w-3/5"> {{$staff->family_in_politics 
-                            ?  ($staff->family_in_politics_text ?? '') 
+                        <label for="name" class="md:w-3/5"> {{$staff->family_in_politics
+                            ?  ($staff->family_in_politics_text ?? '')
                             : 'မရှိ'}}</label>
                                     </div>
             </div>
@@ -858,15 +858,15 @@
                     <label for="" class="md:w-5">၁။ </label>
                     <label for="name" class="md:w-1/3">နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ်ဖော်ပြရန်)</label>
                     <label for="" class="md:w-5">-</label>
-                    
-                    <label for="name" class="md:w-3/5"> 
+
+                    <label for="name" class="md:w-3/5">
                         @foreach($staff->schools as $school)
                         {{ $school->school_name}}/{{ $school->year}}
                         @endforeach
                     </label>
-                </div> 
-                
-                
+                </div>
+
+
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၂။ </label>
@@ -882,7 +882,7 @@
                         ])->filter()->implode('၊') }}</label>
                                     </div>
 
-                                   
+
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၃။ </label>
@@ -951,7 +951,7 @@
                         <label for="name" class="md:w-3/5">{{ en2mm($staff->has_military_friend)? $staff->has_military_friend_text:'မရှိ'}}</label>
                                     </div>
 
-               
+
                 <div class="w-full mb-4">
                     <div class="mb-2 flex justify-start space-x-2">
                         <label>၁၀။ </label>
@@ -991,7 +991,7 @@
                         </table>
                     </div>
                 </div>
-                
+
 
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၁။ </label>
@@ -1038,19 +1038,19 @@
                         <p class="md:w-5">၊</p>
                         <p class="md:w-1/2"></p>
                     </div>
-                    
+
                     <div class="flex justify-end mb-2 ml-80">
                         <p class="md:w-1/4">ကိုယ်ပိုင်အမှတ်(သို့)နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်<br></p>
                         <p class="md:w-5">၊</p>
                         <p class="md:w-1/2">{{$staff->nrc_region_id->name.$staff->nrc_township_code->name.$staff->nrc_sign->name.en2mm( $staff->nrc_code )}}</p>
                     </div>
-                    
+
                     <div class="flex justify-end mb-2 ml-80">
                         <p class="md:w-1/4">အဆင့်/ ရာထူး</p>
                         <p class="md:w-5">၊</p>
                         <p class="md:w-1/2">{{$staff->current_rank->name}}</p>
                     </div>
-                    
+
                     <div class="flex justify-end mb-2 ml-80">
                         <p class="md:w-1/4">အမည်</p>
                         <p class="md:w-5">၊</p>
@@ -1070,7 +1070,7 @@
                 </div>
             </div>
 
-            
+
         </div>
     </div>
 </div>

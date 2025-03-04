@@ -1464,7 +1464,7 @@ $this->submit_staff();
                 'meet_with' => $abroad['meet_with'],
                 'from_date' => $abroad['from_date'] == '' ? null : $abroad['from_date'],
                 'to_date' => $abroad['to_date'] == '' ? null : $abroad['to_date'],
-                'actual_abroad_date' => '2024-12-09',
+                'actual_abroad_date' => $abroad['actual_abroad_date'] == '' ? null : $abroad['actual_abroad_date'] ,
                 'position' => $abroad['position'],
                 'towns' => $abroad['towns'],
                 'abroad_type_id' => $abroad['abroad_type_id']

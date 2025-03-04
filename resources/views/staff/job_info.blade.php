@@ -36,7 +36,7 @@
     </div>
 
     <div>
-        <x-input-label for="လက်ရှိဌာန(DICA)ရောက်ရှိရက်စွဲ" :value="__('လက်ရှိဌာန(DICA)ရောက်ရှိရက်စွဲ (လ ၊ ရက် ၊ နှစ်)')" />
+        <x-input-label for="DICA ရောက်ရှိရက်စွဲ" :value="__('DICA ရောက်ရှိရက်စွဲ (လ ၊ ရက် ၊ နှစ်)')" />
         <x-text-input wire:model="join_date" id="join_date" class="mt-1 block w-full" type="date" required/>
         <x-input-error class="mt-2" :messages="$errors->get('join_date')" />
     </div>
