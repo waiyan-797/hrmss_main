@@ -65,12 +65,7 @@
                 <table class="">
                     <tr>
                         <th style="font-weight:bold;" colspan="36">
-                            ကန့်သတ်
-                        </th>
-                    </tr>
-                    <tr>
-                        <th style="font-weight:bold;" colspan="36">
-                           ၃
+                            ကန့်သတ်<br>၃
                         </th>
                     </tr>
                 </table>
@@ -100,28 +95,28 @@
                 <table>
                     <thead>
                         <tr>
-                            <th style="font-weight:bold;" rowspan="3">စဉ်</th>
-                            <th style="font-weight:bold;" rowspan="3">လစာနှုန်း (ကျပ်)</th>
-                            <th style="font-weight:bold;" rowspan="3">ခန့်ပြီး</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">ကချင်</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">ကယား</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">ကရင်</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">ချင်း</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">မွန်</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">ရခိုင်</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">ရှမ်း</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">စစ်ကိုင်း</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">မန္တလေး</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">နေပြည်<br>တော်</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">ရန်ကုန်</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">ရန်ကုန်<br>ရုံးချုပ်</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">မကွေး</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">ပဲခူး</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">တနင်္သာရီ</th>
-                            <th style="font-weight:bold;" rowspan="2" colspan="2">ဧရာဝတီ</th>
-                            <th style="font-weight:bold;" rowspan="3">စုစု<br>ပေါင်း</th>
+                            <th style="font-weight:bold;" rowspan="2">စဉ်</th>
+                            <th style="font-weight:bold;" rowspan="2">လစာနှုန်း (ကျပ်)</th>
+                            <th style="font-weight:bold;" rowspan="2">ခန့်ပြီး</th>
+                            <th style="font-weight:bold;" colspan="2">ကချင်</th>
+                            <th style="font-weight:bold;" colspan="2">ကယား</th>
+                            <th style="font-weight:bold;" colspan="2">ကရင်</th>
+                            <th style="font-weight:bold;" colspan="2">ချင်း</th>
+                            <th style="font-weight:bold;" colspan="2">မွန်</th>
+                            <th style="font-weight:bold;" colspan="2">ရခိုင်</th>
+                            <th style="font-weight:bold;" colspan="2">ရှမ်း</th>
+                            <th style="font-weight:bold;" colspan="2">စစ်ကိုင်း</th>
+                            <th style="font-weight:bold;" colspan="2">မန္တလေး</th>
+                            <th style="font-weight:bold;" colspan="2">နေပြည်<br>တော်</th>
+                            <th style="font-weight:bold;" colspan="2">ရန်ကုန်</th>
+                            <th style="font-weight:bold;" colspan="2">ရန်ကုန်<br>ရုံးချုပ်</th>
+                            <th style="font-weight:bold;" colspan="2">မကွေး</th>
+                            <th style="font-weight:bold;" colspan="2">ပဲခူး</th>
+                            <th style="font-weight:bold;" colspan="2">တနင်္သာရီ</th>
+                            <th style="font-weight:bold;" colspan="2">ဧရာဝတီ</th>
+                            <th style="font-weight:bold;" rowspan="2">စုစု<br>ပေါင်း</th>
                         </tr>
-                        <tr> </tr>
+                        {{-- <tr> </tr> --}}
                        
                         <tr>
                             <th style="font-weight:bold;">ကျား</th>

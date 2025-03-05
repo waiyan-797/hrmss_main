@@ -99,7 +99,6 @@ class PA01 implements FromView ,WithStyles
         // $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&11' . 'ကန့်သတ်'); // Centered footer text
        
        
-        $sheet->getPageMargins()->setTop(0.8);
         
 
         $sheet->getColumnDimension('A')->setWidth(5.34);

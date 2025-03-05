@@ -49,8 +49,8 @@ class StaffList3 extends Component
             'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),
         ]);
 
-        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 12], ['alignment' => 'center','spaceBefore' => 200]);
-        $phpWord->addTitleStyle(2, ['bold' => false, 'size' => 12], ['alignment' => 'center']);
+        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center','spaceBefore' => 200]);
+        $phpWord->addTitleStyle(2, ['bold' => false, 'size' => 13], ['alignment' => 'center']);
         $phpWord->addTitleStyle(3, ['bold' => false, 'font'=>'Pyidaungsu Number', 'size' => 13], ['alignment' => 'right']);
         $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုးဦးစီးဌာန', 1);
         $section->addTitle('ရုံးချုပ် ဌာနခွဲများ၏အရာထမ်း၊ အမှုထမ်းများစာရင်း', 2);
@@ -64,7 +64,7 @@ class StaffList3 extends Component
         ]);
     
         // Table header
-        // $table->addRow();
+        $table->addRow(50, ['tblHeader'=> true]);
         $table->addCell(700)->addText('စဥ်',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
         $table->addCell(5000)->addText('ရာထူးအမည်',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
         $table->addCell(2000)->addText('ကျား',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
