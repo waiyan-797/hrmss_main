@@ -35,7 +35,7 @@ public function styles(Worksheet $sheet)
     $sheet->getStyle('A1:Z1000')->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
-            'size' => 13,
+            'size' => 12,
         ],
     ]);
     $sheet->getStyle('A1:T100')->applyFromArray([

@@ -111,7 +111,7 @@ class InvestmentCompanies15 extends Component
         return Excel::download(new PA15(
     ), 'PA15.xlsx');
     }
-    public function go_word()
+        public function go_word()
     {
         $yangon = Rank::whereHas('staffs', function($query){
             return $query->where('current_division_id', 23);

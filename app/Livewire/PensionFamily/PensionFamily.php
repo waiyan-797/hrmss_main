@@ -44,6 +44,7 @@ class PensionFamily extends Component
         $staffs =  $staffsQuery->get();
         
         $phpWord = new PhpWord(); 
+        
         $section = $phpWord->addSection([
             'pageSizeW'    => Converter::inchToTwip(14),  
             'pageSizeH'    => Converter::inchToTwip(8.5), 
