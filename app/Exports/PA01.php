@@ -76,6 +76,14 @@ class PA01 implements FromView ,WithStyles
 
         $sheet->getPageSetup()->setScale(80);
 
+        //margin$sheet->getPageMargins()->setTop(0.75);
+        $sheet->getPageMargins()->setHeader(0.3);
+        $sheet->getPageMargins()->setTop(0.75);
+        $sheet->getPageMargins()->setLeft(0.7);
+        $sheet->getPageMargins()->setRight(0.7);
+        $sheet->getPageMargins()->setBottom(0.75);
+        $sheet->getPageMargins()->setFooter(0.3);
+
         // Enable gridlines for unbordered areas
         $sheet->setShowGridlines(true);
         // $sheet->setPrintGridlines(true);
@@ -88,52 +96,54 @@ class PA01 implements FromView ,WithStyles
 
        
         // $sheet->getHeaderFooter()->setOddHeader('&C&H&"Pyidaungsu"&11' . "ကန့်သတ်\n၂"); // Centered header text
-        $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&11' . 'ကန့်သတ်'); // Centered footer text
+        // $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&11' . 'ကန့်သတ်'); // Centered footer text
        
        
         $sheet->getPageMargins()->setTop(0.8);
         
 
-        $sheet->getColumnDimension('A')->setWidth(5);
-        $sheet->getColumnDimension('B')->setWidth(23);
-        $sheet->getColumnDimension('C')->setWidth(10);
-        $sheet->getColumnDimension('D')->setWidth(7);
-        $sheet->getColumnDimension('E')->setWidth(7);
-        $sheet->getColumnDimension('F')->setWidth(6);
-        $sheet->getColumnDimension('G')->setWidth(6);
-        $sheet->getColumnDimension('H')->setWidth(6);
-        $sheet->getColumnDimension('I')->setWidth(6);
-        $sheet->getColumnDimension('J')->setWidth(6);
+        $sheet->getColumnDimension('A')->setWidth(5.34);
+        $sheet->getColumnDimension('B')->setWidth(23.67);
+        $sheet->getColumnDimension('C')->setWidth(8.45);
+        $sheet->getColumnDimension('D')->setWidth(6.34);
+        $sheet->getColumnDimension('E')->setWidth(6.89);
+        $sheet->getColumnDimension('F')->setWidth(6.34);
+        $sheet->getColumnDimension('G')->setWidth(6.34);
+        $sheet->getColumnDimension('H')->setWidth(6.34);
+        $sheet->getColumnDimension('I')->setWidth(6.34);
+        $sheet->getColumnDimension('J')->setWidth(6.34);
         $sheet->getColumnDimension('K')->setWidth(8);
-        $sheet->getColumnDimension('L')->setWidth(9);
-        $sheet->getColumnDimension('M')->setWidth(9);
-        $sheet->getColumnDimension('N')->setWidth(8);
-        $sheet->getColumnDimension('O')->setWidth(9);
-        $sheet->getColumnDimension('P')->setWidth(7);
-        $sheet->getColumnDimension('Q')->setWidth(6);
-        $sheet->getColumnDimension('R')->setWidth(9);
-        $sheet->getColumnDimension('S')->setWidth(8);
-        $sheet->getColumnDimension('T')->setWidth(9);
+        $sheet->getColumnDimension('L')->setWidth(7.56);
+        $sheet->getColumnDimension('M')->setWidth(7.89);
+        $sheet->getColumnDimension('N')->setWidth(7.11);
+        $sheet->getColumnDimension('O')->setWidth(9.11);
+        $sheet->getColumnDimension('P')->setWidth(6.67);
+        $sheet->getColumnDimension('Q')->setWidth(5.34);
+        $sheet->getColumnDimension('R')->setWidth(9.34);
+        $sheet->getColumnDimension('S')->setWidth(8.45);
+        $sheet->getColumnDimension('T')->setWidth(9.34);
 
-        $sheet->getRowDimension(1)->setRowHeight(24);
-        $sheet->getRowDimension(2)->setRowHeight(24);
-        $sheet->getRowDimension(3)->setRowHeight(24);
-        $sheet->getRowDimension(4)->setRowHeight(24);
+        $sheet->getRowDimension(1)->setRowHeight(41.3);
+        $sheet->getRowDimension(2)->setRowHeight(21);
+        $sheet->getRowDimension(3)->setRowHeight(21);
+        $sheet->getRowDimension(4)->setRowHeight(21);
+        $sheet->getRowDimension(6)->setRowHeight(64.5);
+        $sheet->getRowDimension(7)->setRowHeight(18.8);
         // $sheet->getRowDimension(21)->setRowHeight(40);
         // $sheet->getRowDimension(21)->setRowHeight(25);
 
         
-        $sheet->removeRow(3);
-        $sheet->removeRow(5);
+        $sheet->removeRow(2);
+        $sheet->removeRow(4);
         // $sheet->removeRow(22);
         // $sheet->removeRow(23);
         
 
-        for ($row = 7; $row <= $highestRow ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(26);
+        for ($row = 8; $row <= $highestRow-1 ; $row++) {
+            $sheet->getRowDimension($row)->setRowHeight(25.5);
         }
 
-        $sheet->getStyle('A1:A2')->applyFromArray([
+        $sheet->getStyle('A1')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 11,
@@ -149,7 +159,7 @@ class PA01 implements FromView ,WithStyles
             ],
         ]);
 
-        $sheet->getStyle('A3:A4')->applyFromArray([
+        $sheet->getStyle('A2:A3')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 11,
@@ -167,7 +177,7 @@ class PA01 implements FromView ,WithStyles
 
         
 
-        $sheet->getStyle('k3:k4')->applyFromArray([
+        $sheet->getStyle('k2:k3')->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 11,
@@ -184,6 +194,23 @@ class PA01 implements FromView ,WithStyles
         ]);
 
         
+        $sheet->getStyle("A4:T4")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+                'bold' => true
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
         $sheet->getStyle("A$row:$highestColumn$row")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
@@ -216,8 +243,23 @@ class PA01 implements FromView ,WithStyles
                 ],
             ],
         ]);
-
-        $sheet->getStyle("B7:$highestColumn$highestRow")->applyFromArray([
+        $sheet->getStyle("B6:B11")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT, // Custom alignment for A and B
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+        $sheet->getStyle("B13:$highestColumn$highestRow")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 11,
@@ -241,7 +283,7 @@ class PA01 implements FromView ,WithStyles
                 'size' => 11,
             ],
             'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
             ],
             'borders' => [
