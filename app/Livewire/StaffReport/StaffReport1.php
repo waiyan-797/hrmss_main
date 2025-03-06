@@ -4,6 +4,7 @@ namespace App\Livewire\StaffReport;
 
 use App\Exports\PA16;
 use App\Models\Department;
+use App\Models\Rank;
 use App\Models\PensionYear;
 use App\Models\Staff;
 use Illuminate\Support\Carbon;
@@ -16,9 +17,11 @@ use PhpOffice\PhpWord\PhpWord;
 class StaffReport1 extends Component
 {
 
-    public $nameSearch, $deptId, $filterDate;
+    public $nameSearch,  $filterDate;
     public $staffs;
+    public $dept,$deptId ;
     public $year, $month, $filterRange;
+    public $rank, $rankId;
     public $previousYear, $previousMonthDate, $previousMonth;
     public  $pension_year;
 
@@ -36,11 +39,48 @@ class StaffReport1 extends Component
         }, 'staff_pdf_1.pdf');
     }
    
+    // public function go_excel() 
+    // {
+    //     $staffs = Staff::where('current_department_id', $this->deptId)
+    //         ->where('current_rank_id', $this->rankId)
+    //         ->get();
+    //     $this->staffs = $staffs;
+    //     return Excel::download(new PA16($this->year, $this->month, $this->filterRange, $this->previousMonthDate, $this->previousMonth, $this->staffs), 'PA16.xlsx');
+    // }
+    // public function go_excel() 
+    // {
+    //     $staffs = Staff::where('current_department_id', $this->deptId)
+    //         ->where('current_rank_id', $this->rankId)
+    //         ->get();
+            
+    //     return Excel::download(new PA16($this->year, $this->month, $this->filterRange, $this->previousMonthDate, $this->previousMonth, $staffs), 'PA16.xlsx');
+    // }
+
     public function go_excel() 
     {
-        return Excel::download(new PA16($this->year,$this->month,$this->filterRange,$this->previousMonthDate,$this->previousMonth,$this->nameSearch
-    ), 'PA16.xlsx');
+        // Get filtered staff records
+        $staffs = Staff::query()
+            ->when($this->deptId, function ($query) {
+                $query->where('current_department_id', $this->deptId);
+            })
+            ->when($this->rankId, function ($query) {
+                $query->where('current_rank_id', $this->rankId);
+            })
+            ->get();
+        
+        // Pass the filtered staff data to the PA16 class
+        return Excel::download(new PA16(
+            $this->year, 
+            $this->month, 
+            $this->filterRange, 
+            $this->previousMonthDate, 
+            $this->previousMonth, 
+            
+            $staffs
+        ), 'PA16.xlsx');
     }
+    
+    
 
     public function go_word()
     {
@@ -93,49 +133,51 @@ class StaffReport1 extends Component
     {
         $this->filterRange = Carbon::now()->format('Y-m'); // Format: 'YYYY-MM'
     }
+    
     public function render()
-    {
+{
+    if (isset($this->filterRange)) {
         [$year, $month] = explode('-', $this->filterRange);
-        $this->year = $year;
-        $this->month = $month;
-        $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
-        $this->previousYear = $previousMonthDate->year;
-        $this->previousMonth = $previousMonthDate->month;
-        // $year = explode('-', $this->filterDate)[0];
-        // $month = explode('-', $this->filterDate)[1];
-        
-        
-        $staffQuery = Staff::query();
-        $staffQuery->withWhereHas('postings', function ($query) use ($year, $month) {
-
-            $query->whereYear('from_date', '<=', $year)->whereMonth('from_date', '<=', $month);
-            if ($this->deptId) {
-
-                $query->where('department_id', $this->deptId);
-            }
-        });
-        if ($this->nameSearch) {
-            $staffQuery->whereHas('currentRank', function ($query) {
-                $query->where('name', 'like', '%' . $this->nameSearch . '%');
-            });
-        }
-
-        $pension_year = PensionYear::where('id', 1)->value('year');
-        // if ($this->nameSearch) {
-        //     $staffQuery->where('name', 'like', '%' . $this->nameSearch . '%');
-        // }
-        $this->staffs = $staffQuery->get();
-
-        $staffs = Staff::get();
-        // $pension_year = PensionYear::first();
-        $this->pension_year=$pension_year;
-        return view('livewire.staff-report.staff-report1', [
-            'staffs' => $this->staffs,
-            'pension'=>$this->pension_year,
-            'depts' => Department::all() ,
-            'year' => $year ,
-            'month' => $month,
-            'nameSearch'=>$this->nameSearch,
-        ]);
+    } else {
+        $year = now()->year; 
+        $month = now()->month;
     }
+
+    $this->year = $year;
+    $this->month = $month;
+
+    $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
+    $this->previousYear = $previousMonthDate->year;
+    $this->previousMonth = $previousMonthDate->month;
+
+    $staffQuery = Staff::query();
+
+    if (!is_null($this->deptId)) {
+        $staffQuery->where('current_department_id', $this->deptId);
+    }
+
+    if (!is_null($this->rankId)) {
+        $staffQuery->where('current_rank_id', $this->rankId);
+    }
+
+    $staffQuery->withWhereHas('postings', function ($query) use ($year, $month) {
+        $query->whereYear('from_date', '<=', $year)
+              ->whereMonth('from_date', '<=', $month);
+    });
+
+    $this->staffs = $staffQuery->get();
+
+    $pension_year = PensionYear::where('id', 1)->value('year');
+    $this->pension_year = $pension_year;
+
+    return view('livewire.staff-report.staff-report1', [
+        'staffs' => $this->staffs,
+        'pension' => $this->pension_year,
+        'depts' => Department::all(),
+        'ranks' => Rank::all(),
+        'year' => $year,
+        'month' => $month,
+    ]);
+}
+
 }

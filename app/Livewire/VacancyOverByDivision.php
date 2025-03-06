@@ -22,6 +22,7 @@ class VacancyOverByDivision extends Component
         $this->letter_types  = LetterType::all();
         $this->divisions = Division::all();
         $this->divisionName = $divisionName;
+        $this->selectedDivisionId=1;
         
     }
     public function go_pdf() {
@@ -266,7 +267,10 @@ public function go_word()
 
 
     foreach ($first_payscales as $payscale) {
-        foreach ($payscale->ranks as $rank) {
+        foreach($payscale->ranks->filter(function($rank) {
+            $selectedDivisionId = $this->selectedDivisionId;
+            return $rank->is_dica == 1 && ($selectedDivisionId == 1 || !in_array($rank->id, [1, 2]));
+        }) as $rank) {
             $staff_count = $rank->staffs->filter(fn($staff) => $staff->current_division_id == 1)->count();
             $vacant_positions = $rank->allowed_qty - $staff_count;
 
@@ -284,7 +288,10 @@ public function go_word()
         }
     }
     foreach ($second_payscales as $payscale) {
-        foreach ($payscale->ranks as $rank) {
+        foreach($payscale->ranks->filter(function($rank) {
+            $selectedDivisionId = $this->selectedDivisionId;
+            return $rank->is_dica == 1 && ($selectedDivisionId == 1 || !in_array($rank->id, [1, 2]));
+        }) as $rank){
 
             $table->addRow();
             $table->addCell(700)->addText(en2mm($count++),null,['alignment'=>'center','spaceBefore'=>50,'lineHeight'=>0.6]);

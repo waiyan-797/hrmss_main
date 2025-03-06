@@ -8,7 +8,14 @@
             <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
             <br><br>
             <div class="flex gap-2 items-center">
-                <input type="text" wire:model.live='nameSearch'>
+            <select wire:model.live="rankId" class="mt-1 block w-full">
+                <option value="">ရာထူး</option>
+                    @foreach ($ranks as $rank)
+                <option value="{{ $rank->id }}">{{ $rank->name }}</option>
+                @endforeach
+            </select>
+           
+                            <!-- <input type="text" wire:model.live='nameSearch'> -->
                 <input type="month" wire:model.live='filterRange'>
                 <x-select :values="$depts" wire:model.live='deptId' class="mt-1 block w-full"/>
             </div>
@@ -16,7 +23,7 @@
             <h1 class="text-center mt-2 text-sm font-bold">
                 ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>
                 {{ mmDateFormat($year, $month) }} ရက်နေ့
-                <strong>{{ $nameSearch }}</strong>များ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း
+                <strong>{{ $ranks->firstWhere('id', $rankId)?->name }}</strong>များ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း
             </h1>
 
             <div class="overflow-x-auto mt-2">
@@ -58,7 +65,7 @@
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">{{ $staff->name }}
                                 </td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
-                                    {{ $staff->current_rank?->name }}
+                                {{ $staff->current_rank?->name }}
                                 </td>
                                 <td class="text-sm text-left font-medium text-gray-600 px-2 py-3">
                                     {{ $staff->nrc_region_id->name . $staff->nrc_township_code->name . '/' . $staff->nrc_sign->name . '/' . $staff->nrc_code }}

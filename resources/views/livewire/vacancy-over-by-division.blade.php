@@ -48,8 +48,9 @@
                     <tbody>
                         @foreach ($first_payscales as $payscale)
                      
-                            @foreach($payscale->ranks as $rank)
-                             
+                        @foreach($payscale->ranks->filter(function($rank) use ($selectedDivisionId) {
+                                return $rank->is_dica == 1 && ($selectedDivisionId == 1 || !in_array($rank->id, [1, 2]));
+                            }) as $rank)
                             <tr>
                                 <td class="border border-black p-2">{{en2mm(++$count)}}</td>
                                
@@ -90,7 +91,9 @@
                     @endforeach
                     @foreach ($second_payscales as $payscale)
                      
-                    @foreach($payscale->ranks as $rank)
+                    @foreach($payscale->ranks->filter(function($rank) use ($selectedDivisionId) {
+                                return $rank->is_dica == 1 && ($selectedDivisionId == 1 || !in_array($rank->id, [1, 2]));
+                            }) as $rank)
                      
                     <tr>
                         <td class="border border-black p-2 ">{{en2mm(++$count)}}</td>

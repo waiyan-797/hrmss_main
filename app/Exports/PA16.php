@@ -19,73 +19,98 @@ class PA16 implements FromView ,WithStyles
     // {
     //     return PA16::all();
     // }
-    public $nameSearch, $deptId, $filterDate;
-    public $staffs;
+
     public $year, $month, $filterRange;
-    public $previousYear, $previousMonthDate, $previousMonth;
+    public $previousMonthDate, $previousMonth, $previousYear;
+    public $staffs;
+    public $rankId;
+    public $deptId;
     public $pension_year;
 
-    public function __construct($year , $month,
-    $filterRange ,
-    $previousMonthDate,
-    $previousMonth,
-    $nameSearch
-
-    )
-    {
-         $this->filterRange = $filterRange ;
-         $this->year  =  $year;
-         $this->month  =  $month;
-         $this->previousMonthDate  =  $previousMonthDate;
-         $this->previousMonth  =  $previousMonth;
-         $this->nameSearch=$nameSearch;
-
-
-    }
-    public function view(): View
-    {
-
-    [$year, $month] = explode('-', $this->filterRange);
+    public function __construct($year, $month, $filterRange, $previousMonthDate, $previousMonth, $staffs)
+{
     $this->year = $year;
     $this->month = $month;
+    $this->filterRange = $filterRange;
+    $this->previousMonthDate = $previousMonthDate;
+    $this->previousMonth = $previousMonth;
+    $this->staffs = $staffs;  // Make sure this is correctly passed and assigned
+}
+    // public function view(): View
+    // {
 
-    // Get previous month and year
-    $previousMonthDate = Carbon::createFromDate($year, $month)->subMonth();
-    $this->previousYear = $previousMonthDate->year;
-    $this->previousMonth = $previousMonthDate->month;
+    // [$year, $month] = explode('-', $this->filterRange);
+    // $this->year = $year;
+    // $this->month = $month;
 
-    // Build the staff query with conditions
-    $staffQuery = Staff::query()->withWhereHas('postings', function ($query) use ($year, $month) {
-        $query->whereYear('from_date', '<=', $year)
-              ->whereMonth('from_date', '<=', $month);
+    // // Get previous month and year
+    // $previousMonthDate = Carbon::createFromDate($year, $month)->subMonth();
+    // $this->previousYear = $previousMonthDate->year;
+    // $this->previousMonth = $previousMonthDate->month;
 
-        if ($this->deptId) {
-            $query->where('department_id', $this->deptId);
-        }
-    });
+    
+    // $staffQuery = Staff::query()->withWhereHas('postings', function ($query) use ($year, $month) {
+    //     $query->whereYear('from_date', '<=', $year)
+    //           ->whereMonth('from_date', '<=', $month);
 
-    // dd($this->nameSearch);
-    if ($this->nameSearch) {
-        $staffQuery->whereHas('currentRank', function ($query) {
-            $query->where('name', 'like', '%' . $this->nameSearch . '%');
-        });
+    //     if ($this->deptId) {
+    //         $query->where('department_id', $this->deptId);
+    //     }
+    //     if($this->rankId){
+    //         $query->where('rank_id', $this->rankId);
+    //     }
+    // });
+
+    // if ($this->deptId) {
+    //     $staffQuery->where('current_department_id', $this->deptId);
+    // }
+    // if ($this->rankId) {
+    //     $staffQuery->where('current_rank_id', $this->rankId);
+    // }
+    // $pension_year = PensionYear::where('id', 1)->value('year');
+
+    // $this->staffs = $staffQuery->get();
+    // $staffs = Staff::get();
+    
+    // $this->pension_year=$pension_year;
+
+    // // Prepare data for the view
+    // return view('excel_reports.staff_report_1', [
+    //     'staffs' => $this->staffs,
+    //     'pension'=>$this->pension_year,
+    //     'year' => $this->year,
+    //     'month' => $this->month,
+    // ]);
+    // }
+    public function view(): View
+    {
+        // Extract year and month from the filter range
+        [$year, $month] = explode('-', $this->filterRange);
+        $this->year = $year;
+        $this->month = $month;
+    
+        // Get previous month and year
+        $previousMonthDate = Carbon::createFromDate($year, $month)->subMonth();
+        $this->previousYear = $previousMonthDate->year;
+        $this->previousMonth = $previousMonthDate->month;
+    
+        // Use the filtered staff data passed via constructor
+        $staffs = $this->staffs;
+    
+        // Get pension year
+        $pension_year = PensionYear::where('id', 1)->value('year');
+        $this->pension_year = $pension_year;
+    
+        // Return the view with the staff data and pension year
+        return view('excel_reports.staff_report_1', [
+            'staffs' => $staffs,
+            'pension' => $this->pension_year,
+            'year' => $this->year,
+            'month' => $this->month,
+        ]);
     }
-    $pension_year = PensionYear::where('id', 1)->value('year');
+    
 
-    $this->staffs = $staffQuery->get();
-    $staffs = Staff::get();
-    // Fetch additional data for the report
-    // $pensionYear = PensionYear::first();
-    $this->pension_year=$pension_year;
-
-    // Prepare data for the view
-    return view('excel_reports.staff_report_1', [
-        'staffs' => $this->staffs,
-        'pension'=>$this->pension_year,
-        'year' => $this->year,
-        'month' => $this->month,
-    ]);
-    }
   public function styles(Worksheet $sheet)
     {
         // Set paper size and orientation
