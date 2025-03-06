@@ -886,10 +886,14 @@
                                     <th class="p-2 border border-black">သင်တန်းနေရာ/ဒေသ</th>
                                 </tr>
                             </thead>
+                            
                             <tbody class="h-8 p-2 text-center">
                                 @foreach($staff->trainings as $training)
+                                @php
+                            $trainingName = ($training->training_type_id == 32) ?       $training->diploma_name : $training->training_type?->name;
+                            @endphp
                                 <tr>
-                                    <td class="p-2 border border-black">{{ $training->diploma_name }}</td>
+                                    <td class="p-2 border border-black">{{$trainingName}}</td>
                                     <td class="p-2 border border-black">{{ formatDMYmm($training->from_date) }}</td>
                                     <td class="p-2 border border-black">{{ formatDMYmm($training->to_date) }}</td>
                                     <td class="p-2 border border-black">{{ $training->location }}/{{ $staff->training_location?->name}}</td>
