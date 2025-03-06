@@ -237,7 +237,7 @@ class PdfStaffReport68 extends Component
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၂၃။', null,  $pStyle_5);
-        $table->addCell(13000)->addText('အမြဲတမ်းလက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ', null,$pStyle_8);
+        $table->addCell(13000)->addText('အမြဲတမ်းနေရပ်လိပ်စာအပြည့်အစုံ', null,$pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
         $table->addCell(13000)->addText($staff->permanent_address_house_no.$staff->permanent_address_street.$staff->permanent_address_ward.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'ဒေသကြီး။',null ,$pStyle_8);
         $table->addRow(50);

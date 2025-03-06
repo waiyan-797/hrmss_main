@@ -156,7 +156,7 @@
                 </div>
                 <div class="flex justify-between w-full mb-2">
                     <label for="name" class="md:w-5">၂၂။ </label>
-                    <label for="name" class="md:w-1/3">ယခုနေရပ်လိပ်စာအပြည့်အစုံ</label>
+                    <label for="name" class="md:w-1/3">လက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ</label>
                     <label for="name" class="md:w-5">-</label>
 
                     <label for="name" class="md:w-3/5">
@@ -172,7 +172,7 @@
 
                 <div class="flex justify-between w-full mb-2">
                     <label for="name" class="md:w-5">၂၃။ </label>
-                    <label for="name" class="md:w-1/3">အမြဲတမ်းလက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ</label>
+                    <label for="name" class="md:w-1/3">အမြဲတမ်းနေရပ်လိပ်စာအပြည့်အစုံ</label>
                     <label for="name" class="md:w-5">-</label>
 
                     <label for="name"
