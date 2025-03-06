@@ -48,7 +48,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
                             <tr>
                                 <td class="border border-black text-center p-2">၁</td>
                                 <td class="border border-black text-center p-2">ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</td>

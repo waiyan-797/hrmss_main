@@ -55,27 +55,27 @@ class PA08 implements FromView ,WithStyles
         $this->previousMonth = $previousMonthDate->month;
 
 
-        $first_ranks = Rank::where('staff_type_id', 1)
+        $first_ranks = Rank::where('staff_type_id', 1)->whereNotIn('id', [1, 2])
         ->withCount(['staffs' => function ($query) {
-            $query->where('current_division_id', '26');
+            $query->where('current_division_id', '26')->where('current_address_region_id', '1');
         }])
         ->get();
 
-    $second_ranks = Rank::where('staff_type_id', 2)
+    $second_ranks = Rank::where('staff_type_id', 2)->whereNotIn('id', [1, 2])
         ->withCount(['staffs' => function ($query) {
-            $query->where('current_division_id', '26');
+            $query->where('current_division_id', '26')->where('current_address_region_id', '1');
         }])
         ->get();
 
-    $first_second_ranks = Rank::whereIn('staff_type_id', [1, 2])
+    $first_second_ranks = Rank::whereIn('staff_type_id', [1, 2])->whereNotIn('id', [1, 2])
         ->withCount(['staffs' => function ($query) {
-            $query->where('current_division_id', '26');
+            $query->where('current_division_id', '26')->where('current_address_region_id', '1');
         }])
         ->get();
 
-    $third_ranks = Rank::where('staff_type_id', 3)
+    $third_ranks = Rank::where('staff_type_id', 3)->whereNotIn('id', [1, 2])
         ->withCount(['staffs' => function ($query) {
-            $query->where('current_division_id', '26');
+            $query->where('current_division_id', '26')->where('current_address_region_id', '1');
         }])
         ->get();
 

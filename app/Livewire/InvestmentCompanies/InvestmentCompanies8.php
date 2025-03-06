@@ -16,32 +16,40 @@ class InvestmentCompanies8 extends Component
 {
     public $year, $month, $filterRange;
     public $previousYear, $previousMonthDate, $previousMonth;
-     public $count=0;
+    public $count = 0;
 
     public function go_pdf()
     {
         $first_ranks = Rank::where('staff_type_id', 1)
-            ->withCount(['staffs' => function ($query) {
-                $query->where('current_division_id', '26');
-            }])
+            ->withCount([
+                'staffs' => function ($query) {
+                    $query->where('current_division_id', '26');
+                }
+            ])
             ->get();
 
         $second_ranks = Rank::where('staff_type_id', 2)
-            ->withCount(['staffs' => function ($query) {
-                $query->where('current_division_id', '26');
-            }])
+            ->withCount([
+                'staffs' => function ($query) {
+                    $query->where('current_division_id', '26');
+                }
+            ])
             ->get();
 
         $first_second_ranks = Rank::whereIn('staff_type_id', [1, 2])
-            ->withCount(['staffs' => function ($query) {
-                $query->where('current_division_id', '26');
-            }])
+            ->withCount([
+                'staffs' => function ($query) {
+                    $query->where('current_division_id', '26');
+                }
+            ])
             ->get();
 
         $third_ranks = Rank::where('staff_type_id', 3)
-            ->withCount(['staffs' => function ($query) {
-                $query->where('current_division_id', '26');
-            }])
+            ->withCount([
+                'staffs' => function ($query) {
+                    $query->where('current_division_id', '26');
+                }
+            ])
             ->get();
 
         $all_ranks = Rank::get();
@@ -52,50 +60,63 @@ class InvestmentCompanies8 extends Component
             'third_ranks' => $third_ranks,
             'all_ranks' => $all_ranks,
         ];
-        $pdf = PDF::loadView('pdf_reports.investment_companies_report_8', $data,[],[
-            'format'=>'A4',
-            'orientation'=>'L'
+        $pdf = PDF::loadView('pdf_reports.investment_companies_report_8', $data, [], [
+            'format' => 'A4',
+            'orientation' => 'L'
         ]);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'investment_companies_pdf_8.pdf');
     }
-    public function go_excel() 
+    public function go_excel()
     {
-        
-        return Excel::download(new PA08($this->year,$this->month,$this->filterRange,$this->previousMonthDate,$this->previousMonth
-    ), 'PA08.xlsx');
-    
+
+        return Excel::download(new PA08(
+            $this->year,
+            $this->month,
+            $this->filterRange,
+            $this->previousMonthDate,
+            $this->previousMonth
+        ), 'PA08.xlsx');
+
     }
     public function go_word()
     {
         $first_ranks = Rank::where('staff_type_id', 1)
-            ->withCount(['staffs' => function ($query) {
-                $query->where('current_division_id', '26');
-            }])
+            ->withCount([
+                'staffs' => function ($query) {
+                    $query->where('current_division_id', '26');
+                }
+            ])
             ->get();
 
         $second_ranks = Rank::where('staff_type_id', 2)
-            ->withCount(['staffs' => function ($query) {
-                $query->where('current_division_id', '26');
-            }])
+            ->withCount([
+                'staffs' => function ($query) {
+                    $query->where('current_division_id', '26');
+                }
+            ])
             ->get();
 
         $first_second_ranks = Rank::whereIn('staff_type_id', [1, 2])
-            ->withCount(['staffs' => function ($query) {
-                $query->where('current_division_id', '26');
-            }])
+            ->withCount([
+                'staffs' => function ($query) {
+                    $query->where('current_division_id', '26');
+                }
+            ])
             ->get();
 
         $third_ranks = Rank::where('staff_type_id', 3)
-            ->withCount(['staffs' => function ($query) {
-                $query->where('current_division_id', '26');
-            }])
+            ->withCount([
+                'staffs' => function ($query) {
+                    $query->where('current_division_id', '26');
+                }
+            ])
             ->get();
 
         $all_ranks = Rank::get();
         $phpWord = new PhpWord();
-     
+
         $section = $phpWord->addSection([
             'orientation' => 'landscape',
             'marginTop' => 600,
@@ -103,8 +124,8 @@ class InvestmentCompanies8 extends Component
             'marginBottom' => 600,
             'marginLeft' => 600,
         ]);
-        
-        
+
+
 
         $section->addText(
             'ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန',
@@ -207,31 +228,41 @@ class InvestmentCompanies8 extends Component
         $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
         $this->previousYear = $previousMonthDate->year;
         $this->previousMonth = $previousMonthDate->month;
-        $first_ranks = Rank::where('staff_type_id', 1)
-            ->withCount(['staffs' => function ($query) {
-                $query->where('current_division_id', '26');
-            }])
+
+        $first_ranks = Rank::where('staff_type_id', 1)->whereNotIn('id', [1, 2])
+            ->withCount([
+                'staffs' => function ($query) {
+                    $query->where('current_division_id', '26')->where('current_address_region_id', '1');
+                }
+            ])
             ->get();
 
-        $second_ranks = Rank::where('staff_type_id', 2)
-            ->withCount(['staffs' => function ($query) {
-                $query->where('current_division_id', '26');
-            }])
+        $second_ranks = Rank::where('staff_type_id', 2)->whereNotIn('id', [1, 2])
+            ->withCount([
+                'staffs' => function ($query) {
+                    $query->where('current_division_id', '26')->where('current_address_region_id', '1');
+                }
+            ])
             ->get();
 
-        $first_second_ranks = Rank::whereIn('staff_type_id', [1, 2])
-            ->withCount(['staffs' => function ($query) {
-                $query->where('current_division_id', '26');
-            }])
+        $first_second_ranks = Rank::whereIn('staff_type_id', [1, 2])->whereNotIn('id', [1, 2])
+            ->withCount([
+                'staffs' => function ($query) {
+                    $query->where('current_division_id', '26')->where('current_address_region_id', '1');
+                }
+            ])
             ->get();
 
-        $third_ranks = Rank::where('staff_type_id', 3)
-            ->withCount(['staffs' => function ($query) {
-                $query->where('current_division_id', '26');
-            }])
+        $third_ranks = Rank::where('staff_type_id', 3)->whereNotIn('id', [1, 2])
+            ->withCount([
+                'staffs' => function ($query) {
+                    $query->where('current_division_id', '26')->where('current_address_region_id', '1');
+                }
+            ])
             ->get();
 
         $all_ranks = Rank::get();
+
         return view('livewire.investment-companies.investment-companies8', [
             'first_ranks' => $first_ranks,
             'second_ranks' => $second_ranks,

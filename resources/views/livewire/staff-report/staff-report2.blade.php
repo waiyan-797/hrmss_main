@@ -10,12 +10,38 @@
                  {{-- {{mmDateFormat($year , $month )}} --}}ရက်နေ့  
                 ညွှန်ကြားရေးမှူးများ၏ လက်ရှိဌာနသို့ ရောက်ရှိတာဝန်ထမ်းဆောင်သည့်စာရင်း</h1>
                 
-            <div   class=" w-44">
+            <!-- <div   class=" w-44">
                 <x-text-input 
                     wire:model.live='searchName'
                  
                 />
-            </div>
+            </div> -->
+            <div  class="flex items-end gap-x-5" >
+        <div class="w-40 ">
+            <label class="block mb-2 text-sm font-medium text-gray-700">Start Date</label>
+            <x-date-picker wire:model.live="startDate" class="border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+        </div>
+        <div class="w-50">
+            <label class="block mb-2 text-sm font-medium text-gray-700">Rank</label>
+            <select wire:model.live="rankId" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                <option value=""></option>
+                @foreach($ranks as $rank)
+                    <option value="{{ $rank->id }}">{{ $rank->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="w-50">
+            <label class="block mb-2 text-sm font-medium text-gray-700">Department</label>
+            <select wire:model.live="deptId" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                <option value=""></option>
+                @foreach($depts as $dept)
+                    <option value="{{ $dept->id }}">{{ $dept->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+
             <div class="overflow-x-auto mt-7">
 
                 <table class="min-w-full border border-gray-300 border-collapse table-auto">
