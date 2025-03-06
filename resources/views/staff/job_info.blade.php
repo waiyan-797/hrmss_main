@@ -47,7 +47,7 @@
 
         <x-input-label for="current_division_id" :value="__('လက်ရှိဌာနခွဲ')" />
         <x-select
-            disabled="{{!auth()->user()->AdminHR()}}"
+            {{-- disabled="{{!auth()->user()->AdminHR()}}" --}}
             wire:model="current_division_id"
             :values="$divisions"
             placeholder="လက်ရှိဌာနခွဲ‌ရွေးပါ"

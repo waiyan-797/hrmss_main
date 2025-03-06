@@ -17,20 +17,22 @@
                         wire:model="education_type_name"
                         class="text-sm font-arial block w-full mb-4 p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                         <option value="" selected>ပညာအရည်အချင်းအမျိုးအစားရွေးပါ</option>
-                        @foreach ($education_types as $education)
-                            {{-- <option value="{{ $education->id }}"> {{ $education->name.' - '.$education->education_group->name }} </option> --}}
-                            <option value="{{ $education->id }}"> {{ $education->name}} </option>
+                        @foreach ($education_types as $education_type)
+                            {{-- <option value="{{ $education_type->id }}"> {{ $education_type->name.' - '.$education_type->education_type_group->name }} </option> --}}
+                            <option value="{{ $education_type->id }}"> {{ $education_type->name}} </option>
                         @endforeach
 
-                        @foreach ($education_groups as $education_group)
-                        {{-- <option value="{{ $education->id }}"> {{ $education->name.' - '.$education->education_group->name }} </option> --}}
-                        <option value="{{ $education_group->id }}"> {{ $education_group->name}} </option>
-                    @endforeach
+
 
 
                     </select>
                 </div>
             </div>
+
+            {{-- @foreach ($education_groups as $education_group)
+                        <option value="{{ $education->id }}"> {{ $education->name.' - '.$education->education_group->name }} </option>
+                        <option value="{{ $education_group->id }}"> {{ $education_group->name}} </option>
+                    @endforeach --}}
 
 
             <div class="mb-4">
@@ -38,7 +40,7 @@
                 <div class="relative">
                     <select
                         required
-                        wire:model="education_type_name"
+                        wire:model="education_group_name"
                         class="text-sm font-arial block w-full mb-4 p-2.5 border border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                         <option value="" selected>ပညာအရည်အချင်းအုပ်စုရွေးပါ</option>
 

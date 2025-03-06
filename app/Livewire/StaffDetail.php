@@ -1031,6 +1031,7 @@ class StaffDetail extends Component
 
 
             $gotModel->delete();
+            $this->js('location.reload()');
         }
 
         unset($this->$propertyName[$index]);
