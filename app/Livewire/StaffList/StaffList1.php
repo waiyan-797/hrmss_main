@@ -48,13 +48,13 @@ public $divisionTypes ;
         if ($this->selsectedDivisionTypeId == 1) {
             $divisionTitle = 'ရုံးချုပ် ဌာနခွဲ';
         } elseif ($this->selsectedDivisionTypeId == 2) {
-            $divisionTitle = 'တိုင်းဒေသကြီး/ပြည်နယ်ဦးစီးမှုးရုံး';
+            $divisionTitle = 'တိုင်းဒေသကြီး/ပြည်နယ်ညွှန်ကြားရေးမှူးရုံး';
         } else {
             $divisionTitle = '';
         }
         // dd($divisionTitle );
         $section->addTitle(
-            "{$divisionTitle} များ၏ အရာထမ်း၊အမှုထမ်းများစာရင်း", 
+            "{$divisionTitle} များ၏ အရာထမ်း၊ အမှုထမ်းများစာရင်း", 
             2
         );
         $section->addTitle(formatDMYmm(Carbon::now()), 3);
@@ -91,7 +91,7 @@ public $divisionTypes ;
         if ($this->selsectedDivisionTypeId == 1) {
             $divisionTitle = 'ရုံးချုပ်စုစုပေါင်း';
         } elseif ($this->selsectedDivisionTypeId == 2) {
-            $divisionTitle = 'နယ်ရုံးခွဲ';
+            $divisionTitle = 'စုစုပေါင်း';
         } 
         $table->addRow();
         $table->addCell(900)->addText('');

@@ -9,21 +9,9 @@
                 <h2 class="font-semibold text-base mb-2 text-center">
                     ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h2>
                 <h2 class="font-semibold text-base mb-2 text-center">
-                    {{ $staff->current_rank->name}} အဆင့်ရာထူးအတွက် အကဲဖြတ်မှတ်တမ်း</h2>
+                   ဒုတိယညွှန်ကြားရေးမှူး(သို့မဟုတ်) အဆင့်ရာထူးအတွက် အကဲဖြတ်မှတ်တမ်း</h2>
                 <h2 class="font-semibold text-base mb-2 text-center">
-                    {{ formatDMYmm($startDate)}} နေ့မှစ၍ {{ formatDMYmm($endDate)}} နေ့အထိ {{$staff->name}} ၏ အကဲဖြတ်မှတ်တမ်း</h2>
-
-                    {{-- <div  class="flex items-end justify-around my-5 " >
-                        <div class="w-40 ">
-                            <label class="block mb-2 text-sm font-medium text-gray-700">Start Date</label>
-                            <x-date-picker wire:model.live="startDate" class="border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
-                        </div>
-        
-                        <div class="w-40">
-                            <label class="block mb-2 text-sm font-medium text-gray-700">End Date</label>
-                            <x-date-picker wire:model.live="endDate" class="border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
-                        </div>
-                       </div> --}}
+                    {{ formatDMYmm($startDate)}} နေ့မှစ၍ {{ formatDMYmm($endDate)}} နေ့အထိ {{$staff->current_rank->name}} {{$staff->name}} ၏ အကဲဖြတ်မှတ်တမ်း</h2>
                        <div class="flex items-end justify-start gap-4 my-5">
                         <div class="w-40">
                             <label class="block mb-2 text-sm font-medium text-gray-700">Start Date</label>
@@ -38,7 +26,7 @@
                     
                        
 
-                <div class="w-full overflow-x-auto">
+                {{-- <div class="w-full overflow-x-auto">
                     <table class="w-full border-collapse border border-black">
                         <thead>
                             <tr>
@@ -136,7 +124,7 @@
                                     စုစုပေါင်း အမှုထမ်းလုပ်သက်</td>
                                 <td class="border border-black  p-4"> {{ formatDMYmm($staff->join_date) }}<br>{{en2mm($age)}}</td>
                             </tr>
-                            {{-- military_gazetted_date --}}
+                            
                             @php
                         $military_gazetted_date = \Carbon\Carbon::parse($staff->military_gazetted_date);
                         $diff = $military_gazetted_date->diff(\Carbon\Carbon::now());
@@ -156,22 +144,157 @@
                             </tr>
                         </tbody>
                     </table>
-                </div><br><br>
+                </div><br><br> --}}
+
+                <div class="w-full">
+                    <div class="flex justify-start w-full mb-2">
+                        <label for="" class="w-8">၁။ </label>
+                        <h2>ကိုယ်ရေးအချက်အလက်</h2>
+                    </div>
+                    <div class="w-full ml-7">
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(က) </label>
+                            <label for="name" class="md:w-80 ml-3">အမည်</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+
+                                <label for="name" class="md:w-3/5 ml-4">{{$staff->name}}</label>
+                                                    </div>
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(ခ) </label>
+                            <label for="name" class="md:w-80 ml-3">လူမျိုးနှင့် ကိုးကွယ်သည့်ဘာသာ</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+
+                                <label for="name" class="md:w-3/5 ml-4">{{ collect([$staff->ethnic_id ? $staff->ethnic->name : '-', $staff->religion_id ? $staff->religion->name : '-'])->filter()->implode('၊') }}</label>
+                                                    </div>
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(ဂ) </label>
+                            <label for="name" class="md:w-80 ml-3">မွေးဖွားရာဇာတိ</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+
+                                <label for="name" class="md:w-3/5 ml-4">{{$staff->place_of_birth}}</label>
+                                                    </div>
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(ဃ) </label>
+                            <label for="name" class="md:w-80 ml-3">အဘအမည်</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+
+                                <label for="name"
+                                    class="md:w-3/5 ml-4">{{ $staff->father_name}}</label>
+                                                    </div>
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(င) </label>
+                            <label for="name" class="md:w-80 ml-3">အသက်(မွေးသက္ကရာဇ်)</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+
+                                <label for="name" class="md:w-3/5 ml-4">{{ formatDMYmm($staff->dob) }}</label>
+                                                    </div>
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(စ) </label>
+                            <label for="name" class="md:w-80 ml-3">နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+
+                                <label for="name"
+                                    class="md:w-3/5 ml-4">{{ collect([
+                                        $staff->nrc_region_id->name,
+                                        $staff->nrc_township_code->name,
+                                        $staff->nrc_sign->name,
+                                        en2mm($staff->nrc_code),
+                                    ])->filter()->implode('၊') }}</label>
+                                                    </div>
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(ဆ) </label>
+                            <label for="name" class="md:w-80 ml-3">ထင်ရှားသည့်အမှတ်အသား</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+
+                                <label for="name"
+                                    class="md:w-3/5 ml-4">{{ $staff->prominent_mark }}</label>
+                                                    </div>
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(ဇ) </label>
+                            <label for="name" class="md:w-80 ml-3">လက်ရှိရာထူး</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+
+                                <label for="name"
+                                    class="md:w-3/5 ml-4">{{$staff->current_rank->name}}</label>
+                                                    </div>
+                                                    @php
+                            $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);
+                            $diff = $current_rank_date->diff(\Carbon\Carbon::now());
+                            $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+                        @endphp
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(ဈ) </label>
+                            <label for="name" class="md:w-80 ml-3">လက်ရှိရာထူးရရှိသည့်နေ့နှင့်ရာထူးသက်</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+                                <label for="name" class="md:w-3/5 ml-4">{{ formatDMYmm($staff->current_rank_date)}}<br>{{ en2mm($age)}}</label>
+                        </div>
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(ည) </label>
+                            <label for="name" class="md:w-80 ml-3">လက်ရှိအလုပ်အကိုင်ရလာပုံ </label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+                                <label for="name" class="md:w-3/5 ml-4">{{ $staff->is_direct_appointed}}</label>
+                        </div>
+
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(ဋ)</label>
+                            <label for="name" class="md:w-80 ml-3">ပြိုင်ရွေးအရွေးခံ(သို့)တိုက်ရိုက်ခန့်</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+                                <label for="name" class="md:w-3/5 ml-4">{{ $staff->is_direct_appointed}}</label>
+                        </div>
+                        @php
+                        $join_date = \Carbon\Carbon::parse($staff->join_date);
+                        $diff = $join_date->diff(\Carbon\Carbon::now());
+                        $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+                        @endphp
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(ဌ)</label>
+                            <label for="name" class="md:w-80 ml-3">စတင်တာဝန်ထမ်းဆောင်သည့်နေနှင့်<br>စုစုပေါင်းအမှုထမ်းသက်</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+                                <label for="name" class="md:w-3/5 ml-4">{{ formatDMYmm($join_date) }}<br>{{en2mm($age)}}</label>
+                        </div>
+                        @php
+                        $military_gazetted_date = \Carbon\Carbon::parse($staff->military_gazetted_date);
+                        $diff = $military_gazetted_date->diff(\Carbon\Carbon::now());
+                        $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+                        @endphp
+
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(ဍ)</label>
+                            <label for="name" class="md:w-80 ml-3">ပြန်တမ်းဝင်အရာရှိလုပ်သက်</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+                                <label for="name" class="md:w-3/5 ml-4">{{ formatDMYmm($military_gazetted_date) }}<br>{{en2mm($age)}}</label>
+                        </div>
+                        <div class="flex justify-start w-full mb-4 ml-1">
+                            <label for="" class="md:w-5">(ဎ)</label>
+                            <label for="name" class="md:w-80 ml-3">ဌာန/ဌာနခွဲ/ဌာနစိတ်</label>
+                            <label for="" class="md:w-5 ml-10">-</label>
+                                <label for="name" class="md:w-3/5 ml-4">{{$staff->current_department?->name}}/{{$staff->current_division?->name}}</label>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="w-full overflow-x-auto">
                     <table class="w-full border-collapse border border-black">
                         <thead>
                             <tr>
                                 <th rowspan="2" class="border border-black text-center p-4">၂။</th>
-                                <th colspan="3" class="border border-black text-center p-4">
+                                <th colspan="3" class="border border-black  p-4">
                                     ပညာဆည်းပူးသင်ယူလေ့လာခဲ့မှုအခြေအနေ</th>
                             </tr>
-                            <tr>
+                            {{-- <tr>
                                 <th class="border border-black text-center p-4">(က)</th>
                                 <th class="border border-black  p-4">မူလတန်းမှ အလယ်တန်း</th>
                                 <th class="border border-black  p-4"></th>
-                            </tr>
+                            </tr> --}}
                         </thead>
                         <tbody>
+                            <tr>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4">(က)</td>
+                                <td class="border border-black  p-4">မူလတန်းမှ အလယ်တန်း</td>
+                                <td class="border border-black  p-4"></td>
+                            </tr>
                             <tr>
                                 <td class="border border-black text-center p-4"></td>
                                 <td class="border border-black text-center p-4">(ခ)</td>

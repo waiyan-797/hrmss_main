@@ -103,7 +103,7 @@ class StaffDetail extends Component
     //job_info
 
     // $table->date('last_increment_date')->nullable();
-    public $current_rank_id, $current_rank_date, $current_department_id, $current_division_id, $side_ministry_id = null, $side_department_id = null, $side_division_id = null, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time,$last_increment_date, $is_parents_citizen_when_staff_born = false;
+    public $current_rank_id, $current_rank_date, $current_division_join_date , $current_department_id, $current_division_id, $side_ministry_id = null, $side_department_id = null, $side_division_id = null, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time,$last_increment_date, $is_parents_citizen_when_staff_born = false;
     public $recommendations = [];
     public $postings = [];
     public $side_departments = [];
@@ -251,6 +251,7 @@ class StaffDetail extends Component
         'side_division_id' => '',
         'salary_paid_by' => '',
         'join_date' => 'required|date',
+        // 'current_division_join_date' =>'date',
         'is_newly_appointed' => 'required',
         'is_direct_appointed' => '',
         'payscale_id' => 'required',
@@ -818,6 +819,8 @@ class StaffDetail extends Component
         $this->side_division_id = $staff->side_division_id;
         $this->salary_paid_by = $staff->salary_paid_by;
         $this->join_date = $staff->join_date;
+        $this->current_division_join_date = $staff->current_division_join_date;
+
         $this->is_newly_appointed = $staff->is_newly_appointed;
         $this->is_direct_appointed = $staff->is_direct_appointed;
         $this->payscale_id = $staff->payscale_id;
@@ -1255,6 +1258,7 @@ $this->submit_staff();
             'side_division_id' => $this->side_division_id == '' ? null : $this->side_division_id,
             'salary_paid_by' => $this->salary_paid_by == '' ? null : $this->salary_paid_by,
             'join_date' => $this->join_date == '' ? null : $this->join_date,
+            'current_division_join_date' => $this->current_division_join_date == '' ? null : $this->current_division_join_date,
             'is_newly_appointed' => $this->is_newly_appointed == '' ? null : $this->is_newly_appointed,
             'is_direct_appointed' => $this->is_direct_appointed == '' ? null : $this->is_direct_appointed,
             'payscale_id' => $this->payscale_id == '' ? null : $this->payscale_id,
@@ -1460,7 +1464,7 @@ $this->submit_staff();
                 'meet_with' => $abroad['meet_with'],
                 'from_date' => $abroad['from_date'] == '' ? null : $abroad['from_date'],
                 'to_date' => $abroad['to_date'] == '' ? null : $abroad['to_date'],
-                'actual_abroad_date' => '2024-12-09',
+                'actual_abroad_date' => $abroad['actual_abroad_date'] == '' ? null : $abroad['actual_abroad_date'] ,
                 'position' => $abroad['position'],
                 'towns' => $abroad['towns'],
                 'abroad_type_id' => $abroad['abroad_type_id']
@@ -1476,7 +1480,7 @@ $this->submit_staff();
             'abroads.*.particular' => 'required',
             'abroads.*.from_date' => 'required',
             'abroads.*.to_date' => 'required',
-            // 'abroads.*.is_training' => 'required',
+            'abroads.*.abroad_type_id' => 'required',
         ];
 
         $validation_messages = [
@@ -1484,7 +1488,7 @@ $this->submit_staff();
             'abroads.*.particular.required' => 'Field is required.',
             'abroads.*.from_date.required' => 'Field is required.',
             'abroads.*.to_date.required' => 'Field is required.',
-            // 'abroads.*.is_training.required' => 'Field is required.',
+            'abroads.*.abroad_type_id.required' => 'Field is required.',
         ];
 
         return [

@@ -161,13 +161,13 @@ class PdfStaffReport19 extends Component
         $table->addCell(1500)->addText('၉။',null, $pStyle_5);
         $table->addCell(13000)->addText('လက်ရှိနေရပ်လိပ်စာ',null, $pStyle_4);
         $table->addCell(700)->addText('-', null,$pStyle_5);
-        $table->addCell(13000)->addText($staff->current_address_house_no.$staff->current_address_street.'၊'.$staff->current_address_ward.'၊'.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'ဒေသကြီး။',null, $pStyle_8);
+        $table->addCell(13000)->addText($staff->current_address_house_no.$staff->current_address_street.$staff->current_address_ward.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'ဒေသကြီး။',null, $pStyle_8);
 
         $table->addRow(50);
         $table->addCell(1500)->addText('၁၀။',null,$pStyle_5);
         $table->addCell(13000)->addText('အမြဲတမ်းနေရပ်လိပ်စာ',null,$pStyle_4);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText($staff->permanent_address_house_no.$staff->permanent_address_street.'၊'.$staff->permanent_address_ward.'၊'.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'ဒေသကြီး။',null,$pStyle_8);
+        $table->addCell(13000)->addText($staff->permanent_address_house_no.$staff->permanent_address_street.$staff->permanent_address_ward.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'ဒေသကြီး။',null,$pStyle_8);
         $table->addRow(50);
         $table->addCell(1300)->addText('၁၁။', null, $pStyle_5);
         $table->addCell(13000)->addText('ပညာအရည်အချင်း ',null ,$pStyle_4);
@@ -206,7 +206,6 @@ class PdfStaffReport19 extends Component
                 );
 
             }
-
         $section->addText('၁၄။ '.'ထမ်းဆောင်ခဲ့သောတာဝန်များ', null,array('spaceBefore' => 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader'=>true));
@@ -246,9 +245,6 @@ class PdfStaffReport19 extends Component
         $table->addCell(4800)->addText('',null,$pStyle_7);
         $table->addCell(2800)->addText('', null, $pStyle_7);
         $table->addCell(1800)->addText('', null, $pStyle_7);
-
-
-
             $section->addText('၁၆။ '.'ချီးမြှင့်ခံရသည့်ဘွဲ့ထူး/ဂုဏ်ထူးတံဆိပ်လက်မှတ်များ',null,array('spaceBefore' => 200));
             $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
             // $table->addRow();

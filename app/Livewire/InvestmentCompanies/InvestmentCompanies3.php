@@ -16,6 +16,7 @@ class InvestmentCompanies3 extends Component
     // public $selected
 
     public $year, $month, $filterRange;
+    public $ranks;
     public $previousYear, $previousMonthDate, $previousMonth;
      public $count=0;
     public function go_pdf(){
@@ -94,6 +95,7 @@ class InvestmentCompanies3 extends Component
     public function mount()
     {
         $this->filterRange = Carbon::now()->format('Y-m'); // Format: 'YYYY-MM'
+       
     }
     public function render()
     {
@@ -103,16 +105,16 @@ class InvestmentCompanies3 extends Component
         $previousMonthDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
         $this->previousYear = $previousMonthDate->year;
         $this->previousMonth = $previousMonthDate->month;
-
-        $first_ranks = Rank::where('staff_type_id', 1)->get();
-        $second_ranks = Rank::where('staff_type_id', 2)->get();
-        
-        
+        $first_ranks = Rank::where('staff_type_id', 1)->where('is_dica', 1)->get();
+        $second_ranks = Rank::where('staff_type_id', 2)->where('is_dica', 1)->get();
 
         
         return view('livewire.investment-companies.investment-companies3',[
             'first_ranks' => $first_ranks,
             'second_ranks' => $second_ranks
+           
         ]);
     }
+
+
 }

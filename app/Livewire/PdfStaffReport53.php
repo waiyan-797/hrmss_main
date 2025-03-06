@@ -84,6 +84,7 @@ class PdfStaffReport53 extends Component
 
         $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
         $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+        $phpWord->addTitleStyle(3, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
 
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
     $textBoxStyle = [
@@ -148,7 +149,11 @@ class PdfStaffReport53 extends Component
         $table->addCell(1300)->addText('၆။', null, $pStyle_5);
         $table->addCell(13000)->addText('အရပ်အမြင့်', null, $pStyle_8);
         $table->addCell(700)->addText('-',  null, $pStyle_5);
-        $table->addCell(13000)->addText('('.en2mm($staff->height_feet) . ')ပေ' . '('.en2mm($staff->height_inch) . ')လက်မ', null, $pStyle_8);
+        // $table->addCell(13000)->addText('('.en2mm($staff->height_feet) . ')ပေ' . '('.en2mm($staff->height_inch) . ')လက်မ', null, $pStyle_8);
+        $table->addCell(13000)->addText(
+            '(' . en2mm($staff->height_feet) . ')ပေ' . 
+            (!empty($staff->height_inch) ? ' (' . en2mm($staff->height_inch) . ')လက်မ' : ''),null,$pStyle_8
+        );
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၇။', null, $pStyle_5);
@@ -196,26 +201,13 @@ class PdfStaffReport53 extends Component
         $table->addCell(1300)->addText('၁၄။', null, $pStyle_5);
         $table->addCell(13000)->addText('လက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText($staff->current_address_house_no.
-            ($staff->current_address_street ?? '' ).
-            ($staff->current_address_ward ? '၊'.$staff->current_address_ward:'').
-            ($staff->current_address_township_or_town->name ? '၊'.$staff->current_address_township_or_town->name.'မြို့နယ်':''). 
-            ($staff->current_address_region->name ? '၊'.$staff->current_address_region->name.'ဒေသကြီး'.'။':''),
-            null,
-            $pStyle_8
-        );
+        $table->addCell(13000)->addText($staff->current_address_house_no.$staff->current_address_street.$staff->current_address_ward.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'ဒေသကြီး။',null ,$pStyle_8);
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၁၅။', null, $pStyle_5);
         $table->addCell(13000)->addText('အမြဲတမ်းနေရပ်လိပ်စာ', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText($staff->permanent_address_house_no.
-           ($staff->permanent_address_street ?? '' ).
-            ($staff->permanent_address_ward ? '၊'.$staff->permanent_address_ward:'').
-            ($staff->permanent_address_township_or_town->name ? '၊'.$staff->permanent_address_township_or_town->name.'မြို့နယ်':''). 
-            ($staff->permanent_address_region->name ? '၊'.$staff->permanent_address_region->name.'ဒေသကြီး'.'။':''),
-            null,
-            $pStyle_8 );
+        $table->addCell(13000)->addText($staff->permanent_address_house_no.$staff->permanent_address_street.$staff->permanent_address_ward.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'ဒေသကြီး။',null ,$pStyle_8);
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၁၆။', null, $pStyle_5);
@@ -310,14 +302,8 @@ class PdfStaffReport53 extends Component
         $table->addCell(1300)->addText('၂၀။', null, $pStyle_5);
         $table->addCell(13000)->addText('၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText(
-            ($staff->father_address_house_no).($staff->father_address_street ?? '' ).
-            ( $staff->father_address_ward ? '၊' . $staff->father_address_ward :'') . 
-            ($staff->father_address_township_or_town?->name ? '၊'. $staff->father_address_township_or_town?->name.'မြို့နယ်' :'' ). 
-            ($staff->father_address_region?->name ? '၊' . $staff->father_address_region?->name.'ဒေသကြီး' .'။':''), 
-            null, 
-            $pStyle_3
-        );
+        $table->addCell(13000)->addText($staff->father_address_house_no.$staff->father_address_street.$staff->father_address_ward.$staff->father_address_township_or_town->name.'မြို့နယ်၊'.$staff->father_address_region->name.'ဒေသကြီး။',null ,$pStyle_8);
+
         $table->addRow(50);
         $table->addCell(1300)->addText('၂၁။', null, $pStyle_5);
         $table->addCell(13000)->addText('အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်', null, $pStyle_8);
@@ -330,19 +316,13 @@ class PdfStaffReport53 extends Component
             null,
             $pStyle_8
         );
+       
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၂၂။', null, $pStyle_5);
         $table->addCell(13000)->addText('၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText(
-            ($staff->mother_address_house_no).($staff->mother_address_street ?? '') . 
-            ($staff->mother_address_ward ? '၊' . $staff->mother_address_ward : '') . 
-            ($staff->mother_address_township_or_town?->name ? '၊' . $staff->mother_address_township_or_town->name.'မြို့နယ်' : '') . 
-            ($staff->mother_address_region?->name ? '၊' . $staff->mother_address_region->name.'‌ဒေသကြီး' .'။': '') ,
-            null,
-            $pStyle_3
-        );
+        $table->addCell(13000)->addText($staff->mother_address_house_no.$staff->mother_address_street.$staff->mother_address_ward.$staff->mother_address_township_or_town->name.'မြို့နယ်၊'.$staff->mother_address_region->name.'ဒေသကြီး။',null ,$pStyle_8);
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၂၃။', null, $pStyle_5);
@@ -414,6 +394,7 @@ class PdfStaffReport53 extends Component
         //     $table->addCell(2000);
         //     $table->addCell(2000);
         // }
+        
         $table->addRow(50);
         $table->addCell(1300)->addText('၃၀။', null, $pStyle_5);
         $table->addCell(13000)->addText('အလုပ်အကိုင်အတွက် ထောက်ခံသူများ', null, $pStyle_8);
@@ -445,7 +426,7 @@ class PdfStaffReport53 extends Component
                 $table->addCell(4000)->addText($posting->rank->name ?? '',null,$pStyle_3);
                 $table->addCell(2500)->addText(formatDMYmm($posting->from_date),null, $pStyle_6);
                 $table->addCell(2500)->addText(formatDMYmm($posting->to_date),null, $pStyle_6);
-                $table->addCell(3000)->addText($posting->ministry?->name.'၊'."\n".$posting->division?->name   . "\n" . $posting->department?->name  ."\n".$posting->location,null, $pStyle_6);
+                $table->addCell(3000)->addText($posting->ministry?->name.'၊'."\n".$posting->division?->name  . '၊' . $posting->department?->name  .'၊'.$posting->location,null, $pStyle_6);
                 $table->addCell(2000)->addText($posting->remark,null, $pStyle_6);
             }
         }else{
@@ -717,26 +698,46 @@ class PdfStaffReport53 extends Component
             null, 
             $pStyle_4
         );
-        $section->addPageBreak();
-        $section->addTitle('ငယ်စဥ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်', 2);
-        $table = $section->addTable();   
-        $table->addRow(50);
-        $table->addCell(1300)->addText('၁။', null, $pStyle_5);
-        $cell = $table->addCell(11000);
-        $textRun = $cell->addTextRun($pStyle_8);
-        $textRun->addText("နေခဲ့ဖူးသောကျောင်းများ");
-        $textRun->addTextBreak(); 
-        $textRun->addText("(ခုနှစ်၊ သက္ကရာဇ်ဖော်ပြရန်)");
-        $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(15000)->addText('', null, $pStyle_4);
-        foreach($staff->schools as $school){ 
-            $table->addRow(50);
-            $table->addCell(1300);
-            $table->addCell(10000);
-            $table->addCell(700)->addText('-', null, $pStyle_5);
-            $table->addCell(15000)->addText($school->school_name .'('.($school->from_date) .'-'. ($school->to_date).')', null, $pStyle_8);
-            
-        }
+
+//         $section->addPageBreak();
+//         $section->addTitle('ငယ်စဥ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်', 3);
+        
+//         $table->addRow(50);
+//         $table->addCell(1300)->addText('၁။', null, $pStyle_5);
+//         $table->addCell(13000)->addText("နေခဲ့ဖူးသောကျောင်းများ\n(ခုနှစ်၊ သက္ကရာဇ်ဖော်ပြရန်)", null, $pStyle_8);
+//         $table->addCell(700)->addText('-', null, $pStyle_5);
+//         $table->addCell(13000)->addText( 
+//         $staff->schools->map(function ($school) {
+//         return $school->school_name . ' (' . $school->from_date . ' - ' . $school->to_date . ')';
+//     })->join('၊ '), 
+//     null, 
+//     $pStyle_8
+// );
+$section->addPageBreak();
+$section->addTitle('ငယ်စဥ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်', 3);
+$table = $section->addTable();
+
+
+$table->addRow(50);
+$table->addCell(1300)->addText('၁။', null, $pStyle_5);
+$table->addCell(13000)->addText("နေခဲ့ဖူးသောကျောင်းများ\n(ခုနှစ်၊ သက္ကရာဇ်ဖော်ပြရန်)", null, $pStyle_8);
+$table->addCell(700)->addText('-', null, $pStyle_5);
+
+// Check if the staff has school records
+if ($staff->schools->isNotEmpty()) {
+    $table->addCell(13000)->addText(
+        $staff->schools->map(function ($school) {
+            return $school->school_name . ' (' . $school->from_date . ' - ' . $school->to_date . ')';
+        })->join('၊ '), 
+        null, 
+        $pStyle_8
+    );
+} else {
+    // If no schools are available, show a placeholder
+    $table->addCell(13000)->addText('ကျောင်းမှတ်တမ်းမရှိပါ', null, $pStyle_8);
+}
+
+
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၂။', null, $pStyle_5);
@@ -786,7 +787,6 @@ class PdfStaffReport53 extends Component
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၅။', null, $pStyle_5);
-        // $table->addCell(10000)->addText("လုပ်ကိုင်ခဲ့သောအလုပ်အကိုင်များနှင့် ဌာန/မြို့နယ်", null, $pStyle_4);
         $cell = $table->addCell(11000);
         $textRun = $cell->addTextRun($pStyle_8);
         $textRun->addText("လုပ်ကိုင်ခဲ့သောအလုပ်အကိုင်");
@@ -860,10 +860,10 @@ class PdfStaffReport53 extends Component
             foreach ($staff->abroads as $index => $abroad) {
                     $table->addRow(50);
                     $table->addCell(700)->addText(en2mm($index+1),null,$pStyle_6);
-                    $table->addCell(1800)->addText($abroad->countries->pluck('name')->unique()->join(', '),null,$pStyle_3);
+                    $table->addCell(1800)->addText($abroad->countries->pluck('name')->unique()->join(', ')."\n".$abroad->towns,null,$pStyle_3);
                     $table->addCell(4000)->addText($abroad->particular,null,$pStyle_6);
                     $table->addCell(2000)->addText($abroad->meet_with,null,$pStyle_6);
-                    $table->addCell(2500)->addText(formatDMYmm($abroad->from_date) ."\n".formatDMYmm($abroad->to_date),null,array('align' => 'left', 'spaceAfter' => 30, 'spaceBefore' => 70 ,'indentation' => ['left' => 100]));// <' '>it means many space
+                    $table->addCell(2500)->addText(formatDMYmm($abroad->from_date) ."\n".formatDMYmm($abroad->to_date),null,array('align' => 'left', 'spaceAfter' => 30, 'spaceBefore' => 70 ,'indentation' => ['left' => 100]));
                 }
             }else{
                     $table->addRow(50);
