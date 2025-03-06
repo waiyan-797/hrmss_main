@@ -306,7 +306,7 @@ class PdfStaffReport15 extends Component
         $table->addCell(2100)->addText('တပ်/ဌာန', ['alignment' => 'right']);
         $table->addCell(300)->addText('-', ['alignment' => 'right']);
         $table->addCell(2100)->addText($staff->current_department->name, ['alignment' => 'right']);
-        $section->addText('ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
+        $section->addText('ရက်စွဲ၊ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
         $fileName = 'staff_report_15_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
         return response()->stream(

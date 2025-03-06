@@ -333,7 +333,7 @@ class PdfStaffReport17 extends Component
         $table->addCell(500)->addText('-', ['alignment' => 'right']);
         $table->addCell(3000)->addText($staff->current_department->name, ['alignment' => 'right']);
 
-        $section->addText('ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
+        $section->addText('ရက်စွဲ၊ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
 
         $section->addText('၁၇။ ' . "နိုင်ငံခြားသို့သွားရောက်မည့်ပုဂ္ဂိုလ်၏လုပ်ရည်ကိုင်ရည်နှင့်အကျင့်စာရိတ္တကောင်းမွန်ကြောင်း\nထပ်ဆင့် လက်မှတ်ရေးထိုးပါသည်။", null, array('spaceBefore' => 200));
 

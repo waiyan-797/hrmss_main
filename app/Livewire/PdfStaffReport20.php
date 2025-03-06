@@ -250,7 +250,7 @@ class PdfStaffReport20 extends Component
         // $table->addCell(13000)->addText('(ဎ) ဌာန/ဌာနခွဲ/ဌာနစိတ်', null, $pStyle_8);
         // $table->addCell(700)->addText('-', null, $pStyle_5);
         // $table->addCell(13000)->addText(($staff->current_department->name)."\n".($staff->current_division->name), null, $pStyle_8);
-        $section->addPageBreak();
+        $section->addTextBreak();
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50);
         $table->addCell(700)->addText('၂။',null,$pStyle_2);
