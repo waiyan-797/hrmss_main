@@ -92,13 +92,13 @@ class PA02 implements FromView ,WithStyles
         // $sheet->setPrintGridlines(true);
 
         // Dynamically calculate the highest row and column
-        $highestRow = $sheet->getHighestRow()-2; // e.g. 19
+        $highestRow = $sheet->getHighestRow()-3; // e.g. 19
         
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
         $row=5;
 
 
-        // $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&10' . 'ကန့်သတ်'); 
+        $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&12' . 'ကန့်သတ်'); 
         $sheet->getColumnDimension('A')->setWidth(5);
         $sheet->getColumnDimension('B')->setWidth(32.56);
         $sheet->getColumnDimension('C')->setWidth(8.89);
@@ -147,13 +147,12 @@ class PA02 implements FromView ,WithStyles
 
         $sheet->removeRow(2);
         $sheet->removeRow(4);
-        // $sheet->removeRow(25);
 
-        for ($row = 6; $row <= $highestRow-1 ; $row++) {
+        for ($row = 6; $row <= $highestRow; $row++) {
             $sheet->getRowDimension($row)->setRowHeight(33.8);
         }
 
-        
+        // $sheet->removeRow(23);
 
         $sheet->getStyle('A1:A2')->applyFromArray([
             'font' => [
@@ -346,7 +345,7 @@ class PA02 implements FromView ,WithStyles
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                    'color' => ['argb' => 'FF000000'], // Black border
+                    'color' => ['argb' => 'FF000000'],
                 ],
             ],
         ]);

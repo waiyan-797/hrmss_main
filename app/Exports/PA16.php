@@ -24,7 +24,7 @@ class PA16 implements FromView ,WithStyles
     public $previousMonthDate, $previousMonth, $previousYear;
     public $staffs;
     public $rankId;
-    public $deptId;
+    public $divId;
     public $pension_year;
 
     public function __construct($year, $month, $filterRange, $previousMonthDate, $previousMonth, $staffs)

@@ -14,10 +14,8 @@
             </h2>
 
             <div>
-                <div class="w-1/3">
-                    <x-select wire:model="letter_type_id" :values="$letter_types" placeholder="စာအဆင့်အတန်းရွေးပါ"
-                        id="letter_type_id" name="letter_type_id" class="mt-11 block w-full" />
-                    <x-input-error class="mt-2" :messages="$errors->get('letter_type_id')" />
+                <div >
+                    
                 </div>
             </div>
 
