@@ -172,42 +172,42 @@
                     <tr class="font-bold">
                         <td></td>
                         <td style="font-weight: bold;">စုစုပေါင်း</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_si_man) }}</td>
-                        <td>{{ en2mm($total_si_man - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_yinn_1) }}</td>
-                        <td>{{ en2mm($total_yinn_1 - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_yinn_2) }}</td>
-                        <td>{{ en2mm($total_yinn_2 - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_yinn_3) }}</td>
-                        <td>{{ en2mm($total_yinn_3 - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_yinn_4) }}</td>
-                        <td>{{ en2mm($total_yinn_4 - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_mu_warda) }}</td>
-                        <td>{{ en2mm($total_mu_warda - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_yinn_mhyint_tin) }}</td>
-                        <td>{{ en2mm($total_yinn_mhyint_tin - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_yinn_kyee_kyat) }}</td>
-                        <td>{{ en2mm($total_yinn_kyee_kyat - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_si_man_kaine) }}</td>
-                        <td>{{ en2mm($total_si_man_kaine - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_company) }}</td>
-                        <td>{{ en2mm($total_company - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_hr) }}</td>
-                        <td>{{ en2mm($total_hr - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_all) }}</td>
-                        <td>{{ en2mm($total_all - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_si_man) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_si_man - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_yinn_1) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_yinn_1 - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_yinn_2) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_yinn_2 - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_yinn_3) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_yinn_3 - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_yinn_4) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_yinn_4 - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_mu_warda) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_mu_warda - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_yinn_mhyint_tin) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_yinn_mhyint_tin - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_yinn_kyee_kyat) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_yinn_kyee_kyat - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_si_man_kaine) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_si_man_kaine - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_company) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_company - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_hr) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_hr - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_all) }}</td>
+                        <td style="font-weight: bold;">{{ en2mm($total_all - $total_allowed_qty) }}</td>
                     </tr>
                 </tbody>
             </table>

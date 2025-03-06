@@ -22,54 +22,54 @@ class PA14 implements FromView, WithStyles
     }
     public function view(): View
     {
-        $yinn_1 = Rank::whereHas('staffs', function ($query) {
+        $yinn_1 = Rank::where('is_dica',1)->whereHas('staffs', function ($query) {
             return $query->where('current_division_id', 1);
         });
 
-        $yinn_2 = Rank::whereHas('staffs', function ($query) {
+        $yinn_2 = Rank::where('is_dica',1)->whereHas('staffs', function ($query) {
             return $query->where('current_division_id', 2);
         });
 
-        $yinn_3 = Rank::whereHas('staffs', function ($query) {
+        $yinn_3 = Rank::where('is_dica',1)->whereHas('staffs', function ($query) {
             return $query->where('current_division_id', 3);
         });
 
-        $yinn_4 = Rank::whereHas('staffs', function ($query) {
+        $yinn_4 = Rank::where('is_dica',1)->whereHas('staffs', function ($query) {
             return $query->where('current_division_id', 4);
         });
 
-        $si_man = Rank::whereHas('staffs', function ($query) {
+        $si_man = Rank::where('is_dica',1)->whereHas('staffs', function ($query) {
             return $query->where('current_division_id', 11);
         });
 
-        $mu_warda = Rank::whereHas('staffs', function ($query) {
+        $mu_warda = Rank::where('is_dica',1)->whereHas('staffs', function ($query) {
             return $query->where('current_division_id', 8);
         });
 
-        $yinn_mhyint_tin = Rank::whereHas('staffs', function ($query) {
+        $yinn_mhyint_tin = Rank::where('is_dica',1)->whereHas('staffs', function ($query) {
             return $query->where('current_division_id', 7);
         });
 
-        $yinn_kyee_kyat = Rank::whereHas('staffs', function ($query) {
+        $yinn_kyee_kyat = Rank::where('is_dica',1)->whereHas('staffs', function ($query) {
             return $query->where('current_division_id', 5);
         });
 
-        $si_man_kaine = Rank::whereHas('staffs', function ($query) {
+        $si_man_kaine = Rank::where('is_dica',1)->whereHas('staffs', function ($query) {
             return $query->where('current_division_id', 6);
         });
 
-        $company = Rank::whereHas('staffs', function ($query) {
+        $company = Rank::where('is_dica',1)->whereHas('staffs', function ($query) {
             return $query->where('current_division_id', 9);
         });
 
-        $hr = Rank::whereHas('staffs', function ($query) {
+        $hr = Rank::where('is_dica',1)->whereHas('staffs', function ($query) {
             return $query->where('current_division_id', 10);
         });
 
-        $total = Rank::whereHas('staffs', function ($query) {
+        $total = Rank::where('is_dica',1)->whereHas('staffs', function ($query) {
             return $query->whereIn('current_division_id', [1, 2, 3, 4, 11, 8, 7, 5, 6, 9, 10]);
         });
-        $ranks = Rank::whereIn('staff_type_id', [1, 2])->get();
+        $ranks = Rank::where('is_dica',1)->whereIn('staff_type_id', [1, 2])->get();
         $data = [
             'ranks' => $ranks,
             'si_man' => $si_man,
