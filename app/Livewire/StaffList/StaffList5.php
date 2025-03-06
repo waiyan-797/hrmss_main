@@ -45,18 +45,11 @@ class StaffList5 extends Component
         $phpWord = new PhpWord();
         $section = $phpWord->addSection([
             'orientation' => 'portrait',
-<<<<<<< HEAD
-            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.23),     // 1 inch
-            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
-            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.51),   // 0.5 inch
-            'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
-=======
             // 'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.23),
             'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.6), 
             'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5), 
             'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.51), 
             'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5), 
->>>>>>> hrmsrp/main
         ]);
 
         
@@ -79,11 +72,7 @@ class StaffList5 extends Component
             'cellMargin' => 5
         ]);
         // Table headers
-<<<<<<< HEAD
-        $table->addRow();
-=======
         $table->addRow(50, ['tblHeader' => true]);
->>>>>>> hrmsrp/main
         $table->addCell(700, ['valign' => 'top'])->addText('စဥ်',['bold' => true],['alignment' => 'center', 'spaceBefore' => 0, 'lineHeight' => 1]);
         $table->addCell(3000,['valign' => 'top'])->addText('ရာထူးအမည်', ['bold' => true],['alignment'=>'center','spaceBefore'=>0,'lineHeight' => 1]);
         $table->addCell(2000,['valign' => 'top'])->addText('ကျား', ['bold' => true],['alignment'=>'center','spaceBefore'=>0,'lineHeight' => 1]);

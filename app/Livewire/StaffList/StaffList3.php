@@ -64,11 +64,7 @@ class StaffList3 extends Component
         ]);
     
         // Table header
-<<<<<<< HEAD
-        // $table->addRow();
-=======
         $table->addRow(50, ['tblHeader'=> true]);
->>>>>>> hrmsrp/main
         $table->addCell(700)->addText('စဥ်',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
         $table->addCell(5000)->addText('ရာထူးအမည်',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
         $table->addCell(2000)->addText('ကျား',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
@@ -97,11 +93,7 @@ class StaffList3 extends Component
        
         foreach ($second_ranks as $index => $rank) {
             $table->addRow();
-<<<<<<< HEAD
-            $table->addCell(700)->addText('',null,['alignment'=>'center','spaceBefore'=> 70]);
-=======
             $table->addCell(700)->addText(en2mm(++$count),null,['alignment'=>'center','spaceBefore'=> 70]);
->>>>>>> hrmsrp/main
             $table->addCell(5000)->addText($rank->name,null,['alignment'=>'left','spaceBefore'=> 70]);
             $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count()),null,['alignment'=>'center','spaceBefore'=> 70]);
             $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=> 70]);
