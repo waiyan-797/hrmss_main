@@ -14,6 +14,8 @@
                 removeItems: true,
                 removeItemButton: true,
                 placeholderValue: '{{ $placeholderValue }}',
+                itemSelectText: '', //remove press to select
+
              })
        })"
 >
