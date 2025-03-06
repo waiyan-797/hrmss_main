@@ -107,20 +107,26 @@
                                         $diff = $dob->diff(\Carbon\Carbon::now());
                                         $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
                                     @endphp --}}
-                                    @php
+                                    {{-- @php
                                     $dob = \Carbon\Carbon::parse($staff->dob);
                                     $diff = $dob->diff(\Carbon\Carbon::now());
                                     $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
-                                @endphp
+                                @endphp --}}
+                                @php
+                                $dob = \Carbon\Carbon::parse($staff->dob);
+                                $diff = $dob->diff(\Carbon\Carbon::now());
+                                $age =  $diff->y . ' နှစ် ၊'  . $diff->m . ' လ';
+                            @endphp
+
                                     <td class="border border-black text-left p-2"
                                         rowspan="{{ $allCountries->count() }}">
-                                        {{  en2mm($dob->format('d-m-Y')) }}<br>
+                                        {{ formatDMYmm($staff->dob) }}<br>
                                         {{  en2mm($age) }}
                                     </td>
                                     @php
                                         $government_staff_started_date = \Carbon\Carbon::parse($staff->government_staff_started_date);
                                         $diff = $government_staff_started_date->diff(\Carbon\Carbon::now());
-                                        $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+                                        $age =  $diff->y . ' နှစ်၊'  . $diff->m . ' လ';
                                     @endphp
                                     <td class="border border-black text-center p-2"
                                         rowspan="{{ $allCountries->count() }}">
@@ -129,7 +135,7 @@
                                     @php
                                     $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);
                                     $diff = $current_rank_date->diff(\Carbon\Carbon::now());
-                                    $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+                                    $age =  $diff->y . ' နှစ်၊ '  . $diff->m . ' လ';
                                 @endphp
                                     <td class="border border-black text-center p-2"
                                         rowspan="{{ $allCountries->count() }}">

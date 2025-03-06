@@ -70,7 +70,7 @@ private function getSignName($signID)
     $selectedRankName = Rank::find($this->selectedRankId)?->name ?? '';
     $signText = $this->getSignName($this->signID);
     $ageText = en2mm($this->age ?? '');
-    $fullText = "အသက် {$ageText} {$signText} {$selectedRankName} များ၏အမည်စာရင်း";
+    $fullText = "အသက် {$ageText} {$signText} {$selectedRankName}များ၏အမည်စာရင်း";
 
 
     $phpWord = new PhpWord();
@@ -126,17 +126,20 @@ $section->addText(
     $allCountries = $staff->abroads->pluck('country_id')->unique();
     $totalAbroads = $staff->abroads->count();
     $lastAbroad = $staff->abroads->sortByDesc('to_date')->first();
+    // $dob = \Carbon\Carbon::parse($staff->dob);
+    // $diff = $dob->diff(\Carbon\Carbon::now());
+    // $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
     $dob = \Carbon\Carbon::parse($staff->dob);
     $diff = $dob->diff(\Carbon\Carbon::now());
-    $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+    $age =  $diff->y . ' နှစ်၊'  . $diff->m . ' လ';
 
     $government_staff_started_date = \Carbon\Carbon::parse($staff->government_staff_started_date);
     $diff = $government_staff_started_date->diff(\Carbon\Carbon::now());
-    $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+    $age =  $diff->y . ' နှစ်၊'  . $diff->m . ' လ';
 
     $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);
     $diff = $current_rank_date->diff(\Carbon\Carbon::now());
-    $age =  $diff->y . ' နှစ် '  . $diff->m . ' လ';
+    $age =  $diff->y . ' နှစ်၊ '  . $diff->m . ' လ';
 
     foreach ($allCountries as $countryId) {
         $table->addRow();
@@ -144,7 +147,7 @@ $section->addText(
         $table->addCell(4000)->addText($staff->name . "\n" . ($staff->currentRank->name ?? ''),null,$pStyle_1);
         $table->addCell(4000)->addText($staff->current_division->name ?? '',null,$pStyle_1);
 
-        $table->addCell(2800)->addText(  en2mm($dob->format('d-m-Y')) . "\n" . en2mm($age),null,$pStyle_1);
+        $table->addCell(2800)->addText( formatDMYmm($staff->dob) . "\n" . en2mm($age),null,$pStyle_1);
         $table->addCell(2500)->addText( formatDMYmm($staff->government_staff_started_date)."\n".en2mm($age),null,$pStyle_1 );
         $table->addCell(2500)->addText(formatDMYmm($staff->current_rank_date)."\n".en2mm($age),null,$pStyle_1);
         $table->addCell(3000)->addText($lastAbroad?->countries->pluck('name')->unique()->join(', ') ?? '',null,$pStyle_2);
@@ -154,7 +157,7 @@ $section->addText(
         $table->addCell(3000)->addText(en2mm($totalAbroads).'ကြိမ်',null,$pStyle_1);
     }
 }
-    $fileName = 'A06.docx';
+    $fileName = 'A02.docx';
     $tempFile = tempnam(sys_get_temp_dir(), $fileName);
     $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
     $objWriter->save($tempFile);
