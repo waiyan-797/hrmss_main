@@ -14,14 +14,8 @@ use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 class PA14 implements FromView, WithStyles
 {
     /**
-<<<<<<< HEAD
-    * @return \Illuminate\Support\Collection
-    */
-    public $ranks;
-=======
      * @return \Illuminate\Support\Collection
      */
->>>>>>> hrmsrp/main
     public function mount()
     {
         $this->ranks = (new Rank())->isDicaAll();

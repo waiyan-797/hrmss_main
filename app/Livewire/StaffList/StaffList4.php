@@ -60,19 +60,11 @@ class StaffList4 extends Component
             'marginTop' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.23), // 0.23 inch
             'marginBottom' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5), // 0.5 inch
         ]);
-<<<<<<< HEAD
-
-        $section->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 12], ['align' => 'center']);
-        if (!is_null($this->selectedRankId)) {
-            $rankName = getRankById($this->selectedRankId)->name;
-           
-=======
     
         $section->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 12], ['align' => 'center']);
         if (!is_null($this->selectedRankId)) {
             $rankName = getRankById($this->selectedRankId)->name;
     
->>>>>>> hrmsrp/main
             $section->addText($rankName, ['bold' => true, 'size' => 12], ['align' => 'center']);
         } else {
             $section->addText('ဝန်ထမ်းများစာရင်း', ['bold' => true, 'size' => 12], ['align' => 'center']);
@@ -81,14 +73,6 @@ class StaffList4 extends Component
         $tableStyle = [
             'alignment' => Jc::END,
         ];
-<<<<<<< HEAD
-        $table = $section->addTable($tableStyle);
-        $table->addRow();
-        $table->addCell(14000)->addText('', $pStyle_right);
-        $table->addCell(6000)->addText('ရက်စွဲ-' . getTdyDateInMyanmarYearMonthDay(1), $pStyle_right);
-
-        
-=======
     
         $section->addText(
             'ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)),
@@ -96,7 +80,6 @@ class StaffList4 extends Component
             ['alignment' => 'right']
         );
     
->>>>>>> hrmsrp/main
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50, ['tblHeader' => true]); // Set
         $table->addCell(1000)->addText('စဥ်', ['bold' => true, 'size' => 12], ['align' => 'center']);
@@ -109,17 +92,6 @@ class StaffList4 extends Component
         $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true, 'size' => 12], ['align' => 'center']);
     
         foreach ($staffs as $index => $staff) {
-<<<<<<< HEAD
-            $table->addRow();
-            $table->addCell(1000)->addText(en2mm($index + 1), null, $pStyle_2);
-            $table->addCell(4000)->addText($staff->name . " \n " . ($staff->currentRank?->name ?? ''), null, ['align' => 'left', 'indent' => 0.2]);
-            $table->addCell(3000)->addText(($staff->postings->first()?->department->name ?? '') . ($staff->postings->first()?->division?->nick_name ?? ''), null, $pStyle_2);
-            $table->addCell(3000)->addText(en2mm($staff->postings->first()?->from_date ? \Carbon\Carbon::parse($staff->postings->first()->from_date)->format('d-m-Y') : ''), null, $pStyle_1);
-            $table->addCell(4000)->addText(($staff->postings->last()?->department->name ?? '') . ($staff->postings->last()?->division?->nick_name ?? ''), null, $pStyle_2);
-            $table->addCell(3000)->addText(en2mm($staff->postings->last()?->from_date ? \Carbon\Carbon::parse($staff->postings->last()->from_date)->format('d-m-Y') : ''), $pStyle_2);
-            $table->addCell(3000)->addText(en2mm($staff->postings->last()?->from_date ? \Carbon\Carbon::parse($staff->postings->last()->from_date)->format('d-m-Y') : ''));
-            $table->addCell(2000)->addText('');
-=======
             $table->addRow(50);
             $table->addCell(1000)->addText(en2mm($index + 1), $fontStyle, $pStyle_2);
             $table->addCell(4000)->addText($staff->name . " \n " . ($staff->currentRank?->name ?? ''), $fontStyle, ['align' => 'left', 'indent' => 0.2]);
@@ -129,7 +101,6 @@ class StaffList4 extends Component
             $table->addCell(3000)->addText(en2mm($staff->postings->last()?->from_date ? \Carbon\Carbon::parse($staff->postings->last()->from_date)->format('d-m-Y') : ''), $fontStyle, $pStyle_2);
             $table->addCell(3000)->addText(en2mm($staff->postings->last()?->from_date ? \Carbon\Carbon::parse($staff->postings->last()->from_date)->format('d-m-Y') : ''), $fontStyle);
             $table->addCell(2000)->addText('', $fontStyle);
->>>>>>> hrmsrp/main
         }
     
         $fileName = 'staff_list_report_4.docx';
