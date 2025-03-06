@@ -146,7 +146,6 @@ class PdfStaffReport68 extends Component
         $table->addCell(1300)->addText('၈။', null,  $pStyle_5);
         $table->addCell(13000)->addText('အရပ်အမြင့်', null,$pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
-        // $table->addCell(13000)->addText(en2mm($staff->height_feet) . 'ပေ' .'၊'. en2mm($staff->height_inch) . 'လက်မ', null,$pStyle_8);
         $table->addCell(13000)->addText(
             '(' . en2mm($staff->height_feet) . ')ပေ' . 
             (!empty($staff->height_inch) ? ' (' . en2mm($staff->height_inch) . ')လက်မ' : ''),null,$pStyle_8
