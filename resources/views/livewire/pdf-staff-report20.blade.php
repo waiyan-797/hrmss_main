@@ -11,7 +11,7 @@
                 <h2 class="font-semibold text-base mb-2 text-center">
                    ဒုတိယညွှန်ကြားရေးမှူး(သို့မဟုတ်) အဆင့်ရာထူးအတွက် အကဲဖြတ်မှတ်တမ်း</h2>
                 <h2 class="font-semibold text-base mb-2 text-center">
-                    {{ formatDMYmm($startDate)}} နေ့မှစ၍ {{ formatDMYmm($endDate)}} နေ့အထိ {{$staff->name}} ၏ အကဲဖြတ်မှတ်တမ်း</h2>
+                    {{ formatDMYmm($startDate)}} နေ့မှစ၍ {{ formatDMYmm($endDate)}} နေ့အထိ {{$staff->current_rank->name}} {{$staff->name}} ၏ အကဲဖြတ်မှတ်တမ်း</h2>
                        <div class="flex items-end justify-start gap-4 my-5">
                         <div class="w-40">
                             <label class="block mb-2 text-sm font-medium text-gray-700">Start Date</label>
@@ -279,16 +279,22 @@
                         <thead>
                             <tr>
                                 <th rowspan="2" class="border border-black text-center p-4">၂။</th>
-                                <th colspan="3" class="border border-black text-center p-4">
+                                <th colspan="3" class="border border-black  p-4">
                                     ပညာဆည်းပူးသင်ယူလေ့လာခဲ့မှုအခြေအနေ</th>
                             </tr>
-                            <tr>
+                            {{-- <tr>
                                 <th class="border border-black text-center p-4">(က)</th>
                                 <th class="border border-black  p-4">မူလတန်းမှ အလယ်တန်း</th>
                                 <th class="border border-black  p-4"></th>
-                            </tr>
+                            </tr> --}}
                         </thead>
                         <tbody>
+                            <tr>
+                                <td class="border border-black text-center p-4"></td>
+                                <td class="border border-black text-center p-4">(က)</td>
+                                <td class="border border-black  p-4">မူလတန်းမှ အလယ်တန်း</td>
+                                <td class="border border-black  p-4"></td>
+                            </tr>
                             <tr>
                                 <td class="border border-black text-center p-4"></td>
                                 <td class="border border-black text-center p-4">(ခ)</td>
