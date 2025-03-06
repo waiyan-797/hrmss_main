@@ -22,7 +22,10 @@
     <select
         x-ref="{{ $uniqId }}"
         wire:change="$set('{{ $model }}', [...$event.target.options].filter(option => option.selected).map(option => option.value))"
-        {!! $attributes->merge(['class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 font-arial']) !!}
+        {!! $attributes->merge(['class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500
+
+
+        focus:border-green-500 p-2.5 font-arial']) !!}
         multiple
     >
         @foreach($options as $option)

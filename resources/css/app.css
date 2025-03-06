@@ -84,3 +84,15 @@
         transform: rotate(360deg);
     }
 }
+
+
+/* choices__list choices__list--dropdown */
+/*  */
+.choices__list{
+
+    height: 6rem !important;
+    overflow: scroll !important;
+    overflow: scroll;
+    scrollbar-width: thin;
+
+}
