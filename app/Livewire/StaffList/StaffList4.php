@@ -60,11 +60,11 @@ class StaffList4 extends Component
             'marginTop' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.23), // 0.23 inch
             'marginBottom' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5), // 0.5 inch
         ]);
-    
+
         $section->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 12], ['align' => 'center']);
         if (!is_null($this->selectedRankId)) {
             $rankName = getRankById($this->selectedRankId)->name;
-    
+           
             $section->addText($rankName, ['bold' => true, 'size' => 12], ['align' => 'center']);
         } else {
             $section->addText('ဝန်ထမ်းများစာရင်း', ['bold' => true, 'size' => 12], ['align' => 'center']);

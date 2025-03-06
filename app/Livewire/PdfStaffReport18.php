@@ -275,7 +275,7 @@ class PdfStaffReport18 extends Component
                     ['alignment' => 'center']
                 );
             }
-        // $section->addTextBreak();
+        $section->addTextBreak();
        $section->addText('၁၆။ ' . ' ပြည်ပသင်တန်းများ တက်ရောက်မှု', ['bold' => true],array('spaceBefore' => 200));
        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
        $table->addRow(50, array('tblHeader' => true));
@@ -401,7 +401,7 @@ class PdfStaffReport18 extends Component
         $table->addCell(300)->addText('၊',  null, $pStyle_5);
         $table->addCell(2100)->addText($staff->email,null ,$pStyle_4);
 
-        $section->addText('ရက်စွဲ: '. mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center'],array('spaceBefore' => 300));
+        $section->addText('ရက်စွဲ၊ '. mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center'],array('spaceBefore' => 300));
 
         $fileName = 'staff_report_18_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');

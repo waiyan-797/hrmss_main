@@ -81,7 +81,7 @@ class StaffList3 extends Component
             $table->addCell(5000)->addText($rank->name,null,['alignment'=>'left','spaceBefore'=> 70]);
             $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count()),null,['alignment'=>'center','spaceBefore'=> 70]);
             $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=> 70]);
-            $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=>50, 'indentation' => ['left' => 100],'lineHeight'=>0.6 ]);
+            $table->addCell(2000)->addText(en2mm($rank->staffs->where('sgender_id', 1)->count() + $rank->staffs->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=>50, 'indentation' => ['left' => 100],'lineHeight'=>0.6 ]);
         }
         $table->addRow();
         $table->addCell(700)->addText('',['bold' => true],['alignment'=>'left','spaceBefore'=>50, 'indentation' => ['left' => 100],'lineHeight'=>0.6 ]);
@@ -93,7 +93,7 @@ class StaffList3 extends Component
        
         foreach ($second_ranks as $index => $rank) {
             $table->addRow();
-            $table->addCell(700)->addText(en2mm(++$count),null,['alignment'=>'center','spaceBefore'=> 70]);
+            $table->addCell(700)->addText('',null,['alignment'=>'center','spaceBefore'=> 70]);
             $table->addCell(5000)->addText($rank->name,null,['alignment'=>'left','spaceBefore'=> 70]);
             $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 1)->count()),null,['alignment'=>'center','spaceBefore'=> 70]);
             $table->addCell(2000)->addText(en2mm($rank->staffs->where('gender_id', 2)->count()),null,['alignment'=>'center','spaceBefore'=> 70]);
