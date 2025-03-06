@@ -129,12 +129,12 @@
                             <td>ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများ<br>ညွှန်ကြားမှုဦးစီးဌာန</td>
                             <td></td>
                             <td></td>
-                            <td>{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                            <td>{{ en2mm(($first_ranks->where('id', 2)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                            <td>{{ en2mm(($first_ranks->where('id', 3)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                            <td>{{ en2mm(($first_ranks->where('id', 4)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                            <td>{{ en2mm(($first_ranks->where('id', 5)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                            <td>{{ en2mm(($first_ranks->where('id', 6)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 1)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 2)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 3)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 4)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 5)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 6)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
                             <td>
                                 {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->whereNull('spouse_name')->where('gender_id', 1)->count())) }}
                             </td>
@@ -155,12 +155,12 @@
                             <td>-</td>
                             <td></td>
                             <td></td>
-                            <td>{{ en2mm(($first_ranks->where('id', 1)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                            <td>{{ en2mm(($first_ranks->where('id', 2)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                            <td>{{ en2mm(($first_ranks->where('id', 3)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                            <td>{{ en2mm(($first_ranks->where('id', 4)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                            <td>{{ en2mm(($first_ranks->where('id', 5)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
-                            <td>{{ en2mm(($first_ranks->where('id', 6)->first())->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 1)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 2)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 3)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 4)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 5)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
+                            <td>{{ en2mm(($first_ranks->where('id', 6)->first())?->staffs->whereNotNull('spouse_name')->count()) }}</td>
                             <td>
                                 {{ en2mm($first_ranks->sum(fn($rank) => $rank->staffs->whereNull('spouse_name')->where('gender_id', 1)->count())) }}
                             </td>

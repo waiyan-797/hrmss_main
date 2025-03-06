@@ -4,14 +4,13 @@ namespace App\Exports;
 
 use App\Models\Staff;
 use App\Models\PensionYear;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
-class PA17 implements FromView ,WithStyles
+class PA17 implements FromView, WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -20,46 +19,56 @@ class PA17 implements FromView ,WithStyles
     // {
     //     return PA17::all();
     // }
-    public $searchName,$staffs;
+    public $staffs;
     public $pension_year;
+    public $rankId;
+    public $deptId;
+    public $startDate;
 
-    public function __construct($searchName)
+    public function __construct($rankId, $deptId, $startDate)
     {
-        // dd($year, $month, $filterRange, $previousMonthDate, $previousMonth,$nameSearch);
-         $this->searchName=$searchName;
-        //  $this->staffs=$staffs;
-
-
+        $this->rankId = $rankId;
+        $this->deptId = $deptId;
+        $this->startDate = $startDate;
     }
+
     public function view(): View
     {
         $staffQuery = Staff::query();
 
 
-        if ($this->searchName) {
-            // $staffQuery->where('name', 'like', '%' . $this->searchName . '%');
-            $staffQuery->whereHas('currentRank', function ($query) {
-                $query->where('name', 'like', '%' . $this->searchName. '%');
+        // Independent rank filter
+        if ($this->rankId) {
+            $staffQuery = Staff::query()->whereHas('currentRank', function ($query) {
+                $query->where('id', $this->rankId);
             });
         }
+
+        // Independent department filter
+        if ($this->deptId) {
+            $staffQuery = Staff::query()->where('current_division_id', $this->deptId);
+        }
+
+        // Independent start date filter
+        if ($this->startDate) {
+            $staffQuery = Staff::query()->whereDate('join_date', '=', $this->startDate);
+        }
+
         $pension_year = PensionYear::where('id', 1)->value('year');
-
         $this->staffs = $staffQuery->get();
-        $this->pension_year=$pension_year;
+        $this->pension_year = $pension_year;
 
-        $staffs = Staff::get();
-        $data = [
-            'staffs' => $this->staffs ,
-            'pension'=>$this->pension_year,
-
-        ];
-        return view('excel_reports.staff_report_2', $data);
+        return view('excel_reports.staff_report_2', [
+            'staffs' => $this->staffs,
+            'pension' => $this->pension_year,
+        ]);
     }
+
     public function styles(Worksheet $sheet)
     {
         // Set paper size and orientation
         $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_LEGAL); // Set paper size to A4
-        $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
+        $sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
 
         // Fit to page width
         $sheet->getPageSetup()->setFitToWidth(1);

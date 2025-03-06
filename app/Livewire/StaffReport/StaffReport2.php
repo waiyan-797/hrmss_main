@@ -3,7 +3,9 @@
 namespace App\Livewire\StaffReport;
 
 use App\Exports\PA17;
+use App\Models\Department;
 use App\Models\PensionYear;
+use App\Models\Rank;
 use App\Models\Staff;
 
 use Livewire\Component;
@@ -14,10 +16,33 @@ use PhpOffice\PhpWord\PhpWord;
 class StaffReport2 extends Component
 {
 
-    public $searchName;
+    public $nameSearch, $deptId, $filterDate;
+    public $rankId;
     public $staffs;
-    public  $pension_year;
+    public $searchName;
+    public $year, $month, $filterRange;
+    public $previousYear, $previousMonthDate, $previousMonth;
+    public $pension_year;
+    public $startDate;
     
+    public function updatedRankId()
+    {
+        $this->deptId = '';
+        $this->startDate = null;
+    }
+
+    public function updatedDeptId()
+    {
+        $this->rankId = '';
+        $this->startDate = null;
+    }
+
+    public function updatedStartDate()
+    {
+        $this->rankId = '';
+        $this->deptId = '';
+    }
+
     public function go_pdf()
     {
         $staffs = Staff::get();
@@ -32,7 +57,7 @@ class StaffReport2 extends Component
     }
     public function go_excel() 
     {
-        return Excel::download(new PA17($this->searchName), 'PA17.xlsx');
+        return Excel::download(new PA17( $this->rankId, $this->deptId, $this->startDate), 'PA17.xlsx');
     }
     public function go_word()
     {
@@ -85,22 +110,39 @@ class StaffReport2 extends Component
     public function render()
     {
         $staffQuery = Staff::query();
-        // $pension_year=PensionYear::query();
 
         if ($this->searchName) {
-            // $staffQuery->where('name', 'like', '%' . $this->searchName . '%');
             $staffQuery->whereHas('currentRank', function ($query) {
                 $query->where('name', 'like', '%' . $this->searchName. '%');
             });
         }
+
+        // Independent rank filter
+        if ($this->rankId) {
+            $staffQuery = Staff::query()->whereHas('currentRank', function ($query) {
+                $query->where('id', $this->rankId);
+            });
+        }
+
+        // Independent department filter
+        if ($this->deptId) {
+            $staffQuery = Staff::query()->where('current_division_id', $this->deptId);
+        }
+
+        // Independent start date filter
+        if ($this->startDate) {
+            $staffQuery = Staff::query()->whereDate('join_date', '=', $this->startDate);
+        }
+
         $pension_year = PensionYear::where('id', 1)->value('year');
         $this->staffs = $staffQuery->get();
         $staffs = Staff::get();
         $this->pension_year=$pension_year;
         
-
         return view('livewire.staff-report.staff-report2', [
             'staffs' => $this->staffs,
+            'depts' => Department::all(),
+            'ranks'=> Rank::all(),
             'pension'=>$this->pension_year,
         ]);
     }
