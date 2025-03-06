@@ -377,6 +377,7 @@ class StaffDetail extends Component
         $this->staff_languages = [];
         $this->staff_rewards = [];
 
+
         switch ($this->tab) {
             case 'personal_info':
                 $this->military_services = MilitaryService::all();
@@ -396,6 +397,10 @@ class StaffDetail extends Component
                 $this->ministrys = Ministry::all();
                 $this->departments = Department::all();
                 $this->dica_departments = Department::where('id', 129)->get();
+
+                $this->current_department_id = Department::where('id', 129)->first()->id;
+
+
                 $this->divisions = Division::all();
                 $this->payscales = Payscale::all();
                 break;
@@ -424,11 +429,14 @@ class StaffDetail extends Component
                 break;
         }
 
+
         if ($this->staff_id) {
             $this->staff = Staff::find($this->staff_id);
             $this->initializeArrays($this->staff_id);
             $this->loadStaffData($this->staff_id);
         }
+
+
     }
 
     private function initializeArrays($staff_id)
@@ -808,7 +816,9 @@ class StaffDetail extends Component
     {
         $this->current_rank_id = $staff->current_rank_id;
         $this->current_rank_date = $staff->current_rank_date;
-        $this->current_department_id = $staff->current_department_id;
+
+
+        $this->current_department_id = $this->current_department_id ??  $staff->current_department_id;
         $this->transfer_division_id = $staff->transfer_division_id;
         $this->transfer_remark = $staff->transfer_remark;
         $this->government_staff_started_date = $staff->government_staff_started_date;
@@ -2066,6 +2076,7 @@ public $abroads_types;
 
     public function render()
     {
+
         if ($this->tab == 'relative') {
             $this->relatives = [
                 'siblings' => ['label' => 'ညီကိုမောင်နှမ', 'data' => $this->siblings],
