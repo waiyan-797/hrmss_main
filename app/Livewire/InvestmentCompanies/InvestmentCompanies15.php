@@ -384,93 +384,43 @@ class InvestmentCompanies15 extends Component
 
     public function render()
     {
-        $yangon = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 23);
-        })->get();
-
-        $nay_pyi_thaw = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 26);
-        });
-
-        $mandalay = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 20);
-        });
-
-        $shan = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 24);
-        });
-
-        $mon = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 21);
-        });
-
-        $aya = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 25);
-        });
-
-        $sagaing = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 16);
-        });
-
-        $tanindaryi = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 17);
-        });
-
-        $kayin = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 14);
-        });
-
-        $bago = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 18);
-        });
-
-        $magway = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 19);
-        });
-
-        $kayah = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 13);
-        });
-
-        $kachin = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 12);
-        });
-
-        $rakhine = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 22);
-        });
-
-        $chin = Rank::whereHas('staffs', function($query){
-            return $query->where('current_division_id', 15);
-        });
-
-        $total = Rank::whereHas('staffs', function($query){
-            return $query->whereIn('current_division_id', [23, 26, 20, 24, 21, 25, 16, 17, 14, 18, 19, 13, 12, 22, 15]);
-        });
-
-
+        $divisions = [
+            'yangon' => 23,
+            'nay_pyi_thaw' => 26,
+            'mandalay' => 20,
+            'shan' => 24,
+            'mon' => 21,
+            'aya' => 25,
+            'sagaing' => 16,
+            'tanindaryi' => 17,
+            'kayin' => 14,
+            'bago' => 18,
+            'magway' => 19,
+            'kayah' => 13,
+            'kachin' => 12,
+            'rakhine' => 22,
+            'chin' => 15,
+        ];
+    
+        $data = [];
+    
+        foreach ($divisions as $name => $id) {
+            $data[$name] = Rank::where('is_dica', 1)
+                ->whereHas('staffs', fn($query) => $query->where('current_division_id', $id))
+                ->get();
+        }
+    
+        $data['total'] = Rank::where('is_dica', 1)
+            ->whereHas('staffs', fn($query) => $query->whereIn('current_division_id', array_values($divisions)))
+            ->get();
+    
+        $data['ranks'] = Rank::where('is_dica', 1)
+            ->whereIn('staff_type_id', [1, 2])
+            ->get();
 
         $ranks = Rank::whereNot('staff_type_id',3)->get();
         
-
-        return view('livewire.investment-companies.investment-companies15',[
-            'yangon' => $yangon,
-            'nay_pyi_thaw' => $nay_pyi_thaw,
-            'mandalay' => $mandalay,
-            'shan' => $shan,
-            'mon' => $mon,
-            'aya' => $aya,
-            'sagaing' => $sagaing,
-            'tanindaryi' => $tanindaryi,
-            'kayin' => $kayin,
-            'bago' => $bago,
-            'magway' => $magway,
-            'kayah' => $kayah,
-            'kachin' => $kachin,
-            'rakhine' => $rakhine,
-            'chin' => $chin,
-            'total' => $total,
-            'ranks' => $ranks,
-        ]);
+        
+        return view('livewire.investment-companies.investment-companies15', $data);
     }
 }
