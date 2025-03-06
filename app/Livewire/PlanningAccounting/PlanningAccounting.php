@@ -28,7 +28,8 @@ class PlanningAccounting extends Component
     }
     public function go_word()
 {
-    $staffs = Staff::get();
+
+    $staffs = Staff::where('current_division_id', $this->selectedDivisionId)->get();
     $phpWord = new PhpWord();
     $phpWord = new PhpWord();
         $section = $phpWord->addSection([
@@ -49,6 +50,15 @@ class PlanningAccounting extends Component
         $division = getDivisionBy($this->selectedDivisionId);
         $section->addTitle(($division ? $division->name : 'Unknown Division').'ဝန်ထမ်းအင်အားစာရင်း' , 2);
         // $section->addTitle(formatDMYmm(Carbon::now()), 3);
+
+
+
+
+
+
+
+
+
 
     $table = $section->addTable([
         'borderSize' => 6, 
@@ -73,19 +83,21 @@ class PlanningAccounting extends Component
     $phpWord->save($filePath, 'Word2007');
     return response()->download($filePath)->deleteFileAfterSend(true);
 }
-     public function render()
-    {
-        $staffs = Staff::paginate(20);
-        $currentPage = $staffs->currentPage();
-        $perPage = $staffs->perPage();
-        $start = ($currentPage - 1) * $perPage + 1;
-        return view('livewire.planning-accounting.planning-accounting',[ 
-        'staffs' => $staffs,
-        'start'=>$start,
-    ]);
+        public function render()
+        {
+            $query = Staff::query();
+            if ($this->selectedDivisionId) {
+                $query->where('current_division_id', $this->selectedDivisionId);
+            }
+            $staffs = $query->paginate(20);
+            $currentPage = $staffs->currentPage();
+            $perPage = $staffs->perPage();
+            $start = ($currentPage - 1) * $perPage + 1;
+            return view('livewire.planning-accounting.planning-accounting',[ 
+            'staffs' => $staffs,
+            'start'=>$start,
+        ]);
     }
-
-
     public function mount(){
         $this->divisions = Division::all();
          $this->selectedDivisionId = getFirstOf('Division')->id;

@@ -42,7 +42,7 @@
                                 } elseif (!in_array($staff->current_rank_id, [1, 2])) {
                                     $includeStaff = true;
                                 }
-                            @endphp
+                            @endphp     
 
                             @if ($includeStaff)
                                 <tr>
