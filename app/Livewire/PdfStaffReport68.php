@@ -146,7 +146,12 @@ class PdfStaffReport68 extends Component
         $table->addCell(1300)->addText('၈။', null,  $pStyle_5);
         $table->addCell(13000)->addText('အရပ်အမြင့်', null,$pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText(en2mm($staff->height_feet) . 'ပေ' .'၊'. en2mm($staff->height_inch) . 'လက်မ', null,$pStyle_8);
+        // $table->addCell(13000)->addText(en2mm($staff->height_feet) . 'ပေ' .'၊'. en2mm($staff->height_inch) . 'လက်မ', null,$pStyle_8);
+        $table->addCell(13000)->addText(
+            '(' . en2mm($staff->height_feet) . ')ပေ' . 
+            (!empty($staff->height_inch) ? ' (' . en2mm($staff->height_inch) . ')လက်မ' : ''),null,$pStyle_8
+        );
+        
 
         $table->addRow();
         $table->addCell(1300)->addText('၉။', null,  $pStyle_5);
@@ -228,18 +233,13 @@ class PdfStaffReport68 extends Component
         $table->addCell(1300)->addText('၂၂။', null,  $pStyle_5);
         $table->addCell(13000)->addText('လက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ', null,$pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText($staff->current_address_house_no.
-        ($staff->current_address_street ?? '' ).
-        ($staff->current_address_ward ? '၊'.$staff->current_address_ward:'').
-        ($staff->current_address_township_or_town->name ? '၊'.$staff->current_address_township_or_town->name.'မြို့နယ်':'').
-        ($staff->current_address_region->name ? '၊'.$staff->current_address_region->name.'ဒေသကြီး'.'။':''), null, $pStyle_8);
+        $table->addCell(13000)->addText($staff->current_address_house_no.$staff->current_address_street.$staff->current_address_ward.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'ဒေသကြီး။',null ,$pStyle_8);
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၂၃။', null,  $pStyle_5);
         $table->addCell(13000)->addText('အမြဲတမ်းလက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ', null,$pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText($staff->permanent_address_house_no.
-         ($staff->permanent_address_region->name ? '၊'.$staff->permanent_address_region->name.'ဒေသကြီး'.'။':''), null, $pStyle_8);
+        $table->addCell(13000)->addText($staff->permanent_address_house_no.$staff->permanent_address_street.$staff->permanent_address_ward.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'ဒေသကြီး။',null ,$pStyle_8);
         $table->addRow(50);
         $table->addCell(1300)->addText('၂၄။', null,  $pStyle_5);
         $table->addCell(13000)->addText("ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာ\nအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာဖော်ပြရန်မလို)", null,$pStyle_8);
@@ -330,7 +330,7 @@ class PdfStaffReport68 extends Component
         $table->addCell(1300)->addText('၃။', null,  $pStyle_5);
         $table->addCell(13000)->addText('ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်နေ့', null, $pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText(formatDMYmm($staff->join_date), null,$pStyle_8);
+        $table->addCell(13000)->addText(formatDMYmm($staff->government_staff_started_date), null,$pStyle_8);
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၄။', null,  $pStyle_5);
@@ -922,7 +922,8 @@ class PdfStaffReport68 extends Component
         if ($staff->abroads->isNotEmpty()) {
             foreach ($staff->abroads as $abroad) {
                 $table->addRow();
-                $table->addCell(6000)->addText($abroad->countries->pluck('name')->unique()->join(', '), null, $pStyle_1);
+                // $table->addCell(6000)->addText($abroad->countries->pluck('name')->unique()->join(', '), null, $pStyle_1);
+                $table->addCell(6000)->addText($abroad->countries->pluck('name')->unique()->join(', ')."\n".$abroad->towns,null,$pStyle_1);
                 $table->addCell(6000)->addText($abroad->particular, null, $pStyle_3);
                 $table->addCell(6000)->addText($abroad->meet_with, null, $pStyle_3);
 

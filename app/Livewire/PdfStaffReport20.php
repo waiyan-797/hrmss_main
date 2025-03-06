@@ -90,7 +90,7 @@ class PdfStaffReport20 extends Component
         $table->addRow(50);
         $table->addCell(700);
         $table->addCell(700)->addText('(ခ)', null,$pStyle_1);
-        $table->addCell(4000)->addText('လူမျိုးနှင့် ကိုးကွယ်သည့်ဘာသာ',null,$pStyle_3);
+        $table->addCell(4000)->addText('လူမျိုးနှင့်ကိုးကွယ်သည့်ဘာသာ',null,$pStyle_3);
         $table->addCell(4000)->addText(($staff->ethnic_id ? $staff->ethnic->name : '-') . '/' . ($staff->religion_id ? $staff->religion->name : ''),null,$pStyle_3);
         $table->addRow(50);
         $table->addCell(700);

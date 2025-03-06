@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Staff;
+use Carbon\Carbon;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
@@ -149,18 +150,22 @@ class PdfStaffReport17 extends Component
         $table->addCell(13000)->addText('ရာထူး/ ဌာန', null,$pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText($staff->current_rank->name . "\n" . $staff->current_department->name."\n".'ရင်နှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်‌ရေးဝန်ကြီးဌာန', null,$pStyle_8);
-        $joinDate = \Carbon\Carbon::parse($staff->join_date);
-        $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());
-        $table->addRow(50);
-        $table->addCell(1300)->addText('၆။', null, $pStyle_5);
-        $table->addCell(13000)->addText('အမှုထမ်းသက်၊ဝင်ရောက်သည့်ရက်စွဲ', null,$pStyle_8);
-        $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText(formatPeriodMM($joinDateDuration->y, $joinDateDuration->m) . ', ' . formatDMYmm($joinDate), null,$pStyle_8);
+        
+         $joinDate = \Carbon\Carbon::parse($staff->government_staff_started_date);
+         $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());
+         $table->addRow(50);
+         $table->addCell(1300)->addText('၆။', null, $pStyle_5);
+         $table->addCell(13000)->addText('အမှုထမ်းသက်၊ဝင်ရောက်သည့်ရက်စွဲ', null, $pStyle_8);
+         $table->addCell(700)->addText('-', null, $pStyle_5);
+         $table->addCell(13000)->addText(formatPeriodMM($joinDateDuration->y,          $joinDateDuration->m) . ', ' . formatDMYmm($joinDate), null, $pStyle_8);
+
+
+
         $table->addRow(50);
         $table->addCell(1300)->addText('၇။', null, $pStyle_5);
         $table->addCell(13000)->addText('လက်ရှိနေရပ်လိပ်စာ', null,$pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText($staff->current_address_house_no.$staff->current_address_street . '၊' . $staff->current_address_ward . '၊' . $staff->current_address_township_or_town->name.'မြို့နယ်' . '၊' . $staff->current_address_region->name.'ဒေသကြီး။', null,$pStyle_8);
+        $table->addCell(13000)->addText($staff->current_address_house_no.$staff->current_address_street . $staff->current_address_ward. $staff->current_address_township_or_town->name.'မြို့နယ်' . '၊' . $staff->current_address_region->name.'ဒေသကြီး။', null,$pStyle_8);
         $table->addRow(50);
         $table->addCell(1300)->addText('၈။', null, $pStyle_5);
         $table->addCell(13000)->addText('ပညာအရည်အချင်း', null,$pStyle_8);
@@ -196,40 +201,37 @@ class PdfStaffReport17 extends Component
             null,
            $pStyle_8
         );
-        $section->addTextBreak();
+        $section->addText('');
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
-        $table->addRow(50, ['tblHeader' => true]);
-        $table->addCell(12000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ကာလ', ['bold' => true], $pStyle_2);
-        $textContent = "နောက်ဆုံးသွား\nရောက်ခဲ့သည့်\n(၅)နိုင်ငံ";
-        $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent, ['bold' => true], $pStyle_3);
-        $table->addCell(8000, ['vMerge' => 'restart'])->addText("သွားရောက်\nသည့်ကိစ္စ", ['bold' => true], $pStyle_4);
-        $textContent = "သင်တန်းတတ်\nခြင်းဖြစ်လျှင်\nအောင်မအောင်";
-        $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent, ['bold' => true], $pStyle_1);
-        $textContent = "မည်သည့်\nအစိုးရ\nအဖွဲ့အစည်း\nအထောက်အပံ့";
-        $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent, ['bold' => true], $pStyle_1);
-        $table->addRow(50, ['tblHeader' => true]);
-        $table->addCell(6000)->addText('မှ', ['bold' => true], ['alignment' => 'center']);
-        $table->addCell(6000)->addText('ထိ', ['bold' => true], ['alignment' => 'center']);
-        $table->addCell(8000, ['vMerge' => 'continue']);
-        $table->addCell(6000, ['vMerge' => 'continue']);
-        $table->addCell(8000, ['vMerge' => 'continue']);
-        $table->addCell(8000, ['vMerge' => 'continue']);
-        if ($staff->abroads->isNotEmpty()) {
+        $table->addRow(50, array('tblHeader' => true));
+        $table->addCell(4000, ['gridSpan' => 2, 'valign' => 'center'])->addText('ကာလ', ['bold'=>true], $pStyle_2);
+        $table->addCell(1600,['vMerge' => 'restart'])->addText("နောက်ဆုံး\nသွားရောက်\nခဲ့သည့်\n(၅)နိုင်ငံ", ['bold' => true],$pStyle_2);
+        $table->addCell(4000,['vMerge' => 'restart'])->addText("သွားရောက်သည့်ကိစ္စ", ['bold' => true],$pStyle_2);
+        $table->addCell(1800,['vMerge' => 'restart'])->addText("သင်တန်း\nတတ်ခြင်း\nဖြစ်လျှင်\nအောင်\nမအောင်", ['bold' => true],$pStyle_2);
+        $table->addCell(1800,['vMerge' => 'restart'])->addText("မည်သည့်\nအစိုးရ\nအဖွဲ့အစည်း\nအထောက်\nအပံ့", ['bold' => true],$pStyle_2);
+        $table->addRow(50, array('tblHeader' => true));
+        $table->addCell(2000)->addText('မှ',['bold'=>true],['alignment' => 'center']);
+        $table->addCell(2000)->addText('ထိ',['bold'=>true],['alignment' => 'center']);
+        $table->addCell(1600, ['vMerge' => 'continue']);
+        $table->addCell(4000, ['vMerge' => 'continue']);
+        $table->addCell(1800, ['vMerge' => 'continue']);
+        $table->addCell(1800, ['vMerge' => 'continue']);
+          if ($staff->abroads->isNotEmpty()) {
             $latestAbroads = $staff->abroads
             ? $staff->abroads->sortByDesc('to_date')->take(5)
             : collect();
             foreach ($latestAbroads as $abroad) {
                 $table->addRow();
-                $table->addCell(6000)->addText(formatDMYmm($abroad?->from_date), null, $pStyle_2);
-                $table->addCell(6000)->addText(formatDMYmm($abroad?->to_date), null, $pStyle_2);
-                $table->addCell(8000)->addText($abroad->countries->pluck('name')->unique()->join(', '), null, $pStyle_2);
-                $table->addCell(8000)->addText($abroad->particular, null, $pStyle_4);
-                $table->addCell(8000)->addText($abroad->training_success_count, null, $pStyle_4);
-                $table->addCell(8000)->addText($abroad->position, null, $pStyle_1);
+                $table->addCell(2000)->addText(formatDMYmm($abroad->from_date),null,$pStyle_6);
+                $table->addCell(2000)->addText(formatDMYmm($abroad->to_date),null,$pStyle_6);
+                $table->addCell(1600)->addText($abroad->countries->pluck('name')->unique()->join(', '),null,$pStyle_3);
+                $table->addCell(4000)->addText($abroad->particular,null,$pStyle_3);
+                $table->addCell(1800)->addText($abroad->training_success_count,null,$pStyle_3);
+                $table->addCell(1800)->addText($abroad->sponser,null,$pStyle_3);
             }
         } else {
             $table->addRow();
-            $cell = $table->addCell(44000, ['gridSpan' => 6]);
+            $cell = $table->addCell(13200, ['gridSpan' => 6]); 
             $cell->addText(
                 'မရှိပါ',
                null,
@@ -240,31 +242,30 @@ class PdfStaffReport17 extends Component
     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
     $table->addRow(50,array('tblHeader' => true));
     $table->addCell(2800)->addText("အမည်\n(အခြားအမည်များ\nရှိလျှင်လည်း\nဖော်ပြရန်)", ['bold' => true],$pStyle_2);
-    $table->addCell(1300)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
+    $table->addCell(1500)->addText('တော်စပ်ပုံ', ['bold' => true],$pStyle_7);
     $table->addCell(1300)->addText("ကျား/မ", ['bold' => true],$pStyle_7);
     $table->addCell(1300)->addText("လူမျိုး/\nဘာသာ", ['bold' => true],$pStyle_2);
     $table->addCell(1300)->addText('ဇာတိ', ['bold' => true],$pStyle_7);
-    $table->addCell(1800)->addText('အလုပ်အကိုင်', ['bold' => true],$pStyle_7);
-    $table->addCell(2300)->addText('နေရပ်', ['bold' => true],$pStyle_7);
-    $table->addCell(1300)->addText('မှတ်ချက်', ['bold' => true],$pStyle_7);
+    $table->addCell(1500)->addText("အလုပ်\nအကိုင်", ['bold' => true],$pStyle_7);
+    $table->addCell(3000)->addText('နေရပ်', ['bold' => true],$pStyle_7);
+    $table->addCell(1500)->addText('မှတ်ချက်', ['bold' => true],$pStyle_7);
 
     if($staff->spouses->isNotEmpty()){
-        foreach ($staff->spouses as $index => $spouse) {
+        foreach ($staff->spouses as $spouse) {
             $table->addRow();
             $table->addCell(2800)->addText($spouse->name,null, $pStyle_3);
-            $table->addCell(1300)->addText($spouse->relation?->name,null, $pStyle_6);
+            $table->addCell(1500)->addText($spouse->relation?->name,null, $pStyle_6);
             $table->addCell(1300)->addText($spouse->gender?->name,null, $pStyle_6);
-
             $table->addCell(1300)->addText($spouse->ethnic->name  . "/\n" . $spouse->religion->name ,null, $pStyle_6);
             $table->addCell(1300)->addText($spouse->place_of_birth,null, $pStyle_6);
-            $table->addCell(1800)->addText($spouse->occupation,null, $pStyle_3);
-            $table->addCell(2300)->addText($spouse->address,null, $pStyle_3);
-            $table->addCell(1300)->addText();
+            $table->addCell(1500)->addText($spouse->occupation,null, $pStyle_3);
+            $table->addCell(3000)->addText($spouse->address,null, $pStyle_3);
+            $table->addCell(1500)->addText();
 
         }
     }else{
             $table->addRow(50);
-            $cell = $table->addCell(13400, ['gridSpan' => 8]);
+            $cell = $table->addCell(14200, ['gridSpan' => 8]);
             $cell->addText(
                 'မရှိပါ',
                null,
@@ -280,33 +281,33 @@ class PdfStaffReport17 extends Component
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50, ['tblHeader' => true]);
         $textContent_1 = "သွားရောက်\nမည့်ကိစ္စ";
-        $table->addCell(6000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_1);
+        $table->addCell(4000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_1);
         $textContent_1 = "စေလွှတ်\nသည့်နိုင်ငံ";
-        $table->addCell(6000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_3);
+        $table->addCell(4000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_3);
         $textContent_1 = 'အချိန်ကာလ';
-        $table->addCell(12000, ['gridSpan' => 2, 'valign' => 'center'])->addText($textContent_1, ['bold' => true], $pStyle_3);
+        $table->addCell(4000, ['gridSpan' => 2, 'valign' => 'center'])->addText($textContent_1, ['bold' => true], $pStyle_3);
         $textContent_1 = "နိုင်ငံခြားသို့\nသွားရောက်မည့်နေ့";
-        $table->addCell(6000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_3);
+        $table->addCell(4000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_3);
         $textContent_1 = "ထောက်ပံ့သည့်\nအဖွဲ့အစည်း";
-        $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_3);
+        $table->addCell(4000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_3);
         $textContent_1 = "ပြန်ရောက်လျှင်\nအမှုထမ်းမည့်\n ဌာန/ရာထူး";
-        $table->addCell(8000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_3);
+        $table->addCell(4000, ['vMerge' => 'restart'])->addText($textContent_1, ['bold' => true], $pStyle_3);
         $table->addRow(50, ['tblHeader' => true]);
-        $table->addCell(6000, ['vMerge' => 'continue']);
-        $table->addCell(6000, ['vMerge' => 'continue']);
-        $table->addCell(6000)->addText('မှ', ['bold' => true], ['alignment' => 'center']);
-        $table->addCell(6000)->addText('ထိ', ['bold' => true], ['alignment' => 'center']);
-        $table->addCell(8000, ['vMerge' => 'continue']);
-        $table->addCell(8000, ['vMerge' => 'continue']);
-        $table->addCell(8000, ['vMerge' => 'continue']);
+        $table->addCell(4000, ['vMerge' => 'continue']);
+        $table->addCell(4000, ['vMerge' => 'continue']);
+        $table->addCell(2000)->addText('မှ', ['bold' => true], ['alignment' => 'center']);
+        $table->addCell(2000)->addText('ထိ', ['bold' => true], ['alignment' => 'center']);
+        $table->addCell(4000, ['vMerge' => 'continue']);
+        $table->addCell(4000, ['vMerge' => 'continue']);
+        $table->addCell(4000, ['vMerge' => 'continue']);
         $table->addRow();
-        $table->addCell(6000);
-        $table->addCell(6000);
-        $table->addCell(6000);
-        $table->addCell(6000);
-        $table->addCell(8000);
-        $table->addCell(8000);
-        $table->addCell(8000);
+        $table->addCell(4000);
+        $table->addCell(4000);
+        $table->addCell(2000);
+        $table->addCell(2000);
+        $table->addCell(4000);
+        $table->addCell(4000);
+        $table->addCell(4000);
         $section->addText('');
         $section->addText('၁၆။ ' . ' အထက်ပါအချက်အလက်များကို မှန်ကန်သည့်အတိုင်း ဖြည့်သွင်းရေးသားထားပါကြောင်း ကိုယ်တိုင်လက်မှတ်ရေးထိုးပါသည်', null,array('spaceBefore'=> 200));
         $tableStyle = [

@@ -91,7 +91,7 @@ public $divisionTypes ;
         if ($this->selsectedDivisionTypeId == 1) {
             $divisionTitle = 'ရုံးချုပ်စုစုပေါင်း';
         } elseif ($this->selsectedDivisionTypeId == 2) {
-            $divisionTitle = 'နယ်ရုံးခွဲ';
+            $divisionTitle = 'စုစုပေါင်း';
         } 
         $table->addRow();
         $table->addCell(900)->addText('');

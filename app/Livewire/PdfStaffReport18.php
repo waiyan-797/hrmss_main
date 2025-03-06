@@ -168,11 +168,19 @@ class PdfStaffReport18 extends Component
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText($staff?->spouses->first()?->name ? $staff?->spouses->first()?->name :'မရှိပါ' ,null ,$pStyle_4);
 
+        // $table->addRow(50);
+        // $table->addCell(1300)->addText('၉။', null, $pStyle_5);
+        // $table->addCell(13000)->addText('သား/သမီးအမည် ',null ,$pStyle_4);
+        // $table->addCell(700)->addText('-', null, $pStyle_5);
+        // $table->addCell(13000)->addText($staff->children->first()?->name ? $staff->children->first()?->name :'မရှိပါ',null ,$pStyle_4);
         $table->addRow(50);
         $table->addCell(1300)->addText('၉။', null, $pStyle_5);
-        $table->addCell(13000)->addText('သား/သမီးအမည် ',null ,$pStyle_4);
+        $table->addCell(13000)->addText('သား/သမီးအမည် ', null, $pStyle_4);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText($staff->children->first()?->name ? $staff->children->first()?->name :'မရှိပါ',null ,$pStyle_4);
+        $childrenNames = $staff->children->count() > 1 
+        ? implode(', ', $staff->children->pluck('name')->toArray()) :($staff->children->first()?->name ?? 'မရှိပါ');
+        $table->addCell(13000)->addText($childrenNames, null, $pStyle_4);
+
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၁၀။', null, $pStyle_5);
@@ -197,7 +205,6 @@ class PdfStaffReport18 extends Component
         $textRun->addText($staff->payscale?->name ?? '');
         $textRun->addTextBreak();
         $textRun->addText('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန');
-
         $table->addRow(50);
         $table->addCell(1300)->addText('၁၃။', null, $pStyle_5);
         $table->addCell(13000)->addText('သွေးအုပ်စု ',null ,$pStyle_4);
@@ -288,7 +295,6 @@ class PdfStaffReport18 extends Component
             foreach ($staff->trainings->where('training_location_id', 2) as  $training) {
                 $table->addRow(50);
                 $table->addCell(700)->addText('('.myanmarAlphabet($index).')', null, $pStyle_6);
-                // $table->addCell(4000)->addText($training->diploma_name, null, $pStyle_3);
                 $trainingName = ($training->training_type_id == 32) ? $training->diploma_name : $training->training_type?->name;
                 $table->addCell(4000)->addText($trainingName, null, $pStyle_3);
                 $table->addCell(1750)->addText(formatDMYmm($training->from_date), null, $pStyle_6);
@@ -298,7 +304,7 @@ class PdfStaffReport18 extends Component
             }
         }else{
                 $table->addRow(50);
-                $cell = $table->addCell(10200, ['gridSpan' => 4]);
+                $cell = $table->addCell(10200, ['gridSpan' => 5]);
                 $cell->addText(
                     'မရှိပါ',
                    null,

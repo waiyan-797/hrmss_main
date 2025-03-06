@@ -59,7 +59,7 @@
                     <label for="name" class="md:w-1/3">အရပ်အမြင့်</label>
                     <label for="" class="md:w-5">-</label>
                         <label for="name"
-                            class="md:w-3/5">{{ en2mm($staff->height_feet) }}ပေ {{ en2mm($staff->height_inch) }}လက်မ</label>
+                            class="md:w-3/5">{{ en2mm($staff->height_feet) }}ပေ {{ !empty($staff->height_inch) ? ' (' . en2mm($staff->height_inch) . ')လက်မ' : '' }}</label>
                                     </div>
 
                 <div class="flex justify-between w-full mb-4">

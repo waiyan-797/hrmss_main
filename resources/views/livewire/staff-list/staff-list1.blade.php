@@ -76,7 +76,7 @@
 
                         </td>
                         <td class="border border-black text-center p-2">
-                            {{$selsectedDivisionTypeId  == 1 ? ' ရုံးချုပ်စုစုပေါင်း' : 'နယ်ရုံးခွဲ' }} 
+                            {{$selsectedDivisionTypeId  == 1 ? ' ရုံးချုပ်စုစုပေါင်း' : 'စုစုပေါင်း' }} 
                         </td>
                         
                     

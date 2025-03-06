@@ -2,6 +2,7 @@
 
 namespace App\Livewire\InvestmentCompanies;
 use App\Exports\PA04;
+use App\Exports\PA05;
 use App\Models\Payscale;
 use App\Models\Staff;
 use Illuminate\Support\Carbon;
@@ -30,7 +31,7 @@ class InvestmentCompanies4 extends Component
     }
     public function go_excel() 
     {
-        return Excel::download(new PA04($this->year,$this->month,$this->filterRange,$this->previousMonthDate,$this->previousMonth
+        return Excel::download(new PA05($this->year,$this->month,$this->filterRange,$this->previousMonthDate,$this->previousMonth
     ), 'PA04.xlsx');
     }
     public function go_word()
