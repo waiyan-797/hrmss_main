@@ -248,7 +248,7 @@ class PdfStaffReport68 extends Component
         $educationNames = $staff->staff_educations->map(fn($edu) => $edu->education?->name)->implode(', ');
         $table->addRow(50);
         $table->addCell(1300)->addText('၂၅။', null,  $pStyle_5);
-        $table->addCell(13000)->addText("ပညာအရည်အချင်း\n(ရရှိထားသောဘွဲ့၊ဒီပလိုမာ)", null,$pStyle_8);
+        $table->addCell(13000)->addText("ပညာအရည်အချင်း\n(ရရှိထားသော တက္ကသိုလ်/ဘွဲ့/ဒီပလိုမာ)", null,$pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
         $table->addCell(13000)->addText($educationNames, null,$pStyle_8);
 
@@ -453,15 +453,15 @@ class PdfStaffReport68 extends Component
         $table->addCell(1300)->addText('၂။', null, $pStyle_5);
         $table->addCell(13000)->addText('၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText($staff->father_address_house_no.
-
-            ($staff->father_address_street ?? '' ).
-            ( $staff->father_address_ward ? '၊' . $staff->father_address_ward :'') .
-            ($staff->father_address_township_or_town?->name ? '၊'. $staff->father_address_township_or_town?->name.'မြို့နယ်' :'' ).
-            ($staff->father_address_region?->name ? '၊' . $staff->father_address_region?->name .'ဒေသကြီး။':''),
-            null,
-            $pStyle_8
-        );
+        $table->addCell(13000)->addText($staff->father_address_house_no.$staff->father_address_street.$staff->father_address_ward.$staff->father_address_township_or_town->name.'မြို့နယ်၊'.$staff->father_address_region->name.'ဒေသကြီး။',null ,$pStyle_8);
+        // $table->addCell(13000)->addText($staff->father_address_house_no.
+        //     $staff->father_address_street ?? '' .
+        //     ( $staff->father_address_ward ? '၊' . $staff->father_address_ward :'') .
+        //     ($staff->father_address_township_or_town?->name ? '၊'. $staff->father_address_township_or_town?->name.'မြို့နယ်' :'' ).
+        //     ($staff->father_address_region?->name ? '၊' . $staff->father_address_region?->name .'ဒေသကြီး။':''),
+        //     null,
+        //     $pStyle_8
+        // );
 
         $table->addRow(50);
 
@@ -484,15 +484,16 @@ class PdfStaffReport68 extends Component
         $table->addCell(1300)->addText('၄။', null, $pStyle_5);
         $table->addCell(13000)->addText('၎င်း၏ နေရပ်လိပ်စာ အပြည့်အစုံ', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
-        $table->addCell(13000)->addText($staff->mother_address_house_no.
+        $table->addCell(13000)->addText($staff->mother_address_house_no.$staff->mother_address_street.$staff->mother_address_ward.$staff->mother_address_township_or_town->name.'မြို့နယ်၊'.$staff->mother_address_region->name.'ဒေသကြီး။',null ,$pStyle_8);
+        // $table->addCell(13000)->addText($staff->mother_address_house_no.
 
-            ($staff->mother_address_street ?? '') .
-            ($staff->mother_address_ward ? '၊' . $staff->mother_address_ward : '') .
-            ($staff->mother_address_township_or_town?->name ? '၊' . $staff->mother_address_township_or_town->name.'မြို့နယ်' : '') .
-            ($staff->mother_address_region?->name ? '၊' . $staff->mother_address_region->name .'ဒေသကြီး။': '') ,
-            null,
-            $pStyle_8
-        );
+        //     ($staff->mother_address_street ?? '') .
+        //     ($staff->mother_address_ward ? '၊' . $staff->mother_address_ward : '') .
+        //     ($staff->mother_address_township_or_town?->name ? '၊' . $staff->mother_address_township_or_town->name.'မြို့နယ်' : '') .
+        //     ($staff->mother_address_region?->name ? '၊' . $staff->mother_address_region->name .'ဒေသကြီး။': '') ,
+        //     null,
+        //     $pStyle_8
+        // );
         $section->addTextBreak();
         $section->addText('၅။ '.  ' ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
@@ -876,7 +877,7 @@ class PdfStaffReport68 extends Component
         } else {
             $table->addRow();
             $cell = $table->addCell(31000, ['gridSpan' => 6]);
-            $cell->addText('မရှိပါ', null, ['alignment' => 'center']);
+            $cell->addText('', null, ['alignment' => 'center']);
         }
         $section->addText('');
         $table = $section->addTable();
