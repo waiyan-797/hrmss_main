@@ -178,7 +178,7 @@ class PdfStaffReport18 extends Component
         $table->addCell(13000)->addText('သား/သမီးအမည် ', null, $pStyle_4);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $childrenNames = $staff->children->count() > 1 
-        ? implode(', ', $staff->children->pluck('name')->toArray()) :($staff->children->first()?->name ?? 'မရှိပါ');
+        ? implode('၊ ', $staff->children->pluck('name')->toArray()) :($staff->children->first()?->name ?? 'မရှိပါ');
         $table->addCell(13000)->addText($childrenNames, null, $pStyle_4);
 
 

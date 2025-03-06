@@ -221,7 +221,7 @@ class PdfStaffReport19 extends Component
                 $table->addCell(3000)->addText($posting->department->name ?? ' - ', null, $pStyle_7);
                 $table->addCell(1600)->addText($posting->from_date ? formatDMYmm($posting->from_date) : ' - ', null, $pStyle_1);
                 $table->addCell(1600)->addText($posting->to_date ? formatDMYmm($posting->to_date) : ' - ', null, $pStyle_1);
-                $table->addCell(2000)->addText($posting->remark ?? ' - ', null, $pStyle_1);
+                $table->addCell(2000)->addText($posting->remark ?? ' ', null, $pStyle_1);
             }
         } else {
             $table->addRow(50);
@@ -258,7 +258,7 @@ class PdfStaffReport19 extends Component
                     $table->addRow();
                     $table->addCell(1000)->addText('('.myanmarAlphabet($index).')',null, $pStyle_1);
                     $table->addCell(5000)->addText( $awarding->award->name,null,$pStyle_7);
-                    $table->addCell(3000)->addText(formatDMYmm($awarding->order_date), null, $pStyle_7);
+                    $table->addCell(3000)->addText($awarding->order_no, null, $pStyle_7);
                     $table->addCell(3000)->addText( $awarding->remark, null, $pStyle_7);
 
                 }
@@ -316,7 +316,7 @@ class PdfStaffReport19 extends Component
             $table->addCell(300)->addText('၊',  null, $pStyle_5);
             $table->addCell(1000)->addText($staff->current_department?->name,null,$pStyle_4);
 
-            $section->addText('ရက်စွဲ: '. mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center'],array('spaceBefore' => 300));
+            $section->addText('ရက်စွဲ၊ '. mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center'],array('spaceBefore' => 300));
 
         $fileName = 'staff_report_19_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');

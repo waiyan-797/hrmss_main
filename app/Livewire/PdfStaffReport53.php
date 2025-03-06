@@ -426,7 +426,7 @@ class PdfStaffReport53 extends Component
                 $table->addCell(4000)->addText($posting->rank->name ?? '',null,$pStyle_3);
                 $table->addCell(2500)->addText(formatDMYmm($posting->from_date),null, $pStyle_6);
                 $table->addCell(2500)->addText(formatDMYmm($posting->to_date),null, $pStyle_6);
-                $table->addCell(3000)->addText($posting->ministry?->name.'၊'."\n".$posting->division?->name  . '၊' . $posting->department?->name  .'၊'.$posting->location,null, $pStyle_6);
+                $table->addCell(3000)->addText($posting->ministry?->name.'၊'."\n".$posting->division?->name . $posting->department?->name .'၊'.$posting->location,null, $pStyle_6);
                 $table->addCell(2000)->addText($posting->remark,null, $pStyle_6);
             }
         }else{
@@ -889,10 +889,10 @@ if ($staff->schools->isNotEmpty()) {
         $table->addCell(1000)->addText('-', null, $pStyle_5);
         $table->addCell(16000)->addText(
             ($staff->foreigner_friend_name ?? '') . 
-            ($staff->foreigner_friend_occupation ? '၊' . $staff->foreigner_friend_occupation : '').
-            ($staff->foreigner_friend_nationality?->name ? '၊' . $staff->foreigner_friend_nationality?->name : '' ).
-            ($staff->foreigner_friend_country?->name ? '၊' . $staff->foreigner_friend_country?->name : '')  .
-            ($staff->foreigner_friend_how_to_know ? '၊' . $staff->foreigner_friend_how_to_know .'။': ''), 
+            ($staff->foreigner_friend_occupation ? '' . $staff->foreigner_friend_occupation : '').
+            ($staff->foreigner_friend_nationality?->name ? '' . $staff->foreigner_friend_nationality?->name : '' ).
+            ($staff->foreigner_friend_country?->name ? '' . $staff->foreigner_friend_country?->name : '')  .
+            ($staff->foreigner_friend_how_to_know ? '' . $staff->foreigner_friend_how_to_know .'။': ''), 
             null, 
             $pStyle_8
         );
@@ -948,7 +948,7 @@ if ($staff->schools->isNotEmpty()) {
             $table->addCell(2100)->addText('တပ်/ဌာန',null ,$pStyle_4);
             $table->addCell(300)->addText('၊',  null, $pStyle_5);
             $table->addCell(2100)->addText($staff->current_department->name,null ,$pStyle_4);
-        $section->addText('ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
+        $section->addText('ရက်စွဲ၊ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)), ['align' => 'center']);
 
         $fileName = 'staff_report_53_' . $staff->id . '.docx';
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
