@@ -113,7 +113,7 @@ class PA08 implements FromView ,WithStyles
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
 
-        // $sheet->getPageSetup()->setScale(80);
+        $sheet->getPageSetup()->setScale(90);
 
         // Enable gridlines for unbordered areas
         $sheet->setShowGridlines(true);
@@ -130,7 +130,7 @@ class PA08 implements FromView ,WithStyles
         $sheet->getColumnDimension('E')->setWidth(9.29);
         $sheet->getColumnDimension('F')->setWidth(11.95);
         $sheet->getColumnDimension('G')->setWidth(10.29);
-        $sheet->getColumnDimension('H')->setWidth(11.06);
+        $sheet->getColumnDimension('H')->setWidth(11.2);
         $sheet->getColumnDimension('I')->setWidth(9.95);
         $sheet->getColumnDimension('J')->setWidth(8.84);
         $sheet->getColumnDimension('K')->setWidth(5.84);
@@ -153,8 +153,8 @@ class PA08 implements FromView ,WithStyles
         // }
         $sheet->getRowDimension(7)->setRowHeight(152.3);
         $sheet->getRowDimension(8)->setRowHeight(32.3);
-        $sheet->getRowDimension(9)->setRowHeight(21.6);
-        $sheet->getRowDimension(10)->setRowHeight(21.6);
+        $sheet->getRowDimension(9)->setRowHeight(24.75);
+        $sheet->getRowDimension(10)->setRowHeight(24.75);
 
         $sheet->getStyle('A1:A4')->applyFromArray([
             'font' => [
@@ -193,6 +193,22 @@ class PA08 implements FromView ,WithStyles
 
 
         $sheet->getStyle("A7:$highestColumn$highestRow")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 13,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+        $sheet->getStyle("A9")->applyFromArray([
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 13,

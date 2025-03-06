@@ -111,14 +111,10 @@
                 <table class="">
                     <tr>
                         <th colspan="20">
-                            ကန့်သတ်
+                            ကန့်သတ်<br>၂
                         </th>
                     </tr>
-                    <tr>
-                        <th colspan="20">
-                           ၂
-                        </th>
-                    </tr>
+                    
                 </table>
                 {{-- <tr>
                     <th colspan="20">

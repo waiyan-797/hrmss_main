@@ -42,11 +42,15 @@ class StaffList4 extends Component
                 $query->where('current_rank_id', $this->selectedRankId);
             })
             ->get();
-
+    
         $phpWord = new PhpWord();
         $pStyle_1 = ['align' => 'center', 'spaceAfter' => 100, 'spaceBefore' => 100];
         $pStyle_2 = ['align' => 'center', 'spaceAfter' => 30, 'spaceBefore' => 30];
         $pStyle_3 = ['align' => 'center', 'spaceAfter' => 200, 'spaceBefore' => 200];
+        
+        // Define a font style with size 12
+        $fontStyle = ['size' => 12];
+    
         $section = $phpWord->addSection([
             'orientation' => 'landscape',
             'pageSizeW' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(11.69), // A4 Landscape width (11.69 inches)
@@ -56,11 +60,19 @@ class StaffList4 extends Component
             'marginTop' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.23), // 0.23 inch
             'marginBottom' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5), // 0.5 inch
         ]);
+<<<<<<< HEAD
 
         $section->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 12], ['align' => 'center']);
         if (!is_null($this->selectedRankId)) {
             $rankName = getRankById($this->selectedRankId)->name;
            
+=======
+    
+        $section->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 12], ['align' => 'center']);
+        if (!is_null($this->selectedRankId)) {
+            $rankName = getRankById($this->selectedRankId)->name;
+    
+>>>>>>> hrmsrp/main
             $section->addText($rankName, ['bold' => true, 'size' => 12], ['align' => 'center']);
         } else {
             $section->addText('ဝန်ထမ်းများစာရင်း', ['bold' => true, 'size' => 12], ['align' => 'center']);
@@ -69,23 +81,35 @@ class StaffList4 extends Component
         $tableStyle = [
             'alignment' => Jc::END,
         ];
+<<<<<<< HEAD
         $table = $section->addTable($tableStyle);
         $table->addRow();
         $table->addCell(14000)->addText('', $pStyle_right);
         $table->addCell(6000)->addText('ရက်စွဲ-' . getTdyDateInMyanmarYearMonthDay(1), $pStyle_right);
 
         
+=======
+    
+        $section->addText(
+            'ရက်စွဲ ' . mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)),
+            [],
+            ['alignment' => 'right']
+        );
+    
+>>>>>>> hrmsrp/main
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50, ['tblHeader' => true]); // Set
-        $table->addCell(1000)->addText('စဥ်', ['bold' => true], ['align' => 'center']);
-        $table->addCell(4000)->addText('အမည်/ရာထူး', ['bold' => true], ['align' => 'center']);
-        $table->addCell(3000)->addText('မူလဌာန', ['bold' => true], ['align' => 'center']);
-        $table->addCell(3000)->addText("ခုနှစ်\nမှ-ထိ", ['bold' => true], ['align' => 'center']);
-        $table->addCell(4000)->addText('ပြောင်းရွေ့ဌာန', ['bold' => true], ['align' => 'center']);
-        $table->addCell(3000)->addText("ခုနှစ်\nမှ-ထိ", ['bold' => true], ['align' => 'center']);
-        $table->addCell(3000)->addText("လက်ရှိဌာန\nရောက်ရှိရက်စွဲ", ['bold' => true], ['align' => 'center']);
-        $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true], ['align' => 'center']);
+        $table->addCell(1000)->addText('စဥ်', ['bold' => true, 'size' => 12], ['align' => 'center']);
+        $table->addCell(4000)->addText('အမည်/ရာထူး', ['bold' => true, 'size' => 12], ['align' => 'center']);
+        $table->addCell(3000)->addText('မူလဌာန', ['bold' => true, 'size' => 12], ['align' => 'center']);
+        $table->addCell(3000)->addText("ခုနှစ်\nမှ-ထိ", ['bold' => true, 'size' => 12], ['align' => 'center']);
+        $table->addCell(4000)->addText('ပြောင်းရွေ့ဌာန', ['bold' => true, 'size' => 12], ['align' => 'center']);
+        $table->addCell(3000)->addText("ခုနှစ်\nမှ-ထိ", ['bold' => true, 'size' => 12], ['align' => 'center']);
+        $table->addCell(3000)->addText("လက်ရှိဌာန\nရောက်ရှိရက်စွဲ", ['bold' => true, 'size' => 12], ['align' => 'center']);
+        $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true, 'size' => 12], ['align' => 'center']);
+    
         foreach ($staffs as $index => $staff) {
+<<<<<<< HEAD
             $table->addRow();
             $table->addCell(1000)->addText(en2mm($index + 1), null, $pStyle_2);
             $table->addCell(4000)->addText($staff->name . " \n " . ($staff->currentRank?->name ?? ''), null, ['align' => 'left', 'indent' => 0.2]);
@@ -95,12 +119,23 @@ class StaffList4 extends Component
             $table->addCell(3000)->addText(en2mm($staff->postings->last()?->from_date ? \Carbon\Carbon::parse($staff->postings->last()->from_date)->format('d-m-Y') : ''), $pStyle_2);
             $table->addCell(3000)->addText(en2mm($staff->postings->last()?->from_date ? \Carbon\Carbon::parse($staff->postings->last()->from_date)->format('d-m-Y') : ''));
             $table->addCell(2000)->addText('');
+=======
+            $table->addRow(50);
+            $table->addCell(1000)->addText(en2mm($index + 1), $fontStyle, $pStyle_2);
+            $table->addCell(4000)->addText($staff->name . " \n " . ($staff->currentRank?->name ?? ''), $fontStyle, ['align' => 'left', 'indent' => 0.2]);
+            $table->addCell(3000)->addText(($staff->postings->first()?->department->name ?? '') . ($staff->postings->first()?->division?->nick_name ?? ''), $fontStyle, $pStyle_2);
+            $table->addCell(3000)->addText(en2mm($staff->postings->first()?->from_date ? \Carbon\Carbon::parse($staff->postings->first()->from_date)->format('d-m-Y') : ''), $fontStyle, $pStyle_1);
+            $table->addCell(4000)->addText(($staff->postings->last()?->department->name ?? '') . ($staff->postings->last()?->division?->nick_name ?? ''), $fontStyle, $pStyle_2);
+            $table->addCell(3000)->addText(en2mm($staff->postings->last()?->from_date ? \Carbon\Carbon::parse($staff->postings->last()->from_date)->format('d-m-Y') : ''), $fontStyle, $pStyle_2);
+            $table->addCell(3000)->addText(en2mm($staff->postings->last()?->from_date ? \Carbon\Carbon::parse($staff->postings->last()->from_date)->format('d-m-Y') : ''), $fontStyle);
+            $table->addCell(2000)->addText('', $fontStyle);
+>>>>>>> hrmsrp/main
         }
-
+    
         $fileName = 'staff_list_report_4.docx';
         $tempFile = tempnam(sys_get_temp_dir(), $fileName);
         $phpWord->save($tempFile, 'Word2007');
-
+    
         return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
     }
 

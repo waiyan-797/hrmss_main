@@ -101,6 +101,22 @@ class PA18 implements FromView ,WithStyles
             ],
         ],
     ]);
+    $sheet->getStyle('A1:E4')->applyFromArray([
+        'font' => [
+            'name' => 'Pyidaungsu',
+            'size' => 13,
+            'bold' => true,
+        ],
+        'alignment' => [
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        ],
+        'borders' => [
+            'outline' => [
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+            ],
+        ],
+    ]);
     $sheet->getStyle('A7')->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
@@ -123,6 +139,22 @@ class PA18 implements FromView ,WithStyles
         ],
         'alignment' => [
             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        ],
+        'borders' => [
+            'allBorders' => [
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                'color' => ['argb' => 'FF000000'], // Black border
+            ],
+        ],
+    ]);
+    $sheet->getStyle("B5:B$highestRow")->applyFromArray([
+        'font' => [
+            'name' => 'Pyidaungsu',
+            'size' => 13,
+        ],
+        'alignment' => [
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT, // Custom alignment for A and B
             'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
         ],
         'borders' => [

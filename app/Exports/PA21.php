@@ -128,14 +128,31 @@ public function styles(Worksheet $sheet)
             ],
         ],
     ]);
-    $sheet->getStyle("A5:$highestColumn$highestRow")->applyFromArray([
+    $sheet->getStyle('A5:F5')->applyFromArray([
+        'font' => [
+            'name' => 'Pyidaungsu',
+            'size' => 13,
+            'bold' => true
+        ],
+        'alignment' => [
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        ],
+        'borders' => [
+            'allBorders' => [
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                'color' => ['argb' => 'FF000000'], // Black border
+            ],
+        ],
+    ]);
+    $sheet->getStyle("A6:$highestColumn$highestRow")->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
             'size' => 13,
         ],
         'alignment' => [
             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
-            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
         ],
         'borders' => [
             'allBorders' => [

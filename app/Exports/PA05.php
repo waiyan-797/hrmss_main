@@ -49,6 +49,7 @@ class PA05 implements FromView ,WithStyles
         // Fit to page width
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
+        $sheet->getPageSetup()->setScale(85);
 
         // Enable gridlines for unbordered areas
         $sheet->setShowGridlines(true);
@@ -103,6 +104,21 @@ class PA05 implements FromView ,WithStyles
                 'alignment' => [
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                ],
+                'borders' => [
+                    'outline' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+                    ],
+                ],
+            ]);
+            $sheet->getStyle('B5')->applyFromArray([
+                'font' => [
+                    'name' => 'Pyidaungsu',
+                    'size' => 13,
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
                 ],
                 'borders' => [
                     'outline' => [

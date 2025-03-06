@@ -45,25 +45,45 @@ class StaffList5 extends Component
         $phpWord = new PhpWord();
         $section = $phpWord->addSection([
             'orientation' => 'portrait',
+<<<<<<< HEAD
             'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.23),     // 1 inch
             'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
             'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.51),   // 0.5 inch
             'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5),   // 0.5 inch
+=======
+            // 'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.23),
+            'marginLeft'  => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.6), 
+            'marginRight' => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5), 
+            'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.51), 
+            'marginBottom'=> \PhpOffice\PhpWord\Shared\Converter::inchToTwip(0.5), 
+>>>>>>> hrmsrp/main
         ]);
 
         
         $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'center', 'lineHeight' => 1 ]);
-        $phpWord->addTitleStyle(3, ['bold' => false, 'font'=>'Pyidaungsu Number', 'size' => 13], ['alignment' => 'right', 'lineHeight' => 1]);
-        $division = getDivisionBy($this->selectedDivisionId);
+        $phpWord->addTitleStyle(3,['bold' => false, 'font' => 'Pyidaungsu Number', 'size' => 13],['alignment' => 'right', 'indentation' => ['left' => 960, 'right' => 143]]);
+            $division = getDivisionBy($this->selectedDivisionId);
         // $section->addTitle(($division ? $division->name : 'Unknown Division')."\n".'ကျားမအင်အားစာရင်း', 2);
         $section->addTitle(($division ? $division->name : 'Unknown Division'), 2);
         $section->addTitle('ကျားမအင်အားစာရင်း', 2);
-        $section->addTitle(formatDMYmm(Carbon::now()), 3);
+        // $section->addTitle(formatDMYmm(Carbon::now()), 3);
        
-        $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 5]);
+        // $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 5]);
 
+        $section->addTitle(formatDMYmm(Carbon::now()), 3);
+
+       
+        $table = $section->addTable([
+            'borderSize' => 6, 
+            'borderColor' => '000000',
+            'cellMargin' => 5
+        ]);
         // Table headers
+<<<<<<< HEAD
         $table->addRow();
+=======
+        $table->addRow(50, ['tblHeader' => true]);
+>>>>>>> hrmsrp/main
         $table->addCell(700, ['valign' => 'top'])->addText('စဥ်',['bold' => true],['alignment' => 'center', 'spaceBefore' => 0, 'lineHeight' => 1]);
         $table->addCell(3000,['valign' => 'top'])->addText('ရာထူးအမည်', ['bold' => true],['alignment'=>'center','spaceBefore'=>0,'lineHeight' => 1]);
         $table->addCell(2000,['valign' => 'top'])->addText('ကျား', ['bold' => true],['alignment'=>'center','spaceBefore'=>0,'lineHeight' => 1]);

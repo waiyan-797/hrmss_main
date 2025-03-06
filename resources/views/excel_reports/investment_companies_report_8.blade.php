@@ -189,8 +189,8 @@
 
                 <table>
                     <tr>
-                        <th colspan="16" rowspan="2" style="font-size: 14px;">
-                            မှတ်ချက်။ &nbsp; လစဥ်လဆန်း(၂)ရက်နေ့အရောက်ဝန်ကြီးရုံးသို့ပေးပို့ရန်။
+                        <th colspan="16" style="font-size: 13px; vertical-align: center; font-weight: bold;">
+                            မှတ်ချက်။ &nbsp;&nbsp;  လစဥ်လဆန်း(၂)ရက်နေ့အရောက်ဝန်ကြီးရုံးသို့ပေးပို့ရန်။
                         </th>
                     </tr>
                 </table>

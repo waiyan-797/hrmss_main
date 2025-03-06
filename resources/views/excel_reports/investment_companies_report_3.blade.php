@@ -29,12 +29,12 @@
         <table>
             <thead>
                 <tr>
-                    <th rowspan="2" style="font-weight:bold;">စဥ်</th>
-                    <th rowspan="2" style="font-weight:bold;">ရာထူးအမည်</th>
-                    <th rowspan="2" style="font-weight:bold;">လစာနှုန်း (ကျပ်)</th>
-                    <th rowspan="2" style="font-weight:bold;">ခွင့်ပြု <br> အင်အား</th>
-                    <th rowspan="2" style="font-weight:bold;">ခန့်ပြီး <br> အင်အား</th>
-                    <th rowspan="2" style="font-weight:bold;">လစ်လပ် <br> အင်အား</th>
+                    <th style="font-weight:bold;">စဥ်</th>
+                    <th style="font-weight:bold;">ရာထူးအမည်</th>
+                    <th style="font-weight:bold;">လစာနှုန်း (ကျပ်)</th>
+                    <th style="font-weight:bold;">ခွင့်ပြု <br> အင်အား</th>
+                    <th style="font-weight:bold;">ခန့်ပြီး <br> အင်အား</th>
+                    <th style="font-weight:bold;">လစ်လပ် <br> အင်အား</th>
                 </tr>
             </thead>
             <tbody>

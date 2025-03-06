@@ -150,6 +150,7 @@ class PdfStaffReport17 extends Component
         $table->addCell(13000)->addText('ရာထူး/ ဌာန', null,$pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText($staff->current_rank->name . "\n" . $staff->current_department->name."\n".'ရင်နှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်‌ရေးဝန်ကြီးဌာန', null,$pStyle_8);
+<<<<<<< HEAD
         
          $joinDate = \Carbon\Carbon::parse($staff->government_staff_started_date);
          $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());
@@ -161,6 +162,15 @@ class PdfStaffReport17 extends Component
 
 
 
+=======
+        $joinDate = \Carbon\Carbon::parse($staff->join_date);
+        $joinDateDuration = $joinDate->diff(\Carbon\Carbon::now());
+        $table->addRow(50);
+        $table->addCell(1300)->addText('၆။', null, $pStyle_5);
+        $table->addCell(13000)->addText('အမှုထမ်းသက်၊ဝင်ရောက်သည့်ရက်စွဲ', null,$pStyle_8);
+        $table->addCell(700)->addText('-', null, $pStyle_5);
+        $table->addCell(13000)->addText(formatPeriodMM($joinDateDuration->y, $joinDateDuration->m) . ', ' . formatDMYmm($joinDate), null,$pStyle_8);
+>>>>>>> hrmsrp/main
         $table->addRow(50);
         $table->addCell(1300)->addText('၇။', null, $pStyle_5);
         $table->addCell(13000)->addText('လက်ရှိနေရပ်လိပ်စာ', null,$pStyle_8);

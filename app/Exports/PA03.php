@@ -54,12 +54,12 @@ class PA03 implements  FromView ,WithStyles
     {
         $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
         $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_PORTRAIT);
-        $sheet->getPageMargins()->setTop(1);        // 1 inch
-        $sheet->getPageMargins()->setHeader(0.3);   // 0.3 inch
-        $sheet->getPageMargins()->setLeft(0.5);     // 0.5 inch
-        $sheet->getPageMargins()->setRight(0.2);    // 0.2 inch
-        $sheet->getPageMargins()->setBottom(0.75);  // 0.75 inch
-        $sheet->getPageMargins()->setFooter(0.3);   // 0.3 inch
+        $sheet->getPageMargins()->setTop(0.75);        // 1 inch
+        $sheet->getPageMargins()->setHeader(0.31496062992126);   // 0.3 inch
+        $sheet->getPageMargins()->setLeft(0.78740157480315);     // 0.5 inch
+        $sheet->getPageMargins()->setRight(0.393700787401575);    // 0.2 inch
+        $sheet->getPageMargins()->setBottom(0.236220472440945);  // 0.75 inch
+        $sheet->getPageMargins()->setFooter(0.31496062992126);   // 0.3 inch
 
     // Center horizontally on the page
     $sheet->getPageSetup()->setHorizontalCentered(true);
@@ -79,12 +79,13 @@ class PA03 implements  FromView ,WithStyles
 
         $sheet->removeRow(4);
 
-        $sheet->getRowDimension(1)->setRowHeight(25);
-        $sheet->getRowDimension(2)->setRowHeight(25);
-        $sheet->getRowDimension(3)->setRowHeight(25);
-
-        for ($row = 4; $row <= $highestRow ; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(24);
+        $sheet->getRowDimension(1)->setRowHeight(23.25);
+        $sheet->getRowDimension(2)->setRowHeight(23.25);
+        $sheet->getRowDimension(3)->setRowHeight(23.25);
+        $sheet->getRowDimension(4)->setRowHeight(48.75);
+        $sheet->removeRow(5);
+        for ($row = 5; $row <= $highestRow ; $row++) {
+            $sheet->getRowDimension($row)->setRowHeight(25);
         }
 
         // $sheet->getHeaderFooter()->setOddHeader('&C&H&"Pyidaungsu"&10' . "အတွင်းရေး\n၃"); // Centered header text
@@ -97,12 +98,12 @@ class PA03 implements  FromView ,WithStyles
         $sheet->getPageMargins()->setRight(0.2);
 
         $row=5;
-        $sheet->getColumnDimension('A')->setWidth(3);
-        $sheet->getColumnDimension('B')->setWidth(100);
+        $sheet->getColumnDimension('A')->setWidth(5.42);
+        $sheet->getColumnDimension('B')->setWidth(43.57);
         $sheet->getColumnDimension('C')->setWidth(27);
-        $sheet->getColumnDimension('D')->setWidth(12);
-        $sheet->getColumnDimension('E')->setWidth(12);
-        $sheet->getColumnDimension('F')->setWidth(12);
+        $sheet->getColumnDimension('D')->setWidth(15.71);
+        $sheet->getColumnDimension('E')->setWidth(16.14);
+        $sheet->getColumnDimension('F')->setWidth(17.14);
 
         $sheet->getStyle('A1:A2')->applyFromArray([
                 'font' => [
@@ -144,6 +145,22 @@ class PA03 implements  FromView ,WithStyles
                 ],
                 'alignment' => [
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                ],
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FF000000'], // Black border
+                    ],
+                ],
+            ]);
+            $sheet->getStyle("B5:B$highestRow")->applyFromArray([
+                'font' => [
+                    'name' => 'Pyidaungsu',
+                    'size' => 13,
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
                 'borders' => [
