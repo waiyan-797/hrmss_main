@@ -11,14 +11,19 @@
             <select wire:model.live="rankId" class="mt-1 block w-full">
                 <option value="">ရာထူး</option>
                     @foreach ($ranks as $rank)
-                <option value="{{ $rank->id }}">{{ $rank->name }}</option>
+                <option value="{{ $rank->id}}">{{ $rank->name }}</option>
                 @endforeach
             </select>
            
                             <!-- <input type="text" wire:model.live='nameSearch'> -->
                 <input type="month" wire:model.live='filterRange'>
-                <x-select :values="$depts" wire:model.live='deptId' class="mt-1 block w-full"/>
-            </div>
+                <select wire:model.live="divId" class="mt-1 block w-full">
+                <option value="">ဌာနခွဲ</option>
+                    @foreach ($divis as $divi)
+                <option value="{{ $divi->id}}">{{ $divi->name }}</option>
+                @endforeach
+            </select>
+                </div>
 
             <h1 class="text-center mt-2 text-sm font-bold">
                 ရင်းနှီးမြှပ်နှံမှုနှင့် ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန<br>

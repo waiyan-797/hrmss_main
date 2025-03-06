@@ -3,6 +3,7 @@
 namespace App\Livewire\StaffReport;
 
 use App\Exports\PA16;
+use App\Models\Division;
 use App\Models\Department;
 use App\Models\Rank;
 use App\Models\PensionYear;
@@ -19,7 +20,7 @@ class StaffReport1 extends Component
 
     public $nameSearch,  $filterDate;
     public $staffs;
-    public $dept,$deptId ;
+    public $divi,$divId ;
     public $year, $month, $filterRange;
     public $rank, $rankId;
     public $previousYear, $previousMonthDate, $previousMonth;
@@ -60,8 +61,8 @@ class StaffReport1 extends Component
     {
         // Get filtered staff records
         $staffs = Staff::query()
-            ->when($this->deptId, function ($query) {
-                $query->where('current_department_id', $this->deptId);
+            ->when($this->divId, function ($query) {
+                $query->where('current_division_id', $this->divId);
             })
             ->when($this->rankId, function ($query) {
                 $query->where('current_rank_id', $this->rankId);
@@ -152,8 +153,8 @@ class StaffReport1 extends Component
 
     $staffQuery = Staff::query();
 
-    if (!is_null($this->deptId)) {
-        $staffQuery->where('current_department_id', $this->deptId);
+    if (!is_null($this->divId)) {
+        $staffQuery->where('current_division_id', $this->divId);
     }
 
     if (!is_null($this->rankId)) {
@@ -173,8 +174,8 @@ class StaffReport1 extends Component
     return view('livewire.staff-report.staff-report1', [
         'staffs' => $this->staffs,
         'pension' => $this->pension_year,
-        'depts' => Department::all(),
-        'ranks' => Rank::all(),
+        'divis' => Division::all(),
+        'ranks' => Rank::where('is_dica',1)->get(),
         'year' => $year,
         'month' => $month,
     ]);

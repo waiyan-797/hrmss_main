@@ -74,7 +74,7 @@ class PA03 implements  FromView ,WithStyles
         // $sheet->setPrintGridlines(true);
 
         // Dynamically calculate the highest row and column
-        $highestRow = $sheet->getHighestRow()-1; // e.g. 19
+        $highestRow = $sheet->getHighestRow()-2; // e.g. 19
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
         $sheet->removeRow(4);
@@ -84,10 +84,11 @@ class PA03 implements  FromView ,WithStyles
         $sheet->getRowDimension(3)->setRowHeight(23.25);
         $sheet->getRowDimension(4)->setRowHeight(48.75);
         $sheet->removeRow(5);
-        for ($row = 5; $row <= $highestRow ; $row++) {
+        for ($row = 5; $row <= $highestRow; $row++) {
             $sheet->getRowDimension($row)->setRowHeight(25);
         }
 
+        // $sheet->removeRow();
         // $sheet->getHeaderFooter()->setOddHeader('&C&H&"Pyidaungsu"&10' . "အတွင်းရေး\n၃"); // Centered header text
 
 
@@ -222,5 +223,21 @@ class PA03 implements  FromView ,WithStyles
                     ],
                 ],
             ]);
+            // $sheet->getStyle("A$highestRow:$highestRow$highestColumn")->applyFromArray([
+            //     'font' => [
+            //         'name' => 'Pyidaungsu',
+            //         'size' => 13,
+            //     ],
+            //     'alignment' => [
+            //         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+            //         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            //     ],
+            //     'borders' => [
+            //         'allBorders' => [
+            //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE,
+            //             'color' => ['argb' => 'FF000000'], // Black border
+            //         ],
+            //     ],
+            // ]);
     }
 }
