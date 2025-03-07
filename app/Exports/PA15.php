@@ -244,23 +244,23 @@ class PA15 implements FromView ,WithStyles
         //     ],
         // ]);
 
-        $sheet->getStyle("B38:AX38")->applyFromArray([
-            'font' => [
-                'name' => 'Pyidaungsu',
-                'size' => 13,
-                'bold' => true,
-            ],
-            'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-            ],
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                    'color' => ['argb' => 'FF000000'], // Black border
-                ],
-            ],
-        ]);
+        // $sheet->getStyle("B38:AX38")->applyFromArray([
+        //     'font' => [
+        //         'name' => 'Pyidaungsu',
+        //         'size' => 13,
+        //         'bold' => true,
+        //     ],
+        //     'alignment' => [
+        //         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+        //         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        //     ],
+        //     'borders' => [
+        //         'allBorders' => [
+        //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        //             'color' => ['argb' => 'FF000000'], // Black border
+        //         ],
+        //     ],
+        // ]);
     }
 
 }

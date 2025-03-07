@@ -173,7 +173,7 @@
                     </tbody>
                 </table>
 
-                <div class="note-container">
+                <div class="note-container mt-1">
                     <p class="note-label">မှတ်ချက်။ &nbsp; လစဉ်လဆန်း(၂)ရက်နေ့အရောက်ဝန်ကြီးရုံးသို့ပေးပို့ရန်။</p>
                     {{-- <p class="note-content"></p> --}}
                 </div>

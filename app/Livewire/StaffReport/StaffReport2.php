@@ -4,6 +4,7 @@ namespace App\Livewire\StaffReport;
 
 use App\Exports\PA17;
 use App\Models\Department;
+use App\Models\Division;
 use App\Models\PensionYear;
 use App\Models\Rank;
 use App\Models\Staff;
@@ -24,16 +25,34 @@ class StaffReport2 extends Component
     public $previousYear, $previousMonthDate, $previousMonth;
     public $pension_year;
     public $startDate;
-    
+    public $age;
+    public $ageTwo;
+    public $signID = 'all';
+
+    private function getSignName($signID)
+    {
+        return match ($signID) {
+            'all' => 'အားလုံး',
+            'between' => 'နှစ်ကြား',
+            '>' => 'နှစ်အထက်',
+            '=' => 'နှစ်',
+            '<' => 'နှစ်အောက်',
+            default => '',
+        };
+    }
+
+    public function mount()
+    {
+        $this->signID = 'all';
+    }
+
     public function updatedRankId()
     {
-        $this->deptId = '';
         $this->startDate = null;
     }
 
     public function updatedDeptId()
     {
-        $this->rankId = '';
         $this->startDate = null;
     }
 
@@ -57,7 +76,14 @@ class StaffReport2 extends Component
     }
     public function go_excel() 
     {
-        return Excel::download(new PA17( $this->rankId, $this->deptId, $this->startDate), 'PA17.xlsx');
+        return Excel::download(new PA17(
+            $this->rankId, 
+            $this->deptId, 
+            $this->startDate,
+            $this->age,
+            $this->ageTwo,
+            $this->signID
+        ), 'PA17.xlsx');
     }
     public function go_word()
     {
@@ -106,44 +132,56 @@ class StaffReport2 extends Component
         return response()->download($filePath)->deleteFileAfterSend(true);
     }
 
-
     public function render()
     {
         $staffQuery = Staff::query();
 
-        if ($this->searchName) {
-            $staffQuery->whereHas('currentRank', function ($query) {
-                $query->where('name', 'like', '%' . $this->searchName. '%');
-            });
-        }
-
-        // Independent rank filter
+        // Apply rank filter
         if ($this->rankId) {
-            $staffQuery = Staff::query()->whereHas('currentRank', function ($query) {
+            $staffQuery->whereHas('currentRank', function ($query) {
                 $query->where('id', $this->rankId);
             });
         }
 
-        // Independent department filter
+        // Apply department filter
         if ($this->deptId) {
-            $staffQuery = Staff::query()->where('current_division_id', $this->deptId);
+            $staffQuery->where('current_division_id', $this->deptId);
         }
 
-        // Independent start date filter
-        if ($this->startDate) {
-            $staffQuery = Staff::query()->whereDate('join_date', '=', $this->startDate);
+        // Apply service years (လုပ်သက်) filter
+        if (!empty($this->age) && is_numeric($this->age)) {
+            $now = now();
+            if ($this->signID === '>') {
+                // More than X years of service
+                $dateLimit = $now->copy()->subYears($this->age);
+                $staffQuery->where('government_staff_started_date', '<=', $dateLimit);
+            } elseif ($this->signID === '<') {
+                // Less than X years of service
+                $dateLimit = $now->copy()->subYears($this->age);
+                $staffQuery->where('government_staff_started_date', '>', $dateLimit);
+            } elseif ($this->signID === '=') {
+                // Exactly X years of service
+                $startYear = $now->copy()->subYears($this->age + 1);
+                $endYear = $now->copy()->subYears($this->age);
+                $staffQuery->whereBetween('government_staff_started_date', [$endYear, $startYear]);
+            } elseif ($this->signID === 'between' && !empty($this->ageTwo) && is_numeric($this->ageTwo)) {
+                // Between X and Y years of service
+                $maxDate = $now->copy()->subYears(min($this->age, $this->ageTwo));
+                $minDate = $now->copy()->subYears(max($this->age, $this->ageTwo));
+                $staffQuery->whereBetween('government_staff_started_date', [$minDate, $maxDate]);
+            }
         }
 
+        $staffs = $staffQuery->get();
         $pension_year = PensionYear::where('id', 1)->value('year');
-        $this->staffs = $staffQuery->get();
-        $staffs = Staff::get();
-        $this->pension_year=$pension_year;
+        $this->staffs = $staffs;
+        $this->pension_year = $pension_year;
         
         return view('livewire.staff-report.staff-report2', [
+            'ranks' => Rank::where('is_dica',1)->get(),
+            'depts' => Division::all(),
             'staffs' => $this->staffs,
-            'depts' => Department::all(),
-            'ranks'=> Rank::all(),
-            'pension'=>$this->pension_year,
+            'pension' => $this->pension_year,
         ]);
     }
 }
