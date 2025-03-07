@@ -24,34 +24,58 @@ class PA17 implements FromView, WithStyles
     public $rankId;
     public $deptId;
     public $startDate;
+    public $age;
+    public $ageTwo;
+    public $signID;
 
-    public function __construct($rankId, $deptId, $startDate)
+    public function __construct($rankId, $deptId, $startDate, $age, $ageTwo, $signID)
     {
         $this->rankId = $rankId;
         $this->deptId = $deptId;
         $this->startDate = $startDate;
+        $this->age = $age;
+        $this->ageTwo = $ageTwo;
+        $this->signID = $signID;
     }
 
     public function view(): View
     {
         $staffQuery = Staff::query();
 
-
-        // Independent rank filter
+        // Apply rank filter
         if ($this->rankId) {
-            $staffQuery = Staff::query()->whereHas('currentRank', function ($query) {
+            $staffQuery->whereHas('currentRank', function ($query) {
                 $query->where('id', $this->rankId);
             });
         }
 
-        // Independent department filter
+        // Apply department filter
         if ($this->deptId) {
-            $staffQuery = Staff::query()->where('current_division_id', $this->deptId);
+            $staffQuery->where('current_division_id', $this->deptId);
         }
 
-        // Independent start date filter
-        if ($this->startDate) {
-            $staffQuery = Staff::query()->whereDate('join_date', '=', $this->startDate);
+        // Apply service years (လုပ်သက်) filter
+        if (!empty($this->age) && is_numeric($this->age)) {
+            $now = now();
+            if ($this->signID === '>') {
+                // More than X years of service
+                $dateLimit = $now->copy()->subYears($this->age);
+                $staffQuery->where('government_staff_started_date', '<=', $dateLimit);
+            } elseif ($this->signID === '<') {
+                // Less than X years of service
+                $dateLimit = $now->copy()->subYears($this->age);
+                $staffQuery->where('government_staff_started_date', '>', $dateLimit);
+            } elseif ($this->signID === '=') {
+                // Exactly X years of service
+                $startYear = $now->copy()->subYears($this->age + 1);
+                $endYear = $now->copy()->subYears($this->age);
+                $staffQuery->whereBetween('government_staff_started_date', [$endYear, $startYear]);
+            } elseif ($this->signID === 'between' && !empty($this->ageTwo) && is_numeric($this->ageTwo)) {
+                // Between X and Y years of service
+                $maxDate = $now->copy()->subYears(min($this->age, $this->ageTwo));
+                $minDate = $now->copy()->subYears(max($this->age, $this->ageTwo));
+                $staffQuery->whereBetween('government_staff_started_date', [$minDate, $maxDate]);
+            }
         }
 
         $pension_year = PensionYear::where('id', 1)->value('year');
@@ -576,6 +600,23 @@ class PA17 implements FromView, WithStyles
             'font' => [
                 'name' => 'Pyidaungsu',
                 'bold' =>true,
+                'size' => 13,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+        $sheet->getStyle("A4:$highestColumn$highestRow")->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'bold' =>false,
                 'size' => 13,
             ],
             'alignment' => [

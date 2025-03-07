@@ -153,8 +153,8 @@ class PA08 implements FromView ,WithStyles
         // }
         $sheet->getRowDimension(7)->setRowHeight(152.3);
         $sheet->getRowDimension(8)->setRowHeight(32.3);
-        $sheet->getRowDimension(9)->setRowHeight(24.75);
-        $sheet->getRowDimension(10)->setRowHeight(24.75);
+        $sheet->getRowDimension(9)->setRowHeight(27);
+        $sheet->getRowDimension(10)->setRowHeight(27.75);
 
         $sheet->getStyle('A1:A4')->applyFromArray([
             'font' => [
@@ -212,10 +212,6 @@ class PA08 implements FromView ,WithStyles
             'font' => [
                 'name' => 'Pyidaungsu',
                 'size' => 13,
-            ],
-            'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
             ],
             'borders' => [
                 'allBorders' => [

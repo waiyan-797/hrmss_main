@@ -93,7 +93,7 @@
                 if (isHRAdmin() ) {
                     $lists =  [
                         ['route_name' => 'report', 'name' => 'ဝန်ထမ်းရေးရာ'],
-                        ['route_name' => 'attend_training', 'name' => 'သင်တန်းတတ်ရောက်'],
+                        ['route_name' => 'attend_training', 'name' => 'သင်တန်းတက်ရောက်'],
                         ['route_name' => 'pension', 'name' => 'ပြုန်းတီးစာရင်း'],
                         ['route_name' => 'travel_abroad', 'name' => 'နိုင်ငံခြားသွားရောက်မှုများ'],
                         ['route_name' => 'employee_taking_leave', 'name' => 'ခွင့်ယူသည့်ဝန်ထမ်းစာရင်း'],
@@ -123,7 +123,7 @@
                 if (isSuperAdmin()) {
                     $lists =  [
                         ['route_name' => 'report', 'name' => 'ဝန်ထမ်းရေးရာ'],
-                        ['route_name' => 'attend_training', 'name' => 'သင်တန်းတတ်ရောက်'],
+                        ['route_name' => 'attend_training', 'name' => 'သင်တန်းတက်ရောက်'],
                         ['route_name' => 'pension', 'name' => 'ပြုန်းတီးစာရင်း'],
                         ['route_name' => 'travel_abroad', 'name' => 'နိုင်ငံခြားသွားရောက်မှုများ'],
                         ['route_name' => 'employee_taking_leave', 'name' => 'ခွင့်ယူသည့်ဝန်ထမ်းစာရင်း'],
