@@ -210,55 +210,55 @@
                     @endforeach
                     <tr class="font-bold">
                         <td></td>
-                        <td>စုစုပေါင်း</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_yangon) }}</td>
-                        <td>{{ en2mm($total_yangon - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_nay_pyi_thaw) }}</td>
-                        <td>{{ en2mm($total_nay_pyi_thaw - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_mandalay) }}</td>
-                        <td>{{ en2mm($total_mandalay - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_shan) }}</td>
-                        <td>{{ en2mm($total_shan - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_mon) }}</td>
-                        <td>{{ en2mm($total_mon - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_aya) }}</td>
-                        <td>{{ en2mm($total_aya - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_sagaing) }}</td>
-                        <td>{{ en2mm($total_sagaing - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_tanindaryi) }}</td>
-                        <td>{{ en2mm($total_tanindaryi - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_kayin) }}</td>
-                        <td>{{ en2mm($total_kayin - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_bago) }}</td>
-                        <td>{{ en2mm($total_bago - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_magway) }}</td>
-                        <td>{{ en2mm($total_magway - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_kayah) }}</td>
-                        <td>{{ en2mm($total_kayah - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_kachin) }}</td>
-                        <td>{{ en2mm($total_kachin - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_rakhine) }}</td>
-                        <td>{{ en2mm($total_rakhine - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_chin) }}</td>
-                        <td>{{ en2mm($total_chin - $total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_allowed_qty) }}</td>
-                        <td>{{ en2mm($total_all) }}</td>
-                        <td>{{ en2mm($total_all - $total_allowed_qty) }}</td>
+                        <td style="font-weight: bold;">စုစုပေါင်း</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_yangon) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_yangon - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_nay_pyi_thaw) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_nay_pyi_thaw - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_mandalay) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_mandalay - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_shan) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_shan - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_mon) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_mon - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_aya) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_aya - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_sagaing) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_sagaing - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_tanindaryi) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_tanindaryi - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_kayin) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_kayin - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_bago) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_bago - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_magway) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_magway - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_kayah) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_kayah - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_kachin) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_kachin - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_rakhine) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_rakhine - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_chin) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_chin - $total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_allowed_qty) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_all) }}</td>
+                        <td style="font-weight:bold;">{{ en2mm($total_all - $total_allowed_qty) }}</td>
                     </tr>
                 </tbody>
             </table>
