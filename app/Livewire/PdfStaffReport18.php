@@ -68,35 +68,7 @@ class PdfStaffReport18 extends Component
         $pStyle_5=array('align' => 'center', 'spaceAfter' => 15, 'spaceBefore' => 20);
         $pStyle_8=array('align' => 'left', 'spaceAfter' => 10, 'spaceBefore' => 20, 'indentation' => ['left' => 100]);
 
-        $header_page_1 = $section->addHeader();
-        $header_page_1->firstPage();
-        $header_page_1->addText('လျှို့ဝှက်', null, [
-            'align' => 'center',
-            'spaceBefore' => 0,
-            'spaceAfter' => 0,
-            'lineHeight' => 1,
-        ]);
-        $header_subseq = $section->addHeader();
-        $header_subseq->addText('လျှို့ဝှက်', null, [
-            'align' => 'center',
-            'spaceBefore' => 0,
-            'spaceAfter' => 0,
-            'lineHeight' => 1,
-        ]);
-
-        $header_subseq->addPreserveText('{PAGE}', ['name' => 'Pyidaungsu Numbers', 'size' => 13], ['alignment' => 'center', 'spaceBefore' => 0, 'spaceAfter' => 0]);
-
-        // $footer = $section->addFooter();
-        // $footer->addText('လျှို့ဝှက်',null,array('align'=>'center', 'spaceBefore' => 200));
-        $footerFirstPage = $section->addFooter();
-        $footerFirstPage->firstPage();
-        $footerFirstPage->addText('လျှို့ဝှက်', null, ['alignment' => 'center', 'spaceBefore' => 200]);
-        $footer = $section->addFooter();
-        $footer->addText('လျှို့ဝှက်', null, ['align' => 'center', 'spaceBefore' => 200]);
-        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
-        // $section = $phpWord->addSection();
-        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
-        $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
+       
         $textBoxStyle = [
         'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
         'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
@@ -118,6 +90,35 @@ class PdfStaffReport18 extends Component
 
         $textBox->addImage($defaultImagePath, ['width' =>62, 'height' => 65, 'align' => 'center', 'padding'=>0 ]);
        }
+       $header_page_1 = $section->addHeader();
+       $header_page_1->firstPage();
+       $header_page_1->addText('လျှို့ဝှက်', null, [
+           'align' => 'center',
+           'spaceBefore' => 0,
+           'spaceAfter' => 0,
+           'lineHeight' => 1,
+       ]);
+       $header_subseq = $section->addHeader();
+       $header_subseq->addText('လျှို့ဝှက်', null, [
+           'align' => 'center',
+           'spaceBefore' => 0,
+           'spaceAfter' => 0,
+           'lineHeight' => 1,
+       ]);
+
+       $header_subseq->addPreserveText('{PAGE}', ['name' => 'Pyidaungsu Numbers', 'size' => 13], ['alignment' => 'center', 'spaceBefore' => 0, 'spaceAfter' => 0]);
+
+       // $footer = $section->addFooter();
+       // $footer->addText('လျှို့ဝှက်',null,array('align'=>'center', 'spaceBefore' => 200));
+       $footerFirstPage = $section->addFooter();
+       $footerFirstPage->firstPage();
+       $footerFirstPage->addText('လျှို့ဝှက်', null, ['alignment' => 'center', 'spaceBefore' => 200]);
+       $footer = $section->addFooter();
+       $footer->addText('လျှို့ဝှက်', null, ['align' => 'center', 'spaceBefore' => 200]);
+       $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+       // $section = $phpWord->addSection();
+       $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+       $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
 
         $table = $section->addTable();
         $table->addRow(50);

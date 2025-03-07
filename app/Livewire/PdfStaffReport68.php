@@ -53,6 +53,26 @@ class PdfStaffReport68 extends Component
         $pStyle_4=array('align' => 'both', 'spaceAfter' => 10, 'spaceBefore' => 20, 'indentation' => ['left' => 100]);
         $pStyle_5=array('align' => 'center', 'spaceAfter' => 15, 'spaceBefore' => 20);
         $pStyle_8=array('align' => 'left', 'spaceAfter' => 10, 'spaceBefore' => 20, 'indentation' => ['left' => 100]);
+        
+
+        $textBoxStyle = [
+            'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
+            'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
+            'borderSize' => 0,
+            'positioning' => 'relative', // Relative positioning
+            'posHorizontal' => 'right', // Align next to inline content
+            'posHorizontalRel' => 'margin', // Relative to margin (inline context)
+            'marginLeft' => 0, // Small spacing from the left
+        ];
+        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
+        if ($imagePath && file_exists($imagePath)) {
+            $textBox = $section->addTextBox($textBoxStyle);
+            $textBox->addImage($imagePath, ['width' => 62, 'height' => 69, 'align' => 'right']);
+        } else {
+            $defaultImagePath = public_path('img/user.png');
+            $textBox = $section->addTextBox($textBoxStyle);
+            $textBox->addImage($defaultImagePath, ['width' => 62, 'height' => 65, 'align' => 'center', 'padding' => 0]);
+        }
         $header_page_1 = $section->addHeader();
         $header_page_1->firstPage();
         $header_page_1->addText('လျှို့ဝှက်', null, [
@@ -81,25 +101,6 @@ class PdfStaffReport68 extends Component
 
         $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
         $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
-
-        $textBoxStyle = [
-            'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
-            'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
-            'borderSize' => 0,
-            'positioning' => 'relative', // Relative positioning
-            'posHorizontal' => 'right', // Align next to inline content
-            'posHorizontalRel' => 'margin', // Relative to margin (inline context)
-            'marginLeft' => 0, // Small spacing from the left
-        ];
-        $imagePath = $staff->staff_photo ? storage_path('app/upload/' . $staff->staff_photo) : null;
-        if ($imagePath && file_exists($imagePath)) {
-            $textBox = $section->addTextBox($textBoxStyle);
-            $textBox->addImage($imagePath, ['width' => 62, 'height' => 69, 'align' => 'right']);
-        } else {
-            $defaultImagePath = public_path('img/user.png');
-            $textBox = $section->addTextBox($textBoxStyle);
-            $textBox->addImage($defaultImagePath, ['width' => 62, 'height' => 65, 'align' => 'center', 'padding' => 0]);
-        }
 
         $table = $section->addTable();
         $table->addRow(50);
@@ -241,7 +242,7 @@ class PdfStaffReport68 extends Component
         $table->addCell(13000)->addText($staff->permanent_address_house_no.$staff->permanent_address_street.$staff->permanent_address_ward.$staff->permanent_address_township_or_town->name.'မြို့နယ်၊'.$staff->permanent_address_region->name.'ဒေသကြီး။',null ,$pStyle_8);
         $table->addRow(50);
         $table->addCell(1300)->addText('၂၄။', null,  $pStyle_5);
-        $table->addCell(13000)->addText("ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာ\nအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာဖော်ပြရန်မလို)", null,$pStyle_8);
+        $table->addCell(13000)->addText("ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်နေရပ်လိပ်စာ\nအပြည့်အစုံ(တပ်မတော်သားဖြစ်က တပ်လိပ်စာဖော်ပြရန်မလိုပါ)", null,$pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
         $table->addCell(13000)->addText($staff->previous_addresses ? $staff->previous_addresses : 'မရှိပါ', null,$pStyle_8);
 
@@ -410,7 +411,7 @@ class PdfStaffReport68 extends Component
             foreach ($staff->postings as $index => $posting) {
                 $table->addRow(50);
                 $table->addCell(4000)->addText($posting->rank->name ?? '', null, $pStyle_3);
-                $table->addCell(4000)->addText($posting->ministry?->name.'၊'.$posting->department?->name,null,$pStyle_3);
+                $table->addCell(4000)->addText($posting->ministry?->name.'၊'."\n".$posting->department?->name,null,$pStyle_3);
                 $table->addCell(2500)->addText($posting->location,null, $pStyle_6);
 
                 $table->addCell(4000)->addText(formatDMYmm($posting->from_date),null, $pStyle_6);
@@ -440,10 +441,10 @@ class PdfStaffReport68 extends Component
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText(
             ($staff->father_name ?? '') .'  '.
-            ($staff->father_ethnic?->name ? '၊' . $staff->father_ethnic?->name:'') .'  '.
-            ($staff->father_religion?->name ? '၊'. $staff->father_religion?->name : '' ).' '.
-            ($staff->father_place_of_birth ? '၊'. $staff->father_place_of_birth : '' ).
-            ($staff->father_occupation ? '၊'. $staff->father_occupation.'။':''),
+            ($staff->father_ethnic?->name ? '' . $staff->father_ethnic?->name:'') .'  '.
+            ($staff->father_religion?->name ? ''. $staff->father_religion?->name : '' ).' '.
+            ($staff->father_place_of_birth ? ''. $staff->father_place_of_birth : '' ).
+            ($staff->father_occupation ? ''. $staff->father_occupation.'။':''),
             null,
             $pStyle_8
         );
@@ -471,10 +472,10 @@ class PdfStaffReport68 extends Component
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText(
             ($staff->mother_name?? '') .'  '.
-            ($staff->mother_ethnic?->name ?'၊'. $staff->mother_ethnic?->name :'') .'  '.
-            ( $staff->mother_religion?->name ? '၊'. $staff->mother_religion?->name : '') .'  '.
-            ($staff->mother_place_of_birth ? '၊'. $staff->mother_place_of_birth : ''  ).
-            ( $staff->mother_occupation ? '၊'. $staff->mother_occupation.'။':'') ,
+            ($staff->mother_ethnic?->name ?''. $staff->mother_ethnic?->name :'') .'  '.
+            ( $staff->mother_religion?->name ? ''. $staff->mother_religion?->name : '') .'  '.
+            ($staff->mother_place_of_birth ? ''. $staff->mother_place_of_birth : ''  ).
+            ( $staff->mother_occupation ? ''. $staff->mother_occupation.'။':'') ,
             null,
             $pStyle_8
         );
@@ -495,7 +496,7 @@ class PdfStaffReport68 extends Component
         //     $pStyle_8
         // );
         $section->addTextBreak();
-        $section->addText('၅။ '.  ' ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
+        $section->addText('၅။ '.  ' ညီအစ်ကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
@@ -524,7 +525,7 @@ class PdfStaffReport68 extends Component
                 );
             }
         $section->addTextBreak();
-        $section->addText('၆။ '.  ' အဘ၏ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
+        $section->addText('၆။ '.  ' အဘ၏ညီအစ်ကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
@@ -553,7 +554,7 @@ class PdfStaffReport68 extends Component
                 );
             }
         $section->addTextBreak();
-        $section->addText('၇။ '.  ' အမိ၏ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
+        $section->addText('၇။ '.  ' အမိ၏ညီအစ်ကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
@@ -646,7 +647,7 @@ class PdfStaffReport68 extends Component
 
 
         $section->addTextBreak();
-        $section->addText(' ၁၀။ '.  ' ခင်ပွန်း/ဇနီးသည်၏ ညီအကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
+        $section->addText(' ၁၀။ '.  ' ခင်ပွန်း/ဇနီးသည်၏ ညီအစ်ကိုမောင်နှမများ', ['bold'=>true],null, ['spaceBefore' => 200]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
@@ -677,7 +678,7 @@ class PdfStaffReport68 extends Component
             }
 
         $section->addTextBreak();
-        $section->addText(' ၁၁။ '.  " ခင်ပွန်း/ဇနီးသည်အဘနှင့်ညီအကိုမောင်နှမများ၏ အမည်၊ လူမျိုး၊ ဘာသာ၊ ဇာတိ၊\n     အလုပ်အကိုင်နှင့်နေရပ်လိပ်စာ", ['bold'=>true],null, ['spaceBefore' => 200]);
+        $section->addText(' ၁၁။ '.  " ခင်ပွန်း/ဇနီးသည်အဘနှင့်ညီအစ်ကိုမောင်နှမများ၏ အမည်၊ လူမျိုး၊ ဘာသာ၊ ဇာတိ၊\n      အလုပ်အကိုင်နှင့်နေရပ်လိပ်စာ", ['bold'=>true],null, ['spaceBefore' => 200]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
@@ -706,7 +707,7 @@ class PdfStaffReport68 extends Component
                 );
             }
         $section->addTextBreak();
-        $section->addText(' ၁၂။ '.  " ခင်ပွန်း/ဇနီးသည်အမိနှင့်ညီအကိုမောင်နှမများ၏ အမည်၊ လူမျိုး၊ဘာသာ၊ဇာတိ၊\n      အလုပ်အကိုင်နှင့်နေရပ်လိပ်စာ", ['bold'=>true],null, ['spaceBefore' => 200]);
+        $section->addText(' ၁၂။ '.  " ခင်ပွန်း/ဇနီးသည်အမိနှင့်ညီအစ်ကိုမောင်နှမများ၏ အမည်၊ လူမျိုး၊ ဘာသာ၊ ဇာတိ၊\n      အလုပ်အကိုင်နှင့်နေရပ်လိပ်စာ", ['bold'=>true],null, ['spaceBefore' => 200]);
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(2800)->addText('အမည်', ['bold' => true],$pStyle_7);
@@ -739,7 +740,7 @@ class PdfStaffReport68 extends Component
         $table->addRow();
         $table->addCell(1300)->addText('၁၃။', null, $pStyle_5);
 
-        $table->addCell(13000)->addText("မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်းတို့၏မိဘ၊ ညီအကိုမောင်နှမများ၊ သားသမီးများသည်\nနိုင်ငံရေးပါတီဝင်များတွင်ဝင်ရောက်ဆောင်ရွက် မှုရှိ/မရှိ(ရှိကအသေးစိတ်ဖော်ပြရန်)", null, $pStyle_8);
+        $table->addCell(13000)->addText("မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်းတို့၏မိဘ၊ ညီအစ်ကိုမောင်နှမများ၊ သားသမီးများသည်\nနိုင်ငံရေးပါတီဝင်များတွင်ဝင်ရောက်ဆောင်ရွက် မှုရှိ/မရှိ(ရှိကအသေးစိတ်ဖော်ပြရန်)", null, $pStyle_8);
 
         $table->addCell(700)->addText('-', null,$pStyle_5);
         $table->addCell(13000)->addText($staff->family_in_politics ?  ($staff->family_in_politics_text ?? '') : 'မရှိပါ', null,$pStyle_8);
@@ -923,7 +924,7 @@ class PdfStaffReport68 extends Component
             foreach ($staff->abroads as $abroad) {
                 $table->addRow();
                 // $table->addCell(6000)->addText($abroad->countries->pluck('name')->unique()->join(', '), null, $pStyle_1);
-                $table->addCell(6000)->addText($abroad->countries->pluck('name')->unique()->join(', ')."\n".$abroad->towns,null,$pStyle_1);
+                $table->addCell(6000)->addText($abroad->countries->pluck('name')->unique()->join('၊ ')."\n".$abroad->towns,null,$pStyle_1);
                 $table->addCell(6000)->addText($abroad->particular, null, $pStyle_3);
                 $table->addCell(6000)->addText($abroad->meet_with, null, $pStyle_3);
 
