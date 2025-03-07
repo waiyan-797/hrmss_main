@@ -1346,12 +1346,19 @@ $this->submit_staff();
             }
             $staff_create['status_id'] = $_status;
         }
-        $staff = Staff::updateOrCreate(['id' => $this->staff_id], $staff_create);
-
+        // $staff = Staff::updateOrCreate(['id' => $this->staff_id,'created_by'=>Auth::user()->id,'updated_by'=>Auth::user()->id], $staff_create);
+        $staff = Staff::updateOrCreate(
+            ['id' => $this->staff_id],
+            array_merge($staff_create, [ 
+                'created_by' => Auth::user()->id, 
+                'updated_by' => Auth::user()->id 
+            ])
+        );
         $this->staff_id = $staff->id;
         $this->staff_photo = $staff->staff_photo;
         $this->staff_nrc_front = $staff->nrc_front;
         $this->staff_nrc_back = $staff->nrc_back;
+
 
         switch ($this->tab) {
             case 'personal_info':
