@@ -27,17 +27,17 @@
                 ထိ
                 <!-- Sign Selector -->
                 <div class="flex items-center">
-                    <x-input-label value="Operator" />
+                    <x-input-label value="အသက်အပိုင်းအခြားရွေးပါ" />
                     <select wire:model.live="signID"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5">
 
                         <option value="all">အားလုံး</option>
-                        <option value="between">Between</option>
+                        <option value="between">နှစ်ကြား</option>
 
-                        <option value=">">></option>
-                        <option value="=">=</option>
+                        <option value=">">နှစ်အထက်</option>
+                        <option value="=">ညီမျှသော</option>
 
-                        <option value="<"> </option>
+                        <option value="<">နှစ်အောက်</option>
                     </select>
                 </div>
 
@@ -65,8 +65,18 @@
                             <th rowspan="2" class="border border-black p-2 text-center">အမည်</th>
                             <th rowspan="2" class="border border-black p-2 text-center">ရာထူး</th>
                             <th rowspan="2" class="border border-black p-2 text-center">မွေးသက္ကရာဇ်</th>
-                            <th rowspan="2" class="border border-black p-2 text-center">အသက်</th>
-                            <th colspan="2" class="border border-black p-2 text-center">အသက်</th>                       
+                            <th rowspan="2" class="border border-black p-2 text-center">အသက်
+                                
+                            </th>
+                            <th colspan="2" class="border border-black p-2 text-center">အသက် {{ en2mm($age ?? '') }}
+                                @switch($signID)
+                                    @case('all') အားလုံး @break
+                                    @case('between') နှစ်ကြား @break
+                                    @case('>') နှစ်အထက် @break
+                                    @case('=') နှစ် @break
+                                    @case('<') နှစ်အောက် @break
+                                    @default 
+                                @endswitch</th>                       
                             <th rowspan="2" class="border border-black p-2 text-center">မှတ်ချက်</th>
 
                         </tr>
@@ -86,7 +96,7 @@
                                 <td class="border border-black p-2">{{ en2mm($index + 1) }}</td>
                                 <td class="border border-black p-2">{{ $staff->name }}</td>
                                 <td class="border border-black p-2">{{ $staff->currentRank?->name }}</td>
-                                <td class="border border-black p-2 text-center">{{ en2mm($staff->dob) }}</td>
+                                <td class="border border-black p-2 text-center">{{ formatDMYmm($staff->dob) }}</td>
                                 <td class="border border-black p-2 text-center">{{ $staff->howOldAmI() }}</td>
                                 @if($staff->gender_id == 1)
                                 <td class="border border-black p-1 ">

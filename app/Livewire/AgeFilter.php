@@ -23,9 +23,6 @@ class AgeFilter extends Component
     public $genders, $gender_id;
     public $staffs;
     public $signID;
-
-
-    
     public function go_pdf()
     {
         $now = Carbon::now();
