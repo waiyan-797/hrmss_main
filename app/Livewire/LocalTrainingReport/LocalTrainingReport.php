@@ -41,16 +41,9 @@ class LocalTrainingReport extends Component
     public function go_word()
 {
     $query = Staff::whereHas('trainings', function ($query) {
-        if (!empty($this->From) && !empty($this->To)) {
-            $query->where(function ($query) {
-                $query->whereBetween('from_date', [
-                    date('Y-m-01', strtotime($this->From)),
-                    date('Y-m-t', strtotime($this->To))
-                ])->orWhereBetween('to_date', [
-                    date('Y-m-01', strtotime($this->From)),
-                    date('Y-m-t', strtotime($this->To))
-                ]);
-            });
+        // Filter by training location
+        if ($this->trainingLocation != 3) {
+            $query->where('training_location_id', $this->trainingLocation);
         }
         
         // Apply date range filter if both dates are provided
@@ -64,7 +57,7 @@ class LocalTrainingReport extends Component
         }
     })->with(['trainings' => function($query) {
         // Apply same filters to eager loaded trainings
-        if (!empty($this->trainingLocation)) {
+        if ($this->trainingLocation != 3) {
             $query->where('training_location_id', $this->trainingLocation);
         }
         
@@ -77,7 +70,6 @@ class LocalTrainingReport extends Component
         
         $query->with(['training_type', 'training_location']);
     }, 'currentRank']);
-
 
 
     if (!empty($this->selectedRankId)) {
