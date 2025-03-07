@@ -231,7 +231,7 @@ class PdfStaffReport18 extends Component
                 $table->addCell(4000)->addText($posting->rank?->name."\n".$posting->department?->name, null, $pStyle_3);
                 $table->addCell(2000)->addText(formatDMYmm($posting->from_date), null, $pStyle_6);
                 $table->addCell(2000)->addText(formatDMYmm($posting->to_date), null, $pStyle_6);
-                $table->addCell(2000)->addText($posting->address, null, $pStyle_3);
+                $table->addCell(2000)->addText($posting->location, null, $pStyle_3);
             }
         }else{
                 $table->addRow(50);
