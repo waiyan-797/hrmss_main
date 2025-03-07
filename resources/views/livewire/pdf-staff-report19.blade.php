@@ -228,7 +228,7 @@
                                     <tr>
                                         <td class="border border-black p-2">{{'('.myanmarAlphabet($loop->index).')'}}</td>
                                         <td class="border border-black p-2">{{$awarding->award_type->name .'/'. $awarding->award->name}}</td>
-                                        <td class="border border-black p-2">{{formatDMYmm($awarding->order_date)}}</td>
+                                        <td class="border border-black p-2">{{$awarding->order_no}}</td>
                                         <td class="border border-black p-2">{{$awarding->remark}}</td>
                                     </tr>
                                 @endforeach
@@ -299,7 +299,7 @@
 
 
                 <div class="flex justify-start space-x-1 pb-4 pt-2">
-                    <p>ရက်စွဲ - </p>
+                    <p>ရက်စွဲ၊ </p>
                     <p>{{  mmDateFormatYearMonthDay(\Carbon\Carbon::now()->year, \Carbon\Carbon::now()->month, en2mm(\Carbon\Carbon::now()->day)) }}</p>
                 </div>
             </div>

@@ -279,22 +279,22 @@
                         <thead>
                             <tr>
                                 <th rowspan="2" class="border border-black text-center p-4">၂။</th>
-                                <th colspan="3" class="border border-black  p-4">
+                                <th colspan="3" class="border border-black text-left p-4">
                                     ပညာဆည်းပူးသင်ယူလေ့လာခဲ့မှုအခြေအနေ</th>
                             </tr>
-                            {{-- <tr>
+                        <tr>
                                 <th class="border border-black text-center p-4">(က)</th>
-                                <th class="border border-black  p-4">မူလတန်းမှ အလယ်တန်း</th>
+                                <th class="border border-black text-left  p-4">မူလတန်းမှ အလယ်တန်း</th>
                                 <th class="border border-black  p-4"></th>
-                            </tr> --}}
+                            </tr> 
                         </thead>
                         <tbody>
-                            <tr>
+                            {{-- <tr>
                                 <td class="border border-black text-center p-4"></td>
                                 <td class="border border-black text-center p-4">(က)</td>
                                 <td class="border border-black  p-4">မူလတန်းမှ အလယ်တန်း</td>
                                 <td class="border border-black  p-4"></td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <td class="border border-black text-center p-4"></td>
                                 <td class="border border-black text-center p-4">(ခ)</td>
