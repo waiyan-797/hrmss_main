@@ -76,7 +76,7 @@
                     <th colspan="3" class="center">မူလအင်အား</th>
                     <th colspan="2" class="center">အသစ်ခန့်အပ်</th>
                     <th colspan="2" class="center">အခြားဌာနမှ<br>ရောက်ရှိ</th>
-                    <th colspan="2" class="center">အခြားဌာနသို့<br>ပြေင်းရွေ့ခြင်း</th>
+                    <th colspan="2" class="center">အခြားဌာနသို့<br>ပြေင်းရွှေ့ခြင်း</th>
                     <th colspan="2" class="center">ပင်စင်ခံစားခြင်း</th>
                     <th colspan="2" class="center">နုတ်ထွက်ခြင်း</th>
                     <th colspan="2" class="center">ထုတ်ပယ်ခြင်း/<br>ထုတ်ပစ်ခြင်း</th>

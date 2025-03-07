@@ -85,8 +85,7 @@
                 <tr>
                     <th rowspan="3" style="font-weight:bold;">စဉ်</th>
                     <th rowspan="3" style="font-weight:bold;">အကြောင်းအရာ</th>
-                    <th rowspan="2" colspan="3" style="font-weight:bold;">{{en2mm($day)}}-{{mmMonth($month)}}-{{en2mm($year)}}ထိ<br>အင်အား</th>
-                    <th rowspan="2" colspan="2" style="font-weight:bold;">အသစ်ခန့်အပ်</th>
+                    <th rowspan="2" colspan="3" style="font-weight:bold;">{{ en2mm((int)$day) }}-{{ mmMonth($month) }}-{{ en2mm($year) }}ထိ<br>အင်အား</th>     <th rowspan="2" colspan="2" style="font-weight:bold;">အသစ်ခန့်အပ်</th>
                     <th rowspan="2" colspan="2" style="font-weight:bold;">အခြားဌာနမှ<br>ရောက်ရှိ</th>
                     <th rowspan="2" colspan="2" style="font-weight:bold;">အခြားဌာနသို့<br>ပြောင်းရွေ့ခြင်း</th>
                     <th rowspan="2" colspan="2" style="font-weight:bold;">ပင်စင်ခံစားခြင်း</th>

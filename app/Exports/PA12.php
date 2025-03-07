@@ -135,7 +135,7 @@ class PA12 implements FromView ,WithStyles
     $sheet->getRowDimension(4)->setRowHeight(50.2);
     $sheet->getRowDimension(5)->setRowHeight(50.2);
     $sheet->getRowDimension(6)->setRowHeight(50.2);
-    $sheet->getRowDimension(7)->setRowHeight(50.2);
+    // $sheet->getRowDimension(7)->setRowHeight(50.2);
 
 
     // Merge and Style Main Title

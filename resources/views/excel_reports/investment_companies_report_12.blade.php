@@ -83,7 +83,7 @@
                     <th colspan="3" class="center" style="font-weight:bold">မူလအင်အား</th>
                     <th colspan="2" class="center" style="font-weight:bold">အသစ်ခန့်အပ်</th>
                     <th colspan="2" class="center" style="font-weight:bold">အခြားဌာန<br>မှရောက်ရှိ</th>
-                    <th colspan="2" class="center" style="font-weight:bold">အခြားဌာနသို့<br>ပြောင်းရွေ့ခြင်း</th>
+                    <th colspan="2" class="center" style="font-weight:bold">အခြားဌာနသို့<br>ပြောင်းရွှေ့ခြင်း</th>
                     <th colspan="2" class="center" style="font-weight:bold">ပင်စင်ခံစားခြင်း</th>
                     <th colspan="2" class="center" style="font-weight:bold">နုတ်ထွက်ခြင်း</th>
                     <th colspan="2" class="center" style="font-weight:bold">ထုတ်ပယ်ခြင်း/<br>ထုတ်ပစ်ခြင်း</th>
