@@ -21,7 +21,7 @@
                     </select>
                 </div>
 
-                {{-- <!-- Department Filter -->
+                <!-- Department Filter -->
                 <div class="w-48">
                     <select wire:model.live="deptId" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                         <option value="" style="color: grey;">ဌာနများအားလုံး</option>
@@ -29,7 +29,7 @@
                             <option value="{{ $dept->id }}">{{ $dept->name }}</option>
                         @endforeach
                     </select>
-                </div> --}}
+                </div>
 
                 <!-- Age Range Filter -->
                 <div class="flex items-center space-x-4">
