@@ -10,14 +10,16 @@
                 <h1 class="text-center text-sm font-bold mt-2">
                     တတ်ရောက်ခဲ့သည့်သင်တန်းများ</h1>
 
-                    <div>
-                        <x-select class="mt-4" wire:model.live='trainingLocation' :values="[
+                <div>
+                    <x-select class="mt-4" wire:model.live='trainingLocation' :values="[
                             ['id' => '', 'name' => 'ပြည်တွင်း ပြည်ပ ရွေးပါ'],
                             ['id' => 1, 'name' => 'ပြည်တွင်း'],
                             ['id' => 2, 'name' => 'ပြည်ပ'],
                         ]" />
-                         <x-select wire:model.live="selectedRankId" :values="$ranks" placeholder='ရာထူးများအားလုံး' />
-                    </div>
+                    <x-select wire:model.live="selectedRankId" :values="$ranks" placeholder='ရာထူးများအားလုံး' />
+                    <input type="Month" wire:model.live='From' :values="From">
+
+                </div>
 
                 <div class="overflow-x-auto mt-6">
                     <table class="min-w-full border border-black">
@@ -38,76 +40,78 @@
                         <tbody>
 
                             @foreach ($staffs as $staff)
-                                @php
-                                    $firstTraining = $staff?->trainings
-                                        ->whereIn(
-                                            'training_location_id',
-                                            $trainingLocation == 3 ? [1, 2] : $trainingLocation,
-                                        )
-                                        ->first();
+                            @php
+                            $firstTraining = $staff?->trainings
+                            ->whereIn(
+                            'training_location_id',
+                            $trainingLocation == 3 ? [1, 2] : $trainingLocation,
+                            )->first();
 
-                                @endphp
-                                @if ($firstTraining)
-                                    <tr>
-                                        <td class="border border-black border-b-0 text-center p-1">
-                                            {{ en2mm($loop->index + 1) }}
-                                        </td>
-                                        <td class="border border-black border-b-0 text-left p-1">
-                                            {{ $staff->name }}
-                                        </td>
-                                        <td class="border border-black border-b-0 text-left p-1">
-                                            {{ $staff->currentRank->name }}
-                                        </td>
-                                        <!-- First training record -->
-                                        <td class="border border-black text-center p-2">
-                                            {{ $firstTraining->diploma_name }}
-                                        </td>
-                                        <td class="border border-black text-center p-2">
-                                            {{ formatDMYmm($firstTraining->from_date) }}
-                                        </td>
-                                        <td class="border border-black text-center p-2">
-                                            {{ formatDMYmm($firstTraining->to_date) }}
-                                        </td>
-                                        <td class="border border-black text-center p-2">{{ $firstTraining->location }}
-                                        </td>
-                                        <td class="border border-black text-center p-2">
-                                            {{ $firstTraining->training_location?->name }}
-                                        </td>
+                            @endphp
+                            @if ($firstTraining)
+                            <tr>
+                                <td class="border border-black border-b-0 text-center p-1">
+                                    {{ en2mm($loop->index + 1) }}
+                                </td>
+                                <td class="border border-black border-b-0 text-left p-1">
+                                    {{ $staff->name }}
+                                </td>
+                                <td class="border border-black border-b-0 text-left p-1">
+                                    {{ $staff->currentRank->name }}
+                                </td>
+                                <!-- First training record -->
+                                <td class="border border-black text-center p-2">
+                                    {{ $firstTraining->diploma_name }}
+                                </td>
+                                <td class="border border-black text-center p-2">
+                                    {{ formatDMYmm($firstTraining->from_date) }}
+                                </td>
+                                <td class="border border-black text-center p-2">
+                                    {{ formatDMYmm($firstTraining->to_date) }}
+                                </td>
+                                <td class="border border-black text-center p-2">{{ $firstTraining->location }}
+                                </td>
+                                <td class="border border-black text-center p-2">
+                                    {{ $firstTraining->training_location?->name }}
+                                </td>
 
-                                        <td class="border border-black text-center p-2">
-                                            {{ $firstTraining->remark }}
-                                        </td>
-                                    </tr>
+                                <td class="border border-black text-center p-2">
+                                    {{ $firstTraining->remark }}
+                                </td>
+                            </tr>
 
-                                    <!-- For remaining trainings, create new rows -->
-                                    @foreach ($staff->trainings->whereIn('training_location_id', $trainingLocation == 3 ? [1, 2] : $trainingLocation)->skip(1) as $training)
-                                        <tr>
-                                            <td class="border border-black border-b-0 border-t-0 text-center p-1">
+                            <!-- For remaining trainings, create new rows -->
+                            @foreach ($staff->trainings->whereIn('training_location_id', $trainingLocation == 3 ? [1, 2] : $trainingLocation)->skip(1) as $training)
+                            <tr>
+                                <td class="border border-black border-b-0 border-t-0 text-center p-1">
 
-                                            </td>
-                                            <td class="border border-black border-b-0 border-t-0 text-left p-1">
+                                </td>
+                                <td class="border border-black border-b-0 border-t-0 text-left p-1">
 
-                                            </td>
-                                            <td class="border border-black border-b-0 border-t-0 text-left p-1">
+                                </td>
+                                <td class="border border-black border-b-0 border-t-0 text-left p-1">
 
-                                            </td>
-                                            <td class="border border-black text-center p-2">
-                                                {{ $training->training_type->name == 'အခြား' ? $training->diploma_name : $training->training_type->name }}
-                                            </td>
-                                            <td class="border border-black text-center p-2">
-                                                {{ formatDMYmm($training->from_date) }}</td>
-                                            <td class="border border-black text-center p-2">
-                                                {{ formatDMYmm($training->to_date) }}</td>
-                                            <td class="border border-black text-center p-2">{{ $training->location }}
-                                            </td>
-                                            <td class="border border-black text-center p-2">
-                                                {{ $training->training_location?->name }}</td>
-                                            <td class="border border-black text-center p-2">
-                                                {{ $training->remark }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
+                                </td>
+                                <td class="border border-black text-center p-2">
+                                    {{ $training->training_type->name == 'အခြား' ? $training->diploma_name : $training->training_type->name }}
+                                </td>
+                                <td class="border border-black text-center p-2">
+                                    {{ formatDMYmm($training->from_date) }}
+                                </td>
+                                <td class="border border-black text-center p-2">
+                                    {{ formatDMYmm($training->to_date) }}
+                                </td>
+                                <td class="border border-black text-center p-2">{{ $training->location }}
+                                </td>
+                                <td class="border border-black text-center p-2">
+                                    {{ $training->training_location?->name }}
+                                </td>
+                                <td class="border border-black text-center p-2">
+                                    {{ $training->remark }}
+                                </td>
+                            </tr>
+                            @endforeach
+                            @endif
                             @endforeach
 
 

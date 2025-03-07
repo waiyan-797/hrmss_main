@@ -43,7 +43,7 @@
                         <th colspan="3" class="border border-black text-center p-2">မူလအင်အား</th>
                         <th colspan="2" class="border border-black text-center p-2">အသစ်ခန့်အပ်</th>
                         <th colspan="2" class="border border-black text-center p-2">အခြားဌာနမှ<br>ရောက်ရှိ</th>
-                        <th colspan="2" class="border border-black text-center p-2">အခြားဌာနသို့<br>ပြေင်းရွေ့ခြင်း
+                        <th colspan="2" class="border border-black text-center p-2">အခြားဌာနသို့<br>ပြေင်းရွှေ့ခြင်း
                         </th>
                         <th colspan="2" class="border border-black text-center p-2">ပင်စင်ခံစားခြင်း</th>
                         <th colspan="2" class="border border-black text-center p-2">နုတ်ထွက်ခြင်း</th>
