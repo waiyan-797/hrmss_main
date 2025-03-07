@@ -30,7 +30,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="w-50">
+        {{-- <div class="w-50">
             <label class="block mb-2 text-sm font-medium text-gray-700">Department</label>
             <select wire:model.live="deptId" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                 <option value=""></option>
@@ -38,7 +38,7 @@
                     <option value="{{ $dept->id }}">{{ $dept->name }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
     </div>
 
 
