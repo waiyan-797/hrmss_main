@@ -1,7 +1,7 @@
 <div class="w-full">
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4 font-arial">
-            <x-primary-button type="button" wire:click="go_pdf({{ $staff->id }})">PDF</x-primary-button>
+            {{-- <x-primary-button type="button" wire:click="go_pdf({{ $staff->id }})">PDF</x-primary-button> --}}
             <x-primary-button type="button" wire:click="go_word({{ $staff->id }})">WORD</x-primary-button>
             <div class="p-4 md:w-full">
                 <h1 class="text-center text-black font-semibold text-base">ကိုယ်ရေးမှတ်တမ်း</h1>

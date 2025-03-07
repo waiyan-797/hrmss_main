@@ -57,36 +57,7 @@ class PdfStaffReport53 extends Component
         $pStyle_9=array('align' => 'left', 'spaceAfter' => 10, 'spaceBefore' => 10);
 
 
-        $header_page_1 = $section->addHeader();
-        $header_page_1->firstPage();
-        $header_page_1->addText('လျှို့ဝှက်', null, [
-            'align' => 'center',
-            'spaceBefore' => 0, 
-            'spaceAfter' => 0, 
-            'lineHeight' => 1, 
-        ]);
-        $header_subseq = $section->addHeader();
-        $header_subseq->addText('လျှို့ဝှက်', null, [
-            'align' => 'center',
-            'spaceBefore' => 0,
-            'spaceAfter' => 0,
-            'lineHeight' => 1,
-        ]);
-
-        $header_subseq->addPreserveText('{PAGE}', ['name' => 'Pyidaungsu Numbers', 'size' => 13], ['alignment' => 'center', 'spaceBefore' => 0, 'spaceAfter' => 0]);
-        $footerFirstPage = $section->addFooter();
-        $footerFirstPage->firstPage();
-        $footerFirstPage->addText('လျှို့ဝှက်', null, ['alignment' => 'center', 'spaceBefore' => 200]);
-
-        $footer = $section->addFooter();
-        $footer->addText('လျှို့ဝှက်', null, ['align' => 'center', 'spaceBefore' => 200]);
-        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
-
-        $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
-        $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
-        $phpWord->addTitleStyle(3, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
-
-        $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
+       
     $textBoxStyle = [
         'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
         'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(2),
@@ -107,6 +78,36 @@ class PdfStaffReport53 extends Component
 
         $textBox->addImage($defaultImagePath, ['width' =>62, 'height' => 65, 'align' => 'center', 'padding'=>0 ]);
        }
+       $header_page_1 = $section->addHeader();
+       $header_page_1->firstPage();
+       $header_page_1->addText('လျှို့ဝှက်', null, [
+           'align' => 'center',
+           'spaceBefore' => 0, 
+           'spaceAfter' => 0, 
+           'lineHeight' => 1, 
+       ]);
+       $header_subseq = $section->addHeader();
+       $header_subseq->addText('လျှို့ဝှက်', null, [
+           'align' => 'center',
+           'spaceBefore' => 0,
+           'spaceAfter' => 0,
+           'lineHeight' => 1,
+       ]);
+
+       $header_subseq->addPreserveText('{PAGE}', ['name' => 'Pyidaungsu Numbers', 'size' => 13], ['alignment' => 'center', 'spaceBefore' => 0, 'spaceAfter' => 0]);
+       $footerFirstPage = $section->addFooter();
+       $footerFirstPage->firstPage();
+       $footerFirstPage->addText('လျှို့ဝှက်', null, ['alignment' => 'center', 'spaceBefore' => 200]);
+
+       $footer = $section->addFooter();
+       $footer->addText('လျှို့ဝှက်', null, ['align' => 'center', 'spaceBefore' => 200]);
+       $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+
+       $phpWord->addTitleStyle(1, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+       $phpWord->addTitleStyle(2, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+       $phpWord->addTitleStyle(3, ['bold' => true, 'size' => 13], ['alignment' => 'center']);
+
+       $section->addTitle('ကိုယ်‌ရေးမှတ်တမ်း', 1);
     
         $table = $section->addTable();
         $table->addRow(50);
@@ -133,7 +134,7 @@ class PdfStaffReport53 extends Component
         $table->addCell(700)->addText('-', ['align' => 'center'],  $pStyle_5);
         $dob = \Carbon\Carbon::parse($staff->dob);
         $diff = $dob->diff(\Carbon\Carbon::now());
-        $age = '('.$diff->y . ' )နှစ် ' .'('. $diff->m . ' )လ';
+        $age = $diff->y . ' နှစ်၊ ' . $diff->m . ' လ';
         $table->addCell(13000)->addText(
             en2mm($age) . '('.formatDMYmm($dob->format('d-m-Y')) .' )'  ,
             null,$pStyle_8 
@@ -193,13 +194,13 @@ class PdfStaffReport53 extends Component
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၁၃။', null, $pStyle_5);
-        $table->addCell(13000)->addText('နိုင်ငံသားစီစစ်ရေးကတ်ပြားအမှတ်', null, $pStyle_8);
+        $table->addCell(13000)->addText('နိုင်ငံသားစိစစ်ရေးကတ်ပြားအမှတ်', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText($staff->nrc_region_id->name . $staff->nrc_township_code->name . $staff->nrc_sign->name . $staff->nrc_code, null, $pStyle_8);
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၁၄။', null, $pStyle_5);
-        $table->addCell(13000)->addText('လက်ရှိနေရပ်လိပ်စာအပြည့်အစုံ', null, $pStyle_8);
+        $table->addCell(13000)->addText('ယခုနေရပ်လိပ်စာအပြည့်အစုံ', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText($staff->current_address_house_no.$staff->current_address_street.$staff->current_address_ward.$staff->current_address_township_or_town->name.'မြို့နယ်၊'.$staff->current_address_region->name.'ဒေသကြီး။',null ,$pStyle_8);
 
@@ -211,7 +212,7 @@ class PdfStaffReport53 extends Component
 
         $table->addRow(50);
         $table->addCell(1300)->addText('၁၆။', null, $pStyle_5);
-        $table->addCell(13000)->addText("ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်\nနေရပ်လိပ်စာအပြည့်အစုံ", null, $pStyle_8);
+        $table->addCell(13000)->addText("ယခင်နေခဲ့ဖူးသော‌ဒေသနှင့်\nနေရပ်လိပ်စာအပြည့်အစုံ\n(တပ်မတော်သားဖြစ်ပါက\nတပ်လိပ်စာဖော်ပြရန်မလိုပါ)", null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText($staff->previous_addresses ? $staff->previous_addresses :'မရှိပါ', null, $pStyle_8);
 
@@ -291,9 +292,9 @@ class PdfStaffReport53 extends Component
         $table->addCell(13000)->addText(
             ($staff->father_name ?? '') . 
             ($staff->father_ethnic?->name ? '၊' . $staff->father_ethnic?->name:'') .
-            ($staff->father_religion?->name ? '၊'. $staff->father_religion?->name : '' ). 
-            ($staff->father_place_of_birth ? '၊'. $staff->father_place_of_birth : '' ). 
-            ($staff->father_occupation ? '၊'. $staff->father_occupation.'။':''),
+            ($staff->father_religion?->name ? ''. $staff->father_religion?->name : '' ). 
+            ($staff->father_place_of_birth ? ''. $staff->father_place_of_birth : '' ). 
+            ($staff->father_occupation ? ''. $staff->father_occupation.'။':''),
             null, 
             $pStyle_8
         );
@@ -309,10 +310,10 @@ class PdfStaffReport53 extends Component
         $table->addCell(13000)->addText('အမိအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်', null, $pStyle_8);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText(
-            ($staff->mother_name?? '') . ($staff->mother_ethnic?->name ?'၊'. $staff->mother_ethnic?->name :'') .
-            ( $staff->mother_religion?->name ? '၊'. $staff->mother_religion?->name : '') . 
-            ($staff->mother_place_of_birth ? '၊'. $staff->mother_place_of_birth : ''  ).
-            ( $staff->mother_occupation ? '၊'. $staff->mother_occupation.'။':'') ,
+            ($staff->mother_name?? '') . ($staff->mother_ethnic?->name ?''. $staff->mother_ethnic?->name :'') .
+            ( $staff->mother_religion?->name ? ''. $staff->mother_religion?->name : '') . 
+            ($staff->mother_place_of_birth ? ''. $staff->mother_place_of_birth : ''  ).
+            ( $staff->mother_occupation ? ''. $staff->mother_occupation.'။':'') ,
             null,
             $pStyle_8
         );
@@ -438,7 +439,7 @@ class PdfStaffReport53 extends Component
                     ['alignment' => 'center']
                 );
             }
-        $section->addText('၃၂။ ' . ' ညီအကိုမောင်နှမများ', null, array('spaceBefore'=> 200));
+        $section->addText('၃၂။ ' . ' ညီအစ်ကိုမောင်နှမများ', null, array('spaceBefore'=> 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(700)->addText('စဥ်', ['bold' => true],$pStyle_7);
@@ -469,7 +470,7 @@ class PdfStaffReport53 extends Component
                 );
             }
 
-        $section->addText('၃၃။ ' . ' အဘ၏ညီအကိုမောင်နှမများ', null,array('spaceBefore'=> 200));
+        $section->addText('၃၃။ ' . ' အဘ၏ညီအစ်ကိုမောင်နှမများ', null,array('spaceBefore'=> 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(700)->addText('စဥ်', ['bold' => true],$pStyle_7);
@@ -500,7 +501,7 @@ class PdfStaffReport53 extends Component
                 );
             }
 
-        $section->addText('၃၄။ ' . ' အမိ၏ညီအကိုမောင်နှမများ', null,array('spaceBefore'=> 200));
+        $section->addText('၃၄။ ' . ' အမိ၏ညီအစ်ကိုမောင်နှမများ', null,array('spaceBefore'=> 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(700)->addText('စဥ်', ['bold' => true],$pStyle_7);
@@ -593,7 +594,7 @@ class PdfStaffReport53 extends Component
                 );
             }
 
-        $section->addText('၃၇။ ' . ' ခင်ပွန်း/ဇနီးသည်၏ ညီအကိုမောင်နှမများ', null,array('spaceBefore'=> 200));
+        $section->addText('၃၇။ ' . ' ခင်ပွန်း/ဇနီးသည်၏ ညီအစ်ကိုမောင်နှမများ', null,array('spaceBefore'=> 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(700)->addText('စဥ်', ['bold' => true],$pStyle_7);
@@ -624,7 +625,7 @@ class PdfStaffReport53 extends Component
                 );
             }
 
-        $section->addText('၃၈။ ' . ' ခင်ပွန်း/ဇနီးသည် အဘနှင့်ညီအကိုမောင်နှမများ', null, array('spaceBefore'=> 200));
+        $section->addText('၃၈။ ' . ' ခင်ပွန်း/ဇနီးသည် အဘနှင့်ညီအစ်ကိုမောင်နှမများ', null, array('spaceBefore'=> 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(700)->addText('စဥ်', ['bold' => true],$pStyle_7);
@@ -655,7 +656,7 @@ class PdfStaffReport53 extends Component
                 );
             }
 
-        $section->addText('၃၉။ ' . ' ခင်ပွန်း/ဇနီးသည် အမိနှင့်ညီအကိုမောင်နှမများ', null,array('spaceBefore'=> 200));
+        $section->addText('၃၉။ ' . ' ခင်ပွန်း/ဇနီးသည် အမိနှင့်ညီအစ်ကိုမောင်နှမများ', null,array('spaceBefore'=> 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader' => true));
         $table->addCell(700)->addText('စဥ်', ['bold' => true],$pStyle_7);
@@ -689,7 +690,7 @@ class PdfStaffReport53 extends Component
         $table = $section->addTable();   
         $table->addRow(50);
         $table->addCell(1300)->addText('၄၀။', null, $pStyle_5);
-        $table->addCell(13000)->addText("မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်း\nတို့၏မိဘ၊ညီအကိုမောင်နှမများ၊\nသားသမီးများသည်နိုင်ငံရေးပါတီများ\nတွင်ဝင်ရောက်ဆောင်ရွက်မှု ရှိ/မရှိ\n(ရှိက အသေးစိတ်ဖော်ပြရန်)", null, $pStyle_4);
+        $table->addCell(13000)->addText("မိမိနှင့်မိမိ၏ဇနီး(သို့မဟုတ်)ခင်ပွန်း\nတို့၏မိဘ၊ညီအစ်ကိုမောင်နှမများ၊\nသားသမီးများသည်နိုင်ငံရေးပါတီများ\nတွင်ဝင်ရောက်ဆောင်ရွက်မှု ရှိ/မရှိ\n(ရှိက အသေးစိတ်ဖော်ပြရန်)", null, $pStyle_4);
         $table->addCell(700)->addText('-', null, $pStyle_5);
         $table->addCell(13000)->addText(
             $staff->family_in_politics 
@@ -764,7 +765,7 @@ if ($staff->schools->isNotEmpty()) {
         $textRun = $cell->addTextRun($pStyle_8);
         $textRun->addText("ကျောင်းသားဘဝတွင်နိုင်ငံရေး/");
         $textRun->addTextBreak(); // Adds a line break
-        $textRun->addText("မြို့ရေးဆောင်ရွက်မှုများနှင့်");
+        $textRun->addText("မြို့ရေး/ရွာရေးဆောင်ရွက်မှုများနှင့်");
         $textRun->addTextBreak(); // Adds a line break
         $textRun->addText("အဆင့်အတန်း၊တာဝန်");
         $table->addCell(700)->addText('-', null, $pStyle_5);
@@ -855,19 +856,19 @@ if ($staff->schools->isNotEmpty()) {
         $table->addCell(1800)->addText("သွားရောက်ခဲ့\nသည့်နိုင်ငံ", ['bold' => true],$pStyle_2);
         $table->addCell(4000)->addText('သွားရောက်ခဲ့သည့်အကြောင်း', ['bold' => true],$pStyle_7);
         $table->addCell(2000)->addText("တွေ့ဆုံခဲ့သည့်\nကုမ္ပဏီ\nလူပုဂ္ဂိုလ်\nဌာန", ['bold' => true],$pStyle_2);
-        $table->addCell(2500)->addText('ကာလ'."\n".'(မှ-ထိ)', ['bold' => true],$pStyle_7);// <' '>it means many space
+        $table->addCell(2000)->addText('ကာလ'."\n".'(မှ-ထိ)', ['bold' => true],$pStyle_2);// <' '>it m2eans many space
         if($staff->abroads->isNotEmpty()){
             foreach ($staff->abroads as $index => $abroad) {
                     $table->addRow(50);
                     $table->addCell(700)->addText(en2mm($index+1),null,$pStyle_6);
-                    $table->addCell(1800)->addText($abroad->countries->pluck('name')->unique()->join(', ')."\n".$abroad->towns,null,$pStyle_3);
+                    $table->addCell(1800)->addText($abroad->countries->pluck('name')->unique()->join('၊ ')."\n".$abroad->towns,null,$pStyle_3);
                     $table->addCell(4000)->addText($abroad->particular,null,$pStyle_6);
                     $table->addCell(2000)->addText($abroad->meet_with,null,$pStyle_6);
-                    $table->addCell(2500)->addText(formatDMYmm($abroad->from_date) ."\n".formatDMYmm($abroad->to_date),null,array('align' => 'left', 'spaceAfter' => 30, 'spaceBefore' => 70 ,'indentation' => ['left' => 100]));
+                    $table->addCell(2000)->addText(formatDMYmm($abroad->from_date) ."\n".formatDMYmm($abroad->to_date),null,array('align' => 'left', 'spaceAfter' => 30, 'spaceBefore' => 70 ,'indentation' => ['left' => 100]));
                 }
             }else{
                     $table->addRow(50);
-                $cell = $table->addCell(11000, ['gridSpan' => 5]); 
+                $cell = $table->addCell(10500, ['gridSpan' => 5]); 
                 $cell->addText(
                     'မရှိပါ',
                    null,
