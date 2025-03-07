@@ -41,9 +41,16 @@ class LocalTrainingReport extends Component
     public function go_word()
 {
     $query = Staff::whereHas('trainings', function ($query) {
-        // Filter by training location
-        if (!empty($this->trainingLocation)) {
-            $query->where('training_location_id', $this->trainingLocation);
+        if (!empty($this->From) && !empty($this->To)) {
+            $query->where(function ($query) {
+                $query->whereBetween('from_date', [
+                    date('Y-m-01', strtotime($this->From)),
+                    date('Y-m-t', strtotime($this->To))
+                ])->orWhereBetween('to_date', [
+                    date('Y-m-01', strtotime($this->From)),
+                    date('Y-m-t', strtotime($this->To))
+                ]);
+            });
         }
         
         // Apply date range filter if both dates are provided
@@ -70,6 +77,7 @@ class LocalTrainingReport extends Component
         
         $query->with(['training_type', 'training_location']);
     }, 'currentRank']);
+
 
 
     if (!empty($this->selectedRankId)) {
@@ -156,12 +164,73 @@ class LocalTrainingReport extends Component
 
 
 
+//     public function render()
+// {
+//     $query = Staff::whereHas('trainings')
+//         ->with(['trainings', 'currentRank']);
+
+//     if (!empty($this->From)){
+//             $query->where('from_date', "=", $this->From);
+//     }
+
+//     if (!empty($this->selectedRankId)) {
+//         $query->where('current_rank_id', $this->selectedRankId);
+//     }
+    
+//     $this->staffs = $query->get();
+//     $selectedRankName = null;
+//     if (!empty($this->selectedRankId)) {
+//         $selectedRankName = Rank::find($this->selectedRankId)?->name ?? 'ရာထူးအားလုံး';
+//     }
+
+//     return view('livewire.local-training-report.local-training-report', [
+//         'staffs' => $this->staffs,
+//         'ranks' => $this->ranks,
+//         'selectedRankId' => $this->selectedRankId,
+//         'selectedRankName' => $selectedRankName,
+//         'From' => $this->From,
+//     ]);
+// }
+// public function render()
+// {
+//     $query = Staff::whereHas('trainings', function ($query) {
+//         if (!empty($this->From)) {
+//             $query->whereMonth('from_date', '=', date('m', strtotime($this->From)))
+//                   ->whereYear('from_date', '=', date('Y', strtotime($this->From)));
+//         }
+//     })->with(['trainings', 'currentRank']);
+
+//     if (!empty($this->selectedRankId)) {
+//         $query->where('current_rank_id', $this->selectedRankId);
+//     }
+
+//     $this->staffs = $query->get();
+//     $selectedRankName = null;
+//     if (!empty($this->selectedRankId)) {
+//         $selectedRankName = Rank::find($this->selectedRankId)?->name ?? 'ရာထူးအားလုံး';
+//     }
+
+//     return view('livewire.local-training-report.local-training-report', [
+//         'staffs' => $this->staffs,
+//         'ranks' => $this->ranks,
+//         'selectedRankId' => $this->selectedRankId,
+//         'selectedRankName' => $selectedRankName,
+//         'From' => $this->From,
+//     ]);
+// }
 public function render()
 {
     $query = Staff::whereHas('trainings', function ($query) {
-        // Filter by training location
-        if (!empty($this->trainingLocation)) {
-            $query->where('training_location_id', $this->trainingLocation);
+        if (!empty($this->From) && !empty($this->To)) {
+            $query->where(function ($query) {
+                $query->whereBetween('from_date', [
+                    date('Y-m-01', strtotime($this->From)),
+                    date('Y-m-t', strtotime($this->To))
+                ])->orWhereBetween('to_date', [
+                    date('Y-m-01', strtotime($this->From)),
+                    date('Y-m-t', strtotime($this->To))
+                ]);
+            });
         }
         
         // Apply date range filter if both dates are provided
@@ -207,7 +276,7 @@ public function render()
         'selectedRankId' => $this->selectedRankId,
         'selectedRankName' => $selectedRankName,
         'From' => $this->From,
-        'To' => $this->To
+        'To'=> $this->To,
     ]);
 }
 }
