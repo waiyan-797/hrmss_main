@@ -91,11 +91,10 @@ class PA02 implements FromView ,WithStyles
         $sheet->setShowGridlines(true);
         // $sheet->setPrintGridlines(true);
 
-        // Dynamically calculate the highest row and column
-        $highestRow = $sheet->getHighestRow()-3; // e.g. 19
+        $highestRow = $sheet->getHighestRow()-3;
         
         $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
-        $row=5;
+        // $row=5;
 
 
         $sheet->getHeaderFooter()->setOddFooter('&C&H&"Pyidaungsu"&12' . 'ကန့်သတ်'); 
@@ -141,18 +140,20 @@ class PA02 implements FromView ,WithStyles
         $sheet->getRowDimension(3)->setRowHeight(26.3);
         $sheet->getRowDimension(4)->setRowHeight(25);
         $sheet->getRowDimension(5)->setRowHeight(45);
-        $sheet->getRowDimension(6)->setRowHeight(45);
+        $sheet->getRowDimension(6)->setRowHeight(33.8);
         $sheet->getRowDimension(7)->setRowHeight(24.8);
-        $sheet->getRowDimension(8)->setRowHeight(22.5);       
+        $sheet->getRowDimension(8)->setRowHeight(22.5);   
 
         $sheet->removeRow(2);
         $sheet->removeRow(4);
+        // $sheet->removeRow($highestRow+1);
+        
 
         for ($row = 6; $row <= $highestRow; $row++) {
             $sheet->getRowDimension($row)->setRowHeight(33.8);
         }
 
-        // $sheet->removeRow(23);
+        $sheet->getRowDimension(22)->setRowHeight(33.8);
 
         $sheet->getStyle('A1:A2')->applyFromArray([
             'font' => [
@@ -362,6 +363,22 @@ class PA02 implements FromView ,WithStyles
             'borders' => [
                 'outline' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, // Default gridline
+                ],
+            ],
+        ]);
+        $sheet->getStyle('C22:AJ22')->applyFromArray([
+            'font' => [
+                'name' => 'Pyidaungsu',
+                'size' => 12,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'],
                 ],
             ],
         ]);
