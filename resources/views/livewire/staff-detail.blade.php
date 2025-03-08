@@ -1,5 +1,5 @@
 
-<div class="w-[80%]    " >
+<div class="w-[80%]" >
 
 
 

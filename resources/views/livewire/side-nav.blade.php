@@ -131,7 +131,7 @@
                         ['route_name' => 'employee_information', 'name' => 'ဝန်ထမ်းအချက်အလက်များ'],
                     ['route_name' => 'personnel_account', 'name' => 'ဝန်ထမ်းရေးရာ+ငွေစာရင်း'],
                      ['route_name' => 'finance', 'name' => 'ငွေစာရင်း'],
-                ['route_name' => 'employee_taking_leave', 'name' => 'ခွင့်ယူသည့်ဝန်ထမ်းစာရင်း'],
+                // ['route_name' => 'employee_taking_leave', 'name' => 'ခွင့်ယူသည့်ဝန်ထမ်းစာရင်း'],
 
                 ];
                 }
