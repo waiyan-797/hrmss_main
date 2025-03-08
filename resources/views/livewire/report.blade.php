@@ -24,13 +24,13 @@
             </div>
         </div>
     </div> --}}
-    <div class="flex justify-center items-center mb-4"><br>
+    <div class="flex justify-center items-center mb-4 mt-2"><br>
         <h2 class="text-xl font-bold text-gray-700">ဝန်ထမ်းရေးရာ Reports</h2>
        
     </div>
 
-    <div class="overflow-x-auto mt-6">
-        <table class="min-w-full border-collapse border border-gray-200">
+    <div class="overflow-x-auto mt-6 h-[80vh]">
+        <table class="min-w-full overflow-y-scroll border-collapse border border-gray-200">
             <thead class="bg-gray-100">
                 <tr>
                     <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">

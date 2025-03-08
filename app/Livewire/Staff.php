@@ -118,11 +118,18 @@ class Staff extends Component
     $staffSearch = '%' . $this->staff_search . '%';
     $this->modal_title = 'Choose Report Type';
 
+    // $staffQuery = ModelsStaff::with(['currentRank', 'current_department', 'current_division'])
+    //     ->where('status_id', $this->status)
+    //     ->when(Auth::user()->role_id != 2, function ($q) {
+    //         return $q->where('current_division_id', Auth::user()->division_id);
+    //     });
+
     $staffQuery = ModelsStaff::with(['currentRank', 'current_department', 'current_division'])
-        ->where('status_id', $this->status)
-        ->when(Auth::user()->role_id != 2, function ($q) {
-            return $q->where('current_division_id', Auth::user()->division_id);
-        });
+    ->where('status_id', $this->status)
+    ->where('created_by', Auth::id())
+    ->when(Auth::user()->role_id != 2, function ($q) {
+        return $q->where('current_division_id', Auth::user()->division_id);
+    });
 
     if ($this->staff_search) {
         $this->resetPage();
