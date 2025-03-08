@@ -13,7 +13,7 @@
         <x-input-error class="mt-1" :messages="$errors->get('photo')" />
     </div>
     <div>
-        <x-input-label for="အမည်" :value="__('အမည်')" />
+        <x-input-label for="အမည်" :value="__('အမည်')"/>
         <x-text-input wire:model="name" id="name" name="name" type="text" class="block w-full mt-1" required/>
         <x-input-error class="mt-2" :messages="$errors->get('name')" required/>
     </div>
@@ -174,7 +174,7 @@ class="block w-full mt-1"
         </div>
         <br>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-2 gap-4 my-2">
             <!-- NRC Front Section -->
             <div class="flex flex-col">
                 <div class="mb-4">
@@ -204,7 +204,7 @@ class="block w-full mt-1"
             </div>
         </div>
     </div>
-    <div class="col-span-4">
+    <div class="col-span-4 my-2">
         <div class="grid grid-cols-3 gap-4">
             <div>
                 <x-input-label for="ဖုန်းနံပါတ်" :value="__('ဖုန်းနံပါတ်')" />
@@ -225,7 +225,7 @@ class="block w-full mt-1"
     </div>
     <div class="col-span-4">
         <x-input-label :value="__('လက်ရှိနေရပ်လိပ်စာ အပြည့်အစုံ (ပြည်နယ်/တိုင်းဒေသကြီး,ခရိုင်,မြို့/မြို့နယ်,ရပ်ကွက်,လမ်း,အိမ်နံပါတ်)')" />
-        <div class="grid grid-cols-5 gap-4">
+        <div class="grid grid-cols-5 gap-5">
             <div>
                 <x-select
                     required
