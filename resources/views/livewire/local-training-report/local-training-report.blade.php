@@ -8,12 +8,14 @@
                 <h1 class="text-center text-sm font-bold ">ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
                 <h1 class="text-center text-sm font-bold mt-2">ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
                 <h1 class="text-center text-sm font-bold mt-2">
-                    တက်ရောက်ခဲ့သည့်သင်တန်းများ</h1>
+                     {{ $From }} မှ {{ $To }} အတွင်းတက်ရောက်ခဲ့သည့်သင်တန်းများ</h1>
 
                 <div>
                     <x-select class="mt-4" wire:model.live='trainingLocation' :values="[
                             ['id' => '', 'name' => 'ပြည်တွင်း ပြည်ပ ရွေးပါ'],
                             ['id' => in_array($trainingLocation, [1, 2]), 'name' => 'ပြည်တွင်း'],
+                            ['id' => 1, 'name' => 'ပြည်တွင်း'],
+                            ['id' => 2, 'name' => 'ပြည်တွင်း(online)'],
                             ['id' => 3, 'name' => 'ပြည်ပ'],
                         ]" />
                     <x-select wire:model.live="selectedRankId" :values="$ranks" placeholder='ရာထူးများအားလုံး' />
