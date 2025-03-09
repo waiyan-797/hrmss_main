@@ -8,13 +8,14 @@
                 <h1 class="text-center text-sm font-bold ">ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန</h1>
                 <h1 class="text-center text-sm font-bold mt-2">ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
                 <h1 class="text-center text-sm font-bold mt-2">
-                    တက်ရောက်ခဲ့သည့်သင်တန်းများ</h1>
+                     {{ $From }} မှ {{ $To }} အတွင်းတက်ရောက်ခဲ့သည့်သင်တန်းများ</h1>
 
                 <div>
                     <x-select class="mt-4" wire:model.live='trainingLocation' :values="[
                             ['id' => '', 'name' => 'ပြည်တွင်း ပြည်ပ ရွေးပါ'],
                             ['id' => 1, 'name' => 'ပြည်တွင်း'],
-                            ['id' => 2, 'name' => 'ပြည်ပ'],
+                            ['id' => 2, 'name' => 'ပြည်တွင်း(online)'],
+                            ['id' => 3, 'name' => 'ပြည်ပ'],
                         ]" />
                     <x-select wire:model.live="selectedRankId" :values="$ranks" placeholder='ရာထူးများအားလုံး' />
                     <input type="Month" wire:model.live='From' :values="From">
@@ -46,7 +47,7 @@
                             $firstTraining = $staff?->trainings
                             ->whereIn(
                             'training_location_id',
-                            $trainingLocation == 3 ? [1, 2] : $trainingLocation,
+                            $trainingLocation == "" ? [1, 2, 3] : $trainingLocation,
                             )->first();
                             
                             
@@ -84,7 +85,7 @@
                             </tr>
 
                             <!-- For remaining trainings, create new rows -->
-                            @foreach ($staff->trainings->whereIn('training_location_id', $trainingLocation == 3 ? [1, 2] : $trainingLocation)->skip(1) as $training)
+                            @foreach ($staff->trainings->whereIn('training_location_id', $trainingLocation == "" ? [1, 2, 3] : $trainingLocation)->skip(1) as $training)
                             <tr>
                                 <td class="border border-black border-b-0 border-t-0 text-center p-1">
 
