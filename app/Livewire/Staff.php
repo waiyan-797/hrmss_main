@@ -119,10 +119,10 @@ class Staff extends Component
     $this->modal_title = 'Choose Report Type';
 
     $staffQuery = ModelsStaff::with(['currentRank', 'current_department', 'current_division'])
-        ->where('status_id', $this->status)
-        ->when(Auth::user()->role_id != 2, function ($q) {
-            return $q->where('current_division_id', Auth::user()->division_id);
-        });
+    ->where('status_id', $this->status)
+    ->when(Auth::user()->role_id != 2 && Auth::user()->role_id != 3, function ($q) {
+        return $q->where('current_division_id', Auth::user()->division_id);
+    });
 
     // $staffQuery = ModelsStaff::with(['currentRank', 'current_department', 'current_division'])
     // ->where('status_id', $this->status)
