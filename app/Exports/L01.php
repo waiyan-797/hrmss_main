@@ -143,6 +143,7 @@ class L01 implements FromView ,WithStyles
         $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4); // Set paper size to A4
         $sheet->getPageSetup()->setOrientation(PageSetUp::ORIENTATION_LANDSCAPE); // Set orientation to Landscape
 
+        $sheet->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd(1, 6);//for Table header fixed on each page
         // Fit to page width
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
@@ -250,7 +251,7 @@ class L01 implements FromView ,WithStyles
         $sheet->getStyle("B7:$highestColumn$highestRow")->applyFromArray([
             'font' => ['name' => 'Pyidaungsu', 'size' => 13],
             'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 'wrapText' => true,
             ],
