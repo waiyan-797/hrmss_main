@@ -62,7 +62,7 @@ class L03 implements FromView ,WithStyles
     $sheet->getPageSetup()->setFitToWidth(1);
     $sheet->getPageSetup()->setFitToHeight(0);
 
-    $sheet->getPageSetup()->setScale(85);
+    $sheet->getPageSetup()->setScale(75);
 
     // Enable gridlines for unbordered areas
     $sheet->setShowGridlines(true);

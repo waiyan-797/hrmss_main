@@ -147,7 +147,7 @@ class L01 implements FromView ,WithStyles
         $sheet->getPageSetup()->setFitToWidth(1);
         $sheet->getPageSetup()->setFitToHeight(0);
 
-        $sheet->getPageSetup()->setScale(80);
+        $sheet->getPageSetup()->setScale(75);
 
         // Enable gridlines for unbordered areas
         $sheet->setShowGridlines(true);
@@ -252,6 +252,7 @@ class L01 implements FromView ,WithStyles
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                'wrapText' => true,
             ],
             'borders' => [
                 'allBorders' => [
