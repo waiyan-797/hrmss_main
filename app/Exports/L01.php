@@ -45,7 +45,8 @@ class L01 implements FromView ,WithStyles
 
     public function view(): View
     {
-        $leave_types = LeaveType::all();
+        $leave_types = LeaveType::whereIn('id', range(1, 7))->get();
+
        
         if (!($this->dep_category == 3)) {
             $divisions = Division::where('division_type_id', $this->dep_category)->get();

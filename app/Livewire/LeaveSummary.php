@@ -27,7 +27,8 @@ class LeaveSummary extends Component
 
         $this->dateRange = Carbon::now()->format('Y-m');
        
-$this->leave_types = LeaveType::all();
+$this->leave_types = LeaveType::whereIn('id', range(1, 7))->get();
+
 $this->divisionTypes = DivisionType::all();
         
     }
@@ -68,7 +69,7 @@ $this->divisionTypes = DivisionType::all();
     public function render()
     {
         [$this->year , $this->month] = explode('-', $this->dateRange);
-        $leave_types = LeaveType::all();
+        $leave_types = LeaveType::whereIn('id', range(1, 7))->get();
 
        
         // $totalLeaveTypeCounts = [];

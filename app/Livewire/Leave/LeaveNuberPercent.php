@@ -88,7 +88,7 @@ class LeaveNuberPercent extends Component
   
     public function go_word()
 {
-    $leave_types = LeaveType::all();
+    $leave_types = LeaveType::whereIn('id', range(1, 7))->get();
     [$year, $month] = explode('-', $this->dateRange);
     $this->year = $year;
     $this->month = $month;
@@ -217,7 +217,7 @@ class LeaveNuberPercent extends Component
     
     public function render()
     {
-        $leave_types = LeaveType::all();
+        $leave_types = LeaveType::whereIn('id', range(1, 7))->get();
         $divisions = Division::get();
         [$year, $month] = explode('-', $this->dateRange);
         $this->year = $year;
