@@ -106,7 +106,9 @@ class LocalTrainingReport extends Component
     // Add Titles
     $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန', 1);
     $section->addTitle('ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
-    $section->addTitle(in_array($this->trainingLocation, [1, 2]) ? 'ပြည်တွင်းသင်တန်း Report' : 'ပြည်ပသင်တန်း Report', 2);
+    // $section->addTitle($this->From . "မှ" . $this->To . "အတွင်းတက်ရောက်ခဲ့သည့်" . (in_array($this->trainingLocation, [1, 2]) ? 'ပြည်တွင်းသင်တန်း Report' : 'ပြည်ပသင်တန်း Report'), 2);
+    $section->addTitle($this->From . "မှ" . $this->To . "အတွင်းတက်ရောက်ခဲ့သည့်သင်တန်း Report", 2);
+
     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
     $table->addRow(50,array('tblHeader' => true));
     $table->addCell(700)->addText('စဉ်', ['bold' => true],$pStyle_7);
