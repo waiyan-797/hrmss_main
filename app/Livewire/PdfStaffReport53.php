@@ -426,7 +426,7 @@ class PdfStaffReport53 extends Component
                 $table->addCell(1000)->addText('('.myanmarAlphabet($index).')',null,$pStyle_6);
                 $table->addCell(4000)->addText($posting->rank->name ?? '',null,$pStyle_3);
                 $table->addCell(2500)->addText(formatDMYmm($posting->from_date),null, $pStyle_6);
-                $table->addCell(2500)->addText($posting->to_date ? formatDMYmm($posting->to_date) : formatDMYmm(now()->toDateString()),null, $pStyle_6);
+                $table->addCell(2500)->addText(formatDMYmm($posting->to_date),null, $pStyle_6);
                 $table->addCell(3000)->addText($posting->ministry?->name.'၊'."\n".$posting->division?->name . $posting->department?->name .'၊'.$posting->location,null, $pStyle_6);
                 $table->addCell(2000)->addText($posting->remark,null, $pStyle_6);
             }
@@ -855,6 +855,8 @@ if ($staff->schools->isNotEmpty()) {
         $table->addCell(700)->addText('စဥ်', ['bold' => true],$pStyle_7);
         $table->addCell(1800)->addText("သွားရောက်ခဲ့\nသည့်နိုင်ငံ", ['bold' => true],$pStyle_2);
         $table->addCell(4000)->addText('သွားရောက်ခဲ့သည့်အကြောင်း', ['bold' => true],$pStyle_7);
+        $table->addCell(2000)->addText("တွေ့ဆုံခဲ့သည့်\nကုမ္ပဏီ\nလူပုဂ္ဂိုလ်\nဌာန", ['bold' => true],$pStyle_2);
+        $table->addCell(2000)->addText('ကာလ'."\n".'(မှ-ထိ)', ['bold' => true],$pStyle_2);// <' '>it m2eans many space
         $table->addCell(1800)->addText("တွေ့ဆုံခဲ့သည့်\nကုမ္ပဏီ\nလူပုဂ္ဂိုလ်\nဌာန", ['bold' => true],$pStyle_2);
         $table->addCell(2500)->addText('ကာလ'."\n".'(မှ-ထိ)', ['bold' => true],$pStyle_2);// <' '>it m2eans many space
         if($staff->abroads->isNotEmpty()){
@@ -862,17 +864,16 @@ if ($staff->schools->isNotEmpty()) {
                     $table->addRow(50);
                     $table->addCell(700)->addText(en2mm($index+1),null,$pStyle_6);
                     $table->addCell(1800)->addText($abroad->countries->pluck('name')->unique()->join('၊ ')."\n".$abroad->towns,null,$pStyle_3);
+                    $table->addCell(1800)->addText($abroad->countries->pluck('name')->unique()->join('၊ ')."\n".$abroad->towns,null,$pStyle_3);
                     $table->addCell(4000)->addText($abroad->particular,null,$pStyle_6);
-                    $table->addCell(1800)->addText($abroad->meet_with,null,$pStyle_6);
-                    $table->addCell(2500)->addText(formatDMYmm($abroad->from_date) ."\n".formatDMYmm($abroad->to_date),null,array('align' => 'left', 'spaceAfter' => 0, 'spaceBefore' => 0 ,'indentation' => ['left' => 100]));
+                    $table->addCell(2000)->addText($abroad->meet_with,null,$pStyle_6);
+                    $table->addCell(2000)->addText(formatDMYmm($abroad->from_date) ."\n".formatDMYmm($abroad->to_date),null,array('align' => 'left', 'spaceAfter' => 30, 'spaceBefore' => 70 ,'indentation' => ['left' => 100]));
                 }
-            }else{
                     $table->addRow(50);
-                $cell = $table->addCell(10800, ['gridSpan' => 5]); 
+                $cell = $table->addCell(10500, ['gridSpan' => 5]); 
                 $cell->addText(
                     'မရှိပါ',
                    null,
-                    ['alignment' => 'center']
                 );
                 }
         
