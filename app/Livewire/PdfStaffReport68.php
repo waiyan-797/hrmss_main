@@ -840,7 +840,7 @@ class PdfStaffReport68 extends Component
         $table->addCell(1300)->addText('၄။', null,  $pStyle_5);
         $table->addCell(13000)->addText("နောက်ဆုံးအောင်မြင်ခဲ့သည့်ကျောင်း၊ အတန်း၊  ခုံအမှတ်၊ ဘာသာရပ်အတိအကျဖော်ပြရန်", null, $pStyle_8);
         $table->addCell(700)->addText('-', null,  $pStyle_5);
-        $table->addCell(13000)->addText($staff->last_school_name . '၊' . $staff->last_school_subject . '၊' . $staff->last_school_row_no . '၊' . $staff->last_school_major, null, $pStyle_8);
+        $table->addCell(13000)->addText($staff->last_school_name . '' . $staff->last_school_subject . '' . $staff->last_school_row_no . '' . $staff->last_school_major, null, $pStyle_8);
 
         $table->addRow();
         $table->addCell(1300)->addText('၅။', null,  $pStyle_5);
