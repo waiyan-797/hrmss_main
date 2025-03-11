@@ -415,7 +415,7 @@ class PdfStaffReport68 extends Component
                 $table->addCell(2500)->addText($posting->location,null, $pStyle_6);
 
                 $table->addCell(4000)->addText(formatDMYmm($posting->from_date),null, $pStyle_6);
-                $table->addCell(4000)->addText(formatDMYmm($posting->to_date), null, $pStyle_6);
+                $table->addCell(4000)->addText($posting->to_date ? formatDMYmm($posting->to_date) : formatDMYmm(now()->toDateString()), null, $pStyle_6);
 
 
             }
@@ -872,7 +872,7 @@ class PdfStaffReport68 extends Component
                 $table->addCell(6000)->addText($posting->department->name ?? '', null, $pStyle_1);
                 $table->addCell(6000)->addText($posting->ministry->name ?? '', null, $pStyle_1);
                 $table->addCell(5000)->addText(formatDMYmm($posting->from_date), null, $pStyle_1);
-                $table->addCell(5000)->addText(formatDMYmm($posting->to_date), null, $pStyle_1);
+                $table->addCell(5000)->addText($posting->to_date ? formatDMYmm($posting->to_date) : formatDMYmm(now()->toDateString()), null, $pStyle_1);
                 $table->addCell(2000)->addText($posting->remark, null, $pStyle_1);
             }
         } else {

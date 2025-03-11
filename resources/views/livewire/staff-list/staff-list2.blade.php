@@ -55,10 +55,10 @@
                     <tr>
                         <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">{{ en2mm($first_promotion_points) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($second_promotion_points) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($third_promotion_points) }}</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($fourth_promotion_points) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($first_promotion_points * 3) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($second_promotion_points*2) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($third_promotion_points*1) }}</td>
+                        <td class="border border-black text-center p-2">{{ en2mm($fourth_promotion_points*0.5) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($total_points) }}</td>
                     </tr>
                  

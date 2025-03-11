@@ -180,7 +180,7 @@
                                         <td class="border border-black text-center p-2">
                                             {{ formatDMYmm($posting->from_date) ?? '' }}</td>
                                         <td class="border border-black text-center p-2">
-                                            {{ formatDMYmm($posting->to_date) ?? '' }}</td>
+                                            {{ $posting->to_date ? formatDMYmm($posting->to_date) : formatDMYmm(now()->toDateString()) }}</td>
                                         <td class="border border-black text-center p-2">
                                             {{ $posting->location ?? '-' }}</td>
                                     </tr>

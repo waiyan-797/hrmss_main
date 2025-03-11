@@ -16,6 +16,7 @@ class PA14 implements FromView, WithStyles
     /**
      * @return \Illuminate\Support\Collection
      */
+    public $ranks;
     public function mount()
     {
         $this->ranks = (new Rank())->isDicaAll();

@@ -53,6 +53,9 @@
                 <button type="button"
                     class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
                     wire:click="go_report({{ $staff_id }}, '_staff_list_2')">ဝန်ထမ်းလုပ်သက်အတွက်အမှတ်ပေးခြင်း</button>
+                    <button type="button"
+                    class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
+                    wire:click="go_report({{ $staff_id }}, '_calculation_system')">လုပ်သက်မှတ်တွက်ချက်မှုစနစ်သစ်</button>
 
             {{-- @endif --}}
 

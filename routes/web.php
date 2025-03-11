@@ -103,6 +103,8 @@ use App\Livewire\LabourStaff as LivewireLabourStaff;
 use App\Livewire\Language as LivewireLanguage;
 use App\Livewire\Leave;
 use App\Livewire\AllRetire;
+use App\Livewire\CalculationSystem;
+use App\Livewire\DivisionRank;
 use App\Livewire\Leave\LeaveNuberPercent;
 use App\Livewire\Leave\LeaveNuberPercent4;
 use App\Livewire\Leave\LeaveNuberPercent5;
@@ -220,7 +222,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/religion', Religion::class)->name('religion');
     Route::get('/gender', Gender::class)->name('gender');
     Route::get('/salary', Salary::class)->name('salary');
-    Route::get('/promotion', LivewirePromotion::class)->name('promotion'); //no longer use
+    Route::get('/promotion', LivewirePromotion::class)->name('promotion');
+     //no longer use
+     Route::get('/division_rank',DivisionRank::class)->name('division_rank');
     Route::get('/promotion/{staff_id}', LivewirePromotion::class)->name('staff_promotion');
     Route::get('/retirement/{staff_id}', Retirement::class)->name('staff_retirement'); //no longer use
     Route::get('/depromotion',Depromotion::class)->name('depromotion');
@@ -259,6 +263,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/pdf_staff_report_leave_3/{staff_id?}', LeaveDate::class)->name('pdf_staff_report_leave_3');
     Route::get('/pdf_staff_report_staff_list_2/{staff_id?}', StaffList2::class)->name('pdf_staff_report_staff_list_2');
+    Route::get('/pdf_staff_report_calculation_system/{staff_id?}',CalculationSystem::class)->name('pdf_staff_report_calculation_system');
     Route::get('/planning_accounting', PlanningAccounting::class)->name('planning_accounting');
     Route::get('/allowe-male-female-staffs', InvestmentCompanies::class)->name('investment_companies');
     Route::get('/inservice-male-female-staffs', InvestmentCompanies2::class)->name('investment_companies2');

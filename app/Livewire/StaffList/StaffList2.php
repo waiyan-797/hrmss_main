@@ -140,12 +140,6 @@ class StaffList2 extends Component
             $table->addCell(4000)->addText( en2mm($third_promotion_points)); // Name, Rank, Department
             $table->addCell(2000)->addText( en2mm($fourth_promotion_points) ); // Current Rank
             $table->addCell(2000)->addText( en2mm($total_points) ); // Current Rank
-            
-
-
-
-
-    
         // Save Word file
         $fileName = 'staff_list_report.docx';
         $filePath = storage_path('app/' . $fileName);
@@ -160,12 +154,26 @@ class StaffList2 extends Component
         return Promotion::where('rank_id', $rank_id)->where('staff_id', $this->staff_id)->first();
     }
 
-    private function calc_points($diff){
+    // private function calc_points($diff){
+    //     $points = 0;
+    //     $diff->y > 0 ? $points = $diff->y + $points : '';
+    //     $diff->m >= 6 ? $points++ : '';
+    //     return $points;
+    // }
+    private function calc_points($diff) {
         $points = 0;
-        $diff->y > 0 ? $points = $diff->y + $points : '';
-        $diff->m >= 6 ? $points++ : '';
+    
+     
+        if ($diff->y > 0) {
+            $points += $diff->y;
+        }
+        if ($diff->m >= 6) {
+            $points++;
+        }
+    
         return $points;
     }
+    
 
     public function render()
     {

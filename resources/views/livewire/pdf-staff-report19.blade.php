@@ -98,7 +98,7 @@
                     </div>
                 </div>
 
-                <div class="w-full mb-4">
+                {{-- <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">
                         <label for="">၁၃။ </label>
                         <h1 class=" ">တက်ရောက်ခဲ့သည့်သင်တန်းများ</h1>
@@ -133,9 +133,56 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-
+                </div> --}}
                 <div class="w-full mb-4">
+                    <div class="flex justify-start mb-2 space-x-3">
+                        <label for="">၁၃။</label>
+                        <h1 class=" ">တက်ရောက်ခဲ့သည့်သင်တန်းများ</h1>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">ကျောင်း/တက္ကသိုလ်/သင်တန်း</th>
+                                    <th class="p-2 border border-black">မှ</th>
+                                    <th class="p-2 border border-black">ထိ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                @if ($staff->schools->isNotEmpty())
+                                    @foreach ($staff->schools as $school)
+                                        <tr>
+                                            <td class="border border-black p-2">{{ $school->education }}</td>
+                                            <td class="border border-black p-2">{{ $school->from_date }}</td>
+                                            <td class="border border-black p-2">{{ $school->to_date }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                
+                                @if ($staff->trainings->isNotEmpty())
+                                    @foreach ($staff->trainings as $training)
+                                        <tr>
+                                            <td class="border border-black p-2">
+                                                {{ $training->training_type_id == 32 ? $training->diploma_name : $training->training_type->name }}
+                                            </td>
+                                            <td class="border border-black p-2">{{ formatDMYmm($training->from_date) }}</td>
+                                            <td class="border border-black p-2">{{ formatDMYmm($training->to_date) }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                
+                                @if ($staff->schools->isEmpty() && $staff->trainings->isEmpty())
+                                    <tr>
+                                        <td colspan="3" class="border border-black p-4 text-center">မရှိပါ</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+
+                {{-- <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">
                         <label for="">၁၄။ </label>
                         <h1 class=" ">ထမ်းဆောင်ခဲ့သောတာဝန်များ</h1>
@@ -175,7 +222,51 @@
                             </tbody>
                         </table>
                     </div>
+                </div> --}}
+                <div class="w-full mb-4">
+                    <div class="flex justify-start mb-2 space-x-3">
+                        <label for="">၁၄။ </label>
+                        <h1 class=" ">ထမ်းဆောင်ခဲ့သောတာဝန်များ</h1>
+                    </div>
+                    <div class="w-full rounded-lg">
+                        <table class="w-full text-center">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-2 border border-black">တာဝန်</th>
+                                    <th class="p-2 border border-black">ရုံး/ ဌာန/ အဖွဲ့အစည်း</th>
+                                    <th class="p-2 border border-black">နေ့ရက်မှ</th>
+                                    <th class="p-2 border border-black">နေ့ရက်ထိ</th>
+                                    <th class="p-2 border border-black">မှတ်ချက်</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                @if ($staff->postings->isNotEmpty())
+                                    @foreach ($staff->postings as $posting)
+                                        <tr>
+                                            <td class="border border-black p-2"> {{ $posting->rank->name ?? '-' }}</td>
+                                            <td class="border border-black p-2">{{$posting->department->name ?? '-'}}</td>
+                                            <td class="border border-black p-2">{{ formatDMYmm($posting->from_date) }}</td>
+                                            <td class="border border-black p-2">
+                                                {{-- {{ $posting->to_date ? formatDMYmm($posting->to_date) : now()->format('d-m-Y') }} --}}
+                                                {{ $posting->to_date ? formatDMYmm($posting->to_date) : formatDMYmm(now()->toDateString()) }}
+                                            </td>
+                                            <td class="border border-black p-2">{{$posting->remark}}</td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td class="border border-black p-4"></td>
+                                        <td class="border border-black p-4"></td>
+                                        <td class="border border-black p-4"></td>
+                                        <td class="border border-black p-4"></td>
+                                        <td class="border border-black p-4"></td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+                
 
                 <div class="w-full mb-4">
                     <div class="flex justify-start mb-2 space-x-3">

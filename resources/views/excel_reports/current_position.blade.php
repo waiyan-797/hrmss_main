@@ -59,21 +59,21 @@
                         @php
                             $dob = \Carbon\Carbon::parse($staff->dob);
                             $diff = $dob->diff(\Carbon\Carbon::now());
-                            $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+                            $age =   $diff->y . ' နှစ်၊'  . $diff->m . ' လ';
                         @endphp
-                        <td>{{ ' (' . en2mm($dob->format('d-m-Y')) . ')' }}<br>{{ en2mm($age) }}</td>
+                        <td>{{formatDMYmm($staff->dob) }}<br>{{ en2mm($age) }}</td>
                         @php
-                            $join_date = \Carbon\Carbon::parse($staff->join_date);
-                            $diff = $join_date->diff(\Carbon\Carbon::now());
-                            $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+                            $government_staff_started_date = \Carbon\Carbon::parse($staff->government_staff_started_date);
+                            $diff = $government_staff_started_date->diff(\Carbon\Carbon::now());
+                            $age =  $diff->y . ' နှစ်၊ ' . $diff->m . ' လ';
                         @endphp
-                        <td>{{ ' (' . en2mm($join_date->format('d-m-Y')) . ')' }}<br>{{ en2mm($age) }}</td>
+                        <td>{{ formatDMYmm($staff->government_staff_started_date) }}<br>{{ en2mm($age) }}</td>
                         @php
                             $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);
                             $diff = $current_rank_date->diff(\Carbon\Carbon::now());
-                            $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+                            $age =  $diff->y . ' နှစ် ' .  $diff->m . ' လ';
                         @endphp
-                        <td>{{ ' (' . en2mm($current_rank_date->format('d-m-Y')) . ')' }}<br>{{ en2mm($age) }}</td>
+                        <td>{{ formatDMYmm($staff->current_rank_date) }}<br>{{ en2mm($age) }}</td>
                         <td>{{ $staff->current_division?->name }}</td>
                         @php
                             $educationNames = $staff->staff_educations

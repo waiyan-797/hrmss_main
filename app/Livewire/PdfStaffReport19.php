@@ -189,43 +189,52 @@ class PdfStaffReport19 extends Component
         $table->addCell(6700)->addText('ကျောင်း/တက္ကသိုလ်/သင်တန်း', ['bold' => true], $pStyle_1);
         $table->addCell(2000)->addText('မှ', ['bold' => true],$pStyle_1);
         $table->addCell(2000)->addText('ထိ', ['bold' => true],$pStyle_1);
-        if($staff->trainings->isNotEmpty()){
-            foreach ($staff->trainings as $training) {
-                    $table->addRow(50);
-                        $table->addCell(6500)->addText($training->training_type_id  == 32 ? $training->diploma_name :  $training->training_type->name,null, $pStyle_7);
-                        $table->addCell(2000)->addText(formatDMYmm($training->from_date),null, $pStyle_1);
-                        $table->addCell(2000)->addText(formatDMYmm($training->to_date),null, $pStyle_1);
-            }
-        }else{
+        if ($staff->schools->isNotEmpty()) {
+            foreach ($staff->schools as $school) {
                 $table->addRow(50);
-                $cell = $table->addCell(10500, ['gridSpan' => 3]);
-                $cell->addText(
-                    'မရှိပါ',
-                   null,
-                    ['alignment' => 'center']
-                );
-
+                $table->addCell(6500)->addText($school->education, null, $pStyle_7);
+                $table->addCell(2000)->addText($school->from_date, null, $pStyle_1);
+                $table->addCell(2000)->addText($school->to_date, null, $pStyle_1);
             }
+        }
+        if ($staff->trainings->isNotEmpty()) {
+            foreach ($staff->trainings as $training) {
+                $table->addRow(50);
+                $table->addCell(6500)->addText(
+                    $training->training_type_id == 32 ? $training->diploma_name : $training->training_type->name,
+                    null,
+                    $pStyle_7
+                );
+                $table->addCell(2000)->addText(formatDMYmm($training->from_date), null, $pStyle_1);
+                $table->addCell(2000)->addText(formatDMYmm($training->to_date), null, $pStyle_1);
+            }
+        }
+        if ($staff->schools->isEmpty() && $staff->trainings->isEmpty()) {
+            $table->addRow(50);
+            $cell = $table->addCell(10500, ['gridSpan' => 3]);
+            $cell->addText('မရှိပါ', null, ['alignment' => 'center']);
+        }
+        $section->addText('');
         $section->addText('၁၄။ '.'ထမ်းဆောင်ခဲ့သောတာဝန်များ', null,array('spaceBefore' => 200));
         $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 4]);
         $table->addRow(50,array('tblHeader'=>true));
         $table->addCell(1500)->addText('တာဝန်', ['bold' => true],$pStyle_1);
         $table->addCell(3000)->addText('ရုံး/ ဌာန/ အဖွဲ့အစည်း', ['bold' => true],$pStyle_1);
-        $table->addCell(1600)->addText('နေ့ရက်မှ', ['bold' => true],$pStyle_1);
-        $table->addCell(1600)->addText('နေ့ရက်ထိ', ['bold' => true],$pStyle_1);
+        $table->addCell(2000)->addText('နေ့ရက်မှ', ['bold' => true],$pStyle_1);
+        $table->addCell(2000)->addText('နေ့ရက်ထိ', ['bold' => true],$pStyle_1);
         $table->addCell(2000)->addText('မှတ်ချက်', ['bold' => true],$pStyle_1);
         if ($staff->postings->isNotEmpty()) {
             foreach ($staff->postings as $posting) {
                 $table->addRow(50);
                 $table->addCell(1500)->addText($posting->rank?->name ?? ' - ', null, $pStyle_7);
                 $table->addCell(3000)->addText($posting->department->name ?? ' - ', null, $pStyle_7);
-                $table->addCell(1600)->addText($posting->from_date ? formatDMYmm($posting->from_date) : ' - ', null, $pStyle_1);
-                $table->addCell(1600)->addText($posting->to_date ? formatDMYmm($posting->to_date) : ' - ', null, $pStyle_1);
+                $table->addCell(2000)->addText($posting->from_date ? formatDMYmm($posting->from_date) : '  ', null, $pStyle_1);
+                $table->addCell(2000)->addText($posting->to_date ? formatDMYmm($posting->to_date) : formatDMYmm(now()->toDateString()), null, $pStyle_1);
                 $table->addCell(2000)->addText($posting->remark ?? ' ', null, $pStyle_1);
             }
         } else {
             $table->addRow(50);
-            $cell = $table->addCell(9700, ['gridSpan' => 5]);
+            $cell = $table->addCell(10500, ['gridSpan' => 5]);
             $cell->addText(
                 'မရှိပါ',
                 null,
@@ -284,7 +293,7 @@ class PdfStaffReport19 extends Component
         $table->addCell(5000)->addText('အခြားတင်ပြလိုသည့်အချက်များ',null,$pStyle_4);
         $table->addCell(500)->addText('-', ['align' => 'center'],$pStyle_5);
         $table->addCell(5000)->addText('', null, $pStyle_4);
-
+        $section->addTextBreak();
         $section->addText('('.'ဝန်ထမ်း၏ထိုးမြဲလက်မှတ်'.')',null,['alignment' => Jc::END]);
         $textStyle=[
             'alignment' => Jc::BOTH

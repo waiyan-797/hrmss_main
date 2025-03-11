@@ -245,8 +245,7 @@
                                             </div>
                 <div class="flex justify-between w-full mb-4">
                     <label for="" class="md:w-5">၁၉။ </label>
-                    <label for="name" class="md:w-1/3">အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့်
-                        အလုပ်အကိုင်</label>
+                    <label for="name" class="md:w-1/3">အဘအမည်၊ လူမျိုး၊ ကိုးကွယ်သည့်ဘာသာ ဇာတိနှင့် အလုပ်အကိုင်</label>
                     <label for="" class="md:w-5">-</label>
                         <label for="name" class="md:w-3/5">{{ collect([
                             $staff->father_name,
@@ -410,9 +409,9 @@
                                     <td class="border border-black text-center p-2">{{ '('.myanmarAlphabet($loop->index).')' }}</td>
                                     <td class="border border-black text-center p-2">{{ $posting->rank->name ?? '' }}</td>
                                     <td class="border border-black text-center p-2">{{ formatDMYmm($posting->from_date) }}</td>
-                                    <td class="border border-black text-center p-2">{{ formatDMYmm($posting->to_date) }}</td>
+                                    <td class="border border-black text-center p-2">{{ $posting->to_date ? formatDMYmm($posting->to_date) : formatDMYmm(now()->toDateString())}}</td>
                                     <td class="border border-black text-center p-2">
-                                        {{ $posting->division->name ?? '' }} / {{ $posting->department->name ?? '' }}/{{ $posting->location }}
+                                        {{ $posting->division->name ?? '' }}၊{{ $posting->department->name ?? '' }}၊{{ $posting->location }}
                                     </td>
                                     <td class="border border-black text-center p-2">{{ $posting->remark}}</td>
                                 </tr>

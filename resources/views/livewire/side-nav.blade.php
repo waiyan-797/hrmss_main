@@ -56,6 +56,8 @@
                         ['route_name' => 'difficulty_level', 'name' => 'အခက်အခဲအဆင့်'],
                         ['route_name' => 'marital_status', 'name' => 'အိမ်ထောင်သည်'],
                         ['route_name' => 'relation_type', 'name' => 'တော်စပ်ပုံအမျိုးအစား'],
+                        ['route_name' => 'division_rank', 'name' => 'ဌာနအလိုက်ဖွဲ့စည်းပုံ'],
+
 
                     ]"
                 />

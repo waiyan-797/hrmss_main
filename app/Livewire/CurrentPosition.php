@@ -15,7 +15,7 @@ class CurrentPosition extends Component
     {
         $this->ranks = (new Rank() )->isDicaAll();
     }
-    public function go_excel() 
+    public function go_excel($age = null, $ageTwo = null, $signID = null, $selectedRankId = null, $selectedRankName = null) 
     {
         return Excel::download(new SSL14(
     ), 'SSL14.xlsx');
