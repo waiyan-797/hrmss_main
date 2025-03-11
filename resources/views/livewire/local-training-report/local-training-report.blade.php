@@ -10,17 +10,9 @@
                 <h1 class="text-center text-sm font-bold mt-2">
                      {{ $From }} မှ {{ $To }} အတွင်းတက်ရောက်ခဲ့သည့်သင်တန်းများ</h1>
 
-                     {{-- {{ $From }} မှ {{ $To }} အတွင်းတက်ရောက်ခဲ့သည့် 
-                     @if(in_array($trainingLocation, [1, 2]))
-                         ပြည်တွင်း
-                     @elseif($trainingLocation == 3)
-                         ပြည်ပ
-                     @else
-                         
-                     @endif
-                     သင်တန်းများ</h1> --}}
 
                 <div>
+
                     <x-select class="mt-4" wire:model.live='trainingLocation' :values="[
                             ['id' => '', 'name' => 'ပြည်တွင်း ပြည်ပ ရွေးပါ'],
                             ['id' => in_array($trainingLocation, [1, 2]), 'name' => 'ပြည်တွင်း'],
