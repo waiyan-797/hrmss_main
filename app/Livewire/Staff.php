@@ -3,7 +3,10 @@
 namespace App\Livewire;
 
 use App\Models\Promotion;
+use App\Models\Rank;
+use App\Models\RetireType;
 use App\Models\Staff as ModelsStaff;
+use App\Models\Division;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
@@ -20,6 +23,11 @@ class Staff extends Component
         public $open_staff_report = false;
         public $message = null;
         public $staff_search, $staff_name, $staff_id = 0;
+        public $selectedRank,$selectedDivision,$selectedRetireType;
+        // public $retire_type_filter = null;
+        public $retire_type_filter = false;
+
+        public $retire_type;
         public $modal_title;
         public $selectedComment = null;
         public function mount($status){
@@ -114,9 +122,8 @@ class Staff extends Component
     //     ]);
     // }
     public function render()
-{
-    $staffSearch = '%' . $this->staff_search . '%';
-    $this->modal_title = 'Choose Report Type';
+    {
+       
 
     $staffQuery = ModelsStaff::with(['currentRank', 'current_department', 'current_division'])
     ->where('status_id', $this->status)
@@ -130,29 +137,54 @@ class Staff extends Component
     // ->when(Auth::user()->role_id != 2, function ($q) {
     //     return $q->where('current_division_id', Auth::user()->division_id);
     // });
+        $staffSearch = '%' . $this->staff_search . '%';
+        $this->modal_title = 'Choose Report Type';
 
-    // $staffQuery = ModelsStaff::with(['currentRank', 'current_department', 'current_division'])
-    // ->where('status_id', $this->status)
-    // ->where('created_by', Auth::id())
-    // ->when(Auth::user()->role_id != 2, function ($q) {
-    //     return $q->where('current_division_id', Auth::user()->division_id);
-    // });
+        // Base query for staff
+        $staffQuery = ModelsStaff::with(['currentRank', 'current_department', 'current_division'])
+            ->where('status_id', $this->status)
+            ->when(Auth::user()->role_id != 2, function ($q) {
+                return $q->where('current_division_id', Auth::user()->division_id);
+            });
 
-    if ($this->staff_search) {
-        $this->resetPage();
-        $staffQuery->where(function ($q) use ($staffSearch) {
-            $q->where('name', 'LIKE', $staffSearch)->orWhere('staff_no', 'LIKE', $staffSearch);
-        });
-        $staffs = $staffQuery->paginate($staffQuery->count() > 1 ? $staffQuery->count() : 1);
-    } else {
-        $staffs = $staffQuery->paginate(10);
+            
+        if ($this->selectedDivision) {
+            $staffQuery->where('current_division_id', $this->selectedDivision);
+        }
+
+        // Apply rank filter if selected
+        if ($this->selectedRank) {
+            $staffQuery->whereHas('currentRank', function ($query) {
+                $query->where('id', $this->selectedRank);
+            });
+        }
+        if ($this->retire_type_filter) {
+            $staffQuery->whereNotNull('retire_type_id');
+        }
+        if ($this->selectedRetireType) {
+            $staffQuery->where('retire_type_id', $this->selectedRetireType);
+        }
+
+        // Apply search filter if search query is present
+        if ($this->staff_search) {
+            $this->resetPage(); // Reset pagination when searching
+            $staffQuery->where(function ($q) use ($staffSearch) {
+                $q->where('name', 'LIKE', $staffSearch)
+                  ->orWhere('staff_no', 'LIKE', $staffSearch);
+            });
+        }
+
+        // Paginate the results
+        $staffs = $staffQuery->paginate(10); // Use a fixed number for pagination
+
+        return view('livewire.staff', [
+            'staffs' => $staffs,
+            'ranks' => Rank::where('is_dica',1)->get(),
+            'divisions' => Division::all(),
+            'retire_type' => RetireType::all(),
+'retire_type_filter' => ModelsStaff::whereNotNull('retire_type_id')->get(),
+        ]);
     }
-
-    return view('livewire.staff', [
-        'staffs' => $staffs,
-    ]);
-}
-
 
     public function check($id){
         return Promotion::where('staff_id', $id)->get()->isEmpty()  ;
