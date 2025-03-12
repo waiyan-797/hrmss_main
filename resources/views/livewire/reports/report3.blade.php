@@ -7,10 +7,10 @@
             <h1 class="text-center font-bold text-sm">ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <h1 class="text-center font-bold text-sm">Report - 3</h1>
 
-            <div class="flex justify-center items-center space-x-4 mb-5 mt-5">
+            <div class="flex justify-center items-center space-x-4 mb-1 mt-1">
                 <div class="w-1/5">
                     <select wire:model.live="selectedEducationId"
-                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                         <option value="" style="color: grey;">ဘွဲ့ရွေးပါ</option>
                         @foreach ($educations as $education)
                             <option value="{{ $education->education_id }}">{{ $education->education?->name }}</option>
@@ -20,7 +20,7 @@
 
                 <div class="w-1/5">
                     <select wire:model.live="selectedBloodId"
-                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                         <option value="" style="color: grey;">သွေးအုပ်စုရွေးပါ</option>
                         @foreach ($blood_types as $blood_type)
                             <option value="{{ $blood_type->id }}">{{ $blood_type->name }}</option>
@@ -30,7 +30,7 @@
 
                 <div class="w-1/5">
                     <select wire:model.live="selectedLanguageId"
-                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                         <option value="" style="color: grey;">တတ်ကျွမ်းသည့်ဘာသာစကား</option>
                         @foreach ($languages as $language)
                             <option value="{{ $language->language_id }}">{{ $language->language?->name }}</option>
@@ -39,9 +39,9 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap gap-4 justify-center mb-6">
+            <div class="flex flex-wrap gap-4 justify-center mb-2">
                 <div class="flex items-center mr-6">
-                    <x-input-label value="အသက်" />
+                    <x-input-label value="အသက်" class="mr-2"/>
                     <x-text-input wire:model.live="age" class="!w-48 !border-2 rounded-md" />
                 </div>
                 မှ
@@ -62,9 +62,9 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap gap-4 justify-center mb-6">
+            <div class="flex flex-wrap gap-4 justify-center mb-1">
                 <div class="flex items-center mr-6">
-                    <x-input-label value="လက်ရှိရာထူးရသောလုပ်သက်" />
+                    <x-input-label value="လက်ရှိရာထူးရသောလုပ်သက်" class="mr-2"/>
                     <x-text-input wire:model.live="service" class="!w-48 !border-2 rounded-md" />
                 </div>
                 မှ

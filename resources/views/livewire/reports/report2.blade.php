@@ -9,11 +9,11 @@
             <h1 class="text-center font-bold text-sm"> ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန</h1>
             <h1 class="text-center font-bold text-sm">Report - 2</h1>
 
-            <div class="flex justify-center items-center space-x-4 mb-5 mt-5">
+            <div class="flex justify-center items-center space-x-4 mb-3 mt-2">
                 <!-- Rank Filter -->
                 <div class="w-1/5">
                     <select wire:model.live="selectedRankId"
-                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                         <option value="" style="color: grey;">ရာထူးများအားလုံး</option>
                         @foreach ($ranks as $rank)
                             <option value="{{ $rank->id }}">{{ $rank->name }}</option>
@@ -23,7 +23,7 @@
                
                 <div class="w-1/5">
                     <select wire:model.live="selectedEthnicId" id="ethnic-select"
-                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                         <option value="" style="color: grey;">လူမျိုး</option>
                         @foreach ($ethnics as $ethnic)
                             <option value="{{ $ethnic->id }}">{{ $ethnic->name }}</option>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="w-1/5">
                     <select wire:model.live="selectedReligionId"
-                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                         <option value="" style="color: grey;">ကိုးကွယ်သည့်ဘာသာ</option>
                         @foreach ($religions as $religion)
                             <option value="{{ $religion->id }}">{{ $religion->name }}</option>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="w-1/5">
                     <select wire:model.live="selectedGenderId"
-                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                         <option value="" style="color: grey;">ကျား/မ</option>
                         <option value="1">ကျား</option>
                         <option value="2">မ</option>
@@ -49,14 +49,14 @@
                 </div>
                 <div class="w-1/5">
                     <select wire:model.live="selectedMaritalId"
-                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                         <option value="" style="color: grey;">အိမ်ထောင် (ရှိ/မရှိ)</option>
                         <option value="1">ရှိ</option>
                         <option value="2">မရှိ</option>
                     </select>
                 </div>
             </div>
-            <div class="flex flex-wrap gap-4 justify-center mb-6">
+            <div class="flex flex-wrap gap-4 justify-center mb-2">
                     <div class="flex items-center mr-6">
                         <x-input-label value="လက်ရှိရာထူးရသောလုပ်သက်" />
                         <x-text-input wire:model.live="age" class="!w-48 !border-2 rounded-md" />
