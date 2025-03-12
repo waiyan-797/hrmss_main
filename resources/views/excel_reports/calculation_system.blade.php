@@ -98,7 +98,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                {{-- <tr>
                     <td>၁။</td>
                     <td>လက်ရှိရာထူး</td>
                     <td>{{ en2mm($first_promotion_points) }}</td>
@@ -147,6 +147,70 @@
                     <td>{{ en2mm(($first_promotion_points * 3 + $second_promotion_points * 2 + $third_promotion_points * 1 + $fourth_promotion_points * 0.5) * 100 / 
                         (($first_promotion_points * 3 + $second_promotion_points * 2 + $third_promotion_points * 1 + $fourth_promotion_points * 0.5) + 
                         ((44 - ($first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points)) * 3))) }}
+                    </td>
+                    <td></td>
+                </tr> --}}
+
+                <tr>
+                    <td>၁။</td>
+                    <td>လက်ရှိရာထူး</td>
+                    <td>
+                        {{ en2mm($first_promotion_points) }}
+                    </td>
+                    <td>   {{ en2mm($first_promotion_points*3) }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>၂။</td>
+                    <td>တစ်ဆင့်နိမ့်ရာထူး</td>
+                    <td>
+                        {{ en2mm($second_promotion_points) }}
+                    </td>
+                    <td> {{ en2mm($second_promotion_points*2) }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>၃။</td>
+                    <td>နောက်တစ်ဆင့်နိမ့်ရာထူး</td>
+                    <td>{{ en2mm($third_promotion_points) }}</td>
+                    <td>{{ en2mm($third_promotion_points*1) }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>၄။</td>
+                    <td>နောက်တစ်ဆင့်နိမ့်ရာထူးများ</td>
+                    <td>  {{ en2mm($fourth_promotion_points) }}</td>
+                    <td>{{ en2mm($fourth_promotion_points*0.5) }}</td>
+                   
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>လုပ်သက်ပေါင်း</td>
+                    <td> {{ en2mm($first_promotion_points+$second_promotion_points+$third_promotion_points+$fourth_promotion_points) }}</td>
+                    <td>{{ en2mm($first_promotion_points*3+$second_promotion_points*2+$third_promotion_points*1+$fourth_promotion_points*0.5)}}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>လက်ကျန်လုပ်သက်</td>
+                    <td>{{ en2mm(44-($first_promotion_points+$second_promotion_points+$third_promotion_points+$fourth_promotion_points)) }}</td>
+                    <td>{{ en2mm((44 - ($first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points)) * 3) }}
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>ဝန်ထမ်းရမှတ်</td>
+                    <td></td>
+                    <td>
+                        {{-- {{ en2mm(($first_promotion_points * 3 + $second_promotion_points * 2 + $third_promotion_points * 1 + $fourth_promotion_points * 0.5) * 100 / 
+                        (($first_promotion_points * 3 + $second_promotion_points * 2 + $third_promotion_points * 1 + $fourth_promotion_points * 0.5) + 
+                        ((44 - ($first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points)) * 3))) }} --}}
+                        {{ en2mm(number_format((($first_promotion_points * 3 + $second_promotion_points * 2 + $third_promotion_points * 1 + $fourth_promotion_points * 0.5) * 100 / 
+                            (($first_promotion_points * 3 + $second_promotion_points * 2 + $third_promotion_points * 1 + $fourth_promotion_points * 0.5) + 
+                            ((44 - ($first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points)) * 3))), 2)) }}
+                        
                     </td>
                     <td></td>
                 </tr>

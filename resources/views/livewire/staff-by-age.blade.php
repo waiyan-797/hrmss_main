@@ -1,11 +1,24 @@
 <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
     <div class="w-full mx-auto px-3 py-4">
+        <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button>
         <h1 class="text-center mt-2 text-sm font-bold">
             ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန
         </h1>
         <h1 class="text-center mt-2 text-sm font-bold">
-            အသက်အလိုက် ဝန်ထမ်းများစာရင်း
+            <h1 class="font-bold text-center text-base mb-2">
+                အသက် {{ en2mm($age ?? '') }}
+                @switch($signID)
+                    @case('all') အားလုံး @break
+                    @case('between') နှစ်ကြား @break
+                    @case('>') နှစ်အထက် @break
+                    @case('=') နှစ် @break
+                    @case('<') နှစ်အောက် @break
+                    @default
+                @endswitch
+                 ဝန်ထမ်းများ၏အမည်စာရင်း
+            </h1>
         </h1>
+        
         <div class="flex flex-wrap gap-4 justify-center mb-6">
             <div class="flex items-center">
                 <x-input-label value="အသက်" />
@@ -52,27 +65,27 @@
                             @php
                                 $dob = \Carbon\Carbon::parse($staff->dob);
                                 $diff = $dob->diff(\Carbon\Carbon::now());
-                                $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+                                $age =  $diff->y . ' နှစ်၊ ' .  $diff->m . ' လ';
                             @endphp
                             <td class="border border-black px-4 py-2">
-                                {{ ' (' . en2mm($dob->format('d-m-Y')) . ')' }}<br>
+                                {{ formatDMYmm($staff->dob) }}<br>
                                 {{ en2mm($age) }}
                             </td>
                             @php
                                 $join_date = \Carbon\Carbon::parse($staff->join_date);
                                 $diff = $join_date->diff(\Carbon\Carbon::now());
-                                $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+                                $age =  $diff->y . ' နှစ်၊ ' .  $diff->m . ' လ';
                             @endphp
                             <td class="border border-black px-4 py-2">
-                                {{ ' (' . en2mm($join_date->format('d-m-Y')) . ')' }}<br>
+                                {{ formatDMYmm($staff->join_date) }}<br>
                                 {{ en2mm($age) }}</td>
                             @php
                                 $current_rank_date = \Carbon\Carbon::parse($staff->current_rank_date);
                                 $diff = $current_rank_date->diff(\Carbon\Carbon::now());
-                                $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
+                                $age =  $diff->y . ' နှစ်၊ ' . $diff->m . ' လ';
                             @endphp
                             <td class="border border-black px-4 py-2">
-                                {{ ' (' . en2mm($current_rank_date->format('d-m-Y')) . ')' }}<br>
+                                {{ formatDMYmm($staff->current_rank_date)}}<br>
                                 {{ en2mm($age) }}</td>
                             <td class="border border-black px-4 py-2">{{ $staff->current_division?->name }}</td>
                             @php
@@ -87,5 +100,8 @@
                 </tbody>
             </table>
         </div>
+
+
+
     </div>
 </div>

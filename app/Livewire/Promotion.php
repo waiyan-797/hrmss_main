@@ -68,7 +68,7 @@ class Promotion extends Component
             'order_no' => $this->order_no,
 
         ]);
-        $this->staff->current_rank_id = $this->rank_name;
+        // $this->staff->current_rank_id = $this->rank_name;
         $this->staff->update();
         $this->message = 'Created successfully.';
         $this->close_modal();
@@ -99,7 +99,9 @@ class Promotion extends Component
         $this->previous_rank_name = $promotion->previous_rank_id;
         $this->promotion_date = $promotion->promotion_date;
         $this->order_no = $promotion->order_no;
+        // dd( $this->previous_rank_name);
     }
+   
 
     public function updatepromotion()
     {
@@ -113,7 +115,9 @@ class Promotion extends Component
             'order_no' => $this->order_no,
 
         ]);
-        $this->staff->current_rank_id = $this->rank_name;
+
+        // dd($this->previous_rank_name);
+        // $this->staff->current_rank_id = $this->rank_name;
         $this->staff->update();
         $this->message = 'Updated successfully.';
         $this->close_modal();
@@ -170,7 +174,7 @@ class Promotion extends Component
             });
         }
 
-        $this->previous_rank_name = $this->staff->current_rank_id;
+        // $this->previous_rank_name = $this->staff->current_rank_id;
 
 
         $promotions = $promotionQuery->where('staff_id', $this->staff_id)->with(['staff', 'rank'])

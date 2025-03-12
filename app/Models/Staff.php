@@ -546,4 +546,7 @@ public function labourAtt($year, $month)
     public function salary_paid_by_department(){
         return $this->belongsTo(Department::class, 'salary_paid_by', 'id');
     }
+
+
+   
 }

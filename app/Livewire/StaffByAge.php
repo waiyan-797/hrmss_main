@@ -2,15 +2,23 @@
 
 namespace App\Livewire;
 
+use App\Exports\SSL15;
 use App\Models\Staff;
 use Livewire\Component;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
+
 class StaffByAge extends Component
 {
     public $staffs;
     public $age;
     public $ageTwo;
     public $signID;
+
+    public function go_excel()
+    {
+        return Excel::download(new SSL15($this->age, $this->ageTwo, $this->signID), 'SSL15.xlsx');
+    }
     public function render()
     {
         $now = Carbon::now();
@@ -43,7 +51,7 @@ class StaffByAge extends Component
             'all' => 'အားလုံး',
             'between' => 'နှစ်ကြား',
             '>' => 'နှစ်အထက်',
-            '=' => 'နှစ်',
+            '=' => 'ညီမျှသော',
             '<' => 'နှစ်အောက်',
             default => '',
         };

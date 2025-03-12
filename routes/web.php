@@ -164,6 +164,7 @@ use App\Livewire\Retirement;
 use App\Livewire\Salary;
 use App\Livewire\SortableStaff;
 use App\Livewire\StaffByAge;
+use App\Livewire\StaffGraduate;
 use App\Livewire\StaffInNpt;
 use App\Livewire\StaffReport19;
 use App\Livewire\StaffReport20;
@@ -350,6 +351,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pension_report', PensionReport::class)->name('pension_report');
     Route::get('/pensioner', Pensioner::class)->name('pensioner');
     Route::get('/resignation-list', EmpoyeeRecordReport::class)->name('employee_record_report');
+    Route::get('/staff-graduate',StaffGraduate::class)->name('staff-graduate');
     Route::get('/finance_pension_age62', FinancePensionAge62::class)->name('finance_pension_age62');
 
     Route::get('/religion_report', ReligionReport::class)->name('religion_report');

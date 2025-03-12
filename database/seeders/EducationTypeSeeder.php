@@ -20,8 +20,8 @@ class EducationTypeSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
         $columns = ['id', 'name'];
         $items = [
-            [1, 'ဝိဇ္ဇာဘွဲ့( မဟာဘွဲ့ )'],
-            [2, 'သိပ္ပံဘွဲ့( မဟာဘွဲ့ )'],
+            [1, 'ဝိဇ္ဇာဘွဲ့'],
+            [2, 'သိပ္ပံဘွဲ့'],
             [3, 'နိုင်ငံခြားဘာသာဘွဲ့'],
             [4, 'စီးပွားရေးဘွဲ့'],
             [5, 'အင်ဂျင်နီယာဘွဲ့'],

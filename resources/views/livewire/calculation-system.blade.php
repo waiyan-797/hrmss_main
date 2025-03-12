@@ -45,8 +45,9 @@
                     <tr>
                         <td class="border border-black text-center p-2">၄။</td>
                         <td class="border border-black text-center p-2">နောက်တစ်ဆင့်နိမ့်ရာထူးများ</td>
-                        <td class="border border-black text-center p-2">{{ en2mm($fourth_promotion_points) }}</td>
+                        <td class="border border-black text-center p-2">  {{ en2mm($fourth_promotion_points) }}</td>
                         <td class="border border-black text-center p-2">{{ en2mm($fourth_promotion_points*0.5) }}</td>
+                       
                         <td class="border border-black text-center p-2"></td>
                     </tr>
                     <tr>
@@ -68,9 +69,14 @@
                         <td class="border border-black text-center p-2"></td>
                         <td class="border border-black text-center p-2">ဝန်ထမ်းရမှတ်</td>
                         <td class="border border-black text-center p-2"></td>
-                        <td class="border border-black text-center p-2">{{ en2mm(($first_promotion_points * 3 + $second_promotion_points * 2 + $third_promotion_points * 1 + $fourth_promotion_points * 0.5) * 100 / 
+                        <td class="border border-black text-center p-2">
+                            {{-- {{ en2mm(($first_promotion_points * 3 + $second_promotion_points * 2 + $third_promotion_points * 1 + $fourth_promotion_points * 0.5) * 100 / 
                             (($first_promotion_points * 3 + $second_promotion_points * 2 + $third_promotion_points * 1 + $fourth_promotion_points * 0.5) + 
-                            ((44 - ($first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points)) * 3))) }}
+                            ((44 - ($first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points)) * 3))) }} --}}
+                            {{ en2mm(number_format((($first_promotion_points * 3 + $second_promotion_points * 2 + $third_promotion_points * 1 + $fourth_promotion_points * 0.5) * 100 / 
+                                (($first_promotion_points * 3 + $second_promotion_points * 2 + $third_promotion_points * 1 + $fourth_promotion_points * 0.5) + 
+                                ((44 - ($first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points)) * 3))), 2)) }}
+                            
                         </td>
                         <td class="border border-black text-center p-2"></td>
                     </tr>
