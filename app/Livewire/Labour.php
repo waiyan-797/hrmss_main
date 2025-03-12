@@ -12,6 +12,8 @@ class Labour extends Component
     public $confirm_add = false;
     public $open_staff_report = false;
     public $message = null;
+    public $status;
+
     public $staff_search,
         $staff_name,
         $staff_id = 0;
