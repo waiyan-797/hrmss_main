@@ -118,10 +118,10 @@
                             <br>
                             {{dateDiffYMDWithoutDays($staff->current_rank_date, now())}}
                         </td>
-                        <td>
+                        <td style="white-space: normal; word-wrap: break-word;">
                             {{ $staff->current_division?->name }}
                         </td>
-                        <td>
+                        <td style="white-space: normal; word-wrap: break-word;">
                             @foreach ($staff->staff_educations as $edu)
                                 {{ $edu->education?->name }}
                             @endforeach

@@ -20,19 +20,20 @@
         }
         th {
             background-color: #f2f2f2;
+            
         }
     </style>
 </head>
 <body>
     <div class="table-container">
         <tr>
-            <th colspan="9" style="text-align: center">
+            <th colspan="9" style="text-align: center; font-weight: bold;">
                 ရင်းနှီးမြှုပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန								
 
             </th>
         </tr>
         <tr>
-            <th colspan="9" style="text-align: center">
+            <th colspan="9" style="text-align: center; font-weight: bold;">
                 လက်ရှိရာထူး၏လုပ်သက်အလိုက်ဝန်ထမ်းများစာရင်း
             </th>
         </tr>
@@ -55,7 +56,7 @@
                     <tr>
                         <td>{{ en2mm($loop->index+1) }}</td>
                         <td>{{ $staff->name }}</td>
-                        <td>{{ $staff->currentRank?->name }}</td>
+                        <td >{{ $staff->currentRank?->name }}</td>
                         @php
                             $dob = \Carbon\Carbon::parse($staff->dob);
                             $diff = $dob->diff(\Carbon\Carbon::now());
@@ -74,13 +75,13 @@
                             $age =  $diff->y . ' နှစ် ' .  $diff->m . ' လ';
                         @endphp
                         <td>{{ formatDMYmm($staff->current_rank_date) }}<br>{{ en2mm($age) }}</td>
-                        <td>{{ $staff->current_division?->name }}</td>
+                        <td style="white-space: normal; word-wrap: break-word;">{{ $staff->current_division?->name }}</td>
                         @php
                             $educationNames = $staff->staff_educations
                                 ->map(fn($edu) => $edu->education?->name)
                                 ->implode(', ');
                         @endphp
-                        <td>{{ $educationNames }}</td>
+                        <td style="white-space: normal; word-wrap: break-word;">{{ $educationNames }}</td>
                         <td></td>
                     </tr>
                 @endforeach

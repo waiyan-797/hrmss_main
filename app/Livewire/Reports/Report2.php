@@ -3,7 +3,12 @@
 namespace App\Livewire\Reports;
 
 use App\Exports\A04;
+use App\Models\Ethnic;
+use App\Models\MaritalStatus;
+use App\Models\Rank;
+use App\Models\Religion;
 use App\Models\Staff;
+use App\Models\Gender;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
@@ -12,6 +17,144 @@ use PhpOffice\PhpWord\PhpWord;
 
 class Report2 extends Component
 {
+    public $selectedRankId;
+    public $age;
+    public $ageTwo;
+    public $signID = 'all';
+    public $selectedEthnicId;
+    public $selectedReligionId;
+    public $selectedGenderId;
+    public $selectedMaritalId;
+    public $staffs;
+
+    protected $listeners = [
+        'set-ethnic' => 'setEthnic'
+    ];
+
+    public function mount()
+    {
+        $this->updateStaffs();
+    }
+
+    public function setEthnic($data)
+    {
+        $this->selectedEthnicId = $data['value'];
+        $this->updateStaffs();
+    }
+
+    public function updatedAge()
+    {
+        $this->updateStaffs();
+    }
+
+    public function updatedAgeTwo()
+    {
+        $this->updateStaffs();
+    }
+
+    public function updatedSignID()
+    {
+        $this->updateStaffs();
+    }
+
+    public function updatedSelectedRankId()
+    {
+        $this->updateStaffs();
+    }
+
+    public function updatedSelectedEthnicId()
+    {
+        $this->updateStaffs();
+    }
+
+    public function updatedSelectedReligionId()
+    {
+        $this->updateStaffs();
+    }
+
+    public function updatedSelectedGenderId()
+    {
+        $this->updateStaffs();
+    }
+
+    public function updatedSelectedMaritalId()
+    {
+        $this->updateStaffs();
+    }
+
+    private function updateStaffs()
+    {
+        $query = Staff::query();
+
+        // Apply all filters together
+        if ($this->selectedRankId) {
+            $query->where('current_rank_id', $this->selectedRankId);
+        }
+
+        if ($this->age || $this->signID !== 'all') {
+            switch ($this->signID) {
+                case 'between':
+                    if ($this->age && $this->ageTwo) {
+                        $startDate = now()->subYears($this->ageTwo);
+                        $endDate = now()->subYears($this->age);
+                        $query->whereBetween('current_rank_date', [$startDate, $endDate]);
+                    }
+                    break;
+                case '>':
+                    if ($this->age) {
+                        $date = now()->subYears($this->age);
+                        $query->where('current_rank_date', '<', $date);
+                    }
+                    break;
+                case '=':
+                    if ($this->age) {
+                        $startDate = now()->subYears($this->age)->startOfYear();
+                        $endDate = now()->subYears($this->age)->endOfYear();
+                        $query->whereBetween('current_rank_date', [$startDate, $endDate]);
+                    }
+                    break;
+                case '<':
+                    if ($this->age) {
+                        $date = now()->subYears($this->age);
+                        $query->where('current_rank_date', '>', $date);
+                    }
+                    break;
+            }
+        }
+
+        if ($this->selectedEthnicId) {
+            $query->where('ethnic_id', $this->selectedEthnicId);
+        }
+
+        if ($this->selectedReligionId) {
+            $query->where('religion_id', $this->selectedReligionId);
+        }
+
+        if ($this->selectedGenderId) {
+            $query->where('gender_id', $this->selectedGenderId);
+        }
+
+        if ($this->selectedMaritalId) {
+            if ($this->selectedMaritalId == '1') { // ရှိ
+                $query->whereNotNull('spouse_name');
+            } else { // မရှိ
+                $query->whereNull('spouse_name');
+            }
+        }
+
+        $this->staffs = $query->with([
+            'currentRank', 
+            'ethnic', 
+            'religion',
+            'gender',
+            'current_address_region', 
+            'current_address_township_or_town',
+            'permanent_address_region', 
+            'permanent_address_township_or_town',
+            'children'
+        ])->get();
+    }
+
     public function go_pdf(){
         $staffs = Staff::get();
         $data = [
@@ -22,12 +165,21 @@ class Report2 extends Component
             echo $pdf->output();
         }, 'report_2.pdf');
     }
+
     public function go_excel() 
     {
         return Excel::download(new A04(
-    ), 'A04.xlsx');
+            $this->selectedRankId,
+            $this->age,
+            $this->ageTwo,
+            $this->signID,
+            $this->selectedEthnicId,
+            $this->selectedReligionId,
+            $this->selectedGenderId,
+            $this->selectedMaritalId
+        ), 'A04.xlsx');
     }
-  
+
     public function go_word()
     {
         $staffs = Staff::get();
@@ -100,13 +252,21 @@ class Report2 extends Component
         return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
     }
 
-
     public function render()
     {
-        $staffs = Staff::get();
+        $ranks = Rank::where('is_dica',1)->get();
+        $ethnics = Ethnic::all();
+        $religions = Religion::all();
+        $genders = Gender::all();
+        $maritals = MaritalStatus::all();
+
         return view('livewire.reports.report2', [
-            'staffs' => $staffs,
+            'staffs' => $this->staffs,
+            'ranks' => $ranks,
+            'religions' => $religions,
+            'ethnics' => $ethnics,
+            'maritals' => $maritals,
+            'genders' => $genders,
         ]);
     }
 }
-

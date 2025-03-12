@@ -81,8 +81,8 @@
         @foreach ($staffs as $staff)
         <tr>
             <td style="text-align:center">{{ en2mm($loop?->index + 1) }}</td>
-            <td style="text-align:center">{{ $staff?->name }}</td>
-            <td style="text-align:center">{{ $staff?->current_rank?->name }}</td>
+            <td style="word-wrap:break-word;">{{ $staff?->name }}</td>
+            <td style="text-align:center;word-wrap:break-word;">{{ $staff?->current_rank?->name }}</td>
             @php
             $dob = \Carbon\Carbon::parse($staff->dob);
             $diff = $dob->diff(\Carbon\Carbon::now());

@@ -18,7 +18,11 @@ class CurrentPosition extends Component
     public function go_excel($age = null, $ageTwo = null, $signID = null, $selectedRankId = null, $selectedRankName = null) 
     {
         return Excel::download(new SSL14(
-    ), 'SSL14.xlsx');
+            $this->age,
+            $this->ageTwo,
+            $this->signID,
+            $this->selectedRankId
+        ), 'SSL14.xlsx');
     }
     public function render()
     {

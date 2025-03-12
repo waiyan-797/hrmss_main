@@ -68,10 +68,11 @@
                                     <br>
                                     {{dateDiffYMDWithoutDays(Carbon\Carbon::parse($staff->postings->sortByDesc('from_date')->first()?->from_date)->format('j-n-Y') , now())}}
                             </td>
-                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #000000; font-weight: normal;">
+                            <td style="white-space: normal; word-wrap: break-word; padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #000000; font-weight: normal;">
                                 {{$staff->current_division?->nick_name}}
                             </td>
-                            <td style="padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #000000; font-weight: normal;">
+                            
+                            <td style="white-space: normal; word-wrap: break-word; padding: 8px 16px; text-align: center; font-size: 0.875rem; color: #000000; font-weight: normal;">
                                 @foreach ($staff->staff_educations as $key => $edu)
                                     <div style="margin-bottom: 8px;">
                                         <span>{{ $edu->education?->name }}</span>

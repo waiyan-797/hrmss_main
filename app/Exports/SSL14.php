@@ -22,9 +22,19 @@ class SSL14 implements FromView ,WithStyles
     //     return SSL14::all();
     // }
     public $age, $ageTwo, $signID, $selectedRankId, $staffs, $ranks;
+
+    public function __construct($age = null, $ageTwo = null, $signID = null, $selectedRankId = null)
+    {
+        $this->age = $age;
+        $this->ageTwo = $ageTwo;
+        $this->signID = $signID;
+        $this->selectedRankId = $selectedRankId;
+        $this->ranks = (new Rank())->isDicaAll();
+    }
+
     public function mount()
     {
-        $this->ranks = (new Rank() )->isDicaAll();
+        // $this->ranks = (new Rank())->isDicaAll();
     }
     public function view(): View
     {
@@ -78,41 +88,38 @@ class SSL14 implements FromView ,WithStyles
     public function styles(Worksheet $sheet)
     {
 
-    $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_LEGAL);
+    $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4);
     $sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+
+    //defining margin
+    $sheet->getPageMargins()->setTop(0.75);
+    $sheet->getPageMargins()->setRight(right: 0.18);
+    $sheet->getPageMargins()->setLeft(0.7);
+    $sheet->getPageMargins()->setBottom(0.67);
+
     // Fit to page width
     $sheet->getPageSetup()->setFitToWidth(1);
     $sheet->getPageSetup()->setFitToHeight(0);
-    $sheet->getPageSetup()->setScale(85);
+    $sheet->getPageSetup()->setScale(70);
     $sheet->setShowGridlines(true);
     $highestRow = $sheet->getHighestRow(); // e.g. 19
     $highestColumn = $sheet->getHighestColumn(); // e.g. 'N'
 
-    $sheet->getColumnDimension('A')->setWidth(7);
-    $sheet->getColumnDimension('B')->setWidth(25);
-    $sheet->getColumnDimension('C')->setWidth(25);
-    $sheet->getColumnDimension('D')->setWidth(20);
-    $sheet->getColumnDimension('E')->setWidth(25);
-    $sheet->getColumnDimension('F')->setWidth(25);
-    $sheet->getColumnDimension('G')->setWidth(60);
-    $sheet->getColumnDimension('H')->setWidth(40);
-    $sheet->getColumnDimension('I')->setWidth(20);
+    $sheet->getColumnDimension('A')->setWidth(6.28);
+    $sheet->getColumnDimension('B')->setWidth(26.42);
+    $sheet->getColumnDimension('C')->setWidth(30.71);
+    $sheet->getColumnDimension('D')->setWidth(15.46);
+    $sheet->getColumnDimension('E')->setWidth(16.71);
+    $sheet->getColumnDimension('F')->setWidth(14.42);
+    $sheet->getColumnDimension('G')->setWidth(29.46);
+    $sheet->getColumnDimension('H')->setWidth(36.85);
+    $sheet->getColumnDimension('I')->setWidth(width: 18);
 
 
-    $sheet->getRowDimension(1)->setRowHeight(20);
-    $sheet->getRowDimension(2)->setRowHeight(20);
-    $sheet->getRowDimension(3)->setRowHeight(60);
-    $sheet->getRowDimension(4)->setRowHeight(40);
-    $sheet->getRowDimension(5)->setRowHeight(40);
-    $sheet->getRowDimension(6)->setRowHeight(40);
-    $sheet->getRowDimension(7)->setRowHeight(40);
-    $sheet->getRowDimension(8)->setRowHeight(40);
-    $sheet->getRowDimension(9)->setRowHeight(40);
-    $sheet->getRowDimension(10)->setRowHeight(40);
-    $sheet->getRowDimension(11)->setRowHeight(40);
-    $sheet->getRowDimension(12)->setRowHeight(40);
-    $sheet->getRowDimension(13)->setRowHeight(40);
-    $sheet->getRowDimension(14)->setRowHeight(40);
+    $sheet->getRowDimension(1)->setRowHeight(27);
+    $sheet->getRowDimension(2)->setRowHeight(27);
+    $sheet->getRowDimension(3)->setRowHeight(75);
+
     $sheet->getStyle('A1:I2')->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
@@ -134,14 +141,15 @@ class SSL14 implements FromView ,WithStyles
         ],
         'borders' => [
             'outline' => [
-                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, 
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN, 
             ],
         ],
     ]);
-    $sheet->getStyle('A3')->applyFromArray([
+    $sheet->getStyle('A3:I3')->applyFromArray([
         'font' => [
             'name' => 'Pyidaungsu',
             'size' => 13,
+            'bold' => true,
         ],
         'alignment' => [
             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
@@ -149,7 +157,7 @@ class SSL14 implements FromView ,WithStyles
         ],
         'borders' => [
             'outline' => [
-                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE, 
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN, 
             ],
         ],
     ]);
@@ -157,10 +165,31 @@ class SSL14 implements FromView ,WithStyles
         'font' => [
             'name' => 'Pyidaungsu',
             'size' => 13,
+            'wrapText' => true,
+
         ],
         'alignment' => [
             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Custom alignment for A and B
             'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        ],
+        'borders' => [
+            'allBorders' => [
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                'color' => ['argb' => 'FF000000'], // Black border
+            ],
+        ],
+    ]);
+    $sheet->getStyle("B4:B$highestRow")->applyFromArray([
+        'font' => [
+            'name' => 'Pyidaungsu',
+            'size' => 13,
+            'wrapText' => true,
+
+        ],
+        'alignment' => [
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT, // Custom alignment for A and B
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            'indent' => 1
         ],
         'borders' => [
             'allBorders' => [
