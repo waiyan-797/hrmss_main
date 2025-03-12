@@ -79,9 +79,9 @@
             @foreach ($staffs as $staff)
                 <tr>
                     <td>{{ en2mm($loop->index + 1) }}</td>
-                    <td>{{ $staff->name }}</td>
-                    <td>{{ $staff->staff_no }}</td>
-                    <td>{{ $staff->current_rank?->name }}</td>
+                    <td style="white-space:normal; word-wrap: break-word;">{{ $staff->name }}</td>
+                    <td style="white-space:normal; word-wrap: break-word;">{{ $staff->staff_no }}</td>
+                    <td style="white-space:normal; word-wrap: break-word;">{{ $staff->current_rank?->name }}</td>
                     @php
                     $dob = \Carbon\Carbon::parse($staff->dob);
                     $diff = $dob->diff(\Carbon\Carbon::now());
@@ -102,7 +102,7 @@
                     $age = '(' . $diff->y . ' )နှစ် ' . '(' . $diff->m . ' )လ';
                     @endphp
                     <td>{{  ' (' . en2mm($join_date->format('d-m-Y')) . ')'  }}<br>{{ en2mm($age)  }}</td>
-                    <td>
+                    <td style="white-space:normal; word-wrap: break-word;">
                         @foreach ($staff->staff_educations as $education)
                             <div>{{ $education->education?->name }}</div>
                         @endforeach
@@ -110,8 +110,12 @@
                     <td>{{ $staff->gender?->name }}</td>
                     <td>{{ $staff->ethnic?->name }}</td>
                     <td>{{ $staff->religion?->name }}</td>
-                    <td>{{ $staff->current_address }}</td>
-                    <td>{{ $staff->permanent_address }}</td>
+                    <td style="white-space:normal; word-wrap: break-word;" class="border border-black text-center p-2">
+                                                {{$staff->current_address_house_no . '၊' . $staff->current_address_street . '၊' . $staff->current_address_ward . '၊' . $staff->current_address_region?->name . '၊' . $staff->current_address_township_or_town?->name }}
+                                            </td>
+                                            <td style="white-space:normal; word-wrap: break-word;" class="border border-black text-center p-2">
+                                                {{$staff->current_address_house_no . '၊' . $staff->permanent_address_street . '၊' . $staff->permanent_address_ward . '၊' . $staff->permanent_address_region?->name . '၊' . $staff->permanent_address_township_or_town?->name }}
+                                            </td>
                     <td>{{ en2mm($staff->children->where('gender_id', 1)->count()) }}</td>
                     <td>{{ en2mm($staff->children->where('gender_id', 2)->count()) }}</td>
                     <td>{{ $staff->spouse_name ? 'ရှိ' : '' }}</td>
@@ -119,8 +123,8 @@
                     <td>{{ $staff->health_condition }}</td>
                     <td>{{ $staff->blood_type?->name }}</td>
                     <td>{{ $staff->height_feet }}' {{ $staff->height_inch }}"</td>
-                    <td>{{ $staff->habit }}</td>
-                    <td>
+                    <td style="white-space:normal; word-wrap: break-word;">{{ $staff->habit }}</td>
+                    <td style="white-space:normal; word-wrap: break-word;">
                         @foreach ($staff->staff_languages as $lang)
                             <div>{{ $lang?->language?->name }}</div>
                         @endforeach
