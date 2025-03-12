@@ -97,96 +97,66 @@ class StaffList2 extends Component
         $second_promotion = $first_promotion ? $this->promotion_stages($first_promotion->previous_rank_id) : null;
         $third_promotion = $second_promotion ? $this->promotion_stages($second_promotion->previous_rank_id) : null;
         $fourth_promotion = $third_promotion ? $this->promotion_stages($third_promotion->previous_rank_id) : null;
-        $today = \Carbon\Carbon::now();
-        $first_promotion_points = $this->calc_points(dateDiff($first_promotion?->promotion_date, $today));
-        $second_promotion_points = $second_promotion ? $this->calc_points(dateDiff($second_promotion?->promotion_date, \Carbon\Carbon::parse($first_promotion?->promotion_date)->subDay())) : 0;
-        $third_promotion_points = $third_promotion ? $this->calc_points(dateDiff($third_promotion?->promotion_date, \Carbon\Carbon::parse($second_promotion?->promotion_date)->subDay())) : 0;
-        $third_promotion_date = $third_promotion ? \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay() : \Carbon\Carbon::parse($staff->government_staff_started_date)->subDay();
-        $fourth_promotion_points = $fourth_promotion ? $this->calc_points(dateDiff($staff->government_staff_started_date, $third_promotion_date)) : 0;
-        $total_points = $first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points;
+            $today = \Carbon\Carbon::now();
+            $first_promotion_points = $this->calc_points(dateDiff($first_promotion?->promotion_date, $today));
+            $second_promotion_points = $second_promotion ? $this->calc_points(dateDiff($second_promotion?->promotion_date, \Carbon\Carbon::parse($first_promotion?->promotion_date)->subDay())) : 0;
+            $third_promotion_points = $third_promotion ? $this->calc_points(dateDiff($third_promotion?->promotion_date, \Carbon\Carbon::parse($second_promotion?->promotion_date)->subDay())) : 0;
+            // $fourth_promotion_points = $fourth_promotion ? $this->calc_points(dateDiff($fourth_promotion?->promotion_date, \Carbon\Carbon::parse($third_promotion?->promotion_date)->subDay())) : 0;
+            $third_promotion_date = $third_promotion ? \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay() : \Carbon\Carbon::parse($staff->government_staff_started_date)->subDay();
+            $fourth_promotion_points = $fourth_promotion ? $this->calc_points(dateDiff($staff->government_staff_started_date, $third_promotion_date)) : 0;
+            $total_points = $first_promotion_points + $second_promotion_points + $third_promotion_points + $fourth_promotion_points;
+    
+            // Add row data
+            $table->addRow();
+            $table->addCell(2000)->addText(1); // Serial number
+            $table->addCell(4000)->addText($staff->name); // Name, Rank, Department
+            $table->addCell(2000)->addText( $first_promotion ? $first_promotion->rank->name : ''); // Current Rank
+            $table->addCell(2000)->addText($second_promotion ? $second_promotion->rank->name : ''); // First Promotion Rank
+            
+            $table->addCell(2000)->addText($third_promotion ? $third_promotion->rank->name : ''); // Third Promotion Rank
+            $table->addCell(2000)->addText($fourth_promotion ? $fourth_promotion->rank->name : ''); // Total Points
+            $table->addCell(2000)->addText('');
 
-        // Add data row with styling
-        $table->addRow();
-        $table->addCell(800)->addText(en2mm(1),['size' => 12],['alignment' => Jc::CENTER,'spaceAfter'=>0],); // Serial number
-        
-        // Add staff information in a single cell with styling
-        $staffCell = $table->addCell(4000);
-        $staffCell->addText($staff->name, ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0, 'lineSpacing' => 1.15]);
-        $staffCell->addText($staff->currentRank->name, ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0, 'lineSpacing' => 1.15]);
-        $staffCell->addText($staff->current_department->name, ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0, 'lineSpacing' => 1.15]);
-        
-        // Current Rank with styling
-        $cell = $table->addCell(2200);
-        if ($first_promotion) {
-            $cell->addText($first_promotion->rank->name, ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0]);
-        }
+            $table->addRow();
+            $table->addCell(2000)->addText(''); // Serial number
+            $table->addCell(4000)->addText( $staff->currentRank->name ); // Name, Rank, Department
+            $table->addCell(2000)->addText( $first_promotion ? en2mm(formatDMYmm($first_promotion->promotion_date)) .' မှ '. en2mm(formatDMYmm($today)) .' ထိ ' : '' ); // Current Rank
+            $table->addCell(2000)->addText($second_promotion ? en2mm(formatDMYmm($second_promotion->promotion_date)) .' မှ '. en2mm(formatDMYmm(\Carbon\Carbon::parse($first_promotion->promotion_date)->subDay())) .' ထိ ' : ''  ); // First Promotion Rank
+            $table->addCell(2000)->addText( $third_promotion ? en2mm(formatDMYmm($third_promotion->promotion_date)) .' မှ '. en2mm(formatDMYmm(\Carbon\Carbon::parse($second_promotion->promotion_date)->subDay())) .' ထိ ' : ''  ); // Second Promotion Rank
+            $table->addCell(2000)->addText(  $fourth_promotion ? en2mm(formatDMYmm($fourth_promotion->promotion_date)) .' မှ '. en2mm(formatDMYmm(\Carbon\Carbon::parse($third_promotion->promotion_date)->subDay())) .' ထိ ' : ''); // Third Promotion Rank
+            $table->addCell(2000)->addText(''); 
+            $table->addRow();
+            $table->addCell(2000)->addText(''); // Serial number
+            $table->addCell(4000)->addText( $staff->current_department->name); // Name, Rank, Department
+            $table->addCell(2000)->addText( $first_promotion ? dateDiffYMD($first_promotion->promotion_date, $today) : ''  ); // Current Rank
+            $table->addCell(2000)->addText($second_promotion ? dateDiffYMD($second_promotion->promotion_date, \Carbon\Carbon::parse($first_promotion->promotion_date)->subDay()) : ''  ); // First Promotion Rank
+            $table->addCell(2000)->addText(  $third_promotion ? dateDiffYMD($third_promotion->promotion_date, \Carbon\Carbon::parse($second_promotion->promotion_date)->subDay()) : ''   ); // Second Promotion Rank
+            $table->addCell(2000)->addText(  $fourth_promotion ? dateDiffYMD($staff->government_staff_started_date, \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay()) : ''); // Third Promotion Rank
+            $table->addCell(2000)->addText(''); 
+            
 
-        // First Previous Rank with styling
-        $cell = $table->addCell(2200);
-        if ($second_promotion) {
-            $cell->addText($second_promotion->rank->name,['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0]);
-        }
 
-        // Second Previous Rank with styling
-        $cell = $table->addCell(2200);
-        if ($third_promotion) {
-            $cell->addText($third_promotion->rank->name, ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0]);
-        }
+            // <tr>
+            //             <td class="border border-black text-center p-2"></td>
+            //             <td class="border border-black text-center p-2"></td>
+            //             <td class="border border-black text-center p-2">{{ en2mm($first_promotion_points * 3) }}</td>
+            //             <td class="border border-black text-center p-2">{{ en2mm($second_promotion_points*2) }}</td>
+            //             <td class="border border-black text-center p-2">{{ en2mm($third_promotion_points*1) }}</td>
+            //             <td class="border border-black text-center p-2">{{ en2mm($fourth_promotion_points*0.5) }}</td>
+            //             <td class="border border-black text-center p-2">{{ en2mm($total_points) }}</td>
+            //         </tr>
 
-        // Third Previous Rank with styling
-        $cell = $table->addCell(2200);
-        if ($fourth_promotion) {
-            $cell->addText($fourth_promotion->rank->name, ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0]);
-        }
 
-        // Total Points column
-        $table->addCell(1800)->addText('', [], ['spaceAfter' => 0]);
+            $table->addRow();
+            $table->addCell(2000)->addText(''); // Serial number
+            $table->addCell(2000)->addText(''); // Serial number
+            $table->addCell(4000)->addText( en2mm($first_promotion_points * 3) ); // Name, Rank, Department
+            $table->addCell(2000)->addText( en2mm($second_promotion_points*2) ); // Current Rank
+           
 
-        // Date ranges and duration row
-        $table->addRow();
-        $table->addCell(800)->addText('', [], ['spaceAfter' => 0]);
-        $table->addCell(4000)->addText('', [], ['spaceAfter' => 0]);
-        
-        // Current Rank dates and duration
-        $cell = $table->addCell(2200);
-        if ($first_promotion) {
-            $cell->addText(en2mm(formatDMYmm($first_promotion->promotion_date)) .' မှ '. en2mm(formatDMYmm($today)) .' ထိ ', ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0]);
-            $cell->addText(dateDiffYMD($first_promotion->promotion_date, $today), ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0]);
-        }
-
-        // First Previous Rank dates and duration
-        $cell = $table->addCell(2200);
-        if ($second_promotion) {
-            $cell->addText(en2mm(formatDMYmm($second_promotion->promotion_date)) .' မှ '. en2mm(formatDMYmm(\Carbon\Carbon::parse($first_promotion->promotion_date)->subDay())) .' ထိ ', ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0]);
-            $cell->addText(dateDiffYMD($second_promotion->promotion_date, \Carbon\Carbon::parse($first_promotion->promotion_date)->subDay()), ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0]);
-        }
-
-        // Second Previous Rank dates and duration
-        $cell = $table->addCell(2200);
-        if ($third_promotion) {
-            $cell->addText(en2mm(formatDMYmm($third_promotion->promotion_date)) .' မှ '. en2mm(formatDMYmm(\Carbon\Carbon::parse($second_promotion->promotion_date)->subDay())) .' ထိ ', ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0]);
-            $cell->addText(dateDiffYMD($third_promotion->promotion_date, \Carbon\Carbon::parse($second_promotion->promotion_date)->subDay()), ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0]);
-        }
-
-        // Third Previous Rank dates and duration
-        $cell = $table->addCell(2200);
-        if ($fourth_promotion) {
-            $cell->addText(en2mm(formatDMYmm($staff->government_staff_started_date)) .' မှ '. en2mm(formatDMYmm(\Carbon\Carbon::parse($third_promotion->promotion_date)->subDay())) .' ထိ ', ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0]);
-            $cell->addText(dateDiffYMD($staff->government_staff_started_date, \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay()), ['size' => 12], ['alignment' => Jc::LEFT, 'spaceAfter' => 0]);
-        }
-
-        // Empty cell for total
-        $table->addCell(1800)->addText('', [], ['spaceAfter' => 0]);
-
-        // Points row with styling
-        $table->addRow();
-        $table->addCell(800)->addText('', [], ['alignment' => Jc::CENTER, 'spaceAfter' => 0]);
-        $table->addCell(2000)->addText('ပေါင်း', ['bold'=>true, 'size' => 12], ['alignment' => Jc::CENTER, 'spaceAfter' => 0]);
-        $table->addCell(2200)->addText(en2mm($first_promotion_points * 3), ['bold' => true, 'size' => 12], ['alignment' => Jc::CENTER, 'spaceAfter' => 0]);
-        $table->addCell(2200)->addText(en2mm($second_promotion_points*2), ['bold' => true, 'size' => 12], ['alignment' => Jc::CENTER, 'spaceAfter' => 0]);
-        $table->addCell(2200)->addText(en2mm($third_promotion_points*1), ['bold' => true, 'size' => 12], ['alignment' => Jc::CENTER, 'spaceAfter' => 0]);
-        $table->addCell(2200)->addText(en2mm($fourth_promotion_points*0.5), ['bold' => true, 'size' => 12], ['alignment' => Jc::CENTER, 'spaceAfter' => 0]);
-        $table->addCell(1800)->addText(en2mm($total_points), ['bold' => true, 'size' => 12], ['alignment' => Jc::CENTER, 'spaceAfter' => 0]);
+            $table->addCell(4000)->addText( en2mm($third_promotion_points*1)); // Name, Rank, Department
+            $table->addCell(2000)->addText( en2mm($fourth_promotion_points*0.5) ); // Current Rank
+            $table->addCell(2000)->addText( en2mm($total_points) ); // Current Rank
         // Save Word file
         $fileName = 'staff_list_report.docx';
         $filePath = storage_path('app/' . $fileName);
@@ -230,6 +200,7 @@ class StaffList2 extends Component
         $first_promotion_points = $this->calc_points(dateDiff($first_promotion?->promotion_date, $today));
         $second_promotion_points = $second_promotion ? $this->calc_points(dateDiff($second_promotion->promotion_date, \Carbon\Carbon::parse($first_promotion->promotion_date)->subDay())) : 0;
         $third_promotion_points = $third_promotion ? $this->calc_points(dateDiff($third_promotion->promotion_date, \Carbon\Carbon::parse($second_promotion->promotion_date)->subDay())) : 0;
+        // $fourth_promotion_points = $fourth_promotion ? $this->calc_points(dateDiff($fourth_promotion->promotion_date, \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay())) : 0;
         $third_promotion_date = $third_promotion ? \Carbon\Carbon::parse($third_promotion->promotion_date)->subDay() : \Carbon\Carbon::parse($staff->government_staff_started_date)->subDay();
         $fourth_promotion_points = $fourth_promotion ? $this->calc_points(dateDiff($staff->government_staff_started_date, $third_promotion_date)) : 0;
 
