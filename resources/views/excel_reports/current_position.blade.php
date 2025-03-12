@@ -75,7 +75,7 @@
                             $age =  $diff->y . ' နှစ် ' .  $diff->m . ' လ';
                         @endphp
                         <td>{{ formatDMYmm($staff->current_rank_date) }}<br>{{ en2mm($age) }}</td>
-                        <td style="white-space: normal; word-wrap: break-word;">{{ $staff->current_division?->name }}</td>
+                        <td>{{ $staff->current_division?->name }}</td>
                         @php
                             $educationNames = $staff->staff_educations
                                 ->map(fn($edu) => $edu->education?->name)
