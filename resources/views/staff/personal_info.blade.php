@@ -494,9 +494,3 @@ class="block w-full mt-1"
 
     
 </div>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_green.css">
-<script>
-flatpickr("#dob, #military_join_date, #military_gazetted_date, #military_leave_date,#veteran_date", 
-{ dateFormat: "d-m-Y" });
-</script>
