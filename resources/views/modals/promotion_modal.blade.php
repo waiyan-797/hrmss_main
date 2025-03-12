@@ -36,8 +36,8 @@
             </div>
 
             <div class="mb-4">
-                <label for="promotion_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ရာထူးတိုးသည့်နေ့ (လ ၊ ရက် ၊ နှစ်)</label>
-                <x-text-input wire:model="promotion_date" id="promotion_date" name="promotion_date" type="date" class="mt-1 block w-full"/>
+                <label for="promotion_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">ရာထူးတိုးသည့်နေ့ (ရက် ၊ လ ၊ နှစ်)</label>
+                <x-date-picker wire:model="promotion_date" id="promotion_date" name="promotion_date" class="mt-1 block w-full"/>
 
                 @error('promotion_date') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
             </div>

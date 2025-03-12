@@ -10,14 +10,14 @@
         <x-input-error class="mt-2" :messages="$errors->get('current_rank_id')" />
     </div>
     <div>
-        <x-input-label for="လက်ရှိရာထူးရသည့်နေ့" :value="__('လက်ရှိရာထူးရသည့်နေ့ (လ ၊ ရက် ၊ နှစ်)')" />
-        <x-text-input wire:model="current_rank_date" id="current_rank_date" type="date" class="mt-1 block w-full" required/>
+        <x-input-label for="လက်ရှိရာထူးရသည့်နေ့" :value="__('လက်ရှိရာထူးရသည့်နေ့ (ရက် ၊ လ ၊ နှစ်)')" />
+        <x-date-picker wire:model="current_rank_date" id="current_rank_date" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('current_rank_date')" />
     </div>
 
     <div>
-        <x-input-label for="ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်‌နေ့" :value="__('ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်‌နေ့  (လ ၊ ရက် ၊ နှစ်)')" />
-        <x-text-input wire:model="government_staff_started_date" id="government_staff_started_date" type="date" class="mt-1 block w-full"/>
+        <x-input-label for="ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်‌နေ့" :value="__('ဝန်ထမ်းအဖြစ်စတင်ခန့်အပ်သည့်‌နေ့  (ရက် ၊ လ ၊ နှစ်)')" />
+        <x-date-picker wire:model="government_staff_started_date" id="government_staff_started_date" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('government_staff_started_date')" />
     </div>
 
@@ -36,8 +36,8 @@
     </div>
 
     <div>
-        <x-input-label for="DICA ရောက်ရှိရက်စွဲ" :value="__('DICA ရောက်ရှိရက်စွဲ (လ ၊ ရက် ၊ နှစ်)')" />
-        <x-text-input wire:model="join_date" id="join_date" class="mt-1 block w-full" type="date" required/>
+        <x-input-label for="DICA ရောက်ရှိရက်စွဲ" :value="__('DICA ရောက်ရှိရက်စွဲ (ရက် ၊ လ ၊ နှစ်)')" />
+        <x-date-picker wire:model="join_date" id="join_date" class="mt-1 block w-full" required/>
         <x-input-error class="mt-2" :messages="$errors->get('join_date')" />
     </div>
 
@@ -58,8 +58,8 @@
         <x-input-error class="mt-2" :messages="$errors->get('current_division_id')" />
     </div>
     <div>
-        <x-input-label for="လက်ရှိဌာနခွဲရောက်ရှိရက်စွဲ" :value="__('လက်ရှိဌာနခွဲရောက်ရှိရက်စွဲ(လ ၊ ရက် ၊ နှစ်)')" />
-        <x-text-input wire:model="current_division_join_date" id="current_division_join_date" class="mt-1 block w-full" type="date" />
+        <x-input-label for="လက်ရှိဌာနခွဲရောက်ရှိရက်စွဲ" :value="__('လက်ရှိဌာနခွဲရောက်ရှိရက်စွဲ(ရက် ၊ လ ၊ နှစ်)')" />
+        <x-date-picker wire:model="current_division_join_date" id="current_division_join_date" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('current_division_join_date')" />
     </div>
 
@@ -172,8 +172,8 @@
         <x-input-error class="mt-2" :messages="$errors->get('current_increment_time')" />
     </div>
     <div>
-        <x-input-label for="နောက်ဆုံးနှစ်တိုးတိုးသည့်နေ့" :value="__('နောက်ဆုံးနှစ်တိုးတိုးသည့်နေ့(လ ၊ ရက် ၊ နှစ်)')" />
-        <x-text-input wire:model="last_increment_date" id="last_increment_date" type="date" class="mt-1 block w-full"/>
+        <x-input-label for="နောက်ဆုံးနှစ်တိုးတိုးသည့်နေ့" :value="__('နောက်ဆုံးနှစ်တိုးတိုးသည့်နေ့(ရက် ၊ လ ၊ နှစ်)')" />
+        <x-date-picker wire:model="last_increment_date" id="last_increment_date" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('last_increment_date')" />
     </div>
 </div>
