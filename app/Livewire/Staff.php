@@ -23,9 +23,8 @@ class Staff extends Component
         public $open_staff_report = false;
         public $message = null;
         public $staff_search, $staff_name, $staff_id = 0;
-        public $selectedRank,$selectedDivision;
-        public$selectedRetireType,$selectedPensionType = null;
-        // public $retire_type;
+        public $selectedRank,$selectedDivision,$selectedRetireType;
+        // public $retire_type_filter = null;
         public $retire_type_filter = false;
 
         public $retire_type;
@@ -126,7 +125,6 @@ class Staff extends Component
     public function render()
     {
        
-       
     $staffQuery = ModelsStaff::with(['currentRank', 'current_department', 'current_division'])
     ->where('status_id', $this->status)
     ->when(Auth::user()->role_id != 2 && Auth::user()->role_id != 3, function ($q) {
@@ -166,9 +164,6 @@ class Staff extends Component
         if ($this->selectedRetireType) {
             $staffQuery->where('retire_type_id', $this->selectedRetireType);
         }
-        if ($this->retire_type_filter && $this->selectedRetireType == 5 && $this->selectedPensionType) {
-            $staffQuery->where('pension_type_id', $this->selectedPensionType);
-        }
 
         // Apply search filter if search query is present
         if ($this->staff_search) {
@@ -187,7 +182,7 @@ class Staff extends Component
             'ranks' => Rank::where('is_dica',1)->get(),
             'divisions' => Division::all(),
             'retire_type' => RetireType::all(),
-            'retire_type_filter' => ModelsStaff::whereNotNull('retire_type_id')->get(),
+'retire_type_filter' => ModelsStaff::whereNotNull('retire_type_id')->get(),
         ]);
     }
 

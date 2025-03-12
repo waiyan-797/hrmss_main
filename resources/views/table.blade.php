@@ -36,43 +36,34 @@
         <div class="flex flex-row gap-3">
 
             @if (isset($status) && $status == 5)
-            <div class="relative">
-                {{-- Division --}}
-                <x-select wire:model.live="{{ $selectedDivision }}" :values="$divisions" id="{{ $selectedDivision }}" class="w-52"
-                    placeholder='ဌာနခွဲရွေးပါ'/>
-            </div>
-        
-            {{-- Rank --}}
-            <div class="relative">
-                <x-select wire:model.live="{{ $selectedRank }}" :values="$ranks" id="{{ $selectedRank }}"
-                    placeholder='ရာထူးရွေးပါ' />
-            </div>
-        
-            {{-- Retire Checkbox --}}
-            <div class="relative flex items-center space-x-2">
-                <input type="checkbox" wire:model.live="retire_type_filter" id="retire_type_filter"
-                    class="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
-                <label for="retire_type_filter" class="text-sm text-white"> ပြုန်းတီး</label>
-            </div>
-        
-            {{-- Retire Type --}}
-            @if ($retire_type_filter)
                 <div class="relative">
-                    <x-select wire:model.live="selectedRetireType" :values="$retire_type" id="selectedRetireType" placeholder='ပြုန်းတီးရွေးပါ' />
+                    {{-- Division --}}
+                    <x-select wire:model.live="{{ $selectedDivision }}" :values="$divisions" id="{{ $selectedDivision }}"
+                        placeholder='ဌာနခွဲ' />
                 </div>
-                {{-- <div class="relative text-white">
-                    Selected Retire Type ID: {{ var_dump($selectedRetireType) }}
-                </div> --}}
+
+                {{-- Rank --}}
+                <div class="relative">
+                    <x-select wire:model.live="{{ $selectedRank }}" :values="$ranks" id="{{ $selectedRank }}"
+                        placeholder='ရာထူးများအားလုံး' />
+                </div>
+
+                {{-- Retire Checkbox --}}
+                <div class="relative flex items-center space-x-2">
+                    <input type="checkbox" wire:model.live="retire_type_filter" id="retire_type_filter"
+                        class="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                    <label for="retire_type_filter" class="text-sm text-white"> ပြုန်းတီး</label>
+                </div>
+
+                {{-- Retire Type --}}
+                @if ($retire_type_filter)
+                <div class="relative">
+                    <x-select wire:model.live="selectedRetireType" :values="$retire_type"
+                        id="selectedRetireType" placeholder='ပြုန်းတီး' />
+                </div>
             @endif
-        
-            {{-- Pension Type --}}
-            @if ($retire_type_filter && $selectedRetireType == 5)
-            <div class="relative">
-                <x-select wire:model.live="selectedPensionType" :values="$pension_type"
-                    id="selectedPensionType" placeholder='ပင်စင်ရွေးပါ' />
-            </div>
-        @endif
-        @endif
+
+            @endif
             <div class="relative">
                 <div
                     class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">

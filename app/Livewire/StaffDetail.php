@@ -2238,7 +2238,8 @@ class StaffDetail extends Component
             $this->results = [];
         }
     }
-    public function selectValue($value)
+    
+      public function selectValue($value)
     {
         $this->selectedValue = $value;
         $this->search = ''; // Clear search input after selection

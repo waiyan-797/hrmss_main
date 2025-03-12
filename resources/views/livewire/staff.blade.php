@@ -79,7 +79,6 @@
                     'retire_type_filter' => $retire_type_filter,
                     'selectedDivision'=> 'selectedDivision',
                     'selectedRetireType'=> 'selectedRetireType',
-                    'selectedPensionType'=> 'selectedPensionType',
                     'ranks_id'=> 'ranks',
                     'divisions_id'=> 'divisions',
                     'columns' => array_filter([
@@ -98,14 +97,9 @@
                 if ($status == 5) {
                     $tableData['ranks'] = \App\Models\Rank::where('is_dica', 1)->get();
                     $tableData['divisions'] = \App\Models\Division::all();
-                    
                 }
                 if ($status == 5 && $retire_type_filter) {
                     $tableData['retire_type']= \App\Models\RetireType::all();
-                    $tableData['selectedRetireType']= $selectedRetireType;
-                }
-                if ($status ==5 && $retire_type_filter && $selectedRetireType == 5){
-                    $tableData['pension_type']= \App\Models\PensionType::all();
                 }
             @endphp
 
