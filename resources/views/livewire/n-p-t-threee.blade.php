@@ -14,8 +14,8 @@
             </h2>
 
             <div>
-                <div >
-                    
+                <div>
+
                 </div>
             </div>
 
@@ -35,64 +35,64 @@
 
                     <tbody>
                         @foreach ($first_payscales as $payscale)
-                                                <tr>
-                                                    <td class="border border-black p-2 text-center">{{en2mm(++$count)}}</td>
-                                                    <td class="border border-black p-2 text-start">
-                                                        @foreach($payscale->ranks as $rank)
-                                                            {{ $rank->name1 ? $rank->name1 . '/' . $rank->name2 : $rank->name }}
-                                                            @if (!$loop->last)
-                                                                {{ "/" }}
-                                                            @endif
-                                                        @endforeach
-                                                    </td>
-                                                    <td class="border border-black p-2 text-center">{{en2mm(
-                                $payscale->staff->where("current_division_id", 26)
-                                    ->where('marital_status_id', 6)->count()
-                            )}}</td>
-                                                    <td class="border border-black p-2 text-center">{{en2mm(
-                                $payscale->staff->where("current_division_id", 26)
-                                    ->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)
-                                    ->count()
-                            )}}</td>
-                                                    <td class="border border-black p-2 text-center">{{en2mm(
-                                $payscale->staff->where("current_division_id", 26)
-                                    ->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)
-                                    ->count()
-                            )}}</td>
+                            <tr>
+                                <td class="border border-black p-2 text-center">{{ en2mm(++$count) }}</td>
+                                <td class="border border-black p-2 text-start">
+                                    @foreach ($payscale->ranks as $rank)
 
-                                                    <td class="border border-black p-2 text-center">
+                                        {{ $rank->name1 ? $rank->name1 . ' / ' . $rank->name2 : $rank->name }}
+                                        @if (!$loop->last)
+                                             @break
+                                        @endif
+                                    @endforeach
+                                </td>
+                                <td class="border border-black p-2 text-center">
+                                    {{ en2mm($payscale->staff->where('current_division_id', 26)->where('marital_status_id', 6)->count()) }}
+                                </td>
+                                <td class="border border-black p-2 text-center">
+                                    {{ en2mm(
+                                        $payscale->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)->count(),
+                                    ) }}
+                                </td>
+                                <td class="border border-black p-2 text-center">
+                                    {{ en2mm(
+                                        $payscale->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)->count(),
+                                    ) }}
+                                </td>
+
+                                <td class="border border-black p-2 text-center">
 
 
-                                                        {{ en2mm($payscale->staff->where("current_division_id", 26)->count()) }}
-                                                    </td>
+                                    {{ en2mm($payscale->staff->where('current_division_id', 26)->count()) }}
+                                </td>
 
-                                                </tr>
+                            </tr>
                         @endforeach
                         <tr class="font-bold">
                             <td class="border border-black text-center p-2"></td>
                             <td class="border border-black text-center p-2">အရာထမ်းပေါင်း</td>
                             <td class="border border-black text-center p-2">
                                 {{ en2mm(
-    $first_payscales->sum(
-        fn($p) => $p->staff->where('current_division_id', 26)->where('marital_status_id', 6)->count(),
-    ),
-) }}
+                                    $first_payscales->sum(
+                                        fn($p) => $p->staff->where('current_division_id', 26)->where('marital_status_id', 6)->count(),
+                                    ),
+                                ) }}
                             </td>
 
                             <td class="border border-black text-center p-2">
                                 {{ en2mm(
-    $first_payscales->sum(
-        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)->count(),
-    ),
-) }}
+                                    $first_payscales->sum(
+                                        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)->count(),
+                                    ),
+                                ) }}
                             </td>
 
                             <td class="border border-black  p-2 text-center">
                                 {{ en2mm(
-    $first_payscales->sum(
-        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)->count(),
-    ),
-) }}
+                                    $first_payscales->sum(
+                                        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)->count(),
+                                    ),
+                                ) }}
                             </td>
 
 
@@ -103,74 +103,81 @@
 
                             </td>
 
-
-
-
-
                         </tr>
 
                         @foreach ($second_payscales as $payscale)
-                                                <tr>
-                                                    <td class="border border-black p-2 text-center">{{en2mm(++$count)}}</td>
-                                                    <td class="border border-black p-2">
-                                                        @foreach($payscale->ranks as $rank)
-                                                            {{ $rank->name }} 
-                                                            @if (!$loop->last)
-                                                                {{ "/" }}
-                                                            @endif
-                                                        @endforeach
-                                                    </td>
-                                                    <td class="border border-black p-2 text-center">{{en2mm(
-                                $payscale->staff->where("current_division_id", 26)
-                                    ->where('marital_status_id', 6)->count()
-                            )}}</td>
-                                                    <td class="border border-black p-2 text-center">{{en2mm(
-                                $payscale->staff->where("current_division_id", 26)
-                                    ->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)
-                                    ->count()
-                            )}}</td>
-                                                    <td class="border border-black p-2 text-center">{{en2mm(
-                                $payscale->staff->where("current_division_id", 26)
-                                    ->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)
-                                    ->count()
-                            )}}</td>
+                            <tr>
+                                <td class="border border-black p-2 text-center">{{ en2mm(++$count) }}</td>
+                                <td class="border border-black p-2">
+                                    @foreach ($payscale->ranks as $rank)
+                                    @if($rank->name == 'အငယ်တန်းစာရေး')
+                                    {{'အငယ်တန်းစာရေး/စာရင်းကိုင်(၄)/စက်ပြင်(၄)' }}
+                                        @break
+                                    @elseif($rank->name == 'ဒုတိယဦးစီးမှူး')
+                                    {{'ဒုတိယဦးစီးမှူး/ဌာနခွဲစာရေး/စာရင်းကိုင်(၂)' }}
+                                        @break
+                                    @else
+                                        {{$rank->name}}
+                                    @endif
+                                        @if($rank->name == 'အကြီးတန်းစာ‌ရေး')
+                                            {{'/ဓါတ်ပုံကျွမ်းကျင်(၃)/ဗွီဒီယိုကျွမ်းကျင်(၃)' }}
+                                        @endif
+                                       
+                                        @if (!$loop->last)
+                                            {{ '/' }}
+                                        @endif
+                                    @endforeach
+                                </td>
+                                <td class="border border-black p-2 text-center">
+                                    {{ en2mm($payscale->staff->where('current_division_id', 26)->where('marital_status_id', 6)->count()) }}
+                                </td>
+                                <td class="border border-black p-2 text-center">
+                                    {{ en2mm(
+                                        $payscale->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)->count(),
+                                    ) }}
+                                </td>
+                                <td class="border border-black p-2 text-center">
+                                    {{ en2mm(
+                                        $payscale->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)->count(),
+                                    ) }}
+                                </td>
 
-                                                    <td class="border border-black p-2 text-center">
+                                <td class="border border-black p-2 text-center">
 
 
-                                                        {{ en2mm($payscale->staff->where("current_division_id", 26)->count()) }}
-                                                    </td>
-                                                    {{-- <td class="border border-black p-2">
+                                    {{ en2mm($payscale->staff->where('current_division_id', 26)->count()) }}
+                                </td>
+                                {{-- <td class="border border-black p-2">
 
                                                     </td> --}}
 
-                                                </tr>
+                            </tr>
                         @endforeach
                         <tr class="font-bold">
                             <td class="border border-black text-center p-2"></td>
                             <td class="border border-black text-center p-2">အမှုထမ်းပေါင်း</td>
                             <td class="border border-black  p-2 text-center">
                                 {{ en2mm(
-    $first_payscales->sum(
-        fn($p) => $p->staff->where('current_division_id', 26)->where('marital_status_id', 6)->count(),
-    ),
-) }}
+                                    $first_payscales->sum(
+                                        fn($p) => $p->staff->where('current_division_id', 26)->where('marital_status_id', 6)->count(),
+                                    ),
+                                ) }}
                             </td>
 
                             <td class="border border-black  p-2 text-center">
                                 {{ en2mm(
-    $first_payscales->sum(
-        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)->count(),
-    ),
-) }}
+                                    $first_payscales->sum(
+                                        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)->count(),
+                                    ),
+                                ) }}
                             </td>
 
                             <td class="border border-black  p-2 text-center">
                                 {{ en2mm(
-    $first_payscales->sum(
-        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)->count(),
-    ),
-) }}
+                                    $first_payscales->sum(
+                                        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)->count(),
+                                    ),
+                                ) }}
                             </td>
 
 
@@ -194,46 +201,46 @@
                             <td class="border border-black text-center p-2">စုစုပေါင်း</td>
                             <td class="border border-black text-center p-2">
                                 {{ en2mm(
-    $first_payscales->sum($payscale->staff->where('current_division_id', 26)->where('marital_status_id', 6)->count()) +
-    $second_payscales->sum(
-        $payscale->staff->where('current_division_id', 26)->where('marital_status_id', 6)->count(),
-    ),
-) }}
+                                    $first_payscales->sum($payscale->staff->where('current_division_id', 26)->where('marital_status_id', 6)->count()) +
+                                        $second_payscales->sum(
+                                            $payscale->staff->where('current_division_id', 26)->where('marital_status_id', 6)->count(),
+                                        ),
+                                ) }}
                             </td>
 
 
                             <td class="border border-black text-center p-2">
                                 {{ en2mm(
-    $first_payscales->sum(
-        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)->count(),
-    ) +
-    $second_payscales->sum(
-        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)->count(),
-    ),
-) }}
+                                    $first_payscales->sum(
+                                        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)->count(),
+                                    ) +
+                                        $second_payscales->sum(
+                                            fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 1)->count(),
+                                        ),
+                                ) }}
                             </td>
 
 
 
                             <td class="border border-black text-center p-2">
                                 {{ en2mm(
-    $first_payscales->sum(
-        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)->count(),
-    ) +
-    $second_payscales->sum(
-        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)->count(),
-    ),
-) }}
+                                    $first_payscales->sum(
+                                        fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)->count(),
+                                    ) +
+                                        $second_payscales->sum(
+                                            fn($p) => $p->staff->where('current_division_id', 26)->whereIn('marital_status_id', [1, 2, 3, 4, 5])->where('gender_id', 2)->count(),
+                                        ),
+                                ) }}
                             </td>
 
 
                             <td class="border border-black text-center p-2">
                                 {{ en2mm(
-    $first_payscales->sum(
-        $payscale->staff->where('current_division_id', 26)->count() +
-        $second_payscales->sum($payscale->staff->where('current_division_id', 26)->count()),
-    ),
-) }}
+                                    $first_payscales->sum(
+                                        $payscale->staff->where('current_division_id', 26)->count() +
+                                            $second_payscales->sum($payscale->staff->where('current_division_id', 26)->count()),
+                                    ),
+                                ) }}
                             </td>
                         </tr>
 

@@ -40,6 +40,8 @@ class NPTThreee extends Component
         $first_payscales = ModelsPayscale::where('staff_type_id', 1)->get();
         $second_payscales = ModelsPayscale::where('staff_type_id', 2)->get();
 
+        
+
         return view('livewire.n-p-t-threee' , [
              'first_payscales' => $first_payscales,
              'second_payscales' => $second_payscales,
