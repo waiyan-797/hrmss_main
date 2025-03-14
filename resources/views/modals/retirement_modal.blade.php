@@ -56,7 +56,7 @@
 
                     <div class="mb-4">
                         <label for="family_pension_date" class="block mb-1 text-gray-600 dark:text-green-500 font-arial">မိသားစုပင်စင်ရက်စွဲ (ရက် ၊ လ ၊ နှစ်)</label>
-                        <x-date-picker wire:model="family_pension_date" id="family_pension_date" name="family_pension_date" class="mt-1 block w-full"/>
+                        <x-date-select wire:model="family_pension_date" id="family_pension_date" name="family_pension_date" class="mt-1 block w-full"/>
                         @error('family_pension_date') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
                     </div>
                 @endif
@@ -91,7 +91,7 @@
                             @endphp
                             {{ $label }}
                         </label>
-                        <x-date-picker wire:model="retire_date" id="retire_date" name="retire_date" type="date" class="mt-1 block w-full"/>
+                        <x-date-select wire:model="retire_date" id="retire_date" name="retire_date" type="date" class="mt-1 block w-full"/>
                         @error('retire_date') <span class="mt-1 text-red-500 text-xs font-arial font-semibold">{{ $message }}</span> @enderror
                     </div>
                 @endif
