@@ -9,6 +9,8 @@ class SideNavDropDown extends Component
     public $label, $icon, $lists;
 
     public function mount($label, $icon, $lists) {
+
+        
         $this->label = $label;
         $this->icon = $icon;
         $this->lists = $lists;
