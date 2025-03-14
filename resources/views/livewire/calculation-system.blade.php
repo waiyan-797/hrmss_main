@@ -1,9 +1,9 @@
 <div class="w-full">
-    <x-primary-button type="button" wire:click="go_excel()">Excel</x-primary-button><br>
+    <x-primary-button type="button" class="ml-3 mt-2" wire:click="go_excel()">Excel</x-primary-button><br>
     <h1 class="text-center text-sm font-bold ">ပြည်ထောင်စုရာထူးဝန်အဖွဲ့</h1>
     <h1 class="text-center text-sm font-bold ">လုပ်သက်မှတ်တွက်ချက်မှု စနစ်သစ်</h1>
-    <h1 class="text-left text-sm font-bold ">အမည်။ {{ $staff->name }}</h1>
-    <h1 class="text-left text-sm font-bold ">ရာထူး။ {{ $staff->current_rank?->name }}</h1>
+    <h1 class="text-left text-sm font-bold ml-3">အမည် - {{ $staff->name }}</h2>
+    <h1 class="text-left text-sm font-bold ml-3">ရာထူး - {{ $staff->current_rank?->name }}</h1>
     <div class="flex justify-center w-full h-[83vh] overflow-y-auto">
         <div class="w-full mx-auto px-3 py-4">
             <table class="md:w-full">

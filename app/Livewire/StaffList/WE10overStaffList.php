@@ -7,16 +7,17 @@ use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\SimpleType\Jc;
 
 class WE10overStaffList extends Component
 {
     public $exp_years = 10;
     public function go_pdf()
     {
-        $first_ranks = Rank::where('staff_type_id', 1)->get();
-        $second_ranks = Rank::where('staff_type_id', 2)->get();
-        $third_ranks = Rank::where('staff_type_id', 3)->get();
-        $all_ranks = Rank::get();
+        $first_ranks = Rank::where('staff_type_id', 1)->where('is_dica',1)->get();
+        $second_ranks = Rank::where('staff_type_id', 2)->where('is_dica',1)->get();
+        $third_ranks = Rank::where('staff_type_id', 3)->where('is_dica',1)->get();
+        $all_ranks = Rank::where('is_dica',1)->get();
         $data = [
             'first_ranks' => $first_ranks,
             'second_ranks' => $second_ranks,
@@ -31,20 +32,22 @@ class WE10overStaffList extends Component
     }
     public function go_word()
     {
-        $first_ranks = Rank::where('staff_type_id', 1)->get();
-        $second_ranks = Rank::where('staff_type_id', 2)->get();
-        $third_ranks = Rank::where('staff_type_id', 3)->get();
-        $all_ranks = Rank::get();
+        $first_ranks = Rank::where('staff_type_id', 1)->where('is_dica',1)->get();
+        $second_ranks = Rank::where('staff_type_id', 2)->where('is_dica',1)->get();
+        $third_ranks = Rank::where('staff_type_id', 3)->where('is_dica',1)->get();
+        $all_ranks = Rank::where('is_dica',1)->get();
 
         // Create a new PhpWord object
         $phpWord = new PhpWord();
 
+        
 
         $section = $phpWord->addSection();
-
-        // Add title
-        $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
-        $section->addTitle('လက်ရှိရာထူးတွင် လုပ်သက် ၁၀ နှစ်နှင့်အထက် ရှိသောဝန်ထမ်းဦးရေစာရင်း', 2);
+        
+        // Add centered titles using paragraph properties
+         $section->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 13], ['alignment' => Jc::CENTER]);
+        
+        $section->addText('လက်ရှိရာထူးတွင် လုပ်သက် ၁၀ နှစ်နှင့်အထက် ရှိသောဝန်ထမ်းဦးရေစာရင်း', ['bold' => true, 'size' => 13], ['alignment' => Jc::CENTER]);
 
         // Create table
         $table = $section->addTable([
@@ -103,7 +106,7 @@ class WE10overStaffList extends Component
 
         $table->addRow();
         $table->addCell(2000)->addText('');
-        $table->addCell(2000)->addText('စုစုပေါင်း ဝန်ထမ်းဦးရေ', ['bold' => true]);
+        $table->addCell(2000)->addText('စုစုပေါင်း ဝန်ထမ်းဦးရေ', ['bold' => true]);
         $table->addCell(2000)->addText(en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 1)->filter(fn($staff) => \Carbon\Carbon::parse($staff->join_date)->diffInYears(\Carbon\Carbon::now()) > 10)->count())));
         $table->addCell(2000)->addText(en2mm($all_ranks->sum(fn($rank) => $rank->staffs->where('gender_id', 2)->filter(fn($staff) => \Carbon\Carbon::parse($staff->join_date)->diffInYears(\Carbon\Carbon::now()) > 10)->count())));
         $table->addCell(2000)->addText(en2mm($all_ranks->sum(fn($rank) => $rank->staffs->filter(fn($staff) => \Carbon\Carbon::parse($staff->join_date)->diffInYears(\Carbon\Carbon::now()) > 10)->count())));
@@ -118,10 +121,10 @@ class WE10overStaffList extends Component
     }
     public function render()
     {
-        $first_ranks = Rank::where('staff_type_id', 1)->get();
-        $second_ranks = Rank::where('staff_type_id', 2)->get();
-        $third_ranks = Rank::where('staff_type_id', 3)->get();
-        $all_ranks = Rank::get();
+        $first_ranks = Rank::where('staff_type_id', 1)->where('is_dica',1)->get();
+        $second_ranks = Rank::where('staff_type_id', 2)->where('is_dica',1)->get();
+        $third_ranks = Rank::where('staff_type_id', 3)->where('is_dica',1)->get();
+        $all_ranks = Rank::where('is_dica',1)->get();
         return view('livewire.staff-list.w-e10over-staff-list', [
             'first_ranks' => $first_ranks,
             'second_ranks' => $second_ranks,

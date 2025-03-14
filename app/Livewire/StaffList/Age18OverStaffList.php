@@ -7,14 +7,15 @@ use App\Models\Staff;
 use Livewire\Component;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\SimpleType\Jc;
 
 class Age18OverStaffList extends Component
 {
     public function go_pdf(){
-        $first_ranks = Rank::where('staff_type_id', 1)->get();
-        $second_ranks = Rank::where('staff_type_id', 2)->get();
-        $third_ranks = Rank::where('staff_type_id', 3)->get();
-        $all_ranks = Rank::get();
+        $first_ranks = Rank::where('staff_type_id', 1)->where('is_dica',1)->get();
+        $second_ranks = Rank::where('staff_type_id', 2)->where('is_dica',1)->get();
+        $third_ranks = Rank::where('staff_type_id', 3)->where('is_dica',1)->get();
+        $all_ranks = Rank::where('is_dica',1)->get();
         $data = [
             'first_ranks' => $first_ranks,
             'second_ranks' => $second_ranks,
@@ -28,15 +29,14 @@ class Age18OverStaffList extends Component
     }
     public function go_word()
 {
-    $first_ranks = Rank::where('staff_type_id', 1)->get();
-    $second_ranks = Rank::where('staff_type_id', 2)->get();
-    $third_ranks = Rank::where('staff_type_id', 3)->get();
-    $all_ranks = Rank::get();
+    $first_ranks = Rank::where('staff_type_id', 1)->where('is_dica',1)->get();
+    $second_ranks = Rank::where('staff_type_id', 2)->where('is_dica',1)->get();
+    $third_ranks = Rank::where('staff_type_id', 3)->where('is_dica',1)->get();
+    $all_ranks = Rank::where('is_dica',1)->get();
     $phpWord = new PhpWord();
     $section = $phpWord->addSection(['orientation' => 'landscape', 'margin' => 600]); 
-    $section->addTitle('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', 1);
-    $section->addTitle('အသက် ၁၈ နှစ်နှင့်အထက် ရှိသောဝန်ထမ်းဦးရေစာရင်း', 2);
-
+    $section->addText('ရင်းနှီးမြှပ်နှံမှုနှင့်ကုမ္ပဏီများညွှန်ကြားမှုဦးစီးဌာန', ['bold' => true, 'size' => 13], ['alignment' => Jc::CENTER]);
+    $section->addText('အသက် ၁၈ နှစ်နှင့်အထက် ရှိသောဝန်ထမ်းဦးရေစာရင်း', ['bold' => true, 'size' => 13], ['alignment' => Jc::CENTER]);
     // Create table
     $table = $section->addTable(['borderSize' => 6, 'cellMargin' => 80]);
 
@@ -107,10 +107,10 @@ class Age18OverStaffList extends Component
 
      public function render()
      {
-        $first_ranks = Rank::where('staff_type_id', 1)->get();
-        $second_ranks = Rank::where('staff_type_id', 2)->get();
-        $third_ranks = Rank::where('staff_type_id', 3)->get();
-        $all_ranks = Rank::get();
+        $first_ranks = Rank::where('staff_type_id', 1)->where('is_dica',1)->get();
+        $second_ranks = Rank::where('staff_type_id', 2)->where('is_dica',1)->get();
+        $third_ranks = Rank::where('staff_type_id', 3)->where('is_dica',1)->get();
+        $all_ranks = Rank::where('is_dica',1)->get();
         return view('livewire.staff-list.age18-over-staff-list',[
             'first_ranks' => $first_ranks,
             'second_ranks' => $second_ranks,

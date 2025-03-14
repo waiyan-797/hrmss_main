@@ -75,13 +75,13 @@
         </th> 
     </tr> --}}
     <tr>
-        <th colspan="5" style="font-weight:bold; text-align: left;">
-            အမည်။ {{ $staff->name }}
+        <th colspan="5" style="font-weight:bold; text-align: right;">
+            အမည် -  {{ $staff->name }}
         </th> 
     </tr>
     <tr>
-        <th colspan="5" style="font-weight:bold; text-align: left;">
-            ရာထူး။ {{ $staff->current_rank?->name }}
+        <th colspan="5" style="font-weight:bold; text-align: right;">
+            ရာထူး - {{ $staff->current_rank?->name }}
         </th> 
     </tr>
     
@@ -90,11 +90,11 @@
         <table>
             <thead>
                 <tr>
-                    <th>စဥ်</th>
-                    <th>ရာထူး</th>
-                    <th>နှစ်</th>
-                    <th>ရမှတ်</th>
-                    <th>မှတ်ချက်</th>
+                    <th style="font-weight: bold;">စဥ်</th>
+                    <th style="font-weight: bold;">ရာထူး</th>
+                    <th style="font-weight: bold;">နှစ်</th>
+                    <th style="font-weight: bold;">ရမှတ်</th>
+                    <th style="font-weight: bold;">မှတ်ချက်</th>
                 </tr>
             </thead>
             <tbody>
