@@ -48,10 +48,10 @@ class PA18 implements FromView ,WithStyles
     $sheet->getPageSetup()->setFitToWidth(1);
     $sheet->getPageSetup()->setFitToHeight(0);
 
-    $sheet->getPageSetup()->setScale(75);
+    $sheet->getPageSetup()->setScale(90);
 
     // Enable gridlines for unbordered areas
-    $sheet->setShowGridlines(true);
+    // $sheet->setShowGridlines(true);
     // $sheet->setPrintGridlines(true);
 
     // Dynamically calculate the highest row and column
@@ -67,22 +67,15 @@ class PA18 implements FromView ,WithStyles
   
    
 
-    $sheet->getRowDimension(1)->setRowHeight(21.6);
-    $sheet->getRowDimension(2)->setRowHeight(21.6);
-    $sheet->getRowDimension(3)->setRowHeight(21.6);
-    $sheet->getRowDimension(4)->setRowHeight(43.2);
+    $sheet->getRowDimension(1)->setRowHeight(24.75);
+    $sheet->getRowDimension(2)->setRowHeight(24.75);
+    $sheet->getRowDimension(3)->setRowHeight(24.75);
+    $sheet->getRowDimension(4)->setRowHeight(43.5);
     // $sheet->removeRow(5);
     // $sheet->removeRow(9);
-     for ($row = 5; $row <= 16 ; $row++) {
-             $sheet->getRowDimension($row)->setRowHeight(43.2);
+     for ($row = 5; $row <= $highestRow ; $row++) {
+             $sheet->getRowDimension($row)->setRowHeight(50);
        }
-
-    $sheet->getRowDimension(17)->setRowHeight(49.5);
-    $sheet->getRowDimension(18)->setRowHeight(49.5);
-    $sheet->getRowDimension(19)->setRowHeight(53.3);
-    $sheet->getRowDimension(20)->setRowHeight(43.2);
-    $sheet->getRowDimension(21)->setRowHeight(43.2);
-    $sheet->getRowDimension(22)->setRowHeight(43.2);
 
     // $row=4;
 
