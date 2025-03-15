@@ -201,77 +201,22 @@
         'del_method' => 'removeRecommendation',
     ])
 </div>
-
 <div class="w-full h-auto py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('လုပ်ကိုင်ခဲ့ဖူးသည့်အလုပ်အကိုင်')" class="font-semibold"/>
-        <button wire:click='add_posting' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+        <button wire:click='add_multiple_modal("multiple_modal")' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
             <span class="sr-only">Add Icon</span>
         </button>
     </div>
-    @include('staff_multiple_table', [
+    @include('livewire/tables/multiple', [
         'column_names' => ['ရာထူး/အဆင့်', 'မှ', 'ထိ', 'ဝန်ကြီးဌာန', 'ဦးစီးဌာန', 'ဌာနခွဲ', 'နေရာ', 'မှတ်ချက်'],
-        'data_master_add_stats' => [null, null, null, null, null, null, null, null],
-        'add_event' => 'add_posting',
-        'column_vals' => $postings,
-        'column_types' => [
-            [
-                'type' => 'search_select',
-                'wire_array_name' => 'postings',
-                'wire_array_key' => 'rank',
-                'select_values' => $ranks,
-            ],
-            [
-                'type' => 'date',
-                'wire_array_name' => 'postings',
-                'wire_array_key' => 'from_date',
-            ],
-            [
-                'type' => 'date',
-                'wire_array_name' => 'postings',
-                'wire_array_key' => 'to_date',
-            ],
-            [
-                'type' => 'select',
-                'wire_array_name' => 'postings',
-                'wire_array_key' => 'ministry',
-                'select_values' => $ministrys,
-                'next_col_update' => 'departments',
-                'next_col_model' => 'department',
-                'next_col_model_related' => null,
-                'ini_array' => 'departments',
-            ],
-            [
-                'type' => 'select',
-                'wire_array_name' => 'postings',
-                'wire_array_key' => 'department',
-                'select_values' => 'departments',
-                'next_col_update' => null,
-                'next_col_model' => null,
-                'next_col_model_related' => null,
-                'ini_array' => null,
-            ],
-            [
-                'type' => 'text',
-                'wire_array_name' => 'postings',
-                'wire_array_key' => 'sub_department',
-            ],
-            [
-                'type' => 'text',
-                'wire_array_name' => 'postings',
-                'wire_array_key' => 'location',
-            ],
-            [
-                'type' => 'text',
-                'wire_array_name' => 'postings',
-                'wire_array_key' => 'remark',
-            ],
-        ],
-        'del_method' => 'removePosting',
+        'action_name'=>'postings',
+        'del_method' => 'removePostings',
     ])
+    
 </div>
 
 
