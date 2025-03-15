@@ -23,48 +23,51 @@
                     '
 
                     :lists="[
-        ['group'=>'Location','route_name' => 'training_location', 'name' => 'တည်နေရာ'],
+        
         ['group'=>'Location','route_name' => 'region', 'name' => 'တိုင်းဒေသကြီး/ပြည်နယ်'],
         ['group'=>'Location','route_name' => 'district', 'name' => 'ခရိုင်'],
         ['group'=>'Location','route_name' => 'township', 'name' => 'မြို့/မြို့နယ်'],
-        ['group'=>'Location','route_name' => 'division_rank', 'name' => 'ဌာနအလိုက်ဖွဲ့စည်းပုံ'],
+        ['group'=>'Location','route_name' => 'training_location', 'name' => 'တည်နေရာ'],
+        
 
-        ['group'=>'Awards and Education','route_name' => 'award', 'name' => 'ဘွဲ့တံဆိပ်'],
         ['group'=>'Awards and Education','route_name' => 'award_type', 'name' => 'ဘွဲ့တံဆိပ်အမျိုးအစား'],
+        ['group'=>'Awards and Education','route_name' => 'award', 'name' => 'ဘွဲ့တံဆိပ်'],
+        
         ['group'=>'Awards and Education','route_name' => 'education_group', 'name' => 'ဘွဲ့အုပ်စု'],
         ['group'=>'Awards and Education','route_name' => 'education_type', 'name' => 'ဘွဲ့အမျိုးအစား'],
-        ['group'=>'Awards and Education','route_name' => 'training_type', 'name' => 'သင်တန်းအမျိုးအစား'],
         ['group'=>'Awards and Education','route_name' => 'education', 'name' => 'ဘွဲ့'],
+        ['group'=>'Awards and Education','route_name' => 'training_type', 'name' => 'သင်တန်းအမျိုးအစား'],
 
-        ['group'=>'Roles and Responsibilities','route_name' => 'post', 'name' => 'တာဝန်'],
-        ['group'=>'Roles and Responsibilities','route_name' => 'section', 'name' => 'ဌာနစိတ်'],
-        ['group'=>'Roles and Responsibilities','route_name' => 'division', 'name' => 'ဌာနခွဲ'],
-        ['group'=>'Roles and Responsibilities','route_name' => 'department', 'name' => 'ဌာန'],
+        // ['group'=>'Roles and Responsibilities','route_name' => 'post', 'name' => 'တာဝန်'],
         ['group'=>'Roles and Responsibilities','route_name' => 'ministry', 'name' => 'ဝန်ကြီးဌာန'],
-        ['group'=>'Roles and Responsibilities','route_name' => 'leave_type', 'name' => 'ခွင့်အမျိုးအစား'],
-    
+        ['group'=>'Roles and Responsibilities','route_name' => 'department', 'name' => 'ဌာန'],
+        ['group'=>'Roles and Responsibilities','route_name' => 'division', 'name' => 'ဌာနခွဲ'],
+        ['group'=>'Roles and Responsibilities','route_name' => 'section', 'name' => 'ဌာနစိတ်'],
         
         ['group'=>'Staff and Compensation','route_name' => 'staff_type', 'name' => 'ဝန်ထမ်းအမျိုးအစား'],
-        ['group'=>'Staff and Compensation','route_name' => 'penalty_type', 'name' => 'ပြစ်ဒဏ်အမျိုးအစား'],
         ['group'=>'Staff and Compensation','route_name' => 'payscale', 'name' => 'လစာနှုန်း'],
         ['group'=>'Staff and Compensation','route_name' => 'rank', 'name' => 'ရာထူး'],
+        ['group'=>'Staff and Compensation','route_name' => 'division_rank', 'name' => 'ဌာနအလိုက်ဖွဲ့စည်းပုံ'],
+
+        ['group'=>'Staff and Compensation','route_name' => 'penalty_type', 'name' => 'ပြစ်ဒဏ်အမျိုးအစား'],
         ['group'=>'Staff and Compensation','route_name' => 'salary', 'name' => 'လစာ'],
-        ['group'=>'Staff and Compensation','route_name' => 'pension_year', 'name' => 'ပင်စင်နှစ်'],
-        ['group'=>'Staff and Compensation','route_name' => 'pension_type', 'name' => 'ပင်စင်အမျိုးအစား'],
+
+        ['group'=>'pension','route_name' => 'pension_type', 'name' => 'ပင်စင်အမျိုးအစား'],
+        ['group'=>'pension','route_name' => 'pension_year', 'name' => 'ပင်စင်နှစ်'],
     
-        ['group'=>'Demographics','route_name' => 'nationality', 'name' => 'နိုင်ငံသား'],
         ['group'=>'Demographics','route_name' => 'country', 'name' => 'နိုင်ငံ'],
+        ['group'=>'Demographics','route_name' => 'nationality', 'name' => 'နိုင်ငံသား'],
         ['group'=>'Demographics','route_name' => 'ethnic', 'name' => 'လူမျိုး'],
         ['group'=>'Demographics','route_name' => 'religion', 'name' => 'ဘာသာ'],
         ['group'=>'Demographics','route_name' => 'gender', 'name' => 'ကျား/မ'],
         ['group'=>'Demographics','route_name' => 'blood_type', 'name' => 'သွေးအုပ်စု'],
         ['group'=>'Demographics','route_name' => 'language', 'name' => 'ဘာသာစကား'],
     
-        ['group'=>'Relation','route_name' => 'marital_status', 'name' => 'အိမ်ထောင်သည်'],
+        ['group'=>'Relation','route_name' => 'marital_status', 'name' => 'အိမ်ထောင်ရေးအခြေအနေ~'],
         ['group'=>'Relation','route_name' => 'relation_type', 'name' => 'တော်စပ်ပုံအမျိုးအစား'],
         ['group'=>'Relation','route_name' => 'relation', 'name' => 'တော်စပ်ပုံ'],
 
-        
+        ['group'=>'Others','route_name' => 'leave_type', 'name' => 'ခွင့်အမျိုးအစား'],
         ['group'=>'Others','route_name' => 'letter_type', 'name' => 'စာအဆင့်အတန်း'],
         ['group'=>'Others','route_name' => 'difficulty_level', 'name' => 'အခက်အခဲအဆင့်'],
 
@@ -187,48 +190,51 @@
         <i class="fa-solid fa-gear size-2 text-yellow-300 group-hover:text-yellow-500"></i>
     '
     :lists="[
-        ['group'=>'Location','route_name' => 'training_location', 'name' => 'တည်နေရာ'],
+        
         ['group'=>'Location','route_name' => 'region', 'name' => 'တိုင်းဒေသကြီး/ပြည်နယ်'],
         ['group'=>'Location','route_name' => 'district', 'name' => 'ခရိုင်'],
         ['group'=>'Location','route_name' => 'township', 'name' => 'မြို့/မြို့နယ်'],
-        ['group'=>'Location','route_name' => 'division_rank', 'name' => 'ဌာနအလိုက်ဖွဲ့စည်းပုံ'],
+        ['group'=>'Location','route_name' => 'training_location', 'name' => 'တည်နေရာ'],
+        
 
-        ['group'=>'Awards and Education','route_name' => 'award', 'name' => 'ဘွဲ့တံဆိပ်'],
         ['group'=>'Awards and Education','route_name' => 'award_type', 'name' => 'ဘွဲ့တံဆိပ်အမျိုးအစား'],
+        ['group'=>'Awards and Education','route_name' => 'award', 'name' => 'ဘွဲ့တံဆိပ်'],
+        
         ['group'=>'Awards and Education','route_name' => 'education_group', 'name' => 'ဘွဲ့အုပ်စု'],
         ['group'=>'Awards and Education','route_name' => 'education_type', 'name' => 'ဘွဲ့အမျိုးအစား'],
-        ['group'=>'Awards and Education','route_name' => 'training_type', 'name' => 'သင်တန်းအမျိုးအစား'],
         ['group'=>'Awards and Education','route_name' => 'education', 'name' => 'ဘွဲ့'],
+        ['group'=>'Awards and Education','route_name' => 'training_type', 'name' => 'သင်တန်းအမျိုးအစား'],
 
-        ['group'=>'Roles and Responsibilities','route_name' => 'post', 'name' => 'တာဝန်'],
-        ['group'=>'Roles and Responsibilities','route_name' => 'section', 'name' => 'ဌာနစိတ်'],
-        ['group'=>'Roles and Responsibilities','route_name' => 'division', 'name' => 'ဌာနခွဲ'],
-        ['group'=>'Roles and Responsibilities','route_name' => 'department', 'name' => 'ဌာန'],
+        // ['group'=>'Roles and Responsibilities','route_name' => 'post', 'name' => 'တာဝန်'],
         ['group'=>'Roles and Responsibilities','route_name' => 'ministry', 'name' => 'ဝန်ကြီးဌာန'],
-        ['group'=>'Roles and Responsibilities','route_name' => 'leave_type', 'name' => 'ခွင့်အမျိုးအစား'],
-    
+        ['group'=>'Roles and Responsibilities','route_name' => 'department', 'name' => 'ဌာန'],
+        ['group'=>'Roles and Responsibilities','route_name' => 'division', 'name' => 'ဌာနခွဲ'],
+        ['group'=>'Roles and Responsibilities','route_name' => 'section', 'name' => 'ဌာနစိတ်'],
         
         ['group'=>'Staff and Compensation','route_name' => 'staff_type', 'name' => 'ဝန်ထမ်းအမျိုးအစား'],
-        ['group'=>'Staff and Compensation','route_name' => 'penalty_type', 'name' => 'ပြစ်ဒဏ်အမျိုးအစား'],
         ['group'=>'Staff and Compensation','route_name' => 'payscale', 'name' => 'လစာနှုန်း'],
         ['group'=>'Staff and Compensation','route_name' => 'rank', 'name' => 'ရာထူး'],
+        ['group'=>'Staff and Compensation','route_name' => 'division_rank', 'name' => 'ဌာနအလိုက်ဖွဲ့စည်းပုံ'],
+
+        ['group'=>'Staff and Compensation','route_name' => 'penalty_type', 'name' => 'ပြစ်ဒဏ်အမျိုးအစား'],
         ['group'=>'Staff and Compensation','route_name' => 'salary', 'name' => 'လစာ'],
-        ['group'=>'Staff and Compensation','route_name' => 'pension_year', 'name' => 'ပင်စင်နှစ်'],
-        ['group'=>'Staff and Compensation','route_name' => 'pension_type', 'name' => 'ပင်စင်အမျိုးအစား'],
+
+        ['group'=>'pension','route_name' => 'pension_type', 'name' => 'ပင်စင်အမျိုးအစား'],
+        ['group'=>'pension','route_name' => 'pension_year', 'name' => 'ပင်စင်နှစ်'],
     
-        ['group'=>'Demographics','route_name' => 'nationality', 'name' => 'နိုင်ငံသား'],
         ['group'=>'Demographics','route_name' => 'country', 'name' => 'နိုင်ငံ'],
+        ['group'=>'Demographics','route_name' => 'nationality', 'name' => 'နိုင်ငံသား'],
         ['group'=>'Demographics','route_name' => 'ethnic', 'name' => 'လူမျိုး'],
         ['group'=>'Demographics','route_name' => 'religion', 'name' => 'ဘာသာ'],
         ['group'=>'Demographics','route_name' => 'gender', 'name' => 'ကျား/မ'],
         ['group'=>'Demographics','route_name' => 'blood_type', 'name' => 'သွေးအုပ်စု'],
         ['group'=>'Demographics','route_name' => 'language', 'name' => 'ဘာသာစကား'],
     
-        ['group'=>'Relation','route_name' => 'marital_status', 'name' => 'အိမ်ထောင်သည်'],
+        ['group'=>'Relation','route_name' => 'marital_status', 'name' => 'အိမ်ထောင်ရေးအခြေအနေ~'],
         ['group'=>'Relation','route_name' => 'relation_type', 'name' => 'တော်စပ်ပုံအမျိုးအစား'],
         ['group'=>'Relation','route_name' => 'relation', 'name' => 'တော်စပ်ပုံ'],
 
-        
+        ['group'=>'Others','route_name' => 'leave_type', 'name' => 'ခွင့်အမျိုးအစား'],
         ['group'=>'Others','route_name' => 'letter_type', 'name' => 'စာအဆင့်အတန်း'],
         ['group'=>'Others','route_name' => 'difficulty_level', 'name' => 'အခက်အခဲအဆင့်'],
 
