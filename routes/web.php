@@ -164,7 +164,11 @@ use App\Livewire\Retirement;
 use App\Livewire\Salary;
 use App\Livewire\SortableStaff;
 use App\Livewire\StaffByAge;
+<<<<<<< Updated upstream
 use App\Livewire\StaffGraduate;
+=======
+use App\Livewire\StaffDetailController;
+>>>>>>> Stashed changes
 use App\Livewire\StaffInNpt;
 use App\Livewire\StaffReport19;
 use App\Livewire\StaffReport20;
@@ -177,10 +181,10 @@ use App\Models\Promotion;
 use App\Models\Staff as ModelsStaff;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
-// dkfj
-// Route::view('/', 'welcome')->name('welcome');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+   
+
     Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::view('home', 'home')->name('home');
     Route::view('profile', 'profile')->name('profile');
@@ -233,6 +237,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/increment/{staff_id}', Increment::class)->name('staff_increment'); //currently use
     Route::get('/staff_detail/{confirm_add?}/{confirm_edit?}/{staff_id?}/{tab?}', StaffDetail::class)->name('staff_detail');
+    // Route::get('/staff_detail/{confirm_add?}/{confirm_edit?}/{staff_id?}/{tab?}', StaffDetailController::class)->name('staff_detail');
+
+    // Route::post('/staff_detail/recommendation/add', StaffDetailController::class)->name('add_recommendation');
+
+    // Route::get('/staff_detail_controller/{confirm_add?}/{confirm_edit?}/{staff_id?}/{tab?}', StaffDetailController::class)->name('staff_detail_controller');
+
     Route::get('/file/{path}', function ($path) {
         if (File::exists(storage_path('app/upload/') . $path)) {
             return response()->file(storage_path('app/upload/') . $path);

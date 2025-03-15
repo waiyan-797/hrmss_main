@@ -8,12 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class StaffEducation extends Model
 {
     use HasFactory;
-    public function education_group(){
-        return $this->belongsTo(EducationGroup::class);
-    }
-    public function education_type(){
-        return $this->belongsTo(EducationType::class);
-    }
+   
     public function education(){
         return $this->belongsTo(Education::class);
     }

@@ -5,7 +5,7 @@
         </button>
         @if ($collapsed)
         <ul class="space-y-2">
-            <li>
+            {{-- <li>
                 <livewire:side-nav-button label="ဒက်ရှ်ဘုတ်"
                     icon='
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5 text-yellow-300 group-hover:text-yellow-500">
@@ -13,7 +13,7 @@
                         </svg>
                     '
                     route_name="dashboard" count="" />
-            </li>
+            </li> --}}
 
             @if(isSuperAdmin() || isHRAdmin())
             <li>
