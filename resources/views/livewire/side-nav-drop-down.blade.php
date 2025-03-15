@@ -1,4 +1,4 @@
-<div x-data="{ openGroup: null, open: false }">
+<div x-data="{ open: false }">
     <button @click="open = !open" type="button" class="{{ collect($lists)->contains(fn($list) => request()->routeIs($list['route_name'])) ? 'bg-white/90 text-green-700' : 'text-white' }} flex items-center p-2 w-full text-base font-semibold rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-green-700">
         {!! $icon !!}
         <span class="flex-1 ml-3 text-left whitespace-nowrap font-arial text-sm">{{ $label }}</span>
@@ -13,35 +13,18 @@
         @endphp
         
         @foreach ($grouped as $group => $items)
-            @if ($group !== '')
-                <li>
-                    
+            
 
-                    <ul x-show="{{ $group }}" x-cloak x-transition class="py-2 space-y-2 font-arial text-sm text-green-700 pl-6">
-                        @foreach ($items as $item)
-                            @if ($item['route_name'] == 'sperator')
-                                <div class="bg-slate-600 h-[1px] w-full"></div>
-                            @else
-                                <li>
-                                    <a href="{{ route($item['route_name']) }}" class="{{ request()->routeIs($item['route_name']) ? 'bg-white/90 text-green-700' : 'text-white' }} flex items-center p-2 pl-11 w-full rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-green-700 font-semibold" wire:navigate>{{ $item['name'] }}</a>
-                                </li>
-                            @endif
-                        @endforeach
-                        <hr>
-                    </ul>
-                </li>
-            @else
-                <!-- If group is empty, show items directly in the top-level dropdown -->
-                @foreach ($items as $item)
-                    @if ($item['route_name'] == 'sperator')
-                        <div class="bg-slate-600 h-[1px] w-full"></div>
-                    @else
-                        <li>
-                            <a href="{{ route($item['route_name']) }}" class="{{ request()->routeIs($item['route_name']) ? 'bg-white/90 text-green-700' : 'text-white' }} flex items-center p-2 pl-11 w-full rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-green-700 font-semibold" wire:navigate>{{ $item['name'] }}</a>
-                        </li>
-                    @endif
-                @endforeach
-            @endif
+            @foreach ($items as $item)
+                @if ($item['route_name'] == 'sperator')
+                    <div class="bg-slate-600 h-[1px] w-full"></div>
+                @else
+                    <li>
+                        <a href="{{ route($item['route_name']) }}" class="{{ request()->routeIs($item['route_name']) ? 'bg-white/90 text-green-700' : 'text-white' }} flex items-center p-2 pl-6 w-full rounded-lg transition duration-75 group hover:bg-gray-100 hover:text-green-700 font-semibold" wire:navigate>{{ $item['name'] }}</a>
+                    </li>
+                @endif
+            @endforeach
+            <hr>
         @endforeach
     </ul>
 </div>

@@ -30,13 +30,13 @@
         ['group'=>'Location','route_name' => 'training_location', 'name' => 'တည်နေရာ'],
         
 
-        ['group'=>'Awards and Education','route_name' => 'award_type', 'name' => 'ဘွဲ့တံဆိပ်အမျိုးအစား'],
-        ['group'=>'Awards and Education','route_name' => 'award', 'name' => 'ဘွဲ့တံဆိပ်'],
+        ['group'=>'Awards','route_name' => 'award_type', 'name' => 'ဘွဲ့တံဆိပ်အမျိုးအစား'],
+        ['group'=>'Awards','route_name' => 'award', 'name' => 'ဘွဲ့တံဆိပ်'],
         
-        ['group'=>'Awards and Education','route_name' => 'education_group', 'name' => 'ဘွဲ့အုပ်စု'],
-        ['group'=>'Awards and Education','route_name' => 'education_type', 'name' => 'ဘွဲ့အမျိုးအစား'],
-        ['group'=>'Awards and Education','route_name' => 'education', 'name' => 'ဘွဲ့'],
-        ['group'=>'Awards and Education','route_name' => 'training_type', 'name' => 'သင်တန်းအမျိုးအစား'],
+        ['group'=>'Education','route_name' => 'education_group', 'name' => 'ဘွဲ့အုပ်စု'],
+        ['group'=>'Education','route_name' => 'education_type', 'name' => 'ဘွဲ့အမျိုးအစား'],
+        ['group'=>'Education','route_name' => 'education', 'name' => 'ဘွဲ့'],
+        ['group'=>'Education','route_name' => 'training_type', 'name' => 'သင်တန်းအမျိုးအစား'],
 
         // ['group'=>'Roles and Responsibilities','route_name' => 'post', 'name' => 'တာဝန်'],
         ['group'=>'Roles and Responsibilities','route_name' => 'ministry', 'name' => 'ဝန်ကြီးဌာန'],
@@ -63,7 +63,7 @@
         ['group'=>'Demographics','route_name' => 'blood_type', 'name' => 'သွေးအုပ်စု'],
         ['group'=>'Demographics','route_name' => 'language', 'name' => 'ဘာသာစကား'],
     
-        ['group'=>'Relation','route_name' => 'marital_status', 'name' => 'အိမ်ထောင်ရေးအခြေအနေ~'],
+        ['group'=>'Relation','route_name' => 'marital_status', 'name' => 'အိမ်ထောင်ရေးအခြေအနေ'],
         ['group'=>'Relation','route_name' => 'relation_type', 'name' => 'တော်စပ်ပုံအမျိုးအစား'],
         ['group'=>'Relation','route_name' => 'relation', 'name' => 'တော်စပ်ပုံ'],
 
@@ -197,13 +197,13 @@
         ['group'=>'Location','route_name' => 'training_location', 'name' => 'တည်နေရာ'],
         
 
-        ['group'=>'Awards and Education','route_name' => 'award_type', 'name' => 'ဘွဲ့တံဆိပ်အမျိုးအစား'],
-        ['group'=>'Awards and Education','route_name' => 'award', 'name' => 'ဘွဲ့တံဆိပ်'],
+        ['group'=>'Awards','route_name' => 'award_type', 'name' => 'ဘွဲ့တံဆိပ်အမျိုးအစား'],
+        ['group'=>'Awards','route_name' => 'award', 'name' => 'ဘွဲ့တံဆိပ်'],
         
-        ['group'=>'Awards and Education','route_name' => 'education_group', 'name' => 'ဘွဲ့အုပ်စု'],
-        ['group'=>'Awards and Education','route_name' => 'education_type', 'name' => 'ဘွဲ့အမျိုးအစား'],
-        ['group'=>'Awards and Education','route_name' => 'education', 'name' => 'ဘွဲ့'],
-        ['group'=>'Awards and Education','route_name' => 'training_type', 'name' => 'သင်တန်းအမျိုးအစား'],
+        ['group'=>'Education','route_name' => 'education_group', 'name' => 'ဘွဲ့အုပ်စု'],
+        ['group'=>'Education','route_name' => 'education_type', 'name' => 'ဘွဲ့အမျိုးအစား'],
+        ['group'=>'Education','route_name' => 'education', 'name' => 'ဘွဲ့'],
+        ['group'=>'Education','route_name' => 'training_type', 'name' => 'သင်တန်းအမျိုးအစား'],
 
         // ['group'=>'Roles and Responsibilities','route_name' => 'post', 'name' => 'တာဝန်'],
         ['group'=>'Roles and Responsibilities','route_name' => 'ministry', 'name' => 'ဝန်ကြီးဌာန'],
@@ -230,7 +230,7 @@
         ['group'=>'Demographics','route_name' => 'blood_type', 'name' => 'သွေးအုပ်စု'],
         ['group'=>'Demographics','route_name' => 'language', 'name' => 'ဘာသာစကား'],
     
-        ['group'=>'Relation','route_name' => 'marital_status', 'name' => 'အိမ်ထောင်ရေးအခြေအနေ~'],
+        ['group'=>'Relation','route_name' => 'marital_status', 'name' => 'အိမ်ထောင်ရေးအခြေအနေ'],
         ['group'=>'Relation','route_name' => 'relation_type', 'name' => 'တော်စပ်ပုံအမျိုးအစား'],
         ['group'=>'Relation','route_name' => 'relation', 'name' => 'တော်စပ်ပုံ'],
 
