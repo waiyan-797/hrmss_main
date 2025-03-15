@@ -37,9 +37,10 @@
         <table>
             <thead>
                 <tr>
-                    <th colspan="5" style="text-align:center">
+                    <th colspan="5" class="text-center">
                         ရင်းနှီးမြှုပ်နှံမှုနှင့်နိုင်ငံခြားစီးပွားဆက်သွယ်ရေးဝန်ကြီးဌာန
                     </th> 
+                    <th class="text-right">ပုံစံ(၃)</th>
                 </tr>
                 <tr>
                     <th colspan="5" style="text-align:center">
