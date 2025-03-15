@@ -552,7 +552,7 @@ class StaffDetail extends Component
 
                         'post' => $post->post_id,
                         'ministry' => $post->ministry->name,
-                        'department' => $post->department->name,
+                        'department' => $post->department?->name,
                         // 'departments' => Department::where('ministry_id', $post->ministry_id)->get(),
                         'sub_department' => $post->sub_department,
 

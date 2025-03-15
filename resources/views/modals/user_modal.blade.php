@@ -61,7 +61,7 @@
                 @endforeach
                 </select>
             </div>
-            @if (isset($division_id) && $division_id == 1)
+          
             <div class="mb-4">
                 <label for="section_id" class="block mb-1 text-gray-600 dark:text-green-500 font-arial text-sm">Section</label>
                 <select wire:model="section_id" id="section_id"  class="font-arial bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
@@ -70,7 +70,7 @@
                 @endforeach
                 </select>
             </div>
-            @endif
+            
         </div>
         <button type="submit" class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded font-arial">{{ $submit_button_text }}</button>
             <button type="button" wire:click="{{ $cancel_action }}" class="font-arial bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">ထွက်ရန်</button>
