@@ -16,10 +16,10 @@
                 'tab' => 'personal_info',
             ])" :active="$tab == 'personal_info'" wire:navigate
                 class="inline-block p-4 text-green-600  rounded-none active min-w-32 ">
-                {{ __('ကိုယ်ရေးအချက်အလက်ဖြည့်ရန်') }}
+                {{ ('ကိုယ်ရေးအချက်အလက်ဖြည့်ရန်') }}
             </x-nav-link>
             @if($staff)
-        
+
             <x-nav-link :href="route('staff_detail', [
                                 'confirm_add' => $confirm_add,
                                 'confirm_edit' => $confirm_edit,
@@ -27,7 +27,7 @@
                                 'tab' => 'job_info',
                             ])" :active="$tab == 'job_info'" wire:navigate
                 class="inline-block p-4 text-green-600  rounded-none active  min-w-32 ">
-                {{ __('အလုပ်အကိုင်') }}
+                {{ ('အလုပ်အကိုင်') }}
             </x-nav-link>
             <x-nav-link :href="route('staff_detail', [
                                 'confirm_add' => $confirm_add,
@@ -36,7 +36,7 @@
                                 'tab' => 'relative',
                             ])" :active="$tab == 'relative'" wire:navigate
                 class="inline-block p-4 text-green-600  rounded-none active  min-w-32 ">
-                {{ __('ဆွေမျိုးများ') }}
+                {{ ('ဆွေမျိုးများ') }}
             </x-nav-link>
             <x-nav-link :href="route('staff_detail', [
                                 'confirm_add' => $confirm_add,
@@ -45,7 +45,7 @@
                                 'tab' => 'detail_personal_info',
                             ])" :active="$tab == 'detail_personal_info'" wire:navigate
                 class="inline-block p-4 text-green-600  rounded-none active  min-w-32 ">
-                {{ __('ငယ်စဉ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်') }}
+                {{ ('ငယ်စဉ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်') }}
             </x-nav-link>
 
             @else
@@ -56,7 +56,7 @@
                                 'tab' => 'job_info',
                             ])" :active="$tab == 'job_info'" wire:navigate
                 class="inline-block p-4 text-green-600  rounded-none active  min-w-32 pointer-events-none opacity-50">
-                {{ __('အလုပ်အကိုင်') }}
+                {{ ('အလုပ်အကိုင်') }}
             </x-nav-link>
             <x-nav-link :href="route('staff_detail', [
                                 'confirm_add' => $confirm_add,
@@ -65,7 +65,7 @@
                                 'tab' => 'relative',
                             ])" :active="$tab == 'relative'" wire:navigate
                 class="inline-block p-4 text-green-600  rounded-none active  min-w-32 pointer-events-none opacity-50">
-                {{ __('ဆွေမျိုးများ') }}
+                {{ ('ဆွေမျိုးများ') }}
             </x-nav-link>
             <x-nav-link :href="route('staff_detail', [
                                 'confirm_add' => $confirm_add,
@@ -77,7 +77,6 @@
                 {{ __('ငယ်စဉ်မှ ယခုအချိန်ထိ ကိုယ်ရေးရာဇဝင်') }}
             </x-nav-link>
             @endif
-
         </div>
     </div>
     <div class="flex justify-center w-full h-auto overflow-y-auto px-4">
@@ -112,7 +111,7 @@
                         <x-primary-button wire:click="setStaffStatus({{$staff->status_id}})"> Save
                         </x-primary-button>
                         <x-primary-button wire:click="setStaffStatus(5)"> Approve </x-primary-button>
-                        <x-primary-button wire:click="setStaffStatus(3)"> Reject </x-primary-button>
+                        {{-- <x-primary-button wire:click="setStaffStatus(3)"> Reject </x-primary-button> --}}
                         <x-primary-button wire:click="setStaffStatus(4)"> Send Back </x-primary-button>
                         @break
                         @case(5)
@@ -131,7 +130,7 @@
                         <x-primary-button wire:click="setStaffStatus(2)"> Submit </x-primary-button>
                         @break
                         @case(4)
-                        <x-primary-button wire:click="setStaffStatus(null)"> Save  </x-primary-button>
+                        <x-primary-button wire:click="setStaffStatus(null)"> Save </x-primary-button>
                         <x-primary-button wire:click="setStaffStatus(2)"> Submit </x-primary-button>
                         @break
                         @case(5)
@@ -155,16 +154,34 @@
             @case('edu')
             @include('modals/education_modal')
             @break
+            @case('edu_modal')
+            @include('modals/edu_modal')
+            @break
+            @case('recommendations_modal')
+            @include('modals/recommendation_modal')
+            @break
+            @case('multiple_modal')
+            @include('modals/multiple_modal')
+            @break
             @endswitch
         </div>
     </div>
 </div>
-@script
+{{-- @script
 <script type='defer'>
-    // Show Alert
-        Livewire.on('showAlert', data => {
 
-           
+
+    // Show Alert
+        Livewire.on('showAlert', data => {Livewire.on('alert', ({ type, message }) => {
+                Swal.fire({
+                    icon: type,
+                    title: type === 'success' ? 'Success' : 'Error',
+                    text: message,
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            });
+            
             Swal.hideLoading(); // Close the previous Swal instance (if it's still open)
             setTimeout(() => {
                 Swal.fire({
@@ -178,30 +195,121 @@
         });
 
         // Show Loader
-        Livewire.on('showLoader', data => {
-            console.log('lading');
+        //Livewire.on('showLoader', data => {
+         //   console.log('lading');
+         //   Swal.fire({
+          //      title: 'Please wait...',
+           //     text: 'We are processing your request',
+           //     icon: 'info',
+           //     showConfirmButton: false,
+           //     didOpen: () => {
+           //         Swal.showLoading(); // Show the loading spinner
+            //    }
+           // });
+       // });
+
+        // Stop Loader
+       // Livewire.on('stopLoader', data => {
+       //     Swal.close(); // Close the loader after the process is complete
+       // });
+
+
+
+
+
+
+
+</script>
+@endscript --}}
+
+
+@script
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.on('showRemoveConfirmation', ({ index, id }) => {
             Swal.fire({
-                title: 'Please wait...',
-                text: 'We are processing your request',
-                icon: 'info',
-                showConfirmButton: false,
-                didOpen: () => {
-                    Swal.showLoading(); // Show the loading spinner
+                title: 'Are You Sure?',
+                text: 'Do you want to delete this item?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('removeRecommendation', { index: index, id: id });
                 }
             });
         });
 
-        // Stop Loader
-        Livewire.on('stopLoader', data => {
-            Swal.close(); // Close the loader after the process is complete
+        //alert message
+        Livewire.on('alert', (data) => {
+            Swal.fire({
+                icon: 'success',
+                title: data[0].type,
+                text: data[0].message, 
+                position: 'top-end',
+                toast: true,
+                timer: 4000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                background: '#009900',
+                customClass: {
+                    popup: 'p-4 rounded-lg shadow-lg',
+                    title: 'font-bold text-white',
+                    htmlContainer: 'text-sm text-white'
+                }
+            });
+           
+        });
+
+        //validation message
+        Livewire.on('validation', (data) => {
+            console.log(data[0])
+             Swal.fire({
+                icon: 'error',
+                title: data[0].type,
+                text: data[0].message, 
+                position: 'top-end',
+                toast: true,
+                timer: 5000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                background: '#770000',
+                customClass: {
+                    popup: 'p-4 rounded-lg shadow-lg',
+                    title: 'font-bold text-white',
+                    htmlContainer: 'text-sm text-white'
+                }
+            });
+           
         });
 
 
-
-
-
-
-
+        // New listener for validation errors
+        Livewire.on('showErrors', (data) => {
+            console.log(data[0].errors)
+            let errors = data[0].errors;
+            errors.forEach(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: error, 
+                    position: 'bottom-end',
+                    toast: true,
+                    timer: 4000,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    background: '#fee2e2',
+                    customClass: {
+                        popup: 'p-4 rounded-lg shadow-lg',
+                        title: 'font-bold text-red-600',
+                        htmlContainer: 'text-sm text-red-800'
+                    }
+                });
+            });
+        });
+    });
 </script>
 @endscript
 
