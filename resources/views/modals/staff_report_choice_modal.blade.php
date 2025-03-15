@@ -13,7 +13,6 @@
             <button type="button"
                 class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
                 wire:click="go_report({{ $staff_id }}, 18)">ကိုယ်ရေးမှတ်တမ်း(၁၈)ချက်</button>
-                {{-- Route::get('/staff-report19/{staff_id?}',StaffReport19::class)->name('staff_report19'); --}}
                 <button type="button"
                 class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
                 wire:click="go_report({{ $staff_id }}, 20)">ကိုယ်ရေးမှတ်တမ်း(၁၉)ချက်(၁)</button>
@@ -46,25 +45,13 @@
                 wire:click="go_report({{ $staff_id }}, '_salary-adjustment-annual-increase')">
                 လစာညှိနှိုင်း(နှစ်တိုး)
             </button>
-
-
-            {{-- $loop->iteration
-                          @if (!$this->check($staff_id)) --}}
                 <button type="button"
                     class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
                     wire:click="go_report({{ $staff_id }}, '_staff_list_2')">ဝန်ထမ်းလုပ်သက်အတွက်အမှတ်ပေးခြင်း</button>
                     <button type="button"
                     class="w-full h-auto py-2 text-white bg-blue-500 rounded font-arial hover:bg-blue-600"
                     wire:click="go_report({{ $staff_id }}, '_calculation_system')">လုပ်သက်မှတ်တွက်ချက်မှုစနစ်သစ်</button>
-
-            {{-- @endif --}}
-
-
-@endif
-
-
-
-
+                   @endif
         </div>
         <button type="button" wire:click="$set('open_staff_report', false)"
             class="px-4 py-2 text-white bg-gray-500 rounded font-arial hover:bg-gray-600">Cancel</button>

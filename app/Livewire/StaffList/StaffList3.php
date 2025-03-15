@@ -70,12 +70,36 @@ class StaffList3 extends Component
         $table->addCell(2000)->addText('ကျား',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
         $table->addCell(2000)->addText('မ',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
         $table->addCell(2000)->addText('စုစုပေါင်း',['bold'=>true, 'size'=>13],['alignment'=>'center','spaceBefore'=> 70]);
-        $first_ranks = Rank::where('staff_type_id', 1)->withCount('staffs')->get();
-        $second_ranks = Rank::where('staff_type_id', 2)->withCount('staffs')->get();
-        $first_second_ranks = Rank::whereIn('staff_type_id', [1, 2])->withCount('staffs')->get();
-        $third_ranks = Rank::where('staff_type_id', 3)->withCount('staffs')->get();
-        $all_ranks = Rank::withCount('staffs')->get();
+        // $first_ranks = Rank::where('staff_type_id', 1)->withCount('staffs')->get();
+        // $second_ranks = Rank::where('staff_type_id', 2)->withCount('staffs')->get();
+        // $first_second_ranks = Rank::whereIn('staff_type_id', [1, 2])->withCount('staffs')->get();
+        // $third_ranks = Rank::where('staff_type_id', 3)->withCount('staffs')->get();
+        // $all_ranks = Rank::withCount('staffs')->get();
+        $first_ranks = Rank::where('staff_type_id', 1)
+        ->where('is_dica', 1)
+        ->withCount('staffs')
+        ->get();
+    
+    $second_ranks = Rank::where('staff_type_id', 2)
+        ->where('is_dica', 1)
+        ->withCount('staffs')
+        ->get();
+    
+    $first_second_ranks = Rank::whereIn('staff_type_id', [1, 2])
+        ->where('is_dica', 1)
+        ->withCount('staffs')
+        ->get();
+    
+    $third_ranks = Rank::where('staff_type_id', 3)
+        ->where('is_dica', 1)
+        ->withCount('staffs')
+        ->get();
+    
+    $all_ranks = Rank::where('is_dica', 1)
+        ->withCount('staffs')
+        ->get();
         foreach ($first_ranks as $index => $rank) {
+           
             $table->addRow();
             $table->addCell(700)->addText('',null,['alignment'=>'center','spaceBefore'=> 70]);
             $table->addCell(5000)->addText($rank->name,null,['alignment'=>'left','spaceBefore'=> 70]);
@@ -135,11 +159,31 @@ class StaffList3 extends Component
 
     public function render()
     {
-        $first_ranks = Rank::where('staff_type_id', 1)->withCount('staffs')->get();
-        $second_ranks = Rank::where('staff_type_id', 2)->withCount('staffs')->get();
-        $first_second_ranks = Rank::whereIn('staff_type_id', [1, 2])->withCount('staffs')->get();
-        $third_ranks = Rank::where('staff_type_id', 3)->withCount('staffs')->get();
-        $all_ranks = Rank::withCount('staffs')->get();
+        
+        $first_ranks = Rank::where('staff_type_id', 1)
+    ->where('is_dica', 1)
+    ->withCount('staffs')
+    ->get();
+
+$second_ranks = Rank::where('staff_type_id', 2)
+    ->where('is_dica', 1)
+    ->withCount('staffs')
+    ->get();
+
+$first_second_ranks = Rank::whereIn('staff_type_id', [1, 2])
+    ->where('is_dica', 1)
+    ->withCount('staffs')
+    ->get();
+
+$third_ranks = Rank::where('staff_type_id', 3)
+    ->where('is_dica', 1)
+    ->withCount('staffs')
+    ->get();
+
+$all_ranks = Rank::where('is_dica', 1)
+    ->withCount('staffs')
+    ->get();
+
         return view('livewire.staff-list.staff-list3', [
             'first_ranks' => $first_ranks,
             'second_ranks' => $second_ranks,

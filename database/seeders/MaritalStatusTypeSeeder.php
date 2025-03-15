@@ -19,8 +19,8 @@ class MaritalStatusTypeSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
         $columns = ['id', 'name'];
         $items = [
-            [1,'single'],
-            [2,'married'],
+            [1,'မရှိ'],
+            [2,'ရှိ'],
            
            
         ];

@@ -21,6 +21,7 @@ class EmployeeInformation extends Component
             // ['id' => 8, 'name' => 'ရရှိသောဒီပလိုမာ/ဘွဲ့'],
             ['id' => 8, 'name' => 'ပြစ်ဒဏ်'],
             ['id' => 9, 'name' => 'ရရှိသောဒီပလိုမာ/ဘွဲ့'],
+            ['id' => 10, 'name' => 'ဘွဲ့ရရှိခဲ့သူများစာရင်း'],
            
         ];
     }
@@ -37,6 +38,7 @@ class EmployeeInformation extends Component
             // 8 =>route('other_qualification_report'),
             8=>route('punishment_report'),
             9=>route('staff-graduate'),
+            10=>route('graduate-list'),
             
         ];
         if (array_key_exists($id, $routes)) {

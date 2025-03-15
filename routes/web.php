@@ -164,11 +164,8 @@ use App\Livewire\Retirement;
 use App\Livewire\Salary;
 use App\Livewire\SortableStaff;
 use App\Livewire\StaffByAge;
-<<<<<<< Updated upstream
-use App\Livewire\StaffGraduate;
-=======
 use App\Livewire\StaffDetailController;
->>>>>>> Stashed changes
+use App\Livewire\StaffGraduate;
 use App\Livewire\StaffInNpt;
 use App\Livewire\StaffReport19;
 use App\Livewire\StaffReport20;

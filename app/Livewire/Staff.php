@@ -125,18 +125,16 @@ class Staff extends Component
     public function render()
     {
        
+        $saveDraftCount = ModelsStaff::where('status_id', 1)->count();
+        $submitCount = ModelsStaff::where('status_id', 2)->count();
+        $rejectCount = ModelsStaff::where('status_id', 3)->count();
+        $resubmitCount = ModelsStaff::where('status_id', 4)->count();
+        $approveCount = ModelsStaff::where('status_id', 5)->count();
     $staffQuery = ModelsStaff::with(['currentRank', 'current_department', 'current_division'])
-<<<<<<< Updated upstream
-    ->where('status_id', $this->status)
-    ->when(Auth::user()->role_id != 2 && Auth::user()->role_id != 3, function ($q) {
-        return $q->where('current_division_id', Auth::user()->division_id);
-    });
-=======
         ->where('status_id', $this->status)
         ->when(Auth::user()->role_id != 2 && Auth::user()->role_id != 3, function ($q) {
             return $q->where('current_division_id', Auth::user()->division_id);
         });
->>>>>>> Stashed changes
 
 
 
@@ -192,6 +190,11 @@ class Staff extends Component
             'divisions' => Division::all(),
             'retire_type' => RetireType::all(),
 'retire_type_filter' => ModelsStaff::whereNotNull('retire_type_id')->get(),
+'saveDraftCount'=>$saveDraftCount,
+'submitCount'=>$submitCount,
+'rejectCount' => $rejectCount,
+'resubmitCount' => $resubmitCount,
+'approveCount'=>$approveCount,
         ]);
     }
 

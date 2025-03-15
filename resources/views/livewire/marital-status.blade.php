@@ -5,9 +5,9 @@
                 'data_values' => $marital_statuses,
                 'modal' => 'modals/marital_status_modal',
                 'id' => $marital_status_id,
-                'title' => 'အိမ်ထောင်သည်',
+                'title' => 'အိမ်ထောင်ရေးအခြေအနေ',
                 'search_id' => 'marital_status_search',
-                'columns' => ['စဉ်', 'အိမ်ထောင်သည်','အိမ်ထောင်သည်အမျိုးအစား','လုပ်ဆောင်ချက်'],
+                'columns' => ['စဉ်', 'အိမ်ထောင်ရေးအခြေအနေ','အိမ်ထောင်ရှိ/မရှိ','လုပ်ဆောင်ချက်'],
                 'column_vals' => ['name', 'marital_status_type'],
             ])
         </div>

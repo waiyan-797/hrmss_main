@@ -176,6 +176,30 @@
         <x-date-picker wire:model="last_increment_date" id="last_increment_date" class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('last_increment_date')" />
     </div>
+
+    {{-- <div>
+        <x-input-label for="current_section_id" :value="__('လက်ရှိဌာနစိတ်')" />
+        <x-select
+            wire:model="current_section_id"
+            :values="$sections"
+            placeholder="လက်ရှိဌာနစိတ်ရွေးပါ "
+            name="current_section_id"
+            class="mt-1 block w-full"  
+        />
+        <x-input-error class="mt-2" :messages="$errors->get('current_section_id')" />
+    </div> --}}
+
+    <div>
+        <x-input-label for="လက်ရှိဌာနစိတ်" :value="__('လက်ရှိဌာနစိတ်ရွေးပါ')" />
+        <x-select
+            wire:model="current_section_id"
+            :values="$sections"
+            placeholder="လက်ရှိဌာနစိတ်ရွေးပါ"
+            name="current_section_id"
+            class="mt-1 block w-full"
+        />
+        <x-input-error class="mt-2" :messages="$errors->get('current_section_id')" />
+    </div>
 </div>
 <div class="w-full h-auto py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">

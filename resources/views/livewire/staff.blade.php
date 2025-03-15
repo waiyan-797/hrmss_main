@@ -1,29 +1,48 @@
 <div class="w-full {{ isset($header) ? 'h-[83vh]' : 'h-[90vh]' }} overflow-y-auto">
     <div class="flex justify-left items-center space-x-1 px-3 mt-10">
-        <a href="{{ route('staff', ['status' => 1]) }}" wire:navigate wire:ignore
+          <a href="{{ route('staff', ['status' => 1]) }}" wire:navigate wire:ignore
             class="{{ request()->path() == 'staff/1' ? 'bg-yellow-400' : 'bg-green-500' }} text-white hover:bg-yellow-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            အချက်အလက်အကြမ်းစာရင်း {{-- Save Draft --}}
-        </a>
-
+            အချက်အလက်အကြမ်းစာရင်း  {{-- {{saveDraft}} --}}
+            <span class="inline-flex items-center justify-center px-2 py-1 text-white bg-red-600 rounded-full">
+                {{ $saveDraftCount }}
+            </span>
+        </a>  
+        
+         
         <a href="{{ route('staff', ['status' => 2]) }}" wire:navigate wire:ignore
             class="{{ request()->path() == 'staff/2' ? 'bg-yellow-400' : 'bg-green-500' }} text-white hover:bg-yellow-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            တင်ပြထားသည့်စာရင်း{{-- Submit --}}
+            တင်ပြထားသည့်စာရင်း {{-- {{submit}} --}}
+            <span class="inline-flex items-center justify-center px-2 py-1 text-white bg-red-600 rounded-full">
+                {{ $submitCount }}
+            </span>
         </a>
 
         <a href="{{ route('staff', ['status' => 3]) }}" wire:navigate wire:ignore
             class="{{ request()->path() == 'staff/3' ? 'bg-yellow-400' : 'bg-green-500' }} text-white hover:bg-yellow-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            ငြင်းပယ်စာရင်း{{-- Reject --}}
+            တောင်းဆိုသည့်စာရင်း {{-- {{reject}} --}}
+            <span class="inline-flex items-center justify-center px-2 py-1 text-white bg-red-600 rounded-full">
+                {{ $rejectCount }}
+            </span>
         </a>
 
         <a href="{{ route('staff', ['status' => 4]) }}" wire:navigate wire:ignore
             class="{{ request()->path() == 'staff/4' ? 'bg-yellow-400' : 'bg-green-500' }} text-white hover:bg-yellow-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            ပြန်လည်တင်ပြစာရင်း{{-- Resubmit --}}
+            ပြန်လည်ပေးပို့သည့်စာရင်း {{-- {{resubmit}} --}}
+            <span class="inline-flex items-center justify-center px-2 py-1 text-white bg-red-600 rounded-full">
+                {{ $resubmitCount }}
+            </span>
         </a>
 
         <a href="{{ route('staff', ['status' => 5]) }}" wire:navigate wire:ignore
             class="{{ request()->path() == 'staff/5' ? 'bg-yellow-400' : 'bg-green-500' }} text-white hover:bg-yellow-400 font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out">
-            အတည်ပြုဝန်ထမ်းစာရင်း{{-- Approve --}}
-        </a>
+            အတည်ပြုဝန်ထမ်းစာရင်း{{-- {{approve}} --}}
+            <span class="inline-flex items-center justify-center px-2 py-1 text-white bg-red-600 rounded-full">
+                {{ $approveCount }}
+            </span>
+            
+        </a> 
+       
+         
     </div>
     @if (session('message'))
         <div id="alert-border-1"

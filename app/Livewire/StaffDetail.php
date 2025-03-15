@@ -124,8 +124,7 @@ class StaffDetail extends Component
     //job_info
 
     // $table->date('last_increment_date')->nullable();
-    public $current_rank_id, $current_rank_date, $current_division_join_date, $current_department_id, $current_division_id, $side_ministry_id = null, $side_department_id = null, $side_division_id = null, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $last_increment_date, $is_parents_citizen_when_staff_born = false;
-
+    public $current_rank_id, $current_rank_date, $current_division_join_date , $current_department_id, $current_division_id,$current_section_id, $side_ministry_id = null, $side_department_id = null, $side_division_id = null, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time,$last_increment_date, $is_parents_citizen_when_staff_born = false;
     public $recommendations = [];
     public $recommend_by;
     public $update_index;
@@ -274,6 +273,7 @@ class StaffDetail extends Component
         'transfer_remark' => '',
         'government_staff_started_date' => '',
         'current_division_id' => '',
+        'current_section_id'=>'',
         'side_ministry_id' => '',
         'side_department_id' => '',
         'side_division_id' => '',
@@ -436,6 +436,7 @@ class StaffDetail extends Component
 
                 $this->divisions = Division::all();
                 $this->payscales = Payscale::all();
+                $this->sections = Section::all();
                 break;
 
             case 'detail_personal_info':
@@ -848,6 +849,7 @@ class StaffDetail extends Component
         $this->transfer_remark = $staff->transfer_remark;
         $this->government_staff_started_date = $staff->government_staff_started_date;
         $this->current_division_id = $staff->current_division_id ?? Auth::user()->division_id;
+       
         $this->side_ministry_id = $staff->side_ministry_id;
         $this->side_departments = Department::where('ministry_id', $staff->side_ministry_id)->get();
         $this->side_department_id = $staff->side_department_id;
@@ -859,6 +861,7 @@ class StaffDetail extends Component
         $this->is_newly_appointed = $staff->is_newly_appointed;
         $this->is_direct_appointed = $staff->is_direct_appointed;
         $this->payscale_id = $staff->payscale_id;
+        $this->current_section_id =$staff->current_section_id;
         $this->current_salary = $staff->current_salary;
         $this->current_increment_time = $staff->current_increment_time;
         $this->last_increment_date = $staff->last_increment_date;
@@ -1294,6 +1297,7 @@ class StaffDetail extends Component
             'is_newly_appointed' => $this->is_newly_appointed == '' ? null : $this->is_newly_appointed,
             'is_direct_appointed' => $this->is_direct_appointed == '' ? null : $this->is_direct_appointed,
             'payscale_id' => $this->payscale_id == '' ? null : $this->payscale_id,
+            'current_section_id' => $this->current_section_id == '' ? null : $this->current_section_id,
             'current_salary' => $this->current_salary == '' ? null : $this->current_salary,
             'current_increment_time' => $this->current_increment_time == '' ? null : $this->current_increment_time,
             'last_increment_date' => $this->last_increment_date == '' ? null : $this->last_increment_date,
