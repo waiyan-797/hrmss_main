@@ -73,6 +73,8 @@ use App\Livewire\Validations\RecommendationValidation;
 use App\Livewire\Validations\PostingsValidation;
 
 use App\Livewire\StaffDetail\Postings as ChPostings;
+use App\Livewire\StaffDetail\Abroads as ChAbroads;
+
 use App\Livewire\StaffDetail\Schools as ChSchools;
 use App\Livewire\StaffDetail\Trainings as ChTrainings;
 use App\Livewire\StaffDetail\Awards as ChAwards;
@@ -93,7 +95,7 @@ class StaffDetail extends Component
     use WithFileUploads;
     public $educations_all;
     public $saveDraftCheck;
-    public $add_model, $submit_button_text, $data;
+    public $add_model, $submit_button_text;
 
 
     public $has_military_friend_text;
@@ -124,7 +126,7 @@ class StaffDetail extends Component
     //job_info
 
     // $table->date('last_increment_date')->nullable();
-    public $current_rank_id, $current_rank_date, $current_division_join_date , $current_department_id, $current_division_id,$current_section_id, $side_ministry_id = null, $side_department_id = null, $side_division_id = null, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time,$last_increment_date, $is_parents_citizen_when_staff_born = false;
+    public $current_rank_id, $current_rank_date, $current_division_join_date, $current_department_id, $current_division_id, $current_section_id, $side_ministry_id = null, $side_department_id = null, $side_division_id = null, $salary_paid_by, $join_date, $is_direct_appointed = false, $payscale_id, $current_salary, $current_increment_time, $last_increment_date, $is_parents_citizen_when_staff_born = false;
     public $recommendations = [];
     public $recommend_by;
     public $update_index;
@@ -197,6 +199,8 @@ class StaffDetail extends Component
         $ministrys,
         $_countries,
         $nrc_signs;
+
+
 
 
 
@@ -273,7 +277,7 @@ class StaffDetail extends Component
         'transfer_remark' => '',
         'government_staff_started_date' => '',
         'current_division_id' => '',
-        'current_section_id'=>'',
+        'current_section_id' => '',
         'side_ministry_id' => '',
         'side_department_id' => '',
         'side_division_id' => '',
@@ -693,12 +697,14 @@ class StaffDetail extends Component
                 }
 
                 foreach ($abroads as $abroad) {
+                    // dd($abroad);
                     $this->abroads[] = [
                         'id' => $abroad->id,
-                        'country' => $abroad->countries()->pluck('country_id')->toArray(),
+                        // 'country' => $abroad->countries()->pluck('country_id')->toArray(),/
+                        'country' => $abroad->countries,
                         'particular' => $abroad->particular,
                         // 'training_success_fail' => false,
-                        'training_success_fail' => $abroad->training_success_fail == 1 ? true : false,
+                        'training_success_fail' => $abroad->training_success_fail == 1 ? 'အောင်' : 'မအောင်',
                         'training_success_count' => $abroad->training_success_count,
                         'sponser' => $abroad->sponser,
                         'meet_with' => $abroad->meet_with,
@@ -707,12 +713,12 @@ class StaffDetail extends Component
                         'actual_abroad_date' => $abroad->actual_abroad_date,
                         'position' => $abroad->position,
                         'towns' => $abroad->towns,
-                        // 'is_training' => $abroad->is_training,
-                        'abroad_type_id' => $abroad->abroad_type_id
+                        // 'is_training' => $abroad->is_training == 1 ? 'ဟုတ်' : 'မဟုတ်',
+                        'abroad_type_id' => $abroad->abroad_type_id == 1 ? 'ဟုတ်' : 'မဟုတ်'
 
                     ];
                 }
-
+                // dd($abroads);
                 foreach ($punishments as $pun) {
 
                     $this->punishments[] = [
@@ -849,7 +855,7 @@ class StaffDetail extends Component
         $this->transfer_remark = $staff->transfer_remark;
         $this->government_staff_started_date = $staff->government_staff_started_date;
         $this->current_division_id = $staff->current_division_id ?? Auth::user()->division_id;
-       
+
         $this->side_ministry_id = $staff->side_ministry_id;
         $this->side_departments = Department::where('ministry_id', $staff->side_ministry_id)->get();
         $this->side_department_id = $staff->side_department_id;
@@ -861,7 +867,7 @@ class StaffDetail extends Component
         $this->is_newly_appointed = $staff->is_newly_appointed;
         $this->is_direct_appointed = $staff->is_direct_appointed;
         $this->payscale_id = $staff->payscale_id;
-        $this->current_section_id =$staff->current_section_id;
+        $this->current_section_id = $staff->current_section_id;
         $this->current_salary = $staff->current_salary;
         $this->current_increment_time = $staff->current_increment_time;
         $this->last_increment_date = $staff->last_increment_date;
@@ -1034,10 +1040,10 @@ class StaffDetail extends Component
         $this->punishments[] = ['id' => null, 'penalty_type' => null, 'reason' => '', 'from_date' => '', 'to_date' => ''];
     }
 
-    public function add_abroads()
-    {
-        $this->abroads[] = ['id' => null, 'abroad_type_id' => null, 'country' => [], 'towns' => '', 'is_training' => false, 'particular' => '', 'training_success_fail' => false, 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
-    }
+    // public function add_abroads()
+    // {
+    //     $this->abroads[] = ['id' => null, 'abroad_type_id' => null, 'country' => [], 'towns' => '', 'is_training' => false, 'particular' => '', 'training_success_fail' => false, 'training_success_count' => '', 'sponser' => '', 'meet_with' => '', 'from_date' => '', 'to_date' => '', 'actual_abroad_date' => '', 'position' => ''];
+    // }
 
     public function add_socials()
     {
@@ -1145,11 +1151,11 @@ class StaffDetail extends Component
         $this->removeModel('awards',  Awarding::class, $index, []);
     }
 
-    public function remove_abroads($index)
-    {
-        // dd($index);
-        $this->removeModel('abroads',  Abroad::class, $index, []);
-    }
+    // public function remove_abroads($index)
+    // {
+    //     // dd($index);
+    //     $this->removeModel('abroads',  Abroad::class, $index, []);
+    // }
 
     public function remove_socials($index)
     {
@@ -1391,7 +1397,7 @@ class StaffDetail extends Component
                 break;
 
             case 'job_info':
-                $this->saveRecommendations($staff->id);
+                // $this->saveRecommendations($staff->id);
                 // $this->savePostings($staff->id);
                 break;
 
@@ -1482,55 +1488,55 @@ class StaffDetail extends Component
         $this->displayAlertBox = false;
     }
 
-    private function saveAbroads($staffId)
-    {
-        $_validation = $this->validate_abroads();
-        $this->validate($_validation['validate'], $_validation['messages']);
-        // dd('');
-        foreach ($this->abroads as $abroad) {
-            $ab = Abroad::updateOrCreate([
-                'id' => $abroad['id'],
-            ], [
-                'staff_id' => $staffId,
-                'particular' => $abroad['particular'],
-                'training_success_fail' => $abroad['training_success_fail'],
-                'training_success_count' => $abroad['training_success_count'],
-                'sponser' => $abroad['sponser'],
-                'meet_with' => $abroad['meet_with'],
-                'from_date' => $abroad['from_date'] == '' ? null : $abroad['from_date'],
-                'to_date' => $abroad['to_date'] == '' ? null : $abroad['to_date'],
-                'actual_abroad_date' => $abroad['actual_abroad_date'] == '' ? null : $abroad['actual_abroad_date'],
-                'position' => $abroad['position'],
-                'towns' => $abroad['towns'],
-                'abroad_type_id' => $abroad['abroad_type_id']
-            ]);
-            $ab->countries()->sync($abroad['country']);
-        }
-    }
+    // private function saveAbroads($staffId)
+    // {
+    //     $_validation = $this->validate_abroads();
+    //     $this->validate($_validation['validate'], $_validation['messages']);
+    //     // dd('');
+    //     foreach ($this->abroads as $abroad) {
+    //         $ab = Abroad::updateOrCreate([
+    //             'id' => $abroad['id'],
+    //         ], [
+    //             'staff_id' => $staffId,
+    //             'particular' => $abroad['particular'],
+    //             'training_success_fail' => $abroad['training_success_fail'],
+    //             'training_success_count' => $abroad['training_success_count'],
+    //             'sponser' => $abroad['sponser'],
+    //             'meet_with' => $abroad['meet_with'],
+    //             'from_date' => $abroad['from_date'] == '' ? null : $abroad['from_date'],
+    //             'to_date' => $abroad['to_date'] == '' ? null : $abroad['to_date'],
+    //             'actual_abroad_date' => $abroad['actual_abroad_date'] == '' ? null : $abroad['actual_abroad_date'],
+    //             'position' => $abroad['position'],
+    //             'towns' => $abroad['towns'],
+    //             'abroad_type_id' => $abroad['abroad_type_id']
+    //         ]);
+    //         $ab->countries()->sync($abroad['country']);
+    //     }
+    // }
 
-    public function validate_abroads()
-    {
-        $validations = [
-            'abroads.*.country' => 'required',
-            'abroads.*.particular' => 'required',
-            'abroads.*.from_date' => 'required',
-            'abroads.*.to_date' => 'required',
-            'abroads.*.abroad_type_id' => 'required',
-        ];
+    // public function validate_abroads()
+    // {
+    //     $validations = [
+    //         'abroads.*.country' => 'required',
+    //         'abroads.*.particular' => 'required',
+    //         'abroads.*.from_date' => 'required',
+    //         'abroads.*.to_date' => 'required',
+    //         'abroads.*.abroad_type_id' => 'required',
+    //     ];
 
-        $validation_messages = [
-            'abroads.*.country.required' => 'Field is required.',
-            'abroads.*.particular.required' => 'Field is required.',
-            'abroads.*.from_date.required' => 'Field is required.',
-            'abroads.*.to_date.required' => 'Field is required.',
-            'abroads.*.abroad_type_id.required' => 'Field is required.',
-        ];
+    //     $validation_messages = [
+    //         'abroads.*.country.required' => 'Field is required.',
+    //         'abroads.*.particular.required' => 'Field is required.',
+    //         'abroads.*.from_date.required' => 'Field is required.',
+    //         'abroads.*.to_date.required' => 'Field is required.',
+    //         'abroads.*.abroad_type_id.required' => 'Field is required.',
+    //     ];
 
-        return [
-            'validate' => $validations,
-            'messages' => $validation_messages,
-        ];
-    }
+    //     return [
+    //         'validate' => $validations,
+    //         'messages' => $validation_messages,
+    //     ];
+    // }
 
     private function saveSocials($staffId)
     {
@@ -2395,7 +2401,7 @@ class StaffDetail extends Component
     public $staff_rewards_type,$staff_rewards_year,$staff_rewards_remark,$staff_rewards_name;
     public $method = 'create', $editId;
 
-    public function add_multiple_modal($type, $index = null)
+    public function add_postings_modal($type, $index = null)
     {
 
 
@@ -2673,6 +2679,11 @@ public function add_staff_rewards_modal($type, $index = null)
 
         $this->method = 'create';
     }
+
+
+
+
+
 
     // ----------------- Rewards -----------------
     $this->data = ChStaffRewards::datas($this->rewards);

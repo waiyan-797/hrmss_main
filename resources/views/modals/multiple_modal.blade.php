@@ -1,7 +1,7 @@
 <div class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto text-left bg-gray-900 bg-opacity-20"
     wire:ignore.self>
     <!-- Modal Content -->
-    <div class="w-[800px] p-4 bg-white rounded-lg shadow-xl dark:bg-gray-800">
+    <div class="w-[900px] p-4 bg-white rounded-lg shadow-xl dark:bg-gray-800">
         <!-- Modal Content -->
         <h2 class="mb-4 text-lg font-semibold text-gray-500 uppercase dark:text-white font-arial">{{$data['modal_title']
             ?? ''}}</h2>
@@ -61,8 +61,7 @@
                         name="{{$data['column_types'][$index]['wire_array_key']}}"
                         class="block w-full p-2 text-sm border rounded"
                         :values="$data['column_types'][$index]['select_values']" placeholder="Select..." />
-                        <x-input-error class="mt-2"
-                        :messages="$errors->get('postings_rank')" />
+                    <x-input-error class="mt-2" :messages="$errors->get('postings_rank')" />
                     @endif
                 </div>
 
@@ -74,7 +73,7 @@
                             {{ isset($data['column_types'][$index]['require']) && $data['column_types'][$index]['require'] ? '*' : '' }}
                         </span>
                     </label>
-                 
+
                     <x-date-picker
                         wire:model="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
                         id="{{$data['column_types'][$index]['wire_array_key']}}"
@@ -85,6 +84,42 @@
                     --}}
                 </div>
 
+                @elseif ($data['column_types'][$index]['type'] == 'multiple-select')
+                <div class="m-3 w-full">
+                    <label for="{{$data['column_types'][$index]['wire_array_key']}}"
+                        class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
+                        {{$data['column_names'][$index] ?? ''}} <span class="text-rose-700">{{
+                            $data['column_types'][$index]['require'] ? '*' : ''}}</span>
+                    </label>
+                    <x-multiple-select
+                        model="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
+                        class="block w-full text-sm border rounded" placeholderValue="Select..."
+                        :options="$data['column_types'][$index]['select_values']" />
+                    {{--
+                    <x-input-error class="mt-2"
+                        :messages="$errors->get(['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])" />
+                    --}}
+                </div>
+
+                @elseif ($data['column_types'][$index]['type'] == 'checkbox')
+                <div class="w-full m-3">
+                    <label for="{{$data['column_types'][$index]['wire_array_key']}}"
+                        class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
+                        {{$data['column_names'][$index] ?? ''}} <span class="text-rose-700">{{
+                            $data['column_types'][$index]['require'] ? '*' : ''}}</span>
+                    </label>
+                    <input
+                        wire:model="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
+                        type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600"
+                        {{ ${$data['column_types'][$index]['wire_array_name'].'_'.$data['column_types'][$index]['wire_array_key']} == 1 ? 'checked' : '' }}
+                     />
+                    {{--
+                    <x-input-error class="mt-2"
+                        :messages="$errors->get($type['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])" />
+                    --}}
+
+                </div>
+
                 @endif
 
                 @endforeach
@@ -92,7 +127,7 @@
             </div>
 
             @if($errors->get('postings_rank'))
-             @dd($errors)
+            @dd($errors)
             @endif
 
 
@@ -108,6 +143,7 @@
 </div>
 {{-- @script
 <script type='defer'>
+
     document.addEventListener('livewire:initialized', () => {
     Livewire.on('showRemoveConfirmation', ({ index, id }) => {
         Swal.fire({

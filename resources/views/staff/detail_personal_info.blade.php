@@ -270,15 +270,38 @@
 <div class="w-full py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('နိုင်ငံခြားသွားရောက်ခြင်း')" class="font-semibold"/>
-        <button wire:click='add_abroads' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+        <button wire:click='add_abroads_modal("multiple_modal")' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
             <span class="sr-only">Add Icon</span>
         </button>
     </div>
+    @include('livewire/tables/multiple', [
+        'column_names' => [
+            
+            'သွားရောက်ခဲ့သည့်နိုင်ငံ',
+            'မြို့',
+            'သွားရောက်ခဲ့သည့်အကြောင်း',
+            'သင်တန်းတက်ခြင်းဖြစ်လျှင် အောင်/မအောင်',
+            'သင်တန်းဟုတ်/မဟုတ်',
+            'သင်တန်းတက်ခြင်းဖြစ်လျှင် အကြိမ်မည်မျှဖြင့်အောင်မြင်သည်',
+            'ထောက်ပံ့သည့်အဖွဲ့အစည်း',
+            'တွေ့ဆုံခဲ့သည့် ကုမ္ပဏီ၊ လူပုဂ္ဂိုလ်၊ ဌာန',
+            'သွားသည့်နေ့ (လ၊ ရက်၊ နှစ်)',
+            'ပြန်သည့်နေ့ (လ၊ ရက်၊ နှစ်)',
+            'နိုင်ငံခြားသို့သွားရောက်မည်ံနေ့ (လ၊ ရက်၊ နှစ်)',
+            'ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး'
+        ],
+        'columns' => ['country', 'towns', 'particular', 
+         'training_success_fail', 'abroad_type_id','training_success_count', 'sponser',
+        'meet_with','from_date','to_date','actual_abroad_date','position'],
+        'column_vals'=>$abroads,
+        'add_modal' => 'add_abroads_modal',
+        'del_method' => 'remove_abroads',
+    ])
     {{-- @dd($abroads) --}}
-    @include('staff_multiple_table', [
+    {{-- @include('staff_multiple_table', [
         'column_names' => [
             'သွားရောက်ခဲ့သည့်နိုင်ငံ',
             'မြို့',
@@ -374,7 +397,7 @@
             ],
         ],
         'del_method' => 'remove_abroads',
-    ])
+    ]) --}}
 </div>
 <div class="grid grid-cols-4 gap-4 py-5">
     <div class="col-span-4">
