@@ -10,11 +10,14 @@
                 @if($data['column_names'])
                 @foreach ($data['column_names'] as $index =>$item)
 
-                @if($data['column_types'][$index]['type'] === 'search_select')
+                @if(!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] === 'search_select')
 
                 <div class="m-3 w-full">
                     <label for="name" class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
-                        {{$data['column_names'][$index] ?? ''}} <span class="text-rose-700">{{ $data['column_types'][$index]['require'] ? '*' : ''}}</span>
+                        {{ isset($data['column_names'][$index]) ? $data['column_names'][$index] : '' }}
+                        <span class="text-rose-700">
+                            {{ isset($data['column_types'][$index]['require']) && $data['column_types'][$index]['require'] ? '*' : '' }}
+                        </span>
                     </label>
                     <x-searchable-select placeholder="Select..."
                         :values="$data['column_types'][$index]['select_values']"
@@ -24,11 +27,15 @@
                         :messages="$errors->get($data['column_types'][$index]['wire_array_name'] . '_'. $data['column_types'][$index]['wire_array_key'])" />
                 </div>
 
-                @elseif($data['column_types'][$index]['type'] ===
-                'text' || $data['column_types'][$index]['type'] === 'number')
+                @elseif(!empty($data['column_types']) && isset($data['column_types'][$index]) && 
+        ($data['column_types'][$index]['type'] === 'text' || $data['column_types'][$index]['type'] === 'number'))
                 <div class="m-3 w-full">
                     <label for="name" class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
-                        {{$data['column_names'][$index] ?? ''}}<span class="text-rose-700">{{ $data['column_types'][$index]['require'] ? '*' : ''}}</span>
+                        {{-- {{$data['column_names'][$index] ?? ''}}<span class="text-rose-700">{{ $data['column_types'][$index]['require'] ? '*' : ''}}</span> --}}
+                        {{ isset($data['column_names'][$index]) ? $data['column_names'][$index] : '' }}
+                        <span class="text-rose-700">
+                            {{ isset($data['column_types'][$index]['require']) && $data['column_types'][$index]['require'] ? '*' : '' }}
+                        </span>
                     </label>
                     <x-text-input
                         wire:model="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
@@ -38,10 +45,13 @@
                         class="block w-[10rem] p-2 text-sm border rounded " />
 
                 </div>
-                @elseif ($data['column_types'][$index]['type'] == 'select')
+                @elseif (!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] === 'search_select')
                 <div class="m-3 w-full">
                     <label for="name" class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
-                        {{$data['column_names'][$index] ?? ''}}<span class="text-rose-700">{{ $data['column_types'][$index]['require'] ? '*' : ''}}</span>
+                        {{ isset($data['column_names'][$index]) ? $data['column_names'][$index] : '' }}
+                        <span class="text-rose-700">
+                            {{ isset($data['column_types'][$index]['require']) && $data['column_types'][$index]['require'] ? '*' : '' }}
+                        </span>
                     </label>
                     @if (
                     !is_string($data['column_types'][$index]['select_values']))
@@ -56,10 +66,13 @@
                     @endif
                 </div>
 
-                @elseif($data['column_types'][$index]['type'] === 'date')
+                @elseif(!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] === 'date')
                 <div class="m-3 w-full">
                     <label for="{{$data['column_types'][$index]['wire_array_key']}}" class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
-                        {{$data['column_names'][$index] ?? ''}} <span class="text-rose-700">{{ $data['column_types'][$index]['require'] ? '*' : ''}}</span>
+                        {{ isset($data['column_names'][$index]) ? $data['column_names'][$index] : '' }}
+                        <span class="text-rose-700">
+                            {{ isset($data['column_types'][$index]['require']) && $data['column_types'][$index]['require'] ? '*' : '' }}
+                        </span>
                     </label>
                  
                     <x-date-picker
@@ -93,7 +106,7 @@
         </form>
     </div>
 </div>
-@script
+{{-- @script
 <script type='defer'>
     document.addEventListener('livewire:initialized', () => {
     Livewire.on('showRemoveConfirmation', ({ index, id }) => {
@@ -114,5 +127,27 @@
 
     
 });
+</script>
+@endscript --}}
+@script
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.on('showConfirmRemove', ({ model, index, id }) => {
+            Swal.fire({
+                title: 'Are You Sure?',
+                text: 'Do you want to delete this item?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Dynamically dispatch the removeModel method with the model type
+                    Livewire.dispatch('removeModel', { model: model, index: index, id: id });
+                }
+            });
+        });
+    });
 </script>
 @endscript

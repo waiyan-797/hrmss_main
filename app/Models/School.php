@@ -20,4 +20,8 @@ class School extends Model
         return $this->belongsTo(EducationType::class);
     }
 
+    public function education_group(){
+        return $this->belongsTo(EducationGroup::class);
+    }
+
 }

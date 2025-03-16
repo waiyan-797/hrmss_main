@@ -2,14 +2,14 @@
 <div class="w-full h-auto py-5   "  >
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('နေခဲ့ဖူးသောကျောင်းများ (ခုနှစ်၊ သက္ကရာဇ် ဖော်ပြရန်)')" class="font-semibold"/>
-        <button wire:click='add_schools' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+        <button wire:click='add_schools_modal("multiple_modal")' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
             <span class="sr-only">Add Icon</span>
         </button>
     </div>
-    @include('staff_multiple_table', [
+    {{-- @include('staff_multiple_table', [
         'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သောဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့','မှ','ထိ','မှတ်ချက်'],
         'data_master_add_stats' => ['edu_group', 'edu_type', null, null, null, null, null, null],
         'column_vals' => $schools,
@@ -67,23 +67,34 @@
 
         ],
         'del_method' => 'remove_schools',
+    ]) --}}
+    @include('livewire/tables/multiple', [
+        'column_names' => ['ဘွဲ့အုပ်စု', 'ဘွဲ့အမျိုးအစား', 'ရရှိခဲ့သောဘွဲ့အမည်', 'ကျောင်းအမည်', 'မြို့','မှ','ထိ','မှတ်ချက်'],
+        'action_name'=>'schools',
+        'del_method' => 'removeSchool',
     ])
 </div>
+
+
 
 <div class="w-full h-auto py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('သင်တန်း')" class="font-semibold"/>
-        <button wire:click='add_trainings' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+        <button wire:click='add_trainings_modal("multiple_modal")' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
             <span class="sr-only">Add Icon</span>
         </button>
     </div>
-    @include('table_for_trainings', [
-        'column_names' => ['သင်တန်းအမည်',
-        //  '',
-          'သင်တန်းအမှတ်စဉ်' , 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းအမျိုးအစား','အဆင့်အတန်း'],
+
+    @include('livewire/tables/multiple', [
+        'column_names' => ['သင်တန်းအမည်','သင်တန်းအမှတ်စဉ်' , 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းအမျိုးအစား','အဆင့်အတန်း'],
+        'action_name'=>'trainings',
+        'del_method' => 'removeTrainings',
+    ])
+    {{-- @include('table_for_trainings', [
+        'column_names' => ['သင်တန်းအမည်','သင်တန်းအမှတ်စဉ်' , 'မှ', 'ထိ', 'နေရာ', 'နိုင်ငံ', 'သင်တန်းအမျိုးအစား','အဆင့်အတန်း'],
         'data_master_add_stats' => [null, null, null, null, null, null, null, null, null],
         'add_event' => 'add_trainings',
         'column_vals' => $trainings,
@@ -94,11 +105,7 @@
                 'wire_array_key' => 'training_type',
                 'select_values' => $training_types,
             ],
-            // [
-            //     'type' => 'text',
-            //     'wire_array_name' => 'trainings',
-            //     'wire_array_key' => 'diploma_name',
-            // ],
+           
             [
                 'type' => 'text',
                 'wire_array_name' => 'trainings',
@@ -139,21 +146,26 @@
             ],
         ],
         'del_method' => 'remove_trainings',
-    ])
+    ]) --}}
 
 
 </div>
 <div class="w-full h-auto py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်')" class="font-semibold"/>
-        <button wire:click='add_awardings' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+        <button wire:click='add_awards_modal("multiple_modal")' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
             <span class="sr-only">Add Icon</span>
         </button>
     </div>
-    @include('staff_multiple_table', [
+    @include('livewire/tables/multiple', [
+        'column_names' => ['ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အမည်', 'ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်', 'အမိန့်အမှတ်/ခုနှစ်','မှတ်ချက်'],
+        'action_name'=>'awards',
+        'del_method' => 'removeAwards',
+    ])
+    {{-- @include('staff_multiple_table', [
         'column_names' => ['ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်အမည်', 'ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်', 'အမိန့်အမှတ်/ခုနှစ်','မှတ်ချက်'],
         'data_master_add_stats' => [null, null, null, null, null],
         'column_vals' => $awards,
@@ -182,7 +194,7 @@
             ],
         ],
         'del_method' => 'remove_awardings',
-    ])
+    ]) --}}
 </div>
 
 <div class="grid grid-cols-4 gap-4 py-5">
@@ -416,14 +428,19 @@
         {{-- <x-input-label :value="__('ရာဇဝတ်ပြစ်မှုခံရခြင်း')" class="font-semibold"/> --}}
         <x-input-label :value="__('ပြစ်ဒဏ်ခံရခြင်း')" class="font-semibold"/>
 
-        <button wire:click='add_punishments' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+        <button wire:click='add_punishments_modal("multiple_modal")' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
             <span class="sr-only">Add Icon</span>
         </button>
     </div>
-    @include('staff_multiple_table', [
+    @include('livewire/tables/multiple', [
+        'column_names' => ['ပြစ်ဒဏ်အမျိုးအစား', 'ပြစ်ဒဏ်ချမှတ်ခံရသည့် အကြောင်းအရင်း', 'မှ', 'ထိ'],
+        'action_name'=>'punishments',
+        'del_method' => 'removePunishments',
+    ])
+    {{-- @include('staff_multiple_table', [
         'column_names' => ['ပြစ်ဒဏ်အမျိုးအစား', 'ပြစ်ဒဏ်ချမှတ်ခံရသည့် အကြောင်းအရင်း', 'မှ', 'ထိ'],
         'data_master_add_stats' => [null, null, null, null],
         'column_vals' => $punishments,
@@ -452,20 +469,25 @@
             ],
         ],
         'del_method' => 'remove_punishments',
-    ])
+    ]) --}}
 </div>
 
 <div class="w-full py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('လူမှုရေးလှုပ်ရှားမှု')" class="font-semibold"/>
-        <button wire:click='add_socials' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+        <button wire:click='add_socials_modal("multiple_modal")' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
             <span class="sr-only">Add Icon</span>
         </button>
     </div>
-    @include('staff_multiple_table', [
+    @include('livewire/tables/multiple', [
+        'column_names' => ['အကြောင်းအရာ', 'မှတ်ချက်'],
+        'action_name'=>'socials',
+        'del_method' => 'removeSocials',
+    ])
+    {{-- @include('staff_multiple_table', [
         'column_names' => ['အကြောင်းအရာ', 'မှတ်ချက်'],
         'data_master_add_stats' => [null, null],
         'column_vals' => $socials,
@@ -482,20 +504,25 @@
             ],
         ],
         'del_method' => 'remove_socials',
-    ])
+    ]) --}}
 </div>
 
 <div class="w-full h-auto py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('ဘာသာစကားကျွမ်းကျင်မှု')" class="font-semibold"/>
-        <button wire:click='add_staff_languages' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+        <button wire:click='add_languages_modal("multiple_modal")' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
             <span class="sr-only">Add Icon</span>
         </button>
     </div>
-    @include('staff_multiple_table', [
+    @include('livewire/tables/multiple', [
+        'column_names' => ['ဘာသာစကား', 'အဆင့်', 'အရေး', 'အဖတ်', 'အပြော', 'မှတ်ချက်'],
+        'action_name'=>'staff_languages',
+        'del_method' => 'removeLanuages',
+    ])
+    {{-- @include('staff_multiple_table', [
         'column_names' => ['ဘာသာစကား', 'အဆင့်', 'အရေး', 'အဖတ်', 'အပြော', 'မှတ်ချက်'],
         'data_master_add_stats' => [null, null, null, null, null, null],
         'column_vals' => $staff_languages,
@@ -533,7 +560,7 @@
             ],
         ],
         'del_method' => 'remove_staff_languages',
-    ])
+    ]) --}}
 </div>
 
 
@@ -542,14 +569,19 @@
 <div class="w-full h-auto py-5">
     <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
         <x-input-label :value="__('ဆုတံဆိပ်များ')" class="font-semibold"/>
-        <button wire:click='add_staff_rewards' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+        <button wire:click='add_staff_rewards_modal("multiple_modal")' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
             <span class="sr-only">Add Icon</span>
         </button>
     </div>
-    @include('staff_multiple_table', [
+    @include('livewire/tables/multiple', [
+        'column_names' => ['အမျိုးအစား', 'ပြည်တွင်း/နိုင်းငံခြား', 'ခုနှစ်','မှတ်ချက်'],
+        'action_name'=>'staff_rewards',
+        'del_method' => 'removeRewards',
+    ])
+    {{-- @include('staff_multiple_table', [
         'column_names' => ['အမျိုးအစား', 'ပြည်တွင်း/နိုင်းငံခြား', 'ခုနှစ်','မှတ်ချက်'],
         'data_master_add_stats' => [null, null, null, null],
         'column_vals' => $staff_rewards,
@@ -577,5 +609,5 @@
             ],
         ],
         'del_method' => 'remove_staff_rewards',
-    ])
+    ]) --}}
 </div>

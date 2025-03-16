@@ -24,6 +24,9 @@ class EducationGroup extends Model
     }
 
 
+    public function school(){
+        return $this->hasMany(School::class);
+    }
 
 
 }

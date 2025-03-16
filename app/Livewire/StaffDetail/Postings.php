@@ -3,6 +3,7 @@
 namespace App\Livewire\StaffDetail;
 
 use App\Models\Posting;
+use App\Models\School;
 use Livewire\Component;
 use Carbon\Carbon;
 
@@ -137,8 +138,6 @@ class Postings extends Component
 
         return $posting;
     }
-
-
 
     
 }
