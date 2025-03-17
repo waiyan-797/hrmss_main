@@ -2957,63 +2957,85 @@ class StaffDetail extends Component
     }
 
     public function save_languages_modal()
-    {
-        try {
-            $this->validate(
-                ChLanguages::rules(),
-                ChLanguages::messages()
-            );
-        } catch (ValidationException $e) {
-            $errors = $e->validator->errors()->all();
-            $this->dispatch('validation', [
-                'type' => 'Validation Error',
-                'message' => $errors[0],
-            ]);
-            return;
-        }
-    
-        $chlanguages = new ChLanguages;
-        
-        if($this->editIndex == null){
-            $this->editId = null;
-        }
-         $language =$chlanguages->languageCreate(
-                      $this->editId,
-                 $this->staff->id,
-$this->staff_languages_language, 
-    $this->staff_languages_rank, 
- $this->staff_languages_writing, 
- $this->staff_languages_reading, 
-$this->staff_languages_speaking, 
-  $this->staff_languages_remark
-                    );
+{
+    try {
+        $this->validate(
+            ChLanguages::rules(),
+            ChLanguages::messages()
+        );
+    } catch (ValidationException $e) {
+        $errors = $e->validator->errors()->all();
+        $this->dispatch('validation', [
+            'type' => 'Validation Error',
+            'message' => $errors[0],
+        ]);
 
-            if($language){
-                    $display = [
-                    'id' => $language->id,
-                    'language' => $language->language->name,
-                    'rank' => $language->rank,
-                    'writing' => $language->writing,
-                    'reading' => $language->reading,
-                    'speaking' => $language->speaking,
-                    'remark' => $language->remark,
-                ];
-
-                if($this->editIndex ==null){
-                    $this->languages[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
-                }else{
-                    $this->languages[$this->editIndex] = $display;
-                    $this->alert_messages = 'Updated successfully!';
-                }
-            }
-    
-       
-            $this->dispatch('alert', ['type' => 'success', 'message' => (string) $this->alert_messages]);
-
-        $this->add_model = null;
+        return;
     }
 
+    $chlanguages = new ChLanguages;
+
+    if ($this->method == 'create') {
+
+
+        $language = $chlanguages->setCreate(
+            $this->staff->id, 
+            $this->staff_languages_language, 
+            $this->staff_languages_rank, 
+            $this->staff_languages_writing, 
+            $this->staff_languages_reading, 
+            $this->staff_languages_speaking, 
+            $this->staff_languages_remark
+        );
+
+        if ($language) {
+            $this->staff_languages[] = [
+                'id' => $language->id,
+                'language' => $language->language->name,
+                'rank' => $language->rank,
+                'writing' => $language->writing,
+                'reading' => $language->reading,
+                'speaking' => $language->speaking,
+                'remark' => $language->remark,
+            ];
+        }
+
+
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Created successfully!']);
+    } else if ($this->method == 'edit') {
+
+
+        if (array_key_exists($this->editId, $this->staff_languages)) {
+            $id = $this->staff_languages[$this->editId]['id'];
+
+            $language = $chlanguages->setEditData(
+                $id, 
+                $this->staff->id, 
+                $this->staff_languages_language, 
+                $this->staff_languages_rank, 
+                $this->staff_languages_writing, 
+                $this->staff_languages_reading, 
+                $this->staff_languages_speaking, 
+                $this->staff_languages_remark
+            );
+
+            $this->staff_languages[$this->editId] = [
+                'id' => $language->id,
+                'language' => $language->language->name,
+                'rank' => $language->rank,
+                'writing' => $language->writing,
+                'reading' => $language->reading,
+                'speaking' => $language->speaking,
+                'remark' => $language->remark,
+            ];
+        }
+
+
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Updated successfully!']);
+    }
+
+    $this->add_model = null;
+}
     public function add_staff_rewards_modal($type, $index = null)
     {
         if ($index !== null) {

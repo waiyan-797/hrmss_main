@@ -68,20 +68,37 @@ class StaffLanguages extends Component
         ];
     }
 
-    public function languageCreate($id,$staffId,$staff_languages_language, $staff_languages_rank, $staff_languages_writing, $staff_languages_reading, $staff_languages_speaking, $staff_languages_remark){
-    $language = StaffLanguage::updateOrCreate([
-        'id'=>$id
-    ],
-        [
-            'staff_id' => $staffId,
-            'language_id' => $staff_languages_language == '' ? null : $staff_languages_language,
-            'rank' => $staff_languages_rank == '' ? null : $staff_languages_rank,
-            'writing' => $staff_languages_writing == '' ? null : $staff_languages_writing,
-            'reading' => $staff_languages_reading == '' ? null : $staff_languages_reading,
-            'speaking' => $staff_languages_speaking == '' ? null : $staff_languages_speaking,
-            'remark' => $staff_languages_remark == '' ? null : $staff_languages_remark,
-      ]);
-
-      return $language;
-  }
+    public function setCreate($staffId, $staff_languages_language, $staff_languages_rank, $staff_languages_writing, $staff_languages_reading, $staff_languages_speaking, $staff_languages_remark)
+    {
+        $language = StaffLanguage::updateOrCreate(
+            [
+                'staff_id' => $staffId,
+                'language_id' => $staff_languages_language == '' ? null : $staff_languages_language,
+                'rank' => $staff_languages_rank == '' ? null : $staff_languages_rank,
+                'writing' => $staff_languages_writing == '' ? null : $staff_languages_writing,
+                'reading' => $staff_languages_reading == '' ? null : $staff_languages_reading,
+                'speaking' => $staff_languages_speaking == '' ? null : $staff_languages_speaking,
+                'remark' => $staff_languages_remark == '' ? null : $staff_languages_remark,
+            ]
+        );
+    
+        return $language;
+    }
+    
+    public function setEditData($editId, $staffId, $staff_languages_language, $staff_languages_rank, $staff_languages_writing, $staff_languages_reading, $staff_languages_speaking, $staff_languages_remark)
+    {
+        $post = StaffLanguage::findOrFail($editId);
+    
+        $post->staff_id = $staffId;
+        $post->language_id = $staff_languages_language == '' ? null : $staff_languages_language;
+        $post->rank = $staff_languages_rank == '' ? null : $staff_languages_rank;
+        $post->writing = $staff_languages_writing == '' ? null : $staff_languages_writing;
+        $post->reading = $staff_languages_reading == '' ? null : $staff_languages_reading;
+        $post->speaking = $staff_languages_speaking == '' ? null : $staff_languages_speaking;
+        $post->remark = $staff_languages_remark == '' ? null : $staff_languages_remark;
+    
+        $post->save();
+    
+        return $post;
+    }
 }
