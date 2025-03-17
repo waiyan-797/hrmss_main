@@ -2479,10 +2479,10 @@ class StaffDetail extends Component
 
         $siblings = new Siblings;
 
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId = null;
         }
-           
+
             $sibling = $siblings->siblingsCreate($this->editId,$this->staff->id,$this->siblings_name,$this->siblings_ethnic,$this->siblings_religion,$this->siblings_gender,$this->siblings_place_of_birth,$this->siblings_occupation,$this->siblings_address, $this->siblings_relation);
 
             if ($sibling) {
@@ -2499,9 +2499,9 @@ class StaffDetail extends Component
                     'relation' => $sibling->relation->name,
                 ];
 
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->siblings[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->siblings[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -2515,7 +2515,6 @@ class StaffDetail extends Component
     //for father siblings
     public function add_father_siblings_modal($type, $index = null)
     {
-        dd($index);
 
         if ($index !== null) {
             $this->method = 'edit';
@@ -2566,7 +2565,7 @@ class StaffDetail extends Component
 
         $fatherSiblings = new \App\Livewire\StaffDetail\FatherSibling;
 
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId = null;
         }
            
@@ -2585,9 +2584,9 @@ class StaffDetail extends Component
                     'address' => $fatherSibling->address,
                     'relation' => $fatherSibling->relation->name,
                 ];
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->father_siblings[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->father_siblings[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -2650,7 +2649,7 @@ class StaffDetail extends Component
 
         $motherSiblings = new \App\Livewire\StaffDetail\MotherSibling;
 
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId = null;
         }
            
@@ -2669,9 +2668,9 @@ class StaffDetail extends Component
                     'address' => $motherSibling->address,
                     'relation' => $motherSibling->relation->name,
                 ];
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->mother_siblings[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->mother_siblings[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -2735,7 +2734,7 @@ class StaffDetail extends Component
 
         $spouses = new \App\Livewire\StaffDetail\spouse;
 
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId = null;
         }
            
@@ -2754,9 +2753,9 @@ class StaffDetail extends Component
                     'address' => $spouse->address,
                     'relation' => $spouse->relation->name,
                 ];
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->spouses[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->spouses[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -2820,7 +2819,7 @@ class StaffDetail extends Component
 
         $children = new \App\Livewire\StaffDetail\Children;
 
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId = null;
         }
            
@@ -2839,9 +2838,9 @@ class StaffDetail extends Component
                     'address' => $child->address,
                     'relation' => $child->relation->name,
                 ];
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->children[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->children[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -2906,7 +2905,7 @@ class StaffDetail extends Component
 
         $spouseSiblings = new \App\Livewire\StaffDetail\SpouseSibling;
 
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId = null;
         }
            
@@ -2925,9 +2924,9 @@ class StaffDetail extends Component
                     'address' => $spouseSibling->address,
                     'relation' => $spouseSibling->relation->name,
                 ];
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->spouse_siblings[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->spouse_siblings[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -2991,7 +2990,7 @@ class StaffDetail extends Component
 
         $spouseFatherSiblings = new \App\Livewire\StaffDetail\SpouseFatherSibling;
 
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId = null;
         }
            
@@ -3010,9 +3009,9 @@ class StaffDetail extends Component
                     'address' => $spouseFatherSibling->address,
                     'relation' => $spouseFatherSibling->relation->name,
                 ];
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->spouse_father_siblings[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->spouse_father_siblings[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -3075,7 +3074,7 @@ class StaffDetail extends Component
 
         $spouseMotherSibling = new \App\Livewire\StaffDetail\SpouseMotherSibling;
 
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId = null;
         }
            
@@ -3094,9 +3093,9 @@ class StaffDetail extends Component
                     'address' => $spouseMotherSibling->address,
                     'relation' => $spouseMotherSibling->relation->name,
                 ];
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->spouse_mother_siblings[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->spouse_mother_siblings[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -3191,7 +3190,7 @@ class StaffDetail extends Component
 
                 if($this->editIndex ===null){
                     $this->schools[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->schools[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -3401,7 +3400,7 @@ class StaffDetail extends Component
 
                 if($this->editIndex ===null){
                     $this->awards[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->awards[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -3489,7 +3488,7 @@ class StaffDetail extends Component
 
                 if($this->editIndex ===null){
                     $this->punishments[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->punishments[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -3548,7 +3547,6 @@ class StaffDetail extends Component
         $chsocials = new ChSocials;
         
         if($this->editIndex === null){
-            // dd($this->editIndex);
             $this->editId = null;
         }
          $social =$chsocials->socialCreate(
@@ -3565,9 +3563,9 @@ class StaffDetail extends Component
                     'remark' => $social->remark,
                 ];
 
-                if($this->editIndex ===null){
+                if($this->editIndex === null){
                     $this->socials[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->socials[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -3764,7 +3762,7 @@ class StaffDetail extends Component
 
                 if($this->editIndex ===null){
                     $this->rewards[] = $display;
-                    $this->alert_messages = 'Cerated Successfully!';
+                    $this->alert_messages = 'Created Successfully!';
                 }else{
                     $this->rewards[$this->editIndex] = $display;
                     $this->alert_messages = 'Updated successfully!';
@@ -4006,7 +4004,6 @@ class StaffDetail extends Component
     public function remove_siblings($index, $id)
     {
 
-        dd('sdfl'.$index.'fjk'.$id);
         $sibling = Sibling::findOrFail($id);
         $sibling->delete();
         $this->removeModel('siblings', Sibling::class, $index, []);
