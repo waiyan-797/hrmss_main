@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Livewire\StaffDetail\Siblings;
 use App\Models\Abroad;
 use App\Models\Award;
 use App\Models\Awarding;
@@ -1093,50 +1094,6 @@ class StaffDetail extends Component
         $this->removeModel('educations', StaffEducation::class, $index, $attaches);
     }
 
-
-
-
-
-    public function remove_siblings($index)
-    {
-        $this->removeModel('siblings', Sibling::class, $index, []);
-    }
-
-    public function remove_father_siblings($index)
-    {
-        $this->removeModel('father_siblings', FatherSibling::class, $index, []);
-    }
-
-    public function remove_mother_siblings($index)
-    {
-        $this->removeModel('mother_siblings',  MotherSibling::class, $index, []);
-    }
-
-    public function remove_spouses($index)
-    {
-        $this->removeModel('spouses',  Spouse::class, $index, []);
-    }
-
-    public function remove_children($index)
-    {
-        $this->removeModel('children',  Children::class, $index, []);
-    }
-
-    public function remove_spouse_siblings($index)
-    {
-        $this->removeModel('spouse_siblings',  SpouseSibling::class, $index, []);
-    }
-
-    public function remove_spouse_father_siblings($index)
-    {
-        $this->removeModel('spouse_father_siblings',  SpouseFatherSibling::class, $index, []);
-    }
-
-    public function remove_spouse_mother_siblings($index)
-    {
-        $this->removeModel('spouse_mother_siblings',  SpouseMotherSibling::class, $index, []);
-    }
-
     public function remove_schools($index)
     {
 
@@ -2060,6 +2017,7 @@ class StaffDetail extends Component
         $this->side_departments = Department::where('ministry_id', $value)->get();
     }
 
+
     public function render()
     {
 
@@ -2451,8 +2409,703 @@ class StaffDetail extends Component
         $this->submit_form = "save_postings_modal";
     }
 
+    //declaring for relatives
+    public $siblings_name, $siblings_religion, $siblings_ethnic,$siblings_gender,$siblings_place_of_birth,$siblings_occupation,$siblings_address,$siblings_relation;
 
-    //-----------------နေခဲ့ဖူးသောကျောင်းများ --------------------
+    public $fatherSibling_name, $fatherSibling_religion, $fatherSibling_ethnic,$fatherSibling_gender,$fatherSibling_place_of_birth,$fatherSibling_occupation,$fatherSibling_address,$fatherSibling_relation;
+
+    public $motherSibling_name, $motherSibling_religion, $motherSibling_ethnic,$motherSibling_gender,$motherSibling_place_of_birth,$motherSibling_occupation,$motherSibling_address,$motherSibling_relation;
+
+    public $spouses_name, $spouse_religion, $spouse_ethnic,$spouse_gender,$spouse_place_of_birth,$spouse_occupation,$spouse_address,$spouse_relation;
+
+    public $children_name, $children_religion, $children_ethnic,$children_gender,$children_place_of_birth,$children_occupation,$children_address,$children_relation;
+
+    public $spouseSibling_name, $spouseSibling_religion, $spouseSibling_ethnic,$spouseSibling_gender,$spouseSibling_place_of_birth,$spouseSibling_occupation,$spouseSibling_address,$spouseSibling_relation;
+
+    public $spouseFatherSibling_name, $spouseFatherSibling_religion, $spouseFatherSibling_ethnic,$spouseFatherSibling_gender,$spouseFatherSibling_place_of_birth,$spouseFatherSibling_occupation,$spouseFatherSibling_address,$spouseFatherSibling_relation;
+
+    public $spouseMotherSibling_name, $spouseMotherSibling_religion, $spouseMotherSibling_ethnic,$spouseMotherSibling_gender,$spouseMotherSibling_place_of_birth,$spouseMotherSibling_occupation,$spouseMotherSibling_address,$spouseMotherSibling_relation;
+
+    //for siblings
+    public function add_siblings_modal($type, $index = null)
+    {
+
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
+
+            $id = $this->siblings[$index]['id'];
+            $this->editId = $id;
+            $oldData = Sibling::findOrFail($id);
+
+            $this->siblings_name = $oldData->name;
+            $this->siblings_ethnic = $oldData->ethnic_id;
+            $this->siblings_religion = $oldData->religion_id;
+            $this->siblings_place_of_birth = $oldData->place_of_birth;
+            $this->siblings_gender = $oldData->gender_id;
+            $this->siblings_occupation = $oldData->occupation;
+            $this->siblings_address = $oldData->address;
+            $this->siblings_relation = $oldData->relation_id;
+
+        } else {
+                       
+        $this->siblings_name=null; $this->siblings_ethnic=null; $this->siblings_religion=null;  $this->siblings_place_of_birth=null; $this->siblings_gender=null; $this->siblings_occupation=null; $this->siblings_address=null; $this->siblings_relation=null;
+        $this->method = 'create';
+        }
+    
+        $this->data = StaffDetail\Siblings::datas($this->religions,$this->ethnics,$this->genders,$this->relations);
+        
+        $this->add_model = $type;
+        $this->submit_form = "save_siblings_modal";
+    }
+   
+    public function save_siblings_modal()
+    {
+        
+        try {
+            
+            $this->validate(
+                Siblings::rules(),
+                Siblings::messages()
+            );
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->all();
+                $this->dispatch('validation', [
+                    'type' => 'Validation Error',
+                    'message' => $errors[0],
+                ]);
+            return;
+        }
+
+        $siblings = new Siblings;
+
+        if($this->editIndex == null){
+            $this->editId = null;
+        }
+           
+            $sibling = $siblings->siblingsCreate($this->editId,$this->staff->id,$this->siblings_name,$this->siblings_ethnic,$this->siblings_religion,$this->siblings_gender,$this->siblings_place_of_birth,$this->siblings_occupation,$this->siblings_address, $this->siblings_relation);
+
+            if ($sibling) {
+                
+                $display= [
+                    'id' => $sibling->id,
+                    'name' => $sibling->name,
+                    'ethnic' => $sibling->ethnic->name,
+                    'religion' => $sibling->religion->name,
+                    'place_of_birth' => $sibling->place_of_birth,
+                    'gender_id' => $sibling->gender->name,
+                    'occupation' => $sibling->occupation,
+                    'address' => $sibling->address,
+                    'relation' => $sibling->relation->name,
+                ];
+
+                if($this->editIndex ==null){
+                    $this->siblings[] = $display;
+                    $this->alert_messages = 'Cerated Successfully!';
+                }else{
+                    $this->siblings[$this->editIndex] = $display;
+                    $this->alert_messages = 'Updated successfully!';
+                }
+            }
+            $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+            $this->add_model = null;
+
+    }
+
+    //for father siblings
+    public function add_father_siblings_modal($type, $index = null)
+    {
+        dd($index);
+
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
+
+            $id = $this->father_siblings[$index]['id'];
+            $this->editId = $id;
+            $oldData = FatherSibling::findOrFail($id);
+
+            $this->fatherSibling_name = $oldData->name;
+            $this->fatherSibling_ethnic = $oldData->ethnic_id;
+            $this->fatherSibling_religion = $oldData->religion_id;
+            $this->fatherSibling_place_of_birth = $oldData->place_of_birth;
+            $this->fatherSibling_gender = $oldData->gender_id;
+            $this->fatherSibling_occupation = $oldData->occupation;
+            $this->fatherSibling_address = $oldData->address;
+            $this->fatherSibling_relation = $oldData->relation_id;
+
+        } else {
+                       
+        $this->fatherSibling_name=null; $this->fatherSibling_ethnic=null; $this->fatherSibling_religion=null;  $this->fatherSibling_place_of_birth=null; $this->fatherSibling_gender=null; $this->fatherSibling_occupation=null; $this->fatherSibling_address=null; $this->fatherSibling_relation=null;
+            
+            $this->method = 'create';
+        }
+        
+        $this->data = StaffDetail\FatherSibling::datas($this->religions,$this->ethnics,$this->genders,$this->relations);
+        
+        $this->add_model = $type;
+        $this->submit_form = "save_father_siblings_modal";
+    }
+   
+    public function save_father_siblings_modal()
+    {
+        try {
+            
+            $this->validate(
+                \App\Livewire\StaffDetail\FatherSibling::rules(),
+                \App\Livewire\StaffDetail\FatherSibling::messages()
+            );
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->all();
+                $this->dispatch('validation', [
+                    'type' => 'Validation Error',
+                    'message' => $errors[0],
+                ]);
+            return;
+        }
+
+        $fatherSiblings = new \App\Livewire\StaffDetail\FatherSibling;
+
+        if($this->editIndex == null){
+            $this->editId = null;
+        }
+           
+            $fatherSibling = $fatherSiblings->fatherSiblingsCreate($this->editId,$this->staff->id,$this->fatherSibling_name,$this->fatherSibling_ethnic,$this->fatherSibling_religion,$this->fatherSibling_gender,$this->fatherSibling_place_of_birth,$this->fatherSibling_occupation,$this->fatherSibling_address, $this->fatherSibling_relation);
+
+            if ($fatherSibling) {
+                
+                $display= [
+                    'id' => $fatherSibling->id,
+                    'name' => $fatherSibling->name,
+                    'ethnic' => $fatherSibling->ethnic->name,
+                    'religion' => $fatherSibling->religion->name,
+                    'place_of_birth' => $fatherSibling->place_of_birth,
+                    'gender_id' => $fatherSibling->gender->name,
+                    'occupation' => $fatherSibling->occupation,
+                    'address' => $fatherSibling->address,
+                    'relation' => $fatherSibling->relation->name,
+                ];
+                if($this->editIndex ==null){
+                    $this->father_siblings[] = $display;
+                    $this->alert_messages = 'Cerated Successfully!';
+                }else{
+                    $this->father_siblings[$this->editIndex] = $display;
+                    $this->alert_messages = 'Updated successfully!';
+                }
+            }
+            $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+
+            $this->add_model = null;
+    }
+    //for mother siblings
+    public function add_mother_siblings_modal($type, $index = null)
+    {
+
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
+
+            $id = $this->mother_siblings[$index]['id'];
+            $this->editId = $id;
+            $oldData = MotherSibling::findOrFail($id);
+
+            $this->motherSibling_name = $oldData->name;
+            $this->motherSibling_ethnic = $oldData->ethnic_id;
+            $this->motherSibling_religion = $oldData->religion_id;
+            $this->motherSibling_place_of_birth = $oldData->place_of_birth;
+            $this->motherSibling_gender = $oldData->gender_id;
+            $this->motherSibling_occupation = $oldData->occupation;
+            $this->motherSibling_address = $oldData->address;
+            $this->motherSibling_relation = $oldData->relation_id;
+
+        } else {
+                       
+        $this->motherSibling_name=null; $this->motherSibling_ethnic=null; $this->motherSibling_religion=null;  $this->motherSibling_place_of_birth=null; $this->motherSibling_gender=null; $this->motherSibling_occupation=null; $this->motherSibling_address=null; $this->motherSibling_relation=null;
+            
+            $this->method = 'create';
+        }
+        
+        $this->data = StaffDetail\MotherSibling::datas($this->religions,$this->ethnics,$this->genders,$this->relations);
+        
+        $this->add_model = $type;
+        $this->submit_form = "save_mother_siblings_modal";
+    }
+   
+    public function save_mother_siblings_modal()
+    {
+        try {
+            
+            $this->validate(
+                \App\Livewire\StaffDetail\MotherSibling::rules(),
+                \App\Livewire\StaffDetail\MotherSibling::messages()
+            );
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->all();
+                $this->dispatch('validation', [
+                    'type' => 'Validation Error',
+                    'message' => $errors[0],
+                ]);
+            return;
+        }
+
+        $motherSiblings = new \App\Livewire\StaffDetail\MotherSibling;
+
+        if($this->editIndex == null){
+            $this->editId = null;
+        }
+           
+            $motherSibling = $motherSiblings->motherSiblingsCreate($this->editId,$this->staff->id,$this->motherSibling_name,$this->motherSibling_ethnic,$this->motherSibling_religion,$this->motherSibling_gender,$this->motherSibling_place_of_birth,$this->motherSibling_occupation,$this->motherSibling_address, $this->motherSibling_relation);
+
+            if ($motherSibling) {
+                
+                $display= [
+                    'id' => $motherSibling->id,
+                    'name' => $motherSibling->name,
+                    'ethnic' => $motherSibling->ethnic->name,
+                    'religion' => $motherSibling->religion->name,
+                    'place_of_birth' => $motherSibling->place_of_birth,
+                    'gender_id' => $motherSibling->gender->name,
+                    'occupation' => $motherSibling->occupation,
+                    'address' => $motherSibling->address,
+                    'relation' => $motherSibling->relation->name,
+                ];
+                if($this->editIndex ==null){
+                    $this->mother_siblings[] = $display;
+                    $this->alert_messages = 'Cerated Successfully!';
+                }else{
+                    $this->mother_siblings[$this->editIndex] = $display;
+                    $this->alert_messages = 'Updated successfully!';
+                }
+            }
+            $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+
+            $this->add_model = null;
+    }
+
+    //for spouse
+    public function add_spouses_modal($type, $index = null)
+    {
+
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
+
+            $id = $this->spouses[$index]['id'];
+            $this->editId = $id;
+            $oldData = Spouse::findOrFail($id);
+
+            $this->spouses_name = $oldData->name;
+            $this->spouse_ethnic = $oldData->ethnic_id;
+            $this->spouse_religion = $oldData->religion_id;
+            $this->spouse_place_of_birth = $oldData->place_of_birth;
+            $this->spouse_gender = $oldData->gender_id;
+            $this->spouse_occupation = $oldData->occupation;
+            $this->spouse_address = $oldData->address;
+            $this->spouse_relation = $oldData->relation_id;
+
+        } else {
+                       
+        $this->spouses_name=null; $this->spouse_ethnic=null; $this->spouse_religion=null;  $this->spouse_place_of_birth=null; $this->spouse_gender=null; $this->spouse_occupation=null; $this->spouse_address=null; $this->spouse_relation=null;
+            
+            $this->method = 'create';
+        }
+        
+        $this->data = StaffDetail\spouse::datas($this->religions,$this->ethnics,$this->genders,$this->relations);
+        
+        $this->add_model = $type;
+        $this->submit_form = "save_spouses_modal";
+    }
+   
+    public function save_spouses_modal()
+    {
+        try {
+            
+            $this->validate(
+                \App\Livewire\StaffDetail\spouse::rules(),
+                \App\Livewire\StaffDetail\spouse::messages()
+            );
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->all();
+                $this->dispatch('validation', [
+                    'type' => 'Validation Error',
+                    'message' => $errors[0],
+                ]);
+            return;
+        }
+
+        $spouses = new \App\Livewire\StaffDetail\spouse;
+
+        if($this->editIndex == null){
+            $this->editId = null;
+        }
+           
+            $spouse = $spouses->spouseCreate($this->editId,$this->staff->id,$this->spouses_name,$this->spouse_ethnic,$this->spouse_religion,$this->spouse_gender,$this->spouse_place_of_birth,$this->spouse_occupation,$this->spouse_address, $this->spouse_relation);
+
+            if ($spouse) {
+                
+                $display= [
+                    'id' => $spouse->id,
+                    'name' => $spouse->name,
+                    'ethnic' => $spouse->ethnic->name,
+                    'religion' => $spouse->religion->name,
+                    'place_of_birth' => $spouse->place_of_birth,
+                    'gender_id' => $spouse->gender->name,
+                    'occupation' => $spouse->occupation,
+                    'address' => $spouse->address,
+                    'relation' => $spouse->relation->name,
+                ];
+                if($this->editIndex ==null){
+                    $this->spouses[] = $display;
+                    $this->alert_messages = 'Cerated Successfully!';
+                }else{
+                    $this->spouses[$this->editIndex] = $display;
+                    $this->alert_messages = 'Updated successfully!';
+                }
+            }
+            $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+
+            $this->add_model = null;
+    }
+
+    //for children
+    public function add_children_modal($type, $index = null)
+    {
+
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
+
+            $id = $this->children[$index]['id'];
+            $this->editId = $id;
+            $oldData = Children::findOrFail($id);
+
+            $this->children_name = $oldData->name;
+            $this->children_ethnic = $oldData->ethnic_id;
+            $this->children_religion = $oldData->religion_id;
+            $this->children_place_of_birth = $oldData->place_of_birth;
+            $this->children_gender = $oldData->gender_id;
+            $this->children_occupation = $oldData->occupation;
+            $this->children_address = $oldData->address;
+            $this->children_relation = $oldData->relation_id;
+
+        } else {
+                       
+        $this->children_name=null; $this->children_ethnic=null; $this->children_religion=null;  $this->children_place_of_birth=null; $this->children_gender=null; $this->children_occupation=null; $this->children_address=null; $this->fatherSibling_relation=null;
+            
+            $this->method = 'create';
+        }
+        
+        $this->data = StaffDetail\Children::datas($this->religions,$this->ethnics,$this->genders,$this->relations);
+        
+        $this->add_model = $type;
+        $this->submit_form = "save_children_modal";
+    }
+   
+    public function save_children_modal()
+    {
+        try {
+            
+            $this->validate(
+                \App\Livewire\StaffDetail\Children::rules(),
+                \App\Livewire\StaffDetail\Children::messages()
+            );
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->all();
+                $this->dispatch('validation', [
+                    'type' => 'Validation Error',
+                    'message' => $errors[0],
+                ]);
+            return;
+        }
+
+        $children = new \App\Livewire\StaffDetail\Children;
+
+        if($this->editIndex == null){
+            $this->editId = null;
+        }
+           
+            $child = $children->childrenCreate($this->editId,$this->staff->id,$this->children_name,$this->children_ethnic,$this->children_religion,$this->children_gender,$this->children_place_of_birth,$this->children_occupation,$this->children_address, $this->children_relation);
+
+            if ($child) {
+                
+                $display= [
+                    'id' => $child->id,
+                    'name' => $child->name,
+                    'ethnic' => $child->ethnic->name,
+                    'religion' => $child->religion->name,
+                    'place_of_birth' => $child->place_of_birth,
+                    'gender_id' => $child->gender->name,
+                    'occupation' => $child->occupation,
+                    'address' => $child->address,
+                    'relation' => $child->relation->name,
+                ];
+                if($this->editIndex ==null){
+                    $this->children[] = $display;
+                    $this->alert_messages = 'Cerated Successfully!';
+                }else{
+                    $this->children[$this->editIndex] = $display;
+                    $this->alert_messages = 'Updated successfully!';
+                }
+            }
+            $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+
+            $this->add_model = null;
+    }
+
+    //for spouse siblings
+
+    public function add_spouse_siblings_modal($type, $index = null)
+    {
+
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
+
+            $id = $this->spouse_siblings[$index]['id'];
+            $this->editId = $id;
+            $oldData = SpouseSibling::findOrFail($id);
+
+            $this->spouseSibling_name = $oldData->name;
+            $this->spouseSibling_ethnic = $oldData->ethnic_id;
+            $this->spouseSibling_religion = $oldData->religion_id;
+            $this->spouseSibling_place_of_birth = $oldData->place_of_birth;
+            $this->spouseSibling_gender = $oldData->gender_id;
+            $this->spouseSibling_occupation = $oldData->occupation;
+            $this->spouseSibling_address = $oldData->address;
+            $this->spouseSibling_relation = $oldData->relation_id;
+
+        } else {
+                       
+        $this->spouseSibling_name=null; $this->spouseSibling_ethnic=null; $this->spouseSibling_religion=null;  $this->spouseSibling_place_of_birth=null; $this->spouseSibling_gender=null; $this->spouseSibling_occupation=null; $this->spouseSibling_address=null; $this->spouseSibling_relation=null;
+            
+            $this->method = 'create';
+        }
+        
+        $this->data = StaffDetail\SpouseSibling::datas($this->religions,$this->ethnics,$this->genders,$this->relations);
+        
+        $this->add_model = $type;
+        $this->submit_form = "save_spouse_siblings_modal";
+    }
+   
+    public function save_spouse_siblings_modal()
+    {
+        try {
+            
+            $this->validate(
+                \App\Livewire\StaffDetail\SpouseSibling::rules(),
+                \App\Livewire\StaffDetail\SpouseSibling::messages()
+            );
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->all();
+                $this->dispatch('validation', [
+                    'type' => 'Validation Error',
+                    'message' => $errors[0],
+                ]);
+            return;
+        }
+
+        $spouseSiblings = new \App\Livewire\StaffDetail\SpouseSibling;
+
+        if($this->editIndex == null){
+            $this->editId = null;
+        }
+           
+            $spouseSibling = $spouseSiblings->spouseSiblingsCreate($this->editId,$this->staff->id,$this->spouseSibling_name,$this->spouseSibling_ethnic,$this->spouseSibling_religion,$this->spouseSibling_gender,$this->spouseSibling_place_of_birth,$this->spouseSibling_occupation,$this->spouseSibling_address, $this->spouseSibling_relation);
+
+            if ($spouseSibling) {
+                
+                $display= [
+                    'id' => $spouseSibling->id,
+                    'name' => $spouseSibling->name,
+                    'ethnic' => $spouseSibling->ethnic->name,
+                    'religion' => $spouseSibling->religion->name,
+                    'place_of_birth' => $spouseSibling->place_of_birth,
+                    'gender_id' => $spouseSibling->gender->name,
+                    'occupation' => $spouseSibling->occupation,
+                    'address' => $spouseSibling->address,
+                    'relation' => $spouseSibling->relation->name,
+                ];
+                if($this->editIndex ==null){
+                    $this->spouse_siblings[] = $display;
+                    $this->alert_messages = 'Cerated Successfully!';
+                }else{
+                    $this->spouse_siblings[$this->editIndex] = $display;
+                    $this->alert_messages = 'Updated successfully!';
+                }
+            }
+            $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+
+            $this->add_model = null;
+    }
+
+    //for spouse father siblings
+    public function add_spouse_father_siblings_modal($type, $index = null)
+    {
+
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
+
+            $id = $this->spouse_father_siblings[$index]['id'];
+            $this->editId = $id;
+            $oldData = SpouseFatherSibling::findOrFail($id);
+
+            $this->spouseFatherSibling_name = $oldData->name;
+            $this->spouseFatherSibling_ethnic = $oldData->ethnic_id;
+            $this->spouseFatherSibling_religion = $oldData->religion_id;
+            $this->spouseFatherSibling_place_of_birth = $oldData->place_of_birth;
+            $this->spouseFatherSibling_gender = $oldData->gender_id;
+            $this->spouseFatherSibling_occupation = $oldData->occupation;
+            $this->spouseFatherSibling_address = $oldData->address;
+            $this->spouseFatherSibling_relation = $oldData->relation_id;
+
+        } else {
+                       
+        $this->spouseFatherSibling_name=null; $this->spouseFatherSibling_ethnic=null; $this->spouseFatherSibling_religion=null;  $this->spouseFatherSibling_place_of_birth=null; $this->spouseFatherSibling_gender=null; $this->spouseFatherSibling_occupation=null; $this->spouseFatherSibling_address=null; $this->spouseFatherSibling_relation=null;
+            
+            $this->method = 'create';
+        }
+        
+        $this->data = StaffDetail\SpouseFatherSibling::datas($this->religions,$this->ethnics,$this->genders,$this->relations);
+        
+        $this->add_model = $type;
+        $this->submit_form = "save_spouse_father_siblings_modal";
+    }
+   
+    public function save_spouse_father_siblings_modal()
+    {
+        try {
+            
+            $this->validate(
+                \App\Livewire\StaffDetail\SpouseFatherSibling::rules(),
+                \App\Livewire\StaffDetail\SpouseFatherSibling::messages()
+            );
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->all();
+                $this->dispatch('validation', [
+                    'type' => 'Validation Error',
+                    'message' => $errors[0],
+                ]);
+            return;
+        }
+
+        $spouseFatherSiblings = new \App\Livewire\StaffDetail\SpouseFatherSibling;
+
+        if($this->editIndex == null){
+            $this->editId = null;
+        }
+           
+            $spouseFatherSibling = $spouseFatherSiblings->spouseFatherSiblingsCreate($this->editId,$this->staff->id,$this->spouseFatherSibling_name,$this->spouseFatherSibling_ethnic,$this->spouseFatherSibling_religion,$this->spouseFatherSibling_gender,$this->spouseFatherSibling_place_of_birth,$this->spouseFatherSibling_occupation,$this->spouseFatherSibling_address, $this->spouseFatherSibling_relation);
+
+            if ($spouseFatherSibling) {
+                
+                $display= [
+                    'id' => $spouseFatherSibling->id,
+                    'name' => $spouseFatherSibling->name,
+                    'ethnic' => $spouseFatherSibling->ethnic->name,
+                    'religion' => $spouseFatherSibling->religion->name,
+                    'place_of_birth' => $spouseFatherSibling->place_of_birth,
+                    'gender_id' => $spouseFatherSibling->gender->name,
+                    'occupation' => $spouseFatherSibling->occupation,
+                    'address' => $spouseFatherSibling->address,
+                    'relation' => $spouseFatherSibling->relation->name,
+                ];
+                if($this->editIndex ==null){
+                    $this->spouse_father_siblings[] = $display;
+                    $this->alert_messages = 'Cerated Successfully!';
+                }else{
+                    $this->spouse_father_siblings[$this->editIndex] = $display;
+                    $this->alert_messages = 'Updated successfully!';
+                }
+            }
+            $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+
+            $this->add_model = null;
+    }
+
+    //for spouse mother siblings
+    public function add_spouse_mother_siblings_modal($type, $index = null)
+    {
+
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
+
+            $id = $this->spouse_mother_siblings[$index]['id'];
+            $this->editId = $id;
+            $oldData = SpouseMotherSibling::findOrFail($id);
+
+            $this->spouseMotherSibling_name = $oldData->name;
+            $this->spouseMotherSibling_ethnic = $oldData->ethnic_id;
+            $this->spouseMotherSibling_religion = $oldData->religion_id;
+            $this->spouseMotherSibling_place_of_birth = $oldData->place_of_birth;
+            $this->spouseMotherSibling_gender = $oldData->gender_id;
+            $this->spouseMotherSibling_occupation = $oldData->occupation;
+            $this->spouseMotherSibling_address = $oldData->address;
+            $this->spouseMotherSibling_relation = $oldData->relation_id;
+
+        } else {
+                       
+        $this->spouseMotherSibling_name=null; $this->spouseMotherSibling_ethnic=null; $this->spouseMotherSibling_religion=null;  $this->spouseMotherSibling_place_of_birth=null; $this->spouseMotherSibling_gender=null; $this->spouseMotherSibling_occupation=null; $this->spouseMotherSibling_address=null; $this->spouseMotherSibling_relation=null;
+            
+            $this->method = 'create';
+        }
+        
+        $this->data = StaffDetail\SpouseMotherSibling::datas($this->religions,$this->ethnics,$this->genders,$this->relations);
+        $this->add_model = $type;
+        $this->submit_form = "save_spouse_mother_siblings_modal";
+    }
+   
+    public function save_spouse_mother_siblings_modal()
+    {
+        try {
+            
+            $this->validate(
+                \App\Livewire\StaffDetail\SpouseMotherSibling::rules(),
+                \App\Livewire\StaffDetail\SpouseMotherSibling::messages()
+            );
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->all();
+                $this->dispatch('validation', [
+                    'type' => 'Validation Error',
+                    'message' => $errors[0],
+                ]);
+            return;
+        }
+
+        $spouseMotherSibling = new \App\Livewire\StaffDetail\SpouseMotherSibling;
+
+        if($this->editIndex == null){
+            $this->editId = null;
+        }
+           
+            $spouseMotherSibling = $spouseMotherSibling->spouseMotherSiblingsCreate($this->editId,$this->staff->id,$this->spouseMotherSibling_name,$this->spouseMotherSibling_ethnic,$this->spouseMotherSibling_religion,$this->spouseMotherSibling_gender,$this->spouseMotherSibling_place_of_birth,$this->spouseMotherSibling_occupation,$this->spouseMotherSibling_address, $this->spouseMotherSibling_relation);
+
+            if ($spouseMotherSibling) {
+                
+                $display= [
+                    'id' => $spouseMotherSibling->id,
+                    'name' => $spouseMotherSibling->name,
+                    'ethnic' => $spouseMotherSibling->ethnic->name,
+                    'religion' => $spouseMotherSibling->religion->name,
+                    'place_of_birth' => $spouseMotherSibling->place_of_birth,
+                    'gender_id' => $spouseMotherSibling->gender->name,
+                    'occupation' => $spouseMotherSibling->occupation,
+                    'address' => $spouseMotherSibling->address,
+                    'relation' => $spouseMotherSibling->relation->name,
+                ];
+                if($this->editIndex ==null){
+                    $this->spouse_mother_siblings[] = $display;
+                    $this->alert_messages = 'Cerated Successfully!';
+                }else{
+                    $this->spouse_mother_siblings[$this->editIndex] = $display;
+                    $this->alert_messages = 'Updated successfully!';
+                }
+            }
+            $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+
+            $this->add_model = null;
+    }
     public function add_schools_modal($type, $index = null)
     {
         if ($index !== null) {
@@ -3197,9 +3850,129 @@ class StaffDetail extends Component
     }
 
 
+<<<<<<< Updated upstream
     public function showConfirmRemove($index, $id, $del_method)
     {
         $this->dispatch('showConfirmRemove', index: $index, id: $id,del_method:$del_method);
+=======
+    // ----------------end save modal ------------------------
+
+
+
+    public function showConfirmRemove($index, $id,$del_method)
+    {
+        $this->dispatch('showConfirmRemove', index: $index, id: $id, del_method: $del_method);
+    }
+
+    #[on('removeMethods')]
+    public function removeMethod($index, $id,$del_method)
+    {
+
+        if($del_method == 'removePostings'){
+            $postings = Posting::findOrFail($id);
+            $postings->delete();
+            $this->removeModel('postings', Posting::class, $index, []);
+            $this->alert_messages = 'Postings delete successfully!';
+    
+        }elseif($del_method == 'removeSchool'){
+
+        }elseif($del_method == 'removeTrainings'){
+
+        }elseif($del_method == 'removeAwards'){
+            
+        }elseif($del_method == 'remove_abroads'){
+           $abroad =Abroad::findOrFail($id);
+           $abroad->delete();
+            $this->removeModel('abroads',  Abroad::class, $index, []);
+            $this->alert_messages = 'Abroad delete successfully!';
+
+
+        }elseif($del_method == 'removePunishments'){
+            
+        }elseif($del_method == 'removeSocials'){
+            
+        }elseif($del_method == 'removeLanuages'){
+            
+        }elseif($del_method == 'removeRewards'){
+            
+        }elseif($del_method == 'remove_siblings'){
+            $sibling =Sibling::findOrFail($id);
+           $sibling->delete();
+            $this->removeModel('siblings',  Sibling::class, $index, []);
+            $this->alert_messages = 'Sibling delete successfully!';
+        }elseif($del_method == 'remove_father_siblings'){
+            $fatherSibling =FatherSibling::findOrFail($id);
+           $fatherSibling->delete();
+            $this->removeModel('father_siblings',  FatherSibling::class, $index, []);
+            $this->alert_messages = 'Father Sibling delete successfully!';  
+        }elseif($del_method == 'remove_mother_siblings'){
+            $motherSibling =MotherSibling::findOrFail($id);
+           $motherSibling->delete();
+            $this->removeModel('mother_siblings',  MotherSibling::class, $index, []);
+            $this->alert_messages = 'Mother Sibling delete successfully!';
+        }elseif($del_method == 'remove_spouses'){
+            $spouse =Spouse::findOrFail($id);
+           $spouse->delete();
+            $this->removeModel('spouses',  Spouse::class, $index, []);
+            $this->alert_messages = 'Spouse delete successfully!';
+        }elseif($del_method == 'remove_children'){
+            $children =Children::findOrFail($id);
+           $children->delete();
+            $this->removeModel('children',  Children::class, $index, []);
+            $this->alert_messages = 'Children delete successfully!';
+        }elseif($del_method == 'remove_spouse_siblings'){
+            $spouseSibling =SpouseSibling::findOrFail($id);
+           $spouseSibling->delete();
+            $this->removeModel('spouse_siblings',  SpouseSibling::class, $index, []);
+            $this->alert_messages = 'Spouse Sibling delete successfully!';
+        }elseif($del_method == 'remove_spouse_father_siblings'){
+            $spouseFatherSibling =SpouseFatherSibling::findOrFail($id);
+           $spouseFatherSibling->delete();
+            $this->removeModel('spouse_father_siblings',  SpouseFatherSibling::class, $index, []);
+            $this->alert_messages = 'Spouse Father Sibling delete successfully!';
+        }elseif($del_method == 'remove_spouse_mother_siblings'){
+            $spouseMotherSibling =SpouseMotherSibling::findOrFail($id);
+           $spouseMotherSibling->delete();
+            $this->removeModel('spouse_mother_siblings',  SpouseMotherSibling::class, $index, []);
+            $this->alert_messages = 'Spouse Mother Sibling delete successfully!';
+        }
+        
+        $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+    }
+    
+    public function siblingShowConfirmRemove($index, $id)
+    {
+        
+        $this->dispatch('siblingShowConfirmRemove', $index, $id);
+    }
+    public function fatherSiblingShowConfirmRemove($index, $id)
+    {
+        $this->dispatch('fatherSiblingShowConfirmRemove', $index, $id);
+    }
+    public function motherSiblingShowConfirmRemove($index, $id)
+    {
+        $this->dispatch('motherSiblingShowConfirmRemove', $index, $id);
+    }
+    public function spouseShowConfirmRemove($index, $id)
+    {
+        $this->dispatch('spouseShowConfirmRemove', $index, $id);
+    }
+    public function childrenShowConfirmRemove($index, $id)
+    {
+        $this->dispatch('childrenShowConfirmRemove', $index, $id);
+    }
+    public function spouseSiblingShowConfirmRemove($index, $id)
+    {
+        $this->dispatch('spouseSiblingShowConfirmRemove', $index, $id);
+    }
+    public function spouseFatherSiblingShowConfirmRemove($index, $id)
+    {
+        $this->dispatch('spouseFatherSiblingShowConfirmRemove', $index, $id);
+    }
+    public function spouseMotherSiblingShowConfirmRemove($index, $id)
+    {
+        $this->dispatch('spouseMotherSiblingShowConfirmRemove', $index, $id);
+>>>>>>> Stashed changes
     }
 
     #[on('removeMethods')]
@@ -3268,5 +4041,90 @@ class StaffDetail extends Component
         }
         
         $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+    }
+
+
+    #[On('removeSiblings')]
+    public function remove_siblings($index, $id)
+    {
+
+        dd('sdfl'.$index.'fjk'.$id);
+        $sibling = Sibling::findOrFail($id);
+        $sibling->delete();
+        $this->removeModel('siblings', Sibling::class, $index, []);
+
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
+    }
+
+    
+    #[On('removeFatherSibling')]
+    public function remove_father_siblings($index, $id)
+    {
+        
+        $fatherSibling = FatherSibling::findOrFail($id);
+        $fatherSibling->delete();
+        $this->removeModel('father_siblings', FatherSibling::class, $index, []);
+
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
+    }
+    #[On('removeMotherSibling')]
+    public function remove_mother_siblings($index, $id)
+    {
+        
+        $motherSibling = MotherSibling::findOrFail($id);
+        $motherSibling->delete();
+        $this->removeModel('mother_siblings', MotherSibling::class, $index, []);
+
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
+    }
+
+    #[On('removeSpouse')]
+    public function remove_spouses($index, $id)
+    {
+        
+        $spouse = Spouse::findOrFail($id);
+        $spouse->delete();
+        $this->removeModel('spouses', Spouse::class, $index, []);
+
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
+    }
+    #[On('removeChildren')]
+    public function remove_children($index, $id)
+    {
+        $children = Children::findOrFail($id);
+        $children->delete();
+        $this->removeModel('children', Children::class, $index, []);
+
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
+    }
+    #[On('removeSpouseSibling')]
+    public function remove_spouse_siblings($index, $id)
+    {
+        
+        $spouseSibling = SpouseSibling::findOrFail($id);
+        $spouseSibling->delete();
+        $this->removeModel('spouse_siblings', SpouseSibling::class, $index, []);
+
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
+    }
+    #[On('removeSpouseFatherSibling')]
+    public function remove_spouse_father_siblings($index, $id)
+    {
+        
+        $spouseFatherSibling = SpouseFatherSibling::findOrFail($id);
+        $spouseFatherSibling->delete();
+        $this->removeModel('spouse_father_siblings', SpouseFatherSibling::class, $index, []);
+
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
+    }
+    #[On('removeSpouseMotherSibling')]
+    public function remove_spause_mother_siblings($index, $id)
+    {
+        
+        $spouseMotherSibling = SpouseMotherSibling::findOrFail($id);
+        $spouseMotherSibling->delete();
+        $this->removeModel('spouse_mother_siblings', SpouseSibling::class, $index, []);
+
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
     }
 }//end

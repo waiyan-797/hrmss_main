@@ -160,7 +160,7 @@
     <div class="w-full h-auto py-5">
         <div class="pb-2 flex flex-row items-center gap-2 mb-3 font-arial font-semibold text-sm">
             <x-input-label :value="__($relative['label'])" class="font-semibold"/>
-            <button wire:click='add_{{$key}}' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
+            <button wire:click='add_{{ $key }}_modal("multiple_modal")' type="button" class="text-green-500 bg-transparent border border-gray-300 hover:bg-green-200 hover:text-green-700 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-green-800 dark:border-gray-200 dark:hover:text-green-700 dark:focus:ring-green-700 dark:hover:bg-green-200 dark:bg-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
@@ -168,60 +168,11 @@
             </button>
         </div>
 
-        @include('staff_multiple_table', [
+        @include('livewire/tables/multiple', [
             'column_names' => ['အမည်', 'လူမျိုး', 'ဘာသာ','ကျား/မ', 'ဇာတိ', 'အလုပ်အကိုင်', 'နေရပ်လိပ်စာ', 'တော်စပ်ပုံ'],
             'column_vals' => $relative['data'],
-            'data_master_add_stats' => [null, null, null, null, null, null, null, null],
-            'column_types' => [
-                [
-                    'type' => 'text',
-                    'wire_array_name' => $key,
-                    'wire_array_key' => 'name',
-                ],
-                [
-                    'type' => 'search_select',
-                    'wire_array_name' => $key,
-                    'next_col_update' => null,
-                    'wire_array_key' => 'ethnic',
-                    'select_values' => $ethnics,
-                ],
-                [
-                    'type' => 'select',
-                    'wire_array_name' => $key,
-                    'next_col_update' => null,
-                    'wire_array_key' => 'religion',
-                    'select_values' => $religions,
-                ],
-                [
-                    'type' => 'select',
-                    'wire_array_name' => $key,
-                    'next_col_update' => null,
-                    'wire_array_key' => 'gender_id',
-                    'select_values' => $genders,
-                ],
-                [
-                    'type' => 'text',
-                    'wire_array_name' => $key,
-                    'wire_array_key' => 'place_of_birth',
-                ],
-                [
-                    'type' => 'text',
-                    'wire_array_name' => $key,
-                    'wire_array_key' => 'occupation',
-                ],
-                [
-                    'type' => 'text',
-                    'wire_array_name' => $key,
-                    'wire_array_key' => 'address',
-                ],
-                [
-                    'type' => 'select',
-                    'wire_array_name' => $key,
-                    'next_col_update' => null,
-                    'wire_array_key' => 'relation',
-                    'select_values' => getRelatedRsType($relations , $key),
-                ],
-            ],
+            'add_modal'=> 'add_'.$key.'_modal',
+            'columns' => ['name', 'ethnic', 'religion', 'gender_id', 'place_of_birth', 'occupation', 'address', 'relation'],
             'del_method' => 'remove_'.$key,
         ])
     </div>
