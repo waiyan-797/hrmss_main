@@ -87,21 +87,22 @@
                     --}}
                 </div>
 
-                @elseif (!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] == 'multiple-select')
+                @elseif ($data['column_types'][$index]['type'] == 'select')
                 <div class="m-3 w-full">
-                    <label for="{{$data['column_types'][$index]['wire_array_key']}}"
-                        class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
-                        {{$data['column_names'][$index] ?? ''}} <span class="text-rose-700">{{
-                            $data['column_types'][$index]['require'] ? '*' : ''}}</span>
+                    <label for="name" class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
+                        {{$data['column_names'][$index] ?? ''}}<span class="text-rose-700">{{ $data['column_types'][$index]['require'] ? '*' : ''}}</span>
                     </label>
-                    <x-multiple-select
-                        model="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
-                        class="block w-full text-sm border rounded" placeholderValue="Select..."
-                        :options="$data['column_types'][$index]['select_values']" />
-                    {{--
-                    <x-input-error class="mt-2"
-                        :messages="$errors->get(['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])" />
-                    --}}
+                    @if (
+                    !is_string($data['column_types'][$index]['select_values']))
+                    <x-select
+                        wire:model="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
+                        id="{{$data['column_types'][$index]['wire_array_key']}}"
+                        name="{{$data['column_types'][$index]['wire_array_key']}}"
+                        class="block w-full p-2 text-sm border rounded"
+                        :values="$data['column_types'][$index]['select_values']" placeholder="Select..." />
+                        <x-input-error class="mt-2"
+                        :messages="$errors->get('postings_rank')" />
+                    @endif
                 </div>
                 
                 @elseif (!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] == 'checkbox')

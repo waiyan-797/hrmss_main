@@ -2828,7 +2828,7 @@ class StaffDetail extends Component
             if($punishment){
                     $display = [
                     'id' => $punishment->id,
-                    'penalty_type' => $punishment->penaltyType,
+                    'penalty_type' => $punishment->penalty_type->name,
                     'reason' => $punishment->reason,
                     'from_date' => Carbon::parse($punishment->from_date)->format('d/m/Y'),
                     'to_date' => Carbon::parse($punishment->to_date)->format('d/m/Y'),
@@ -3009,7 +3009,7 @@ $this->staff_languages_speaking,
             }
     
        
-        $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+            $this->dispatch('alert', ['type' => 'success', 'message' => (string) $this->alert_messages]);
 
         $this->add_model = null;
     }
@@ -3076,11 +3076,11 @@ $this->staff_languages_speaking,
 
             if($reward){
                     $display = [
-                    'id' => $reward->id,
-                    'name' => $reward->name,
-                    'type' => $reward->type,
-                    'year' => $reward->year,
-                    'remark' => $reward->remark,
+                        'id' => $reward->id,
+                        'name' => $reward->name,
+                        'type' => $reward->type,
+                        'year' => $reward->year,
+                        'remark' => $reward->remark,
                 ];
 
                 if($this->editIndex ==null){
@@ -3174,20 +3174,76 @@ $this->staff_languages_speaking,
     }
 
 
-    public function showConfirmRemove($index, $id)
+    public function showConfirmRemove($index, $id, $del_method)
     {
         $this->dispatch('showConfirmRemove', index: $index, id: $id,del_method:$del_method);
     }
 
-    #[On('removePostings')]
-
-    public function removePosting($index, $id)
+    #[on('removeMethods')]
+    public function removeMethod($index, $id,$del_method)
     {
 
-        $postings = Posting::findOrFail($id);
-        $postings->delete();
-        $this->removeModel('postings', Posting::class, $index, []);
+        
 
-        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
+        if($del_method == 'removePostings'){
+            $postings = Posting::findOrFail($id);
+            $postings->delete();
+            $this->removeModel('postings', Posting::class, $index, []);
+            $this->alert_messages = 'Postings delete successfully!';
+    
+        }elseif($del_method == 'removeSchool'){
+
+            $schools = School::findOrFail($id);
+            $schools->delete();
+            $this->removeModel('schools', School::class, $index, []);
+            $this->alert_messages = 'Schools delete successfully!';
+
+        }elseif($del_method == 'removeTrainings'){
+
+            $trainings = Training::findOrFail($id);
+            $trainings->delete();
+            $this->removeModel('trainings', Training::class, $index, []);
+            $this->alert_messages = 'Trainings delete successfully!';
+
+        }elseif($del_method == 'removeAwards'){
+            $awards = Awarding::findOrFail($id);
+            $awards->delete();
+            $this->removeModel('awards', Awarding::class, $index, []);
+            $this->alert_messages = 'Awards delete successfully!';
+
+        }elseif($del_method == 'remove_abroads'){
+           $abroad =Abroad::findOrFail($id);
+           $abroad->delete();
+            $this->removeModel('abroads',  Abroad::class, $index, []);
+            $this->alert_messages = 'Abroad delete successfully!';
+
+
+        }elseif($del_method == 'removePunishments'){
+            $punishments = Punishment::findOrFail($id);
+            $punishments->delete();
+            $this->removeModel('punishments', Punishment::class, $index, []);
+            $this->alert_messages = 'Punishments delete successfully!';$this->alert_messages = 'Schools delete successfully!';
+
+        }elseif($del_method == 'removeSocials'){
+            $socials = SocialActivity::findOrFail($id);
+            $socials->delete();
+            $this->removeModel('socials', SocialActivity::class, $index, []);
+            $this->alert_messages = 'Socials delete successfully!';$this->alert_messages = 'Schools delete successfully!';
+
+        }elseif($del_method == 'removeLanuages'){
+            $languages = StaffLanguage::findOrFail($id);
+            $languages->delete();
+            $this->removeModel('staff_languages', StaffLanguage::class, $index, []);
+            $this->alert_messages = 'Languages delete successfully!';$this->alert_messages = 'Schools delete successfully!';
+
+        }elseif($del_method == 'removeRewards'){
+            $reward = Reward::findOrFail($id);
+            $reward->delete();
+            $this->removeModel('staff_rewards', Reward::class, $index, []); // Fix model name
+            $this->alert_messages = 'Rewards delete successfully!';$this->alert_messages = 'Schools delete successfully!';
+
+        }
+        
+        $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
     }
 }//end
