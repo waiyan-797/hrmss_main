@@ -3059,20 +3059,59 @@ class StaffDetail extends Component
 
 
 
-    public function showConfirmRemove($index, $id)
+   
+    // #[On('removePostings')]
+
+    // public function removePosting($index, $id)
+    // {
+
+    //     $postings = Posting::findOrFail($id);
+    //     $postings->delete();
+    //     $this->removeModel('postings', Posting::class, $index, []);
+
+    //     $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
+    // }
+    public function showConfirmRemove($index, $id,$del_method)
     {
-        $this->dispatch('showConfirmRemove', index: $index, id: $id);
+        $this->dispatch('showConfirmRemove', index: $index, id: $id,del_method:$del_method);
     }
 
-    #[On('removePostings')]
 
-    public function removePosting($index, $id)
+    #[on('removeMethods')]
+    public function removeMethod($index, $id,$del_method)
     {
 
-        $postings = Posting::findOrFail($id);
-        $postings->delete();
-        $this->removeModel('postings', Posting::class, $index, []);
+        
 
-        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
+        if($del_method == 'removePostings'){
+            $postings = Posting::findOrFail($id);
+            $postings->delete();
+            $this->removeModel('postings', Posting::class, $index, []);
+            $this->alert_messages = 'Postings delete successfully!';
+    
+        }elseif($del_method == 'removeSchool'){
+
+        }elseif($del_method == 'removeTrainings'){
+
+        }elseif($del_method == 'removeAwards'){
+            
+        }elseif($del_method == 'remove_abroads'){
+           $abroad =Abroad::findOrFail($id);
+           $abroad->delete();
+            $this->removeModel('abroads',  Abroad::class, $index, []);
+            $this->alert_messages = 'Abroad delete successfully!';
+
+
+        }elseif($del_method == 'removePunishments'){
+            
+        }elseif($del_method == 'removeSocials'){
+            
+        }elseif($del_method == 'removeLanuages'){
+            
+        }elseif($del_method == 'removeRewards'){
+            
+        }
+        
+        $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
     }
 }//end
