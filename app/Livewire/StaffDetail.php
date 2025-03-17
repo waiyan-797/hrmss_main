@@ -88,6 +88,7 @@ use Illuminate\Support\Carbon as SupportCarbon;
 use Illuminate\Validation\ValidationException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+
 class StaffDetail extends Component
 
 
@@ -639,21 +640,20 @@ class StaffDetail extends Component
                 $schools = School::where('staff_id', $staff_id)->get();
                 // $trainings = Training::where('staff_id', $staff_id)->get();
                 $trainings = Training::with('training_type')
-                ->with('training_location')->with('country')
-                ->where('staff_id', $staff_id)->get();
+                    ->with('training_location')->with('country')
+                    ->where('staff_id', $staff_id)->get();
                 $awards = Awarding::with(['award_type', 'award'])
-                ->where('staff_id', $staff_id)->get();
+                    ->where('staff_id', $staff_id)->get();
                 $abroads = Abroad::where('staff_id', $staff_id)->get();
                 $punishments = Punishment::with('penalty_type')
-                ->where('staff_id', $staff_id)->get();
+                    ->where('staff_id', $staff_id)->get();
+               $_educations = Education::with(['education_type', 'education_group'])
 
-                $_educations = Education::with(['education_type', 'education_group'])
-            
-            ->get();
+                    ->get();
                 $educationTypes = EducationType::all();
                 $socials = SocialActivity::where('staff_id', $staff_id)->get();
                 $staff_languages = StaffLanguage::with('language')
-                ->where('staff_id', $staff_id)->get();
+                    ->where('staff_id', $staff_id)->get();
                 $staff_rewards = Reward::where('staff_id', $staff_id)->get();
                 foreach ($schools as $sch) {
                     $this->schools[] = [
@@ -667,8 +667,8 @@ class StaffDetail extends Component
                         'to_date' => $sch->to_date,
                         'remark' => $sch->remark,
                         'education_types' => $educationTypes,
-        
-    ];
+
+                    ];
                 }
 
                 foreach ($trainings as $tra) {
@@ -685,6 +685,8 @@ class StaffDetail extends Component
                         'remark' => $tra->remark,
                     ];
                 }
+                // dd($this->trainings);
+
 
                 foreach ($awards as $awa) {
                     $this->awards[] = [
@@ -2247,8 +2249,8 @@ class StaffDetail extends Component
             $this->results = [];
         }
     }
-    
-      public function selectValue($value)
+
+    public function selectValue($value)
     {
         $this->selectedValue = $value;
         $this->search = ''; // Clear search input after selection
@@ -2286,106 +2288,106 @@ class StaffDetail extends Component
 
     // // ------------------start အလုပ်အကိုင်အတွက် ထောက်ခံသူများ---------------
 
-    // function add_recommendation_modal($type)
-    // {
-    //     $this->data = [
-    //         'modal_title' => 'အလုပ်အကိုင်အတွက် ထောက်ခံသူများ',
-    //         'old_data' => null,
-    //         'del_method' => 'removeRecommendation',
+    function add_recommendation_modal($type)
+    {
+        $this->data = [
+            'modal_title' => 'အလုပ်အကိုင်အတွက် ထောက်ခံသူများ',
+            'old_data' => null,
+            'del_method' => 'removeRecommendation',
 
-    //     ];
+        ];
 
-    //     $this->add_model = $type;
-    //     $this->submit_form = "save_{$type}";
-    // }
-    // function  edit_recommendation_modal($type, $index)
-    // {
-    //     $value = $this->recommendations[$index];
+        $this->add_model = $type;
+        $this->submit_form = "save_{$type}";
+    }
+    function  edit_recommendation_modal($type, $index)
+    {
+        $value = $this->recommendations[$index];
 
-    //     // dd($value['recommend_by']);
-    //     $this->recommend_by = $value['recommend_by'];
-    //     $this->update_index = $index;
-    //     $this->data = [
-    //         'modal_title' => 'အလုပ်အကိုင်အတွက် ထောက်ခံသူများ',
-    //         'old_data' => [$value['recommend_by'], $index, $value['id']],
-    //         'del_method' => 'removeRecommendation',
+        // dd($value['recommend_by']);
+        $this->recommend_by = $value['recommend_by'];
+        $this->update_index = $index;
+        $this->data = [
+            'modal_title' => 'အလုပ်အကိုင်အတွက် ထောက်ခံသူများ',
+            'old_data' => [$value['recommend_by'], $index, $value['id']],
+            'del_method' => 'removeRecommendation',
 
-    //     ];
+        ];
 
-    //     $this->add_model = $type;
-    //     $this->submit_form = "save_{$type}";
-    // }
+        $this->add_model = $type;
+        $this->submit_form = "save_{$type}";
+    }
 
-    // public function save_recommendations_modal()
-    // {
-    //     if ($this->staff) {
-    //         if ($this->update_index !== null) {
-    //             // Ensure $this->recommendations is an array
-    //             if (!is_array($this->recommendations)) {
-    //                 // Optionally log an error or dispatch an alert
-    //                 // $this->dispatch('alert', ['type' => 'error', 'message' => 'Recommendations data is invalid']);
-    //                 return;
-    //             }
+    public function save_recommendations_modal()
+    {
+        if ($this->staff) {
+            if ($this->update_index !== null) {
+                // Ensure $this->recommendations is an array
+                if (!is_array($this->recommendations)) {
+                    // Optionally log an error or dispatch an alert
+                    // $this->dispatch('alert', ['type' => 'error', 'message' => 'Recommendations data is invalid']);
+                    return;
+                }
 
-    //             // Check if the index exists
-    //             if (array_key_exists($this->update_index, $this->recommendations)) {
-    //                 $id = $this->recommendations[$this->update_index]['id'];
-    //                 $this->recommendations[$this->update_index] = ['id' => $id, 'recommend_by' => $this->recommend_by];
+                // Check if the index exists
+                if (array_key_exists($this->update_index, $this->recommendations)) {
+                    $id = $this->recommendations[$this->update_index]['id'];
+                    $this->recommendations[$this->update_index] = ['id' => $id, 'recommend_by' => $this->recommend_by];
 
-    //                 $rec = Recommendation::findOrFail($id);
-    //                 $rec->recommend_by = $this->recommend_by;
-    //                 $rec->save();
-
-
-    //                 $this->dispatch('alert', ['type' => 'success', 'message' => 'Updated successfully!']);
-    //             }
-    //         } else {
-    //             $this->validate(
-    //                 RecommendationValidation::rules(),
-    //                 RecommendationValidation::messages()
-    //             );
-
-    //             $rec = Recommendation::updateOrCreate([
-    //                 'recommend_by' => $this->recommend_by,
-    //                 'staff_id' => $this->staff->id,
-    //             ]);
-
-    //             // Ensure $this->recommendations is an array before appending
-    //             if (!is_array($this->recommendations)) {
-    //                 $this->recommendations = [];
-    //             }
-
-    //             $this->recommendations[] = [
-    //                 'id' => $rec->id,
-    //                 'recommend_by' => $rec->recommend_by,
-    //             ];
-
-    //             $this->dispatch('alert', ['type' => 'success', 'message' => 'Created successfully!']);
-    //         }
-
-    //         $this->add_model = null;
-    //     } else {
-    //         return;
-    //     }
-    // }
+                    $rec = Recommendation::findOrFail($id);
+                    $rec->recommend_by = $this->recommend_by;
+                    $rec->save();
 
 
-    // public function confirmRemoveRecommendation($index, $id)
-    // {
-    //     $this->dispatch('showRemoveConfirmation', index: $index, id: $id);
-    // }
+                    $this->dispatch('alert', ['type' => 'success', 'message' => 'Updated successfully!']);
+                }
+            } else {
+                $this->validate(
+                    RecommendationValidation::rules(),
+                    RecommendationValidation::messages()
+                );
 
-    // #[On('removeRecommendation')]
-    // public function removeRecommendation($index, $id)
-    // {
+                $rec = Recommendation::updateOrCreate([
+                    'recommend_by' => $this->recommend_by,
+                    'staff_id' => $this->staff->id,
+                ]);
 
-    //     $recommendation = Recommendation::findOrFail($id);
-    //     $recommendation->delete();
-    //     unset($this->recommendations[$index]);
-    //     $this->recommendations = array_values($this->recommendations);
+                // Ensure $this->recommendations is an array before appending
+                if (!is_array($this->recommendations)) {
+                    $this->recommendations = [];
+                }
 
-    //     $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
-    // }
+                $this->recommendations[] = [
+                    'id' => $rec->id,
+                    'recommend_by' => $rec->recommend_by,
+                ];
+
+                $this->dispatch('alert', ['type' => 'success', 'message' => 'Created successfully!']);
+            }
+
+            $this->add_model = null;
+        } else {
+            return;
+        }
+    }
+
+
+    public function confirmRemoveRecommendation($index, $id)
+    {
+        $this->dispatch('showRemoveConfirmation', index: $index, id: $id);
+    }
+
+    #[On('removeRecommendation')]
+    public function removeRecommendation($index, $id)
+    {
+
+        $recommendation = Recommendation::findOrFail($id);
+        $recommendation->delete();
+        unset($this->recommendations[$index]);
+        $this->recommendations = array_values($this->recommendations);
+
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
+    }
 
     // ------------------end အလုပ်အကိုင်အတွက် ထောက်ခံသူများ---------------
 
@@ -2394,12 +2396,13 @@ class StaffDetail extends Component
     public $postings_rank, $postings_from_date, $postings_to_date, $postings_ministry, $postings_department, $postings_sub_department, $postings_location, $postings_remark;
     public $schools_education_group, $schools_education_type, $schools_education, $schools_school_name, $schools_town, $schools_from_date, $schools_to_date, $schools_remark;
     public $trainings_training_type, $trainings_from_date, $trainings_location, $trainings_country, $trainings_to_date, $trainings_training_location, $trainings_batch, $trainings_remark;
-    public $awards_award_type,$awards_award,$awards_order_no,$awards_remark;
-    public $punishments_penalty_type,$punishments_reason,$punishments_from_date, $punishments_to_date;
+    public $awards_award_type, $awards_award, $awards_order_no, $awards_remark;
+    public $punishments_penalty_type, $punishments_reason, $punishments_from_date, $punishments_to_date;
     public $socials_particular, $socials_remark;
-    public $staff_languages_language,$staff_languages_rank,$staff_languages_writing,$staff_languages_reading,$staff_languages_speaking,$staff_languages_remark;
-    public $staff_rewards_type,$staff_rewards_year,$staff_rewards_remark,$staff_rewards_name;
-    public $method = 'create', $editId;
+    public $staff_languages_language, $staff_languages_rank, $staff_languages_writing, $staff_languages_reading, $staff_languages_speaking, $staff_languages_remark;
+    public $staff_rewards_type, $staff_rewards_year, $staff_rewards_remark, $staff_rewards_name;
+    public $method = 'create', $editId,$editIndex;
+    public $data,$alert_messages;
 
     public function add_postings_modal($type, $index = null)
     {
@@ -2407,7 +2410,7 @@ class StaffDetail extends Component
 
         if ($index !== null) {
             $this->method = 'edit';
-            $this->editId = $index;
+            $this->editIndex = $index;
 
             // -----------------start လုပ်ကိုင်ခဲ့ဖူးသည့်အလုပ်အကိုင်--------------------
 
@@ -2415,8 +2418,8 @@ class StaffDetail extends Component
 
             $oldData = Posting::findOrFail($id);
             $this->postings_rank =  $oldData->rank_id;
-            $this->postings_from_date = Carbon::parse($oldData->from_date)->format('Y-m-d');
-            $this->postings_to_date = Carbon::parse($oldData->to_date)->format('Y-m-d');
+            $this->postings_from_date = $oldData->from_date;
+            $this->postings_to_date = $oldData->to_date;
             $this->postings_ministry = $oldData->ministry_id;
             $this->postings_department = $oldData->department_id;
             $this->postings_sub_department = $oldData->sub_department;
@@ -2435,7 +2438,7 @@ class StaffDetail extends Component
             $this->postings_ministry = null;
             $this->postings_department = null;
             $this->postings_sub_department = null;
-            $this->postings_location;
+            $this->postings_location = null;
             $this->postings_remark = null;
 
 
@@ -2448,55 +2451,200 @@ class StaffDetail extends Component
         $this->submit_form = "save_postings_modal";
     }
 
-    
+
     //-----------------နေခဲ့ဖူးသောကျောင်းများ --------------------
     public function add_schools_modal($type, $index = null)
-{
-    if ($index !== null) {
-        $this->method = 'edit';
-        $this->editId = $index;
+    {
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
 
-        $id = $this->schools[$index]['id'];
-        $oldData = School::findOrFail($id);
+            $id = $this->schools[$index]['id'];
+            $this->editId = $id;
+            $oldData = School::findOrFail($id);
+
+            $this->schools_education_group =  $oldData->education_group_id;
+            $this->schools_education_type =  $oldData->education_type_id;
+            $this->schools_education = $oldData->education;
+            $this->schools_school_name = $oldData->school_name;
+            $this->schools_town = $oldData->town;
+            $this->schools_from_date = $oldData->from_date;
+            $this->schools_to_date = $oldData->to_date;
+            $this->schools_remark =  $oldData->remark;
+        } else {
+            $this->schools_education_group = null;
+            $this->schools_education_type = null;
+            $this->schools_education = null;
+            $this->schools_school_name = null;
+            $this->schools_town = null;
+            $this->schools_from_date = null;
+            $this->schools_to_date = null;
+            $this->schools_remark = null;
+
+            $this->method = 'create';
+        }
+
+        $this->data = ChSchools::datas($this->education_groups, $this->education_types);
+        $this->add_model = $type;
+        $this->submit_form = "save_schools_modal";
+    }
+
+    public function save_schools_modal()
+    {
+        try {
+            $this->validate(
+                ChSchools::rules(),
+                ChSchools::messages()
+            );
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->all();
+            $this->dispatch('validation', [
+                'type' => 'Validation Error',
+                'message' => $errors[0],
+            ]);
+            return;
+        }
+    
+        $chschools = new ChSchools;
         
-        $this->schools_education_group =  $oldData->education_group_id;
-        $this->schools_education_type =  $oldData->education_type_id;
-        $this->schools_education = $oldData->education;
-        $this->schools_school_name = $oldData->school_name;
-        $this->schools_town = $oldData->town;
-        $this->schools_from_date = Carbon::parse($oldData->from_date)->format('Y-m-d');
-        $this->schools_to_date = Carbon::parse($oldData->to_date)->format('Y-m-d');
-        $this->schools_remark =  $oldData->remark;
-    } else {
-        $this->schools_education_group = null;
-        $this->schools_education_type = null;
-        $this->schools_education = null;
-        $this->schools_school_name = null;
-        $this->schools_town = null;
-        $this->schools_from_date = null;
-        $this->schools_to_date = null;
-        $this->schools_remark = null;
+        if($this->editIndex == null){
+            $this->editId = null;
+        }
+         $school =$chschools->schoolCreate(
+                        $this->editId,
+                        $this->staff->id,
+                        $this->schools_education_group,
+                        $this->schools_education_type,
+                        $this->schools_education,
+                        $this->schools_school_name,
+                        $this->schools_town,
+                        $this->schools_from_date,
+                        $this->schools_to_date,
+                        $this->schools_remark
+                    );
+
+            if($school){
+                    $display = [
+                    'id' => $school->id,
+                    'education_group' => $school->education_group->name,
+                    'education_type' => $school->education_type->name,
+                    'education' => $school->education,
+                    'school_name' => $school->school_name,
+                    'town' => $school->town,
+                    'from_date' => $school->from_date,
+                    'to_date' => $school->to_date,
+                    'remark' => $school->remark,
+                ];
+
+                if($this->editIndex ==null){
+                    $this->schools[] = $display;
+                    $this->alert_messages = 'Cerated Successfully!';
+                }else{
+                    $this->schools[$this->editIndex] = $display;
+                    $this->alert_messages = 'Updated successfully!';
+                }
+            }
+    
+        // if ($this->method == 'create') {
+        //     // -----------------start နေခဲ့ဖူးသောကျောင်းများ --------------------
+    
+        //     $post = $chschools->schoolCreate(
+        //         $this->staff->id,
+        //         $this->schools_education_group,
+        //         $this->schools_education_type,
+        //         $this->schools_education,
+        //         $this->schools_school_name,
+        //         $this->schools_town,
+        //         $this->schools_from_date,
+        //         $this->schools_to_date,
+        //         $this->schools_remark
+        //     );
+    
+        //     if ($post) {
+        //         $this->schools[] = [
+        //             'id' => $post->id,
+        //             'education_group' => $post->education_group->name,
+        //             'education_type' => $post->education_type->name,
+        //             'education' => $post->education,
+        //             'school_name' => $post->school_name,
+        //             'town' => $post->town,
+        //             'from_date' => Carbon::parse($post->from_date)->format('d/m/Y'),
+        //             'to_date' => Carbon::parse($post->to_date)->format('d/m/Y'),
+        //             'remark' => $post->remark,
+        //         ];
+        //     }
+    
+        //     // -----------------end နေခဲ့ဖူးသောကျောင်းများ --------------------
+    
+        //     $this->dispatch('alert', ['type' => 'success', 'message' => 'Created successfully!']);
+        // } else if ($this->method == 'edit') {
+        //     // -----------------start နေခဲ့ဖူးသောကျောင်းများ --------------------
+    
+        //     if (array_key_exists($this->editId, $this->schools)) {
+        //         $id = $this->schools[$this->editId]['id'];
+    
+        //         $post = $chschools->schoolEditData(
+        //             $id,
+        //             $this->staff->id,
+        //             $this->schools_education_group,
+        //             $this->schools_education_type,
+        //             $this->schools_education,
+        //             $this->schools_school_name,
+        //             $this->schools_town,
+        //             $this->schools_from_date,
+        //             $this->schools_to_date,
+        //             $this->schools_remark
+        //         );
+    
+        //         if ($post) {
+        //             $this->schools[$this->editId] = [
+        //                 'id' => $post->id,
+        //                 'education_group' => $post->education_group->name,
+        //                 'education_type' => $post->education_type->name,
+        //                 'education' => $post->education,
+        //                 'school_name' => $post->school_name,
+        //                 'town' => $post->town,
+        //                 'from_date' => Carbon::parse($post->from_date)->format('d/m/Y'),
+        //                 'to_date' => Carbon::parse($post->to_date)->format('d/m/Y'),
+        //                 'remark' => $post->remark,
+        //             ];
+        //         }
+    
+    
+        //         $this->dispatch('alert', ['type' => 'success', 'message' => 'Updated successfully!']);
+        //     }
+        // }
+        $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+
+        $this->add_model = null;
+    }
+
+    #[On('removeSchool')]
+    public function removeSchools($index, $id)
+    {
+       
+        $schools = School::findOrFail($id);
         
-        $this->method = 'create';
+        $schools->delete();
+        $this->removeModel('schools', School::class, $index, []);
+    
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
     }
     
-    $this->data = ChSchools::datas($this->education_groups, $this->education_types);
-    $this->add_model = $type;
-    $this->submit_form = "save_schools_modal";
-}
 
     //-----------------နေခဲ့ဖူးသောကျောင်းများ --------------------
+    //-----------------starn မတန်း --------------------
 
     public function add_trainings_modal($type, $index = null)
     {
         if ($index !== null) {
             $this->method = 'edit';
-            $this->editId = $index;
-    
+            $this->editIndex = $index;
+
             // -----------------start သင်တန်းအချက်အလက်များ--------------------
-    
+
             $id = $this->trainings[$index]['id'];
-    
+
             $oldData = Training::findOrFail($id);
             $this->trainings_training_type = $oldData->training_type_id;
             $this->trainings_from_date = Carbon::parse($oldData->from_date)->format('Y-m-d');
@@ -2506,7 +2654,7 @@ class StaffDetail extends Component
             $this->trainings_training_location = $oldData->training_location_id;
             $this->trainings_batch = $oldData->batch;
             $this->trainings_remark = $oldData->remark;
-    
+
             // -----------------end သင်တန်းအချက်အလက်များ--------------------
         } else {
             // -----------------သင်တန်းအချက်အလက်များ--------------------
@@ -2518,181 +2666,413 @@ class StaffDetail extends Component
             $this->trainings_training_location = null;
             $this->trainings_batch = null;
             $this->trainings_remark = null;
-    
+
             $this->method = 'create';
         }
         // -----------------သင်တန်းအချက်အလက်များ--------------------
         $this->data = ChTrainings::datas($this->training_types, $this->countries, $this->training_locations);
-    
+
         $this->add_model = $type;
         $this->submit_form = "save_trainings_modal";
     }
+    public function save_trainings_modal()
+    {
+        try {
+            $this->validate(
+                ChTrainings::rules(),
+                ChTrainings::messages()
+            );
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->all();
+            $this->dispatch('validation', [
+                'type' => 'Validation Error',
+                'message' => $errors[0],
+            ]);
+    
+            return;
+        }
+        if($this->editIndex == null){
+            $this->editId =null;
+        }
+    
+        $chtrainings = new ChTrainings;
 
+             $training = $chtrainings->setCreate(
+                $this->editId,
+                $this->staff->id, 
+                $this->trainings_training_type, 
+                $this->trainings_from_date, 
+                $this->trainings_to_date, 
+                $this->trainings_location, 
+                $this->trainings_country, 
+                $this->trainings_training_location, 
+                $this->trainings_batch, 
+                $this->trainings_remark
+            );
+            // dd($training);
+            // Training::with('training_type')
+            // ->with('training_location')->with('country')
+            // ->where('staff_id', $staff_id)->get();
+            if ($training) {
+                $display = [
+
+                    'id' => $training->id,
+                    'training_type' => $training->training_type->name,
+                    'batch' => $training->batch,
+                    'from_date' => Carbon::parse($training->from_date)->format('d/m/Y'),
+                    'to_date' => Carbon::parse($training->to_date)->format('d/m/Y'),
+                    'location' => $training->location,
+                    'country' => $training->country->name,
+                    'training_location' => $training->training_location->name,
+                    'remark' => $training->remark,
+                ];
+
+                if($this->editIndex == null){
+                    $this->trainings[] = $display;
+                    $this->alert_messages = 'Created Successfully!';
+                }else{
+                    $this->trainings[$this->editIndex] = $display;
+                    $this->alert_messages = 'Updated Successfully!';
+
+
+                }
+            }
+    
+        // if ($this->method == 'create') {
+    
+        //     // -----------------start သင်တန်းအချက်အလက်များ--------------------
+    
+        //     $training = $chtrainings->setCreate(
+        //         $this->staff->id, 
+        //         $this->trainings_training_type, 
+        //         $this->trainings_from_date, 
+        //         $this->trainings_to_date, 
+        //         $this->trainings_location, 
+        //         $this->trainings_country, 
+        //         $this->trainings_training_location, 
+        //         $this->trainings_batch, 
+        //         $this->trainings_remark
+        //     );
+    
+        //     if ($training) {
+        //         $this->trainings[] = [
+        //             'id' => $training->id,
+        //             'training_type' => $training->trainingType,
+        //             'batch' => $training->batch,
+        //             'from_date' => Carbon::parse($training->from_date)->format('d/m/Y'),
+        //             'to_date' => Carbon::parse($training->to_date)->format('d/m/Y'),
+        //             'location' => $training->location,
+        //             'country' => $training->country,
+        //             'training_location' => $training->trainingLocation,
+        //             'remark' => $training->remark,
+        //         ];
+        //     }
+    
+        //     // -----------------end သင်တန်းအချက်အလက်များ--------------------
+    
+        //     $this->dispatch('alert', ['type' => 'success', 'message' => 'Created successfully!']);
+        // } else if ($this->method == 'edit') {
+    
+        //     // -----------------start သင်တန်းအချက်အလက်များ--------------------
+    
+        //     if (array_key_exists($this->editId, $this->trainings)) {
+        //         $id = $this->trainings[$this->editId]['id'];
+    
+        //         $training = $chtrainings->setEditData(
+        //             $id, 
+        //             $this->staff->id, 
+        //             $this->trainings_training_type, 
+        //             $this->trainings_from_date, 
+        //             $this->trainings_to_date, 
+        //             $this->trainings_location, 
+        //             $this->trainings_country, 
+        //             $this->trainings_training_location, 
+        //             $this->trainings_batch, 
+        //             $this->trainings_remark
+        //         );
+    
+        //         $this->trainings[$this->editId] = [
+        //             'id' => $training->id,
+        //             'training_type' => $training->trainingType,
+        //             'batch' => $training->batch,
+        //             'from_date' => Carbon::parse($training->from_date)->format('d/m/Y'),
+        //             'to_date' => Carbon::parse($training->to_date)->format('d/m/Y'),
+        //             'location' => $training->location,
+        //             'country' => $training->country,
+        //             'training_location' => $training->trainingLocation,
+                    
+        //             'remark' => $training->remark,
+        //         ];
+        //     }
+    
+        //     // -----------------end သင်တန်းအချက်အလက်များ--------------------
+    
+        //     $this->dispatch('alert', ['type' => 'success', 'message' => 'Updated successfully!']);
+        // }
+            $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
+
+        $this->add_model = null;
+    }
+    //-----------------end မတန်း --------------------
 
     public function add_awards_modal($type, $index = null)
-{
-    if ($index !== null) {
-        $this->method = 'edit';
-        $this->editId = $index;
+    {
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
+
+            // -----------------ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်--------------------
+            $id = $this->awards[$index]['id'];
+
+            $oldData = Awarding::findOrFail($id);
+            $this->awards_award_type = $oldData->award_type_id;
+            $this->awards_award = $oldData->award_id;
+            $this->awards_order_no = $oldData->order_no;
+            $this->awards_remark = $oldData->remark;
+            // -----------------ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်--------------------
+
+        } else {
+            // -----------------ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်--------------------
+            $this->awards_award_type = null;
+            $this->awards_award = null;
+            $this->awards_order_no = null;
+            $this->awards_remark = null;
+
+            $this->method = 'create';
+        }
+
 
         // -----------------ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်--------------------
-        $id = $this->awards[$index]['id'];
+        $this->data = ChAwards::datas($this->award_types, $this->awardsId);
 
-        $oldData = Awarding::findOrFail($id);
-        $this->awards_award_type = $oldData->award_type_id; 
-        $this->awards_award = $oldData->award_id; 
-        $this->awards_order_no = $oldData->order_no;
-        $this->awards_remark = $oldData->remark; 
-        // -----------------ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်--------------------
-
-    } else {
-        // -----------------ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်--------------------
-        $this->awards_award_type = null;
-        $this->awards_award = null;
-        $this->awards_order_no = null;
-        $this->awards_remark = null;
-
-        $this->method = 'create';
+        $this->add_model = $type;
+        $this->submit_form = "save_awards_modal";
     }
 
+    public function add_punishments_modal($type, $index = null)
+    {
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
 
-    // -----------------ဘွဲ့ထူး၊ ဂုဏ်ထူးတံဆိပ်--------------------
-    $this->data = ChAwards::datas($this->award_types, $this->awardsId);  
+            // ----------------- Punishments -----------------
+            $id = $this->punishments[$index]['id'];
 
-    $this->add_model = $type;
-    $this->submit_form = "save_awards_modal";
-}
+            $oldData = Punishment::findOrFail($id);
+            $this->punishments_penalty_type = $oldData->penalty_type_id;
+            $this->punishments_reason = $oldData->reason;
+            $this->punishments_from_date = $oldData->from_date;
+            $this->punishments_to_date = $oldData->to_date;
+            // ----------------- Punishments -----------------
 
-public function add_punishments_modal($type, $index = null)
-{
-    if ($index !== null) {
-        $this->method = 'edit';
-        $this->editId = $index;
+        } else {
+            // ----------------- Punishments -----------------
+            $this->punishments_penalty_type = null;
+            $this->punishments_reason = null;
+            $this->punishments_from_date = null;
+            $this->punishments_to_date = null;
+
+            $this->method = 'create';
+        }
 
         // ----------------- Punishments -----------------
-        $id = $this->punishments[$index]['id'];
+        $this->data = ChPunishments::datas($this->penalty_types);
 
-        $oldData = Punishment::findOrFail($id);
-        $this->punishments_penalty_type = $oldData->penalty_type_id; 
-        $this->punishments_reason = $oldData->reason; 
-        $this->punishments_from_date = $oldData->from_date;
-        $this->punishments_to_date = $oldData->to_date; 
-        // ----------------- Punishments -----------------
+        $this->add_model = $type;
+        $this->submit_form = "save_punishments_modal";
+    }
+    public function add_socials_modal($type, $index = null)
+    {
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
 
-    } else {
-        // ----------------- Punishments -----------------
-        $this->punishments_penalty_type = null;
-        $this->punishments_reason = null;
-        $this->punishments_from_date = null;
-        $this->punishments_to_date = null;
+            // ----------------- Socials -----------------
+            $id = $this->socials[$index]['id'];
 
-        $this->method = 'create';
+            $oldData = SocialActivity::findOrFail($id);
+            $this->socials_particular = $oldData->particular;
+            $this->socials_remark = $oldData->remark;
+            // ----------------- Socials -----------------
+
+        } else {
+            // ----------------- Socials -----------------
+            $this->socials_particular = null;
+            $this->socials_remark = null;
+
+            $this->method = 'create';
+        }
+
+        // ----------------- Socials -----------------
+        $this->data = ChSocials::datas();
+
+        $this->add_model = $type;
+        $this->submit_form = "save_socials_modal";
     }
 
-    // ----------------- Punishments -----------------
-    $this->data = ChPunishments::datas($this->penalty_types);  
+    public function add_languages_modal($type, $index = null)
+    {
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
+            // ----------------- Languages -----------------
+            $id = $this->staff_languages[$index]['id'];
 
-    $this->add_model = $type;
-    $this->submit_form = "save_punishments_modal";
-}
-public function add_socials_modal($type, $index = null)
-{
-    if ($index !== null) {
-        $this->method = 'edit';
-        $this->editId = $index;
+            $oldData = StaffLanguage::findOrFail($id);
+            $this->staff_languages_language = $oldData->language_id;
+            $this->staff_languages_rank = $oldData->rank;
+            $this->staff_languages_writing = $oldData->writing;
+            $this->staff_languages_reading = $oldData->reading;
+            $this->staff_languages_speaking = $oldData->speaking;
+            $this->staff_languages_remark = $oldData->remark;
+        } else {
+            $this->staff_languages_language = null;
+            $this->staff_languages_rank = null;
+            $this->staff_languages_writing = null;
+            $this->staff_languages_reading = null;
+            $this->staff_languages_speaking = null;
+            $this->staff_languages_remark = null;
 
-        // ----------------- Socials -----------------
-        $id = $this->socials[$index]['id'];
+            $this->method = 'create';
+        }
 
-        $oldData = SocialActivity::findOrFail($id);
-        $this->socials_particular = $oldData->particular; 
-        $this->socials_remark = $oldData->remark; 
-        // ----------------- Socials -----------------
-
-    } else {
-        // ----------------- Socials -----------------
-        $this->socials_particular = null;
-        $this->socials_remark = null;
-
-        $this->method = 'create';
-    }
-
-    // ----------------- Socials -----------------
-    $this->data = ChSocials::datas();  
-
-    $this->add_model = $type;
-    $this->submit_form = "save_socials_modal";
-}
-
-public function add_languages_modal($type, $index = null)
-{
-    if ($index !== null) {
-        $this->method = 'edit';
-        $this->editId = $index;
         // ----------------- Languages -----------------
-        $id = $this->staff_languages[$index]['id'];
+        $this->data = ChLanguages::datas($this->languages);
 
-        $oldData = StaffLanguage::findOrFail($id);
-        $this->staff_languages_language = $oldData->language_id; 
-        $this->staff_languages_rank = $oldData->rank; 
-        $this->staff_languages_writing = $oldData->writing;
-        $this->staff_languages_reading = $oldData->reading; 
-        $this->staff_languages_speaking = $oldData->speaking; 
-        $this->staff_languages_remark = $oldData->remark; 
-
-    } else {
-        $this->staff_languages_language = null;
-        $this->staff_languages_rank = null;
-        $this->staff_languages_writing = null;
-        $this->staff_languages_reading = null;
-        $this->staff_languages_speaking = null;
-        $this->staff_languages_remark = null;
-
-        $this->method = 'create';
+        $this->add_model = $type;
+        $this->submit_form = "save_languages_modal";
     }
 
-    // ----------------- Languages -----------------
-    $this->data = ChLanguages::datas($this->languages);  
+    public function add_staff_rewards_modal($type, $index = null)
+    {
+        if ($index !== null) {
+            $this->method = 'edit';
+            $this->editIndex = $index;
 
-    $this->add_model = $type;
-    $this->submit_form = "save_languages_modal";
-}
+            // ----------------- Rewards -----------------
+            $id = $this->staff_rewards[$index]['id'];
 
-public function add_staff_rewards_modal($type, $index = null)
-{
-    if ($index !== null) {
-        $this->method = 'edit';
-        $this->editId = $index;
+            $oldData = Reward::findOrFail($id);
+            $this->staff_rewards_name = $oldData->name;
+            $this->staff_rewards_year = $oldData->year;
+            $this->staff_rewards_remark = $oldData->remark;
+        } else {
+            $this->staff_rewards_name = null;
+            $this->staff_rewards_year = null;
+            $this->staff_rewards_remark = null;
+
+            $this->method = 'create';
+        }
+
+
+
+
+
 
         // ----------------- Rewards -----------------
-        $id = $this->staff_rewards[$index]['id'];
+        $this->data = ChStaffRewards::datas($this->rewards);
 
-        $oldData = Reward::findOrFail($id);
-        $this->staff_rewards_name = $oldData->name;
-        $this->staff_rewards_year = $oldData->year;
-        $this->staff_rewards_remark = $oldData->remark;
+        $this->add_model = $type;
+        $this->submit_form = "save_staff_rewards_modal";
+    }
 
-    } else {
-        $this->staff_rewards_name = null;
-        $this->staff_rewards_year = null;
-        $this->staff_rewards_remark = null;
+    // ---------------start save modal   ----------------
+    // -----------------start လုပ်ကိုင်ခဲ့ဖူးသည့်အလုပ်အကိုင်--------------------
 
-        $this->method = 'create';
+    public function save_postings_modal()
+    {
+
+        try {
+
+            $this->validate(
+                ChPostings::rules(),
+                ChPostings::messages()
+            );
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->all();
+            $this->dispatch('validation', [
+                'type' => 'Validation Error',
+                'message' => $errors[0],
+            ]);
+
+
+            return;
+        }
+
+        $chpostings = new ChPostings;
+
+        if ($this->method == 'create') {
+
+
+            $post = $chpostings->setCreate($this->staff->id, $this->postings_rank, $this->postings_from_date, $this->postings_to_date, $this->postings_department, $this->postings_sub_department, $this->postings_location, $this->postings_remark, $this->postings_ministry);
+
+            if ($post) {
+
+                $this->postings[] = [
+                    'id' => $post->id,
+                    'rank' => $post->rank->name,
+                    'from_date' =>  Carbon::parse($post->from_date)->format('d/m/Y'),
+                    'to_date' =>  Carbon::parse($post->to_date)->format('d/m/Y'),
+
+                    'post' => $post->post_id,
+                    'ministry' => $post->ministry->name,
+                    'department' => $post->department->name,
+                    'sub_department' => $post->sub_department,
+
+                    'location' => $post->location,
+                    'remark' => $post->remark,
+                ];
+            }
+
+
+            $this->dispatch('alert', ['type' => 'success', 'message' => 'Created successfully!']);
+        } else if ('edit') {
+
+            if (array_key_exists($this->editIndex, $this->postings)) {
+                $id = $this->postings[$this->editIndex]['id'];
+
+                $post = $chpostings->setEditData($id, $this->staff->id, $this->postings_rank, $this->postings_from_date, $this->postings_to_date, $this->postings_department, $this->postings_sub_department, $this->postings_location, $this->postings_remark, $this->postings_ministry);
+
+                $this->postings[$this->editId] = [
+                    'id' => $post->id,
+                    'rank' => $post->rank->name,
+                    'from_date' =>  Carbon::parse($post->from_date)->format('d/m/Y'),
+                    'to_date' =>  Carbon::parse($post->to_date)->format('d/m/Y'),
+                    'post' => $post->post_id,
+                    'ministry' => $post->ministry->name,
+                    'department' => $post->department->name,
+                    'sub_department' => $post->sub_department,
+                    'location' => $post->location,
+                    'remark' => $post->remark,
+                ];
+            }
+
+
+            $this->dispatch('alert', ['type' => 'success', 'message' => 'Updated successfully!']);
+        }
+
+        $this->add_model = null;
     }
 
 
+    // ----------------end save modal ------------------------
 
 
 
+    public function showConfirmRemove($index, $id)
+    {
+        $this->dispatch('showConfirmRemove', index: $index, id: $id);
+    }
 
-    // ----------------- Rewards -----------------
-    $this->data = ChStaffRewards::datas($this->rewards);
+    #[On('removePostings')]
 
-    $this->add_model = $type;
-    $this->submit_form = "save_staff_rewards_modal";
-}
-    
+    public function removePosting($index, $id)
+    {
 
+        $postings = Posting::findOrFail($id);
+        $postings->delete();
+        $this->removeModel('postings', Posting::class, $index, []);
 
-
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Deleted successfully!']);
+    }
 }//end

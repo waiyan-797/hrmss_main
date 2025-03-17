@@ -110,8 +110,11 @@ class Schools extends Component
         return $post;
 
     }
-    public function schoolCreate($staffId,$schools_education_group,$schools_education_type,$schools_education,$schools_school_name,$schools_town,$schools_from_date,$schools_to_date,$schools_remark){
+    public function schoolCreate($id,$staffId,$schools_education_group,$schools_education_type,$schools_education,$schools_school_name,$schools_town,$schools_from_date,$schools_to_date,$schools_remark){
         $school=   School::updateOrCreate([
+            'id'=>$id
+        ],
+            [
         'staff_id' => $staffId,
         'education_group_id' => $schools_education_group == '' ? null : $schools_education_group,
         'education_type_id' => $schools_education_type == '' ? null : $schools_education_type,

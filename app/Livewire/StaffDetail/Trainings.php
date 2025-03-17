@@ -17,33 +17,44 @@ class Trainings extends Component
                     'wire_array_name' => 'trainings',
                     'wire_array_key' => 'training_type',
                     'select_values' => $training_types,
+                    'require' => true,
                 ],
                
                 [
                     'type' => 'text',
                     'wire_array_name' => 'trainings',
                     'wire_array_key' => 'batch',
+                    'require' => false,
+
                 ],
                 [
                     'type' => 'date',
                     'wire_array_name' => 'trainings',
                     'wire_array_key' => 'from_date',
+                    'require' => false,
+
                 ],
                 [
                     'type' => 'date',
                     'wire_array_name' => 'trainings',
                     'wire_array_key' => 'to_date',
+                    'require' => false,
+
                 ],
                 [
                     'type' => 'text',
                     'wire_array_name' => 'trainings',
                     'wire_array_key' => 'location',
+                    'require' => true,
+
                 ],
                 [
                     'type' => 'search_select',
                     'wire_array_name' => 'trainings',
                     'wire_array_key' => 'country',
                     'select_values' => $countries,
+                    'require' => true,
+
                 ],
                 [
                     'type' => 'select',
@@ -51,11 +62,15 @@ class Trainings extends Component
                     'next_col_update' => null,
                     'wire_array_key' => 'training_location',
                     'select_values' => $training_locations,
+                    'require' => false,
+
                 ],
                 [
                     'type' => 'text',
                     'wire_array_name' => 'trainings',
                     'wire_array_key' => 'remark',
+                    'require' => false,
+
                 ],
             ]
         ];
@@ -81,9 +96,11 @@ class Trainings extends Component
         ];
     }
 
-    public function setCreate($staffId, $training_type, $from_date, $to_date, $location, $country, $training_location, $batch, $remark)
+    public function setCreate($id,$staffId, $training_type, $from_date, $to_date, $location, $country, $training_location, $batch, $remark)
     {
-        $training = Training::updateOrCreate(
+        $training = Training::updateOrCreate([
+            'id' => $id,
+        ],
             [
                 'staff_id' => $staffId,
                 'training_type_id' => $training_type == '' ? null : $training_type,

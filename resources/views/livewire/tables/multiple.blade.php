@@ -23,8 +23,8 @@
 
                 <tr
                     class="border-b font-arial dark:bg-gray-800 dark:border-gray-700  dark:hover:bg-gray-600 {{$index % 2 ? 'bg-white hover:bg-gray-50' : 'bg-gray-200 hover:bg-white'}}">
-                    @foreach($columns as $key => $value)
-                        @if($value == 'country')
+                    @foreach($columns as $key => $value )
+                        @if($value == 'country' && $add_modal == 'add_abroad_modal')
                             {{-- @dd($column_val[$value]) --}}
                             <td class="px-4 py-4 min-w-[200px] text-gray-500 dark:text-gray-300">
 
@@ -92,6 +92,7 @@
     
     document.addEventListener('livewire:initialized', () => {
         const del_method = @json($del_method);
+        console.log(del_method)
     Livewire.on('showConfirmRemove', ({ index, id }) => {
         Swal.fire({
             title: 'Are You Sure?',
