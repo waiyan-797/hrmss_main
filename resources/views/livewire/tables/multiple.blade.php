@@ -42,26 +42,6 @@
                 @endif
 
                 @endforeach
-<<<<<<< Updated upstream
-
-
-
-                <td class="px-4 py-2 min-w-[80px]">
-
-                    <button type="button" wire:click='{{$add_modal}}("multiple_modal",{{$index}})'
-                        class="font-medium text-green-600 hover:underline mx-2">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M16.862 3.487a2.25 2.25 0 1 1 3.182 3.182L6.75 19.96l-4.5 1.013 1.013-4.5 13.294-13.294zM19.5 8.25V6a2.25 2.25 0 0 0-2.25-2.25h-2.25" />
-                        </svg>
-
-
-                    </button>
-
-
-=======
 
                 <td class="px-4 py-2 min-w-[80px]">
                     <button type="button" wire:click='{{$add_modal}}("multiple_modal",{{$index}})'
@@ -77,7 +57,6 @@
                     </button>
 
 
->>>>>>> Stashed changes
                     <button type="button" wire:click="showConfirmRemove({{$index}}, {{$column_val['id']}},'{{$del_method}}')"
                         class="font-medium text-red-600 hover:underline">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -89,10 +68,6 @@
                     </button>
                 </td>
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
             </tr>
             @endforeach
             @endif

@@ -3849,97 +3849,13 @@ class StaffDetail extends Component
         $this->add_model = null;
     }
 
-
-<<<<<<< Updated upstream
-    public function showConfirmRemove($index, $id, $del_method)
-    {
-        $this->dispatch('showConfirmRemove', index: $index, id: $id,del_method:$del_method);
-=======
-    // ----------------end save modal ------------------------
-
-
-
     public function showConfirmRemove($index, $id,$del_method)
     {
         $this->dispatch('showConfirmRemove', index: $index, id: $id, del_method: $del_method);
     }
 
     #[on('removeMethods')]
-    public function removeMethod($index, $id,$del_method)
-    {
-
-        if($del_method == 'removePostings'){
-            $postings = Posting::findOrFail($id);
-            $postings->delete();
-            $this->removeModel('postings', Posting::class, $index, []);
-            $this->alert_messages = 'Postings delete successfully!';
-    
-        }elseif($del_method == 'removeSchool'){
-
-        }elseif($del_method == 'removeTrainings'){
-
-        }elseif($del_method == 'removeAwards'){
-            
-        }elseif($del_method == 'remove_abroads'){
-           $abroad =Abroad::findOrFail($id);
-           $abroad->delete();
-            $this->removeModel('abroads',  Abroad::class, $index, []);
-            $this->alert_messages = 'Abroad delete successfully!';
-
-
-        }elseif($del_method == 'removePunishments'){
-            
-        }elseif($del_method == 'removeSocials'){
-            
-        }elseif($del_method == 'removeLanuages'){
-            
-        }elseif($del_method == 'removeRewards'){
-            
-        }elseif($del_method == 'remove_siblings'){
-            $sibling =Sibling::findOrFail($id);
-           $sibling->delete();
-            $this->removeModel('siblings',  Sibling::class, $index, []);
-            $this->alert_messages = 'Sibling delete successfully!';
-        }elseif($del_method == 'remove_father_siblings'){
-            $fatherSibling =FatherSibling::findOrFail($id);
-           $fatherSibling->delete();
-            $this->removeModel('father_siblings',  FatherSibling::class, $index, []);
-            $this->alert_messages = 'Father Sibling delete successfully!';  
-        }elseif($del_method == 'remove_mother_siblings'){
-            $motherSibling =MotherSibling::findOrFail($id);
-           $motherSibling->delete();
-            $this->removeModel('mother_siblings',  MotherSibling::class, $index, []);
-            $this->alert_messages = 'Mother Sibling delete successfully!';
-        }elseif($del_method == 'remove_spouses'){
-            $spouse =Spouse::findOrFail($id);
-           $spouse->delete();
-            $this->removeModel('spouses',  Spouse::class, $index, []);
-            $this->alert_messages = 'Spouse delete successfully!';
-        }elseif($del_method == 'remove_children'){
-            $children =Children::findOrFail($id);
-           $children->delete();
-            $this->removeModel('children',  Children::class, $index, []);
-            $this->alert_messages = 'Children delete successfully!';
-        }elseif($del_method == 'remove_spouse_siblings'){
-            $spouseSibling =SpouseSibling::findOrFail($id);
-           $spouseSibling->delete();
-            $this->removeModel('spouse_siblings',  SpouseSibling::class, $index, []);
-            $this->alert_messages = 'Spouse Sibling delete successfully!';
-        }elseif($del_method == 'remove_spouse_father_siblings'){
-            $spouseFatherSibling =SpouseFatherSibling::findOrFail($id);
-           $spouseFatherSibling->delete();
-            $this->removeModel('spouse_father_siblings',  SpouseFatherSibling::class, $index, []);
-            $this->alert_messages = 'Spouse Father Sibling delete successfully!';
-        }elseif($del_method == 'remove_spouse_mother_siblings'){
-            $spouseMotherSibling =SpouseMotherSibling::findOrFail($id);
-           $spouseMotherSibling->delete();
-            $this->removeModel('spouse_mother_siblings',  SpouseMotherSibling::class, $index, []);
-            $this->alert_messages = 'Spouse Mother Sibling delete successfully!';
-        }
-        
-        $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
-    }
-    
+   
     public function siblingShowConfirmRemove($index, $id)
     {
         
@@ -3972,7 +3888,6 @@ class StaffDetail extends Component
     public function spouseMotherSiblingShowConfirmRemove($index, $id)
     {
         $this->dispatch('spouseMotherSiblingShowConfirmRemove', $index, $id);
->>>>>>> Stashed changes
     }
 
     #[on('removeMethods')]
@@ -4038,6 +3953,46 @@ class StaffDetail extends Component
             $this->removeModel('staff_rewards', Reward::class, $index, []); // Fix model name
             $this->alert_messages = 'Rewards delete successfully!';$this->alert_messages = 'Schools delete successfully!';
 
+        }elseif($del_method == 'remove_siblings'){
+            $sibling =Sibling::findOrFail($id);
+           $sibling->delete();
+            $this->removeModel('siblings',  Sibling::class, $index, []);
+            $this->alert_messages = 'Sibling delete successfully!';
+        }elseif($del_method == 'remove_father_siblings'){
+            $fatherSibling =FatherSibling::findOrFail($id);
+           $fatherSibling->delete();
+            $this->removeModel('father_siblings',  FatherSibling::class, $index, []);
+            $this->alert_messages = 'Father Sibling delete successfully!';  
+        }elseif($del_method == 'remove_mother_siblings'){
+            $motherSibling =MotherSibling::findOrFail($id);
+           $motherSibling->delete();
+            $this->removeModel('mother_siblings',  MotherSibling::class, $index, []);
+            $this->alert_messages = 'Mother Sibling delete successfully!';
+        }elseif($del_method == 'remove_spouses'){
+            $spouse =Spouse::findOrFail($id);
+           $spouse->delete();
+            $this->removeModel('spouses',  Spouse::class, $index, []);
+            $this->alert_messages = 'Spouse delete successfully!';
+        }elseif($del_method == 'remove_children'){
+            $children =Children::findOrFail($id);
+           $children->delete();
+            $this->removeModel('children',  Children::class, $index, []);
+            $this->alert_messages = 'Children delete successfully!';
+        }elseif($del_method == 'remove_spouse_siblings'){
+            $spouseSibling =SpouseSibling::findOrFail($id);
+           $spouseSibling->delete();
+            $this->removeModel('spouse_siblings',  SpouseSibling::class, $index, []);
+            $this->alert_messages = 'Spouse Sibling delete successfully!';
+        }elseif($del_method == 'remove_spouse_father_siblings'){
+            $spouseFatherSibling =SpouseFatherSibling::findOrFail($id);
+           $spouseFatherSibling->delete();
+            $this->removeModel('spouse_father_siblings',  SpouseFatherSibling::class, $index, []);
+            $this->alert_messages = 'Spouse Father Sibling delete successfully!';
+        }elseif($del_method == 'remove_spouse_mother_siblings'){
+            $spouseMotherSibling =SpouseMotherSibling::findOrFail($id);
+           $spouseMotherSibling->delete();
+            $this->removeModel('spouse_mother_siblings',  SpouseMotherSibling::class, $index, []);
+            $this->alert_messages = 'Spouse Mother Sibling delete successfully!';
         }
         
         $this->dispatch('alert', ['type' => 'success', 'message' => $this->alert_messages]);
