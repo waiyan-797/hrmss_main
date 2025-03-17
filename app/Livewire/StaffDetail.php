@@ -2927,17 +2927,18 @@ class StaffDetail extends Component
     {
         if ($index !== null) {
             $this->method = 'edit';
-            $this->editIndex = $index;
+            $this->editId = $index;
             // ----------------- Languages -----------------
             $id = $this->staff_languages[$index]['id'];
-            $this->editId = $id;
+    
             $oldData = StaffLanguage::findOrFail($id);
-            $this->staff_languages_language = $oldData->language_id;
-            $this->staff_languages_rank = $oldData->rank;
+            $this->staff_languages_language = $oldData->language_id; 
+            $this->staff_languages_rank = $oldData->rank; 
             $this->staff_languages_writing = $oldData->writing;
-            $this->staff_languages_reading = $oldData->reading;
-            $this->staff_languages_speaking = $oldData->speaking;
-            $this->staff_languages_remark = $oldData->remark;
+            $this->staff_languages_reading = $oldData->reading; 
+            $this->staff_languages_speaking = $oldData->speaking; 
+            $this->staff_languages_remark = $oldData->remark; 
+    
         } else {
             $this->staff_languages_language = null;
             $this->staff_languages_rank = null;
@@ -2945,13 +2946,13 @@ class StaffDetail extends Component
             $this->staff_languages_reading = null;
             $this->staff_languages_speaking = null;
             $this->staff_languages_remark = null;
-
+    
             $this->method = 'create';
         }
-
+    
         // ----------------- Languages -----------------
-        $this->data = ChLanguages::datas($this->languages);
-
+        $this->data = ChLanguages::datas($this->languages);  
+    
         $this->add_model = $type;
         $this->submit_form = "save_languages_modal";
     }
