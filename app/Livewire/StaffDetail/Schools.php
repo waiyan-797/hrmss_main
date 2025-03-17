@@ -46,20 +46,20 @@ class Schools extends Component
                     'type' => 'text',
                     'wire_array_name' => 'schools',
                     'wire_array_key' => 'town',
-                    'require' => false,
+                    'require' => true,
 
                 ],
                 [
                     'type' => 'text',
                     'wire_array_name' => 'schools',
                     'wire_array_key' => 'from_date',
-                    'require' => false,
+                    'require' => true,
                 ],
                 [
                     'type' => 'text',
                     'wire_array_name' => 'schools',
                     'wire_array_key' => 'to_date',
-                    'require' => false,
+                    'require' => true,
                 ],
                 [
                     'type' => 'text',
@@ -80,6 +80,10 @@ class Schools extends Component
             'schools_education_group' => 'required',
             'schools_education_type' => 'required',
             'schools_school_name' => 'required',
+            // 'schools_school_education' => 'required',
+            // 'schools_school_town' => 'required',
+            // 'schools_school_from_date' => 'required',
+            // 'schools_school_to_date' => 'required',
 
         ];
     }
@@ -90,6 +94,10 @@ class Schools extends Component
             'schools_education_group.required' => 'education_group eield is required.',
             'schools_education_type.required' => 'education_type date is required.',
             'schools_school_name.required' => 'education_type date is required.',
+            // 'schools_school_education.required' => 'education_type date is required.',
+            // 'schools_school_town.required' => 'education_type date is required.',
+            // 'schools_school_from_date.required' => 'education_type date is required.',
+            // 'schools_school_to_date.required' => 'education_type date is required.',
         ];
     }
 

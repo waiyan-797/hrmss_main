@@ -41,6 +41,7 @@ class Socials extends Component
 //     return $post;
 // }
 public function socialCreate($id,$staffId, $socials_particular, $socials_remark){
+    dd($id);
     $social = SocialActivity::updateOrCreate([
         'id'=>$id
     ],

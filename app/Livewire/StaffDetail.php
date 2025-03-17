@@ -3160,7 +3160,7 @@ class StaffDetail extends Component
     
         $chschools = new ChSchools;
         
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId = null;
         }
          $school =$chschools->schoolCreate(
@@ -3189,7 +3189,7 @@ class StaffDetail extends Component
                     'remark' => $school->remark,
                 ];
 
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->schools[] = $display;
                     $this->alert_messages = 'Cerated Successfully!';
                 }else{
@@ -3273,7 +3273,7 @@ class StaffDetail extends Component
     
             return;
         }
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId =null;
         }
     
@@ -3309,7 +3309,7 @@ class StaffDetail extends Component
                     'remark' => $training->remark,
                 ];
 
-                if($this->editIndex == null){
+                if($this->editIndex === null){
                     $this->trainings[] = $display;
                     $this->alert_messages = 'Created Successfully!';
                 }else{
@@ -3378,7 +3378,7 @@ class StaffDetail extends Component
     
         $chawards = new ChAwards;
         
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId = null;
         }
          $award =$chawards->awardCreate(
@@ -3399,7 +3399,7 @@ class StaffDetail extends Component
                         'remark' => $award->remark,
                 ];
 
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->awards[] = $display;
                     $this->alert_messages = 'Cerated Successfully!';
                 }else{
@@ -3466,7 +3466,7 @@ class StaffDetail extends Component
     
         $chpunishments = new ChPunishments;
         
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId = null;
         }
          $punishment =$chpunishments->punishmentCreate(
@@ -3487,7 +3487,7 @@ class StaffDetail extends Component
                     'to_date' => Carbon::parse($punishment->to_date)->format('d/m/Y'),
                 ];
 
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->punishments[] = $display;
                     $this->alert_messages = 'Cerated Successfully!';
                 }else{
@@ -3504,6 +3504,8 @@ class StaffDetail extends Component
     public function add_socials_modal($type, $index = null)
     {
         if ($index !== null) {
+
+            // dd($index);
             $this->method = 'edit';
             $this->editIndex = $index;
 
@@ -3545,7 +3547,8 @@ class StaffDetail extends Component
     
         $chsocials = new ChSocials;
         
-        if($this->editIndex == null){
+        if($this->editIndex === null){
+            // dd($this->editIndex);
             $this->editId = null;
         }
          $social =$chsocials->socialCreate(
@@ -3562,7 +3565,7 @@ class StaffDetail extends Component
                     'remark' => $social->remark,
                 ];
 
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->socials[] = $display;
                     $this->alert_messages = 'Cerated Successfully!';
                 }else{
@@ -3738,7 +3741,7 @@ class StaffDetail extends Component
     
         $chstaffRewards = new ChStaffRewards;
         
-        if($this->editIndex == null){
+        if($this->editIndex === null){
             $this->editId = null;
         }
          $reward =$chstaffRewards->rewardCeate(
@@ -3759,7 +3762,7 @@ class StaffDetail extends Component
                         'remark' => $reward->remark,
                 ];
 
-                if($this->editIndex ==null){
+                if($this->editIndex ===null){
                     $this->rewards[] = $display;
                     $this->alert_messages = 'Cerated Successfully!';
                 }else{
