@@ -40,7 +40,7 @@ class Schools extends Component
                     'type' => 'text',
                     'wire_array_name' => 'schools',
                     'wire_array_key' => 'school_name',
-                    'require' => false,
+                    'require' => true,
                 ],
                 [
                     'type' => 'text',
@@ -79,7 +79,7 @@ class Schools extends Component
         return [
             'schools_education_group' => 'required',
             'schools_education_type' => 'required',
-            
+            'schools_school_name' => 'required',
 
         ];
     }
@@ -89,6 +89,7 @@ class Schools extends Component
         return [
             'schools_education_group.required' => 'education_group eield is required.',
             'schools_education_type.required' => 'education_type date is required.',
+            'schools_school_name.required' => 'education_type date is required.',
         ];
     }
 
