@@ -7,7 +7,6 @@
 
                     <span class="flex flex-row items-center gap-1">
                         <span>{{ $name }}</span>
-
                     </span>
                 </th>
                 @endforeach

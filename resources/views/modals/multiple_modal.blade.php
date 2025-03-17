@@ -10,7 +10,7 @@
                 @if($data['column_names'])
                 @foreach ($data['column_names'] as $index =>$item)
 
-                @if($data['column_types'][$index]['type'] === 'search_select')
+                @if(!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] === 'search_select')
 
                 <div class="m-3 w-full">
                     <label for="name" class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
@@ -28,8 +28,8 @@
                         :messages="$errors->get($data['column_types'][$index]['wire_array_name'] . '_'. $data['column_types'][$index]['wire_array_key'])" />
                 </div>
 
-                @elseif($data['column_types'][$index]['type'] === 'text' || $data['column_types'][$index]['type'] ===
-                'number')
+                @elseif(!empty($data['column_types']) && isset($data['column_types'][$index]) && 
+                ($data['column_types'][$index]['type'] === 'text' || $data['column_types'][$index]['type'] === 'number'))
                 <div class="m-3 w-full">
                     <label for="name" class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
                         {{-- {{$data['column_names'][$index] ?? ''}}<span class="text-rose-700">{{
@@ -48,7 +48,7 @@
                         class="block w-[10rem] p-2 text-sm border rounded " />
 
                 </div>
-                @elseif ($data['column_types'][$index]['type'] == 'select')
+                @elseif (!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] === 'search_select')
                 <div class="m-3 w-full">
                     <label for="name" class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
                         {{$data['column_names'][$index] ?? ''}}<span class="text-rose-700">{{ $data['column_types'][$index]['require'] ? '*' : ''}}</span>
@@ -66,7 +66,7 @@
                     @endif
                 </div>
 
-                @elseif($data['column_types'][$index]['type'] === 'date')
+                @elseif(!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] === 'date')
                 <div class="m-3 w-full">
                     <label for="{{$data['column_types'][$index]['wire_array_key']}}"
                         class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
@@ -77,7 +77,7 @@
                         </span>
                     </label>
 
-                    <x-date-picker
+                    <x-date-select
                         wire:model="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
                         id="{{$data['column_types'][$index]['wire_array_key']}}"
                         name="{{$data['column_types'][$index]['wire_array_key']}}" class="block w-full mt-1" />
@@ -87,7 +87,7 @@
                     --}}
                 </div>
 
-                @elseif ($data['column_types'][$index]['type'] == 'multiple-select')
+                @elseif (!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] == 'multiple-select')
                 <div class="m-3 w-full">
                     <label for="{{$data['column_types'][$index]['wire_array_key']}}"
                         class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
@@ -103,8 +103,8 @@
                         :messages="$errors->get(['wire_array_name'] . '.' . $index . '.' . $type['wire_array_key'])" />
                     --}}
                 </div>
-
-                @elseif ($data['column_types'][$index]['type'] == 'checkbox')
+                
+                @elseif (!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] == 'checkbox')
                 <div class="w-full m-3">
                     <label for="{{$data['column_types'][$index]['wire_array_key']}}"
                         class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">

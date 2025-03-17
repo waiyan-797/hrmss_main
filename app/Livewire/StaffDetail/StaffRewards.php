@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class StaffRewards extends Component
 {
-    public static function datas($rewards){
+    public static function datas(){
         return [
             'modal_title' => 'ဆုတံဆိပ်များ',
             'column_names' => ['အမျိုးအစား', 'ပြည်တွင်း/နိုင်းငံခြား', 'ခုနှစ်','မှတ်ချက်'],
@@ -16,19 +16,26 @@ class StaffRewards extends Component
                     'type' => 'text',
                     'wire_array_name' => 'staff_rewards',
                     'wire_array_key' => 'name',
-                    'select_values' => $rewards,
-                ],
-               
-                [
+                    'require'   => true,
+                    ],
+                    [
+                    'type' => 'text',
+                    'wire_array_name' => 'staff_rewards',
+                    'wire_array_key' => 'type',
+                    'require'   => true,
+                    ],
+                    [
                     'type' => 'text',
                     'wire_array_name' => 'staff_rewards',
                     'wire_array_key' => 'year',
-                ],
-                [
+                    'require'   => false,
+                    ],
+                    [
                     'type' => 'text',
                     'wire_array_name' => 'staff_rewards',
                     'wire_array_key' => 'remark',
-                ],
+                    'require'   => false,
+                    ],
             ]
         ];
         
@@ -48,33 +55,20 @@ class StaffRewards extends Component
             'staff_rewards_name.required' => 'name eield is required.',
         ];
     }
-    public function setCreate($staffId, $name, $year, $remark)
-    {
-        $reward = Reward::updateOrCreate(
+    public function rewardCeate($id,$staffId,$name, $type,$year, $remark){
+        $reward = Reward::updateOrCreate([
+            'id'=>$id
+        ],
             [
                 'staff_id' => $staffId,
                 'name' => $name == '' ? null : $name,
+                'type' => $type == '' ? null : $type,
                 'year' => $year == '' ? null : $year,
                 'remark' => $remark == '' ? null : $remark,
-            ]
-        );
-    
-        return $reward;
-    }
-
-    public function setEditData($editId, $staffId, $name, $year, $remark)
-    {
-        $reward = Reward::findOrFail($editId);
-    
-        $reward->staff_id = $staffId;
-        $reward->name = $name == '' ? null : $name;
-        $reward->year = $year == '' ? null : $year;
-        $reward->remark = $remark == '' ? null : $remark;
-    
-        $reward->save();
-    
-        return $reward;
-    }
+          ]);
+  
+          return $reward;
+      }
     
 
 }

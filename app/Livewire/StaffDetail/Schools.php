@@ -34,34 +34,32 @@ class Schools extends Component
                     'type' => 'text',
                     'wire_array_name' => 'schools',
                     'wire_array_key' => 'education',
-
+                    'require' => false,
                 ],
                 [
                     'type' => 'text',
                     'wire_array_name' => 'schools',
                     'wire_array_key' => 'school_name',
-                    
-
-
+                    'require' => false,
                 ],
                 [
                     'type' => 'text',
                     'wire_array_name' => 'schools',
                     'wire_array_key' => 'town',
-
+                    'require' => false,
 
                 ],
                 [
                     'type' => 'text',
                     'wire_array_name' => 'schools',
                     'wire_array_key' => 'from_date',
-
+                    'require' => false,
                 ],
                 [
                     'type' => 'text',
                     'wire_array_name' => 'schools',
                     'wire_array_key' => 'to_date',
-
+                    'require' => false,
                 ],
                 [
                     'type' => 'text',
@@ -94,22 +92,6 @@ class Schools extends Component
         ];
     }
 
-    public function schoolEditData($editId,$staffId,$schools_education_group,$schools_education_type,$schools_education,$schools_school_name,$schools_town,$schools_from_date,$schools_to_date,$schools_remark){
-        $post = School::findOrFail($editId);
-        $post->staff_id = $staffId;
-        $post->education_group_id = $schools_education_group == '' ? null : $schools_education_group;
-        $post->education_type_id = $schools_education_type == '' ? null : $schools_education_type;
-        $post->education = $schools_education == '' ? null : $schools_education;
-        $post->school_name = $schools_school_name == '' ? null : $schools_school_name;
-        $post->town = $schools_town == '' ? null : $schools_town;
-        $post->from_date = $schools_from_date == '' ? null : $schools_from_date;
-        $post->to_date = $schools_to_date == '' ? null : $schools_to_date;
-        $post->remark = $schools_remark == '' ? null : $schools_remark;
-
-        $post->save();
-        return $post;
-
-    }
     public function schoolCreate($id,$staffId,$schools_education_group,$schools_education_type,$schools_education,$schools_school_name,$schools_town,$schools_from_date,$schools_to_date,$schools_remark){
         $school=   School::updateOrCreate([
             'id'=>$id

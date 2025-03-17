@@ -552,7 +552,7 @@
     @include('livewire/tables/multiple', [
     'column_names' => ['အကြောင်းအရာ', 'မှတ်ချက်'],
     'columns' => ['particular', 'remark'],
-    'column_vals'=>$punishments,
+    'column_vals'=>$socials,
     'add_modal' => 'add_socials_modal',
     'del_method' => 'removeSocials',
     ])
