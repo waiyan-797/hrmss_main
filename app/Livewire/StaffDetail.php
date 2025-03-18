@@ -202,6 +202,7 @@ class StaffDetail extends Component
         $nrc_region_ids,
         $ministrys,
         $_countries,
+        $degree_certificate,
         $nrc_signs;
 
 
@@ -510,25 +511,25 @@ class StaffDetail extends Component
         switch ($this->tab) {
             case 'personal_info':
 
-                $staff_educations = StaffEducation::where('staff_id', $staff_id)->get();
+                // $staff_educations = StaffEducation::where('staff_id', $staff_id)->get();
 
-                foreach ($staff_educations as $edu) {
-                    $education = Education::find($edu->education_id);
+                // foreach ($staff_educations as $edu) {
+                //     $education = Education::find($edu->education_id);
 
 
-                    $this->educations[] = [
-                        'id' => $edu->id,
-                        'education_group' => $education->education_group_id,
-                        'education_type' => $education->education_type_id,
-                        'education' => $education->id,
-                        'country_id' => $edu->country_id,
-                        // 'education_types' => EducationType::where('education_group_id', $edu->education_group_id)->get(),
-                        // '_educations' => Education::where('education_type_id', $edu->education_type_id)->get(),
-                        'education_types' => EducationType::all(),
-                        '_educations' => Education::all(),
-                        'degree_certificate' => $edu->degree_certificate,
-                    ];
-                }
+                //     $this->educations[] = [
+                //         'id' => $edu->id,
+                //         'education_group' => $education->education_group_id,
+                //         'education_type' => $education->education_type_id,
+                //         'education' => $education->id,
+                //         'country_id' => $edu->country_id,
+                //         // 'education_types' => EducationType::where('education_group_id', $edu->education_group_id)->get(),
+                //         // '_educations' => Education::where('education_type_id', $edu->education_type_id)->get(),
+                //         'education_types' => EducationType::all(),
+                //         '_educations' => Education::all(),
+                //         'degree_certificate' => $edu->degree_certificate,
+                //     ];
+                // }
 
                 break;
 
@@ -658,6 +659,27 @@ class StaffDetail extends Component
                 $staff_languages = StaffLanguage::with('language')
                     ->where('staff_id', $staff_id)->get();
                 $staff_rewards = Reward::where('staff_id', $staff_id)->get();
+
+                $staff_educations = StaffEducation::with('country')->where('staff_id', $staff_id)->get();
+
+                // dd($staff_educations);
+                foreach ($staff_educations as $edu) {
+                    $education = Education::find($edu->education_id);
+                    $educationGroup = EducationGroup::find($education->education_group_id);
+                    $educationType = EducationType::find($education->education_type_id);
+                    $country = Country::find($edu->country_id);
+                    $this->educations[] = [
+                        'id' => $edu->id,
+                        'education_group' => $educationGroup ? $educationGroup->name : null,
+                        'education_type' => $educationType ? $educationType->name : null,
+                        'education' => $education ? $education->name : null,
+                        // 'country_id' => $edu->country_id->name,
+                        'country_id' => $country ? $country->name : 'Unknown',
+                        'education_types' => EducationType::all(),
+                        '_educations' => Education::all(),
+                        'degree_certificate' => $edu->degree_certificate,
+                    ];
+                }
                 foreach ($schools as $sch) {
                     $this->schools[] = [
                         'id' => $sch->id,
@@ -3127,7 +3149,7 @@ class StaffDetail extends Component
                 $this->educations_education_type_text = $eduT->name;
                 $this->educations_education_group_text = $eduG->name;
                 $this->educations_education_type = $eduT->id;
-                $this->educations_education_group = $eduG->id;
+                $this->educations_education_group = $eduG->particular;
         
                         // dd($edu->education_group);
         
@@ -3137,21 +3159,13 @@ class StaffDetail extends Component
                     $this->method = 'edit';
                     $this->editIndex = $index;
                     $id = $this->educations[$index]['id'];
-        
-                    // 'id' => $edu->id,
-                    // 'education_group' => $education->education_group_id,
-                    // 'education_type' => $education->education_type_id,
-                    // 'education' => $education->id,
-                    // 'country_id' => $edu->country_id,
-                    // // 'education_types' => EducationType::where('education_group_id', $edu->education_group_id)->get(),
-                    // // '_educations' => Education::where('education_type_id', $edu->education_type_id)->get(),
-                    // 'education_types' => EducationType::all(),
-                    // '_educations' => Education::all(),
-                    // 'degree_certificate' => $edu->degree_certificate,
-
+                    
                     $oldData = StaffEducation::findOrFail($id);
-                    $eduG= $oldData->education_group;
-                    $eduT =  $oldData->education_type;
+                    $edu = $oldData->education;
+                    $eduG= $edu->education_group;
+                    $eduT =  $edu->education_type;
+                    // dd($edu);
+
                     $this->educations_education_type_text = $eduT->name;
                     $this->educations_education_group_text = $eduG->name;
 
@@ -3159,7 +3173,9 @@ class StaffDetail extends Component
                     $this->educations_education_type = $oldData->particular;
                     $this->educations_education_group = $eduG->id;
                     $this->educations_country_id = $eduT->id;
-                    $this->educations_degree_certificate = $oldData->training_success_fail;
+                    // $this->educations_degree_certificate = $oldData->training_success_fail;
+                    $this->educations_degree_certificate = $oldData->degree_certificate;
+
                     
 
                 } else {
@@ -3173,7 +3189,7 @@ class StaffDetail extends Component
                     $this->method = 'create';
                 }
                 // dd($this->educations_all); 
-                $this->data = ChEducations::datas($this->educations, $this->educations_all, $this->education_types,$this->education_groups,$this->_countries);
+                $this->data = ChEducations::datas($this->educations, $this->educations_all, $this->education_types,$this->education_groups,$this->_countries, $this->degree_certificate);
 
                 $this->add_model = $type;
                 $this->submit_form = "save_edu_modal";
@@ -3213,21 +3229,24 @@ class StaffDetail extends Component
                     );
                     
                     if ($education) {
+                        $edu = $education->education;
+                        $eduG= $edu->education_group;
+                        $eduT =  $edu->education_type;
                         $display = [
         
                         'id' => $education->id,
-                        'education_group' => $education->education_group_id,
-                        'education_type' => $education->education_type_id,
-                        'education' => $education->id,
-                        'country_id' => $education->country_id,
+                        'education_group' => $eduG ? $eduG->name : null,
+                        'education_type' => $eduT ? $eduT->name : null,
+                        'education' => $edu ? $edu->name : null,
+                        'country_id' => $education ? $education->country->name : 'Unknown',
                         'degree_certificate' => $education->degree_certificate,
                         ];
         
                         if($this->editIndex === null){
-                            $this->trainings[] = $display;
+                            $this->educations[] = $display;
                             $this->alert_messages = 'Created Successfully!';
                         }else{
-                            $this->trainings[$this->editIndex] = $display;
+                            $this->educations[$this->editIndex] = $display;
                             $this->alert_messages = 'Updated Successfully!';
         
         
@@ -3239,10 +3258,7 @@ class StaffDetail extends Component
         
                 $this->add_model = null;
             }
-            // ----------end educations------------
-
-    
-            // ----------start schools------------
+           
             public function add_schools_modal($type, $index = null)
             {
                 if ($index !== null) {
@@ -3664,9 +3680,7 @@ class StaffDetail extends Component
                 $this->add_model = null;
             }
 
-            // ----------end abroads------------
-
-            // ----------start punishments------------
+        
             public function add_punishments_modal($type, $index = null)
             {
                 if ($index !== null) {
@@ -4207,25 +4221,32 @@ class StaffDetail extends Component
             $punishments->delete();
             $this->removeModel('punishments', Punishment::class, $index, []);
             $this->alert_messages = 'Punishments delete successfully!';
-            $this->alert_messages = 'Schools delete successfully!';
         } elseif ($del_method == 'removeSocials') {
             $socials = SocialActivity::findOrFail($id);
             $socials->delete();
             $this->removeModel('socials', SocialActivity::class, $index, []);
             $this->alert_messages = 'Socials delete successfully!';
-            $this->alert_messages = 'Schools delete successfully!';
-        } elseif ($del_method == 'removeLanuages') {
+        } elseif($del_method == 'removeEdu'){
+            $educations = StaffEducation::findOrFail($id);
+            if ($educations->degree_certificate) {
+                Storage::disk('upload')->delete($educations->degree_certificate);
+            }
+            $educations->delete();
+            $this->removeModel('educations', StaffLanguage::class, $index, []);
+            $this->alert_messages = 'Educations deleted successfully!';
+            
+        }
+        
+        elseif ($del_method == 'removeLanuages') {
             $languages = StaffLanguage::findOrFail($id);
             $languages->delete();
             $this->removeModel('staff_languages', StaffLanguage::class, $index, []);
             $this->alert_messages = 'Languages delete successfully!';
-            $this->alert_messages = 'Schools delete successfully!';
         } elseif ($del_method == 'removeRewards') {
             $reward = Reward::findOrFail($id);
             $reward->delete();
             $this->removeModel('staff_rewards', Reward::class, $index, []); // Fix model name
             $this->alert_messages = 'Rewards delete successfully!';
-            $this->alert_messages = 'Schools delete successfully!';
         } elseif ($del_method == 'remove_siblings') {
             $sibling = Sibling::findOrFail($id);
             $sibling->delete();
