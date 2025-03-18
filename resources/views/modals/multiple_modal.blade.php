@@ -9,7 +9,83 @@
             <div class="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-3 items-center justify-items-center">
                 @if($data['column_names'])
                 @foreach ($data['column_names'] as $index =>$item)
+                @if($data['column_types'][$index]['wire_array_name'] == 'educations')
+                @if ($data['column_types'][$index]['type'] == 'select')
+                {{-- @dd($data['column_types'][$index]['select_values']) --}}
+              <div class="m-3 w-full">
+                  <label for="name" class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
+                      {{$data['column_names'][$index] ?? ''}}<span class="text-rose-700">{{ $data['column_types'][$index]['require'] ? '*' : ''}}</span>
+                  </label>
+                  @if (
+                  !is_string($data['column_types'][$index]['select_values']))
+                  <x-select
+                      wire:model="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
+                      wire:change='handleCustomColumnUpdateEducation($event.target.value,)'
+                      id="{{$data['column_types'][$index]['wire_array_key']}}"
+                      name="{{$data['column_types'][$index]['wire_array_key']}}"
+                      class="block w-full p-2 text-sm border rounded"
+                      :values="$data['column_types'][$index]['select_values']" placeholder="Select..." />
+                     
+                  @endif
+              </div>
+              @elseif($data['column_types'][$index]['type'] == 'search_select')
 
+              <div class="m-3 w-full">
+                  <label for="name" class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
+                      {{ isset($data['column_names'][$index]) ? $data['column_names'][$index] : '' }}
+                      <span class="text-rose-700">
+                          {{ isset($data['column_types'][$index]['require']) &&
+                          $data['column_types'][$index]['require'] ? '*' : '' }}
+                      </span>
+                  </label>
+                  <x-searchable-select placeholder="Select..."
+                      :values="$data['column_types'][$index]['select_values']"
+                      property="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
+                      class="w-full p-3 text-base border border-gray-300 rounded-lg font-arial bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500" />
+                  <x-input-error class="mt-2 text-sm text-red-500 font-arial"
+                      :messages="$errors->get($data['column_types'][$index]['wire_array_name'] . '_'. $data['column_types'][$index]['wire_array_key'])" />
+              </div>
+              
+              @elseif ($data['column_types'][$index]['type'] == 'file')
+              <x-input-file
+                  wire:model="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
+                  id="{{$data['column_types'][$index]['wire_array_key']}}"
+                  name="{{$data['column_types'][$index]['wire_array_key']}}"
+                  type="{{$data['column_types'][$index]['type']}}"
+                  file="{{$this->getWireValue($data['column_types'][$index]['wire_array_name'], $index, $data['column_types'][$index]['wire_array_key'])}}"
+                  class="block w-full text-sm border mb-1 rounded"
+                  accept=".pdf"
+              />
+
+              @elseif($data['column_types'][$index]['type'] === 'show')
+                <div class="m-3 w-full">
+                    <label for="name" class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
+                       
+                        {{ isset($data['column_names'][$index]) ? $data['column_names'][$index] : '' }}
+                        <span class="text-rose-700">
+                            {{ isset($data['column_types'][$index]['require']) &&
+                            $data['column_types'][$index]['require'] ? '*' : '' }}
+                        </span>
+                    </label>
+                    <input
+                        wire:model="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
+                        id="{{$data['column_types'][$index]['wire_array_key']}}"
+                        name="{{$data['column_types'][$index]['wire_array_key']}}"
+                        type="{{$data['column_types'][$index]['type']}}"
+                        disabled = "{{$data['column_types'][$index]['disabled']}}"
+                        class="block w-full p-2 text-sm border rounded "  />
+
+                </div>
+
+
+
+              @endif
+
+
+                @else
+
+
+                {{-- all using    --}}
                 @if(!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] === 'search_select')
 
                 <div class="m-3 w-full">
@@ -48,23 +124,7 @@
                         class="block w-[10rem] p-2 text-sm border rounded " />
 
                 </div>
-                @elseif (!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] === 'search_select')
-                <div class="m-3 w-full">
-                    <label for="name" class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
-                        {{$data['column_names'][$index] ?? ''}}<span class="text-rose-700">{{ $data['column_types'][$index]['require'] ? '*' : ''}}</span>
-                    </label>
-                    @if (
-                    !is_string($data['column_types'][$index]['select_values']))
-                    <x-select
-                        wire:model="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
-                        id="{{$data['column_types'][$index]['wire_array_key']}}"
-                        name="{{$data['column_types'][$index]['wire_array_key']}}"
-                        class="block w-full p-2 text-sm border rounded"
-                        :values="$data['column_types'][$index]['select_values']" placeholder="Select..." />
-                        <x-input-error class="mt-2"
-                        :messages="$errors->get('postings_rank')" />
-                    @endif
-                </div>
+               
 
                 @elseif(!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] === 'date')
                 <div class="m-3 w-full">
@@ -104,6 +164,19 @@
                         :messages="$errors->get('postings_rank')" />
                     @endif
                 </div>
+                @elseif ($data['column_types'][$index]['type'] == 'multiple-select')
+                <div class="m-3 w-full">
+                    <label for="{{$data['column_types'][$index]['wire_array_key']}}"
+                        class="block mb-2 text-gray-600 dark:text-green-500 font-arial text-base">
+                        {{$data['column_names'][$index] ?? ''}} <span class="text-rose-700">{{
+                            $data['column_types'][$index]['require'] ? '*' : ''}}</span>
+                    </label>
+                    <x-multiple-select
+                        model="{{$data['column_types'][$index]['wire_array_name']}}_{{$data['column_types'][$index]['wire_array_key']}}"
+                        class="block w-full text-sm border rounded" placeholderValue="Select..."
+                        :options="$data['column_types'][$index]['select_values']" />
+                   
+                </div>
                 
                 @elseif (!empty($data['column_types']) && isset($data['column_types'][$index]) && $data['column_types'][$index]['type'] == 'checkbox')
                 <div class="w-full m-3">
@@ -125,7 +198,8 @@
                 </div>
 
                 @endif
-
+                {{-- all using    --}}
+                @endif
                 @endforeach
                 @endif
             </div>

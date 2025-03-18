@@ -2,6 +2,7 @@
 
 namespace App\Livewire\StaffDetail;
 
+use App\Models\Abroad;
 use Livewire\Component;
 
 class Abroads extends Component
@@ -25,7 +26,6 @@ class Abroads extends Component
                 'နိုင်ငံခြားသို့သွားရောက်မည်ံနေ့ (ရက်၊ လ ၊ နှစ်)',
                 'ပြန်ရောက်လျှင်အမှုထမ်းမည့် ဌာန/ရာထူး'
             ],
-            'data_master_add_stats' => [null, null, null,  null, null, null, null, null, null, null, null, null],
             'column_vals' => $abroads,
             'column_types' => [
                 [
@@ -159,5 +159,43 @@ class Abroads extends Component
         ];
 
         
+    }
+
+    public function setCreate(
+        $id,
+        $staffId,
+        $abroads_country,
+        $abroads_towns,
+        $abroads_particular,
+        $abroads_abroad_type_id,
+        $abroads_training_success_fail,
+        $abroads_training_success_count,
+        $abroads_sponser,
+        $abroads_meet_with,
+        $abroads_from_date,
+        $abroads_to_date,
+        $abroads_actual_abroad_date,
+        $abroads_position,
+    ){
+
+        $ab = Abroad::updateOrCreate([
+                        'id' => $id,
+                    ], [
+                        'staff_id' => $staffId,
+                        'particular' => $abroads_particular,
+                        'training_success_fail' => $abroads_training_success_fail,
+                        'training_success_count' => $abroads_training_success_count,
+                        'sponser' => $abroads_sponser,
+                        'meet_with' => $abroads_meet_with,
+                        'from_date' => $abroads_from_date == '' ? null : $abroads_from_date,
+                        'to_date' => $abroads_to_date == '' ? null : $abroads_to_date,
+                        'actual_abroad_date' => $abroads_actual_abroad_date == '' ? null : $abroads_actual_abroad_date,
+                        'position' => $abroads_position,
+                        'towns' => $abroads_towns,
+                        'abroad_type_id' => $abroads_abroad_type_id
+                    ]);
+                    $ab->countries()->sync($abroads_country);
+            return $ab;
+
     }
 }
